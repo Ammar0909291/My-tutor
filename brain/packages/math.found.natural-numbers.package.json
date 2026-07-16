@@ -1,0 +1,547 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.natural-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.natural-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:20ed8b32d10013eb22edaaff1ac792b698d9e96d505659190106c5ad7b7d3b34",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.natural-numbers.md": "sha256:5491aae0ff498cb471facef292811a2b4f46740c5972e46667422647ebaacc59"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 10,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 10
+  },
+  "concept": {
+    "conceptId": "math.found.natural-numbers",
+    "name": "Natural Numbers",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.set-theory",
+      "math.found.total-order"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.natural-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.natural-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.natural-numbers.md": "sha256:5491aae0ff498cb471facef292811a2b4f46740c5972e46667422647ebaacc59"
+      },
+      "contentHash": "sha256:64fdda6bb80f16e9c28c323b5054600f0c11f11e3c0afb94b1c9f666d7659457",
+      "ruleCount": 10,
+      "bandCounts": {
+        "3": 10
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-A04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-A06 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-A07",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.natural-numbers.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.natural-numbers.md#TA-B03 (addresses MC-3, MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.natural-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.natural-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.natural-numbers/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Natural Numbers — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.found.set-theory**: ℕ is a set; learner uses set notation {…}, membership (∈), set-builder {n ∈ ℤ : n ≥ 0}, and cardinality.\n- **math.found.total-order**: Canonical order on ℕ is a total order (RATT). Learner understands \"least element,\" comparability of all pairs, and ⟨S, <⟩ notation.\n\n### Target Understanding\n1. ℕ as a formally defined set with two standard conventions (0-inclusive ISO vs. 1-inclusive NCERT).\n2. Peano axioms: base element, successor S, uniqueness axiom, injectivity, induction principle.\n3. Canonical total order on ℕ: m < n iff n = S^k(m) for some k ≥ 1.\n4. Well-ordering principle: every non-empty S ⊆ ℕ has a least element (distinguishes ℕ from ℤ and ℚ).\n5. Arithmetic as recursive derivation from succession: addition and multiplication from Peano.\n\n### Cross-Link Activation\n- **math.arith.counting**: Each \"next\" in counting is S applied once. Peano formalizes what counting assumes.\n- **math.nt.divisibility**: d | n defined as ∃k ∈ ℕ, n = k × d — quantifies over ℕ; well-ordering underpins prime factorization.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 31,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.natural-numbers",
+      "title": "[FOUNDATIONAL] — ZERO-MEMBERSHIP",
+      "content": "### MC-1 [FOUNDATIONAL] — ZERO-MEMBERSHIP\n- **Trigger**: \"Zero is not a natural number\" OR \"ℕ has only one definition\"\n- **Root cause**: School curricula (NCERT: ℕ = {1,2,3,…}) conflict with ISO 80000-2 (ℕ = {0,1,2,…}). Learner treats one as universal truth.\n- **Error pattern**: Asserting one convention is the only valid definition; confusing ℕ with ℕ⁺; deriving proof errors from wrong assumption.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — cleared in TA-A01; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.natural-numbers",
+      "title": "— PEANO-INFORMAL",
+      "content": "### MC-2 — PEANO-INFORMAL\n- **Trigger**: \"Natural numbers are just what you count — Peano axioms add nothing\"\n- **Root cause**: Rich informal experience with counting makes axioms feel redundant; learner unaware that P5 (induction) validates proof-by-induction.\n- **Error pattern**: Dismissing axioms; not seeing what informal counting leaves unspecified (allows cycles, prevents no inductive proofs).\n- **Repair**: TA-B02.\n- **MAMR**: Address after MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.natural-numbers",
+      "title": "— WELL-ORDER-FINITE",
+      "content": "### MC-3 — WELL-ORDER-FINITE\n- **Trigger**: \"Well-ordered means finite\" OR \"ℕ must end somewhere because it has a minimum\"\n- **Root cause**: Conflating \"every subset has a minimum\" with \"the set has both a minimum and maximum.\"\n- **Error pattern**: Asserting ℕ is finite; claiming ℤ is also well-ordered.\n- **Repair**: TA-B03.\n- **MAMR**: Address after MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Set Definition and Zero-Membership Convention",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Set Definition and Zero-Membership Convention\",\"primitives\":[\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 89,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Peano Axioms and Successor Function",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Peano Axioms and Successor Function\",\"primitives\":[\"P03\",\"P07\",\"P1\",\"P2\",\"P3\",\"P4\",\"P49\",\"P5\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 115,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Canonical Total Order on ℕ",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Canonical Total Order on ℕ\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 141,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Well-Ordering Principle",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Well-Ordering Principle\",\"primitives\":[\"P03\",\"P06\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 163,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Arithmetic from Peano Recursion",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Arithmetic from Peano Recursion\",\"primitives\":[\"P04\",\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 191,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Cross-Link Bridge: Counting and Divisibility",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Cross-Link Bridge: Counting and Divisibility\",\"primitives\":[\"P3\",\"P4\",\"P41\",\"P49\",\"P5\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 217,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 240,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Repair MC-1 ZERO-MEMBERSHIP",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 ZERO-MEMBERSHIP\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 297,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Repair MC-2 PEANO-INFORMAL",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 PEANO-INFORMAL\",\"primitives\":[\"P03\",\"P07\",\"P3\",\"P4\",\"P49\",\"P5\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 318,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Repair MC-3 WELL-ORDER-FINITE",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 WELL-ORDER-FINITE\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P27\",\"P41\",\"P49\",\"P5\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 333,
+        "endLine": 430
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/mastery_probe/MP-TA-A07",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.natural-numbers",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A07 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA — routing via P75/P74 only]**\n**[GR-6: P91 is the terminal compound in this TA]**\n**[GR-7: P76 present in this mastery gate]**\n\n**P77 (MULTI-PROBLEM SET):**\n\nQ1: \"Under ISO 80000-2, is 0 ∈ ℕ? List the three smallest elements of ℕ.\"\n\nQ2: \"Write the number 3 as a nested application of the Peano successor S, starting from 0.\"\n\nQ3: \"Is ⟨ℕ, <⟩ well-ordered? Is ⟨ℤ, <⟩ well-ordered? Give a one-sentence justification for each answer.\"\n\nQ4: \"Find min(A) where A = {n ∈ ℕ : n² > 20}.\"\n\nQ5: \"Using the Peano recursive definition (a+0=a; a+S(b)=S(a+b)), verify step-by-step that 2 + 2 = 4.\"\n\nQ6: \"State one mathematical consequence of well-ordering that holds for ℕ but FAILS for ℤ.\"\n\n**P55 (SCORE):** Evaluate Q1–Q6:\n- Q1: 0 ∈ ℕ (YES); {0, 1, 2}\n- Q2: S(S(S(0)))\n- Q3: ℕ: YES (every non-empty subset has a minimum); ℤ: NO (e.g., {n ∈ ℤ : n < 0} has no minimum)\n- Q4: min(A) = 5 (4²=16 < 20 < 25=5²)\n- Q5: 2+2=2+S(1)=S(2+1)=S(2+S(0))=S(S(2+0))=S(S(2))=S(3)=4 ✓\n- Q6: e.g., proof by strong induction works over ℕ but not over ℤ; or every non-empty subset of ℕ has a smallest element but {n ∈ ℤ : n < 0} does not\n\n**P76 (TRANSFER PROBE — Cross-link: math.arith.counting):**\n\"A software loop processes an array of n items. The loop variable i starts at 0 and is incremented each iteration (i ← S(i) in Peano notation). List the values i takes as a subset of ℕ. How many values are visited? Which property of ℕ guarantees the loop terminates in finite steps?\"\n\nExpected: i ∈ {0, 1, 2, …, n−1} — n distinct values. Terminates because ℕ is well-ordered: the \"remaining iterations\" count {n−1−i, n−2−i, …, 0} is a non-empty subset of ℕ that decreases each step and must reach its minimum (0). This is the cross-link to math.arith.counting (counting n objects = iterating i from 0 to n−1).\n\n**P55 (SCORE):** Evaluate P76: (1) correct element set {0,…,n−1}; (2) count n; (3) well-ordering cited as termination guarantee.\n\n**P75 (MASTERY ASSESSMENT):**\nItems: Q1, Q2, Q3, Q4, Q5, Q6, P76 = **7 items**.\nPass criterion: **7/7** (⌈0.90 × 7⌉ = 7; threshold = 0.90).\n- **PASS** → P74: route to P78.\n- **FAIL** → P74: identify miss pattern → repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong → TA-B01 (ZERO-MEMBERSHIP).\n- Q2 wrong or Q5 wrong → TA-B02 (PEANO-INFORMAL).\n- Q3 wrong or Q4 wrong or Q6 wrong or P76 wrong → TA-B03 (WELL-ORDER-FINITE).\n- Multiple wrongs → MAMR: TA-B01 first if Q1 wrong, then FIFO: TA-B02 before TA-B03; re-gate after all active MCs cleared.\n\n**P78 (COMPLETION):**\nMastery of math.found.natural-numbers confirmed. Record mastery event. Schedule P89. Activate unlocks: math.arith.counting, math.found.proof-by-induction, math.nt.divisibility.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 240,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a concrete physical analogy (counting stones, staircase steps) before introducing formal set notation. Use the number line as the pictorial bridge before symbolic successor notation.\n\n### MAMR Enforcement\nMC-1 ZERO-MEMBERSHIP addressed in TA-A01 (first TA). If MC-1 triggers at any subsequent TA or at the mastery gate, route → TA-B01 → return to point of interruption. MC-2 and MC-3 are FIFO after MC-1 is cleared: if both are active, address TA-B02 before TA-B03.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 75,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.natural-numbers",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (zero-membership) + Q3 (well-ordering ℕ vs ℤ) + P76 (loop iteration) | 3/3 |\n| Day 3 | Q2 (Peano successor notation) + Q5 (Peano arithmetic) | 2/2 |\n| Day 7 | Mixed 3-item mini-set: one from each MC area | 3/3 |\n| Day 21 | Q1, Q3, Q4, Q6 (4 items) | 4/4 |\n| Day 60 | Full 7-item mastery gate | 7/7 |\n\n**Decay rule**: Failure at any interval → reset to Day 1 + Protocol B routing:\n- Q1/Q6-type failure → TA-B01; Q2/Q5-type → TA-B02; Q3/Q4/P76-type → TA-B03.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 351,
+        "endLine": 366
+      }
+    },
+    {
+      "assetId": "math.found.natural-numbers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.natural-numbers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Set Theory | math.found.set-theory | Set membership, set-builder notation, cardinality |\n| Total Order | math.found.total-order | RATT axioms; \"least element\"; ⟨S, <⟩ notation |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Counting | math.arith.counting | Peano successor formalizes \"next\" in counting |\n| Proof by Induction | math.found.proof-by-induction | P5 induction axiom is the direct prerequisite |\n| Divisibility | math.nt.divisibility | Divisibility quantifies over ℕ |\n\n### Cross-Links\n- **math.arith.counting**: Bidirectional — ℕ supplies formal foundation; counting supplies concrete model. Bridged in TA-A06 and P76.\n- **math.nt.divisibility**: Well-ordering of ℕ underpins prime factorization uniqueness.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.natural-numbers.md",
+        "startLine": 366,
+        "endLine": 387
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

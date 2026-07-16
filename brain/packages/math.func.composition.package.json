@@ -1,0 +1,342 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.composition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.composition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ed7d2023687915081b5bcf4b979bfbafed46dce3e8182e34e3db8e43bd2bd716",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.composition.md": "sha256:d8440153b630494a132dd0fb6f7488ffa8e85b877bd809315dff18393afdc751"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.func.composition",
+    "name": "Function Composition",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.func.function-concept"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.composition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.composition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.composition.md": "sha256:d8440153b630494a132dd0fb6f7488ffa8e85b877bd809315dff18393afdc751"
+      },
+      "contentHash": "sha256:c04d42852ae7ff5226c502e48efe7dd8ba230dfe8bc077d196a9ec4ae458b24f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.composition.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.composition.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.composition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.composition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.composition.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.composition.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.composition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.composition\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.composition.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.composition.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.composition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.composition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.composition.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.composition.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.composition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.composition\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.composition/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.func.composition",
+      "title": "Function Composition — cognitive map",
+      "content": "### Core Insight\nFunction composition feeds the output of one function into the input of another. The order is right-to-left: in (f∘g)(x) = f(g(x)), g acts first. Getting this order wrong is the single most common composition error.\n\n### Conceptual Hierarchy\n```\nLevel 0 (Concrete): Assembly-line analogy: station g processes raw material first,\n                    station f processes the output. Swap order → different product.\nLevel 1 (Pictorial): Arrow diagrams showing g: A→B and f: B→C composing to f∘g: A→C.\nLevel 2 (Abstract): (f∘g)(x) = f(g(x)); domain restriction; non-commutativity.\nLevel 3 (Transfer): Decomposing h(x)=(2x+1)³ into f(g(x)); inner/outer structure for chain rule.\n```\n\n### Core Formulas\n```\nDefinition:  (f∘g)(x) = f(g(x))    [apply g first, then f]\nDomain:      dom(f∘g) = {x ∈ dom(g) : g(x) ∈ dom(f)}\nNotation:    f∘g  means  \"f after g\"  (right-to-left reading)\n\nKey properties:\n  Non-commutativity: f∘g ≠ g∘f in general\n  Associativity:     (f∘g)∘h = f∘(g∘h)  (always)\n  Identity:          f∘id = id∘f = f\n\nDecomposition pattern (for chain-rule readiness):\n  h(x) = (outer function) of (inner function)\n  outer = f, inner = g → h = f∘g\n```\n\n### Skill Execution Steps (bloom=apply)\n```\nStep 1: Identify which function is inner (g) and which is outer (f).\nStep 2: Evaluate g(x) — this is the input to f.\nStep 3: Substitute g(x) wherever the variable appears in f.\nStep 4: Simplify.\nStep 5 (domain check): Confirm g(x) lies in dom(f) for each x.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 32,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.func.composition/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.composition",
+      "title": "[FOUNDATIONAL]: COMPOSITION-REVERSED",
+      "content": "### MC-1 [FOUNDATIONAL]: COMPOSITION-REVERSED\n**Belief:** (f∘g)(x) = g(f(x)) — student applies f first, then g.\n**Origin:** Reading f∘g left-to-right: \"f, then g.\" The ∘ symbol feels like multiplication (left-to-right).\n**Trigger:** Asked to compute (f∘g)(2) with f(x)=x² and g(x)=x+3; student gets (2+3)²=25 instead of (2²+3)=7. Wait — correct is f(g(2))=f(5)=25 and g(f(2))=g(4)=7. Student confuses which is which.\n**Clarification:** (f∘g)(x)=f(g(x)): g acts first. So (f∘g)(2)=f(g(2))=f(5)=25. (g∘f)(2)=g(f(2))=g(4)=7. The issue is the student may compute (f∘g) as g(f(x)).\n**Repair:** Emphasise \"f∘g means f AFTER g; g goes first.\" Use assembly-line analogy.\n**Priority:** FOUNDATIONAL — must clear before any computation practice.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.func.composition/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.composition",
+      "title": "DOMAIN-IGNORED",
+      "content": "### MC-2: DOMAIN-IGNORED\n**Belief:** The domain of f∘g is just dom(g), ignoring the constraint that g(x) must lie in dom(f).\n**Origin:** Students focus on substitution mechanics without checking the intermediate output.\n**Trigger:** f(x)=√x (requires x≥0), g(x)=x−4; student says dom(f∘g)=ℝ instead of [4,∞).\n**Repair:** Two-stage domain check: (1) x must be in dom(g); (2) g(x) must be in dom(f). Both required.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.func.composition/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.composition",
+      "title": "COMPOSITION-COMMUTATIVE",
+      "content": "### MC-3: COMPOSITION-COMMUTATIVE\n**Belief:** f∘g = g∘f always, so the order of composition doesn't matter.\n**Origin:** Multiplication is commutative; student extends this to function composition.\n**Trigger:** Presented with f(x)=x+1 and g(x)=2x; computes f∘g = 2x+1 but claims g∘f = 2x+1 too, missing that g∘f = 2(x+1) = 2x+2.\n**Repair:** Concrete counter-example with different results. Stress that composition order is always significant unless a specific pair happens to commute.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 17,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "math.func.composition/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.composition",
+      "title": "Concrete Foundation — Order Matters",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Foundation — Order Matters\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 128,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "math.func.composition/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.composition",
+      "title": "Skill Execution — Computing and Decomposing Compositions",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Skill Execution — Computing and Decomposing Compositions\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 189,
+        "endLine": 268
+      }
+    },
+    {
+      "assetId": "math.func.composition/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.composition",
+      "title": "Non-Commutativity and Decomposition Practice",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Non-Commutativity and Decomposition Practice\",\"primitives\":[\"P04\",\"P11\",\"P27\",\"P49\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 268,
+        "endLine": 340
+      }
+    },
+    {
+      "assetId": "math.func.composition/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.composition",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 340,
+        "endLine": 639
+      }
+    },
+    {
+      "assetId": "math.func.composition/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.composition",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "### TA-A04: Mastery Gate (P91 Terminal)\n\n```\nP77 — MULTI-PROBLEM SET (4 problems)\n\nProblem 1:\n\"Let f(x) = x² + 1 and g(x) = 2x − 3.\nCompute (f∘g)(x) and (g∘f)(x). Are they equal?\"\n\nProblem 2:\n\"Let f(x) = ln(x) (dom f: x>0) and g(x) = x² − 9.\n(a) Compute (f∘g)(x).\n(b) State dom(f∘g) carefully.\"\n\nProblem 3:\n\"Decompose h(x) = sin²(x) (= (sin x)²) into f and g such that h = f∘g.\nState f(u) and g(x).\"\n\nProblem 4:\n\"True or false: For any two functions f and g with matching domains,\n(f∘g)∘h = f∘(g∘h). Justify with one example or one proof.\"\n[Answer: True — composition is associative. Example: any three functions.]\n```\n\n```\nP55 — SCORE (after P77)\nAward 1 point per problem.\nRunning total before P76: __/4.\n```\n\n```\nP76 — TRANSFER PROBE (cross-link: math.calc.chain-rule)\n\"Consider h(x) = (2x + 1)³.\n\n(a) Decompose h into f and g such that h(x) = f(g(x)).\n    Write f(u) = ___ and g(x) = ___.\n\n(b) In calculus, the chain rule states: if h = f∘g then h'(x) = f'(g(x))·g'(x).\n    Using your decomposition, identify:\n    • f'(u) = ___\n    • g'(x) = ___\n    • h'(x) = f'(g(x))·g'(x) = ___ (do not evaluate — just substitute)\n\n(c) This decomposition — identifying inner and outer functions — is exactly\n    what the chain rule requires. Explain in one sentence how function\n    composition is the structural foundation of the chain rule.\"\n\n[Expected answer:\n(a) g(x) = 2x+1 (inner), f(u) = u³ (outer). f(g(x)) = (2x+1)³. ✓\n(b) f'(u) = 3u², g'(x) = 2. h'(x) = 3(2x+1)²·2.\n(c) The chain rule differentiates composite functions by operating on the\n    outer and inner functions separately — it requires the composition\n    f(g(x)) structure to identify what to differentiate with what.]\n```\n\n```\nP55 — SCORE (after P76)\nAward 1 point for P76.\nRunning total: __/5.\n```\n\n```\nP75 — MASTERY ASSESSMENT\nPass criterion: 4 out of 5 (⌈0.80 × 5⌉ = 4)\n```\n\n```\nP55 — SCORE (final)\nRecord pass/fail status.\n```\n\n```\nP74 — ROUTING DECISION\nScore ≥ 4/5 → MASTERY ACHIEVED → P78 COMPLETION\nScore < 4/5 → NEEDS REVIEW → identify lowest-scoring item; activate Protocol B for its misconception\n```\n\n```\nP55 — SCORE (routing recorded)\n```\n\n```\nP78 — COMPLETION\n\"Function composition checkpoint complete. You have established:\n  • (f∘g)(x) = f(g(x)): g acts first, f acts second. Order is right-to-left.\n  • dom(f∘g) = {x ∈ dom(g) : g(x) ∈ dom(f)}: both domain gates must be checked.\n  • f∘g ≠ g∘f in general: composition is not commutative.\n  • Decomposing h into f∘g — identifying inner and outer — is the skill that\n    makes the chain rule tractable.\nNext concept: math.calc.chain-rule, where you will differentiate h = f∘g\nusing h'(x) = f'(g(x))·g'(x).\"\n```\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair Chains)\n\n### Repair Chain B-1: COMPOSITION-REVERSED (MC-1 FOUNDATIONAL)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: (f∘g)(x) = g(f(x))  [f goes first]\n AFTER:  (f∘g)(x) = f(g(x))  [g goes first]\n\nMemory trick: read the ∘ symbol as AFTER.\nf∘g = 'f AFTER g' → g runs, then f processes the result.\n\nEquivalently: the function written on the RIGHT goes first.\nIn f∘g, g is on the right → g is the inner (first) function.\"\n\nRepair exercise:\nLet f(x)=x+10, g(x)=3x.\n(a) Which function runs first in f∘g?  [g]\n(b) Compute (f∘g)(2) step by step.\n    Step 1: g(2) = 6.  Step 2: f(6) = 16.\n    (f∘g)(2) = 16.  NOT f(2)=12 first → g(12)=36.\n\nExit gate: \"In (f∘g)(x), which function is applied first?\"\nExpected: \"g — the right-hand function in the notation.\"\n→ Correct: return to TA-A01 P49 re-attempt.\n→ Incorrect: repeat P64 with new concrete pair.\n```\n\n### Repair Chain B-2: DOMAIN-IGNORED (MC-2)\n\n```\nP41 — MISCONCEPTION DETECTOR\nDiagnostic: \"Find dom(f∘g) where f(x)=√x and g(x)=x−4.\"\nIf student says dom = ℝ or dom = [0,∞) without checking: MC-2 confirmed.\n\nP27 — MISCONCEPTION NAMING\n\"DOMAIN-IGNORED: Only checking dom(g), not whether g(x) lands in dom(f).\nTwo conditions must BOTH hold:\n  (1) x ∈ dom(g): x can enter the inner function.\n  (2) g(x) ∈ dom(f): the output of g can enter the outer function.\"\n\nP03 — ANALOGY BRIDGE\n\"Two security checkpoints at an airport:\n  Checkpoint G: you must have a valid ticket.\n  Checkpoint F: your bag must weigh under 10 kg.\nBoth must be cleared. Passing checkpoint G doesn't mean you'll pass F.\"\n\nRepair exercise: f(x)=1/x, g(x)=x²−1.\n  Cond 1: dom(g) = ℝ. Cond 2: g(x)=x²−1≠0 → x≠±1.\n  dom(f∘g) = ℝ\\{−1,1}.\n\nExit gate: \"State dom(f∘g) as a two-condition intersection.\"\n→ Correct: return to TA-A02.\n```\n\n### Repair Chain B-3: COMPOSITION-COMMUTATIVE (MC-3)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: f∘g = g∘f always.\n AFTER:  f∘g = g∘f is the exception, not the rule.\n\nCounter-example: f(x)=x+1, g(x)=2x.\n  (f∘g)(x) = f(2x) = 2x+1.\n  (g∘f)(x) = g(x+1) = 2(x+1) = 2x+2.\n  2x+1 ≠ 2x+2 (they differ by 1 for every x).\n\nWhy functions ≠ multiplication: multiplication of numbers is\ncommutative (a×b = b×a) because both are just scaling.\nFunction composition changes the TYPE of operation between applications —\nadding vs. squaring vs. multiplying — and those operations interfere\ndifferently depending on order.\"\n\nExit gate: \"Give one pair of functions where f∘g ≠ g∘f and verify.\"\nExpected: any valid counter-example with two distinct computed values.\n→ Correct: return to TA-A03.\n```\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n```\nP89 — SPACED REPETITION\nReview schedule for math.func.composition:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"Write the definition of (f∘g)(x). Which function runs first?\"\n  Target: f(g(x)); g runs first.\n\nInterval 2 (3 days):\n  Application: \"Let f(x)=eˣ and g(x)=x²+1.\n  Compute (f∘g)(x), (g∘f)(x), and state dom(f∘g).\"\n  Target: e^(x²+1) vs. (eˣ)²+1; dom(f∘g)=ℝ (since x²+1>0 always).\n\nInterval 3 (7 days):\n  Transfer: \"Decompose h(x) = cos(3x²−1) into f and g.\n  What would the chain-rule give for h'(x)?\"\n  Target: f(u)=cos(u), g(x)=3x²−1; h'(x)=−sin(3x²−1)·6x.\n\nInterval 4 (21 days):\n  Integration: \"A student in math.calc.chain-rule cannot identify the\n  inner function in h(x)=ln(sin x). Explain using function composition\n  how to decompose it and why that decomposition is what the chain rule differentiates.\"\n  Target: g(x)=sin(x), f(u)=ln(u); h'(x)=cos(x)/sin(x)=cot(x).\n```\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### GR-8: Cross-link documentation\n```\nIncoming prerequisite:\n  math.func.function-concept → Provides domain/codomain/function-as-mapping.\n  Composition requires understanding a function as a rule f: A→B;\n  without this, \"feeding output of g to input of f\" is meaningless.\n\nOutgoing unlocks:\n  math.calc.chain-rule → Requires h = f∘g decomposition as the structural\n  prerequisite. Chain rule cannot be applied without knowing which function\n  is inner and which is outer.\n\nCross-linked (non-prerequisite):\n  math.calc.chain-rule (Tier 1) → Used in P76 transfer probe: decompose\n  (2x+1)³ and preview the chain-rule structure without computing derivatives.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.calc.chain-rule]\nmath.calc.chain-rule IS in Tier 1 set → P76 CROSS-LINK PROBE\nP76 probe: decompose h(x)=(2x+1)³ into f∘g; identify f'(u) and g'(x);\n  state h'(x)=f'(g(x))·g'(x) without evaluating — previews chain-rule structure.\n```\n\n---\n\n\n## Component 8 — Teaching Notes\n\n### Pedagogical Rationale\nFunction composition (bloom=apply) requires students to execute a multi-step procedure reliably, not just recognise the definition. The P07 worked example pair in TA-A02 models both directions of the skill: computing a composition formula from scratch AND decomposing a given expression into inner/outer — the decomposition direction is the one chain-rule requires.\n\n### Common Session Failure Modes\n1. **MC-1 is near-universal:** The left-to-right reading of f∘g misleads nearly all first-time learners. Expect the P41 gate to fire; the B-1 repair chain should clear it in one pass with the assembly-line analogy.\n2. **Decomposition is underpractised:** Students can compute f(g(x)) but freeze when asked to reverse-engineer f and g from a given h. The worked example pair and TA-A03 pattern induction address this directly.\n3. **Domain check is skipped under time pressure:** Students in computation-heavy sessions default to \"domain is whatever works.\" The two-gate framing in TA-A02 and the airport analogy in B-2 make this memorable.\n\n### Connections to Broader Curriculum\n- **Downstream — math.calc.chain-rule:** The P76 probe intentionally previews the chain rule's structure. By the time students reach chain-rule, they should arrive with h = f∘g decomposition as a practised, automatic skill.\n- **Cross-domain — math.abst.group-theory:** Function composition on bijections forms a group (under composition). This connection enriches both topics but is not required content here.\n- **Prerequisite — math.func.function-concept:** Domain/codomain terminology, and the notion of a function as a mapping f: A→B, must be solid before domain-of-composition arguments make sense.\n\n### Language Precision\n- Always write \"g runs first\" or \"g is the inner function\" — never \"g is on the left\" (it's on the right in f∘g).\n- Say \"f AFTER g\" as a mnemonic for f∘g.\n- Distinguish (f∘g)(x) = f(g(x)) from f·g(x) = f(x)·g(x) (product of functions).\n\n---\n\n\n## Component 10 — Validation Checklist\n\n### Structural Validators\n- [x] V-1: Blueprint has all 10 components (0–8, 10).\n- [x] V-2: Metadata YAML complete with all required fields.\n- [x] V-3: concept_id matches filename `math.func.composition`.\n- [x] V-4: difficulty=proficient, bloom_level=apply, mastery_threshold=0.80.\n- [x] V-5: estimated_hours=5, session_ta_cap=7.\n\n### Grammar Rule Validators\n- [x] V-6 (GR-1): Every non-repair TA opens with B-category primitive (TA-A01: P03+P06; TA-A02: P07; TA-A03: P04; TA-A04 is mastery gate).\n- [x] V-7 (GR-2): Every non-gate TA contains P49 with all 4 branches. TA-A01, TA-A02, TA-A03 each have P49.\n- [x] V-8 (GR-3): Mastery gate TA-A04 is terminal (ends with P78).\n- [x] V-9 (GR-4): P41 entry diagnostic gates P64 → Protocol B when MC-1 active.\n- [x] V-10 (GR-6): P91 compound (P77→P55→P76→P55→P75→P55→P74→P55→P78) complete in TA-A04.\n- [x] V-11 (GR-7): P76 present in mastery gate TA-A04.\n- [x] V-12 (GR-8): Cross-links documented in Component 7. math.calc.chain-rule named.\n- [x] V-13 (GR-9): P76 mode is CROSS-LINK (math.calc.chain-rule is Tier 1). P76 probe previews chain-rule decomposition structure.\n- [x] V-14 (GR-10): MAMR stated in Component 0 and enforced in Component 3.\n\n### Content Validators\n- [x] V-15: Pass criterion = ⌈0.80 × 5⌉ = 4/5. P77 has 4 problems; P76 contributes 1; total n=5. ✓\n- [x] V-16: CPA_ENTRY_STAGE = C. proficient/apply starts Concrete (no prior concrete in prerequisites). ✓\n- [x] V-17: MC-1 is FOUNDATIONAL and cleared first per MAMR. ✓\n- [x] V-18: P49 INCORRECT branch activates P27 or P64 with repair pathway in TA-A01, TA-A02, TA-A03. ✓\n- [x] V-19: P76 probe independent of P77 problems (P77: algebraic computation; P76: decompose (2x+1)³ and chain-rule preview). ✓\n- [x] V-20: Spaced repetition intervals are 1, 3, 7, 21 days with distinct prompts. ✓\n\n### bloom=apply Validator\n- [x] V-APPLY: P07 (WORKED EXAMPLE PAIR) present in TA-A02, modelling both computation and decomposition directions. ✓\n\n### Automated Invariant Check (AIR)\n- [x] AIR-1: No implementation code present.\n- [x] AIR-2: No references to internal system variables.\n- [x] AIR-3: All cross-linked concept IDs use canonical prefix format.\n- [x] AIR-4: P91 sequence order is P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n- [x] AIR-5: Protocol B repair chains each have explicit exit gate with return instruction. ✓\n\n**VALIDATION RESULT: PASS — PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 340,
+        "endLine": 639
+      }
+    },
+    {
+      "assetId": "math.func.composition/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.composition",
+      "title": "Scaffolding Protocol",
+      "content": "### Entry Diagnostic (P41 gate)\n```\nP41 — MISCONCEPTION DETECTOR\nPrompt: \"Let f(x) = 2x and g(x) = x + 5.\nCompute (f∘g)(3) and (g∘f)(3). Are they equal?\"\n\nCORRECT ((f∘g)(3)=f(8)=16; (g∘f)(3)=g(6)=11; not equal):\n→ No MC-1 detected → proceed to TA-A01 standard opening.\n\nINCORRECT ((f∘g)(3)=g(f(3))=g(6)=11 — applied g∘f instead of f∘g):\n→ MC-1 FOUNDATIONAL active → P64 CONCEPTUAL SHIFT\n→ Activate Protocol B (MC-1 Repair Chain)\n\nINCORRECT ((f∘g)(3)=(g∘f)(3) — claims they're equal):\n→ MC-3 active; flag for repair after MC-1 check.\n```\n\n### Prerequisite Bridge\nStudent completed math.func.function-concept. Composition extends the function-as-mapping idea: instead of one mapping, two mappings are chained. The codomain of g becomes (part of) the domain of f.\n\n### MAMR Enforcement\nMC-1 is FOUNDATIONAL. If active, clear completely before engaging MC-2 or MC-3 content. MC-2 and MC-3 addressed FIFO once MC-1 cleared.\n\n### CPA Progression: C → P → A\n- **Concrete (C):** Specific numbers through two specific functions; verify by substitution.\n- **Pictorial (P):** Arrow diagram A→B→C; domain restriction diagram.\n- **Abstract (A):** Symbolic definition (f∘g)(x)=f(g(x)); formal domain formula; decomposition for chain rule.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 97,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "math.func.composition/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.func.composition",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89 — SPACED REPETITION\nReview schedule for math.func.composition:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"Write the definition of (f∘g)(x). Which function runs first?\"\n  Target: f(g(x)); g runs first.\n\nInterval 2 (3 days):\n  Application: \"Let f(x)=eˣ and g(x)=x²+1.\n  Compute (f∘g)(x), (g∘f)(x), and state dom(f∘g).\"\n  Target: e^(x²+1) vs. (eˣ)²+1; dom(f∘g)=ℝ (since x²+1>0 always).\n\nInterval 3 (7 days):\n  Transfer: \"Decompose h(x) = cos(3x²−1) into f and g.\n  What would the chain-rule give for h'(x)?\"\n  Target: f(u)=cos(u), g(x)=3x²−1; h'(x)=−sin(3x²−1)·6x.\n\nInterval 4 (21 days):\n  Integration: \"A student in math.calc.chain-rule cannot identify the\n  inner function in h(x)=ln(sin x). Explain using function composition\n  how to decompose it and why that decomposition is what the chain rule differentiates.\"\n  Target: g(x)=sin(x), f(u)=ln(u); h'(x)=cos(x)/sin(x)=cot(x).\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 518,
+        "endLine": 547
+      }
+    },
+    {
+      "assetId": "math.func.composition/reference/1",
+      "kind": "reference",
+      "conceptId": "math.func.composition",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### GR-8: Cross-link documentation\n```\nIncoming prerequisite:\n  math.func.function-concept → Provides domain/codomain/function-as-mapping.\n  Composition requires understanding a function as a rule f: A→B;\n  without this, \"feeding output of g to input of f\" is meaningless.\n\nOutgoing unlocks:\n  math.calc.chain-rule → Requires h = f∘g decomposition as the structural\n  prerequisite. Chain rule cannot be applied without knowing which function\n  is inner and which is outer.\n\nCross-linked (non-prerequisite):\n  math.calc.chain-rule (Tier 1) → Used in P76 transfer probe: decompose\n  (2x+1)³ and preview the chain-rule structure without computing derivatives.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.calc.chain-rule]\nmath.calc.chain-rule IS in Tier 1 set → P76 CROSS-LINK PROBE\nP76 probe: decompose h(x)=(2x+1)³ into f∘g; identify f'(u) and g'(x);\n  state h'(x)=f'(g(x))·g'(x) without evaluating — previews chain-rule structure.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.composition.md",
+        "startLine": 547,
+        "endLine": 576
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

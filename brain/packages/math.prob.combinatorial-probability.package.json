@@ -1,0 +1,374 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.combinatorial-probability-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.combinatorial-probability",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5cc6a5fc21222f65ef4f7e4d61ecac13d3977240ee7ca8116f384d2f99b0cf8b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.combinatorial-probability.md": "sha256:63a084096ae204fa085379e3142bdf708c627371f46b819920c394f07ebf6ce3"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 4,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.combinatorial-probability",
+    "name": "Combinatorial Probability",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.combinatorial-probability-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.combinatorial-probability (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.combinatorial-probability.md": "sha256:63a084096ae204fa085379e3142bdf708c627371f46b819920c394f07ebf6ce3"
+      },
+      "contentHash": "sha256:e69bcaa0e157c6f10a9be4bc41b5143790bf05376a4df2853680833c1dd92845",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.combinatorial-probability.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md#TA-1 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.combinatorial-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.combinatorial-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.combinatorial-probability.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.combinatorial-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.combinatorial-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.combinatorial-probability.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.combinatorial-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.combinatorial-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.combinatorial-probability.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.combinatorial-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.combinatorial-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.combinatorial-probability/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Combinatorial Probability — core explanation",
+      "content": "**One-sentence definition:** Combinatorial probability computes P(A) = |A|/|Ω| for equally-likely sample spaces by using permutations, combinations, and the multiplication/addition principles to count |A| and |Ω| without listing every outcome.\n\n**Why it matters:** Many real-world probability calculations (poker hands, lottery odds, quality-control sampling, genetics) involve sample spaces too large to enumerate; combinatorial counting converts those counting problems into tractable formulas.\n\n| Tool                   | Formula                          | When to use                                         |\n|------------------------|----------------------------------|-----------------------------------------------------|\n| Multiplication rule    | n₁ × n₂ × … × nₖ                | Sequence of k independent choices                   |\n| Permutations P(n, r)   | n! / (n−r)!                      | r items chosen from n, order matters                |\n| Combinations C(n, r)   | n! / (r!(n−r)!)                  | r items chosen from n, order doesn't matter         |\n| Classical probability  | P(A) = \\|A\\| / \\|Ω\\|            | After counting via the tools above                  |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 20,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Learning Objectives",
+      "content": "By the end of this concept the learner will be able to:\n1. Identify whether a counting problem requires permutations or combinations.\n2. Compute |Ω| and |A| using the multiplication rule, P(n,r), or C(n,r).\n3. Apply P(A) = |A|/|Ω| after completing the combinatorial count.\n4. Solve classic setups: poker hands, committee selection, sampling with/without replacement.\n5. Use complementary counting: P(A) = 1 − P(Aᶜ) when counting Aᶜ is easier.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 43,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Order always matters when picking items.",
+      "content": "### MC-1: \"Order always matters when picking items.\"\n\n**Probe question:** Five people apply for 3 identical seats on a committee. How many ways can the committee be formed?\n\n**Characteristic phrase:** \"I use 5 × 4 × 3 = 60 because who we pick first matters.\"\n\n**Bridge:** The committee has *identical* seats — \"Alice, Bob, Carol\" and \"Carol, Alice, Bob\" form the same committee. Only combinations apply: C(5,3) = 10. The multiplication rule and P(n,r) count ordered sequences; C(n,r) counts unordered groups. The question to ask first: \"Does order change the outcome?\" If not, use C(n,r).\n\n**Replacement concept:** Permutations → when order matters (passwords, ranked prizes, arrangements). Combinations → when order doesn't matter (committees, hands, samples). This decision is the first step in every combinatorial probability problem.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "I can always compute |Ω| and |A| separately without thinking about whether they use the same counting logic.",
+      "content": "### MC-2: \"I can always compute |Ω| and |A| separately without thinking about whether they use the same counting logic.\"\n\n**Probe question:** A 5-card hand is dealt from 52 cards. What is P(all 5 are hearts)?\n\n**Characteristic phrase:** \"Total outcomes = 52 × 51 × 50 × 49 × 48 (ordered), favorable = 13 × 12 × 11 × 10 × 9 (ordered). So P = (13×12×11×10×9)/(52×51×50×49×48).\"\n\n**Bridge:** The formula is valid — but only because both numerator and denominator use the same counting model (ordered sequences). If Ω is counted using *unordered* combinations [C(52,5) = 2,598,960], then |A| must also use unordered combinations [C(13,5) = 1,287]. Mixing ordered for one and unordered for the other gives a wrong answer. Decide on one model (ordered or unordered) and apply it consistently.\n\n**Replacement concept:** |Ω| and |A| must be counted using the same framework (both ordered or both unordered). In practice: choose unordered combinations for \"hand\" or \"sample\" problems (cards, balls), ordered permutations for \"arrangement\" or \"sequence\" problems.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Complementary counting is just harder — always count the event directly.",
+      "content": "### MC-3: \"Complementary counting is just harder — always count the event directly.\"\n\n**Probe question:** In a group of 10 people, what is P(at least 2 share a birthday) over 365 days?\n\n**Characteristic phrase:** \"I'll add up P(exactly 2) + P(exactly 3) + … — it's more thorough.\"\n\n**Bridge:** Counting \"at least 2 share a birthday\" directly requires summing over many cases. Counting the complement \"no two share a birthday\" is one clean formula: P(all different) = (365 × 364 × … × 356)/365¹⁰. Then P(at least 2 share) = 1 − P(all different). Complementary counting is a *strategy* that dramatically simplifies many \"at least one / at least two\" problems — it is often far easier, not harder.\n\n**Replacement concept:** When the event is \"at least one …\" or \"at least k …\", consider computing 1 − P(complement). Count the complement first; if it's simpler, use it.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 27,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Learner uses permutations for an unordered selection → trigger MC-1 bridge + Demo 1.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Learner uses permutations for an unordered selection → trigger MC-1 bridge + Demo 1.\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 155,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Learner mixes ordered and unordered counting → trigger MC-2 bridge.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Learner mixes ordered and unordered counting → trigger MC-2 bridge.\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 156,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Learner tries to enumerate \"at least k\" cases directly → trigger MC-3 bridge + Explanation 3 complement strategy.",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Learner tries to enumerate \\\"at least k\\\" cases directly → trigger MC-3 bridge + Explanation 3 complement strategy.\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 157,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Learner is ready for harder problems → bridge to poker-hand Explanation 2.",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Learner is ready for harder problems → bridge to poker-hand Explanation 2.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 158,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Assessment Items",
+      "content": "**Q1 (recall):** When do you use C(n,r) instead of P(n,r)?\n*Answer:* C(n,r) when order of selection does not matter (unordered subsets); P(n,r) when order matters (ordered arrangements).\n\n**Q2 (application):** A committee of 4 is chosen from 9 candidates. What is P(a specific person is included)?\n*Answer:* |Ω| = C(9,4) = 126. |A| = C(8,3) = 56 (fix that person, choose 3 of remaining 8). P = 56/126 = 4/9.\n\n**Q3 (synthesis):** 5 cards from a standard 52-card deck. What is P(exactly two aces)?\n*Answer:* |Ω| = C(52,5) = 2,598,960. |A| = C(4,2) × C(48,3) = 6 × 17,296 = 103,776. P = 103,776/2,598,960 ≈ 0.0399.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 168,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Voice Teaching Script",
+      "content": "\"Classical probability says P(A) = favorable outcomes over total outcomes. Combinatorial probability is about counting those numbers efficiently. The first decision is always: does order matter? If I'm ranking three finalists, yes — first, second, third are different positions. If I'm picking a committee, no — the same three people make the same committee regardless of who was named first. That one decision tells you whether to use permutations or combinations. Once you've chosen, apply it consistently to both the favorable count and the total count.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 162,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Recovery Notes",
+      "content": "Learners who mix P(n,r) and C(n,r) almost always recover after Demo 1 (committee vs. officers with same n and r). The factor of r! = 6 difference makes the error concrete and memorable.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 181,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Memory & Review",
+      "content": "**Spaced-repetition cue:** \"What is the first question you ask before computing a combinatorial probability?\"\n\n**One-week review hook:** Give a new problem requiring complementary counting and ask the learner to identify why direct counting is harder before computing via the complement.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 187,
+        "endLine": 195
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Transfer Map",
+      "content": "- → **math.prob.conditional-probability** (conditional counting: restrict Ω to B, then count A ∩ B)\n- → **math.prob.discrete-distributions** (binomial distribution directly uses C(n,r))\n- → **math.prob.discrete-distributions** (hypergeometric distribution = combinatorial sampling without replacement)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 195,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "math.prob.combinatorial-probability/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.combinatorial-probability",
+      "title": "Curriculum Feedback",
+      "content": "Discovery 1 (birthday paradox) is high-engagement and should be used early; it motivates both the complementary counting strategy and the power of mathematical reasoning over intuition. Ensure learners from math.disc.combinations have seen C(n,r) before this blueprint.\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.combinatorial-probability.md",
+        "startLine": 203,
+        "endLine": 208
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

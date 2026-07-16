@@ -1,0 +1,266 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.derivative-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.derivative-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ff97e8c3263269b18605143d42692d01ace00d290acaf639467c232d9595e41a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.derivative-intro.md": "sha256:637d6a45f16183d7f1d6df6a6d67524e264cb12df00d829d90391c40c61eb928"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 2,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 2
+  },
+  "concept": {
+    "conceptId": "math.calc.derivative-intro",
+    "name": "Slope of Tangent and Rate of Change",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.slope",
+      "math.calc.limits"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.derivative-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.derivative-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.derivative-intro.md": "sha256:637d6a45f16183d7f1d6df6a6d67524e264cb12df00d829d90391c40c61eb928"
+      },
+      "contentHash": "sha256:2ac5799aa79b29e0a5a392f76c7c93206bf230f42d8937b316790f3669ad1215",
+      "ruleCount": 2,
+      "bandCounts": {
+        "3": 2
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-intro.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-intro.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-intro\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-intro.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-intro.md#TA-B02 (addresses MC-2, MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-intro\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.derivative-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "Slope of Tangent and Rate of Change — cognitive map",
+      "content": "**Core concept:** The derivative at a point is the instantaneous rate of change, defined as the limit of the average rate of change (difference quotient) as the interval shrinks to zero: f'(a) = lim_{h→0} [f(a+h) − f(a)]/h. Geometrically, f'(a) is the slope of the tangent line to the curve y=f(x) at x=a, obtained as the limit of secant slopes as the second point approaches the first.\n\n**Conceptual progression:**\n1. Average rate of change (AROC): Δy/Δx = [f(x+h)−f(x)]/h — slope of secant line through two points.\n2. As h→0, the secant line rotates toward the tangent line at x — a limiting process.\n3. The difference quotient's limit gives the instantaneous rate of change (IROC) = derivative.\n4. AROC ≠ IROC in general: AROC measures over an interval; IROC measures at a single instant.\n5. Linear functions: AROC = IROC everywhere (constant slope), confirming consistency.\n6. f'(a) may not exist if the limit does not exist (corner, cusp, vertical tangent).\n\n**CPA arc (entry: P):**\n- Pictorial: table of AROC values for decreasing h approaching 0; graph of secant lines rotating toward tangent; animated slope convergence\n- Abstract: difference quotient [f(a+h)−f(a)]/h; limit notation lim_{h→0}; derivative f'(a); tangent line equation y−f(a)=f'(a)(x−a)\n\n**Prior knowledge activated:** slope of a line (rise/run, two-point formula); limit of a function as h→0; function notation f(x); average rate of change concept\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "TANGENT-IS-JUST-ONE-POINT [FOUNDATIONAL]",
+      "content": "### MC-1: TANGENT-IS-JUST-ONE-POINT [FOUNDATIONAL]\n**Description:** Learner believes the tangent line \"only touches the curve at one point and has no slope\" — conflates the geometric picture (tangent point) with the algebraic construction needed to compute the slope.\n**Surface form:** \"You can't find the slope with just one point. You need two points on the line.\"\n**Root cause:** Correct but incomplete — learner knows slope needs two points but hasn't yet seen how the second point is constructed via the limit. Conflates \"tangent line as geometric object\" with \"method of computing its slope.\"\n**Trigger condition:** Any prompt asking for the slope of a tangent or derivative at a point.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "INSTANTANEOUS-IS-UNDEFINED",
+      "content": "### MC-2: INSTANTANEOUS-IS-UNDEFINED\n**Description:** Learner thinks \"rate of change at a single instant\" is a contradiction in terms — there is no time elapsed, so change divided by zero is undefined. Resists the limit construction as a workaround.\n**Surface form:** \"Speed at one moment doesn't make sense. You need a time interval to measure speed.\"\n**Root cause:** Pre-limit intuition: change requires two distinct states. Learner hasn't reconciled this with the limit as a process that approaches, not divides by, zero.\n**Trigger condition:** Car-speed or particle-motion problems asking for instantaneous velocity.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "DIFFERENCE-QUOTIENT-IS-THE-DERIVATIVE",
+      "content": "### MC-3: DIFFERENCE-QUOTIENT-IS-THE-DERIVATIVE\n**Description:** Learner computes [f(x+h)−f(x)]/h for a specific small h (e.g., h=0.001) and treats this as the derivative, skipping the limit.\n**Surface form:** \"The slope is approximately 2.001, so the derivative is 2.001.\"\n**Root cause:** Numerically, small h gives good approximation, so learner conflates approximation with the exact value. Does not distinguish limit (process) from evaluation at small h (computation).\n**Trigger condition:** Problems requiring an exact derivative using the limit definition.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "Repair for MC-1 (TANGENT-IS-JUST-ONE-POINT)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (TANGENT-IS-JUST-ONE-POINT)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 193,
+        "endLine": 210
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "Repair for MC-2 and MC-3 (INSTANTANEOUS-IS-UNDEFINED / DIFFERENCE-QUOTIENT-IS-DERIVATIVE)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 and MC-3 (INSTANTANEOUS-IS-UNDEFINED / DIFFERENCE-QUOTIENT-IS-DERIVATIVE)\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 210,
+        "endLine": 408
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.80 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"For f(x)=x², compute the difference quotient [f(1+h)−f(1)]/h and simplify. What does this expression approach as h→0?\"\n[Expected: (2h+h²)/h = 2+h → 2. Answer: 2. This is f'(1).]\n\n**Item 2:**\n\"The average rate of change of g(x)=x³ from x=2 to x=2+h is computed as 12+6h+h². What is the instantaneous rate of change at x=2?\"\n[Expected: Take lim_{h→0}(12+6h+h²) = 12. Answer: 12.]\n\n**Item 3:**\nTrue or False: \"The derivative f'(a) equals the slope of the secant line through (a, f(a)) and a nearby point.\"\n[Expected: FALSE. The derivative equals the slope of the TANGENT line — the LIMIT of secant slopes, not any secant slope itself.]\n\n**Item 4:**\n\"If f(x)=5x+2, what is f'(x) for all x? (Use the difference quotient or reasoning.)\"\n[Expected: AROC = [5(x+h)+2−5x−2]/h = 5h/h = 5. Limit: f'(x)=5 everywhere. The derivative of a linear function is its slope.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for fully correct, 0 for incorrect or missing. Running score: /4. If score ≥ 3, add half-weight (+0.5) to provisional total; if ≤ 2, note repair triggers for MC-1 or MC-3.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"A car's position at time t seconds is s(t) = t² + 2t metres.\n\n(a) Write out the difference quotient [s(2+h)−s(2)]/h and simplify completely.\n(b) Take the limit as h→0. What is the instantaneous speed of the car at t=2 seconds?\n(c) What does this value represent on the graph of s(t)?\"\n\n[Expected:\n(a) s(2+h)=(2+h)²+2(2+h)=4+4h+h²+4+2h=8+6h+h². s(2)=4+4=8.\nDifference quotient: (8+6h+h²−8)/h=(6h+h²)/h=6+h.\n(b) lim_{h→0}(6+h)=6. Instantaneous speed = 6 m/s at t=2.\n(c) It is the slope of the tangent line to the curve y=s(t) at the point (2, 8).]\n\n---\n\n#### P55 — SCORE after P76\nScore 1 point for correct limit (6 m/s), 1 point for correct geometric interpretation (tangent slope). Maximum P76 contribution: 1 point (binary — P76 is 1 of the 5 items). Award 1 if both algebra and limit are correct; 0 if limit is wrong.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (≥4/5): Learner has demonstrated understanding of the limit definition of derivative, distinction between AROC and IROC, and can compute difference quotients and take limits.\n- FAIL (<4/5): Identify which items failed; route to appropriate repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 or Item 4 (difference quotient algebra): → TA-B02 (repair MC-3)\n- FAIL on Item 3 (secant vs. tangent confusion): → TA-B01 (repair MC-1)\n- FAIL on P76 (limit step or interpretation): → TA-B02 (limit = instantaneous conceptual repair)\n- FAIL on multiple items: → TA-B01 first, then TA-B02; re-gate after both repair sequences\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nIf routed through repair: re-administer two fresh items (equivalent difficulty) and P76. Apply same MAMR. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have successfully demonstrated understanding of the derivative as the limit of the difference quotient — the instantaneous rate of change as the geometrical slope of the tangent line.\n\nKey anchors to carry forward:\n- f'(a) = lim_{h→0} [f(a+h)−f(a)]/h — the definition you will use to derive all derivative rules.\n- AROC measures over an interval; IROC = derivative measures at a point.\n- The tangent line at (a, f(a)) has slope f'(a).\n\nNext concept: math.calc.derivative-definition — formal rules for differentiation (power rule, sum rule, product rule) derived from this limit foundation.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 307,
+        "endLine": 400
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** Present graph of y=x² and two points: (1, 1) and (1.5, 2.25). Ask: \"What is the slope of the line through these two points?\" If correct (Δy/Δx=2.5), proceed to A01. If incorrect, reinforce slope formula from math.geom.slope before continuing.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): Provide completed AROC table with h=1, 0.5, 0.1, 0.01 — learner reads off values and identifies trend.\n- Rung 2 (partial abstract): Learner fills in the algebra for one row of the AROC table using the difference quotient formula provided.\n- Rung 3 (full abstract): Learner sets up and evaluates the limit lim_{h→0} [f(x+h)−f(x)]/h independently.\n\n**Pacing note:** h=5 estimated hours; deliver over 2 sessions. A01–A02 in session 1; A03 + mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"f(x)=2x²+1. Without using derivative rules, use the limit definition to find f'(x). What is f'(3)?\"\n[Expected: [f(x+h)−f(x)]/h = [2(x+h)²+1−2x²−1]/h = [4xh+2h²]/h = 4x+2h → 4x. f'(3)=12.]\n\n**Day 10 prompt:**\n\"A particle's position is s(t)=t³ metres. (a) Find the average velocity from t=1 to t=2. (b) Find the instantaneous velocity at t=1 using the limit definition.\"\n[Expected: (a) (8−1)/1=7 m/s. (b) lim_{h→0}[(1+h)³−1]/h = lim_{h→0}[3+3h+h²] = 3 m/s.]\n\n**Day 30 prompt:**\n\"Explain in words why the derivative is called an 'instantaneous' rate of change even though 'dividing by zero' would be undefined. What role does the limit play?\"\n[Expected: The limit avoids dividing by zero by approaching h=0 without reaching it; algebra simplifies h out of the numerator before the limit is taken.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 226,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-intro/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.derivative-intro",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.geom.slope — slope formula, secant lines, two-point slope; activates immediately in A01\n- math.calc.limits — limit notation, substitution, lim_{h→0}; required for the limit step in every TA\n\n**Unlocked blueprints:**\n- math.calc.derivative-definition — formal definition and rules for differentiation; builds directly on this motivational foundation\n\n**Cross-links (non-Tier-1, reference only):**\n- None\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-intro.md",
+        "startLine": 244,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

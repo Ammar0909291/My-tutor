@@ -1,0 +1,455 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.proposition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.proposition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8b7ade3d12695fc145fa8572f662f04b6e2386e44c8304fbbe8b433ed53cbe5b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.proposition.md": "sha256:c53103f528dad8747f7f1f59601ad7b87d0856bde108620f8c0f05e1db1dac30"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.found.proposition",
+    "name": "Proposition",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.logic"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.proposition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.proposition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.proposition.md": "sha256:c53103f528dad8747f7f1f59601ad7b87d0856bde108620f8c0f05e1db1dac30"
+      },
+      "contentHash": "sha256:4e81ada00d907e0ef98d5a007d2ee96b16157308741c4cc02eddf63b8feb3034",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.proposition.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proposition.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proposition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proposition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proposition.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proposition.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proposition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proposition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proposition.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proposition.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proposition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proposition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proposition.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proposition.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proposition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proposition\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proposition.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proposition.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proposition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proposition\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proposition.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proposition.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proposition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proposition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proposition.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proposition.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proposition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proposition\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.proposition/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.proposition",
+      "title": "Proposition — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.found.logic**: Learner understands the concepts of truth and falsity; is familiar with \"TRUE/FALSE\" as values; understands that mathematical statements can be evaluated.\n\n### Target Understanding\n1. A proposition is a declarative sentence that has exactly one truth value: TRUE or FALSE.\n2. Two necessary tests: (1) Is it declarative (not a question, command, or exclamation)? (2) Does it have a definite truth value (not dependent on unspecified variables)?\n3. Non-propositions by category: questions, commands, exclamations, open sentences (predicates with free variables), paradoxes.\n4. Bivalence principle: every proposition is exactly one of {TRUE, FALSE} — never both, never neither.\n5. Propositions are the atomic building blocks of propositional logic and logical connectives.\n\n### Cross-Link Activation\n- None (cross_links = []). P76 uses an independent real-world context.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 31,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.found.proposition/worked_example/WE-TA-A03",
+      "kind": "worked_example",
+      "conceptId": "math.found.proposition",
+      "title": "Bivalence Principle and Worked Examples",
+      "content": "### TA-A03 — Bivalence Principle and Worked Examples\n**Primitives**: P04 → P07 → P49\n\n**P04 (PATTERN INDUCTION):**\n**Bivalence principle**: Every proposition P satisfies exactly one of:\n- P is TRUE\n- P is FALSE\n\nNever both simultaneously; never neither. This is the classical principle of bivalence (or law of excluded middle in its propositional form).\n\nPattern — determining truth values:\n- \"2 + 2 = 5\" → Proposition → FALSE\n- \"Every even integer > 2 is a sum of two primes.\" → Proposition (Goldbach's Conjecture) → Truth value EXISTS but is UNKNOWN. It is still a proposition even if we don't know its truth value.\n- \"This sentence is false.\" → NOT a standard proposition — it is a self-referential paradox that violates bivalence (if TRUE then FALSE; if FALSE then TRUE). Classical propositional logic excludes such sentences.\n\n**P07 (WORKED EXAMPLE PAIR):**\n- **Example 1 — Unknown truth value is still a proposition**: \"There are infinitely many twin primes.\" This is a famous unsolved problem. We do not know if it is TRUE or FALSE. But it IS a proposition because it IS definitely one or the other — we just haven't proved which. Propositions can have unknown (to us) truth values while still being classified as propositions.\n- **Example 2 — Liar paradox is excluded**: \"This statement is false.\" Assume TRUE → it is false → contradiction. Assume FALSE → it is true → contradiction. Classical propositional logic excludes this sentence from the category of propositions. Self-referential sentences that cannot consistently receive a truth value are NOT propositions in classical logic.\n\n**P49 (ADAPTIVE CHECKPOINT):**\nPrompt: \"True or False: (a) A proposition must have a KNOWN truth value. (b) 'This sentence has five words' — is this a proposition? (c) Can a proposition be both TRUE and FALSE?\"\n- **CORRECT**: (a) FALSE — a proposition must have a DEFINITE truth value, but it need not be KNOWN to us; (b) YES, it is a proposition (count: This/sentence/has/five/words = 5 → TRUE); (c) NO — bivalence rules this out → TA-A04.\n- **PARTIAL**: Clarify (a) — distinguish known vs. definite; confirm (b) by counting words → TA-A04.\n- **INCORRECT**: → Protocol B, TA-B03.\n- **NO_RESPONSE**: → Protocol B, TA-B02 or TA-B03 based on error type.\n\n---",
+      "localKey": "WE-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 146,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "math.found.proposition/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.proposition",
+      "title": "[FOUNDATIONAL] — OPEN-SENTENCE-AS-PROPOSITION",
+      "content": "### MC-1 [FOUNDATIONAL] — OPEN-SENTENCE-AS-PROPOSITION\n- **Trigger**: \"'x > 3' is a proposition\" OR \"n is even — that's either true or false\"\n- **Root cause**: Open sentences look like declarative statements but have free variables — their truth value depends on the value of the variable, which is unspecified. Learner mistakes grammatical form for logical form.\n- **Error pattern**: Classifying predicates/open sentences as propositions; treating \"x > 3\" as having a definite truth value; not recognizing that a free variable renders a statement incomplete.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — cleared in TA-A02 (via P27); if triggered at any later TA or mastery gate, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.proposition/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.proposition",
+      "title": "— OPINION-AS-PROPOSITION",
+      "content": "### MC-2 — OPINION-AS-PROPOSITION\n- **Trigger**: \"'Mathematics is the most beautiful subject' is a proposition\"\n- **Root cause**: Learner conflates \"declarative sentence\" with \"proposition\"; subjective or evaluative claims are declarative in grammar but lack a fact-of-the-matter truth value.\n- **Error pattern**: Classifying opinions, aesthetic judgments, or culturally relative claims as propositions.\n- **Repair**: TA-B02.\n- **MAMR**: Address after MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.proposition/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.proposition",
+      "title": "— PARADOX-BIVALENCE",
+      "content": "### MC-3 — PARADOX-BIVALENCE\n- **Trigger**: \"'This statement is false' is a proposition — it just has an unusual truth value\"\n- **Root cause**: Learner extends the bivalence principle to all grammatically declarative sentences, not recognizing that self-referential paradoxes break bivalence and lie outside classical propositional logic.\n- **Error pattern**: Treating the Liar paradox as a valid proposition; thinking \"true and false simultaneously\" is a third truth value.\n- **Repair**: TA-B03.\n- **MAMR**: Address after MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proposition",
+      "title": "Definition: Two Tests for a Proposition",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Definition: Two Tests for a Proposition\",\"primitives\":[\"P03\",\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 87,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proposition",
+      "title": "Non-Propositions by Category",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Non-Propositions by Category\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 117,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proposition",
+      "title": "Bivalence Principle and Worked Examples",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Bivalence Principle and Worked Examples\",\"primitives\":[\"P04\",\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 146,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proposition",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 174,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proposition",
+      "title": "Repair MC-1 OPEN-SENTENCE-AS-PROPOSITION",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 OPEN-SENTENCE-AS-PROPOSITION\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 237,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proposition",
+      "title": "Repair MC-2 OPINION-AS-PROPOSITION",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 OPINION-AS-PROPOSITION\",\"primitives\":[\"P03\",\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 261,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proposition",
+      "title": "Repair MC-3 PARADOX-BIVALENCE",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 PARADOX-BIVALENCE\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 283,
+        "endLine": 379
+      }
+    },
+    {
+      "assetId": "math.found.proposition/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.proposition",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A04 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA — routing via P75/P74 only]**\n**[GR-6: P91 is the terminal compound in this TA]**\n**[GR-7: P76 present in this mastery gate]**\n\n**P77 (MULTI-PROBLEM SET):**\n\nQ1: \"Classify each as a proposition or non-proposition. For each proposition, state its truth value (or note it is unknown): (a) '√2 is irrational'; (b) 'What is √2?'; (c) 'x² = 4'; (d) '∃x ∈ ℝ, x² = 4'.\"\n\nQ2: \"Give one example of: (a) a proposition that is FALSE; (b) an open sentence (predicate) with one free variable; (c) a proposition whose truth value is currently unknown to mathematicians.\"\n\nQ3: \"The statement 'n is divisible by 3' has a free variable. Write TWO propositions derived from it: one by substitution of a specific value, and one by universal quantification over ℤ.\"\n\nQ4: \"'This statement is false' — why is this NOT a proposition in classical logic?\"\n\nQ5: \"A student writes: 'f(x) = 2x + 1 — this is TRUE.' What is wrong with this statement?\"\n\nQ6: \"True or False: 'A proposition cannot have an unknown truth value.' Justify.\"\n\n**P55 (SCORE):** Evaluate Q1–Q6:\n- Q1: (a) Proposition: TRUE; (b) Not a proposition: question; (c) Not a proposition: open sentence (x free); (d) Proposition: TRUE\n- Q2: (a) e.g., \"2 + 2 = 5\" (FALSE); (b) e.g., \"x > 0\"; (c) e.g., Riemann Hypothesis, Goldbach's Conjecture\n- Q3: Substitution: \"6 is divisible by 3\" (TRUE) or \"5 is divisible by 3\" (FALSE); Quantification: \"∀n ∈ ℤ, n is divisible by 3\" (FALSE)\n- Q4: If TRUE, then by its own claim it is FALSE — contradiction; if FALSE, then by its claim it is TRUE — contradiction. Bivalence cannot be consistently assigned → not a proposition in classical logic.\n- Q5: f(x) = 2x+1 is an expression/function definition, not a proposition — it has a free variable x and is not declarative with a definite truth value\n- Q6: FALSE — a proposition has a DEFINITE truth value that exists (is TRUE or FALSE), but it need not be KNOWN; Goldbach's Conjecture is an example\n\n**P76 (TRANSFER PROBE — Independence, real-world context):**\n\"A software requirements document contains four statements: (1) 'Press the login button.' (2) 'The login button is enabled when valid credentials are entered.' (3) 'Will the button respond within 200ms?' (4) 'Either the system accepts the login or it rejects it.'\n\nClassify each statement as a proposition or non-proposition. For each proposition, state its truth value — or explain why the truth value exists but cannot be determined without more information.\"\n\nExpected:\n- (1) NOT a proposition: command/imperative.\n- (2) Proposition: TRUE or FALSE depending on system implementation — the statement has a definite truth value (it either correctly describes the system or it does not); it IS a proposition.\n- (3) NOT a proposition: question.\n- (4) Proposition: TRUE — it is a tautology (disjunction of a statement and its negation; always true by bivalence regardless of system behavior).\n\n**P55 (SCORE):** Evaluate P76: correct classification of all four statements; correct truth-value reasoning for (2) and (4).\n\n**P75 (MASTERY ASSESSMENT):**\nItems: Q1, Q2, Q3, Q4, Q5, Q6, P76 = **7 items**.\nPass criterion: **6/7** (⌈0.85 × 7⌉ = 6; threshold = 0.85).\n- **PASS** → P74: route to P78.\n- **FAIL** → P74: identify miss pattern → repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1(c) wrong or Q3 wrong or Q5 wrong (open sentence errors) → TA-B01 (OPEN-SENTENCE-AS-PROPOSITION).\n- Q2(a)/(b) wrong or Q6 wrong → TA-B02 (OPINION-AS-PROPOSITION) if opinion-type errors, else TA-B03.\n- Q4 wrong or P76(4) wrong (paradox/tautology errors) → TA-B03 (PARADOX-BIVALENCE).\n- Multiple wrongs → MAMR: TA-B01 if open-sentence errors present; then FIFO TA-B02 before TA-B03; re-gate after all active MCs cleared.\n\n**P78 (COMPLETION):**\nMastery of math.found.proposition confirmed. Record mastery event. Schedule P89. Activate unlocks: math.found.logical-connectives, math.found.truth-table.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 174,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.proposition",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with everyday declarative claims (\"The door is closed,\" \"Paris is the capital of France\") before introducing mathematical examples. Learner evaluates truth values of familiar statements before formal definition.\n\n### MAMR Enforcement\nMC-1 OPEN-SENTENCE-AS-PROPOSITION addressed in TA-A02 via P27. If triggered at any later TA or at the mastery gate, route → TA-B01 → return to point of interruption. MC-2 and MC-3 are FIFO after MC-1 cleared: if both active, address TA-B02 before TA-B03.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 73,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.found.proposition/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.proposition",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (classify four statements) + Q4 (Liar paradox) | 2/2 |\n| Day 3 | Q3 (convert open sentence to proposition) + P76 (software spec context) | 2/2 |\n| Day 7 | Mixed 3-item mini-set: one proposition identification, one open sentence, one bivalence question | 2/3 |\n| Day 21 | Q1, Q3, Q5, Q6 (4 items) | 3/4 |\n| Day 60 | Full 7-item mastery gate | 6/7 |\n\n**Decay rule**: Failure at any interval → reset to Day 1 + Protocol B routing:\n- Open-sentence errors → TA-B01; opinion errors → TA-B02; paradox/bivalence errors → TA-B03.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 302,
+        "endLine": 317
+      }
+    },
+    {
+      "assetId": "math.found.proposition/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.proposition",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Logic | math.found.logic | Concepts of truth and falsity; TRUE/FALSE as values; mathematical statements |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Logical Connectives | math.found.logical-connectives | Connectives (¬, ∧, ∨, →, ↔) operate on propositions; requires proposition concept |\n| Truth Tables | math.found.truth-table | Truth tables systematically enumerate truth values of compound propositions |\n\n### Cross-Links\n- None (cross_links = []). P76 uses an independent real-world context (software requirements specification).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proposition.md",
+        "startLine": 317,
+        "endLine": 335
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

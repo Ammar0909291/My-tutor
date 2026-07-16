@@ -1,0 +1,561 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.rational-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.rational-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:54dac5d2dfd8140bbe397a9c3a96100b759684bb3e2efa3c40bbdfa2839fd021",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.rational-numbers.md": "sha256:b022fdc93b49a65d0ff70f71f0fc21c80c216c462514c17149c5cb8a9866ab48"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 10,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 10
+  },
+  "concept": {
+    "conceptId": "math.found.rational-numbers",
+    "name": "Rational Numbers",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.integers"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.rational-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.rational-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.rational-numbers.md": "sha256:b022fdc93b49a65d0ff70f71f0fc21c80c216c462514c17149c5cb8a9866ab48"
+      },
+      "contentHash": "sha256:f284d6ce8c0c8dc2e503187d5116e3ae03aaeb17b9ac875f2b58f3c6eec3afcc",
+      "ruleCount": 10,
+      "bandCounts": {
+        "3": 10
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-A05 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-A06 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-A07",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.rational-numbers.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.rational-numbers.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.rational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.rational-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.rational-numbers/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Rational Numbers — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.found.integers**: ℤ = {…, −2, −1, 0, 1, 2, …} with ring structure (closed under +, −, ×; not under ÷). ℚ extends ℤ by supplying multiplicative inverses for all non-zero elements, completing the field structure. The numerator and denominator of every rational are integers.\n\n### Target Understanding\n1. **Formal definition**: ℚ = {p/q : p ∈ ℤ, q ∈ ℤ, q ≠ 0}, where p/q and r/s name the same rational iff p × s = q × r.\n2. **Equivalence classes**: Every rational number is an equivalence class of integer pairs under the relation (p,q) ~ (r,s) iff ps = qr. A single rational has infinitely many fraction representations (1/2 = 2/4 = 3/6 = …).\n3. **Canonical form**: The reduced fraction: GCD(|p|, q) = 1 and q > 0. Each equivalence class has exactly one canonical representative.\n4. **Field structure**: ℚ is closed under +, −, ×, and ÷ (by non-zero elements). Every non-zero rational has a multiplicative inverse: (p/q)⁻¹ = q/p. ℤ is a ring but not a field; ℚ is a field.\n5. **Dense total order**: ℚ is totally ordered. Between any two distinct rationals a < b, there exists c ∈ ℚ with a < c < b (e.g., c = (a+b)/2). ℤ is NOT dense.\n6. **Not complete**: ℚ is dense but has \"holes\" — the positions occupied by irrational numbers (√2, π, e ∉ ℚ). The sequence 1, 1.4, 1.41, 1.414, … of rational approximations to √2 converges, but its limit (√2) is not in ℚ.\n7. **Decimal characterization**: Every rational has a terminating or eventually repeating decimal expansion. Terminating: reduced denominator has only prime factors 2 and 5 (e.g., 3/4 = 0.75, 7/40 = 0.175). Repeating: other prime factors (e.g., 1/3 = 0.333…, 1/7 = 0.142857142857…). Non-terminating, non-repeating decimals are irrational.\n8. **Number system chain**: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ. ℚ is the first number system in the chain that forms a field.\n\n### Cross-Link Activation\n- **math.arith.fractions**: ℚ provides the formal ring/field foundation; math.arith.fractions provides the computational operations (addition with LCD, multiplication, simplification) and concrete applications. P76 bridges these via recipe scaling.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 31,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/worked_example/WE-TA-A06",
+      "kind": "worked_example",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Misconception Naming + Worked Examples: Repeating Decimals",
+      "content": "### TA-A06 — Misconception Naming + Worked Examples: Repeating Decimals\n**Primitives**: P27 → P07 → P49\n\n**P27 (MISCONCEPTION NAMING — MC-3 RATIONAL-TERMINATING):**\n\"MC-3 RATIONAL-TERMINATING: the belief that 'a rational number has a terminating decimal.'\n\nWhy it's tempting: the first fractions you learn (1/2, 1/4, 3/4) all terminate. 'Rational' and 'terminates' feel linked.\n\nWhy it's wrong: the defining property of ℚ is p/q with p,q ∈ ℤ, q ≠ 0 — NOTHING about decimal termination. Whether a decimal terminates depends on whether the reduced denominator is of the form 2^a × 5^b. Most denominators aren't.\n\nCorrect rule: Every rational has a TERMINATING or EVENTUALLY REPEATING decimal expansion. Non-terminating, non-repeating = irrational.\"\n\nExamples showing repeating = rational:\n- 1/3 = 0.333… (rational — denominator 3, not 2^a × 5^b)\n- 2/9 = 0.222…\n- 5/6 = 0.8333… (eventually repeating: one non-repeating digit, then repeating 3)\n- 1/7 = 0.142857142857… (repeating block of 6)\n\n**P07 (WORKED EXAMPLE PAIR):**\n- **Example 1**: Convert 5/6 to decimal.\n  5 ÷ 6 = 0.8333…\n  Long division: 50÷6=8 remainder 2; 20÷6=3 remainder 2; repeats → 0.8̄3̄ (8 then repeating 3).\n  Verify 5/6 is rational: p=5 ∈ ℤ, q=6 ∈ ℤ, q≠0 ✓.\n  Denominator: 6 = 2 × 3; has prime factor 3 (not only 2 or 5) → repeating. ✓\n\n- **Example 2**: Add 3/4 + 2/3.\n  LCD = 12: 3/4 = 9/12; 2/3 = 8/12.\n  9/12 + 8/12 = 17/12 = 1 and 5/12.\n  Result: 17/12 ∈ ℚ. ℚ is closed under addition. ✓\n\n**P49:** \"Is 0.142857142857… (repeating block 142857) a rational number? How do you know?\"\n- **CORRECT**: Yes — it is a repeating decimal, so it is rational. (It equals 1/7.) All repeating decimals are rational by the algebraic trick: set x = 0.142857…, multiply by 10⁶, subtract. → TA-A07.\n- **PARTIAL**: Confirm repeating → rational; mention the algebraic trick (or that 1/7 = 0.142857…). → TA-A07.\n- **INCORRECT**: \"Repeating decimals are always rational. 0.142857142857… = 1/7 ∈ ℚ. The trick: 1,000,000x = 142857.142857…; subtract: 999,999x = 142857; x = 142857/999,999 = 1/7.\" → TA-A07.\n- **NO_RESPONSE**: Work through the algebraic trick. → TA-A07.\n\n---",
+      "localKey": "WE-TA-A06",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 233,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.rational-numbers",
+      "title": "[FOUNDATIONAL] — FRACTION-UNIQUE",
+      "content": "### MC-1 [FOUNDATIONAL] — FRACTION-UNIQUE\n- **Trigger**: \"1/2 and 2/4 are different rational numbers\" or \"each rational number has exactly one fraction.\"\n- **Root cause**: Elementary education teaches fraction symbols before equivalence; 1/2 and 2/4 look different, so learners treat them as different objects.\n- **Error pattern**: Rejects simplification steps as \"changing the number\"; treats canonical form as the only legitimate representation; argues 3/6 ≠ 1/2.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.rational-numbers",
+      "title": "— DENSITY-COMPLETENESS",
+      "content": "### MC-2 — DENSITY-COMPLETENESS\n- **Trigger**: \"Since there's always a rational between any two rationals, ℚ must fill the entire number line.\"\n- **Root cause**: \"Dense\" sounds like \"no gaps\"; learner conflates density (no adjacent elements) with completeness (every Cauchy sequence converges in the set).\n- **Error pattern**: Claims √2 must be rational because the number line looks \"full\"; believes ℚ and ℝ are the same set.\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.rational-numbers",
+      "title": "— RATIONAL-TERMINATING",
+      "content": "### MC-3 — RATIONAL-TERMINATING\n- **Trigger**: \"1/3 isn't really a rational because its decimal never ends\" or \"all fractions have terminating decimals.\"\n- **Root cause**: Early exposure to 1/2, 1/4, 3/4 (all terminating); non-terminating decimals feel \"incomplete\" or \"not exact.\"\n- **Error pattern**: Excludes 1/3, 1/7, 2/9 from ℚ; believes terminating = rational and non-terminating = irrational.\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Extending ℤ: From Fence Posts to Filled Gaps",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Extending ℤ: From Fence Posts to Filled Gaps\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 90,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Misconception Gate: FRACTION-UNIQUE (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: FRACTION-UNIQUE (FOUNDATIONAL)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 107,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Representation Shift: Four Faces of a Rational Number",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Representation Shift: Four Faces of a Rational Number\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 135,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Pattern Induction: Terminating vs. Repeating Decimals",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Pattern Induction: Terminating vs. Repeating Decimals\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 164,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Contrast Pair: ℤ vs. ℚ (Field and Density)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Contrast Pair: ℤ vs. ℚ (Field and Density)\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 198,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Misconception Naming + Worked Examples: Repeating Decimals",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Misconception Naming + Worked Examples: Repeating Decimals\",\"primitives\":[\"P07\",\"P27\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 233,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 271,
+        "endLine": 336
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Repair MC-1 FRACTION-UNIQUE",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 FRACTION-UNIQUE\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 336,
+        "endLine": 356
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Repair MC-2 DENSITY-COMPLETENESS",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 DENSITY-COMPLETENESS\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 356,
+        "endLine": 376
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Repair MC-3 RATIONAL-TERMINATING",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 RATIONAL-TERMINATING\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P77\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 376,
+        "endLine": 474
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/mastery_probe/MP-TA-A07",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.rational-numbers",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A07 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal in this TA]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\n\nQ1: Which of these is NOT a rational number? (A) 22/7  (B) √4  (C) 0.6̄ (= 0.666…)  (D) √3\n\nQ2: Reduce 48/60 to canonical form. Show your work.\n\nQ3: Calculate 2/3 × 9/4. Express the result as a reduced fraction.\n\nQ4: Does 7/40 have a terminating or repeating decimal expansion? Justify by factoring the denominator.\n\nQ5: A student says: \"0.999… (repeating 9) and 1 are different rational numbers.\" Is the student correct? If not, prove that 0.999… = 1.\n\nQ6: ℤ and ℚ are both totally ordered sets. Name one structural property that ℚ has and ℤ lacks (not \"field\" — think about the ordering).\n\n**P55 (SCORE):**\nQ1: D — √3 is irrational (non-terminating, non-repeating). Note: 22/7 ∈ ℚ; √4 = 2 ∈ ℤ ⊂ ℚ; 0.666… = 2/3 ∈ ℚ.\nQ2: GCD(48, 60) = 12; 48/12 = 4; 60/12 = 5 → 4/5.\nQ3: (2 × 9)/(3 × 4) = 18/12; GCD(18,12) = 6 → 3/2.\nQ4: Terminates. 40 = 2³ × 5; only prime factors 2 and 5 → terminating. (7/40 = 0.175.)\nQ5: Incorrect. Proof: let x = 0.999…; 10x = 9.999…; 10x − x = 9; 9x = 9; x = 1. So 0.999… = 1 exactly.\nQ6: Density. Between any two distinct rationals there exists another rational; between consecutive integers (e.g., 1 and 2) there is no integer. ℤ is discrete; ℚ is dense.\n\n**P76 (TRANSFER PROBE — Cross-link: math.arith.fractions):**\n\n**Context**: Recipe scaling. A bakery recipe produces 12 cookies and calls for 3/4 cup of sugar.\n\n**(a)** You want to make only 8 cookies. What is the scale factor? Express as a fraction in canonical (reduced) form.\n\n**(b)** Using your scale factor from (a), how much sugar do you need for 8 cookies? Express as a fraction in canonical form.\n\n**(c)** Your oven tray holds exactly 6 cookies and you decide to make 2 full trays. What scale factor maps the original 12-cookie recipe to the 2-tray production? How much sugar do you need?\n\n**Expected answers**:\n(a) Scale factor = 8/12; GCD(8,12) = 4 → 2/3.\n(b) Sugar = 3/4 × 2/3 = 6/12; GCD(6,12) = 6 → 1/2 cup.\n(c) 2 trays × 6 cookies = 12 cookies = original recipe. Scale factor = 12/12 = 1. Sugar: 3/4 × 1 = 3/4 cup.\nCross-link: math.arith.fractions — this probe uses fraction multiplication, GCD reduction, and scaling, the core operations of math.arith.fractions, grounding rational arithmetic in a concrete food-preparation context.\n\n**P55 (SCORE):** Scale factors computed and reduced; sugar quantities obtained by rational multiplication; canonical forms verified.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, Q5, Q6, P76 = **7 items**.\nPass criterion: **6/7** (⌈0.85 × 7⌉ = 6; threshold = 0.85).\n- **PASS (≥ 6/7)** → P78.\n- **FAIL (< 6/7)** → P74 repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong or Q5 wrong → TA-B02 (DENSITY-COMPLETENESS — confusing irrational status) or TA-B03 (RATIONAL-TERMINATING); inspect error type; apply MAMR.\n- Q2 wrong or Q3 wrong or P76 wrong → TA-B01 (FRACTION-UNIQUE — reduction errors trace to equivalence confusion); apply MAMR.\n- Q4 wrong → TA-B03 (RATIONAL-TERMINATING).\n- Q6 wrong → TA-B02 (DENSITY-COMPLETENESS — conflating density with discrete ordering).\n- Multiple wrongs → MAMR: TA-B01 first; then FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.arith.fractions, math.found.irrational-numbers.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 271,
+        "endLine": 336
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a Concrete number-line model (fence posts for ℤ, rationals filling the gaps). Move to Pictorial (fraction ↔ decimal ↔ percentage ↔ number-line-position equivalence table) in TA-A03. Reach Abstract (equivalence class formalism, field axioms, density proof sketch) by TA-A05.\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). If triggered in later TAs, route → TA-B01 → return. MC-2 and MC-3 FIFO after MC-1 cleared.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 76,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.rational-numbers",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q2 (reduce 48/60) + Q4 (7/40 terminating check) | 2/2 |\n| Day 3 | Q3 (multiply 2/3 × 9/4) + Q5 (0.999… = 1 proof) | 2/2 |\n| Day 7 | Mixed 3-item: classify rational/irrational, perform multiplication, state density vs. completeness | 2/3 |\n| Day 21 | Q1, Q2, Q3, Q4, Q6 (5 items) | 4/5 |\n| Day 60 | Full 7-item mastery gate | 6/7 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing by error type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 397,
+        "endLine": 411
+      }
+    },
+    {
+      "assetId": "math.found.rational-numbers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.rational-numbers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Integers | math.found.integers | ℤ as the alphabet for numerator/denominator; ring structure that ℚ extends to a field |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Fractions | math.arith.fractions | Operational arithmetic (addition, subtraction, multiplication, division) on ℚ elements |\n| Irrational Numbers | math.found.irrational-numbers | Defined as ℝ ∖ ℚ; requires ℚ to be precisely characterized first |\n\n### Cross-Links\n- **math.arith.fractions**: ℚ provides the formal number-theoretic foundation (equivalence classes, field axioms, density). math.arith.fractions provides the computational procedures and concrete applications. P76 recipe-scaling probe bridges formal multiplication in ℚ with practical fraction arithmetic.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.rational-numbers.md",
+        "startLine": 411,
+        "endLine": 429
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

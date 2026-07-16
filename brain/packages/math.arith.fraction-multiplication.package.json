@@ -1,0 +1,1060 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.fraction-multiplication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.fraction-multiplication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8a8f9f7cc9fcad393825484bbe1d745fee4a34432275d8a94a48370225d77a59",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.fraction-multiplication.md": "sha256:f5d1cb6003658bb1d73ca588650c60b156e205b06f322f4003f50b4e849aad3b"
+    },
+    "assetCount": 33,
+    "assetCounts": {
+      "core_explanation": 1,
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 24,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 24
+  },
+  "concept": {
+    "conceptId": "math.arith.fraction-multiplication",
+    "name": "Multiplication and Division of Fractions",
+    "difficultyRaw": "2 (developing)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.arith.fractions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.fraction-multiplication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.fraction-multiplication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.fraction-multiplication.md": "sha256:f5d1cb6003658bb1d73ca588650c60b156e205b06f322f4003f50b4e849aad3b"
+      },
+      "contentHash": "sha256:e8247f9985989d4cf9569e3e8fcb48a388a1c876de87d71fb942bd9fe8cac9fc",
+      "ruleCount": 24,
+      "bandCounts": {
+        "3": 24
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-A04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-A05 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-A07",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-B03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-B04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-B04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-C01 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-C02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-C03 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-C04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-C05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-D02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-E01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-E02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-multiplication.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md#TA-E04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.fraction-multiplication/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Multiplication and Division of Fractions — core idea",
+      "content": "Multiplying two fractions produces a new fraction whose numerator is the product of the original numerators and whose denominator is the product of the original denominators: (a/b) × (c/d) = (ac)/(bd). Dividing by a fraction is equivalent to multiplying by its reciprocal: (a/b) ÷ (c/d) = (a/b) × (d/c). Both operations are conceptually grounded in area (multiplication) and inverse relationship (division).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 9,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Learning Objective",
+      "content": "A student who achieves mastery correctly computes (a/b) × (c/d) by multiplying numerators and denominators separately, correctly computes (a/b) ÷ (c/d) by multiplying by the reciprocal of the divisor, AND can explain why the area model justifies the multiplication rule and why multiplying by the reciprocal is equivalent to division. NOT merely producing correct numeric answers by memorised procedure. A student who executes the algorithms without being able to connect them to the area model (for ×) or the inverse relationship (for ÷) has NOT achieved mastery.\n\n**Accuracy threshold:** 85% across multiplication, division, and word-problem items.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 33,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "— Fraction Multiplication Uses the Addition Algorithm",
+      "content": "### MC-1 — Fraction Multiplication Uses the Addition Algorithm\n\n**Observable symptom:** Student computes 1/2 × 1/3 = 2/5 (adds numerators, adds denominators) or converts to common denominator then multiplies numerators only.\n\n**Diagnostic trigger:** DB-1; TA-C01 P41.\n\n**Root cause:** Addition is the first and most practised fraction operation; students generalise the \"same denominator\" procedure to multiplication. The additive algorithm is over-rehearsed and transfer occurs by familiarity.\n\n**Repair chain:** P27 (expose additive procedure) → P28 (conflict: area model gives 1/6 ≠ 2/5; result > 1/2 violates logic — a fraction of a half must be less than a half) → P29 (pause) → P30 (bridge: area model requires counting total cells = product of denominators; shaded cells = product of numerators) → P31 (install: multiply top × top and bottom × bottom) → P32 (three problems)\n\n**S6-safe path:** Omit P28; use P06 concrete area model before P30; confirm result < smaller fraction as reasonableness check.\n\n**MAMR status:** FOUNDATIONAL for MC-2. MC-1 must clear first: division algorithm uses correct multiplication as a sub-step; students with MC-1 will produce wrong cross-check for MC-2 repair.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 5,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "— Dividing Fractions by Dividing Numerators and Denominators Separately",
+      "content": "### MC-2 — Dividing Fractions by Dividing Numerators and Denominators Separately\n\n**Observable symptom:** Student computes 3/4 ÷ 1/2 as (3÷1)/(4÷2) = 3/2. Answer is accidentally correct here but fails for 5/6 ÷ 2/3.\n\n**Diagnostic trigger:** DB-2; TA-C01 P41.\n\n**Root cause:** Analogy to integer division: 6 ÷ 3 = 2 by dividing each part. Student over-generalises positional symmetry. The method works only when numerators and denominators divide evenly.\n\n**Repair chain:** P27 (expose method) → P28 (conflict: 5/6 ÷ 2/3 by method = 5÷2 / 6÷3 = 2.5/2 — not a clean fraction; reciprocal method = 5/6 × 3/2 = 15/12 = 5/4 — clean and verifiable) → P29 (pause) → P30 (bridge: reciprocal undoes the divisor) → P31 (install: flip second fraction, multiply) → P32\n\n**S6-safe path:** Skip P28; use P09 narrative (how many 1/4-slices fit in 3/4?) before P30.\n\n**MAMR status:** Dependent on MC-1 cleared (if both active). Independent otherwise.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "— Whole Number × Fraction: Whole Number Goes to Denominator",
+      "content": "### MC-3 — Whole Number × Fraction: Whole Number Goes to Denominator\n\n**Observable symptom:** Student computes 3 × 2/5 = 2/15 (places 3 in denominator position).\n\n**Diagnostic trigger:** DB-3; TA-C01 P41.\n\n**Root cause:** \"Denominator tells you how many parts\" prompt triggers denominator placement for any number appearing near the fraction. Student pattern-matches position without understanding role.\n\n**Repair chain:** P27 (expose belief) → P28 (conflict: reverse check — 2/15 ÷ 3 ≠ 2/5) → P30 (bridge: write whole as fraction/1; multiply numerators) → P31 (install: whole number multiplies numerator only) → P32\n\n**S6-safe path:** Skip P28; show three repeated addition diagrams for 3 × 2/5 = 2/5 + 2/5 + 2/5 = 6/5 as concrete anchor before P30.\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 37,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Area Model: Fraction × Fraction (Concrete)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Area Model: Fraction × Fraction (Concrete)\",\"primitives\":[\"P01\",\"P04\",\"P06\",\"P14\",\"P30\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 12,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "The Algorithm: Why Multiply Numerators and Denominators",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Algorithm: Why Multiply Numerators and Denominators\",\"primitives\":[\"P01\",\"P06\",\"P21\",\"P34\",\"P36\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 47,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Perceptual: Number Line Model for Fraction × Whole",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Perceptual: Number Line Model for Fraction × Whole\",\"primitives\":[\"P01\",\"P07\",\"P16\",\"P34\",\"P36\",\"P49\",\"P50\",\"P52\",\"P53\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 80,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Division as Inverse: Why the Reciprocal Works",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Division as Inverse: Why the Reciprocal Works\",\"primitives\":[\"P01\",\"P09\",\"P17\",\"P21\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 109,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Abstract Consolidation: Mixed Operations",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Abstract Consolidation: Mixed Operations\",\"primitives\":[\"P02\",\"P08\",\"P10\",\"P34\",\"P42\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 143,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Application: Word Problems",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Application: Word Problems\",\"primitives\":[\"P02\",\"P34\",\"P39\",\"P49\",\"P50\",\"P52\",\"P53\",\"P55\",\"P59\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 188,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\"],\"addresses\":[]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 234,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Why the Algorithm Works (Area Model Derivation)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Why the Algorithm Works (Area Model Derivation)\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P25\",\"P35\",\"P36\",\"P49\",\"P50\",\"P52\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 256,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Division and the Reciprocal Relationship",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Division and the Reciprocal Relationship\",\"primitives\":[\"P02\",\"P17\",\"P34\",\"P49\",\"P50\",\"P51\",\"P53\",\"P55\",\"P59\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 285,
+        "endLine": 329
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Word Problem Application",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Word Problem Application\",\"primitives\":[\"P02\",\"P34\",\"P39\",\"P42\",\"P49\",\"P50\",\"P52\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 329,
+        "endLine": 373
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-B04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-B04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 373,
+        "endLine": 387
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Misconception Identification",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Identification\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P50\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 387,
+        "endLine": 404
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "MC-1 Repair: Multiplication ≠ Addition",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-1 Repair: Multiplication ≠ Addition\",\"primitives\":[\"P01\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P36\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 404,
+        "endLine": 439
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "MC-2 Repair: Division ≠ Dividing Numerator by Numerator",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-2 Repair: Division ≠ Dividing Numerator by Numerator\",\"primitives\":[\"P01\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P36\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 439,
+        "endLine": 476
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "MC-3 Repair: Whole Number × Fraction",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-3 Repair: Whole Number × Fraction\",\"primitives\":[\"P01\",\"P27\",\"P28\",\"P30\",\"P31\",\"P32\",\"P34\",\"P36\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 476,
+        "endLine": 509
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Post-Repair Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"Post-Repair Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P28\",\"P30\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\"],\"addresses\":[]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 509,
+        "endLine": 523
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Competence Anchor + Multiplication Fluency",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Competence Anchor + Multiplication Fluency\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\",\"P64\",\"P70\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 523,
+        "endLine": 566
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Division Confidence Building",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Division Confidence Building\",\"primitives\":[\"P02\",\"P30\",\"P34\",\"P35\",\"P49\",\"P50\",\"P52\",\"P55\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 566,
+        "endLine": 609
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Word Problem Application With Confidence Monitoring",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Word Problem Application With Confidence Monitoring\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\",\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 609,
+        "endLine": 638
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Mastery Gate (Terminal, S6-compliant)",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate (Terminal, S6-compliant)\",\"primitives\":[\"P02\",\"P07\",\"P08\",\"P28\",\"P55\",\"P70\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 638,
+        "endLine": 653
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Area Model: Visual Foundation for Multiplication",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Area Model: Visual Foundation for Multiplication\",\"primitives\":[\"P01\",\"P06\",\"P07\",\"P16\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 653,
+        "endLine": 682
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Notation and Division: Step by Step",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Notation and Division: Step by Step\",\"primitives\":[\"P01\",\"P07\",\"P08\",\"P10\",\"P20\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 682,
+        "endLine": 734
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Application With Visual Context",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Application With Visual Context\",\"primitives\":[\"P02\",\"P34\",\"P39\",\"P42\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 734,
+        "endLine": 780
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P07\",\"P08\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\"],\"addresses\":[]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 780,
+        "endLine": 788
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Assessment Battery",
+      "content": "---\n\n**AB-1 — Classification Probe** (P74-pattern)\n\nLabel each as requiring multiplication or division:\n\n| Item | Context | Operation |\n|------|---------|-----------|\n| a | 2/3 of 3/4 metre | multiplication |\n| b | How many 1/8-litre servings in 3/4 litre? | division |\n| c | A field is 4/5 km × 3/7 km. Find area. | multiplication |\n| d | Split 5/6 metre rope into 5/12-metre pieces. | division |\n\nPass: 4/4 correct operation labels with brief justification.\n\n---\n\n**AB-2 — Generation and Computation** (P77-pattern)\n\nCompute: (a) 5/6 × 3/10  (b) 7/8 ÷ 7/4  (c) 3 × 4/11.\n\nPass: (a) 15/60 = 1/4, (b) 7/8 × 4/7 = 28/56 = 1/2, (c) 12/11. All with working shown.\n\n---\n\n**AB-3 — Boundary Probe** (P75-pattern)\n\n\"What is 1/2 ÷ 1/2? Does dividing a fraction by itself always give 1? What is (a/b) ÷ (a/b) in general?\"\n\nPass: 1; yes, any nonzero fraction divided by itself = (a/b) × (b/a) = (ab)/(ab) = 1.\n\n---\n\n**AB-4 — Explanation Probe** (P78-pattern)\n\n\"In one sentence, explain why (3/4) ÷ (1/2) = 3/4 × 2.\"\n\nPass criteria: mentions reciprocal or inverse relationship — \"1/2 and 2 are reciprocals; multiplying by 2 undoes dividing by 1/2.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 1019,
+        "endLine": 1062
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Student State Matrix",
+      "content": "| State | Entry Condition | Protocol |\n|-------|----------------|----------|\n| S0 | No prior exposure to fraction multiplication or division | Protocol A — full CPA, 7 TAs |\n| S1 | Multiplies fractions correctly; cannot explain why; makes consistent errors on division | Protocol B — conceptual grounding + division, 4 TAs |\n| S2 | Carries MC-1 (addition algorithm applied to multiplication) and/or MC-2 (division by dividing numerators separately) and/or MC-3 (whole number × fraction confusion) | Protocol C — schema repair, 3–5 TAs |\n| S6 | Understands both operations but loses confidence under time pressure or with unlike fractions | Protocol D — scaffolded fluency, 4 TAs |\n| S9 | Second-language learner; visual-dominant; procedural anchors needed | Protocol E — visual-first, 4 TAs |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 41,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Diagnostic Battery",
+      "content": "Run DB-1 through DB-4 in sequence. Stop when entry state is confirmed.\n\n---\n\n**DB-1 — Prior Exposure Check**\n\nQuestion: \"What is 1/2 × 1/3? How did you get it?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"1/6 — multiplied numerators and denominators separately\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"1/6 but reasoning unclear or 'I just know'\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"2/5 (adds numerators, adds denominators); or 2/6 (adds numerators, multiplies denominators)\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-1\" }\n\n{ stimulus: \"No response or 'I don't know how to multiply fractions'\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → run DB-2 (division and conceptual depth)  \nSIGNAL:PARTIAL → S1 candidate; run DB-2  \nSIGNAL:INCORRECT (MC-1) → S2 with MC-1; route to Protocol C  \nSIGNAL:NO_RESPONSE → S0; route to Protocol A\n\n---\n\n**DB-2 — Division Check**\n\nQuestion: \"What is 3/4 ÷ 1/2? Show your reasoning.\"\n\nResponse taxonomy:\n```\n{ stimulus: \"3/4 × 2/1 = 6/4 = 3/2 — flipped and multiplied\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"Knows to 'flip' but gets denominator wrong or inverts the wrong fraction\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"3÷1 / 4÷2 = 3/2 (divides numerators, divides denominators separately)\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-2\" }\n\n{ stimulus: \"1/2 (divides 3/4 as if by 2 only, ignoring the fraction denominator of divisor)\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-2-variant\" }\n```\n\nSIGNAL:CORRECT → run DB-3 (conceptual grounding)  \nSIGNAL:PARTIAL → S1; route to Protocol B  \nSIGNAL:INCORRECT → S2 with MC-2; route to Protocol C\n\n---\n\n**DB-3 — Whole Number Multiplication Check**\n\nQuestion: \"What is 4 × 2/5?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"8/5 — multiplies 4 × 2 = 8, keeps denominator 5\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"2/20 or 2/5×4 → 2/20 (treats 4 as denominator)\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-3\" }\n\n{ stimulus: \"8/5 but written as 1 and 3/5 — correct arithmetic, uncertain with answer form\",\n  signal: \"SIGNAL:PARTIAL\" }\n```\n\nSIGNAL:CORRECT → run DB-4  \nSIGNAL:INCORRECT (MC-3) → add MC-3 to active set; route Protocol C  \nSIGNAL:PARTIAL → continue\n\n---\n\n**DB-4 — Confidence Calibration**\n\nQuestion: \"Could you explain to someone why multiplying 1/2 × 1/3 gives 1/6, not 2/5?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"Yes: area model or 'half of a third is a sixth' explanation\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"I know it's right but can't fully explain why\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Not confident — I just use the rule\",\n  signal: \"SIGNAL:INCORRECT\" }\n```\n\nSIGNAL:CORRECT → near-mastery; administer assessment battery  \nSIGNAL:PARTIAL → S1 or S6; check prior performance, route Protocol B or D  \nSIGNAL:INCORRECT (with correct procedural answers in DB-1–3) → S6; route Protocol D\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-2-variant",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 53,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-multiplication/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fraction-multiplication",
+      "title": "Prerequisite Check",
+      "content": "Run PRE-1 before Protocol A. If gap detected, halt and schedule prerequisite session.\n\n---\n\n**PRE-1 — Fraction Concept** (requires math.arith.fractions)\n\nStimulus: \"What does 3/4 mean?\"\n\nExpected: 3 equal parts out of 4 equal parts total.\n\nSIGNAL:INCORRECT → prerequisite gap: math.arith.fractions; halt and schedule.\n\n---\n\n**PRE-2 — Integer Multiplication**\n\nStimulus: \"3 × 4 = ?\"\n\nExpected: 12.\n\nSIGNAL:INCORRECT → arithmetic gap; address before this session.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-multiplication.md",
+        "startLine": 154,
+        "endLine": 180
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

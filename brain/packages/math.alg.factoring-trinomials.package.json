@@ -1,0 +1,351 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.factoring-trinomials-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.factoring-trinomials",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:67eb8a4a838679814d741cc241f648e9e0c22c006696dccd1f016ba1160c38d0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.factoring-trinomials.md": "sha256:3543486bf32c5c60fcc0aa0b9b414acfe1b7a1820309782ed6e0632c81c63a29"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.factoring-trinomials",
+    "name": "Factoring Trinomials",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.alg.factoring-gcf"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.factoring-trinomials-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.factoring-trinomials (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.factoring-trinomials.md": "sha256:3543486bf32c5c60fcc0aa0b9b414acfe1b7a1820309782ed6e0632c81c63a29"
+      },
+      "contentHash": "sha256:3b838cb13ca76f86283190985da22ad4a9edfdea062de800f33814e20eae16ad",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-trinomials.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-trinomials"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-trinomials\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-trinomials.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-trinomials"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-trinomials\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-trinomials.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-trinomials"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-trinomials\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-trinomials.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md#TA-A04 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-trinomials"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-trinomials\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.factoring-trinomials/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "Factoring Trinomials — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.alg.factoring-gcf**: GCF extraction from polynomials; step: always extract GCF first before other methods\n- **math.alg.factoring** (grandparent): general factoring strategy — GCF → special forms → trinomials → grouping\n\n### Target Knowledge State\nStudent can factor monic trinomials (x²+bx+c) by finding two integers multiplying to c and adding to b, and factor non-monic trinomials (ax²+bx+c, a≠1) via the AC method (find two numbers multiplying to ac and adding to b, then split the middle term and factor by grouping). Student always extracts GCF first and recognizes irreducible quadratics.\n\n### Conceptual Obstacles\n1. Applying the monic shortcut (find two numbers → product=c, sum=b) to non-monic trinomials — correct product target is ac, not c\n2. Sign errors when splitting the middle term and factoring by grouping (especially with negative leading signs)\n3. Attempting to factor a sum of squares x²+k² over the reals (irreducible; only difference of squares factors)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "Worked Example Pair",
+      "content": "### Teaching Action A02 — Worked Example Pair\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Step-by-step application of both monic and AC methods; address MC-2\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**Worked Example 1 — Monic Trinomial: x²−5x+6**\n\n*Step 1 — Check GCF:* GCF = 1 (no common factor). Proceed.\n\n*Step 2 — Identify a=1:* Monic. Find p×q=6 and p+q=−5.\n\n*Step 3 — List factor pairs of 6:* (1,6), (2,3), (−1,−6), (−2,−3).\n- Check sums: −2+(−3)=−5 ✓ → p=−2, q=−3\n\n*Step 4 — Write factored form:*\nx²−5x+6 = **(x−2)(x−3)**\n\n*Verify by expansion:* (x−2)(x−3) = x²−3x−2x+6 = x²−5x+6 ✓\n\n---\n\n**Worked Example 2 — Non-Monic Trinomial: 6x²+7x−3**\n\n*Step 1 — Check GCF:* GCF = 1. Proceed.\n\n*Step 2 — Identify a=6≠1:* Non-monic. Use AC method.\n\n*Step 3 — Compute ac:* ac = 6×(−3) = **−18**\n\n*Step 4 — Find p, q: p×q=−18, p+q=7.*\nFactor pairs of −18: (1,−18), (2,−9), (3,−6), (6,−3), (9,−2), (−1,18), …\n- Check sums: 9+(−2) = 7 ✓ → p=9, q=−2\n\n*Step 5 — Split middle term:*\n6x²+7x−3 = 6x²+9x−2x−3\n\n*Step 6 — Factor by grouping:*\n= 3x(2x+3) − 1(2x+3)\n= **(3x−1)(2x+3)**\n\n*Sign note (MC-2):* When the second group has a negative coefficient, factor out a negative: −2x−3 = −1(2x+3). The common binomial factor (2x+3) appears in both groups.\n\n*Verify:* (3x−1)(2x+3) = 6x²+9x−2x−3 = 6x²+7x−3 ✓\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n*Probe:* Factor 2x²−x−6 using the AC method.\n\n(A) (2x+3)(x−2)\n(B) (2x−3)(x+2)\n(C) (2x+1)(x−6)\n(D) Cannot be factored\n\n*Branch CORRECT (A):* ac = 2×(−6) = −12. Find p×q=−12, p+q=−1: pair (3, −4). Split: 2x²+3x−4x−6 = x(2x+3)−2(2x+3) = (x−2)(2x+3). ✓ Proceed to A03.\n\n*Branch PARTIAL:* You found the correct factor pair but may have split the middle term with incorrect signs. ac=−12; pair (3,−4) since 3+(−4)=−1 ✓. Split: 2x²+3x−4x−6 = x(2x+3)−2(2x+3) = (x−2)(2x+3). Verify by expansion.\n\n*Branch INCORRECT (B, C, or D):* For 2x²−x−6: ac=2×(−6)=−12; b=−1. Find p×q=−12, p+q=−1: pair (3,−4). Split: 2x²+3x−4x−6 = x(2x+3)−2(2x+3) = (x−2)(2x+3). Note (A) = (2x+3)(x−2) — same result. Always verify by expanding. Proceed to A03.\n\n*Branch NO_RESPONSE:* AC method: ac=2×(−6)=−12; find p×q=−12, p+q=−1 → pair (3,−4). Rewrite: 2x²+3x−4x−6 = x(2x+3)−2(2x+3) = (x−2)(2x+3). Proceed to A03.\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 130,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "MONIC-SHORTCUT-FOR-NONMONIC",
+      "content": "| MC-1 | MONIC-SHORTCUT-FOR-NONMONIC | For ax²+bx+c (a≠1), student looks for two numbers with product c and sum b instead of product ac and sum b | Any non-monic trinomial where a≠1 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "SIGN-ERROR-IN-GROUPING",
+      "content": "| MC-2 | SIGN-ERROR-IN-GROUPING | When splitting the middle term and grouping, student assigns an incorrect sign to the second group, especially when the split term is negative | Trinomials with negative b or negative c |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "SUM-OF-SQUARES-FACTORABLE",
+      "content": "| MC-3 | SUM-OF-SQUARES-FACTORABLE | Student attempts to factor x²+k² into two linear factors over the reals (e.g., (x+k)(x+k)) | Quadratics with positive constant term and negative discriminant |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "Factor-Pair Bridge",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Factor-Pair Bridge\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 67,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "Worked Example Pair",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 130,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "Monic vs. Non-Monic Contrast",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Monic vs. Non-Monic Contrast\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 199,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 255,
+        "endLine": 464
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Factor completely. Show all steps including GCF extraction if applicable.*\n\n**Problem 1.** x²+7x+12\n\n**Problem 2.** x²−3x−18\n\n**Problem 3.** 3x²+11x+6\n\n**Problem 4.** 4x²−4x−3\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. Find p×q=12, p+q=7 → (3,4): **(x+3)(x+4)**\n   Verify: x²+4x+3x+12=x²+7x+12 ✓\n\n2. Find p×q=−18, p+q=−3 → (3,−6): **(x+3)(x−6)**\n   Verify: x²−6x+3x−18=x²−3x−18 ✓\n\n3. ac=3×6=18; find p×q=18, p+q=11 → (2,9):\n   3x²+2x+9x+6 = x(3x+2)+3(3x+2) = **(x+3)(3x+2)**\n   Verify: 3x²+2x+9x+6=3x²+11x+6 ✓\n\n4. ac=4×(−3)=−12; find p×q=−12, p+q=−4 → (2,−6):\n   4x²+2x−6x−3 = 2x(2x+1)−3(2x+1) = **(2x−3)(2x+1)**\n   Verify: 4x²+2x−6x−3=4x²−4x−3 ✓\n\nScore 1 point per problem (P77 total: 4 points).\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence — cross_links = [])*\n\n*Problem:* Factor completely: **6x³−x²−12x**\n\nNote: This problem requires first extracting the GCF, then factoring the resulting trinomial.\n\n(a) Identify and factor out the GCF.\n(b) Apply the AC method to the remaining trinomial factor.\n(c) Write the completely factored form and verify by expanding.\n\n*Expected solution:*\n\n(a) GCF = x: 6x³−x²−12x = x(6x²−x−12)\n\n(b) AC method on 6x²−x−12:\n   ac = 6×(−12) = −72; find p×q=−72, p+q=−1 → pair (8, −9) since 8×(−9)=−72 and 8+(−9)=−1 ✓\n   6x²+8x−9x−12 = 2x(3x+4)−3(3x+4) = (2x−3)(3x+4)\n\n(c) Completely factored: **x(2x−3)(3x+4)**\n\nVerify: (2x−3)(3x+4)=6x²+8x−9x−12=6x²−x−12; then x(6x²−x−12)=6x³−x²−12x ✓\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (GCF extraction correct, AC method correct, final form correct, verified).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.8 × 5⌉ = 4). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Review missed items; identify pattern (sign errors → B02; non-monic method → B01); targeted re-explanation |\n| ≤ 2/5 | → Return to A01; re-engage factor-pair analogy; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.alg.factoring-trinomials` complete. Threshold 0.8 requires 4/5 correct.\n\n**Unlocks:** `math.alg.quadratic-equation`\n\nNext concept recommendation: `math.alg.quadratic-equation` — factoring trinomials is the primary method for solving quadratics without the quadratic formula.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 258,
+        "endLine": 372
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** Pictorial (P) — proficient learner.\n\n**Scaffolding sequence:**\n1. **A01 P03 ANALOGY BRIDGE** — connect integer factor-pair search (known: factor pairs of 12) to monic trinomial factoring; introduce the decision tree for monic vs. non-monic\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: monic x²−5x+6; WE2: non-monic 6x²+7x−3 via AC method\n3. **A03 P06 CONTRAST PAIR** — monic vs. non-monic (different target for the product); factorable vs. irreducible quadratic\n4. **A04 P91 Gate** — mastery assessment\n\n**V-3 (CPA Concrete stage):** N/A — proficient learner enters at Pictorial stage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 57,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Factor x²+2x−15. |\n| R2 | 3 days | Factor 4x²+8x+3 using the AC method. |\n| R3 | 7 days | Factor completely: 5x³−5x²−30x. (Hint: extract GCF first.) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 406,
+        "endLine": 416
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-trinomials/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.factoring-trinomials",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | — |\n| P76_mode | independence (cross_links = []) |\n| Unlocks | math.alg.quadratic-equation |\n| Requires (Tier-1) | math.alg.factoring-gcf |\n\n**GR-8 compliance:** No cross-links to document.\n**GR-9 compliance:** P76 uses an independent problem (GCF + AC on a cubic) unrelated to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-trinomials.md",
+        "startLine": 416,
+        "endLine": 430
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

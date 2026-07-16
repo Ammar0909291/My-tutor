@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.pdf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.pdf",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4c8c2acc21f7ee694f4c152c1fb04ab02b0065217e9207b42597f2d29f41552f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.pdf.md": "sha256:2f8e0362a3f9c77114a62d8a2b58867005f58c1d10f79c8ac4786eca74332f33"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.prob.pdf",
+    "name": "Probability Density Function",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.continuous-rv"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.pdf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.pdf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.pdf.md": "sha256:2f8e0362a3f9c77114a62d8a2b58867005f58c1d10f79c8ac4786eca74332f33"
+      },
+      "contentHash": "sha256:4063af2dd7cfacbcd08381f2c6b7c522258437b4a834e59795f16f467bc87d83",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.pdf.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pdf.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pdf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pdf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.pdf.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pdf.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pdf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pdf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.pdf.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pdf.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pdf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pdf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.pdf/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.pdf",
+      "title": "Probability Density Function — cognitive map",
+      "content": "**Core concept:** A PDF f(x) completely characterises a continuous RV: it is non-negative, integrates to 1, and encodes all probabilistic information. The apply-level skills extend continuous-rv understanding to: (1) finding normalisation constants k so ∫kf(x)dx=1; (2) computing the expectation E[X]=∫xf(x)dx as the probability-weighted mean; (3) computing E[X²]=∫x²f(x)dx and the variance Var(X)=E[X²]−(E[X])².\n\n**Conceptual progression:**\n1. Recap: PDF validity conditions — f(x)≥0; ∫_{−∞}^∞ f(x)dx=1.\n2. Normalisation: when f(x)=k·g(x), solve k·∫g(x)dx=1 for k.\n3. Expectation: E[X]=∫_{−∞}^∞ xf(x)dx — the probability-weighted centre of gravity.\n4. Second moment: E[X²]=∫_{−∞}^∞ x²f(x)dx — needed for variance.\n5. Variance: Var(X)=E[X²]−(E[X])² — expected squared deviation from the mean.\n\n**CPA arc (entry: P):**\n- Pictorial: density curve; vertical line at E[X] as the balance point; spread around E[X] visualised as variance.\n- Abstract: integral formulas for k, E[X], E[X²], Var(X); shortcut Var(X)=E[X²]−μ².\n\n**Prior knowledge activated:** math.prob.continuous-rv — PDF definition, P(a≤X≤b)=∫_a^b f(x)dx, CDF; definite integral mechanics (integration by substitution, power rule); algebraic manipulation to solve for k.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.pdf",
+      "title": "EXPECTATION-AS-MODE [FOUNDATIONAL]",
+      "content": "### MC-1: EXPECTATION-AS-MODE [FOUNDATIONAL]\n**Description:** Learner computes E[X] as the x-value where f(x) is maximum (the mode) rather than evaluating ∫xf(x)dx.\n**Surface form:** \"f(x) = 6x(1−x) peaks at x=1/2 (by calculus or symmetry), so E[X] = 1/2.\" (Here the answer happens to be correct, but for asymmetric distributions it fails: for f(x)=3x² on [0,1], mode is at x=1 but E[X]=3/4.)\n**Root cause:** Conflating the mean (weighted integral) with the peak of the density curve; the learner uses a heuristic (center of peak) rather than the defining formula.\n**Trigger condition:** Any asymmetric PDF or any problem that explicitly requires E[X] via integration.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.pdf",
+      "title": "VARIANCE-AS-EXPECTED-DEVIATION",
+      "content": "### MC-2: VARIANCE-AS-EXPECTED-DEVIATION\n**Description:** Learner computes Var(X) as E[X−μ]=∫(x−μ)f(x)dx=0, concluding that variance is always zero, or computes E[|X−μ|] instead of E[(X−μ)²].\n**Surface form:** \"Var(X) = ∫(x−μ)f(x)dx = 0 because the positive and negative deviations cancel.\"\n**Root cause:** Forgetting the squaring in the definition; or confusing Var(X)=E[(X−μ)²] with E[X−μ] (which is always 0 by definition of E[X]).\n**Trigger condition:** Any variance computation.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.pdf",
+      "title": "NORMALIZATION-BY-EVALUATION",
+      "content": "### MC-3: NORMALIZATION-BY-EVALUATION\n**Description:** Learner finds k by evaluating k·f(c)=1 at some point c (e.g., at x=0 or at the maximum), rather than setting up and solving ∫k·g(x)dx=1.\n**Surface form:** \"f(x)=k·x on [0,2]. At x=1: k·1=1 so k=1.\" Correct: ∫_0^2 k·x dx = k·2=1 → k=1/2.\n**Root cause:** Interpreting the normalization condition \"f must equal 1 somewhere\" rather than \"f must integrate to 1\"; confusing the PDF value at a point with the total probability.\n**Trigger condition:** Any problem requiring the normalisation constant k.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pdf",
+      "title": "Repair for MC-1 (EXPECTATION-AS-MODE)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (EXPECTATION-AS-MODE)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 118,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pdf",
+      "title": "Repair for MC-2 (VARIANCE-AS-EXPECTED-DEVIATION)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (VARIANCE-AS-EXPECTED-DEVIATION)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 180,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pdf",
+      "title": "Repair for MC-3 (NORMALIZATION-BY-EVALUATION)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (NORMALIZATION-BY-EVALUATION)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 199,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.pdf",
+      "title": "Protocol A, TA-A03 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.9 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"f(x) = kx² for 0≤x≤2, 0 elsewhere. Find k.\"\n[Expected: ∫_0^2 kx²dx = k[x³/3]_0^2 = 8k/3 = 1 → k = 3/8.]\n\n**Item 2:**\n\"For f(x) = 2x on [0,1], find E[X].\"\n[Expected: E[X]=∫_0^1 x·2x dx=∫_0^1 2x²dx=2[x³/3]_0^1=2/3.]\n\n**Item 3:**\n\"For f(x) = 2x on [0,1], find E[X²].\"\n[Expected: E[X²]=∫_0^1 x²·2x dx=∫_0^1 2x³dx=2[x⁴/4]_0^1=1/2.]\n\n**Item 4:**\n\"Using E[X]=2/3 and E[X²]=1/2 (from Items 2–3 or freshly derived), find Var(X) for f(x)=2x on [0,1].\"\n[Expected: Var(X)=E[X²]−(E[X])²=1/2−(2/3)²=1/2−4/9=9/18−8/18=1/18.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"X has PDF f(x) = 3x² for 0≤x≤1, 0 elsewhere.\n\n(a) Verify that f is a valid PDF.\n(b) Find E[X].\n(c) Find E[X²] and then Var(X).\"\n\n[Expected:\n(a) f(x)=3x²≥0 ✓; ∫_0^1 3x²dx=[x³]_0^1=1 ✓. Valid PDF.\n(b) E[X]=∫_0^1 x·3x²dx=∫_0^1 3x³dx=3[x⁴/4]_0^1=3/4.\n(c) E[X²]=∫_0^1 x²·3x²dx=∫_0^1 3x⁴dx=3[x⁵/5]_0^1=3/5. Var=3/5−(3/4)²=3/5−9/16=48/80−45/80=3/80.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if parts (a)–(c) are all correct; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can find normalisation constants, compute E[X], E[X²], and Var(X) from a given PDF.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 2 or P76(b) (E[X] computed as mode or peak): → TA-B01 (EXPECTATION-AS-MODE repair), then re-gate\n- FAIL on Item 4 or P76(c) (Var=E[X−μ]=0 or Var=E[X²] without subtracting (E[X])²): → TA-B02 (VARIANCE-AS-EXPECTED-DEVIATION repair), then re-gate\n- FAIL on Item 1 or P76(a) (k found by point evaluation): → TA-B03 (NORMALIZATION-BY-EVALUATION repair), then re-gate\n- FAIL due to integration arithmetic errors only (correct formula, wrong integral evaluation): → targeted computation correction; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated the ability to work with probability density functions at the apply level: finding normalisation constants, computing expectations, second moments, and variances.\n\nKey anchors to carry forward:\n- Normalise: solve ∫kf(x)dx = 1 for k (integral condition, not point evaluation).\n- E[X] = ∫xf(x)dx (probability-weighted mean; not the peak of f).\n- Var(X) = E[X²]−(E[X])² where E[X²]=∫x²f(x)dx.\n- Var(X) = E[(X−μ)²] ≠ E[X−μ] (sign matters; always square the deviation).\n\nNext concepts: math.prob.continuous-distributions — applying these formulas to the Normal, Exponential, and Uniform families.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 304,
+        "endLine": 397
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.pdf",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"For f(x)=2x on [0,1]: (a) verify it's a valid PDF; (b) find P(0≤X≤1/2).\" Correct responses (∫_0^1 2x dx=1 ✓; P=∫_0^{1/2}2xdx=1/4) confirm readiness for expectation work. These recall the continuous-rv blueprint directly.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): show a triangular density; identify balance point visually; contrast with highest point (mode).\n- Rung 2 (structured): compute E[X]=∫_0^1 x·2x dx step by step with guided notation.\n- Rung 3 (full apply): find k, E[X], Var(X) for a new family independently.\n\n**Pacing note:** h=3 estimated hours; A01 + A02 in sessions 1–2; mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.pdf",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"X has PDF f(x) = c·e^{−2x} for x≥0. (a) Find c. (b) Find E[X]. (c) Find Var(X).\"\n[Expected: (a) ∫_0^∞ ce^{−2x}dx = c/2 = 1 → c=2. (b) E[X]=∫_0^∞ x·2e^{−2x}dx; integrate by parts: u=x, dv=2e^{−2x}dx; [−xe^{−2x}]_0^∞+∫_0^∞ e^{−2x}dx = 0 + [−e^{−2x}/2]_0^∞ = 1/2. (c) E[X²]=∫_0^∞ x²·2e^{−2x}dx=1/2 (by integration by parts twice or moment formula for Exp(2): 2/λ²=2/4=1/2). Var=1/2−1/4=1/4.]\n\n**Day 10 prompt:**\n\"X has PDF f(x) = (3/2)x² for −1≤x≤1. Find: (a) E[X]; (b) Var(X); (c) P(|X|≤0.5).\"\n[Expected: (a) E[X]=∫_{−1}^1 x·(3/2)x²dx=(3/2)∫_{−1}^1 x³dx=0 (odd function on symmetric interval). (b) E[X²]=(3/2)∫_{−1}^1 x⁴dx=(3/2)·[2/5]=3/5; Var=3/5−0=3/5. (c) P(|X|≤0.5)=∫_{−0.5}^{0.5}(3/2)x²dx=(3/2)[x³/3]_{−0.5}^{0.5}=(3/2)·(1/12+1/12)=(3/2)·(1/6)=1/4.]\n\n**Day 30 prompt:**\n\"Show that for any continuous RV X with E[X]=μ and E[X²]<∞: Var(X) = E[(X−μ)²] = E[X²]−μ². Prove the shortcut formula by expanding (X−μ)².\"\n[Expected: E[(X−μ)²]=E[X²−2μX+μ²]=E[X²]−2μE[X]+μ²=E[X²]−2μ²+μ²=E[X²]−μ².]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 229,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "math.prob.pdf/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.pdf",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.prob.continuous-rv — PDF definition, ∫f(x)dx=1, P(a≤X≤b)=∫f(x)dx, CDF F(x)=∫f(t)dt; the present blueprint extends to expectation and variance\n\n**Unlocked blueprints:**\n- math.prob.continuous-distributions — Normal, Exponential, Uniform; each is a specific f(x) family requiring the expectation and variance formulas from this blueprint\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pdf.md",
+        "startLine": 247,
+        "endLine": 259
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

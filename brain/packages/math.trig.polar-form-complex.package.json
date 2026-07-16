@@ -1,0 +1,299 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.polar-form-complex-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.polar-form-complex",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d94b0e91031dac3268ff196d8915aa95a859301bd05a0ad13e7a126c2e4986ac",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.polar-form-complex.md": "sha256:9cb81b7850a302df6101af926ac89bd5d0ae20e6e69222a8f47b951de442439f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.trig.polar-form-complex",
+    "name": "Polar Form of Complex Numbers",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.found.complex-numbers",
+      "math.trig.trig-functions",
+      "math.geom.polar-coordinates"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.polar-form-complex-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.polar-form-complex (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.polar-form-complex.md": "sha256:9cb81b7850a302df6101af926ac89bd5d0ae20e6e69222a8f47b951de442439f"
+      },
+      "contentHash": "sha256:cbf4b919383771ba424b31940d4bb8d61428672338a794404ef37839c3e2c55a",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.polar-form-complex.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.polar-form-complex.md#TA-B01 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.polar-form-complex"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.polar-form-complex\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.polar-form-complex.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.polar-form-complex.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.polar-form-complex"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.polar-form-complex\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.polar-form-complex.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.polar-form-complex.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.polar-form-complex"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.polar-form-complex\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.polar-form-complex/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "Polar Form of Complex Numbers — cognitive map",
+      "content": "**Core concept:** A complex number z = a + bi is fully described by its modulus r = |z| = √(a²+b²) (distance from origin in the Argand plane) and argument θ = arg(z) (angle from positive real axis). The polar form is z = r(cosθ + i sinθ), and by Euler's formula z = re^(iθ). Conversion between Cartesian and polar requires quadrant-aware angle computation. Multiplication in polar form is geometrically elegant: z₁z₂ = r₁r₂(cos(θ₁+θ₂) + i sin(θ₁+θ₂)) — multiply moduli, add arguments. De Moivre's theorem follows immediately: zⁿ = rⁿ(cos(nθ) + i sin(nθ)).\n\n**Conceptual progression:**\n1. The Argand plane: horizontal axis = Re(z); vertical axis = Im(z); complex number z = a+bi is the point (a,b).\n2. Modulus: r = |z| = √(a²+b²) (distance from origin; always non-negative).\n3. Argument: θ = arg(z) = angle from positive real axis, measured counterclockwise; quadrant of (a,b) determines the correct range.\n4. Cartesian → polar: r = √(a²+b²); θ determined from quadrant and arctan(|b/a|).\n5. Polar → Cartesian: a = r cosθ; b = r sinθ.\n6. Multiplication: (r₁e^{iθ₁})(r₂e^{iθ₂}) = r₁r₂e^{i(θ₁+θ₂)}.\n7. De Moivre: (re^{iθ})ⁿ = rⁿe^{inθ} = rⁿ(cos(nθ) + i sin(nθ)).\n\n**CPA arc (entry: C):**\n- Concrete: compass/radar analogy — a location described by (distance r from origin, direction θ from north); multiplication rotates and scales.\n- Pictorial: Argand diagram with r as arrow length, θ as arrow angle; multiplying z₁z₂ visualised as composing rotations and scaling.\n- Abstract: polar form z=r(cosθ+i sinθ)=re^{iθ}; multiplication rule; De Moivre's theorem.\n\n**Prior knowledge activated:** complex numbers (math.found.complex-numbers) — Cartesian form a+bi, modulus, conjugate; trig functions (math.trig.trig-functions) — sin, cos, values at key angles, quadrant signs; polar coordinates (math.geom.polar-coordinates) — (r,θ) coordinate system, Cartesian↔polar conversion.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 20,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "ARGUMENT-FROM-ARCTAN-ONLY [FOUNDATIONAL]",
+      "content": "### MC-1: ARGUMENT-FROM-ARCTAN-ONLY [FOUNDATIONAL]\n**Description:** Learner computes θ = arctan(b/a) without adjusting for quadrant, giving a wrong angle for z in Q2, Q3, or Q4.\n**Surface form:** \"z = −1+i: arctan(1/−1) = arctan(−1) = −π/4. So θ = −π/4.\" Correct: Q2 → θ = π − π/4 = 3π/4.\n**Root cause:** The arctan function returns values in (−π/2, π/2) (only Q1 and Q4). Learners use it directly without identifying which quadrant (a,b) lies in.\n**Trigger condition:** Any complex number with a < 0 (Q2 or Q3) or any with a > 0, b < 0 (Q4 close to boundary).\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "MODULUS-SQUARED-AS-MODULUS",
+      "content": "### MC-2: MODULUS-SQUARED-AS-MODULUS\n**Description:** Learner computes |z| = a²+b² (omitting the square root), or writes |z|² for the modulus.\n**Surface form:** \"z = 3+4i: |z| = 3²+4² = 25.\" Correct: |z| = √(9+16) = √25 = 5.\n**Root cause:** Conflating |z|² = a²+b² (the modulus squared, used in z·z̄ = |z|²) with |z| = √(a²+b²). The squared formula appears in conjugate-product calculations and is easily over-generalised.\n**Trigger condition:** Any modulus computation, especially when a²+b² is a perfect square (camouflages the error).\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "MULTIPLICATION-BY-ADDING-MODULI",
+      "content": "### MC-3: MULTIPLICATION-BY-ADDING-MODULI\n**Description:** When multiplying complex numbers in polar form, learner adds the moduli (as for addition) instead of multiplying them.\n**Surface form:** \"z₁ = 2(cosα+i sinα), z₂ = 3(cosβ+i sinβ): z₁z₂ = 5(cos(α+β)+i sin(α+β)).\" Correct: modulus = 2×3 = 6, not 2+3 = 5.\n**Root cause:** Confusion between the ADDITION rule (add components → not simple in polar) and the MULTIPLICATION rule (multiply moduli, add arguments). The argument-addition part is correct; the modulus-multiplication part is replaced by addition by analogy with Cartesian addition.\n**Trigger condition:** Any polar-form multiplication or division; any application of De Moivre requiring a new modulus.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "Repair for MC-1 (ARGUMENT-FROM-ARCTAN-ONLY)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (ARGUMENT-FROM-ARCTAN-ONLY)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 138,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "Repair for MC-2 (MODULUS-SQUARED-AS-MODULUS)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (MODULUS-SQUARED-AS-MODULUS)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 206,
+        "endLine": 264
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "Repair for MC-3 (MULTIPLICATION-BY-ADDING-MODULI)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (MULTIPLICATION-BY-ADDING-MODULI)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 264,
+        "endLine": 287
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.75 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Convert z = −2−2i to polar form.\"\n[Expected: r=√(4+4)=2√2; Q3 (a<0,b<0): φ=arctan(2/2)=π/4; θ=π+π/4=5π/4. Polar: 2√2(cos(5π/4)+i sin(5π/4)).]\n\n**Item 2:**\n\"Convert w = 5(cos(2π/3)+i sin(2π/3)) to Cartesian form.\"\n[Expected: a=5cos(2π/3)=5·(−1/2)=−5/2; b=5sin(2π/3)=5·(√3/2)=5√3/2. Cartesian: −5/2+(5√3/2)i.]\n\n**Item 3:**\n\"Let z = √3+i and w = 1+i√3. Find z·w in polar form, then convert to Cartesian.\"\n[Expected: z: r₁=2, Q1: θ₁=arctan(1/√3)=π/6. w: r₂=2, Q1: θ₂=arctan(√3/1)=π/3. z·w: r=4; θ=π/6+π/3=π/2. Polar: 4(cos(π/2)+i sin(π/2)). Cartesian: 4i. Verify: (√3+i)(1+i√3)=√3+3i+i+i²√3=(√3−√3)+(3+1)i=4i ✓.]\n\n**Item 4:**\n\"Use De Moivre's theorem to find (1+i)⁶.\"\n[Expected: r=√2; θ=π/4. (√2)⁶=8; nθ=6·π/4=3π/2. (1+i)⁶=8(cos(3π/2)+i sin(3π/2))=8(0−i)=−8i. Verify: (1+i)²=2i; (2i)³=8i³=8·(−i)=−8i ✓.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (cross-link probe: math.cx.complex-numbers-analysis)\n\n\"Let z = −1+i√3.\n\n(a) Convert z to polar form and write it as re^{iθ} using Euler's formula e^{iθ} = cosθ+i sinθ.\n(b) Compute z³ using the exponential form. Verify in Cartesian form.\n(c) Briefly explain how the exponential form z = re^{iθ} connects polar coordinates (as used in this topic) to the complex exponential function (the foundation of complex analysis).\"\n\n[Expected:\n(a) r=√(1+3)=2; Q2 (a=−1<0,b=√3>0): φ=arctan(√3/1)=π/3; θ=π−π/3=2π/3.\n  z = 2e^{i2π/3} = 2(cos(2π/3)+i sin(2π/3)).\n(b) z³ = (2e^{i2π/3})³ = 8e^{i·2π} = 8(cos2π+i sin2π) = 8·1 = 8.\n  Cartesian verify: z=−1+i√3. z²=(−1)²+(i√3)²+2(−1)(i√3)=1−3−2i√3=−2−2i√3.\n  z³=z²·z=(−2−2i√3)(−1+i√3)=2−2i√3+2i√3−2i²·3=2+6=8 ✓.\n(c) Euler's formula e^{iθ}=cosθ+i sinθ gives an exponential interpretation to rotation by θ. In polar coordinates, (r,θ) describes a point geometrically. In complex analysis, re^{iθ} describes the SAME point as a complex exponential. Multiplying two such numbers obeys the exponential law e^{iθ₁}·e^{iθ₂}=e^{i(θ₁+θ₂)}, which is why multiplication in ℂ corresponds to multiplying distances and adding angles — the polar multiplication rule is a geometric consequence of the exponential structure of ℂ.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (a) polar form correct with exponential notation, (b) z³=8 with Cartesian verification, and (c) makes a meaningful connection between polar coordinates and the exponential form; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (4–5/5): Learner can convert complex numbers between Cartesian and polar forms (with quadrant correction), multiply/divide in polar form, apply De Moivre, and connect polar form to the complex exponential.\n- FAIL (<4/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Items 1 or 3 with θ in wrong quadrant: → TA-B01 (ARGUMENT-FROM-ARCTAN-ONLY repair), then re-gate\n- FAIL on Item 1 with r=8 (=2√2 squared) or similar: → TA-B02 (MODULUS-SQUARED-AS-MODULUS repair), then re-gate\n- FAIL on Item 3 with |z·w|=4 (=2+2, added moduli): → TA-B03 (MULTIPLICATION-BY-ADDING-MODULI repair), then re-gate\n- FAIL on Item 4 only (De Moivre arithmetic): → return to A02 WE2; re-practise; re-gate\n- FAIL on P76 only (Euler/exponential connection not articulated): → revisit cross-link bridge in A03; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 4/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated the ability to work with the polar form of complex numbers: converting between Cartesian and polar (with correct quadrant adjustment), multiplying and dividing using modulus and argument rules, applying De Moivre's theorem for powers, and connecting polar form to the complex exponential via Euler's formula.\n\nKey anchors to carry forward:\n- |z| = √(a²+b²); arg(z) = quadrant-adjusted arctan. Always identify quadrant first.\n- Polar form: z = r(cosθ+i sinθ) = re^{iθ}.\n- Multiplication: MULTIPLY moduli, ADD arguments. Never add moduli.\n- De Moivre: zⁿ = rⁿ(cos nθ + i sin nθ). Polar form makes powers trivial.\n- Euler's formula: e^{iθ} = cosθ+i sinθ connects geometry of ℂ to complex analysis.\n\nNext concept: math.cx.complex-numbers-analysis — analytic functions, Cauchy–Riemann equations, complex integration, building on the exponential form introduced here.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 374,
+        "endLine": 472
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Convert the polar coordinate (3, π/3) to Cartesian.\" Correct: x=3cos(π/3)=3/2; y=3sin(π/3)=3√3/2. This confirms sin/cos fluency and polar-to-Cartesian conversion from math.geom.polar-coordinates. Then: \"Plot z = 1+i on the Argand plane. What is |z|?\" (|z|=√2.) This anchors the Argand-plane interpretation.\n\n**Scaffolding ladder:**\n- Rung 1 (concrete): navigator analogy — r as distance from port, θ as compass bearing; multiplying trips rotates and scales the journey.\n- Rung 2 (pictorial): Argand diagram; draw z, mark r and θ; quadrant grid showing sign of sin and cos in each quadrant.\n- Rung 3 (abstract): conversion formulas; multiplication rule; De Moivre for powers.\n\n**Pacing note:** h=8 estimated hours; A01 in sessions 1–2, A02 in sessions 3–5, A03 in sessions 6–7; mastery gate in session 8.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 67,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Let z = 1−i√3. (a) Find polar form. (b) Compute z⁶. (c) Find all cube roots of z.\"\n[Expected: (a) r=2; Q4: φ=arctan(√3)=π/3; θ=2π−π/3=5π/3. z=2e^{i5π/3}. (b) z⁶=64e^{i·10π}=64(cos0+i sin0)=64. (c) Cube roots of 2e^{i5π/3}: r^{1/3}=2^{1/3}; θ_k=(5π/3+2kπ)/3 for k=0,1,2: θ_0=5π/9, θ_1=5π/9+2π/3=11π/9, θ_2=5π/9+4π/3=17π/9. Three roots: 2^{1/3}e^{i5π/9}, 2^{1/3}e^{i11π/9}, 2^{1/3}e^{i17π/9}.]\n\n**Day 10 prompt:**\n\"Prove De Moivre's theorem by induction: (cosθ+i sinθ)ⁿ = cos(nθ)+i sin(nθ) for positive integers n.\"\n[Expected: Base n=1: trivially true. Inductive step: assume (cosθ+i sinθ)ᵏ=cos(kθ)+i sin(kθ). Then (cosθ+i sinθ)^{k+1}=(cosθ+i sinθ)^k·(cosθ+i sinθ)=(cos(kθ)+i sin(kθ))(cosθ+i sinθ)=cos(kθ)cosθ−sin(kθ)sinθ+i(sin(kθ)cosθ+cos(kθ)sinθ)=cos((k+1)θ)+i sin((k+1)θ) using sum formulas. ∎]\n\n**Day 30 prompt:**\n\"Use De Moivre to express cos(3θ) and sin(3θ) in terms of sin θ and cos θ. Then verify with cos(π/6) and sin(π/6).\"\n[Expected: (cosθ+i sinθ)³ = cos(3θ)+i sin(3θ). Expand: cos³θ+3cos²θ(i sinθ)+3cosθ(i sinθ)²+(i sinθ)³ = cos³θ−3cosθsin²θ+i(3cos²θsinθ−sin³θ). Real: cos3θ=cos³θ−3cosθsin²θ=4cos³θ−3cosθ. Imaginary: sin3θ=3cos²θsinθ−sin³θ=3sinθ−4sin³θ. Check θ=π/6: cos(π/2)=0; 4(√3/2)³−3(√3/2)=4·3√3/8−3√3/2=3√3/2−3√3/2=0 ✓.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 295,
+        "endLine": 313
+      }
+    },
+    {
+      "assetId": "math.trig.polar-form-complex/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.polar-form-complex",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.found.complex-numbers — Cartesian form a+bi, modulus |z|=√(a²+b²), conjugate z̄, arithmetic; this blueprint introduces the polar representation of the same objects\n- math.trig.trig-functions — sin, cos values at key angles (π/6, π/4, π/3, π/2 and quadrant extensions); required for polar↔Cartesian conversion\n- math.geom.polar-coordinates — (r,θ) coordinate system, atan2 quadrant correction, Cartesian↔polar formulas; this blueprint applies the same machinery to the complex plane\n\n**Unlocked blueprints:** none directly in Tier 1 beyond this point (polar-form-complex is a terminal topic in its sub-branch).\n\n**Cross-links:**\n- math.cx.complex-numbers-analysis (Tier 1) — Euler's formula e^{iθ}=cosθ+i sinθ; exponential form z=re^{iθ}; complex exponential arithmetic; analytic functions on ℂ. This blueprint introduces the polar form; complex-numbers-analysis deepens it via the exponential function and its analytic properties.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.polar-form-complex.md",
+        "startLine": 313,
+        "endLine": 327
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

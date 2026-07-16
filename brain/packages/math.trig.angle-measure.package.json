@@ -1,0 +1,342 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.angle-measure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.angle-measure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1e2b4cba1e88d0ee092369e941d7a37671e30ddbecacf2cd818bd34e7d14ea19",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.angle-measure.md": "sha256:1ca9e86fa302e6f71a69b756a26846039940054598c724726c2cacd4e6315cc9"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.angle-measure",
+    "name": "",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.angle-measurement"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.angle-measure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.angle-measure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.angle-measure.md": "sha256:1ca9e86fa302e6f71a69b756a26846039940054598c724726c2cacd4e6315cc9"
+      },
+      "contentHash": "sha256:817073a9909eaeb2f97d69a4c98dc10d0c2ddbe4f21906abac4528ed4ec05331",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.angle-measure.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.angle-measure.md#TA-A01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.angle-measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.angle-measure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.angle-measure.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.angle-measure.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.angle-measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.angle-measure\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.angle-measure.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.angle-measure.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.angle-measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.angle-measure\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.angle-measure.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.angle-measure.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.angle-measure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.angle-measure\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.angle-measure/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.angle-measure",
+      "title": "math.trig.angle-measure — cognitive map",
+      "content": "### Target Understanding\nAn **angle in standard position** has its vertex at the origin and its initial side on the\npositive x-axis; the angle is measured by a signed rotation — positive (counterclockwise, CCW)\nor negative (clockwise, CW) — from the initial to the terminal side.  Two angles that share the\nsame terminal side are **coterminal** and differ by a multiple of 360° (or 2π rad).  When an arc\nof a circle of radius r subtends an angle θ (in **radians**), the arc length is s = rθ.  The\n**reference angle** of a non-quadrantal angle is the acute positive angle between the terminal\nside and the nearest part of the x-axis.\n\n### Distinction from math.geom.angle-measurement\n`math.geom.angle-measurement` established how to measure angles physically (protractor, two\nscales) and how to convert between degrees and radians using θ_rad = θ_deg × π/180.  This\nblueprint builds on those conversion skills to introduce the richer structure of angle measure:\ndirected rotation, coterminal equivalence, the arc-length formula (which requires radians), and\nreference angles for locating terminal sides in the coordinate plane.\n\n### Conceptual Layers (P → A)\n| Layer | Content |\n|-------|---------|\n| **Pictorial (P)** | Standard-position diagram (origin, initial side on +x-axis, terminal side after rotation); quadrant placement; reference angle as the acute \"shadow\" angle on the x-axis |\n| **Abstract (A)** | Coterminal angles: θ + 360°k (or θ + 2πk), k ∈ ℤ; arc length s = rθ (θ in radians); reference angle formula by quadrant |\n\n### Prerequisite Knowledge (from KG)\n- **math.geom.angle-measurement** — protractor reading; degree-radian conversion; reflex angles (> 180°)\n\n### Key Facts\n| Concept | Formula / Statement |\n|---------|-------------------|\n| Standard position | Vertex at origin; initial side on positive x-axis |\n| Positive rotation | Counterclockwise (CCW) |\n| Negative rotation | Clockwise (CW) |\n| Coterminal angles | θ and θ + 360°k (deg) = θ + 2πk (rad) for any integer k |\n| Arc length | s = rθ, θ **must be in radians** |\n| Reference angle Q1 | θ itself (0° < θ < 90°) |\n| Reference angle Q2 | 180° − θ |\n| Reference angle Q3 | θ − 180° |\n| Reference angle Q4 | 360° − θ |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 32,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.angle-measure",
+      "title": "COTERMINAL-MEANS-DIFFERENT",
+      "content": "| MC-1 | COTERMINAL-MEANS-DIFFERENT | Claims 30° and 390° are \"different angles\" pointing to different terminal positions | Does not understand that a full revolution (360°) brings the terminal side back to the same ray; equates \"more rotation\" with \"different position\" | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.angle-measure",
+      "title": "ARC-LENGTH-IN-DEGREES",
+      "content": "| MC-2 | ARC-LENGTH-IN-DEGREES | Computes s = r × 30 (using degree measure) instead of s = r × (π/6) | Memorises s = rθ without internalising that θ must be in radians; no sense of WHY the formula requires radians | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.angle-measure",
+      "title": "NEGATIVE-ANGLE-MISREAD",
+      "content": "| MC-3 | NEGATIVE-ANGLE-MISREAD | Interprets −30° as the supplement (150°) or complement (60°) rather than as 30° clockwise | \"Negative\" angle triggers \"opposite = supplementary\" association; doesn't connect sign with rotation direction | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.angle-measure",
+      "title": "Entry: Standard Position and Directed Rotation (P03 + P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: Standard Position and Directed Rotation (P03 + P11 + P49)\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 111,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.angle-measure",
+      "title": "MC-1 Gate: Coterminal Angles (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: Coterminal Angles (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 157,
+        "endLine": 210
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.angle-measure",
+      "title": "Arc Length and Reference Angles (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Arc Length and Reference Angles (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 210,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.angle-measure",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P03\",\"P06\",\"P11\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 284,
+        "endLine": 600
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.angle-measure",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Find a positive coterminal angle and a negative coterminal angle for −150°.\n\n*(Target: Positive: −150° + 360° = 210°.  Negative: −150° − 360° = −510°.)*\n\n**Q2.** A circle has radius 5 cm.  A central angle of 4π/3 radians is subtended.  Find the\narc length.\n\n*(Target: s = 5 × 4π/3 = 20π/3 cm ≈ 20.9 cm.)*\n\n**Q3.** The terminal side of an angle θ in standard position lies in quadrant III at 215°.\n(i) Find the reference angle.  (ii) Is −145° coterminal with 215°?\n\n*(Target: (i) 215° − 180° = 35°.  (ii) −145° + 360° = 215°. Yes, they are coterminal.)*\n\n**Q4.** TRUE or FALSE: \"The terminal side of −70° is in the same position as the terminal side of\n110° (the supplement of 70°).\"  Explain.\n\n*(Target: FALSE.  −70° is 70° CW from the positive x-axis → terminal side in Q IV.  110° is\n110° CCW → terminal side in Q II.  These are different positions.  The negative sign means CW,\nnot supplementary.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independence probe — self-contained.*\n\n> A wheel of radius 6 cm rotates counterclockwise by **5π/4 radians** from standard position.\n>\n> (a) Convert 5π/4 radians to degrees.\n> (b) Find the arc length swept by a point on the rim.\n> (c) Find the reference angle (in degrees).\n> (d) Find a negative coterminal angle (in radians) in the interval (−2π, 0).\n\n*Expected answers:*\n*(a) 5π/4 × (180°/π) = 225°.*\n*(b) s = 6 × 5π/4 = 15π/2 cm ≈ 23.6 cm.*\n*(c) 225° is in Q III.  Reference angle = 225° − 180° = 45°.*\n*(d) 5π/4 − 2π = 5π/4 − 8π/4 = −3π/4.  This is in (−2π, 0) ✓.*\n\n**[P55 — SCORE]**  Award 1 point for P76 if all four parts correct; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.90  →  ⌈0.90 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → MC-1 residual → TB-R01 (abbreviated, one more coterminal pair example).\n  - Q2 wrong → MC-2 → TB-R02.\n  - Q3(i) wrong → reference angle formula error → re-read the Q III row of the formula table.\n  - Q3(ii) wrong → MC-1 residual → TB-R01 (check by adding 360°).\n  - Q4 wrong → MC-3 → TB-R03.\n  - P76 wrong → map to part:\n    (a) conversion error → review θ_rad × (180°/π);\n    (b) MC-2 → TB-R02;\n    (c) reference angle formula error → re-read formula;\n    (d) MC-1 residual → TB-R01.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.trig.angle-measure\nMASTERY_REACHED: true\nUNLOCKS:         math.trig.right-triangle-trig, math.trig.unit-circle\nNEXT_CONCEPT:    math.trig.unit-circle  (or math.trig.right-triangle-trig)\nSESSION_CLOSE:   \"You can now place any angle in standard position, find its coterminal\n                  equivalents, compute arc lengths using s = rθ (θ in radians), and\n                  reduce any angle to its reference angle. These skills are the direct\n                  input to the unit circle and right-triangle trigonometry.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: COTERMINAL-MEANS-DIFFERENT (MC-1)\n\n**Trigger:** Student treats angles differing by 360° (or 2π) as having different terminal sides.\n\n**Step 1 — Anchor: full revolution returns to start.**\n> Starting from the positive x-axis, rotate CCW by 360°.  Where do you end up?\n> Back at the positive x-axis.  You are in the exact same position.\n\n**Step 2 — Apply to any angle.**\n> If 30° puts the terminal side at a specific ray in Q I, then 30° + 360° = 390° performs that\n> same rotation PLUS one full circle — ending at the same ray.\n> Any multiple of 360° is \"invisible\" to the terminal side.\n\n**Step 3 — Formula restatement.**\n> Coterminal to θ: all angles of the form θ + 360°k (or θ + 2πk), k ∈ ℤ.\n\n**Exit:** Return to TA-A02 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: ARC-LENGTH-IN-DEGREES (MC-2)\n\n**Trigger:** Student uses s = rθ with θ in degrees.\n\n**Step 1 — Show the formula's origin.**\n> By definition, 1 radian is the angle where the arc length equals the radius.\n> So when θ = 1 rad, s = r × 1 = r.  This is literally the definition of radian measure.\n> s = rθ (radians) works because 1 radian was constructed to make arc = radius × angle.\n\n**Step 2 — Show degrees give wrong units.**\n> If θ = 30° and you write s = r × 30, the \"30\" is just a count of degree-units.\n> Arc length must be in length units (cm, m), not degree-units.\n> Only radian measure is dimensionless (radians = arc/radius = length/length), so θ in radians\n> can multiply r (in cm) to give s in cm.\n\n**Step 3 — Procedure.**\n> If given θ in degrees: FIRST convert to radians, THEN apply s = rθ.\n> Example: θ = 60°, r = 3 cm → θ_rad = 60 × π/180 = π/3 → s = 3 × π/3 = π ≈ 3.14 cm.\n\n**Exit:** Return to TA-A03 P49 checkpoint, part (i).\n\n---\n\n### TB-R03 · Repair: NEGATIVE-ANGLE-MISREAD (MC-3)\n\n**Trigger:** Student interprets −θ as the supplement (180°−θ) rather than a CW rotation by θ.\n\n**Step 1 — Draw the standard-position diagram.**\n> Draw a coordinate plane.  Mark 60° CCW from +x-axis — terminal side in Q I.\n> Now draw −60°: start at +x-axis and rotate CW by 60° — terminal side in Q IV.\n\n**Step 2 — Contrast with supplement.**\n> Supplement of 60° = 180° − 60° = 120°.  Draw 120° CCW — terminal side in Q II.\n> −60° (Q IV) ≠ 120° (Q II).  Completely different terminal sides.\n\n**Step 3 — State the rule.**\n> Negative sign = CLOCKWISE rotation by |θ|.\n> Supplement = 180° − θ (no sign involved; always CCW; for angles less than 180°).\n> These are unrelated concepts.  Never confuse them.\n\n**Exit:** Return to TA-A03 P49 checkpoint, part (ii) — review the contrast table.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Find a positive coterminal angle for −200°. In which quadrant does the\n            terminal side lie?\"\n    Target: −200° + 360° = 160°. Q II. PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"A circle has radius 3 cm. A central angle of π/2 radians subtends an arc.\n            Find the arc length.\"\n    Target: s = 3 × π/2 = 3π/2 cm. PASS if correct and θ was used in radians.\n\n  Interval-3 (+1 week):\n    Probe: \"Find the reference angle for 7π/6.\"\n    Target: 7π/6 rad = 210°. Q III. Reference angle = 210° − 180° = 30°. PASS if correct.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (coterminal) or TA-A03 (arc/reference) as appropriate.\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.geom.angle-measurement:\n    Used in:   TA-A01 (degree-radian conversion assumed known; P11 uses 120° = 2π/3),\n               TA-A02 (coterminal examples in both degrees and radians; conversion fluency needed),\n               TA-A03 (P06: convert 3π/4 to 135° for reference angle; arc-length requires radian\n                       conversion as a prerequisite skill),\n               TA-A04 (Q1 uses −150° in degrees; Q2 arc length in radians; P76 converts 5π/4→225°).\n    Assumed:   Student can convert between degrees and radians using θ_rad = θ_deg × π/180;\n               knows acute/right/obtuse/reflex classification.\n\nUNLOCKS_ENABLED:\n  math.trig.right-triangle-trig:\n    Dependency: Right-triangle definitions of sin/cos/tan use reference angles to extend to all\n                quadrants; coterminal angles are needed to handle angles outside [0°, 90°].\n  math.trig.unit-circle:\n    Dependency: Unit circle coordinates are defined for angles in standard position; arc length\n                formula s = rθ with r=1 gives s = θ directly; coterminal angles explain why trig\n                functions are periodic with period 2π.\n\nCROSS_LINKS_NOTED:\n  (none)\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The CPA entry at P is deliberate.**\nStudents who completed `math.geom.angle-measurement` have already done the Concrete layer (draw\nthe angle, measure with protractor, use the conversion formula).  Re-doing concrete work would\nfeel like revision and slow progress.  The standard-position diagram (TA-A01 P11) is the right\nfirst Pictorial representation — it sets up everything that follows.\n\n**2. MC-1 (coterminal = different) is the most consequential error for future trigonometry.**\nIf a student doesn't understand that 30° and 390° are coterminal, they will misinterpret the\nperiodicity of trig functions entirely.  TA-A02 must lock this in with the full-circle argument\nbefore TA-A03's more complex content.\n\n**3. The arc-length formula demands radian discipline.**\nThe most effective repair for MC-2 is TB-R02 Step 1 — the radian is literally defined so that\narc = radius × angle.  Once a student sees that the formula's derivation presupposes radians,\nthey understand why substituting degrees produces a dimensionally wrong answer.\n\n**4. Reference angles bridge to trigonometry, but don't preview trig values here.**\nTA-A03 introduces reference angles as the acute \"shadow\" angle to the x-axis.  This is\nsufficient for this blueprint — the payoff (reference angle determines trig function magnitude)\nbelongs in math.trig.right-triangle-trig and math.trig.unit-circle.  Don't pre-empt those.\n\n**5. Negative angles and supplements are a classic trap.**\nThe contrast table in TA-A03 Contrast B is the most direct pre-emption for MC-3.  If a student\nis confused, TB-R03 uses a side-by-side diagram: −60° lands in Q IV; 120° (supplement of 60°)\nlands in Q II.  The visual separation is more convincing than any algebraic argument.\n\n**6. P76 probe is fully calibrated to the four skills.**\nParts (a) = conversion, (b) = arc length, (c) = reference angle, (d) = coterminal negative.\nA student who answers all four has demonstrated mastery of every new concept in this blueprint,\nindependent of prerequisite content.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.trig.angle-measure\n================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 7; 4 TAs used ≤ 7.\n[PASS] V-4   CPA_ENTRY_STAGE = P (proficient difficulty; Concrete already covered by prerequisite).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02, P41 + P64 — coterminal definition).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03 P06, TB-R02, TB-R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P03 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross_links to document (cross_links = []).\n[PASS] V-17  GR-9: P76 uses Independence mode (cross_links = []); probe is self-contained\n               (wheel of radius 6 cm, angle 5π/4 rad — no external Tier 1 concept required;\n               conversion, arc length, reference angle, and coterminal computation all use only\n               prerequisite math.geom.angle-measurement skills plus content from this blueprint).\n[PASS] V-18  GR-10: MAMR stated in Component 3; enforced — MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.90 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   Standard position defined (vertex at origin, initial side on +x).\n             Positive = CCW, negative = CW established with P03 turntable analogy.\n             Coterminal angles defined (θ + 360°k) with examples; P41/P64 gate in TA-A02.\n             Arc length s = rθ (θ in radians) taught with contrast table and WHY explanation.\n             Reference angles by quadrant (four formulae); introduced in TA-A03 and tested in Q3 + P76.\n             MC-1 (coterminal = different) addressed by full-revolution anchor.\n             MC-2 (arc length in degrees) addressed by radian definition in TB-R02.\n             MC-3 (negative = supplement) addressed by side-by-side contrast in TA-A03 and TB-R03.\n             P76 probe exercises all four new skills (conversion, arc length, reference,\n             coterminal) in a single self-contained scenario.\n             Prerequisite degree-radian conversion from math.geom.angle-measurement is used\n             but not re-taught.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 284,
+        "endLine": 600
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.angle-measure",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P03 analogy: turntable rotation; P11 standard-position diagram; P49)\n      → TA-A02 (P41/P64 MC-1 gate: coterminal angles; P49)\n      → TA-A03 (P06 contrast: arc-length in degrees vs radians; CW vs supplement; P49)\n      → TA-A04 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (full-revolution anchor for coterminal angles)\n  MC-2 → TB-R02 (why arc length requires radians; unit derivation)\n  MC-3 → TB-R03 (clockwise rotation diagram; −θ ≠ supplement)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.angle-measure",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Find a positive coterminal angle for −200°. In which quadrant does the\n            terminal side lie?\"\n    Target: −200° + 360° = 160°. Q II. PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"A circle has radius 3 cm. A central angle of π/2 radians subtends an arc.\n            Find the arc length.\"\n    Target: s = 3 × π/2 = 3π/2 cm. PASS if correct and θ was used in radians.\n\n  Interval-3 (+1 week):\n    Probe: \"Find the reference angle for 7π/6.\"\n    Target: 7π/6 rad = 210°. Q III. Reference angle = 210° − 180° = 30°. PASS if correct.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (coterminal) or TA-A03 (arc/reference) as appropriate.\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 449,
+        "endLine": 473
+      }
+    },
+    {
+      "assetId": "math.trig.angle-measure/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.angle-measure",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.geom.angle-measurement:\n    Used in:   TA-A01 (degree-radian conversion assumed known; P11 uses 120° = 2π/3),\n               TA-A02 (coterminal examples in both degrees and radians; conversion fluency needed),\n               TA-A03 (P06: convert 3π/4 to 135° for reference angle; arc-length requires radian\n                       conversion as a prerequisite skill),\n               TA-A04 (Q1 uses −150° in degrees; Q2 arc length in radians; P76 converts 5π/4→225°).\n    Assumed:   Student can convert between degrees and radians using θ_rad = θ_deg × π/180;\n               knows acute/right/obtuse/reflex classification.\n\nUNLOCKS_ENABLED:\n  math.trig.right-triangle-trig:\n    Dependency: Right-triangle definitions of sin/cos/tan use reference angles to extend to all\n                quadrants; coterminal angles are needed to handle angles outside [0°, 90°].\n  math.trig.unit-circle:\n    Dependency: Unit circle coordinates are defined for angles in standard position; arc length\n                formula s = rθ with r=1 gives s = θ directly; coterminal angles explain why trig\n                functions are periodic with period 2π.\n\nCROSS_LINKS_NOTED:\n  (none)\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.angle-measure.md",
+        "startLine": 473,
+        "endLine": 502
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

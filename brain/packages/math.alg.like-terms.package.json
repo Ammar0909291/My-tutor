@@ -1,0 +1,411 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.like-terms-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.like-terms",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5b897bbfdc097558449c1430e04dbb8294b11f38ecc4d68ec2f8a3677812f2d4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.like-terms.md": "sha256:726fb68b648a377e0e4439a1fb4e3bf6d67eb6e6dc87c9752522e0f2d5ace714"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.alg.like-terms",
+    "name": "Like Terms",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.alg.term",
+      "math.alg.coefficient"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.like-terms-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.like-terms (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.like-terms.md": "sha256:726fb68b648a377e0e4439a1fb4e3bf6d67eb6e6dc87c9752522e0f2d5ace714"
+      },
+      "contentHash": "sha256:b80547363062848edc7b4ad5c4d1030335e04e47a85a13266445c1c1ce4ce121",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.like-terms.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.like-terms.md#TA-A01 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.like-terms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.like-terms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.like-terms.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.like-terms.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.like-terms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.like-terms\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.like-terms.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.like-terms.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.like-terms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.like-terms\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.like-terms.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.like-terms.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.like-terms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.like-terms\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.like-terms.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.like-terms.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.like-terms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.like-terms\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.like-terms.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.like-terms.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.like-terms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.like-terms\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.like-terms/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.like-terms",
+      "title": "Like Terms — cognitive map",
+      "content": "**Core concept:** Terms with identical variable parts (same variables raised to the same powers) are like terms. Only like terms can be combined: add or subtract their coefficients and keep the variable part unchanged. Terms whose variable parts differ cannot be combined.\n\n**Knowledge prerequisites activated:**\n- math.alg.term: a term is a product of a coefficient and a variable part; like terms share the same variable part\n- math.alg.coefficient: the numerical factor of a term; when combining like terms, it is the coefficients that are added or subtracted\n\n**Concept structure:**\n1. **Like terms**: same variable part — 3x², −5x², x² are like (all share x²); 3x and 3y are unlike (different variables)\n2. **Identifying like terms**: compare variable parts symbol-by-symbol including exponents; coefficients are irrelevant for identification\n3. **Unlike terms**: different variable parts — x² and x³ cannot be combined; xy and x²y cannot be combined\n4. **Combining like terms**: add/subtract coefficients only; variable part is unchanged (3x² + (−5x²) = (3 − 5)x² = −2x²)\n5. **Multi-variable terms**: 3xy and 5xy are like (variable part xy); 3xy and 5x²y are unlike (xy ≠ x²y)\n\n**Target understanding:** Given an expression, the learner identifies all sets of like terms, combines them by operating on their coefficients, and leaves unlike terms unchanged.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 26,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.like-terms",
+      "title": "VARIABLE-PARTS-IGNORED",
+      "content": "| MC-1 | VARIABLE-PARTS-IGNORED | Shown 3x + 2y, asked to simplify | Combines all terms regardless of variable part; gives 5x, 5y, or 5xy; ignores that x and y are distinct variable parts | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.like-terms",
+      "title": "EXPONENT-ADDS-WHEN-COMBINING",
+      "content": "| MC-2 | EXPONENT-ADDS-WHEN-COMBINING | Shown 3x² + 2x², asked to simplify | Gives 5x⁴ — adds the exponents as if applying the product rule; confuses coefficient addition with exponent arithmetic | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.like-terms",
+      "title": "UNLIKE-TERMS-FORCED",
+      "content": "| MC-3 | UNLIKE-TERMS-FORCED | Shown x + x², asked to simplify | Gives 2x or 2x² — treats x and x² as like terms because \"both have x\"; ignores the exponent difference | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.like-terms",
+      "title": "\"Same Item, Same Shelf\": Identifying Like Terms (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"\\\"Same Item, Same Shelf\\\": Identifying Like Terms (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 71,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.like-terms",
+      "title": "Combining Like Terms in Practice (GR-1: P07 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Combining Like Terms in Practice (GR-1: P07 | GR-2: P49)\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 102,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.like-terms",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 153,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.like-terms",
+      "title": "Repair: VARIABLE-PARTS-IGNORED (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: VARIABLE-PARTS-IGNORED (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 220,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.like-terms",
+      "title": "Repair: EXPONENT-ADDS-WHEN-COMBINING (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: EXPONENT-ADDS-WHEN-COMBINING (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 253,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.like-terms",
+      "title": "Repair: UNLIKE-TERMS-FORCED (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: UNLIKE-TERMS-FORCED (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 284,
+        "endLine": 386
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.like-terms",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A03 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **Identify all sets of like terms in: 5x² + 3x − 2x² + 4y + x².**\n   *(Expected: {5x², −2x², x²} are like terms with variable part x²; 3x and 4y are unlike each other and unlike the x²-group)*\n\n2. **Simplify: 7m³ + 2m − 3m³ + m.**\n   *(Expected: (7m³ − 3m³) + (2m + m) = 4m³ + 3m)*\n\n3. **True/False:** 4xy and 4x are like terms.\n   *(Expected: FALSE — variable parts xy and x are different; the extra y in xy makes them unlike)*\n\n4. **Simplify: 3a + 2b − a + 5b.**\n   *(Expected: (3a − a) + (2b + 5b) = 2a + 7b)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: independence mode — cross_links=[], novel context)\n\n*Business revenue model:*\n\n\"A business models its weekly revenue as R = 3p + 5q + 2p − q, where p is the price of product A and q is the price of product B.\n\n(a) Identify the like terms in R.\n(b) Simplify R by combining like terms.\n(c) If p = 10 and q = 4, evaluate both the original and simplified expressions and verify they agree.\"\n\n*(Expected:\n(a) 3p and 2p are like (variable part p); 5q and −q are like (variable part q)\n(b) R = 5p + 4q\n(c) Original: 3(10) + 5(4) + 2(10) − 4 = 30 + 20 + 20 − 4 = 66; Simplified: 5(10) + 4(4) = 50 + 16 = 66 ✓)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.85; ⌈0.85×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 VARIABLE-PARTS-IGNORED first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now identify like terms by comparing variable parts, combine them by operating on coefficients only, and leave unlike terms unchanged. Like-term recognition is the core skill for algebraic simplification and equation solving.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 153,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.like-terms",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\n\"Supermarket grouping\" model: apples and oranges are different items and are counted separately. 3 apples + 2 apples = 5 apples; 3 apples + 2 oranges stays as 3 apples + 2 oranges — you cannot add apples to oranges. Like terms are the \"same item\"; the coefficient counts how many.\n\n**Progression Gate (C → P):** Learner consistently identifies which terms share the same variable part (the \"item type\") before attempting to combine.\n**Progression Gate (P → A):** Learner extends like-term identification to multi-variable and negative-coefficient cases without a concrete model.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 57,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.like-terms",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Identify like terms | \"Which pairs in 4p² + 3p − p² + 2q are like?\" |\n| Day 3 | Combine like terms | \"Simplify 5x − 2y + 3x + y\" (8x − y) |\n| Day 7 | Multi-variable and negative coefficients | \"Simplify 4ab − 2a + ab − 3a\" (5ab − 5a) |\n| Day 30 | Transfer: like terms in equations | \"Collect like terms on the left side of 3x + 4 − x = 9\" (2x + 4 = 9) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 315,
+        "endLine": 326
+      }
+    },
+    {
+      "assetId": "math.alg.like-terms/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.like-terms",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.alg.term (required): a term is the unit that is classified as like or unlike; a term's variable part is the classification key\n- math.alg.coefficient (required): when combining like terms, the coefficients are added or subtracted; sign of the coefficient is part of the operation\n\n**Enables:**\n- math.alg.simplification: simplifying an expression by collecting all like terms is the core operation; like-term recognition is the prerequisite skill\n\n**Cross-links (GR-8):**\n- (none — cross_links=[])\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.like-terms.md",
+        "startLine": 326,
+        "endLine": 340
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

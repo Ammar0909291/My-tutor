@@ -1,0 +1,471 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.irrational-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.irrational-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cf5f150d82d8dc3d0d91e5b865435ce5756c1cc63a642611a3537055a7d4846c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.irrational-numbers.md": "sha256:6b1a4fc2c72292034e12f5ee13d87dc15a6a22ec53fbf694a90f054402581489"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.found.irrational-numbers",
+    "name": "Irrational Numbers",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.rational-numbers"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.irrational-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.irrational-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.irrational-numbers.md": "sha256:6b1a4fc2c72292034e12f5ee13d87dc15a6a22ec53fbf694a90f054402581489"
+      },
+      "contentHash": "sha256:0a5709fd180b39a1623ab1e7397ef2e285a1731d3342aeae15f4de56e7f7513f",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.irrational-numbers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.irrational-numbers.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.irrational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.irrational-numbers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.irrational-numbers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.irrational-numbers.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.irrational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.irrational-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.irrational-numbers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.irrational-numbers.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.irrational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.irrational-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.irrational-numbers.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.irrational-numbers.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.irrational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.irrational-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.irrational-numbers.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.irrational-numbers.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.irrational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.irrational-numbers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.irrational-numbers.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.irrational-numbers.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.irrational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.irrational-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.irrational-numbers.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.irrational-numbers.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.irrational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.irrational-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.irrational-numbers.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.irrational-numbers.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.irrational-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.irrational-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.irrational-numbers/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Irrational Numbers — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.found.rational-numbers**: ℚ = {p/q : p, q ∈ ℤ, q ≠ 0}. Every rational has a terminating or eventually repeating decimal. Irrationals are defined as the complement: ℝ \\ ℚ — real numbers that are NOT rational. The prerequisite also establishes that ℚ is dense but incomplete; irrationals fill the \"holes.\"\n\n### Target Understanding\n1. **Formal definition**: A real number is irrational if it cannot be expressed as p/q with p, q ∈ ℤ and q ≠ 0.\n2. **Decimal characterization**: Irrationals have non-terminating AND non-repeating decimal expansions. This is the diagnostic: if a decimal neither terminates nor eventually repeats, the number is irrational.\n3. **Canonical examples**:\n   - √2: irrational (proof by contradiction — see below)\n   - √3, √5, √7, √p for any prime p: irrational\n   - π ≈ 3.14159265358979…: irrational (Niven 1947)\n   - e ≈ 2.71828182845904…: irrational (Euler 1737)\n   - φ = (1+√5)/2 ≈ 1.61803398…: irrational (golden ratio)\n   - ln(2) ≈ 0.693147…: irrational\n4. **Proof that √2 is irrational** (proof by contradiction):\n   Assume √2 = p/q in lowest terms (GCD(p,q)=1). Then 2 = p²/q², so p² = 2q². Thus p² is even, so p is even (p = 2k). Substituting: (2k)² = 2q², so 4k² = 2q², so q² = 2k², so q is even. But if both p and q are even, GCD(p,q) ≥ 2 — contradiction with p/q in lowest terms. Therefore √2 ∉ ℚ. ∎\n5. **Operations on irrationals**: sums and products of irrationals can be rational (√2 + (−√2) = 0 ∈ ℚ; √2 × √2 = 2 ∈ ℚ) or irrational (√2 + 1, √2 × √3 = √6). Irrationals are NOT closed under + or ×.\n6. **Abundance of irrationals**: Informally, ℚ is countable and ℝ is uncountable — \"most\" real numbers are irrational in a rigorous technical sense (ℚ has measure zero in ℝ).\n7. **Number chain**: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ, where ℝ = ℚ ∪ (ℝ \\ ℚ) (rationals union irrationals, disjoint).\n\n### Cross-Link Activation\n- No cross-links. P76 uses an independence probe (diagonal of a unit square — the classic concrete introduction to √2).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 31,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "[FOUNDATIONAL] — IRRATIONAL-IMPRECISE",
+      "content": "### MC-1 [FOUNDATIONAL] — IRRATIONAL-IMPRECISE\n- **Trigger**: \"√2 is not an exact number — it's just an approximation like 1.414\" or \"irrational numbers are inexact.\"\n- **Root cause**: Learner encounters √2 only through decimal approximations; conflates the REPRESENTATION (the truncated decimal) with the NUMBER (the precise mathematical object).\n- **Error pattern**: Claims √2 ≈ 1.414 (equal, not approximately equal); believes irrational numbers have less mathematical status than rationals; refuses to write √2 as an exact answer.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "— INFINITE-DECIMAL-IRRATIONAL",
+      "content": "### MC-2 — INFINITE-DECIMAL-IRRATIONAL\n- **Trigger**: \"Any decimal that goes on forever must be irrational\" or \"0.333… is irrational because it never ends.\"\n- **Root cause**: Learner correctly identifies that irrationals have non-terminating decimals, but over-generalizes: non-terminating implies irrational (forgetting the repeating case).\n- **Error pattern**: Classifies 0.333…, 1/7 = 0.142857…, or any non-terminating decimal as irrational; ignores the \"non-repeating\" requirement.\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "— IRRATIONAL-RARE",
+      "content": "### MC-3 — IRRATIONAL-RARE\n- **Trigger**: \"Irrational numbers are unusual special cases; most numbers are rational\" or \"you only need irrationals for square roots.\"\n- **Root cause**: In school, irrationals are introduced as exceptions (√2, π) while rationals form the default; the informal sense is that irrationals are edge cases.\n- **Error pattern**: Dismisses irrationals as rare; doesn't recognize that between any two rationals lie infinitely many irrationals; thinks ℚ and ℝ are essentially the same set.\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "The Hole in the Number Line: Concrete Motivation",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Hole in the Number Line: Concrete Motivation\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 96,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Misconception Gate: IRRATIONAL-IMPRECISE (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: IRRATIONAL-IMPRECISE (FOUNDATIONAL)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 113,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Pattern Induction: Decimal Characterization and Canonical Examples",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Pattern Induction: Decimal Characterization and Canonical Examples\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 139,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Contrast Pair: ℚ vs. ℝ \\ ℚ; Closure and Abundance",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Contrast Pair: ℚ vs. ℝ \\\\ ℚ; Closure and Abundance\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 172,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 202,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Repair MC-1 IRRATIONAL-IMPRECISE",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 IRRATIONAL-IMPRECISE\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 255,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Repair MC-2 INFINITE-DECIMAL-IRRATIONAL",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 INFINITE-DECIMAL-IRRATIONAL\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 277,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Repair MC-3 IRRATIONAL-RARE",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 IRRATIONAL-RARE\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 299,
+        "endLine": 393
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A05 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal in this TA]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\n\nQ1: Classify each as rational or irrational: (a) √4; (b) √5; (c) 0.12121212… (repeating \"12\"); (d) π.\nQ2: True or False: The product of two irrational numbers is always irrational. Give a counterexample if false.\nQ3: The decimal for √7 begins 2.6457513… Does it terminate? Does it repeat? What does this tell you about √7?\nQ4: A student argues: \"π ≈ 22/7, so π is rational because 22/7 ∈ ℚ.\" Identify the error.\n\n**P55 (SCORE):**\nQ1: (a) √4 = 2 ∈ ℤ ⊂ ℚ — rational. (b) √5 is irrational (5 is not a perfect square; proof by contradiction). (c) 0.12121212… = 0.̄1̄2̄ — repeating with period 2 → rational (= 12/99 = 4/33). (d) π is irrational (proved by Niven 1947).\nQ2: FALSE. Counterexample: √2 × √2 = 2 ∈ ℚ. The product of two irrationals can be rational.\nQ3: It does not terminate (we can see more digits extend). The key question: does it ever repeat? No — √7 is irrational (7 is not a perfect square), so its decimal is non-terminating AND non-repeating. Conclusion: √7 is irrational.\nQ4: The error is confusing approximation with equality. 22/7 ≈ 3.14286… ≠ π = 3.14159… 22/7 is a rational approximation of π — a rational number CLOSE to π but not equal. π itself is not rational. \"Approximately equal\" (≈) is not \"equal\" (=).\n\n**P76 (TRANSFER PROBE — Independence: cross_links = []):**\n\n**Context**: A surveyor is measuring the diagonal of a perfectly square plot of land with side length 1 km.\n\n**(a)** Using the Pythagorean theorem, express the EXACT length of the diagonal.\n**(b)** Is the diagonal length rational or irrational? Justify briefly (one sentence).\n**(c)** A colleague says: \"We'll just use 1.414 km — that's accurate enough for practical purposes.\" Is 1.414 km the exact diagonal? What is the exact value, and how does 1.414 relate to it?\n\n**Expected answers**:\n(a) d² = 1² + 1² = 2, so d = √2 km.\n(b) Irrational — √2 cannot be expressed as p/q (integer over non-zero integer), as proved by contradiction; equivalently, 1.41421356… is non-terminating and non-repeating.\n(c) 1.414 km is NOT the exact diagonal. 1.414 = 1414/1000 ∈ ℚ, and (1.414)² = 1.999396 ≠ 2. The exact diagonal is √2 km. 1.414 is a rational approximation — close enough for surveying practice, but mathematically distinct from √2.\n\n**P55 (SCORE):** √2 km identified as exact; irrational classification with brief justification; distinction between exact √2 and rational approximation 1.414 stated clearly.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, P76 = **5 items**.\nPass criterion: **4/5** (⌈0.80 × 5⌉ = 4; threshold = 0.80).\n- **PASS (≥ 4/5)** → P78.\n- **FAIL (< 4/5)** → P74 repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 (c) or Q3 wrong (classified non-repeating decimal incorrectly) → TA-B02 (INFINITE-DECIMAL-IRRATIONAL; repeating vs. non-repeating confusion); apply MAMR.\n- Q2 wrong → TA-B03 (IRRATIONAL-RARE — belief that irrationals form a \"nice\" closed system like ℚ).\n- Q4 wrong or P76 (c) wrong → TA-B01 (IRRATIONAL-IMPRECISE; confusing approximation with exact value); apply MAMR.\n- Q1 (a) or Q1 (b) wrong → TA-B02 (misclassifying perfect squares or non-perfect-squares).\n- Multiple wrongs → MAMR: TA-B01 first; then FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.found.real-numbers.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 202,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen Concrete (unit square diagonal physically cannot be measured as a fraction) → Pictorial (number line with rational \"gaps\" and √2 marked) → Abstract (formal proof of irrationality, decimal characterization theorem).\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). If triggered in later TAs, route → TA-B01 → return. MC-2 and MC-3 FIFO after MC-1 cleared.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 82,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (classify a,b,c,d) + Q4 (π ≠ 22/7) | 2/2 |\n| Day 3 | Q2 (product irrational?) + P76 (b,c) | 2/2 |\n| Day 7 | Mixed 3-item: classify two decimals, prove one irrational (√5 sketch) | 2/3 |\n| Day 21 | Q1, Q2, Q3, Q4 (4 items) | 3/4 |\n| Day 60 | Full 5-item mastery gate | 4/5 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing by error type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 318,
+        "endLine": 332
+      }
+    },
+    {
+      "assetId": "math.found.irrational-numbers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.irrational-numbers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Rational Numbers | math.found.rational-numbers | ℚ = {p/q : p,q ∈ ℤ, q≠0}; irrationals are defined as ℝ \\ ℚ; decimal characterization of ℚ (terminating or repeating) is the baseline for the diagnostic test |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Real Numbers | math.found.real-numbers | ℝ = ℚ ∪ (ℝ \\ ℚ); the complete ordered field; requires both ℚ and irrationals to be understood first |\n\n### Cross-Links\n- None. Concept is self-contained at this stage. P76 uses an independent real-world context (unit square diagonal).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.irrational-numbers.md",
+        "startLine": 332,
+        "endLine": 349
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

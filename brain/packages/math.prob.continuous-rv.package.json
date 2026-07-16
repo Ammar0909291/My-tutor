@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.continuous-rv-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.continuous-rv",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2307963620a6626070b36230bc5bc2a694fc0a9902570aed1ed418c4a7330dc8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.continuous-rv.md": "sha256:816a7c2cdb5d165693fe5ff5f54d98686e88c02371f8f551452399d066b82d15"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.prob.continuous-rv",
+    "name": "Continuous Random Variable",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.prob.random-variable",
+      "math.calc.definite-integral"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.continuous-rv-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.continuous-rv (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.continuous-rv.md": "sha256:816a7c2cdb5d165693fe5ff5f54d98686e88c02371f8f551452399d066b82d15"
+      },
+      "contentHash": "sha256:29fe08e7ea12f762a01724797b11479b4ebf612cbf58df614463ec9ce7c9d2c8",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.continuous-rv.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.continuous-rv.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.continuous-rv"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.continuous-rv\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.continuous-rv.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.continuous-rv.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.continuous-rv"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.continuous-rv\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.continuous-rv.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.continuous-rv.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.continuous-rv"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.continuous-rv\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.continuous-rv/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "Continuous Random Variable — cognitive map",
+      "content": "**Core concept:** A continuous random variable X is characterised by a probability density function (PDF) f(x) ≥ 0 whose integral over all reals equals 1. Probability is not attached to individual points but to intervals: P(a ≤ X ≤ b) = ∫_a^b f(x)dx. As a consequence, P(X = c) = 0 for every single value c. The cumulative distribution function F(x) = P(X ≤ x) = ∫_{−∞}^x f(t)dt is the running antiderivative of f, so f(x) = F′(x) wherever f is continuous.\n\n**Conceptual progression:**\n1. Discrete RV recap: PMF P(X=k) assigns positive probability to each value.\n2. Transition: as values become uncountably infinite, each point's probability becomes zero; probability \"spreads\" into density.\n3. PDF f(x): density per unit length; area under curve over [a,b] gives P(a ≤ X ≤ b).\n4. Validity conditions: f(x) ≥ 0 everywhere; ∫_{−∞}^∞ f(x)dx = 1.\n5. CDF F(x) = ∫_{−∞}^x f(t)dt; f(x) = F′(x); F ranges in [0,1] and is non-decreasing.\n\n**CPA arc (entry: P):**\n- Pictorial: continuous curve above x-axis; shaded region between a and b represents P(a ≤ X ≤ b); a single vertical line at x = c has zero area.\n- Abstract: P(a ≤ X ≤ b) = ∫_a^b f(x)dx; ∫_{−∞}^∞ f(x)dx = 1; F(x) = ∫_{−∞}^x f(t)dt; f(x) = F′(x).\n\n**Prior knowledge activated:** discrete random variable (math.prob.random-variable) — PMF, expectation; definite integral (math.calc.definite-integral) — area as integral, limits of integration.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "SINGLE-VALUE-HAS-PROBABILITY [FOUNDATIONAL]",
+      "content": "### MC-1: SINGLE-VALUE-HAS-PROBABILITY [FOUNDATIONAL]\n**Description:** Learner assigns positive probability to a single point, believing P(X = c) = f(c) or P(X = c) > 0.\n**Surface form:** \"If f(2) = 0.5, then the probability of getting exactly 2 is 0.5.\"\n**Root cause:** Overgeneralising from discrete RV where P(X = k) > 0; the learner reads the density value as a direct probability.\n**Trigger condition:** Any question asking for P(X = c) or computing P(a ≤ X ≤ b) with a = b.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "PDF-IS-PROBABILITY",
+      "content": "### MC-2: PDF-IS-PROBABILITY\n**Description:** Learner believes f(x) is a probability and must satisfy 0 ≤ f(x) ≤ 1; they reject PDFs where f(x) > 1.\n**Surface form:** \"f(x) = 3 on [0, 1/3] can't be valid because a probability can't exceed 1.\"\n**Root cause:** Conflating probability (f(x)) with density (mass per unit length). The constraint is on the integral ∫f(x)dx = 1, not on the value f(x).\n**Trigger condition:** Any PDF where f exceeds 1 on some interval; any question asking whether a given f is a valid PDF.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "CDF-PDF-CONFUSION",
+      "content": "### MC-3: CDF-PDF-CONFUSION\n**Description:** Learner conflates F(x) and f(x), using them interchangeably or applying the wrong one.\n**Surface form:** \"The probability P(X ≤ 1/2) equals f(1/2).\" or \"To check validity, I evaluate F(0) + F(1).\"\n**Root cause:** Both F and f involve the same variable x; learner does not distinguish the accumulation function from the density function.\n**Trigger condition:** Any problem requesting either the CDF or the PDF when the other is given.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "Repair for MC-1 (SINGLE-VALUE-HAS-PROBABILITY)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (SINGLE-VALUE-HAS-PROBABILITY)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 118,
+        "endLine": 182
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "Repair for MC-2 (PDF-IS-PROBABILITY)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (PDF-IS-PROBABILITY)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 182,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "Repair for MC-3 (CDF-PDF-CONFUSION)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (CDF-PDF-CONFUSION)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "Protocol A, TA-A03 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.9 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"X ~ Uniform[0,2]: f(x) = 1/2 for 0 ≤ x ≤ 2, 0 elsewhere. Find P(1 ≤ X ≤ 1.5).\"\n[Expected: ∫_1^{1.5} (1/2)dx = (1/2)(0.5) = 1/4.]\n\n**Item 2:**\n\"f(x) = 2x for 0 ≤ x ≤ 1, 0 elsewhere. Verify ∫_{−∞}^∞ f(x)dx = 1.\"\n[Expected: ∫_0^1 2x dx = [x²]_0^1 = 1 ✓.]\n\n**Item 3:**\n\"True or False: 'f(x) = 5 on [0, 0.2] is not a valid PDF because f(x) = 5 > 1.'\"\n[Expected: FALSE. ∫_0^{0.2} 5 dx = 5·0.2 = 1 ✓; f(x) ≥ 0 ✓. The density can exceed 1; only the integral must equal 1.]\n\n**Item 4:**\n\"The CDF of X is F(x) = x² for 0 ≤ x ≤ 1. Find f(x) for 0 < x < 1.\"\n[Expected: f(x) = F′(x) = 2x.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Let X have density f(x) = 2x for 0 ≤ x ≤ 1, 0 elsewhere.\n\n(a) Verify that f is a valid PDF.\n(b) Find P(1/4 ≤ X ≤ 3/4).\n(c) What is P(X = 1/2)? Justify.\n(d) Find the CDF F(x) for 0 ≤ x ≤ 1.\"\n\n[Expected:\n(a) f(x) = 2x ≥ 0 on [0,1] ✓; ∫_0^1 2x dx = [x²]_0^1 = 1 ✓. Valid PDF.\n(b) ∫_{1/4}^{3/4} 2x dx = [x²]_{1/4}^{3/4} = 9/16 − 1/16 = 8/16 = 1/2.\n(c) P(X=1/2) = 0. A single point has zero-width integral; P(X=c)=0 for any continuous RV.\n(d) F(x) = ∫_0^x 2t dt = [t²]_0^x = x² for 0 ≤ x ≤ 1.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if parts (a)–(d) are all correct; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner understands the PDF/CDF distinction, P(X=c)=0, and can compute probabilities by integration.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 3 (False → True) or P76(c) wrong (P(X=1/2)>0): → TA-B01 (SINGLE-VALUE-HAS-PROBABILITY repair), then re-gate\n- FAIL on Item 3 (f=5 invalid) or P76(a) wrong: → TA-B02 (PDF-IS-PROBABILITY repair), then re-gate\n- FAIL on Item 4 (F′ error) or P76(d) wrong: → TA-B03 (CDF-PDF-CONFUSION repair), then re-gate\n- FAIL on Item 1 or 2 (integration error only): → return to A02; practice integration for probabilities; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated understanding of continuous random variables: probability is area under f(x), single points have zero probability, and F(x) = ∫f(t)dt with f = F′.\n\nKey anchors to carry forward:\n- P(a ≤ X ≤ b) = ∫_a^b f(x)dx; P(X=c) = 0 always.\n- Valid PDF: f(x) ≥ 0 and ∫_{−∞}^∞ f(x)dx = 1 (f(x) can exceed 1).\n- CDF: F(x) = P(X ≤ x) = ∫_{−∞}^x f(t)dt; f(x) = F′(x).\n\nNext concepts: math.prob.pdf (expectation, variance), math.prob.continuous-distributions (Normal, Exponential).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 306,
+        "endLine": 400
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"A discrete RV X takes values 1, 2, 3 with P(X=1)=0.2, P(X=2)=0.5, P(X=3)=0.3. Find P(X=2).\" Correct answer (0.5) confirms familiarity with discrete PMF. Follow up: \"Why can't an analogous formula work when X can take any real value in [0,1]?\" This exposes the discrete-to-continuous transition need.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): show a smooth curve f(x) over [0,1]; shade the region from 0.3 to 0.7; confirm \"the shaded area IS the probability.\"\n- Rung 2 (structured): provide f(x) = 1 on [0,1]; guide computation of P(0.2 ≤ X ≤ 0.6) = ∫_{0.2}^{0.6} 1 dx = 0.4.\n- Rung 3 (full understand): learner verifies validity of a given PDF and computes probabilities and CDF independently.\n\n**Pacing note:** h=4 estimated hours; A01 + A02 in sessions 1–2; mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Let X have CDF F(x) = x² for 0 ≤ x ≤ 1, F(x) = 0 for x < 0, F(x) = 1 for x > 1. Find: (a) f(x); (b) P(1/4 < X < 3/4); (c) P(X = 0.3).\"\n[Expected: (a) f(x)=F′(x)=2x on [0,1]; (b) ∫_{1/4}^{3/4}2x dx=[x²]_{1/4}^{3/4}=9/16−1/16=1/2; (c) 0.]\n\n**Day 10 prompt:**\n\"A factory produces bolts with diameter X (mm). f(x) = k(x−9)(11−x) for 9 ≤ x ≤ 11, 0 elsewhere. Find k so that f is a valid PDF, then find P(9.5 ≤ X ≤ 10.5).\"\n[Expected: ∫_9^{11} k(x−9)(11−x)dx; substitute u=x−10: ∫_{−1}^{1} k(1−u²)du = k[u−u³/3]_{−1}^{1} = k·(4/3); so k=3/4. P(9.5≤X≤10.5)=∫_{9.5}^{10.5}(3/4)(x−9)(11−x)dx; by symmetry around 10, = (3/4)·∫_{−0.5}^{0.5}(1−u²)du=(3/4)[u−u³/3]_{−0.5}^{0.5}=(3/4)·(11/12)=11/16.]\n\n**Day 30 prompt:**\n\"X has PDF f(x) = e^{−x} for x ≥ 0. Find P(X > t) for any t > 0 and use this to show that P(X > s+t | X > s) = P(X > t). This is the memoryless property.\"\n[Expected: P(X>t)=∫_t^∞ e^{−x}dx=e^{−t}. P(X>s+t|X>s)=P(X>s+t)/P(X>s)=e^{−(s+t)}/e^{−s}=e^{−t}=P(X>t). Memoryless: past survival provides no information about future survival.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 229,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-rv/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.continuous-rv",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.prob.random-variable — discrete RV, PMF, expectation; the continuous case is the limiting extension\n- math.calc.definite-integral — computing ∫_a^b f(x)dx as signed area; used for every probability computation in this blueprint\n\n**Unlocked blueprints:**\n- math.prob.pdf — formal PDF properties, expectation E[X]=∫xf(x)dx, variance\n- math.prob.continuous-distributions — Normal, Exponential, Uniform; all are special cases of this blueprint's framework\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-rv.md",
+        "startLine": 247,
+        "endLine": 261
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

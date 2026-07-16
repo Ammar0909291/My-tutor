@@ -1,0 +1,441 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.vector-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.vector",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1aaa4419eed5f0be39a923b9dc16ac5cfc15f5ca69cb05238b3370b93793eaa6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.vector.md": "sha256:aea90fdb9aa23136dc9a4291ff5c56d0a4af395681c5124051f659e7aa7daf09"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.linalg.vector",
+    "name": "Vector",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.real-numbers",
+      "math.geom.x-y-coordinates"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.vector-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.vector (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.vector.md": "sha256:aea90fdb9aa23136dc9a4291ff5c56d0a4af395681c5124051f659e7aa7daf09"
+      },
+      "contentHash": "sha256:12bc9005acf1d1dcd09165b2307b2f9dbfb0739ffb072c497d8909618667745e",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector.md#TA-A03 (addresses MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.vector/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.linalg.vector",
+      "title": "Vector — cognitive map",
+      "content": "### 1.1 Core Insight\nA vector in ℝⁿ is an **ordered n-tuple of real numbers** (v₁, v₂, …, vₙ). Two interpretations coexist: **geometric** (an arrow with magnitude and direction, anchored to no fixed point) and **algebraic** (an element of ℝⁿ — a list of components). The ordered-tuple definition unifies both. Two vectors are equal if and only if all corresponding components are equal. The zero vector **0** = (0, 0, …, 0) is the unique vector with every component zero.\n\n### 1.2 Knowledge Prerequisites (Activated)\n- **math.found.real-numbers:** Components are real numbers; the complete ordered field ℝ is the coefficient domain.\n- **math.geom.x-y-coordinates:** Ordered pairs (x, y) as signed distances; provides the geometric reading of 2D vectors.\n\n### 1.3 Conceptual Sequence\n1. Vector = ordered n-tuple: (v₁, v₂, …, vₙ) where each vᵢ ∈ ℝ.\n2. Two geometric interpretations: position vector (arrow from origin to point) vs free vector (displacement — can be placed anywhere).\n3. Dimension: the n in ℝⁿ is the number of components; vectors in ℝ² are 2D, ℝ³ are 3D.\n4. Equality: **u** = **v** iff uᵢ = vᵢ for all i (component-wise).\n5. Zero vector: **0** = (0, 0, …, 0); the unique vector with all components zero.\n6. Notation: boldface **v**, arrow ⃗v, column [v₁; v₂; …; vₙ], or row (v₁, v₂, …, vₙ).\n\n### 1.4 Transfer Target\nReading a vector's components, determining dimension, asserting equality/inequality of vectors, and recognising the geometric arrow interpretation in ℝ²; understanding that vectors carry direction as well as magnitude.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 29,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.vector",
+      "title": "VECTOR-IS-POINT",
+      "content": "| MC-1 | VECTOR-IS-POINT | Treats vector (3, 4) as identical to the geometric point (3, 4) at a fixed location | Shared notation — ordered pairs used for both coordinates and vectors — leads to conflating displacement with location | FOUNDATIONAL |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.vector",
+      "title": "VECTOR-ORDER-FREE",
+      "content": "| MC-2 | VECTOR-ORDER-FREE | Claims (3, 4) and (4, 3) are the same vector | Confuses vector with set; ignores the \"ordered\" in ordered tuple | SECONDARY |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.vector",
+      "title": "VECTOR-IS-MAGNITUDE",
+      "content": "| MC-3 | VECTOR-IS-MAGNITUDE | Says \"the vector is √5\" when asked about **(1, 2)**; conflates the vector with its scalar length | Magnitude is computed frequently, leading student to discard directional information | SECONDARY |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector",
+      "title": "Concrete Opening: Displacement Arrow",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Opening: Displacement Arrow\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 71,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector",
+      "title": "Representation Shift: Arrow ↔ Tuple ↔ Column",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Representation Shift: Arrow ↔ Tuple ↔ Column\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 98,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector",
+      "title": "Equality and Order: Contrast Pair",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Equality and Order: Contrast Pair\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 129,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 155,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector",
+      "title": "Repair: VECTOR-IS-POINT (MC-1 FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: VECTOR-IS-POINT (MC-1 FOUNDATIONAL)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 202,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector",
+      "title": "Repair: VECTOR-ORDER-FREE (MC-2)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: VECTOR-ORDER-FREE (MC-2)\",\"primitives\":[\"P27\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 225,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector",
+      "title": "Repair: VECTOR-IS-MAGNITUDE (MC-3)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: VECTOR-IS-MAGNITUDE (MC-3)\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 244,
+        "endLine": 350
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.vector",
+      "title": "Mastery Gate",
+      "content": "### TA-A04 — Mastery Gate\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n**Grammar:** GR-3 ✓ (terminal); GR-6 ✓; GR-7 ✓ (P76 in gate); GR-9: `math.geom.vectors-2d` is Tier 1 → P76 CROSS-LINK PROBE\n\n**pass_criterion:** ⌈0.90 × 5⌉ = **5 / 5** (4 P77 items + 1 P76 item)\n\n**P77 — MULTI-PROBLEM SET (4 items)**\n1. Write the vector from point A = (1, 2) to point B = (4, 6) as an ordered pair.\n2. Are vectors (2, 5) and (5, 2) equal? Explain.\n3. Vector **v** = (−3, 0, 4) is in ℝ³. State: (a) its first component, (b) its dimension, (c) its zero vector **0** in the same space.\n4. Give two distinct vectors in ℝ² with the same magnitude √5. (Any valid pair accepted.)\n\n**P55 — SCORE** (tally P77 results)\n\n**P76 — TRANSFER PROBE (CROSS-LINK: `math.geom.vectors-2d`)**\n> In 2D geometry, vectors are visualised as arrows from the origin. For **u** = (−2, 3):\n>\n> (a) Describe the arrow for **u**: which quadrant does its tip land in?\n>\n> (b) Compute the **magnitude** ‖**u**‖ = √(u₁² + u₂²). Leave in exact form.\n>\n> (c) **u** + **v** (vector addition, which you will study next) is computed component-wise: if **v** = (5, 1), compute **u** + **v**. Does the tip-to-tail picture make sense — arrow for **u** then arrow for **v** placed at **u**'s tip?\n\n*(Expected: (a) tip at (−2,3), Quadrant II; (b) √(4+9)=√13; (c) (3,4); yes — final tip at (3,4).)*\n\n**P55 — SCORE** (add P76 result)\n\n**P75 — MASTERY ASSESSMENT**\n- pass: 5 / 5 → MASTERY ACHIEVED\n- fail: ≤ 4 / 5 → MASTERY NOT ACHIEVED\n\n**P55 — SCORE** (record mastery outcome)\n\n**P74 — ROUTING DECISION**\n- MASTERY ACHIEVED → P78\n- MASTERY NOT ACHIEVED → P77 item 1 or P76 (a) failed → TA-B01; P77 item 2 failed → TA-B02; P77 item 4 failed → TA-B03; re-enter TA-A02\n\n**P55 — SCORE** (record routing)\n\n**P78 — COMPLETION**\n> \"You can now read, write, and interpret vectors as ordered n-tuples; distinguish vectors from points; assert equality by components; and understand that magnitude is a property of a vector, not the vector itself. The transfer probe previewed 2D geometric vector operations — you are ready for vector addition, scalar multiplication, and eventually the full structure of a vector space.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Protocol)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 155,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.vector",
+      "title": "Scaffolding Protocol",
+      "content": "| Stage | Condition | Entry Action |\n|---|---|---|\n| C (Concrete) | developing → always | Begin TA-A01 with displacement-arrow analogy |\n| P (Pictorial) | After C → geometric arrow diagrams | TA-A02 (representation shift between arrow, tuple, and coordinate forms) |\n| A (Abstract) | After P → equality, ordering, zero vector | TA-A03 (contrast pair: vector vs point, two orderings) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 63,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.vector",
+      "title": "P89 Spaced Repetition",
+      "content": "**P89 — SPACED REPETITION SCHEDULE**\n\n| Interval | Probe Type | Content |\n|---|---|---|\n| Day 1 (consolidation) | Read and write | From arrow A=(0,0)→B=(−3,5): write as tuple, as column vector, state dimension |\n| Day 3 | Equality check | Which pairs are equal: (2,3) vs (3,2); (4,−1,0) vs (4,−1,0); (1,1) vs (1,1,0) |\n| Day 7 | Vector vs magnitude | **v**=(−4,3): state the vector, compute ‖**v**‖, name two other vectors with same magnitude |\n| Day 30 | Transfer | Given a 3D vector **w**=(2,−1,3): state its geometric interpretation; which plane contains it if v₃=0? |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 275,
+        "endLine": 288
+      }
+    },
+    {
+      "assetId": "math.linalg.vector/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.vector",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**GR-8 ✓:** All cross_links documented.\n\n| Dependency | Direction | Relationship |\n|---|---|---|\n| `math.found.real-numbers` | REQUIRES | Components vᵢ ∈ ℝ; ℝⁿ is the ambient space |\n| `math.geom.x-y-coordinates` | REQUIRES | Ordered pair notation; signed axis directions for 2D interpretation |\n| `math.linalg.vector-space` | UNLOCKS | Vector spaces generalise ℝⁿ; vectors become abstract elements |\n| `math.linalg.dot-product` | UNLOCKS | Dot product requires component-wise multiplication of two vectors |\n| `math.geom.vectors-2d` | CROSS-LINK (Tier 1) | Geometric arrow interpretation in ℝ²; magnitude and direction; tip-to-tail addition |\n| `math.geom.vectors-3d` | CROSS-LINK (Tier 1) | Extension to ℝ³; third component (depth/z-axis) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector.md",
+        "startLine": 288,
+        "endLine": 303
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

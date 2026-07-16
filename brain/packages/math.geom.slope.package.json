@@ -1,0 +1,395 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.slope-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.slope",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ebe3f34e734494dc2d86beba47f9cc0b2e02f1652121e9a2f7e5d97b154cdad4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.slope.md": "sha256:33a2937a2c5bbd0174b742e83875bdf785826dc085588dd6b42e89ac4f033647"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.geom.slope",
+    "name": "Slope of a Line",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.coordinate-plane"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.slope-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.slope (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.slope.md": "sha256:33a2937a2c5bbd0174b742e83875bdf785826dc085588dd6b42e89ac4f033647"
+      },
+      "contentHash": "sha256:9e327f22d4ad8ee021a0d4924dae0ad58ec0052741d94518c4a5369c5f98e9ba",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.slope.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.slope.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.slope"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.slope\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.slope.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.slope.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.slope"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.slope\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.slope.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.slope.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.slope"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.slope\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.slope.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.slope.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.slope"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.slope\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.slope.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.slope.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.slope"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.slope\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.slope.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.slope.md#TA-B02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.slope"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.slope\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.slope/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.slope",
+      "title": "Slope of a Line — cognitive map",
+      "content": "**Core concept:** The slope m of a line through points (x₁,y₁) and (x₂,y₂) is m = (y₂−y₁)/(x₂−x₁) = Δy/Δx. Slope is constant for all point pairs on the same line. Parallel lines have equal slopes; perpendicular lines have slopes that are negative reciprocals (m₁ × m₂ = −1). The slope formula is the discrete precursor to the derivative.\n\n**Conceptual progression:**\n1. Slope as ratio of vertical change (rise) to horizontal change (run): m = Δy/Δx.\n2. Any two points on the same line produce the same slope — slope is a property of the line, not the points chosen.\n3. Parallel lines: same slope, different intercepts.\n4. Perpendicular lines: slopes are negative reciprocals (m₂ = −1/m₁).\n5. Special cases: horizontal line (Δy=0, m=0); vertical line (Δx=0, m undefined).\n6. Limiting connection: slope of secant → slope of tangent (derivative) as the two points approach each other.\n\n**CPA arc (entry: P):**\n- Pictorial: coordinate grid with slope triangles showing rise and run; parallel and perpendicular line pairs plotted; colour-coded Δy and Δx\n- Abstract: symbolic formula m = (y₂−y₁)/(x₂−x₁); parallel condition m₁=m₂; perpendicular condition m₁m₂=−1; limiting secant argument\n\n**Prior knowledge activated:** coordinate plane; plotting points (x,y); concept of \"steepness\" informally; fractions as ratios\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.geom.slope/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.slope",
+      "title": "DELTA-Y-OVER-DELTA-X-REVERSED [FOUNDATIONAL]",
+      "content": "### MC-1: DELTA-Y-OVER-DELTA-X-REVERSED [FOUNDATIONAL]\n**Description:** Learner computes Δx/Δy instead of Δy/Δx.\n**Surface form:** For (2,3) and (5,9), computes (5−2)/(9−3) = 3/6 = 1/2 instead of (9−3)/(5−2) = 6/3 = 2.\n**Root cause:** Memorises \"difference over difference\" without anchoring which change goes on top; may confuse x-direction with \"up\" direction.\n**Trigger condition:** Any slope computation from two points.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.geom.slope/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.slope",
+      "title": "SLOPE-DEPENDS-ON-POINT-CHOICE",
+      "content": "### MC-2: SLOPE-DEPENDS-ON-POINT-CHOICE\n**Description:** Learner believes different pairs of points on the same line give different slopes.\n**Surface form:** After computing slope using (0,1) and (2,5) as 2, doubts that using (1,3) and (4,9) gives the same slope.\n**Root cause:** Does not understand that slope is a property of the entire line, not of the specific interval chosen; treats slope like a local measurement.\n**Trigger condition:** Any problem asking the learner to verify slope invariance or use non-given points.\n**Repair target:** TA-B01.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.slope/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.slope",
+      "title": "PERPENDICULAR-SLOPES-EQUAL",
+      "content": "### MC-3: PERPENDICULAR-SLOPES-EQUAL\n**Description:** Learner confuses the parallel condition (equal slopes) with the perpendicular condition, claiming perpendicular lines also have equal slopes.\n**Surface form:** Asked for the slope perpendicular to m=3, answers 3 instead of −1/3.\n**Root cause:** Conflates \"related to\" with \"equal to\"; may misremember the rule as \"same slope = perpendicular\" from a garbled version of the parallel rule.\n**Trigger condition:** Any problem involving perpendicular lines.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.slope/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.slope",
+      "title": "Slope Formula and Invariance",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Slope Formula and Invariance\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 83,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "math.geom.slope/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.slope",
+      "title": "Parallel and Perpendicular Slopes",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Parallel and Perpendicular Slopes\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 112,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "math.geom.slope/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.slope",
+      "title": "Contrast: Parallel vs. Perpendicular Identification",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast: Parallel vs. Perpendicular Identification\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 138,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "math.geom.slope/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.slope",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 163,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "math.geom.slope/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.slope",
+      "title": "Repair: Delta-Y/Delta-X Reversed or Slope Invariance Confusion",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: Delta-Y/Delta-X Reversed or Slope Invariance Confusion\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 212,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "math.geom.slope/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.slope",
+      "title": "Repair: Perpendicular-Slopes-Equal",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: Perpendicular-Slopes-Equal\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 228,
+        "endLine": 336
+      }
+    },
+    {
+      "assetId": "math.geom.slope/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.slope",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A04 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 90% → PASS requires ⌈0.90 × 5⌉ = 5/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: Find the slope of the line through (2, 3) and (5, 9). [Answer: m = (9−3)/(5−2) = 6/3 = 2]\nItem 2: A line has slope 3. What is the slope of a line perpendicular to it? [Answer: −1/3]\nItem 3: True or False — the slope of a line is the same no matter which two points on the line you choose. [Answer: TRUE]\nItem 4: State the slope of the vertical line x=5 and the horizontal line y=7. [Answer: vertical: undefined; horizontal: m=0]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (cross-link to math.calc.derivative-intro):**\nLet f(x) = x². Consider the secant line through (1, f(1)) = (1, 1) and (1+h, f(1+h)) = (1+h, (1+h)²).\n\n(a) Write an expression for the slope of the secant line in terms of h.\n[Answer: m_sec = ((1+h)²−1)/h = (1+2h+h²−1)/h = (2h+h²)/h = 2+h]\n\n(b) Compute m_sec for h=1, h=0.1, h=0.01.\n[Answers: h=1 → 3; h=0.1 → 2.1; h=0.01 → 2.01]\n\n(c) What value does m_sec approach as h→0?\n[Answer: 2 — this is the slope of the tangent line at x=1, which equals f'(1) = 2x|_{x=1} = 2]\n\n(d) How does this connect slope to the derivative?\n[The derivative f'(1) is the limit of secant slopes as h→0 — slope is the discrete precursor to the derivative.]\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score 5/5 → PASS → P78 COMPLETION\n- Score < 5/5 → FAIL → Route to TA-B01 (slope computation / invariance errors) or TA-B02 (parallel/perpendicular errors)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Slope of a line: mastered. You can compute slope from any two points, apply the parallel and perpendicular slope conditions, handle horizontal and vertical special cases, and see how slope extends to the derivative concept. This directly enables linear equations, rates of change, and introductory calculus.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 163,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "math.geom.slope/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.slope",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** Plot (0,0) and (3,6). Ask for slope. If correct (m=2) → begin TA-A01. If incorrect → repair prerequisite (math.geom.coordinate-plane).\n\n**Scaffolding ladder:**\n1. Rise and run from a slope triangle drawn on a grid (pictorial)\n2. Slope formula from two given points — first with easy integers\n3. Parallel lines: verify equal slopes; explain why they never meet\n4. Perpendicular lines: compute slope, then negative reciprocal\n\n**Pacing gate:** Must score ≥ 5/5 on P91 to earn mastery credit (MAMR = 90%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 65,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.geom.slope/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.slope",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.geom.slope\n  MAMR: 0.90\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"Slope of the line through (−2, 5) and (4, 11)?\"\n  session_3_probe: \"A line has slope −2/3. What is the slope of a perpendicular line?\"\n  session_7_probe: \"Show that (0,1),(2,5),(5,11) are collinear using slope.\"\n  session_14_probe: \"A line through (1,2) is perpendicular to y=4x+1. Write its equation.\"\n  session_30_probe: \"Explain why slope is called a 'rate of change' and connect it to average velocity.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 241,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "math.geom.slope/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.slope",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.geom.coordinate-plane — plotting points (x,y); Cartesian system [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.geom.line-equation — y=mx+b form uses slope directly\n\n**Cross-links:** [math.calc.derivative-intro] — Tier 1 concept; P76 cross-link probe used.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented.\n**GR-9 satisfied:** math.calc.derivative-intro is Tier 1 → P76 cross-link probe applied in TA-A04.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.slope.md",
+        "startLine": 257,
+        "endLine": 272
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

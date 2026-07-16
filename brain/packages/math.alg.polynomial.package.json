@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.polynomial-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.polynomial",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fb938de56eef2dd571b3efdf81a2f499820e744ccb23b2f41151ba3ff298a64e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.polynomial.md": "sha256:2df0ddbed1a2f39b9e86f9b06b6986938d4e3caa9ee3814c13baae8bc217cbd3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.polynomial",
+    "name": "Polynomial",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.alg.expression",
+      "math.arith.exponent-rules"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.polynomial-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.polynomial (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.polynomial.md": "sha256:2df0ddbed1a2f39b9e86f9b06b6986938d4e3caa9ee3814c13baae8bc217cbd3"
+      },
+      "contentHash": "sha256:ba4708e58a460fc5748aa81f1d5746cc9ea5542d8984fb720503e3fabf4e3725",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.polynomial/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.polynomial",
+      "title": "Polynomial — cognitive map",
+      "content": "**Core concept:** A polynomial in x is an expression of the form aₙxⁿ + aₙ₋₁xⁿ⁻¹ + … + a₁x + a₀ where n ∈ ℕ₀ (non-negative integer) and all aᵢ ∈ ℝ with aₙ ≠ 0 (if n>0). The degree is n (the highest exponent); the leading coefficient is aₙ; the constant term is a₀. Polynomials are closed under addition, subtraction, and multiplication — they form a ring. The degree-n polynomial has AT MOST n real roots; over ℂ, exactly n roots counting multiplicity.\n\n**Conceptual progression:**\n1. Recognising polynomials: every term has a non-negative integer exponent; exponents like −1, 1/2, or 2.7 disqualify an expression.\n2. Anatomy: degree, leading coefficient, leading term, constant term; standard form (descending exponent order).\n3. Monomial, binomial, trinomial, polynomial: number of terms; a monomial (one term) IS a polynomial.\n4. Degree and graph shape: degree 0 → constant; degree 1 → line; degree 2 → parabola; degree n → at most n roots; even degree → same end behaviour both sides; odd degree → opposite end behaviour.\n5. Leading term dominance: for large |x|, aₙxⁿ overwhelms all lower-degree terms.\n\n**CPA arc (entry: P):**\n- Pictorial: expression written in standard form with labelled parts (degree, leading coefficient, constant); graph sketches showing degree-1/2/3/4 shapes; table of coefficients as a list\n- Abstract: Σₖ₌₀ⁿ aₖxᵏ notation; degree and coefficient definitions; root count theorem\n\n**Prior knowledge activated:** algebraic expressions (math.alg.expression); exponent rules including x⁰=1, x¹=x, xᵐxⁿ=xᵐ⁺ⁿ (math.arith.exponent-rules); function evaluation p(a) for substituting x=a\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial",
+      "title": "DEGREE-IS-LARGEST-COEFFICIENT [FOUNDATIONAL]",
+      "content": "### MC-1: DEGREE-IS-LARGEST-COEFFICIENT [FOUNDATIONAL]\n**Description:** Learner identifies the degree of a polynomial as the numerically largest coefficient rather than the highest exponent. For example, in 5x²+3x³, learner reports degree=5 (largest coefficient) instead of degree=3 (highest exponent).\n**Surface form:** \"The degree of 10x²+2x³ is 10 because 10 is the biggest number.\"\n**Root cause:** \"Degree\" is an unfamiliar term; the most salient large number in the expression is the coefficient. Learner has not internalised that degree refers to the exponent (power) of x, not the coefficient (multiplier of xⁿ).\n**Trigger condition:** Any question asking for the degree of a polynomial, especially when coefficients are larger than exponents.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial",
+      "title": "MONOMIAL-IS-NOT-A-POLYNOMIAL",
+      "content": "### MC-2: MONOMIAL-IS-NOT-A-POLYNOMIAL\n**Description:** Learner believes a polynomial must have more than one term — that \"poly\" (many) means the count of terms must exceed 1. Consequently, rejects monomials (one term, e.g., 7x³) and binomials (two terms, but learner may also doubt) as polynomials.\n**Surface form:** \"7x³ is a monomial, not a polynomial — polynomials have more than one term.\"\n**Root cause:** Etymological over-literalism: \"poly\" = \"many\" in Greek. Learner interprets this as requiring multiple terms. The standard mathematical definition includes single-term polynomials.\n**Trigger condition:** Any classification problem involving single-term expressions, or questions asking whether a monomial is a polynomial.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial",
+      "title": "NEGATIVE-EXPONENTS-ALLOWED",
+      "content": "### MC-3: NEGATIVE-EXPONENTS-ALLOWED\n**Description:** Learner includes terms with negative, fractional, or irrational exponents in polynomials — e.g., 3x⁻¹+2 or x^{1/2}+5x. Does not apply the restriction that all exponents must be non-negative integers.\n**Surface form:** \"3x⁻¹+2 is a polynomial — it's just x to the power of −1 plus a constant.\"\n**Root cause:** Learner knows that any expression in x is \"algebraic,\" and conflates polynomials with the broader class of algebraic expressions. The specific restriction (non-negative integer exponents only) has not been made salient.\n**Trigger condition:** Classification problems where non-polynomial algebraic expressions are presented.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial",
+      "title": "Repair for MC-1 (DEGREE-IS-LARGEST-COEFFICIENT)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (DEGREE-IS-LARGEST-COEFFICIENT)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 119,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial",
+      "title": "Repair for MC-2 (MONOMIAL-IS-NOT-A-POLYNOMIAL)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (MONOMIAL-IS-NOT-A-POLYNOMIAL)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 175,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial",
+      "title": "Repair for MC-3 (NEGATIVE-EXPONENTS-ALLOWED)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (NEGATIVE-EXPONENTS-ALLOWED)\",\"primitives\":[\"P04\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 193,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.polynomial",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"What is the degree of 4x⁵ − 7x³ + 2x?\"\n[Expected: degree=5. The highest exponent is 5 (in the term 4x⁵).]\n\n**Item 2:**\n\"Is f(x)=x^{1/2}+3 a polynomial? Why or why not?\"\n[Expected: NO. The term x^{1/2} has exponent 1/2, which is not a non-negative integer. Polynomials require all exponents to be in {0,1,2,3,…}.]\n\n**Item 3:**\nTrue or False: \"A monomial like 5x² is a polynomial.\"\n[Expected: TRUE. 5x² has exactly one term with exponent 2 (a non-negative integer). Single-term polynomials are valid polynomials; the count of terms does not affect membership in the polynomial class.]\n\n**Item 4:**\n\"For p(x)=3x²−7x+2: what is the leading coefficient? The degree? The constant term?\"\n[Expected: leading coefficient=3; degree=2; constant term=2.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Let p(x) = x³ − 6x² + 11x − 6.\n\n(a) State the degree, leading coefficient, and constant term.\n(b) Evaluate p(1), p(2), and p(3). What do you notice?\n(c) What is the maximum number of real roots p(x) can have? Is this consistent with your findings in (b)?\n(d) Factor p(x) completely.\"\n\n[Expected:\n(a) Degree=3, leading coefficient=1, constant term=−6.\n(b) p(1)=1−6+11−6=0; p(2)=8−24+22−6=0; p(3)=27−54+33−6=0. All three are roots.\n(c) At most 3 real roots (degree=3). Found exactly 3 roots in (b) — consistent; the polynomial achieves its maximum.\n(d) p(x)=(x−1)(x−2)(x−3). Verify: (x−1)(x−2)=x²−3x+2; times (x−3)=x³−3x²+2x−3x²+9x−6 = x³−6x²+11x−6 ✓.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (b) correctly identifies all three roots as zero and (c) connects the count to the degree bound, 0 otherwise. Partial factoring in (d) acceptable if (b)+(c) are correct.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can identify degree (not coefficient), classify polynomial vs. non-polynomial, accept monomials as polynomials, apply root-count bound, and evaluate to find roots.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 (incorrect degree): → TA-B01 (DEGREE-IS-LARGEST-COEFFICIENT repair), then re-gate\n- FAIL on Item 2 (accepts x^{1/2} as polynomial): → TA-B03 (NEGATIVE-EXPONENTS-ALLOWED repair), then re-gate\n- FAIL on Item 3 (rejects monomial as polynomial): → TA-B02 (MONOMIAL-IS-NOT-A-POLYNOMIAL repair), then re-gate\n- FAIL on Item 4 (cannot identify leading coefficient): → Return to A01 (P11 anatomy labelling), then re-gate\n- FAIL on P76 (cannot evaluate or connect to degree): → Return to A03 (P04 degree-n pattern), then re-gate\n- FAIL on multiple items: → Repair in order B01 → B03 → B02 based on which MCs are active; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated understanding of polynomial structure: definition, degree, leading coefficient, term count, and root-count bound.\n\nKey anchors to carry forward:\n- Polynomial = finite sum of terms aₖxᵏ with k ∈ {0,1,2,3,…} and all coefficients in ℝ.\n- Degree = highest EXPONENT (not highest coefficient); leading coefficient = coefficient of the highest-degree term.\n- Any monomial, binomial, or trinomial is a polynomial; x⁻¹, x^{1/2}, and 2^x are NOT.\n- Degree-n polynomial: AT MOST n real roots; at least 1 real root if n is odd.\n- End behaviour is determined entirely by the leading term aₙxⁿ.\n\nNext concepts: math.alg.factoring (expressing polynomials as products of simpler factors), math.alg.polynomial-roots (finding roots; Factor Theorem; Vieta's formulas).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 342,
+        "endLine": 440
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.polynomial",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Write 3x−2x³+5+x² in standard form and identify its degree.\" If the learner can write −2x³+x²+3x+5 and state degree=3, proceed to A01. If the degree is misidentified (e.g., degree=3 found correctly but stated as \"coefficient of x³\"), clarify the definition before starting.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): label the parts of a given polynomial: underline the leading term, circle the degree (exponent), box the leading coefficient, bracket the constant term.\n- Rung 2 (classification): given a list of ten expressions, classify each as polynomial (yes/no) and state why.\n- Rung 3 (full abstract): given a polynomial, state all properties (degree, leading coeff, constant term, number of roots) and sketch the end behaviour.\n\n**Pacing note:** h=10 estimated hours; A01–A02 in sessions 1–3; A03 + mastery gate in sessions 4–5.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.polynomial",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Is f(x)=x²+2x^{1/2}−3 a polynomial? Identify the degree and leading coefficient of g(x)=−7x³+4x⁵−2.\"\n[Expected: f is NOT a polynomial (x^{1/2} has fractional exponent). g: write in standard form: 4x⁵−7x³−2; degree=5, leading coefficient=4.]\n\n**Day 10 prompt:**\n\"Sketch (roughly) the end behaviour of p(x)=−2x⁵+100x⁴−x+3. How many real roots can it have at most? Does it have at least one real root?\"\n[Expected: degree=5 (odd), leading coeff=−2 (negative). End behaviour: x→+∞ → p→−∞ (leading term dominates, negative); x→−∞ → p→+∞. Opposite ends → MUST cross x-axis → at least 1 real root. At most 5 real roots.]\n\n**Day 30 prompt:**\n\"Explain why the set of all polynomials with real coefficients is closed under addition and multiplication — that is, why the sum and product of two polynomials is always another polynomial. Is it closed under division? Give an example.\"\n[Expected: Sum: if p has degree m and q has degree n, p+q has degree max(m,n) — still polynomial (finite sum, non-negative integer exponents). Product: if p(x)=Σaₖxᵏ and q(x)=Σbⱼxʲ, then p(x)q(x)=Σcₗxˡ where cₗ=Σₖ aₖbₗ₋ₖ; exponents are sums of non-negative integers → still non-negative integers → polynomial. Not closed under division: x/(x+1) is not a polynomial (rational function). This is why polynomials form a RING but not a FIELD.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 258,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.polynomial",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.alg.expression — algebraic expressions; terms, coefficients; combining like terms\n- math.arith.exponent-rules — xᵐxⁿ=xᵐ⁺ⁿ; x⁰=1; negative and fractional exponents (so learner knows x⁻¹ exists but is excluded from polynomials)\n\n**Unlocked blueprints:**\n- math.alg.factoring — factoring polynomials into irreducible factors\n- math.alg.polynomial-roots — finding real roots; relationship between roots and factors; Vieta's formulas\n- math.func.polynomial-function — polynomial as a function; transformations; graph analysis\n\n**Cross-links (neither is T1 — P76 independence mode):**\n- math.func.polynomial-function (not T1): polynomial viewed as a function; domain ℝ; continuity; transformations\n- math.abst.polynomial-ring (not T1): algebraic structure; ℝ[x] as a ring; polynomial division algorithm in ring theory\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial.md",
+        "startLine": 276,
+        "endLine": 293
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

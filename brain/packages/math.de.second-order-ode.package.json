@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.second-order-ode-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.second-order-ode",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d0a45f33e9a771e079ff536a7a08aece4e66178f4af2bf2f14fa7ce9ca669036",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.second-order-ode.md": "sha256:edff6f9b4f599f5583962ecb0b64229ae935baddf16cc6d57c934ce09c948b35"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.second-order-ode",
+    "name": "Second-Order ODE",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.de.first-order-ode"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.second-order-ode-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.second-order-ode (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.second-order-ode.md": "sha256:edff6f9b4f599f5583962ecb0b64229ae935baddf16cc6d57c934ce09c948b35"
+      },
+      "contentHash": "sha256:f191a531a354b0b80af1cbf1990b3dbf6aae7b0910adf48698e0a85f35c251e1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.second-order-ode.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.second-order-ode.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.second-order-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.second-order-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.second-order-ode.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.second-order-ode.md#TA-A02 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.second-order-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.second-order-ode\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.second-order-ode.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.second-order-ode.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.second-order-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.second-order-ode\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.second-order-ode.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.second-order-ode.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.second-order-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.second-order-ode\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.second-order-ode/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Second-Order ODE — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.de.first-order-ode**: separation of variables; integrating factor; general vs particular solutions; single arbitrary constant fixed by one initial condition; verification by substitution\n\n### Target Knowledge State\nStudent fluently solves homogeneous linear second-order constant-coefficient ODEs ay″+by′+cy=0 via the characteristic equation ar²+br+c=0, handling all three root cases (distinct real → y=C₁e^{r₁x}+C₂e^{r₂x}; repeated real → y=(C₁+C₂x)e^{rx}; complex α±βi → y=e^{αx}(C₁cos βx+C₂sin βx)); applies TWO initial conditions y(x₀), y′(x₀) to fix both constants; verifies solutions by substitution; and recognises the standard form y″+P(x)y′+Q(x)y=G(x) and the homogeneous/non-homogeneous distinction.\n\n### Conceptual Obstacles\n1. Carrying over the one-constant habit — a second-order general solution needs TWO independent constants; writing y=Ce^{r₁x} (or fixing C₂=0 silently) loses half the solution family and makes the second initial condition unsatisfiable\n2. The repeated-root case — when r₁=r₂=r, writing y=C₁e^{rx}+C₂e^{rx}=(C₁+C₂)e^{rx} collapses to ONE effective constant; the second independent solution is xe^{rx}, and forgetting the x-factor is the classic error\n3. Complex roots mishandled — leaving the answer as C₁e^{(α+βi)x}+C₂e^{(α−βi)x} or dropping the real part; the real form e^{αx}(C₁cos βx+C₂sin βx) must be extracted via Euler's formula, and sign/placement errors in α and β are frequent\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Worked Example Pair: Full IVP and Complex Roots",
+      "content": "### Teaching Action A02 — Worked Example Pair: Full IVP and Complex Roots\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Model the complete solution protocol end-to-end — WE1 exercises the 2×2 constant-fixing system (MC-1 antidote); WE2 models the Euler extraction for complex roots (MC-3 antidote)\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**WE1 — Distinct real roots with IVP: y″ + y′ − 2y = 0, y(0)=3, y′(0)=0**\n\n**Step 1 — Characteristic equation:**\n$$r^2 + r − 2 = 0 \\implies (r+2)(r−1) = 0 \\implies r = −2,\\ 1$$\n\n**Step 2 — General solution:**\n$$y = C_1e^{x} + C_2e^{−2x}$$\n\n**Step 3 — Impose both initial conditions:**\n$$y(0)=3:\\quad C_1 + C_2 = 3$$\n$$y' = C_1e^{x} − 2C_2e^{−2x};\\qquad y'(0)=0:\\quad C_1 − 2C_2 = 0$$\n\n**Step 4 — Solve the 2×2 system:** subtract: (C₁+C₂)−(C₁−2C₂)=3−0 → 3C₂=3 → C₂=1, then C₁=2.\n\n**Particular solution:** y = 2eˣ + e^{−2x}\n\n**Step 5 — Verify:** y″=2eˣ+4e^{−2x}, y′=2eˣ−2e^{−2x}. y″+y′−2y = (2+2−4)eˣ + (4−2−2)e^{−2x} = 0 ✓; y(0)=3 ✓; y′(0)=0 ✓.\n\n---\n\n**WE2 — Complex roots: y″ + 2y′ + 5y = 0**\n\n**Step 1 — Characteristic equation:**\n$$r^2 + 2r + 5 = 0 \\implies r = \\frac{−2 ± \\sqrt{4−20}}{2} = \\frac{−2 ± 4i}{2} = −1 ± 2i$$\n\n**Step 2 — Read off α and β:** roots are α±βi with **α=−1, β=2**.\n\n**Step 3 — Why cos/sin appear (Euler's formula):**\n$$e^{(−1+2i)x} = e^{−x}e^{2ix} = e^{−x}(\\cos 2x + i\\sin 2x)$$\nReal and imaginary parts of a complex solution of a real equation are each real solutions. Extract: y₁=e^{−x}cos 2x, y₂=e^{−x}sin 2x.\n\n**Step 4 — Real general solution:**\n$$y = e^{−x}(C_1\\cos 2x + C_2\\sin 2x)$$\n\n**Interpretation:** e^{−x} is a decaying envelope; cos 2x/sin 2x oscillate — a damped oscillation. (α controls growth/decay; β controls the oscillation frequency.)\n\n**Verification (y₁):** y₁′=e^{−x}(−cos 2x−2 sin 2x); y₁″=e^{−x}(−3cos 2x+4 sin 2x). Sum: y₁″+2y₁′+5y₁ = e^{−x}[(−3−2+5)cos 2x+(4−4)sin 2x]=0 ✓.\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n**Prompt:** Solve y″ + 9y = 0 with y(0)=2, y′(0)=−3.\n\n**CORRECT:** r²+9=0 → r=±3i, so α=0, β=3. General: y=C₁cos 3x+C₂sin 3x. y(0)=2 → C₁=2. y′=−3C₁sin 3x+3C₂cos 3x; y′(0)=−3 → 3C₂=−3 → C₂=−1. Answer: y=2cos 3x−sin 3x.\n→ \"Correct. With α=0 there is no exponential envelope — pure oscillation (this is the harmonic oscillator y″=−9y).\" → Proceed to A03.\n\n**PARTIAL:** Student reaches y=C₁cos 3x+C₂sin 3x but sets C₂ using y(0) again or forgets to differentiate before imposing y′(0) (MC-1's IC half).\n→ \"The second condition applies to the DERIVATIVE. Differentiate first: y′=−3C₁sin 3x+3C₂cos 3x. At x=0: sin 0=0, cos 0=1, so y′(0)=3C₂=−3 → C₂=−1. Each condition fixes its own constant through its own equation.\"\n\n**INCORRECT:** Student writes r=±3 (real) and answers y=C₁e^{3x}+C₂e^{−3x} (MC-3 — sign of the discriminant misread).\n→ \"Solve r²+9=0: r²=−9, so r=±√(−9)=±3i — imaginary, not real. (r=±3 would solve r²−9=0.) With α=0, β=3 the real solution is y=C₁cos 3x+C₂sin 3x. Substitute your y=e^{3x} to see it fail: 9e^{3x}+9e^{3x}=18e^{3x}≠0.\"\n\n**NO_RESPONSE:** → \"Characteristic: r²+9=0 → r=±3i (α=0, β=3). General: y=C₁cos 3x+C₂sin 3x. IC 1: y(0)=C₁=2. Differentiate: y′=−6 sin 3x+3C₂cos 3x; IC 2: y′(0)=3C₂=−3 → C₂=−1. Final: y=2cos 3x−sin 3x.\"\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 143,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.second-order-ode",
+      "title": "SINGLE-CONSTANT-SOLUTION",
+      "content": "| MC-1 | SINGLE-CONSTANT-SOLUTION | Student writes the general solution with one arbitrary constant (y=Ce^{r₁x}), or applies only one initial condition; the solution family is half-missing and IVPs with two conditions become unsolvable | Any second-order general solution; IVPs specifying both y(0) and y′(0) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.second-order-ode",
+      "title": "REPEATED-ROOT-COLLAPSE",
+      "content": "| MC-2 | REPEATED-ROOT-COLLAPSE | For a double root r, student writes y=C₁e^{rx}+C₂e^{rx}, which is really one constant (C₁+C₂)e^{rx}; misses the xe^{rx} second solution | Characteristic equations with zero discriminant, e.g. y″−4y′+4y=0 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.second-order-ode",
+      "title": "COMPLEX-ROOTS-MISREAD",
+      "content": "| MC-3 | COMPLEX-ROOTS-MISREAD | Student misextracts α and β from roots α±βi (sign errors, swapping), or leaves complex exponentials in the final answer instead of the real cos/sin form | Characteristic equations with negative discriminant, e.g. y″+2y′+5y=0 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Discovering the Characteristic Equation",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Discovering the Characteristic Equation\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 64,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Worked Example Pair: Full IVP and Complex Roots",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair: Full IVP and Complex Roots\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 143,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Contrast Pair: The Three Root Cases",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast Pair: The Three Root Cases\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 209,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 272,
+        "endLine": 497
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess fluent handling of all three root cases and full IVP solving\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Solve y″ − 7y′ + 10y = 0.\n\n*Solution:* r²−7r+10=(r−2)(r−5)=0 → r=2,5. **y=C₁e^{2x}+C₂e^{5x}**\n\n**Problem 2:** Solve y″ + 4y′ + 4y = 0, y(0)=2, y′(0)=1.\n\n*Solution:* (r+2)²=0 → double root r=−2. y=(C₁+C₂x)e^{−2x}. y(0)=C₁=2. y′=C₂e^{−2x}−2(C₁+C₂x)e^{−2x}; y′(0)=C₂−2C₁=1 → C₂=5. **y=(2+5x)e^{−2x}**\n\n**Problem 3:** Solve y″ − 2y′ + 10y = 0.\n\n*Solution:* r=(2±√(4−40))/2=1±3i → α=1, β=3. **y=eˣ(C₁cos 3x+C₂sin 3x)**\n\n**Problem 4:** Verify that y=e^{−x}sin 2x satisfies y″+2y′+5y=0, and state which characteristic roots this solution corresponds to.\n\n*Solution:* y′=e^{−x}(2cos 2x−sin 2x); y″=e^{−x}(−3sin 2x−4cos 2x). Sum: y″+2y′+5y=e^{−x}[(−3−2+5)sin 2x+(−4+4)cos 2x]=0 ✓. Roots: **−1±2i** (α=−1 from the envelope e^{−x}, β=2 from sin 2x).\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A mass on a spring with friction obeys\n\n$$x'' + 2x' + 26x = 0$$\n\nwhere x(t) is the displacement (cm) at time t (s). The mass is pulled to x(0)=5 cm and released from rest (x′(0)=0).\n\n(a) Solve the initial value problem.\n(b) Identify the decay envelope and the oscillation frequency, and describe the motion in one sentence.\n(c) Show that the mass passes through the equilibrium position x=0 infinitely many times, and find the first positive time it does so.\n\n**Expected solution:**\n\n(a) Characteristic: r²+2r+26=0 → r=(−2±√(4−104))/2=−1±5i → α=−1, β=5.\nGeneral: x=e^{−t}(C₁cos 5t+C₂sin 5t).\nx(0)=5 → C₁=5.\nx′=e^{−t}(−C₁cos 5t−C₂sin 5t−5C₁sin 5t+5C₂cos 5t); x′(0)=−C₁+5C₂=0 → C₂=1.\n**x(t)=e^{−t}(5cos 5t+sin 5t)**\n\n(b) Decay envelope e^{−t} (amplitude shrinks by factor e each second); oscillation frequency β=5 rad/s (period 2π/5≈1.26 s). The mass oscillates about equilibrium with exponentially dying amplitude — damped oscillation (underdamped: Δ<0).\n\n(c) x(t)=0 requires 5cos 5t+sin 5t=0 (the envelope e^{−t} is never zero), i.e. tan 5t=−5. Since tan is periodic, solutions occur once every π/5 seconds — infinitely many crossings. First positive: 5t=π−arctan 5 → **t=(π−arctan 5)/5 ≈ (3.1416−1.3734)/5 ≈ 0.354 s**.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.de.higher-order-ode and math.de.systems-ode; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.de.second-order-ode assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — SINGLE-CONSTANT-SOLUTION (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Writing a second-order general solution with one constant is SINGLE-CONSTANT-SOLUTION. Order 2 means two constants and two initial conditions — position AND velocity.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Write the general solution of y″−9y=0.\"\n- MC-1 response: y=Ce^{3x} (or any one-constant answer).\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Count degrees of freedom physically: y″−9y=0 prescribes acceleration from position. To launch a trajectory you choose where to start (y(0)) and how fast (y′(0)) — two independent choices, so the family must have two dials. Roots r=±3 give y=C₁e^{3x}+C₂e^{−3x}. Test your one-constant answer against y(0)=0, y′(0)=1: Ce⁰=0 forces C=0, but then y′(0)=0≠1 — unsolvable. With two constants: C₁+C₂=0, 3C₁−3C₂=1 → C₁=1/6, C₂=−1/6. Solvable.\"\n\nPractice: y″−y=0 with y(0)=1, y′(0)=−1 (answer: y=e^{−x}; here the ICs happen to zero out C₁ — but only the two-constant setup can discover that).\n\n---\n\n### Repair Action B02 — REPEATED-ROOT-COLLAPSE (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Writing C₁e^{rx}+C₂e^{rx} for a double root is REPEATED-ROOT-COLLAPSE — the constants merge and you secretly have a one-parameter family. The second independent solution is xe^{rx}.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"General solution of y″−6y′+9y=0?\"\n- MC-2 response: y=C₁e^{3x}+C₂e^{3x}.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Simplify your answer: C₁e^{3x}+C₂e^{3x}=(C₁+C₂)e^{3x}=Ke^{3x} — one dial, not two. The repair: when (r−3)²=0, the second building block is xe^{3x}. Verify it: y=xe^{3x} → y′=(1+3x)e^{3x} → y″=(6+9x)e^{3x}; then y″−6y′+9y=(6+9x−6−18x+9x)e^{3x}=0 ✓. Correct family: y=(C₁+C₂x)e^{3x}. Trigger to memorize: discriminant zero → x-factor.\"\n\nPractice: Solve y″+10y′+25y=0, y(0)=0, y′(0)=2 (answer: y=2xe^{−5x} — note C₁=0 is forced, and only the x-term survives).\n\n---\n\n### Repair Action B03 — COMPLEX-ROOTS-MISREAD (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Extracting α, β wrongly from complex roots — or leaving complex exponentials in the final answer — is COMPLEX-ROOTS-MISREAD. Roots α±βi give the real solution e^{αx}(C₁cos βx+C₂sin βx).\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Roots of the characteristic equation are −2±7i. Write the general solution.\"\n- MC-3 response: y=e^{7x}(C₁cos 2x+C₂sin 2x) (α and β swapped), or y=C₁e^{(−2+7i)x}+C₂e^{(−2−7i)x} left complex.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Anchor the roles: α is the REAL part — it sits alone and becomes the exponential envelope e^{αx}. β is the coefficient OF i — it becomes the frequency inside cos/sin. For −2±7i: α=−2 (decay envelope e^{−2x}), β=7 (oscillation cos 7x, sin 7x): y=e^{−2x}(C₁cos 7x+C₂sin 7x). Sanity check via Euler: e^{(−2+7i)x}=e^{−2x}(cos 7x+i sin 7x) — the real part carries e^{−2x}cos 7x, exactly matching. Swapped α/β would claim a GROWING envelope e^{7x} from a damped system — physically absurd for negative real part.\"\n\nPractice: Write general solutions for roots: 3±i; ±4i; −1±√2 i. (Answers: e^{3x}(C₁cos x+C₂sin x); C₁cos 4x+C₂sin 4x; e^{−x}(C₁cos √2x+C₂sin √2x).)\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | One equation from each root case (general solutions only); state the discriminant rule from memory |\n| SR-2 | +3 days | Full IVP with distinct real roots (2×2 system for C₁,C₂); verify by substitution |\n| SR-3 | +7 days | Repeated-root IVP and complex-root IVP; explicit product-rule derivative before imposing y′(0) |\n| SR-4 | +14 days | Damped-oscillator modeling problem (mass-spring, Δ<0); identify envelope, frequency, first zero-crossing |\n\nRetrieval flag: if student produces a one-constant general solution (MC-1) or writes C₁e^{rx}+C₂e^{rx} for a double root (MC-2), re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.de.first-order-ode | Exponential trial solutions, general-vs-particular, IC mechanics; this blueprint doubles the constants and conditions |\n| Unlocks | math.de.higher-order-ode | Order n → degree-n characteristic polynomial with the same case rules (A03 Contrast 3 previews this) |\n| Unlocks | math.de.systems-ode | A second-order equation converts to a 2×2 first-order system; eigenvalues replay the characteristic roots |\n\n**GR-9:** cross_links=[] → P76 mode = independence (mass-spring transfer probe is self-contained).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=6 → standard structure (3 main TAs + gate)\n- bloom=apply → V-4 = PASS (P07 required; WE1=full IVP distinct roots, WE2=complex roots in A02)\n- CPA_entry = C for advanced learner: trial-solution discovery in A01 before any case taxonomy\n\n**Key teaching insight:** The method should feel discovered, not decreed: the trial y=e^{rx} collapses the ODE into a quadratic before the student's eyes (A01 Stage C), making the characteristic equation an observation rather than a recipe. The organizing principle to drill relentlessly is the count: order 2 = 2 constants = 2 initial conditions. Every misconception in the registry is a violation of that count or of the case table.\n\n**Case-table pedagogy (A03):** The three cases should be taught as one table with a single decision variable (the discriminant), not as three separate methods. MC-2 deserves the explicit \"collapse demonstration\" — showing C₁e^{rx}+C₂e^{rx} merging into one constant is far more convincing than asserting that xe^{rx} is needed.\n\n**Scope note:** This blueprint covers the homogeneous constant-coefficient core plus recognition of the general standard form y″+P(x)y′+Q(x)y=G(x). Non-homogeneous techniques (undetermined coefficients, variation of parameters) belong to the higher-order/systems follow-on concepts and are only named here as the meaning of G(x)≠0.\n\n**P76 design:** The damped mass-spring problem is the canonical second-order application (per the KG description: \"Newton's second law, harmonic oscillators\"). Part (c) — the zero-crossing computation — forces genuine engagement with the cos/sin structure (envelope never vanishes; the trig factor does), separating students who understand the solution's anatomy from those who only assembled it.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.de.second-order-ode ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.de.first-order-ode ✓ | PASS |\n| V-3 | CPA entry = C for advanced difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 present | P07 in A02 (WE1=IVP distinct roots, WE2=complex roots) ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | cross_links=[] → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=6 → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Mass-spring x″+2x′+26x=0; x=e^{−t}(5cos 5t+sin 5t); first crossing (π−arctan 5)/5≈0.354 s ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 272,
+        "endLine": 497
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner tests y=e^{rx} in a specific equation and watches the ODE collapse to a quadratic in r, discovering the characteristic-equation method rather than receiving it.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: guess y=e^{rx} in y″−5y′+6y=0 → (r²−5r+6)e^{rx}=0 → r=2,3; superposition gives two-constant family; P: solution-family/IC diagram; A: standard form, characteristic equation, superposition theorem, order=constants=conditions principle\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: distinct real roots with full IVP (two conditions, 2×2 system for C₁,C₂); WE2: complex roots with Euler extraction to the real form\n3. **A03 P06 CONTRAST PAIR** — the three root cases side by side; repeated-root xe^{rx} fix; first-order vs second-order structural comparison\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.de.second-order-ode",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | One equation from each root case (general solutions only); state the discriminant rule from memory |\n| SR-2 | +3 days | Full IVP with distinct real roots (2×2 system for C₁,C₂); verify by substitution |\n| SR-3 | +7 days | Repeated-root IVP and complex-root IVP; explicit product-rule derivative before imposing y′(0) |\n| SR-4 | +14 days | Damped-oscillator modeling problem (mass-spring, Δ<0); identify envelope, frequency, first zero-crossing |\n\nRetrieval flag: if student produces a one-constant general solution (MC-1) or writes C₁e^{rx}+C₂e^{rx} for a double root (MC-2), re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 427,
+        "endLine": 442
+      }
+    },
+    {
+      "assetId": "math.de.second-order-ode/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.second-order-ode",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.de.first-order-ode | Exponential trial solutions, general-vs-particular, IC mechanics; this blueprint doubles the constants and conditions |\n| Unlocks | math.de.higher-order-ode | Order n → degree-n characteristic polynomial with the same case rules (A03 Contrast 3 previews this) |\n| Unlocks | math.de.systems-ode | A second-order equation converts to a 2×2 first-order system; eigenvalues replay the characteristic roots |\n\n**GR-9:** cross_links=[] → P76 mode = independence (mass-spring transfer probe is self-contained).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.second-order-ode.md",
+        "startLine": 442,
+        "endLine": 456
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

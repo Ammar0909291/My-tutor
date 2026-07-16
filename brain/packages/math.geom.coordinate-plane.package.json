@@ -1,0 +1,344 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.coordinate-plane-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.coordinate-plane",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0e4d2cd2dedd3e3d8239833512799fc4db75cd3eab96fe191bf52de458684a49",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.coordinate-plane.md": "sha256:26996bf9cad81c693dd04d555bb118f4a43d515733be4f1220c3f7285e60ae8b"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.coordinate-plane",
+    "name": "Coordinate Plane",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.geom.plane",
+      "math.found.real-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.coordinate-plane-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.coordinate-plane (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.coordinate-plane.md": "sha256:26996bf9cad81c693dd04d555bb118f4a43d515733be4f1220c3f7285e60ae8b"
+      },
+      "contentHash": "sha256:aca2ca77e920c5093a8385f4800c6a0ddc1d8e6b5572307e3297ac8a0d36412a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.coordinate-plane.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.coordinate-plane.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.coordinate-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.coordinate-plane\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.coordinate-plane.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.coordinate-plane.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.coordinate-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.coordinate-plane\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.coordinate-plane.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.coordinate-plane.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.coordinate-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.coordinate-plane\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.coordinate-plane.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.coordinate-plane.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.coordinate-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.coordinate-plane\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.coordinate-plane/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "Coordinate Plane — cognitive map",
+      "content": "### Core Insight\nThe Cartesian coordinate plane pairs every point in the plane ℝ² with a unique ordered pair (x, y) by measuring signed horizontal distance (x) and signed vertical distance (y) from a fixed origin. Order matters: (3, −2) and (−2, 3) are different points. Sign matters: (3, 2) and (−3, 2) are reflections across the y-axis.\n\n### Conceptual Hierarchy\n```\nLevel 0 (Concrete): Grid paper with origin marked; plot and read specific points.\nLevel 1 (Pictorial): Full Cartesian plane with labelled axes, quadrant labels, scale marks.\nLevel 2 (Abstract): ℝ² as a set of ordered pairs; axes as real number lines; quadrant sign rules.\nLevel 3 (Transfer): Connect coordinate geometry to distance/slope/line-equation concepts.\n```\n\n### Core Definitions\n```\nCoordinate plane (Cartesian plane): two perpendicular real number lines,\n  x-axis (horizontal) and y-axis (vertical), intersecting at the origin O=(0,0).\n\nOrdered pair (x, y):\n  x-coordinate (abscissa): signed horizontal distance from origin.\n    Positive x → right of y-axis. Negative x → left of y-axis.\n  y-coordinate (ordinate): signed vertical distance from origin.\n    Positive y → above x-axis. Negative y → below x-axis.\n\nQuadrants (labelled I–IV counter-clockwise from upper right):\n  Quadrant I:   x > 0, y > 0   (upper right)\n  Quadrant II:  x < 0, y > 0   (upper left)\n  Quadrant III: x < 0, y < 0   (lower left)\n  Quadrant IV:  x > 0, y < 0   (lower right)\n\nSpecial positions:\n  On x-axis: y = 0 (e.g., (5, 0), (−3, 0))\n  On y-axis: x = 0 (e.g., (0, 4), (0, −2))\n  Origin:    (0, 0)\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 36,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "[FOUNDATIONAL]: AXIS-SWAP",
+      "content": "### MC-1 [FOUNDATIONAL]: AXIS-SWAP\n**Belief:** In the ordered pair (x, y), the first number is the vertical (y) distance and the second is the horizontal (x) distance — or equivalently, plot by going up/down first, then left/right.\n**Origin:** Some students read \"across, then up\" as \"up, then across\" because the word \"coordinates\" suggests no inherent order, or they confuse the convention.\n**Trigger:** Plot (3, −2): student moves 3 units UP then 2 units LEFT, landing at (−2, 3).\n**Repair:** Reinforce convention: HORIZONTAL first (x = east/west), then VERTICAL (y = north/south). Mnemonic: x comes before y alphabetically, and left-right comes before up-down when navigating.\n**Priority:** FOUNDATIONAL — every coordinate operation (graphing, distance, slope) depends on reading (x, y) correctly.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "QUADRANT-SIGN-ERROR",
+      "content": "### MC-2: QUADRANT-SIGN-ERROR\n**Belief:** Quadrant II has positive x (upper right is positive), or quadrant signs are not connected to axis signs.\n**Origin:** Students memorise quadrant numbers without linking them to the sign rules of the two axes.\n**Trigger:** \"Which quadrant contains (−4, 2)?\" → student says Quadrant IV (confuses negative x with right side).\n**Repair:** Re-derive quadrant signs from axes: left of y-axis → x < 0; above x-axis → y > 0; therefore (−4, 2) → (negative, positive) → Quadrant II.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "ORIGIN-AS-CORNER",
+      "content": "### MC-3: ORIGIN-AS-CORNER\n**Belief:** The origin is in the bottom-left corner of the grid, like the corner of a page or a ruler starting at zero; coordinates measure from that corner.\n**Origin:** Students who used rulers (starting at 0 on the left end) or page coordinates (starting top-left) import that frame into the coordinate plane.\n**Trigger:** \"Where is the point (−3, 2)?\" → student says there's no such point because \"coordinates can't be negative.\"\n**Repair:** The origin is the CENTER of the plane; axes extend in both directions. Negative coordinates indicate positions to the left of or below the origin.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 16,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "Concrete Foundation — The Address System",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Foundation — The Address System\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 125,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "Quadrant Signs and Reflections",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Quadrant Signs and Reflections\",\"primitives\":[\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 190,
+        "endLine": 264
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "Abstract Layer — ℝ² and Coordinate Reading",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Abstract Layer — ℝ² and Coordinate Reading\",\"primitives\":[\"P04\",\"P11\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 264,
+        "endLine": 334
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 334,
+        "endLine": 632
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "### TA-A04: Mastery Gate (P91 Terminal)\n\n```\nP77 — MULTI-PROBLEM SET (4 problems)\n\nProblem 1:\n\"Plot and label: A=(−5, 0), B=(2, 7), C=(−3, −6), D=(0, −4).\nState the quadrant or axis position of each.\"\n\nProblem 2:\n\"Find the coordinates of the point symmetric to P=(4, −3) with respect to:\n(a) the x-axis  (b) the y-axis  (c) the origin.\"\n\nProblem 3:\n\"A point T lies in Quadrant III and is equidistant (same distance) from both axes.\nIf |x|=|y|=6, write all possible coordinates of T.\"\n[Only (−6, −6) satisfies Q3 sign conditions.]\n\nProblem 4:\n\"The points (a, 3) and (a, −5) lie on the same vertical line.\n(a) What is the x-coordinate of this line?\n(b) For what value of a does this line pass through the y-axis?\"\n[(a) Both share x-coordinate a, so the line is x=a; (b) a=0 makes x=0, the y-axis.]\n```\n\n```\nP55 — SCORE (after P77)\nAward 1 point per problem.\nRunning total before P76: __/4.\n```\n\n```\nP76 — TRANSFER PROBE (P76 independence: math.func.graph-of-function NOT Tier 1)\n\"Consider the equation y = x² (a parabola).\n\n(a) Complete the table of values:\n      x:  −3  −2  −1   0   1   2   3\n      y:   ?   ?   ?   ?   ?   ?   ?\n\n(b) Plot the seven points (x, y) from your table on a coordinate plane.\n\n(c) Describe the geometric shape the points suggest.\n\n(d) The point (−3, 9) and (3, 9) both lie on y=x². What do these two points\n    have in common geometrically? Use coordinate-plane vocabulary (quadrant, axis, reflection).\"\n\n[Expected:\n(a) y = 9, 4, 1, 0, 1, 4, 9.\n(b) Seven plotted points forming a U-shape opening upward.\n(c) A parabola (U-shaped curve) symmetric about the y-axis.\n(d) They have the same y-coordinate (both at height 9). They are reflections\n    of each other across the y-axis: (−3,9) is in Q2, (3,9) is in Q1.\n    Reflection across y-axis flips x-sign: (−3)→(3).]\n```\n\n```\nP55 — SCORE (after P76)\nAward 1 point for P76.\nRunning total: __/5.\n```\n\n```\nP75 — MASTERY ASSESSMENT\nPass criterion: 5 out of 5 (⌈0.90 × 5⌉ = 5)\n```\n\n```\nP55 — SCORE (final)\nRecord pass/fail status.\n```\n\n```\nP74 — ROUTING DECISION\nScore = 5/5 → MASTERY ACHIEVED → P78 COMPLETION\nScore < 5/5 → NEEDS REVIEW → identify lowest-scoring item; activate Protocol B for its misconception\n```\n\n```\nP55 — SCORE (routing recorded)\n```\n\n```\nP78 — COMPLETION\n\"Coordinate plane checkpoint complete. You have established:\n  • (x, y): x = horizontal signed distance (right +, left −); y = vertical signed distance (up +, down −).\n  • Origin = (0,0) = centre of the plane; axes extend infinitely in both directions.\n  • Quadrant I: (+,+); Q2: (−,+); Q3: (−,−); Q4: (+,−); points on axes belong to no quadrant.\n  • Reflection rules: flip x-sign → mirror across y-axis; flip y-sign → mirror across x-axis; flip both → 180° rotation.\nNext concepts: math.geom.distance-formula, math.geom.slope, math.geom.line-equation.\"\n```\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair Chains)\n\n### Repair Chain B-1: AXIS-SWAP (MC-1 FOUNDATIONAL)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: (x, y) — the first number is vertical (up/down), second is horizontal.\n AFTER:  (x, y) — the first number is ALWAYS horizontal (x-axis), second is ALWAYS vertical (y-axis).\n\nMemory tricks:\n  (1) Alphabetical: x comes before y. x-direction (horizontal) comes first.\n  (2) Navigation: east/west (horizontal) before north/south (vertical), like 'longitude, latitude.'\n  (3) On a number line: x is the number line lying FLAT (horizontal); y is the one standing UP.\"\n\nRepair exercise:\nStart from origin (0,0). Follow these steps for (5, −3):\n  STEP 1 (horizontal): x=5 → move RIGHT 5 units. Mark the intermediate point (5, 0).\n  STEP 2 (vertical): y=−3 → from (5,0), move DOWN 3 units. Mark (5, −3).\nStudent repeats for (−2, 4): move LEFT 2 (to (−2,0)), then UP 4.\n\nExit gate: \"For (−4, 7): which direction and how many units for EACH step?\"\nExpected: Step 1: LEFT 4 units; Step 2: UP 7 units.\n→ Correct: return to TA-A01 P49 re-attempt.\n→ Incorrect: use physical finger-tracing on grid; repeat with two more points.\n```\n\n### Repair Chain B-2: QUADRANT-SIGN-ERROR (MC-2)\n\n```\nP41 — MISCONCEPTION DETECTOR\nDiagnostic: \"In which quadrant is (−5, −8)?\"\nIf student says Q1 or Q2 (thinks negative x means Q2 only): MC-2 confirmed.\n\nP27 — MISCONCEPTION NAMING\n\"QUADRANT-SIGN-ERROR: memorising 'which quadrant is which number' instead of\nderiving signs from axis directions.\n\nALWAYS DERIVE: negative x = left of y-axis; negative y = below x-axis.\n  Q1: right and up = x>0, y>0.\n  Q2: left and up = x<0, y>0.\n  Q3: left and down = x<0, y<0.\n  Q4: right and down = x>0, y<0.\n(−5,−8): x<0 (left), y<0 (down) → Q3.\"\n\nRepair exercise: Classify (3,−7), (−1,4), (−6,−2), (8,9) using the derive-from-axes method.\nStudent shows their reasoning: \"x>0 (right), y<0 (down) → Q4\" etc.\n\nExit gate: \"Give the quadrant and an example point for 'negative x, positive y.'\"\nExpected: Q2; e.g., (−2, 5).\n→ Correct: return to TA-A02.\n```\n\n### Repair Chain B-3: ORIGIN-AS-CORNER (MC-3)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: The origin is the bottom-left corner; coordinates are always ≥ 0.\n AFTER:  The origin is the CENTER; the x-axis and y-axis extend infinitely in BOTH directions.\n\nPicture a ruler: it starts at 0 on ONE end. But the coordinate AXES have no end —\nthey extend left/right (x-axis) and up/down (y-axis) forever. The origin (0,0)\nis where they cross — in the middle, not in a corner.\n\nNegative coordinates are real, valid positions:\n  (−3, 2): 3 units LEFT of origin, 2 units ABOVE — in Q2.\n  (0, −5): directly BELOW the origin on the y-axis.\"\n\nRepair exercise: On a coordinate plane (both positive and negative regions shown):\nPlot A=(−4, 3), B=(2, −5), C=(−1, −2).\nConfirm each point exists in the visible plane.\n\nExit gate: \"Can a point have x = −10? If so, where is it?\"\nExpected: YES — 10 units to the left of the y-axis.\n→ Correct: return to TA-A01.\n```\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n```\nP89 — SPACED REPETITION\nReview schedule for math.geom.coordinate-plane:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"Name the four quadrants and their sign rules.\n  Plot (−3, 5) and state its quadrant.\"\n  Target: QI(+,+), QII(−,+), QIII(−,−), QIV(+,−); (−3,5) in QII.\n\nInterval 2 (3 days):\n  Application: \"Point P=(6,−4). State: (a) quadrant; (b) x-axis reflection;\n  (c) y-axis reflection; (d) 180° rotation about origin.\"\n  Target: (a) QIV; (b) (6,4); (c) (−6,−4); (d) (−6,4).\n\nInterval 3 (7 days):\n  Transfer: \"Find all points (x,y) with |x|=3 and |y|=3.\n  Plot them. What shape do they form?\"\n  Target: (3,3),(3,−3),(−3,3),(−3,−3) — a square with side 6.\n\nInterval 4 (21 days):\n  Integration: \"In math.geom.distance-formula, the distance from (x₁,y₁) to (x₂,y₂)\n  is √((x₂−x₁)²+(y₂−y₁)²). Use this formula to find the distance from\n  origin (0,0) to point (3,4). Then describe what the distance formula does\n  in terms of the coordinate plane.\"\n  Target: √(9+16)=√25=5. Formula measures straight-line distance between points\n    identified by their coordinate pairs.\n```\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### GR-8: Cross-link documentation\n```\nIncoming prerequisites:\n  math.geom.plane → Provides the infinite flat surface; the coordinate plane\n    superimposes an algebraic grid onto it.\n  math.found.real-numbers → Provides ℝ as the complete ordered line;\n    both axes are copies of ℝ, so coordinate values can be any real number.\n\nOutgoing unlocks:\n  math.geom.distance-formula → Uses (x₁,y₁),(x₂,y₂) coordinates as inputs.\n  math.geom.midpoint-formula → Uses coordinate averages: midpoint = ((x₁+x₂)/2, (y₁+y₂)/2).\n  math.geom.slope → Rise/run computed from y- and x-coordinate differences.\n  math.geom.line-equation → Lines expressed as ax+by=c using coordinate variables.\n\nCross-linked (non-prerequisite):\n  math.func.graph-of-function (NOT Tier 1) → Function graphs are sets of\n    points (x, f(x)) plotted on the coordinate plane; coordinate-plane mastery\n    is the visual language for function graphs.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.func.graph-of-function]\nmath.func.graph-of-function is NOT Tier 1 → P76 INDEPENDENCE\nP76 probe: plotting y=x² from a table; geometric description; symmetry about y-axis.\n  Self-contained — only uses coordinate plotting skills, no prior function knowledge needed.\n```\n\n---\n\n\n## Component 8 — Teaching Notes\n\n### Pedagogical Rationale\nCoordinate plane (bloom=understand) requires students to understand the coordinate system as a complete bidirectional framework, not a ruler-from-corner system. The two key conceptual leaps are: (1) the ordered pair convention (x before y, always), and (2) the origin-as-centre (axes extend in both directions, negative coordinates are valid). Both are undermined by students' prior experience with rulers and page margins.\n\n### Common Session Failure Modes\n1. **MC-1 persists under time pressure:** Under timed conditions, students revert to axis-swapping. The GPS analogy (longitude before latitude = x before y) provides a durable anchor.\n2. **Students place Q3 in the upper-left:** The counter-clockwise labelling convention (Q1 → Q2 → Q3 → Q4 going counter-clockwise) is less intuitive than clockwise. Deriving Q labels from sign rules (not rote position) prevents this.\n3. **Negative coordinates feel \"wrong\":** Students who have only used positive-axis graphs (e.g., in data science or bar charts) find negative coordinates unfamiliar. Physical examples (temperature below 0°, floors below ground level) help.\n\n### Connections to Broader Curriculum\n- **Downstream — math.geom.distance-formula:** Distance = √(Δx²+Δy²) is a direct computation on two coordinate pairs.\n- **Downstream — math.geom.slope:** Slope = Δy/Δx requires correctly signed coordinate differences.\n- **Cross-domain — math.func.graph-of-function:** Every function graph is a set of points in the coordinate plane; coordinate fluency is the visual language of all function analysis.\n\n### Language Precision\n- \"x-coordinate\" or \"abscissa\" for the first element; \"y-coordinate\" or \"ordinate\" for the second.\n- \"Ordered pair\" — stress the word ordered: (3,−2) ≠ (−2,3).\n- \"Quadrant\" vs. \"axis\": points on the axes are not in any quadrant.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n### Structural Validators\n- [x] V-1: Blueprint has all 10 components (0–8, 10).\n- [x] V-2: Metadata YAML complete with all required fields.\n- [x] V-3: concept_id matches filename `math.geom.coordinate-plane`.\n- [x] V-4: difficulty=developing, bloom_level=understand, mastery_threshold=0.90.\n- [x] V-5: estimated_hours=6, session_ta_cap=7.\n\n### Grammar Rule Validators\n- [x] V-6 (GR-1): Every non-repair TA opens with B-category primitive (TA-A01: P03+P06; TA-A02: P11; TA-A03: P04+P11; TA-A04 is mastery gate).\n- [x] V-7 (GR-2): Every non-gate TA contains P49 with all 4 branches. TA-A01, TA-A02, TA-A03 each have P49.\n- [x] V-8 (GR-3): Mastery gate TA-A04 is terminal (ends with P78).\n- [x] V-9 (GR-4): P41 entry diagnostic gates P64 → Protocol B when MC-1 active.\n- [x] V-10 (GR-6): P91 compound (P77→P55→P76→P55→P75→P55→P74→P55→P78) complete in TA-A04.\n- [x] V-11 (GR-7): P76 present in mastery gate TA-A04.\n- [x] V-12 (GR-8): Cross-links documented in Component 7. math.func.graph-of-function named.\n- [x] V-13 (GR-9): P76 mode is INDEPENDENCE (math.func.graph-of-function NOT Tier 1). P76 probe: plot y=x², describe shape, explain symmetry. Self-contained.\n- [x] V-14 (GR-10): MAMR stated in Component 0 and enforced in Component 3.\n\n### Content Validators\n- [x] V-15: Pass criterion = ⌈0.90 × 5⌉ = 5/5. P77 has 4 problems; P76 contributes 1; total n=5. ✓\n- [x] V-16: CPA_ENTRY_STAGE = C. developing always starts Concrete. ✓\n- [x] V-17: MC-1 is FOUNDATIONAL and cleared first per MAMR. ✓\n- [x] V-18: P49 INCORRECT branch activates P27 or P64 with repair pathway in all three non-gate TAs. ✓\n- [x] V-19: P76 probe independent of P77 problems (P77: plotting/labelling, reflections, Q3 equidistant, vertical line; P76: y=x² table and symmetry argument — distinct). ✓\n- [x] V-20: Spaced repetition intervals are 1, 3, 7, 21 days with distinct prompts. ✓\n\n### Automated Invariant Check (AIR)\n- [x] AIR-1: No implementation code present.\n- [x] AIR-2: No references to internal system variables.\n- [x] AIR-3: All cross-linked concept IDs use canonical prefix format.\n- [x] AIR-4: P91 sequence order is P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n- [x] AIR-5: Protocol B repair chains each have explicit exit gate with return instruction. ✓\n\n**VALIDATION RESULT: PASS — PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 334,
+        "endLine": 632
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "Scaffolding Protocol",
+      "content": "### Entry Diagnostic (P41 gate)\n```\nP41 — MISCONCEPTION DETECTOR\nPrompt: \"On a standard Cartesian plane, describe where you would find the\npoint (−3, 4). Which quadrant is it in?\"\n\nCORRECT (left of y-axis 3 units; above x-axis 4 units; Quadrant II):\n→ No MC-1 or MC-3 detected → proceed to TA-A01 standard opening.\n\nINCORRECT (places point to the right, or says Quadrant I, or says negative not possible):\n→ MC-1 or MC-3 active → P64 CONCEPTUAL SHIFT on ordered pair convention and signed axes\n→ Activate Protocol B (MC-1 Repair Chain)\n```\n\n### Prerequisite Bridge\nStudent completed math.geom.plane (geometric plane as a flat infinite surface) and math.found.real-numbers (ℝ as the complete ordered number line). The coordinate plane equips the geometric plane with an algebraic address system by laying two copies of ℝ — one horizontal, one vertical — intersecting at zero.\n\n### MAMR Enforcement\nMC-1 is FOUNDATIONAL. Axis-swap corrupts all coordinate reading and plotting. Clear it completely before working on quadrant signs (MC-2) or negative-coordinate concepts (MC-3). MC-2 and MC-3 FIFO.\n\n### CPA Progression: C → P → A\n- **Concrete (C):** Grid paper; physical plotting by counting grid squares.\n- **Pictorial (P):** Full labelled plane with quadrant signs; origin as centre; axes as number lines.\n- **Abstract (A):** ℝ² = set of ordered pairs; signed distance definition; algebraic quadrant conditions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 97,
+        "endLine": 126
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89 — SPACED REPETITION\nReview schedule for math.geom.coordinate-plane:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"Name the four quadrants and their sign rules.\n  Plot (−3, 5) and state its quadrant.\"\n  Target: QI(+,+), QII(−,+), QIII(−,−), QIV(+,−); (−3,5) in QII.\n\nInterval 2 (3 days):\n  Application: \"Point P=(6,−4). State: (a) quadrant; (b) x-axis reflection;\n  (c) y-axis reflection; (d) 180° rotation about origin.\"\n  Target: (a) QIV; (b) (6,4); (c) (−6,−4); (d) (−6,4).\n\nInterval 3 (7 days):\n  Transfer: \"Find all points (x,y) with |x|=3 and |y|=3.\n  Plot them. What shape do they form?\"\n  Target: (3,3),(3,−3),(−3,3),(−3,−3) — a square with side 6.\n\nInterval 4 (21 days):\n  Integration: \"In math.geom.distance-formula, the distance from (x₁,y₁) to (x₂,y₂)\n  is √((x₂−x₁)²+(y₂−y₁)²). Use this formula to find the distance from\n  origin (0,0) to point (3,4). Then describe what the distance formula does\n  in terms of the coordinate plane.\"\n  Target: √(9+16)=√25=5. Formula measures straight-line distance between points\n    identified by their coordinate pairs.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 508,
+        "endLine": 540
+      }
+    },
+    {
+      "assetId": "math.geom.coordinate-plane/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.coordinate-plane",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### GR-8: Cross-link documentation\n```\nIncoming prerequisites:\n  math.geom.plane → Provides the infinite flat surface; the coordinate plane\n    superimposes an algebraic grid onto it.\n  math.found.real-numbers → Provides ℝ as the complete ordered line;\n    both axes are copies of ℝ, so coordinate values can be any real number.\n\nOutgoing unlocks:\n  math.geom.distance-formula → Uses (x₁,y₁),(x₂,y₂) coordinates as inputs.\n  math.geom.midpoint-formula → Uses coordinate averages: midpoint = ((x₁+x₂)/2, (y₁+y₂)/2).\n  math.geom.slope → Rise/run computed from y- and x-coordinate differences.\n  math.geom.line-equation → Lines expressed as ax+by=c using coordinate variables.\n\nCross-linked (non-prerequisite):\n  math.func.graph-of-function (NOT Tier 1) → Function graphs are sets of\n    points (x, f(x)) plotted on the coordinate plane; coordinate-plane mastery\n    is the visual language for function graphs.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.func.graph-of-function]\nmath.func.graph-of-function is NOT Tier 1 → P76 INDEPENDENCE\nP76 probe: plotting y=x² from a table; geometric description; symmetry about y-axis.\n  Self-contained — only uses coordinate plotting skills, no prior function knowledge needed.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.coordinate-plane.md",
+        "startLine": 540,
+        "endLine": 572
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

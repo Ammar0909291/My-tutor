@@ -1,0 +1,443 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.prime-number-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.prime-number",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6ff4550890bb801c2b78102692751e93b22fdd3cffb7ab1a06506b3523641984",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.prime-number.md": "sha256:d8eb1ffe43f57ef09c356bea7ab7aefdf04863d8c7a09550f3f24ece2b37aeb7"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.nt.prime-number",
+    "name": "Prime Number",
+    "difficultyRaw": "developing",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.nt.divisibility"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.prime-number-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.prime-number (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.prime-number.md": "sha256:d8eb1ffe43f57ef09c356bea7ab7aefdf04863d8c7a09550f3f24ece2b37aeb7"
+      },
+      "contentHash": "sha256:af2a8ff8d0a09fe686bbeee1e8cc5c24f76488fc3bdbbbf05b15dea114e5230d",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number.md#TA-A03 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-number.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-number.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-number"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-number\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.prime-number/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.nt.prime-number",
+      "title": "Prime Number — cognitive map",
+      "content": "**Core concept:** A prime number is a natural number greater than 1 whose only positive divisors are 1 and itself. All other natural numbers greater than 1 are composite (they have at least one divisor other than 1 and themselves). The number 1 is neither prime nor composite by definition. Primes are the multiplicative building blocks of all positive integers.\n\n**Knowledge prerequisites activated:**\n- math.nt.divisibility: a|b means ∃k∈ℤ: b=ak; p is prime iff its only divisors in ℕ are 1 and p\n\n**Concept structure:**\n1. **Definition**: p is prime ↔ p > 1 and the only positive divisors of p are 1 and p\n2. **Exclusion of 1**: 1 is excluded by definition; it is neither prime nor composite\n3. **The only even prime**: 2 is prime (divisors: 1 and 2 only); every other even number is composite\n4. **Primality test**: to test p, check divisibility by every integer from 2 to √p; if none divide p, it is prime\n\n**Target understanding:** The learner can state the definition of a prime number, correctly classify small numbers as prime or composite, identify 1 as neither, and identify 2 as the only even prime.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 26,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-number",
+      "title": "PRIME-INCLUDES-ONE",
+      "content": "| MC-1 | PRIME-INCLUDES-ONE | Asked whether 1 is prime | Argues 1 is prime because \"its only divisors are 1 and itself\"; misses the \"greater than 1\" clause in the definition | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-number",
+      "title": "ODD-EQUALS-PRIME",
+      "content": "| MC-2 | ODD-EQUALS-PRIME | Asked about even primes | Claims 2 is not prime because \"even numbers are never prime\"; or that all odd numbers are prime (missing composites like 9, 15, 21) | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-number",
+      "title": "LAST-DIGIT-HEURISTIC",
+      "content": "| MC-3 | LAST-DIGIT-HEURISTIC | Asked to classify numbers like 21, 51, 91 | Incorrectly concludes primality from the last digit alone (e.g., \"21 ends in 1 so it's prime\") without testing divisors | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number",
+      "title": "Indivisible Atoms: The Molecular Analogy (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Indivisible Atoms: The Molecular Analogy (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 69,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number",
+      "title": "Positive Divisors, Factor Pairs, Definition (GR-1: P11 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Positive Divisors, Factor Pairs, Definition (GR-1: P11 | GR-2: P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 95,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number",
+      "title": "Prime vs. Composite vs. 1; The Only Even Prime (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Prime vs. Composite vs. 1; The Only Even Prime (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 129,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 161,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number",
+      "title": "Repair: PRIME-INCLUDES-ONE (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: PRIME-INCLUDES-ONE (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 226,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number",
+      "title": "Repair: ODD-EQUALS-PRIME (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: ODD-EQUALS-PRIME (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 252,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-number",
+      "title": "Repair: LAST-DIGIT-HEURISTIC (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: LAST-DIGIT-HEURISTIC (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 277,
+        "endLine": 375
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.prime-number",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A04 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **Is 17 prime?** List all positive divisors.\n   *(Expected: divisors {1,17} only; 17>1; YES — prime)*\n\n2. **Is 21 prime?** Find a divisor other than 1 and 21.\n   *(Expected: 21=3×7; divisor 3 (or 7) exists → NO — composite)*\n\n3. **True/False:** 1 is prime because its only divisors are 1 and itself.\n   *(Expected: FALSE — the definition requires the number to be greater than 1; 1 is neither prime nor composite)*\n\n4. **Is 2 prime?** Justify your answer.\n   *(Expected: YES — divisors of 2 are {1,2} only; 2>1; 2 is prime and is the only even prime)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: independence mode — math.nt.fundamental-theorem-arithmetic is NOT Tier 1; novel context used)\n\n*Cryptography context — testing a two-digit number:*\n\n\"Cryptography relies on the difficulty of factoring large numbers. Test whether **91** is prime using the √p method (only need to test divisors up to √91 ≈ 9.5):\n\n(a) Test divisibility by 2, 3, 5, 7. For each, state whether it divides 91 and show the check.\n(b) Based on your tests, is 91 prime or composite? If composite, express it as a product of two primes.\"\n\n*(Expected:*\n*(a) 2: 91 is odd → 2∤91; 3: 9+1=10, not divisible by 3 → 3∤91; 5: does not end in 0 or 5 → 5∤91; 7: 91÷7=13 exactly → 7|91*\n*(b) 91 is composite: 91=7×13, and both 7 and 13 are prime.)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.90; ⌈0.90×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 PRIME-INCLUDES-ONE first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now define a prime number, classify numbers as prime, composite, or neither, correctly exclude 1, identify 2 as the only even prime, and test primality up to √p. Primes are the atoms of multiplication — fundamental theorem of arithmetic and prime factorisation build directly on this foundation.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 161,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.prime-number",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\nTile-grouping model: given p tiles, try to arrange them into rectangular arrays (rows × columns) with more than one row and more than one column. If the only rectangles possible are 1×p or p×1, p is prime.\n\n**Progression Gate (C → P):** Learner can group tiles to identify all factor pairs of a number.\n**Progression Gate (P → A):** Learner states the definition from memory and applies the √p test to classify two-digit numbers.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 55,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.prime-number",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Definition and exclusion of 1 | \"Is 1 prime? Is 23 prime?\" |\n| Day 3 | Even prime and odd composites | \"Classify: 2, 9, 15, 31\" |\n| Day 7 | √p primality test on two-digit numbers | \"Is 49 prime? Test up to 7.\" (No: 7×7=49) |\n| Day 30 | Transfer: finding all primes up to 30 | Sieve of Eratosthenes mini-task |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 302,
+        "endLine": 313
+      }
+    },
+    {
+      "assetId": "math.nt.prime-number/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.prime-number",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.nt.divisibility (required): p is prime iff its only positive divisors are 1 and p; divisibility (a|b) is the foundational relation\n\n**Enables:**\n- math.nt.fundamental-theorem-arithmetic: every integer > 1 factors uniquely into primes (prime existence + uniqueness require the prime definition)\n- math.nt.prime-factorization: expressing n as a product of prime powers requires identifying primes\n\n**Cross-links (GR-8):**\n- math.nt.fundamental-theorem-arithmetic (NOT Tier 1): FTA states every integer > 1 factors uniquely into primes; motivates why 1 must be excluded — P76 independence mode (cryptographic primality transfer probe used instead)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-number.md",
+        "startLine": 313,
+        "endLine": 327
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

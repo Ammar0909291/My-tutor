@@ -1,0 +1,471 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.angle-measurement-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.angle-measurement",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9f893028618fc4f83737bc94563d91c13a1744a3422b579332c34783cfe00456",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.angle-measurement.md": "sha256:1a7c1c379faef36ccd9e057235f346d0814dc45225c2fb345b17b17b845e5e63"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.geom.angle-measurement",
+    "name": "Angle Measurement",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.angle"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.angle-measurement-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.angle-measurement (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.angle-measurement.md": "sha256:1a7c1c379faef36ccd9e057235f346d0814dc45225c2fb345b17b17b845e5e63"
+      },
+      "contentHash": "sha256:f65e4a37119492b7acae52dcc8dfac03757240527dc1f0df51eca78b1901b16e",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-measurement.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-measurement.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-measurement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-measurement\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-measurement.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-measurement.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-measurement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-measurement\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-measurement.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-measurement.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-measurement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-measurement\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-measurement.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-measurement.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-measurement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-measurement\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-measurement.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-measurement.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-measurement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-measurement\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-measurement.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-measurement.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-measurement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-measurement\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-measurement.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-measurement.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-measurement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-measurement\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-measurement.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-measurement.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-measurement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-measurement\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.angle-measurement/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Angle Measurement — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.geom.angle**: An angle is the rotation between two rays from a common vertex; it can be measured in degrees or radians. Angle measurement operationalizes this: using a protractor to read degrees and applying conversion formulas to switch between degrees and radians.\n\n### Target Understanding\n1. A standard protractor measures angles from 0° to 180°. The vertex of the angle is placed at the center hole; one ray aligns along the 0° baseline; the measure is read where the second ray crosses the arc.\n2. Two scales on a protractor (inner and outer, both 0–180°) run in opposite directions. The correct scale to read matches the direction the angle opens: angle opening to the right → use the right-to-left scale; opening to the left → use the left-to-right scale.\n3. Degree-to-radian: θ_rad = θ_deg × π/180. Radian-to-degree: θ_deg = θ_rad × 180/π.\n4. Key benchmarks: 30°=π/6, 45°=π/4, 60°=π/3, 90°=π/2, 120°=2π/3, 135°=3π/4, 150°=5π/6, 180°=π.\n5. Reflex angle measurement (>180°): measure the non-reflex portion with the protractor, then reflex angle = 360° − measured angle.\n6. 1 radian ≈ 57.3°; π ≈ 3.14159; a full rotation = 360° = 2π rad.\n\n### Cross-Link Activation\n- **math.trig.angle-measure**: Protractor-based measurement and degree-radian conversion are the entry point for all trigonometric angle work. P76 applies these skills in a compass-bearing context as a preview of math.trig.angle-measure.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 31,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "[FOUNDATIONAL] — PROTRACTOR-WRONG-SCALE",
+      "content": "### MC-1 [FOUNDATIONAL] — PROTRACTOR-WRONG-SCALE\n- **Trigger**: Reading the wrong scale on the protractor, giving a supplementary reading (θ instead of 180°−θ or vice versa).\n- **Root cause**: The protractor has two overlapping number scales running in opposite directions. Without a rule for which to read, learners pick arbitrarily or always read the same scale.\n- **Error pattern**: The angle opens to the right from the 0° baseline; learner reads the left-opening scale and gets 130° when the correct measure is 50°; or vice versa.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "— CONVERSION-FORMULA-MISSING-PI",
+      "content": "### MC-2 — CONVERSION-FORMULA-MISSING-PI\n- **Trigger**: Converting degrees to radians as θ_rad = θ_deg / 180 (forgetting the π factor).\n- **Root cause**: Learner remembers \"divide by 180\" but drops the π; gets a dimensionless ratio rather than radians.\n- **Error pattern**: Converts 90° as \"90/180 = 0.5 rad\" instead of \"90 × π/180 = π/2 rad ≈ 1.571 rad.\"\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "— REFLEX-ANGLE-UNMEASURABLE",
+      "content": "### MC-3 — REFLEX-ANGLE-UNMEASURABLE\n- **Trigger**: \"You can't measure a reflex angle — the protractor only goes to 180°.\"\n- **Root cause**: Learner takes the protractor's 180° limit as an absolute barrier and doesn't see how to infer the reflex measure.\n- **Error pattern**: Gives up when asked to measure an angle of 240°; doesn't use reflex = 360° − (non-reflex portion).\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "The Protractor as a Rotation Meter",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Protractor as a Rotation Meter\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 88,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Misconception Gate: PROTRACTOR-WRONG-SCALE (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: PROTRACTOR-WRONG-SCALE (FOUNDATIONAL)\",\"primitives\":[\"P07\",\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 110,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Degree-Radian Benchmarks",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Degree-Radian Benchmarks\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 136,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Reflex Angles and Conversion Practice",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Reflex Angles and Conversion Practice\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 163,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 181,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Repair MC-1 PROTRACTOR-WRONG-SCALE",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 PROTRACTOR-WRONG-SCALE\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 229,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Repair MC-2 CONVERSION-FORMULA-MISSING-PI",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 CONVERSION-FORMULA-MISSING-PI\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 250,
+        "endLine": 268
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Repair MC-3 REFLEX-ANGLE-UNMEASURABLE",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 REFLEX-ANGLE-UNMEASURABLE\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 268,
+        "endLine": 358
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A05 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\nQ1: A protractor shows two scale readings where the second ray crosses: 75 and 105. The angle opens to the RIGHT from the 0° end on the right. What is the correct measure?\nQ2: Convert 150° to radians (exact form).\nQ3: Convert 2π/3 rad to degrees.\nQ4: A reflex angle has its non-reflex portion measured at 45° with a protractor. What is the reflex angle in degrees and radians?\nQ5: Which is larger: 1 radian or 45°?\n\n**P55 (SCORE):**\nQ1: 75° — the angle opens right, so use the right-side scale, which reads 75 (not 105 = 180°−75°, the wrong scale).\nQ2: 150° × π/180 = 5π/6 rad.\nQ3: 2π/3 × 180/π = 120°.\nQ4: Reflex = 360° − 45° = 315°. In radians: 315 × π/180 = 7π/4 rad.\nQ5: 1 radian ≈ 57.3° > 45°, so 1 radian is larger.\n\n**P76 (TRANSFER PROBE — Cross-link: math.trig.angle-measure):**\nA navigator uses a compass where North = 0°, angles increase clockwise. The ship's bearing is 120° (measured clockwise from North).\n(a) Convert the 120° bearing to radians.\n(b) A second ship travels at bearing 210°. What type of angle is 210°?\n(c) The navigator measures a turn of 3π/4 rad to the right. How many degrees is this turn?\n\n**Expected**: (a) 120° × π/180 = 2π/3 rad. (b) 210° is a reflex angle (180° < 210° < 360°). (c) 3π/4 × 180/π = 135°.\n\n**P55 (SCORE):** 120° → 2π/3 correct; 210° classified as reflex; 3π/4 → 135° correct.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, Q5, P76 = **6 items**. Pass: **6/6** (⌈0.90×6⌉ = 6).\n- PASS → P78.\n- FAIL → P74.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong → TA-B01 (PROTRACTOR-WRONG-SCALE; apply MAMR).\n- Q2, Q3, or P76(a,c) wrong → TA-B02 (CONVERSION-FORMULA-MISSING-PI).\n- Q4 wrong → TA-B03 (REFLEX-ANGLE-UNMEASURABLE).\n- Q5 wrong → re-teach benchmark table from TA-A03; re-gate.\n- Multiple → MAMR: TA-B01 first; FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.trig.angle-measure.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 181,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a physical protractor and pencil-drawn angles (Concrete). Pictorial: labeled protractor diagram showing both scales, center hole, baseline, and measurement arc. Abstract: conversion formula θ_rad = θ_deg × π/180; benchmark table.\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). Route → TA-B01 if triggered later. MC-2 and MC-3 FIFO.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 74,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (protractor scale) + Q2 (convert 150°→rad) | 2/2 |\n| Day 3 | Q3 (2π/3→degrees) + Q4 (reflex angle) | 2/2 |\n| Day 7 | Mixed 3-item: read a described protractor, convert one angle each way, classify reflex or non-reflex | 3/3 |\n| Day 21 | Q1, Q2, Q3, Q4, Q5 (5 items) | 5/5 |\n| Day 60 | Full 6-item mastery gate | 6/6 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 283,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "math.geom.angle-measurement/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.angle-measurement",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Angle | math.geom.angle | Definition of angle, degree/radian notation, and the concept that measure = rotation (prerequisite for using a protractor) |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Angle Measure (Trig) | math.trig.angle-measure | Trigonometric angle measure builds directly on protractor skills and radian conversion |\n\n### Cross-Links\n- **math.trig.angle-measure**: Protractor use and degree-radian conversion are the entry point for angle measure in trigonometry; P76 previews this through the compass-bearing scenario.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-measurement.md",
+        "startLine": 297,
+        "endLine": 314
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

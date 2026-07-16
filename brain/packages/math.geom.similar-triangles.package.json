@@ -1,0 +1,299 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.similar-triangles-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.similar-triangles",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9ee6c7e6a01feb68f4f30761fbe0ad4c23a1f5b9d6bdc26eec8842acce3fc439",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.similar-triangles.md": "sha256:80749d5f94a59386be48f9e712a00b4a1bf082667f12382fea126b6298bc0b1b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.similar-triangles",
+    "name": "Similar Triangles",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.geom.triangle",
+      "math.arith.ratios"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.similar-triangles-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.similar-triangles (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.similar-triangles.md": "sha256:80749d5f94a59386be48f9e712a00b4a1bf082667f12382fea126b6298bc0b1b"
+      },
+      "contentHash": "sha256:377912a5630771a08e23823247af7d3318327cbf2b9c4fa569838b11d6b8480c",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.similar-triangles.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.similar-triangles.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.similar-triangles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.similar-triangles\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.similar-triangles.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.similar-triangles.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.similar-triangles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.similar-triangles\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.similar-triangles.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.similar-triangles.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.similar-triangles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.similar-triangles\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.similar-triangles/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "Similar Triangles — cognitive map",
+      "content": "**Core concept:** Two triangles are similar (△ABC ~ △DEF) if they have the same shape but possibly different sizes: corresponding angles are equal and corresponding sides are proportional. Similarity is established by AA (two matching angles), SAS (matching angle with proportional adjacent sides), or SSS (all three pairs of sides proportional). The ratio of corresponding sides is the scale factor k; all lengths scale by k and area by k².\n\n**Conceptual progression:**\n1. Shape without size: similar triangles are scaled copies — same angles, proportional sides.\n2. Criteria: AA is the most used (third angle is forced by angle-sum=180°); SAS and SSS require ratio checks.\n3. Scale factor: if △ABC ~ △DEF and AB/DE=k, then BC/EF=k and CA/FD=k.\n4. Applications: indirect measurement (heights of buildings, widths of rivers) via shadow or sight-line triangles.\n5. Connection to trigonometry: sin, cos, tan are well-defined because all right triangles with the same acute angle are similar, so the side ratios are constant regardless of triangle size.\n\n**CPA arc (entry: P):**\n- Pictorial: diagrams of two similar triangles with vertex labels; correspondence arrows; scale factor k labelled on one pair of sides; shadow/tree diagram for indirect measurement\n- Abstract: ratio equations AB/DE=BC/EF=CA/FD=k; AA/SAS/SSS criteria; proportion equation a/b=c/d → ad=bc\n\n**Prior knowledge activated:** triangle angle sum = 180° (math.geom.triangle); ratio and proportion (math.arith.ratios); Pythagorean theorem for right triangles\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "CONGRUENT-MEANS-SIMILAR [FOUNDATIONAL]",
+      "content": "### MC-1: CONGRUENT-MEANS-SIMILAR [FOUNDATIONAL]\n**Description:** Learner conflates congruence (same shape and same size, k=1) with similarity (same shape, any size). Believes that \"similar\" implies the triangles must be different in size, or conversely that congruent triangles are not similar.\n**Surface form:** \"These two triangles are the same size, so they're congruent, not similar.\"\n**Root cause:** Everyday language: \"similar\" means \"somewhat alike but different.\" In mathematics, similar is a precise property (equal angles, proportional sides) that includes the case k=1 (congruence). The learner applies the everyday meaning.\n**Trigger condition:** Any problem involving two triangles with equal angles but the same or different size.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "AA-NEEDS-THREE-ANGLES",
+      "content": "### MC-2: AA-NEEDS-THREE-ANGLES\n**Description:** Learner believes that AA (two equal angles) is insufficient to establish similarity — all three angles must be verified.\n**Surface form:** \"You only gave me two equal angles. I need to check the third angle too.\"\n**Root cause:** Overgeneralisation of completeness: if two angles are given, the third \"hasn't been verified.\" Learner has not internalised that the angle-sum constraint (∠A+∠B+∠C=180°) forces the third angle once two are known.\n**Trigger condition:** AA similarity problems; problems where only two angles are compared.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "CORRESPONDENCE-ORDER-DOESNT-MATTER",
+      "content": "### MC-3: CORRESPONDENCE-ORDER-DOESNT-MATTER\n**Description:** Learner sets up side ratios without respecting vertex correspondence — matches sides by position in the figure (e.g., both left sides) rather than by the paired vertices in the similarity statement △ABC ~ △DEF.\n**Surface form:** \"△ABC ~ △DEF, so AB/DF = BC/DE because those are the bottom sides.\"\n**Root cause:** Vertex order in the similarity statement is rarely explained explicitly; learner reads the diagram visually rather than symbolically. This leads to cross-multiplying incorrect pairs and getting wrong answers.\n**Trigger condition:** Any problem requiring side lengths from a similarity statement, especially when triangles are oriented differently.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "Repair for MC-1 (CONGRUENT-MEANS-SIMILAR)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (CONGRUENT-MEANS-SIMILAR)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 112,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "Repair for MC-2 (AA-NEEDS-THREE-ANGLES)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (AA-NEEDS-THREE-ANGLES)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 163,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "Repair for MC-3 (CORRESPONDENCE-ORDER-DOESNT-MATTER)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (CORRESPONDENCE-ORDER-DOESNT-MATTER)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 218,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"△PQR ~ △XYZ with PQ=5, QR=6. XY=10. Find YZ.\"\n[Expected: k=XY/PQ=10/5=2; YZ=QR×k=6×2=12.]\n\n**Item 2:**\nTrue or False: \"All congruent triangles are similar.\"\n[Expected: TRUE. Congruent triangles have k=1, which satisfies the similarity condition. Congruence is a special case of similarity.]\n\n**Item 3:**\n\"Two angles of △ABC are 50° and 70°. Two angles of △DEF are 50° and 60°. Are the triangles similar?\"\n[Expected: NO. △ABC has angles 50°, 70°, 60°. △DEF has angles 50°, 60°, 70°. Wait — △DEF has 50°+60°=110°, so third angle is 70°. So △ABC and △DEF both have angles 50°, 60°, 70° → they ARE similar by AA. Let me reconsider.\n\nActually, if △ABC has angles 50° and 70°, then the third is 60°. Triangle △DEF has angles 50° and 60°, so the third is 70°. Both triangles have angles {50°, 60°, 70°} — they are similar by AA (any two angles match).\n\nLet me revise Item 3 to be genuinely non-similar:\n\"Two angles of △ABC are 50° and 70°. Two angles of △DEF are 50° and 55°. Are the triangles similar?\"\n[Expected: △ABC angles: 50°, 70°, 60°. △DEF angles: 50°, 55°, 75°. Only the 50° angle matches; the second angles 70°≠55°. Not similar by AA.]\n\n**Item 4:**\n\"A 3 m post casts a 4 m shadow. A building casts a 28 m shadow at the same time. How tall is the building?\"\n[Expected: k=28/4=7; building height=3×7=21 m.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (cross-link probe mode: math.trig.right-triangle-trig)\n\n\"Consider two right triangles, both with a right angle at C (and C') and the same acute angle θ at A (and A'):\n- △ABC: legs BC=3, AC=4, hypotenuse AB=5.\n- △A'B'C': legs B'C'=6, A'C'=8, hypotenuse A'B'=10.\n\n(a) Are △ABC and △A'B'C' similar? Which criterion? What is k?\n(b) Compute BC/AB and B'C'/A'B'. Are they equal?\n(c) What does this say about the ratio 'opposite/hypotenuse' for angle θ, regardless of triangle size?\"\n\n[Expected:\n(a) Both have ∠C=∠C'=90° and ∠A=∠A'=θ → AA similarity. k=10/5=2.\n(b) BC/AB=3/5=0.6; B'C'/A'B'=6/10=0.6. Equal. ✓\n(c) The ratio opposite/hypotenuse = 3/5 = 6/10 = 0.6, the same in both triangles despite different sizes. This ratio depends only on θ, not on which triangle. This is why sin θ is well-defined as 'opposite/hypotenuse' — it has the same value for all right triangles with angle θ, because they are all similar to each other.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (b) both ratios equal 3/5 is correct and (c) states the ratio is constant because triangles are similar (or equivalent reasoning), 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can find missing sides using scale factor, knows congruence is a special case of similarity, can apply AA to indirect measurement, and understands why sin/cos are well-defined.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 (incorrect side correspondence): → TA-B03 (CORRESPONDENCE-ORDER-DOESNT-MATTER repair), then re-gate\n- FAIL on Item 2 (congruence not similar): → TA-B01 (CONGRUENT-MEANS-SIMILAR repair), then re-gate\n- FAIL on Item 3 (incorrect AA conclusion): → TA-B02 (AA-NEEDS-THREE-ANGLES), verify angle computation; then re-gate\n- FAIL on Item 4 or P76 (setup of similar triangles in context): → Return to A02 (WE2 shadow problem), re-demonstrate, then re-gate\n- FAIL on multiple items: → TA-B03 first (correspondence is most common error), then remaining repairs; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated mastery of similar triangles: AA criterion, scale factor computation, vertex correspondence, indirect measurement applications, and the fundamental connection to trigonometry.\n\nKey anchors to carry forward:\n- △ABC ~ △DEF means A↔D, B↔E, C↔F; always use vertex order to establish correspondence.\n- AA is sufficient: two equal angles determine the third (angle-sum=180°).\n- Scale factor k: all sides multiply by k; area multiplies by k².\n- Indirect measurement: equal sun angles + right angle → AA similarity → ratio equation.\n- Trigonometry foundation: all right triangles with the same acute angle θ are similar, so sin θ = opposite/hypotenuse is the same for every such triangle.\n\nNext concept: math.trig.right-triangle-trig — sin, cos, tan defined and computed using these ratios.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 326,
+        "endLine": 429
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"In △PQR and △XYZ, ∠P=50° and ∠X=50°; ∠Q=70° and ∠Y=70°. Are the triangles similar? By which criterion?\" If the learner identifies AA and concludes ∠R=∠Z=60°, proceed to A01. If the learner asks for more information before concluding, address MC-2 first.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): provide two similar triangles with vertex labels; learner draws correspondence arrows and writes the ratio equation.\n- Rung 2 (proportion): learner sets up cross-multiplication to find one missing side.\n- Rung 3 (full apply): learner identifies similarity criterion, writes scale factor, and finds all missing sides.\n\n**Pacing note:** h=8 estimated hours; A01–A02 in sessions 1–2; A03 + mastery gate in sessions 3–4.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"△PQR ~ △XYZ with PQ=5, QR=8, RP=6. The perimeter of △XYZ is 57. Find the scale factor and all sides of △XYZ.\"\n[Expected: perimeter of △PQR=19. k=57/19=3. XY=15, YZ=24, ZX=18.]\n\n**Day 10 prompt:**\n\"A 1.8 m person casts a 2.4 m shadow. A nearby flagpole casts a 16 m shadow at the same time. How tall is the flagpole? Identify the similarity criterion used.\"\n[Expected: AA (right angle + equal sun angle). k=16/2.4=20/3. Height=1.8×(20/3)=12 m.]\n\n**Day 30 prompt:**\n\"In right triangle △ABC with right angle at C, point D is on AB such that CD ⊥ AB. Prove that △ACD ~ △ABC and △CBD ~ △ABC. What is CD² in terms of AD and DB?\"\n[Expected: ∠A=∠A (shared), ∠ACD=∠ACB=90° → △ACD ~ △ABC by AA. Similarly ∠B=∠B, ∠BCD=90° → △CBD ~ △ABC. From △ACD~△ABC: AC/AB=AD/AC → AC²=AB·AD. From △CBD~△ABC: BC/AB=DB/BC → BC²=AB·DB. From △ACD~△CBD: CD/BD=AD/CD → CD²=AD·DB (geometric mean relation).]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 247,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "math.geom.similar-triangles/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.similar-triangles",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.geom.triangle — triangle angle-sum property (180°), types of triangles; needed for AA criterion\n- math.arith.ratios — ratio and proportion; cross-multiplication; a/b=c/d ↔ ad=bc\n\n**Unlocked blueprints:**\n- math.trig.right-triangle-trig — sin/cos/tan defined as ratios in similar right triangles (this concept directly enables that definition)\n\n**Cross-link (T1 — P76 cross-link probe mode):**\n- math.trig.right-triangle-trig (T1): the definition of sin/cos/tan is justified by the fact that all right triangles with the same acute angle are similar — the ratio opposite/hypotenuse is the same for any triangle size\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.similar-triangles.md",
+        "startLine": 265,
+        "endLine": 279
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

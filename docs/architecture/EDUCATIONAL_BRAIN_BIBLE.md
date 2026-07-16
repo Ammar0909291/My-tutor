@@ -1407,3 +1407,51 @@ Assessment) — not due yet.
   comparison. 11 new tests in `src/tests/spineSignals.test.ts`. Suite 1212
   passed/1 skipped, tsc clean, build succeeds. No new telemetry, no schema
   change, no other file touched.
+- **2026-07-16 — Mathematics reaches physics-parity package migration
+  (owner-directed production-readiness sprint; no architecture change).**
+  153/154 mathematics Teaching Blueprints compiled to DRAFT Educational
+  Packages via the EXISTING compiler (`blueprint-frontend@0.3.0-physics-migration`,
+  same id — no version bump needed), reusing the Blueprint Front-End and
+  Package Runtime unmodified in their contracts. Gap analysis: mathematics
+  KG has 908 concepts but only 154 (17%) have an authored Teaching
+  Blueprint — a Curriculum Production Pipeline authoring gap, explicitly
+  out of scope (this session authors no curriculum); of the 154 that
+  exist, 153 compiled cleanly after purely additive parser/asset-lowering
+  extensions (title-keyword and label-alias additions only, the same
+  category of fix as the physics migration): tolerant C0 metadata label
+  matching (backticks, trailing colons, ALL-CAPS/non-standard field
+  names, `·`-separated prerequisite lists, bracket-only `[]` cells
+  misread as a literal prerequisite), widened TA header shapes (4-hash
+  `####`, colon separator), bold-only MC headers with no `###` marker,
+  `"Component N (continued)"` section-header recognition (previously
+  silently absorbed into the prior section — a real parser gap that also
+  fixed the entire mastery-probe under-capture once corrected), a new
+  bare-bullet-list Teaching Actions fallback shape, and one worked
+  example / mastery probe embedded-in-named-Teaching-Action fallback
+  (`BlueprintTeachingAction` gained an optional `body` field to support
+  this — additive, not a new data model). Physics re-verified at 217/217
+  compile and byte-identical `--check` after every change — zero
+  physics regression (`git diff` against committed physics artifacts:
+  zero bytes changed). One permanent content gap tracked, not fixed:
+  `math.func.function-concept` cites a prerequisite absent from the
+  canonical KG (`math.alg.variable`) — a Curriculum Pipeline decision,
+  documented in `mathPackageCorpus.test.ts`'s `KNOWN_CONTENT_GAPS` so it
+  fails loudly if silently forgotten. QA baseline (misconceptions,
+  teaching-action metadata, mastery probes, explanation surface) reaches
+  100% on all 153 packages, identical bar to physics. Runtime proven live
+  (`ENABLE_PACKAGE_RUNTIME=1`, `math.arith.fractions`: package-sourced
+  lesson context, zero blueprint-markdown reads, K4 `decide()` driven by
+  the package rule layer). Student Intelligence and Learning Orchestrator
+  required zero changes — both were already subject-agnostic; verified
+  `buildCurriculumContext('mathematics')` walks all 908 KG concepts
+  (with or without a compiled package). Full report:
+  `docs/mathematics/PACKAGE_MIGRATION_REPORT.md`. CI: the existing
+  determinism gate's batch `--check` mode was corrected to skip
+  blueprints with no committed artifact (a genuine latent design gap
+  physics never exposed, since physics had zero uncompilable blueprints)
+  rather than hard-failing the whole gate on a documented content gap —
+  determinism (byte-for-byte drift) and corpus completeness are now
+  correctly treated as separate concerns. 20 new tests
+  (`mathPackageCorpus.test.ts`). Suite 1401 passed/1 skipped, tsc clean,
+  build succeeds. No production-serving-path change; packages remain
+  DRAFT.

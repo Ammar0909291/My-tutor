@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.remainder-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.remainder-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:13171913c980107f181047149eeea01e4d7d36323b846bd7353c48ea16ea4c01",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.remainder-theorem.md": "sha256:2beb741df157c5bd2077e27bde7a80be687bcdf83707b00db644a6ad51190fb4"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.remainder-theorem",
+    "name": "Remainder Theorem",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.alg.polynomial-division"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.remainder-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.remainder-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.remainder-theorem.md": "sha256:2beb741df157c5bd2077e27bde7a80be687bcdf83707b00db644a6ad51190fb4"
+      },
+      "contentHash": "sha256:d9140ed18e6a7cb64f1b7d2201b2e8c925a1c57d3fee3abe9426540f6ae3cbfc",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.remainder-theorem.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.remainder-theorem.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.remainder-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.remainder-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.remainder-theorem.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.remainder-theorem.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.remainder-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.remainder-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.remainder-theorem.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.remainder-theorem.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.remainder-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.remainder-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.remainder-theorem/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "Remainder Theorem — cognitive map",
+      "content": "**Core concept:** When polynomial p(x) is divided by (x−a), the remainder r is a constant (degree 0 < degree 1 of the divisor). Substituting x=a into p(x)=( x−a)q(x)+r gives p(a)=0·q(a)+r=r. Therefore the remainder equals p(a) — no division required. The Factor Theorem is the immediate corollary: (x−a) divides p(x) exactly (r=0) if and only if p(a)=0.\n\n**Conceptual progression:**\n1. Division algorithm foundation: p(x) = (x−a)q(x) + r with r constant.\n2. Substitution argument: x=a zeroes the first term; p(a) = r.\n3. Direct application: remainder when p(x) ÷ (x−a) = evaluate p(a).\n4. Factor Theorem corollary: p(a) = 0 ↔ (x−a) is a factor of p(x).\n5. Connection to synthetic division: the last entry of the synthetic array with c=a is exactly p(a).\n\n**CPA arc (entry: P):**\n- Pictorial: side-by-side of synthetic division array and direct substitution p(a), showing they produce the same last entry.\n- Abstract: p(x) = (x−a)q(x) + r; r = p(a).\n\n**Prior knowledge activated:** polynomial division (math.alg.polynomial-division) — synthetic division, remainder concept, evaluation of p(c); polynomial evaluation by substitution.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "SUBSTITUTE-WRONG-SIGN [FOUNDATIONAL]",
+      "content": "### MC-1: SUBSTITUTE-WRONG-SIGN [FOUNDATIONAL]\n**Description:** When the divisor is (x−a), the learner substitutes x = −a into p(x) instead of x = a. Sees \"x−2\" and computes p(−2); sees \"x+3\" and computes p(+3).\n**Surface form:** \"Dividing by (x−2), so I substitute x=−2: p(−2) = 8−4+2−1 = 5.\"\n**Root cause:** \"The number being subtracted is 2, so I use −2.\" The learner focuses on the subtracted constant rather than solving (x−a)=0 for x. The correct value a solves x=a, not x=−a.\n**Trigger condition:** Any application of the Remainder Theorem with a non-zero value of a.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "THEOREM-IS-ONLY-FOR-ROOTS",
+      "content": "### MC-2: THEOREM-IS-ONLY-FOR-ROOTS\n**Description:** Learner believes the Remainder Theorem only applies (or only gives a useful answer) when p(a)=0 — conflating it with the Factor Theorem. If the remainder is non-zero, they believe the theorem \"doesn't work\" or is inapplicable.\n**Surface form:** \"The remainder theorem tells you if something is a factor. If p(a)≠0, then the theorem doesn't apply.\"\n**Root cause:** The Factor Theorem (which requires p(a)=0) is taught alongside the Remainder Theorem, and learners merge the two. The general statement — remainder = p(a) regardless of whether it is zero — is lost.\n**Trigger condition:** Any problem where the remainder is non-zero.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "DIVISION-STILL-REQUIRED",
+      "content": "### MC-3: DIVISION-STILL-REQUIRED\n**Description:** After computing p(a), the learner performs full polynomial division anyway \"to verify.\" They do not accept that p(a) IS the remainder — the theorem feels like an approximation or shortcut that must be validated by the actual computation.\n**Surface form:** \"I got p(2)=7, but let me check by doing the long division to make sure.\"\n**Root cause:** Distrust of the theorem; the learner views synthetic or long division as the \"real\" method and substitution as a guess. The proof (substitution argument) was never made rigorous enough to be convincing.\n**Trigger condition:** Speed or efficiency problems where the learner should apply the theorem directly.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "Repair for MC-1 (SUBSTITUTE-WRONG-SIGN)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (SUBSTITUTE-WRONG-SIGN)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 119,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "Repair for MC-2 (THEOREM-IS-ONLY-FOR-ROOTS)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (THEOREM-IS-ONLY-FOR-ROOTS)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 169,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "Repair for MC-3 (DIVISION-STILL-REQUIRED)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (DIVISION-STILL-REQUIRED)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 187,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "Protocol A, TA-A03 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Find the remainder when p(x) = x³−4x+1 is divided by (x−2).\"\n[Expected: a=2; p(2)=8−8+1=1. Remainder=1.]\n\n**Item 2:**\n\"Find the remainder when q(x) = x⁴+2x³−x+3 is divided by (x+1).\"\n[Expected: divisor (x+1)=(x−(−1)); a=−1. q(−1)=1−2+1+3=3. Remainder=3.]\n\n**Item 3:**\n\"Is (x−3) a factor of p(x) = x³−6x²+11x−6?\"\n[Expected: p(3)=27−54+33−6=0. Remainder=0 → (x−3) IS a factor. Factor: p(x)=(x−3)(x²−3x+2)=(x−3)(x−1)(x−2).]\n\n**Item 4:**\nTrue or False: \"The Remainder Theorem only applies when p(a) = 0.\"\n[Expected: FALSE. The theorem gives remainder = p(a) for any value of a. When p(a)=0 the remainder is zero (Factor Theorem), but the theorem holds regardless.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Let p(x) = 2x³+x²−5x+2.\n\n(a) Use the Remainder Theorem to find the remainder when p(x) is divided by (x−1).\n(b) Use the Remainder Theorem to find the remainder when p(x) is divided by (x+2).\n(c) Is (x+2) a factor of p(x)? Justify.\"\n\n[Expected:\n(a) a=1; p(1)=2+1−5+2=0. Remainder=0.\n(b) a=−2; p(−2)=2(−8)+4+10+2=−16+4+10+2=0. Remainder=0.\n(c) p(−2)=0 → (x+2) IS a factor. (Also p(1)=0 so (x−1) is a factor.) Full factor: p(x)=(x−1)(x+2)(2x−1).]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (a) gives remainder 0, (b) gives remainder 0, and (c) correctly identifies (x+2) as a factor with justification p(−2)=0; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can apply the Remainder Theorem to find remainders and test factors, choosing the correct substitution value.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 or 2 with wrong value substituted (e.g., p(−2) for (x−2)): → TA-B01 (SUBSTITUTE-WRONG-SIGN repair), then re-gate\n- FAIL on Item 4 (TRUE instead of FALSE): → TA-B02 (THEOREM-IS-ONLY-FOR-ROOTS repair), then re-gate\n- FAIL on Item 3 with correct p(3)=0 but claims \"not a factor\": → TA-B02; clarify Factor Theorem corollary; re-gate\n- FAIL on P76 (computational error only): → return to A02; re-practise evaluation; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to apply the Remainder Theorem to find remainders and to identify factors without polynomial division.\n\nKey anchors to carry forward:\n- Remainder Theorem: when p(x) ÷ (x−a), remainder = p(a). No division needed.\n- To find a: solve (divisor)=0. For (x−3): a=3. For (x+5): a=−5.\n- Factor Theorem (corollary): p(a)=0 ↔ (x−a) is a factor of p(x).\n- The theorem holds for ALL a — non-zero remainders are just as valid as zero remainders.\n\nNext concept: math.alg.factor-theorem — using repeated Remainder Theorem application to find and verify all roots, leading to complete polynomial factorisation.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 291,
+        "endLine": 384
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"What is the remainder when p(x) = x³−2x²+x−3 is divided by (x−2)? Use synthetic division.\" If the learner produces remainder = −1 via the synthetic array (confirmed from the polynomial-division blueprint WE1), they are ready for A01. This confirms the synthetic division skill and establishes the remainder = last array entry fact.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): show the synthetic array for p(x)÷(x−2) alongside the direct computation p(2); label both last entries as the remainder; confirm they match.\n- Rung 2 (structured): provide four divisors; learner identifies the value a to substitute for each; evaluates p(a).\n- Rung 3 (full apply): learner applies the theorem independently to find remainders and test factors.\n\n**Pacing note:** h=3 estimated hours; A01 + A02 in sessions 1–2; mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Without any division, find all values of k such that (x−2) is a factor of p(x)=x³−kx²+3x−2.\"\n[Expected: p(2)=0 → 8−4k+6−2=0 → 12−4k=0 → k=3. Verify: p(x)=x³−3x²+3x−2; p(2)=8−12+6−2=0 ✓.]\n\n**Day 10 prompt:**\n\"p(x) is a cubic with p(1)=3, p(−1)=5, p(2)=−1. Find the remainders when p(x) is divided by (x−1), (x+1), and (x−2).\"\n[Expected: By the Remainder Theorem, remainders are p(1)=3, p(−1)=5, p(2)=−1 respectively. No additional computation needed.]\n\n**Day 30 prompt:**\n\"Prove or disprove: if p(a)=p(b)=0 with a≠b, then (x−a)(x−b) divides p(x).\"\n[Expected: TRUE, but requires care. p(a)=0 → (x−a)|p(x) → p(x)=(x−a)q(x). Now p(b)=0 → (b−a)q(b)=0 → since a≠b, b−a≠0 → q(b)=0 → (x−b)|q(x) → q(x)=(x−b)r(x) → p(x)=(x−a)(x−b)r(x). So yes, (x−a)(x−b)|p(x). This is the basis for building polynomial factorisation from roots.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 216,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.alg.remainder-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.remainder-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.alg.polynomial-division — polynomial division algorithm, synthetic division, the division equation p(x)=d(x)q(x)+r(x); the Remainder Theorem is derived directly from this equation\n\n**Unlocked blueprints:**\n- math.alg.factor-theorem — the corollary p(a)=0 ↔ (x−a)|p(x); systematic root-finding and polynomial factorisation via repeated Remainder Theorem application\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.remainder-theorem.md",
+        "startLine": 234,
+        "endLine": 246
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

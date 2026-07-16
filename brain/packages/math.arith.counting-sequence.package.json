@@ -1,0 +1,364 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.counting-sequence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.counting-sequence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:26e2deecba28e552e933a157d4b6bc1676bae3999208b807fa130ca222618a89",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.counting-sequence.md": "sha256:9e2ae8bd8e5ea53822bd40fce326d391c94a8b486bd207be05a3e43481436e6f"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.arith.counting-sequence",
+    "name": "Counting Sequence",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.counting"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.counting-sequence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.counting-sequence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.counting-sequence.md": "sha256:9e2ae8bd8e5ea53822bd40fce326d391c94a8b486bd207be05a3e43481436e6f"
+      },
+      "contentHash": "sha256:83d9b79717e4c75b06957e69cea127b1bd802e5f2b05e8aec7a806e12f74030d",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.counting-sequence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting-sequence.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting-sequence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.counting-sequence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting-sequence.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting-sequence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.counting-sequence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting-sequence.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting-sequence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.counting-sequence.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting-sequence.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting-sequence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.counting-sequence.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting-sequence.md#TA-B02 (addresses MC-1, MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting-sequence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.counting-sequence/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "Counting Sequence — cognitive map",
+      "content": "**Core concept:** The counting sequence is the ordered sequence 1, 2, 3, 4, … of natural numbers. It assigns a unique natural number to each element of a finite set. Three properties define it: (1) it starts at 1; (2) each successor is exactly 1 more than the previous; (3) it contains no gaps. The total count of a finite set equals the last number reached.\n\n**Conceptual progression:**\n1. Counting as a bijection: matching each object with exactly one number from the sequence (one-to-one correspondence).\n2. Order within the sequence is fixed: 1 always before 2, 2 always before 3 — this order is not a matter of preference.\n3. The total count is invariant: regardless of which object in a set you count first, the final number is always the same.\n4. No gaps in the sequence: 1, 2, 4, 5 is NOT a counting sequence (3 was skipped).\n\n**CPA arc (entry: C):**\n- Concrete: touching and labelling objects (apples, blocks, fingers) with spoken numbers 1, 2, 3, …\n- Pictorial: number line showing 1, 2, 3, … equally spaced; arrows connecting objects to their number tags\n- Abstract: formal sequence notation 1, 2, 3, …, n; last element n = cardinality of the set\n\n**Prior knowledge activated:** the counting process (saying 1, 2, 3 … while touching objects); natural number symbols 1, 2, 3, …; the concept of \"how many\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "SEQUENCE-HAS-GAPS [FOUNDATIONAL]",
+      "content": "### MC-1: SEQUENCE-HAS-GAPS [FOUNDATIONAL]\n**Description:** Learner believes a counting sequence can skip numbers (e.g., 1, 2, 4, 5).\n**Surface form:** When asked what comes after 3 in the counting sequence, says 5.\n**Root cause:** Conflates the counting sequence with an arbitrary list of numbers; has not internalised the successor rule (+1 every step with no skips).\n**Trigger condition:** Any question about the structure or continuation of the counting sequence.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "COUNT-ORDER-CHANGES-TOTAL",
+      "content": "### MC-2: COUNT-ORDER-CHANGES-TOTAL\n**Description:** Learner believes the total count changes depending on which object in a set is counted first.\n**Surface form:** Counts 5 apples starting from the left (gets 5), then thinks counting from the right would give a different number.\n**Root cause:** Confuses the ORDER in which objects are counted with the TOTAL count; does not yet grasp that the bijection produces the same last number regardless of starting point.\n**Trigger condition:** Any problem asking whether counting in different orders gives the same total.\n**Repair target:** TA-B01.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "ZERO-STARTS-SEQUENCE",
+      "content": "### MC-3: ZERO-STARTS-SEQUENCE\n**Description:** Learner begins the counting sequence at 0 instead of 1 when counting elements of a finite set.\n**Surface form:** Counts 5 objects as \"0, 1, 2, 3, 4\" and reports 4 as the total.\n**Root cause:** Over-generalisation from zero-indexed contexts (computer programming, some array notations) or from cardinal vs. ordinal confusion.\n**Trigger condition:** Any problem requiring a count of a finite set where starting number matters.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "What the Counting Sequence Is",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"What the Counting Sequence Is\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 82,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "Properties and Invariance",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Properties and Invariance\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 108,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 138,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "Repair: Sequence-Has-Gaps / Count-Order-Changes-Total",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: Sequence-Has-Gaps / Count-Order-Changes-Total\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 179,
+        "endLine": 195
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "Repair: Zero-Starts-Sequence",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: Zero-Starts-Sequence\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 195,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A03 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 95% → PASS requires ⌈0.95 × 5⌉ = 5/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: What number comes immediately after 9 in the counting sequence? [Answer: 10]\nItem 2: Is 1, 2, 3, 5, 6 a valid counting sequence? Why or why not? [Answer: No — 4 is missing; a counting sequence has no gaps]\nItem 3: True or False — if you count 8 objects starting from the 3rd object instead of the 1st, your total will be different. [Answer: FALSE — the total is always 8, regardless of starting object]\nItem 4: What is the 7th number in the counting sequence? [Answer: 7]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (independence mode — cross_links: []):**\nA librarian counts the books on a shelf: \"1, 2, 3, 4, 5, 6, 7, 8.\" The next day, books were rearranged. The librarian counts again and again reaches 8.\n\n(a) Does the rearrangement change the count? [Answer: No — the set has the same 8 books]\n(b) The librarian accidentally skips book number 5 while counting, saying \"1, 2, 3, 4, 6, 7, 8, 9.\" What total does the librarian report? [Answer: 9 — one more than the true count]\n(c) Why is this wrong, and how could the librarian catch the error? [Answer: Book 5 was counted twice (or skipped in labelling but the sequence kept going — the labelling gap at 5 means one book got no unique number, but then a 9th label was assigned incorrectly to the same 8 books). The librarian could verify by recounting or checking that the last number reached equals the known shelf capacity.]\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score 5/5 → PASS → P78 COMPLETION\n- Score < 5/5 → FAIL → Route to TA-B01 (gap / order-dependence errors) or TA-B02 (zero-start errors)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Counting sequence: mastered. You understand that the sequence 1, 2, 3, … starts at 1, steps by 1 with no gaps, and produces the same total regardless of counting order. This is the foundation of all arithmetic and measurement of set size.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 138,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** \"Say the first 5 numbers you use when counting things.\" If correct (1, 2, 3, 4, 5) → begin TA-A01. If learner starts from 0 → flag MC-3 and route to TA-B02 after TA-A01.\n\n**Scaffolding ladder:**\n1. Touch-and-count 5 physical objects — verify start at 1, one-to-one matching, no skipping\n2. Identify the gap in a sequence with a missing number (e.g., 1, 2, __, 4, 5)\n3. Confirm count invariance by counting the same set of objects in two different orders\n4. Connect sequence to number line — equal spacing, no gaps\n\n**Pacing gate:** Must score ≥ 5/5 on P91 to earn mastery credit (MAMR = 95%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 64,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.arith.counting-sequence\n  MAMR: 0.95\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"What comes after 12 in the counting sequence?\"\n  session_3_probe: \"Is 1, 2, 3, 4, 6 a valid counting sequence? Explain.\"\n  session_7_probe: \"Keiko counts 7 coins starting from the leftmost coin. Priya counts the same 7 coins starting from the rightmost. Who gets a bigger total?\"\n  session_14_probe: \"A teller counts banknotes: 1, 2, 3, 4, 5, 7, 8. What went wrong and what is the correct total?\"\n  session_30_probe: \"Explain why the counting sequence must start at 1 and have no gaps. What goes wrong if either rule is violated?\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 208,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "math.arith.counting-sequence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.counting-sequence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.arith.counting — the counting process (saying numbers while touching objects) [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.arith.place-value — place value requires understanding the sequence beyond 9\n\n**Cross-links:** [] — no Tier 1 cross-links.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented.\n**GR-9 satisfied:** P76 independence mode applied (cross_links empty).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting-sequence.md",
+        "startLine": 224,
+        "endLine": 239
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

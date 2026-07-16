@@ -1,0 +1,962 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.mixed-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.mixed-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cb2bcf36a071fc9eafef23cf6f6d72eb27dc46e7d71335219a28e443782f7fea",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.mixed-numbers.md": "sha256:6448f386dca5683b0f57f7459e79cba222f22d2f95fa38e2f82c50431da9a823"
+    },
+    "assetCount": 31,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 21,
+      "mastery_probe": 5,
+      "teaching_note": 1
+    },
+    "ruleCount": 21
+  },
+  "concept": {
+    "conceptId": "math.arith.mixed-numbers",
+    "name": "Mixed Numbers",
+    "difficultyRaw": "2 (developing)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.arith.fractions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.mixed-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.mixed-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.mixed-numbers.md": "sha256:6448f386dca5683b0f57f7459e79cba222f22d2f95fa38e2f82c50431da9a823"
+      },
+      "contentHash": "sha256:83e7f638e38d6d3d7c18c1a9a6e2c6c134e5c3d503edc56979dc74c2c3279436",
+      "ruleCount": 21,
+      "bandCounts": {
+        "3": 21
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-A04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-A05 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-A07 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-B02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-B03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-C01 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-C02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-C03 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-C04 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-C05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mixed-numbers.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mixed-numbers.md#TA-E03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mixed-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mixed-numbers\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.mixed-numbers/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Learning Objective",
+      "content": "**Mastery statement:** A student who achieves mastery demonstrates understanding of what a mixed number represents, can add and subtract mixed numbers (including with unlike denominators and with regrouping), and can apply mixed number arithmetic to solve real-world problems — selecting appropriate strategies and verifying answers in context.\n\n**NOT mastery:** A student who can convert between improper fractions and mixed numbers (a separate concept) but cannot add mixed numbers with unlike denominators, or who cannot regroup during subtraction, or who cannot apply mixed number operations to a word problem, has NOT achieved mastery.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 34,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Addition without LCD",
+      "content": "| MC-1 | Addition without LCD | Student adds whole parts correctly but adds fraction parts without finding a common denominator (e.g., 2⅓ + 1½ → 3 2/5 instead of 3 5/6) | Foundational | 1st (underlies subtraction; must clear before MC-2 addressed in repair context) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Subtraction regrouping omitted",
+      "content": "| MC-2 | Subtraction regrouping omitted | When fractional part of minuend is less than subtrahend's fraction, student subtracts smaller from larger regardless of position (e.g., 3¼ − 1¾ → 2 2/4 instead of 1½) | Secondary | 2nd |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Mixed multiplication adds whole parts",
+      "content": "| MC-3 | Mixed multiplication adds whole parts | For mixed × whole or mixed × mixed, student adds whole number parts and multiplies fraction parts separately (e.g., 2½ × 3 → 5½ instead of 7½) | Secondary | 2nd (independent of MC-2) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Concrete: What a Mixed Number Represents",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete: What a Mixed Number Represents\",\"primitives\":[\"P02\",\"P03\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 70,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Addition: Like Denominators",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Addition: Like Denominators\",\"primitives\":[\"P01\",\"P03\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 119,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Addition: Unlike Denominators",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Addition: Unlike Denominators\",\"primitives\":[\"P01\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 172,
+        "endLine": 236
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Subtraction Without Regrouping",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Subtraction Without Regrouping\",\"primitives\":[\"P01\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 236,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Subtraction With Regrouping",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Subtraction With Regrouping\",\"primitives\":[\"P01\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 302,
+        "endLine": 370
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Application: Word Problems",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Application: Word Problems\",\"primitives\":[\"P01\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 370,
+        "endLine": 423
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 423,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Gap Diagnosis and LCD Reinforcement",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Gap Diagnosis and LCD Reinforcement\",\"primitives\":[\"P02\",\"P06\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 488,
+        "endLine": 536
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Fluency Practice",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Fluency Practice\",\"primitives\":[\"P01\",\"P26\",\"P30\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 536,
+        "endLine": 578
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 578,
+        "endLine": 635
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Misconception Triage",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Triage\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 635,
+        "endLine": 678
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "MC-1 Repair: Addition Requires LCD",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-1 Repair: Addition Requires LCD\",\"primitives\":[\"P27\",\"P29\",\"P30\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 678,
+        "endLine": 738
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "MC-2 Repair: Subtraction Regrouping",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-2 Repair: Subtraction Regrouping\",\"primitives\":[\"P06\",\"P26\",\"P27\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 738,
+        "endLine": 808
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "MC-3 Repair: Multiplication of Mixed Numbers",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-3 Repair: Multiplication of Mixed Numbers\",\"primitives\":[\"P06\",\"P26\",\"P27\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 808,
+        "endLine": 878
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Post-Repair Mastery Gate",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"Post-Repair Mastery Gate\",\"primitives\":[\"P01\",\"P28\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 878,
+        "endLine": 941
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Two Confidence Anchors",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Two Confidence Anchors\",\"primitives\":[\"P02\",\"P03\",\"P06\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 941,
+        "endLine": 983
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Confidence at Range",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Confidence at Range\",\"primitives\":[\"P01\",\"P26\",\"P30\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 983,
+        "endLine": 1024
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 1024,
+        "endLine": 1080
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Retrieval Challenge",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Retrieval Challenge\",\"primitives\":[\"P01\",\"P06\",\"P49\",\"P55\",\"P77\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 1080,
+        "endLine": 1117
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Transfer Retrieval",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Transfer Retrieval\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P76\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 1117,
+        "endLine": 1156
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Maintenance Mastery Gate",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Maintenance Mastery Gate\",\"primitives\":[\"P01\",\"P02\",\"P03\",\"P06\",\"P07\",\"P08\",\"P26\",\"P27\",\"P28\",\"P29\",\"P30\",\"P32\",\"P34\",\"P41\",\"P49\",\"P54\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 1156,
+        "endLine": 1298
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/mastery_probe/MP-TA-A07",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Mastery Gate",
+      "content": "**TA-A07 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"You've worked through all the key mixed number operations. Let's confirm mastery.\"\n\n**P77 — MASTERY PROBE (Retrieval):**\n\"From memory: (a) state the critical rule for adding/subtracting mixed numbers with unlike denominators, (b) explain when regrouping is needed in subtraction, and (c) state how to perform the regroup.\"\n\n*Expected:* (a) Find LCD and convert fraction parts before adding/subtracting. (b) Regrouping needed when fraction of minuend < fraction of subtrahend. (c) Borrow 1 from whole number; convert to denominator/denominator; add to fraction part.\n\n**P55 — COMPREHENSION CHECK:** \"If you forget to find the LCD before adding, what type of answer do you get?\"\n\n**P76 — TRANSFER PROBE:**\n\"A wall is 5⅓ metres wide. Two pictures need to hang on it: one is 1¾ metres wide, the other is 2⅝ metres wide. Is there enough wall for both pictures with at least ¼ metre gap between them? Show your work.\"\n\n*P76 independence note: cross_links=[]; transfer uses a home-decoration measurement context; self-contained at the arithmetic level.*\n\n**P55 — COMPREHENSION CHECK:** \"What total width do the pictures plus gap require? How does that compare to the wall width?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"A student computes 4⅓ − 2¾ as follows: 'The fraction ¾ > ⅓, so subtract ⅓ from ¾ and get 2/4 = ½. Then 4−2=2. Answer: 2½.' What did they do wrong? What is the correct answer?\"\n\n*Expected:* They subtracted the smaller fraction from the larger regardless of position — MC-2. Correct: regroup, get 1 7/12.\n\n**P55 — COMPREHENSION CHECK:** \"What rule does the student need to fix their approach?\"\n\n**P74 — APPLICATION PROBE:**\n\"Compute: (a) 3⅖ + 4⅗, (b) 6¾ − 2⅞, (c) 8⅓ + 3½ − 4¼.\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): which operation did you perform first, and why?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"P77 all three points stated accurately; P76 wall-problem correct with all work shown; P75 MC-2 error identified and correct answer given; P74 (a)(b)(c) all correct\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_B\": {\n    \"criteria\": \"P77 recall correct but P74 application has errors\",\n    \"action\": \"Route to Protocol B for procedure consolidation.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 shows MC-2 not resolved, OR P74 shows LCD omission (MC-1)\",\n    \"action\": \"Route to Protocol C for active misconception repair.\"\n  }\n}\n```\n\n---\n\n### Protocol B — State S1: Partial Knowledge / Procedural Gaps\n\n**Entry condition:** Student can add mixed numbers with like denominators but fails with unlike denominators, or performs subtraction but systematically omits regrouping check.\n\n**Instructional goal:** Fill specific procedural gaps with conceptual anchoring; build fluency in both directions.\n\n---",
+      "localKey": "MP-TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 423,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/mastery_probe/MP-TA-B03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Mastery Gate",
+      "content": "**TA-B03 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"Gaps addressed. Let's confirm full mastery.\"\n\n**P77 — MASTERY PROBE:** \"State the full addition procedure and the full subtraction procedure for mixed numbers with unlike denominators.\"\n\n**P55 — COMPREHENSION CHECK:** \"What is the one check that tells you whether regrouping is needed?\"\n\n**P76 — TRANSFER PROBE:**\n\"A seamstress has 8½ metres of fabric. She uses 3⅔ metres for a dress and 2¾ metres for a skirt. How much fabric remains?\"\n\n**P55 — COMPREHENSION CHECK:** \"Which operations did you use and in what order?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"Identify the error: '3⅕ + 2⅔ = 5 3/8.' What should the answer be?\"\n\n*Expected:* LCD error — student treated the denominators as addible (1/5+2/3 ≠ 3/8). LCD=15; ⅕=3/15, ⅔=10/15; 3+10=13/15. Total: 5 + 13/15 = 5 13/15.\n\n**P55 — COMPREHENSION CHECK:** \"What specifically caused the error in the student's work?\"\n\n**P74 — APPLICATION PROBE:** \"Compute: (a) 5½ + 2⅗, (b) 9⅓ − 4⅝, (c) 6¼ + 3⅓ − 5⅚.\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): show your LCD and conversion before computing.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; P75 LCD error identified; P74 all three correct\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 or P74 reveals active MC\",\n    \"action\": \"Route to Protocol C.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"Minor arithmetic error only\",\n    \"action\": \"One retry of the failed item. If corrected: PASS.\"\n  }\n}\n```\n\n---\n\n### Protocol C — State S2: Active Misconceptions\n\n**Entry condition:** Diagnostic identifies one or more active misconceptions from the registry.\n\n---",
+      "localKey": "MP-TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 578,
+        "endLine": 635
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/mastery_probe/MP-TA-C05",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Post-Repair Mastery Gate",
+      "content": "**TA-C05 — Post-Repair Mastery Gate**\n\n*Entered after all active misconceptions repaired (MAMR complete).*\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"All misconceptions addressed. Let's confirm full mastery.\"\n\n**P77 — MASTERY PROBE:**\n\"State: (a) the LCD rule for mixed-number addition, (b) the regrouping condition for subtraction, (c) the procedure for multiplying mixed numbers.\"\n\n**P55 — COMPREHENSION CHECK:** \"Why are all three procedures ultimately different? What makes each case distinct?\"\n\n**P76 — TRANSFER PROBE:**\n\"A tank holds 8⅓ litres. In the morning 2¾ litres are used. In the afternoon 1⅔ litres are added. What is the final volume?\"\n\n**P55 — COMPREHENSION CHECK:** \"Describe the operations you chose and why.\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"Error identification: '3¾ − 1⅞: the student writes 2⅛ because ¾ > ⅞ and ¾ − ⅞ = 2/8.' What is wrong?\"\n\n*Expected:* ¾ = 6/8 and 6/8 < 7/8 — regrouping IS needed. The student incorrectly compared ¾ and ⅞ without converting to the same denominator. Correct: 3¾ = 3 6/8; 6/8 < 7/8 → regroup → 2 14/8 − 1 7/8 = 1 7/8.*\n\n**P55 — COMPREHENSION CHECK:** \"What step did the student skip that caused the error?\"\n\n**P74 — APPLICATION PROBE:**\n\"Compute: (a) 4⅔ + 2¾, (b) 7⅓ − 5½, (c) 2¼ × 3⅓.\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): show the improper fraction forms before multiplying.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; P75 error identified with correct answer; P74 all three correct\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"One arithmetic error, not conceptual\",\n    \"action\": \"Allow one retry. If still wrong: route to relevant repair TA.\"\n  },\n  \"ROUTE_BACK\": {\n    \"criteria\": \"Two or more errors OR MC resurfaces\",\n    \"action\": \"Re-enter appropriate repair TA.\"\n  }\n}\n```\n\n---\n\n### Protocol D — State S6: Low Confidence (Knows But Doubts)\n\n**Entry condition:** Student shows hesitation or self-correction but underlying knowledge is likely sound. GR-5 — P28 ABSENT from all Protocol D TAs.\n\n**Instructional goal:** Build confidence through the verify-by-adding-back strategy and estimation checks.\n\n---",
+      "localKey": "MP-TA-C05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 878,
+        "endLine": 941
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/mastery_probe/MP-TA-D03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Mastery Gate",
+      "content": "**TA-D03 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:** \"Final check — with your confidence tools active.\"\n\n**P77 — MASTERY PROBE:** \"State both confidence tools and when to use them.\"\n\n**P55 — COMPREHENSION CHECK:** \"Which tool catches conceptual errors? Which catches arithmetic slips?\"\n\n**P76 — TRANSFER PROBE:**\n\"A builder orders 12⅓ metres of lumber. After using 7¾ metres, they receive another 4½ metres. What is the current total?\"\n\n**P55 — COMPREHENSION CHECK:** \"Show your estimate and inverse verify.\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"True or False: 'If your answer passes the estimate check, it must be correct.' Explain.\"\n\n*Expected:* FALSE. The estimate is approximate — it catches large errors but not small ones. The inverse check is the exact verification.\n\n**P55 — COMPREHENSION CHECK:** \"Give an example where an estimate would pass but the exact answer is still wrong.\"\n\n**P74 — APPLICATION PROBE:** \"Compute: (a) 6⅕ + 3⅘, (b) 9⅓ − 7¾, (c) 3½ + 4⅔ − 2¼.\"\n\n**P55 — COMPREHENSION CHECK:** \"For each: estimate first, compute, verify.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; estimates used; inverse checks shown; P75 false statement identified\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P74 reveals active MC\",\n    \"action\": \"Route to Protocol C.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"Arithmetic slip only\",\n    \"action\": \"One retry. Advance if corrected.\"\n  }\n}\n```\n\n---\n\n### Protocol E — State S9: Mastery Maintenance (Spaced Repetition)\n\n**Entry condition:** Student previously achieved mastery. Scheduled P89 retrieval event (1, 3, 7, 21, 60 days).\n\n---",
+      "localKey": "MP-TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 1024,
+        "endLine": 1080
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/mastery_probe/MP-TA-E03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Maintenance Mastery Gate",
+      "content": "**TA-E03 — Maintenance Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:** \"Final maintenance confirmation.\"\n\n**P77 — MASTERY PROBE:** \"State all three MC risks and the fix for each.\"\n\n**P55 — COMPREHENSION CHECK:** \"Which misconception is foundational, and why must it be fixed first?\"\n\n**P76 — TRANSFER PROBE:**\n\"A painter has 9½ litres of paint. Uses 3⅔ for room A and 2¾ for room B. Receives 1⅓ more litres. Final total?\"\n\n**P55 — COMPREHENSION CHECK:** \"Walk through each operation step and the LCD for each.\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"Identify the error: '5⅔ − 2⅘: student writes ⅔ > ⅘ so no regroup needed, gets 3⅕.' What is wrong?\"\n\n*Expected:* ⅔ and ⅘ don't have the same denominator. LCD=15; ⅔=10/15, ⅘=12/15; 10/15 < 12/15 → regrouping IS needed. Correct answer: regroup 5 10/15 → 4 25/15; 4 25/15 − 2 12/15 = 2 13/15.*\n\n**P55 — COMPREHENSION CHECK:** \"What should the student have done before comparing the fractions?\"\n\n**P74 — APPLICATION PROBE:** \"Compute: (a) 7⅛ + 4⅔, (b) 11½ − 8⅝, (c) 3¼ × 2⅗.\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): show the improper fraction forms.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; retention confirmed\",\n    \"action\": \"Record retention. Schedule next P89 interval. Blueprint cycle continues.\"\n  },\n  \"DECAY_DETECTED\": {\n    \"criteria\": \"Two or more probes missed\",\n    \"action\": \"Route to Protocol B for refresh. Reset P89 from day 1.\"\n  },\n  \"PARTIAL_DECAY\": {\n    \"criteria\": \"One probe missed\",\n    \"action\": \"Address that probe. Re-gate.\"\n  }\n}\n```\n\n---\n\n\n## Component 5 — Spaced Repetition Schedule\n\n**Primitive:** P89 — SPACED REPETITION\n\n**Trigger:** Fires after each P78 PASS event.\n\n**Intervals:** 1 day → 3 days → 7 days → 21 days → 60 days\n\n**Entry point on each firing:** Protocol E (TA-E01 → TA-E02 → TA-E03)\n\n**Decay rule:** DECAY_DETECTED → reset to day 1 → Protocol B before next session.\n\n---\n\n\n## Component 6 — Cross-Link Bridge\n\n**Cross-linked concept:** none (cross_links=[]).\n\nThe related concept `math.arith.improper-fractions` (KG `related` field) is the natural companion — mixed numbers and improper fractions are alternate representations of the same quantity. This blueprint uses improper-fraction conversion as an internal tool for multiplication (TA-C04), but this is handled inline without requiring a separate blueprint dependency. When a student later studies or has already studied `math.arith.improper-fractions`, the conversion procedures are reinforced bidirectionally.\n\n---\n\n\n## Component 7 — Retrieval Architecture\n\n**P89 anchor moments:**\n1. After TA-A07 mastery gate PASS → schedule Protocol E at 1, 3, 7, 21, 60 days\n2. After TA-B03 mastery gate PASS → same schedule\n3. After TA-C05 mastery gate PASS → same schedule\n4. After TA-D03 mastery gate PASS → same schedule\n\n**Retrieval spacing rationale:** estimated_hours=3 → moderate concept. The 7-day and 21-day intervals specifically target MC-2 (regrouping) and MC-3 (multiplication), which are the most fragile elements. Research shows regrouping errors resurface after 2-3 weeks without practice. The 60-day interval confirms long-term retention of the full procedure set.\n\n---\n\n\n## Component 8 — Primitive Usage Index\n\n| Primitive | Role in this Blueprint | TAs Used |\n|-----------|------------------------|----------|\n| P01 | Attention anchor | A02–A07, B02–B03, C03–C05, D02–D03, E01–E03 |\n| P02 | Context establishment | A01, B01, C01, D01 |\n| P03 | Concrete manipulation | A01, D01 |\n| P06 | Explicit strategy instruction | A01, A03, A04, A05, B01, C02–C04 |\n| P26 | Worked example | A01–A06, B01–B02, C01–C04, D02 |\n| P27 | Misconception naming | C02–C04 |\n| P29 | Contrastive analysis | C02 |\n| P30 | Bridge reinforcement | A03 (context), B02, C02, D02 |\n| P32 | Consolidation checkpoint | C02–C04 |\n| P34 | Corrective worked example | C02–C04 |\n| P41 | Misconception detector — triage | B01, C01 |\n| P49 | Adaptive checkpoint — 4-branch routing | All TAs |\n| P55 | Comprehension check | All TAs |\n| P74 | Application probe | A07, B03, C05, D03, E03 |\n| P75 | Misconception probe | A07, B03, C05, D03, E03 |\n| P76 | Transfer probe | A07, B03, C05, D03, E02, E03 |\n| P77 | Mastery probe (retrieval) | A07, B03, C05, D03, E01, E03 |\n| P78 | Mastery gate | A07, B03, C05, D03, E03 |\n| P89 | Spaced repetition scheduler | Component 5 |\n| P91 | Named compound (mastery gate expansion) | All mastery gate TAs |\n\n---\n\n\n## Component 9 — Validation Checklist\n\n| Check | Criterion | Status | Evidence |\n|-------|-----------|--------|----------|\n| V-1 | All concept id slots reference valid KG nodes | PASS | math.arith.mixed-numbers: KG confirmed. math.arith.fractions (requires): KG confirmed. cross_links=[]: no additional IDs to verify. |\n| V-2 | difficulty → cpa_entry_stage correct per spec | PASS | difficulty=2 (developing), domain≠physics → cpa_entry_stage=C. Correct. |\n| V-3 | mastery_threshold matches KG value | PASS | KG: mastery_threshold=0.85. Blueprint Component 0: 0.85. Match confirmed. |\n| V-4 | Canonical 10-field schema only (no domain/concept_type) | PASS | Component 0 uses: id, name, requires, unlocks, cross_links, difficulty, bloom, mastery_threshold, estimated_hours, description. No domain/concept_type fields. |\n| V-5 | No invented primitives | PASS | All primitives used (P01–P07, P26–P32, P34, P41, P49, P55, P74–P78, P89, P91) exist in the Primitive Library. |\n| V-6 | GR-1: all TAs start P01 or P02 | PASS | Protocol A: A01→P02 ✓, A02→P01 ✓, A03→P01 ✓, A04→P01 ✓, A05→P01 ✓, A06→P01 ✓, A07→P01 ✓. Protocol B: B01→P02 ✓, B02→P01 ✓, B03→P01 ✓. Protocol C: C01→P02 ✓, C02→P27 (repair-chain exception) ✓, C03→P27 ✓, C04→P27 ✓, C05→P01 ✓. Protocol D: D01→P02 ✓, D02→P01 ✓, D03→P01 ✓. Protocol E: E01→P01 ✓, E02→P01 ✓, E03→P01 ✓. All compliant. |\n| V-7 | GR-2: P55 follows every elicitation primitive | PASS | All P41, P49, P74, P75, P76, P77, P78 occurrences followed by P55 within their TA or are terminal elements of P91 expansion. P91 expansion: P77→P55→P76→P55→P75→P55→P74→P55→P78 verified in all 5 mastery gate TAs. |\n| V-8 | GR-3: P08 only after P06 or P07 has fired | PASS | P08 not used. Rule vacuously satisfied. |\n| V-9 | GR-4: repair chain entered only after P41/P64 | PASS | Protocol C opens with TA-C01 containing P41. Routing to C02/C03/C04 occurs only via P49 branch in TA-C01, after P41 fires. Protocol B uses P41 in TA-B01 for gap diagnosis. |\n| V-10 | GR-5: P28 absent from S6 Protocol | PASS | Protocol D TAs D01, D02, D03 — P28 is absent from all three. Confirmed. |\n| V-11 | GR-6: P91 terminal in all mastery gate TAs | PASS | P91 in: A07, B03, C05, D03, E03. In each, P91 expanded as P77→P55→P76→P55→P75→P55→P74→P55→P78, with P78 terminal. |\n| V-12 | GR-7: ≤3 consecutive C-primitives | PASS | Longest C-primitive run: P29→P34→P30 in TA-C02 = 3 C-primitives (P27 precedes as D-category, breaking any prior run). No sequence exceeds 3 consecutive C-primitives. |\n| V-13 | GR-8: P54 precedes high-difficulty first-attempt questions | PASS | difficulty=2; GR-8 applies to difficulty≥4. Not applicable. |\n| V-14 | GR-9: assessment primitives not in first TA unless diagnostic | PASS | TA-A01 (first TA of Protocol A) contains P49 (routing/elicitation) only — no P74/P75/P76/P77/P78. Compliant. |\n| V-15 | GR-10: Named Compound expansions substituted | PASS | P91 expanded in all 5 mastery gate TAs (A07, B03, C05, D03, E03). P89 referenced as scheduler in Component 5. |\n| V-16 | Response taxonomy present for all elicitation primitives | PASS | All P49 instances carry complete 4-branch JSON taxonomy. P77/P75/P74/P76 have specified expected responses in text. |\n| V-17 | All P49 branches specified (CORRECT/PARTIAL/INCORRECT/NO_RESPONSE) | PASS | Verified for all 16 P49 instances: A01–A06, B01–B02, C01–C04, D01–D02, E01–E02. All 4 branches present. |\n| V-18 | Session cap respected | PASS | estimated_hours=3 → max 7 TAs. Protocol A: 7 TAs ✓ (maximum, at cap). Protocol B: 3 TAs ✓. Protocol C: up to 5 TAs (C01 + up to 3 repair TAs + C05) ✓. Protocol D: 3 TAs ✓. Protocol E: 3 TAs ✓. All within cap. |\n| V-19 | Transfer contexts reference cross-linked concept (P76 independence note if cross_links=[]) | PASS | cross_links=[]. All P76 transfer probes use self-contained real-world contexts (wall measurements, sewing, carpentry, plumbing, hiking, painting). P76 independence note documented in Component 6. |\n| V-20 | AIR-1 through AIR-5 pass | PASS | AIR-1: All content slots finite and KG-sourced (fraction values, worked examples — all pre-specified). AIR-2: Response taxonomies pre-authored in all P49 branches. AIR-3: Branching deterministic (MAMR order fixed, all routes pre-specified). AIR-4: Primitives are concept-independent pedagogical operations. AIR-5: All TA sequences fixed at authoring time. PASS. |\n\n**PACKAGE_READY: YES** — All 20 V-checks PASS. Components 0–9 present. Blueprint approved for Educational Brain integration.",
+      "localKey": "MP-TA-E03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 1156,
+        "endLine": 1298
+      }
+    },
+    {
+      "assetId": "math.arith.mixed-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.mixed-numbers",
+      "title": "Spaced Repetition Schedule",
+      "content": "**Primitive:** P89 — SPACED REPETITION\n\n**Trigger:** Fires after each P78 PASS event.\n\n**Intervals:** 1 day → 3 days → 7 days → 21 days → 60 days\n\n**Entry point on each firing:** Protocol E (TA-E01 → TA-E02 → TA-E03)\n\n**Decay rule:** DECAY_DETECTED → reset to day 1 → Protocol B before next session.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mixed-numbers.md",
+        "startLine": 1211,
+        "endLine": 1225
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

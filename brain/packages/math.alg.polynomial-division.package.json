@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.polynomial-division-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.polynomial-division",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e2b8e6a1ae7e7d149dae2448680ba073550b25f67c25ce614904ed3333f97ac4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.polynomial-division.md": "sha256:702903ee20ff87324dfaf4b6773eda79086b93fa4371d63863ecffc973c28e9a"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.polynomial-division",
+    "name": "Polynomial Division",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.alg.polynomial-operations"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.polynomial-division-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.polynomial-division (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.polynomial-division.md": "sha256:702903ee20ff87324dfaf4b6773eda79086b93fa4371d63863ecffc973c28e9a"
+      },
+      "contentHash": "sha256:4831bf10d92ae8c5c2bb99551f8675660912414c2d294457a1d07cc8f59ccd05",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-division.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-division.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-division\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-division.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-division.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-division\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-division.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-division.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-division\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.polynomial-division/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "Polynomial Division — cognitive map",
+      "content": "**Core concept:** Dividing polynomial p(x) by d(x) produces a unique quotient q(x) and remainder r(x) such that p(x)=d(x)q(x)+r(x) with deg r < deg d (the Division Algorithm for polynomials). Two methods: (1) long division — mirrors integer long division, works for any divisor; (2) synthetic division — compact scheme for linear divisors of the form (x−c). The remainder theorem states p(c)=r when d(x)=x−c.\n\n**Conceptual progression:**\n1. Division algorithm: p(x)=d(x)q(x)+r(x), deg r < deg d. Non-zero remainder is permitted.\n2. Long division: repeatedly divide the leading term of the current remainder by the leading term of d(x); subtract; repeat until remainder degree is less than d(x) degree.\n3. Synthetic division: when d(x)=x−c, carry only the coefficients (including zero placeholders); sum and multiply by c iteratively.\n4. Remainder theorem: p(c)=r. Corollary: x=c is a root of p(x) iff (x−c) divides p(x) with remainder 0.\n\n**CPA arc (entry: P):**\n- Pictorial: long division layout mirroring integer long division; synthetic division array with annotated steps\n- Abstract: p(x)=d(x)q(x)+r(x); p(c)=r (Remainder Theorem)\n\n**Prior knowledge activated:** polynomial operations (math.alg.polynomial-operations) — specifically polynomial subtraction and the leading term; degree of a polynomial; evaluating p(c) by substitution\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 20,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "REMAINDER-MUST-BE-ZERO [FOUNDATIONAL]",
+      "content": "### MC-1: REMAINDER-MUST-BE-ZERO [FOUNDATIONAL]\n**Description:** Learner believes polynomial division must come out evenly — that a non-zero remainder indicates an error. Stops midway, re-does the division, or reports no quotient when a remainder exists.\n**Surface form:** \"I got a remainder of −1, so I must have made a mistake — division of polynomials should always work out.\"\n**Root cause:** Experience with integer factoring and polynomial factoring exercises always produces a zero remainder. The general Division Algorithm (remainder possible) was never made explicit. Learner assumes the pattern from easy exercises is a universal law.\n**Trigger condition:** Any division where d(x) does not exactly divide p(x).\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "DIVIDE-WRONG-TERM",
+      "content": "### MC-2: DIVIDE-WRONG-TERM\n**Description:** Learner determines the quotient term by dividing the last term or constant of the current remainder by the leading term of d(x) instead of dividing the LEADING TERMS of both.\n**Surface form:** In (x³+2x²−5x−6)÷(x−2): at step 2, instead of dividing 6x by x to get 6, divides −6 by x to get −6/x (rational term).\n**Root cause:** Confusion about the algorithm: \"match the last term with the last term\" — a false memory from integer long division appearance. The algorithm matches LEADING terms at each step.\n**Trigger condition:** Any long division step past the first.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "SYNTHETIC-FOR-ANY-DIVISOR",
+      "content": "### MC-3: SYNTHETIC-FOR-ANY-DIVISOR\n**Description:** Learner applies synthetic division when the divisor is not of the form (x−c) — for example, trying to use synthetic division for (2x+3) or (x²+1).\n**Surface form:** \"I'll use synthetic division with c=3 for the divisor 2x+3.\"\n**Root cause:** Synthetic division's compact form is attractive; learner generalises it without checking the restriction: the divisor must be exactly (x−c), a monic linear polynomial.\n**Trigger condition:** Any problem with a non-monic linear divisor or higher-degree divisor.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "Repair for MC-1 (REMAINDER-MUST-BE-ZERO)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (REMAINDER-MUST-BE-ZERO)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 118,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "Repair for MC-2 (DIVIDE-WRONG-TERM)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (DIVIDE-WRONG-TERM)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 181,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "Repair for MC-3 (SYNTHETIC-FOR-ANY-DIVISOR)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (SYNTHETIC-FOR-ANY-DIVISOR)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 238,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.80 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Divide (x²+5x+6)÷(x+2). State the quotient and remainder.\"\n[Expected: quotient=x+3, remainder=0. (x+2)(x+3)=x²+5x+6 ✓.]\n\n**Item 2:**\n\"Use synthetic division to find the quotient and remainder for (2x³−x+3)÷(x−1). (Note: include a placeholder for the missing x² term.)\"\n[Expected: c=1; coefficients [2,0,−1,3]. Array: 2; 2×1=2,0+2=2; 2×1=2,−1+2=1; 1×1=1,3+1=4. Quotient: 2x²+2x+1, remainder: 4. Verify: p(1)=2−1+3=4 ✓.]\n\n**Item 3:**\nTrue or False: \"For polynomial long division, the remainder must always be zero.\"\n[Expected: FALSE. The remainder can be any polynomial of degree less than the divisor. Zero remainder means d(x) divides p(x) exactly — a special case, not the general rule.]\n\n**Item 4:**\n\"Use synthetic division to divide (x³−x²−x+1)÷(x−1).\"\n[Expected: c=1; coefficients [1,−1,−1,1]. Array: 1; 1×1=1,−1+1=0; 0×1=0,−1+0=−1; −1×1=−1,1+(−1)=0. Quotient: x²+0x−1=x²−1, remainder: 0. Factorisation: (x−1)(x²−1)=(x−1)(x+1)(x−1)=(x−1)²(x+1).]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Divide p(x) = x³+x²−4x−4 by (x−2).\n\n(a) Use synthetic division with c=2. Show the full array.\n(b) State the quotient q(x) and remainder r.\n(c) Verify using the Remainder Theorem: compute p(2) directly. Does it match r?\n(d) If r=0, factor p(x) completely.\"\n\n[Expected:\n(a) c=2; coefficients [1,1,−4,−4]. Array:\n  2 |  1    1   −4   −4\n    |       2    6    4\n    |  1    3    2    0\n(b) Quotient: x²+3x+2. Remainder: r=0.\n(c) p(2)=8+4−8−4=0 ✓. Matches r=0.\n(d) r=0 → (x−2) divides p(x). q(x)=x²+3x+2=(x+1)(x+2). Full factorisation: p(x)=(x−2)(x+1)(x+2).]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (b) gives quotient x²+3x+2 and remainder 0 correctly, and (c) confirms p(2)=0, 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (≥4/5): Learner can execute both long division and synthetic division, accepts non-zero remainders, and applies the Remainder Theorem.\n- FAIL (<4/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 or P76 (stops at non-zero remainder or claims error): → TA-B01 (REMAINDER-MUST-BE-ZERO repair), then re-gate\n- FAIL on Item 2 (quotient term computed from wrong terms): → TA-B02 (DIVIDE-WRONG-TERM repair), then re-gate\n- FAIL on Item 2 (omits zero placeholder): → return to A02; emphasise zero-placeholder rule; re-gate\n- FAIL on multiple items: → B01 then B02; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 4/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to divide polynomials using both long division and synthetic division, and to apply the Remainder Theorem.\n\nKey anchors to carry forward:\n- Division Algorithm: p(x)=d(x)q(x)+r(x) with deg r < deg d. Non-zero remainder is normal.\n- Long division: match and cancel LEADING TERMS at each step.\n- Synthetic division: applies ONLY to monic linear divisors (x−c); last array entry = p(c) = remainder.\n- Remainder Theorem: dividing p(x) by (x−c) gives remainder p(c). Zero remainder ↔ c is a root.\n\nNext concepts: math.alg.remainder-theorem, math.alg.factor-theorem — building directly on this Remainder Theorem connection to identify roots and factors.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 345,
+        "endLine": 443
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Compute (6x³−3x²+9x)÷(3x) by dividing term-by-term.\" If the learner gets 2x²−x+3 correctly, proceed to A01. This monomial-divisor warm-up confirms ability to divide term-by-term (prerequisite for the leading-term strategy in long division).\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): show integer division 137÷7=19 remainder 4 side-by-side with polynomial long division; label each step in both.\n- Rung 2 (structured): complete a long division with the framework already drawn — learner fills in each term of the quotient and each subtraction.\n- Rung 3 (full apply): learner sets up and executes both methods independently.\n\n**Pacing note:** h=6 estimated hours; A01 in session 1; A02 in sessions 2–3; A03 + mastery gate in sessions 3–4.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 63,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Divide (x⁴−1)÷(x−1) by synthetic division. What do you notice about the factorisation?\"\n[Expected: coefficients [1,0,0,0,−1], c=1. Array: 1; 1×1=1,0+1=1; 1×1=1,0+1=1; 1×1=1,0+1=1; 1×1=1,−1+1=0. Quotient: x³+x²+x+1, remainder 0. Factorisation: (x−1)(x³+x²+x+1)=(x−1)(x²+1)(x+1). Note: xⁿ−1 factors as (x−1)(xⁿ⁻¹+…+x+1) — the geometric series sum.]\n\n**Day 10 prompt:**\n\"Without dividing, find the remainder when p(x)=x¹⁰⁰−3x+2 is divided by (x−1) and by (x+1).\"\n[Expected: p(1)=1−3+2=0 → remainder 0 when divided by (x−1); x=1 is a root. p(−1)=(−1)¹⁰⁰−3(−1)+2=1+3+2=6 → remainder 6 when divided by (x+1). Remainder Theorem: no division needed.]\n\n**Day 30 prompt:**\n\"Prove or disprove: if p(c)=0 and p'(c)=0 (where p' is the derivative), then (x−c)² divides p(x).\"\n[Expected: TRUE. If (x−c) divides p(x), then p(x)=(x−c)q(x). Then p'(x)=q(x)+(x−c)q'(x). At x=c: p'(c)=q(c)+0=q(c). So p'(c)=0 → q(c)=0 → (x−c) divides q(x) → q(x)=(x−c)r(x) → p(x)=(x−c)²r(x). So (x−c)² divides p(x) iff x=c is a double root (multiplicity ≥ 2).]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 267,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-division/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.polynomial-division",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.alg.polynomial-operations — polynomial addition, subtraction, multiplication; leading term identification; these operations are used at every step of long division\n\n**Unlocked blueprints:**\n- math.alg.remainder-theorem — formalises p(c)=r; corollary: factor theorem (x−c | p iff p(c)=0)\n- math.alg.factor-theorem — (x−c) divides p(x) iff p(c)=0; systematic root-finding\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-division.md",
+        "startLine": 285,
+        "endLine": 298
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

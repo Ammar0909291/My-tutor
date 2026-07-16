@@ -1,0 +1,410 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.real-valued-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.real-valued-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d31fc358469e636e0ca20b2ef7c2202939be7b72574b7cfde716a7547446fde2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.real-valued-function.md": "sha256:d0b8626df5b48b8473111f210471a63fe60cf1b80fa020f92454456829a21e6c"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.func.real-valued-function",
+    "name": "Real-Valued Function",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.func.function-concept",
+      "math.found.real-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.real-valued-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.real-valued-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.real-valued-function.md": "sha256:d0b8626df5b48b8473111f210471a63fe60cf1b80fa020f92454456829a21e6c"
+      },
+      "contentHash": "sha256:b07912d930b8628ef880c8c3340b2f2a7e7649066876e80812be801103e5f28f",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.real-valued-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.real-valued-function.md#TA-A01 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.real-valued-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.real-valued-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.real-valued-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.real-valued-function.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.real-valued-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.real-valued-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.real-valued-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.real-valued-function.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.real-valued-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.real-valued-function\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.real-valued-function.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.real-valued-function.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.real-valued-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.real-valued-function\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.real-valued-function.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.real-valued-function.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.real-valued-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.real-valued-function\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.real-valued-function.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.real-valued-function.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.real-valued-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.real-valued-function\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.real-valued-function/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Real-Valued Function — cognitive map",
+      "content": "**Core concept:** A real-valued function is a function f: D → ℝ whose domain D is a subset of ℝ and whose output is always a real number. The natural domain is the largest subset of ℝ for which the formula is defined (excluding division by zero, square roots of negatives, logarithms of non-positives). Real-valued functions on ℝ are the primary objects of calculus.\n\n**Knowledge prerequisites activated:**\n- math.func.function-concept: a function assigns exactly one output to each input; domain, codomain, and range\n- math.found.real-numbers: the real line ℝ; intervals; natural domain constraints arise from the structure of ℝ\n\n**Concept structure:**\n1. **Definition**: f: D ⊆ ℝ → ℝ; both inputs and outputs are real numbers\n2. **Natural domain**: the largest D ⊆ ℝ for which f(x) is a well-defined real number; found by excluding points where the formula fails\n3. **Common domain restrictions**: x ≠ 0 in denominators; x ≥ 0 under even-index roots; x > 0 for logarithms\n4. **Range vs. domain**: domain = set of valid inputs; range = set of actual outputs; these are different sets\n5. **Single-output rule**: for every x ∈ D, there is exactly one f(x) ∈ ℝ; ±√x is not a function\n\n**Target understanding:** The learner determines the natural domain of a given real-valued formula, distinguishes domain from range, and recognises that the single-output rule is a necessary property (not just a convention).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 26,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.real-valued-function",
+      "title": "DOMAIN-RANGE-CONFUSED",
+      "content": "| MC-1 | DOMAIN-RANGE-CONFUSED | Asked for domain and range separately | Swaps them: says \"the range is the set of x-values\" or \"the domain is what f outputs\"; reverses input and output roles | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.real-valued-function",
+      "title": "DOMAIN-IS-ALWAYS-ALL-REALS",
+      "content": "| MC-2 | DOMAIN-IS-ALWAYS-ALL-REALS | Shown f(x)=1/(x−2) or f(x)=√(x−3), asked for domain | States \"domain = ℝ\" without checking where the formula is undefined; does not identify division-by-zero or square-root-of-negative restrictions | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.real-valued-function",
+      "title": "MULTI-VALUED-IS-A-FUNCTION",
+      "content": "| MC-3 | MULTI-VALUED-IS-A-FUNCTION | Told that ±√x gives two values for positive x; asked if ±√x is a function | Agrees that ±√x is a function because \"it comes from the same formula x\"; does not apply the single-output rule | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Domain, Range, and the Single-Output Rule (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Domain, Range, and the Single-Output Rule (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 70,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Natural Domain Determination (GR-1: P11 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Natural Domain Determination (GR-1: P11 | GR-2: P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 97,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 132,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Repair: DOMAIN-RANGE-CONFUSED (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: DOMAIN-RANGE-CONFUSED (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 199,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Repair: DOMAIN-IS-ALWAYS-ALL-REALS (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: DOMAIN-IS-ALWAYS-ALL-REALS (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 234,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Repair: MULTI-VALUED-IS-A-FUNCTION (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: MULTI-VALUED-IS-A-FUNCTION (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 270,
+        "endLine": 374
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A03 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **State the natural domain of f(x) = √(x − 3).**\n   *(Expected: x ≥ 3, or [3,∞); x − 3 must be non-negative for the square root to be real)*\n\n2. **Is ±√x (giving both positive and negative square roots for x > 0) a real-valued function from ℝ to ℝ? Explain.**\n   *(Expected: No — for x = 4, it gives both +2 and −2; this violates the single-output rule: a function must assign exactly one output per input)*\n\n3. **True/False:** The range of f(x) = x² with domain ℝ is all of ℝ.\n   *(Expected: FALSE — the range is [0, ∞) because x² ≥ 0 for all real x; negative numbers are not in the range)*\n\n4. **State the natural domain of h(x) = 1/√(x − 1).**\n   *(Expected: x > 1, or (1,∞); x − 1 must be strictly positive (not zero, since it is also in a denominator))*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: cross-link to math.calc.limits — Tier 1 concept)\n\n*Bridge to limits:*\n\n\"Consider the function f(x) = (x² − 1)/(x − 1).\n\n(a) State the natural domain of f.\n(b) Evaluate f(x) at x = 0.9, x = 0.99, x = 0.999. What value does f(x) appear to approach as x → 1?\n(c) Note that x² − 1 = (x−1)(x+1). Simplify f(x) for x ≠ 1. What does this tell you about the value that f approaches as x → 1 even though f(1) is undefined?\"\n\n*(Expected:\n(a) Domain = ℝ \\ {1}; x = 1 makes denominator 0\n(b) f(0.9) = (0.81−1)/(0.9−1) = (−0.19)/(−0.1) = 1.9; f(0.99) ≈ 1.99; f(0.999) ≈ 1.999 → approaching 2\n(c) f(x) = (x−1)(x+1)/(x−1) = x+1 for x ≠ 1; as x → 1, x+1 → 2; lim_{x→1} f(x) = 2 even though f(1) is undefined)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.85; ⌈0.85×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 DOMAIN-RANGE-CONFUSED first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now state the natural domain of a real-valued function by identifying formula restrictions, distinguish domain from range, and apply the single-output rule to test whether a given correspondence is a function. These skills are the entry point for limits, continuity, and all of calculus.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 132,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** P — Pictorial\n\"Input-output machine\" diagram: a function is a box; real numbers feed in from the left (domain); real numbers emerge on the right (range). The box accepts only numbers from its domain; it always produces exactly one output number.\n\n**Progression Gate (P → A):** Learner correctly identifies which real numbers a given formula accepts (domain) and how the domain restriction is determined by the formula's structure.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 57,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.func.real-valued-function",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Natural domain of rational and root functions | \"Domain of f(x) = 1/(x²−4)?\" (ℝ \\ {−2,2}) |\n| Day 3 | Range vs. domain | \"f(x) = |x|: domain? range?\" (ℝ; [0,∞)) |\n| Day 7 | Single-output rule applied to implicitly defined curves | \"Is x² + y² = 1 a function y of x? Why or why not?\" (No — fails vertical line test; two y for most x) |\n| Day 30 | Transfer to limit setup | \"Why does lim_{x→0} 1/x require x ≠ 0 in the domain?\" (domain of 1/x excludes 0; limit asks about behavior as x approaches 0, not at x=0) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 303,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "math.func.real-valued-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.func.real-valued-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.func.function-concept (required): single-output rule; domain, codomain, range definitions for general functions\n- math.found.real-numbers (required): ℝ as the domain and codomain; real-line structure determines natural domain constraints (square roots, denominators)\n\n**Enables:**\n- math.calc.limits (directly): limits study the behavior of a real-valued function near a point; the domain must exclude that point for the limit to be non-trivial (as shown in the P76 probe)\n\n**Cross-links (GR-8):**\n- math.calc.limits (Tier 1): P76 cross-link probe shows that the natural domain excludes the limit point x = 1 for f(x) = (x²−1)/(x−1), and the behavior as x → 1 is the prototype limit question\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.real-valued-function.md",
+        "startLine": 314,
+        "endLine": 328
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

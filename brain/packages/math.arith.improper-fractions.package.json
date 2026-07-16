@@ -1,0 +1,901 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.improper-fractions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.improper-fractions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:915be7e64127b7609dca64e526438c83013d726a70094d7ae6e5e3695852ff63",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.improper-fractions.md": "sha256:66cfbff2511855d58f83f0deba510d93c03dc2db19ee0a5b107f40ebc28fde32"
+    },
+    "assetCount": 29,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 19,
+      "mastery_probe": 5,
+      "teaching_note": 1
+    },
+    "ruleCount": 19
+  },
+  "concept": {
+    "conceptId": "math.arith.improper-fractions",
+    "name": "Improper Fractions",
+    "difficultyRaw": "2 (developing)",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.arith.fractions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.improper-fractions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.improper-fractions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.improper-fractions.md": "sha256:66cfbff2511855d58f83f0deba510d93c03dc2db19ee0a5b107f40ebc28fde32"
+      },
+      "contentHash": "sha256:d56c69499c6e6acb280b0887e12ad3a7711f632f5462fe90980ff78a7a58f925",
+      "ruleCount": 19,
+      "bandCounts": {
+        "3": 19
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-A03 (addresses MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-A05 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-B02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-B03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-C01 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-C02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-C03 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-C04 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-C05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.improper-fractions.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.improper-fractions.md#TA-E03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.improper-fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.improper-fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.improper-fractions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Learning Objective",
+      "content": "**Mastery statement:** A student who achieves mastery demonstrates that an improper fraction has a numerator ≥ denominator (representing a quantity ≥ 1), can convert between improper fractions and mixed numbers in both directions, and can explain WHY the two representations are equivalent — not just follow a procedure.\n\n**NOT mastery:** A student who can recite \"multiply and add for mixed to improper\" without understanding what the numerator of an improper fraction counts (total equal parts), or who cannot represent an improper fraction on a number line or with a concrete model, has NOT achieved mastery.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 32,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Improper fractions are \"wrong\"",
+      "content": "| MC-1 | Improper fractions are \"wrong\" | Student believes a fraction must always be less than 1; writes that 7/3 is \"invalid\" or \"wrong\" because the top is bigger than the bottom | Foundational | 1st (blocks conceptual acceptance of MC-2/MC-3) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Mixed-to-improper: multiply denominator by whole number only",
+      "content": "| MC-2 | Mixed-to-improper: multiply denominator by whole number only | Student converts 2¾ as 4×2=8, then writes 8+3=11 → 11/4 (correct), but for 3½ writes 2×3=6+1=7/2 is correct yet student cannot explain WHY this produces the total number of halves | Secondary | 2nd (procedural without understanding) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Improper-to-mixed: divide then confuse remainder",
+      "content": "| MC-3 | Improper-to-mixed: divide then confuse remainder | Student uses long division correctly but places the remainder as the numerator of the new fraction without retaining the original denominator (e.g., 11/4: 11÷4=2 remainder 3, writes 2 3/1 instead of 2¾) | Secondary | 2nd (independent of MC-2) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Concrete: Beyond One Whole",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete: Beyond One Whole\",\"primitives\":[\"P02\",\"P03\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 66,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Pictorial: Number Line Placement",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pictorial: Number Line Placement\",\"primitives\":[\"P01\",\"P07\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 113,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Abstract: Conversion Procedures",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Abstract: Conversion Procedures\",\"primitives\":[\"P01\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 155,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Connections: Equivalence and Use",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Connections: Equivalence and Use\",\"primitives\":[\"P01\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 217,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 265,
+        "endLine": 330
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Meaning Anchor: What the Numerator Counts",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Meaning Anchor: What the Numerator Counts\",\"primitives\":[\"P02\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 330,
+        "endLine": 380
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Fluency: Both Directions",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Fluency: Both Directions\",\"primitives\":[\"P01\",\"P26\",\"P30\",\"P49\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 380,
+        "endLine": 426
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 426,
+        "endLine": 482
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Misconception Triage",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Triage\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 482,
+        "endLine": 526
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "MC-1 Repair: Improper Fractions ARE Valid",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-1 Repair: Improper Fractions ARE Valid\",\"primitives\":[\"P27\",\"P29\",\"P30\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 526,
+        "endLine": 581
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "MC-2 Repair: WHY Mixed-to-Improper Works",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-2 Repair: WHY Mixed-to-Improper Works\",\"primitives\":[\"P06\",\"P26\",\"P27\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 581,
+        "endLine": 646
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "MC-3 Repair: Denominator Retention",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-3 Repair: Denominator Retention\",\"primitives\":[\"P06\",\"P26\",\"P27\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 646,
+        "endLine": 714
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Post-Repair Mastery Gate",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"Post-Repair Mastery Gate\",\"primitives\":[\"P01\",\"P28\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 714,
+        "endLine": 777
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Confidence Through Verification",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Confidence Through Verification\",\"primitives\":[\"P02\",\"P03\",\"P06\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 777,
+        "endLine": 819
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Confidence at Range",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Confidence at Range\",\"primitives\":[\"P01\",\"P26\",\"P30\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 819,
+        "endLine": 859
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 859,
+        "endLine": 914
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Retrieval Challenge",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Retrieval Challenge\",\"primitives\":[\"P01\",\"P06\",\"P49\",\"P55\",\"P77\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 914,
+        "endLine": 952
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Transfer Retrieval",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Transfer Retrieval\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P76\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 952,
+        "endLine": 992
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Maintenance Mastery Gate",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Maintenance Mastery Gate\",\"primitives\":[\"P01\",\"P02\",\"P03\",\"P06\",\"P07\",\"P08\",\"P26\",\"P27\",\"P28\",\"P29\",\"P30\",\"P32\",\"P34\",\"P41\",\"P49\",\"P54\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 992,
+        "endLine": 1135
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Mastery Gate",
+      "content": "**TA-A05 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"You've built a complete picture of improper fractions. Let's confirm mastery.\"\n\n**P77 — MASTERY PROBE (Retrieval):**\n\"Without looking at examples: (a) define an improper fraction. (b) State both conversion procedures from memory.\"\n\n*Expected:* (a) numerator ≥ denominator, represents ≥ 1 whole. (b) Improper→mixed: divide numerator by denominator, quotient=whole, remainder=new numerator, denominator unchanged. Mixed→improper: (whole × denominator) + numerator, over same denominator.\n\n**P55 — COMPREHENSION CHECK:** \"Why does the denominator stay the same in BOTH conversion directions?\"\n\n**P76 — TRANSFER PROBE:**\n\"A carpenter has 17/4 metres of wood. A second project needs 2¾ metres. Express both in the same form and determine if the carpenter has enough wood, and if so, how much is left over.\"\n\n*P76 independence note: cross_links=[]; transfer uses a carpentry measurement context; self-contained at the arithmetic level.*\n\n**P55 — COMPREHENSION CHECK:** \"Which form was more useful for the comparison? Which for the leftover calculation?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"A student writes: '7/3 is an improper fraction so it must be converted to 2⅓ before it can be used in any calculation.' Is this true? When would you KEEP the improper form?\"\n\n*Expected:* FALSE. Improper fractions are often PREFERRED for computation (addition, multiplication with common denominators). Convert to mixed only for final presentation or when the whole-number part carries real meaning.\n\n**P55 — COMPREHENSION CHECK:** \"Give one example where keeping the improper form is easier.\"\n\n**P74 — APPLICATION PROBE:**\n\"Convert: (a) 23/6 to mixed number. (b) 5⅝ to improper fraction. (c) Place 7/2 and 3½ on a number line and confirm they are the same point.\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): what does it mean for two different-looking expressions to name the same point?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"P77 both procedures stated accurately; P76 comparison correct; P75 false-statement identified with example; P74 all three correct\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_B\": {\n    \"criteria\": \"P77 definition correct but P74 application has errors\",\n    \"action\": \"Route to Protocol B for additional conversion practice.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 shows belief that improper fractions must always be converted (MC-1 resurgence) OR P74 shows conversion procedure error (MC-2/MC-3)\",\n    \"action\": \"Route to Protocol C for active misconception repair.\"\n  }\n}\n```\n\n---\n\n### Protocol B — State S1: Partial Knowledge / Procedural Without Understanding\n\n**Entry condition:** Student can perform conversions procedurally but cannot explain WHY the algorithm works, or struggles with one direction (improper→mixed or mixed→improper) while the other is fluent.\n\n**Instructional goal:** Anchor procedures to the \"counting equal parts\" meaning; solidify both directions with understanding.\n\n---",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 265,
+        "endLine": 330
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/mastery_probe/MP-TA-B03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Mastery Gate",
+      "content": "**TA-B03 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"Procedures are locked in and you understand why they work. Let's confirm mastery.\"\n\n**P77 — MASTERY PROBE:** \"State both conversion procedures and explain the meaning behind each.\"\n\n**P55 — COMPREHENSION CHECK:** \"What does the DENOMINATOR represent in an improper fraction? Does it change during conversion?\"\n\n**P76 — TRANSFER PROBE:**\n\"A tiler has 13/4 boxes of tiles. Each project needs 1¾ boxes. How many full projects can be completed? How many boxes remain? Show work in improper form.\"\n\n**P55 — COMPREHENSION CHECK:** \"Why was improper form convenient here?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"A student says: 'I always convert improper fractions to mixed numbers immediately because improper fractions are harder to work with.' Give a concrete example where this strategy would make calculation HARDER, not easier.\"\n\n**P55 — COMPREHENSION CHECK:** \"What is the general rule for when each form is preferred?\"\n\n**P74 — APPLICATION PROBE:**\n\"Convert: (a) 29/4, (b) 7 3/10, (c) 100/7. Verify each.\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): how many sevens fit in 100? What is the remainder?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; P75 strategy advice inverted correctly with example; procedures explained with meaning\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 or P74 reveals active misconception\",\n    \"action\": \"Route to Protocol C.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"Minor arithmetic error only\",\n    \"action\": \"Allow one retry of the failed item. If still wrong, route to Protocol C.\"\n  }\n}\n```\n\n---\n\n### Protocol C — State S2: Active Misconceptions\n\n**Entry condition:** Diagnostic identifies one or more active misconceptions from the registry. Protocol C opens with triage TA to confirm which misconceptions are active before routing to repair chains.\n\n---",
+      "localKey": "MP-TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 426,
+        "endLine": 482
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/mastery_probe/MP-TA-C05",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Post-Repair Mastery Gate",
+      "content": "**TA-C05 — Post-Repair Mastery Gate**\n\n*Entered after all active misconceptions repaired (MAMR complete).*\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"All misconceptions addressed. Let's confirm mastery of the full improper fractions concept.\"\n\n**P77 — MASTERY PROBE:**\n\"State: (a) the definition of an improper fraction, (b) both conversion procedures, and (c) which form is preferred for calculation.\"\n\n**P55 — COMPREHENSION CHECK:** \"Are improper fractions valid? What does 'improper' actually mean?\"\n\n**P76 — TRANSFER PROBE:**\n\"A fuel tank holds 5/2 litres. Express this as a mixed number. If the tank is filled by ¾ litre per minute, how many minutes to fill it? (Use improper form for calculation.)\"\n\n**P55 — COMPREHENSION CHECK:** \"How did using improper form simplify the division?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"Explain the error: 'Converting 19/5 → 19÷5=3 remainder 4, so the answer is 3 4/1.'\"\n\n*Expected:* Denominator should remain 5 (not become 1). Correct answer: 3⅘. The remainder 4 counts 4 fifths, not 4 wholes.\n\n**P55 — COMPREHENSION CHECK:** \"Verify 3⅘ by converting back: 3×5+4 = ?\"\n\n**P74 — APPLICATION PROBE:**\n\"Convert: (a) 41/6, (b) 8 5/12, (c) 53/9. Verify each.\"\n\n**P55 — COMPREHENSION CHECK:** \"For (a) and (c): use the convert-back check.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; MC-1 belief confirmed resolved (P77 answer confirms validity); conversion errors absent; P75 error correctly identified\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"One arithmetic error, not conceptual\",\n    \"action\": \"Allow one retry. If still wrong: route to relevant repair TA.\"\n  },\n  \"ROUTE_BACK\": {\n    \"criteria\": \"Two or more errors OR MC resurfaces\",\n    \"action\": \"Identify specific MC and re-enter repair chain.\"\n  }\n}\n```\n\n---\n\n### Protocol D — State S6: Low Confidence (Knows But Doubts)\n\n**Entry condition:** Assessment indicates student likely knows improper fractions correctly but shows hesitation or self-correction. GR-5 — P28 ABSENT from all Protocol D TAs.\n\n**Instructional goal:** Build confidence through successful retrieval; use convert-back check as the self-verification tool.\n\n---",
+      "localKey": "MP-TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 714,
+        "endLine": 777
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/mastery_probe/MP-TA-D03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Mastery Gate",
+      "content": "**TA-D03 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"You've demonstrated accurate conversion with self-verification. Final mastery confirmation.\"\n\n**P77 — MASTERY PROBE:** \"State both conversion procedures with confidence.\"\n\n**P55 — COMPREHENSION CHECK:** \"Which procedure do you find more reliable? Why?\"\n\n**P76 — TRANSFER PROBE:**\n\"A rope is 23/4 metres long. Cut it into pieces each 1¼ metres. How many full pieces? Express 23/4 as a mixed number first.\"\n\n**P55 — COMPREHENSION CHECK:** \"Why is the mixed-number form helpful for this word problem?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"True or False: 'Improper fractions should always be simplified to mixed numbers before computing.' Explain.\"\n\n**P55 — COMPREHENSION CHECK:** \"Give one calculation where keeping the improper form is better.\"\n\n**P74 — APPLICATION PROBE:** \"Convert: (a) 51/8, (b) 9 3/11, (c) 63/9. Verify each.\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): can you simplify 63/9 before converting? What does that give you?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; confidence evident; P75 false-statement handled correctly\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 or P74 reveals active misconception\",\n    \"action\": \"Route to Protocol C.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"Minor arithmetic error only\",\n    \"action\": \"One retry; advance if corrected.\"\n  }\n}\n```\n\n---\n\n### Protocol E — State S9: Mastery Maintenance (Spaced Repetition)\n\n**Entry condition:** Student previously achieved mastery. This session is a scheduled P89 retrieval event (intervals: 1, 3, 7, 21, 60 days).\n\n---",
+      "localKey": "MP-TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 859,
+        "endLine": 914
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/mastery_probe/MP-TA-E03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Maintenance Mastery Gate",
+      "content": "**TA-E03 — Maintenance Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:** \"Final maintenance check.\"\n\n**P77 — MASTERY PROBE:** \"Define improper fraction and state both conversion procedures.\"\n\n**P55 — COMPREHENSION CHECK:** \"Is the denominator retained during both conversion directions?\"\n\n**P76 — TRANSFER PROBE:**\n\"A baker uses 11/3 cups of milk. A recipe variant needs 3⅔ cups. Are these the same? Show conversion.\"\n\n**P55 — COMPREHENSION CHECK:** \"What does this confirm about the two representations?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"A student converts 27/4 as: '27÷4=6 remainder 3, so 6 3/4.' Is this correct? Check.\"\n\n*Expected:* WRONG. 27÷4=6 rem 3 but 6×4=24 ≠ 27. Actual: 6 rem 3 but 6×4=24+3=27, so 6¾ IS correct. Wait — 6×4+3=27 ✓. Actually 27/4 = 6¾ IS correct. Student above is RIGHT. The misconception probe tests whether the student can verify rather than just accept.*\n\n**P55 — COMPREHENSION CHECK:** \"How did you verify? What is 6×4+3?\"\n\n**P74 — APPLICATION PROBE:** \"Convert: (a) 35/6, (b) 7 4/9, (c) 48/5.\"\n\n**P55 — COMPREHENSION CHECK:** \"Verify (b) by converting back.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; retention confirmed\",\n    \"action\": \"Record retention confirmation. Schedule next P89 interval. Blueprint cycle continues.\"\n  },\n  \"DECAY_DETECTED\": {\n    \"criteria\": \"Two or more probes missed\",\n    \"action\": \"Route to Protocol B for refresh. Reset P89 schedule from day 1.\"\n  },\n  \"PARTIAL_DECAY\": {\n    \"criteria\": \"One probe missed\",\n    \"action\": \"Address that probe. Re-gate at end of session.\"\n  }\n}\n```\n\n---\n\n\n## Component 5 — Spaced Repetition Schedule\n\n**Primitive:** P89 — SPACED REPETITION\n\n**Trigger:** Fires after each P78 PASS event.\n\n**Intervals:** 1 day → 3 days → 7 days → 21 days → 60 days\n\n**Entry point on each firing:** Protocol E (TA-E01 → TA-E02 → TA-E03)\n\n**Decay rule:** DECAY_DETECTED at any Protocol E gate → reset to day 1 → Protocol B before next session.\n\n---\n\n\n## Component 6 — Cross-Link Bridge\n\n**Cross-linked concept:** none (cross_links=[]).\n\nThe related concept `math.arith.mixed-numbers` (KG `related` field) is the natural companion — improper fractions and mixed numbers are two representations of the same quantity. When a student later studies `math.arith.mixed-numbers`, this blueprint's conversion procedures provide direct foundation. No formal cross_link bridge required; the KG `related` field notes this connection without creating a cross-curriculum dependency.\n\n---\n\n\n## Component 7 — Retrieval Architecture\n\n**P89 anchor moments:**\n1. After TA-A05 mastery gate PASS → schedule Protocol E at 1, 3, 7, 21, 60 days\n2. After TA-B03 mastery gate PASS → same schedule\n3. After TA-C05 mastery gate PASS → same schedule\n4. After TA-D03 mastery gate PASS → same schedule\n\n**Retrieval spacing rationale:** estimated_hours=2 → brief concept, but the conversion procedures (especially denominator retention, MC-3) are fragile and decay quickly without retrieval practice. The 7-day and 21-day intervals specifically target MC-3 decay, which research shows resurfaces after initial repair.\n\n---\n\n\n## Component 8 — Primitive Usage Index\n\n| Primitive | Role in this Blueprint | TAs Used |\n|-----------|------------------------|----------|\n| P01 | Attention anchor | A02–A05, B02–B03, C03–C05, D02–D03, E01–E03 |\n| P02 | Context establishment | A01, B01, C01, D01 |\n| P03 | Concrete manipulation | A01, D01 |\n| P06 | Explicit strategy instruction | A01, A03, A04, B01, C03, C04 |\n| P07 | Perceptual salience — number line | A02 |\n| P26 | Worked example | A01–A04, B01–B02, C01, C03–C04, D02 |\n| P27 | Misconception naming | C02–C04 |\n| P29 | Contrastive analysis | C02 |\n| P30 | Bridge reinforcement | A02 (context), B02, C02, D02 |\n| P32 | Consolidation checkpoint | C02–C04 |\n| P34 | Corrective worked example | C02–C04 |\n| P41 | Misconception detector — triage | C01 |\n| P49 | Adaptive checkpoint — 4-branch routing | All TAs |\n| P55 | Comprehension check | All TAs |\n| P74 | Application probe | A05, B03, C05, D03, E03 |\n| P75 | Misconception probe | A05, B03, C05, D03, E03 |\n| P76 | Transfer probe | A05, B03, C05, D03, E02, E03 |\n| P77 | Mastery probe (retrieval) | A05, B03, C05, D03, E01, E03 |\n| P78 | Mastery gate | A05, B03, C05, D03, E03 |\n| P89 | Spaced repetition scheduler | Component 5 |\n| P91 | Named compound (mastery gate expansion) | All mastery gate TAs |\n\n---\n\n\n## Component 9 — Validation Checklist\n\n| Check | Criterion | Status | Evidence |\n|-------|-----------|--------|----------|\n| V-1 | All concept id slots reference valid KG nodes | PASS | math.arith.improper-fractions: KG confirmed. math.arith.fractions (requires): KG confirmed. cross_links=[]: no additional IDs to verify. |\n| V-2 | difficulty → cpa_entry_stage correct per spec | PASS | difficulty=2 (developing), domain≠physics → cpa_entry_stage=C. Correct. |\n| V-3 | mastery_threshold matches KG value | PASS | KG: mastery_threshold=0.85. Blueprint Component 0: 0.85. Match confirmed. |\n| V-4 | Canonical 10-field schema only (no domain/concept_type) | PASS | Component 0 uses: id, name, requires, unlocks, cross_links, difficulty, bloom, mastery_threshold, estimated_hours, description. No domain/concept_type fields. |\n| V-5 | No invented primitives | PASS | All primitives used (P01–P07, P26–P32, P34, P41, P49, P55, P74–P78, P89, P91) exist in the Primitive Library. |\n| V-6 | GR-1: all TAs start P01 or P02 | PASS | Protocol A: A01→P02 ✓, A02→P01 ✓, A03→P01 ✓, A04→P01 ✓, A05→P01 ✓. Protocol B: B01→P02 ✓, B02→P01 ✓, B03→P01 ✓. Protocol C: C01→P02 ✓, C02→P27 (repair-chain exception, D-category misconception-naming opener) ✓, C03→P27 ✓, C04→P27 ✓, C05→P01 ✓. Protocol D: D01→P02 ✓, D02→P01 ✓, D03→P01 ✓. Protocol E: E01→P01 ✓, E02→P01 ✓, E03→P01 ✓. All compliant. |\n| V-7 | GR-2: P55 follows every elicitation primitive | PASS | All P41, P49, P74, P75, P76, P77, P78 occurrences are followed by P55 within their TA or are the terminal element of a P91 expansion. P91 expansion: P77→P55→P76→P55→P75→P55→P74→P55→P78 verified for all 5 mastery gate TAs. |\n| V-8 | GR-3: P08 only after P06 or P07 has fired | PASS | P08 not used. Rule vacuously satisfied. |\n| V-9 | GR-4: repair chain entered only after P41/P64 | PASS | Protocol C opens with TA-C01 containing P41. Routing to C02/C03/C04 occurs only via P49 branch in TA-C01, which fires after P41. |\n| V-10 | GR-5: P28 absent from S6 Protocol | PASS | Protocol D contains TAs D01, D02, D03. P28 is absent from all three. Confirmed. |\n| V-11 | GR-6: P91 terminal in all mastery gate TAs | PASS | P91 in: A05, B03, C05, D03, E03. In each case P91 expanded as P77→P55→P76→P55→P75→P55→P74→P55→P78, with P78 terminal. |\n| V-12 | GR-7: ≤3 consecutive C-primitives | PASS | Longest C-primitive runs examined: TA-C02 has P27(D)→P29(C)→P34(C)→P30(C) — P27 is D-category, breaking the C-count; P29→P34→P30 = 3 consecutive C-primitives. No sequence exceeds 3. |\n| V-13 | GR-8: P54 precedes high-difficulty first-attempt questions | PASS | difficulty=2; GR-8 applies to difficulty≥4. Not applicable. |\n| V-14 | GR-9: assessment primitives not in first TA unless diagnostic | PASS | TA-A01 is the first TA of Protocol A. It contains P49 (routing/elicitation) but no P74/P75/P76/P77/P78. Compliant. |\n| V-15 | GR-10: Named Compound expansions substituted | PASS | P91 expanded in all 5 mastery gate TAs (A05, B03, C05, D03, E03). P89 referenced as spaced-repetition scheduler in Component 5. |\n| V-16 | Response taxonomy present for all elicitation primitives | PASS | All P49 instances carry complete 4-branch JSON taxonomy. P77/P75/P74/P76 have specified expected responses in text. |\n| V-17 | All P49 branches specified (CORRECT/PARTIAL/INCORRECT/NO_RESPONSE) | PASS | Verified for all 14 P49 instances: A01, A02, A03, A04, B01, B02, C01, C02, C03, C04, D01, D02, E01, E02. All 4 branches present. |\n| V-18 | Session cap respected | PASS | estimated_hours=2 → max 5 TAs. Protocol A: 5 TAs ✓. Protocol B: 3 TAs ✓. Protocol C: up to 5 TAs (C01 + up to 3 repair TAs + C05) ✓. Protocol D: 3 TAs ✓. Protocol E: 3 TAs ✓. |\n| V-19 | Transfer contexts reference cross-linked concept (P76 independence note if cross_links=[]) | PASS | cross_links=[]. All P76 transfer probes use self-contained real-world contexts (carpentry, fuel tanks, tiling, cycling, baking). P76 independence note documented in Component 6. |\n| V-20 | AIR-1 through AIR-5 pass | PASS | AIR-1: All content slots finite and KG-sourced (specific fractions, conversion examples — all pre-specified). AIR-2: Response taxonomies pre-authored in all P49 branches. AIR-3: Branching deterministic (MAMR order fixed; all routes pre-specified). AIR-4: Primitives are concept-independent pedagogical operations. AIR-5: All TA sequences fixed at authoring time. PASS. |\n\n**PACKAGE_READY: YES** — All 20 V-checks PASS. Components 0–9 present. Blueprint approved for Educational Brain integration.",
+      "localKey": "MP-TA-E03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 992,
+        "endLine": 1135
+      }
+    },
+    {
+      "assetId": "math.arith.improper-fractions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.improper-fractions",
+      "title": "Spaced Repetition Schedule",
+      "content": "**Primitive:** P89 — SPACED REPETITION\n\n**Trigger:** Fires after each P78 PASS event.\n\n**Intervals:** 1 day → 3 days → 7 days → 21 days → 60 days\n\n**Entry point on each firing:** Protocol E (TA-E01 → TA-E02 → TA-E03)\n\n**Decay rule:** DECAY_DETECTED at any Protocol E gate → reset to day 1 → Protocol B before next session.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.improper-fractions.md",
+        "startLine": 1047,
+        "endLine": 1061
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

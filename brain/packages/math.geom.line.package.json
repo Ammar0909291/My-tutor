@@ -1,0 +1,437 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.line-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.line",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8f5b7b02ab9cf7c746d87a2766cf47765f5808d69ad37394a56088a6e5b60964",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.line.md": "sha256:4a127805807b47841a4b45a3bcbcb1bbae6073e7320ae9f48bcc9429c660b4a8"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.geom.line",
+    "name": "Line",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.geom.point"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.line-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.line (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.line.md": "sha256:4a127805807b47841a4b45a3bcbcb1bbae6073e7320ae9f48bcc9429c660b4a8"
+      },
+      "contentHash": "sha256:b900a700a929a3cdf786fb97dfae80b6dc7f4d68c750335c30b5e659e86dada6",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.line.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.line.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.line"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.line\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.line.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.line.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.line"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.line\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.line.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.line.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.line"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.line\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.line.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.line.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.line"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.line\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.line.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.line.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.line"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.line\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.line.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.line.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.line"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.line\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.line.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.line.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.line"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.line\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.line/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.line",
+      "title": "Line — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.geom.point**: A point is a dimensionless location, defined by coordinates or by name. A line is built from the relationships between points — specifically, any two distinct points determine exactly one line.\n\n### Target Understanding\n1. A geometric line is a one-dimensional figure that extends infinitely in both directions, has no endpoints, no thickness, and no width.\n2. Two distinct points determine exactly one line (Euclid's first postulate in modern form). Equivalently, two distinct points lie on a unique line.\n3. A line is a primitive (undefined) term in Euclidean geometry — like a point, it is not defined in terms of simpler geometric objects; its properties are given by axioms.\n4. Notation: the line through points P and Q is written ↔PQ (with arrows on both ends) or with a lowercase letter (l, m, n). A line is not a segment.\n5. Three related objects share the \"line\" family but differ by extent: line (infinite, both directions), ray (starts at a point, extends infinitely in one direction: →PQ), line segment (finite, two endpoints: ─PQ).\n\n### Cross-Link Activation\n- **math.geom.line-equation**: The algebraic equation y = mx + b is the coordinate representation of a line in the plane. The geometric concept (two points determine one line) corresponds to the algebraic fact that two points determine m and b uniquely. P76 bridges these.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 31,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.geom.line/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.line",
+      "title": "[FOUNDATIONAL] — LINE-HAS-ENDPOINTS",
+      "content": "### MC-1 [FOUNDATIONAL] — LINE-HAS-ENDPOINTS\n- **Trigger**: \"A line connects two points\" or treating \"line\" and \"line segment\" as interchangeable.\n- **Root cause**: In everyday speech, \"draw a line between A and B\" means draw a segment; early classroom diagrams show lines with two tick-marks (endpoints) on a whiteboard; the word \"line\" colloquially means \"a short mark.\"\n- **Error pattern**: Learner defines a line as having two endpoints; does not recognize the infinite extension; cannot distinguish line, ray, and segment.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.geom.line/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.line",
+      "title": "— LINE-HAS-THICKNESS",
+      "content": "### MC-2 — LINE-HAS-THICKNESS\n- **Trigger**: \"A line is the thinnest possible mark\" or measuring width of a drawn line.\n- **Root cause**: Physical representations of lines (pencil marks, laser beams) have measurable width; learner confuses the representation with the mathematical object.\n- **Error pattern**: Claims a line has width; believes two parallel \"lines\" could be close enough to touch; cannot distinguish the drawn model from the abstract concept.\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.line/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.line",
+      "title": "— LINE-NEEDS-EQUATION",
+      "content": "### MC-3 — LINE-NEEDS-EQUATION\n- **Trigger**: \"Without an equation, a line is not well-defined\" or \"a line is only a line if you can write y = mx + b for it.\"\n- **Root cause**: Algebraic representations of lines (y = mx + b) come early in school; learner conflates the algebraic tool for describing a line with the geometric object itself.\n- **Error pattern**: Believes vertical lines (x = k) are \"not real lines\" because they can't be written as y = mx + b; doesn't accept the geometric definition from two points.\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.line",
+      "title": "What a Line Is: Analogy and Representations",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"What a Line Is: Analogy and Representations\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 87,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.line",
+      "title": "Misconception Gate: LINE-HAS-ENDPOINTS (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: LINE-HAS-ENDPOINTS (FOUNDATIONAL)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 119,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.line",
+      "title": "Contrast Pair: Line vs. Ray vs. Line Segment",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast Pair: Line vs. Ray vs. Line Segment\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 146,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.line",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 180,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.line",
+      "title": "Repair MC-1 LINE-HAS-ENDPOINTS",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 LINE-HAS-ENDPOINTS\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 234,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.line",
+      "title": "Repair MC-2 LINE-HAS-THICKNESS",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 LINE-HAS-THICKNESS\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 255,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.line",
+      "title": "Repair MC-3 LINE-NEEDS-EQUATION",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 LINE-NEEDS-EQUATION\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 273,
+        "endLine": 371
+      }
+    },
+    {
+      "assetId": "math.geom.line/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.line",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A04 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal in this TA]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\n\nQ1: True or False: A geometric line has two endpoints.\nQ2: How many geometric lines can pass through two distinct points? Through one point?\nQ3: Classify each object: (A) The x-axis in the coordinate plane; (B) The edge of a ruler from 0 cm to 30 cm; (C) A sunray from the sun toward Earth. Is each a line, a ray, or a segment?\nQ4: A student says \"a geometric line has infinite length.\" Is this a correct statement about a geometric line?\n\n**P55 (SCORE):**\nQ1: FALSE — a geometric line has NO endpoints; it extends infinitely in both directions.\nQ2: Exactly one line through two distinct points. Infinitely many lines through one point.\nQ3: A → Line (x-axis extends infinitely in both directions). B → Line segment (finite, two endpoints at 0 and 30 cm). C → Ray (starts at the sun, extends outward in one direction).\nQ4: Technically, saying \"infinite length\" is imprecise — a line does not have a finite length; its extent is unbounded. The preferred phrasing: \"a line extends infinitely\" or \"a line is unbounded.\" Accept \"TRUE\" if learner correctly interprets it as \"extends without bound.\"\n\n**P76 (TRANSFER PROBE — Cross-link: math.geom.line-equation):**\n\n**Context**: A coordinate plane has the equation y = 3x − 2 plotted on it.\n\n**(a)** How many points lie on the line y = 3x − 2?\n**(b)** A student knows two points lie on y = 3x − 2: A = (1, 1) and B = (2, 4). Can these two points determine the line y = 3x − 2 uniquely, or could another line also pass through both A and B?\n**(c)** Is the set of all points satisfying y = 3x − 2 a line, a ray, or a segment? Justify.\n\n**Expected answers**:\n(a) Infinitely many — one for each x-value (every real number x gives a point (x, 3x−2) on the line).\n(b) Uniquely — two distinct points determine exactly one line. A = (1,1) and B = (2,4) lie on exactly one line; that line is y = 3x − 2.\n(c) A line — the equation is satisfied for all real x (no restriction), so the set extends infinitely in both directions (no endpoints). A segment would require restricting x to an interval; a ray would restrict x to a half-line.\nCross-link: math.geom.line-equation — the geometric uniqueness property (two points → one line) corresponds algebraically to the fact that two data points determine both slope m and intercept b in y = mx + b.\n\n**P55 (SCORE):** Infinite points confirmed; uniqueness stated; line (not segment or ray) identified with justification.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, P76 = **5 items**.\nPass criterion: **5/5** (⌈0.95 × 5⌉ = 5; threshold = 0.95).\n- **PASS (5/5)** → P78.\n- **FAIL (< 5/5)** → P74 repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong or Q2 wrong → TA-B01 (LINE-HAS-ENDPOINTS; apply MAMR).\n- Q3 wrong → TA-B01 (segment/ray/line confusion) or TA-B02 (LINE-HAS-THICKNESS if reasoning involves width); apply MAMR.\n- Q4 wrong → TA-B02 (conceptual confusion about infinite extent).\n- P76 wrong → TA-B03 (LINE-NEEDS-EQUATION — if learner confuses the equation with the geometric object).\n- Multiple wrongs → MAMR: TA-B01 first; then FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.geom.angle, math.geom.parallel-lines. Children unlocked: math.geom.line-segment, math.geom.ray.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 180,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.line",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a physical analogy (Concrete): a laser beam that extends infinitely. Move to Pictorial (diagram with arrows, notation ↔PQ, contrast with ray and segment) in TA-A01 and TA-A03. Reach Abstract (Euclid's axiom, primitive-term definition) by TA-A03.\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). If triggered in later TAs, route → TA-B01 → return. MC-2 and MC-3 FIFO after MC-1 cleared.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 73,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.geom.line/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.line",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (endpoints?) + Q3 (classify line/ray/segment) | 2/2 |\n| Day 3 | Q2 (uniqueness) + P76 probe (b) | 2/2 |\n| Day 7 | Mixed 3-item: define line, classify 2 objects | 2/3 |\n| Day 21 | Q1, Q2, Q3, Q4 (4 items) | 4/4 |\n| Day 60 | Full 5-item mastery gate | 5/5 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing by error type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 289,
+        "endLine": 303
+      }
+    },
+    {
+      "assetId": "math.geom.line/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.line",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Point | math.geom.point | A point is a dimensionless location; a line is determined by any two distinct points |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Angle | math.geom.angle | Two rays sharing an endpoint form an angle; rays are sub-objects of lines |\n| Parallel Lines | math.geom.parallel-lines | Two lines in the same plane that never intersect (requires line definition) |\n\n### Output Children (sub-objects)\n| Blueprint | KG ID | Relationship |\n|---|---|---|\n| Line Segment | math.geom.line-segment | A finite piece of a line bounded by two endpoints |\n| Ray | math.geom.ray | Half of a line starting at one endpoint and extending infinitely in one direction |\n\n### Cross-Links\n- **math.geom.line-equation**: A line in the coordinate plane is represented by y = mx + b (or x = k for vertical). The geometric uniqueness property (two points determine one line) corresponds to the algebraic determination of m and b from two data points.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.line.md",
+        "startLine": 303,
+        "endLine": 327
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

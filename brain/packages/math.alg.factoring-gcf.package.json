@@ -1,0 +1,299 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.factoring-gcf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.factoring-gcf",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:277b1c7523b2538a5b73ba55e10992bc5cbd2c6cd809da4d7407e6cd778535bb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.factoring-gcf.md": "sha256:2941664b0ea2ecca819441f78fe8e5e4d60cca6a396f8a51425ecf2c6445ef1f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.factoring-gcf",
+    "name": "Factoring out the GCF",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.alg.factoring"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.factoring-gcf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.factoring-gcf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.factoring-gcf.md": "sha256:2941664b0ea2ecca819441f78fe8e5e4d60cca6a396f8a51425ecf2c6445ef1f"
+      },
+      "contentHash": "sha256:4329404f43581bd03988c634f638dafc242f283cde68d9bc60bcc36e52c04c73",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-gcf.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-gcf.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-gcf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-gcf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-gcf.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-gcf.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-gcf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-gcf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-gcf.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-gcf.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-gcf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-gcf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.factoring-gcf/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "Factoring out the GCF — cognitive map",
+      "content": "**Core concept:** The distributive law in reverse: a·b + a·c = a(b + c). To factor out the GCF from a polynomial expression, identify the largest factor (numerical and variable) common to every term, then write the expression as GCF × (remaining sum). The remaining terms inside the parentheses are each term divided by the GCF. Verification by expanding confirms correctness.\n\n**Conceptual progression:**\n1. GCF of integers: GCF(12, 8) = 4 because 4 is the largest integer dividing both 12 and 8.\n2. GCF of monomials: GCF(6x³, 4x²) = 2x² — take GCF of numerical coefficients AND the lowest power of each shared variable.\n3. Apply distributive law in reverse: 6x³ + 4x² = 2x²(3x + 2).\n4. Multi-term expressions: apply GCF to all terms simultaneously; divide each term by the GCF.\n5. Verification: expand GCF × (residual) and confirm it reproduces the original expression.\n\n**CPA arc (entry: C):**\n- Concrete: physical tile grouping — 12 red tiles and 8 blue tiles arranged into 4 equal groups of (3 red + 2 blue) mirrors 12 + 8 = 4(3 + 2).\n- Pictorial: area model — rectangle with width = GCF and partitioned length (term 1 / GCF + term 2 / GCF).\n- Abstract: GCF extraction algorithm — numerical GCF of coefficients times lowest shared variable power; then divide each coefficient by numerical GCF and each variable factor by the GCF variable part.\n\n**Prior knowledge activated:** math.alg.factoring — systematic factoring strategy, including GCF as the first step; distributive law a(b+c) = ab+ac; monomial arithmetic (multiplying and dividing terms like 12x³ ÷ 4x²).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "MISSING-VARIABLE-IN-GCF [FOUNDATIONAL]",
+      "content": "### MC-1: MISSING-VARIABLE-IN-GCF [FOUNDATIONAL]\n**Description:** Learner correctly identifies the numerical GCF of the coefficients but ignores the variable factor, leaving x-terms un-extracted.\n**Surface form:** \"6x² + 4x: numerical GCF is 2 → 2(3x² + 2x).\" Correct: GCF = 2x → 2x(3x + 2).\n**Root cause:** The learner focuses only on the integer GCF algorithm and does not extend it to variable factors; the variable part is treated as part of the \"content\" rather than as a factor to be extracted.\n**Trigger condition:** Any expression where the variable factor contributes to the GCF (most polynomial GCF problems).\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "HIGHEST-POWER-IN-GCF",
+      "content": "### MC-2: HIGHEST-POWER-IN-GCF\n**Description:** Learner takes the highest power of the variable shared across terms rather than the lowest power.\n**Surface form:** \"4x³ + 8x²: common factor is x³ → x³(4 + 8x²/x³).\" Correct: GCF includes x² (the lower power); x³ does not divide 8x².\n**Root cause:** Confusion between LCM (highest powers, used for adding fractions) and GCF (lowest powers, used for factoring out). Learner applies the LCM strategy to GCF.\n**Trigger condition:** Any expression where terms have different powers of the same variable.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "QUOTIENT-ARITHMETIC-ERROR",
+      "content": "### MC-3: QUOTIENT-ARITHMETIC-ERROR\n**Description:** Learner correctly identifies the GCF but makes errors when dividing individual terms by the GCF, producing wrong residual terms inside the parentheses.\n**Surface form:** \"12x³ + 8x² = 4x(3x³ + 2x)\" — divides numerically by 4 but fails to account for the x in the GCF when dividing the variable parts (12x³ ÷ 4x = 3x², not 3x³).\n**Root cause:** The learner divides the numerical part of each term by the numerical GCF correctly but does not apply the subtraction of exponents rule for the variable part (x^m ÷ x^k = x^(m−k)).\n**Trigger condition:** Any expression where the GCF contains a variable factor.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "Repair for MC-1 (MISSING-VARIABLE-IN-GCF)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (MISSING-VARIABLE-IN-GCF)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 137,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "Repair for MC-2 (HIGHEST-POWER-IN-GCF)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (HIGHEST-POWER-IN-GCF)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 199,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "Repair for MC-3 (QUOTIENT-ARITHMETIC-ERROR)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (QUOTIENT-ARITHMETIC-ERROR)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 218,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "Protocol A, TA-A03 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.9 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Factor out the GCF: 6x² + 9x.\"\n[Expected: GCF(6,9)=3; variable: min power of x is x. GCF=3x. 6x²÷3x=2x; 9x÷3x=3. Result: 3x(2x+3). Verify: 3x·2x=6x² ✓; 3x·3=9x ✓.]\n\n**Item 2:**\n\"Factor out the GCF: 8x³y² − 12x²y³.\"\n[Expected: GCF(8,12)=4; x: min(3,2)=2 → x²; y: min(2,3)=2 → y². GCF=4x²y². 8x³y²÷4x²y²=2x; −12x²y³÷4x²y²=−3y. Result: 4x²y²(2x−3y). Verify: 4x²y²·2x=8x³y² ✓; 4x²y²·(−3y)=−12x²y³ ✓.]\n\n**Item 3:**\n\"Factor out the GCF: 5a²b + 10ab² + 15ab.\"\n[Expected: GCF(5,10,15)=5; a: min(2,1,1)=1 → a; b: min(1,2,1)=1 → b. GCF=5ab. 5a²b÷5ab=a; 10ab²÷5ab=2b; 15ab÷5ab=3. Result: 5ab(a+2b+3). Verify: 5ab·a=5a²b ✓; 5ab·2b=10ab² ✓; 5ab·3=15ab ✓.]\n\n**Item 4:**\n\"Identify the error: '4x³ + 8x² = 4x³(1 + 2x^{−1}).' What is the correct factored form?\"\n[Expected: Error — GCF should be 4x² (lowest variable power), not 4x³ (which does not divide 8x² leaving integer quotients). Correct: GCF=4x²; 4x³÷4x²=x; 8x²÷4x²=2. Result: 4x²(x+2). Verify: 4x²·x=4x³ ✓; 4x²·2=8x² ✓.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Factor out the GCF from 4x⁴ − 12x³ + 8x². Show all steps and verify by expanding.\"\n\n[Expected:\nStep 1: GCF(4,12,8) = 4.\nStep 2: Variable x: min power in {x⁴, x³, x²} = x².\nStep 3: GCF = 4x².\nStep 4: 4x⁴÷4x²=x²; −12x³÷4x²=−3x; 8x²÷4x²=2.\nStep 5: 4x⁴−12x³+8x² = 4x²(x²−3x+2).\nStep 6: Verify: 4x²·x²=4x⁴ ✓; 4x²·(−3x)=−12x³ ✓; 4x²·2=8x² ✓.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if GCF is correct (4x²), residual is correct (x²−3x+2), and verification is shown; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can reliably identify the full GCF (numerical + variable parts) and extract it from polynomial expressions, verifying by expansion.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 (numeric GCF only, variable missed) or Item 4 (wrong power) or P76 GCF wrong: → TA-B01 or TA-B02 based on error type (MC-1 if variable missing; MC-2 if highest power used); re-gate\n- FAIL on Items 2 or 3 or P76 (residual arithmetic wrong): → TA-B03 (QUOTIENT-ARITHMETIC-ERROR repair), then re-gate\n- FAIL on Item 4 identification only (can't name the error): → return to A01 GCF-vs-LCM explanation; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated the ability to factor out the GCF from polynomial expressions reliably: identifying both the numerical GCF and the variable GCF (lowest shared exponent), dividing each term correctly, and verifying by expansion.\n\nKey anchors to carry forward:\n- GCF of monomials = (GCF of coefficients) × (each variable raised to its minimum exponent).\n- Divide each term: coefficient ÷ numerical GCF; subtract exponents for each variable.\n- Always verify: GCF × residual = original expression.\n- GCF uses MINIMUM exponents; LCM uses maximum exponents — never confuse them.\n\nThis GCF skill is the first step of all systematic polynomial factoring.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 323,
+        "endLine": 414
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Compute GCF(12, 8) and GCF(x³, x²).\" Correct responses (4; x²) confirm both the numerical GCF and the variable GCF algorithm from prerequisite knowledge. Follow up: \"If GCF(12x³, 8x²) = 4x², what are 12x³ ÷ 4x² and 8x² ÷ 4x²?\" (Expected: 3x and 2.) This primes division of monomials by the GCF before full extraction.\n\n**Scaffolding ladder:**\n- Rung 1 (concrete): tile grouping — split 12 red + 8 blue tiles into equal groups; confirm GCF = 4; write 12 + 8 = 4·3 + 4·2 = 4(3+2).\n- Rung 2 (pictorial): area model with GCF as one dimension; label each partition with the quotient term.\n- Rung 3 (abstract): full GCF extraction from 3-term polynomial; verify by expansion.\n\n**Pacing note:** h=3 estimated hours; A01 + A02 in sessions 1–2; mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Factor completely by GCF: (a) 24a³b² − 16a²b³ + 8ab; (b) −15x⁴ + 10x³ − 5x².\"\n[Expected: (a) GCF=8ab; 8ab(3a²b−2ab²+1). Verify. (b) GCF=−5x²; −5x²(3x²−2x+1). Verify: −5x²·3x²=−15x⁴ ✓.]\n\n**Day 10 prompt:**\n\"The expression 6x²y + 9xy² + 3xy factors as 3xy(2x + 3y + 1). A student claims GCF = xy (missing the factor of 3). Explain the error and give the correct GCF and factored form.\"\n[Expected: GCF of coefficients 6,9,3 is 3, not 1. Correct GCF=3xy. If GCF=xy were used: xy(6x+9y+3) which is partially factored but not completely — 3 is still a common factor of 6,9,3 inside. Complete: 3xy(2x+3y+1).]\n\n**Day 30 prompt:**\n\"Factor: p(x,y) = x^n·y^m + x^(n−1)·y^(m+1) for positive integers n,m with n≥1, m≥1. State the GCF and the factored form.\"\n[Expected: GCF = x^(n−1)·y^m (minimum powers: min(n,n−1)=n−1; min(m,m+1)=m). p = x^(n−1)y^m(x + y). Verify: x^(n−1)y^m·x = x^n·y^m ✓; x^(n−1)y^m·y = x^(n−1)·y^(m+1) ✓.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 248,
+        "endLine": 266
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-gcf/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.factoring-gcf",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.alg.factoring — complete polynomial factoring strategy; GCF extraction is the first step of the systematic factoring algorithm; this blueprint provides a focused fluency drill on that single step\n\n**Unlocked blueprints:** none directly (GCF fluency is a supporting skill for math.alg.factoring and downstream algebra topics).\n\n**Cross-links:**\n- math.nt.gcd — the formal number-theoretic definition of GCF/GCD (Euclidean algorithm, prime factorisation); this blueprint uses the GCF concept operationally; the GCD blueprint provides the theoretical foundation. math.nt.gcd is NOT a Tier 1 concept → P76 uses independence mode, not a cross-link probe.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-gcf.md",
+        "startLine": 266,
+        "endLine": 278
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

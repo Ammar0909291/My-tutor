@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.u-substitution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.u-substitution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:39462e395bfcebc77ea969c5a7b800451a7d66d5000a730fa6681c45e2ea6c35",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.u-substitution.md": "sha256:341d67a1d582b280a543a3b988882a41cad30c14e4a5ed228c2f7f4e054e560d"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.u-substitution",
+    "name": "Integration by Substitution (u-substitution)",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.ftc-part2",
+      "math.calc.chain-rule"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.u-substitution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.u-substitution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.u-substitution.md": "sha256:341d67a1d582b280a543a3b988882a41cad30c14e4a5ed228c2f7f4e054e560d"
+      },
+      "contentHash": "sha256:48e00fe449458eb22ebc38f1d49afd963ffea7139b3ade5bf85bb8af2130695e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.u-substitution.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.u-substitution.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.u-substitution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.u-substitution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.u-substitution.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.u-substitution.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.u-substitution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.u-substitution\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.u-substitution.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.u-substitution.md#TA-A03 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.u-substitution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.u-substitution\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.u-substitution.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.u-substitution.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.u-substitution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.u-substitution\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.u-substitution/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Integration by Substitution (u-substitution) — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.chain-rule**: (f∘g)'(x) = f'(g(x))·g'(x); outer-inner decomposition; d/dx[F(g(x))] = F'(g(x))·g'(x)\n- **math.calc.ftc-part2**: ∫ₐᵇ f(x)dx = F(b)−F(a); antiderivative families; evaluation theorem; definite vs indefinite integrals\n\n### Target Knowledge State\nStudent fluently applies u-substitution to evaluate indefinite and definite integrals: identifies u=g(x) (the inner function), computes du=g'(x)dx, verifies g'(x) appears as a factor in the integrand (or adjusts with a constant), rewrites the integral in terms of u, evaluates, and back-substitutes. For definite integrals, converts limits to u-limits and evaluates without back-substitution. Recognises when substitution will not work (g'(x) entirely absent) versus when it requires a constant adjustment.\n\n### Conceptual Obstacles\n1. Failing to verify that g'(x) (up to a constant) appears in the integrand — writing u=x² for ∫cos(x²)dx and proceeding without du=2x dx present; the method cannot proceed when the differential is completely absent\n2. Keeping x-limits unchanged in a definite integral after substituting u — computing [F(u)]₀¹ with original x-bounds instead of converting to u-bounds (x=0 → u=g(0), x=1 → u=g(1))\n3. Computing du incorrectly — writing du=x dx instead of du=2x dx for u=x², or omitting the factor from the chain rule; leads to wrong constant multiple in the result\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Worked Example Pair",
+      "content": "### Teaching Action A02 — Worked Example Pair\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Build substitution fluency across two difficulty levels: WE1 shows a clean substitution; WE2 shows the constant-adjustment technique; both model the three-step verification protocol explicitly\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**WE1 — Clean substitution: ∫2x · cos(x²) dx**\n\n**Step 1 — Choose u:**\n$$u = x^2 \\quad \\text{(the inner function of } \\cos(x^2) \\text{)}$$\n\n**Step 2 — Compute du:**\n$$du = 2x\\, dx$$\n\n**Step 3 — Verify du is present:**\nIntegrand: 2x dx = du ✓ (exact match)\n\n**Step 4 — Rewrite in u and integrate:**\n$$\\int \\cos(u)\\, du = \\sin(u) + C$$\n\n**Step 5 — Back-substitute:**\n$$= \\sin(x^2) + C$$\n\n**Verification:** d/dx[sin(x²)] = cos(x²)·2x ✓\n\n---\n\n**WE2 — Constant adjustment: ∫x²(1+x³)⁵dx**\n\n**Step 1 — Choose u:**\n$$u = 1+x^3 \\quad \\text{(inner function of } (1+x^3)^5 \\text{)}$$\n\n**Step 2 — Compute du:**\n$$du = 3x^2\\, dx$$\n\n**Step 3 — Verify and adjust:**\nIntegrand contains x²dx but du=3x²dx. So x²dx = du/3.\n\n$$\\int x^2(1+x^3)^5\\, dx = \\int (1+x^3)^5 \\cdot x^2\\, dx = \\int u^5 \\cdot \\frac{du}{3} = \\frac{1}{3}\\int u^5\\, du$$\n\n**Step 4 — Integrate in u:**\n$$\\frac{1}{3} \\cdot \\frac{u^6}{6} + C = \\frac{u^6}{18} + C$$\n\n**Step 5 — Back-substitute:**\n$$= \\frac{(1+x^3)^6}{18} + C$$\n\n**Verification:** d/dx[(1+x³)⁶/18] = (6(1+x³)⁵·3x²)/18 = x²(1+x³)⁵ ✓\n\n**Key lesson from WE2:** When du ≠ (what's in the integrand)·dx but differs only by a constant, divide/multiply to adjust. The constant can always be moved outside the integral. If the mismatch involves an x-expression (not just a number), the substitution cannot be adjusted and a different approach is needed.\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n**Prompt:** Evaluate ∫x·e^{x²}dx.\n\n**CORRECT:** u=x², du=2x dx; x dx=du/2. ∫(1/2)eᵘdu=(1/2)eᵘ+C=(1/2)e^{x²}+C.\n→ \"Correct. Verify: d/dx[(1/2)e^{x²}]=(1/2)·e^{x²}·2x=xe^{x²} ✓.\" → Proceed to A03.\n\n**PARTIAL:** Student gets u=x² but writes du=x dx (MC-3 — forgot factor of 2).\n→ \"Good substitution. Now differentiate u=x²: du/dx=2x, so du=2x dx (not x dx). Therefore x dx=du/2. Rewrite: ∫(1/2)eᵘdu=(1/2)eᵘ+C=(1/2)e^{x²}+C.\"\n\n**INCORRECT:** Student tries u=e^{x²} (wrong inner-outer assignment).\n→ \"With u=e^{x²}: du=e^{x²}·2x dx. The integral becomes ∫x·u·(du/(2xu))... this doesn't simplify. Instead: e^{x²} is the outer function applied to x². The inner function is x². Set u=x², du=2x dx. The factor x dx is present (as du/2). Proceed.\"\n\n**NO_RESPONSE:** → \"The inner function of e^{x²} is x². Set u=x². Differentiate: du=2x dx. The integrand has x dx = du/2. Rewrite: ∫(1/2)eᵘ du. Integrate: (1/2)eᵘ+C. Back-substitute: (1/2)e^{x²}+C.\"\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 141,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.u-substitution",
+      "title": "DU-WITHOUT-VERIFICATION",
+      "content": "| MC-1 | DU-WITHOUT-VERIFICATION | Student identifies u=g(x) and substitutes without checking that g'(x) (up to a constant) is present in the integrand; integral cannot be rewritten purely in u; the method breaks down and student proceeds with mixed x-u expressions | Integrands like ∫cos(x²)dx or ∫√(x²+1)dx where the \"obvious\" inner function's derivative is absent |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.u-substitution",
+      "title": "LIMITS-UNCHANGED",
+      "content": "| MC-2 | LIMITS-UNCHANGED | Student converts ∫ₐᵇ f(g(x))g'(x)dx to ∫ₐᵇ f(u)du with the original x-limits a and b instead of converting to u-limits g(a) and g(b); produces a numerically wrong definite answer | Any definite integral solved by substitution; students who are comfortable with indefinite but not definite substitution |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.u-substitution",
+      "title": "DU-ALGEBRA-ERROR",
+      "content": "| MC-3 | DU-ALGEBRA-ERROR | Student computes du incorrectly: omits a constant factor (du=x dx instead of 2x dx for u=x²) or differentiates the wrong expression; the integral evaluates with a wrong constant multiple | Any substitution where g'(x) is not 1; especially u=ax²+b, u=sin(x), u=eˣ |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Discovering Substitution by Reversing the Chain Rule",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Discovering Substitution by Reversing the Chain Rule\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 65,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Worked Example Pair",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 141,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Contrast Pair: Works vs. Fails; Indefinite vs. Definite",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast Pair: Works vs. Fails; Indefinite vs. Definite\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 213,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 273,
+        "endLine": 493
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess fluent application of u-substitution to indefinite and definite integrals\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Evaluate ∫cos(3x)dx.\n\n*Solution:* u=3x, du=3dx; dx=du/3. ∫(1/3)cos(u)du=(1/3)sin(u)+C=**(1/3)sin(3x)+C**\n\n**Problem 2:** Evaluate ∫x/(1+x²)dx.\n\n*Solution:* u=1+x², du=2x dx; x dx=du/2. ∫(1/(2u))du=(1/2)ln|u|+C=**(1/2)ln(1+x²)+C**\n\n**Problem 3:** Evaluate ∫eˢⁱⁿ⁽ˣ⁾cos(x)dx.\n\n*Solution:* u=sin(x), du=cos(x)dx (exact match). ∫eᵘdu=eᵘ+C=**e^{sin(x)}+C**\n\n**Problem 4:** Evaluate ∫₀¹ 2x(x²+1)⁴dx using limit conversion.\n\n*Solution:* u=x²+1, du=2x dx; limits: x=0→u=1, x=1→u=2. [u⁵/5]₁² = 32/5 − 1/5 = **31/5**\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** Evaluate ∫sin³(x)cos(x)dx. Then use your result to compute ∫₀^{π/2} sin³(x)cos(x)dx.\n\nFor the definite integral, use limit conversion (not back-substitution after evaluating the indefinite integral).\n\n**Expected solution:**\n\n*Indefinite:* Let u=sin(x), du=cos(x)dx. The integrand sin³(x)·cos(x)dx = u³du (exact match).\n∫u³du = u⁴/4 + C = **sin⁴(x)/4 + C**\n\n*Definite (limit conversion):*\n- x=0: u=sin(0)=0\n- x=π/2: u=sin(π/2)=1\n$$\\int_0^{π/2}\\sin^3(x)\\cos(x)\\,dx = \\int_0^1 u^3\\,du = \\left[\\frac{u^4}{4}\\right]_0^1 = \\frac{1}{4} - 0 = \\boxed{\\frac{1}{4}}$$\n\n*Verification:* d/dx[sin⁴(x)/4] = (4sin³(x)cos(x))/4 = sin³(x)cos(x) ✓.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.calc.integration-by-parts; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.calc.u-substitution assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — DU-WITHOUT-VERIFICATION (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Choosing u and substituting without verifying that du is present is called DU-WITHOUT-VERIFICATION. Substitution requires that the entire integral — including the differential — can be expressed in u alone. If any x remains after substitution, the method has failed.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Set up u-substitution for ∫cos(x²)dx.\"\n- MC-1 response: Writes u=x², du=2x dx, proceeds to ∫cos(u)du (forgetting the 2x factor is absent).\n- Correct: \"u=x², du=2x dx, but 2x dx is NOT in the integrand — substitution cannot proceed.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"After computing du, ask: 'Is du (or a constant multiple of du) present in the original integrand as a factor?' For ∫cos(x²)dx: du=2x dx, but the integrand has only dx, with no x factor to match. The 2x is missing completely — not a constant issue, a function issue. You cannot divide by 2x (it's a variable). Substitution fails. The verification step is non-negotiable: check before rewriting.\"\n\nPractice: ∫x²sin(x³)dx — verify u=x³, du=3x²dx, integrand has x²dx: adjust with constant 1/3 → works. Contrast: ∫sin(x³)dx — same u, du=3x²dx, integrand has only dx: x² completely absent → fails.\n\n---\n\n### Repair Action B02 — LIMITS-UNCHANGED (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Keeping the original x-limits after substituting u is LIMITS-UNCHANGED. In a definite integral, limits are x-values; after substituting u=g(x), they become u-values via g(a) and g(b).\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: Set up ∫₀¹ 2x(x²+1)³dx with u=x²+1.\n- MC-2 response: ∫₀¹ u³du (x-limits kept).\n- Correct: ∫₁² u³du (limits converted: x=0→u=1, x=1→u=2).\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The limit 0 means x=0, which translates to u=g(0)=0²+1=1. The limit 1 means x=1, which translates to u=g(1)=1²+1=2. New limits are in u-space. The integral ∫₀¹u³du=1/4, but ∫₁²u³du=15/4 — keeping old limits gives the wrong numerical answer. Checklist: after substituting, immediately compute the new limits before evaluating.\"\n\nPractice: ∫₀^{π/2} cos(x)sin²(x)dx with u=sin(x). Convert limits: x=0→u=0, x=π/2→u=1. ∫₀¹u²du=1/3.\n\n---\n\n### Repair Action B03 — DU-ALGEBRA-ERROR (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Computing du incorrectly is DU-ALGEBRA-ERROR. The most common form: writing du=x dx instead of 2x dx for u=x². The derivative of x² is 2x, not x.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"For u=x², what is du?\"\n- MC-3 response: du=x dx.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"du = (d/dx)(u) · dx. For u=x²: d/dx(x²)=2x, so du=2x dx. The '2' comes from the power rule. A fast check: differentiate F(x)=x²sin(x²) using chain rule to see the 2x factor naturally. Similarly: u=x³ → du=3x²dx; u=sin(x) → du=cos(x)dx; u=eˣ → du=eˣdx.\"\n\nPractice drills (write du for each u): u=x⁴, u=3x²+1, u=cos(x), u=ln(x), u=e^{2x}.\nAnswers: 4x³dx, 6x dx, −sin(x)dx, (1/x)dx, 2e^{2x}dx.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Three indefinite integrals requiring constant adjustment (e.g., ∫x(1+x²)⁴dx); verify du-check step is stated |\n| SR-2 | +3 days | Two definite integrals with limit conversion; include one where the student must state explicitly \"x=a → u=g(a)\" |\n| SR-3 | +7 days | Recognise failure case: ∫√(1+x²)dx — no g'(x) to match; discuss why this requires trig substitution instead |\n| SR-4 | +14 days | Multi-step: ∫tan(x)dx via u=cos(x); ∫sec²(x)tan³(x)dx via u=tan(x); connect to integration-by-parts boundary |\n\nRetrieval flag: if student skips verification step (MC-1) or keeps x-limits (MC-2) in any SR, re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.calc.ftc-part2 | Evaluation theorem and definite integral mechanics assumed; limit conversion technique extends FTC Part 2 |\n| Requires (Tier-1) | math.calc.chain-rule | Substitution reverses the chain rule; f'(g(x))·g'(x) pattern must be recognised in the integrand |\n| Unlocks | math.calc.integration-by-parts | Integration by parts is the next systematic integration technique; requires fluent substitution as a sub-step |\n\n**GR-9:** cross_links=[] → P76 mode = independence (transfer probe is self-contained within single-variable calculus).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=10 → standard structure (3 main TAs + gate)\n- bloom=apply → V-4 = PASS (P07 required; WE1 and WE2 in A02)\n- CPA_entry = C for advanced learner: concrete chain-rule reversal in A01 before abstract theorem\n\n**Key teaching insight:** Substitution is the most important single integration technique, and the verification step (does du appear?) is what students most frequently skip. A01's three-step protocol (choose u, compute du, verify) should be presented as a checklist that students write down before every substitution problem, not just a thought process. The P76 probe uses sin³(x)cos(x) — a composite where u=sin(x) is natural but may not be obvious to students who haven't seen trigonometric integrands, making it a genuine transfer test.\n\n**WE2 constant adjustment:** The pattern of writing x²dx=(du/3) is subtle — students need to isolate the exact factor that is present (x²dx) and express it in terms of du. Emphasise: never change what's in du; instead, adjust the relationship between du and the factor in the integrand.\n\n**Definite integral advice:** Always convert limits immediately after identifying u and computing du — before rewriting the integrand. Deferring the limit conversion is the main cause of MC-2.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.calc.u-substitution ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.calc.ftc-part2 ✓, math.calc.chain-rule ✓ | PASS |\n| V-3 | CPA entry = C for advanced difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 present | P07 in A02 (WE1=∫2x·cos(x²)dx, WE2=∫x²(1+x³)⁵dx) ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | cross_links=[] → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=10 → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | sin³(x)cos(x): u=sin(x), du=cos(x)dx, exact match; definite=1/4; verified by differentiation ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 273,
+        "endLine": 493
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner reverses a known chain-rule derivative to discover substitution, making the method a direct consequence of something already mastered.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: differentiate F(x)=sin(x²) using the chain rule → F'(x)=cos(x²)·2x; reverse: ∫cos(x²)·2x dx=sin(x²)+C; name the substitution u=x², du=2x dx; P: outer-inner decomposition diagram; A: formal substitution theorem ∫f(g(x))g'(x)dx = ∫f(u)du\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: ∫2x·cos(x²)dx (u=x², g' visible); WE2: ∫x²(1+x³)⁵dx (u=1+x³, g'=3x² requires constant adjustment)\n3. **A03 P06 CONTRAST PAIR** — substitution works (g' present) vs. fails (g' absent); indefinite vs. definite with limit conversion; constant-coefficient adjustment\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.u-substitution",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Three indefinite integrals requiring constant adjustment (e.g., ∫x(1+x²)⁴dx); verify du-check step is stated |\n| SR-2 | +3 days | Two definite integrals with limit conversion; include one where the student must state explicitly \"x=a → u=g(a)\" |\n| SR-3 | +7 days | Recognise failure case: ∫√(1+x²)dx — no g'(x) to match; discuss why this requires trig substitution instead |\n| SR-4 | +14 days | Multi-step: ∫tan(x)dx via u=cos(x); ∫sec²(x)tan³(x)dx via u=tan(x); connect to integration-by-parts boundary |\n\nRetrieval flag: if student skips verification step (MC-1) or keeps x-limits (MC-2) in any SR, re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 425,
+        "endLine": 440
+      }
+    },
+    {
+      "assetId": "math.calc.u-substitution/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.u-substitution",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.calc.ftc-part2 | Evaluation theorem and definite integral mechanics assumed; limit conversion technique extends FTC Part 2 |\n| Requires (Tier-1) | math.calc.chain-rule | Substitution reverses the chain rule; f'(g(x))·g'(x) pattern must be recognised in the integrand |\n| Unlocks | math.calc.integration-by-parts | Integration by parts is the next systematic integration technique; requires fluent substitution as a sub-step |\n\n**GR-9:** cross_links=[] → P76 mode = independence (transfer probe is self-contained within single-variable calculus).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.u-substitution.md",
+        "startLine": 440,
+        "endLine": 454
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

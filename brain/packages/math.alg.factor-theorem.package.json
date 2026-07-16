@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.factor-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.factor-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0aebdd7ebe018fb6f6bb792927ee4c09f7a231aed949ed56147957edafd136ba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.factor-theorem.md": "sha256:44929f081e5f5dfdc6be8ab93a40d32bb870bd46015024406f4c10cbacb6528f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.factor-theorem",
+    "name": "Factor Theorem",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.alg.remainder-theorem"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.factor-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.factor-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.factor-theorem.md": "sha256:44929f081e5f5dfdc6be8ab93a40d32bb870bd46015024406f4c10cbacb6528f"
+      },
+      "contentHash": "sha256:ed4fc2ea50174660dd5c0e871418bb76e2d3c2a6077d52564d9ec82395289049",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.factor-theorem.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factor-theorem.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factor-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factor-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factor-theorem.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factor-theorem.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factor-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factor-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factor-theorem.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factor-theorem.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factor-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factor-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.factor-theorem/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "Factor Theorem — cognitive map",
+      "content": "**Core concept:** (x−a) is a factor of polynomial p(x) if and only if p(a)=0. This is the Remainder Theorem at the special case r=0: the remainder equals p(a), and the remainder being zero is exactly what it means to divide without remainder (i.e., to be a factor). Application: test potential roots by evaluating p(a); when p(a)=0, divide p(x) by (x−a) to obtain the quotient and continue factorising.\n\n**Conceptual progression:**\n1. Factor Theorem statement: p(a)=0 ↔ (x−a)|p(x).\n2. Root-finding strategy: test integer divisors of the constant term (Rational Root candidates) via the theorem; first success gives the first linear factor.\n3. Deflation: once (x−a) is found, divide p(x)÷(x−a) to get a lower-degree quotient q(x); apply the theorem to q(x) for next root.\n4. Complete factorisation: repeated application of steps 2–3 until q(x) is linear or irreducible quadratic.\n5. Connection to Remainder Theorem: Factor Theorem IS the Remainder Theorem with r=0. No new machinery — just the special case with important consequences.\n\n**CPA arc (entry: P):**\n- Pictorial: table of trial evaluations p(a) for several a-values; root identified; synthetic division array showing q(x); tree of successive factorisations.\n- Abstract: p(a)=0 ↔ (x−a)|p(x); p(x)=(x−a)q(x).\n\n**Prior knowledge activated:** Remainder Theorem (math.alg.remainder-theorem) — p(a) is the remainder when p(x)÷(x−a); synthetic division; polynomial evaluation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "SUBSTITUTE-WRONG-SIGN [FOUNDATIONAL]",
+      "content": "### MC-1: SUBSTITUTE-WRONG-SIGN [FOUNDATIONAL]\n**Description:** For a divisor of the form (x+c), the learner tests p(c) instead of p(−c). Sees \"(x+3)\" and computes p(3) instead of p(−3), producing a wrong remainder and a false positive/negative factor test.\n**Surface form:** \"Testing (x+2): p(2)=8+4−2+4=14≠0, so (x+2) is not a factor.\"\n**Root cause:** Identical to the Remainder Theorem misconception: the learner reads the sign of the constant term rather than solving (x+c)=0 for x. For (x+c): solving x+c=0 gives x=−c, not x=c.\n**Trigger condition:** Any factor test where the divisor has a positive constant (equivalently, a negative root is being tested).\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "FACTOR-FOUND-MEANS-DONE",
+      "content": "### MC-2: FACTOR-FOUND-MEANS-DONE\n**Description:** Learner identifies one root a and writes p(x)=(x−a) as the complete factorisation, ignoring the remaining quotient q(x) of degree n−1. Does not perform deflation (dividing p(x) by the found factor to obtain q(x) for further analysis).\n**Surface form:** \"p(2)=0 so (x−2) is a factor and the factorisation is just (x−2).\"\n**Root cause:** The theorem is understood as \"find a factor,\" not \"find a factor AND reduce the degree.\" The iterative deflation process was never shown or practised.\n**Trigger condition:** Any polynomial of degree ≥ 2 where multiple factors need to be found.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "RATIONAL-ROOT-NOT-NEEDED",
+      "content": "### MC-3: RATIONAL-ROOT-NOT-NEEDED\n**Description:** Learner tries random values for a without a systematic strategy; misses roots or wastes time on fractions and irrationals. Does not use the Rational Root candidates (divisors of constant term ÷ divisors of leading coefficient) to restrict the search.\n**Surface form:** \"I'll try a=5, a=7, a=−4 … none of these work. I give up.\"\n**Root cause:** The Rational Root theorem was not connected to the Factor Theorem as the search strategy. Learner treats trial-and-error as open-ended.\n**Trigger condition:** Any cubic or higher-degree polynomial with integer coefficients where roots are not immediately obvious.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "Repair for MC-1 (SUBSTITUTE-WRONG-SIGN)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (SUBSTITUTE-WRONG-SIGN)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 115,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "Repair for MC-2 (FACTOR-FOUND-MEANS-DONE)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (FACTOR-FOUND-MEANS-DONE)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 173,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "Repair for MC-3 (RATIONAL-ROOT-NOT-NEEDED)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (RATIONAL-ROOT-NOT-NEEDED)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 191,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "Protocol A, TA-A03 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Is (x−3) a factor of p(x) = x³−4x²+x+6?\"\n[Expected: p(3)=27−36+3+6=0 ✓. Yes, (x−3) is a factor. Quotient: x²−x−2=(x−2)(x+1). Full: (x−3)(x−2)(x+1).]\n\n**Item 2:**\n\"Is (x+2) a factor of q(x) = x³+3x²+3x+1?\"\n[Expected: Divisor (x+2): a=−2. q(−2)=−8+12−6+1=−1≠0. No, (x+2) is not a factor. (q(x)=(x+1)³.)]\n\n**Item 3:**\n\"Fully factorise r(x) = x³−2x²−5x+6.\"\n[Expected: Candidates: ±1,±2,±3,±6. r(1)=1−2−5+6=0. Divide by (x−1): quotient x²−x−6=(x−3)(x+2). Full: (x−1)(x−3)(x+2).]\n\n**Item 4:**\nTrue or False: \"If p(−3)=0 then (x+3) is a factor of p(x).\"\n[Expected: TRUE. p(−3)=0 means the remainder when p(x)÷(x−(−3))=p(x)÷(x+3) is 0. By the Factor Theorem, (x+3)=(x−(−3)) is a factor.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Let p(x) = x³+x²−4x−4.\n\n(a) Use the Factor Theorem to find one factor of p(x). Show the factor test.\n(b) Use synthetic division to find the quotient after dividing by your factor.\n(c) Fully factorise p(x) over ℝ.\"\n\n[Expected:\n(a) Candidates: ±1,±2,±4. p(1)=1+1−4−4=−6≠0. p(−1)=−1+1+4−4=0 ✓. Factor: (x+1)=(x−(−1)).\n(b) Synthetic with c=−1, coefficients [1,1,−4,−4]:\n    −1 | 1   1  −4  −4\n       |    −1   0   4\n       | 1   0  −4   0\nQuotient: x²−4.\n(c) x²−4=(x−2)(x+2). Full factorisation: p(x)=(x+1)(x−2)(x+2).]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (a) correctly identifies (x+1) or another valid first factor with the factor test shown, (b) gives the correct quotient, and (c) gives the correct complete factorisation; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can test factors, identify correct substitution values, perform deflation, and complete the factorisation of a cubic.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Items 1/2 with wrong sign substitution: → TA-B01 (SUBSTITUTE-WRONG-SIGN), then re-gate\n- FAIL on Item 3 or P76(c) (partial factorisation only): → TA-B02 (FACTOR-FOUND-MEANS-DONE), then re-gate\n- FAIL on Item 4 (FALSE): → return to A01; re-clarify Factor Theorem statement and sign; re-gate\n- FAIL on Item 3 (no systematic search): → TA-B03 (RATIONAL-ROOT-NOT-NEEDED); re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to apply the Factor Theorem to identify factors, perform deflation, and completely factorise polynomials.\n\nKey anchors to carry forward:\n- Factor Theorem: p(a)=0 ↔ (x−a)|p(x). The value a solves the divisor = 0.\n- Deflation: after finding (x−a), divide p(x)÷(x−a) synthetically to get q(x); continue factoring q.\n- Rational Root candidates: divisors of constant term ÷ divisors of leading coefficient.\n- Factorisation is complete when all remaining factors are linear or irreducible quadratic.\n\nNext concept: math.alg.polynomial-roots — multiplicity of roots, repeated factors, connection to graph behaviour at roots.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 295,
+        "endLine": 392
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"State the Remainder Theorem. What does p(a)=0 tell you about (x−a) and p(x)?\" If the learner recalls remainder=p(a) and identifies that p(a)=0 means (x−a)|p(x), proceed to A01. This confirms that the Factor Theorem is understood as a corollary, not a new concept.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): table with candidate a-values, p(a) evaluations, and a \"factor?\" column; learner fills it in for a given cubic.\n- Rung 2 (structured): first root found and marked; synthetic division array provided with learner completing the entries to get q(x); factoring q(x) by standard methods.\n- Rung 3 (full apply): learner performs the complete sequence (rational root candidates → trial evaluation → synthetic division → factor q(x)) independently.\n\n**Pacing note:** h=3 estimated hours; A01 + A02 in sessions 1–2; mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Factorise p(x) = 2x³+x²−5x+2 completely over ℝ.\"\n[Expected: Leading=2, constant=2. Rational candidates: ±1,±2,±1/2. p(1)=2+1−5+2=0 ✓. Divide by (x−1): synthetic [2,1,−5,2] c=1 → quotient 2x²+3x−2=(2x−1)(x+2). Full: (x−1)(2x−1)(x+2). Roots: 1, 1/2, −2.]\n\n**Day 10 prompt:**\n\"p(x) is a monic cubic with roots 2, −1, and 3. Write p(x) in expanded form.\"\n[Expected: p(x)=(x−2)(x+1)(x−3). Expand: (x−2)(x+1)=x²−x−2; then (x²−x−2)(x−3)=x³−3x²−x²+3x−2x+6=x³−4x²+x+6.]\n\n**Day 30 prompt:**\n\"Show that xⁿ−aⁿ is always divisible by (x−a) for any positive integer n, using the Factor Theorem.\"\n[Expected: Let p(x)=xⁿ−aⁿ. Evaluate p(a)=aⁿ−aⁿ=0. By Factor Theorem, (x−a)|p(x). This holds for all n≥1. (Bonus: the quotient is xⁿ⁻¹+axⁿ⁻²+…+aⁿ⁻¹ — geometric sum.)]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 220,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "math.alg.factor-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.factor-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.alg.remainder-theorem — p(a) is the remainder when p(x)÷(x−a); the Factor Theorem is the Remainder Theorem restricted to r=0; synthetic division for deflation\n\n**Unlocked blueprints:**\n- math.alg.polynomial-roots — complete root-finding strategy for polynomials; multiplicity of roots; relationship between roots and coefficients (Vieta's formulas)\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factor-theorem.md",
+        "startLine": 238,
+        "endLine": 250
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

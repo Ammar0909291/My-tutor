@@ -1,0 +1,972 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.ratios-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.ratios",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:df839013cc21c2f95660efed0f75b4c58dcff5e77b162e2f949e782d2de2f6ab",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.ratios.md": "sha256:d7a1a02916de90c988131bb394873d40b4fd0d3791749bc3fb0314833611e83e"
+    },
+    "assetCount": 31,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 21,
+      "mastery_probe": 5,
+      "teaching_note": 1
+    },
+    "ruleCount": 21
+  },
+  "concept": {
+    "conceptId": "math.arith.ratios",
+    "name": "Ratio",
+    "difficultyRaw": "2 (developing)",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.arith.fractions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.ratios-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.ratios (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.ratios.md": "sha256:d7a1a02916de90c988131bb394873d40b4fd0d3791749bc3fb0314833611e83e"
+      },
+      "contentHash": "sha256:f0fa5b8a34572b346affe63578ff3ebb1f701a50799a9dc1fb0da3cabf12d3f7",
+      "ruleCount": 21,
+      "bandCounts": {
+        "3": 21
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-A04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-A07 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-B02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-B03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-C01 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-C02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-C03 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-C04 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-C05 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.ratios.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.ratios.md#TA-E03 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.ratios\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.ratios/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.ratios",
+      "title": "Learning Objective",
+      "content": "**Mastery statement:** A student who achieves mastery demonstrates that a ratio is a multiplicative comparison (a:b means \"for every a of one quantity, there are b of the other\"), can write ratios in all three forms (a:b, a/b, \"a to b\"), can find and verify equivalent ratios, can simplify ratios, can distinguish part-to-part from part-to-whole comparisons, and can interpret a rate as a ratio with different units.\n\n**NOT mastery:** A student who can write ratios in a:b form but treats them as additive comparisons, or who confuses ratio order (thinks a:b = b:a), or who cannot identify whether a given ratio is part-to-part or part-to-whole, has NOT achieved mastery.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 32,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.ratios",
+      "title": "Ratio is commutative",
+      "content": "| MC-1 | Ratio is commutative | Student treats a:b as equivalent to b:a (e.g., \"3 apples to 5 oranges\" is the same as \"5 oranges to 3 apples\") — order of comparison is lost | Foundational | 1st (blocks MC-2/MC-3 since order matters for part-to-part analysis) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.ratios",
+      "title": "Part-to-part vs. part-to-whole confusion",
+      "content": "| MC-2 | Part-to-part vs. part-to-whole confusion | Student mixes up the two types: writes the ratio of red to total as red:red+blue when asked for red:blue (or vice versa) | Secondary | 2nd |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.ratios",
+      "title": "Ratio simplification changes the quantities",
+      "content": "| MC-3 | Ratio simplification changes the quantities | Student believes simplifying 6:10 to 3:5 means the original quantities changed (6 items became 3 items) rather than understanding that 3:5 describes the same relationship in smaller equivalent terms | Secondary | 2nd (independent of MC-2) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Concrete: The Comparison Story",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete: The Comparison Story\",\"primitives\":[\"P02\",\"P03\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 66,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Pictorial: Equivalent Ratios",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pictorial: Equivalent Ratios\",\"primitives\":[\"P01\",\"P07\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 115,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Abstract: Simplifying Ratios",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Abstract: Simplifying Ratios\",\"primitives\":[\"P01\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 169,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Part-to-Part vs. Part-to-Whole",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Part-to-Part vs. Part-to-Whole\",\"primitives\":[\"P01\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 235,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Rates: Ratios With Different Units",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Rates: Ratios With Different Units\",\"primitives\":[\"P01\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 302,
+        "endLine": 363
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Ratio Tables and Applications",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Ratio Tables and Applications\",\"primitives\":[\"P01\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 363,
+        "endLine": 416
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 416,
+        "endLine": 479
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Gap Diagnosis",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Gap Diagnosis\",\"primitives\":[\"P02\",\"P06\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 479,
+        "endLine": 524
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Fluency: Ratio Tables and Word Problems",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Fluency: Ratio Tables and Word Problems\",\"primitives\":[\"P01\",\"P26\",\"P30\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 524,
+        "endLine": 566
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 566,
+        "endLine": 621
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Misconception Triage",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Triage\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 621,
+        "endLine": 664
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "MC-1 Repair: Ratio Order Matters",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-1 Repair: Ratio Order Matters\",\"primitives\":[\"P27\",\"P29\",\"P30\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 664,
+        "endLine": 731
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "MC-2 Repair: Part-to-Part vs. Part-to-Whole",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-2 Repair: Part-to-Part vs. Part-to-Whole\",\"primitives\":[\"P06\",\"P26\",\"P27\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 731,
+        "endLine": 810
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "MC-3 Repair: Simplification Preserves the Relationship",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-3 Repair: Simplification Preserves the Relationship\",\"primitives\":[\"P06\",\"P26\",\"P27\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 810,
+        "endLine": 879
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Post-Repair Mastery Gate",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"Post-Repair Mastery Gate\",\"primitives\":[\"P01\",\"P28\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 879,
+        "endLine": 940
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "The Equivalence Check",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"The Equivalence Check\",\"primitives\":[\"P02\",\"P03\",\"P06\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 940,
+        "endLine": 981
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Confidence Across Problem Types",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Confidence Across Problem Types\",\"primitives\":[\"P01\",\"P26\",\"P30\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 981,
+        "endLine": 1019
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 1019,
+        "endLine": 1076
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Retrieval Challenge",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Retrieval Challenge\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P77\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 1076,
+        "endLine": 1113
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Transfer Retrieval",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Transfer Retrieval\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P76\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 1113,
+        "endLine": 1152
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.ratios",
+      "title": "Maintenance Mastery Gate",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Maintenance Mastery Gate\",\"primitives\":[\"P01\",\"P02\",\"P03\",\"P06\",\"P07\",\"P08\",\"P26\",\"P27\",\"P28\",\"P29\",\"P30\",\"P32\",\"P34\",\"P41\",\"P49\",\"P54\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 1152,
+        "endLine": 1296
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/mastery_probe/MP-TA-A07",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.ratios",
+      "title": "Mastery Gate",
+      "content": "**TA-A07 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"You've covered the full range of ratio concepts. Let's confirm mastery.\"\n\n**P77 — MASTERY PROBE (Retrieval):**\n\"From memory: (a) define ratio. (b) explain why order matters. (c) define part-to-part vs. part-to-whole. (d) define rate and unit rate.\"\n\n**P55 — COMPREHENSION CHECK:** \"In what THREE notation forms can a ratio be written?\"\n\n**P76 — TRANSFER PROBE:**\n\"A ramp rises 3 metres for every 12 metres of horizontal run. (a) What is the ratio of rise to run? (b) Simplify. (c) This ratio is also called the 'slope' of the ramp — it is the constant of proportionality in the relationship height = slope × horizontal distance. Identify what concept connects ratios to linear functions.\"\n\n*Note: cross_links=[math.func.linear-function]. This P76 probe explicitly bridges to the cross-linked concept at a conceptual level appropriate for bloom=understand.*\n\n**P55 — COMPREHENSION CHECK:** \"Is the slope 3:12 a part-to-part ratio or a rate? Explain.\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"A student says: 'If a class has 15 boys and 10 girls, the ratio of boys to girls is 15:10 = 3:2, which means there are now only 3 boys and 2 girls.' What is wrong?\"\n\n*Expected:* The simplified ratio 3:2 describes the RELATIONSHIP (for every 3 boys there are 2 girls) but does NOT change the actual count. The class still has 15 boys and 10 girls. 3:2 and 15:10 are equivalent — they name the same comparison.\n\n**P55 — COMPREHENSION CHECK:** \"If the ratio is 3:2, how many boys would you expect in a class of 25 students total?\"\n\n**P74 — APPLICATION PROBE:**\n\"A paint mix uses red and blue in a ratio of 5:3. (a) Simplify the ratio (already simplified — confirm). (b) If you need 40 litres of red, how much blue? (c) What fraction of the total mix is blue?\"\n\n**P55 — COMPREHENSION CHECK:** \"How did you use the ratio to answer (b)? Was it a part-to-part or part-to-whole approach?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"P77 all four definitions accurate; P76 slope connection identified and part-to-part vs. rate distinguished; P75 MC-3 error explained; P74 all three correct\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_B\": {\n    \"criteria\": \"P77 definitions correct but P74 application has errors\",\n    \"action\": \"Route to Protocol B for practice consolidation.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P77 shows order confusion (MC-1), P74 shows part-type confusion (MC-2), or P75 not identified (MC-3 active)\",\n    \"action\": \"Route to Protocol C for active misconception repair.\"\n  }\n}\n```\n\n---\n\n### Protocol B — State S1: Partial Knowledge / Procedural Gaps\n\n**Entry condition:** Student understands basic ratio notation but has gaps — typically in simplification, the part-to-part/whole distinction, or rates.\n\n**Instructional goal:** Fill specific gaps with targeted instruction; build fluency in applying ratio concepts to problems.\n\n---",
+      "localKey": "MP-TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 416,
+        "endLine": 479
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/mastery_probe/MP-TA-B03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.ratios",
+      "title": "Mastery Gate",
+      "content": "**TA-B03 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:** \"Gaps filled. Confirming mastery.\"\n\n**P77 — MASTERY PROBE:** \"State: (a) the three ratio notation forms, (b) how to simplify a ratio, (c) the difference between part-to-part and part-to-whole.\"\n\n**P55 — COMPREHENSION CHECK:** \"What is the GCF method and why is it used for simplification?\"\n\n**P76 — TRANSFER PROBE:**\n\"A scale model is built at ratio 1:50. The real building is 75 metres tall. How tall is the model in cm? (1 metre = 100 cm)\"\n\n**P55 — COMPREHENSION CHECK:** \"Which type of ratio is 1:50 — part-to-part or a rate? What units does each term carry?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"Two students say: Student A: '6:10 and 3:5 are different ratios because the numbers are different.' Student B: '6:10 and 3:5 are the same ratio because 6:10 ÷ 2 = 3:5.' Who is right?\"\n\n**P55 — COMPREHENSION CHECK:** \"Give a real-world example where 6:10 and 3:5 describe the exact same situation.\"\n\n**P74 — APPLICATION PROBE:**\n\"In a survey: 25 preferred coffee, 15 preferred tea. (a) Ratio of coffee to tea (simplify). (b) What fraction preferred tea? (c) If 200 people took the same survey with the same ratio, how many preferred coffee?\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): did you use part-to-whole or part-to-part reasoning?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; P75 Student B correctly identified with explanation; P74 all three correct\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 or P74 reveals active MC\",\n    \"action\": \"Route to Protocol C.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"Minor arithmetic error only\",\n    \"action\": \"One retry of the failed item. If corrected: PASS.\"\n  }\n}\n```\n\n---\n\n### Protocol C — State S2: Active Misconceptions\n\n**Entry condition:** Diagnostic identifies one or more active misconceptions from the registry.\n\n---",
+      "localKey": "MP-TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 566,
+        "endLine": 621
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/mastery_probe/MP-TA-C05",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.ratios",
+      "title": "Post-Repair Mastery Gate",
+      "content": "**TA-C05 — Post-Repair Mastery Gate**\n\n*Entered after all active misconceptions repaired (MAMR complete).*\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:**\n\"All misconceptions addressed. Confirming full mastery.\"\n\n**P77 — MASTERY PROBE:**\n\"State: (a) why ratio order matters, (b) how to distinguish part-to-part from part-to-whole, (c) what simplification does and does not change.\"\n\n**P55 — COMPREHENSION CHECK:** \"Give a real-world example where mixing up a:b and b:a would cause a practical error.\"\n\n**P76 — TRANSFER PROBE:**\n\"A solution is 2 parts acid to 8 parts water. (a) Simplify the ratio. (b) What fraction of the solution is acid? (c) For 50 litres of water, how much acid?\"\n\n**P55 — COMPREHENSION CHECK:** \"Was (b) a part-to-whole or part-to-part calculation?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"Identify ALL errors: 'A box has 6 red and 9 blue balls. The ratio of red to total is 6:9 = 2:3. After simplifying, there are now 2 red and 3 blue.'\"\n\n*Expected:* Two errors: (1) ratio of red to TOTAL should be 6:15=2:5, not 6:9 (MC-2); (2) simplifying does not change actual quantities (MC-3). Both need to be identified.*\n\n**P55 — COMPREHENSION CHECK:** \"What are the two separate errors in that statement?\"\n\n**P74 — APPLICATION PROBE:**\n\"A concrete mix uses cement, sand, and gravel in ratio 1:2:4. (a) For 7 bags cement, how much sand and gravel? (b) If you use 56 kg gravel, how much cement? (c) What fraction of the mix is cement?\"\n\n**P55 — COMPREHENSION CHECK:** \"For (c): is this a part-to-part or part-to-whole ratio?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; P75 both errors identified; P74 all three correct with correct part-type classification\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"One arithmetic error, not conceptual\",\n    \"action\": \"One retry. Advance if corrected.\"\n  },\n  \"ROUTE_BACK\": {\n    \"criteria\": \"Two or more errors OR MC resurfaces\",\n    \"action\": \"Re-enter appropriate repair TA.\"\n  }\n}\n```\n\n---\n\n### Protocol D — State S6: Low Confidence (Knows But Doubts)\n\n**Entry condition:** Student knows ratios but shows hesitation. GR-5 — P28 ABSENT from all Protocol D TAs.\n\n---",
+      "localKey": "MP-TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 879,
+        "endLine": 940
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/mastery_probe/MP-TA-D03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.ratios",
+      "title": "Mastery Gate",
+      "content": "**TA-D03 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:** \"Final mastery confirmation.\"\n\n**P77 — MASTERY PROBE:** \"Define ratio, rate, and unit rate.\"\n\n**P55 — COMPREHENSION CHECK:** \"What is the key difference between a ratio and a rate?\"\n\n**P76 — TRANSFER PROBE:**\n\"A map has scale 1:25000. A road is 8 cm on the map. How long is the road in km? (1 km = 100000 cm)\"\n\n**P55 — COMPREHENSION CHECK:** \"What type of ratio is a map scale?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"True or False: 'If you double both terms of a ratio, you get a different ratio.' Explain.\"\n\n*Expected:* FALSE. Doubling both terms gives an equivalent ratio (×2 scale factor). E.g., 3:5 → 6:10 = 3:5.\n\n**P55 — COMPREHENSION CHECK:** \"What operation DOES change a ratio?\"\n\n**P74 — APPLICATION PROBE:**\n\"Mortar: cement to sand in ratio 1:3. (a) For 15 bags sand, how much cement? (b) What fraction of total mortar is cement? (c) Simplify 8:24 to verify it matches 1:3.\"\n\n**P55 — COMPREHENSION CHECK:** \"Verify (a) using the scale-factor check.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; confidence demonstrated; P75 false statement identified; P74 all correct\",\n    \"action\": \"Record mastery. Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P74 or P75 reveals active MC\",\n    \"action\": \"Route to Protocol C.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"Arithmetic slip only\",\n    \"action\": \"One retry. Advance if corrected.\"\n  }\n}\n```\n\n---\n\n### Protocol E — State S9: Mastery Maintenance (Spaced Repetition)\n\n**Entry condition:** Previously achieved mastery. Scheduled P89 retrieval event (1, 3, 7, 21, 60 days).\n\n---",
+      "localKey": "MP-TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 1019,
+        "endLine": 1076
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/mastery_probe/MP-TA-E03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.ratios",
+      "title": "Maintenance Mastery Gate",
+      "content": "**TA-E03 — Maintenance Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:** \"Final maintenance confirmation.\"\n\n**P77 — MASTERY PROBE:** \"State the three notation forms for a ratio and give an example of a rate.\"\n\n**P55 — COMPREHENSION CHECK:** \"In what scenario is each notation form most useful?\"\n\n**P76 — TRANSFER PROBE:**\n\"A photographer uses photos to rejections in a ratio of 3:7. Of 200 images taken, how many are kept? What fraction are rejected?\"\n\n**P55 — COMPREHENSION CHECK:** \"Was your calculation part-to-part or part-to-whole at each step?\"\n\n**P75 — MISCONCEPTION PROBE:**\n\"Identify the error: 'The ratio of boys to girls in a class is 2:3. Since 2+3=5, there are 5 students in the class.'\"\n\n*Expected:* Error is additive thinking — 2:3 means for every 2 boys there are 3 girls, but the class could have 4 boys and 6 girls, or 20 boys and 30 girls, etc. The ratio only fixes the RELATIONSHIP, not the actual count. Total is unknown without more information.*\n\n**P55 — COMPREHENSION CHECK:** \"What additional information would you need to find the actual class size?\"\n\n**P74 — APPLICATION PROBE:**\n\"Orange juice blend: 3 parts juice to 2 parts water. (a) Unit rate (juice per part water). (b) For 10 litres water, how much juice? (c) What fraction of the blend is water?\"\n\n**P55 — COMPREHENSION CHECK:** \"Identify (b) as part-to-part or part-to-whole reasoning.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.85\",\n  \"PASS\": {\n    \"criteria\": \"All probes correct; P75 additive error correctly identified; retention confirmed\",\n    \"action\": \"Record retention. Schedule next P89 interval. Blueprint cycle continues.\"\n  },\n  \"DECAY_DETECTED\": {\n    \"criteria\": \"Two or more probes missed\",\n    \"action\": \"Route to Protocol B for refresh. Reset P89 from day 1.\"\n  },\n  \"PARTIAL_DECAY\": {\n    \"criteria\": \"One probe missed\",\n    \"action\": \"Address that probe. Re-gate.\"\n  }\n}\n```\n\n---\n\n\n## Component 5 — Spaced Repetition Schedule\n\n**Primitive:** P89 — SPACED REPETITION\n\n**Trigger:** Fires after each P78 PASS event.\n\n**Intervals:** 1 day → 3 days → 7 days → 21 days → 60 days\n\n**Entry point on each firing:** Protocol E (TA-E01 → TA-E02 → TA-E03)\n\n**Decay rule:** DECAY_DETECTED → reset to day 1 → Protocol B before next session.\n\n---\n\n\n## Component 6 — Cross-Link Bridge\n\n**Cross-linked concept:** `math.func.linear-function`\n\n**Bridge:** The ratio rise:run in a linear graph is the slope, which is the constant of proportionality k in y = kx. The ratio concept provides the arithmetic foundation for understanding slope: slope IS a ratio (vertical change : horizontal change). This connection appears in TA-A07 P76 and TA-E02 P76. At bloom=understand, the bridge is conceptual only — students are introduced to the connection without being required to operate formally with y=kx (which belongs to `math.func.linear-function`). When students later study linear functions, the ratio foundation makes slope immediately interpretable as a multiplicative comparison.\n\n---\n\n\n## Component 7 — Retrieval Architecture\n\n**P89 anchor moments:**\n1. After TA-A07 mastery gate PASS → schedule Protocol E at 1, 3, 7, 21, 60 days\n2. After TA-B03 mastery gate PASS → same schedule\n3. After TA-C05 mastery gate PASS → same schedule\n4. After TA-D03 mastery gate PASS → same schedule\n\n**Retrieval spacing rationale:** estimated_hours=8 → large concept that unlocks two downstream concepts (proportion, direct variation). The 21-day and 60-day intervals are critical — part-to-whole confusion (MC-2) and ratio order (MC-1) are the errors most likely to re-emerge after a gap. The cross-link probe (slope connection) at TA-E02 also reinforces the forward connection to `math.func.linear-function`.\n\n---\n\n\n## Component 8 — Primitive Usage Index\n\n| Primitive | Role in this Blueprint | TAs Used |\n|-----------|------------------------|----------|\n| P01 | Attention anchor | A02–A07, B02–B03, C03–C05, D01–D03, E01–E03 |\n| P02 | Context establishment | A01, B01, C01, D01 |\n| P03 | Concrete manipulation | A01, D01 |\n| P06 | Explicit strategy instruction | A01, A03, A04, A05, B01, C02–C04 |\n| P07 | Perceptual salience — ratio diagram | A02 |\n| P26 | Worked example | A01–A06, B01–B02, C01–C04, D02 |\n| P27 | Misconception naming | C02–C04 |\n| P29 | Contrastive analysis | C02 |\n| P30 | Bridge reinforcement | A03 (context), B02, C02, D02 |\n| P32 | Consolidation checkpoint | C02–C04 |\n| P34 | Corrective worked example | C02–C04 |\n| P41 | Misconception detector — triage | B01, C01 |\n| P49 | Adaptive checkpoint — 4-branch routing | All TAs |\n| P55 | Comprehension check | All TAs |\n| P74 | Application probe | A07, B03, C05, D03, E03 |\n| P75 | Misconception probe | A07, B03, C05, D03, E03 |\n| P76 | Transfer probe | A07, B03, C05, D03, E02, E03 |\n| P77 | Mastery probe (retrieval) | A07, B03, C05, D03, E01, E03 |\n| P78 | Mastery gate | A07, B03, C05, D03, E03 |\n| P89 | Spaced repetition scheduler | Component 5 |\n| P91 | Named compound (mastery gate expansion) | All mastery gate TAs |\n\n---\n\n\n## Component 9 — Validation Checklist\n\n| Check | Criterion | Status | Evidence |\n|-------|-----------|--------|----------|\n| V-1 | All concept id slots reference valid KG nodes | PASS | math.arith.ratios: KG confirmed. math.arith.fractions (requires): KG confirmed. math.arith.proportion (unlocks): KG confirmed. math.arith.direct-variation (unlocks): KG confirmed. math.func.linear-function (cross_links): KG confirmed. |\n| V-2 | difficulty → cpa_entry_stage correct per spec | PASS | difficulty=2 (developing), domain≠physics → cpa_entry_stage=C. Correct. |\n| V-3 | mastery_threshold matches KG value | PASS | KG: mastery_threshold=0.85. Blueprint Component 0: 0.85. Match confirmed. |\n| V-4 | Canonical 10-field schema only (no domain/concept_type) | PASS | Component 0 uses: id, name, requires, unlocks, cross_links, difficulty, bloom, mastery_threshold, estimated_hours, description. No domain/concept_type fields. |\n| V-5 | No invented primitives | PASS | All primitives used (P01–P07, P26–P32, P34, P41, P49, P55, P74–P78, P89, P91) exist in the Primitive Library. |\n| V-6 | GR-1: all TAs start P01 or P02 | PASS | Protocol A: A01→P02 ✓, A02→P01 ✓, A03→P01 ✓, A04→P01 ✓, A05→P01 ✓, A06→P01 ✓, A07→P01 ✓. Protocol B: B01→P02 ✓, B02→P01 ✓, B03→P01 ✓. Protocol C: C01→P02 ✓, C02→P27 (repair-chain exception) ✓, C03→P27 ✓, C04→P27 ✓, C05→P01 ✓. Protocol D: D01→P02 ✓, D02→P01 ✓, D03→P01 ✓. Protocol E: E01→P01 ✓, E02→P01 ✓, E03→P01 ✓. All compliant. |\n| V-7 | GR-2: P55 follows every elicitation primitive | PASS | All P41, P49, P74, P75, P76, P77, P78 occurrences followed by P55 or terminal in P91 expansion. P91 expansion: P77→P55→P76→P55→P75→P55→P74→P55→P78 verified in all 5 mastery gate TAs. |\n| V-8 | GR-3: P08 only after P06 or P07 has fired | PASS | P08 not used. Rule vacuously satisfied. |\n| V-9 | GR-4: repair chain entered only after P41/P64 | PASS | Protocol C opens with TA-C01 containing P41. Routing to C02/C03/C04 occurs only via P49 in TA-C01, after P41 fires. |\n| V-10 | GR-5: P28 absent from S6 Protocol | PASS | Protocol D contains TAs D01, D02, D03. P28 is absent from all three. Confirmed. |\n| V-11 | GR-6: P91 terminal in all mastery gate TAs | PASS | P91 in: A07, B03, C05, D03, E03. In each, P91 expanded as P77→P55→P76→P55→P75→P55→P74→P55→P78, with P78 terminal. |\n| V-12 | GR-7: ≤3 consecutive C-primitives | PASS | Longest C-primitive run: P29→P34→P30 in TA-C02 = 3 consecutive C-primitives (P27 precedes, D-category, breaking prior run). No sequence exceeds 3 consecutive C-primitives. |\n| V-13 | GR-8: P54 precedes high-difficulty first-attempt questions | PASS | difficulty=2; GR-8 applies to difficulty≥4. Not applicable. |\n| V-14 | GR-9: assessment primitives not in first TA unless diagnostic | PASS | TA-A01 (first TA of Protocol A) contains P49 (routing/elicitation) only — no P74/P75/P76/P77/P78. Compliant. |\n| V-15 | GR-10: Named Compound expansions substituted | PASS | P91 expanded in all 5 mastery gate TAs (A07, B03, C05, D03, E03). P89 referenced as scheduler in Component 5. |\n| V-16 | Response taxonomy present for all elicitation primitives | PASS | All P49 instances carry complete 4-branch JSON taxonomy. P77/P75/P74/P76 have specified expected responses in text. |\n| V-17 | All P49 branches specified (CORRECT/PARTIAL/INCORRECT/NO_RESPONSE) | PASS | Verified for all 16 P49 instances across all protocols and spaced repetition TAs. All 4 branches present. |\n| V-18 | Session cap respected | PASS | estimated_hours=8 → max 7 TAs. Protocol A: 7 TAs ✓ (at cap). Protocol B: 3 TAs ✓. Protocol C: up to 5 TAs (C01 + up to 3 repair TAs + C05) ✓. Protocol D: 3 TAs ✓. Protocol E: 3 TAs ✓. All within cap. |\n| V-19 | Transfer contexts reference cross-linked concept (P76 independence note if cross_links=[]) | PASS | cross_links=[math.func.linear-function]. P76 transfer probes include slope/linear-function bridge in TA-A07 and TA-E02, connecting to the cross-linked concept at the conceptual level appropriate for bloom=understand. Component 6 documents the bridge. Other P76 probes (scale models, recipes, photography) are self-contained. |\n| V-20 | AIR-1 through AIR-5 pass | PASS | AIR-1: All content slots finite and KG-sourced (specific ratio values, worked examples — all pre-specified). AIR-2: Response taxonomies pre-authored in all P49 branches. AIR-3: Branching deterministic (MAMR order fixed; all routes pre-specified). AIR-4: Primitives are concept-independent pedagogical operations. AIR-5: All TA sequences fixed at authoring time. PASS. |\n\n**PACKAGE_READY: YES** — All 20 V-checks PASS. Components 0–9 present. Blueprint approved for Educational Brain integration.",
+      "localKey": "MP-TA-E03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 1152,
+        "endLine": 1296
+      }
+    },
+    {
+      "assetId": "math.arith.ratios/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.ratios",
+      "title": "Spaced Repetition Schedule",
+      "content": "**Primitive:** P89 — SPACED REPETITION\n\n**Trigger:** Fires after each P78 PASS event.\n\n**Intervals:** 1 day → 3 days → 7 days → 21 days → 60 days\n\n**Entry point on each firing:** Protocol E (TA-E01 → TA-E02 → TA-E03)\n\n**Decay rule:** DECAY_DETECTED → reset to day 1 → Protocol B before next session.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.ratios.md",
+        "startLine": 1208,
+        "endLine": 1222
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,1176 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.logic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.logic",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:40fa70c2e9c7ccd85903c3fe945a78eb614798304a5b29670bc552ada5ebf05a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.logic.md": "sha256:dbfbb71eb9c63244ebbdf6b29fd40d812aa19d5d82941b9e2f9f84b7065bdc25"
+    },
+    "assetCount": 37,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 4,
+      "teaching_action_meta": 28,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 28
+  },
+  "concept": {
+    "conceptId": "math.found.logic",
+    "name": "Mathematical Logic",
+    "difficultyRaw": "foundational (mapped: 1)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.found.mathematical-language"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.logic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.logic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.logic.md": "sha256:dbfbb71eb9c63244ebbdf6b29fd40d812aa19d5d82941b9e2f9f84b7065bdc25"
+      },
+      "contentHash": "sha256:e859d9a738228c878d915293e4efc1edb23a15e2a0edc787f2c42bf5b203b131",
+      "ruleCount": 28,
+      "bandCounts": {
+        "3": 28
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-A02 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-A04 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-A07 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-B02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-B03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-B04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-B04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-C01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-C02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-C03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-C04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-E04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-E05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-E05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-F01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-F01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-F02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-F02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-F03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-F03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.logic.TA-F04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.logic.md#TA-F04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.logic\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.logic/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.logic",
+      "title": "Learning Objective",
+      "content": "A student who achieves mastery **analyzes a compound mathematical statement to identify its connective type, evaluates its truth value given the truth values of its components, determines whether a two-step argument is valid using modus ponens or modus tollens, and distinguishes a tautology from a contradiction.**\n\nNOT: recalling connective names without applying them. NOT: producing correct truth table entries by rote without understanding why. A student who labels \"IF P THEN Q\" correctly but then asserts its converse \"IF Q THEN P\" is equivalent has NOT achieved mastery.\n\n**Observable mastery criterion:** Given a novel IF-THEN statement and two premises, the student correctly derives the conclusion OR correctly identifies that no valid conclusion follows — and states which argument form (or non-form) is being used.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 27,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.found.logic/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.logic",
+      "title": "— \"IF P THEN Q is false when P is false.",
+      "content": "### MC-1 — \"IF P THEN Q is false when P is false.\"\n\n**Trigger signal:** MISCONCEPTION:MC-1  \n**Active in:** DQ-3 response asserting converse cases are false; truth table errors on rows 3 and 4\n\n**Conflict evidence:** \"The statement 'IF it rains, THEN I carry an umbrella' was made. It did not rain, and I did not carry an umbrella. Did I break my promise? No — the promise was only about rainy situations. I said nothing about dry weather.\"\n\n**Bridge text:** \"IF P THEN Q makes a promise that fires ONLY when P is true. When P is false, the conditional is simply not tested. An untested promise cannot be broken — so the conditional is TRUE by default when P is false.\"\n\n**Replacement text:** \"IF-THEN is false in exactly one case: when P is TRUE and Q is FALSE — because that is the only time a promise is made and broken. In all other cases, IF-THEN is TRUE.\"\n\n**Discrimination pairs:**\n- CORRECTLY evaluates IF-THEN: \"P=F, Q=T → IF-THEN=T because P never fired.\"\n- MC-1 error: \"P=F, Q=T → IF-THEN=F because Q being true doesn't match P being false.\"\n\n**S6 path:** Use promise analogy (P19) before P27. Do not present the truth table until after the everyday analogy is solid.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 3,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.found.logic/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.logic",
+      "title": "— \"IF P THEN Q means IF Q THEN P (converse confusion).",
+      "content": "### MC-2 — \"IF P THEN Q means IF Q THEN P (converse confusion).\"\n\n**Trigger signal:** MISCONCEPTION:MC-2  \n**Active in:** DQ-3 response asserting converse is equivalent; any argument form analysis claiming converse is valid\n\n**Conflict evidence:** \"IF a number is divisible by 4, THEN it is divisible by 2. Is 6 divisible by 4? No. But 6 IS divisible by 2. So we have a case where Q is true but P is false. The converse fails for x=6.\"\n\n**Bridge text:** \"P→Q and Q→P are different statements. P→Q means: whenever P occurs, Q occurs. Q→P means: whenever Q occurs, P occurs. These can have completely different truth values. Check: IF every square is a rectangle, does that mean every rectangle is a square? No — a counterexample kills the converse.\"\n\n**Replacement text:** \"The converse of a true statement is NOT automatically true. Always check: can I find a case where Q is true but P is false? If yes, the converse fails.\"\n\n**Discrimination pairs:**\n- IS a valid converse: IF x=5 THEN x+1=6; converse IF x+1=6 THEN x=5 — also true (happens to be biconditional)\n- IS NOT a valid converse: IF x divisible by 4 THEN x divisible by 2; converse fails for x=6\n\n**S6 path:** Use everyday counterexample first (dogs and mammals) before symbolic. P30 before P27.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 22,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.found.logic/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.logic",
+      "title": "— \"A single example proves a mathematical statement true.",
+      "content": "### MC-3 — \"A single example proves a mathematical statement true.\"\n\n**Trigger signal:** MISCONCEPTION:MC-3  \n**Active in:** Student asserts \"I found one case where it works, so it's true\"\n\n**Conflict evidence:** \"Goldbach's conjecture: every even number greater than 2 is the sum of two primes. Checked for the first 4×10¹⁸ even numbers — all true. Still not proven. One trillion examples do not constitute a proof.\"\n\n**Bridge text:** \"In mathematics, a UNIVERSAL statement ('for all x...') requires an ARGUMENT that covers ALL cases — not just the cases you checked. However, ONE COUNTEREXAMPLE is sufficient to DISPROVE a universal statement. The asymmetry is: examples support, one counterexample defeats.\"\n\n**Replacement text:** \"To PROVE: need an argument covering all cases. To DISPROVE: need one counterexample. This asymmetry is the engine of mathematical proof.\"\n\n**S6 path:** Do not introduce counterexample searches as \"finding your mistake\" — frame as \"being a detective who tests conjectures.\"\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 41,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.found.logic/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "math.found.logic",
+      "title": "— \"Inclusive OR is exclusive OR (P or Q means exactly one).",
+      "content": "### MC-4 — \"Inclusive OR is exclusive OR (P or Q means exactly one).\"\n\n**Trigger signal:** MISCONCEPTION:MC-4  \n**Active in:** DQ-2 response selecting D (\"at least one\") for AND; OR truth table with P=T,Q=T evaluated as F\n\n**Conflict evidence:** \"The sentence 'You can have dessert if you finish dinner or clean your room' — if a child finishes dinner AND cleans their room, do they get dessert? Yes. The OR includes the both-true case.\"\n\n**Bridge text:** \"Everyday English OR is often exclusive ('tea or coffee?'). Mathematical OR is always inclusive — TRUE when at least one component is true, including when BOTH are true. The both-true case is never excluded in formal logic.\"\n\n**Replacement text:** \"Mathematical OR (∨): true in 3 of 4 rows (all except both-false). Exclusive-OR (XOR) is a separate operation. Unless explicitly stated, OR in mathematics is inclusive.\"\n\n**S6 path:** Use concrete physical example (dessert scenario) with objects before truth table.\n\n---\n\n**MAMR note:** If MC-1 and MC-2 are both active, repair MC-1 first — understanding when IF-THEN is false (MC-1) is prerequisite to understanding converse direction (MC-2). A student confused about IF-THEN truth values cannot reason about the converse correctly.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 56,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Anchor + Proposition Concept (C-stage)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Anchor + Proposition Concept (C-stage)\",\"primitives\":[\"P02\",\"P06\",\"P14\",\"P16\",\"P26\",\"P37\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 14,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Connective NOT and AND (C-stage)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Connective NOT and AND (C-stage)\",\"primitives\":[\"P01\",\"P06\",\"P10\",\"P13\",\"P14\",\"P15\",\"P27\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 44,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Connective OR (C-stage)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Connective OR (C-stage)\",\"primitives\":[\"P02\",\"P06\",\"P14\",\"P17\",\"P25\",\"P26\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 87,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Connective IF-THEN (C-stage → P-stage transition)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Connective IF-THEN (C-stage → P-stage transition)\",\"primitives\":[\"P01\",\"P06\",\"P10\",\"P14\",\"P15\",\"P17\",\"P27\",\"P34\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 114,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Truth Tables as Perceptual Representation (P-stage)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Truth Tables as Perceptual Representation (P-stage)\",\"primitives\":[\"P01\",\"P07\",\"P13\",\"P15\",\"P36\",\"P38\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 160,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Valid Arguments: Modus Ponens and Modus Tollens (A-stage)",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Valid Arguments: Modus Ponens and Modus Tollens (A-stage)\",\"primitives\":[\"P01\",\"P08\",\"P10\",\"P25\",\"P26\",\"P44\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 189,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 230,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Surface the Error",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Surface the Error\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 252,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Semantic Grounding of IF-THEN",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Semantic Grounding of IF-THEN\",\"primitives\":[\"P01\",\"P14\",\"P19\",\"P25\",\"P36\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 273,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Repair Converse Confusion (if MC-2 flagged)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair Converse Confusion (if MC-2 flagged)\",\"primitives\":[\"P02\",\"P16\",\"P25\",\"P27\",\"P33\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 294,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-B04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-B04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P49\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 318,
+        "endLine": 336
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Surface + Conflict Evidence",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Surface + Conflict Evidence\",\"primitives\":[\"P02\",\"P35\",\"P41\",\"P49\",\"P52\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 336,
+        "endLine": 355
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Counterexample Chain",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"Counterexample Chain\",\"primitives\":[\"P01\",\"P16\",\"P21\",\"P42\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 355,
+        "endLine": 368
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Formalise the Direction Asymmetry",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"Formalise the Direction Asymmetry\",\"primitives\":[\"P07\",\"P26\",\"P33\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 368,
+        "endLine": 382
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 382,
+        "endLine": 398
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Map Existing Knowledge to Symbols",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Map Existing Knowledge to Symbols\",\"primitives\":[\"P04\",\"P07\",\"P13\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 398,
+        "endLine": 406
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Fill Gaps in Formal Notation",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Fill Gaps in Formal Notation\",\"primitives\":[\"P08\",\"P35\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 406,
+        "endLine": 414
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Tautology and Contradiction (extending bloom=analyze)",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Tautology and Contradiction (extending bloom=analyze)\",\"primitives\":[\"P02\",\"P23\",\"P26\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 414,
+        "endLine": 424
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P28\",\"P30\",\"P52\",\"P54\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 424,
+        "endLine": 440
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Low-Stakes Anchor",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Low-Stakes Anchor\",\"primitives\":[\"P02\",\"P30\",\"P41\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 440,
+        "endLine": 447
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Concrete (Everyday Props)",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Concrete (Everyday Props)\",\"primitives\":[\"P06\",\"P15\",\"P30\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 447,
+        "endLine": 453
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Guided NOT/AND/OR",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Guided NOT/AND/OR\",\"primitives\":[\"P30\",\"P35\",\"P49\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 453,
+        "endLine": 459
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "IF-THEN with Scaffolded Promise Frame",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"IF-THEN with Scaffolded Promise Frame\",\"primitives\":[\"P30\",\"P35\",\"P49\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 459,
+        "endLine": 465
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-E05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-E05\",\"title\":\"Mastery Gate\",\"primitives\":[\"P30\",\"P49\",\"P52\",\"P54\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 465,
+        "endLine": 481
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-F01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Vocabulary Anchor",
+      "content": "{\"id\":\"TA-F01\",\"title\":\"Vocabulary Anchor\",\"primitives\":[\"P02\",\"P06\",\"P26\",\"P37\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 481,
+        "endLine": 487
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-F02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Truth Table as Visual",
+      "content": "{\"id\":\"TA-F02\",\"title\":\"Truth Table as Visual\",\"primitives\":[\"P07\",\"P15\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 487,
+        "endLine": 493
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-F03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "IF-THEN Visual",
+      "content": "{\"id\":\"TA-F03\",\"title\":\"IF-THEN Visual\",\"primitives\":[\"P06\",\"P15\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 493,
+        "endLine": 499
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_action_meta/TA-F04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.logic",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-F04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-F04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 499,
+        "endLine": 507
+      }
+    },
+    {
+      "assetId": "math.found.logic/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.logic",
+      "title": "Assessment Battery",
+      "content": "**Formative items F-1 and F-2 (used in P90):**\n\nF-1 (P74 — Classification):  \n\"Label each compound statement as: conjunction (AND), disjunction (OR), negation (NOT), or conditional (IF-THEN):  \n(A) 'x is not negative.'  \n(B) 'x is prime and x is even.'  \n(C) 'If the derivative is zero, then x is a critical point.'  \n(D) 'The function is increasing or the function is constant.'\"  \nExpected CORRECT: A=NOT, B=AND, C=IF-THEN, D=OR.\n\nF-2 (P78 — Explanation):  \n\"IF-THEN has three TRUE rows and one FALSE row. Explain in your own words why the two rows where P is false are both TRUE.\"  \nExpected CORRECT: Articulates the promise-not-triggered interpretation.\n\n---\n\n**Full battery:**\n\n| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (Classification) | \"Classify each argument as MP, MT, or Converse Fallacy: (A) P→Q; P; ∴Q. (B) P→Q; ¬Q; ∴¬P. (C) P→Q; Q; ∴P.\" | CORRECT: A=MP, B=MT, C=Fallacy |\n| P75 (Boundary) | \"Is P∨¬P always true, sometimes true, or never true? What kind of statement is it?\" | CORRECT: Always true — it is a tautology. Either P holds or its negation holds. |\n| P76 (Transfer) | \"In a circuit: switch A AND switch B must both be closed for current to flow. If current is NOT flowing, what do you know about the switches?\" | CORRECT: At least one switch is open (MT applied to AND: ¬(A∧B) → ¬A∨¬B by De Morgan; at least one is false). |\n| P77 (Generation) | \"Write a compound mathematical statement using IF-THEN that is TRUE when the antecedent is false.\" | CORRECT: Any valid conditional with a false antecedent, e.g. 'IF 3 is even, THEN 3 is divisible by 2' — both components false; conditional is true. |\n| P78 (Explanation) | \"A student says: 'I proved P→Q is true by showing Q is true.' Is this correct? Explain.\" | CORRECT: No — this is the converse fallacy. Showing Q is true does not establish that P caused Q or that P→Q holds. You need to show that whenever P is true, Q must also be true. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 723,
+        "endLine": 753
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.logic",
+      "title": "Student State Matrix",
+      "content": "| State | Label | Entry Behaviour | Protocol |\n|---|---|---|---|\n| S0 | Complete Novice | Has not encountered formal logic; confuses everyday language \"if-then\" with material conditional; no truth table experience | Protocol A |\n| S1 | Procedural Carrier | Can fill in truth tables by rote but misapplies the IF-THEN connective (treats it as biconditional or as causal) | Protocol B |\n| S2 | Misconception Carrier | Holds MC-2 (converse confusion: P→Q same as Q→P) actively with confidence; produces systematic errors on IF-THEN truth tables | Protocol C |\n| S3 | Conceptual Carrier | Has informal logic experience (debates, everyday reasoning); missing the formalism; understands validity but cannot evaluate it symbolically | Protocol D |\n| S6 | Low Confidence | Shuts down under symbolic notation; can handle concrete everyday propositions but freezes at truth table symbols | Protocol E |\n| S9 | Second-Language Learner | Language of connectives (AND, OR, NOT, IF-THEN) differs from L1 usage; needs visual truth tables before verbal definitions | Protocol F |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 37,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.logic",
+      "title": "Diagnostic Battery",
+      "content": "**Administration note:** Run DQ-1, DQ-2, DQ-3 before any teaching. Do not introduce truth tables or formal notation until after routing.\n\n---\n\n### DQ-1 — Proposition Recognition (P41)\n\n**Stimulus:** \"I'm going to say five things. Tell me which ones are either definitely true or definitely false — not a matter of opinion.\"  \n(A) \"The number 7 is prime.\"  \n(B) \"Mathematics is beautiful.\"  \n(C) \"If it is raining, I will use an umbrella.\"  \n(D) \"All squares have four sides.\"  \n(E) \"This problem is hard.\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"Correctly identifies A and D as definite T/F; C as conditional; B/E as opinion\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"Identifies A and D; unsure about C\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"Includes B or E as mathematical propositions\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n{ stimulus: \"Cannot distinguish any category\", signal: \"SIGNAL:NO_RESPONSE\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → likely S3 → DQ-2\n- SIGNAL:PARTIAL → likely S0 → DQ-2\n- SIGNAL:INCORRECT → S0; note for prerequisite reinforcement\n- SIGNAL:NO_RESPONSE → S0 or S6\n\n---\n\n### DQ-2 — Connective Intuition (P35)\n\n**Stimulus:** \"Consider: 'P is true AND Q is true.' Under what conditions is this compound statement true?\"  \n(A) When P is true, regardless of Q.  \n(B) When Q is true, regardless of P.  \n(C) When both P and Q are true.  \n(D) When at least one of P or Q is true.\n\n**Response taxonomy:**\n```\n{ stimulus: \"C, with explanation\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"C, without explanation\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"D ('at least one')\", signal: \"MISCONCEPTION:MC-4\", mc_id: \"MC-4\" }\n{ stimulus: \"A or B\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → DQ-3\n- MISCONCEPTION:MC-4 → flag; continue to DQ-3; route to Protocol A with MC-4 repair early\n- SIGNAL:INCORRECT or PARTIAL → DQ-3 regardless\n\n---\n\n### DQ-3 — IF-THEN Intuition (P41)\n\n**Stimulus:** \"Consider: 'IF a number is divisible by 4, THEN it is divisible by 2.' Suppose a number IS divisible by 2. Does that tell you it's divisible by 4?\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"No — divisible by 2 does not guarantee divisible by 4 (e.g. 6)\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"Yes — because IF divisible by 4 THEN divisible by 2, so it works both ways\", signal: \"MISCONCEPTION:MC-2\", mc_id: \"MC-2\" }\n{ stimulus: \"Yes — because the statement says so\", signal: \"MISCONCEPTION:MC-1\", mc_id: \"MC-1\" }\n{ stimulus: \"Not sure\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → S3 or S1 → Protocol D or B (use DQ-1 result to distinguish)\n- MISCONCEPTION:MC-2 → Protocol C (converse confusion is the dominant error)\n- MISCONCEPTION:MC-1 → MC-1 active; Protocol A with MC-1 repair in TA-A06\n- SIGNAL:PARTIAL → S0 → Protocol A\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-4",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 50,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "math.found.logic/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "math.found.logic",
+      "title": "Prerequisite Check",
+      "content": "`requires: [math.found.mathematical-language]`\n\n**Prerequisite check items (P41 × 2):**\n\n**PC-1:** \"Is '2+2=5' a mathematical statement? Is it true?\"  \nExpected CORRECT: Yes it is a statement; it is false.  \nSIGNAL:INCORRECT (says it's not a statement, or says \"it can't be true OR false because it's wrong\") → prerequisite gap; reinforce in TA-A01 before proceeding.\n\n**PC-2:** \"What does it mean for a mathematical statement to be TRUE?\"  \nExpected CORRECT: It accurately describes reality / it corresponds to fact / it can be verified.  \nSIGNAL:INCORRECT or vague → reinforce mathematical statement concept in TA-A01.\n\n**Gap repair (in-session, 1 TA only):** If prerequisite gap detected, open Protocol A with:  \nP02 → P26[definition: \"A proposition is a statement that is either true or false — not both, not neither.\"] → P37[classify: classify 4 sentences as propositions or non-propositions] → P55 → P49 → then continue Protocol A from TA-A02.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.logic.md",
+        "startLine": 124,
+        "endLine": 143
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

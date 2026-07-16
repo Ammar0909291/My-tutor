@@ -1,0 +1,352 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.quadratic-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.quadratic-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:96eb50687e69bec812aa8dabeb3e43c4d685266d0396c706f440e2bd71bd67bc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.quadratic-equation.md": "sha256:eeb24945d1865cd22ba565c898310b4bf15eaa712075f30bb9f7d70c0328cf66"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.quadratic-equation",
+    "name": "Quadratic Equation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.alg.factoring-trinomials"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.quadratic-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.quadratic-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.quadratic-equation.md": "sha256:eeb24945d1865cd22ba565c898310b4bf15eaa712075f30bb9f7d70c0328cf66"
+      },
+      "contentHash": "sha256:616194b1c735bf4116aaac08c829d126d363830870f0facae934350e26546a1e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.quadratic-equation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.quadratic-equation.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.quadratic-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.quadratic-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.quadratic-equation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.quadratic-equation.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.quadratic-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.quadratic-equation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.quadratic-equation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.quadratic-equation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.quadratic-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.quadratic-equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.quadratic-equation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.quadratic-equation.md#TA-A04 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.quadratic-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.quadratic-equation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.quadratic-equation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "Quadratic Equation — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.alg.factoring-trinomials**: factoring ax²+bx+c into linear factors; AC method; recognizing irreducible quadratics\n\n### Target Knowledge State\nStudent can solve ax²+bx+c=0 by three methods: (1) factoring when the discriminant is a perfect square, (2) the quadratic formula x=(−b±√(b²−4ac))/2a for any quadratic, and (3) completing the square as an intermediate step. Student can use the discriminant b²−4ac to determine the number and nature of roots before solving.\n\n### Conceptual Obstacles\n1. Attempting to factor every quadratic regardless of whether it factors over the rationals — not checking the discriminant first; getting stuck when factoring fails\n2. Sign errors in the quadratic formula, particularly computing −b when b is already negative (e.g., b=−3 → −b=+3, not −3 again)\n3. Computing √(b²−4ac) when b²−4ac<0 and calling it a real number — ignoring that no real roots exist\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "Worked Example Pair",
+      "content": "### Teaching Action A02 — Worked Example Pair\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Apply factoring method and quadratic formula to contrasting examples; address MC-2\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**Worked Example 1 — Solve by Factoring**\n\n*Problem:* Solve x² − 5x + 6 = 0.\n\n*Step 1 — Check discriminant:* Δ = 25 − 24 = 1 (perfect square) → factoring viable.\n\n*Step 2 — Factor:* Find p×q=6, p+q=−5 → (−2, −3): x²−5x+6=(x−2)(x−3)\n\n*Step 3 — Apply Zero Product Property:*\n(x−2)(x−3) = 0 → x−2=0 or x−3=0 → **x=2 or x=3**\n\n*Verify:* 2²−5(2)+6=4−10+6=0 ✓; 3²−5(3)+6=9−15+6=0 ✓\n\n---\n\n**Worked Example 2 — Solve by Quadratic Formula (Irrational Roots)**\n\n*Problem:* Solve 2x² − 4x − 3 = 0.\n\n*Step 1 — Check discriminant:* a=2, b=−4, c=−3.\nΔ = (−4)² − 4(2)(−3) = 16 + 24 = 40. Not a perfect square → factoring won't give rational roots. Use formula.\n\n*Step 2 — Apply formula:*\n\nx = (−(−4) ± √40) / (2·2) = (4 ± √40) / 4\n\n*Simplify √40:* √40 = 2√10\n\nx = (4 ± 2√10) / 4 = **(2 ± √10) / 2**\n\n*Two roots:*\nx₁ = (2 + √10)/2 ≈ (2 + 3.162)/2 ≈ **2.581**\nx₂ = (2 − √10)/2 ≈ (2 − 3.162)/2 ≈ **−0.581**\n\n*Sign note (MC-2):* b=−4, so −b=−(−4)=**+4**. The numerator starts with +4, not −4.\n\n*Verify (x₁ approximate):* 2(2.581)²−4(2.581)−3 ≈ 2(6.66)−10.32−3 ≈ 13.32−10.32−3 = 0 ✓\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n*Probe:* For 3x² − x − 2 = 0, compute −b and 2a to set up the formula.\n\n(A) −b = −1; 2a = 6\n(B) −b = 1; 2a = 6\n(C) −b = 1; 2a = 3\n(D) −b = −1; 2a = 3\n\n*Branch CORRECT (B):* b = −1, so −b = −(−1) = +1. 2a = 2(3) = 6. ✓ Δ = 1 + 24 = 25; x=(1±5)/6 → x=1 or x=−2/3. Proceed to A03.\n\n*Branch PARTIAL:* You may have gotten the 2a correct but made a sign error on −b. Here b=−1, so −b=+1 (change sign). Formula numerator: +1 ± √25 = 1 ± 5. Proceed to A03.\n\n*Branch INCORRECT (A or D):* b=−1 (the coefficient of x is negative one). −b means \"change the sign of b\": −(−1)=+1. Option A repeats the negative sign — a very common MC-2 error. Proceed to A03.\n\n*Branch NO_RESPONSE:* b=−1 → −b=+1; a=3 → 2a=6. x=(1±√(1+24))/6=(1±5)/6 → x=1 or x=−1/3. Proceed to A03.\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 137,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "FACTORING-IS-UNIVERSAL",
+      "content": "| MC-1 | FACTORING-IS-UNIVERSAL | Student attempts to factor every quadratic; when factoring fails (discriminant not a perfect square), student is stuck rather than switching to the quadratic formula | Non-factorable quadratics with irrational or complex roots |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "NEGATIVE-b-FORMULA-ERROR",
+      "content": "| MC-2 | NEGATIVE-b-FORMULA-ERROR | For ax²+bx+c with b negative (e.g., b=−5), student writes −b=−5 (not changing sign) instead of −b=+5 in the formula x=(−b±√Δ)/2a | Quadratic formula applied to equations where b<0 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "NEGATIVE-DISCRIMINANT-REAL-ROOT",
+      "content": "| MC-3 | NEGATIVE-DISCRIMINANT-REAL-ROOT | When Δ=b²−4ac<0, student continues computing √Δ as if it were real, or reports \"no solution\" without checking Δ first | Any quadratic with complex roots; not recognizing the nature-of-roots test |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "Linear-to-Quadratic Analogy",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Linear-to-Quadratic Analogy\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 66,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "Worked Example Pair",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 137,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "Discriminant Cases Contrast",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Discriminant Cases Contrast\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 205,
+        "endLine": 263
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 263,
+        "endLine": 478
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*For each equation: (i) compute Δ; (ii) state the nature of roots; (iii) solve (if real roots exist).*\n\n**Problem 1.** x² − 7x + 12 = 0\n\n**Problem 2.** x² + 4x + 4 = 0\n\n**Problem 3.** 2x² + 3x − 2 = 0\n\n**Problem 4.** x² − x + 1 = 0\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. Δ = 49 − 48 = 1 > 0 (perfect square) → two rational roots\n   Factor: (x−3)(x−4)=0 → **x=3, x=4**\n   Verify: 9−21+12=0 ✓; 16−28+12=0 ✓\n\n2. Δ = 16 − 16 = 0 → one repeated root\n   (x+2)²=0 → **x=−2** (double root)\n   Verify: 4−8+4=0 ✓\n\n3. Δ = 9 + 16 = 25 > 0 (perfect square) → two rational roots\n   AC: ac=2×(−2)=−4; find p×q=−4, p+q=3 → (4,−1)\n   2x²+4x−x−2=2x(x+2)−1(x+2)=(2x−1)(x+2)=0 → **x=1/2, x=−2**\n   Verify: 2(1/4)+3(1/2)−2=0.5+1.5−2=0 ✓; 2(4)+3(−2)−2=8−6−2=0 ✓\n\n4. Δ = 1 − 4 = **−3 < 0** → **no real roots**\n\nScore 1 point per problem (P77 total: 4 points). Full credit requires all three steps (Δ, nature, roots/conclusion).\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence — cross_links NOT Tier-1)*\n\n*Problem:* A rectangle has perimeter 24 cm and area 35 cm². Find the dimensions.\n\n(a) Let the length be x cm. Write an expression for the width in terms of x.\n\n(b) Use the area condition to form a quadratic equation.\n\n(c) Compute the discriminant and determine how many solutions exist.\n\n(d) Solve the quadratic equation and state the rectangle's dimensions. Verify by checking both perimeter and area.\n\n*Expected solution:*\n\n(a) Perimeter = 2(length + width) = 24 → length + width = 12 → width = 12 − x\n\n(b) Area = x(12−x) = 35 → 12x − x² = 35 → **x² − 12x + 35 = 0**\n\n(c) Δ = 144 − 140 = **4 > 0** (perfect square) → two real rational roots\n\n(d) Factor (or formula): (x−5)(x−7)=0 → x=5 or x=7\n   - x=5: width=12−5=7 → dimensions **5 cm × 7 cm**\n   - x=7: width=12−7=5 → same rectangle in the other orientation\n\nVerify: Perimeter = 2(5+7) = 24 ✓; Area = 5×7 = 35 ✓\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all four parts correct — equation set up, Δ computed, roots found, dimensions verified).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.85 × 5⌉ = 5). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Re-examine missed item; identify pattern (sign errors → B02; discriminant error → B01 or B03); targeted re-explanation |\n| ≤ 3/5 | → Return to A01; re-engage decision tree; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.alg.quadratic-equation` complete. Threshold 0.85 requires 5/5 correct.\n\n**Unlocks:** `math.func.quadratic-function`, `math.alg.polynomial-roots`\n\nNext concept recommendation: `math.alg.completing-the-square` (child) or `math.alg.discriminant` (child) — both deepen understanding before approaching polynomial-roots in full generality.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 266,
+        "endLine": 385
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** Pictorial (P) — proficient learner.\n\n**Scaffolding sequence:**\n1. **A01 P03 ANALOGY BRIDGE** — connect linear equation solving (one root) to quadratic (at most two roots); introduce the three methods and a method-selection decision tree keyed to the discriminant\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: solve by factoring (integer roots); WE2: solve by quadratic formula (irrational roots)\n3. **A03 P06 CONTRAST PAIR** — discriminant cases Δ>0, Δ=0, Δ<0 with examples of each; completing the square as derivation of the formula\n4. **A04 P91 Gate** — mastery assessment\n\n**V-3 (CPA Concrete stage):** N/A — proficient learner enters at Pictorial stage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 56,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Solve x²+2x−15=0. First compute Δ, then factor. |\n| R2 | 3 days | Solve 3x²−2x−4=0 using the quadratic formula (Δ is not a perfect square). |\n| R3 | 7 days | Determine the nature of roots (without solving) for: (a) 4x²−4x+1=0; (b) x²+x+3=0. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 419,
+        "endLine": 429
+      }
+    },
+    {
+      "assetId": "math.alg.quadratic-equation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.quadratic-equation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | math.func.quadratic-function (NOT Tier-1) |\n| P76_mode | independence (cross-link NOT Tier-1) |\n| Unlocks | math.func.quadratic-function, math.alg.polynomial-roots |\n| Requires (Tier-1) | math.alg.factoring-trinomials |\n\n**GR-8 compliance:** cross_links = [math.func.quadratic-function]; NOT Tier-1 → documented.\n**GR-9 compliance:** P76 uses an independent novel problem (geometric rectangle) unrelated to the non-Tier-1 cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.quadratic-equation.md",
+        "startLine": 429,
+        "endLine": 443
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

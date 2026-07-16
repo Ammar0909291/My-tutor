@@ -1,0 +1,471 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.angle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.angle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7e10882480604b5bd9c52ed561c6f513c561c384a17efe9a48e759555564a9d8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.angle.md": "sha256:1d93c63ca8a9de455658e854b70c7a944ec5454c112e72364b0947b3ae76dfe6"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.geom.angle",
+    "name": "Angle",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.ray"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.angle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.angle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.angle.md": "sha256:1d93c63ca8a9de455658e854b70c7a944ec5454c112e72364b0947b3ae76dfe6"
+      },
+      "contentHash": "sha256:3529970e7701344178ee27e21dc14178b42cbf671bdadd37fc00be2e3235c68b",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.angle.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.angle/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.angle",
+      "title": "Angle — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.geom.ray**: A ray is a half-line with one endpoint and infinite extent in one direction. An angle is formed by TWO rays sharing a common endpoint (vertex).\n\n### Target Understanding\n1. An angle is the figure formed by two rays (sides) sharing a common endpoint (vertex). Written ∠ABC: vertex at B; sides are →BA and →BC.\n2. Angle measure = the amount of rotation between the two sides. It is a positive quantity independent of the length of the rays.\n3. Degree measure: full rotation = 360°. Classifications: acute (0° < θ < 90°), right (θ = 90°), obtuse (90° < θ < 180°), straight (θ = 180°), reflex (180° < θ < 360°).\n4. Radian measure: full rotation = 2π rad. Conversion: θ_rad = θ_deg × π/180. Right angle = π/2 rad; straight angle = π rad.\n5. ∠ABC = ∠CBA — an angle is symmetric in its naming; the vertex letter is always in the middle.\n6. Complementary angles sum to 90°; supplementary angles sum to 180°.\n\n### Cross-Link Activation\n- **math.trig.angle-measure**: Angle measure in degrees and radians is the foundational input for all trigonometric functions. P76 previews radian-degree conversion and the surveyor-angle context used in trigonometry.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 31,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.geom.angle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle",
+      "title": "[FOUNDATIONAL] — ANGLE-DEPENDS-ON-RAY-LENGTH",
+      "content": "### MC-1 [FOUNDATIONAL] — ANGLE-DEPENDS-ON-RAY-LENGTH\n- **Trigger**: \"A bigger angle has longer sides (rays)\" or \"angles with shorter drawn rays look smaller.\"\n- **Root cause**: Physical experience with diagrams — wider-looking angles often have longer drawn lines. Learner conflates the visual area between rays with the angular measurement.\n- **Error pattern**: Compares two angles by the length of their rays; says ∠ABC > ∠DEF because ray BA is longer than ray ED in the diagram.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.geom.angle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle",
+      "title": "— ANGLE-DEGREES-ONLY",
+      "content": "### MC-2 — ANGLE-DEGREES-ONLY\n- **Trigger**: \"Angles can only be measured in degrees; π/2 radians isn't a real angle\" or \"I don't understand what a radian is.\"\n- **Root cause**: Degrees are introduced first and feel concrete (360° for a full turn is familiar). Radians feel abstract.\n- **Error pattern**: Rejects radian notation; cannot convert 90° to π/2; says \"π/2 isn't a number, it's just π divided by 2.\"\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.angle/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle",
+      "title": "— ANGLE-VERTEX-IS-FIRST-LETTER",
+      "content": "### MC-3 — ANGLE-VERTEX-IS-FIRST-LETTER\n- **Trigger**: \"In ∠ABC, the vertex is at A\" (vertex is always at B — the middle letter).\n- **Root cause**: Reading left-to-right, A is the first letter encountered, so learner assumes A is the special point.\n- **Error pattern**: Identifies the wrong vertex in ∠PQR (says P instead of Q); draws the angle turn at A when given ∠ABC.\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle",
+      "title": "Angle as a Figure of Two Rays at a Common Vertex",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Angle as a Figure of Two Rays at a Common Vertex\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 88,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle",
+      "title": "Misconception Gate: ANGLE-DEPENDS-ON-RAY-LENGTH (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: ANGLE-DEPENDS-ON-RAY-LENGTH (FOUNDATIONAL)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 112,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle",
+      "title": "Angle Classification",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Angle Classification\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 134,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle",
+      "title": "Degrees and Radians",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Degrees and Radians\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 156,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 178,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle",
+      "title": "Repair MC-1 ANGLE-DEPENDS-ON-RAY-LENGTH",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 ANGLE-DEPENDS-ON-RAY-LENGTH\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 226,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle",
+      "title": "Repair MC-2 ANGLE-DEGREES-ONLY",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 ANGLE-DEGREES-ONLY\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 246,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle",
+      "title": "Repair MC-3 ANGLE-VERTEX-IS-FIRST-LETTER",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 ANGLE-VERTEX-IS-FIRST-LETTER\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 265,
+        "endLine": 358
+      }
+    },
+    {
+      "assetId": "math.geom.angle/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.angle",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A05 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\nQ1: In ∠ABC, which point is the vertex?\nQ2: ∠PQR and ∠STU both measure 45°. Ray QP = 3 cm; ray TS = 6 cm. Are the angles equal in measure?\nQ3: Classify: (a) 75°; (b) 180°; (c) 225°.\nQ4: Convert: (a) 60° to radians; (b) π/3 rad to degrees.\nQ5: True or False: ∠ABC = ∠CBA.\n\n**P55 (SCORE):**\nQ1: B — vertex is always the middle letter in the angle name.\nQ2: Yes — ∠PQR = ∠STU = 45°. Angle measure depends on rotation, not ray length.\nQ3: (a) Acute (0° < 75° < 90°); (b) Straight (180°); (c) Reflex (180° < 225° < 360°).\nQ4: (a) 60° × π/180 = π/3 rad; (b) π/3 × 180/π = 60°.\nQ5: TRUE — ∠ABC = ∠CBA. The vertex (B) is always the middle letter; swapping the outer letters names the same angle.\n\n**P76 (TRANSFER PROBE — Cross-link: math.trig.angle-measure):**\nA surveyor at station S measures the angle between two sight lines: one toward landmark A, one toward landmark B. The instrument reads 60°.\n(a) Express the surveyor's 60° angle in radians.\n(b) A colleague asks for the complementary angle (the angle that together with 60° makes a right angle). What is it in degrees and in radians?\n(c) The surveyor extends both sight lines by 50 m. Does the angle at S change?\n\n**Expected**: (a) 60° × π/180 = π/3 rad. (b) Complement = 90° − 60° = 30° = π/6 rad. (c) No — extending sight lines (rays) does not change the angle; it depends only on rotation, not on distance.\n\n**P55 (SCORE):** Conversion correct; complementary angle given in both units; ray-length independence confirmed.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, Q5, P76 = **6 items**. Pass: **6/6** (⌈0.90×6⌉ = 6).\n- PASS → P78.\n- FAIL → P74.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q2 wrong or P76(c) wrong → TA-B01 (ANGLE-DEPENDS-ON-RAY-LENGTH; apply MAMR).\n- Q4 or P76(a,b) wrong → TA-B02 (ANGLE-DEGREES-ONLY).\n- Q1 or Q5 wrong → TA-B03 (ANGLE-VERTEX-IS-FIRST-LETTER).\n- Q3 wrong → re-teach TA-A03 classification table; re-gate.\n- Multiple → MAMR: TA-B01 first; FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.geom.triangle, math.trig.right-triangle-trig.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 178,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.angle",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a physical protractor and two pencils or a door opening on a hinge (Concrete). Pictorial: draw two rays from a vertex B with an arc between them. Abstract: the angle as a measure of rotation; conversion formula θ_rad = θ_deg × π/180.\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). Route → TA-B01 if triggered later. MC-2 and MC-3 FIFO.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 74,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.angle/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.angle",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (vertex) + Q2 (ray-length independence) | 2/2 |\n| Day 3 | Q3 (classify 3 angles) + Q4 (convert 1 angle) | 2/2 |\n| Day 7 | Mixed 3-item: name vertex, classify, convert 45° to radians | 3/3 |\n| Day 21 | Q1, Q2, Q3, Q4, Q5 (5 items) | 5/5 |\n| Day 60 | Full 6-item mastery gate | 6/6 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 282,
+        "endLine": 296
+      }
+    },
+    {
+      "assetId": "math.geom.angle/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.angle",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Ray | math.geom.ray | An angle is formed by two rays sharing a common endpoint (the vertex); ray direction and endpoint concepts are prerequisite |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Triangle | math.geom.triangle | Triangles have three interior angles; angle classification is prerequisite for triangle types |\n| Right Triangle Trig | math.trig.right-triangle-trig | Trig ratios (sin, cos, tan) are defined for angles in right triangles |\n\n### Cross-Links\n- **math.trig.angle-measure**: Degree-radian conversion and the unit-circle radian definition; P76 previews this connection through the surveyor scenario.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle.md",
+        "startLine": 296,
+        "endLine": 314
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

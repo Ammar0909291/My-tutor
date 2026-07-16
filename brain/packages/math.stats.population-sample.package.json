@@ -1,0 +1,438 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.population-sample-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.population-sample",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ff49e870c29134d480aafaf0a4857a7b33b65bf2875a16a9f27839269dd6a891",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.population-sample.md": "sha256:6ac2c4dd20c7bc5430f9e385512948080995cbb08a4955d92e01c0d89f708290"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.stats.population-sample",
+    "name": "Population and Sample",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.arith.fractions"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.population-sample-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.population-sample (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.population-sample.md": "sha256:6ac2c4dd20c7bc5430f9e385512948080995cbb08a4955d92e01c0d89f708290"
+      },
+      "contentHash": "sha256:5a76d6f7230e5f1f7d2d49c15ba243396ea0c5507c4662c1df69b9b2f2f4b3bc",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.population-sample.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.population-sample.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.population-sample"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.population-sample\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.population-sample.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.population-sample.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.population-sample"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.population-sample\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.population-sample.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.population-sample.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.population-sample"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.population-sample\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.population-sample.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.population-sample.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.population-sample"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.population-sample\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.population-sample.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.population-sample.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.population-sample"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.population-sample\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.population-sample.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.population-sample.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.population-sample"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.population-sample\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.population-sample.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.population-sample.md#TA-B03 (addresses MC-3, MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.population-sample"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.population-sample\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.population-sample/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.stats.population-sample",
+      "title": "Population and Sample — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.arith.fractions**: The sampling fraction n/N (sample size ÷ population size) and proportions from sample data use fraction arithmetic.\n\n### Target Understanding\n1. The population is the complete set of all units (people, objects, measurements) about which a conclusion is sought. It is defined by the research question and may be finite or conceptually infinite.\n2. A sample is a subset of the population — the selected units actually studied. n denotes sample size; N denotes population size (when finite).\n3. Statistical inference uses sample data to estimate population characteristics. Samples are studied because surveying the full population is often impossible, impractical, or too costly.\n4. A representative sample reflects the population's characteristics proportionally and without systematic bias. A biased sample systematically over- or under-represents some segment.\n5. Larger sample size alone does NOT guarantee representativeness. Sampling method (random selection vs. voluntary/convenience) is the primary determinant of representativeness.\n6. The sampling fraction = n/N; meaningful when N is finite and known.\n\n### Cross-Link Activation\n- No cross-links. P76 uses an independence probe (national polling scenario).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 31,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.population-sample",
+      "title": "[FOUNDATIONAL] — SAMPLE-IS-POPULATION",
+      "content": "### MC-1 [FOUNDATIONAL] — SAMPLE-IS-POPULATION\n- **Trigger**: Treating sample results as definitive truth for the entire population without qualification.\n- **Root cause**: Learner doesn't distinguish \"what I found in my sample\" from \"what is true in the population.\" Every data set studied is a sample of something larger, yet the distinction often goes unstated.\n- **Error pattern**: \"I surveyed 30 students and found 60% prefer pizza — so 60% of all students prefer pizza.\" No hedging; treats sample percentage as a known population percentage.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.population-sample",
+      "title": "— LARGER-IS-ALWAYS-BETTER",
+      "content": "### MC-2 — LARGER-IS-ALWAYS-BETTER\n- **Trigger**: \"1,000,000 respondents is always more accurate than 1,000 respondents, no matter how they were selected.\"\n- **Root cause**: Intuition that more data = more accurate. Doesn't account for sampling bias.\n- **Error pattern**: Rates a voluntary online poll of 10,000 as more trustworthy than a random sample of 500; dismisses the small random sample as \"too small to matter.\"\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.stats.population-sample",
+      "title": "— POPULATION-IS-PEOPLE",
+      "content": "### MC-3 — POPULATION-IS-PEOPLE\n- **Trigger**: \"A population in statistics has to be a group of people.\"\n- **Root cause**: Everyday usage of \"population\" means human population (residents of a city or country).\n- **Error pattern**: Cannot identify the population in a study of manufactured parts, tree heights, or bacteria counts; says \"there's no population here — it's not about people.\"\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.population-sample",
+      "title": "Population and Sample: Core Definitions",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Population and Sample: Core Definitions\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 88,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.population-sample",
+      "title": "Misconception Gate: SAMPLE-IS-POPULATION (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: SAMPLE-IS-POPULATION (FOUNDATIONAL)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 111,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.population-sample",
+      "title": "Representative Samples and Bias",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Representative Samples and Bias\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 135,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.population-sample",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 155,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.population-sample",
+      "title": "Repair MC-1 SAMPLE-IS-POPULATION",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 SAMPLE-IS-POPULATION\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.population-sample",
+      "title": "Repair MC-2 LARGER-IS-ALWAYS-BETTER",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 LARGER-IS-ALWAYS-BETTER\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 221,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.population-sample",
+      "title": "Repair MC-3 POPULATION-IS-PEOPLE",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 POPULATION-IS-PEOPLE\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 240,
+        "endLine": 332
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.population-sample",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A04 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\nQ1: A biologist studies all fish in a lake by capturing and measuring 200 fish, then releasing them. What is the population? What is the sample?\nQ2: True or False: A sample of 10,000 is always more reliable than a sample of 100.\nQ3: A factory produces 50,000 bolts per day. A quality inspector tests 250 randomly selected bolts. What is the sampling fraction?\nQ4: Why might surveying only people who voluntarily respond to an online poll produce a biased sample?\n\n**P55 (SCORE):**\nQ1: Population = all fish in the lake. Sample = the 200 captured and measured fish.\nQ2: FALSE — a larger sample is not automatically more reliable. A biased sampling method produces biased results regardless of size.\nQ3: Sampling fraction = n/N = 250/50,000 = 1/200 = 0.5%.\nQ4: Voluntary respondents self-select: people with strong opinions are more likely to respond, so their views are over-represented. Those with moderate or no opinion are under-represented. The result is systematically biased.\n\n**P76 (TRANSFER PROBE — Independence):**\nA polling company wants to estimate the percentage of adults nationwide who support a proposed tax policy. They randomly select 1,000 adults from a national voter registration database and interview them.\n(a) What is the population?\n(b) What is the sample?\n(c) A critic says: \"1,000 people is far too small — you need at least 100,000 to get an accurate result.\" Evaluate this criticism.\n\n**Expected**: (a) Population = all adults nationwide (the group whose opinion is being estimated). (b) Sample = the 1,000 randomly selected adults interviewed. (c) The criticism confuses size with method. A random sample of 1,000 from a national database can produce accurate national estimates (standard practice for national polls); the critical factor is that the 1,000 were randomly selected, not that 100,000 were sampled. An unrepresentative sample of 100,000 would still be biased.\n\n**P55 (SCORE):** Population correctly identified; sample identified; size-vs-method distinction correctly explained.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, P76 = **5 items**. Pass: **5/5** (⌈0.90×5⌉ = 5).\n- PASS → P78.\n- FAIL → P74.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 or P76(a,b) wrong → TA-B01 (SAMPLE-IS-POPULATION; apply MAMR).\n- Q2 or P76(c) wrong → TA-B02 (LARGER-IS-ALWAYS-BETTER).\n- Q1 wrong due to non-human population confusion → TA-B03 (POPULATION-IS-PEOPLE).\n- Multiple → MAMR: TA-B01 first; FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.stats.descriptive-statistics, math.stats.sampling.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 155,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.population-sample",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with the soup-tasting analogy (a pot of soup = population; a spoonful = sample) (Concrete). Pictorial: large circle labeled \"Population N\" containing smaller circle \"Sample n.\" Abstract: sampling fraction n/N; notation for population parameter (μ) vs. sample statistic (x̄).\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). Route → TA-B01 if triggered later. MC-2 and MC-3 FIFO.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 74,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.population-sample",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (population vs. sample) + Q2 (size fallacy) | 2/2 |\n| Day 3 | Q3 (sampling fraction) + P76 (a, b) | 2/2 |\n| Day 7 | Mixed 2-item: identify population and sample in a novel study; explain one source of bias | 2/2 |\n| Day 21 | Q1, Q2, Q3, Q4 (4 items) | 4/4 |\n| Day 60 | Full 5-item mastery gate | 5/5 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 257,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "math.stats.population-sample/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.population-sample",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Fractions | math.arith.fractions | Sampling fraction n/N; percentages and proportions from sample data |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Descriptive Statistics | math.stats.descriptive-statistics | Descriptive statistics summarize sample data; the population–sample distinction determines which statistics are parameters vs. estimates |\n| Sampling | math.stats.sampling | Sampling methods (random, stratified, cluster, convenience) build on the foundational population–sample framework |\n\n### Cross-Links\n- None.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.population-sample.md",
+        "startLine": 271,
+        "endLine": 289
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

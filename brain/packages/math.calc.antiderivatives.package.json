@@ -1,0 +1,347 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.antiderivatives-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.antiderivatives",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bf399d2d904945e549b493b671733aaefef0697133644120a1aee54a70a0145f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.antiderivatives.md": "sha256:0c6441cd4757918623d292a5993b0869761290f29baabf93f3d1866bdcaf9424"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.antiderivatives",
+    "name": "Antiderivatives",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.derivative-rules"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.antiderivatives-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.antiderivatives (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.antiderivatives.md": "sha256:0c6441cd4757918623d292a5993b0869761290f29baabf93f3d1866bdcaf9424"
+      },
+      "contentHash": "sha256:1824d35becd242e7e710e1fd7fc96b1c1ff915827eadc8cb984d19eb91f9e16d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.antiderivatives.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.antiderivatives.md#TA-A01 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.antiderivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.antiderivatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.antiderivatives.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.antiderivatives.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.antiderivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.antiderivatives\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.antiderivatives.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.antiderivatives.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.antiderivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.antiderivatives\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.antiderivatives.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.antiderivatives.md#TA-A04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.antiderivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.antiderivatives\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.antiderivatives/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "Antiderivatives — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.derivative-rules**: d/dx(xⁿ)=nxⁿ⁻¹; constant multiple rule; sum/difference rule; d/dx(eˣ)=eˣ; rewrite-first discipline for radicals and rationals\n\n### Target Knowledge State\nStudent understands that F is an antiderivative of f when F'=f; can identify the entire family F(x)+C and explain why the arbitrary constant is necessary; fluently applies the reverse power rule ∫xⁿdx=xⁿ⁺¹/(n+1)+C (n≠−1), ∫eˣdx=eˣ+C, and the sum/constant-multiple rules; rewrites radical and rational expressions as fractional/negative powers before integrating; and uses an initial condition to determine C in applied problems.\n\n### Conceptual Obstacles\n1. Omitting the +C — writing ∫f(x)dx=F(x) without the constant; misses that the antiderivative is a family of functions, not a unique function\n2. Applying the reverse power rule in the wrong direction — writing ∫xⁿdx=xⁿ⁻¹/n (subtracting 1, dividing by n) instead of xⁿ⁺¹/(n+1) (adding 1, dividing by new exponent)\n3. Believing the antiderivative is unique — confusing F(x) (one member) with the whole family F(x)+C; doesn't see the verification step F'(x)=f(x) as a check on any single choice\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "Worked Examples: Polynomials and Radical/Rational Functions",
+      "content": "### Teaching Action A02 — Worked Examples: Polynomials and Radical/Rational Functions\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Model antidifferentiation for polynomial and non-integer power functions; establish rewrite-first discipline; demonstrate the verification step (F'=f)\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**WE1 — Polynomial: ∫(5x³ − 2x + 7)dx**\n\n*Step 1 — Apply sum/constant-multiple rules (term-by-term):*\n$$\\int(5x^3 - 2x + 7)\\,dx = \\int 5x^3\\,dx - \\int 2x\\,dx + \\int 7\\,dx$$\n\n*Step 2 — Reverse power rule on each term:*\n- ∫5x³dx = 5·x⁴/4 = (5/4)x⁴\n- ∫2x dx = 2·x²/2 = x²\n- ∫7 dx = 7x\n\n*Step 3 — Collect (one +C at the end):*\n$$\\int(5x^3 - 2x + 7)\\,dx = \\frac{5}{4}x^4 - x^2 + 7x + C$$\n\n*Verification (always available):*\nd/dx[(5/4)x⁴ − x² + 7x + C] = 5x³ − 2x + 7 ✓\n\n**Common error:** writing a separate +C for each term — this is redundant; one +C absorbs all constants.\n\n---\n\n**WE2 — Radical and Rational: ∫(3√x + 1/x²)dx**\n\n*Step 1 — Rewrite as power functions FIRST:*\n$$3\\sqrt{x} + \\frac{1}{x^2} = 3x^{1/2} + x^{-2}$$\n\n*Step 2 — Reverse power rule on each term:*\n- ∫3x^(1/2)dx = 3·x^(3/2)/(3/2) = 3·(2/3)x^(3/2) = 2x^(3/2)\n- ∫x^(−2)dx = x^(−1)/(−1) = −x^(−1) = −1/x\n\n*Step 3 — Collect:*\n$$\\int\\left(3\\sqrt{x} + \\frac{1}{x^2}\\right)dx = 2x^{3/2} - \\frac{1}{x} + C$$\n\n*Verification:*\nd/dx[2x^(3/2) − x^(−1) + C] = 2·(3/2)x^(1/2) − (−1)x^(−2) = 3x^(1/2) + x^(−2) = 3√x + 1/x² ✓\n\n*Rewrite-first discipline:* Never apply the reverse power rule to 1/x² directly as written. Rewrite → then antidifferentiate. Same discipline as differentiation (WE2 in math.calc.derivative-rules).\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\nFind ∫(4x^(−3) + 6√x)dx.\n\n- **CORRECT** → ∫(4x^(−3)+6x^(1/2))dx = 4·x^(−2)/(−2)+6·x^(3/2)/(3/2)+C = −2x^(−2)+4x^(3/2)+C = −2/x²+4x^(3/2)+C. Verify: d/dx[−2x^(−2)+4x^(3/2)+C]=4x^(−3)+6x^(1/2) ✓.\n- **PARTIAL** → Student may get one term wrong (often the sign on x^(−2)). Isolate: \"For ∫4x^(−3)dx: exponent = −3. Add 1: −3+1=−2. Divide by −2. So 4·x^(−2)/(−2)=−2x^(−2).\"\n- **INCORRECT** → Student writes 4·x^(−4)/(−3)+... (subtracted 1 instead of adding). Redirect: \"Reverse power rule: ADD 1 to the exponent. Here −3+1=−2, not −4.\"\n- **NO_RESPONSE** → Prompt: \"First rewrite both terms in power form. 4x^(−3) is already written. 6√x = 6x^(?). Fill in the exponent.\"\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 142,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "CONSTANT-OMISSION",
+      "content": "| MC-1 | CONSTANT-OMISSION | Student writes ∫f(x)dx=F(x) without +C; treats indefinite integral as yielding a unique function | Any antiderivative computation; also when checking: F'=f → student stops without acknowledging the family |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "REVERSE-POWER-RULE-WRONG",
+      "content": "| MC-2 | REVERSE-POWER-RULE-WRONG | Student computes ∫xⁿdx=xⁿ⁻¹/n (subtracts 1 from exponent, divides by original n) instead of xⁿ⁺¹/(n+1) | Any reverse-power-rule application; especially for n=2 giving x¹/2 instead of x³/3 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "ANTIDERIVATIVE-IS-UNIQUE",
+      "content": "| MC-3 | ANTIDERIVATIVE-IS-UNIQUE | Student says \"THE antiderivative is…\" as if there is only one; confused when asked why +C appears | Initial-value problems; comparison of antiderivatives differing by constants |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "The Family of Antiderivatives",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Family of Antiderivatives\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 64,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "Worked Examples: Polynomials and Radical/Rational Functions",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Examples: Polynomials and Radical/Rational Functions\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 142,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "Antidifferentiation vs. Differentiation; Indefinite vs. Definite",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Antidifferentiation vs. Differentiation; Indefinite vs. Definite\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 201,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 250,
+        "endLine": 464
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 items)*\n\n**Item 1:** Find ∫(4x³ − 3x + 1)dx.\n\n*Solution:* x⁴ − (3/2)x² + x + C\n\n**Item 2:** Find ∫(2x^(1/2) − 5x^(−2))dx.\n\n*Solution:* 2·x^(3/2)/(3/2) − 5·x^(−1)/(−1) + C = (4/3)x^(3/2) + 5x^(−1) + C = (4/3)x^(3/2) + 5/x + C\n\n**Item 3:** Find ∫(3eˣ − 7)dx.\n\n*Solution:* 3eˣ − 7x + C\n\n*(Verify: d/dx[3eˣ−7x+C]=3eˣ−7 ✓)*\n\n**Item 4:** Is F(x) = x³ − 2x an antiderivative of f(x) = 3x² − 2? Verify.\n\n*Solution:* F'(x) = 3x² − 2 = f(x) ✓. Yes, F is an antiderivative. The full family is x³ − 2x + C.\n\n---\n\n**[P55 — SCORE]** Count correct items (Items 1–4). Running total: _/4.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(independence mode)*\n\nThe velocity of a particle moving along a line is v(t) = 6t² − 4t + 1 (m/s). At time t=0, the position is s(0) = 3 m.\n\n**(a)** Find the position function s(t) using antidifferentiation (include +C).\n\n**(b)** Apply the initial condition s(0)=3 to determine C.\n\n**(c)** Find s(2) and v(2). What do they represent?\n\n**(d)** At what time t>0 does the particle momentarily change direction (v=0)?\n\n---\n\n*Expected solution:*\n\n(a) s(t) = ∫v(t)dt = ∫(6t²−4t+1)dt = 2t³ − 2t² + t + C\n\n(b) s(0) = 2(0)−2(0)+0+C = C = 3 → **s(t) = 2t³ − 2t² + t + 3**\n\n(c) s(2) = 2(8)−2(4)+2+3 = 16−8+2+3 = **13 m** (position at t=2)\nv(2) = 6(4)−4(2)+1 = 24−8+1 = **17 m/s** (velocity at t=2)\n\n(d) v(t)=0: 6t²−4t+1=0. Discriminant: 16−24=−8<0. No real roots → the particle never stops for t>0. Its velocity stays positive for all t>0.\n\n---\n\n**[P55 — SCORE]** Score P76 (0 or 1). Running total: _/5.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]** MAMR = 5/5.\n\n- Score ≥ 5/5 → PASS → proceed to P74.\n- Score < 5/5 → FAIL → P74 routes to repair.\n\n---\n\n**[P55 — SCORE]** Record final pass/fail.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- **PASS (5/5):** Concept mastered. Proceed to math.calc.definite-integral.\n- **FAIL:** Diagnose: +C omitted → B-MC1. Reverse power rule wrong → B-MC2. Uniqueness confusion → B-MC3.\n\n---\n\n**[P55 — SCORE]** Log routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession complete for math.calc.antiderivatives.\n\n---\n\n\n## Component 5 — Protocol B (Repair Sequences)\n\n### B-MC1 — Repair: CONSTANT-OMISSION\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You wrote F(x) without +C. The indefinite integral is a family of functions, not a unique one. Any constant C gives a valid antiderivative, and all of them are equally correct answers.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nCompare F₁(x)=x³ and F₂(x)=x³+100. Both satisfy d/dx(Fᵢ)=3x². If you write \"the\" antiderivative of 3x² is x³, you're missing x³+100, x³−7, and infinitely many others. The +C is not cosmetic — it means \"this works for any constant.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\nAntiderivative is many-to-one in reverse: many functions (all shifted copies) share the same derivative. The +C collects all of them in one expression. When someone gives you an initial condition (F(0)=5), you then solve for C to pin down the unique antiderivative they want. Without +C, you can't do initial-value problems.\n\n---\n\n### B-MC2 — Repair: REVERSE-POWER-RULE-WRONG\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You wrote ∫xⁿdx=xⁿ⁻¹/n — that's the derivative rule applied backward the wrong way. For antiderivatives, you add 1 to the exponent (not subtract) and divide by the new exponent.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nTest: if ∫x²dx=x¹/2=x/2 (your answer), check by differentiating: d/dx(x/2)=1/2 ≠ x². That's wrong. Now try x³/3: d/dx(x³/3)=3x²/3=x² ✓. The correct process: 2+1=3, divide by 3 → x³/3.\n\n**[P64 — CONCEPTUAL SHIFT]**\nDifferentiation lowers the power by 1 (n→n−1) and multiplies by n. Antidifferentiation reverses both steps: raise the power by 1 (n→n+1) and divide by the NEW exponent (n+1). The two operations are exact inverses. Use the verification step d/dx[F]=f to catch the error immediately.\n\n---\n\n### B-MC3 — Repair: ANTIDERIVATIVE-IS-UNIQUE\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You're treating the antiderivative as a unique function. It's not — there are infinitely many, all differing by a constant. 'An antiderivative' is one member; 'the antiderivative' is the whole family F(x)+C.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nd/dx(x²+1)=2x; d/dx(x²−π)=2x; d/dx(x²+10000)=2x. All have derivative 2x. So asking \"what is the antiderivative of 2x?\" has infinitely many correct answers. Only when given additional information (e.g., F(1)=3) does the answer narrow to a unique function (here x²+2).\n\n**[P64 — CONCEPTUAL SHIFT]**\nThis non-uniqueness is intrinsic: differentiation discards additive constant information. Antidifferentiation cannot recover it. The +C represents \"the information that was lost.\" In physics, this lost constant is often the initial position, initial velocity, or another physical starting condition — found from measurements, not from the math alone.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | ∫(7x⁶ − 3x^(−2) + 1)dx. [x⁷+3x^(−1)+x+C] |\n| Day 3 | f'(x)=√x and f(4)=10. Find f(x). [f=∫x^(1/2)dx=(2/3)x^(3/2)+C; f(4)=(2/3)·8+C=10 → C=10−16/3=14/3; f(x)=(2/3)x^(3/2)+14/3] |\n| Day 7 | True/False: ∫(2x)(3x²)dx = (2x)·(x³)+C. [False — simplify first: ∫6x³dx = (3/2)x⁴+C] |\n| Day 14 | ∫(x+1)²dx: expand first or use chain-rule-in-reverse? [Expand to x²+2x+1 → x³/3+x²+x+C; chain-rule-in-reverse is valid but not yet covered] |\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.derivative-rules | PACKAGE_READY | Reverse power rule is the exact inverse of the derivative power rule; rewrite-first discipline transfers |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.calc.definite-integral | Requires antiderivative family concept and F(x)+C notation for Fundamental Theorem |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Antidifferentiation as reverse-engineering:** Frame A01 explicitly as \"we already know how to go forward (differentiate); now we go backward.\" The Stage C observation — three different functions sharing the same derivative — makes the +C feel necessary and natural, not like a technicality imposed by the teacher.\n\n**The rewrite-first discipline:** WE2 reinforces the same pattern from the differentiation blueprint: convert radicals and fractions to power form before operating. Students who form this habit have far fewer errors on integration than those who try to apply rules to √x or 1/x² directly.\n\n**The verification step:** Encourage students to check every antiderivative they find by differentiating it back. This is the fastest way to catch MC-2 errors (wrong direction of power rule) and builds the habit of self-verification that will serve them in definite integrals and differential equations.\n\n**P76 connects to initial-value problems:** The projectile/position context shows exactly how +C is resolved in practice: a physical measurement (initial position) determines C. This connects integration back to the kinematic intuition from the derivative-definition blueprint while requiring a new skill (apply initial condition).\n\n**Note on scope:** ∫(1/x)dx=ln|x|+C is NOT covered here — it requires the natural logarithm rule, which is a separate blueprint. If students ask about it, acknowledge it as a special case (n=−1) and note it will appear later.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| ID | Check | Status |\n|----|-------|--------|\n| V-1 | All Teaching Actions have assigned primitives | PASS |\n| V-2 | GR-1: A01 opens with P11 (B-category primitive, non-repair) | PASS |\n| V-3 | CPA entry stage = C for advanced difficulty | PASS |\n| V-4 | bloom=apply → P07 present in A02 (WORKED EXAMPLE PAIR) | PASS |\n| V-5 | GR-2: P49 present in A01, A02, A03, each with 4 branches | PASS |\n| V-6 | GR-3: A04 (P91) is terminal — no further TAs after gate | PASS |\n| V-7 | GR-4: All B-sequences open with P27+P41+P64 | PASS |\n| V-8 | GR-6: P91 is terminal in A04 | PASS |\n| V-9 | GR-7: P76 present inside A04 mastery gate | PASS |\n| V-10 | GR-9: cross_links=[] → P76 mode = independence | PASS |\n| V-11 | GR-10: MAMR=5/5 stated and enforced (thresh=0.85, n=5: ⌈0.85×5⌉=5) | PASS |\n| V-12 | PASS criterion (5/5) stated in P75 and P74 | PASS |\n| V-13 | GR-8: Component 7 documents all cross-blueprint dependencies | PASS |\n| V-14 | Standard structure: h=8 → 3 main TAs (A01,A02,A03) + gate (A04) | PASS |\n| V-15 | Component 0 metadata fields complete | PASS |\n| V-16 | Component 1 (prior anchors, target state, obstacles) complete | PASS |\n| V-17 | Component 2: 3 MCs with 1 foundational designated | PASS |\n| V-18 | Component 3 scaffolding protocol complete | PASS |\n| V-19 | Component 6 P89 schedule complete (4 intervals) | PASS |\n| V-20 | Component 8 teaching notes complete | PASS |\n| AIR | No prohibited operations (no curriculum modification, no framework redesign) | PASS |\n\n**Status: PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 250,
+        "endLine": 464
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner observes that multiple functions share the same derivative before abstracting.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: differentiate three functions (3x², 3x²+5, 3x²−7) to observe that all have derivative 6x; conclude antiderivative of 6x is 3x²+C; P: antiderivative family as vertical shift table; A: formal definition, reverse power rule, ∫eˣdx=eˣ+C, linearity rules\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: polynomial ∫(5x³−2x+7)dx; WE2: radical/rational ∫(3√x+1/x²)dx requiring rewrite-first\n3. **A03 P06 CONTRAST PAIR** — differentiation vs antidifferentiation (unique vs family; local vs global); indefinite vs definite integral (preview Fundamental Theorem)\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | ∫(7x⁶ − 3x^(−2) + 1)dx. [x⁷+3x^(−1)+x+C] |\n| Day 3 | f'(x)=√x and f(4)=10. Find f(x). [f=∫x^(1/2)dx=(2/3)x^(3/2)+C; f(4)=(2/3)·8+C=10 → C=10−16/3=14/3; f(x)=(2/3)x^(3/2)+14/3] |\n| Day 7 | True/False: ∫(2x)(3x²)dx = (2x)·(x³)+C. [False — simplify first: ∫6x³dx = (3/2)x⁴+C] |\n| Day 14 | ∫(x+1)²dx: expand first or use chain-rule-in-reverse? [Expand to x²+2x+1 → x³/3+x²+x+C; chain-rule-in-reverse is valid but not yet covered] |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 394,
+        "endLine": 407
+      }
+    },
+    {
+      "assetId": "math.calc.antiderivatives/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.antiderivatives",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.derivative-rules | PACKAGE_READY | Reverse power rule is the exact inverse of the derivative power rule; rewrite-first discipline transfers |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.calc.definite-integral | Requires antiderivative family concept and F(x)+C notation for Fundamental Theorem |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.antiderivatives.md",
+        "startLine": 407,
+        "endLine": 424
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,437 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.plane-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.plane",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1b34c18d4d9cea86268e6ba2ef1c4f07105cd9eb20c7794b473e30d7140fcae7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.plane.md": "sha256:7942c9e126acf069e56a7b0494d6c50a97048edc7a51fc439d95d58be8eb4bd7"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.geom.plane",
+    "name": "Plane",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.geom.line"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.plane-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.plane (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.plane.md": "sha256:7942c9e126acf069e56a7b0494d6c50a97048edc7a51fc439d95d58be8eb4bd7"
+      },
+      "contentHash": "sha256:ea21370ed2fef429dae635c0cb5353796f02352c9717d545217d597bdddc9181",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.plane.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.plane.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.plane\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.plane.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.plane.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.plane\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.plane.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.plane.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.plane\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.plane.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.plane.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.plane\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.plane.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.plane.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.plane\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.plane.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.plane.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.plane\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.plane.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.plane.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.plane\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.plane/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.plane",
+      "title": "Plane — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.geom.line**: A line is a one-dimensional geometric object extending infinitely in both directions with no endpoints. A plane is a two-dimensional geometric object — a flat surface that extends infinitely in all directions within that surface, contains infinitely many lines, and has no edges, corners, or thickness.\n\n### Target Understanding\n1. A plane is a flat, two-dimensional surface extending infinitely in all directions; it has zero thickness, no edges, and no boundary.\n2. Three non-collinear points determine a unique plane — just as two distinct points determine a unique line. Two points (or three collinear points) determine only a line; they do not fix a unique plane.\n3. A plane contains infinitely many lines. Any two distinct points in a plane determine a line that lies entirely within that plane.\n4. Infinitely many planes can contain a single given line (imagine rotating a plane around the line as an axis — each rotation angle gives a different plane).\n5. Two distinct planes are either parallel (no intersection) or intersect in a line.\n6. Common physical models (sheets of paper, floors, tables) represent only bounded portions of a geometric plane.\n\n### Cross-Link Activation\n- **math.geom.coordinate-plane**: The xy-plane is the canonical example of a geometric plane — the set of all points (x, y, 0) in 3D space, extending infinitely in the x and y directions with no edges. P76 uses this connection directly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 31,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.geom.plane/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.plane",
+      "title": "[FOUNDATIONAL] — PLANE-HAS-BOUNDARY",
+      "content": "### MC-1 [FOUNDATIONAL] — PLANE-HAS-BOUNDARY\n- **Trigger**: \"A plane is like a sheet of paper — it has edges\" or \"a plane is a finite flat surface.\"\n- **Root cause**: Every physical model of a plane (paper, table, floor, whiteboard) has visible edges. Learner overgeneralizes from the physical model to the geometric ideal.\n- **Error pattern**: Says \"the plane stops at the edge\"; draws a border around a plane diagram; assigns a finite area to a plane.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.geom.plane/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.plane",
+      "title": "— PLANE-FROM-TWO-POINTS",
+      "content": "### MC-2 — PLANE-FROM-TWO-POINTS\n- **Trigger**: \"Two points determine a unique plane\" (overapplying the two-point line rule).\n- **Root cause**: The rule \"two distinct points determine a unique line\" is correct. Learner extends this by analogy: \"two points must also determine a unique plane.\"\n- **Error pattern**: Says \"points A and B determine a unique plane\"; doesn't recognize that a plane requires a third point not on line AB.\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.plane/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.plane",
+      "title": "— ONE-PLANE-PER-LINE",
+      "content": "### MC-3 — ONE-PLANE-PER-LINE\n- **Trigger**: \"A given line lies in exactly one plane.\"\n- **Root cause**: Learner recalls that three non-collinear points determine a unique plane, and conflates this with \"uniqueness\" meaning \"exclusivity per line.\"\n- **Error pattern**: Claims only one plane can contain a given line; does not visualize rotating the plane around the line.\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.plane",
+      "title": "Plane as an Infinite Flat Surface",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Plane as an Infinite Flat Surface\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 88,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.plane",
+      "title": "Misconception Gate: PLANE-HAS-BOUNDARY (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: PLANE-HAS-BOUNDARY (FOUNDATIONAL)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 113,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.plane",
+      "title": "Three Non-Collinear Points Determine a Plane",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Three Non-Collinear Points Determine a Plane\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 135,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.plane",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 157,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.plane",
+      "title": "Repair MC-1 PLANE-HAS-BOUNDARY",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 PLANE-HAS-BOUNDARY\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 201,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.plane",
+      "title": "Repair MC-2 PLANE-FROM-TWO-POINTS",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 PLANE-FROM-TWO-POINTS\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 222,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.plane",
+      "title": "Repair MC-3 ONE-PLANE-PER-LINE",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 ONE-PLANE-PER-LINE\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 239,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "math.geom.plane/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.plane",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A04 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\nQ1: True or False: A geometric plane has edges (boundaries).\nQ2: How many non-collinear points are needed to determine a unique plane?\nQ3: Line ℓ lies in plane α. How many other planes also contain line ℓ?\n\n**P55 (SCORE):**\nQ1: FALSE — a geometric plane extends infinitely in all directions and has no boundaries or edges.\nQ2: Three non-collinear points. (Two points determine a line; infinitely many planes contain any given line. The third non-collinear point locks a unique plane.)\nQ3: Infinitely many — imagine rotating a plane around ℓ as a hinge; each rotation angle yields a different plane. Only a fourth non-collinear point would fix a unique plane through ℓ, but ℓ alone admits infinitely many.\n\n**P76 (TRANSFER PROBE — Cross-link: math.geom.coordinate-plane):**\nThe xy-plane in coordinate geometry is a geometric plane — the set of all points (x, y, 0) in 3D space.\n(a) Does the xy-plane have any edges or boundaries?\n(b) Points P = (0, 0, 0), Q = (1, 0, 0), and R = (0, 1, 0) all lie in the xy-plane. Are P, Q, R collinear? Do they determine a unique plane?\n(c) The line y = x, z = 0 lies entirely in the xy-plane. How many planes in 3D space contain this line?\n\n**Expected**: (a) No — the xy-plane extends infinitely in both the x and y directions; it has no edges. (b) P, Q, R are NOT collinear (they do not all lie on a single line); they determine the xy-plane as their unique plane. (c) Infinitely many — the line y = x, z = 0 is contained in the xy-plane, the plane z = y − x, and infinitely many other planes rotated around that line.\n\n**P55 (SCORE):** No boundary stated; P, Q, R non-collinear confirmed; infinitely many planes for a line stated.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, P76 = **4 items**. Pass: **4/4** (⌈0.95×4⌉ = 4).\n- PASS → P78.\n- FAIL → P74.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong → TA-B01 (PLANE-HAS-BOUNDARY; apply MAMR).\n- Q2 wrong → TA-B02 (PLANE-FROM-TWO-POINTS).\n- Q3 wrong → TA-B03 (ONE-PLANE-PER-LINE).\n- P76 wrong → TA-B01 (boundary error) or TA-B03 (plane-count error) depending on error type.\n- Multiple → MAMR: TA-B01 first; FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.geom.polygon, math.geom.coordinate-plane.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 157,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.plane",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a table or floor surface (Concrete). Pictorial: draw a parallelogram labeled α with no border markings to suggest edges, plus arrows pointing outward. Abstract: a plane as the set of all points satisfying ax + by + cz = d (a Cartesian equation); the xy-plane is z = 0.\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). Route → TA-B01 if triggered later. MC-2 and MC-3 FIFO.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 74,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.plane/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.plane",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (boundary) + Q2 (how many points needed) | 2/2 |\n| Day 3 | Q3 (planes through a line) + P76 (a, b) | 2/2 |\n| Day 7 | Mixed 2-item: classify point/line/plane; determine whether 3 points are collinear and whether they fix a unique plane | 2/2 |\n| Day 21 | Q1, Q2, Q3 (3 items) | 3/3 |\n| Day 60 | Full 4-item mastery gate | 4/4 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 253,
+        "endLine": 267
+      }
+    },
+    {
+      "assetId": "math.geom.plane/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.plane",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Line | math.geom.line | Lines are contained in planes; collinearity (all points on one line) is the key condition for whether three points determine a unique plane |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Polygon | math.geom.polygon | Polygons are plane figures — all vertices and edges lie in a single plane |\n| Coordinate Plane | math.geom.coordinate-plane | The xy-plane is the canonical coordinate-geometry realization of a geometric plane |\n\n### Cross-Links\n- **math.geom.coordinate-plane**: The xy-plane (z = 0) is the archetypal example of a geometric plane used in P76.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.plane.md",
+        "startLine": 267,
+        "endLine": 285
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

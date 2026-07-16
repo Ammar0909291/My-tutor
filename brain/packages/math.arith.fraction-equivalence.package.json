@@ -1,0 +1,826 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.fraction-equivalence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.fraction-equivalence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d43b024533f1c62cb702235fcf6924c80b99934b4240519f973763fc2a6592ad",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.fraction-equivalence.md": "sha256:da44773c5209ff092b404a95e79d4b96991e4af814ca20c0831c4f56cfc0b2da"
+    },
+    "assetCount": 26,
+    "assetCounts": {
+      "core_explanation": 1,
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 18,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 18
+  },
+  "concept": {
+    "conceptId": "math.arith.fraction-equivalence",
+    "name": "Equivalent Fractions",
+    "difficultyRaw": "2 (developing)",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.fractions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.fraction-equivalence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.fraction-equivalence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.fraction-equivalence.md": "sha256:da44773c5209ff092b404a95e79d4b96991e4af814ca20c0831c4f56cfc0b2da"
+      },
+      "contentHash": "sha256:e3206499b1e0625970c3bd036f9436fba93259d8c3e28aabe6188586d0027be9",
+      "ruleCount": 18,
+      "bandCounts": {
+        "3": 18
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-B02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-B03 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-C01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-C02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-C03 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-C04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-equivalence.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-equivalence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.fraction-equivalence/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Equivalent Fractions — core idea",
+      "content": "Two fractions a/b and c/d are equivalent if they represent the same quantity; this holds exactly when a×d = b×c, and is generated by multiplying (or dividing) both numerator and denominator by the same nonzero integer. Equivalence is a multiplicative relationship, not an additive one.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 9,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Learning Objective",
+      "content": "A student who achieves mastery demonstrates that two fractions are equivalent when multiplying both numerator and denominator by the same nonzero integer, AND can generate equivalent fractions with a specified denominator, AND can verify equivalence using cross-multiplication. NOT merely recognising that \"1/2 and 2/4 look related\" or listing equivalents by repeated doubling. A student who generates equivalents mechanically (×2 only, or by guess) but cannot explain why the value is unchanged, or who uses additive reasoning (adds the same number to top and bottom), has NOT achieved mastery.\n\n**Accuracy threshold:** 85% across generation, verification, and classification tasks.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 33,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "— Adding Same Number to Numerator and Denominator Creates Equivalents",
+      "content": "### MC-1 — Adding Same Number to Numerator and Denominator Creates Equivalents\n\n**Observable symptom:** Student generates 2/4 from 1/3 by adding 1 to both, or generates 4/7 from 3/6 by adding 1. States \"add the same number to top and bottom.\"\n\n**Diagnostic trigger:** P41 after \"make a fraction equivalent to 1/3\" (DB-2; TA-C01).\n\n**Root cause:** Symmetry heuristic — students correctly apply \"same operation to both sides\" from equation-solving but conflate multiplication and addition as equally valid symmetric operations on fractions.\n\n**Repair chain:** P27 (expose additive belief) → P28 (conflict: 1/3 ≈ 0.333 ≠ 2/4 = 0.500) → P29 (pause) → P30 (bridge: adding changes ratio; multiplying scales both parts together) → P31 (install correct rule: multiply) → P32 (three consolidation problems)\n\n**S6-safe path:** Omit P28; route through P30 directly with concrete strips showing unequal coverage when addition is applied.\n\n**MAMR status:** FOUNDATIONAL for MC-2. MC-1 must be cleared before MC-2 repair begins. Rationale: MC-2 repair involves cross-multiplication on non-simplified fractions; students carrying MC-1 will generate wrong \"equivalents\" to compare, making MC-2 repair incoherent.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 5,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "— Only Simplified Fractions Are Valid / Equivalent",
+      "content": "### MC-2 — Only Simplified Fractions Are Valid / Equivalent\n\n**Observable symptom:** Student accepts 3/4 as the \"only real\" fraction for that value; rejects 6/8 as \"not a proper fraction\" or \"a different fraction\" because it is not in lowest terms.\n\n**Diagnostic trigger:** P41 \"Is 6/8 equivalent to 3/4?\" (DB-2; TA-C01).\n\n**Root cause:** School instruction emphasises \"always simplify your answer,\" which students interpret as: the simplified form is the fraction; all other forms are incorrect or inferior.\n\n**Repair chain:** P27 (expose belief) → P28 (conflict: cross-multiplication confirms 6/8 = 3/4 by definition) → P30 (bridge: simplification finds the simplest name; all names for the same value are valid) → P31 (install: equivalent fractions are multiple names for one quantity) → P33 (discrimination training: {(3/4, 6/8) → equivalent} vs {(3/4, 5/8) → not equivalent})\n\n**S6-safe path:** Omit P28; use P07 (number line) to show 6/8 and 3/4 land at the same point before introducing P30.\n\n**MAMR status:** Independent of other misconceptions.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Fraction Strips: Concrete Foundation",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Fraction Strips: Concrete Foundation\",\"primitives\":[\"P01\",\"P04\",\"P06\",\"P16\",\"P30\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 12,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Why Multiplication Preserves Value",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Why Multiplication Preserves Value\",\"primitives\":[\"P01\",\"P06\",\"P13\",\"P21\",\"P34\",\"P36\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 47,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Number Line: Perceptual Bridge",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Number Line: Perceptual Bridge\",\"primitives\":[\"P01\",\"P07\",\"P16\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 80,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Cross-Multiplication Verification (Abstract)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Cross-Multiplication Verification (Abstract)\",\"primitives\":[\"P02\",\"P08\",\"P10\",\"P34\",\"P42\",\"P49\",\"P50\",\"P51\",\"P52\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 114,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 163,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Why k/k = 1 Makes Multiplication Safe",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Why k/k = 1 Makes Multiplication Safe\",\"primitives\":[\"P02\",\"P06\",\"P17\",\"P35\",\"P36\",\"P49\",\"P50\",\"P52\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 185,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Cross-Multiplication as Algebraic Proof",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Cross-Multiplication as Algebraic Proof\",\"primitives\":[\"P02\",\"P25\",\"P34\",\"P49\",\"P50\",\"P51\",\"P53\",\"P55\",\"P59\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 213,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 257,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Misconception Identification",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Identification\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P50\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 271,
+        "endLine": 287
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "MC-1 Repair: Adding Does Not Preserve Value",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-1 Repair: Adding Does Not Preserve Value\",\"primitives\":[\"P01\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P36\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 287,
+        "endLine": 322
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "MC-2 Repair: Non-Simplified Fractions Are Valid",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-2 Repair: Non-Simplified Fractions Are Valid\",\"primitives\":[\"P01\",\"P27\",\"P28\",\"P30\",\"P31\",\"P33\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 322,
+        "endLine": 356
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Post-Repair Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"Post-Repair Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P28\",\"P30\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\"],\"addresses\":[]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 356,
+        "endLine": 370
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Competence Anchor + Scaffolded Retrieval",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Competence Anchor + Scaffolded Retrieval\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\",\"P64\",\"P70\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 370,
+        "endLine": 413
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Independent Verification With Confidence Monitoring",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Independent Verification With Confidence Monitoring\",\"primitives\":[\"P02\",\"P30\",\"P34\",\"P35\",\"P49\",\"P50\",\"P52\",\"P55\",\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 413,
+        "endLine": 458
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Mastery Gate (Terminal, S6-compliant)",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Mastery Gate (Terminal, S6-compliant)\",\"primitives\":[\"P02\",\"P07\",\"P08\",\"P28\",\"P55\",\"P70\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 458,
+        "endLine": 473
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Visual Fraction Bars: Equal-Shares Foundation",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Visual Fraction Bars: Equal-Shares Foundation\",\"primitives\":[\"P01\",\"P06\",\"P07\",\"P16\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 473,
+        "endLine": 502
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Multiplication Pattern: Visual Derivation to Notation",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Multiplication Pattern: Visual Derivation to Notation\",\"primitives\":[\"P01\",\"P07\",\"P08\",\"P20\",\"P34\",\"P42\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 502,
+        "endLine": 548
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P07\",\"P08\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 548,
+        "endLine": 556
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Assessment Battery",
+      "content": "---\n\n**AB-1 — Classification Battery** (P74-pattern)\n\nClassify each pair as equivalent or not. Show cross-multiplication working.\n\n| Item | Pair | Verdict |\n|------|------|---------|\n| a | 2/3 and 6/9 | equivalent — 2×9=18=3×6 |\n| b | 3/5 and 4/6 | not equivalent — 3×6=18 ≠ 5×4=20 |\n| c | 5/8 and 15/24 | equivalent — 5×24=120=8×15 |\n| d | 1/4 and 3/16 | not equivalent — 1×16=16 ≠ 4×3=12 |\n\nPass: 4/4 with correct cross-multiplication shown.  \nFail routing: additive errors on any item → MC-1; rejection of c as \"not equivalent because 15/24 isn't simplified\" → MC-2.\n\n---\n\n**AB-2 — Boundary Probe** (P75-pattern)\n\n\"Is 0/5 equivalent to 0/100? Explain. Is 5/0 a valid fraction? Why or why not?\"\n\nPass criteria: Yes, 0/5 = 0/100 (both equal zero; cross-mult: 0×100 = 5×0 = 0). No, 5/0 is undefined (division by zero).\n\n---\n\n**AB-3 — Generation Probe** (P77-pattern)\n\n\"Generate four fractions all equivalent to 3/8, using a different multiplier each time.\"\n\nPass criteria: 6/16, 9/24, 12/32, 15/40 (or any ×k equivalents with k=2,3,4,5). All verifiable by cross-multiplication.\n\n---\n\n**AB-4 — Explanation Probe** (P78-pattern)\n\n\"Explain in one sentence why 6/10 and 9/15 are equivalent.\"\n\nPass criteria: References equal cross-products (6×15=90=10×9), or notes both equal 3/5 via multiplication by 2/2 and 3/3, or states the multiplicative relationship explicitly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 750,
+        "endLine": 794
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Student State Matrix",
+      "content": "| State | Entry Condition | Protocol |\n|-------|----------------|----------|\n| S0 | No prior exposure to equivalent fractions | Protocol A — full CPA, 5 TAs |\n| S1 | Generates equivalents by ×2 or ×3 procedurally; cannot explain why value is preserved | Protocol B — conceptual grounding, 3 TAs |\n| S2 | Carries MC-1 (additive thinking) and/or MC-2 (simplified-only) | Protocol C — schema repair, 3–4 TAs |\n| S6 | Correct understanding; low confidence on non-obvious equivalents or verification tasks | Protocol D — scaffolded practice, 3 TAs |\n| S9 | Second-language learner; visual-dominant; vocabulary gaps (numerator/denominator) | Protocol E — visual-first, 3 TAs |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 41,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Diagnostic Battery",
+      "content": "Run DB-1 through DB-3 in sequence. Stop when entry state is confirmed.\n\n---\n\n**DB-1 — Prior Exposure Check**\n\nQuestion: \"Can you tell me what equivalent fractions are? Give an example.\"\n\nResponse taxonomy:\n```\n{ stimulus: \"Two fractions that name the same amount; e.g. 1/2 = 2/4\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"Mentions 'same' or names a correct pair but cannot say why they're equal\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Doesn't know, gives wrong example, or says 'fractions with the same top or bottom'\",\n  signal: \"SIGNAL:INCORRECT\" }\n\n{ stimulus: \"No response\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → run DB-2 (test procedure depth)  \nSIGNAL:PARTIAL → S1 candidate; run DB-2  \nSIGNAL:INCORRECT → S0; route to Protocol A  \nSIGNAL:NO_RESPONSE → S0; route to Protocol A\n\n---\n\n**DB-2 — Procedure and Misconception Probe**\n\nQuestion: \"Make a fraction equivalent to 3/5 by multiplying. Now — is 4/6 equivalent to 3/5? How do you know?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"Multiplies correctly (e.g. 6/10); states 4/6 ≠ 3/5 via cross-multiplication or decimal\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"Generates 6/10 but cannot verify 4/6 ≠ 3/5, or says 4/6 = 3/5 because '+ 1 to each'\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Produces 4/6 from 3/5 by adding 1 to numerator and denominator\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-1\" }\n\n{ stimulus: \"Generates correct equivalent but says 4/6 is 'also equivalent' because it looks close\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-2-risk\" }\n```\n\nSIGNAL:CORRECT → run DB-3 (confidence calibration)  \nSIGNAL:PARTIAL → S1; route to Protocol B  \nSIGNAL:INCORRECT (MC-1) → S2 with MC-1 active; route to Protocol C  \nSIGNAL:INCORRECT (MC-2-risk) → S2 with MC-2 active; route to Protocol C\n\n---\n\n**DB-3 — Confidence Calibration**\n\nQuestion: \"How confident are you — on a scale of 1–5 — that you could explain to a friend *why* multiplying top and bottom by the same number doesn't change the fraction's value?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"4–5: gives clear multiplicative explanation (×k/k = 1; multiplying by 1 preserves value)\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"2–3: understands it works but uncertain about the explanation\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"1: says 'I just know the rule'; no conceptual anchor\",\n  signal: \"SIGNAL:INCORRECT\" }\n```\n\nSIGNAL:CORRECT → verified understanding; administer assessment battery to confirm mastery  \nSIGNAL:PARTIAL → S6 overlay likely; route to Protocol D  \nSIGNAL:INCORRECT (with prior correct procedure) → S6; route to Protocol D\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2-risk",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 53,
+        "endLine": 133
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-equivalence/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fraction-equivalence",
+      "title": "Prerequisite Check",
+      "content": "Run PRE-1 before Protocol A (S0 entry). If gap detected, halt and address prerequisite first.\n\n---\n\n**PRE-1 — Fraction Concept** (requires math.arith.fractions)\n\nStimulus: \"What does the fraction 3/5 mean? What does the denominator 5 tell you?\"\n\nExpected: 3 parts out of 5 equal parts (or equivalent phrasing)\n\nSIGNAL:INCORRECT → prerequisite gap: math.arith.fractions; schedule that session before returning\n\n---\n\n**PRE-2 — Integer Multiplication**\n\nStimulus: \"What is 4 × 7?\"\n\nExpected: 28\n\nSIGNAL:INCORRECT → prerequisite arithmetic gap; address multiplication before this session\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-equivalence.md",
+        "startLine": 133,
+        "endLine": 159
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

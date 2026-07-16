@@ -1,0 +1,339 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.set-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.set",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:64d8c4064fe2579d55b9adb3f92ac70f789a18a3ffbc4e01f2ff6e8ba15928c4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.set.md": "sha256:6cbaa062dde516eff8afe6fdccb1d442b3535b46a05670a6f86d825e076c9d8f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.found.set",
+    "name": "Set",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.set-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.set-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.set (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.set.md": "sha256:6cbaa062dde516eff8afe6fdccb1d442b3535b46a05670a6f86d825e076c9d8f"
+      },
+      "contentHash": "sha256:1b78d9b0121f979f161144cd1b50acff3a0e8ddf846b1e31fd8ec4ebe408f35e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.set.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set.md#TA-A04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set.md#TA-A05 (addresses MC-1, MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.set/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.set",
+      "title": "Set — core explanation",
+      "content": "A **set** is a well-defined, unordered collection of **distinct** objects. The objects are called **elements** or **members**. Three defining properties hold simultaneously:\n\n1. **Well-defined** — for any object, there is an unambiguous YES or NO answer to \"does this object belong to the set?\"\n2. **Unordered** — {1, 2, 3} and {3, 1, 2} are the same set; listing order carries no meaning.\n3. **No repetition (distinct elements)** — {a, b, a, c} = {a, b, c}; duplicates are ignored.\n\n**Notation:**\n\n| Form | Syntax | Example |\n|---|---|---|\n| Roster (listing) | {e₁, e₂, …, eₙ} | {2, 4, 6, 8} |\n| Set-builder | {x \\| P(x)} | {x \\| x is an even natural number and x < 10} |\n| Empty set | ∅ or {} | the set with no elements |\n\n**Key distinctions:**\n\n| Structure | Ordered? | Repetition allowed? |\n|---|---|---|\n| Set | NO | NO |\n| Sequence / list | YES | YES |\n| Multiset | NO | YES |\n\n**Cardinality** \\|S\\| = the number of distinct elements. \\|∅\\| = 0.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 32,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.found.set/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.set",
+      "title": "FOUNDATIONAL) — Sets preserve order and allow repetition, like lists.",
+      "content": "**MC-1 (FOUNDATIONAL) — Sets preserve order and allow repetition, like lists.**\n- Trigger: student writes {1, 2, 1} and claims it has 3 elements; OR claims {1, 2} ≠ {2, 1}\n- Root cause: overgeneralises from everyday sequential and list structures (arrays, sequences)\n- Impact: corrupts all downstream work on set equality, Cartesian products, and functions\n- Correction path: Protocol B-01 → contrast set vs. list, count distinct elements only\n- MAMR role: FOUNDATIONAL — must be cleared before any other repair",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.set/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.set",
+      "title": "— Any description in language defines a valid set (\"the set of tall people\").",
+      "content": "**MC-2 — Any description in language defines a valid set (\"the set of tall people\").**\n- Trigger: student accepts non-well-defined descriptions as valid sets; doesn't apply the YES/NO membership test\n- Root cause: conflates natural-language \"collections\" with formal mathematical sets\n- Correction path: Protocol B-02 → YES/NO membership criterion drill",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 10,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.set/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.set",
+      "title": "— The empty set is undefined; OR ∅ ∈ ∅; OR {∅} = ∅.",
+      "content": "**MC-3 — The empty set is undefined; OR ∅ ∈ ∅; OR {∅} = ∅.**\n- Trigger: student claims ∅ \"doesn't make sense\"; counts |{∅}| = 0; confuses ∅ with {∅}\n- Root cause: zero-object concept feels meaningless; visual similarity between ∅ and {}\n- Correction path: Protocol B-03 → counting exercise distinguishing ∅ from {∅}\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 15,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.found.set/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set",
+      "title": "What Is a Set?",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"What Is a Set?\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 79,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.found.set/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set",
+      "title": "Well-Defined vs. Not Well-Defined Collections",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Well-Defined vs. Not Well-Defined Collections\",\"primitives\":[\"P01\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 109,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "math.found.set/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set",
+      "title": "Unordered and No Repetition — The Two Key Properties",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Unordered and No Repetition — The Two Key Properties\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 138,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "math.found.set/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set",
+      "title": "The Empty Set and Singleton Sets",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"The Empty Set and Singleton Sets\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 166,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "math.found.set/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set",
+      "title": "Set Notation — Roster and Set-Builder",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Set Notation — Roster and Set-Builder\",\"primitives\":[\"P01\",\"P03\",\"P06\",\"P07\",\"P11\",\"P17\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 200,
+        "endLine": 577
+      }
+    },
+    {
+      "assetId": "math.found.set/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.set",
+      "title": "Assessment Item Bank",
+      "content": "*Minimum 10 items. Items tagged by property tested.*\n\n| # | Item | Property | Answer |\n|---|---|---|---|\n| A1 | What is |{1, 2, 3, 2, 1}|? | No repetition | 3 |\n| A2 | Are {a, b, c} and {c, b, a} equal sets? | Unordered | Yes |\n| A3 | Is \"the set of difficult problems\" a valid mathematical set? | Well-defined | No — \"difficult\" is subjective |\n| A4 | What is |∅|? | Empty set | 0 |\n| A5 | What is |{∅}|? | Empty set / nesting | 1 |\n| A6 | Convert to roster: {x | x ∈ ℕ, x < 5} | Notation | {1, 2, 3, 4} |\n| A7 | The word PROGRAMMING — what is the set of its distinct letters? | No repetition | {P, R, O, G, A, M, I, N} |\n| A8 | True or false: {∅} = ∅ | Empty set | False |\n| A9 | Is \"the set of integers greater than 100\" a valid set? | Well-defined | Yes — the criterion is precise |\n| A10 | Write in set-builder notation: {4, 8, 12, 16, 20} | Notation | {x | x ∈ ℕ, x is a multiple of 4, x ≤ 20} |\n| A11 | How many elements in {∅, {∅}, {{∅}}}? | Nesting / cardinality | 3 |\n| A12 | Simplify: {letters in AARDVARK} as a roster set | No repetition | {A, R, D, V, K} |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 508,
+        "endLine": 529
+      }
+    },
+    {
+      "assetId": "math.found.set/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.set",
+      "title": "Spaced Repetition Schedule",
+      "content": "| Interval | Trigger condition | Action |\n|---|---|---|\n| Day 1 | Day of initial mastery | Mark mastered; schedule Day 3 probe |\n| Day 3 | 2 days after mastery | Protocol E 5-item probe |\n| Day 7 | 4 days after Day 3 pass | Protocol E 5-item probe |\n| Day 21 | 14 days after Day 7 pass | Protocol E 5-item probe |\n| Day 60 | 39 days after Day 21 pass | Protocol E 5-item probe |\n| Decay reset | Any probe score < 5/5 | Reset to Day 1; route to Protocol B targeting failed item |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set.md",
+        "startLine": 495,
+        "endLine": 508
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

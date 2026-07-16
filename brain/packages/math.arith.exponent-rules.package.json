@@ -1,0 +1,498 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.exponent-rules-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.exponent-rules",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c0c9050e8500793dbde12affe8ac22a6ff66befa3e689302f691480876ddf1f2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.exponent-rules.md": "sha256:5922ca27a3752f9b25b35f74f47b646dc0321c9f96f4c8c813e8635916e646cd"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.arith.exponent-rules",
+    "name": "Exponent Rules",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.arith.exponentiation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.exponent-rules-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.exponent-rules (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.exponent-rules.md": "sha256:5922ca27a3752f9b25b35f74f47b646dc0321c9f96f4c8c813e8635916e646cd"
+      },
+      "contentHash": "sha256:755c90098d3aa80522c4005a4b3cd94bc6c4bb6def7e8821d1bd8fe2b8d2017e",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.exponent-rules.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponent-rules.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponent-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponent-rules.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponent-rules.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponent-rules\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponent-rules.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponent-rules.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponent-rules\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponent-rules.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponent-rules.md#TA-A04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponent-rules\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponent-rules.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponent-rules.md#TA-A05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponent-rules\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponent-rules.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponent-rules.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponent-rules\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponent-rules.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponent-rules.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponent-rules\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponent-rules.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponent-rules.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponent-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponent-rules\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.exponent-rules/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Exponent Rules — cognitive map",
+      "content": "**Core concept:** The exponent rules are algebraic laws derived from the repeated-multiplication definition of aⁿ. Core rules: (1) Product rule: aᵐ·aⁿ = aᵐ⁺ⁿ; (2) Quotient rule: aᵐ÷aⁿ = aᵐ⁻ⁿ; (3) Power rule: (aᵐ)ⁿ = aᵐⁿ; (4) Product-of-bases rule: (ab)ⁿ = aⁿbⁿ; (5) Negative exponent: a⁻ⁿ = 1/aⁿ; (6) Zero exponent: a⁰ = 1. All rules follow from counting factors.\n\n**Knowledge prerequisites activated:**\n- math.arith.exponentiation: aⁿ = a×a×…×a (n copies); a⁰=1; a⁻ⁿ=1/aⁿ established via the decreasing pattern\n\n**Concept structure:**\n1. **Product rule** (aᵐ·aⁿ = aᵐ⁺ⁿ): m copies times n copies = m+n copies; add exponents\n2. **Power rule** ((aᵐ)ⁿ = aᵐⁿ): n groups of m copies each = m×n copies; multiply exponents\n3. **Quotient rule** (aᵐ÷aⁿ = aᵐ⁻ⁿ): m copies cancel n copies; subtract exponents\n4. **Product-of-bases rule** ((ab)ⁿ = aⁿbⁿ): distribute exponent over product\n5. **Negative/zero exponent**: a⁻ⁿ = 1/aⁿ; a⁰ = 1\n\n**Target understanding:** Given an exponential expression, the learner identifies which rule(s) apply and simplifies correctly. The learner can derive or verify each rule from the definition of aⁿ.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 26,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Worked Examples: Product Rule and Power Rule (GR-1: P07 | GR-2: P49)",
+      "content": "### TA-A02 — Worked Examples: Product Rule and Power Rule (GR-1: P07 | GR-2: P49)\n\n**P07 WORKED EXAMPLE PAIR**\n\n*Example 1 — Product rule: same base, multiplied together:*\nSimplify x³·x⁴.\n```\nRule: aᵐ·aⁿ = aᵐ⁺ⁿ  (same base → add exponents)\nx³·x⁴ = x³⁺⁴ = x⁷\n\nVerify by expansion: (x·x·x)(x·x·x·x) = x⁷ ✓\n```\n\n*Example 2 — Power rule: a power raised to a power:*\nSimplify (2³)².\n```\nRule: (aᵐ)ⁿ = aᵐⁿ  (power of a power → multiply exponents)\n(2³)² = 2³×² = 2⁶ = 64\n\nVerify: (2³)² = 8² = 64 ✓\n```\n\n**P49 ADAPTIVE CHECKPOINT**\nQ: \"Simplify (a) y²·y⁵ and (b) (y²)⁵.\"\n→ CORRECT [(a) y⁷; (b) y¹⁰]: \"Correct — product rule adds (2+5=7); power rule multiplies (2×5=10).\" → TA-A03\n→ INCORRECT [(a) y¹⁰ or (b) y⁷ — rules swapped]: Flag appropriate MC. (a) wrong → MC-1; (b) wrong → MC-2. Route → B01 or B02.\n→ NO_RESPONSE: \"In (a): are the bases being multiplied (two separate groups) or is one group being raised to a power?\" → guided\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 97,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "PRODUCT-RULE-MULTIPLIES-EXPONENTS",
+      "content": "| MC-1 | PRODUCT-RULE-MULTIPLIES-EXPONENTS | Presented with x³·x⁴ | Multiplies exponents: x³·x⁴ = x¹² instead of x⁷; confuses product rule (add) with power rule (multiply) | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "POWER-RULE-ADDS-EXPONENTS",
+      "content": "| MC-2 | POWER-RULE-ADDS-EXPONENTS | Presented with (x³)⁴ | Adds exponents: (x³)⁴ = x⁷ instead of x¹²; confuses power rule (multiply) with product rule (add) | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "NEGATIVE-EXPONENT-NEGATES",
+      "content": "| MC-3 | NEGATIVE-EXPONENT-NEGATES | Presented with 2⁻³ | Computes −2³=−8 or −(1/8) instead of 1/2³=1/8; interprets negative exponent as a negative sign on the result | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Counting Factors: The Foundation of Every Rule (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Counting Factors: The Foundation of Every Rule (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 70,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Worked Examples: Product Rule and Power Rule (GR-1: P07 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Examples: Product Rule and Power Rule (GR-1: P07 | GR-2: P49)\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 97,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Add vs. Multiply Exponents: Knowing Which Rule (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Add vs. Multiply Exponents: Knowing Which Rule (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 127,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Negative Exponents and Quotient Rule: Pattern and Definition (GR-1: P04 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Negative Exponents and Quotient Rule: Pattern and Definition (GR-1: P04 | GR-2: P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 166,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 202,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Repair: PRODUCT-RULE-MULTIPLIES-EXPONENTS (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: PRODUCT-RULE-MULTIPLIES-EXPONENTS (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 269,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Repair: POWER-RULE-ADDS-EXPONENTS (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: POWER-RULE-ADDS-EXPONENTS (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 297,
+        "endLine": 326
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Repair: NEGATIVE-EXPONENT-NEGATES (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: NEGATIVE-EXPONENT-NEGATES (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 326,
+        "endLine": 428
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A05 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **Simplify x³·x⁵.** State which rule you used.\n   *(Expected: x⁸; product rule — same base multiplied, add exponents 3+5=8)*\n\n2. **Simplify (y²)⁴.** State which rule you used.\n   *(Expected: y⁸; power rule — power of a power, multiply exponents 2×4=8)*\n\n3. **True/False:** 3²·3³ = 3⁶.\n   *(Expected: FALSE — product rule: 3²·3³ = 3²⁺³ = 3⁵ = 243, not 3⁶ = 729)*\n\n4. **Write 2⁻³ as a fraction.**\n   *(Expected: 1/2³ = 1/8; negative exponent means reciprocal of the positive power)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: independence mode — cross_links=[], novel context)\n\n*Area and volume context:*\n\n\"A square has side length a³ cm, and a cube has edge length a² cm.\n\n(a) Write the area of the square as a single power of a. State the rule used.\n(b) Write the volume of the cube as a single power of a. State the rule used.\n(c) Write the ratio area÷volume and simplify using the quotient rule. (Leave answer in terms of a.)\"\n\n*(Expected:*\n*(a) Area = (a³)² = a^(3×2) = a⁶ cm²; power rule*\n*(b) Volume = (a²)³ = a^(2×3) = a⁶ cm³; power rule*\n*(c) a⁶÷a⁶ = a^(6−6) = a⁰ = 1; quotient rule — area and volume happen to be equal numerically (both a⁶) when side lengths are chosen this way)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.85; ⌈0.85×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 PRODUCT-RULE-MULTIPLIES-EXPONENTS first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now apply all five exponent rules — product (add), power (multiply), quotient (subtract), product-of-bases (distribute), negative exponent (reciprocal) — identify which rule to use, and derive results from the factor-counting definition. Algebraic exponent rules (math.alg.exponent-rules) extend these same laws to variable exponents.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 202,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\nFactor-counting model: expand each power into its explicit factors, count the total, and re-express as a single power. This makes every rule visible before the shortcut formula is introduced.\n\n**Progression Gate (C → P):** Learner correctly expands two exponential expressions and counts combined factors to derive the simplified result for product and power rules.\n**Progression Gate (P → A):** Learner applies all five rules symbolically without expansion, and can identify which rule to apply in a mixed expression.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 56,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Product rule vs. power rule discrimination | \"(a) x²·x³=? (b) (x²)³=?\" (x⁵ vs x⁶) |\n| Day 3 | Quotient rule and negative exponents | \"x⁷÷x⁴=x³; x²÷x⁵=x⁻³=1/x³\" |\n| Day 7 | Product-of-bases and combined rules | \"(2x)³=8x³; simplify x²·x⁻¹\" |\n| Day 30 | All rules in one expression | \"Simplify (x³y²)²·x⁻¹\" (x⁵y⁴) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 356,
+        "endLine": 367
+      }
+    },
+    {
+      "assetId": "math.arith.exponent-rules/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.exponent-rules",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.arith.exponentiation (required): all rules are derived from the repeated-multiplication definition aⁿ=a×…×a; zero and negative exponent rules introduced there are reinforced here\n\n**Enables:**\n- math.alg.exponent-rules: the same rules extended to variable exponents and polynomial expressions\n\n**Cross-links (GR-8):**\n- (none — cross_links=[])\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponent-rules.md",
+        "startLine": 367,
+        "endLine": 380
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

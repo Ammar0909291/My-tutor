@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.complex-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.complex-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eeba33e815d00624e992e1f3b62569d520169bd67df57bc00b3e89d474dd3680",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.complex-numbers.md": "sha256:3d74f4ee8a31007f81a1abdca03d00cc22ae6bb734d492432d2a2c0ee03ecdb9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.complex-numbers",
+    "name": "Complex Numbers",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.found.real-numbers"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.complex-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.complex-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.complex-numbers.md": "sha256:3d74f4ee8a31007f81a1abdca03d00cc22ae6bb734d492432d2a2c0ee03ecdb9"
+      },
+      "contentHash": "sha256:4348091270af196f640c3bbb90ae9a99cea45bdc4fb7f2a26f7a1ce3d4377d85",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.complex-numbers.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.complex-numbers.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.complex-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.complex-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.complex-numbers.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.complex-numbers.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.complex-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.complex-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.complex-numbers.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.complex-numbers.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.complex-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.complex-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.complex-numbers/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.complex-numbers",
+      "title": "Complex Numbers — cognitive map",
+      "content": "**Core concept:** The complex numbers ℂ = {a+bi : a,b ∈ ℝ, i² = −1} extend the reals by adjoining a number i whose square is −1. This extension is algebraically complete (every polynomial has a root, Fundamental Theorem of Algebra) and geometrically rich (ℂ = ℝ² with a multiplication that encodes rotation and scaling). Every real number a = a+0i is complex; ℝ ⊂ ℂ.\n\n**Conceptual progression:**\n1. Motivation: x²+1=0 has no real solution — we need a new number satisfying i²=−1.\n2. Definition: ℂ = {a+bi : a,b ∈ ℝ}; i is defined by i²=−1, not computed.\n3. Arithmetic: (a+bi)+(c+di)=(a+c)+(b+d)i; (a+bi)(c+di)=(ac−bd)+(ad+bc)i (substitute i²=−1).\n4. Complex plane: a+bi ↔ point (a,b); real axis horizontal, imaginary axis vertical; |a+bi|=√(a²+b²).\n5. Powers of i: i¹=i, i²=−1, i³=−i, i⁴=1 — cycle of period 4; iⁿ determined by n mod 4.\n6. Subset relations: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ; purely real (b=0); purely imaginary (a=0).\n\n**CPA arc (entry: P):**\n- Pictorial: complex plane with labelled axes; points (a,b) representing a+bi; |z| as distance from origin; multiplication as rotation+scaling shown via diagram\n- Abstract: a+bi notation, i²=−1, powers-of-i cycle, arithmetic rules\n\n**Prior knowledge activated:** real number line (math.found.real-numbers); square roots and why x²=−1 has no real solution; Pythagorean theorem for distance in ℝ²\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.complex-numbers",
+      "title": "SQRT-NEGATIVE-UNDEFINED [FOUNDATIONAL]",
+      "content": "### MC-1: SQRT-NEGATIVE-UNDEFINED [FOUNDATIONAL]\n**Description:** Learner believes i is computed as √(−1), and since square roots of negatives are undefined, i doesn't exist or is a fiction. Does not understand that i is DEFINED by the rule i²=−1, not derived by computation.\n**Surface form:** \"You can't take the square root of −1, so i is not a real mathematical object.\"\n**Root cause:** Prior instruction in ℝ correctly states √(−1) is undefined; learner applies that rule without realising we are now extending the number system by definition.\n**Trigger condition:** Any problem involving i, or the question \"what is i?\"\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.complex-numbers",
+      "title": "I-IS-JUST-A-SYMBOL",
+      "content": "### MC-2: I-IS-JUST-A-SYMBOL\n**Description:** Learner treats i as an unspecified algebraic variable like x, leaving i² unsimplified in answers. Does not apply the operative rule i²=−1 to reduce expressions.\n**Surface form:** \"(2+i)(3+i) = 6+2i+3i+i² = 6+5i+i²\" (stops without substituting i²=−1).\n**Root cause:** Standard algebraic manipulation leaves symbolic terms; learner has not internalised that i²=−1 is a mandatory substitution, not optional simplification.\n**Trigger condition:** Any multiplication or higher-power computation involving i.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.complex-numbers",
+      "title": "COMPLEX-NUMBERS-ARE-NOT-REAL",
+      "content": "### MC-3: COMPLEX-NUMBERS-ARE-NOT-REAL\n**Description:** Learner interprets \"complex\" as meaning \"not real,\" believing ℝ and ℂ are disjoint. Does not recognise that every real number is also a complex number with b=0.\n**Surface form:** \"7 is not complex — it's real, not imaginary.\"\n**Root cause:** The word \"complex\" in everyday English means \"complicated\" or \"not simple.\" Learner maps this onto \"not real.\" The subset relation ℝ ⊂ ℂ is counterintuitive if the label \"complex\" connotes a different category.\n**Trigger condition:** Any problem asking whether a real number is complex, or involving the classification of numbers.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.complex-numbers",
+      "title": "Repair for MC-1 (SQRT-NEGATIVE-UNDEFINED)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (SQRT-NEGATIVE-UNDEFINED)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 108,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.complex-numbers",
+      "title": "Repair for MC-3 (COMPLEX-NUMBERS-ARE-NOT-REAL)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (COMPLEX-NUMBERS-ARE-NOT-REAL)\",\"primitives\":[\"P04\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 163,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.complex-numbers",
+      "title": "Repair for MC-2 (I-IS-JUST-A-SYMBOL)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (I-IS-JUST-A-SYMBOL)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 218,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.complex-numbers",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.80 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Compute (2+3i)(1−2i) and simplify completely.\"\n[Expected: 2−4i+3i−6i²=2−i+6=8−i.]\n\n**Item 2:**\n\"Compute i^{31}.\"\n[Expected: 31 mod 4=3, so i^{31}=i³=−i.]\n\n**Item 3:**\nTrue or False: \"Every real number is also a complex number.\"\n[Expected: TRUE. Every real number a=a+0i, so ℝ ⊂ ℂ.]\n\n**Item 4:**\n\"Plot z=−2+3i on the complex plane and find |z|.\"\n[Expected: point at (−2,3); |z|=√(4+9)=√13.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (cross-link probe mode: math.trig.polar-form-complex)\n\n\"Let z₁=1+i and z₂=1−i.\n\n(a) Find |z₁| and |z₂|. What angle does z₁ make with the positive real axis?\n(b) Compute z₁·z₂ using the algebraic rule. Is the result real or complex?\n(c) Interpret the product geometrically: what happens to |z| and the angle when you multiply z₁ by z₂?\"\n\n[Expected:\n(a) |z₁|=√2, |z₂|=√2. z₁=(1,1) is at angle θ=arctan(1/1)=π/4=45°. z₂=(1,−1) is at angle −π/4=−45°.\n(b) z₁·z₂=(1+i)(1−i)=1−i+i−i²=1+1=2. The product is real (b=0).\n(c) Magnitudes multiply: |z₁|·|z₂|=√2·√2=2=|product| ✓. Angles add: π/4+(−π/4)=0, so the product lands on the positive real axis ✓. Multiplication = scale by product of magnitudes + rotate by sum of angles.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (b) z₁z₂=2 is correct and (c) includes the rotation+scaling interpretation (even partially), 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (≥4/5): Learner can multiply complex numbers, compute powers of i, interpret ℝ ⊂ ℂ, and read the complex plane. Ready for polar form and complex analysis.\n- FAIL (<4/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 or Item 2 (did not substitute i²=−1): → TA-B02 (I-IS-JUST-A-SYMBOL repair), then re-gate\n- FAIL on Item 3 (claims real numbers are not complex): → TA-B03 (COMPLEX-NUMBERS-ARE-NOT-REAL repair), then re-gate\n- FAIL on Item 4 or P76 (complex plane unfamiliar): → Return to A01 (P11 representation shift), then re-gate\n- FAIL on multiple items: → TA-B01 if Item 2 failure seems definitional; TA-B02 if algebraic; TA-B03 if classification. Re-gate after each repair.\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 4/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated understanding of the complex number system: its definition via i²=−1, its arithmetic, the complex plane as ℝ², the subset relation ℝ ⊂ ℂ, and the powers-of-i cycle.\n\nKey anchors to carry forward:\n- i is defined by i²=−1 (a definition, not a computation); every time i² appears, replace with −1.\n- ℂ = {a+bi} is a two-dimensional number plane; ℝ is the real axis, a proper subset of ℂ.\n- |z|=√(a²+b²) is the modulus — distance from the origin on the complex plane.\n- Powers of i cycle with period 4: i¹=i, i²=−1, i³=−i, i⁴=1.\n- Multiplication = scaling by product of moduli + rotating by sum of angles.\n\nNext concepts: math.trig.polar-form-complex (Euler form r·e^{iθ}), math.alg.complex-polynomial-roots (Fundamental Theorem of Algebra).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 330,
+        "endLine": 424
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.complex-numbers",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Compute (2+3i)+(1−i) and simplify (if possible) 4i².\" If the learner can sum the real and imaginary parts to get 3+2i and recognise 4i²=4(−1)=−4, proceed directly to A01. If 4i² is left as 4i², address MC-2 before starting.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): provide a blank complex plane; learner plots five given complex numbers and labels each with its a+bi form.\n- Rung 2 (partial abstract): learner identifies real/imaginary parts, computes |z|=√(a²+b²) for given z.\n- Rung 3 (full abstract): learner applies i²=−1 to multiply two complex numbers and simplify; applies powers-of-i cycle.\n\n**Pacing note:** h=8 estimated hours; A01–A02 in sessions 1–2; A03 + mastery gate in sessions 3–4.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.complex-numbers",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Compute (3−2i)(1+4i) and simplify completely. Then plot both factors and their product on the complex plane.\"\n[Expected: (3−2i)(1+4i)=3+12i−2i−8i²=3+10i+8=11+10i. Factors at (3,−2) and (1,4); product at (11,10).]\n\n**Day 10 prompt:**\n\"Compute i^{38} and (1+i)^8 without expanding term-by-term. Explain your method.\"\n[Expected: i^{38}: 38 mod 4=2, so i^{38}=−1. (1+i)^8=((1+i)²)⁴=(2i)⁴=16i⁴=16(1)=16.]\n\n**Day 30 prompt:**\n\"Prove that every complex number z=a+bi with |z|=1 can be written as z=cosθ+i·sinθ for some θ∈[0,2π). What does this say about the set of complex numbers of modulus 1?\"\n[Expected: z=(a,b) on the unit circle; parameterise by angle: a=cosθ, b=sinθ; so z=cosθ+i sinθ. The set {z∈ℂ: |z|=1} is the unit circle — a group under multiplication (since |z₁z₂|=|z₁||z₂|=1 when both moduli are 1).]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 247,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "math.found.complex-numbers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.complex-numbers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.found.real-numbers — understanding of ℝ, square roots, why x²=−1 has no real solution; the motivation for extending the number system\n\n**Unlocked blueprints:**\n- math.alg.complex-polynomial-roots — roots of polynomials in ℂ; Fundamental Theorem of Algebra\n- math.cx.complex-numbers-analysis — complex functions, holomorphic/analytic functions, Cauchy-Riemann equations (deep extension)\n- math.trig.polar-form-complex — polar and Euler form of complex numbers: z=r·e^{iθ}\n\n**Cross-links (both T1 — P76 cross-link probe mode):**\n- math.trig.polar-form-complex (T1): polar form z=r(cosθ+i sinθ); Euler's formula z=r·e^{iθ}; multiplication as rotation+scaling with angle addition\n- math.cx.complex-numbers-analysis (T1): analytic functions of a complex variable; this concept is the direct prerequisite that math.found.complex-numbers unlocks\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.complex-numbers.md",
+        "startLine": 265,
+        "endLine": 281
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

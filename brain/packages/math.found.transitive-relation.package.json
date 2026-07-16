@@ -1,0 +1,263 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.transitive-relation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.transitive-relation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c9d7db5fb2da90da04f3761a4aad4d37488143eb301303ca720e2814194bee56",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.transitive-relation.md": "sha256:402c894f9a4e5db813e0c2694307d5fd0a577be9edc532630d9a8c56d8d5e94f"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.transitive-relation",
+    "name": "Transitive Relation",
+    "difficultyRaw": "developing (2)",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.transitive-relation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.transitive-relation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.transitive-relation.md": "sha256:402c894f9a4e5db813e0c2694307d5fd0a577be9edc532630d9a8c56d8d5e94f"
+      },
+      "contentHash": "sha256:c0eb852df2bbd9f2a0d6cb34d460d1fc7c58919dabb52209c5a6988b5da9da92",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.transitive-relation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.transitive-relation.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.transitive-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.transitive-relation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.transitive-relation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.transitive-relation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.transitive-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.transitive-relation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.transitive-relation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.transitive-relation.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.transitive-relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.transitive-relation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.transitive-relation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.transitive-relation",
+      "title": "Transitive Relation — core explanation",
+      "content": "A relation R on a set A is **transitive** if:\n> (a, b) ∈ R and (b, c) ∈ R **implies** (a, c) ∈ R, for all a, b, c ∈ A.\n\nMnemonic: **if you can reach c from a in two steps via b, you must also be able to reach c from a in one step.**\n\n**Verification method:** For every pair of \"chained\" ordered pairs (a,b) and (b,c) in R, check that (a,c) is also in R. A single counterexample — a chain (a,b),(b,c) where (a,c) ∉ R — makes R NOT transitive.\n\n**Canonical transitive relations:**\n- \"Is less than\" (< ) on ℤ: a < b and b < c → a < c ✓\n- \"Is an ancestor of\" on people: if Alice is Bob's ancestor, and Bob is Carol's ancestor, then Alice is Carol's ancestor ✓\n- \"Is a subset of\" (⊆) on sets: A ⊆ B and B ⊆ C → A ⊆ C ✓\n- \"Is divisible by\" on ℤ: a|b and b|c → a|c ✓\n\n**Non-transitive example:**\n- \"Is the mother of\" on people: Alice is the mother of Bob; Bob is the mother of Carol → Alice is the mother of Carol? NO — Alice is Carol's grandmother, not mother.\n\n**Vacuous transitivity:** If R has no pair (a,b),(b,c) with a shared middle element b, the transitivity condition is vacuously true (no counterexample can exist). The empty relation ∅ on any set is transitive.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 32,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.found.transitive-relation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.transitive-relation",
+      "title": "FOUNDATIONAL) — Transitivity checks (a,b) and (c,b) instead of (a,b) and (b,c).",
+      "content": "**MC-1 (FOUNDATIONAL) — Transitivity checks (a,b) and (c,b) instead of (a,b) and (b,c).**\n- Trigger: student pairs (a,b) with (c,b) — matching on the SECOND component instead of on the shared middle element appearing as second then first\n- Root cause: confuses the chain direction; \"b\" must be the second component of the first pair AND the first component of the second pair\n- Impact: systematic incorrect transitivity verdicts; all downstream equivalence/partial-order work corrupted\n- Correction path: Protocol B-01 → directed chain visualisation\n- MAMR role: FOUNDATIONAL — cleared first",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.transitive-relation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.transitive-relation",
+      "title": "— Transitivity means if (a,c) ∈ R, then there must exist a chain through some b.",
+      "content": "**MC-2 — Transitivity means if (a,c) ∈ R, then there must exist a chain through some b.**\n- Trigger: student tries to EXPLAIN every pair (a,c) by finding a chain; rejects (a,c) ∈ R if no such chain exists\n- Root cause: inverts the implication — transitivity is \"chain ⟹ shortcut\", NOT \"shortcut ⟹ chain exists\"\n- Correction path: Protocol B-02 → implication direction exercise",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 10,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.transitive-relation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.transitive-relation",
+      "title": "— A relation with no two \"chain-able\" pairs cannot be transitive (vacuous truth confusion).",
+      "content": "**MC-3 — A relation with no two \"chain-able\" pairs cannot be transitive (vacuous truth confusion).**\n- Trigger: student says ∅ or a relation like {(1,2)} is \"not transitive because there's nothing to verify\"\n- Root cause: misunderstands that a universal conditional is true when the antecedent is never satisfied\n- Correction path: Protocol B-03 → vacuous truth explanation\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 15,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.found.transitive-relation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.transitive-relation",
+      "title": "The Transitivity Property",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Transitivity Property\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 73,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.found.transitive-relation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.transitive-relation",
+      "title": "Checking Transitivity from a Matrix",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Checking Transitivity from a Matrix\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 106,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "math.found.transitive-relation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.transitive-relation",
+      "title": "Vacuous Transitivity and Boundary Cases",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Vacuous Transitivity and Boundary Cases\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P17\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 140,
+        "endLine": 445
+      }
+    },
+    {
+      "assetId": "math.found.transitive-relation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.transitive-relation",
+      "title": "Assessment Item Bank",
+      "content": "| # | Item | Property | Answer |\n|---|---|---|---|\n| A1 | State the definition of transitivity. | Definition | (a,b)∈R and (b,c)∈R ⟹ (a,c)∈R |\n| A2 | R={(1,2),(2,3),(1,3)} on {1,2,3}. Transitive? | Standard check | Yes |\n| A3 | R={(a,b),(b,c)} on {a,b,c}. Transitive? | Missing shortcut | No — (a,b)+(b,c)→need (a,c); (a,c)∉R |\n| A4 | R=∅ on {1,2,3}. Transitive? | Vacuous | Yes |\n| A5 | Is \"is the parent of\" transitive? | Real-world | No (parent of parent = grandparent, not parent) |\n| A6 | Is \"is an ancestor of\" transitive? | Real-world | Yes |\n| A7 | R={(1,1),(2,2),(3,3),(1,2),(2,3),(1,3)} on {1,2,3}. Transitive? | Full check | Yes |\n| A8 | R={(p,q),(q,p)} on {p,q}. Transitive? | Cycle check | No — (p,q)+(q,p)→need(p,p)∉R |\n| A9 | R={A×A} on A. Transitive? | Complete relation | Yes (trivially) |\n| A10 | True or false: every transitive relation contains (a,a) for all a. | Confusion with reflexive | False — transitivity does not require reflexivity |\n| A11 | R={(1,2),(3,4)} on {1,2,3,4}. Transitive? | No chains | Yes (vacuously) |\n| A12 | R is transitive and (a,b),(b,c),(c,d) ∈ R. Is (a,d) ∈ R? | Chaining | Yes — apply transitivity twice |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 378,
+        "endLine": 397
+      }
+    },
+    {
+      "assetId": "math.found.transitive-relation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.transitive-relation",
+      "title": "Spaced Repetition Schedule",
+      "content": "Day 1, Day 3, Day 7, Day 21, Day 60. Decay: score < 5/5 → reset to Day 1 + Protocol B.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.transitive-relation.md",
+        "startLine": 372,
+        "endLine": 378
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

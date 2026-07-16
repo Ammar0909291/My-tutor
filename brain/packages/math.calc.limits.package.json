@@ -1,0 +1,400 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.limits-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.limits",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f3f3497f2d2dfb9120cc2810e5c69eb0c1a3944bad6693c4e79143e25d229696",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.limits.md": "sha256:5b2a1b43ed5e520cdc2a552c4607a5a4fcf51dbde6e2788673f7febd0838feb5"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.calc.limits",
+    "name": "Limit of a Function",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 15,
+    "prerequisites": [
+      "math.func.real-valued-function",
+      "math.found.real-numbers"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.limits-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.limits (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.limits.md": "sha256:5b2a1b43ed5e520cdc2a552c4607a5a4fcf51dbde6e2788673f7febd0838feb5"
+      },
+      "contentHash": "sha256:6a35c140d01b4e5bdf421f861837cb9bc7b6660092f4ac4f5305994427b6906b",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.limits.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limits.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limits.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limits.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limits.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limits.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limits.md#TA-B02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limits\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.limits/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.limits",
+      "title": "Limit of a Function — cognitive map",
+      "content": "**Core concept:** The limit lim_{x→a} f(x) = L means that f(x) can be made arbitrarily close to L by taking x sufficiently close (but not equal) to a. The value (or existence) of f at a is irrelevant to the limit. Formalised by the ε-δ definition: for every ε>0, there exists δ>0 such that 0<|x−a|<δ implies |f(x)−L|<ε.\n\n**Conceptual progression:**\n1. Informal intuition: f(x) approaches L as x approaches a — from numerical tables and graphs.\n2. The limit is about APPROACH, not arrival — f(a) can be undefined, different from L, or equal to L.\n3. One-sided limits: lim_{x→a⁺} f(x) (from the right) and lim_{x→a⁻} f(x) (from the left).\n4. Two-sided limit exists if and only if both one-sided limits equal the same value.\n5. Limit laws: sum, product, quotient, constant-multiple rules for computing limits of compound expressions.\n6. ε-δ definition: making the informal notion precise; δ is a response to an arbitrary challenge ε.\n\n**CPA arc (entry: P):**\n- Pictorial: graphs showing f(x) approaching L from left and right as x→a; graphs with holes, jumps, and vertical asymptotes; number line showing δ-neighbourhood of a mapping to ε-neighbourhood of L\n- Abstract: formal notation lim_{x→a} f(x) = L; ε-δ definition; limit laws; algebraic cancellation for indeterminate forms\n\n**Prior knowledge activated:** domain and range of a function; real number distance and absolute value |x−a|; function evaluation; factoring polynomials; concept of \"infinity\" as a process, not a number\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.calc.limits/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.limits",
+      "title": "LIMIT-IS-THE-FUNCTION-VALUE [FOUNDATIONAL]",
+      "content": "### MC-1: LIMIT-IS-THE-FUNCTION-VALUE [FOUNDATIONAL]\n**Description:** Learner equates lim_{x→a} f(x) with f(a), believing the limit always equals the function value at a.\n**Surface form:** For f(x) = (x²−1)/(x−1), evaluates f(1) = 0/0 and reports \"limit is undefined\" or \"limit is 0/0.\"\n**Root cause:** Has only seen continuous functions where limit = value; has not encountered removable discontinuities, holes, or piecewise-defined functions.\n**Trigger condition:** Any function with a removable discontinuity or where f(a) is undefined.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.calc.limits/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.limits",
+      "title": "LIMIT-REQUIRES-f(a)-DEFINED",
+      "content": "### MC-2: LIMIT-REQUIRES-f(a)-DEFINED\n**Description:** Learner believes a limit can exist only if f is defined at x=a.\n**Surface form:** Sees f(x)=(x²−4)/(x−2) and says \"no limit at x=2 because f(2) is undefined.\"\n**Root cause:** Same root as MC-1; learner confuses the limit concept (based on approach) with evaluation (based on the point itself).\n**Trigger condition:** Any problem where f(a) is undefined but the limit exists.\n**Repair target:** TA-B01.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.limits/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.limits",
+      "title": "ONE-SIDED-EQUALS-TWO-SIDED",
+      "content": "### MC-3: ONE-SIDED-EQUALS-TWO-SIDED\n**Description:** Learner computes only the right-hand (or left-hand) limit and reports it as the two-sided limit without checking the other side.\n**Surface form:** For f(x)=|x|/x, computes lim_{x→0⁺}=1 and reports lim_{x→0}=1, missing that lim_{x→0⁻}=−1.\n**Root cause:** Does not know the existence criterion: two-sided limit requires both one-sided limits to agree.\n**Trigger condition:** Any function with a jump discontinuity or where the graph behaves differently from left and right.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.limits/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits",
+      "title": "Limits as Approach, Not Arrival",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Limits as Approach, Not Arrival\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 84,
+        "endLine": 118
+      }
+    },
+    {
+      "assetId": "math.calc.limits/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits",
+      "title": "One-Sided Limits and Existence Criterion",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"One-Sided Limits and Existence Criterion\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 118,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "math.calc.limits/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits",
+      "title": "Limit Laws and Algebraic Computation",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Limit Laws and Algebraic Computation\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 146,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "math.calc.limits/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 178,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "math.calc.limits/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits",
+      "title": "Repair: Limit-Is-The-Function-Value / Limit-Requires-f(a)-Defined",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: Limit-Is-The-Function-Value / Limit-Requires-f(a)-Defined\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 221,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "math.calc.limits/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limits",
+      "title": "Repair: One-Sided-Equals-Two-Sided",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: One-Sided-Equals-Two-Sided\",\"primitives\":[\"P04\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 237,
+        "endLine": 345
+      }
+    },
+    {
+      "assetId": "math.calc.limits/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.limits",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A04 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 80% → PASS requires ⌈0.80 × 5⌉ = 4/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: Compute lim_{x→2} (x²−4)/(x−2). [Answer: factor to (x+2)(x−2)/(x−2) = x+2; limit = 4]\nItem 2: Does lim_{x→0} |x|/x exist? Justify using one-sided limits. [Answer: left limit=−1, right limit=1; 1≠−1 → DNE]\nItem 3: True or False — if lim_{x→a} f(x) = L, then f(a) = L. [Answer: FALSE — f(a) may be undefined or ≠ L; limit and function value are independent]\nItem 4: If lim_{x→2} f(x)=5 and lim_{x→2} g(x)=3, compute lim_{x→2} [2f(x) − g(x)]. [Answer: 2(5)−3=7, by sum/constant-multiple laws]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (independence mode — cross_links: []):**\nLet f(x) = (x²−1)/(x−1) for x≠1, and f(1) = 0.\n\n(a) What is f(1)? [Answer: 0 — defined by the piecewise rule]\n(b) What is lim_{x→1} f(x)? [Answer: lim_{x→1}(x+1)=2 (after factoring); limit=2]\n(c) Is the limit equal to the function value? [Answer: No — lim=2 but f(1)=0; limit and value are different]\n(d) What would f(1) need to equal for the limit and value to agree? [Answer: f(1)=2 — this would make f continuous at x=1]\n(e) What is the name for the type of discontinuity at x=1 in the original definition? [Answer: removable discontinuity — the limit exists but differs from (or is not equal to) the function value; a single point can \"fill the hole\"]\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score ≥ 4/5 → PASS → P78 COMPLETION\n- Score < 4/5 → FAIL → Route to TA-B01 (limit-vs-value confusion) or TA-B02 (one-sided limit errors)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Limits of functions: mastered. You can compute limits using algebraic cancellation and limit laws, distinguish limits from function values, apply one-sided limit tests for existence, and recognise removable discontinuities. This is the analytical foundation for continuity and derivatives.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 178,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "math.calc.limits/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.limits",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** \"Does the limit lim_{x→3} (x²−9)/(x−3) exist? If so, what is it?\" If learner successfully factors and finds 6 → begin TA-A01. If learner says \"undefined\" → flag MC-1/MC-2 for TA-B01 after instruction.\n\n**Scaffolding ladder:**\n1. Numerical tables: compute f(x) for x approaching a from both sides; observe approach to L\n2. Graph reading: identify limits from graphs, including holes and jumps\n3. Algebraic computation: factor and cancel for indeterminate 0/0 forms\n4. One-sided limits: analyze from left and right separately; determine existence of two-sided limit\n5. Limit laws: compute limits of sums/products/quotients without indeterminate forms\n\n**Pacing gate:** Must score ≥ 4/5 on P91 to earn mastery credit (MAMR = 80%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 65,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.calc.limits/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.limits",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.calc.limits\n  MAMR: 0.80\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"Compute lim_{x→3} (x²−9)/(x−3).\"\n  session_3_probe: \"Does lim_{x→2} f(x) exist for f(x)=x+1 when x<2 and f(x)=x²−1 when x≥2?\"\n  session_7_probe: \"Compute lim_{x→0} sin(x)/x. What numerical evidence supports your answer?\"\n  session_14_probe: \"Explain the difference between lim_{x→a}f(x) and f(a). Give an example where they differ.\"\n  session_30_probe: \"Sketch a function where lim_{x→2}f(x)=4 but f(2)=7. Is such a function possible? Explain.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 250,
+        "endLine": 266
+      }
+    },
+    {
+      "assetId": "math.calc.limits/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.limits",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.func.real-valued-function — domain, range, function evaluation [BLUEPRINT EXISTS]\n- math.found.real-numbers — real number line, absolute value, distance [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.calc.continuity — f continuous at a iff lim_{x→a}f(x) = f(a)\n- math.calc.derivative-definition — derivative as a limit of difference quotient\n\n**Cross-links:** [] — no Tier 1 cross-links.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented.\n**GR-9 satisfied:** P76 independence mode applied (cross_links empty).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limits.md",
+        "startLine": 266,
+        "endLine": 283
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

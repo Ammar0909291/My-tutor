@@ -1,0 +1,267 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.determinant-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.determinant",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2f6b7f39798a220e38961d1e0e20dded494349b8c4841f66b69ffb9060ff37d6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.determinant.md": "sha256:9ebfd160c4d07c8272a83f56a1b0fd00546b6188a547b36f5327ce082dcaec87"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 2,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 2
+  },
+  "concept": {
+    "conceptId": "math.linalg.determinant",
+    "name": "Determinant",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.linalg.matrix-multiplication"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.determinant-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.determinant (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.determinant.md": "sha256:9ebfd160c4d07c8272a83f56a1b0fd00546b6188a547b36f5327ce082dcaec87"
+      },
+      "contentHash": "sha256:29fd8f7c4084f823c5686df1c04c1955ba0f41a3b7a26f490932927e014a02c9",
+      "ruleCount": 2,
+      "bandCounts": {
+        "3": 2
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.determinant.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.determinant.md#TA-B01 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.determinant"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.determinant\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.determinant.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.determinant.md#TA-B02 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.determinant"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.determinant\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.determinant/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.linalg.determinant",
+      "title": "Determinant — cognitive map",
+      "content": "**Core concept:** The determinant det(A) is a scalar function on square matrices satisfying: (1) multilinearity in rows, (2) alternating (swapping two rows changes the sign), (3) det(I)=1. For 2×2 matrices: det([[a,b],[c,d]])=ad−bc. Geometrically: |det(A)| is the area (2×2) or volume (3×3) of the parallelepiped formed by the rows; the sign encodes orientation. det(A)≠0 if and only if A is invertible.\n\n**Conceptual progression:**\n1. 2×2 determinant: ad−bc — the \"cross-multiply\" formula; derive from area of parallelogram.\n2. Geometric meaning: |det| = area (2D) or volume (3D); sign = orientation (positive=counterclockwise, negative=clockwise).\n3. Row operations and sign: swapping rows changes the sign; scaling a row scales det; adding a multiple of one row to another leaves det unchanged.\n4. 3×3 determinant: cofactor expansion along any row (or column); choose the row with zeros for efficiency.\n5. Invertibility criterion: det(A)=0 ↔ rows are linearly dependent ↔ A is not invertible.\n6. Product rule: det(AB)=det(A)·det(B). Consequence: det(A⁻¹)=1/det(A).\n\n**CPA arc (entry: P):**\n- Pictorial: parallelogram formed by row vectors (a,b) and (c,d) in the plane; area computed by the formula; graph of how scaling/shearing transforms change area\n- Abstract: 2×2 formula ad−bc; 3×3 cofactor expansion formula; property det(AB)=det(A)det(B)\n\n**Prior knowledge activated:** matrix multiplication (AB requires compatible dimensions and row-column products); inverse matrix concept (AA⁻¹=I); area of a parallelogram (base × height); signed quantities\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.determinant",
+      "title": "DETERMINANT-IS-JUST-A-FORMULA [FOUNDATIONAL]",
+      "content": "### MC-1: DETERMINANT-IS-JUST-A-FORMULA [FOUNDATIONAL]\n**Description:** Learner applies the 2×2 formula ad−bc mechanically without understanding what the determinant measures. Cannot connect det=0 to non-invertibility or give geometric meaning to |det|.\n**Surface form:** \"det([[3,1],[2,4]])=3×4−1×2=10. Done.\" (No mention of area, orientation, or invertibility.)\n**Root cause:** The formula is easy to apply; the geometric interpretation requires connecting a scalar output to an area — a non-obvious step.\n**Trigger condition:** Any problem asking why det(A)=0 matters, or asking for the geometric meaning of the determinant.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.determinant",
+      "title": "DET(A+B)=DET(A)+DET(B) [FOUNDATIONAL alternate]",
+      "content": "### MC-2: DET(A+B)=DET(A)+DET(B) [FOUNDATIONAL alternate]\n**Description:** Learner incorrectly applies linearity to the whole determinant: det(A+B)=det(A)+det(B). Confuses this with the valid property det(AB)=det(A)det(B). The determinant IS linear in each ROW separately, but NOT linear in the entire matrix.\n**Surface form:** \"det(A+B) = det(A)+det(B) because determinants are linear.\"\n**Root cause:** Linear operations like trace satisfy tr(A+B)=tr(A)+tr(B). Learner imports this pattern to det without verifying. The distinction between row-multilinearity and full-matrix-additivity is subtle.\n**Trigger condition:** Any problem comparing det(A+B) with det(A)+det(B).\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.determinant",
+      "title": "ZERO-DETERMINANT-MEANS-ZERO-MATRIX",
+      "content": "### MC-3: ZERO-DETERMINANT-MEANS-ZERO-MATRIX\n**Description:** Learner believes det(A)=0 implies A is the zero matrix, or that A is \"trivial/empty\" in some sense. Does not understand that det(A)=0 means linear dependence of rows — A can be a nonzero matrix with a zero determinant.\n**Surface form:** \"det(A)=0 so A must be the zero matrix.\"\n**Root cause:** In scalar arithmetic, only 0 has det/value=0 in the trivial sense. The learner has not yet met non-trivial matrices with zero determinant. The concept of linear dependence has not been linked to det=0.\n**Trigger condition:** Any problem where a nonzero matrix has zero determinant (e.g., [[1,2],[2,4]]).\n**Repair target:** TA-B01.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.determinant",
+      "title": "Repair for MC-1 and MC-3 (NO-GEOMETRIC-MEANING / ZERO-MEANS-ZERO-MATRIX)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 and MC-3 (NO-GEOMETRIC-MEANING / ZERO-MEANS-ZERO-MATRIX)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 210,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.determinant",
+      "title": "Repair for MC-2 (DET(A+B)≠DET(A)+DET(B))",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (DET(A+B)≠DET(A)+DET(B))\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 233,
+        "endLine": 433
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.determinant",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.90 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Compute det([[4,2],[3,5]]).\"\n[Expected: 4×5 − 2×3 = 20 − 6 = 14.]\n\n**Item 2:**\n\"The matrix M=[[2,4],[1,2]]. Compute det(M). Is M invertible?\"\n[Expected: det(M)=2×2−4×1=4−4=0. Not invertible. Row 2=(1,2)=(1/2)×row 1 — linearly dependent rows.]\n\n**Item 3:**\nTrue or False: \"det(A+B)=det(A)+det(B) for all 2×2 matrices A and B.\"\n[Expected: FALSE. Counterexample: A=B=I, det(A)=det(B)=1, but det(A+B)=det(2I)=4≠1+1=2.]\n\n**Item 4:**\n\"If det(A)=4 and det(B)=−3, what is det(AB)?\"\n[Expected: det(AB)=det(A)×det(B)=4×(−3)=−12.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"A linear map T: ℝ²→ℝ² has matrix A=[[2,1],[1,2]].\n\n(a) Compute det(A).\n(b) The unit square has corners at (0,0), (1,0), (0,1), (1,1). After applying T, the image has corners T(0,0)=(0,0), T(1,0)=(2,1), T(0,1)=(1,2), T(1,1)=(3,3). What is the area of the image parallelogram?\n(c) Is A invertible? If so, what is det(A⁻¹)?\"\n\n[Expected:\n(a) det(A)=2×2−1×1=3.\n(b) Area of image = |det(A)| × area of original = 3 × 1 = 3. (The determinant gives the area scale factor.)\n(c) det(A)=3≠0 → A is invertible. det(A⁻¹)=1/det(A)=1/3.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (a) correct (det=3) and (c) correct (invertible, det(A⁻¹)=1/3) with the area answer in (b) stated as 3. Award 0 if det(A) wrong or invertibility conclusion wrong.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: 5 out of 5 (MAMR = ⌈0.90 × 5⌉ = 5).\n- PASS (5/5): Learner can compute 2×2 determinants, identify singular matrices, apply the product rule, disprove additivity, and interpret det geometrically as an area scale factor.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS (5/5): → P78 COMPLETION\n- FAIL on Item 2 (det=0 doesn't mean zero matrix): → TA-B01 (MC-3 repair)\n- FAIL on Item 3 (false additivity): → TA-B02 (MC-2 repair)\n- FAIL on Item 1 (formula error): → Review A02 WE1; re-gate\n- FAIL on Item 4 (product rule not applied): → Review A03 Property 4; re-gate\n- FAIL on P76 (no geometric interpretation): → TA-B01 (MC-1 — geometric meaning repair)\n- FAIL on multiple items: → TA-B01 then TA-B02; re-gate with two fresh items + P76\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to compute determinants, apply the product rule, identify singular matrices, and interpret the determinant geometrically as an area/volume scale factor.\n\nKey anchors to carry forward:\n- 2×2: det([[a,b],[c,d]])=ad−bc; geometric: area of parallelogram formed by rows.\n- det(A)=0 ↔ rows linearly dependent ↔ A singular (not invertible) ↔ area/volume collapses to 0.\n- Product rule: det(AB)=det(A)det(B). Consequence: det(A⁻¹)=1/det(A).\n- det(A+B) ≠ det(A)+det(B) in general — additivity is FALSE.\n- 3×3: cofactor expansion along the row/column with the most zeros.\n\nNext concepts: math.linalg.matrix-inverse — explicit formula for A⁻¹ using the adjugate; math.linalg.eigenvalues — characteristic equation det(A−λI)=0.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 329,
+        "endLine": 425
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.determinant",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Compute the matrix product [[1,2],[3,4]]×[[5,6],[7,8]].\" If the learner correctly computes [[19,22],[43,50]], matrix multiplication is active and they are ready for A01. If not, briefly review from math.linalg.matrix-multiplication.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): Show the parallelogram for rows (1,0) and (0,1) — area=1=det(I). Then (2,0) and (0,3) — area=6=det([[2,0],[0,3]]). Learner reads area from the picture.\n- Rung 2 (partial abstract): Learner applies the 2×2 formula ad−bc to three given matrices, then checks one geometrically using the parallelogram picture.\n- Rung 3 (full abstract): Learner does a 3×3 cofactor expansion independently, choosing the most efficient row.\n\n**Pacing note:** h=6 estimated hours; A01–A02 in session 1; A03 + mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.determinant",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Let A=[[2,3],[1,4]]. (a) Compute det(A). (b) Find det(2A). (c) Find det(A²).\"\n[Expected: (a) 8−3=5. (b) det(2A)=2²×det(A)=4×5=20 (scaling each of the 2 rows by 2 scales det by 2²). (c) det(A²)=25.]\n\n**Day 10 prompt:**\n\"Compute det([[2,−1,3],[0,4,1],[0,0,5]]) without full cofactor expansion. What shortcut applies?\"\n[Expected: Upper triangular matrix — det = product of diagonal entries = 2×4×5=40. The row operations that create zeros below the diagonal are row replacements (which don't change det), so the final triangular matrix has the same det as the original.]\n\n**Day 30 prompt:**\n\"Explain why det(AB)=det(A)det(B) implies that if A is invertible, det(A⁻¹)=1/det(A). Then explain why det(A)=0 implies A cannot be invertible.\"\n[Expected: Since AA⁻¹=I: det(AA⁻¹)=det(I)=1, so det(A)det(A⁻¹)=1, giving det(A⁻¹)=1/det(A). If det(A)=0: suppose A were invertible with inverse B; then det(A)det(B)=det(AB)=det(I)=1, so 0×det(B)=1 — contradiction. So det(A)=0 → A is not invertible.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 249,
+        "endLine": 267
+      }
+    },
+    {
+      "assetId": "math.linalg.determinant/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.determinant",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.linalg.matrix-multiplication — matrix product AB; cofactor expansion involves 2×2 sub-products; product rule requires AB\n\n**Unlocked blueprints:**\n- math.linalg.matrix-inverse — A⁻¹ exists iff det(A)≠0; inversion formula (1/det)×adj(A)\n- math.linalg.eigenvalues — characteristic polynomial det(A−λI)=0 defines eigenvalues\n- math.linalg.cramer-rule — uses det to solve Ax=b\n\n**Cross-links (none):**\n- cross_links=[] — no Tier-1 cross-links\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.determinant.md",
+        "startLine": 267,
+        "endLine": 282
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

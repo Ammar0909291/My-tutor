@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.system-linear-equations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.system-linear-equations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1d9c08880ba5c8f83fda23f1b851ad27ea62d9ea5ce952451599625d592ee7e0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.system-linear-equations.md": "sha256:7117c693b819a8af817e1aec4b054e51dde13ba37e0edad9c94943c2a8f1dbfa"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.system-linear-equations",
+    "name": "Systems of Linear Equations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.alg.linear-equation-2var"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.system-linear-equations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.system-linear-equations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.system-linear-equations.md": "sha256:7117c693b819a8af817e1aec4b054e51dde13ba37e0edad9c94943c2a8f1dbfa"
+      },
+      "contentHash": "sha256:5e6bb736bdb04d1459791142f5ca3440e03fed96239567a4b7f942084aa4a2c1",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.system-linear-equations.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.system-linear-equations.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.system-linear-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.system-linear-equations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.system-linear-equations.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.system-linear-equations.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.system-linear-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.system-linear-equations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.system-linear-equations.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.system-linear-equations.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.system-linear-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.system-linear-equations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.system-linear-equations/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "Systems of Linear Equations — cognitive map",
+      "content": "**Core concept:** A system of linear equations is a set of two or more linear equations in the same variables; a solution is a tuple of values satisfying ALL equations simultaneously. For two equations in two unknowns, three cases exist: one solution (lines intersect), no solution (parallel lines), or infinitely many solutions (same line). The two principal solution methods are substitution (isolate one variable, substitute into the other equation) and elimination (add/subtract multiples of equations to cancel one variable).\n\n**Conceptual progression:**\n1. Geometric interpretation: each equation is a line in ℝ²; the solution set is the intersection of the lines.\n2. Three cases: unique solution (∃!), no solution (∅), infinitely many solutions (ℝ¹ — a line).\n3. Substitution method: isolate a variable in one equation, substitute the expression into the other, solve, back-substitute.\n4. Elimination (addition) method: multiply equations by constants so one variable's coefficients are additive inverses; add to eliminate that variable.\n5. Consistency check: always substitute the solution back into BOTH original equations.\n\n**CPA arc (entry: P):**\n- Pictorial: two lines on a coordinate plane — one intersection point (unique), parallel (no solution), overlapping (infinite solutions); labelled intersection as the solution\n- Abstract: algebraic manipulation; substitution and elimination steps; 0=0 vs. 0=k detection\n\n**Prior knowledge activated:** linear equations in two variables (math.alg.linear-equation-2var) — standard form ax+by=c, slope-intercept form y=mx+b, solving for y; evaluating expressions by substituting a value for a variable\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "SUBSTITUTE-INTO-SAME-EQUATION [FOUNDATIONAL]",
+      "content": "### MC-1: SUBSTITUTE-INTO-SAME-EQUATION [FOUNDATIONAL]\n**Description:** Learner substitutes the expression from one equation back into that SAME equation instead of the OTHER equation, creating a tautology (0=0 or 5=5) and concluding that infinitely many solutions exist or that the method has \"failed.\"\n**Surface form:** From {x+y=5, x=3−y}: substituting x=3−y into the same first equation where x was expressed: \"(3−y)+y=5 → 3=5 ✗ [confused]\" OR \"always true — infinitely many solutions.\"\n**Root cause:** Learner does not distinguish between \"the equation I solved FROM\" and \"the other equation.\" When substituting back into the same equation, the substitution is circular — the equation becomes an identity or a contradiction instead of revealing the value of the remaining variable.\n**Trigger condition:** Substitution method, especially when the isolated expression is substituted.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "ELIMINATION-WRONG-SIGN",
+      "content": "### MC-2: ELIMINATION-WRONG-SIGN\n**Description:** Learner adds equations when subtracting is needed, or vice versa — failing to make the target variable's coefficients cancel. For example, to eliminate x from {3x+2y=13, 3x−y=7}, learner adds (getting 6x+y=20) instead of subtracting (getting 3y=6).\n**Surface form:** \"I added the two equations to eliminate x: (3x+3x)+(2y+(−y))=(13+7) → 6x+y=20. Now what?\"\n**Root cause:** The strategy — \"make coefficients cancel\" — requires the coefficients to be additive inverses (opposite signs). Learner adds regardless of sign, or does not multiply to create opposite signs before adding.\n**Trigger condition:** Elimination method when the coefficients of the target variable have the same sign.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "ZERO-EQUALS-ZERO-MEANS-NO-SOLUTION",
+      "content": "### MC-3: ZERO-EQUALS-ZERO-MEANS-NO-SOLUTION\n**Description:** When elimination yields 0=0 (an identity, indicating infinitely many solutions), learner concludes there is no solution. Confuses \"0=0\" (any value works) with \"0=k, k≠0\" (contradiction, no solution).\n**Surface form:** \"I got 0=0. That means nothing works — no solution.\"\n**Root cause:** \"Nothing is left after elimination\" is interpreted as \"nothing satisfies the equation.\" The learner has not connected 0=0 (a true statement for all values) to the geometric picture of coincident lines (every point on the line is a solution).\n**Trigger condition:** Any dependent system (both equations describe the same line).\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "Repair for MC-1 (SUBSTITUTE-INTO-SAME-EQUATION)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (SUBSTITUTE-INTO-SAME-EQUATION)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 109,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "Repair for MC-2 (ELIMINATION-WRONG-SIGN)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (ELIMINATION-WRONG-SIGN)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 164,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "Repair for MC-3 (ZERO-EQUALS-ZERO-MEANS-NO-SOLUTION)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (ZERO-EQUALS-ZERO-MEANS-NO-SOLUTION)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 214,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Solve by substitution: {x+y=5, x−y=1}.\"\n[Expected: Add equations: 2x=6 → x=3; y=2. Or: x=y+1 (from eq 2), substitute into eq 1: (y+1)+y=5 → y=2, x=3. Solution: (3,2). Verify: 3+2=5 ✓; 3−2=1 ✓.]\n\n**Item 2:**\n\"Solve by your choice: {y=2x−1, 3x+y=14}.\"\n[Expected: Substitute y=2x−1 into second: 3x+2x−1=14 → 5x=15 → x=3; y=5. Verify: y=2(3)−1=5 ✓; 3(3)+5=14 ✓.]\n\n**Item 3:**\nTrue or False: \"When solving by substitution, substitute the expression into the same equation you used to find it.\"\n[Expected: FALSE. Always substitute into the OTHER equation. Substituting back into the same equation gives a tautology and provides no new information.]\n\n**Item 4:**\n\"Classify (do not solve): {2x+y=5, 4x+2y=8}.\"\n[Expected: Multiply first equation by 2: 4x+2y=10. The second equation gives 4x+2y=8 ≠ 10. The left sides are identical but right sides differ → parallel lines → NO SOLUTION (inconsistent system).]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Solve the system: {2x+3y=12, 4x−y=10}.\n\n(a) State which method you will use and why.\n(b) Show all steps.\n(c) Verify your answer in both original equations.\"\n\n[Expected:\n(a) Elimination: multiply second equation by 3 to make y-coefficients +3 and −3 (additive inverses). Or substitution from equation 2: y=4x−10.\n\nMethod A (elimination): 3×(4x−y=10): 12x−3y=30. Add to 2x+3y=12: 14x=42 → x=3. Sub: 2(3)+3y=12 → 3y=6 → y=2. Solution: (3,2).\n\nMethod B (substitution): y=4x−10; sub: 2x+3(4x−10)=12 → 2x+12x−30=12 → 14x=42 → x=3; y=2.\n\n(c) Check: 2(3)+3(2)=6+6=12 ✓; 4(3)−2=12−2=10 ✓.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if solution (3,2) is correct and both verification checks are shown, 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can solve systems by substitution and elimination, recognise all three solution cases, and substitute into the correct equation.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 or Item 3 (substitution into same equation, or circular answer): → TA-B01 (SUBSTITUTE-INTO-SAME-EQUATION repair), then re-gate\n- FAIL on Item 2 (sign error in elimination, or incorrect elimination): → TA-B02 (ELIMINATION-WRONG-SIGN repair), then re-gate\n- FAIL on Item 4 (0=0 interpreted as no solution): → TA-B03 (ZERO-EQUALS-ZERO-MEANS-NO-SOLUTION repair), then re-gate\n- FAIL on P76 (wrong solution, or verification fails): → return to A02 (WE2 — re-demonstrate elimination steps), then re-gate\n- FAIL on multiple items: → B01 then B02 then B03 as needed; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated mastery of systems of linear equations: substitution and elimination methods, the three solution cases, and the geometric interpretation as line intersections.\n\nKey anchors to carry forward:\n- Two equations, two unknowns: geometrically, two lines in ℝ². Solution = intersection point(s).\n- Substitution: isolate one variable in one equation; substitute into the OTHER equation.\n- Elimination: make one variable's coefficients additive inverses; add equations to eliminate it.\n- Three cases: unique solution (lines cross); no solution (parallel lines, 0=k≠0); infinitely many (same line, 0=0).\n- Always verify the solution in BOTH original equations.\n\nNext concepts: math.linalg.linear-system (matrix form, Gaussian elimination for n×n systems), math.alg.system-3var (three equations, three unknowns).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 335,
+        "endLine": 434
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Solve 2x+3=9. Now solve y=2x−1 for x given y=5.\" If the learner finds x=3 in the first and x=3 in the second, proceed to A01. If the learner cannot isolate a variable in a single linear equation, review math.alg.linear-equation-2var first.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): graph both equations on the same axes; identify the intersection point visually before solving algebraically. Verify the algebraic answer matches the graph.\n- Rung 2 (substitution): always highlight (circle) which equation an expression was obtained FROM; draw an arrow to the OTHER equation where it will be substituted.\n- Rung 3 (elimination): write the target variable's coefficients explicitly; note whether they are equal or opposite; decide to add or subtract; write the operation clearly before executing.\n\n**Pacing note:** h=12 estimated hours; A01 in sessions 1–2; A02 in sessions 3–4; A03 + mastery gate in sessions 5–6.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Solve the system {3x+4y=18, 5x−2y=4} by elimination. Show each step.\"\n[Expected: multiply second by 2: 10x−4y=8. Add to first: 13x=26 → x=2. Then 3(2)+4y=18 → y=3. Solution (2,3). Verify: 3(2)+4(3)=18 ✓; 5(2)−2(3)=10−6=4 ✓.]\n\n**Day 10 prompt:**\n\"For which value of k does {2x+y=5, 4x+2y=k} have (a) no solution, (b) infinitely many solutions?\"\n[Expected: multiply first by 2: 4x+2y=10. (a) k≠10 → parallel lines, no solution. (b) k=10 → same line, infinitely many solutions. The system never has a unique solution (the lines can only be parallel or coincident — never transversal — because they have the same slope).]\n\n**Day 30 prompt:**\n\"Three friends together have 18 coins. Alice has twice as many as Bob. Bob has 3 more than Carol. Set up a system of 3 equations in 3 unknowns and solve.\"\n[Expected: A+B+C=18; A=2B; B=C+3. Sub: 2B+B+(B−3)=18 → 4B=21? Recheck: A+B+C=18, A=2B, B=C+3 → C=B−3. So 2B+B+(B−3)=18 → 4B−3=18 → 4B=21. This doesn't give integer values. Let me fix the problem.\n\nActually: Alice has twice as many as Bob, Bob has 3 MORE than Carol.\nA=2B; B=C+3; A+B+C=18. Sub A=2B: 2B+B+C=18 → 3B+C=18. Sub C=B−3: 3B+B−3=18 → 4B=21 → B=21/4. Non-integer. Adjust problem.\n\nNew version: Alice has twice as many as Bob. Bob has 3 more than Carol. Together they have 21.\nA=2B; B=C+3; A+B+C=21. Sub: 2B+B+C=21 → 3B+C=21. Sub C=B−3: 4B−3=21 → 4B=24 → B=6. A=12, C=3. Check: 12+6+3=21 ✓; A=2B ✓; B=C+3 ✓.\n\nLet me adjust to use 21 total.]\n\n\"Three friends together have 21 coins. Alice has twice as many as Bob. Bob has 3 more than Carol. How many coins does each have?\"\n[Expected: A=2B, B=C+3, A+B+C=21. Sub A=2B: 3B+C=21. Sub C=B−3: 4B=24 → B=6. A=12, C=3. Verify: 12+6+3=21 ✓.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 243,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "math.alg.system-linear-equations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.system-linear-equations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.alg.linear-equation-2var — solving a single linear equation in two variables; standard form ax+by=c; isolating one variable\n\n**Unlocked blueprints:**\n- math.linalg.linear-system — matrix representation Ax=b; Gaussian elimination; linear systems in n variables and m equations\n- math.alg.system-3var — three equations in three unknowns; elimination cascade\n\n**Cross-link (NOT T1 — P76 independence mode):**\n- math.linalg.linear-system (not T1): the linear system in matrix form; Gaussian elimination generalises the two-equation elimination method to n equations in n unknowns\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.system-linear-equations.md",
+        "startLine": 272,
+        "endLine": 286
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

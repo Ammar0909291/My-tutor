@@ -1,0 +1,299 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.polynomial-operations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.polynomial-operations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b459e4775dbecdc831fb89ee8603ca6c0a0b05a555e89b1b47743365d768c60f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.polynomial-operations.md": "sha256:39a182e404ef70003eea8b72c6067ce618f5ebdbaa937de2089399b8e5b4657d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.polynomial-operations",
+    "name": "Polynomial Operations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.alg.polynomial",
+      "math.alg.like-terms"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.polynomial-operations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.polynomial-operations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.polynomial-operations.md": "sha256:39a182e404ef70003eea8b72c6067ce618f5ebdbaa937de2089399b8e5b4657d"
+      },
+      "contentHash": "sha256:748afeed39a99d8ae4328e052c26020bc85eca002ca31fb1dc0bc70d16fe3606",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-operations.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-operations.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-operations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-operations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-operations.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-operations.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-operations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-operations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-operations.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-operations.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-operations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-operations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.polynomial-operations/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "Polynomial Operations — cognitive map",
+      "content": "**Core concept:** Polynomials are added and subtracted by collecting like terms (matching degree); they are multiplied using the distributive property applied term-by-term, then collecting like terms. The degree of a sum is at most max(deg p, deg q); the degree of a product is exactly deg p + deg q when both leading coefficients are nonzero.\n\n**Conceptual progression:**\n1. Addition/subtraction: group terms of the same degree; only like terms (same variable and same exponent) combine.\n2. Sign distribution in subtraction: p(x)−q(x) requires distributing the minus sign to EVERY term of q(x), not just the first.\n3. Multiplication — distributive property: each term of one factor multiplies every term of the other; FOIL is a mnemonic for the binomial×binomial case, not a general rule.\n4. Degree arithmetic: deg(p+q) ≤ max(deg p, deg q); deg(p·q) = deg p + deg q.\n5. Standard form throughout: always collect and write in descending exponent order.\n\n**CPA arc (entry: P):**\n- Pictorial: column addition/subtraction of polynomials aligned by degree; grid (table) method for multiplication showing partial products\n- Abstract: sigma notation grouping, coefficient arithmetic, degree rules\n\n**Prior knowledge activated:** polynomial anatomy (math.alg.polynomial) — degree, leading term, like terms; like-term identification and collection (math.alg.like-terms); distributive property a(b+c)=ab+ac\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "UNLIKE-TERMS-COMBINE [FOUNDATIONAL]",
+      "content": "### MC-1: UNLIKE-TERMS-COMBINE [FOUNDATIONAL]\n**Description:** Learner adds or multiplies terms with different degrees as if they were like terms — e.g., x²+x = 2x² or 2x³, or writes (x²)(x) = x² rather than x³.\n**Surface form:** \"x²+x = 2x because they're both x-terms.\" or \"x²+3x = 4x² because 1+3=4.\"\n**Root cause:** Overgeneralisation of numeric addition: 2+3=5, so 2x²+3x \"should\" simplify. Learner has not internalised that unlike terms cannot be combined — only terms with the SAME variable AND the SAME exponent are like terms.\n**Trigger condition:** Any addition or subtraction problem involving terms of different degrees.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "SUBTRACTION-DISTRIBUTES-FIRST-TERM-ONLY",
+      "content": "### MC-2: SUBTRACTION-DISTRIBUTES-FIRST-TERM-ONLY\n**Description:** Learner negates only the first term of the subtracted polynomial, leaving subsequent terms unchanged. For example, (x²+3x+1)−(x²−2x+4) becomes x²+3x+1−x²−2x+4 instead of x²+3x+1−x²+2x−4.\n**Surface form:** \"p(x)−q(x): I put a minus in front of q and change the first term's sign.\"\n**Root cause:** The minus sign is treated as a prefix that modifies one term, not as multiplying the entire second polynomial by −1. Learner has not internalised that subtraction = adding the additive inverse of the WHOLE polynomial.\n**Trigger condition:** Any polynomial subtraction, especially when the second polynomial has three or more terms.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "FOIL-FOR-ALL-PRODUCTS",
+      "content": "### MC-3: FOIL-FOR-ALL-PRODUCTS\n**Description:** Learner applies FOIL (First-Outer-Inner-Last) mechanically to multiply polynomials when at least one factor has more than two terms, and either stops at 4 terms or misses cross-products.\n**Surface form:** \"(x+2)(x²−3x+5): FOIL gives x³−3x+2x²−6… wait, I'm confused.\"\n**Root cause:** FOIL is taught as a standalone rule for binomial×binomial, and learner never generalises it to the underlying distributive property. When the mnemonic doesn't apply, learner has no fallback method.\n**Trigger condition:** Any product where at least one factor has 3+ terms.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "Repair for MC-1 (UNLIKE-TERMS-COMBINE)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (UNLIKE-TERMS-COMBINE)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 116,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "Repair for MC-2 (SUBTRACTION-DISTRIBUTES-FIRST-TERM-ONLY)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (SUBTRACTION-DISTRIBUTES-FIRST-TERM-ONLY)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 179,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "Repair for MC-3 (FOIL-FOR-ALL-PRODUCTS)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (FOIL-FOR-ALL-PRODUCTS)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 197,
+        "endLine": 262
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Simplify: (3x²+2x−1)+(x²−5x+4).\"\n[Expected: (3+1)x²+(2−5)x+(−1+4) = 4x²−3x+3.]\n\n**Item 2:**\n\"Simplify: (4x³−2x+1)−(x³+x²−3x+5).\"\n[Expected: 4x³−2x+1−x³−x²+3x−5 = (4−1)x³+(−1)x²+(−2+3)x+(1−5) = 3x³−x²+x−4.]\n\n**Item 3:**\nTrue or False: \"x²+x = 2x³.\"\n[Expected: FALSE. x² and x are unlike terms (different degrees); they cannot be combined at all, and certainly not to produce a cubic term.]\n\n**Item 4:**\n\"Expand: (x+3)(x+4).\"\n[Expected: x²+4x+3x+12 = x²+7x+12. (FOIL or distributive property both work here.)]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Expand and simplify: (x²−2x+1)(x+3).\n\n(a) List all partial products.\n(b) Collect like terms and write the result in standard form.\n(c) Verify the degree of the result equals deg(x²−2x+1)+deg(x+3).\"\n\n[Expected:\n(a) x²·x=x³; x²·3=3x²; (−2x)·x=−2x²; (−2x)·3=−6x; 1·x=x; 1·3=3. Six partial products.\n(b) x³+(3x²−2x²)+(−6x+x)+3 = x³+x²−5x+3.\n(c) deg(x²−2x+1)=2, deg(x+3)=1; 2+1=3=deg(result) ✓.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (b) x³+x²−5x+3 is correct, 0 otherwise. (Minor arithmetic slip in one coefficient acceptable if method is correct and degree check (c) is valid.)\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can add, subtract (including full sign distribution), and multiply polynomials correctly; knows unlike terms don't combine; knows degree adds under multiplication.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 or Item 3 (unlike terms combined): → TA-B01 (UNLIKE-TERMS-COMBINE repair), then re-gate\n- FAIL on Item 2 (sign error in subtraction): → TA-B02 (SUBTRACTION-DISTRIBUTES-FIRST-TERM-ONLY repair), then re-gate\n- FAIL on Item 4 or P76 (multiplication error / wrong number of products): → TA-B03 (FOIL-FOR-ALL-PRODUCTS repair) if 3+ term polynomial involved; else re-demonstrate WE1; then re-gate\n- FAIL on multiple items: → B01 then B02; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to perform all three polynomial arithmetic operations correctly.\n\nKey anchors to carry forward:\n- Like terms only: same variable AND same exponent; x² and x are unlike and cannot combine.\n- Subtraction = add the negative: p−q = p+(−1)·q; every term of q changes sign.\n- Multiplication = distributive property: every term of first × every term of second; FOIL is a special case for binomials only.\n- Degree: deg(p+q) ≤ max(deg p, deg q); deg(p·q) = deg p + deg q.\n\nNext concept: math.alg.polynomial-division — dividing polynomials using long division and the Remainder Theorem.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 348,
+        "endLine": 441
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Simplify: (2x²+3x)+(x²−5x). Which terms can you combine?\" If the learner correctly identifies like terms (both x² terms, both x terms) and gets 3x²−2x, proceed to A01. If the learner attempts to combine x² and x, address MC-1 before starting.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): column layout — write polynomials aligned by degree (x³ column, x² column, x column, constant column); add within each column only.\n- Rung 2 (sign focus): given a subtraction problem, rewrite p(x)−q(x) as p(x)+(−1)·q(x), then negate every term of q.\n- Rung 3 (multiplication): use a grid (table) with one polynomial's terms as rows and the other's as columns; each cell is one partial product.\n\n**Pacing note:** h=8 estimated hours; A01 in session 1; A02 in sessions 2–3; A03 + mastery gate in sessions 4–5.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Compute (3x²−x+4)−(x²+2x−1) and (x−3)(2x²+x−5). Simplify fully.\"\n[Expected: subtraction: 2x²−3x+5. Product: 2x³+x²−5x−6x²−3x+15=2x³−5x²−8x+15.]\n\n**Day 10 prompt:**\n\"What is (x+a)(x+b) expanded? Now what is (x+a)³=(x+a)(x+a)² — expand step by step.\"\n[Expected: (x+a)(x+b)=x²+(a+b)x+ab. (x+a)²=x²+2ax+a². (x+a)³=(x+a)(x²+2ax+a²)=x³+2ax²+a²x+ax²+2a²x+a³=x³+3ax²+3a²x+a³ (binomial theorem for n=3).]\n\n**Day 30 prompt:**\n\"Prove or disprove: (p+q)²=p²+q² for polynomials p and q. Give a concrete counterexample if false.\"\n[Expected: FALSE. (p+q)²=(p+q)(p+q)=p²+2pq+q². The cross term 2pq is generally nonzero. Counterexample: p=x, q=1: (x+1)²=x²+2x+1≠x²+1. This is a polynomial identity version of the \"freshman's dream\" error (which holds in characteristic 2 but not over ℝ).]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 270,
+        "endLine": 288
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-operations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.polynomial-operations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.alg.polynomial — definition of polynomial, degree, like terms, standard form\n- math.alg.like-terms — combining like terms by adding coefficients when variables and exponents match\n\n**Unlocked blueprints:**\n- math.alg.polynomial-division — long division and synthetic division of polynomials\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-operations.md",
+        "startLine": 288,
+        "endLine": 301
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

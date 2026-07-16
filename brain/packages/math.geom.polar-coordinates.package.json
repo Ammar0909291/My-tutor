@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.polar-coordinates-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.polar-coordinates",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9c0d7df8314fd90af03b9a1161401a8c1c9440f052a456196e614db374b15aae",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.polar-coordinates.md": "sha256:a9a69a5f611c8f8eca245ede3ebd10f238df994e9094515993290f19bbb981d3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.polar-coordinates",
+    "name": "Polar Coordinates",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.geom.coordinate-plane",
+      "math.trig.trig-functions"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.polar-coordinates-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.polar-coordinates (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.polar-coordinates.md": "sha256:a9a69a5f611c8f8eca245ede3ebd10f238df994e9094515993290f19bbb981d3"
+      },
+      "contentHash": "sha256:a91a6453376313cc0dbbf4298f169ee0db7b0f37cdfe9aaf58f9c85496f68aae",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.polar-coordinates.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polar-coordinates.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polar-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polar-coordinates\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polar-coordinates.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polar-coordinates.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polar-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polar-coordinates\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polar-coordinates.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polar-coordinates.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polar-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polar-coordinates\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.polar-coordinates/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "Polar Coordinates — cognitive map",
+      "content": "**Core concept:** Polar coordinates describe the location of a point using distance r from the origin and angle θ from the positive x-axis (measured counter-clockwise). The Cartesian-polar conversion formulas are: x=r cos θ, y=r sin θ (polar→Cartesian); r=√(x²+y²), θ=arctan(y/x) with quadrant adjustment (Cartesian→polar). Negative r is valid: (−r, θ) denotes the same point as (r, θ+π). Polar representation is non-unique: (r, θ) and (r, θ+2πn) describe the same point; so do (−r, θ+π).\n\n**Conceptual progression:**\n1. Polar grid: concentric circles (constant r), rays from origin (constant θ). A point P=(r,θ) lies at distance r on the ray at angle θ.\n2. Cartesian conversion: x=r cos θ, y=r sin θ. Inverse: r=√(x²+y²), θ chosen by quadrant (atan2 function).\n3. Negative r: reflects through the origin. (−2, π/4) = (2, π/4+π) = (2, 5π/4).\n4. Non-uniqueness: infinitely many polar pairs for each point. Standardise: r≥0 and θ∈[0,2π) for a canonical form.\n5. Geometric interpretation: circles centred at origin have equation r=c; rays have equation θ=α. Comparing to Cartesian: x²+y²=c² (circle), y=x tan α (ray) — polar is simpler for these.\n\n**CPA arc (entry: C — advanced difficulty):**\n- Concrete: navigator/radar analogy — a ship's radar gives bearing (angle) and range (distance), not x/y grid coordinates. Polar coordinates are the natural language of direction and distance.\n- Pictorial: polar grid with key points plotted; Cartesian grid with the same points; conversion diagram.\n- Abstract: (r,θ) ↔ (r cos θ, r sin θ); r²=x²+y².\n\n**Prior knowledge activated:** coordinate-plane (math.geom.coordinate-plane) — Cartesian system, quadrant location; trig functions (math.trig.trig-functions) — sin, cos, tan as real-valued functions; arc-length of a circle; distance formula.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "POLAR-POINT-AS-CARTESIAN [FOUNDATIONAL]",
+      "content": "### MC-1: POLAR-POINT-AS-CARTESIAN [FOUNDATIONAL]\n**Description:** Learner plots (r,θ) as if it were (x,y) in a Cartesian grid — treats r as the horizontal coordinate and θ as the vertical coordinate. A point (3, π/2) is plotted at Cartesian (3, π/2≈1.57) instead of at Cartesian (0,3).\n**Surface form:** \"The point (3, π/2) goes 3 units right and π/2 units up.\"\n**Root cause:** Coordinate pair notation (a,b) always meant (x,y) in Cartesian work. The learner does not recognise that in polar notation the same format encodes a completely different location scheme.\n**Trigger condition:** Any plotting or interpretation of a polar point.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "NEGATIVE-R-IS-UNDEFINED",
+      "content": "### MC-2: NEGATIVE-R-IS-UNDEFINED\n**Description:** Learner rejects negative r values as meaningless or invalid, either skipping them or setting r=|r|, thereby misplotting or misidentifying the point.\n**Surface form:** \"r can't be negative — distance is always positive. So (−2, π/6) doesn't exist.\"\n**Root cause:** Distance in Cartesian geometry is always non-negative (r=√(x²+y²)≥0). The convention of allowing negative r as \"extend backward through the origin\" was never introduced.\n**Trigger condition:** Any polar point or equation with negative r.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "UNIQUE-POLAR-REPRESENTATION",
+      "content": "### MC-3: UNIQUE-POLAR-REPRESENTATION\n**Description:** Learner believes each point has exactly one polar representation, analogous to Cartesian uniqueness. Fails to recognise that adding 2π to θ, or negating r and adding π to θ, gives the same point.\n**Surface form:** \"The polar form of (0,3) is (3, π/2). It can't also be (3, 5π/2) — that's a different representation.\"\n**Root cause:** In Cartesian coordinates, each point has exactly one ordered pair (x,y). The learner applies this uniqueness assumption to polar coordinates without noticing the angular periodicity and the (−r, θ+π) equivalence.\n**Trigger condition:** Any problem asking for all polar representations, or any equation with multiple solution angles.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "Repair for MC-1 (POLAR-POINT-AS-CARTESIAN)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (POLAR-POINT-AS-CARTESIAN)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 117,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "Repair for MC-2 (NEGATIVE-R-IS-UNDEFINED)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (NEGATIVE-R-IS-UNDEFINED)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 172,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "Repair for MC-3 (UNIQUE-POLAR-REPRESENTATION)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (UNIQUE-POLAR-REPRESENTATION)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 230,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.75 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Convert the polar point (6, π/3) to Cartesian coordinates.\"\n[Expected: x=6 cos(π/3)=6·(1/2)=3; y=6 sin(π/3)=6·(√3/2)=3√3. Cartesian: (3, 3√3).]\n\n**Item 2:**\n\"Convert the Cartesian point (0,−5) to polar form with r>0 and θ∈[0,2π).\"\n[Expected: r=5; (0,−5) is on the negative y-axis: θ=3π/2. Polar: (5, 3π/2).]\n\n**Item 3:**\n\"Where is the polar point (−3, π/4)? Give the equivalent positive-r polar form.\"\n[Expected: Negative r: reflect through origin. θ=π/4+π=5π/4. Positive-r form: (3, 5π/4). Cartesian: x=3 cos(5π/4)=3·(−√2/2)=−3√2/2; y=3 sin(5π/4)=−3√2/2.]\n\n**Item 4:**\nTrue or False: \"Every point has exactly one polar representation.\"\n[Expected: FALSE. Adding 2πn to θ or using (−r, θ+π) gives alternative valid representations of the same point. Only a canonical convention (r≥0, θ∈[0,2π)) ensures uniqueness.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (cross-link probe: math.cx.complex-numbers-analysis)\n\n\"The complex number z = 1+i can be written in polar form r(cos θ + i sin θ), where r is the modulus and θ is the argument.\n\n(a) Find r = |z| and θ = arg(z) for z=1+i.\n(b) Write z in polar form.\n(c) How does (r, θ) here correspond to the polar coordinate (r, θ) of the point (1, 1) in the Cartesian plane?\n(d) Compute z² using the polar form and verify with direct multiplication.\"\n\n[Expected:\n(a) r=|1+i|=√(1²+1²)=√2. θ=arctan(1/1)=π/4 (Q1). arg(z)=π/4.\n(b) z=√2(cos(π/4)+i sin(π/4)).\n(c) The Cartesian coordinates of z are (Re(z), Im(z))=(1,1). The polar coordinate (r,θ)=(√2, π/4) describes the same point (1,1) in the coordinate plane — the complex number's polar form IS the polar coordinate representation of the point (a,b) when z=a+bi.\n(d) z²: r²=2; θ doubled=π/2. z²=2(cos(π/2)+i sin(π/2))=2(0+i)=2i. Verify: (1+i)²=1+2i+i²=1+2i−1=2i ✓.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (a) gives r=√2 and θ=π/4, (b) is correct, (c) correctly identifies the connection between complex polar form and geometric polar coordinates, and (d) gives z²=2i; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (≥4/5): Learner can convert in both directions, handle negative r, recognise non-uniqueness, and connect polar coordinates to complex polar form.\n- FAIL (<4/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 (plots as Cartesian): → TA-B01 (POLAR-POINT-AS-CARTESIAN), then re-gate\n- FAIL on Item 3 (rejects negative r or mishandles it): → TA-B02 (NEGATIVE-R-IS-UNDEFINED), then re-gate\n- FAIL on Item 4 (TRUE): → TA-B03 (UNIQUE-POLAR-REPRESENTATION), then re-gate\n- FAIL on Item 2 (wrong θ quadrant): → return to A02; re-drill Cartesian-to-polar quadrant analysis; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 4/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to convert between polar and Cartesian coordinates, handle negative r and non-unique representations, and connect polar coordinates to complex polar form.\n\nKey anchors to carry forward:\n- Polar → Cartesian: x=r cos θ, y=r sin θ.\n- Cartesian → Polar: r=√(x²+y²); θ from atan2(y,x) with quadrant adjustment.\n- Negative r: (−r,θ)=(r,θ+π). Walk backward = flip the direction.\n- Non-uniqueness: (r,θ) = (r,θ+2πn) = (−r,θ+(2n+1)π).\n- Complex connection: z=a+bi has modulus r=|z| and argument θ=arg(z); polar form z=r(cos θ+i sin θ) exactly mirrors the polar coordinate (r,θ) of the point (a,b).\n\nNext concepts: math.geom.polar-curves (roses, limaçons, spirals), math.cx.complex-numbers-analysis (De Moivre's theorem, complex multiplication in polar form).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 336,
+        "endLine": 432
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"A point P is at distance 5 from the origin and at angle 60° from the positive x-axis. What are its Cartesian coordinates?\" If the learner applies x=5 cos 60°=5/2 and y=5 sin 60°=5√3/2 correctly, proceed to A01. This confirms conversion formula readiness.\n\n**Scaffolding ladder:**\n- Rung 1 (concrete): radar screen with two ships described by (range, bearing) — show that (3, 30°) is not the same as Cartesian point (3, 30).\n- Rung 2 (pictorial): polar grid with key points annotated; learner maps each to the Cartesian grid by conversion.\n- Rung 3 (full apply): learner converts in both directions and handles negative r and equivalent representations.\n\n**Pacing note:** h=8 estimated hours; A01 in sessions 1–2; A02 in sessions 3–4; A03 + mastery gate in sessions 4–5.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Convert the polar equation r=4 sin θ to a Cartesian equation and identify the curve.\"\n[Expected: Multiply both sides by r: r²=4r sin θ. Substitute: x²+y²=4y → x²+y²−4y=0 → x²+(y−2)²=4. A circle centred at (0,2) with radius 2.]\n\n**Day 10 prompt:**\n\"Find all polar representations of the origin (0,0).\"\n[Expected: The origin has r=0 for any θ. So (0,θ) for any real θ represents the origin. It has infinitely many polar representations — uniqueness fails most severely at the origin.]\n\n**Day 30 prompt:**\n\"Show that the polar curve r=cos θ is a circle. Find its Cartesian equation and state the centre and radius.\"\n[Expected: Multiply both sides by r: r²=r cos θ. So x²+y²=x → x²−x+y²=0 → (x−1/2)²+y²=1/4. Circle centred at (1/2, 0) with radius 1/2.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 259,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "math.geom.polar-coordinates/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.polar-coordinates",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.geom.coordinate-plane — Cartesian system, plotting, distance formula, quadrant identification; polar coordinates extend this system\n- math.trig.trig-functions — sin and cos as functions of angle; without these, the conversion x=r cos θ, y=r sin θ cannot be applied\n\n**Unlocked blueprints:**\n- math.geom.polar-curves — graphs of polar equations (spirals, roses, limaçons); require fluent polar-Cartesian conversion and non-uniqueness understanding\n- math.cx.complex-numbers-analysis — complex polar form r(cos θ+i sin θ); (r,θ) in polar coordinates is exactly the modulus and argument of a complex number\n\n**Cross-links:** math.cx.complex-numbers-analysis (TIER 1) — P76 cross-link probe.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-coordinates.md",
+        "startLine": 277,
+        "endLine": 291
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,398 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.proof-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.proof",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:036047a1638aff441fbb0d851e8017f1c6904686167c818c09c713b069d7d91d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.proof.md": "sha256:72c4b9185f5d56a9e2cede3f793b744fdb6cf53a6bdada4edd02955fd6a26236"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.found.proof",
+    "name": "Mathematical Proof",
+    "difficultyRaw": "developing",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 20,
+    "prerequisites": [
+      "math.found.logic",
+      "math.found.rules-of-inference"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.proof-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.proof (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.proof.md": "sha256:72c4b9185f5d56a9e2cede3f793b744fdb6cf53a6bdada4edd02955fd6a26236"
+      },
+      "contentHash": "sha256:5e30bdb9bae694423da46fc6907dc7101392f3b01c3b9ba68ac5464337b0edd1",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.proof.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof.md#TA-B02 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.proof/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.proof",
+      "title": "Mathematical Proof — cognitive map",
+      "content": "**Core concept:** A mathematical proof is a finite sequence of logically valid steps that establishes the truth of a mathematical statement with certainty, starting from axioms or previously proven results. Proofs are not explanations or demonstrations — they are rigorous logical arguments where every step follows from the previous by a valid inference rule.\n\n**Conceptual progression:**\n1. What a proof is: a finite, formal, logical chain from known truths to a new conclusion.\n2. What a proof is NOT: checking examples, appealing to intuition, or informal explanation.\n3. Direct proof: assume P, apply definitions and theorems, derive Q.\n4. Proof by contradiction: assume P and ¬Q, derive a logical contradiction (proving Q must be true).\n5. Proof by induction: base case + inductive step (deferred — see math.found.theorem for induction details).\n6. Structural requirements: each step cites its justification (definition, axiom, hypothesis, or previously proven result).\n\n**CPA arc (entry: C):**\n- Concrete: argument chains using familiar facts — number parity, set membership, simple geometry; learner manually checks each step\n- Pictorial: proof diagrams showing logical flow; annotated proofs with justifications highlighted; \"broken proof\" exercises where learner spots missing or invalid steps\n- Abstract: formal two-column proofs (statement | justification); paragraph proofs with explicit connectives; symbolic logic notation\n\n**Prior knowledge activated:** propositional logic (P → Q, ¬P, P ∧ Q, P ∨ Q); rules of inference (modus ponens, modus tollens, hypothetical syllogism); definitions of even/odd integers; set membership notation\n\n**Threshold concept:** The difference between a proof and a convincing argument. Many arguments that feel convincing (examples, analogies, diagrams) are not proofs. A proof eliminates ALL doubt by proceeding step-by-step from undeniable foundations.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 20,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.found.proof/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.proof",
+      "title": "PROOF-BY-EXAMPLE [FOUNDATIONAL]",
+      "content": "### MC-1: PROOF-BY-EXAMPLE [FOUNDATIONAL]\n**Description:** Learner checks a universal statement for several cases and claims \"proven.\"\n**Surface form:** \"I checked n=1,2,3,4,5 and n²+n is even each time, so it's always even.\"\n**Root cause:** Conflates \"consistent with\" and \"proven\"; has not internalised that a universal statement (∀n …) requires an argument that works for ALL n, not merely many.\n**Trigger condition:** Any problem asking for a proof of a statement involving \"for all\" or \"always.\"\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.proof/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.proof",
+      "title": "CIRCULAR-REASONING",
+      "content": "### MC-2: CIRCULAR-REASONING\n**Description:** Learner uses the conclusion as a step in the proof.\n**Surface form:** To prove n²+n is even, writes \"n²+n is divisible by 2, so n²+n is even\" — uses the conclusion to establish itself.\n**Root cause:** Does not distinguish between what is GIVEN and what is TO BE SHOWN; may confuse \"restating\" with \"proving.\"\n**Trigger condition:** Any proof where the desired conclusion appears in the proof body before being established.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.proof/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.proof",
+      "title": "ALGEBRA-WITHOUT-JUSTIFICATION",
+      "content": "### MC-3: ALGEBRA-WITHOUT-JUSTIFICATION\n**Description:** Learner produces a sequence of algebraic manipulations without citing why each step is valid, presenting algebra as a self-sufficient proof.\n**Surface form:** Writes a chain of equalities with no explanations, no definitions invoked, no logical connectives.\n**Root cause:** Has seen algebra used to \"show\" things but has not learned to annotate: which step invokes which definition/axiom/theorem.\n**Trigger condition:** Any proof requiring algebraic manipulation combined with a definition or theorem.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.proof/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof",
+      "title": "What Proof Is (and Is Not)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"What Proof Is (and Is Not)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 87,
+        "endLine": 118
+      }
+    },
+    {
+      "assetId": "math.found.proof/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof",
+      "title": "Direct Proof Structure",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Direct Proof Structure\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 118,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "math.found.proof/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof",
+      "title": "Proof by Contradiction",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Proof by Contradiction\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 160,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "math.found.proof/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 191,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "math.found.proof/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof",
+      "title": "Repair: Proof-by-Example / Failure to Generalise",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: Proof-by-Example / Failure to Generalise\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 241,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "math.found.proof/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof",
+      "title": "Repair: Circular Reasoning / Algebra-Without-Justification",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: Circular Reasoning / Algebra-Without-Justification\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 257,
+        "endLine": 365
+      }
+    },
+    {
+      "assetId": "math.found.proof/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.proof",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A04 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 75% → PASS requires ⌈0.75 × 5⌉ = 4/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: Identify the error: \"I verified n²+n is even for n=1,2,3,4,5. Therefore it is always even.\" [Answer: proof by example — only checks 5 of infinitely many cases; does not constitute a proof for all integers]\n\nItem 2: Prove directly: if n is even, then n² is even. [Answer: let n=2k; n²=4k²=2(2k²); 2k² is an integer; n² is even. □]\n\nItem 3: True or False — in a proof by contradiction, you begin by assuming the NEGATION of the conclusion. [Answer: TRUE]\n\nItem 4: Complete the following proof step: \"Let n be an even integer. By definition of even, n = ___, where ___ is an integer.\" [Answer: n = 2k, where k is an integer]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (independence mode — cross_links: []):**\nProve that the sum of two odd numbers is even. Write a complete direct proof with all steps justified.\n\nModel proof:\nStep 1: Let a and b be odd integers. [Hypothesis]\nStep 2: By definition of odd: a=2j+1 and b=2k+1 for integers j,k. [Definition of odd]\nStep 3: a+b = (2j+1)+(2k+1) = 2j+2k+2 = 2(j+k+1). [Algebra]\nStep 4: j+k+1 is an integer (integers are closed under addition). [Closure of ℤ]\nStep 5: a+b = 2·(j+k+1) has the form 2·(integer). [From Steps 3–4]\nStep 6: By definition of even, a+b is even. □ [Definition of even]\n\nMarking rubric: full marks if all 6 logical elements appear (hypothesis, both definitions, algebra, closure citation, conclusion). Partial if 4–5 elements present. Fail if proof-by-example used or conclusion assumed.\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score ≥ 4/5 → PASS → P78 COMPLETION\n- Score < 4/5 → FAIL → Route to TA-B01 (proof-by-example / structural errors) or TA-B02 (circular reasoning / missing justification)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Mathematical proof: mastered. You can distinguish valid proofs from proof-by-example and circular reasoning, write complete direct proofs with step-by-step justifications, construct proof-by-contradiction arguments, and annotate each proof step with its logical basis. This is the foundation for all formal mathematics.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 191,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "math.found.proof/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.proof",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** \"Why is checking n=1,2,3 for a statement about 'all integers n' not a proof?\" If learner correctly identifies that it doesn't cover all cases → begin TA-A01. If learner says it is enough → flag MC-1 for TA-B01.\n\n**Scaffolding ladder:**\n1. Identify valid vs. invalid proof steps (spot-the-error exercises)\n2. Annotate a given proof with justifications for each step\n3. Complete a partially-written direct proof by filling in the missing steps\n4. Write a complete direct proof from scratch\n5. Construct a proof by contradiction for a simple claim\n\n**Pacing gate:** Must score ≥ 4/5 on P91 to earn mastery credit (MAMR = 75%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 68,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.found.proof/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.proof",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.found.proof\n  MAMR: 0.75\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"Write a direct proof that if n is odd, then n² is odd.\"\n  session_3_probe: \"Spot the flaw: 'To prove √2 is irrational, note that √2≈1.414, which cannot be expressed as p/q.'\"\n  session_7_probe: \"Prove by contradiction that there is no largest prime.\"\n  session_14_probe: \"Prove that the product of an even and an odd integer is even.\"\n  session_30_probe: \"What is the difference between a proof and a convincing informal argument? Why does mathematics require the former?\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 270,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "math.found.proof/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.proof",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.found.logic — propositional logic; P→Q, negation, conjunction, disjunction [BLUEPRINT EXISTS]\n- math.found.rules-of-inference — modus ponens, modus tollens, hypothetical syllogism [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.found.theorem — theorems are statements established by proof\n- math.found.axiom — axioms are the starting points that proofs build on\n\n**Cross-links:** [] — no Tier 1 cross-links.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented.\n**GR-9 satisfied:** P76 independence mode applied (cross_links empty).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof.md",
+        "startLine": 286,
+        "endLine": 303
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

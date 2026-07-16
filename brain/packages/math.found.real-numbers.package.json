@@ -1,0 +1,344 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.real-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.real-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:72706f6cbdd9c4e9729d1e460f5e4396c97ff2d6d8060978fab52cf756c787e3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.real-numbers.md": "sha256:ff2155079a097a71b78ccd746d1725ef1e931ee14e3547c2b08aba5f5c5a2d28"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.real-numbers",
+    "name": "Real Numbers",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.irrational-numbers",
+      "math.found.rational-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.real-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.real-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.real-numbers.md": "sha256:ff2155079a097a71b78ccd746d1725ef1e931ee14e3547c2b08aba5f5c5a2d28"
+      },
+      "contentHash": "sha256:5754672a09193eab6f79bae120530289df9e5b0a06711548e9eca16ea236f29e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.real-numbers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.real-numbers.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.real-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.real-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.real-numbers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.real-numbers.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.real-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.real-numbers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.real-numbers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.real-numbers.md#TA-A03 (addresses MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.real-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.real-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.real-numbers.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.real-numbers.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.real-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.real-numbers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.real-numbers/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.real-numbers",
+      "title": "Real Numbers — cognitive map",
+      "content": "### Core Insight\nThe real numbers ℝ are the unique complete ordered field: they contain all rationals and irrationals, they are ordered in the familiar way, and — crucially — they have no gaps. The completeness property (every bounded non-empty subset has a least upper bound) is what separates ℝ from ℚ and is what makes calculus possible.\n\n### Conceptual Hierarchy\n```\nLevel 0 (Concrete): Specific reals on a number line: −3, 0, ½, √2, π, e.\nLevel 1 (Pictorial): The number line as a complete continuum; ℚ as dense but gapped; ℝ as gapless.\nLevel 2 (Abstract): ℝ = ℚ ∪ (ℝ\\ℚ); completeness property; ordered field axioms.\nLevel 3 (Transfer): Why ℝ's completeness allows limits to converge;\n                    the sequence 1, 1.4, 1.41, 1.414, … converges in ℝ but has no limit in ℚ.\n```\n\n### Key Facts About ℝ\n```\nContainment: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ.\n\nComponents of ℝ:\n  Rational numbers ℚ: numbers expressible as p/q, p∈ℤ, q∈ℤ\\{0}.\n    Examples: −3, 0, 1/2, 0.333…=1/3, 2.5=5/2.\n  Irrational numbers ℝ\\ℚ: reals not expressible as p/q.\n    Examples: √2, π, e, √3, ln 2.\n  Every real number has an infinite decimal expansion:\n    Rational ↔ eventually repeating decimal.\n    Irrational ↔ non-repeating, non-terminating decimal.\n\nCompleteness Property (Least Upper Bound / LUB):\n  If A ⊆ ℝ is non-empty and bounded above, then sup A ∈ ℝ exists.\n  (ℚ fails: A = {q ∈ ℚ : q² < 2} is bounded above but has no sup in ℚ.)\n\nDensity: Between any two distinct reals a < b, there exist:\n  • A rational r with a < r < b.\n  • An irrational s with a < s < b.\n\nOrder: ℝ is totally ordered (for any a, b: a < b or a = b or a > b).\n```\n\n### Why ℝ ≠ \"Just Long Decimals\"\n```\nA decimal representation is a NAME for a real number, not the number itself.\nThe same real number has multiple representations:\n  0.999… = 1  (same real, different decimal string)\n  0.5 = 0.4999… (same real, different decimal string)\nThe real number system is defined by its algebraic and order properties,\nnot by the notation used to write its elements.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 36,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.real-numbers",
+      "title": "[FOUNDATIONAL]: REAL-IS-DECIMAL",
+      "content": "### MC-1 [FOUNDATIONAL]: REAL-IS-DECIMAL\n**Belief:** Real numbers are numbers that have decimal points, or are \"numbers you can write as decimals.\" Integers and fractions are not \"really\" real numbers; reals are a special extra category.\n**Origin:** The phrase \"real number\" sounds like a category distinct from integers/fractions; the decimal representation of √2 or π reinforces the idea that reals are \"decimal numbers.\"\n**Trigger:** \"Is 7 a real number?\" → student says no, or \"Is 1/3 a real number?\" → student says no.\n**Repair:** Every integer is real (7=7.000…), every rational is real (1/3=0.333…). ℝ is the union, not a separate category. \"Real\" contrasts with \"complex,\" not with \"integer.\"\n**Priority:** FOUNDATIONAL — misidentifying which numbers are real blocks every downstream concept.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.real-numbers",
+      "title": "RATIONAL-IS-COMPLETE",
+      "content": "### MC-2: RATIONAL-IS-COMPLETE\n**Belief:** The rational numbers ℚ are already \"complete\" — fractions can be made as precise as needed, so there are no gaps.\n**Origin:** Students know ℚ is dense (there's a rational between any two rationals), and confuse density with completeness.\n**Trigger:** \"Is there a gap in ℚ?\" → student says no because \"you can always find a fraction in between.\"\n**Repair:** Density ≠ completeness. The set A={q∈ℚ: q²<2} is bounded above (e.g., by 2) but has no least upper bound in ℚ — √2 is the supremum, and √2 ∉ ℚ. ℚ is dense but gapped.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.real-numbers",
+      "title": "IRRATIONALS-ARE-RARE",
+      "content": "### MC-3: IRRATIONALS-ARE-RARE\n**Belief:** Irrational numbers like √2, π, e are rare special cases; \"most\" real numbers are rational.\n**Origin:** Students encounter specific named irrationals and form the impression that irrationals are exceptional.\n**Repair:** The opposite is true in a precise sense: the rationals occupy \"measure zero\" of the real line — almost every real number is irrational. Named irrationals are just the memorable ones.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 16,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.real-numbers",
+      "title": "Concrete Foundation — ℝ Is the Entire Number Line",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Foundation — ℝ Is the Entire Number Line\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 137,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.real-numbers",
+      "title": "Completeness — What ℚ Is Missing",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Completeness — What ℚ Is Missing\",\"primitives\":[\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 202,
+        "endLine": 280
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.real-numbers",
+      "title": "The Real Line — Density, Decimal Expansions, and Irrationals",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Real Line — Density, Decimal Expansions, and Irrationals\",\"primitives\":[\"P04\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 280,
+        "endLine": 352
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.real-numbers",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 352,
+        "endLine": 657
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.real-numbers",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "### TA-A04: Mastery Gate (P91 Terminal)\n\n```\nP77 — MULTI-PROBLEM SET (4 problems)\n\nProblem 1:\n\"For each number, state all applicable categories (natural, integer, rational, irrational, real):\n  (a) −√16    (b) 0.272727… (= 3/11)    (c) ∛7    (d) 0\"\n\nProblem 2:\n\"Let A = {q ∈ ℚ : q³ < 5}.\n(a) Is A non-empty? (b) Is A bounded above in ℝ? (c) State sup A in ℝ.\n(d) Is sup A ∈ ℚ? What does this demonstrate about ℚ?\"\n\nProblem 3:\n\"True or false: Between any two distinct rational numbers there is an irrational number.\nJustify.\"\n[True. Given a < b in ℚ, a + (b−a)/√2 is irrational and lies in (a,b) when (b−a)/√2 < b−a.\n Simpler: a+√2(b−a)/2 ∈ (a,b) and is irrational since √2 is irrational.]\n\nProblem 4:\n\"A student says: '0.999… and 1 are different real numbers because one has a 9 after the decimal\nand the other doesn't.' Is the student correct? Explain using the definition of real numbers.\"\n[Incorrect. 0.999… = 1 as real numbers. The same real number has multiple decimal representations.\n Proof: let x=0.999…; then 10x=9.999…; so 10x−x=9; so 9x=9; x=1.]\n```\n\n```\nP55 — SCORE (after P77)\nAward 1 point per problem.\nRunning total before P76: __/4.\n```\n\n```\nP76 — TRANSFER PROBE (cross-link: math.calc.limits — Tier 1)\n\"In calculus, lim[n→∞] aₙ = L means: for every ε > 0, there exists N such that\nfor all n > N, |aₙ − L| < ε.\n\nConsider the sequence aₙ = (1 + 1/n)ⁿ.\nThe first few terms are: a₁=2, a₂=2.25, a₃≈2.370, a₄≈2.441, a₁₀₀≈2.705.\n\n(a) Each term aₙ is rational (it's a finite power of rational numbers). True or false?\n(b) The sequence is increasing and bounded above (by 3, for example). Using ℝ's\n    completeness property, what can you conclude about lim[n→∞] aₙ?\n(c) The limit is e ≈ 2.71828… Is e rational?\n(d) In one sentence: why is ℝ the natural setting for limits, rather than ℚ?\"\n\n[Expected:\n(a) TRUE — each aₙ = (1+1/n)ⁿ where 1+1/n ∈ ℚ and the power is a natural number.\n(b) Completeness guarantees that any bounded monotone sequence in ℝ converges.\n    So lim aₙ exists in ℝ.\n(c) No — e is irrational (transcendental). The limit is NOT rational.\n(d) ℝ is the natural setting because completeness guarantees limits of bounded\n    sequences exist, even when those limits are irrational.]\n```\n\n```\nP55 — SCORE (after P76)\nAward 1 point for P76.\nRunning total: __/5.\n```\n\n```\nP75 — MASTERY ASSESSMENT\nPass criterion: 5 out of 5 (⌈0.85 × 5⌉ = 5)\n```\n\n```\nP55 — SCORE (final)\nRecord pass/fail status.\n```\n\n```\nP74 — ROUTING DECISION\nScore = 5/5 → MASTERY ACHIEVED → P78 COMPLETION\nScore < 5/5 → NEEDS REVIEW → identify lowest-scoring item; activate Protocol B for its misconception\n```\n\n```\nP55 — SCORE (routing recorded)\n```\n\n```\nP78 — COMPLETION\n\"Real numbers checkpoint complete. You have established:\n  • ℝ = ℚ ∪ (ℝ\\ℚ): the complete union of rationals and irrationals.\n  • Every integer, fraction, and named irrational (√2, π, e) is a real number.\n  • Completeness: every bounded non-empty subset of ℝ has a supremum in ℝ.\n  • ℚ is dense but not complete; ℝ fills ℚ's gaps (e.g., √2, √3, e ∈ ℝ\\ℚ).\n  • Decimal representation is a name for a real number, not its definition.\nNext concepts: math.calc.limits (why completeness makes limits well-defined),\nmath.func.real-valued-function (functions mapping into ℝ).\"\n```\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair Chains)\n\n### Repair Chain B-1: REAL-IS-DECIMAL (MC-1 FOUNDATIONAL)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: 'Real numbers' = numbers with decimal points (a special category).\n AFTER: 'Real numbers' = all numbers on the number line.\n\nThe hierarchy is:\n  ℕ (natural: 1,2,3,…) ⊂ ℤ (integers) ⊂ ℚ (rationals) ⊂ ℝ (reals)\n\nEvery natural number IS a real number. Every integer IS a real number.\nEvery rational IS a real number. Every irrational IS a real number.\n'Real' contrasts with 'imaginary' (from complex numbers ℂ), not with 'rational.'\n\nMnemonic: REAL = RULER — every point on a number line is real.\"\n\nRepair exercise:\nPlace each on the number line: −4, 0, 7/2, −√25, π.\n[−4: left of 0; 0: origin; 7/2=3.5: between 3 and 4;\n −√25=−5: left of −4; π≈3.14: between 3 and 4 to the left of 7/2]\nConfirm each is a real number.\n\nExit gate: \"Name one integer that is not a real number.\"\nExpected: \"No such integer exists — all integers are real.\"\n→ Correct: return to TA-A01 P49 re-attempt.\n→ Incorrect: revisit containment diagram ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ.\n```\n\n### Repair Chain B-2: RATIONAL-IS-COMPLETE (MC-2)\n\n```\nP41 — MISCONCEPTION DETECTOR\nDiagnostic: \"Does the set {q ∈ ℚ : q < √2} have a least upper bound in ℚ?\"\nIf student says YES: MC-2 confirmed.\n\nP27 — MISCONCEPTION NAMING\n\"RATIONAL-IS-COMPLETE: confusing DENSITY with COMPLETENESS.\nDense: between any two rationals, another rational exists. (TRUE for ℚ)\nComplete: every bounded non-empty subset has a supremum. (FALSE for ℚ)\nDense subsets of ℝ are NOT automatically complete.\"\n\nP03 — ANALOGY BRIDGE\n\"A dense fog fills a room but not every point — there are gaps between\nindividual fog particles even though they appear continuous.\nℚ is like a dense fog: it appears to fill the line, but √2 is a gap that\nno rational number can plug.\"\n\nRepair exercise: show that no rational r satisfies r = sup{q∈ℚ: q²<2}.\n  If r < √2: r²<2, so r ∉ upper bounds (elements of A exceed r).\n  If r > √2: r²>2, and there's a smaller upper bound between √2 and r.\n  Only √2 is the least upper bound, but √2 ∉ ℚ.\n\nExit gate: \"Name the supremum of {q∈ℚ: q²<2} and state whether it's in ℚ.\"\nExpected: sup = √2, which is NOT in ℚ.\n→ Correct: return to TA-A02.\n```\n\n### Repair Chain B-3: IRRATIONALS-ARE-RARE (MC-3)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: Irrationals (√2, π, e) are rare exceptions.\n AFTER: Irrationals are overwhelmingly MORE common than rationals.\n\nℚ is countable (can be listed: 1/1, 1/2, 2/1, 1/3, 3/1, …).\nℝ is uncountable (Cantor's diagonal argument).\nSo ℝ\\ℚ (irrationals) = ℝ minus a countable set = still uncountable.\n\nIntuition: Pick a 'random' real number — the probability that it is rational\nis 0 (measure-theoretic sense). Named irrationals are memorable, not numerous.\"\n\nExit gate: \"Is the set of irrational numbers larger, smaller, or the same size\nas the set of rational numbers?\" (in cardinality sense)\nExpected: LARGER — irrationals are uncountable, rationals are countable.\n→ Correct: return to TA-A03.\n```\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n```\nP89 — SPACED REPETITION\nReview schedule for math.found.real-numbers:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State the completeness property of ℝ in one sentence.\n  Give one example of a set that demonstrates ℚ is NOT complete.\"\n  Target: LUB property; A = {q∈ℚ:q²<2}, sup = √2 ∉ ℚ.\n\nInterval 2 (3 days):\n  Application: \"Is the set {x ∈ ℝ : x² < 7} bounded above? What is its supremum?\n  Is the supremum in ℚ?\"\n  Target: bounded above by 3; sup = √7; √7 ∉ ℚ (irrational).\n\nInterval 3 (7 days):\n  Transfer: \"The sequence 3, 3.1, 3.14, 3.141, 3.1415, … converges to π.\n  (a) Are all terms rational? (b) Is the limit in ℚ? (c) Is the limit in ℝ?\n  (d) What property of ℝ guarantees the limit exists?\"\n  Target: (a) YES; (b) NO (π irrational); (c) YES; (d) completeness.\n\nInterval 4 (21 days):\n  Integration: \"A student in math.calc.limits asks: 'Why do we define limits using\n  ℝ and not ℚ?' Explain using the completeness property and a concrete example.\"\n  Target: ℚ not complete → sequences with irrational limits diverge in ℚ;\n    ℝ is complete → all Cauchy sequences converge; limits are well-defined in ℝ.\n```\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### GR-8: Cross-link documentation\n```\nIncoming prerequisites:\n  math.found.rational-numbers → Defines ℚ = {p/q : p,q ∈ ℤ, q≠0};\n    density of ℚ; decimal representation of rationals.\n  math.found.irrational-numbers → Defines ℝ\\ℚ; examples (√2, π, e);\n    irrationality proofs (√2 proof by contradiction).\n\nOutgoing unlocks:\n  math.func.real-valued-function → Functions f: D → ℝ require ℝ as codomain.\n  math.calc.limits → Limit theory depends on ℝ's completeness;\n    sequences converge in ℝ because of LUB.\n  math.real.completeness → Formal study of suprema, infima, Cauchy sequences.\n\nCross-linked (non-prerequisite):\n  math.calc.limits (Tier 1) → Used in P76 probe: sequence (1+1/n)ⁿ → e;\n    completeness guarantees limit; limit is irrational.\n  math.real.completeness (NOT Tier 1) → Formal deepening of the LUB property.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.calc.limits, math.real.completeness]\nmath.calc.limits IS in Tier 1 set → P76 CROSS-LINK PROBE\nmath.real.completeness NOT in Tier 1 → ignore for P76 mode\n\nP76 probe: sequence (1+1/n)ⁿ → e; each term rational; limit irrational;\n  completeness guarantees limit exists in ℝ; bridges to math.calc.limits.\n```\n\n---\n\n\n## Component 8 — Teaching Notes\n\n### Pedagogical Rationale\nReal numbers (bloom=understand) requires students to understand what ℝ is, not just compute with real numbers. The critical understanding is two-fold: (1) ℝ is the umbrella containing ALL types of numbers students have encountered, and (2) the completeness property is what makes ℝ different from ℚ and what makes calculus possible.\n\n### Common Session Failure Modes\n1. **MC-1 is the entry blocker:** Students who think \"real\" means \"decimal\" cannot correctly classify integers as real numbers. The B-1 repair chain must resolve this before TA-A02's completeness discussion.\n2. **Completeness is abstract:** The ℚ gap example with √2 is the single most effective concrete illustration. Spend time on it — if students understand why {q∈ℚ:q²<2} has no supremum in ℚ, the completeness concept crystallises.\n3. **The sequence-to-limit bridge (TA-A03):** The sequence 1, 1.4, 1.41, ... → √2 is the most intuitive path from \"rational approximations\" to \"irrational limit.\" This prepares the P76 probe directly.\n\n### Connections to Broader Curriculum\n- **Downstream — math.calc.limits:** Every fundamental theorem of calculus (continuity, differentiability, integration) implicitly uses ℝ's completeness. The intermediate value theorem, the extreme value theorem, and the mean value theorem all fail in ℚ.\n- **Downstream — math.real.completeness:** Formal study includes Cauchy completeness, the Bolzano-Weierstrass theorem, and the Heine-Borel theorem.\n- **Conceptual predecessor:** Students who have proved √2 irrational (from math.found.irrational-numbers) already have the key example for the completeness gap. Build on it explicitly.\n\n### Language Precision\n- Say \"ℝ is the complete ordered field\" — not \"ℝ is all the numbers.\"\n- \"Completeness\" means LUB property — not \"covers everything\" informally.\n- Distinguish \"supremum\" (least upper bound, may or may not be in the set) from \"maximum\" (largest element, must be in the set).\n\n---\n\n\n## Component 10 — Validation Checklist\n\n### Structural Validators\n- [x] V-1: Blueprint has all 10 components (0–8, 10).\n- [x] V-2: Metadata YAML complete with all required fields.\n- [x] V-3: concept_id matches filename `math.found.real-numbers`.\n- [x] V-4: difficulty=developing, bloom_level=understand, mastery_threshold=0.85.\n- [x] V-5: estimated_hours=5, session_ta_cap=7.\n\n### Grammar Rule Validators\n- [x] V-6 (GR-1): Every non-repair TA opens with B-category primitive (TA-A01: P03+P06; TA-A02: P11; TA-A03: P04; TA-A04 is mastery gate).\n- [x] V-7 (GR-2): Every non-gate TA contains P49 with all 4 branches. TA-A01, TA-A02, TA-A03 each have P49.\n- [x] V-8 (GR-3): Mastery gate TA-A04 is terminal (ends with P78).\n- [x] V-9 (GR-4): P41 entry diagnostic gates P64 → Protocol B when MC-1 active.\n- [x] V-10 (GR-6): P91 compound (P77→P55→P76→P55→P75→P55→P74→P55→P78) complete in TA-A04.\n- [x] V-11 (GR-7): P76 present in mastery gate TA-A04.\n- [x] V-12 (GR-8): Cross-links documented in Component 7. math.calc.limits and math.real.completeness named.\n- [x] V-13 (GR-9): P76 mode is CROSS-LINK (math.calc.limits is Tier 1). P76 probe: sequence (1+1/n)ⁿ→e; completeness guarantees limit; limit irrational. Bridges to math.calc.limits.\n- [x] V-14 (GR-10): MAMR stated in Component 0 and enforced in Component 3.\n\n### Content Validators\n- [x] V-15: Pass criterion = ⌈0.85 × 5⌉ = 5/5. P77 has 4 problems; P76 contributes 1; total n=5. ✓\n- [x] V-16: CPA_ENTRY_STAGE = C. developing always starts Concrete. ✓\n- [x] V-17: MC-1 is FOUNDATIONAL and cleared first per MAMR. ✓\n- [x] V-18: P49 INCORRECT branch activates P27 or P64 with repair pathway in TA-A01, TA-A02, TA-A03. ✓\n- [x] V-19: P76 probe independent of P77 problems (P77: classification, LUB exercises, density, 0.999…; P76: Euler's number sequence and completeness argument). ✓\n- [x] V-20: Spaced repetition intervals are 1, 3, 7, 21 days with distinct prompts. ✓\n\n### Automated Invariant Check (AIR)\n- [x] AIR-1: No implementation code present.\n- [x] AIR-2: No references to internal system variables.\n- [x] AIR-3: All cross-linked concept IDs use canonical prefix format.\n- [x] AIR-4: P91 sequence order is P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n- [x] AIR-5: Protocol B repair chains each have explicit exit gate with return instruction. ✓\n\n**VALIDATION RESULT: PASS — PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 352,
+        "endLine": 657
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.real-numbers",
+      "title": "Scaffolding Protocol",
+      "content": "### Entry Diagnostic (P41 gate)\n```\nP41 — MISCONCEPTION DETECTOR\nPrompt: \"Which of the following are real numbers? \n  (a) −5    (b) 3/7    (c) √5    (d) π    (e) 0    (f) 2.718…\"\n\nCORRECT (all six are real numbers):\n→ No MC-1 detected → proceed to TA-A01 standard opening.\n\nINCORRECT (excludes integers like −5 and 0, or excludes fractions, or treats\n\"real number\" as meaning \"decimal with infinite non-repeating expansion\"):\n→ MC-1 FOUNDATIONAL active → P64 CONCEPTUAL SHIFT on ℝ as umbrella set\n→ Activate Protocol B (MC-1 Repair Chain)\n```\n\n### Prerequisite Bridge\nStudent completed math.found.rational-numbers and math.found.irrational-numbers. Real-numbers synthesises both: ℝ = ℚ ∪ (ℝ\\ℚ) is the unique set containing all rationals and irrationals on a complete, ordered line.\n\n### MAMR Enforcement\nMC-1 is FOUNDATIONAL. If active, clear the \"ℝ includes all of ℕ, ℤ, ℚ, and ℝ\\ℚ\" framing before any completeness discussion. MC-2 and MC-3 addressed FIFO after MC-1 cleared.\n\n### CPA Progression: C → P → A\n- **Concrete (C):** Specific real numbers placed on a number line; identify type (rational/irrational).\n- **Pictorial (P):** Number line with labelled regions; gap diagram for ℚ; completeness as \"filling all gaps.\"\n- **Abstract (A):** Formal completeness property; LUB/supremum; density theorem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 108,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.real-numbers",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89 — SPACED REPETITION\nReview schedule for math.found.real-numbers:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State the completeness property of ℝ in one sentence.\n  Give one example of a set that demonstrates ℚ is NOT complete.\"\n  Target: LUB property; A = {q∈ℚ:q²<2}, sup = √2 ∉ ℚ.\n\nInterval 2 (3 days):\n  Application: \"Is the set {x ∈ ℝ : x² < 7} bounded above? What is its supremum?\n  Is the supremum in ℚ?\"\n  Target: bounded above by 3; sup = √7; √7 ∉ ℚ (irrational).\n\nInterval 3 (7 days):\n  Transfer: \"The sequence 3, 3.1, 3.14, 3.141, 3.1415, … converges to π.\n  (a) Are all terms rational? (b) Is the limit in ℚ? (c) Is the limit in ℝ?\n  (d) What property of ℝ guarantees the limit exists?\"\n  Target: (a) YES; (b) NO (π irrational); (c) YES; (d) completeness.\n\nInterval 4 (21 days):\n  Integration: \"A student in math.calc.limits asks: 'Why do we define limits using\n  ℝ and not ℚ?' Explain using the completeness property and a concrete example.\"\n  Target: ℚ not complete → sequences with irrational limits diverge in ℚ;\n    ℝ is complete → all Cauchy sequences converge; limits are well-defined in ℝ.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 532,
+        "endLine": 563
+      }
+    },
+    {
+      "assetId": "math.found.real-numbers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.real-numbers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### GR-8: Cross-link documentation\n```\nIncoming prerequisites:\n  math.found.rational-numbers → Defines ℚ = {p/q : p,q ∈ ℤ, q≠0};\n    density of ℚ; decimal representation of rationals.\n  math.found.irrational-numbers → Defines ℝ\\ℚ; examples (√2, π, e);\n    irrationality proofs (√2 proof by contradiction).\n\nOutgoing unlocks:\n  math.func.real-valued-function → Functions f: D → ℝ require ℝ as codomain.\n  math.calc.limits → Limit theory depends on ℝ's completeness;\n    sequences converge in ℝ because of LUB.\n  math.real.completeness → Formal study of suprema, infima, Cauchy sequences.\n\nCross-linked (non-prerequisite):\n  math.calc.limits (Tier 1) → Used in P76 probe: sequence (1+1/n)ⁿ → e;\n    completeness guarantees limit; limit is irrational.\n  math.real.completeness (NOT Tier 1) → Formal deepening of the LUB property.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.calc.limits, math.real.completeness]\nmath.calc.limits IS in Tier 1 set → P76 CROSS-LINK PROBE\nmath.real.completeness NOT in Tier 1 → ignore for P76 mode\n\nP76 probe: sequence (1+1/n)ⁿ → e; each term rational; limit irrational;\n  completeness guarantees limit exists in ℝ; bridges to math.calc.limits.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.real-numbers.md",
+        "startLine": 563,
+        "endLine": 597
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

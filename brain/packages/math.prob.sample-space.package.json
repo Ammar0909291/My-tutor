@@ -1,0 +1,471 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.sample-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.sample-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a5f364dabadf83410cc758e93018787e396b83f3b324de2f860b52b35768bea3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.sample-space.md": "sha256:0b6a3630d7757a604c15984810afd97cd55cc43267da29c5b73c541495b20183"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.prob.sample-space",
+    "name": "Sample Space",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.set-theory"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.sample-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.sample-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.sample-space.md": "sha256:0b6a3630d7757a604c15984810afd97cd55cc43267da29c5b73c541495b20183"
+      },
+      "contentHash": "sha256:c8d596b68ecb9b476361a919986b1c64b6c9bd835cb3cddf1ed0793a1597e00b",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.sample-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.sample-space.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.sample-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.sample-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.sample-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.sample-space.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.sample-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.sample-space\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.sample-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.sample-space.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.sample-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.sample-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.sample-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.sample-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.sample-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.sample-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.sample-space.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.sample-space.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.sample-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.sample-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.sample-space.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.sample-space.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.sample-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.sample-space\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.sample-space.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.sample-space.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.sample-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.sample-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.sample-space.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.sample-space.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.sample-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.sample-space\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.sample-space/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.sample-space",
+      "title": "Sample Space — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.found.set-theory**: The sample space Ω IS a set. Set operations (union ∪, intersection ∩, complement, subset ⊆) apply directly to events (subsets of Ω). Cardinality of Ω determines whether the space is finite, countably infinite, or uncountable.\n\n### Target Understanding\n1. **Sample space** Ω = the set of ALL possible outcomes of a random experiment. Each element ω ∈ Ω is an elementary outcome (or sample point). No outcome is omitted and no outcome appears twice (Ω is a set, not a multiset).\n2. **Types**: Finite (coin flip: Ω = {H, T}); countably infinite (count rolls until first 6: Ω = {1, 2, 3, …}); uncountable (uniform on [0,1]: Ω = [0, 1]).\n3. **Event**: Any subset A ⊆ Ω. The empty set ∅ is the impossible event; Ω itself is the certain event.\n4. **Set operations on events**: A ∪ B (A or B occurs), A ∩ B (both A and B), A^c = Ω \\ A (A does not occur), A ∩ B = ∅ means A and B are mutually exclusive.\n5. **Sample space depends on the question**: A die roll can have Ω = {1, 2, 3, 4, 5, 6} (if the question is about the number) or Ω = {odd, even} (if only parity matters). Different questions → different Ω.\n\n### Cross-Link Activation\n- No cross-links. P76 uses an independence probe (self-contained coin-flip experiment).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 31,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.sample-space",
+      "title": "[FOUNDATIONAL] — SAMPLE-SPACE-OUTCOMES-LABELED",
+      "content": "### MC-1 [FOUNDATIONAL] — SAMPLE-SPACE-OUTCOMES-LABELED\n- **Trigger**: \"The sample space is just a list of what can happen\" or ignoring that Ω is a SET with set operations.\n- **Root cause**: Learner treats probability informally; \"write down the possibilities\" without the structure of set theory.\n- **Error pattern**: Forgets to check whether all outcomes are included; uses the word \"list\" instead of \"set\"; tries to compute probabilities without the set-theoretic framework.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.sample-space",
+      "title": "— SAMPLE-SPACE-MUST-BE-FINITE",
+      "content": "### MC-2 — SAMPLE-SPACE-MUST-BE-FINITE\n- **Trigger**: \"You can't have infinitely many outcomes — probability wouldn't make sense\" or refusing to accept Ω = ℝ or Ω = [0, 1].\n- **Root cause**: Elementary probability uses only finite sample spaces (dice, cards, coins); learner over-generalizes.\n- **Error pattern**: Rejects continuous random variables; cannot define sample space for \"a randomly chosen real number in [0,1]\"; believes uncountable Ω means individual outcomes have positive probability (confusion with finite case).\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.sample-space",
+      "title": "— SAMPLE-SPACE-UNIQUE",
+      "content": "### MC-3 — SAMPLE-SPACE-UNIQUE\n- **Trigger**: \"There is only one correct sample space for a given experiment.\"\n- **Root cause**: School problems present unique Ω (e.g., \"the sample space for a coin flip IS {H, T}\"), giving the impression that Ω is fixed by the experiment, not by the question.\n- **Error pattern**: Cannot choose between two valid Ω's depending on the question being asked; insists on the \"most detailed\" Ω for every problem even when it is unnecessary.\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.sample-space",
+      "title": "The Sample Space as a Universe of Possibilities",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Sample Space as a Universe of Possibilities\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 87,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.sample-space",
+      "title": "Misconception Gate: SAMPLE-SPACE-OUTCOMES-LABELED (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: SAMPLE-SPACE-OUTCOMES-LABELED (FOUNDATIONAL)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 107,
+        "endLine": 133
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.sample-space",
+      "title": "Pattern Induction: Three Types of Sample Spaces",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Pattern Induction: Three Types of Sample Spaces\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 133,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.sample-space",
+      "title": "Contrast Pair: Ω vs. Event; Finite vs. Infinite Ω",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Contrast Pair: Ω vs. Event; Finite vs. Infinite Ω\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 156,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.sample-space",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 193,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.sample-space",
+      "title": "Repair MC-1 SAMPLE-SPACE-OUTCOMES-LABELED",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 SAMPLE-SPACE-OUTCOMES-LABELED\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 251,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.sample-space",
+      "title": "Repair MC-2 SAMPLE-SPACE-MUST-BE-FINITE",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 SAMPLE-SPACE-MUST-BE-FINITE\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 272,
+        "endLine": 292
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.sample-space",
+      "title": "Repair MC-3 SAMPLE-SPACE-UNIQUE",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 SAMPLE-SPACE-UNIQUE\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 292,
+        "endLine": 392
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.sample-space",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A05 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal in this TA]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\n\nQ1: A spinner has four equally-likely sectors labeled A, B, C, D. Write the sample space Ω.\nQ2: For Ω = {A, B, C, D} from Q1, write the event E = \"the result is A or B\" as a subset. Is E ⊆ Ω? What is E^c?\nQ3: True or False: The sample space for \"flip a coin 3 times\" must be listed as {H, T}. Explain.\nQ4: An experiment consists of tossing a coin until the first Head appears. Is Ω finite or infinite? Give three elements of Ω using notation ω = number of tosses needed.\nQ5: For Ω = {1, 2, 3, 4, 5, 6} (die roll), let A = {1, 2} and B = {2, 3, 4}. Are A and B mutually exclusive? Find A ∩ B and A ∪ B.\n\n**P55 (SCORE):**\nQ1: Ω = {A, B, C, D}.\nQ2: E = {A, B} ⊆ Ω ✓. E^c = {C, D}.\nQ3: FALSE. The correct Ω for three coin flips is {HHH, HHT, HTH, HTT, THH, THT, TTH, TTT} (8 outcomes, or equivalently all binary strings of length 3). {H, T} is only the sample space for ONE flip.\nQ4: Infinite. ω₁ = 1 (H on first toss); ω₂ = 2 (TH, head on second); ω₃ = 3 (TTH); Ω = {1, 2, 3, …}.\nQ5: NOT mutually exclusive: A ∩ B = {2} ≠ ∅. A ∪ B = {1, 2, 3, 4}.\n\n**P76 (TRANSFER PROBE — Independence: cross_links = []):**\n\n**Context**: A fair coin is flipped 3 times. Let the outcomes be written as sequences like HHT (first toss H, second H, third T).\n\n**(a)** Write the complete sample space Ω for this experiment.\n**(b)** Let event A = \"exactly 2 heads appear.\" List the elements of A as a subset of Ω.\n**(c)** Is A an elementary outcome or an event? Explain the distinction.\n**(d)** What is A^c (the complement of A)? Write it as a subset of Ω.\n\n**Expected answers**:\n(a) Ω = {HHH, HHT, HTH, HTT, THH, THT, TTH, TTT} — 8 elements.\n(b) A = {HHT, HTH, THH} — exactly 2 H's in the sequence.\n(c) A is an EVENT (a subset of Ω with 3 elements), not an elementary outcome. An elementary outcome is a single element of Ω (e.g., HHT). \"Exactly 2 heads\" is a property shared by multiple outcomes — it describes a set of outcomes.\n(d) A^c = Ω \\ A = {HHH, HTT, THT, TTH, TTT} — 5 elements (0, 1, or 3 heads).\n\n**P55 (SCORE):** Ω complete (8 elements); A correct (3 elements); event vs. outcome distinction stated; A^c correctly computed as Ω \\ A.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, Q5, P76 = **6 items**.\nPass criterion: **6/6** (⌈0.90 × 6⌉ = 6; threshold = 0.90).\n- **PASS (6/6)** → P78.\n- **FAIL (< 6/6)** → P74 repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong or Q2 wrong or Q3 wrong → TA-B01 (SAMPLE-SPACE-OUTCOMES-LABELED; apply MAMR).\n- Q4 wrong → TA-B02 (SAMPLE-SPACE-MUST-BE-FINITE).\n- Q5 wrong → TA-B01 (set-operation confusion in Ω).\n- P76 wrong (part c especially) → TA-B01 (confusing elementary outcome with event).\n- Q3 wrong in a specific way (claiming many valid Ω's wrong) → TA-B03 (SAMPLE-SPACE-UNIQUE).\n- Multiple wrongs → MAMR: TA-B01 first; then FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.prob.probability-axioms. Children unlocked: math.prob.event, math.prob.probability-measure.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 193,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.sample-space",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a Concrete experiment (coin flip, die roll) and build Ω as a literal set. Move to Pictorial (Venn-diagram-like set pictures for event operations) in TA-A04. Reach Abstract (formal notation, countably infinite and uncountable Ω) in TA-A03.\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). If triggered in later TAs, route → TA-B01 → return. MC-2 and MC-3 FIFO after MC-1 cleared.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 73,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.sample-space",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (write Ω) + Q2 (event and complement) | 2/2 |\n| Day 3 | Q3 (3-flip Ω) + Q5 (set operations) | 2/2 |\n| Day 7 | Mixed 3-item: write Ω for one experiment, classify outcome vs. event, compute A^c | 2/3 |\n| Day 21 | Q1, Q2, Q3, Q4, Q5 (5 items) | 5/5 |\n| Day 60 | Full 6-item mastery gate | 6/6 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing by error type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 311,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "math.prob.sample-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.sample-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Set Theory | math.found.set-theory | Set language (∈, ⊆, ∪, ∩, \\ , ∅); Ω IS a set; events ARE subsets |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Probability Axioms | math.prob.probability-axioms | Kolmogorov's axioms assign probability to measurable subsets of Ω |\n\n### Output Children\n| Blueprint | KG ID | Relationship |\n|---|---|---|\n| Event | math.prob.event | An event is a subset A ⊆ Ω; requires Ω to be defined first |\n| Probability Measure | math.prob.probability-measure | A function P: subsets of Ω → [0,1]; requires Ω |\n\n### Cross-Links\n- None. P76 uses an independent real-world context (3-coin-flip experiment).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.sample-space.md",
+        "startLine": 325,
+        "endLine": 348
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

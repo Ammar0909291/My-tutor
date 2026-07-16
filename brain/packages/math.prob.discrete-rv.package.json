@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.discrete-rv-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.discrete-rv",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d31d9325e5d1a5c4608d0c130a54703350ef1c1a8e7c82c553817f608dca5e48",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.discrete-rv.md": "sha256:14aa6d14953903c471929f0920d7b66a697126f55c0ce8e81c8013199eb16ad1"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.discrete-rv",
+    "name": "",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.random-variable"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.discrete-rv-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.discrete-rv (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.discrete-rv.md": "sha256:14aa6d14953903c471929f0920d7b66a697126f55c0ce8e81c8013199eb16ad1"
+      },
+      "contentHash": "sha256:a540f493bf1288dbe71e5c12d79b396d326175ebce0f59f0572252d8eafb730d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.discrete-rv.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.discrete-rv.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.discrete-rv"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.discrete-rv\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.discrete-rv.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.discrete-rv.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.discrete-rv"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.discrete-rv\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.discrete-rv.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.discrete-rv.md#TA-A03 (addresses MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.discrete-rv"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.discrete-rv\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.discrete-rv.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.discrete-rv.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.discrete-rv"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.discrete-rv\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.discrete-rv/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "math.prob.discrete-rv — cognitive map",
+      "content": "### Target Understanding\nA **discrete random variable** X has a countable range {x₁, x₂, …}.  Its probability distribution\nis completely described by the **probability mass function (PMF)** p(x) = P(X = x).  A PMF is\nvalid if and only if: (i) p(x) ≥ 0 for all x, and (ii) Σ p(xᵢ) = 1 (probabilities sum to 1).\nThe **support** of X is the set of values x where p(x) > 0.\n\n### Distinction from math.prob.random-variable\n`math.prob.random-variable` established that X: Ω → ℝ is a function from the sample space to\nthe reals, and that \"discrete\" means the range of X is countable.  This blueprint focuses\nexclusively on discrete RVs and their PMFs — the complete numerical characterisation of the\nprobability distribution.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Fair die: tabulate x and p(x)=1/6; biased coin: tabulate P(H)=2/3, P(T)=1/3 |\n| **Pictorial (P)** | Bar chart / probability histogram with x on the horizontal axis and p(x) on the vertical; bars reach p(x) |\n| **Abstract (A)** | PMF definition: p: ℝ → [0,1]; properties p(x)≥0, Σp(x)=1; support; CDF vs PMF distinction |\n\n### Prerequisite Knowledge (from KG)\n- **math.prob.random-variable** — X: Ω→ℝ; P(X=x) = P({ω : X(ω)=x}); discrete = countable range\n\n### PMF Validity Rules\n| Rule | Check | Typical error |\n|------|-------|--------------|\n| Non-negativity | p(x) ≥ 0 for every listed x | p(x) = −0.1 for some x |\n| Normalization | Σp(x) = 1 exactly | Σ = 0.9 (missing case) or Σ = 1.1 (double-counted) |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 29,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "PMF-SUMS-NOT-ONE",
+      "content": "| MC-1 | PMF-SUMS-NOT-ONE | Writes a PMF where Σp(x) ≠ 1 without flagging the error; assigns probabilities by intuition without checking normalization | Does not treat Σp(x)=1 as a hard constraint; treats each p(x) assignment as independent | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "SUPPORT-IS-ALL-REALS",
+      "content": "| MC-2 | SUPPORT-IS-ALL-REALS | Thinks p(x) must be defined (and nonzero) for all x ∈ ℝ; confused when p(x)=0 for most values | Doesn't understand that p(x)=0 for all x outside the support; conflates domain with support | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "PMF-IS-CDF",
+      "content": "| MC-3 | PMF-IS-CDF | Writes P(X ≤ x) when asked for the PMF p(x); or uses cumulative values as if they were individual probabilities | Confuses the PMF (point probability) with the CDF (cumulative probability); reads P(X=x) as P(X≤x) | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "Entry: The PMF as a Probability Table (P03 + P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: The PMF as a Probability Table (P03 + P11 + P49)\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 97,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "MC-1 Gate: Normalization Must Hold Exactly (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: Normalization Must Hold Exactly (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 148,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "Support, Invalid PMFs, and PMF vs CDF (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Support, Invalid PMFs, and PMF vs CDF (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 189,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P03\",\"P06\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 240,
+        "endLine": 540
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Is the following a valid PMF for X ∈ {1, 2, 3, 4}?\np(1)=0.25, p(2)=0.25, p(3)=0.25, p(4)=0.25.\nIf yes, what is P(X = 2)?\n\n*(Target: Yes — each p(x)=0.25≥0 and 4×0.25=1.0 ✓. P(X=2)=p(2)=0.25.)*\n\n**Q2.** A PMF for X ∈ {0, 1, 2} has p(0) = 0.2 and p(1) = 0.5.  What must p(2) be?\n\n*(Target: p(2) = 1 − 0.2 − 0.5 = 0.3, from normalization Σp(x)=1.)*\n\n**Q3.** For the PMF p(1)=0.1, p(2)=0.3, p(3)=0.4, p(4)=0.2:\n(i) Find P(X ≥ 3).   (ii) Find the support of X.\n\n*(Target: (i) P(X≥3) = p(3)+p(4) = 0.4+0.2 = 0.6. (ii) {1,2,3,4}.)*\n\n**Q4.** TRUE or FALSE: \"The PMF p(x) = P(X ≤ x).\"\n\n*(Target: FALSE. p(x) = P(X = x) is the PMF (point probability). P(X ≤ x) is the CDF F(x).)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independence probe — self-contained.*\n\n> A biased coin has P(H) = 2/3, P(T) = 1/3.  The coin is flipped **twice**.\n> Let X = number of heads in two flips.\n>\n> (a) List the support of X.\n> (b) Construct the complete PMF table for X.  (Use the sample space {HH, HT, TH, TT} and\n>     the independence of flips to find each probability.)\n> (c) Verify that Σp(x) = 1.\n> (d) Find P(X ≥ 1) using the PMF.\n\n*Expected answers:*\n*(a) Support = {0, 1, 2}.*\n*(b) P(TT) = (1/3)² = 1/9 → p(0) = 1/9.*\n*    P(HT or TH) = 2×(2/3)(1/3) = 4/9 → p(1) = 4/9.*\n*    P(HH) = (2/3)² = 4/9 → p(2) = 4/9.*\n*(c) 1/9 + 4/9 + 4/9 = 9/9 = 1 ✓.*\n*(d) P(X≥1) = p(1)+p(2) = 4/9+4/9 = 8/9.  Alternatively: 1 − p(0) = 1 − 1/9 = 8/9.*\n\n**[P55 — SCORE]**  Award 1 point for P76 if all four parts correct; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.90  →  ⌈0.90 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → MC-1 residual (verification) → re-check Σ = 4×0.25 = 1.\n  - Q2 wrong → MC-1 residual (solving for missing p) → TB-R01 brief.\n  - Q3(i) wrong → summing wrong range → re-read \"P(X≥3) = p(3)+p(4).\"\n  - Q3(ii) wrong → MC-2 → TB-R02.\n  - Q4 wrong → MC-3 → TB-R03.\n  - P76 wrong → (a) support listing; (b) probability computation; (c) normalization; (d) summing.\n    Route to TB-R01 if normalization fails; no repair needed for arithmetic errors — retry once.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.prob.discrete-rv\nMASTERY_REACHED: true\nUNLOCKS:         math.prob.pmf, math.prob.discrete-distributions\nNEXT_CONCEPT:    math.prob.pmf\nSESSION_CLOSE:   \"You can now construct and validate a PMF table, identify the support,\n                  distinguish the PMF from the CDF, and compute event probabilities by\n                  summing the relevant p(x) values. The PMF is the complete description\n                  of a discrete random variable's distribution.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: PMF-SUMS-NOT-ONE (MC-1)\n\n**Trigger:** Student assigns probabilities without verifying Σp(x) = 1.\n\n**Step 1 — Axiom anchor.**\n> By Axiom A2 (probability-axioms): P(Ω) = 1.\n> The events {X=x₁}, {X=x₂}, … partition Ω (they're mutually exclusive and exhaustive for\n> a discrete RV).\n> By Axiom A3 (extended): Σ P(X=xᵢ) = P(Ω) = 1.\n> This is not optional — it is forced by the axioms.\n\n**Step 2 — Check and adjust.**\n> After assigning all p(x) values:\n> Step 1: Sum them.\n> Step 2: If sum ≠ 1, identify what's wrong (missing case, double-counted case, arithmetic).\n> Step 3: Adjust one value (or all proportionally) to make the sum exactly 1.\n\n**Step 3 — Practical heuristic.**\n> With n outcomes, a uniform PMF gives p(x) = 1/n for each.\n> For non-uniform, assign values that sum to 1 by construction (e.g., last value = 1 − Σ_others).\n\n**Exit:** Return to TA-A02 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: SUPPORT-IS-ALL-REALS (MC-2)\n\n**Trigger:** Student claims the PMF must be defined or nonzero for all x ∈ ℝ.\n\n**Step 1 — Definition of support.**\n> The support of X is {x : p(x) > 0} — the set of values that CAN occur.\n> For x outside the support, p(x) = P(X=x) = 0 (that value simply cannot happen).\n\n**Step 2 — Die example.**\n> For a six-sided die: support = {1,2,3,4,5,6}.\n> p(7) = P(X=7) = 0.  p(−5) = 0.  The PMF is defined on ALL of ℝ; it just equals 0 outside {1,…,6}.\n\n**Step 3 — Analogy.**\n> Think of the PMF as a bar chart.  Bars appear only where the die can land.\n> No bar at x=7 — not because 7 is \"outside the PMF\" but because p(7) = 0 and a bar of height 0\n> is invisible.\n\n**Exit:** Return to TA-A03 P49 checkpoint, part (i).\n\n---\n\n### TB-R03 · Repair: PMF-IS-CDF (MC-3)\n\n**Trigger:** Student uses cumulative probabilities where individual probabilities are required.\n\n**Step 1 — Name the difference.**\n> PMF: p(x) = P(X = x).  The probability of landing EXACTLY on x.\n> CDF: F(x) = P(X ≤ x).  The probability of landing AT OR BELOW x.\n\n**Step 2 — Numeric contrast.**\n> PMF: p(2) = 0.4 means \"exactly 2 happens with probability 0.4.\"\n> CDF: F(2) = P(X≤2) = p(0)+p(1)+p(2) = 0.1+0.3+0.4 = 0.8 means \"2 or less with probability 0.8.\"\n\n**Step 3 — Which to use when.**\n> \"Find P(X = x)\" → use the PMF directly.\n> \"Find P(X ≤ x)\" or \"P(X < x)\" or \"P(X ≥ x)\" → sum the relevant PMF values.\n\n**Exit:** Return to TA-A03 P49 checkpoint, part (ii).\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"A PMF has p(0)=0.3, p(1)=0.5, p(2)=k. Find k. Is it valid?\"\n    Target: k = 1−0.3−0.5 = 0.2. Valid (k=0.2≥0 and sum=1). PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"For p(1)=0.2, p(2)=0.5, p(3)=0.3: what is the support? Find P(X≥2).\"\n    Target: Support={1,2,3}. P(X≥2)=p(2)+p(3)=0.8. PASS if both correct.\n\n  Interval-3 (+1 week):\n    Probe: \"TRUE/FALSE: p(x)=P(X≤x). Explain.\"\n    Target: FALSE. p(x)=P(X=x) is the PMF; P(X≤x)=F(x) is the CDF. PASS if distinction clear.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (normalization) or TA-A03 (PMF vs CDF).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.prob.random-variable:\n    Used in:   TA-A01 (X: Ω→ℝ function; p(x)=P(X=x) notation; discrete = countable range),\n               TA-A02 (normalization traced to probability-axioms via the prerequisite),\n               TA-A04 P76 (two-coin-flip sample space; X = number of heads).\n    Assumed:   Student can write out X(ω) for each ω; understands P(X=x)=P({ω:X(ω)=x});\n               knows discrete means countable range.\n\nUNLOCKS_ENABLED:\n  math.prob.pmf:\n    Dependency: Detailed study of PMF properties, moment generating functions, and specific PMF\n                families (Bernoulli, Binomial); requires this blueprint's normalization and\n                support concepts.\n  math.prob.discrete-distributions:\n    Dependency: Named discrete distributions (Poisson, Geometric) are specific PMF families;\n                requires understanding of what a PMF is and its validity conditions.\n\nCROSS_LINKS_NOTED:\n  (none)\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The normalization condition is the most critical invariant.**\nEvery PMF problem should begin with a normalization check.  If the check is automatic, MC-1\nnever fires.  TA-A02's P64 traces Σp(x)=1 directly back to Axiom A2 (P(Ω)=1) — this is the\nmost convincing argument because the student has already internalized the axioms.\n\n**2. MC-3 appears as an interpretation error, not a computational one.**\nStudents who confuse PMF and CDF typically compute the right number but label it wrong.\nThe contrast table in TA-A03 Contrast B is designed to make the labelling difference visual.\nIf MC-3 persists after TA-A03, TB-R03's three-line rule (\"= x → PMF, ≤ x → CDF\") is usually\nenough to close it.\n\n**3. The P76 probe's biased-coin calculation is non-trivial.**\nPart (b) requires computing P(HT or TH) = 2×(2/3)(1/3) = 4/9, which assumes independent flips.\nStudents who have not seen independence before may struggle with this.  If so, allow direct\ncounting from the probability tree (P(HT) = 2/3 × 1/3 = 2/9; P(TH) = 1/3 × 2/3 = 2/9; total\n= 4/9) rather than requiring the formula.  The key skill being tested is the PMF construction\nand normalization, not independence itself.\n\n**4. Support is a concise concept but requires careful wording.**\nSupport = {x : p(x) > 0}, not {x : p(x) is defined}.  Since p is defined on all of ℝ (it's\njust 0 outside the support), the distinction matters.  The bar-chart analogy in TB-R02 Step 3\nmakes this visual.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.prob.discrete-rv\n=============================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 7; 4 TAs used ≤ 7.\n[PASS] V-4   CPA_ENTRY_STAGE = C (Concrete PMF tables before abstract definition).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 — normalization axiom link).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03 Contrast A/B; TB-R02, TB-R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P03 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross_links to document (cross_links = []).\n[PASS] V-17  GR-9: P76 uses Independence mode (cross_links = []); probe is self-contained\n               (biased coin flipped twice; PMF for number of heads; no external Tier 1 dependency).\n[PASS] V-18  GR-10: MAMR stated in Component 3; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.90 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   PMF defined: p(x) = P(X=x); validity conditions p(x)≥0 and Σp(x)=1.\n             Support defined: {x : p(x) > 0}; outside support p(x)=0.\n             PMF vs CDF distinction: P(X=x) vs P(X≤x).\n             Normalization linked to Axiom A2 via mutually-exclusive exhaustive partition.\n             MC-1 (normalization fails) addressed by P64 axiom derivation + TB-R01.\n             MC-2 (support = all reals) addressed by die example + bar-chart analogy.\n             MC-3 (PMF = CDF) addressed by Contrast B table showing numerical difference.\n             P76 probe: biased coin flipped twice; full PMF construction + normalization check\n             + P(X≥1) computation. Self-contained.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 240,
+        "endLine": 540
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P03 analogy: fair die as canonical PMF + P11 table representation + P49)\n      → TA-A02 (P41/P64 MC-1 gate: normalization Σp(x)=1 + P49)\n      → TA-A03 (P06 contrast: valid vs invalid PMF; support; PMF vs CDF + P49)\n      → TA-A04 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (normalization check — Σp(x) must equal 1 exactly)\n  MC-2 → TB-R02 (support is where p(x)>0; outside support, p(x)=0)\n  MC-3 → TB-R03 (PMF = P(X=x) vs CDF = P(X≤x))\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 75,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"A PMF has p(0)=0.3, p(1)=0.5, p(2)=k. Find k. Is it valid?\"\n    Target: k = 1−0.3−0.5 = 0.2. Valid (k=0.2≥0 and sum=1). PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"For p(1)=0.2, p(2)=0.5, p(3)=0.3: what is the support? Find P(X≥2).\"\n    Target: Support={1,2,3}. P(X≥2)=p(2)+p(3)=0.8. PASS if both correct.\n\n  Interval-3 (+1 week):\n    Probe: \"TRUE/FALSE: p(x)=P(X≤x). Explain.\"\n    Target: FALSE. p(x)=P(X=x) is the PMF; P(X≤x)=F(x) is the CDF. PASS if distinction clear.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (normalization) or TA-A03 (PMF vs CDF).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 406,
+        "endLine": 428
+      }
+    },
+    {
+      "assetId": "math.prob.discrete-rv/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.discrete-rv",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.prob.random-variable:\n    Used in:   TA-A01 (X: Ω→ℝ function; p(x)=P(X=x) notation; discrete = countable range),\n               TA-A02 (normalization traced to probability-axioms via the prerequisite),\n               TA-A04 P76 (two-coin-flip sample space; X = number of heads).\n    Assumed:   Student can write out X(ω) for each ω; understands P(X=x)=P({ω:X(ω)=x});\n               knows discrete means countable range.\n\nUNLOCKS_ENABLED:\n  math.prob.pmf:\n    Dependency: Detailed study of PMF properties, moment generating functions, and specific PMF\n                families (Bernoulli, Binomial); requires this blueprint's normalization and\n                support concepts.\n  math.prob.discrete-distributions:\n    Dependency: Named discrete distributions (Poisson, Geometric) are specific PMF families;\n                requires understanding of what a PMF is and its validity conditions.\n\nCROSS_LINKS_NOTED:\n  (none)\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.discrete-rv.md",
+        "startLine": 428,
+        "endLine": 455
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

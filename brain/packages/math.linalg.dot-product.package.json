@@ -1,0 +1,465 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.dot-product-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.dot-product",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ab804cc164f1fa7db8062d697e84d86a9011ea615b6900a31959633f9cd4c7ed",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.dot-product.md": "sha256:c77c30ddd9f76218648855efa0688c256c5a9bd5c0ff8d10bde789a55c771f70"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.linalg.dot-product",
+    "name": "Dot Product",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.vector",
+      "math.arith.multiplication"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.dot-product-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.dot-product (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.dot-product.md": "sha256:c77c30ddd9f76218648855efa0688c256c5a9bd5c0ff8d10bde789a55c771f70"
+      },
+      "contentHash": "sha256:e4ee5949e5b7a734d88fe6c51171be91cf4408eadf07a1c71d05426121f2fe1e",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.dot-product.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.dot-product.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.dot-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.dot-product\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.dot-product.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.dot-product.md#TA-A02 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.dot-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.dot-product\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.dot-product.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.dot-product.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.dot-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.dot-product\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.dot-product.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.dot-product.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.dot-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.dot-product\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.dot-product.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.dot-product.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.dot-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.dot-product\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.dot-product.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.dot-product.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.dot-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.dot-product\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.dot-product.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.dot-product.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.dot-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.dot-product\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.dot-product/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Dot Product — cognitive map",
+      "content": "**Core concept:** The dot product of vectors **a** = (a₁,…,aₙ) and **b** = (b₁,…,bₙ) is the scalar **a·b = Σᵢ aᵢbᵢ**. Geometrically, **a·b = |a||b|cosθ** where θ is the angle between them. The dot product equals zero if and only if the vectors are orthogonal.\n\n**Knowledge prerequisites activated:**\n- math.linalg.vector: vectors are ordered n-tuples; each component occupies a fixed positional slot\n- math.arith.multiplication: multiply paired components; accumulate signed products via addition\n\n**Concept structure:**\n1. **Component formula** (computational): pair components by position, multiply each pair, sum all products\n2. **Geometric formula** (interpretive): |a||b|cosθ — connects to angle and magnitude\n3. **Orthogonality criterion**: a·b = 0 ↔ θ = 90°\n4. **Scalar output invariant**: result is always a single number, never a vector\n\n**Target understanding:** Given two same-dimension vectors, the learner computes a·b using the component formula, correctly identifies the result as a scalar, and determines orthogonality by checking whether a·b = 0.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 26,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Worked Examples: Component Formula in 2D and 3D (GR-1: P07 | GR-2: P49)",
+      "content": "### TA-A02 — Worked Examples: Component Formula in 2D and 3D (GR-1: P07 | GR-2: P49)\n\n**P07 WORKED EXAMPLE PAIR**\n\n*Example 1 — Two-dimensional:*\nCompute (2,3)·(4,5).\n```\nStep 1 — Check dimensions: both 2D ✓\nStep 2 — Multiply paired components:\n         Position 1: 2 × 4  =  8\n         Position 2: 3 × 5  = 15\nStep 3 — Sum all products: 8 + 15 = 23\nResult: (2,3)·(4,5) = 23   ← scalar\n```\n\n*Example 2 — Three-dimensional with negatives:*\nCompute (1,−2,3)·(4,0,−2).\n```\nStep 1 — Check dimensions: both 3D ✓\nStep 2 — Multiply paired components:\n         Position 1:  1  × 4   =  4\n         Position 2: (−2)× 0   =  0\n         Position 3:  3  ×(−2) = −6\nStep 3 — Sum: 4 + 0 + (−6) = −2\nResult: (1,−2,3)·(4,0,−2) = −2   ← negative scalar is valid\n```\n\n**P49 ADAPTIVE CHECKPOINT**\nQ: \"Compute (3,−1,2)·(2,4,−3). Show all three paired products.\"\n→ CORRECT [3×2+(−1)×4+2×(−3) = 6−4−6 = −4]: \"Correct — −4.\" → TA-A03\n→ PARTIAL [correct products, arithmetic error in sum]: \"Re-add: 6 + (−4) + (−6). Work left to right.\" → re-prompt\n→ INCORRECT [returns a vector such as (6,−4,−6)]: Flag MC-2. Route → B02\n→ INCORRECT [wrong products, add-first pattern]: Flag MC-1. Route → B01\n→ NO_RESPONSE: Re-present Example 2 with (3,−1,2)·(2,4,−3) with position 1 partially filled.\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 99,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.dot-product",
+      "title": "ADD-THEN-MULTIPLY",
+      "content": "| MC-1 | ADD-THEN-MULTIPLY | Presented with (2,3)·(4,5) | Adds components within each vector first (2+3=5, 4+5=9), then multiplies the sums (5×9=45) instead of pairing by position | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.dot-product",
+      "title": "DOT-PRODUCT-IS-VECTOR",
+      "content": "| MC-2 | DOT-PRODUCT-IS-VECTOR | Asked for result of dot product | Returns component-wise product as a vector: (2,3)·(4,5)=(8,15) instead of scalar 23 | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.dot-product",
+      "title": "COSINE-FORMULA-ONLY",
+      "content": "| MC-3 | COSINE-FORMULA-ONLY | Asked to compute dot product from components | Cannot apply component formula; attempts to find |a|, |b|, and θ even when components are given | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Pair-Multiply-Sum: The Invoice Analogy (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Pair-Multiply-Sum: The Invoice Analogy (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 70,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Worked Examples: Component Formula in 2D and 3D (GR-1: P07 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Examples: Component Formula in 2D and 3D (GR-1: P07 | GR-2: P49)\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 99,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Scalar vs. Vector Output; Two Equivalent Formulas (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Scalar vs. Vector Output; Two Equivalent Formulas (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 136,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 166,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Repair: ADD-THEN-MULTIPLY (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: ADD-THEN-MULTIPLY (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 233,
+        "endLine": 264
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Repair: DOT-PRODUCT-IS-VECTOR (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: DOT-PRODUCT-IS-VECTOR (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 264,
+        "endLine": 292
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Repair: COSINE-FORMULA-ONLY (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: COSINE-FORMULA-ONLY (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 292,
+        "endLine": 392
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A04 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. Compute **(2,3)·(4,5)**.\n   *(Expected: 2×4+3×5 = 8+15 = 23)*\n\n2. Compute **(1,−2,3)·(4,0,−2)**.\n   *(Expected: 4+0+(−6) = −2)*\n\n3. **True/False:** The dot product of two vectors is always a vector.\n   *(Expected: FALSE — the dot product is always a scalar)*\n\n4. Find **k** such that **(2,k)·(1,−3) = 0**.\n   *(Expected: 2×1 + k×(−3) = 0 → 2−3k = 0 → k = 2/3)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: independence mode — math.geom.dot-product is NOT Tier 1; novel context used)\n\n*Physics application — work done by a force:*\n\n\"In physics, the work done by force **F** along displacement **d** is W = **F·d**. Suppose **F** = (3,4) newtons and **d** = (6,0) metres.\n\n(a) Compute W = **F·d**.\n(b) Now suppose the displacement changes to **d** = (0,5) metres. Compute W again.\n(c) Which displacement produces more work? Explain why the vertical component of **F** contributes nothing when motion is purely horizontal.\"\n\n*(Expected:*\n*(a) W = 3×6+4×0 = 18+0 = 18 J*\n*(b) W = 3×0+4×5 = 0+20 = 20 J*\n*(c) d=(0,5) gives more work (20 J vs 18 J). When motion is purely horizontal, only the horizontal force component (3 N) does work; the vertical component (4 N) is perpendicular to the displacement, contributing zero — the dot product captures exactly this perpendicularity via the cosθ factor.)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.90; ⌈0.90×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 ADD-THEN-MULTIPLY first; then B02 or B03 as flagged by prior TAs)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now compute dot products in any dimension, identify the scalar output, and apply the operation in novel physical contexts. This operation is the foundation of orthogonality checks, vector norms, and angle measurement — the next concepts in this sequence.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 166,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\nPhysical pairing: write vectors as two labelled rows; draw lines connecting position 1 to position 1, position 2 to position 2; multiply each connected pair, then sum the products into one box.\n\n**Progression Gate (C → P):** Learner correctly pairs, multiplies, and sums components of two 2D vectors with no prompting.\n**Progression Gate (P → A):** Learner states the component formula symbolically and applies it to 3D vectors with negative entries.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 56,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.dot-product",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Component formula: pair-multiply-sum in 2D | (3,−1)·(2,4) = 6+(−4) = 2 |\n| Day 3 | Scalar output + orthogonality check | Are (1,2) and (−2,1) orthogonal? (−2+2=0 → YES) |\n| Day 7 | 3D dot product with negatives | (1,0,−1)·(2,3,2) = 2+0+(−2)=0 orthogonal? YES |\n| Day 30 | Cross-context transfer | Work W=F·d: F=(5,0), d=(3,4) → W=15; why is the vertical force wasted? |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 317,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "math.linalg.dot-product/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.dot-product",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.linalg.vector (required): vectors are ordered n-tuples with positional slots; dot product pairs by position index\n- math.arith.multiplication (required): multiply paired signed components; accumulate products\n\n**Enables:**\n- math.linalg.norm: ‖a‖ = √(a·a) — norm is the square root of the dot product of a vector with itself\n- math.linalg.angle-vectors: cosθ = (a·b)/(|a||b|) — angle formula derived directly from dot product\n- math.linalg.orthogonality: a ⊥ b defined by a·b = 0 — orthogonality is the zero dot product condition\n\n**Cross-links (GR-8):**\n- math.geom.dot-product (NOT Tier 1): geometric interpretation in coordinate geometry — P76 independence mode used (novel physics work probe, not the cross-linked concept)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.dot-product.md",
+        "startLine": 328,
+        "endLine": 344
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

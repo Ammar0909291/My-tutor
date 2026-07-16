@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.ode-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.ode",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:aa550c879c8c32f0d92fef1b4132ff4224f7899b2a4babae751fc8c8bfe0d442",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.ode.md": "sha256:228741d5e90913cfa9499d5fc8bd0b3cec03e5d44a539010cc3963bda240580f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.de.ode",
+    "name": "Ordinary Differential Equation",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.derivative-intro",
+      "math.calc.antiderivatives",
+      "math.func.function-concept"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.ode-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.ode (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.ode.md": "sha256:228741d5e90913cfa9499d5fc8bd0b3cec03e5d44a539010cc3963bda240580f"
+      },
+      "contentHash": "sha256:efb2c5a80f9adb5a1d1089e0f295e0dfcb2d87ea59e8396f0085e235cd36d9f9",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.ode.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.ode.md#TA-A01 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.ode.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.ode.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.ode\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.ode.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.ode.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.ode\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.ode/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.de.ode",
+      "title": "Ordinary Differential Equation — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.derivative-intro**: derivative as instantaneous rate of change; dy/dx notation; slope interpretation\n- **math.calc.antiderivatives**: F'=f means F is an antiderivative of f; general solution F(x)+C; initial conditions determine C\n- **math.func.function-concept**: function as a rule y=f(x); domain; the distinction between an equation in x and y vs. an equation involving a function and its derivatives\n\n### Target Knowledge State\nStudent understands that an ODE is an equation relating an unknown function and its derivatives; can identify the order (highest derivative present) and degree (power of that highest-order derivative); distinguishes general solutions (containing arbitrary constants) from particular solutions (constants fixed by initial/boundary conditions); verifies that a proposed function satisfies an ODE by substituting and differentiating; and recognises ODEs in physical modelling contexts (exponential growth/decay, harmonic motion).\n\n### Conceptual Obstacles\n1. Expecting the \"solution\" to be a number (as in algebraic equations x=3) rather than a function y(x) satisfying the equation for all x in some interval\n2. Confusing the order (highest derivative's index) with the degree (power of that derivative); (y'')²+y=0 has order 2 and degree 2, not order 4\n3. Not understanding why the general solution has exactly n arbitrary constants (one per order) — and why an initial/boundary condition fixes each one uniquely\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 29,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.de.ode/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.ode",
+      "title": "SOLUTION-IS-A-NUMBER",
+      "content": "| MC-1 | SOLUTION-IS-A-NUMBER | Student expects an ODE to \"solve for y\" as a specific number or value, not as a function y(x); may write y=5 or \"y is some constant\" as the solution | First exposure to ODE; any verification or solution-construction problem |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.de.ode/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.ode",
+      "title": "ORDER-VERSUS-DEGREE",
+      "content": "| MC-2 | ORDER-VERSUS-DEGREE | Student reports the degree of the highest derivative (power) as the order, or vice versa; e.g., in (y'')³+y=0, claims order=3 (the exponent) instead of order=2 (the index of the highest derivative) | Classification problems; equations with higher powers of derivatives |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.de.ode/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.ode",
+      "title": "GENERAL-PARTICULAR-CONFLATED",
+      "content": "| MC-3 | GENERAL-PARTICULAR-CONFLATED | Student doesn't recognise that a general solution requires one constant C per order; writes a \"particular\" solution without boundary conditions, or adds too many or too few constants | Solution construction; initial-value problems |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.de.ode/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.ode",
+      "title": "What an ODE Is and What Its Solution Means",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"What an ODE Is and What Its Solution Means\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 65,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "math.de.ode/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.ode",
+      "title": "ODE Classification and Solution Verification",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"ODE Classification and Solution Verification\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 127,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "math.de.ode/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.ode",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 184,
+        "endLine": 397
+      }
+    },
+    {
+      "assetId": "math.de.ode/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.ode",
+      "title": "Mastery Gate",
+      "content": "### Teaching Action A03 — Mastery Gate\n\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 items)*\n\n**Item 1:** State the order and degree of (y'')³ + 2y' − y = x².\n\n*Solution:* Highest derivative: y'' (order 2). It appears to the power 3. **Order = 2, Degree = 3.**\n\n**Item 2:** Verify that y=3e^{2x} is a solution of y'−2y=0.\n\n*Solution:* y'=6e^{2x}; y'−2y=6e^{2x}−6e^{2x}=0 ✓. Yes, y=3e^{2x} is a solution.\n\n**Item 3:** The general solution of y'=3x² is y=x³+C. Find the particular solution satisfying y(0)=5.\n\n*Solution:* y(0)=0+C=5 → C=5. **Particular solution: y=x³+5.**\n\n**Item 4:** Which of the following is an ODE? (a) x²+y²=1; (b) y'=x·y; (c) ∂y/∂t=y².\n\n*Solution:* (a) Algebraic equation — not an ODE. (b) **ODE** — involves unknown function y(x) and its derivative y'=dy/dx. (c) Partial differential equation (PDE) — involves a partial derivative with respect to t, not an ordinary derivative.\n\n---\n\n**[P55 — SCORE]** Count correct items (Items 1–4). Running total: _/4.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(independence mode)*\n\nA radioactive substance decays at a rate proportional to its current mass:\n$$\\frac{dM}{dt} = -0.03\\,M, \\quad M(0) = 100 \\text{ g}$$\n\n**(a)** State the order and degree of this ODE.\n\n**(b)** Verify that M(t) = M₀e^{−0.03t} is a solution for any constant M₀.\n\n**(c)** Apply the initial condition M(0)=100 to find the particular solution.\n\n**(d)** Find the half-life: the time T at which M(T) = 50 g.\n\n---\n\n*Expected solution:*\n\n(a) Highest derivative: dM/dt (first derivative). Power = 1. **Order = 1, Degree = 1.**\n\n(b) M'(t)=−0.03M₀e^{−0.03t}. Check: M'−(−0.03M)=−0.03M₀e^{−0.03t}+0.03·M₀e^{−0.03t}=0 ✓.\n\n(c) M(0)=M₀e⁰=M₀=100 → M₀=100. **Particular solution: M(t)=100e^{−0.03t}.**\n\n(d) 100e^{−0.03T}=50 → e^{−0.03T}=0.5 → −0.03T=ln(0.5)=−ln2 → T=ln2/0.03 ≈ **23.1 years.**\n\n---\n\n**[P55 — SCORE]** Score P76 (0 or 1). Running total: _/5.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]** MAMR = 5/5.\n\n- Score ≥ 5/5 → PASS → proceed to P74.\n- Score < 5/5 → FAIL → P74 routes to repair.\n\n---\n\n**[P55 — SCORE]** Record final pass/fail.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- **PASS (5/5):** Concept mastered. Proceed to math.de.first-order-ode, math.de.second-order-ode.\n- **FAIL:** Diagnose: Item 1 wrong → B-MC2. Item 2 (verification) wrong → B-MC1 (solution concept). Item 3 (particular solution) wrong → B-MC3.\n\n---\n\n**[P55 — SCORE]** Log routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession complete for math.de.ode.\n\n---\n\n\n## Component 5 — Protocol B (Repair Sequences)\n\n### B-MC1 — Repair: SOLUTION-IS-A-NUMBER\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You're treating the ODE solution as a number, like solving x²=4 gives x=2. But an ODE solution is a function y(x) — an entire rule assigning outputs to inputs — not a single value.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nCheck: is y=5 a solution of y'=2x? Compute y'=d/dx(5)=0. Does 0=2x for all x? No — only at x=0. A constant doesn't work. Try y=x²: y'=2x. Does 2x=2x? Yes, for all x! So y=x² is a solution. The \"solution\" is a function, checked for ALL x, not at one point.\n\n**[P64 — CONCEPTUAL SHIFT]**\nAn algebraic equation (like x²=4) is a condition on a number. An ODE (like y'=2x) is a condition on a function — it must hold at every point in the domain. The solution is a function that makes the equation true everywhere, not a number that makes it true at one point. Think of it as: \"find the curve whose slope at every x equals 2x\" — the answer is a parabola, a geometric object, not a point.\n\n---\n\n### B-MC2 — Repair: ORDER-VERSUS-DEGREE\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You reported the degree as the order, or vice versa. Order is about which derivative is present (how many times the function is differentiated); degree is about the power of that derivative in the equation.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nTwo equations: (a) y'''=0 (order=3, degree=1 — third derivative to the first power); (b) (y')²=1−y² (order=1, degree=2 — first derivative squared). In (a), order=3 is the NUMBER OF PRIMES on y'''. Degree=1 because y''' appears to the first power. In (b), order=1 but degree=2 because y' appears squared.\n\n**[P64 — CONCEPTUAL SHIFT]**\nOrder = count the prime marks on the highest derivative (y'=1, y''=2, y'''=3, etc.). Degree = the exponent on that highest-order derivative (after clearing fractions). A useful check: degree≥1 always (you can't have a derivative to the zeroth power — that's just a function, not a derivative). Order and degree are independent: an ODE can have high order and low degree, or low order and high degree.\n\n---\n\n### B-MC3 — Repair: GENERAL-PARTICULAR-CONFLATED\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You mixed up the general solution (a family with free constants) and the particular solution (a specific member of that family). The general solution of an n-th order ODE always has exactly n arbitrary constants.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nODE: y'=6x (first order). Integrate: y=3x²+C. This is the general solution — it represents infinitely many parabolas. If y(0)=7: 3·0+C=7 → C=7 → y=3x²+7. This particular solution is the unique parabola passing through (0,7) with the right slope everywhere. Without the condition, any C works; with it, exactly one C is forced.\n\n**[P64 — CONCEPTUAL SHIFT]**\nAn n-th order ODE needs n integrations to reach the solution function, and each integration introduces one constant (C₁, C₂, … Cₙ). The general solution is all functions with those n free constants. Each initial/boundary condition is one equation, and n conditions pin down all n constants uniquely (under appropriate hypotheses). Missing a constant in the general solution means missing entire families of solutions.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | Classify: y'' − 5y' + 6y = e²ˣ. Order? Degree? Linear or nonlinear? [Order=2, degree=1, linear] |\n| Day 3 | Verify y=e^{−x}+2 is NOT a solution of y'+y=0. [y'=−e^{−x}; y'+y=−e^{−x}+e^{−x}+2=2≠0] |\n| Day 7 | y'=−0.1y, y(0)=50. Find the particular solution. [y=50e^{−0.1x}] |\n| Day 14 | True/False: the general solution of a second-order ODE always has exactly two arbitrary constants. [True — under regularity conditions (Picard-Lindelöf); for explicit n-th order ODEs this holds.] |\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.derivative-intro | Required | Derivative concept and notation are the core language of ODEs |\n| math.calc.antiderivatives | PACKAGE_READY | General solution via integration; +C as the origin of the arbitrary constant |\n| math.func.function-concept | Required | ODE solution is a function, not a number — this understanding is the prerequisite |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.de.first-order-ode | Requires ODE concept, order/degree, verification |\n| math.de.second-order-ode | Requires ODE concept and two-constant general solution understanding |\n\n### Cross-Links\n| Concept ID | T1 Status | Notes |\n|------------|-----------|-------|\n| math.phys.classical-mechanics | NOT T1 | ODEs naturally arise in mechanics (Newton's second law as a second-order ODE); cross-domain preview |\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**The \"solution is a function\" shift is everything:** Students who have spent years solving algebraic equations for numbers need to make a genuine conceptual shift. A01's Stage C uses the antiderivative problem — which they already know — to reframe it as an ODE, making the shift feel like a renaming rather than a leap. The Stage P contrast table (number vs. function solutions) then makes the difference explicit.\n\n**Verification as the primary tool:** At the ODE-introduction level, students cannot yet solve most ODEs. But they can always VERIFY whether a given function is a solution. This is the key skill A02 develops — differentiate, substitute, simplify to 0. It builds rigour without requiring solution techniques, and it prepares students for the first-order and second-order ODE blueprints.\n\n**Order vs. degree mnemonic:** Order = position of the derivative in the sequence (1st, 2nd, 3rd). Degree = power (1st power, squared, cubed). The confusion comes from using numbers for both. Require students to say \"order 2\" and \"degree 3\" (not just 2 and 3) until the distinction is automatic.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| ID | Check | Status |\n|----|-------|--------|\n| V-1 | All Teaching Actions have assigned primitives | PASS |\n| V-2 | GR-1: A01 opens with P11 (B-category primitive, non-repair) | PASS |\n| V-3 | CPA entry stage = C for advanced difficulty | PASS |\n| V-4 | bloom=understand → no P07 required; V-4 = N/A | N/A |\n| V-5 | GR-2: P49 present in A01 and A02, each with 4 branches | PASS |\n| V-6 | GR-3: A03 (P91) is terminal — no further TAs after gate | PASS |\n| V-7 | GR-4: All B-sequences open with P27+P41+P64 | PASS |\n| V-8 | GR-6: P91 is terminal in A03 | PASS |\n| V-9 | GR-7: P76 present inside A03 mastery gate | PASS |\n| V-10 | GR-9: cross_t1=[] → P76 mode = independence | PASS |\n| V-11 | GR-10: MAMR=5/5 stated and enforced (thresh=0.85, n=5: ⌈0.85×5⌉=5) | PASS |\n| V-12 | PASS criterion (5/5) stated in P75 and P74 | PASS |\n| V-13 | GR-8: Component 7 documents all cross-blueprint dependencies | PASS |\n| V-14 | Lean structure: h=4 → 2 main TAs (A01,A02) + gate (A03) | PASS |\n| V-15 | Component 0 metadata fields complete | PASS |\n| V-16 | Component 1 (prior anchors, target state, obstacles) complete | PASS |\n| V-17 | Component 2: 3 MCs with 1 foundational designated | PASS |\n| V-18 | Component 3 scaffolding protocol complete | PASS |\n| V-19 | Component 6 P89 schedule complete (4 intervals) | PASS |\n| V-20 | Component 8 teaching notes complete | PASS |\n| AIR | No prohibited operations (no curriculum modification, no framework redesign) | PASS |\n\n**Status: PACKAGE_READY**",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 184,
+        "endLine": 397
+      }
+    },
+    {
+      "assetId": "math.de.ode/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.ode",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner begins with a concrete ODE from known calculus (antiderivative problem) before abstracting.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: a position/velocity ODE s'(t)=2t is recognised as the antiderivative problem ∫2t dt=t²+C; observe that the solution is a function with a constant; P: algebraic equation vs ODE contrast (number-solution vs function-solution); A: formal definition, order, degree, general and particular solutions\n2. **A02 P06 CONTRAST PAIR** — first-order vs second-order ODEs; linear vs nonlinear; autonomous vs non-autonomous; solution verification procedure\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 58,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.de.ode/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.de.ode",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | Classify: y'' − 5y' + 6y = e²ˣ. Order? Degree? Linear or nonlinear? [Order=2, degree=1, linear] |\n| Day 3 | Verify y=e^{−x}+2 is NOT a solution of y'+y=0. [y'=−e^{−x}; y'+y=−e^{−x}+e^{−x}+2=2≠0] |\n| Day 7 | y'=−0.1y, y(0)=50. Find the particular solution. [y=50e^{−0.1x}] |\n| Day 14 | True/False: the general solution of a second-order ODE always has exactly two arbitrary constants. [True — under regularity conditions (Picard-Lindelöf); for explicit n-th order ODEs this holds.] |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 326,
+        "endLine": 339
+      }
+    },
+    {
+      "assetId": "math.de.ode/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.ode",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.derivative-intro | Required | Derivative concept and notation are the core language of ODEs |\n| math.calc.antiderivatives | PACKAGE_READY | General solution via integration; +C as the origin of the arbitrary constant |\n| math.func.function-concept | Required | ODE solution is a function, not a number — this understanding is the prerequisite |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.de.first-order-ode | Requires ODE concept, order/degree, verification |\n| math.de.second-order-ode | Requires ODE concept and two-constant general solution understanding |\n\n### Cross-Links\n| Concept ID | T1 Status | Notes |\n|------------|-----------|-------|\n| math.phys.classical-mechanics | NOT T1 | ODEs naturally arise in mechanics (Newton's second law as a second-order ODE); cross-domain preview |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.ode.md",
+        "startLine": 339,
+        "endLine": 361
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

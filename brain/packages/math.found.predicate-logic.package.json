@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.predicate-logic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.predicate-logic",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:45fd057236169784f8fe7bfd8ceb5d02bdd34c42c240ac41d8719cd89072be41",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.predicate-logic.md": "sha256:da0dd56c2a1b2ba2cf1a7792a88b31e870c9efff7ebb68b36c40dcd21d21a9dc"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.predicate-logic",
+    "name": "Predicate Logic",
+    "difficultyRaw": "developing",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.found.logical-connectives",
+      "math.found.proposition"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.predicate-logic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.predicate-logic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.predicate-logic.md": "sha256:da0dd56c2a1b2ba2cf1a7792a88b31e870c9efff7ebb68b36c40dcd21d21a9dc"
+      },
+      "contentHash": "sha256:2daa1da36ab49f193498a2f958faeb427dad0a4e0cb499e224413dc817da4f0a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.predicate-logic.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.predicate-logic.md#TA-A01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.predicate-logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.predicate-logic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.predicate-logic.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.predicate-logic.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.predicate-logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.predicate-logic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.predicate-logic.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.predicate-logic.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.predicate-logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.predicate-logic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.predicate-logic.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.predicate-logic.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.predicate-logic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.predicate-logic\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.predicate-logic/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.predicate-logic",
+      "title": "Predicate Logic — cognitive map",
+      "content": "### Core Insight\nPredicate logic extends propositional logic by quantifying over a domain: ∀x P(x) claims P holds for every element, while ∃x P(x) claims P holds for at least one. Quantifier order is critical — swapping ∀ and ∃ changes the meaning, and often the truth value. Negation pushes through a quantifier by flipping ∀↔∃ and negating the predicate.\n\n### Conceptual Hierarchy\n```\nLevel 0 (Concrete): Predicates as sentence templates; domain as a specific set.\nLevel 1 (Pictorial): Truth table for small finite domains; scope diagram for nested quantifiers.\nLevel 2 (Abstract): Quantifier syntax (∀x, ∃x); negation laws; nested quantifiers.\nLevel 3 (Transfer): Analyse ∀x ∃y P(x,y) vs. ∃y ∀x P(x,y); different truth values, different meanings.\n```\n\n### Core Definitions\n```\nPREDICATE: P(x) is a sentence containing a variable x that becomes a proposition\n  when x is assigned a value from the domain D.\n  Example: P(x) = \"x is even\" over D = ℤ.\n    P(4) is TRUE; P(7) is FALSE; P(x) alone has no truth value.\n\nDOMAIN OF DISCOURSE (D): the set of values x can take.\n  Example: D = ℕ, D = ℤ, D = {1,2,...,10}.\n  Changing D can change the truth value of ∀x P(x) or ∃x P(x).\n\nUNIVERSAL QUANTIFIER ∀:\n  ∀x P(x) is TRUE iff P(d) is TRUE for EVERY d ∈ D.\n  ∀x P(x) is FALSE iff P(d) is FALSE for SOME d ∈ D (a counter-example suffices).\n\nEXISTENTIAL QUANTIFIER ∃:\n  ∃x P(x) is TRUE iff P(d) is TRUE for AT LEAST ONE d ∈ D.\n  ∃x P(x) is FALSE iff P(d) is FALSE for EVERY d ∈ D.\n\nNEGATION LAWS (De Morgan for quantifiers):\n  ¬(∀x P(x)) ≡ ∃x ¬P(x)   [Not all → exists one that fails]\n  ¬(∃x P(x)) ≡ ∀x ¬P(x)   [None exists → all fail]\n\nNESTED QUANTIFIERS:\n  ∀x ∃y P(x,y): For each x, we can FIND a (possibly different) y.\n  ∃y ∀x P(x,y): There is ONE y that works for ALL x simultaneously.\n  These are NOT equivalent in general.\n\nFREE vs. BOUND VARIABLES:\n  In ∀x P(x,y): x is bound (quantified); y is free (unquantified).\n  Replacing y with a value gives a proposition.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 33,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.predicate-logic",
+      "title": "[FOUNDATIONAL]: QUANTIFIER-SCOPE-COLLAPSE",
+      "content": "### MC-1 [FOUNDATIONAL]: QUANTIFIER-SCOPE-COLLAPSE\n**Belief:** ∀x ∃y P(x,y) and ∃y ∀x P(x,y) mean the same thing — quantifier order doesn't matter.\n**Origin:** Students read both as \"for all x and for some y, P(x,y)\" without registering the dependency. Multiplication is commutative; students assume logical quantifiers are too.\n**Trigger:** \"Is ∀m ∃n (m < n) the same as ∃n ∀m (m < n) over ℤ?\" → student says yes.\n**Repair:** Over ℤ: ∀m ∃n (m<n) is TRUE (for any m, take n=m+1). But ∃n ∀m (m<n) is FALSE (no single integer exceeds all integers). Same predicate, reversed quantifiers, opposite truth values.\n**Priority:** FOUNDATIONAL — every proof involving \"for all x, there exists y\" depends on getting this right.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.predicate-logic",
+      "title": "NEGATION-FLIP-FAILURE",
+      "content": "### MC-2: NEGATION-FLIP-FAILURE\n**Belief:** ¬(∀x P(x)) ≡ ∀x ¬P(x) — negation passes through the quantifier without flipping ∀↔∃.\n**Origin:** Students negate the predicate but forget to flip the quantifier, mirroring how ¬(p∧q) ≡ ¬p∧¬q is incorrectly applied.\n**Trigger:** \"Negate: ∀x (x > 0)\" → student writes \"∀x (x ≤ 0)\" instead of \"∃x (x ≤ 0).\"\n**Repair:** The correct law is ¬(∀x P(x)) ≡ ∃x ¬P(x). Mnemonic: to disprove a \"for all\" claim, you need only ONE counter-example (there EXISTS one where it fails).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.predicate-logic",
+      "title": "DOMAIN-UNIVERSAL",
+      "content": "### MC-3: DOMAIN-UNIVERSAL\n**Belief:** The domain is always ℝ (or \"all numbers\" or \"everything\") unless explicitly restricted; unstated domains default to ℝ.\n**Origin:** Most school examples use ℝ or ℤ; students habituate to omitting domain specification.\n**Trigger:** \"∀x (x² ≥ 0)\" — student says TRUE without checking; over ℂ it's FALSE (i² = −1 < 0).\n**Repair:** Domain must always be stated. The same statement can be TRUE over D₁ and FALSE over D₂.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 16,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.predicate-logic",
+      "title": "Concrete Foundation — Predicates and Quantifiers on Finite Domains",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Foundation — Predicates and Quantifiers on Finite Domains\",\"primitives\":[\"P03\",\"P06\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 139,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.predicate-logic",
+      "title": "Negation Laws and Quantifier Flipping",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Negation Laws and Quantifier Flipping\",\"primitives\":[\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 202,
+        "endLine": 279
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.predicate-logic",
+      "title": "Nested Quantifiers and Scope Analysis",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Nested Quantifiers and Scope Analysis\",\"primitives\":[\"P04\",\"P11\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 279,
+        "endLine": 365
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.predicate-logic",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 365,
+        "endLine": 690
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.predicate-logic",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "### TA-A04: Mastery Gate (P91 Terminal)\n\n```\nP77 — MULTI-PROBLEM SET (4 problems)\n\nProblem 1:\n\"Domain: D = {n ∈ ℕ : 1 ≤ n ≤ 10}. Predicate: S(n) = 'n is a perfect square.'\n(a) List all n ∈ D for which S(n) is TRUE.\n(b) Determine the truth value of ∀n S(n) and ∃n S(n).\n(c) Write the formal negation of ∀n S(n) and state its truth value.\"\n\nProblem 2:\n\"Write the formal negation of each statement (flip quantifier, negate predicate):\n(a) ∃x (x² = 2)  over ℚ.\n(b) ∀x ∀y (x + y = y + x)  over ℝ.\"\n\nProblem 3:\n\"Domain D = ℤ × ℤ (pairs of integers). Predicate P(a,b) = 'a + b = 0'.\n(a) Determine the truth value of ∀a ∃b P(a,b).\n(b) Determine the truth value of ∃b ∀a P(a,b).\n(c) Explain in one sentence why (a) and (b) differ.\"\n\nProblem 4:\n\"In the statement ∀x ∃y (y > x²), identify:\n(a) The bound variables.\n(b) Any free variables.\n(c) Whether this statement is TRUE or FALSE over domain ℝ.\n(d) Write its formal negation.\"\n```\n\n```\nP55 — SCORE (after P77)\nAward 1 point per problem.\nRunning total before P76: __/4.\n```\n\n```\nP76 — TRANSFER PROBE (P76 independence: cross_links = [])\n\"Let D = ℕ (positive integers 1, 2, 3, …).\nDefine P(m, n) = 'm divides n' (meaning n = km for some k ∈ ℕ).\n\n(a) State ∀m ∃n P(m,n) in plain English. Is it TRUE or FALSE over ℕ?\n    For each m, exhibit a witness n.\n\n(b) State ∃n ∀m P(m,n) in plain English. Is it TRUE or FALSE over ℕ?\n    Explain why no such n can exist.\n\n(c) Write the formal negation of statement (b). Simplify fully (no ¬ on a quantifier).\n\n(d) In one sentence, explain what the difference between (a) and (b) reveals\n    about why quantifier order matters in predicate logic.\"\n\n[Expected:\n(a) 'For every positive integer m, there exists a positive integer n that m divides.'\n    TRUE: for any m, take n = m (m divides m, since m = 1·m). Witness: n = m.\n(b) 'There exists a positive integer n that is divisible by every positive integer.'\n    FALSE: such an n would satisfy 1|n AND 2|n AND 3|n AND … — no finite positive\n    integer is divisible by all positive integers (e.g., n+1 doesn't divide n for n≥1; or\n    directly: if n is divisible by every m, then n ≥ m for all m, so n ≥ n+1, contradiction).\n(c) ¬(∃n ∀m P(m,n)) ≡ ∀n ∃m ¬P(m,n) = ∀n ∃m (m does not divide n).\n    In English: 'For every positive integer n, there is some positive integer m that does not divide n.'\n(d) In (a), each m chooses its own n; in (b), a single n must work for every m —\n    this dependency is what makes (a) weaker than (b) and explains why swapping\n    quantifiers changes truth values.]\n```\n\n```\nP55 — SCORE (after P76)\nAward 1 point for P76.\nRunning total: __/5.\n```\n\n```\nP75 — MASTERY ASSESSMENT\nPass criterion: 4 out of 5 (⌈0.80 × 5⌉ = 4)\n```\n\n```\nP55 — SCORE (final)\nRecord pass/fail status.\n```\n\n```\nP74 — ROUTING DECISION\nScore ≥ 4/5 → MASTERY ACHIEVED → P78 COMPLETION\nScore < 4/5 → NEEDS REVIEW → identify lowest-scoring item; activate Protocol B for its misconception\n```\n\n```\nP55 — SCORE (routing recorded)\n```\n\n```\nP78 — COMPLETION\n\"Predicate logic checkpoint complete. You have established:\n  • Predicates P(x): sentences with a variable that become propositions when x is assigned a value.\n  • Domain D: the set of values x can take; always state the domain.\n  • ∀x P(x): TRUE iff P(d) holds for every d ∈ D; one counter-example makes it FALSE.\n  • ∃x P(x): TRUE iff P(d) holds for some d ∈ D; one witness makes it TRUE.\n  • Negation laws: ¬(∀x P(x)) ≡ ∃x ¬P(x); ¬(∃x P(x)) ≡ ∀x ¬P(x). Quantifier flips.\n  • Nested quantifiers: ∀x ∃y ≠ ∃y ∀x in general — order determines dependency structure.\nNext concepts: math.found.proof (quantifiers structure every mathematical proof),\nmath.found.set-theory (∀/∃ over sets formalise membership and subset relations).\"\n```\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair Chains)\n\n### Repair Chain B-1: QUANTIFIER-SCOPE-COLLAPSE (MC-1 FOUNDATIONAL)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: ∀x ∃y P(x,y) and ∃y ∀x P(x,y) say the same thing.\n AFTER: They differ in DEPENDENCY. In ∀x ∃y, y can depend on x.\n   In ∃y ∀x, y is fixed before x is chosen.\n\nDependency picture:\n  ∀x ∃y P(x,y): Pick any x → THEN search for y (y may vary with x).\n  ∃y ∀x P(x,y): Fix y first → THEN verify P holds for ALL x.\n\nConcrete counter-example (ℤ, P(m,n) = 'm < n'):\n  ∀m ∃n (m<n): TRUE — for any m, pick n=m+1.\n  ∃n ∀m (m<n): FALSE — no single integer beats all integers.\n  Conclusion: swapping quantifiers changed TRUE to FALSE.\"\n\nRepair exercise:\nOver D = {1,2,3}, P(a,b) = 'a+b > 3'.\n  ∀a ∃b P(a,b): a=1: b=3 ✓. a=2: b=2 ✓. a=3: b=1 ✓. TRUE.\n  ∃b ∀a P(a,b): need fixed b with 1+b>3 AND 2+b>3 AND 3+b>3.\n    b must satisfy b>2 AND b>1 AND b>0. So b>2. Only b=3.\n    Check: 1+3=4>3 ✓, 2+3=5>3 ✓, 3+3=6>3 ✓. TRUE.\n  (This example BOTH are true, showing independence isn't guaranteed either way.)\n  Return to the ℤ example for a pair that differs.\n\nExit gate: \"Give one example where ∀x ∃y P(x,y) is TRUE but ∃y ∀x P(x,y) is FALSE.\"\nExpected: ∀m ∃n (m<n) over ℤ (TRUE) vs. ∃n ∀m (m<n) over ℤ (FALSE).\n→ Correct: return to TA-A03.\n→ Incorrect: revisit the scope diagrams.\n```\n\n### Repair Chain B-2: NEGATION-FLIP-FAILURE (MC-2)\n\n```\nP41 — MISCONCEPTION DETECTOR\nDiagnostic: \"Negate: ∀x (x is a prime number) over D = {2,3,4,5}.\"\nIf student writes \"∀x (x is NOT a prime number)\": MC-2 confirmed.\n\nP27 — MISCONCEPTION NAMING\n\"NEGATION-FLIP-FAILURE: ¬(∀x P(x)) ≡ ∀x ¬P(x) is WRONG.\nThe CORRECT law: ¬(∀x P(x)) ≡ ∃x ¬P(x).\nMnemonic: to disprove 'ALL x satisfy P,' show ONE x that DOESN'T satisfy P.\nONE counter-example = one existential statement.\"\n\nP03 — ANALOGY BRIDGE\n\"Prosecutor's claim: 'All suspects were at the scene.'\nDefense's negation: 'Not ALL were at the scene' = 'AT LEAST ONE suspect was NOT.'\nThe defense does NOT say 'NONE were at the scene' — that's ¬∃, not ¬∀.\"\n\nRepair exercise:\nNegate ∃x (x² < 0) over ℝ.\n  ¬(∃x (x²<0)) ≡ ∀x ¬(x²<0) ≡ ∀x (x² ≥ 0). (TRUE over ℝ.)\nNegate ∀x (x > 0) over ℤ.\n  ¬(∀x (x>0)) ≡ ∃x ¬(x>0) ≡ ∃x (x ≤ 0). (TRUE — x=−1 is a witness.)\n\nExit gate: \"What are the two negation laws? State them symbolically.\"\nExpected: ¬(∀x P(x)) ≡ ∃x ¬P(x) AND ¬(∃x P(x)) ≡ ∀x ¬P(x).\n→ Correct: return to TA-A02.\n```\n\n### Repair Chain B-3: DOMAIN-UNIVERSAL (MC-3)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: The domain is always ℝ (or 'all numbers') by default.\n AFTER: The domain must always be specified; truth values can differ by domain.\n\nCounter-example:\n  ∀x (x² ≥ 0):\n    Over ℝ: TRUE (squares of real numbers are non-negative).\n    Over ℂ: FALSE — take x=i; i²=−1 < 0.\n  \n  ∀x (x + 1 > x):\n    Over ℝ: TRUE.\n    Over ℤ/2ℤ = {[0],[1]}: [0]+[1]=[1] and [1]+[1]=[0].\n    In [1]: [1]+[1]=[0] ≰ [1]? Depends on ordering definition.\n\nLesson: ALWAYS state the domain. Same predicate, different domain → possibly different truth value.\"\n\nExit gate: \"Give an example of a predicate P(x) and two domains D₁, D₂ such that\n∀x P(x) is TRUE over D₁ but FALSE over D₂.\"\nExpected: e.g. P(x) = 'x > 0'; D₁ = ℕ (TRUE), D₂ = ℤ (FALSE, x=−1 is counter-example).\n→ Correct: return to TA-A01.\n```\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n```\nP89 — SPACED REPETITION\nReview schedule for math.found.predicate-logic:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State the two negation laws for quantifiers.\n  Negate: ∃x (x is a factor of 7) over D = {2,3,4,5,6}.\"\n  Target: ¬∃ ≡ ∀¬; negation: ∀x (x is NOT a factor of 7); TRUE over D.\n\nInterval 2 (3 days):\n  Application: \"Over D = ℝ, compare:\n  (a) ∀x ∃y (x·y = 1)  and  (b) ∃y ∀x (x·y = 1).\n  Determine truth values and explain the dependency structure.\"\n  Target: (a) FALSE — x=0 has no multiplicative inverse;\n          (b) FALSE — y=1 fails for x=2 (2·1≠1).\n\nInterval 3 (7 days):\n  Transfer: \"Analyse ∀ε>0 ∃δ>0 (|x−a|<δ → |f(x)−L|<ε).\n  (a) What does this say about ε and δ?\n  (b) What does swapping the quantifiers change?\"\n  Target: (a) ε fixed first; then δ found (δ may depend on ε);\n          (b) ∃δ ∀ε: one δ must work for ALL ε simultaneously — much stronger,\n              corresponds to uniform continuity, not pointwise.\n\nInterval 4 (21 days):\n  Integration: \"When writing a proof that ∀x ∈ D, P(x), what is the\n  standard proof strategy? How does predicate logic determine the proof structure?\"\n  Target: Let x ∈ D be arbitrary; prove P(x). Generality of x represents ∀.\n```\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### GR-8: Cross-link documentation\n```\nIncoming prerequisites:\n  math.found.proposition → Truth values (TRUE/FALSE); propositions as atomic statements.\n    Predicates generalise propositions by introducing a free variable.\n  math.found.logical-connectives → ∧, ∨, ¬, →, ↔. The negation law\n    ¬(∀x P(x)) ≡ ∃x ¬P(x) is the quantifier analogue of De Morgan's laws.\n\nOutgoing unlocks:\n  math.found.proof → Every mathematical proof involves quantified statements;\n    \"∀x P(x)\" proofs use the arbitrary-element strategy; \"∃x P(x)\" proofs require\n    constructing a witness.\n  math.found.set-theory → Set membership (x ∈ A) and subset (A ⊆ B, meaning\n    ∀x (x ∈ A → x ∈ B)) are predicate logic statements.\n\nCross-links: none.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = []\nP76 MODE: INDEPENDENCE\nP76 probe: divisibility predicate P(m,n) = 'm divides n' over ℕ;\n  ∀m ∃n P(m,n) vs. ∃n ∀m P(m,n); negation of the existential form.\n  Self-contained; no cross-concept dependency.\n```\n\n---\n\n\n## Component 8 — Teaching Notes\n\n### Pedagogical Rationale\nPredicate logic (bloom=analyze) requires students to break down quantified statements — identify the quantifier, the domain, the predicate, and the dependency structure — then evaluate truth values by checking elements or constructing counter-examples/witnesses. The bloom level means P49 branches and P77 problems require analysis, not just procedural symbol manipulation.\n\n### Common Session Failure Modes\n1. **MC-1 is the critical gate:** Students who conflate ∀x ∃y and ∃y ∀x will write flawed proofs indefinitely. The scope-dependency diagram (TA-A03, P11) is the most effective repair tool — visualising \"y is chosen AFTER x\" vs. \"y is fixed BEFORE x\" separates the two cases.\n2. **MC-2 persists even when corrected:** Students revert to ∀x ¬P(x) under time pressure. The prosecutor/defense analogy in B-2 provides a durable mnemonic.\n3. **Finite domain exercises are essential:** Abstract laws (∀m ∃n over ℤ) are easier to understand after smaller concrete checks (domain {1,2,3}). Always begin with finite domains in TA-A01 before moving to infinite ones.\n\n### Connections to Broader Curriculum\n- **Downstream — math.found.proof:** Universal statements are proved by \"let x ∈ D be arbitrary\"; existential statements by \"let x = [specific witness].\" The logic is directly predicate logic.\n- **Downstream — math.found.set-theory:** Every set operation (∩, ∪, ⊆, complement) is a predicate-logic statement about membership. Set theory IS applied predicate logic.\n- **Cross-domain — calculus (later):** The ε-δ definition of limits (∀ε>0 ∃δ>0 …) is a nested quantifier statement. Students who master predicate logic here will find the limit definition much more legible.\n\n### Language Precision\n- Always say \"for all x IN D\" and \"there exists x IN D\" — domain membership is essential.\n- \"Negate\" means flip the quantifier AND negate the predicate; do not do one without the other.\n- \"Bound variable\" vs \"free variable\": in ∀x P(x,y), x is bound; y is free — the statement is still a predicate in y, not a proposition.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n### Structural Validators\n- [x] V-1: Blueprint has all 10 components (0–8, 10).\n- [x] V-2: Metadata YAML complete with all required fields.\n- [x] V-3: concept_id matches filename `math.found.predicate-logic`.\n- [x] V-4: difficulty=developing, bloom_level=analyze, mastery_threshold=0.80.\n- [x] V-5: estimated_hours=8, session_ta_cap=7.\n\n### Grammar Rule Validators\n- [x] V-6 (GR-1): Every non-repair TA opens with B-category primitive (TA-A01: P03+P06; TA-A02: P11; TA-A03: P04; TA-A04 is mastery gate).\n- [x] V-7 (GR-2): Every non-gate TA contains P49 with all 4 branches. TA-A01, TA-A02, TA-A03 each have P49.\n- [x] V-8 (GR-3): Mastery gate TA-A04 is terminal (ends with P78).\n- [x] V-9 (GR-4): P41 entry diagnostic gates → Protocol B when MC-1 active.\n- [x] V-10 (GR-6): P91 compound (P77→P55→P76→P55→P75→P55→P74→P55→P78) complete in TA-A04.\n- [x] V-11 (GR-7): P76 present in mastery gate TA-A04.\n- [x] V-12 (GR-8): Cross-links = []; documented in Component 7 as empty.\n- [x] V-13 (GR-9): P76 mode is INDEPENDENCE (cross_links=[]). P76 probe: divisibility predicate on ℕ; ∀m∃n vs. ∃n∀m; negation. Self-contained.\n- [x] V-14 (GR-10): MAMR stated in Component 0 and enforced in Component 3.\n\n### Content Validators\n- [x] V-15: Pass criterion = ⌈0.80 × 5⌉ = 4/5. P77 has 4 problems; P76 contributes 1; total n=5. ✓\n- [x] V-16: CPA_ENTRY_STAGE = C. developing always starts Concrete. ✓\n- [x] V-17: MC-1 is FOUNDATIONAL and cleared first per MAMR. ✓\n- [x] V-18: P49 INCORRECT branch activates P27 or P64 with repair pathway in TA-A01, TA-A02, TA-A03. ✓\n- [x] V-19: P76 probe independent of P77 problems (P77: perfect squares/negation/nested on D={1..10} and specific integer pairs; P76: divisibility on ℕ — distinct predicate/domain). ✓\n- [x] V-20: Spaced repetition intervals are 1, 3, 7, 21 days with distinct prompts. ✓\n\n### Automated Invariant Check (AIR)\n- [x] AIR-1: No implementation code present.\n- [x] AIR-2: No references to internal system variables.\n- [x] AIR-3: cross_links = [] — no concept IDs to validate.\n- [x] AIR-4: P91 sequence order is P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n- [x] AIR-5: Protocol B repair chains each have explicit exit gate with return instruction. ✓\n\n**VALIDATION RESULT: PASS — PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 365,
+        "endLine": 690
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.predicate-logic",
+      "title": "Scaffolding Protocol",
+      "content": "### Entry Diagnostic (P41 gate)\n```\nP41 — MISCONCEPTION DETECTOR\nPrompt: \"Consider P(x) = 'x² > x' and domain D = {−2, −1, 0, 1, 2}.\n(a) Evaluate P(x) for each element of D.\n(b) Is ∀x P(x) true or false?\n(c) Is ∃x P(x) true or false?\"\n\nCORRECT ((a): P(−2)=4>−2 ✓, P(−1)=1>−1 ✓, P(0)=0>0 ✗, P(1)=1>1 ✗, P(2)=4>2 ✓;\n          (b) FALSE (P(0) and P(1) fail); (c) TRUE (P(2) holds)):\n→ No MC-1/MC-2 detected for this level → proceed to TA-A01.\n\nINCORRECT (part (b) TRUE — misses the counter-examples):\n→ MC-1 potential. Ask follow-up: \"Does P(0) hold? P(0) says 0² > 0, i.e., 0 > 0. True or false?\"\n→ If student still says TRUE → MC-1/MC-3 active → activate Protocol B.\n\nINCORRECT (part (c) FALSE — misses all three TRUE cases):\n→ Ask: \"Does P(2) hold? 4 > 2. True or false?\"\n→ Guide to understanding ∃ needs only one witness; activate B-2 if negation confusion surfaces.\n```\n\n### Prerequisite Bridge\nStudent completed math.found.proposition (truth values, logical structure) and math.found.logical-connectives (∧, ∨, ¬, →, ↔). Predicate logic extends this by adding a variable x and quantifiers — ∀ generalises \"and for every element\" and ∃ generalises \"or for some element.\"\n\n### MAMR Enforcement\nMC-1 is FOUNDATIONAL. If the student conflates quantifier order, correct this before domain specification or negation. MC-2 and MC-3 addressed FIFO once MC-1 cleared.\n\n### CPA Progression: C → P → A\n- **Concrete (C):** Small finite domain (e.g., {1,2,3,4,5}); evaluate predicate at each element; determine truth values of ∀ and ∃ by exhaustion.\n- **Pictorial (P):** Scope diagram for nested quantifiers; dependency arrows (x selected first, y may depend on x).\n- **Abstract (A):** Infinite domains (ℤ, ℝ); nested quantifiers; formal negation; free/bound variable identification.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 104,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.predicate-logic",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89 — SPACED REPETITION\nReview schedule for math.found.predicate-logic:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State the two negation laws for quantifiers.\n  Negate: ∃x (x is a factor of 7) over D = {2,3,4,5,6}.\"\n  Target: ¬∃ ≡ ∀¬; negation: ∀x (x is NOT a factor of 7); TRUE over D.\n\nInterval 2 (3 days):\n  Application: \"Over D = ℝ, compare:\n  (a) ∀x ∃y (x·y = 1)  and  (b) ∃y ∀x (x·y = 1).\n  Determine truth values and explain the dependency structure.\"\n  Target: (a) FALSE — x=0 has no multiplicative inverse;\n          (b) FALSE — y=1 fails for x=2 (2·1≠1).\n\nInterval 3 (7 days):\n  Transfer: \"Analyse ∀ε>0 ∃δ>0 (|x−a|<δ → |f(x)−L|<ε).\n  (a) What does this say about ε and δ?\n  (b) What does swapping the quantifiers change?\"\n  Target: (a) ε fixed first; then δ found (δ may depend on ε);\n          (b) ∃δ ∀ε: one δ must work for ALL ε simultaneously — much stronger,\n              corresponds to uniform continuity, not pointwise.\n\nInterval 4 (21 days):\n  Integration: \"When writing a proof that ∀x ∈ D, P(x), what is the\n  standard proof strategy? How does predicate logic determine the proof structure?\"\n  Target: Let x ∈ D be arbitrary; prove P(x). Generality of x represents ∀.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 565,
+        "endLine": 599
+      }
+    },
+    {
+      "assetId": "math.found.predicate-logic/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.predicate-logic",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### GR-8: Cross-link documentation\n```\nIncoming prerequisites:\n  math.found.proposition → Truth values (TRUE/FALSE); propositions as atomic statements.\n    Predicates generalise propositions by introducing a free variable.\n  math.found.logical-connectives → ∧, ∨, ¬, →, ↔. The negation law\n    ¬(∀x P(x)) ≡ ∃x ¬P(x) is the quantifier analogue of De Morgan's laws.\n\nOutgoing unlocks:\n  math.found.proof → Every mathematical proof involves quantified statements;\n    \"∀x P(x)\" proofs use the arbitrary-element strategy; \"∃x P(x)\" proofs require\n    constructing a witness.\n  math.found.set-theory → Set membership (x ∈ A) and subset (A ⊆ B, meaning\n    ∀x (x ∈ A → x ∈ B)) are predicate logic statements.\n\nCross-links: none.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = []\nP76 MODE: INDEPENDENCE\nP76 probe: divisibility predicate P(m,n) = 'm divides n' over ℕ;\n  ∀m ∃n P(m,n) vs. ∃n ∀m P(m,n); negation of the existential form.\n  Self-contained; no cross-concept dependency.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.predicate-logic.md",
+        "startLine": 599,
+        "endLine": 630
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

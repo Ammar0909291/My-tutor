@@ -1,0 +1,1249 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.fractions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.fractions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:014490fe9ee8602fc131150b5be52fd02372b8afe8ddc65b6f99189a25e76825",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.fractions.md": "sha256:1ed7073719c8762d1a7cee944be49bcd8a4d8d395053e65ed0aad3b49c47dfb3"
+    },
+    "assetCount": 39,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 4,
+      "teaching_action_meta": 30,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 30
+  },
+  "concept": {
+    "conceptId": "math.arith.fractions",
+    "name": "Fractions",
+    "difficultyRaw": "developing (mapped: 2)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 20,
+    "prerequisites": [
+      "math.arith.division",
+      "math.found.rational-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.fractions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.fractions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.fractions.md": "sha256:1ed7073719c8762d1a7cee944be49bcd8a4d8d395053e65ed0aad3b49c47dfb3"
+      },
+      "contentHash": "sha256:5b313f9a0d660dbc864839f5e579e06f5c6a040ee81f469f5771cbddf433dfd5",
+      "ruleCount": 30,
+      "bandCounts": {
+        "3": 30
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A03 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A06 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A07",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A08",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A08 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A09",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A09 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-A10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-A10 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-B03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-C01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-C02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-C03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-D01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-E04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-E05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-E05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-E06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-E06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-F01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-F01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-F02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-F02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-F03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-F03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fractions.TA-F04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fractions.md#TA-F04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fractions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fractions\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.fractions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.fractions",
+      "title": "Learning Objective",
+      "content": "A student who achieves mastery **applies fraction notation to represent a part-whole relationship, produces an equivalent fraction by multiplying numerator and denominator by the same non-zero integer, correctly adds two fractions with unlike denominators by finding a common denominator, and applies multiplication of fractions in a novel word problem context.**\n\nNOT: recognising that \"one half\" means 1/2 without being able to compare 3/4 to 2/3. NOT: following a memorised procedure for adding fractions without being able to explain what \"common denominator\" means. A student who adds numerators and denominators separately (1/2 + 1/3 = 2/5) has NOT achieved mastery regardless of arithmetic fluency.\n\n**Observable mastery criterion:** Given \"Sarah used 3/4 of a cup of flour and 2/3 of a cup of sugar. How much did she use in total?\", the student correctly identifies the need for a common denominator, computes 9/12 + 8/12 = 17/12, and interprets 17/12 as 1 and 5/12 cups — without prompting.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 29,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.fractions",
+      "title": "— \"Larger denominator = larger fraction.",
+      "content": "### MC-1 — \"Larger denominator = larger fraction.\"\n\n**Trigger signal:** MISCONCEPTION:MC-1  \n**Active in:** DQ-2=MC-1; any comparison task where student ranks by denominator alone\n\n**Conflict evidence:** \"Cut one pizza into 4 slices and another identical pizza into 8 slices. Hold one slice from each. The 1/4 slice is visibly larger. Yet 4 < 8. Larger denominator means each slice is smaller, not larger.\"\n\n**Bridge text:** \"The denominator tells you how many pieces the whole was cut into. MORE cuts = SMALLER pieces. So larger denominator = smaller unit fraction. 1/100 is almost nothing; 1/2 is half.\"\n\n**Replacement text:** \"To compare fractions: convert to a common denominator, then compare numerators. Never compare denominators directly.\"\n\n**Discrimination pairs:**\n- CORRECT comparison: 1/3 > 1/5 (fewer cuts = bigger pieces)\n- MC-1 error: 1/5 > 1/3 (5 > 3 so 1/5 must be bigger)\n\n**S6 path:** Use physical cutting of paper circles. Emotional framing: \"This is one of the most common errors — you're in good company.\"\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 3,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.fractions",
+      "title": "— \"Add fractions by adding numerators and denominators separately.",
+      "content": "### MC-2 — \"Add fractions by adding numerators and denominators separately.\"\n\n**Trigger signal:** MISCONCEPTION:MC-2  \n**Active in:** DQ-3=MC-2; any addition task yielding numerator-sum / denominator-sum result\n\n**Conflict evidence:** \"1/2 + 1/2 should equal 1 (one whole). By your method: (1+1)/(2+2) = 2/4 = 1/2. But half plus half is one whole, not another half. The rule breaks immediately for the simplest case.\"\n\n**Bridge text:** \"To add pieces, the pieces must be the same size. 1/2 is one half-sized piece. 1/3 is one third-sized piece. They're different sizes. You cannot add them until you convert to the same-sized unit (same denominator).\"\n\n**Replacement text:** \"Fraction addition: Step 1 — find common denominator. Step 2 — convert. Step 3 — add numerators ONLY. Step 4 — simplify. Never add denominators.\"\n\n**Discrimination pairs:**\n- CORRECT: 1/2 + 1/3 = 3/6 + 2/6 = 5/6\n- MC-2 error: 1/2 + 1/3 = 2/5\n\n**S6 path:** Use physical fraction strips to show why adding directly fails before introducing the abstract rule.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 22,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.fractions",
+      "title": "— \"Multiplication of fractions also requires a common denominator.",
+      "content": "### MC-3 — \"Multiplication of fractions also requires a common denominator.\"\n\n**Trigger signal:** MISCONCEPTION:MC-3  \n**Active in:** Any multiplication task where student unnecessarily finds LCM first\n\n**Conflict evidence:** \"(1/2) × (1/3) = 1/6. By finding common denominator: 3/6 × 2/6 = 6/36 = 1/6. Arithmetic still works but common denominator step was unnecessary and creates a complex intermediate form. More importantly: (2/3) × (3/4) with common denominator → 8/12 × 9/12 = 72/144 = 1/2. Direct: (2×3)/(3×4) = 6/12 = 1/2. Both work but MC-3 makes the computation harder.\"\n\n**Bridge text:** \"Common denominator is needed only when you're ADDING or SUBTRACTING. For multiplication, you're asking 'a fraction of a fraction' — which combines the denominators naturally by multiplying.\"\n\n**Replacement text:** \"Multiplication rule: straight across. (a/b) × (c/d) = (ac)/(bd). No common denominator needed.\"\n\n**Discrimination pairs:**\n- CORRECT operation for addition: find LCM first\n- CORRECT operation for multiplication: multiply straight across, no LCM needed\n\n**S6 path:** Use area model visual to show why multiplication works differently — \"2/3 of 3/4 of a square\" produces a rectangle whose dimensions multiply.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 41,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "math.arith.fractions",
+      "title": "— \"Fractions must be less than 1 (improper fractions are not real fractions).",
+      "content": "### MC-4 — \"Fractions must be less than 1 (improper fractions are not real fractions).\"\n\n**Trigger signal:** MISCONCEPTION:MC-4  \n**Active in:** TA-A03; any task producing improper fraction or mixed number\n\n**Conflict evidence:** \"On a number line from 0 to 2, where is 5/4? It is 5 steps of size 1/4 = 1.25, which is between 1 and 2. 5/4 is a completely valid number — it appears naturally when you add 3/4 + 2/4.\"\n\n**Bridge text:** \"Fractions are ratios — they can represent any quantity. 5/4 means 5 quarter-pieces. If a whole has 4 quarter-pieces, 5/4 is one whole plus one extra quarter. We also write this as the mixed number 1¼.\"\n\n**Replacement text:** \"Fractions can be any positive rational number. p/q > 1 when p > q. These are called improper fractions, but the name is misleading — they are perfectly correct and arise naturally from fraction addition.\"\n\n**S6 path:** Use physical stacking of quarter-pieces until more than a whole is accumulated. Count the pieces: \"5 quarter-pieces. That's 5/4.\"\n\n---\n\n**MAMR note:** MC-2 and MC-3 can co-occur (confusion about when common denominator is needed). MC-2 is foundational — repair MC-2 first, since the student needs a correct model for addition before distinguishing addition from multiplication. After MC-2 is cleared, address MC-3 by direct contrast: \"You just learned that addition NEEDS common denominator. Multiplication does NOT.\"\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 60,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Part-Whole Anchor (C-stage)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Part-Whole Anchor (C-stage)\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P15\",\"P26\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 16,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Numerator and Denominator Roles (C-stage)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Numerator and Denominator Roles (C-stage)\",\"primitives\":[\"P01\",\"P06\",\"P07\",\"P15\",\"P26\",\"P37\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 39,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Fractions on the Number Line (C→P transition)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Fractions on the Number Line (C→P transition)\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P15\",\"P27\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 64,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Equivalent Fractions (C-stage with P bridge)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Equivalent Fractions (C-stage with P bridge)\",\"primitives\":[\"P01\",\"P06\",\"P10\",\"P14\",\"P21\",\"P23\",\"P42\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 88,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Equivalent Fractions Formalised + Simplification (P-stage)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Equivalent Fractions Formalised + Simplification (P-stage)\",\"primitives\":[\"P08\",\"P25\",\"P35\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 112,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Comparing Fractions (P-stage)",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Comparing Fractions (P-stage)\",\"primitives\":[\"P02\",\"P07\",\"P13\",\"P38\",\"P49\",\"P53\",\"P55\",\"P62\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 134,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Session 1 Formative Check (pre-close)",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Session 1 Formative Check (pre-close)\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P62\",\"P90\"],\"addresses\":[]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 161,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A08",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Adding and Subtracting Fractions (A-stage)",
+      "content": "{\"id\":\"TA-A08\",\"title\":\"Adding and Subtracting Fractions (A-stage)\",\"primitives\":[\"P01\",\"P08\",\"P10\",\"P25\",\"P35\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A08",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 173,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A09",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Multiplying and Dividing Fractions (A-stage)",
+      "content": "{\"id\":\"TA-A09\",\"title\":\"Multiplying and Dividing Fractions (A-stage)\",\"primitives\":[\"P02\",\"P08\",\"P14\",\"P19\",\"P25\",\"P27\",\"P35\",\"P49\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A09",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 202,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-A10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A10\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A10",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 230,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Surface the Error",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Surface the Error\",\"primitives\":[\"P02\",\"P16\",\"P41\",\"P49\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 251,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Why Common Denominator is Necessary",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Why Common Denominator is Necessary\",\"primitives\":[\"P06\",\"P14\",\"P25\",\"P26\",\"P31\",\"P32\",\"P35\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 270,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Word Problem Application + Mastery Gate",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Word Problem Application + Mastery Gate\",\"primitives\":[\"P46\",\"P49\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 294,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Conflict Experience (Concrete)",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Conflict Experience (Concrete)\",\"primitives\":[\"P02\",\"P06\",\"P34\",\"P49\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 312,
+        "endLine": 332
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Conceptual Repair",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"Conceptual Repair\",\"primitives\":[\"P19\",\"P27\",\"P31\",\"P32\",\"P33\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 332,
+        "endLine": 345
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P30\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 345,
+        "endLine": 363
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Confirm Existing Knowledge",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Confirm Existing Knowledge\",\"primitives\":[\"P04\",\"P49\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 363,
+        "endLine": 370
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Multiplication",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Multiplication\",\"primitives\":[\"P08\",\"P19\",\"P35\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 370,
+        "endLine": 378
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Division",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Division\",\"primitives\":[\"P08\",\"P19\",\"P35\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 378,
+        "endLine": 387
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P28\",\"P30\",\"P52\",\"P54\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 387,
+        "endLine": 403
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Low-Stakes Part-Whole (Physical)",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Low-Stakes Part-Whole (Physical)\",\"primitives\":[\"P02\",\"P06\",\"P30\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 403,
+        "endLine": 410
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Notation (Paced)",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Notation (Paced)\",\"primitives\":[\"P30\",\"P37\",\"P49\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 410,
+        "endLine": 416
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Equivalent Fractions (Visual)",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Equivalent Fractions (Visual)\",\"primitives\":[\"P07\",\"P30\",\"P35\",\"P49\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 416,
+        "endLine": 422
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Comparison (Visual, No Formula)",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"Comparison (Visual, No Formula)\",\"primitives\":[\"P07\",\"P30\",\"P35\",\"P49\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 422,
+        "endLine": 428
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-E05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Addition (Scaffolded)",
+      "content": "{\"id\":\"TA-E05\",\"title\":\"Addition (Scaffolded)\",\"primitives\":[\"P30\",\"P35\",\"P49\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 428,
+        "endLine": 434
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-E06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-E06\",\"title\":\"Mastery Gate\",\"primitives\":[\"P30\",\"P49\",\"P52\",\"P54\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 434,
+        "endLine": 451
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-F01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Vocabulary Anchor",
+      "content": "{\"id\":\"TA-F01\",\"title\":\"Vocabulary Anchor\",\"primitives\":[\"P02\",\"P06\",\"P26\",\"P37\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 451,
+        "endLine": 462
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-F02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Reading Fractions",
+      "content": "{\"id\":\"TA-F02\",\"title\":\"Reading Fractions\",\"primitives\":[\"P07\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 462,
+        "endLine": 470
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-F03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Equivalent and Comparison",
+      "content": "{\"id\":\"TA-F03\",\"title\":\"Equivalent and Comparison\",\"primitives\":[\"P07\",\"P13\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 470,
+        "endLine": 479
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_action_meta/TA-F04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fractions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-F04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-F04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 479,
+        "endLine": 487
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.fractions",
+      "title": "Assessment Battery",
+      "content": "**Formative items F-1 and F-2:**\n\nF-1 (P74 — Classification):  \n\"Identify the operation needed and compute: 'A plank is 5/6 of a metre long. A second plank is 3/4 of a metre long. What is their combined length?'\"  \nExpected CORRECT: Addition; 5/6 + 3/4 = 10/12 + 9/12 = 19/12 = 1 and 7/12 metres.\n\nF-2 (P78 — Explanation):  \n\"A student computes 2/3 + 1/4 = 3/7. What is the error and what is the correct answer?\"  \nExpected CORRECT: Error is MC-2 (added numerators and denominators). Correct: LCM(3,4)=12; 2/3=8/12; 1/4=3/12; sum=11/12.\n\n---\n\n**Full battery:**\n\n| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (Classification) | \"Label each as equivalent or not equivalent: (A) 3/4 and 9/12. (B) 2/5 and 3/7. (C) 6/8 and 3/4.\" | CORRECT: A=equivalent; B=not equivalent; C=equivalent |\n| P75 (Boundary) | \"Is 4/4 a fraction? Is 8/4 a fraction? What do these represent?\" | CORRECT: Yes to both. 4/4 = 1 (whole); 8/4 = 2 (two wholes). Fractions include whole numbers and values greater than 1. |\n| P76 (Transfer) | \"A map scale: 3/4 inch represents 15 miles. How many miles does 1/2 inch represent?\" | CORRECT: (1/2) ÷ (3/4) = (1/2) × (4/3) = 4/6 = 2/3 of 15 miles = 10 miles. |\n| P77 (Generation) | \"Write a word problem whose solution requires adding two fractions with different denominators. State the answer.\" | CORRECT: Any valid context involving two distinct fractional amounts combined. Answer includes common-denominator working. |\n| P78 (Explanation) | \"Explain why (2/3) × (4/5) = 8/15 without using any formulas — only the meaning of multiplication.\" | CORRECT: 2/3 of 4/5 means take 2/3 of a quantity that is itself 4/5 of the whole. 4/5 of the whole = 4 fifths. 2/3 of 4 fifths = 8 fifths of a third = 8/15 of the whole. (Accept any correct area-model or proportional reasoning.) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 695,
+        "endLine": 721
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fractions",
+      "title": "Student State Matrix",
+      "content": "| State | Label | Entry Behaviour | Protocol |\n|---|---|---|---|\n| S0 | Complete Novice | Has informal \"half / quarter\" vocabulary but no formal fraction notation; confuses numerator and denominator roles | Protocol A |\n| S1 | Procedural Carrier | Can write fractions and simplify; makes rule errors in operations — most commonly adds numerators and denominators (MC-2) | Protocol B |\n| S2 | Misconception Carrier | Holds MC-1 (larger denominator = larger fraction) actively; consistently incorrect on comparison tasks | Protocol C |\n| S3 | Conceptual Carrier | Understands part-whole, can compare fractions; missing multiplication and division of fractions | Protocol D |\n| S6 | Low Confidence | Can identify a half physically but shuts down at notation or multi-step operations; often co-presents with MC-2 or MC-1 | Protocol E |\n| S9 | Second-Language Learner | Fraction vocabulary (numerator, denominator, equivalent) does not map cleanly to L1; visual and concrete emphasis first | Protocol F |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 39,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fractions",
+      "title": "Diagnostic Battery",
+      "content": "---\n\n### DQ-1 — Part-Whole Intuition (P41)\n\n**Stimulus:** \"I have a pizza cut into 8 equal slices. I eat 3 slices. What fraction of the pizza did I eat? How did you decide?\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"3/8 with explanation: 3 pieces out of 8 total\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"3/8 without explanation\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"3 slices (no fraction notation)\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n{ stimulus: \"8/3 (numerator/denominator reversed)\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n{ stimulus: \"Cannot respond\", signal: \"SIGNAL:NO_RESPONSE\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → DQ-2\n- SIGNAL:PARTIAL → DQ-2 (needs procedural clarification)\n- SIGNAL:INCORRECT → S0; note denominator confusion if 8/3 response\n- SIGNAL:NO_RESPONSE → S0 or S6\n\n---\n\n### DQ-2 — Comparison (P35)\n\n**Stimulus:** \"Which is larger: 1/4 or 1/8? Explain.\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"1/4 is larger — each piece is bigger when you cut into fewer pieces\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"1/8 is larger — 8 is bigger than 4\", signal: \"MISCONCEPTION:MC-1\", mc_id: \"MC-1\" }\n{ stimulus: \"1/4 is larger but wrong reasoning ('4 is closer to 1')\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"They are equal\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → DQ-3\n- MISCONCEPTION:MC-1 → flag; DQ-3; route to Protocol C\n- SIGNAL:PARTIAL → DQ-3; note reasoning gap\n- SIGNAL:INCORRECT → S0\n\n---\n\n### DQ-3 — Addition Intuition (P41)\n\n**Stimulus:** \"1/2 + 1/3 = ? Compute it and show your working.\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"5/6 with common denominator work shown\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"2/5 (numerators and denominators added separately)\", signal: \"MISCONCEPTION:MC-2\", mc_id: \"MC-2\" }\n{ stimulus: \"2/6 or 1/3 (partial common denominator work)\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"Cannot attempt\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → S3 (concept solid; check multiplication/division) → Protocol D\n- MISCONCEPTION:MC-2 → Protocol B (if DQ-1=CORRECT) or C (if MC-1 also active)\n- SIGNAL:INCORRECT → S0 → Protocol A\n- SIGNAL:PARTIAL → S1 → Protocol B\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 52,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.arith.fractions/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fractions",
+      "title": "Prerequisite Check",
+      "content": "`requires: [math.arith.division, math.found.rational-numbers]`\n\n**PC-1 (division):** \"What is 15 ÷ 3? And what does division mean?\"  \nExpected CORRECT: 5; division splits a quantity into equal groups.  \nSIGNAL:INCORRECT → division concept gap; anchor TA-A02 more heavily on \"equal parts.\"\n\n**PC-2 (rational numbers):** \"Is 3/4 a number? Is it between 0 and 1?\"  \nExpected CORRECT: Yes to both; 3/4 ≈ 0.75 is between 0 and 1.  \nSIGNAL:INCORRECT → number-line gap; introduce number line in TA-A05 before comparisons.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fractions.md",
+        "startLine": 117,
+        "endLine": 131
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,490 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.variable-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.variable",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:68b748a04145cd9c51ff409b242c6293f2097ba76d59379929a8b62b82ab5ea4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.variable.md": "sha256:7ac3b062dd120aa5cfa59f3f6b32227305745da7d3f4565242e1c4fee79bfc58"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.found.variable",
+    "name": "Variable",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.abstraction",
+      "math.found.mathematical-notation"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.variable-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.variable (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.variable.md": "sha256:7ac3b062dd120aa5cfa59f3f6b32227305745da7d3f4565242e1c4fee79bfc58"
+      },
+      "contentHash": "sha256:5d9bb8b6a131a60b087d3c718ff6413fa0d255f1355c5229e9e15d2026d2fac8",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.variable.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.variable.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.variable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.variable.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.variable.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.variable\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.variable.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.variable.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.variable\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.variable.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.variable.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.variable\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.variable.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.variable.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.variable\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.variable.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.variable.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.variable\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.variable.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.variable.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.variable\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.variable.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.variable.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.variable\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.variable/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.variable",
+      "title": "Variable — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.found.abstraction**: Learner can extract a general pattern from specific instances; understands that symbols represent general concepts, not just specific values.\n- **math.found.mathematical-notation**: Learner reads and writes standard mathematical symbols; familiar with quantifiers (∀, ∃) and set notation (∈, :).\n\n### Target Understanding\n1. A variable is a symbol that represents any element from a specified domain (not just a label or fixed unknown).\n2. Three roles of a variable: (a) unknown in an equation; (b) universal placeholder in an identity; (c) parameter in a formula.\n3. Domain of a variable: the set from which it takes values must be specified or clearly implied.\n4. Bound vs. free variables: a bound variable is captured by a quantifier or summation; a free variable ranges over its domain without an enclosing binder.\n5. Cross-link: in f:A→B, the input variable x ranges over A — the function-concept formalizes variables with explicit domain and co-domain.\n\n### Cross-Link Activation\n- **math.func.function-concept**: f(x) = x² formalizes x as a variable ranging over the domain A of function f. The notation f:A→B makes the domain explicit — reinforcing that every variable has a domain.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 31,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.found.variable/worked_example/WE-TA-A04",
+      "kind": "worked_example",
+      "conceptId": "math.found.variable",
+      "title": "Worked Examples Across Expression Types",
+      "content": "### TA-A04 — Worked Examples Across Expression Types\n**Primitives**: P04 → P07 → P49\n\n**P04 (PATTERN INDUCTION):**\nPattern: the SAME variable symbol plays different roles depending on context.\n- Equation context: solve for one value (x = ?)\n- Identity context: true for ALL values in domain simultaneously\n- Formula/parameter context: generates a family of outputs as variable changes\n\nThe letter used (x, t, r, n) does not determine the role — context and quantifiers do.\n\n**P07 (WORKED EXAMPLE PAIR):**\n- **Example 1 — Expression vs. Equation vs. Identity**:\n  - Expression: 2x + 3 — free variable x; no truth value; evaluates to a number given x.\n  - Equation: 2x + 3 = 11 — solving gives x = 4; here x played the \"unknown\" role.\n  - Identity: 2(a + b) = 2a + 2b — true for ALL a, b ∈ ℝ; variables are universal placeholders.\n  - Moral: the same symbol x can play different roles in different contexts. The ROLE is determined by context, not by the letter chosen.\n\n- **Example 2 — Parameter role**:\n  - Formula: C = 2πr, r ∈ (0, ∞). The variable r is a parameter — fixing r gives one circle's circumference; varying r generates the family of all circles.\n  - Compare with: solving C = 2πr for r when C = 10π gives r = 5. Here r becomes an unknown (one specific value). Same formula, different context, different role.\n\n**P49 (ADAPTIVE CHECKPOINT):**\nPrompt: \"Consider the expression (x + y)² = x² + 2xy + y². (a) What role do x and y play? (b) What is their domain? (c) Is this an expression, equation, or identity?\"\n- **CORRECT**: (a) universal placeholder (true for all values); (b) ℝ (or any ring); (c) identity → TA-A05.\n- **PARTIAL**: Clarify identity = true for ALL values in domain, not just one; role = universal placeholder → TA-A05.\n- **INCORRECT**: → Protocol B, TA-B02.\n- **NO_RESPONSE**: → Protocol B, TA-B02.\n\n---",
+      "localKey": "WE-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 169,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "math.found.variable/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.variable",
+      "title": "[FOUNDATIONAL] — VARIABLE-AS-LABEL",
+      "content": "### MC-1 [FOUNDATIONAL] — VARIABLE-AS-LABEL\n- **Trigger**: \"x is just a name for the unknown\" OR \"x is whatever we decide to call it — it doesn't matter what set x comes from\"\n- **Root cause**: Informal introduction of variables as \"a letter standing in for a number\" without specifying a domain; learner treats x like a box-label rather than a ranging symbol.\n- **Error pattern**: Writing expressions with unspecified domain; treating ∀x (x > 0) as equivalent to \"x = any positive number\" without understanding that x quantifies over a declared set; confusing \"let x = 5\" (fixed value) with \"for all x ∈ ℝ\" (domain-ranging).\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — cleared in TA-A02; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.variable/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.variable",
+      "title": "— EQUATION-ONLY",
+      "content": "### MC-2 — EQUATION-ONLY\n- **Trigger**: \"Variables only appear in equations like x + 3 = 7 — they don't appear in identities or formulas\"\n- **Root cause**: First contact with variables is always in equations (solve for x); learner has not encountered the identity or parameter roles.\n- **Error pattern**: Expecting a variable always to have exactly one value to \"solve for\"; treating a(b+c) = ab+ac as an equation with unknowns rather than an identity true for all a, b, c.\n- **Repair**: TA-B02.\n- **MAMR**: Address after MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.variable/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.variable",
+      "title": "— SINGLE-VALUE",
+      "content": "### MC-3 — SINGLE-VALUE\n- **Trigger**: \"x = 5 means x always refers to 5 in this problem\"\n- **Root cause**: Solving equations reinforces the idea that a variable collapses to one specific value; learner does not distinguish \"x is the unknown we solved for\" from \"x ranges over a domain in a general statement.\"\n- **Error pattern**: Substituting a found solution into a universal statement and concluding the universal statement is \"about\" that value; not seeing that a universal quantifier makes x range over ALL domain elements simultaneously.\n- **Repair**: TA-B03.\n- **MAMR**: Address after MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.variable",
+      "title": "Three Roles of a Variable",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Three Roles of a Variable\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 88,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.variable",
+      "title": "Domain of a Variable",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Domain of a Variable\",\"primitives\":[\"P04\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 114,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.variable",
+      "title": "Bound vs. Free Variables",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Bound vs. Free Variables\",\"primitives\":[\"P03\",\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 142,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.variable",
+      "title": "Worked Examples Across Expression Types",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Worked Examples Across Expression Types\",\"primitives\":[\"P04\",\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 169,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.variable",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 200,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.variable",
+      "title": "Repair MC-1 VARIABLE-AS-LABEL",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 VARIABLE-AS-LABEL\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 257,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.variable",
+      "title": "Repair MC-2 EQUATION-ONLY",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 EQUATION-ONLY\",\"primitives\":[\"P03\",\"P07\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 277,
+        "endLine": 292
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.variable",
+      "title": "Repair MC-3 SINGLE-VALUE",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 SINGLE-VALUE\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 292,
+        "endLine": 388
+      }
+    },
+    {
+      "assetId": "math.found.variable/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.variable",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A05 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA — routing via P75/P74 only]**\n**[GR-6: P91 is the terminal compound in this TA]**\n**[GR-7: P76 present in this mastery gate]**\n\n**P77 (MULTI-PROBLEM SET):**\n\nQ1: \"In the statement ∀n ∈ ℕ, n² ≥ n — what is the domain of n? Is n free or bound?\"\n\nQ2: \"Identify the role of the variable t in: (a) 3t − 7 = 2; (b) sin²t + cos²t = 1; (c) s = ut + ½at² (equation of motion with u, a fixed constants).\"\n\nQ3: \"In ∑_{i=1}^{m} i = m(m+1)/2 — which variables are bound and which are free?\"\n\nQ4: \"Write a mathematical expression containing one bound variable and one free variable. Identify each.\"\n\nQ5: \"True or False: 'A variable must always refer to a single specific number.' Justify.\"\n\nQ6: \"What is missing from the statement 'x > 0 implies x² > 0'? What must be added to make it a complete formal proposition?\"\n\n**P55 (SCORE):** Evaluate Q1–Q6:\n- Q1: domain ℕ; n is bound (by ∀)\n- Q2: (a) unknown (t = 3); (b) universal placeholder; (c) parameter (t varies with u, a fixed)\n- Q3: i is bound (by ∑); m is free\n- Q4: any valid example, e.g., ∑_{k=1}^{n} k (k bound, n free) — award if distinction is correct\n- Q5: FALSE — a variable ranges over a domain; in a universal statement it represents ALL values simultaneously\n- Q6: domain of x must be declared, e.g., \"∀x ∈ ℝ, x > 0 ⟹ x² > 0\"\n\n**P76 (TRANSFER PROBE — Cross-link: math.func.function-concept):**\n\"Consider the function f : ℝ → ℝ defined by f(x) = x² + 1. (a) What role does x play in this function definition? (b) What is x's domain? (c) In the definition 'f(x) = x² + 1', is x free or bound? (d) Now compare ∀x ∈ ℝ, f(x) ≥ 1 — is x free or bound here, and what type of statement is this?\"\n\nExpected: (a) parameter/input variable; (b) ℝ — the domain of f; (c) free in the expression x²+1 (x is the input to f; it becomes bound only when we apply f to a specific value or quantify); (d) x is bound by ∀; the statement is a proposition (TRUE, since x²+1 ≥ 1 for all x ∈ ℝ). This bridges to math.func.function-concept: the function f makes the domain of x explicit in its type signature f:ℝ→ℝ.\n\n**P55 (SCORE):** Evaluate P76: (a) correct role; (b) domain ℝ; (c) free in expression; (d) bound by ∀, proposition.\n\n**P75 (MASTERY ASSESSMENT):**\nItems: Q1, Q2, Q3, Q4, Q5, Q6, P76 = **7 items**.\nPass criterion: **6/7** (⌈0.85 × 7⌉ = 6; threshold = 0.85).\n- **PASS** → P74: route to P78.\n- **FAIL** → P74: identify miss pattern → repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong or Q6 wrong (domain missing) → TA-B01 (VARIABLE-AS-LABEL).\n- Q2 wrong (role confusion) or Q5 wrong → TA-B02 (EQUATION-ONLY) or TA-B03 (SINGLE-VALUE) depending on error.\n- Q3 wrong or Q4 wrong or P76(c/d) wrong → TA-B03 (SINGLE-VALUE / bound-free confusion).\n- Multiple wrongs → MAMR: TA-B01 if domain issue present; then FIFO TA-B02 before TA-B03; re-gate after all active MCs cleared.\n\n**P78 (COMPLETION):**\nMastery of math.found.variable confirmed. Record mastery event. Schedule P89. Activate unlocks: math.alg.expression, math.alg.equation, math.func.function-concept.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 200,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.variable",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with concrete objects (a seat labelled \"speaker,\" a price tag with \"?\") before introducing symbolic notation. Move from concrete placeholder → pictorial domain diagram → symbolic ∀x ∈ S.\n\n### MAMR Enforcement\nMC-1 VARIABLE-AS-LABEL addressed in TA-A02 (explicitly names MC-1 via P27). If MC-1 triggers at any later TA or at the mastery gate, route → TA-B01 → return to point of interruption. MC-2 and MC-3 are FIFO after MC-1 cleared: if both active, address TA-B02 before TA-B03.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 74,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.found.variable/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.variable",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (domain + bound/free) + Q5 (single-value misconception) | 2/2 |\n| Day 3 | Q2 (three roles) + P76 (function cross-link) | 2/2 |\n| Day 7 | Mixed 3-item mini-set: one from each role + domain question | 2/3 |\n| Day 21 | Q1, Q2, Q3, Q6 (4 items) | 3/4 |\n| Day 60 | Full 7-item mastery gate | 6/7 |\n\n**Decay rule**: Failure at any interval → reset to Day 1 + Protocol B routing:\n- Domain-type failure → TA-B01; role-confusion failure → TA-B02; single-value failure → TA-B03.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 310,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "math.found.variable/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.variable",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Abstraction | math.found.abstraction | Ability to extract general pattern; symbol as placeholder concept |\n| Mathematical Notation | math.found.mathematical-notation | ∀, ∃, ∈, :, → symbols; set and quantifier notation |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Expression | math.alg.expression | Algebraic expressions require understanding variables |\n| Equation | math.alg.equation | Equations use variables in the unknown role |\n| Function Concept | math.func.function-concept | Functions formalize variables with explicit domain/codomain |\n\n### Cross-Links\n- **math.func.function-concept**: Bidirectional — function makes variable domain explicit in f:A→B type signature; P76 probe bridges this. Variables are the inputs that function-concept formalizes.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.variable.md",
+        "startLine": 325,
+        "endLine": 345
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,471 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.axiom-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.axiom",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3d8ae6aad0081413e8cfe315bebefbcdad1cca7ec3fceac5e3399da7929afa75",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.axiom.md": "sha256:1b44f46317cfb4c6a540b10923a01a9d75c840dc6f79d87b7ea03ab8266091e8"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.found.axiom",
+    "name": "Axiom",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.logic"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.axiom-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.axiom (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.axiom.md": "sha256:1b44f46317cfb4c6a540b10923a01a9d75c840dc6f79d87b7ea03ab8266091e8"
+      },
+      "contentHash": "sha256:1dec2b2e0ada10695b11d32ebbeb8a1074695d731cd82d95f9d59f5d7dedf6c2",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.axiom.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiom.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiom"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiom\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiom.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiom.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiom"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiom\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiom.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiom.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiom"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiom\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiom.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiom.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiom"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiom\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiom.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiom.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiom"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiom\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiom.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiom.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiom"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiom\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiom.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiom.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiom"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiom\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.axiom.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.axiom.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.axiom"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.axiom\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.axiom/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.axiom",
+      "title": "Axiom — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.found.logic**: supplies truth values (TRUE/FALSE), logical statements, and the notion of proof. An axiom is a logical statement whose truth value is stipulated TRUE by assumption, not demonstrated by proof.\n\n### Target Understanding\n1. An axiom (or postulate) is a statement adopted as a foundational assumption of a mathematical theory, accepted without proof as the starting point from which theorems are derived.\n2. Axioms are unprovable within the system they define — every proof chain must stop somewhere; axioms ARE the stops.\n3. Axioms are not chosen because they are \"obvious\" — they are chosen because they yield a useful, internally consistent theory. Obviousness is incidental, not a requirement.\n4. Different axiom sets yield different but equally valid mathematical systems (e.g., Euclidean vs. non-Euclidean geometry).\n5. Key vocabulary: axiom vs. theorem (proved from axioms); axiom vs. definition (definitions introduce terms; axioms make truth claims); axiom vs. conjecture (conjectures are unproven hypotheses, not foundational choices).\n\n### Cross-Link Activation\n- No cross-links. P76 uses an independence probe (self-contained real-world game context).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 31,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.found.axiom/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.axiom",
+      "title": "[FOUNDATIONAL] — AXIOM-AS-OBVIOUS",
+      "content": "### MC-1 [FOUNDATIONAL] — AXIOM-AS-OBVIOUS\n- **Trigger**: \"A good axiom must be obviously true — something no reasonable person can doubt.\"\n- **Root cause**: School geometry presents Euclid's first four postulates as \"self-evident truths,\" training learners to expect axioms to be intuitively clear.\n- **Error pattern**: Learner rejects the 5th postulate (parallel postulate) as \"not really an axiom\" because it is complex; or claims that if an axiom is not obvious, it should be provable.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A02 via P41/P64; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.axiom/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.axiom",
+      "title": "— AXIOM-AS-PROVABLE",
+      "content": "### MC-2 — AXIOM-AS-PROVABLE\n- **Trigger**: \"We should be able to prove axioms from even more fundamental truths.\"\n- **Root cause**: Learner treats axioms as informal intuitions that \"should\" have deeper justifications; conflates regressing to more basic axioms with proving an axiom.\n- **Error pattern**: Claims the parallel postulate can be derived from Euclid's other four; believes all mathematical statements are in principle provable.\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.axiom/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.axiom",
+      "title": "— AXIOM-AS-THEOREM",
+      "content": "### MC-3 — AXIOM-AS-THEOREM\n- **Trigger**: \"Axioms are just theorems we haven't proved yet\" or \"axioms and theorems are basically the same thing.\"\n- **Root cause**: Surface similarity — both axioms and theorems are true mathematical statements.\n- **Error pattern**: Learner reverses the direction of logical dependence; treats the absence of a proof as a temporary gap rather than a structural choice.\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiom",
+      "title": "Axioms as Foundational Rules: Game Analogy",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Axioms as Foundational Rules: Game Analogy\",\"primitives\":[\"P03\",\"P1\",\"P2\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 87,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiom",
+      "title": "Misconception Gate: AXIOM-AS-OBVIOUS (FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Misconception Gate: AXIOM-AS-OBVIOUS (FOUNDATIONAL)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 106,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiom",
+      "title": "Representation Shift: Four Faces of an Axiom",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Representation Shift: Four Faces of an Axiom\",\"primitives\":[\"P1\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 134,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiom",
+      "title": "Contrast Pair: Axiom vs. Theorem vs. Definition vs. Conjecture",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Contrast Pair: Axiom vs. Theorem vs. Definition vs. Conjecture\",\"primitives\":[\"P06\",\"P07\",\"P2\",\"P3\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 161,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiom",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P1\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 192,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiom",
+      "title": "Repair MC-1 AXIOM-AS-OBVIOUS",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 AXIOM-AS-OBVIOUS\",\"primitives\":[\"P06\",\"P1\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 250,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiom",
+      "title": "Repair MC-2 AXIOM-AS-PROVABLE",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 AXIOM-AS-PROVABLE\",\"primitives\":[\"P06\",\"P1\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 270,
+        "endLine": 288
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.axiom",
+      "title": "Repair MC-3 AXIOM-AS-THEOREM",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 AXIOM-AS-THEOREM\",\"primitives\":[\"P03\",\"P06\",\"P1\",\"P11\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 288,
+        "endLine": 380
+      }
+    },
+    {
+      "assetId": "math.found.axiom/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.axiom",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A05 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal in this TA]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\n\nQ1: Classify the following statement: \"0 is a natural number.\" Is it an axiom, theorem, definition, or conjecture in Peano arithmetic?\nQ2: Classify: \"In Euclidean geometry, a straight line segment can be drawn between any two points.\" (A) Theorem (B) Axiom (C) Definition (D) Conjecture\nQ3: The Riemann Hypothesis states: \"All non-trivial zeros of the Riemann zeta function have real part 1/2.\" Classify it: axiom, theorem, definition, or conjecture?\nQ4: True or False: \"In Euclidean geometry, the theorem that interior angles of a triangle sum to 180° is a theorem, not an axiom, because it can be proved from Euclid's five postulates.\" Explain.\n\n**P55 (SCORE):**\nQ1: Axiom (Peano P1 — accepted without proof in the Peano system).\nQ2: B — Axiom (Euclid's first postulate).\nQ3: Conjecture — it is unproven and is not a foundational starting point of any currently adopted axiom system.\nQ4: TRUE — the 180° fact is derived by proof from the parallel postulate (axiom). It is fundamental but not foundational; it is a destination, not a starting point.\n\n**P76 (TRANSFER PROBE — Independence: cross_links = []):**\n\n**Context**: A game designer creates a strategy board game and writes these five rules:\n- Rule G1: \"Each player starts with 1 king and 8 soldiers.\"\n- Rule G2: \"A soldier moves exactly 1 square forward per turn.\"\n- Rule G3: \"A king can move to any adjacent square.\"\n- Rule G4: \"A player wins by capturing the opponent's king.\"\n- Rule G5: \"A soldier that reaches the opponent's back row becomes a second king.\"\n\nA player argues: \"Rule G5 must follow logically from Rules G1–G4, because it makes sense that soldiers become kings when they reach the back row.\"\n\n**(a)** Is this argument valid? Can Rule G5 be logically derived from Rules G1–G4?\n**(b)** What is Rule G5's formal role in this game's rule system?\n\n**Expected answer**:\n(a) No — Rules G1–G4 say nothing about transforming pieces or creating additional kings. No deduction from G1–G4 produces G5. The argument is invalid.\n(b) Rule G5 is an axiom of the game: a foundational rule accepted without derivation. It is a design choice that defines how this specific game works. A different game could omit or replace it without contradiction — that independence confirms it is not a theorem derivable from the other rules.\n\n**P55 (SCORE):** (a): invalid derivation correctly identified. (b): Rule G5 correctly classified as axiom / foundational rule.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, P76 = **5 items**.\nPass criterion: **4/5** (⌈0.80 × 5⌉ = 4; threshold = 0.80).\n- **PASS (≥ 4/5)** → P78.\n- **FAIL (< 4/5)** → P74 repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong or Q2 wrong → TA-B03 (AXIOM-AS-THEOREM); apply MAMR.\n- Q3 wrong → TA-B02 (AXIOM-AS-PROVABLE — confusing conjecture with axiom implies confusion about what \"foundational\" means).\n- Q4 wrong → TA-B03 (conflating theorem with axiom by importance).\n- P76 wrong → TA-B01 (AXIOM-AS-OBVIOUS — if learner accepts the invalid derivation, the OBVIOUS misconception is still active).\n- Multiple wrongs → MAMR: TA-B01 first; then FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.found.theorem, math.found.axiomatic-system.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 192,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.axiom",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a game-rule analogy (Concrete) — the rules of a game as axioms of the game system. Learner can physically imagine accepting rules to play. Move to Pictorial (classification table) in TA-A03 and TA-A04, then to Abstract (formal axiom schemas) by TA-A04.\n\n### MAMR Enforcement\nMC-1 addressed in TA-A02 (P41/P64). If triggered in later TAs, route → TA-B01 → return. MC-2 and MC-3 FIFO after MC-1 cleared.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 73,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.found.axiom/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.axiom",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q2 (Euclid postulate classification) + P76 probe (a) | 2/2 |\n| Day 3 | Q1 (Peano P1) + Q4 (180° theorem) | 2/2 |\n| Day 7 | Mixed 3-item: classify one axiom, one theorem, one conjecture | 2/3 |\n| Day 21 | Q1, Q2, Q3, Q4 (4 items) | 3/4 |\n| Day 60 | Full 5-item mastery gate | 4/5 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing by error type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 304,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "math.found.axiom/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.axiom",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Logic | math.found.logic | Logical statements with truth values; the framework within which axioms are TRUE by stipulation |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Theorem | math.found.theorem | Theorems are derived from axioms; cannot be taught without the axiom/theorem distinction |\n| Axiomatic System | math.found.axiomatic-system | A formal system built on a chosen axiom set; requires understanding of what an axiom is |\n\n### Cross-Links\n- None. Concept is self-contained at this stage. P76 uses an independent real-world context (game rules as axioms).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.axiom.md",
+        "startLine": 318,
+        "endLine": 336
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

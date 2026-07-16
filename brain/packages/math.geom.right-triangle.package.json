@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.right-triangle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.right-triangle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8c3a606ac79ee7587915c9d1b3379ed826424292cc3a081edb150ac6cab1ab02",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.right-triangle.md": "sha256:74a7cf8b00850448a3b53c9a79def5e25127ad5543908f1f145a44015e176fe2"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.geom.right-triangle",
+    "name": "Right Triangle",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.triangle",
+      "math.geom.perpendicular-lines"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.right-triangle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.right-triangle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.right-triangle.md": "sha256:74a7cf8b00850448a3b53c9a79def5e25127ad5543908f1f145a44015e176fe2"
+      },
+      "contentHash": "sha256:27e2165d3c30f3e2b8c6e466ea25ca5f36ba6fa862e6e7262d2510cf107ca2d7",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.right-triangle.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.right-triangle.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.right-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.right-triangle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.right-triangle.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.right-triangle.md#TA-A02 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.right-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.right-triangle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.right-triangle.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.right-triangle.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.right-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.right-triangle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.right-triangle.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.right-triangle.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.right-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.right-triangle\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.right-triangle.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.right-triangle.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.right-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.right-triangle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.right-triangle.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.right-triangle.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.right-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.right-triangle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.right-triangle.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.right-triangle.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.right-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.right-triangle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.right-triangle/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Right Triangle — cognitive map",
+      "content": "**Core concept:** A right triangle is a triangle containing exactly one 90° angle (the right angle). The two sides adjacent to the right angle are legs; the side opposite the right angle is the hypotenuse — always the longest side. Because one angle is 90°, the two remaining angles are acute and sum to exactly 90°.\n\n**Knowledge prerequisites activated:**\n- math.geom.triangle: a triangle has three sides and three interior angles summing to 180°; angle sum gives the constraint on the acute angles\n- math.geom.perpendicular-lines: the two legs of a right triangle meet at a 90° angle — they are perpendicular; this is marked with a small square ⊾\n\n**Concept structure:**\n1. **Definition**: triangle with exactly one angle equal to 90°\n2. **Right angle marker**: the square symbol ⊾ placed at the vertex of the 90° angle\n3. **Parts**: legs (two shorter sides adjacent to the right angle), hypotenuse (side opposite the right angle)\n4. **Hypotenuse property**: opposite the right angle; always the longest of the three sides\n5. **Acute angle constraint**: ∠A + ∠B = 90° when ∠C = 90°; the two acute angles are complementary\n\n**Target understanding:** Given a right triangle description or diagram, the learner identifies the hypotenuse, finds a missing acute angle, and explains why the hypotenuse is always opposite the right angle.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 26,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.right-triangle",
+      "title": "HYPOTENUSE-NOT-OPPOSITE-RIGHT-ANGLE",
+      "content": "| MC-1 | HYPOTENUSE-NOT-OPPOSITE-RIGHT-ANGLE | Right triangle shown in non-standard orientation; asked to identify hypotenuse | Identifies the side that looks longest in the diagram or the vertical/horizontal side, rather than specifically the side opposite the 90° angle | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.right-triangle",
+      "title": "ACUTE-ANGLES-SUM-TO-180",
+      "content": "| MC-2 | ACUTE-ANGLES-SUM-TO-180 | Given one acute angle, asked for the other | Subtracts from 180° rather than 90°; gives e.g. 180° − 35° = 145° instead of 90° − 35° = 55° | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.right-triangle",
+      "title": "TWO-RIGHT-ANGLES-POSSIBLE",
+      "content": "| MC-3 | TWO-RIGHT-ANGLES-POSSIBLE | Asked whether a triangle can have two right angles | Says \"yes\" or tries to draw one; does not recognise that 90° + 90° = 180° exhausts the angle sum leaving 0° for the third vertex | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.right-triangle",
+      "title": "\"Square Corner\" Definition and Parts (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"\\\"Square Corner\\\" Definition and Parts (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 71,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Representation and Acute Angle Sum (GR-1: P11 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Representation and Acute Angle Sum (GR-1: P11 | GR-2: P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 106,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Contrast with Other Triangle Types (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast with Other Triangle Types (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 137,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 159,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Repair: HYPOTENUSE-NOT-OPPOSITE-RIGHT-ANGLE (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: HYPOTENUSE-NOT-OPPOSITE-RIGHT-ANGLE (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 226,
+        "endLine": 262
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Repair: ACUTE-ANGLES-SUM-TO-180 (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: ACUTE-ANGLES-SUM-TO-180 (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 262,
+        "endLine": 295
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Repair: TWO-RIGHT-ANGLES-POSSIBLE (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: TWO-RIGHT-ANGLES-POSSIBLE (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 295,
+        "endLine": 396
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A04 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **In right triangle ABC with ∠C = 90°, if ∠A = 38°, find ∠B.**\n   *(Expected: ∠B = 90° − 38° = 52°; the two acute angles are complementary)*\n\n2. **In a right triangle, one angle is 90°. The hypotenuse is the side opposite: the 90° angle, the 38° angle, or the 52° angle?**\n   *(Expected: the side opposite the 90° angle — the hypotenuse is always opposite the right angle)*\n\n3. **True/False:** It is possible to draw a triangle with two right angles.\n   *(Expected: FALSE — two 90° angles sum to 180°, leaving 0° for the third angle; this cannot form a triangle)*\n\n4. **A right triangle has legs of 6 cm and 8 cm, and a hypotenuse of 10 cm. A student says \"the 8 cm side is the hypotenuse because it looks longest in my diagram.\" Is the student correct?**\n   *(Expected: No — the hypotenuse is the 10 cm side because it is opposite the right angle; the visual appearance depends on orientation)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: cross-link to math.trig.right-triangle-trig — Tier 1 concept)\n\n*Bridge to trigonometric ratios:*\n\n\"A right triangle has a right angle at vertex C and an angle of 35° at vertex A. The hypotenuse (side c, opposite the right angle) has length 15.\n\n(a) Find angle B using the acute angle sum.\n(b) Label the sides relative to ∠A: 'opposite' (the side across from ∠A), 'adjacent' (the leg next to ∠A that is not the hypotenuse), and 'hypotenuse'. Which side of the triangle is each?\n(c) Using the trigonometric ratio sin(∠A) = opposite/hypotenuse and sin(35°) ≈ 0.574, find the length of the side opposite ∠A.\"\n\n*(Expected:\n(a) ∠B = 90° − 35° = 55°\n(b) Opposite ∠A = side BC (side a); adjacent to ∠A = side AB (side b); hypotenuse = side CA (side c, opposite the right angle at C)\n(c) opposite = 15 × 0.574 = 8.61)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.90; ⌈0.90×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 HYPOTENUSE-NOT-OPPOSITE-RIGHT-ANGLE first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now identify the hypotenuse and legs of any right triangle regardless of orientation, find missing acute angles using the complementary sum, and distinguish right triangles from acute and obtuse types. These skills are direct prerequisites for the Pythagorean theorem and right-triangle trigonometry.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 159,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\n\"Corner of a door\" model: a right angle is a perfect square corner — the corner of a door, a book, or a tile. A right triangle is formed by cutting that square corner diagonally: the two edges meeting at the corner are the legs; the diagonal cut is the hypotenuse — always the longest piece.\n\n**Progression Gate (C → P):** Learner consistently identifies the right angle vertex (or square marker) and names the side opposite it as the hypotenuse, regardless of how the triangle is rotated in a diagram.\n**Progression Gate (P → A):** Learner applies the acute angle sum (90°) to find missing angles and relates the right triangle to perpendicularity.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 57,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.right-triangle",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Hypotenuse identification in rotated diagrams | \"Which side is the hypotenuse?\" (side opposite the ⊾ marker) |\n| Day 3 | Acute angle finding | \"Right triangle with 53° acute angle — find the other\" (37°) |\n| Day 7 | Combined: identify parts and angles | \"Right triangle DEF, ∠D=90°, ∠E=62°. Name hypotenuse; find ∠F.\" (EF; 28°) |\n| Day 30 | Transfer to Pythagorean theorem preview | \"In right triangle with legs 5 and 12, use a²+b²=c² to find the hypotenuse\" (13) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 324,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "math.geom.right-triangle/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.right-triangle",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.geom.triangle (required): angle sum theorem (180°) applied to find the acute angle constraint (90°); triangle classification framework\n- math.geom.perpendicular-lines (required): the two legs meet at a right angle — the definition of perpendicularity; ⊾ is the perpendicularity marker\n\n**Enables:**\n- math.geom.pythagorean-theorem: requires knowing which side is the hypotenuse and which are legs; a² + b² = c² is stated in terms of legs a, b and hypotenuse c\n- math.trig.right-triangle-trig: requires side labeling (opposite, adjacent, hypotenuse) relative to a given acute angle; acute angle sum gives all angles from one\n\n**Cross-links (GR-8):**\n- math.trig.right-triangle-trig (Tier 1): P76 cross-link probe previews sin(∠A) = opposite/hypotenuse using the right triangle's angle and side structure — learner applies the acute angle sum to find all angles, then applies the ratio using a given sin value\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.right-triangle.md",
+        "startLine": 335,
+        "endLine": 350
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

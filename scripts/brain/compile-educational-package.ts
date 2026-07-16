@@ -103,15 +103,32 @@ function main(): void {
     // Batch mode: every blueprint whose filename starts with the prefix
     // (e.g. --prefix phys. compiles the whole physics corpus in-process).
     const dir = path.join(process.cwd(), 'docs', 'curriculum', 'blueprints')
-    const ids = fs.readdirSync(dir)
+    const allIds = fs.readdirSync(dir)
       .filter((f) => f.startsWith(prefix) && f.endsWith('.md'))
       .map((f) => f.replace(/\.md$/, ''))
       .sort()
+
+    // --check is a DRIFT gate (does a committed artifact still match a fresh
+    // compile of its source) — a separate question from corpus completeness
+    // (has every blueprint in the corpus been migrated at all). A blueprint
+    // that has never been compiled (e.g. it cites a prerequisite the KG
+    // doesn't have yet — a content gap, not a determinism regression) is
+    // skipped here rather than failing the gate; corpus completeness is
+    // tracked in the subject's migration report instead.
+    const packageDir = path.join(process.cwd(), 'brain', 'packages')
+    const ids = check
+      ? allIds.filter((id) => fs.existsSync(path.join(packageDir, `${id}.package.json`)))
+      : allIds
+    const skipped = check ? allIds.filter((id) => !ids.includes(id)) : []
+
     let failed = 0
     for (const id of ids) {
       if (!compileOne(id, check, true)) failed++
     }
     console.log(`\n${check ? 'checked' : 'compiled'} ${ids.length - failed}/${ids.length} packages for prefix "${prefix}"`)
+    if (skipped.length > 0) {
+      console.log(`skipped ${skipped.length} not-yet-migrated blueprint(s) (no committed artifact): ${skipped.join(', ')}`)
+    }
     process.exit(failed > 0 ? 1 : 0)
   }
 

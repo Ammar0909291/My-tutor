@@ -1,0 +1,335 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.relation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.relation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d3d8302eacd8531fc7f93714d29eaf7ed089fa199ae24f8c544d8fa142c22f84",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.relation.md": "sha256:7821193a9d5f82d6cccdfc5bfd98b63dec02f2d2afc454062fdcacc8d12355bb"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.found.relation",
+    "name": "Relation",
+    "difficultyRaw": "developing (2)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.found.cartesian-product"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.relation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.relation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.relation.md": "sha256:7821193a9d5f82d6cccdfc5bfd98b63dec02f2d2afc454062fdcacc8d12355bb"
+      },
+      "contentHash": "sha256:81bff99ed228cce8550ec2b576bf867a962778ffeb606e147d0d15af682f1f56",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.relation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.relation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.relation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.relation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.relation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.relation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.relation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.relation.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.relation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.relation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.relation.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.relation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.relation.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.relation.md#TA-A05 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.relation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.relation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.relation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.relation",
+      "title": "Relation — core explanation",
+      "content": "A **relation** R from set A to set B is any **subset** of the Cartesian product A × B.\n\n**Formal definition:**\n> R ⊆ A × B\n> We write a R b (or (a, b) ∈ R) to mean: a is related to b by R.\n\nA relation from A to **A itself** (i.e., R ⊆ A × A) is called a **relation on A**.\n\n**Key insight:** A relation imposes no uniqueness or totality constraints — any subset of A × B is a valid relation. This distinguishes relations from functions.\n\n**Standard representations:**\n\n| Form | Description | Example for R ⊆ {1,2,3} × {a,b}: R = {(1,a),(2,a),(2,b)} |\n|---|---|---|\n| Listing | Enumerate ordered pairs | {(1,a),(2,a),(2,b)} |\n| Arrow diagram | Draw arrows from each first-component to second-component | 1→a; 2→a; 2→b; 3 unconnected |\n| Relation matrix | M[i][j] = 1 if (aᵢ,bⱼ) ∈ R, else 0 | See TA-A02 |\n\n**Terminology:**\n\n| Term | Definition |\n|---|---|\n| Domain of R | {a ∈ A | ∃ b ∈ B: (a,b) ∈ R} — elements of A that are related to something |\n| Codomain | B — the set of potential second components |\n| Image / Range | {b ∈ B | ∃ a ∈ A: (a,b) ∈ R} — elements of B actually reached by R |\n\n**Relation vs. Function:**\nA function f: A → B is a relation where every a ∈ A is related to **exactly one** b ∈ B.\nA general relation has no such restriction:\n- An element of A may be related to zero, one, or many elements of B.\n- An element of A need not appear at all.\n\n**Downstream concepts (children of this concept):**\n- Reflexive, symmetric, and transitive relations → these are special properties a relation on A may satisfy.\n- Equivalence relation (reflexive + symmetric + transitive) and partial order (reflexive + antisymmetric + transitive) are built from combinations of these.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 32,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.found.relation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.relation",
+      "title": "FOUNDATIONAL) — A relation must assign exactly one output to each input (a relation is a function).",
+      "content": "**MC-1 (FOUNDATIONAL) — A relation must assign exactly one output to each input (a relation is a function).**\n- Trigger: student rejects R = {(1,a),(1,b)} because element 1 \"goes to two things\"\n- Root cause: prior exposure to functions as \"machines with one output\"; generalises incorrectly to all relations\n- Impact: blocks understanding of relation generality; corrupts set-up for reflexive/symmetric/transitive properties (which don't require uniqueness)\n- Correction path: Protocol B-01 → contrast with explicit multi-output example\n- MAMR role: FOUNDATIONAL — cleared first",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.relation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.relation",
+      "title": "— Every element of A must be related to something (relations must be \"total\").",
+      "content": "**MC-2 — Every element of A must be related to something (relations must be \"total\").**\n- Trigger: student rejects a relation that leaves some element of A unrelated\n- Root cause: conflates with total functions where every input must have an output\n- Correction path: Protocol B-02 → explicitly show valid relation with domain ≠ A",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 10,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.relation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.relation",
+      "title": "— If (a, b) ∈ R then (b, a) ∈ R must also hold (all relations are symmetric).",
+      "content": "**MC-3 — If (a, b) ∈ R then (b, a) ∈ R must also hold (all relations are symmetric).**\n- Trigger: student adds (b, a) whenever they write (a, b)\n- Root cause: confuses \"is related to\" (directed) with everyday \"knows each other\" (mutual) relationships\n- Correction path: Protocol B-03 → directed vs. undirected relationship examples\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 15,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.found.relation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.relation",
+      "title": "What Is a Relation?",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"What Is a Relation?\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 91,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "math.found.relation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.relation",
+      "title": "Representing Relations — Three Equivalent Forms",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Representing Relations — Three Equivalent Forms\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 123,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "math.found.relation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.relation",
+      "title": "Domain, Codomain, and Image",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Domain, Codomain, and Image\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 165,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "math.found.relation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.relation",
+      "title": "Relation vs. Function — The Uniqueness Distinction",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Relation vs. Function — The Uniqueness Distinction\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 197,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "math.found.relation/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.relation",
+      "title": "Relations on a Single Set",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Relations on a Single Set\",\"primitives\":[\"P01\",\"P04\",\"P06\",\"P07\",\"P11\",\"P17\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 230,
+        "endLine": 606
+      }
+    },
+    {
+      "assetId": "math.found.relation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.relation",
+      "title": "Assessment Item Bank",
+      "content": "| # | Item | Property | Answer |\n|---|---|---|---|\n| A1 | Define: what is a relation from A to B? | Definition | Any subset R ⊆ A × B |\n| A2 | R = {(1,a),(2,b)} on A={1,2,3}, B={a,b,c}. List domain and image. | Domain/image | Domain={1,2}; Image={a,b} |\n| A3 | How many distinct relations exist from A to B if \\|A\\|=2, \\|B\\|=3? | Counting | 2^6 = 64 |\n| A4 | Is {(1,a),(1,b),(2,c)} a valid relation? A function? | Relation vs. function | Valid relation; not a function (1 has two images) |\n| A5 | True or false: every function is a relation. | Relationship | True |\n| A6 | R = 'divides' on {1,2,3,4,6}. Is (2,6) ∈ R? Is (6,2) ∈ R? | Membership | Yes; No |\n| A7 | Build the 3×3 relation matrix for R={(1,1),(1,3),(2,2),(3,1)} on {1,2,3}. | Matrix | 1s at specified positions, 0s elsewhere |\n| A8 | A directed graph on V has edge set {(A,B),(B,C),(A,C)}. Write as a relation. | Transfer (graph) | R = {(A,B),(B,C),(A,C)} ⊆ V×V |\n| A9 | What is the image of the empty relation ∅ from A to B? | Edge case | ∅ |\n| A10 | R = {(x,y) | x,y ∈ {1,2,3,4} and x + y = 5}. List R. | Enumeration | {(1,4),(2,3),(3,2),(4,1)} |\n| A11 | For R in A10: is R symmetric? (Does (a,b)∈R always imply (b,a)∈R?) | Property test | Yes — if x+y=5 then y+x=5 |\n| A12 | R = {(n,m) | n,m ∈ ℕ, n < m}. Is this a valid relation on ℕ? Is it a function? | Infinite relation | Valid relation; not a function (each n relates to infinitely many m) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 539,
+        "endLine": 558
+      }
+    },
+    {
+      "assetId": "math.found.relation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.relation",
+      "title": "Spaced Repetition Schedule",
+      "content": "| Interval | Trigger | Action |\n|---|---|---|\n| Day 1 | Day of initial mastery | Schedule Day 3 |\n| Day 3 | 2 days after mastery | Protocol E 5-item probe |\n| Day 7 | 4 days after Day 3 pass | Protocol E 5-item probe |\n| Day 21 | 14 days after Day 7 pass | Protocol E 5-item probe |\n| Day 60 | 39 days after Day 21 pass | Protocol E 5-item probe |\n| Decay reset | Any probe score < 5/5 | Reset to Day 1 + Protocol B for failed item |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.relation.md",
+        "startLine": 526,
+        "endLine": 539
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.sequence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.sequence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:49fb5bb1a8b77fe637b0fc5984fbc3ce666c49d3e59bd9d6b8b2bf6826b55812",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.sequence.md": "sha256:8dda37fc4f5aef3079b3f758b77f8bed76db538f1f4b6297f09f5704933d4122"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 2,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 2
+  },
+  "concept": {
+    "conceptId": "math.seq.sequence",
+    "name": "Sequence",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.func.function-concept",
+      "math.found.natural-numbers"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.sequence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.sequence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.sequence.md": "sha256:8dda37fc4f5aef3079b3f758b77f8bed76db538f1f4b6297f09f5704933d4122"
+      },
+      "contentHash": "sha256:e692d30eb8d6fa3758116fe55ce74921c88f7b2b8963e0707691c70735bc5edf",
+      "ruleCount": 2,
+      "bandCounts": {
+        "3": 2
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.sequence.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.sequence.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.sequence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.sequence.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.sequence.md#TA-B02 (addresses MC-2, MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.sequence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.sequence/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.sequence",
+      "title": "Sequence — cognitive map",
+      "content": "**Core concept:** A sequence is a function from ℕ (or {1,2,3,...,n}) to a set, whose values are listed in order: a₁, a₂, a₃, …. Unlike a set, order is essential and repetition is permitted. A sequence may be defined by an explicit formula (aₙ = f(n)), a recurrence relation (a₁ given; aₙ₊₁ = g(aₙ)), or by description alone with no closed-form rule.\n\n**Conceptual progression:**\n1. A sequence is an ordered list — position (index) matters; {2,4,6} as a set ≠ (2,4,6) as the first three terms of a sequence.\n2. Sequences as functions: domain = ℕ (or a finite initial segment), codomain = any set. aₙ = f(n).\n3. Explicit sequences: aₙ=2n, aₙ=1/n, aₙ=(-1)ⁿ — pattern identified from formula.\n4. Recursive sequences: a₁=1, aₙ₊₁=aₙ+3 — next term defined in terms of previous.\n5. Non-patterned sequences: digits of π — a valid sequence with no predictive formula.\n6. Finite vs. infinite sequences: both valid; infinite sequences central to analysis.\n\n**CPA arc (entry: P):**\n- Pictorial: ordered list notation (a₁, a₂, a₃, …); arrow diagrams ℕ→ℝ showing mapping; number-line plots of sequence terms\n- Abstract: function notation aₙ = f(n), n ∈ ℕ; recurrence notation a₁=c, aₙ₊₁=g(aₙ); Σ and lim notation for later concepts\n\n**Prior knowledge activated:** function concept (domain, codomain, function-as-mapping); natural numbers ℕ = {1, 2, 3, …}; set notation vs. ordered list notation\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.sequence",
+      "title": "SEQUENCE-IS-A-SET [FOUNDATIONAL]",
+      "content": "### MC-1: SEQUENCE-IS-A-SET [FOUNDATIONAL]\n**Description:** Learner treats a sequence as a set — believes order doesn't matter and repetition is impossible. Writes {2,4,6} and (2,4,6) interchangeably; cannot process (2,2,2,...) as a valid sequence.\n**Surface form:** \"The sequence (4,2,6) and the sequence (2,4,6) are the same — they have the same elements.\"\n**Root cause:** Prior exposure to sets (which are unordered and have no repeated elements) is the dominant data structure. The concept of \"ordered list with repetition\" requires a distinct data model the learner hasn't yet internalised.\n**Trigger condition:** Any problem where two sequences with the same elements but different orders are presented.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.sequence",
+      "title": "SEQUENCE-MUST-HAVE-PATTERN",
+      "content": "### MC-2: SEQUENCE-MUST-HAVE-PATTERN\n**Description:** Learner believes a sequence is only valid if there is a formula or rule generating it. Rejects sequences defined by description or without closed form.\n**Surface form:** \"3, 1, 4, 1, 5, 9, 2, 6 — this isn't a sequence because there's no formula.\"\n**Root cause:** Exposure to sequences has been exclusively through arithmetic/geometric progressions with explicit formulas. The general definition (any function from ℕ) has not been presented.\n**Trigger condition:** Any sequence defined recursively or informally (digits of π, random-looking sequences).\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.sequence",
+      "title": "INDEX-STARTS-AT-ZERO",
+      "content": "### MC-3: INDEX-STARTS-AT-ZERO\n**Description:** Learner defaults to 0-based indexing (from programming). Interprets a₃ as the fourth term (offset by one), or writes a₀ = first term when the convention is a₁ = first term.\n**Surface form:** \"If aₙ=2n and n starts at 0, then a₃=6 is the fourth term.\"\n**Root cause:** Zero-indexing is standard in programming and some computer science contexts. Mathematical sequences conventionally start at n=1 (or explicitly state the starting index).\n**Trigger condition:** Any problem where the index of a specific term must be identified.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.sequence",
+      "title": "Repair for MC-1 (SEQUENCE-IS-A-SET)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (SEQUENCE-IS-A-SET)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 195,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.sequence",
+      "title": "Repair for MC-2 and MC-3 (MUST-HAVE-PATTERN / ZERO-INDEXING)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 and MC-3 (MUST-HAVE-PATTERN / ZERO-INDEXING)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 214,
+        "endLine": 415
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.sequence",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"If aₙ = 3n − 1, what is the 4th term a₄?\"\n[Expected: 3(4)−1 = 11.]\n\n**Item 2:**\n\"Is the sequence (2, 2, 2, 2, …) valid? Is (2) the same sequence as (2, 2, …)?\"\n[Expected: Yes, (2,2,2,…) is valid — repetition is allowed in sequences. No, (2) has one term; (2,2,…) has infinitely many — they are different sequences (different domains).]\n\n**Item 3:**\nTrue or False: \"A sequence is a set.\"\n[Expected: FALSE. A set is unordered and has no repeated elements; a sequence preserves order and allows repetition. They are different mathematical objects.]\n\n**Item 4:**\n\"Given a₁=4, aₙ₊₁=aₙ−2. Find a₃.\"\n[Expected: a₂=4−2=2, a₃=2−2=0. Answer: 0.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"The sequence b₁, b₂, b₃, … is defined by: bₙ = the nth decimal digit of π, starting from the first digit after the decimal point.\nSo b₁=1 (since π=3.14159…), b₂=4, b₃=1, b₄=5, b₅=9, b₆=2, …\n\n(a) Is this a valid mathematical sequence? Why or why not?\n(b) What is the domain of this sequence (viewed as a function)?\n(c) If I told you b₇=6, does that tell you anything about b₈? Explain.\"\n\n[Expected:\n(a) Yes — valid. Each bₙ is well-defined (every decimal digit of π exists and is a specific digit 0–9). The function n↦bₙ is defined on all of ℕ.\n(b) Domain = ℕ = {1,2,3,…}.\n(c) No — knowing b₇ does not allow prediction of b₈ from local information. The digits of π are deterministic but not predictable by a simple recurrence from a single previous term. (No known simple formula for the nth digit of π exists.) This shows sequences can be valid without patterns.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (a) is correctly answered with reasoning (well-defined function from ℕ), 0 otherwise. Part (b) and (c) give partial credit context but the binary score is on (a).\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: 5 out of 5 (MAMR = ⌈0.85 × 5⌉ = 5).\n- PASS (5/5): Learner demonstrates clear understanding of sequences as ordered functions, recurrence and explicit formulas, and the independence of a sequence's validity from the existence of a formula.\n- FAIL (<5/5): Identify which items failed; route to appropriate repair sequence.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS (5/5): → P78 COMPLETION\n- FAIL on Item 3 (sequence-is-a-set): → TA-B01, then re-gate\n- FAIL on P76 (pattern required for validity): → TA-B02 (MC-2 repair), then re-gate\n- FAIL on Item 4 (index confusion, off-by-one): → TA-B02 (MC-3 repair), then re-gate\n- FAIL on Items 1 or 2: → Review A01 analogy; confirm order and repetition understanding; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nIf routed through repair: re-administer two fresh equivalent items + P76. Apply same MAMR 5/5. Record repair attempt score.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated solid understanding of mathematical sequences — ordered functions from ℕ to a set — including explicit formulas, recurrence relations, and the fact that validity does not require a pattern.\n\nKey anchors to carry forward:\n- A sequence is a function aₙ = f(n), n ∈ ℕ. Order and repetition both matter.\n- Sequences ≠ sets. {1,2,3} = {3,2,1} as sets; but (1,2,3) ≠ (3,2,1) as sequences.\n- No formula is needed for a sequence to be valid — only that each term is well-defined.\n\nNext concepts: math.seq.arithmetic-sequence, math.seq.geometric-sequence — special sequences where the structure yields explicit formulas.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 314,
+        "endLine": 407
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.sequence",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Give an example of a function. What is its domain? What is its codomain?\" If the learner can give a function with domain ℕ (even informally), proceed to A01. If not, briefly review function-as-mapping before starting.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): Arrow diagram from {1,2,3,4,5} to ℝ showing aₙ=2n. Learner reads off a₃ and a₅ from the diagram.\n- Rung 2 (partial abstract): Learner fills in the table for a recursive sequence a₁=3, aₙ₊₁=aₙ+4 through a₅.\n- Rung 3 (full abstract): Learner writes the explicit formula for a sequence given first four terms.\n\n**Pacing note:** h=5 estimated hours; deliver A01–A02 in session 1; A03 + mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.sequence",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Write the first five terms of (a) aₙ=n²−1 and (b) a₁=3, aₙ₊₁=aₙ/3. Identify which is explicit and which is recursive.\"\n[Expected: (a) 0,3,8,15,24 (explicit). (b) 3,1,1/3,1/9,1/27 (recursive).]\n\n**Day 10 prompt:**\n\"A sequence has a₁=2, a₂=5, a₃=8, a₄=11. (a) Find the explicit formula. (b) Is this a function from ℕ to ℝ? (c) What is a₁₀₀?\"\n[Expected: (a) aₙ=3n−1. (b) Yes — domain ℕ, codomain ℝ. (c) a₁₀₀=299.]\n\n**Day 30 prompt:**\n\"Can two different functions f:ℕ→ℝ and g:ℕ→ℝ define the same sequence? Can two different formulas define the same sequence? Give an example or explain why not.\"\n[Expected: Same sequence means same function: f(n)=g(n) for all n. Example: aₙ=2(n+1)−2 and bₙ=2n give the same terms 2,4,6,8,… — they are the same sequence expressed with different (equivalent) formulas.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 232,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "math.seq.sequence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.sequence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.func.function-concept — function as a mapping, domain, codomain; essential for the function-theoretic definition of a sequence\n- math.found.natural-numbers — ℕ = {1,2,3,…}; the domain of a sequence\n\n**Unlocked blueprints:**\n- math.seq.series — sum of sequence terms; requires sequence concept\n- math.seq.arithmetic-sequence — special case with constant differences\n- math.seq.geometric-sequence — special case with constant ratios\n- math.seq.recursive-sequences — formal treatment of recurrence relations\n\n**Cross-links (non-Tier-1, reference only):**\n- math.calc.sequence-limits — limits of sequences as n→∞; this concept is the prerequisite for that one, but the limit concept itself is not required here\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.sequence.md",
+        "startLine": 250,
+        "endLine": 267
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,501 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.exponentiation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.exponentiation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:71407b78d082578e29e7b24432a397a9d253253f63b5f6193b9e6af89a262a9d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.exponentiation.md": "sha256:dff718c60ae8c8f872cb66f4dd9f8728a30642ed9abc5cbe553ae268c1867236"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.arith.exponentiation",
+    "name": "Exponentiation",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.arith.multiplication"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.exponentiation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.exponentiation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.exponentiation.md": "sha256:dff718c60ae8c8f872cb66f4dd9f8728a30642ed9abc5cbe553ae268c1867236"
+      },
+      "contentHash": "sha256:d30d2ac5096c9d7b23aab62bff5010a405f0c24b385ebd909488aaabede1f9fe",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.exponentiation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponentiation.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponentiation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponentiation.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponentiation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponentiation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponentiation.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponentiation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponentiation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponentiation.md#TA-A04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponentiation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponentiation.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponentiation.md#TA-A05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponentiation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponentiation.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponentiation.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponentiation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponentiation.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponentiation.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponentiation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.exponentiation.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.exponentiation.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.exponentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.exponentiation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.exponentiation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Exponentiation — cognitive map",
+      "content": "**Core concept:** Exponentiation aⁿ (read \"a to the power n\") means multiplying a by itself n times: aⁿ = a×a×…×a (n factors). The base a is the repeated factor; the exponent n counts how many times it appears. Key special cases: a⁰=1 for a≠0 (no factors means the multiplicative identity); a¹=a; a⁻ⁿ=1/aⁿ (for the extension to negative exponents).\n\n**Knowledge prerequisites activated:**\n- math.arith.multiplication: aⁿ is iterated multiplication; each step multiplies the running product by a\n\n**Concept structure:**\n1. **Definition**: aⁿ = a × a × … × a (n copies of a); n must be a positive integer for the basic definition\n2. **Base and exponent roles**: base a is the factor being repeated; exponent n counts repetitions\n3. **Special cases**: a¹=a (one copy); a⁰=1 (zero copies — multiplicative identity convention); a⁻ⁿ=1/aⁿ\n4. **Common misconception boundary**: aⁿ ≠ a×n (exponent counts multiplications, not additions)\n\n**Target understanding:** Given a base and exponent, the learner expands aⁿ as a repeated multiplication, computes the value, correctly handles the zero exponent, and distinguishes aⁿ from a×n.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 26,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Worked Examples: Computing aⁿ Step by Step (GR-1: P07 | GR-2: P49)",
+      "content": "### TA-A02 — Worked Examples: Computing aⁿ Step by Step (GR-1: P07 | GR-2: P49)\n\n**P07 WORKED EXAMPLE PAIR**\n\n*Example 1 — Integer base, small exponent:*\nCompute 3⁴.\n```\nStep 1 — Expand: 3⁴ = 3 × 3 × 3 × 3   (4 copies of 3)\nStep 2 — Multiply left to right:\n         3 × 3 = 9\n         9 × 3 = 27\n         27 × 3 = 81\nResult: 3⁴ = 81\n```\n\n*Example 2 — Larger base, exponent 5:*\nCompute 2⁵.\n```\nStep 1 — Expand: 2⁵ = 2 × 2 × 2 × 2 × 2   (5 copies of 2)\nStep 2 — Multiply left to right:\n         2 × 2 = 4\n         4 × 2 = 8\n         8 × 2 = 16\n         16 × 2 = 32\nResult: 2⁵ = 32\n```\n\n**P49 ADAPTIVE CHECKPOINT**\nQ: \"Compute 4³. Show the expansion and multiply step by step.\"\n→ CORRECT [4×4×4; 4×4=16; 16×4=64]: \"Correct — 64.\" → TA-A03\n→ PARTIAL [says 64 but skips steps]: \"Write out 4×4×4 as a chain with intermediate results.\" → re-prompt\n→ INCORRECT [4³=4×3=12]: Flag MC-1. Route → B01\n→ INCORRECT [4³=4+4+4=12]: Flag MC-2. Route → B02\n→ NO_RESPONSE: Re-present Example 1 with 4³ partially filled: \"4⁴ = 4 × 4 × 4 = __ × 4 = __.\" → guided\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 97,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.exponentiation",
+      "title": "EXPONENT-MULTIPLIES-BASE",
+      "content": "| MC-1 | EXPONENT-MULTIPLIES-BASE | Presented with 2³ or 5² | Computes base × exponent: 2³=2×3=6 (instead of 2×2×2=8); or 5²=5×2=10 (instead of 5×5=25) | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.exponentiation",
+      "title": "EXPONENT-ADDS-COPIES",
+      "content": "| MC-2 | EXPONENT-ADDS-COPIES | Presented with 2³ | Computes base added n times: 2³=2+2+2=6 (repeated addition instead of repeated multiplication) | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.exponentiation",
+      "title": "ZERO-EXPONENT-GIVES-ZERO",
+      "content": "| MC-3 | ZERO-EXPONENT-GIVES-ZERO | Asked for a⁰ | Computes a⁰=0 (instead of a⁰=1); reasons \"no factor, no value\" without applying the multiplicative identity convention | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Repeated Doubling: Paper-Fold and Layer Count (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Repeated Doubling: Paper-Fold and Layer Count (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 69,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Worked Examples: Computing aⁿ Step by Step (GR-1: P07 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Examples: Computing aⁿ Step by Step (GR-1: P07 | GR-2: P49)\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 97,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Exponentiation vs. Multiplication: aⁿ ≠ a×n (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Exponentiation vs. Multiplication: aⁿ ≠ a×n (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 134,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Zero Exponent, Negative Exponents, and the Pattern (GR-1: P04 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Zero Exponent, Negative Exponents, and the Pattern (GR-1: P04 | GR-2: P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 170,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 205,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Repair: EXPONENT-MULTIPLIES-BASE (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: EXPONENT-MULTIPLIES-BASE (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 272,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Repair: EXPONENT-ADDS-COPIES (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: EXPONENT-ADDS-COPIES (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 302,
+        "endLine": 330
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Repair: ZERO-EXPONENT-GIVES-ZERO (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: ZERO-EXPONENT-GIVES-ZERO (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 330,
+        "endLine": 431
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A05 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **Compute 3⁴.** Show the expansion and step-by-step multiplication.\n   *(Expected: 3×3×3×3; 9×3=27; 27×3=81)*\n\n2. **Compute 2⁵.**\n   *(Expected: 2×2×2×2×2 = 32)*\n\n3. **True/False:** 5² = 5×2 = 10.\n   *(Expected: FALSE — 5²=5×5=25; the exponent counts multiplications of the base, not a product with the exponent)*\n\n4. **Compute 7⁰.**\n   *(Expected: 1 — the zero exponent rule; any nonzero base to the power zero equals 1)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: independence mode — math.alg.exponential-function is NOT Tier 1; novel scientific notation context)\n\n*Scientific notation — powers of 10:*\n\n\"Scientific notation represents very large and very small numbers using powers of 10.\n\n(a) Compute 10¹, 10², and 10³. What pattern do you notice about each result?\n(b) Compute 10⁰. State the general rule this illustrates.\n(c) The speed of light is approximately 3×10⁸ metres per second. Expand 10⁸ as a number (without scientific notation). How many digits does it have?\"\n\n*(Expected:*\n*(a) 10¹=10; 10²=100; 10³=1,000. Pattern: each power of 10 adds one zero (multiplies by 10).*\n*(b) 10⁰=1. Rule: any nonzero base to the power zero equals the multiplicative identity, 1.*\n*(c) 10⁸=100,000,000 (one followed by 8 zeros; 9 digits total). 3×10⁸=300,000,000 m/s.)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.85; ⌈0.85×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 EXPONENT-MULTIPLIES-BASE first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now compute aⁿ by repeated multiplication, distinguish exponentiation from multiplication, apply the zero-exponent rule, and transfer the operation to scientific notation contexts. Square roots, scientific notation, and all exponent-rule algebra build directly on this foundation.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 205,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\nPaper-folding model: fold one sheet of paper once → 2 layers (2¹). Fold again → 4 layers (2²). Fold again → 8 layers (2³). The layer count doubles (multiplies) with each fold. Generalise: aⁿ means the running product is multiplied by a a total of n times.\n\n**Progression Gate (C → P):** Learner can expand any aⁿ as a chain of n copies of a connected by × signs, then compute the product step by step.\n**Progression Gate (P → A):** Learner computes 2-digit and 3-digit bases to small exponents, handles zero exponent, and applies exponentiation inside PEMDAS expressions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 55,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.exponentiation",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Basic expansion and computation | \"Compute 2⁴ and 3³.\" (16 and 27) |\n| Day 3 | Distinguishing aⁿ from a×n | \"Is 4³ equal to 12 or 64?\" (64; 4×4×4) |\n| Day 7 | Zero and negative exponents | \"Compute 6⁰ and 2⁻³.\" (1 and 1/8) |\n| Day 30 | Application in PEMDAS context | \"Evaluate 3+2³×2−1.\" (3+16−1=18) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 357,
+        "endLine": 368
+      }
+    },
+    {
+      "assetId": "math.arith.exponentiation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.exponentiation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.arith.multiplication (required): aⁿ is n successive multiplications by a; the entire concept builds on iterated multiplication\n\n**Enables:**\n- math.arith.square-roots: √a = a^(1/2) — square root is the inverse of squaring; a^(1/2) × a^(1/2) = a\n- math.arith.scientific-notation: numbers written as c×10ⁿ; the 10ⁿ factor uses exponentiation\n- math.alg.exponent-rules: product rule aᵐ×aⁿ=aᵐ⁺ⁿ, power rule (aᵐ)ⁿ=aᵐⁿ, etc. — all depend on the repeated-multiplication definition\n\n**Cross-links (GR-8):**\n- math.alg.exponential-function (NOT Tier 1): aˣ for real-valued x (extending from integer n to real x) — P76 independence mode used (scientific notation powers-of-10 probe instead)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.exponentiation.md",
+        "startLine": 368,
+        "endLine": 383
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

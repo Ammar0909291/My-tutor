@@ -1,0 +1,480 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.expression-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.expression",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:870d16ae1bef7097622d2f19c023358f07bf315bfb74c3bc4d7068e318064198",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.expression.md": "sha256:02f797c5911239bb5f714c01cadbd3754dd055ff66bc0d61a7536d03ae140ca1"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.alg.expression",
+    "name": "Algebraic Expression",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.variable",
+      "math.arith.order-of-operations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.expression-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.expression (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.expression.md": "sha256:02f797c5911239bb5f714c01cadbd3754dd055ff66bc0d61a7536d03ae140ca1"
+      },
+      "contentHash": "sha256:665e8907bba6afb0839c5ee20d11e8c98588f0a841a7ae3e112516a24fad94a6",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.expression.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.expression.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.expression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.expression\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.expression.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.expression.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.expression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.expression\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.expression.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.expression.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.expression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.expression\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.expression.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.expression.md#TA-A04 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.expression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.expression\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.expression.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.expression.md#TA-A05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.expression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.expression\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.expression.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.expression.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.expression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.expression\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.expression.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.expression.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.expression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.expression\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.expression.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.expression.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.expression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.expression\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.expression/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.expression",
+      "title": "Algebraic Expression — cognitive map",
+      "content": "**Core concept:** An algebraic expression is a combination of numbers, variables, and arithmetic operations that represents a mathematical quantity. Unlike an equation, it contains no equality or inequality sign — it is not a statement to solve but a quantity to evaluate or simplify. Variables in an expression may take on multiple values; evaluating an expression substitutes a specific value and computes the result.\n\n**Knowledge prerequisites activated:**\n- math.found.variable: a variable is a symbol representing a quantity that can vary; not fixed\n- math.arith.order-of-operations: substitution produces a numerical expression; PEMDAS governs its evaluation\n\n**Concept structure:**\n1. **Components**: constants (fixed numbers), variables (symbols for varying quantities), operations (+, −, ×, ÷, exponents)\n2. **No equality sign**: an expression is not a claim; it does not have a true/false value and is not solved\n3. **Evaluation**: substitute a specific value for each variable, then apply order-of-operations\n4. **Simplification**: combine like terms (same variable, same degree) to reduce the expression\n\n**Target understanding:** The learner recognises an algebraic expression (vs. an equation), evaluates it at given variable values using PEMDAS, and simplifies by combining like terms.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 26,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.alg.expression/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.expression",
+      "title": "EXPRESSION-IS-EQUATION",
+      "content": "| MC-1 | EXPRESSION-IS-EQUATION | Presented with an expression like 3x+2 | Adds \"= something\" or says \"solve for x\"; treats the expression as an equation requiring a unique solution rather than a quantity | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.alg.expression/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.expression",
+      "title": "VARIABLE-IS-FIXED",
+      "content": "| MC-2 | VARIABLE-IS-FIXED | Asked to evaluate 3x+2 for x=4 | Insists x must be \"solved\" first; believes x has one fixed unknown value rather than being a placeholder for any number | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.alg.expression/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.expression",
+      "title": "UNLIKE-TERMS-COMBINED",
+      "content": "| MC-3 | UNLIKE-TERMS-COMBINED | Asked to simplify 3x+2y or 3x+2 | Adds unlike terms: 3x+2y=5xy, or 3x+2=5x; ignores that only matching variable-power combinations can be combined | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.expression",
+      "title": "Recipe Quantity: Expressions Represent Amounts (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Recipe Quantity: Expressions Represent Amounts (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 70,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.expression",
+      "title": "Expression vs. Equation: No Equals Sign (GR-1: P11 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Expression vs. Equation: No Equals Sign (GR-1: P11 | GR-2: P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 100,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.expression",
+      "title": "Like and Unlike Terms: What Can Be Combined (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Like and Unlike Terms: What Can Be Combined (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 129,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.expression",
+      "title": "Variables and Evaluation — Pattern Across Values (GR-1: P04 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Variables and Evaluation — Pattern Across Values (GR-1: P04 | GR-2: P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 163,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.expression",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 191,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.expression",
+      "title": "Repair: EXPRESSION-IS-EQUATION (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: EXPRESSION-IS-EQUATION (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 258,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.expression",
+      "title": "Repair: VARIABLE-IS-FIXED (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: VARIABLE-IS-FIXED (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 284,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.expression",
+      "title": "Repair: UNLIKE-TERMS-COMBINED (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: UNLIKE-TERMS-COMBINED (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P04\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 314,
+        "endLine": 413
+      }
+    },
+    {
+      "assetId": "math.alg.expression/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.expression",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A05 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **Is \"4x−3y+7\" an expression or an equation?** Justify in one sentence.\n   *(Expected: expression — contains no equality or inequality sign)*\n\n2. **Evaluate 3x+2 for x=4.**\n   *(Expected: substitute: 3(4)+2; PEMDAS: 12+2=14)*\n\n3. **True/False:** 2x+3y = 5xy.\n   *(Expected: FALSE — x-term and y-term are unlike; they cannot be combined into 5xy)*\n\n4. **Simplify: 5a+2b−3a+b.**\n   *(Expected: (5a−3a)+(2b+b) = 2a+3b)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: P76 independence mode — cross_links=[], novel context)\n\n*Shopping cost model:*\n\n\"A store sells notebooks for $n each and pens for $p each.\n\n(a) Write an algebraic expression for the total cost of buying 3 notebooks and 5 pens.\n(b) Evaluate the expression when n=$2.00 and p=$0.50.\n(c) Is your answer to (a) an expression or an equation? Explain the difference using one sentence.\"\n\n*(Expected:*\n*(a) 3n + 5p*\n*(b) 3(2.00)+5(0.50) = 6.00+2.50 = $8.50*\n*(c) 3n+5p is an expression — it contains no = sign and produces different values depending on the prices n and p chosen.)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.85; ⌈0.85×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 EXPRESSION-IS-EQUATION first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now identify an algebraic expression, evaluate it at given values using order of operations, and simplify by combining like terms. Expressions are the building material of equations and polynomials — every algebraic concept that follows is built from this foundation.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 191,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.expression",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\nRecipe-quantity model: \"3 cups of flour plus 2 teaspoons of salt\" represents a quantity that depends on how many cups is one cup. Draw a physical \"box\" for the variable; place a number card inside to evaluate.\n\n**Progression Gate (C → P):** Learner correctly substitutes a number card into the box and evaluates the resulting arithmetic expression.\n**Progression Gate (P → A):** Learner evaluates a two-variable expression at given values using PEMDAS, and simplifies a three-term expression by identifying and combining like terms.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 56,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.alg.expression/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.expression",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Expression vs. equation identification | \"Is 5x−3 an expression or equation? What about 5x−3=12?\" |\n| Day 3 | Evaluation at given values | \"Evaluate 2x²+1 for x=−2.\" (2(4)+1=9) |\n| Day 7 | Like-term simplification | \"Simplify 4p+2q−p+3q.\" (3p+5q) |\n| Day 30 | Multi-variable evaluation and simplification | \"Evaluate 3a−2b+1 at a=2, b=−1; simplify 2x+y−x+3y.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 339,
+        "endLine": 350
+      }
+    },
+    {
+      "assetId": "math.alg.expression/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.expression",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.found.variable (required): x, y, a represent varying quantities; substitution means replacing the symbol with a number\n- math.arith.order-of-operations (required): after substitution, the resulting numerical expression must be evaluated using PEMDAS\n\n**Enables:**\n- math.alg.equation: an equation is formed when two expressions are set equal; solving finds the variable value that makes the equation true\n- math.alg.polynomial: a polynomial is a specific class of algebraic expression with non-negative integer exponents\n\n**Cross-links (GR-8):**\n- (none — cross_links=[])\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.expression.md",
+        "startLine": 350,
+        "endLine": 365
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

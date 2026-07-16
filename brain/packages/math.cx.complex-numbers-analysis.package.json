@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.complex-numbers-analysis-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.complex-numbers-analysis",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:140abb3f599c59e1b76dc7e5884a4adeddcd4f2b73b28fa4e4a7e2a37fae4f55",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md": "sha256:f69b2839ccc41f44536b35abf0b7463af31305edcd58f3ec1288cfae1d6518c9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cx.complex-numbers-analysis",
+    "name": "Complex Numbers (Analysis)",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.complex-numbers",
+      "math.trig.polar-form-complex"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.complex-numbers-analysis-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.complex-numbers-analysis (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md": "sha256:f69b2839ccc41f44536b35abf0b7463af31305edcd58f3ec1288cfae1d6518c9"
+      },
+      "contentHash": "sha256:87fa3cae15188cd2a3b90616b5c8e00af5d649c2d0efb5112258c20036a3e1ec",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-numbers-analysis.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-numbers-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-numbers-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-numbers-analysis.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-numbers-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-numbers-analysis\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-numbers-analysis.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-numbers-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-numbers-analysis\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.complex-numbers-analysis/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "Complex Numbers (Analysis) — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.found.complex-numbers**: algebraic form z=a+bi; basic operations; i²=−1\n- **math.trig.polar-form-complex**: z=r(cosθ+i·sinθ); modulus r=|z|; quadrant-aware argument; De Moivre's theorem\n\n### Target Knowledge State\nStudent understands ℂ as a structured set {x+iy: x,y∈ℝ} with a rigorous metric |z|=√(x²+y²); can write z in exponential polar form re^{iθ} using Euler's formula e^{iθ}=cosθ+i·sinθ; computes z̄=x−iy, extracts Re(z) and Im(z) via conjugate formulas; and verifies the fundamental identity |z|²=z·z̄.\n\n### Conceptual Obstacles\n1. Computing |z| as |x|+|y| or |x−y| rather than √(x²+y²) (L¹ norm confusion)\n2. Writing z̄=−x−iy (negating both parts) instead of z̄=x−iy (negating imaginary part only)\n3. Confusing z·z̄=|z|² (a real non-negative number) with z² (which has an imaginary part unless y=0)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "MODULUS-IS-SUM",
+      "content": "| MC-1 | MODULUS-IS-SUM | Student computes |z|=|x|+|y| (sum of absolute coordinates) instead of √(x²+y²) | Any modulus computation, especially for z where x and y are both non-zero |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "CONJUGATE-NEGATES-BOTH",
+      "content": "| MC-2 | CONJUGATE-NEGATES-BOTH | Student writes z̄=−x−iy, negating both real and imaginary parts instead of only the imaginary part | Any conjugation step; also z̄=−z is written |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "ZZ-BAR-AS-Z-SQUARED",
+      "content": "| MC-3 | ZZ-BAR-AS-Z-SQUARED | Student confuses z·z̄=|z|² (always real and positive) with z²=(x²−y²)+2xyi (complex in general) | Problems using z·z̄ to compute modulus or find |z|² |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "Three Representations",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Three Representations\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 64,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "Conjugate and Modulus Identity",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Conjugate and Modulus Identity\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 135,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 214,
+        "endLine": 429
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A03 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Show all work.*\n\n**Problem 1.** z = 3 + 4i.\n(a) Find |z| and z̄.\n(b) Verify the identity |z|² = z·z̄.\n\n**Problem 2.** z = −1 + i√3.\n(a) Find |z| and arg(z) (use the correct quadrant).\n(b) Write z in exponential polar form re^{iθ}.\n\n**Problem 3.** Compute (1+i)⁶ using exponential polar form.\n(1+i = √2·e^{iπ/4}, so (1+i)⁶ = ?)\n\n**Problem 4.** For z = a + bi, derive Re(z) = (z+z̄)/2 and Im(z) = (z−z̄)/(2i) algebraically.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. (a) |z| = √(9+16) = **5**; z̄ = **3−4i**\n   (b) z·z̄ = (3+4i)(3−4i) = 9+16 = 25 = 5² = |z|² ✓\n\n2. (a) |z| = √(1+3) = **2**; arg(z): second quadrant, ref angle=arctan(√3/1)=π/3 → θ=π−π/3=**2π/3**\n   (b) **z = 2e^{i2π/3}**\n\n3. 1+i = √2·e^{iπ/4}\n   (1+i)⁶ = (√2)⁶·e^{i6π/4} = 8·e^{i3π/2} = 8(cos(3π/2)+i·sin(3π/2)) = 8(0−i) = **−8i**\n\n4. z+z̄ = (a+bi)+(a−bi) = 2a → **(z+z̄)/2 = a = Re(z)** ✓\n   z−z̄ = (a+bi)−(a−bi) = 2bi → **(z−z̄)/(2i) = 2bi/(2i) = b = Im(z)** ✓\n\nScore 1 point per problem (P77 total: 4 points). Problem 1: both parts must be correct.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence — cross_links NOT Tier-1)*\n\n*Problem:* Let z = e^{iπ/3} (a complex number on the unit circle).\n\n(a) Write z in algebraic form x+iy using Euler's formula.\n\n(b) Find z̄ and verify |z|²=z·z̄=1.\n\n(c) Compute z³ in exponential form, then convert to algebraic and verify directly by expanding (e^{iπ/3})³ = e^{iπ}.\n\n(d) Describe the positions of z, z̄, and −z on the Argand diagram. What geometric transformation maps z to z̄? What maps z to −z?\n\n*Expected answers:*\n\n(a) z = cos(π/3)+i·sin(π/3) = **1/2 + i√3/2**\n\n(b) z̄ = 1/2 − i√3/2 = e^{−iπ/3}\n   z·z̄ = (1/2+i√3/2)(1/2−i√3/2) = 1/4+3/4 = **1** = |z|² ✓ (unit circle: |z|=1)\n\n(c) z³ = e^{iπ/3·3} = e^{iπ} = cosπ+i·sinπ = **−1**\n   Direct: z²=(1/2+i√3/2)²=1/4+i√3/2−3/4=−1/2+i√3/2; z³=z²·z=(−1/2+i√3/2)(1/2+i√3/2)=−1/4−i√3/4+i√3/4+i²·3/4=−1/4−3/4=**−1** ✓\n\n(d) z is at angle π/3 on unit circle; z̄ is its reflection in the real axis (angle −π/3); −z is at angle π/3+π=4π/3 (rotation by π).\n   z→z̄: **reflection in the real axis**; z→−z: **rotation by π (180°)** about the origin.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all four parts correct).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.9 × 5⌉ = 5). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Re-examine missed item; if modulus error → B01; if conjugate error → B02; targeted repair |\n| ≤ 3/5 | → Return to A01; re-engage ℝ²-to-ℂ bridge; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.cx.complex-numbers-analysis` complete. Threshold 0.9 requires 5/5 correct.\n\n**Unlocks:** `math.cx.analytic-functions`\n\nNext concept recommendation: `math.cx.analytic-functions` — where complex differentiability and the Cauchy-Riemann equations extend this framework.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 217,
+        "endLine": 337
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: concrete vector in ℝ² with Euclidean distance (known); P: Argand plane with modulus as distance from origin; A: algebraic definition |z|=√(x²+y²), polar z=re^{iθ}, Euler's formula\n2. **A02 P06 CONTRAST PAIR** — conjugation z̄ vs. negation −z; product z·z̄ vs. z²; key identities\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | z=−3+4i. Find |z|, z̄, and verify |z|²=z·z̄. |\n| R2 | 3 days | Write z=−√3+i in exponential polar form re^{iθ}. |\n| R3 | 7 days | Compute (1−i)⁸ using exponential polar form. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 371,
+        "endLine": 381
+      }
+    },
+    {
+      "assetId": "math.cx.complex-numbers-analysis/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.complex-numbers-analysis",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | math.trig.eulers-formula (NOT Tier-1) |\n| P76_mode | independence (cross-link NOT Tier-1) |\n| Unlocks | math.cx.analytic-functions |\n| Requires (Tier-1) | math.found.complex-numbers, math.trig.polar-form-complex |\n\n**GR-8 compliance:** cross_links = [math.trig.eulers-formula]; NOT Tier-1 → documented.\n**GR-9 compliance:** P76 uses an independent problem (unit circle z=e^{iπ/3}) unrelated to the non-Tier-1 cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-numbers-analysis.md",
+        "startLine": 381,
+        "endLine": 395
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

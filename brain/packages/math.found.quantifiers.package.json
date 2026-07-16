@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.quantifiers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.quantifiers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4b8b0d3b04206c0373e3bb5823d291c2c815f644f9e23b0ad62af04fcdd973cb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.quantifiers.md": "sha256:c0fd480aac3278db3ffac9c5af10f8d35812746d112d740c9b46742ab610ff09"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.found.quantifiers",
+    "name": "Quantifiers",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.predicate",
+      "math.found.predicate-logic"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.quantifiers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.quantifiers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.quantifiers.md": "sha256:c0fd480aac3278db3ffac9c5af10f8d35812746d112d740c9b46742ab610ff09"
+      },
+      "contentHash": "sha256:dc4c2a3797f0d3cc0638125b4d4d3e059cfbae74ae563e036ba8827424f9c443",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.quantifiers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.quantifiers.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.quantifiers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.quantifiers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.quantifiers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.quantifiers.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.quantifiers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.quantifiers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.quantifiers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.quantifiers.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.quantifiers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.quantifiers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.quantifiers.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.quantifiers.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.quantifiers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.quantifiers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.quantifiers/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.quantifiers",
+      "title": "Quantifiers — cognitive map",
+      "content": "### Core Insight\nBounded quantifiers — ∀x∈A and ∃x∈A — restrict quantification to a named set A rather than a universal domain. The critical asymmetry: bounded ∀ expands using IMPLICATION (→), while bounded ∃ expands using CONJUNCTION (∧). Getting this wrong produces statements with entirely different truth values.\n\n### Conceptual Hierarchy\n```\nLevel 0 (Concrete): Bounded quantifier examples on finite sets; enumerate to verify.\nLevel 1 (Pictorial): Venn-diagram expansion: A is a subset of the full domain;\n                      ∀x∈A P(x) checks only elements inside circle A.\nLevel 2 (Abstract): Formal expansion laws; uniqueness quantifier ∃!; set-theory bridge.\nLevel 3 (Transfer): Express A⊆B, A∩B, A^c using bounded quantifier notation.\n```\n\n### Core Definitions\n```\nBOUNDED UNIVERSAL QUANTIFIER:\n  ∀x∈A P(x)  ≡  ∀x(x∈A → P(x))\n  Read: \"For all x in A, P(x).\"\n  Truth: TRUE iff for every element a ∈ A, P(a) is TRUE.\n  Vacuously true when A = ∅ (no elements to check).\n\nBOUNDED EXISTENTIAL QUANTIFIER:\n  ∃x∈A P(x)  ≡  ∃x(x∈A ∧ P(x))\n  Read: \"There exists x in A such that P(x).\"\n  Truth: TRUE iff at least one element a ∈ A satisfies P(a).\n  FALSE when A = ∅ (no witnesses available).\n\nUNIQUENESS QUANTIFIER:\n  ∃!x P(x)  ≡  ∃x(P(x) ∧ ∀y(P(y) → y=x))\n  Read: \"There exists a unique x such that P(x).\"\n  TRUE iff exactly one element satisfies P.\n\nCONNECTIVE ASYMMETRY — WHY → FOR ∀ AND ∧ FOR ∃:\n  ∀x∈A using ∧: ∀x(x∈A ∧ P(x)) claims EVERY x (in the whole domain) is in A.\n    This is almost always false — it over-constrains.\n  ∃x∈A using →: ∃x(x∈A → P(x)) is trivially true whenever ∃x∉A\n    (False→P is True), making the statement vacuously true.\n    This is almost always trivially true — it under-constrains.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 34,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.quantifiers",
+      "title": "[FOUNDATIONAL]: BOUNDED-UNIVERSAL-WRONG-CONNECTIVE",
+      "content": "### MC-1 [FOUNDATIONAL]: BOUNDED-UNIVERSAL-WRONG-CONNECTIVE\n**Belief:** ∀x∈A P(x) ≡ ∀x(x∈A ∧ P(x)) — uses ∧ instead of →.\n**Origin:** \"For all x in A AND P(x)\" feels natural; the ∧ seems to express \"both conditions hold.\"\n**Trigger:** Student writes ∀n∈ℕ(n>0) as ∀n(n∈ℕ ∧ n>0). Over domain ℤ: this claims every integer is a natural number — FALSE, but the intended statement is TRUE.\n**Repair:** ∀x(x∈A ∧ P(x)) asserts that EVERY object in the universe is in A. This is much stronger (usually false). The correct meaning \"all members of A satisfy P\" is captured by conditional: if x is in A, then P(x).\n**Priority:** FOUNDATIONAL — this error corrupts all formal mathematical statements.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.quantifiers",
+      "title": "BOUNDED-EXISTENTIAL-WRONG-CONNECTIVE",
+      "content": "### MC-2: BOUNDED-EXISTENTIAL-WRONG-CONNECTIVE\n**Belief:** ∃x∈A P(x) ≡ ∃x(x∈A → P(x)) — uses → instead of ∧.\n**Origin:** Mirroring the fix for MC-1 (\"bounded quantifiers always use →\") without distinguishing ∀ from ∃.\n**Trigger:** ∃x∈{2,4}(x is odd): student writes ∃x(x∈{2,4} → x is odd). The expansion is trivially TRUE (take x=3 not in {2,4}: False→anything is True). The correct statement is FALSE.\n**Repair:** For ∃, we need to find an x that IS in A AND satisfies P — both conditions active simultaneously: ∃x(x∈A ∧ P(x)).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.quantifiers",
+      "title": "UNIQUENESS-IS-EXISTENCE",
+      "content": "### MC-3: UNIQUENESS-IS-EXISTENCE\n**Belief:** ∃!x P(x) is just another way to write ∃x P(x) — uniqueness adds no content.\n**Origin:** Students read \"there exists a unique\" as emphasis on existence, not a separate logical condition.\n**Trigger:** ∃!x(x²=4) over ℝ: student says TRUE (there exists such an x). But ∃!x(x²=4) is FALSE (both x=2 and x=−2 satisfy it; two solutions, not one).\n**Repair:** ∃! is strictly stronger than ∃. ∃x requires at least one. ∃!x requires exactly one.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 16,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.quantifiers",
+      "title": "Concrete Foundation — Bounded Quantifiers and Connective Choice",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Foundation — Bounded Quantifiers and Connective Choice\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 129,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.quantifiers",
+      "title": "Uniqueness and Formal Expansion",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Uniqueness and Formal Expansion\",\"primitives\":[\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 191,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.quantifiers",
+      "title": "Bridge to Set Theory",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Bridge to Set Theory\",\"primitives\":[\"P04\",\"P11\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 260,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.quantifiers",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 333,
+        "endLine": 636
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.quantifiers",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "### TA-A04: Mastery Gate (P91 Terminal)\n\n```\nP77 — MULTI-PROBLEM SET (4 problems)\n\nProblem 1:\n\"Expand each into an unbounded quantifier form, stating the connective used:\n(a) ∀x∈{1,2,3} (x < 5)   over D = ℕ.\n(b) ∃x∈{1,2,3} (x is prime)   over D = ℕ.\"\n\nProblem 2:\n\"Determine whether each statement is TRUE or FALSE.\nDomain D = ℤ. Set A = {−3, −1, 0, 1, 3}.\n(a) ∀x∈A (x² ≤ 9)\n(b) ∃x∈A (x² = 2)\n(c) ∃!x∈A (x² = 0)\"\n\nProblem 3:\n\"Negate: ∀x∈ℕ ∃!y∈ℕ (y = x + 1).\nWrite the negation in a simplified form (no ¬ on a quantifier).\"\n[¬(∀x∈ℕ ∃!y∈ℕ(y=x+1)) ≡ ∃x∈ℕ ¬(∃!y∈ℕ(y=x+1))\n≡ ∃x∈ℕ (∀y∈ℕ(y≠x+1) ∨ ∃y,z∈ℕ(y≠z ∧ y=x+1 ∧ z=x+1))\nSimplified: ∃x∈ℕ where the unique successor doesn't exist or isn't unique.\nOver ℕ the original is TRUE; negation is FALSE — but the exercise tests the negation law.]\n\nProblem 4:\n\"True or false: ∃!x∈ℝ (x² − 5x + 6 = 0). Justify.\"\n[x²−5x+6=(x−2)(x−3)=0; x=2 or x=3. Two solutions → NOT unique. FALSE.]\n```\n\n```\nP55 — SCORE (after P77)\nAward 1 point per problem.\nRunning total before P76: __/4.\n```\n\n```\nP76 — TRANSFER PROBE (cross-link: math.found.set-theory — Tier 1)\n\"Using bounded quantifier notation, express the following set-theory definitions.\nThen verify each for the concrete sets A = {2,3,5}, B = {1,2,3,4}, domain D = {1,2,3,4,5}.\n\n(a) Express 'A is a subset of B' (A ⊆ B) using ∀x∈A.\n    Verify whether A ⊆ B is TRUE or FALSE.\n\n(b) Express 'the intersection A∩B consists of all x in D that are in both A and B'\n    using ∃x∈D with the appropriate conjunction.\n    List the elements of A∩B.\n\n(c) Express the complement A^c (relative to D) as a bounded existential or\n    bounded universal statement about membership in A. List the elements of A^c.\n\n(d) In one sentence: how does this exercise show that set theory is a specialisation\n    of predicate logic with bounded quantifiers?\"\n\n[Expected:\n(a) ∀x∈A(x∈B) ≡ ∀x(x∈A → x∈B). 5∈A but 5∉B, so A⊄B — FALSE.\n(b) A∩B = {x∈D : x∈A ∧ x∈B}. Elements: {2,3}.\n    Quantified check: ∀x∈D (x∈A∩B ↔ x∈A ∧ x∈B).\n(c) A^c = D\\A = {1,4}. Expressed: {x∈D : x∉A}; or: ∀x∈D(x∈A^c ↔ x∉A).\n(d) Set operations (subset, intersection, complement) are shorthand for specific\n    bounded quantifier statements over a domain — set theory is predicate logic\n    applied to membership predicates.]\n```\n\n```\nP55 — SCORE (after P76)\nAward 1 point for P76.\nRunning total: __/5.\n```\n\n```\nP75 — MASTERY ASSESSMENT\nPass criterion: 4 out of 5 (⌈0.80 × 5⌉ = 4)\n```\n\n```\nP55 — SCORE (final)\nRecord pass/fail status.\n```\n\n```\nP74 — ROUTING DECISION\nScore ≥ 4/5 → MASTERY ACHIEVED → P78 COMPLETION\nScore < 4/5 → NEEDS REVIEW → identify lowest-scoring item; activate Protocol B for its misconception\n```\n\n```\nP55 — SCORE (routing recorded)\n```\n\n```\nP78 — COMPLETION\n\"Quantifiers checkpoint complete. You have established:\n  • Bounded ∀: ∀x∈A P(x) ≡ ∀x(x∈A → P(x)). Connective: IMPLICATION (→).\n  • Bounded ∃: ∃x∈A P(x) ≡ ∃x(x∈A ∧ P(x)). Connective: CONJUNCTION (∧).\n  • Uniqueness: ∃!x P(x) ≡ ∃x(P(x) ∧ ∀y(P(y)→y=x)). Exactly one, not 'at least one.'\n  • Set theory encodes bounded quantifiers: A⊆B ≡ ∀x∈A(x∈B); A∩B uses ∧.\nNext concepts: math.found.proof (every proof uses ∀/∃ strategies),\nmath.found.set-theory (full set algebra in bounded-quantifier language).\"\n```\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair Chains)\n\n### Repair Chain B-1: BOUNDED-UNIVERSAL-WRONG-CONNECTIVE (MC-1 FOUNDATIONAL)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: ∀x∈A P(x) ≡ ∀x(x∈A ∧ P(x)).\n AFTER:  ∀x∈A P(x) ≡ ∀x(x∈A → P(x)).\n\nWhy ∧ fails: ∀x(x∈A ∧ P(x)) says EVERY x in the WHOLE domain is in A AND satisfies P.\nBut A is just a subset — most x's are NOT in A. The conjunction fails for them.\n\nWhy → works: ∀x(x∈A → P(x)) says: IF x is in A, THEN P(x). For x ∉ A,\nthe implication is vacuously true (we don't care about them). Only x ∈ A are checked.\n\nCounter-example showing ∧ wrong:\n  ∀n∈{2,4}(n < 10) over D=ℕ.\n  Correct expansion: ∀n(n∈{2,4} → n<10). TRUE (only n=2,4 are checked; both <10).\n  Wrong expansion: ∀n(n∈{2,4} ∧ n<10). FALSE: n=1∈D but 1∉{2,4} → conjunct fails.\"\n\nExit gate: \"What connective expands bounded ∀? Write ∀x∈C P(x) in unbounded form.\"\nExpected: ∀x(x∈C → P(x)).\n→ Correct: return to TA-A01 P49 re-attempt.\n→ Incorrect: repeat the counter-example above with student's own small set.\n```\n\n### Repair Chain B-2: BOUNDED-EXISTENTIAL-WRONG-CONNECTIVE (MC-2)\n\n```\nP41 — MISCONCEPTION DETECTOR\nDiagnostic: \"Expand ∃x∈{3,5}(x is even).\"\nIf student writes ∃x(x∈{3,5} → x is even): MC-2 confirmed.\n\nP27 — MISCONCEPTION NAMING\n\"BOUNDED-EXISTENTIAL-WRONG-CONNECTIVE: using → for bounded ∃.\n∃x(x∈A → P(x)) is trivially TRUE whenever ∃x∉A — take any x outside A,\n  the implication is False→anything=True. Useless.\nCorrect: ∃x(x∈A ∧ P(x)). Both conditions must be SIMULTANEOUSLY true:\n  x must be IN A, AND x must satisfy P.\n\n∃x∈{3,5}(x is even):\n  Wrong: ∃x(x∈{3,5} → x is even). Take x=2: 2∉{3,5} → True. Trivially TRUE. Wrong!\n  Right: ∃x(x∈{3,5} ∧ x is even). Check 3: 3∈{3,5} ✓ BUT 3 is NOT even ✗.\n         Check 5: 5∈{3,5} ✓ BUT 5 is NOT even ✗. No witness. FALSE. Correct!\"\n\nExit gate: \"What connective expands bounded ∃? Write ∃x∈C P(x) in unbounded form.\"\nExpected: ∃x(x∈C ∧ P(x)).\n→ Correct: return to TA-A01.\n```\n\n### Repair Chain B-3: UNIQUENESS-IS-EXISTENCE (MC-3)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: ∃!x P(x) says the same as ∃x P(x).\n AFTER:  ∃!x P(x) requires EXACTLY ONE satisfier — neither zero nor two.\n\nThree cases:\n  Zero satisfiers → ∃x P(x) is FALSE → ∃!x P(x) is FALSE.\n  One satisfier → ∃x P(x) is TRUE → ∃!x P(x) is TRUE.\n  Two or more satisfiers → ∃x P(x) is TRUE → ∃!x P(x) is FALSE.\n\n∃!x(x²=4) over ℝ: x=2 and x=−2 both satisfy → TWO satisfiers → ∃!x is FALSE.\n∃!x(x³=8) over ℝ: only x=2 satisfies → ONE satisfier → ∃!x is TRUE.\"\n\nExit gate: \"How many satisfiers are needed for ∃!x P(x) to be TRUE? How many for ∃x P(x)?\"\nExpected: exactly 1 for ∃!; at least 1 for ∃.\n→ Correct: return to TA-A02.\n```\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n```\nP89 — SPACED REPETITION\nReview schedule for math.found.quantifiers:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State the bounded ∀ and ∃ expansion laws with their connectives.\n  Expand ∀x∈ℕ(x > 0) and ∃x∈ℕ(x > 100) in unbounded form.\"\n  Target: ∀x(x∈ℕ → x>0); ∃x(x∈ℕ ∧ x>100).\n\nInterval 2 (3 days):\n  Application: \"A = {n∈ℤ : −5 ≤ n ≤ 5}.\n  (a) Is ∀n∈A(n² ≤ 25) TRUE?  (b) Is ∃!n∈A(n³=0) TRUE?\"\n  Target: (a) TRUE (|n|≤5 → n²≤25); (b) TRUE (only n=0 in A satisfies n³=0).\n\nInterval 3 (7 days):\n  Transfer: \"Express A ⊆ B ∧ B ⊆ A as a single quantifier statement.\n  What does this mean about sets A and B?\"\n  Target: ∀x(x∈A ↔ x∈B), meaning A = B (same elements).\n\nInterval 4 (21 days):\n  Integration: \"In a proof that A∩B ⊆ A, write the formal statement to prove\n  and describe the proof strategy (what do you assume, what do you show).\"\n  Target: Prove ∀x∈A∩B(x∈A). Let x∈A∩B (arbitrary); then x∈A ∧ x∈B;\n    in particular x∈A. Done — universal proof by arbitrary element.\n```\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### GR-8: Cross-link documentation\n```\nIncoming prerequisites:\n  math.found.predicate → Defines predicates P(x) as sentence templates.\n    Bounded quantifiers require predicates to be applied within a named set.\n  math.found.predicate-logic → Provides unrestricted ∀x P(x), ∃x P(x);\n    negation laws ¬(∀)≡∃¬, ¬(∃)≡∀¬; nested quantifiers.\n    Quantifiers extends this to bounded notation and the uniqueness quantifier.\n\nOutgoing unlocks:\n  math.found.proof → Proof strategies are:\n    ∀x∈A P(x) → arbitrary-element proof (let x∈A be arbitrary; prove P(x)).\n    ∃x∈A P(x) → witness proof (exhibit specific a∈A with P(a)).\n    ∃!x P(x) → existence + uniqueness (prove both ∃x and the only-one property).\n  math.found.set-theory → All set operations are bounded quantifier statements.\n    A⊆B: ∀x∈A(x∈B). A∩B: {x:x∈A∧x∈B}. Complement: {x∈U:x∉A}.\n\nCross-linked:\n  math.found.set-theory (Tier 1) → P76 probe: express A⊆B, A∩B, A^c in\n    bounded quantifier notation; verify on concrete sets.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.found.set-theory]\nmath.found.set-theory IS in Tier 1 set → P76 CROSS-LINK PROBE\nP76 probe: express A⊆B, A∩B, A^c in bounded quantifier notation;\n  verify on A={2,3,5}, B={1,2,3,4}, D={1,...,5}.\n  Bridges quantifiers to set-theory language.\n```\n\n---\n\n\n## Component 8 — Teaching Notes\n\n### Pedagogical Rationale\nQuantifiers (bloom=understand) is a short but high-leverage concept. The entire power of formal mathematics rests on using ∀ and ∃ correctly with the right connectives. The connective asymmetry (→ for bounded ∀, ∧ for bounded ∃) is non-intuitive and must be derived from first principles, not memorised as two separate rules.\n\n### Common Session Failure Modes\n1. **MC-1 and MC-2 are mirror images:** Students who learn MC-1 repair (∀ uses →) often over-apply it and start using → for ∃ as well (creating MC-2). Both repair chains must clarify WHY each connective was chosen, not just WHICH connective.\n2. **Short session at h=4:** This blueprint covers three focused topics in fewer TAs than typical. Keep TA-A03 (set-theory bridge) brisk — it is preparation for the P76 probe and the downstream math.found.set-theory concept.\n3. **∃! requires two sub-proofs:** Students encounter ∃! in proofs later (math.found.proof) and must know: (a) prove existence, (b) prove uniqueness separately. The formal expansion ∃x(P(x) ∧ ∀y(P(y)→y=x)) encodes both.\n\n### Connections to Broader Curriculum\n- **Downstream — math.found.proof:** The proof structure for ∀ (arbitrary element) and ∃ (exhibit witness) are direct translations of the semantics of quantifiers.\n- **Downstream — math.found.set-theory:** Every set operation has a quantifier encoding; fluency here makes set-theory proofs transparent.\n- **Predecessor — math.found.predicate-logic:** Predicate-logic introduced ∀/∃ unrestricted; quantifiers deepens into bounded forms and uniqueness.\n\n### Language Precision\n- \"Bounded universal\" for ∀x∈A P(x); \"bounded existential\" for ∃x∈A P(x).\n- Always say which connective: \"bounded ∀ uses implication; bounded ∃ uses conjunction.\"\n- \"Uniqueness quantifier\" for ∃! — never called \"the existence quantifier.\"\n\n---\n\n\n## Component 10 — Validation Checklist\n\n### Structural Validators\n- [x] V-1: Blueprint has all 10 components (0–8, 10).\n- [x] V-2: Metadata YAML complete with all required fields.\n- [x] V-3: concept_id matches filename `math.found.quantifiers`.\n- [x] V-4: difficulty=developing, bloom_level=understand, mastery_threshold=0.80.\n- [x] V-5: estimated_hours=4, session_ta_cap=7.\n\n### Grammar Rule Validators\n- [x] V-6 (GR-1): Every non-repair TA opens with B-category primitive (TA-A01: P06+P03; TA-A02: P11; TA-A03: P04+P11; TA-A04 is mastery gate).\n- [x] V-7 (GR-2): Every non-gate TA contains P49 with all 4 branches. TA-A01, TA-A02, TA-A03 each have P49.\n- [x] V-8 (GR-3): Mastery gate TA-A04 is terminal (ends with P78).\n- [x] V-9 (GR-4): P41 entry diagnostic gates P64 → Protocol B when MC-1 active.\n- [x] V-10 (GR-6): P91 compound (P77→P55→P76→P55→P75→P55→P74→P55→P78) complete in TA-A04.\n- [x] V-11 (GR-7): P76 present in mastery gate TA-A04.\n- [x] V-12 (GR-8): Cross-links documented in Component 7. math.found.set-theory named.\n- [x] V-13 (GR-9): P76 mode is CROSS-LINK (math.found.set-theory is Tier 1). P76 probe: A⊆B, A∩B, A^c in bounded quantifier notation on concrete sets. Bridges to set-theory.\n- [x] V-14 (GR-10): MAMR stated in Component 0 and enforced in Component 3.\n\n### Content Validators\n- [x] V-15: Pass criterion = ⌈0.80 × 5⌉ = 4/5. P77 has 4 problems; P76 contributes 1; total n=5. ✓\n- [x] V-16: CPA_ENTRY_STAGE = C. developing always starts Concrete. ✓\n- [x] V-17: MC-1 is FOUNDATIONAL and cleared first per MAMR. ✓\n- [x] V-18: P49 INCORRECT branch activates P27 or P64 with repair pathway in all three non-gate TAs. ✓\n- [x] V-19: P76 probe independent of P77 problems (P77: expansion/verification on finite sets, negation, discriminant equation; P76: set operations as bounded quantifiers on distinct A,B — different). ✓\n- [x] V-20: Spaced repetition intervals are 1, 3, 7, 21 days with distinct prompts. ✓\n\n### Automated Invariant Check (AIR)\n- [x] AIR-1: No implementation code present.\n- [x] AIR-2: No references to internal system variables.\n- [x] AIR-3: All cross-linked concept IDs use canonical prefix format.\n- [x] AIR-4: P91 sequence order is P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n- [x] AIR-5: Protocol B repair chains each have explicit exit gate with return instruction. ✓\n\n**VALIDATION RESULT: PASS — PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 333,
+        "endLine": 636
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.quantifiers",
+      "title": "Scaffolding Protocol",
+      "content": "### Entry Diagnostic (P41 gate)\n```\nP41 — MISCONCEPTION DETECTOR\nPrompt: \"Domain D = ℤ. Set A = {2, 4, 6}.\nExpand ∀x∈A (x < 10) into an unbounded form using D.\nWhich logical connective do you use: → or ∧?\"\n\nCORRECT (∀x(x∈{2,4,6} → x < 10); uses →):\n→ No MC-1 detected → proceed to TA-A01 standard opening.\n\nINCORRECT (writes ∀x(x∈{2,4,6} ∧ x < 10); uses ∧):\n→ MC-1 FOUNDATIONAL active → P64 CONCEPTUAL SHIFT\n→ Activate Protocol B (MC-1 Repair Chain)\n```\n\n### Prerequisite Bridge\nStudent completed math.found.predicate-logic (predicates, unrestricted ∀x P(x) and ∃x P(x), negation laws, nested quantifiers). Quantifiers deepens this by introducing BOUNDED quantification — restricting the domain to a named set A — and the uniqueness quantifier ∃!.\n\n### MAMR Enforcement\nMC-1 is FOUNDATIONAL. The wrong connective for bounded ∀ corrupts the formal expansion into a false over-constraining statement. Clear completely before discussing ∃ connectives (MC-2) or ∃! (MC-3).\n\n### CPA Progression: C → P → A\n- **Concrete (C):** Small finite A={2,4,6}; enumerate to verify truth of ∀x∈A P(x) and ∃x∈A P(x).\n- **Pictorial (P):** Venn diagram with domain D as outer rectangle, A as inner circle; ∀x∈A checks only inside circle.\n- **Abstract (A):** Formal expansion laws; counterexample analysis; set-theory encoding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 100,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.quantifiers",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89 — SPACED REPETITION\nReview schedule for math.found.quantifiers:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State the bounded ∀ and ∃ expansion laws with their connectives.\n  Expand ∀x∈ℕ(x > 0) and ∃x∈ℕ(x > 100) in unbounded form.\"\n  Target: ∀x(x∈ℕ → x>0); ∃x(x∈ℕ ∧ x>100).\n\nInterval 2 (3 days):\n  Application: \"A = {n∈ℤ : −5 ≤ n ≤ 5}.\n  (a) Is ∀n∈A(n² ≤ 25) TRUE?  (b) Is ∃!n∈A(n³=0) TRUE?\"\n  Target: (a) TRUE (|n|≤5 → n²≤25); (b) TRUE (only n=0 in A satisfies n³=0).\n\nInterval 3 (7 days):\n  Transfer: \"Express A ⊆ B ∧ B ⊆ A as a single quantifier statement.\n  What does this mean about sets A and B?\"\n  Target: ∀x(x∈A ↔ x∈B), meaning A = B (same elements).\n\nInterval 4 (21 days):\n  Integration: \"In a proof that A∩B ⊆ A, write the formal statement to prove\n  and describe the proof strategy (what do you assume, what do you show).\"\n  Target: Prove ∀x∈A∩B(x∈A). Let x∈A∩B (arbitrary); then x∈A ∧ x∈B;\n    in particular x∈A. Done — universal proof by arbitrary element.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 511,
+        "endLine": 541
+      }
+    },
+    {
+      "assetId": "math.found.quantifiers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.quantifiers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### GR-8: Cross-link documentation\n```\nIncoming prerequisites:\n  math.found.predicate → Defines predicates P(x) as sentence templates.\n    Bounded quantifiers require predicates to be applied within a named set.\n  math.found.predicate-logic → Provides unrestricted ∀x P(x), ∃x P(x);\n    negation laws ¬(∀)≡∃¬, ¬(∃)≡∀¬; nested quantifiers.\n    Quantifiers extends this to bounded notation and the uniqueness quantifier.\n\nOutgoing unlocks:\n  math.found.proof → Proof strategies are:\n    ∀x∈A P(x) → arbitrary-element proof (let x∈A be arbitrary; prove P(x)).\n    ∃x∈A P(x) → witness proof (exhibit specific a∈A with P(a)).\n    ∃!x P(x) → existence + uniqueness (prove both ∃x and the only-one property).\n  math.found.set-theory → All set operations are bounded quantifier statements.\n    A⊆B: ∀x∈A(x∈B). A∩B: {x:x∈A∧x∈B}. Complement: {x∈U:x∉A}.\n\nCross-linked:\n  math.found.set-theory (Tier 1) → P76 probe: express A⊆B, A∩B, A^c in\n    bounded quantifier notation; verify on concrete sets.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.found.set-theory]\nmath.found.set-theory IS in Tier 1 set → P76 CROSS-LINK PROBE\nP76 probe: express A⊆B, A∩B, A^c in bounded quantifier notation;\n  verify on A={2,3,5}, B={1,2,3,4}, D={1,...,5}.\n  Bridges quantifiers to set-theory language.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.quantifiers.md",
+        "startLine": 541,
+        "endLine": 576
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

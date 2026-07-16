@@ -1,0 +1,358 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.de.first-order-ode-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.de.first-order-ode",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eda1a0369d0f91ff4b98862808efd7b33c9686a0f598540a5c7a6b6979294661",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.de.first-order-ode.md": "sha256:eee0378424e906fb179116c66b7d88424e557fdf55fc43ce6b8d4d3b69eb7abf"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.de.first-order-ode",
+    "name": "First-Order ODE",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.de.ode",
+      "math.calc.antiderivatives",
+      "math.calc.u-substitution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.de.first-order-ode-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.de.first-order-ode (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.de.first-order-ode.md": "sha256:eee0378424e906fb179116c66b7d88424e557fdf55fc43ce6b8d4d3b69eb7abf"
+      },
+      "contentHash": "sha256:b675b1fe43f115728814257b1935284a98d7f598f7116364345b1532f019b154",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.de.first-order-ode.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.first-order-ode.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.first-order-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.first-order-ode\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.first-order-ode.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.first-order-ode.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.first-order-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.first-order-ode\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.first-order-ode.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.first-order-ode.md#TA-A03 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.first-order-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.first-order-ode\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.de.first-order-ode.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.de.first-order-ode.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.de.first-order-ode"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.de.first-order-ode\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.de.first-order-ode/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.de.first-order-ode",
+      "title": "First-Order ODE — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.de.ode**: ODE definition; order/degree; general vs particular solution; verification procedure; classifying equations (order, linearity)\n- **math.calc.antiderivatives**: ∫f(x)dx=F(x)+C; reverse power rule; ∫eˣdx=eˣ+C; ∫(1/x)dx=ln|x|+C\n- **math.calc.u-substitution**: recognise and apply substitution; du-verification; composite integrands\n\n### Target Knowledge State\nStudent fluently solves separable first-order ODEs (separate variables, integrate both sides, solve for y, apply initial conditions); recognises the linear first-order form y'+P(x)y=Q(x) and applies the integrating factor μ=e^{∫P(x)dx} to solve it; correctly handles the arbitrary constant throughout (does not absorb A=e^C prematurely); uses an initial condition to find the particular solution; and identifies which method (separation or integrating factor) is appropriate for a given first-order ODE.\n\n### Conceptual Obstacles\n1. Attempting separation on non-separable ODEs — y'=y+x cannot be written as g(y)dy=h(x)dx; recognising a separable equation requires being able to factor the RHS into a product f(x)·g(y) (or sum is never separable)\n2. Absorbing the constant into the exponential — after ln|y|=f(x)+C, student writes y=e^{f(x)} instead of y=e^{f(x)+C}=e^C·e^{f(x)}=Ae^{f(x)}; A=e^C is a nonzero constant that must be retained\n3. Forgetting +C on one side of the separated equation — integrating both sides ∫dy/g(y)=∫h(x)dx and writing only a constant on the right; both sides gain a constant, which net to a single constant C on the right by convention\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 29,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.de.first-order-ode",
+      "title": "Worked Example Pair",
+      "content": "### Teaching Action A02 — Worked Example Pair\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Build fluency across two solution methods — WE1 demonstrates separation with an IC; WE2 demonstrates the integrating factor for a linear first-order ODE that is not separable\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**WE1 — Separable with IC: y'=x/y, y(0)=2**\n\n**Step 1 — Separability check:** RHS = x/y = x · (1/y) = h(x)·g(y). ✓ Separable.\n\n**Step 2 — Separate:**\n$$y\\, dy = x\\, dx$$\n\n**Step 3 — Integrate both sides:**\n$$\\frac{y^2}{2} = \\frac{x^2}{2} + C$$\n\n**Step 4 — Solve for y:**\n$$y^2 = x^2 + 2C = x^2 + K \\quad (K=2C \\text{ is still arbitrary})$$\n$$y = \\pm\\sqrt{x^2 + K}$$\n\n**Step 5 — Apply IC y(0)=2:**\n$$2 = \\pm\\sqrt{0 + K} \\implies K = 4 \\quad (\\text{take } + \\text{ since } y(0)=2>0)$$\n\n**Particular solution:** y = √(x²+4)\n\n**Verification:** y'=x/√(x²+4)=x/y ✓\n\n---\n\n**WE2 — Linear first-order (integrating factor): y'−2y=4eˣ**\n\n*Why not separation?* RHS−2y is a sum of a y-term and an x-term function; cannot factor as h(x)·g(y). Use the integrating factor.\n\n**Standard form:** y' + P(x)y = Q(x) with P(x)=−2, Q(x)=4eˣ.\n\n**Integrating factor:** μ(x) = e^{∫P(x)dx} = e^{∫(−2)dx} = e^{−2x}\n\n**Multiply through by μ:**\n$$e^{-2x}y' - 2e^{-2x}y = 4e^x \\cdot e^{-2x} = 4e^{-x}$$\n\nRecognise the left side as d/dx[μ·y]:\n$$(e^{-2x}y)' = 4e^{-x}$$\n\n**Integrate both sides:**\n$$e^{-2x}y = \\int 4e^{-x}\\, dx = -4e^{-x} + C$$\n\n**Solve for y:**\n$$y = e^{2x}(-4e^{-x} + C) = -4e^x + Ce^{2x}$$\n\n**Verification:** y'=−4eˣ+2Ce^{2x}; y'−2y=(−4eˣ+2Ce^{2x})−2(−4eˣ+Ce^{2x})=−4eˣ+8eˣ=4eˣ ✓\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n**Prompt:** Solve y'=2xy with y(1)=e.\n\n**CORRECT:** Separable (RHS=2xy=h(x)·g(y) with h=2x, g=y). dy/y=2x dx. ln|y|=x²+C. y=Ae^{x²}. IC: e=Ae¹ → A=e⁰=1. Particular solution: y=e^{x²}.\n→ \"Correct. Verify: y'=2xe^{x²}=2x·y ✓.\" → Proceed to A03.\n\n**PARTIAL:** Student separates correctly but writes y=e^{x²+C}=e^{x²} (drops A at IC step by setting C=0 instead of A=1).\n→ \"Good separation. IC: y(1)=e. General solution y=Ae^{x²}. At x=1: e=Ae^1 → A=e/e=1. Particular solution: y=1·e^{x²}=e^{x²}. You set C=0 incorrectly — C=0 is not the same as A=1. A=e^C, not C.\"\n\n**INCORRECT:** Student tries integrating factor on y'=2xy (unnecessary — it is separable).\n→ \"y'=2xy is separable: move dy to left, dx to right: dy/y=2x dx. Integrate: ln|y|=x²+C → y=Ae^{x²}. The integrating factor is for non-separable linear equations. Separation is simpler here.\"\n\n**NO_RESPONSE:** → \"Check separability: y'=2xy = (2x)·y = h(x)·g(y) ✓. Separate: dy/y=2x dx. Integrate both sides: ln|y|=x²+C. Solve: y=Ae^{x²}. Apply y(1)=e: e=Ae¹ → A=1. Answer: y=e^{x²}.\"\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 146,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.de.first-order-ode",
+      "title": "SEPARATION-ON-NON-SEPARABLE",
+      "content": "| MC-1 | SEPARATION-ON-NON-SEPARABLE | Student attempts to \"separate\" y'=y+x or y'=x+y² by moving y-terms to one side and x-terms to the other, without verifying the RHS factors as f(x)·g(y); produces incorrect or undefined expressions | Any first-order ODE where the RHS is a sum f(x)+g(y) rather than a product |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.de.first-order-ode",
+      "title": "CONSTANT-ABSORBED-PREMATURELY",
+      "content": "| MC-2 | CONSTANT-ABSORBED-PREMATURELY | After integrating ln|y|=f(x)+C, student drops the +C and writes y=e^{f(x)}, losing the general-solution family and any ability to apply an initial condition | Any separable equation whose separation produces a logarithm on the y-side |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.de.first-order-ode",
+      "title": "SINGLE-SIDE-CONSTANT",
+      "content": "| MC-3 | SINGLE-SIDE-CONSTANT | Student integrates both sides of the separated equation but adds +C to only one side (or neither); forgets that C on the right absorbs the left-side constant by convention | Multi-step separations; especially when the left integral also yields a constant term |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.first-order-ode",
+      "title": "From Antiderivative to Separation of Variables",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Antiderivative to Separation of Variables\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 66,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.first-order-ode",
+      "title": "Worked Example Pair",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 146,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.first-order-ode",
+      "title": "Contrast Pair: Method Selection and Common Errors",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast Pair: Method Selection and Common Errors\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 219,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.de.first-order-ode",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 289,
+        "endLine": 515
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.de.first-order-ode",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess fluent application of both separation and integrating factor methods\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Solve y'=3y, y(0)=2.\n\n*Solution:* Separable. dy/y=3dx → ln|y|=3x+C → y=Ae^{3x}. IC: 2=A → **y=2e^{3x}**\n\n**Problem 2:** Solve dy/dx = x/y.\n\n*Solution:* Separable. y dy=x dx → y²/2=x²/2+C → **y²=x²+K** (K=2C arbitrary; y=±√(x²+K))\n\n**Problem 3:** Solve y'+y=eˣ.\n\n*Solution:* Linear, not separable (RHS=eˣ−y is a sum). P(x)=1, Q(x)=eˣ. μ=eˣ. (eˣy)'=e^{2x}. eˣy=e^{2x}/2+C. **y=(eˣ/2)+Ce^{−x}**\n\n**Problem 4:** Verify y=3e^{−x}+2 is a particular solution of y'+y=2, and find the value of the initial condition it satisfies.\n\n*Solution:* y'=−3e^{−x}. y'+y=(−3e^{−x})+(3e^{−x}+2)=2 ✓. IC: y(0)=3+2=**5** → y(0)=5.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A tank contains 100 L of fresh water. Brine with salt concentration 0.5 kg/L flows in at 3 L/min, and the well-mixed solution drains at 3 L/min.\n\n(a) Let Q(t) be the kg of salt in the tank at time t minutes. Explain why Q satisfies a first-order linear ODE and write it in standard form y'+P(x)y=Q(x).\n\n(b) Solve the ODE with the initial condition Q(0)=0.\n\n(c) What is the salt content as t→∞? Interpret this physically.\n\n**Expected solution:**\n\n(a) Rate in: 0.5 kg/L × 3 L/min = 1.5 kg/min.\nRate out: (Q/100) kg/L × 3 L/min = 3Q/100 = 0.03Q kg/min.\ndQ/dt = 1.5 − 0.03Q\nStandard form: **Q' + 0.03Q = 1.5** (linear, P=0.03, Q(x)=1.5)\n\n(b) Integrating factor: μ = e^{0.03t}.\n(e^{0.03t}Q)' = 1.5e^{0.03t}\ne^{0.03t}Q = 50e^{0.03t} + C\nQ = 50 + Ce^{−0.03t}\nIC Q(0)=0: 0 = 50 + C → C = −50\n**Q(t) = 50(1 − e^{−0.03t})**\n\n(c) As t→∞: Q→50 kg. Physical interpretation: the concentration approaches 0.5 kg/L × 100 L = 50 kg — the tank eventually reaches the same concentration as the incoming brine. Equilibrium is when inflow equals outflow.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.de.second-order-ode; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.de.first-order-ode assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — SEPARATION-ON-NON-SEPARABLE (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Applying separation to a non-separable ODE is SEPARATION-ON-NON-SEPARABLE. Separation requires the RHS to factor as a product h(x)·g(y). A sum h(x)+g(y) cannot be separated.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Apply separation of variables to y'=y+x.\"\n- MC-1 response: Student moves y to one side and x to the other: dy/(y)=x dx or similar incorrect expression.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Check: can y+x be written as h(x)·g(y)? Try: h(x)·g(y)=y+x. Whatever h and g are, h(x)·g(y) can equal y+x only if... it can't — no product of a pure-x function and a pure-y function gives y+x. The separability test fails. For y'=y+x: standard form is y'−y=x — linear with P(x)=−1, Q(x)=x. Use the integrating factor μ=e^{−x}.\"\n\nPractice: For each — determine separable or IF-needed: (i) y'=xy² (sep), (ii) y'=x+y² (IF), (iii) y'=(x+1)y (sep: h=x+1, g=y).\n\n---\n\n### Repair Action B02 — CONSTANT-ABSORBED-PREMATURELY (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Writing y=e^{f(x)} after ln|y|=f(x)+C is CONSTANT-ABSORBED-PREMATURELY. The +C inside the exponent cannot be dropped — it becomes a multiplicative constant A=e^C.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Solve y'=2y step by step, writing each intermediate line.\"\n- MC-2 response: ln|y|=2x+C → y=e^{2x} (last line skips the e^C factor).\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Show the algebra explicitly: e^{2x+C}=e^{2x}·e^C. Since e^C is always positive (for any real C), write A=e^C. So y=A·e^{2x} where A>0. To allow negative solutions: y=±Ae^{2x}, which we consolidate as A∈ℝ\\{0}. The constant A is what allows the IC to be satisfied: y(0)=A·e⁰=A=y(0). If A is dropped, all ICs except y(0)=1 are impossible.\"\n\nPractice: Redo y'=y (from A01): ln|y|=x+C → y=A·e^x. Now apply y(0)=−3. Answer: A=−3, y=−3e^x. Verify −3<0: allowed since A∈ℝ\\{0}.\n\n---\n\n### Repair Action B03 — SINGLE-SIDE-CONSTANT (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Adding the integration constant to only one side — or neither — is SINGLE-SIDE-CONSTANT. Both sides gain constants when integrated, but by convention they are combined into one constant C on the right.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Integrate both sides of y dy = x dx.\"\n- MC-3 response: y²/2=x²/2 (no C).\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"When integrating, each integral produces a +C: ∫y dy + C₁ = ∫x dx + C₂. Rearranging: y²/2 = x²/2 + (C₂−C₁). Since C₂−C₁ is an arbitrary constant, call it C. Result: y²/2=x²/2+C. Without C, the answer y²=x² is one specific curve (C=0), not a general solution. Always carry C through; apply IC to determine C.\"\n\nPractice: Redo y dy=x dx with IC y(1)=2. y²/2=x²/2+C → y²=x²+K. y(1)=2: 4=1+K → K=3. y=√(x²+3).\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Solve y'=xy, y(0)=1 (separable); solve y'+y=x (IF method); verify both |\n| SR-2 | +3 days | Classify three ODEs as separable/IF/neither; solve the separable one step-by-step with correct constant handling |\n| SR-3 | +7 days | Applied problem: exponential decay A'=−0.1A, A(0)=50; find half-life (t=ln2/0.1≈6.93) |\n| SR-4 | +14 days | Linear first-order with variable P(x): y'+cos(x)·y=cos(x); IF=e^{sin(x)}; solution y=1+Ce^{-sin(x)} |\n\nRetrieval flag: if student applies separation to a non-separable ODE (MC-1) or drops A after exponentiating (MC-2), re-execute B01/B02 immediately.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.de.ode | ODE definition, order/degree, verification procedure, and general vs particular solution are assumed |\n| Requires (Tier-1) | math.calc.antiderivatives | Integral tables (∫(1/y)dy=ln|y|, ∫e^{ax}dx, etc.) and the +C handling assumed fluent |\n| Requires (Tier-1) | math.calc.u-substitution | Integrating factor method uses the product-rule structure d/dx[μy]=(μy)' and u-sub may appear in computing ∫P(x)dx |\n| Unlocks | math.de.second-order-ode | Second-order ODEs build on first-order methods; reduction of order technique applies first-order skills |\n\n**GR-9:** cross_links=[] → P76 mode = independence (tank-problem transfer probe is self-contained).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=6 → standard structure (3 main TAs + gate)\n- bloom=apply → V-4 = PASS (P07 required; WE1=separable with IC, WE2=integrating factor in A02)\n- CPA_entry = C for advanced learner: concrete antiderivative extension in A01 before the abstract algorithm\n\n**Key teaching insight:** The two methods (separation and integrating factor) cover nearly all first-order ODEs students encounter. The decision tree in A03 (Contrast 4) is more valuable than memorising either method in isolation — students who can route correctly outperform those who know the methods but apply them to wrong equations. Every ODE in this blueprint should be prefaced with an explicit separability check before any computation begins.\n\n**MC-2 permanence:** The constant-handling error (dropping A=e^C) is extremely persistent. WE1, the P49 checkpoints, and B02 all address it. Reinforce at every SR session by having the student write out the exponential expansion e^{f(x)+C}=e^C·e^{f(x)}=A·e^{f(x)} explicitly.\n\n**P76 design:** The mixing-tank problem is the canonical first-order linear ODE application. Students who can set up the rate-in minus rate-out model, write the standard form, and solve with IF have genuinely mastered the concept. The equilibrium interpretation (c) tests conceptual understanding beyond computation.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.de.first-order-ode ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.de.ode ✓, math.calc.antiderivatives ✓, math.calc.u-substitution ✓ | PASS |\n| V-3 | CPA entry = C for advanced difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 present | P07 in A02 (WE1=separable with IC, WE2=integrating factor) ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | cross_links=[] → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=6 → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Mixing-tank problem; Q'+0.03Q=1.5; Q=50(1−e^{-0.03t}); equilibrium Q→50 kg correct ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 289,
+        "endLine": 515
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.de.first-order-ode",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner starts from a known antiderivative problem (y'=2x → y=x²+C) and extends the technique to y'=y via the separation of variables method.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: y'=2x antiderivative gives y=x²+C; y'=y cannot be integrated directly — separate: dy/y=dx, integrate both sides, solve for y=Ae^x; P: solution-curve family diagram; A: separation of variables algorithm (5 steps) with separability test\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: separable y'=x/y with IC; WE2: linear first-order y'−2y=4eˣ via integrating factor\n3. **A03 P06 CONTRAST PAIR** — separable vs non-separable; with IC (particular) vs without IC (general); separation vs integrating factor decision\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 58,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.de.first-order-ode",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Solve y'=xy, y(0)=1 (separable); solve y'+y=x (IF method); verify both |\n| SR-2 | +3 days | Classify three ODEs as separable/IF/neither; solve the separable one step-by-step with correct constant handling |\n| SR-3 | +7 days | Applied problem: exponential decay A'=−0.1A, A(0)=50; find half-life (t=ln2/0.1≈6.93) |\n| SR-4 | +14 days | Linear first-order with variable P(x): y'+cos(x)·y=cos(x); IF=e^{sin(x)}; solution y=1+Ce^{-sin(x)} |\n\nRetrieval flag: if student applies separation to a non-separable ODE (MC-1) or drops A after exponentiating (MC-2), re-execute B01/B02 immediately.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 446,
+        "endLine": 461
+      }
+    },
+    {
+      "assetId": "math.de.first-order-ode/reference/1",
+      "kind": "reference",
+      "conceptId": "math.de.first-order-ode",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.de.ode | ODE definition, order/degree, verification procedure, and general vs particular solution are assumed |\n| Requires (Tier-1) | math.calc.antiderivatives | Integral tables (∫(1/y)dy=ln|y|, ∫e^{ax}dx, etc.) and the +C handling assumed fluent |\n| Requires (Tier-1) | math.calc.u-substitution | Integrating factor method uses the product-rule structure d/dx[μy]=(μy)' and u-sub may appear in computing ∫P(x)dx |\n| Unlocks | math.de.second-order-ode | Second-order ODEs build on first-order methods; reduction of order technique applies first-order skills |\n\n**GR-9:** cross_links=[] → P76 mode = independence (tank-problem transfer probe is self-contained).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.de.first-order-ode.md",
+        "startLine": 461,
+        "endLine": 476
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,494 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.multiplication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.multiplication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:35501e8ad3b2a2dc02a48fb3c39dd78051b1be4b7430ef8b4f46cfc29fe638ab",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.multiplication.md": "sha256:481da2a940c1e86557216128fea063a50b8a87b431f9abea1ac0b8b93f8432e2"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.arith.multiplication",
+    "name": "Multiplication",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 15,
+    "prerequisites": [
+      "math.arith.addition"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.multiplication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.multiplication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.multiplication.md": "sha256:481da2a940c1e86557216128fea063a50b8a87b431f9abea1ac0b8b93f8432e2"
+      },
+      "contentHash": "sha256:43ce6bfc9322ad3bc9df7fbe81223bd5eeb4f8e1251182645f8e6e787bb5d026",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.multiplication.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.multiplication.md#TA-A01 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.multiplication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.multiplication.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.multiplication.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.multiplication\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.multiplication.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.multiplication.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.multiplication.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.multiplication.md#TA-A04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.multiplication.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.multiplication.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.multiplication.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.multiplication.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.multiplication\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.multiplication.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.multiplication.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.multiplication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.multiplication.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.multiplication.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.multiplication\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.multiplication/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.multiplication",
+      "title": "Multiplication — cognitive map",
+      "content": "### 1.1 Core Insight\nMultiplication is repeated addition: a × b is the sum of b copies of a (equivalently, a rows of b objects = b × a total). The distributive law a×(b+c) = a×b + a×c is the engine behind long multiplication and extends multiplication to all number systems. Key properties: commutativity, associativity, identity element 1, annihilator element 0.\n\n### 1.2 Knowledge Prerequisites (Activated)\n- **math.arith.addition:** Multi-digit column addition with carrying; commutativity; zero identity. Multiplication is defined as iterated addition; long multiplication uses column addition for partial products.\n\n### 1.3 Conceptual Sequence\n1. Multiplication as repeated addition: a × b = a + a + … + a (b times).\n2. Rectangular array model: a × b = number of cells in a rows × b columns array.\n3. Commutativity: a × b = b × a (rotate the array; same total cells).\n4. Distributive law: a × (b + c) = a×b + a×c (splits array into two sub-arrays).\n5. Multiplication by 1 (identity): a × 1 = 1 × a = a.\n6. Multiplication by 0 (annihilator): a × 0 = 0 × a = 0 (zero copies of any quantity = zero).\n7. Long multiplication procedure: partial products via distributive law, column addition of results.\n\n### 1.4 Transfer Target\nSingle-digit recall and 2-digit × 2-digit long multiplication; recognition that multiplication is the same binary operation underlying matrix multiplication and ring axioms.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 29,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.arith.multiplication",
+      "title": "Worked Example Pair: Long Multiplication",
+      "content": "### TA-A02 — Worked Example Pair: Long Multiplication\n**Primitives:** P07 (WORKED EXAMPLE PAIR), P49 (ADAPTIVE CHECKPOINT)\n**Grammar:** GR-1 ✓ (P07 is B-category); GR-2 ✓; bloom=apply → P07 required ✓\n\n**P07 — WORKED EXAMPLE PAIR**\n\n*Example 1 — single-digit multiplier:*\n> Compute 24 × 6.\n>\n> Distributive law: 24 = 20 + 4.\n> 6 × 4 = 24 → write **4**, carry **2**.\n> 6 × 2 = 12, plus carry 2 = **14** → write **14** in tens and hundreds.\n>\n> **Answer: 144.** Verify: 24 + 24 + 24 + 24 + 24 + 24 = 144 ✓\n\n*Example 2 — two-digit multiplier:*\n> Compute 47 × 23.\n>\n> Partial products using distributive law: 47 × 23 = 47 × (20 + 3) = 47×3 + 47×20.\n>\n> **47 × 3:**  7×3=21 → write 1, carry 2; 4×3=12+2=14 → write 141.\n>\n> **47 × 20 = 47 × 2 × 10:** 7×2=14 → write 4, carry 1; 4×2=8+1=9 → write 940 (shift one place left).\n>\n> **Total:** 141 + 940 = **1,081**.\n\n**P49 — ADAPTIVE CHECKPOINT**\n> \"Compute 36 × 4.\"\n\n| Branch | Criterion | Next |\n|---|---|---|\n| CORRECT | 144 | TA-A03 |\n| PARTIAL | 134 or 154 (carrying error) | TA-A03 (minor; reinforce carrying in addition) |\n| INCORRECT | 40 (3+6+4 type confusion) or 144 via wrong process | TA-B01 (MC-1 repair) → TA-A03 |\n| NO_RESPONSE | No attempt | \"36 × 4 = 30×4 + 6×4. Compute each.\" If stuck → TA-B01 |\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 95,
+        "endLine": 133
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.multiplication",
+      "title": "ADDITION-CONFUSION",
+      "content": "| MC-1 | ADDITION-CONFUSION | Adds instead of multiplying: 3×4=7 (not 12); or uses × to mean \"add one more time\" | Has not yet distinguished multiplication from repeated addition at the operational level | FOUNDATIONAL |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.multiplication",
+      "title": "COMMUTATIVITY-FALSE",
+      "content": "| MC-2 | COMMUTATIVITY-FALSE | Claims 3×4 ≠ 4×3 because \"3 groups of 4\" and \"4 groups of 3\" are physically different | Correct that the models differ physically; incorrect conclusion that the totals differ | SECONDARY |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.multiplication",
+      "title": "ZERO-IDENTITY-CONFUSION",
+      "content": "| MC-3 | ZERO-IDENTITY-CONFUSION | Computes a×0 = a instead of a×0 = 0 | Overgeneralises additive identity (a+0=a) to multiplication | SECONDARY |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.multiplication",
+      "title": "Concrete Opening: Rectangular Array",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Opening: Rectangular Array\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 71,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.multiplication",
+      "title": "Worked Example Pair: Long Multiplication",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair: Long Multiplication\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 95,
+        "endLine": 133
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.multiplication",
+      "title": "Commutativity: Contrast Pair",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Commutativity: Contrast Pair\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 133,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.multiplication",
+      "title": "Identity and Annihilator: Contrast Pair",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Identity and Annihilator: Contrast Pair\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 158,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.multiplication",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 183,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.multiplication",
+      "title": "Repair: ADDITION-CONFUSION (MC-1 FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: ADDITION-CONFUSION (MC-1 FOUNDATIONAL)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 232,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.multiplication",
+      "title": "Repair: COMMUTATIVITY-FALSE (MC-2)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: COMMUTATIVITY-FALSE (MC-2)\",\"primitives\":[\"P11\",\"P27\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 255,
+        "endLine": 279
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.multiplication",
+      "title": "Repair: ZERO-IDENTITY-CONFUSION (MC-3)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: ZERO-IDENTITY-CONFUSION (MC-3)\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 279,
+        "endLine": 385
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.multiplication",
+      "title": "Mastery Gate",
+      "content": "### TA-A05 — Mastery Gate\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n**Grammar:** GR-3 ✓ (terminal); GR-6 ✓; GR-7 ✓ (P76 in gate); GR-9: `math.linalg.matrix-multiplication` is Tier 1 → P76 CROSS-LINK PROBE\n\n**pass_criterion:** ⌈0.95 × 5⌉ = **5 / 5** (4 P77 items + 1 P76 item)\n\n**P77 — MULTI-PROBLEM SET (4 items)**\n1. Compute 7 × 8.\n2. Compute 24 × 6.\n3. Compute 47 × 23.\n4. Verify the distributive law: compute 5 × (3 + 4) both as 5×7 and as 5×3 + 5×4. Do the results agree?\n\n**P55 — SCORE** (tally P77 results)\n\n**P76 — TRANSFER PROBE (CROSS-LINK: `math.linalg.matrix-multiplication`)**\n> In matrix multiplication, computing the **(1,1) entry** of a product uses a row of one matrix and a column of another:\n>\n> **[3  1  2]** × **[4; 0; 5]** = 3×4 + 1×0 + 2×5\n>\n> Each term is a scalar multiplication; the three terms are added — the distributive law you mastered.\n>\n> Compute: **[3  1  2]** × **[4; 0; 5]** = ?\n>\n> Then compute **[5  2  1]** × **[3; 4; 2]** = ?\n\n*(Expected: 3×4+1×0+2×5 = 12+0+10 = 22; 5×3+2×4+1×2 = 15+8+2 = 25.)*\n\n**P55 — SCORE** (add P76 result)\n\n**P75 — MASTERY ASSESSMENT**\n- pass: 5 / 5 → MASTERY ACHIEVED\n- fail: ≤ 4 / 5 → MASTERY NOT ACHIEVED\n\n**P55 — SCORE** (record mastery outcome)\n\n**P74 — ROUTING DECISION**\n- MASTERY ACHIEVED → P78\n- MASTERY NOT ACHIEVED → P77 items 1–2 failed → TA-B01; P77 item 4 failed → TA-B02; P76 failed → TA-B01 (basic products); re-enter TA-A02\n\n**P55 — SCORE** (record routing)\n\n**P78 — COMPLETION**\n> \"You can now compute single-digit products, perform long multiplication via partial products, and apply commutativity, identity, and annihilator rules. The transfer probe showed that scalar multiplication is the atomic operation inside matrix multiplication — every entry of a matrix product is computed using exactly what you practiced here. Division and exponentiation come next.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Protocol)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 183,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.multiplication",
+      "title": "Scaffolding Protocol",
+      "content": "| Stage | Condition | Entry Action |\n|---|---|---|\n| C (Concrete) | foundational → always | Begin TA-A01 with rectangular array analogy |\n| P (Pictorial) | After C → introduce number-line skip-counting and partial-product diagram | TA-A02 P07 worked examples |\n| A (Abstract) | After P → commutativity, identity/annihilator, distributive law | TA-A03 and TA-A04 |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 63,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.multiplication",
+      "title": "P89 Spaced Repetition",
+      "content": "**P89 — SPACED REPETITION SCHEDULE**\n\n| Interval | Probe Type | Content |\n|---|---|---|\n| Day 1 (consolidation) | Computation | Times table drill: all products n×m for n,m ∈ {6,7,8,9} |\n| Day 3 | Long multiplication | 3-digit × 2-digit: 136 × 24 |\n| Day 7 | Property application | Apply distributive: 8×(100+37); compute; verify via long multiplication |\n| Day 30 | Transfer check | Row-vector × column-vector: [4  2  3]×[5;1;6]; connect each product to today's multiplication |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 310,
+        "endLine": 323
+      }
+    },
+    {
+      "assetId": "math.arith.multiplication/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.multiplication",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**GR-8 ✓:** All cross_links documented.\n\n| Dependency | Direction | Relationship |\n|---|---|---|\n| `math.arith.addition` | REQUIRES | Multiplication = repeated addition; long multiplication uses column addition for partial products |\n| `math.arith.division` | UNLOCKS | Inverse of multiplication: a×b=c ↔ c÷b=a |\n| `math.arith.exponentiation` | UNLOCKS | Repeated multiplication: aⁿ = a×a×…×a (n times) |\n| `math.nt.divisibility` | UNLOCKS | b divides a iff a = b×k for some integer k |\n| `math.linalg.matrix-multiplication` | CROSS-LINK (Tier 1) | Matrix product entries computed via scalar multiplication + addition (row · column) |\n| `math.abst.ring-theory` | CROSS-LINK (Tier 1) | Multiplication is the second binary operation in every ring; distributive law is a ring axiom |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.multiplication.md",
+        "startLine": 323,
+        "endLine": 338
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

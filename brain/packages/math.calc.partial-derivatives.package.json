@@ -1,0 +1,349 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.partial-derivatives-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.partial-derivatives",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2c56d7d26ea92f377fcd964ec89342fa308685ee2165aba87ec9b8e79543ecdc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.partial-derivatives.md": "sha256:7813bc861bd587d07714750141fbede8b7f51ab551c1bd6576fc165a392f8534"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.partial-derivatives",
+    "name": "Partial Derivatives",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.multivariable-intro"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.partial-derivatives-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.partial-derivatives (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.partial-derivatives.md": "sha256:7813bc861bd587d07714750141fbede8b7f51ab551c1bd6576fc165a392f8534"
+      },
+      "contentHash": "sha256:ed4238b5e2d9e99a36cd2be4a91178364759b893b66f8cd5b3808e2d48811720",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.partial-derivatives.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.partial-derivatives.md#TA-A01 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.partial-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.partial-derivatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.partial-derivatives.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.partial-derivatives.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.partial-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.partial-derivatives\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.partial-derivatives.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.partial-derivatives.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.partial-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.partial-derivatives\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.partial-derivatives.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.partial-derivatives.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.partial-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.partial-derivatives\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.partial-derivatives/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "Partial Derivatives — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.multivariable-intro**: f(x,y) has a 2D domain and a 3D surface graph; limits require all-path agreement; level curves f(x,y)=c; single-variable calculus derivatives carried into 2D space\n\n### Target Knowledge State\nStudent understands that ∂f/∂x is the derivative of f(x,y) with respect to x when y is treated as a constant parameter — geometrically, it is the slope of the tangent line to the surface in the x-direction; fluently computes ∂f/∂x and ∂f/∂y for polynomial, exponential, and trigonometric functions using all single-variable rules; computes second-order partials f_{xx}, f_{yy}, f_{xy} and verifies Clairaut's theorem (f_{xy}=f_{yx} when both are continuous); and applies partial derivatives to compute rates of change in applied settings.\n\n### Conceptual Obstacles\n1. When computing ∂f/∂x, accidentally differentiating the y-terms — writing d/dx(y²)=2y instead of recognising y²=constant and d/dx(y²)=0\n2. Believing mixed partials f_{xy} and f_{yx} are always different — in practice (with continuous mixed partials), Clairaut's theorem guarantees equality; the order of differentiation does not matter\n3. Confusing ∂f/∂x (rate of change in the pure x-direction, y held fixed) with the total rate of change along an arbitrary path through (x,y)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "Worked Examples",
+      "content": "### Teaching Action A02 — Worked Examples\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Model partial differentiation for polynomial-exponential and product-trig functions; reinforce the \"freeze the other variable\" discipline\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**WE1 — Polynomial with mixed terms: f(x,y) = x³y + 2x²y² − 5xy + 3**\n\n*Finding ∂f/∂x (y is a constant parameter):*\n\n| Term | Treatment | ∂/∂x |\n|------|-----------|-------|\n| x³y | y = constant; d/dx(x³) = 3x² | 3x²y |\n| 2x²y² | y² = constant multiplier; d/dx(2x²) = 4x | 4xy² |\n| −5xy | y = constant; d/dx(−5x) = −5 | −5y |\n| 3 | constant | 0 |\n\n$$\\frac{\\partial f}{\\partial x} = 3x^2y + 4xy^2 - 5y$$\n\n*Finding ∂f/∂y (x is a constant parameter):*\n\n| Term | Treatment | ∂/∂y |\n|------|-----------|-------|\n| x³y | x³ = constant; d/dy(y) = 1 | x³ |\n| 2x²y² | x² = constant; d/dy(2y²) = 4y | 4x²y |\n| −5xy | x = constant; d/dy(−5y) = −5 | −5x |\n| 3 | constant | 0 |\n\n$$\\frac{\\partial f}{\\partial y} = x^3 + 4x^2y - 5x$$\n\n*Cross-check:* At (1,1): ∂f/∂x = 3+4−5=2; ∂f/∂y = 1+4−5=0.\n\n---\n\n**WE2 — Products with trig and exponential: g(x,y) = x²sin(y) + cos(x)·y³**\n\n*Finding ∂g/∂x:*\n- x²sin(y): sin(y)=constant; d/dx(x²sin(y))=2x·sin(y)\n- cos(x)·y³: y³=constant; d/dx(cos(x))=−sin(x); result=−sin(x)·y³\n\n$$\\frac{\\partial g}{\\partial x} = 2x\\sin(y) - y^3\\sin(x)$$\n\n*Finding ∂g/∂y:*\n- x²sin(y): x²=constant; d/dy(sin(y))=cos(y); result=x²cos(y)\n- cos(x)·y³: cos(x)=constant; d/dy(y³)=3y²; result=3y²cos(x)\n\n$$\\frac{\\partial g}{\\partial y} = x^2\\cos(y) + 3y^2\\cos(x)$$\n\n*At (π/2, π/2):* sin(π/2)=1, cos(π/2)=0.\n∂g/∂x|_{(π/2,π/2)} = 2·(π/2)·1 − (π/2)³·1 = π − π³/8\n∂g/∂y|_{(π/2,π/2)} = (π/2)²·0 + 3·(π/2)²·0 = 0\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\nh(x,y) = eˣ·y² + x·ln(y) (assume y>0). Find hₓ and h_y.\n\n- **CORRECT** → hₓ = eˣ·y² + ln(y) (treat y² and ln(y) as constants w.r.t. x; eˣ differentiates to eˣ; x differentiates to 1). h_y = eˣ·2y + x·(1/y) = 2yeˣ + x/y (treat eˣ and x as constants; y² → 2y; ln(y) → 1/y).\n- **PARTIAL** → Student may write hₓ=eˣ·2y (differentiated y² in x). Address: \"When finding ∂/∂x, y² is a constant. Only eˣ and the x in x·ln(y) change.\"\n- **INCORRECT** → Various errors. Use the freeze-and-check: \"Set y=1. h(x,1)=eˣ·1+x·0=eˣ. So ∂h/∂x at y=1 is eˣ. Does your formula give eˣ when y=1?\"\n- **NO_RESPONSE** → Prompt: \"Start with hₓ. Treat y as a constant. The first term is eˣ·y². What is d/dx(eˣ·y²) when y is fixed?\"\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 134,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "OTHER-VARIABLE-TREATED-AS-VARIABLE",
+      "content": "| MC-1 | OTHER-VARIABLE-TREATED-AS-VARIABLE | When computing ∂f/∂x, student differentiates y-containing terms with respect to y (e.g., d/dx(3y²)=6y instead of 0) | Any term mixing x and y; especially y², y³, eʸ, sin(y) when computing ∂/∂x |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "MIXED-PARTIALS-NONCOMMUTATIVE",
+      "content": "| MC-2 | MIXED-PARTIALS-NONCOMMUTATIVE | Student believes f_{xy} ≠ f_{yx} and computes them expecting different results; misses Clairaut's theorem | Second-order partial problems; \"does the order matter?\" questions |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "PARTIAL-IS-TOTAL-DERIVATIVE",
+      "content": "| MC-3 | PARTIAL-IS-TOTAL-DERIVATIVE | Student treats ∂f/∂x as the full rate of change of f along any path; misses that ∂f/∂x is specifically the x-directional rate with y frozen | Word problems asking for \"rate of change\"; comparison with directional derivatives |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "What Partial Derivatives Measure",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"What Partial Derivatives Measure\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 64,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "Worked Examples",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Examples\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 134,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "Second-Order Partials and Clairaut's Theorem",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Second-Order Partials and Clairaut's Theorem\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 202,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 257,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 items)*\n\n**Item 1:** f(x,y) = 3x²y − 2xy³ + 5y. Find ∂f/∂x and ∂f/∂y.\n\n*Solution:*\n∂f/∂x = 6xy − 2y³\n∂f/∂y = 3x² − 6xy² + 5\n\n**Item 2:** g(x,y) = x²sin(y) + cos(x)·y². Find g_x and g_y.\n\n*Solution:*\ng_x = 2xsin(y) − sin(x)·y²\ng_y = x²cos(y) + 2y·cos(x)\n\n**Item 3:** f(x,y) = x³y² + 4xy. Find f_{xx} and f_{xy}; verify f_{xy}=f_{yx}.\n\n*Solution:*\nf_x = 3x²y² + 4y → f_{xx} = 6xy²; f_{xy} = ∂/∂y(3x²y²+4y) = 6x²y + 4\nf_y = 2x³y + 4x → f_{yx} = ∂/∂x(2x³y+4x) = 6x²y + 4 ✓\n\n**Item 4:** h(x,y,z) = x²yz − 2xz³. Find ∂h/∂x, ∂h/∂y, ∂h/∂z.\n\n*Solution:*\n∂h/∂x = 2xyz − 2z³\n∂h/∂y = x²z\n∂h/∂z = x²y − 6xz²\n\n---\n\n**[P55 — SCORE]** Count correct items (Items 1–4). Running total: _/4.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(independence mode)*\n\nThe temperature at a point (x,y) in a metal plate is modelled by:\n$$T(x,y) = 100\\,e^{-(x^2+y^2)/4}$$\n\n**(a)** Find ∂T/∂x and ∂T/∂y. (Use the chain rule for the exponential.)\n\n**(b)** Evaluate ∂T/∂x and ∂T/∂y at (2,0). Interpret physically: in which direction is temperature decreasing most rapidly from (2,0)?\n\n**(c)** Find the mixed partial ∂²T/∂x∂y.\n\n**(d)** Find ∂²T/∂y∂x and verify it equals ∂²T/∂x∂y.\n\n---\n\n*Expected solution:*\n\n(a) Let u = −(x²+y²)/4. Then T=100eᵘ.\n∂T/∂x = 100·eᵘ·(∂u/∂x) = 100·e^{−(x²+y²)/4}·(−2x/4) = **−50x·e^{−(x²+y²)/4}**\n∂T/∂y = 100·e^{−(x²+y²)/4}·(−2y/4) = **−50y·e^{−(x²+y²)/4}**\n\n(b) At (2,0):\n∂T/∂x|(2,0) = −50·2·e^{−4/4} = −100e^{−1} ≈ −36.8 (°C per unit in x-direction)\n∂T/∂y|(2,0) = −50·0·e^{−1} = 0 (no change in y-direction from this point on the x-axis)\n\nTemperature decreases as we move in the +x direction from (2,0); it is locally flat in the y-direction (by symmetry, the point (2,0) is on the x-axis where the temperature distribution is symmetric).\n\n(c) ∂²T/∂x∂y = ∂/∂y[∂T/∂x] = ∂/∂y[−50x·e^{−(x²+y²)/4}]\n= −50x·e^{−(x²+y²)/4}·(−2y/4) = **25xy·e^{−(x²+y²)/4}**\n\n(d) ∂²T/∂y∂x = ∂/∂x[∂T/∂y] = ∂/∂x[−50y·e^{−(x²+y²)/4}]\n= −50y·e^{−(x²+y²)/4}·(−2x/4) = **25xy·e^{−(x²+y²)/4}** ✓ Equal.\n\nClairaut's theorem confirmed: T(x,y)=100e^{−(x²+y²)/4} has continuous second partials everywhere, so the mixed partials must agree — and they do.\n\n---\n\n**[P55 — SCORE]** Score P76 (0 or 1). Running total: _/5.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]** MAMR = 4/5.\n\n- Score ≥ 4/5 → PASS → proceed to P74.\n- Score < 4/5 → FAIL → P74 routes to repair.\n\n---\n\n**[P55 — SCORE]** Record final pass/fail.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- **PASS (≥4/5):** Concept mastered. Proceed to math.calc.gradient, math.calc.directional-derivative, math.calc.chain-rule-multivariable.\n- **FAIL:** Diagnose: MC-1 errors (differentiating held variable) → B-MC1. Mixed partial order confusion → B-MC2. Total vs partial confusion → B-MC3.\n\n---\n\n**[P55 — SCORE]** Log routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession complete for math.calc.partial-derivatives.\n\n---\n\n\n## Component 5 — Protocol B (Repair Sequences)\n\n### B-MC1 — Repair: OTHER-VARIABLE-TREATED-AS-VARIABLE\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"When computing ∂f/∂x, you differentiated the y-terms. In partial differentiation, y is held fixed — it behaves like a constant number, not a variable. d/dx(y²)=0, not 2y.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nf(x,y)=3x²y². You wrote ∂f/∂x=6xy·2y=12xy². Substitute y=2: f(x,2)=3x²·4=12x². Differentiate: d/dx(12x²)=24x. Your formula gives 12x·2=24x. Now try y=3: f(x,3)=27x². d/dx=54x. Your formula gives 12x·3=36x. These disagree (54≠36). The error is the second factor 2y — y² is a constant, so d/dx(3x²·y²)=6x·y² (not 6xy·2y).\n\n**[P64 — CONCEPTUAL SHIFT]**\nIn ∂f/∂x, y is not a variable — it is a frozen number whose value we don't happen to know. Think of it as an unspecified constant c. If f(x,c)=3x²c², then d/dx(f)=6x·c². Replace c back with y: ∂f/∂x=6x·y². This is the correct answer. Treat y (and all non-x variables) exactly as you would a numeric constant when computing ∂/∂x.\n\n---\n\n### B-MC2 — Repair: MIXED-PARTIALS-NONCOMMUTATIVE\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You expected f_{xy} and f_{yx} to give different results. For smooth functions (continuous mixed partials), Clairaut's theorem guarantees f_{xy}=f_{yx}. The order of differentiation does not matter.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nf(x,y)=x²y³. f_x=2xy³; f_{xy}=∂/∂y(2xy³)=6xy². f_y=3x²y²; f_{yx}=∂/∂x(3x²y²)=6xy². Same. Try f(x,y)=sin(xy): f_x=y·cos(xy); f_{xy}=cos(xy)−xy·sin(xy). f_y=x·cos(xy); f_{yx}=cos(xy)−xy·sin(xy). Same again. This is always the case for smooth f.\n\n**[P64 — CONCEPTUAL SHIFT]**\nClairaut's theorem is a deep result: the order you differentiate in doesn't matter for well-behaved functions. The notation f_{xy} means \"first y, then x\" (reading left to right in subscripts: f_{xy}=∂/∂x(f_y)), while f_{yx}=∂/∂y(f_x). Both give the same result. Choose whichever order produces simpler intermediate expressions.\n\n---\n\n### B-MC3 — Repair: PARTIAL-IS-TOTAL-DERIVATIVE\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"∂f/∂x is the rate of change of f only in the x-direction, with y held fixed. It does not capture how f changes along an arbitrary path where both x and y vary simultaneously.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nf(x,y)=x²+y². Moving along the path x=t, y=t: df/dt = d/dt(t²+t²)=4t. But ∂f/∂x = 2x = 2t. These differ (4t ≠ 2t): the total rate of change along the diagonal path is 4t, but the partial in x alone is 2t. The missing 2t comes from the y-component: ∂f/∂y·(dy/dt)=2y·1=2t. Total = 2t+2t=4t ✓.\n\n**[P64 — CONCEPTUAL SHIFT]**\nMoving through ℝ² along a path, both x and y change. The total rate df/dt combines both: df/dt=(∂f/∂x)·(dx/dt)+(∂f/∂y)·(dy/dt). This is the multivariable chain rule. The partial ∂f/∂x is only one piece — it answers \"how fast does f change if ONLY x moves?\" In practice, you often need both partials together to answer \"how fast does f change along this specific path?\"\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | f(x,y)=x⁴y²−3xy+7. Find f_x and f_y. [f_x=4x³y²−3y; f_y=2x⁴y−3x] |\n| Day 3 | g(x,y)=e^{x+2y}. Find g_{xx} and g_{xy}. [g_x=e^{x+2y}; g_{xx}=e^{x+2y}; g_{xy}=2e^{x+2y}] |\n| Day 7 | f(x,y)=x²/(x²+y²). Find f_x (simplify fully). [Product/quotient: f_x=(2x(x²+y²)−x²·2x)/(x²+y²)²=2xy²/(x²+y²)²] |\n| Day 14 | True/False: if f(x,y) is differentiable at (a,b), then ∂f/∂x and ∂f/∂y both exist at (a,b). [True. But the converse fails: partials can exist without differentiability.] |\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.multivariable-intro | PACKAGE_READY | 2D domain, surface graphs, 2D limits — conceptual foundation for partial differentiation |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.calc.gradient | Requires both partial derivatives (gradient = (∂f/∂x, ∂f/∂y)) |\n| math.calc.directional-derivative | Requires partial derivatives via dot product formula |\n| math.calc.chain-rule-multivariable | Requires both partials for the chain rule formula |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**The freeze-and-check method:** The most reliable way to teach MC-1 repair is to have students literally substitute a specific number for the held variable, differentiate the resulting single-variable function, and then check that their general formula matches at that number (as modelled in A01 Stage C and the P49 hints). This makes \"y is a constant\" visceral rather than abstract.\n\n**Notation clarity:** Students encounter four notations for the same thing: ∂f/∂x, fₓ, f_x, D₁f. Standardise to ∂f/∂x in A01, then introduce fₓ in WE1, and note all notations are equivalent. The subscript notation (f_{xy}) is especially useful for second-order partials.\n\n**Clairaut's theorem as a practical tool:** Students who are told \"it doesn't matter which order you differentiate in\" gain flexibility — they can choose the easier order. For instance, to compute f_{xy} for a complicated f, it may be easier to compute f_x first (if simpler) or f_y first (if that leads to a simpler intermediate). Clairaut makes both valid.\n\n**P76 as an applied capstone:** The temperature distribution T=100e^{−(x²+y²)/4} (a Gaussian) appears naturally in heat diffusion, signal processing, and statistics (2D normal distribution). The computation requires the chain rule for exponentials in partial differentiation — a preview of the skills needed for the gradient and chain rule in multivariable calculus. The mixed partial computation also provides a complete worked Clairaut verification.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| ID | Check | Status |\n|----|-------|--------|\n| V-1 | All Teaching Actions have assigned primitives | PASS |\n| V-2 | GR-1: A01 opens with P11 (B-category primitive, non-repair) | PASS |\n| V-3 | CPA entry stage = C for advanced difficulty | PASS |\n| V-4 | bloom=apply → P07 present in A02 (WORKED EXAMPLE PAIR) | PASS |\n| V-5 | GR-2: P49 present in A01, A02, A03, each with 4 branches | PASS |\n| V-6 | GR-3: A04 (P91) is terminal — no further TAs after gate | PASS |\n| V-7 | GR-4: All B-sequences open with P27+P41+P64 | PASS |\n| V-8 | GR-6: P91 is terminal in A04 | PASS |\n| V-9 | GR-7: P76 present inside A04 mastery gate | PASS |\n| V-10 | GR-9: cross_links=[] → P76 mode = independence | PASS |\n| V-11 | GR-10: MAMR=4/5 stated and enforced (thresh=0.8, n=5: ⌈0.8×5⌉=4) | PASS |\n| V-12 | PASS criterion (≥4/5) stated in P75 and P74 | PASS |\n| V-13 | GR-8: Component 7 documents all cross-blueprint dependencies | PASS |\n| V-14 | Standard structure: h=8 → 3 main TAs (A01,A02,A03) + gate (A04) | PASS |\n| V-15 | Component 0 metadata fields complete | PASS |\n| V-16 | Component 1 (prior anchors, target state, obstacles) complete | PASS |\n| V-17 | Component 2: 3 MCs with 1 foundational designated | PASS |\n| V-18 | Component 3 scaffolding protocol complete | PASS |\n| V-19 | Component 6 P89 schedule complete (4 intervals) | PASS |\n| V-20 | Component 8 teaching notes complete | PASS |\n| AIR | No prohibited operations (no curriculum modification, no framework redesign) | PASS |\n\n**Status: PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 257,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner evaluates a specific function with one variable numerically frozen before abstracting to the general rule.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: fix y=2 in f(x,y)=x²y+3y² and differentiate in x; then fix x=1 and differentiate in y; observe that y² contributes 0 to ∂/∂x; P: geometric tangent-line diagram showing surface slices; A: limit definition and computational rule (treat other variable as constant)\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: polynomial with mixed terms; WE2: product of trig and exponential functions\n3. **A03 P06 CONTRAST PAIR** — second-order partials; Clairaut's theorem; ∂f/∂x vs total rate of change\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | f(x,y)=x⁴y²−3xy+7. Find f_x and f_y. [f_x=4x³y²−3y; f_y=2x⁴y−3x] |\n| Day 3 | g(x,y)=e^{x+2y}. Find g_{xx} and g_{xy}. [g_x=e^{x+2y}; g_{xx}=e^{x+2y}; g_{xy}=2e^{x+2y}] |\n| Day 7 | f(x,y)=x²/(x²+y²). Find f_x (simplify fully). [Product/quotient: f_x=(2x(x²+y²)−x²·2x)/(x²+y²)²=2xy²/(x²+y²)²] |\n| Day 14 | True/False: if f(x,y) is differentiable at (a,b), then ∂f/∂x and ∂f/∂y both exist at (a,b). [True. But the converse fails: partials can exist without differentiability.] |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 418,
+        "endLine": 431
+      }
+    },
+    {
+      "assetId": "math.calc.partial-derivatives/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.partial-derivatives",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.multivariable-intro | PACKAGE_READY | 2D domain, surface graphs, 2D limits — conceptual foundation for partial differentiation |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.calc.gradient | Requires both partial derivatives (gradient = (∂f/∂x, ∂f/∂y)) |\n| math.calc.directional-derivative | Requires partial derivatives via dot product formula |\n| math.calc.chain-rule-multivariable | Requires both partials for the chain rule formula |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.partial-derivatives.md",
+        "startLine": 431,
+        "endLine": 450
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.group-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.group-theory",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:515f1978756066b2fba579c49af47048469e1aab5bf453a86ecd4201463d368a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.group-theory.md": "sha256:0d53b76e5d8ea0fb4e265f79e6bdbe3e70a7c8110acabb91857e20f8850f1b39"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.group-theory",
+    "name": "",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.abst.binary-operation"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.group-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.group-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.group-theory.md": "sha256:0d53b76e5d8ea0fb4e265f79e6bdbe3e70a7c8110acabb91857e20f8850f1b39"
+      },
+      "contentHash": "sha256:f74dc784320f0620e88c84ca9fae272f89ec439224308c814140a5b581876d6d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.group-theory.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-theory.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-theory.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-theory.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-theory\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-theory.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-theory.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-theory.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-theory.md#TA-A04 (addresses MC-2, MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-theory\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.group-theory/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.group-theory",
+      "title": "math.abst.group-theory — cognitive map",
+      "content": "### Target Understanding\nA **group** is a set G together with a binary operation · satisfying exactly four axioms:\n(G1) **Closure**: for all a,b ∈ G, a·b ∈ G;\n(G2) **Associativity**: (a·b)·c = a·(b·c) for all a,b,c ∈ G;\n(G3) **Identity**: there exists e ∈ G such that a·e = e·a = a for all a ∈ G;\n(G4) **Inverses**: for every a ∈ G, there exists a⁻¹ ∈ G such that a·a⁻¹ = a⁻¹·a = e.\nIf additionally (G5) **Commutativity** a·b = b·a holds, the group is called **abelian** (or commutative).\nThe identity element is unique; inverses are unique; these are theorems, not axioms.\n\n### Distinction from math.abst.binary-operation\n`math.abst.binary-operation` established that any closure-preserving rule on a set is a binary\noperation, and identified four extra properties (closure, associativity, identity, inverse) as\noptional.  This blueprint takes the specific combination of ALL FOUR as axioms defining a group.\nClosure is axiom G1 here — it was already the definition of binary operation in the prerequisite,\nso a group starts from that baseline.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | (ℤ, +): verify G1–G4; (ℕ, +): check which axiom fails; ({1,−1}, ×): small finite group |\n| **Pictorial (P)** | Cayley table for a small finite group; annotate: e in the table, a⁻¹ paired with a |\n| **Abstract (A)** | Four axioms in full generality; abelian group; uniqueness of identity and inverse (theorems) |\n\n### Prerequisite Knowledge (from KG)\n- **math.abst.binary-operation** — binary operation definition; closure; the four extra properties\n  (associativity, commutativity, identity, inverse) as independent, optional attributes\n\n### Canonical Examples\n| Group (G, ·) | G1 Closure | G2 Assoc | G3 Identity | G4 Inverses | Abelian? |\n|:-------------|:----------:|:--------:|:-----------:|:-----------:|:--------:|\n| (ℤ, +) | ✓ | ✓ | e = 0 | −a | ✓ |\n| (ℝ \\ {0}, ×) | ✓ | ✓ | e = 1 | 1/a | ✓ |\n| (GL_n(ℝ), ×) | ✓ | ✓ | e = Iₙ | A⁻¹ | ✗ (n ≥ 2) |\n| (ℕ, +) | ✓ | ✓ | e = 0 (if 0 ∈ ℕ) | ✗ (no −a in ℕ) | — |\n| (ℤ, ×) | ✓ | ✓ | e = 1 | ✗ (no 1/2 in ℤ) | — |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 32,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-theory",
+      "title": "GROUP-NEEDS-COMMUTATIVITY",
+      "content": "| MC-1 | GROUP-NEEDS-COMMUTATIVITY | Claims (GL_n(ℝ), ×) is not a group because matrix multiplication is not commutative | Conflates the group axioms (G1–G4) with the abelian property (G5); thinks all groups must be commutative | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-theory",
+      "title": "IDENTITY-MUST-BE-ZERO-OR-ONE",
+      "content": "| MC-2 | IDENTITY-MUST-BE-ZERO-OR-ONE | Assumes the identity is always 0 (for additive groups) or 1 (for multiplicative groups); can't find the identity in non-standard groups | Surface pattern matching from familiar examples without understanding G3: ∃e such that a·e = e·a = a | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-theory",
+      "title": "INVERSE-IS-NEGATIVE",
+      "content": "| MC-3 | INVERSE-IS-NEGATIVE | Writes a⁻¹ = −a always; doesn't connect the definition of inverse to the operation and identity in the specific group | Overgeneralises from (ℤ,+) where a⁻¹ = −a; doesn't apply G4 from first principles | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-theory",
+      "title": "Entry: The Canonical Group (ℤ, +) (P03 + P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: The Canonical Group (ℤ, +) (P03 + P11 + P49)\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 109,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-theory",
+      "title": "MC-1 Gate: Non-Abelian Groups Are Still Groups (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: Non-Abelian Groups Are Still Groups (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 160,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-theory",
+      "title": "Non-Standard Groups: Identity and Inverses from First Principles (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Non-Standard Groups: Identity and Inverses from First Principles (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 213,
+        "endLine": 267
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-theory",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P03\",\"P06\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 267,
+        "endLine": 573
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.group-theory",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Show that (ℤ, +) is an abelian group by verifying all five conditions G1–G5.\n\n*(Target: G1: a+b∈ℤ ✓. G2: (a+b)+c=a+(b+c) ✓. G3: e=0, a+0=0+a=a ✓. G4: a⁻¹=−a, a+(−a)=0=e ✓. G5: a+b=b+a ✓. Abelian.)*\n\n**Q2.** Does (ℤ, ×) form a group?  State which axiom(s) fail and provide evidence.\n\n*(Target: G1 ✓ (product of integers is integer). G2 ✓. G3: e=1, a×1=a ✓. G4: FAILS — 2 has no inverse in ℤ (1/2∉ℤ). NOT a group.)*\n\n**Q3.** A student says all groups are abelian.  Give a counterexample with a brief explanation.\n\n*(Target: (GL₂(ℝ), ×) satisfies G1–G4 but not G5 (matrix multiplication is non-commutative for most pairs). OR: the symmetric group S₃ (permutations of 3 elements). Brief explanation: \"This group satisfies G1–G4 but AB ≠ BA for some matrices A, B.\")*\n\n**Q4.** In a group (G, ·), is the identity element unique?  Give a one-line proof sketch.\n\n*(Target: Yes. Suppose e and e' are both identities. Then e = e·e' (since e' is an identity) = e' (since e is an identity). So e = e'.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Cross-link to math.linalg.vector-addition)\n\n*Cross-link probe: bridges group theory to vector addition.*\n\n> Consider ℝ² = {(x, y) : x, y ∈ ℝ} with vector addition defined by\n> (x₁, y₁) + (x₂, y₂) = (x₁+x₂, y₁+y₂).\n>\n> Verify that (ℝ², +) is an abelian group by checking all five conditions G1–G5.\n> For each condition, state the group element (if applicable) or justify with one sentence.\n\n*Expected answers:*\n- **G1 Closure:** (x₁+x₂, y₁+y₂) ∈ ℝ² — yes, sum of real numbers is real. ✓\n- **G2 Associativity:** ((x₁,y₁)+(x₂,y₂))+(x₃,y₃) = (x₁+x₂+x₃, y₁+y₂+y₃) = (x₁,y₁)+((x₂,y₂)+(x₃,y₃)). ✓\n- **G3 Identity:** e = (0, 0), since (x,y)+(0,0) = (x,y). ✓\n- **G4 Inverses:** (x,y)⁻¹ = (−x, −y), since (x,y)+(−x,−y) = (0,0) = e. ✓\n- **G5 Abelian:** (x₁+x₂, y₁+y₂) = (x₂+x₁, y₂+y₁) (real addition is commutative). ✓\n- *Conclusion:* (ℝ², +) is an abelian group.\n\n**[P55 — SCORE]**  Award 1 point for P76 if all five conditions verified with justifications; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.90  →  ⌈0.90 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → missing one axiom check → identify which one (G1/G2/G3/G4/G5) and re-verify.\n  - Q2 wrong → MC-2 (identity) or MC-3 (inverse) depending on error → TB-R02/R03.\n  - Q3 wrong → MC-1 → TB-R01 (abbreviated: commutativity is G5, not G1–G4).\n  - Q4 wrong → uniqueness proof gap → provide the two-identity argument from TA-A03 Contrast A\n    extended: \"e = e·e' = e' because both are identities.\"\n  - P76 wrong → identify which axiom check is missing; route to matching repair.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.group-theory\nMASTERY_REACHED: true\nUNLOCKS:         math.abst.subgroup, math.abst.coset\nNEXT_CONCEPT:    math.abst.subgroup\nSESSION_CLOSE:   \"You now know the four group axioms G1–G4, can verify whether a given\n                  (G, ·) is a group, can distinguish groups from abelian groups (G5),\n                  and have seen the group structure in both integers and vectors. Subgroups\n                  and cosets are the next layer of internal structure within a group.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: GROUP-NEEDS-COMMUTATIVITY (MC-1)\n\n**Trigger:** Student rejects a valid group because it is non-commutative.\n\n**Step 1 — Count the axioms.**\n> List: G1 Closure. G2 Associativity. G3 Identity. G4 Inverses.\n> Count: FOUR axioms.  That is all.  Commutativity is NOT in this list.\n\n**Step 2 — Name the optional property.**\n> A group where a·b = b·a for all a,b is called ABELIAN (after Niels Henrik Abel).\n> A non-abelian group satisfies G1–G4 but NOT commutativity.  It is still a group.\n\n**Step 3 — Concrete non-abelian example.**\n> (GL₂(ℝ), ×): satisfies G1–G4 (closure, associativity via matrix multiplication, identity = I₂,\n> inverses = A⁻¹ for invertible A).  AB ≠ BA for most A, B.  Non-abelian group. Still a group.\n\n**Exit:** Return to TA-A02 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: IDENTITY-MUST-BE-ZERO-OR-ONE (MC-2)\n\n**Trigger:** Student assumes e = 0 or e = 1 without verifying G3.\n\n**Step 1 — State G3 as an equation.**\n> G3: Find e ∈ G such that a · e = e · a = a for ALL a ∈ G.\n> This is an EQUATION.  Its solution depends on the operation.\n\n**Step 2 — Custom example.**\n> G = ℝ, a ∗ b = a + b − 5.\n> Solve a ∗ e = a: a + e − 5 = a → e = 5.\n> Not 0, not 1.  The identity is 5 here.\n\n**Step 3 — Verify.**\n> Check: a ∗ 5 = a + 5 − 5 = a ✓.  And 5 ∗ a = 5 + a − 5 = a ✓.\n\n**Exit:** Return to TA-A03 P49 checkpoint, part (i).\n\n---\n\n### TB-R03 · Repair: INVERSE-IS-NEGATIVE (MC-3)\n\n**Trigger:** Student writes a⁻¹ = −a regardless of the operation.\n\n**Step 1 — State G4 as an equation.**\n> G4: For each a ∈ G, find a⁻¹ ∈ G such that a · a⁻¹ = e.\n> Solve for a⁻¹ using the specific operation and the identity element e you found.\n\n**Step 2 — Custom example.**\n> G = ℝ, a ∗ b = a + b − 5, e = 5 (from TB-R02).\n> Solve a ∗ x = 5: a + x − 5 = 5 → x = 10 − a.\n> So a⁻¹ = 10 − a.  NOT −a.\n> Check: a ∗ (10−a) = a + (10−a) − 5 = 5 = e ✓.\n\n**Step 3 — Reinforce the pattern.**\n> Step A: find e (solve a·e = a).\n> Step B: find a⁻¹ (solve a·x = e, using the e from step A).\n> Two equations, solved in order.  Never skip Step A before Step B.\n\n**Exit:** Return to TA-A03 P49 checkpoint, part (ii).\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Which group axiom does (ℕ, +) with ℕ={1,2,3,...} fail?  Which does (ℤ,×) fail?\"\n    Target: (ℕ,+): G3 fails (no identity 0 in ℕ) OR G4 fails (no −a in ℕ, if 0∈ℕ definition).\n            (ℤ,×): G4 fails (no 1/2 in ℤ). PASS if correct axiom cited for each.\n\n  Interval-2 (+3 days):\n    Probe: \"For G=ℝ with a∗b=a+b+1: (i) find e; (ii) find a⁻¹.\"\n    Target: (i) a+e+1=a → e=−1. (ii) a+x+1=−1 → x=−a−2. PASS if both correct.\n\n  Interval-3 (+1 week):\n    Probe: \"Is (ℝ\\{0}, ×) abelian? Why?\"\n    Target: Yes — a×b=b×a for real multiplication. PASS if G5 cited correctly.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (axiom gate) or TA-A03 (identity/inverse).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.binary-operation:\n    Used in:   TA-A01 (canonical group table recaps the four optional properties from\n               the prerequisite, now re-framed as required axioms G1–G4),\n               TA-A02 (P64: closure was the definition of binary op; now G1 in groups;\n               commutativity was \"optional\" — here distinguished from G1–G4),\n               TA-A03 (custom operation a∗b = a+b−1 introduced as a binary op first,\n               then group axioms checked; P76 uses vector addition as a binary op first).\n    Assumed:   Student holds the definition of binary operation (closure) and understands\n               that associativity, commutativity, identity, inverse are independent properties.\n\nUNLOCKS_ENABLED:\n  math.abst.subgroup:\n    Dependency: A subgroup H ≤ G is a subset of G that is itself a group under the same\n                operation. Requires the group definition.\n  math.abst.coset:\n    Dependency: Cosets aH = {ah : h ∈ H} require group structure and subgroup concept.\n\nCROSS_LINKS_NOTED:\n  math.linalg.vector-addition:\n    Status:    Tier 1 concept — P76 uses a cross-link probe.\n    P76 probe: Student verifies (ℝ², +) satisfies G1–G5 using component-wise vector addition.\n    Bridge:    The group axioms frame the algebraic structure of vector addition explicitly,\n               preparing for the vector space axioms in linear algebra. The probe makes the\n               connection visible: vector addition is an abelian group on ℝ² (and ℝⁿ).\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The prerequisite binary-operation blueprint is the scaffold for this one.**\nEvery TA in this blueprint assumes the student holds the P64 conceptual shift from\n`math.abst.binary-operation`: the four extra properties (associativity, commutativity, identity,\ninverse) are independent and optional.  Here they are re-presented as specific required axioms\n(G1=closure, G2=associativity, G3=identity, G4=inverse), with commutativity as the extra G5.\nThe parallel structure makes the progression visible.\n\n**2. MC-1 (commutativity required) is the dominant error in abstract algebra.**\nStudents who have only seen commutative arithmetic groups (ℤ,+), (ℝ\\{0},×) believe all groups\ncommute.  GL₂(ℝ) is the most convincing counterexample — concrete, verifiable, and from linear\nalgebra which most students will encounter later (reinforcing the P76 cross-link).\n\n**3. MC-2 and MC-3 require equation-solving, not pattern-recall.**\nThe custom operation a∗b = a+b−1 in TA-A03 is the cleanest way to break the \"e=0, a⁻¹=−a\"\npattern because the answers (e=1, a⁻¹=2−a) are non-trivially different.  TB-R02 and TB-R03\nre-use this example in step-by-step form.  If the student has seen it in TA-A03 and still\nstruggles, use the TA-A03 a∗b=a+b+3 example from P49 instead (e=−3, inverse of 7 is −13).\n\n**4. The uniqueness of identity (Q4) introduces proof-by-contradiction lite.**\nQ4's one-line proof (e = e·e' = e') is not complicated, but it requires the student to think\nabout what would happen if two distinct identities existed.  At bloom=understand, a full formal\nproof is not required — a clear verbal argument (\"both must behave as identity, so they must\nbe equal\") suffices.\n\n**5. P76 cross-link makes the abstract concrete again.**\nAfter working through the axioms abstractly, the P76 probe returns to concrete component-wise\naddition in ℝ².  G1 (closure) is trivial; G3 (identity) is the zero vector (0,0); G4 (inverse)\nis the negation (−x, −y).  This probe bridges group theory directly to linear algebra, making\n`math.linalg.vector-addition` feel familiar rather than foreign when the student reaches it.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.group-theory\n===============================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 7; 4 TAs used ≤ 7.\n[PASS] V-4   CPA_ENTRY_STAGE = C (Concrete via (ℤ,+) and (ℕ,+) examples before abstraction).\n[PASS] V-5   P76_MODE = Cross-link with explicit rationale (math.linalg.vector-addition IS Tier 1).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 — GL₂(ℝ) non-abelian but group).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03 Contrast A/B, TB-R02, TB-R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P03 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: Cross-link math.linalg.vector-addition documented in Component 7.\n[PASS] V-17  GR-9: P76 uses Cross-link mode (math.linalg.vector-addition IS Tier 1); probe\n              verifies (ℝ², +) satisfies G1–G5, explicitly bridging group axioms to vector\n              addition in ℝ² — the core content of math.linalg.vector-addition.\n[PASS] V-18  GR-10: MAMR stated in Component 3; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.90 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   Four group axioms G1–G4 stated precisely; G5 (abelian) distinguished from G1–G4.\n             Canonical examples: (ℤ,+) abelian group; (GL₂(ℝ),×) non-abelian group; (ℤ,×)\n             and (ℕ,+) as non-groups (failing G4 and G3 respectively).\n             Custom operation (a∗b=a+b−1) used to break identity=0 and inverse=−a assumptions.\n             Uniqueness of identity proven in Q4 (e = e·e' = e').\n             MC-1 (commutativity required) addressed by GL₂(ℝ) counterexample.\n             MC-2 (identity=0 or 1 always) addressed by Contrast A + TB-R02.\n             MC-3 (inverse=−a always) addressed by Contrast B + TB-R03.\n             P76 cross-link to math.linalg.vector-addition: (ℝ²,+) verified as abelian group\n             (G1–G5), building the bridge to linear algebra.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 267,
+        "endLine": 573
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-theory",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P03 analogy: (ℤ,+) as the canonical group + P11 four axioms + P49)\n      → TA-A02 (P41/P64 MC-1 gate: non-abelian groups are still groups + P49)\n      → TA-A03 (P06 contrast: group vs non-group; non-standard identity/inverse + P49)\n      → TA-A04 (P91 terminal mastery gate — includes P76 cross-link to vector-addition)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (G1–G4 are the axioms; commutativity is G5, not required)\n  MC-2 → TB-R02 (G3 from first principles: find e such that a·e = a for all a)\n  MC-3 → TB-R03 (G4 from first principles: find a⁻¹ such that a·a⁻¹ = e)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-theory",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Which group axiom does (ℕ, +) with ℕ={1,2,3,...} fail?  Which does (ℤ,×) fail?\"\n    Target: (ℕ,+): G3 fails (no identity 0 in ℕ) OR G4 fails (no −a in ℕ, if 0∈ℕ definition).\n            (ℤ,×): G4 fails (no 1/2 in ℤ). PASS if correct axiom cited for each.\n\n  Interval-2 (+3 days):\n    Probe: \"For G=ℝ with a∗b=a+b+1: (i) find e; (ii) find a⁻¹.\"\n    Target: (i) a+e+1=a → e=−1. (ii) a+x+1=−1 → x=−a−2. PASS if both correct.\n\n  Interval-3 (+1 week):\n    Probe: \"Is (ℝ\\{0}, ×) abelian? Why?\"\n    Target: Yes — a×b=b×a for real multiplication. PASS if G5 cited correctly.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (axiom gate) or TA-A03 (identity/inverse).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 423,
+        "endLine": 446
+      }
+    },
+    {
+      "assetId": "math.abst.group-theory/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.group-theory",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.binary-operation:\n    Used in:   TA-A01 (canonical group table recaps the four optional properties from\n               the prerequisite, now re-framed as required axioms G1–G4),\n               TA-A02 (P64: closure was the definition of binary op; now G1 in groups;\n               commutativity was \"optional\" — here distinguished from G1–G4),\n               TA-A03 (custom operation a∗b = a+b−1 introduced as a binary op first,\n               then group axioms checked; P76 uses vector addition as a binary op first).\n    Assumed:   Student holds the definition of binary operation (closure) and understands\n               that associativity, commutativity, identity, inverse are independent properties.\n\nUNLOCKS_ENABLED:\n  math.abst.subgroup:\n    Dependency: A subgroup H ≤ G is a subset of G that is itself a group under the same\n                operation. Requires the group definition.\n  math.abst.coset:\n    Dependency: Cosets aH = {ah : h ∈ H} require group structure and subgroup concept.\n\nCROSS_LINKS_NOTED:\n  math.linalg.vector-addition:\n    Status:    Tier 1 concept — P76 uses a cross-link probe.\n    P76 probe: Student verifies (ℝ², +) satisfies G1–G5 using component-wise vector addition.\n    Bridge:    The group axioms frame the algebraic structure of vector addition explicitly,\n               preparing for the vector space axioms in linear algebra. The probe makes the\n               connection visible: vector addition is an abelian group on ℝ² (and ℝⁿ).\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-theory.md",
+        "startLine": 446,
+        "endLine": 479
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

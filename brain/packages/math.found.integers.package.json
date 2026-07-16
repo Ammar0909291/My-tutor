@@ -1,0 +1,507 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.integers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.integers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:020841ce9ac1d9de164496a4c65ad1e3cd93b3cb18f64042eea09da2dc80074a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.integers.md": "sha256:67e67708ac9e26e3644a2cff5820a36b3dd3b90beb04d087b65209ac8c16109e"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "math.found.integers",
+    "name": "Integers",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.natural-numbers"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.integers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.integers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.integers.md": "sha256:67e67708ac9e26e3644a2cff5820a36b3dd3b90beb04d087b65209ac8c16109e"
+      },
+      "contentHash": "sha256:1a5541dcca4d92ec9c499490077ad250c4d6fa3c6d112d198dd6cd1b88b2973e",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.integers.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.integers.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.integers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.integers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.integers/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.found.integers",
+      "title": "Integers — cognitive map",
+      "content": "### Prerequisites Activated\n- **math.found.natural-numbers**: ℕ = {0, 1, 2, …} with Peano axioms, well-ordering, successor, recursive arithmetic. ℤ extends ℕ.\n\n### Target Understanding\n1. ℤ = {…, −2, −1, 0, 1, 2, …} formed by extending ℕ with additive inverses.\n2. For every n ∈ ℕ, there is a unique −n ∈ ℤ such that n + (−n) = 0. Together with 0 and positive integers, this gives all of ℤ.\n3. Ring structure: ℤ is closed under + and ×; + is commutative, associative; additive identity 0; additive inverses exist; × distributes over +. Division is NOT always possible in ℤ.\n4. ℤ is NOT well-ordered: the subset {…, −3, −2, −1} ⊂ ℤ has no least element. This is the key structural difference from ℕ.\n5. Absolute value |n| and sign: sgn(n) = +1 if n > 0, 0 if n = 0, −1 if n < 0.\n\n### Cross-Link Activation\n- **math.arith.negative-numbers**: Negative integers are the practical realization of additive inverses — temperatures below zero, debt, coordinate positions. The formal structure (additive inverse in ℤ) supplies the rigorous foundation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 31,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.found.integers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.integers",
+      "title": "[FOUNDATIONAL] — NEGATIVE-AS-SUBTRACTION",
+      "content": "### MC-1 [FOUNDATIONAL] — NEGATIVE-AS-SUBTRACTION\n- **Trigger**: \"−3 means 'take away 3'\" or \"negative numbers are just subtraction results\"\n- **Root cause**: Learner encounters negative numbers only as the result of subtracting a larger from a smaller (3 − 7 = −4), not as elements of ℤ with their own identity.\n- **Error pattern**: Not accepting −3 as a standalone element of ℤ; treating −n as an operation rather than an element; difficulty with (−n) + n = 0 as a defining property.\n- **Repair**: TA-B01.\n- **MAMR**: FOUNDATIONAL — addressed in TA-A01 via P27; if triggered later, route to TA-B01 before returning.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.integers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.integers",
+      "title": "— RING-CONFUSION",
+      "content": "### MC-2 — RING-CONFUSION\n- **Trigger**: \"ℤ is closed under division\" OR \"ℤ has the same properties as ℕ just with negatives added\"\n- **Root cause**: Learner over-generalizes from ℕ's closure properties; does not notice that division can leave ℤ (e.g., 1 ÷ 3 ∉ ℤ).\n- **Error pattern**: Claiming ℤ is closed under ÷; forgetting ℤ is NOT well-ordered (unlike ℕ).\n- **Repair**: TA-B02.\n- **MAMR**: After MC-1 cleared. FIFO with MC-3.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.integers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.integers",
+      "title": "— ZERO-ASYMMETRY",
+      "content": "### MC-3 — ZERO-ASYMMETRY\n- **Trigger**: \"0 is not really in ℤ because it's not positive or negative\" or \"0 is its own separate category\"\n- **Root cause**: Learner thinks of ℤ as {positive integers} ∪ {negative integers}, missing 0 as the additive identity.\n- **Error pattern**: Excluding 0 from counts or arguments over ℤ; saying things like \"every integer is either positive or negative.\"\n- **Repair**: TA-B03.\n- **MAMR**: After MC-1 cleared. FIFO with MC-2.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "Extending ℕ with Additive Inverses",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Extending ℕ with Additive Inverses\",\"primitives\":[\"P03\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "ℤ as a Set and Ring Structure",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"ℤ as a Set and Ring Structure\",\"primitives\":[\"P04\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 104,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "ℤ Is Not Well-Ordered: Contrast with ℕ",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"ℤ Is Not Well-Ordered: Contrast with ℕ\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 132,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "Absolute Value and Order on ℤ",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Absolute Value and Order on ℤ\",\"primitives\":[\"P04\",\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 155,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "Cross-Link Bridge: Negative Numbers in Context",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Cross-Link Bridge: Negative Numbers in Context\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 176,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"P91 Mastery Gate (Terminal)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 192,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "Repair MC-1 NEGATIVE-AS-SUBTRACTION",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair MC-1 NEGATIVE-AS-SUBTRACTION\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 231,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "Repair MC-2 RING-CONFUSION",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair MC-2 RING-CONFUSION\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 249,
+        "endLine": 267
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.integers",
+      "title": "Repair MC-3 ZERO-ASYMMETRY",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair MC-3 ZERO-ASYMMETRY\",\"primitives\":[\"P04\",\"P06\",\"P27\",\"P41\",\"P49\",\"P64\",\"P74\",\"P76\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 267,
+        "endLine": 354
+      }
+    },
+    {
+      "assetId": "math.found.integers/mastery_probe/MP-TA-A06",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.integers",
+      "title": "P91 Mastery Gate (Terminal)",
+      "content": "### TA-A06 — P91 Mastery Gate (Terminal)\n**Primitive**: P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**[GR-3: Terminal TA]** **[GR-6: P91 terminal in this TA]** **[GR-7: P76 present]**\n\n**P77 (MULTI-PROBLEM SET):**\nQ1: \"What is the additive inverse of −5? Verify it satisfies the defining property.\"\nQ2: \"True or False: ℤ is closed under division. Give a counterexample if false.\"\nQ3: \"Is the set A = {n ∈ ℤ : n ≤ 0} well-ordered? Explain.\"\nQ4: \"Compute: |−8| − |3| + |−1|. Then order −8, 3, −1 from least to greatest.\"\nQ5: \"Write ℤ in set-builder notation using ℕ as the base set.\"\n\n**P55 (SCORE):** Q1: −(−5)=5; 5+(−5)=0 ✓. Q2: FALSE; e.g., 3÷2=1.5∉ℤ. Q3: NOT well-ordered; extends to −∞, no minimum. Q4: 8−3+1=6; order: −8<−1<3. Q5: ℤ={n−m:n,m∈ℕ} or ℤ=ℕ∪{−n:n∈ℕ,n≠0}.\n\n**P76 (TRANSFER PROBE — Cross-link: math.arith.negative-numbers):**\n\"A bank account has balance $200. After three withdrawals of $80 each, what is the balance? Express each step as an integer in ℤ: starting balance, after each withdrawal. Which property of ℤ guarantees you can represent $−40 (an overdraft)?\"\nExpected: $200 → $120 → $40 → −$40. ℤ includes additive inverses, so −40 ∈ ℤ. ℕ could not represent this overdraft (40 has no additive inverse in ℕ). Cross-link: math.arith.negative-numbers (debt = negative balance = additive inverse application).\n\n**P55 (SCORE):** Correct arithmetic; −40 identified as element of ℤ; additive inverse cited.\n\n**P75 (MASTERY ASSESSMENT):** Items: Q1, Q2, Q3, Q4, Q5, P76 = **6 items**.\nPass criterion: **6/6** (⌈0.90 × 6⌉ = 6; threshold = 0.90).\n- **PASS** → P78.\n- **FAIL** → P74 repair routing.\n\n**P74 (ROUTING DECISION):**\n- PASS → P78.\n- Q1 wrong or Q5 wrong → TA-B01 (NEGATIVE-AS-SUBTRACTION).\n- Q2 wrong or Q3 wrong → TA-B02 (RING-CONFUSION).\n- Q4 wrong or P76 wrong → TA-B03 (ZERO-ASYMMETRY) or TA-B01; apply MAMR.\n- Multiple wrongs → MAMR: TA-B01 first; then FIFO TA-B02, TA-B03; re-gate.\n\n**P78 (COMPLETION):** Mastery confirmed. Schedule P89. Activate: math.arith.negative-numbers, math.nt.divisibility.\n\n---\n\n\n## Component 5 — Protocol B (Repair Chains)",
+      "localKey": "MP-TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 192,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.integers",
+      "title": "Scaffolding Protocol",
+      "content": "### CPA Entry: Concrete\nOpen with a number line (visual/concrete) — extends the ℕ number line leftward past 0. Use temperatures, elevation, and debt as concrete motivators before formal ring structure.\n\n### MAMR Enforcement\nMC-1 addressed in TA-A01 (P27). If triggered later, route → TA-B01 → return. MC-2 and MC-3 FIFO after MC-1 cleared.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 73,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.found.integers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.integers",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Content | Pass Criterion |\n|---|---|---|\n| Day 1 | Q1 (additive inverse) + Q3 (well-ordering) | 2/2 |\n| Day 3 | Q2 (closure under ÷) + P76 (bank account) | 2/2 |\n| Day 7 | Mixed 3-item: ring property, absolute value, well-ordering | 2/3 |\n| Day 21 | Q1, Q2, Q3, Q4 (4 items) | 4/4 |\n| Day 60 | Full 6-item mastery gate | 6/6 |\n\n**Decay**: Failure → reset to Day 1 + TA-B routing by error type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 277,
+        "endLine": 291
+      }
+    },
+    {
+      "assetId": "math.found.integers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.integers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Input Dependencies\n| Blueprint | KG ID | What it supplies |\n|---|---|---|\n| Natural Numbers | math.found.natural-numbers | ℕ as base; Peano axioms; well-ordering; arithmetic |\n\n### Output Unlocks\n| Blueprint | KG ID | What this blueprint enables |\n|---|---|---|\n| Negative Numbers | math.arith.negative-numbers | Practical applications of additive inverses |\n| Divisibility | math.nt.divisibility | Divisibility extended to ℤ (including sign) |\n\n### Cross-Links\n- **math.arith.negative-numbers**: ℤ provides formal structure; negative-numbers provides concrete contexts (debt, temperature, elevation).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.integers.md",
+        "startLine": 291,
+        "endLine": 309
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

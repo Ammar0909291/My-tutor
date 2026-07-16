@@ -1,0 +1,942 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.pattern-recognition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.pattern-recognition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:39a2b83c04451d5535f0f58ac5f67c6366b62171583c08e72c6d279222dd304c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.pattern-recognition.md": "sha256:359a691bbb6e8401d1f299a69f5eb6e3e026b27e9d363555087a9b6460f34b7b"
+    },
+    "assetCount": 29,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 21,
+      "mastery_probe": 4
+    },
+    "ruleCount": 21
+  },
+  "concept": {
+    "conceptId": "math.found.pattern-recognition",
+    "name": "Pattern Recognition",
+    "difficultyRaw": "1 (foundational)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.mathematical-thinking"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.pattern-recognition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.pattern-recognition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.pattern-recognition.md": "sha256:359a691bbb6e8401d1f299a69f5eb6e3e026b27e9d363555087a9b6460f34b7b"
+      },
+      "contentHash": "sha256:0ff6f56fcba2aa8eac127b201acb72c8094ac9869dd8e0c37d962bc27657bbef",
+      "ruleCount": 21,
+      "bandCounts": {
+        "3": 21
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-A04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-A07 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-B01 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-B02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-B03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-C01 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-C02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-C03 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-C04 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-C05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-D03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.pattern-recognition.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.pattern-recognition.md#TA-E03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.pattern-recognition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.pattern-recognition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.pattern-recognition/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Learning Objective",
+      "content": "**Mastery statement:** A student who achieves mastery can (1) apply the 4-step pattern recognition process to identify a rule in a numerical, geometric, or logical sequence, (2) state the rule in both recursive and closed-form where possible, (3) verify the rule on unseen instances, (4) use the rule to predict terms well beyond the given examples, (5) recognise that the same finite set of initial terms may be generated by more than one rule, and (6) detect structural patterns across mathematical domains including combinatorics.\n\n**NOT mastery:** A student who memorises the next term in a familiar sequence without stating the underlying rule, or who insists there can only be one correct pattern for a finite sequence, or who cannot detect patterns outside number lists, has NOT achieved mastery.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 32,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Pattern = memorisation",
+      "content": "| MC-1 | Pattern = memorisation | Student believes pattern recognition means recalling observed instances; does not seek an underlying structural rule | Foundational | 1st |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "One sequence, one pattern",
+      "content": "| MC-2 | One sequence, one pattern | Student insists any number sequence has exactly one correct pattern; rejects that multiple rules can generate the same initial terms | Secondary | 2nd |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Patterns only in number lists",
+      "content": "| MC-3 | Patterns only in number lists | Student cannot detect patterns in geometric, logical, or combinatorial contexts | Secondary | 2nd (independent) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Concrete: Discovering Patterns in Objects",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete: Discovering Patterns in Objects\",\"primitives\":[\"P02\",\"P03\",\"P06\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 61,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Concrete: Recursive vs. Closed-Form Rules",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Concrete: Recursive vs. Closed-Form Rules\",\"primitives\":[\"P01\",\"P07\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 142,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Pictorial: Geometric Pattern Recognition",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Pictorial: Geometric Pattern Recognition\",\"primitives\":[\"P01\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 207,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Pictorial: Multiple Patterns from the Same Terms",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Pictorial: Multiple Patterns from the Same Terms\",\"primitives\":[\"P01\",\"P26\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 277,
+        "endLine": 339
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Abstract: Algebraic Pattern Recognition",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Abstract: Algebraic Pattern Recognition\",\"primitives\":[\"P01\",\"P26\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 339,
+        "endLine": 396
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Abstract: Cross-Domain Pattern Recognition (Combinatorics)",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Abstract: Cross-Domain Pattern Recognition (Combinatorics)\",\"primitives\":[\"P01\",\"P26\",\"P49\",\"P55\",\"P76\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 396,
+        "endLine": 455
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 455,
+        "endLine": 530
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Gap Diagnosis and Rule Extraction Reinforcement",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Gap Diagnosis and Rule Extraction Reinforcement\",\"primitives\":[\"P02\",\"P06\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 530,
+        "endLine": 571
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Transfer Practice",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Transfer Practice\",\"primitives\":[\"P01\",\"P26\",\"P30\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 571,
+        "endLine": 623
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 623,
+        "endLine": 675
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Triage",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Triage\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 675,
+        "endLine": 716
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "MC-1 Repair: Pattern = Structural Rule, Not Memorisation",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-1 Repair: Pattern = Structural Rule, Not Memorisation\",\"primitives\":[\"P27\",\"P29\",\"P30\",\"P32\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 716,
+        "endLine": 770
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "MC-2 Repair: A Finite Sequence Has No Unique Pattern",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-2 Repair: A Finite Sequence Has No Unique Pattern\",\"primitives\":[\"P06\",\"P26\",\"P27\",\"P32\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 770,
+        "endLine": 829
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "MC-3 Repair: Patterns Exist Across All Mathematical Domains",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-3 Repair: Patterns Exist Across All Mathematical Domains\",\"primitives\":[\"P06\",\"P26\",\"P27\",\"P32\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 829,
+        "endLine": 891
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Post-Repair Mastery Gate",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"Post-Repair Mastery Gate\",\"primitives\":[\"P01\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 891,
+        "endLine": 943
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Confidence Anchor: You Already Recognise Patterns",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Confidence Anchor: You Already Recognise Patterns\",\"primitives\":[\"P02\",\"P03\",\"P06\",\"P28\",\"P30\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 943,
+        "endLine": 991
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Scaffolded Practice with Support",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Scaffolded Practice with Support\",\"primitives\":[\"P01\",\"P26\",\"P28\",\"P30\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 991,
+        "endLine": 1043
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P28\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 1043,
+        "endLine": 1105
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Retrieval Probe",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Retrieval Probe\",\"primitives\":[\"P02\",\"P49\",\"P55\",\"P77\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 1105,
+        "endLine": 1143
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Transfer Probe",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Transfer Probe\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P76\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 1143,
+        "endLine": 1181
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "P89 Schedule Update",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"P89 Schedule Update\",\"primitives\":[\"P01\",\"P02\",\"P28\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 1181,
+        "endLine": 1303
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/mastery_probe/MP-TA-A07",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Mastery Gate",
+      "content": "**TA-A07 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01 — ATTENTION ANCHOR:** \"All pattern recognition skills developed. Confirming mastery.\"\n\n**P77 — MASTERY PROBE:**\n\"State the 4-step pattern recognition process. Distinguish recursive from closed-form rules. Explain why a finite sequence does not determine a unique pattern.\"\n\n**P55 — COMPREHENSION CHECK:** \"When is a recursive rule more useful than a closed-form? When is closed-form preferred?\"\n\n*Expected: Recursive is easier to discover (just look at consecutive differences/ratios). Closed-form is preferred for large-n predictions (no stepping through all previous terms) and for algebraic analysis.*\n\n**P76 — TRANSFER PROBE:**\n\"In music, a composer notices: bar 1 has 1 note, bar 2 has 2, bar 3 has 4, bar 4 has 8. (a) State the rule. (b) How many notes in bar 10? (c) Could a different rule also generate 1, 2, 4, 8? Give one alternative.\"\n\n*P76 note: cross_links=[math.disc.combinatorics]; this probe uses musical context for self-contained real-world transfer and a combinatorial alternative for the cross-link. The connection to combinatorics is structural — many combinatorial counting problems generate the same exponential patterns.*\n\n**P55 — COMPREHENSION CHECK:** \"Why does the doubling rule fail to tell us what comes after bar 4 without additional context about the composer's intention?\"\n\n*Expected: Multiple rules generate 1, 2, 4, 8. Without knowing whether the composer chose doubling specifically or was following another structure, the next term is underdetermined.*\n\n**P75 — MISCONCEPTION PROBE:**\n\"A student says: 'I've seen the sequence 1, 4, 9, 16 before — I know the rule is n² without applying the 4-step process, so I can skip it.' What risk does this shortcut create?\"\n\n*Expected: MC-1. Recognising a familiar sequence by memory does NOT identify the rule — it bypasses rule extraction. The student might apply the wrong rule when the sequence appears in an unfamiliar context. Also: 1, 4, 9, 16 could be generated by other rules (e.g., aₙ = n⁴−6n³+14n²−12n+4 for these four terms). Memory ≠ pattern recognition.*\n\n**P55 — COMPREHENSION CHECK:** \"Give one case where a familiar sequence appearing in an unfamiliar context would lead to the wrong rule if you relied on memory alone.\"\n\n*Expected: E.g., 1, 4, 9, 16 appears in a combinatorial problem where it actually represents (C(n+1,2))² — the rule is n² here, but the structural reason is combinatorial, not purely arithmetic. Understanding WHY prevents misapplication.*\n\n**P74 — APPLICATION PROBE:**\n\"Identify the pattern in this table and state a general formula:\n\n| n | Triangle area |\n|---|---|\n| 1 | 1 |\n| 2 | 4 |\n| 3 | 9 |\n| 4 | 16 |\n\nVerify the formula and explain WHY triangles of side n have area n².\"\n\n*Expected: Area = n². Verify: n=3: 9 ✓. Why: a triangle of side n (in a triangular grid) consists of n² unit triangles — both upward-pointing (n(n+1)/2 per layer? Or simpler: n²) — the geometric structure of equilateral triangle growth generates perfect squares.*\n\n**P55 — COMPREHENSION CHECK:** \"What does this example show about the relationship between geometry and algebra in pattern recognition?\"\n\n*Expected: Geometric patterns generate algebraic formulas — the pattern in SHAPE produces a rule in NUMBERS. Pattern recognition bridges both domains.*\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.75\",\n  \"PASS\": {\n    \"criteria\": \"P77 4-step process stated + recursive/closed-form distinction correct + finite sequence non-uniqueness explained; P76 rule stated + n=10 computed + alternative rule given; P75 MC-1 shortcut risk identified; P74 formula n² with geometric explanation\",\n    \"action\": \"Record mastery (threshold 0.75). Trigger P89 spaced repetition (1, 3, 7, 21, 60 days). Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_B\": {\n    \"criteria\": \"P77 correct but P74 application fails — procedural gap\",\n    \"action\": \"Route to Protocol B.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 MC-1 not identified (still believes memory = pattern recognition) OR P76 insists only one rule exists (MC-2)\",\n    \"action\": \"Route to Protocol C.\"\n  }\n}\n```\n\n---\n\n### Protocol B — State S1: Partial Knowledge",
+      "localKey": "MP-TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 455,
+        "endLine": 530
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/mastery_probe/MP-TA-B03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Mastery Gate",
+      "content": "**TA-B03 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01:** \"Confirming full mastery.\"\n\n**P77:** \"State the 4-step process. What is the difference between a recursive rule and a closed-form? Why are multiple rules sometimes valid for the same finite sequence?\"\n\n**P55:** \"Which type of rule is more useful for computing the 1000th term of a sequence?\"\n\n**P76 — TRANSFER PROBE:** \"Tree branching: a tree starts with 1 trunk. Each branch splits into 2. Level 0: 1 trunk, Level 1: 2 branches, Level 2: 4, Level 3: 8. (a) State the rule. (b) Predict level n. (c) How does this pattern appear in binary computer algorithms?\"\n\n**P55:** \"What is the total number of branches through level n (sum)? Express as a formula.\"\n\n**P75 — MISCONCEPTION PROBE:** \"A student is given 5, 10, 20, 40 and immediately states 'the rule is doubling.' Their classmate says 'I need to check if another rule also fits.' Who is doing better mathematics and why?\"\n\n*Expected: The classmate. Checking whether the rule is unique is correct analytical practice — 'doubling fits' is a valid claim, but 'doubling is the ONLY rule' requires proof (or more terms). Stating a rule without checking for alternatives is MC-2.*\n\n**P55:** \"What minimum evidence would justify stating 'doubling is the only rule that fits'?\"\n\n**P74 — APPLICATION PROBE:** \"Find the pattern in the number of regions created by n lines in a plane (assuming no two lines are parallel and no three meet at a point): n=0: 1 region, n=1: 2, n=2: 4, n=3: 7, n=4: 11. State the rule and predict n=6.\"\n\n*Expected: Differences: 1, 2, 3, 4 — increasing by 1. Closed-form: R(n) = n(n+1)/2 + 1. Verify: n=4: 4×5/2+1=11 ✓. Predict n=6: 6×7/2+1=22.*\n\n**P55:** \"Why does adding each new line add exactly n new regions (when the nth line crosses all n−1 previous lines)?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.75\",\n  \"PASS\": {\n    \"criteria\": \"P77 complete; P76 rule + prediction + binary connection; P75 classmate's approach identified as better; P74 R(n)=n(n+1)/2+1 correct with prediction\",\n    \"action\": \"Record mastery. P89 scheduled. Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 not correctly analysed (MC-2 still present)\",\n    \"action\": \"Route to Protocol C.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"One minor error\",\n    \"action\": \"One retry.\"\n  }\n}\n```\n\n---\n\n### Protocol C — State S2: Active Misconceptions",
+      "localKey": "MP-TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 623,
+        "endLine": 675
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/mastery_probe/MP-TA-C05",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Post-Repair Mastery Gate",
+      "content": "**TA-C05 — Post-Repair Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n**P01:** \"All misconceptions repaired. Confirming full mastery.\"\n\n**P77:** \"State the 4-step pattern recognition process. Distinguish recursive from closed-form. Explain why finite terms do not determine a unique rule.\"\n\n**P55:** \"Give an example of a geometric pattern and translate it to a number rule.\"\n\n**P76 — TRANSFER PROBE:** \"Epidemiology: on day 1, one person is infected. Each infected person infects 3 new people per day. Day 1: 1 infected, Day 2: 4 (1+3), Day 3: 13 (4+9), Day 4: 40 (13+27). (a) State both the recursive rule for DAILY NEW INFECTIONS and the closed-form for TOTAL infected. (b) Predict total infected on day 7.\"\n\n**P55:** \"Why is the closed-form rule for total infections more useful to a public health official than the recursive rule?\"\n\n**P75 — MISCONCEPTION PROBE:** \"A student is given 1, 8, 27, 64 and says 'these are perfect cubes, so the rule is n³ — I recognised it instantly without working through the steps.' What is the analytical gap in this approach?\"\n\n*Expected: MC-1. Correct conclusion (rule is n³) but wrong process. Without the 4-step verification, the student cannot confirm the rule holds for all n (not just the given terms), cannot distinguish this from another rule that fits these four values, and will not have the skill to find rules for sequences they haven't seen before.*\n\n**P55:** \"What would proper 4-step execution add to the student's analysis, even if the answer is the same?\"\n\n**P74 — APPLICATION PROBE:** \"Identify the pattern in the number of intersection points when n lines cross in general position (no two parallel, no three concurrent): n=1: 0, n=2: 1, n=3: 3, n=4: 6, n=5: 10. State the rule and predict n=8.\"\n\n*Expected: Differences: 1, 2, 3, 4 → closed-form = C(n,2) = n(n−1)/2. Verify: n=5: 5×4/2=10 ✓. n=8: 8×7/2=28. Why: each new line crosses all existing lines once — nth line creates n−1 new intersections.*\n\n**P55:** \"What combinatorial structure does C(n,2) represent? How does it explain the line intersection count?\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.75\",\n  \"PASS\": {\n    \"criteria\": \"P77 complete; P76 epidemiology rule + day 7 prediction; P75 4-step gap identified; P74 C(n,2) rule with prediction and combinatorial explanation\",\n    \"action\": \"Record mastery. P89 scheduled. Blueprint complete.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"One minor error only\",\n    \"action\": \"One retry.\"\n  },\n  \"ROUTE_BACK\": {\n    \"criteria\": \"Two or more errors — MC still present\",\n    \"action\": \"Re-enter appropriate repair TA.\"\n  }\n}\n```\n\n---\n\n### Protocol D — State S6: Low Confidence",
+      "localKey": "MP-TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 891,
+        "endLine": 943
+      }
+    },
+    {
+      "assetId": "math.found.pattern-recognition/mastery_probe/MP-TA-D03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.pattern-recognition",
+      "title": "Mastery Gate",
+      "content": "**TA-D03 — Mastery Gate**\n\n*Primitive sequence:* `P01 → P91`\n\n**P91 expansion:** `P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78`\n\n*GR-5: P28 ABSENT throughout.*\n\n**P01:** \"Final confidence and mastery check.\"\n\n**P77:** \"State the 4-step process. What is the difference between recognising a term by memory and extracting a rule?\"\n\n**P55:** \"Can the template in TA-D02 always find a rule? What if differences aren't constant or increasing by a constant?\"\n\n**P76 — TRANSFER:** \"A student saves £10 in week 1, £20 in week 2, £30 in week 3. (a) State the rule for weekly savings. (b) How much in week n? (c) Total saved after N weeks?\"\n\n*Expected: (a) aₙ=10n. (b) 10n. (c) Total = 10×N(N+1)/2 = 5N(N+1).*\n\n**P55:** \"What pattern type is total savings (5N(N+1)/2) — linear or quadratic? How can you tell?\"\n\n**P75 — MISCONCEPTION PROBE:** \"True or False: 'The sequence 2, 4, 8 proves the next term is 16, because the only pattern is doubling.'\"\n\n*Expected: False — MC-2 statement. Three terms admit multiple rules. 'Proves' is too strong. The doubling rule FIT these three terms, but does not PROVE the 4th is 16 without additional context.*\n\n**P55:** \"What word should replace 'proves' in that sentence?\"\n\n**P74 — APPLICATION:** \"Find the rule for: 0, 3, 8, 15, 24, 35. Predict term 8.\"\n\n*Expected: Differences: 3,5,7,9,11 — increasing by 2. Second differences constant → quadratic. aₙ=n²−1. Verify: n=5: 25−1=24 ✓. Term 8: 64−1=63.*\n\n**P55:** \"Verify by computing second differences of 0,3,8,15,24,35.\"\n\n**P78 — MASTERY GATE:**\n\n```json\n{\n  \"gate\": \"mastery_threshold = 0.75\",\n  \"PASS\": {\n    \"criteria\": \"P77 4-step + memory vs. rule distinction; P76 savings rule correct + total formula; P75 'proves' rejected (MC-2 corrected); P74 aₙ=n²−1 with correct term 8\",\n    \"action\": \"Record mastery. P89 scheduled. Blueprint complete.\"\n  },\n  \"ROUTE_TO_PROTOCOL_C\": {\n    \"criteria\": \"P75 false statement accepted (MC-2 active)\",\n    \"action\": \"Route to Protocol C.\"\n  },\n  \"RETRY\": {\n    \"criteria\": \"One minor error only\",\n    \"action\": \"One retry.\"\n  }\n}\n```\n\n---\n\n### Protocol E — State S9: Mastery Maintenance (Spaced Repetition)\n\n**P89 Schedule:** Day 1 → Day 3 → Day 7 → Day 21 → Day 60.\n**Entry:** Protocol E.\n**Decay rule:** Failure on any probe → reset to Day 1 + Protocol B.\n\n---",
+      "localKey": "MP-TA-D03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.pattern-recognition.md",
+        "startLine": 1043,
+        "endLine": 1105
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

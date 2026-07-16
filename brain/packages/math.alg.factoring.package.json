@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.factoring-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.factoring",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ee8cde1094824a96a7c385616afb66a56e18bfbd216a6fce561260fcb89be2ee",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.factoring.md": "sha256:254ea08ab0c4ad71969bfd87b830ee5cc5e6f25738241af9d57a0ed78d8e40e9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.factoring",
+    "name": "Factoring Polynomials",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 15,
+    "prerequisites": [
+      "math.alg.polynomial",
+      "math.alg.factor-theorem"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.factoring-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.factoring (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.factoring.md": "sha256:254ea08ab0c4ad71969bfd87b830ee5cc5e6f25738241af9d57a0ed78d8e40e9"
+      },
+      "contentHash": "sha256:0473d42a83a756128376206adc8bc9b1e83c002aefba501652eb9176167504d8",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring.md#TA-B02 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.factoring/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.factoring",
+      "title": "Factoring Polynomials — cognitive map",
+      "content": "**Core concept:** Factoring a polynomial means expressing it as a product of lower-degree polynomial factors that are irreducible over ℝ. The process requires a systematic strategy: (1) always extract the greatest common factor (GCF) first; (2) recognise special patterns (difference of squares, difference/sum of cubes, perfect square trinomial); (3) factor trinomials by trial (monic) or ac-method (non-monic); (4) use the Factor Theorem to test roots for degree-3+ polynomials; (5) verify completeness — check each factor cannot be factored further.\n\n**Conceptual progression:**\n1. GCF extraction: identify and factor out the GCF of all terms as the mandatory first step.\n2. Monic trinomial (x²+bx+c): find two integers with product c and sum b.\n3. Non-monic trinomial (ax²+bx+c, a≠1): compute ac; find pair summing to b with product ac; split middle term; factor by grouping.\n4. Special patterns: a²−b²=(a−b)(a+b); a²+2ab+b²=(a+b)²; a³−b³=(a−b)(a²+ab+b²); a³+b³=(a+b)(a²−ab+b²).\n5. Irreducibility over ℝ: a²+b² (b≠0) is irreducible; negative discriminant confirms no real linear factors.\n6. Higher-degree factoring: use the Factor Theorem to find rational roots (rational root theorem candidates), then deflate by synthetic division.\n\n**CPA arc (entry: P):**\n- Pictorial: factor trees for integers (24=2²×3) paired with polynomial factor diagrams; box method for non-monic trinomials.\n- Abstract: systematic decision tree — GCF → count terms → identify pattern → factor; verify by expansion.\n\n**Prior knowledge activated:** polynomial structure (math.alg.polynomial) — degree, coefficients, leading coefficient; Factor Theorem (math.alg.factor-theorem) — p(a)=0 ↔ (x−a) is a factor; synthetic division; substitution and evaluation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring",
+      "title": "GCF-THEN-DONE [FOUNDATIONAL]",
+      "content": "### MC-1: GCF-THEN-DONE [FOUNDATIONAL]\n**Description:** Learner extracts the GCF and stops without factoring the remaining polynomial further.\n**Surface form:** \"6x³−21x²−12x = 3x(2x²−7x−4). Done — I've factored out the GCF.\"\n**Root cause:** The GCF step feels like a complete factorisation because it is the dominant visible pattern; the learner does not check whether the residual factor (here 2x²−7x−4) is itself factorable.\n**Trigger condition:** Any polynomial where the GCF step yields a composite residual factor.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring",
+      "title": "AC-METHOD-ONLY-FOR-MONIC",
+      "content": "### MC-2: AC-METHOD-ONLY-FOR-MONIC\n**Description:** Learner applies the simple trial-factor method (find pair summing to b with product c) to non-monic trinomials, ignoring the leading coefficient; or applies the ac-method incorrectly by forgetting to divide by a.\n**Surface form:** For 2x²+7x+3: \"Product 3, sum 7: can't find two integers. I can't factor this.\"\n**Root cause:** The monic method (product=c, sum=b) is learned first and over-generalised; the ac-method substitutes product=ac, sum=b, which differs from the monic case.\n**Trigger condition:** Any trinomial with leading coefficient a ≠ 1.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring",
+      "title": "IRREDUCIBLE-QUADRATIC-FACTORABLE",
+      "content": "### MC-3: IRREDUCIBLE-QUADRATIC-FACTORABLE\n**Description:** Learner attempts to factor a²+b² (sum of squares) as a product of real linear factors, or factors x²+k (k>0) as (x+√k)(x−√k) by confusing sum with difference.\n**Surface form:** \"x²+9 = (x+3)(x−3)? No wait — (x+3i)(x−3i)? Let me try (x+3)(x+3).\"\n**Root cause:** The difference-of-squares pattern a²−b²=(a−b)(a+b) is over-generalised to the sum case; learners forget that a²+b² is irreducible over ℝ.\n**Trigger condition:** Any polynomial containing a sum of squares as a residual factor.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring",
+      "title": "Repair for MC-1 (GCF-THEN-DONE)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (GCF-THEN-DONE)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 126,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring",
+      "title": "Repair for MC-2 (AC-METHOD-ONLY-FOR-MONIC)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (AC-METHOD-ONLY-FOR-MONIC)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 192,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring",
+      "title": "Repair for MC-3 (IRREDUCIBLE-QUADRATIC-FACTORABLE)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (IRREDUCIBLE-QUADRATIC-FACTORABLE)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 251,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.factoring",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Factor 3x² + 12x completely.\"\n[Expected: GCF = 3x; 3x(x+4). Check: 3x is degree 1 (irreducible); x+4 is degree 1 (irreducible). Complete: 3x(x+4).]\n\n**Item 2:**\n\"Factor x² + 7x + 10 completely.\"\n[Expected: monic; find pair with product 10 and sum 7: (2)(5). Complete: (x+2)(x+5).]\n\n**Item 3:**\n\"Factor 4x² − 9 completely.\"\n[Expected: no GCF; 2 terms; difference of squares: (2x)²−3²=(2x−3)(2x+3). Complete: (2x−3)(2x+3).]\n\n**Item 4:**\n\"Factor 2x² + x − 3 completely.\"\n[Expected: ac = 2×(−3) = −6; find pair with product −6 and sum 1: (3)(−2)=−6, 3+(−2)=1 ✓. Rewrite: 2x²+3x−2x−3 = x(2x+3)−1(2x+3) = (x−1)(2x+3). Complete: (x−1)(2x+3).]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Factor 4x³ − 4x² − 15x completely. Show all steps.\"\n\n[Expected:\nStep 1 — GCF: GCF(4x³, 4x², 15x) = x → x(4x²−4x−15).\nStep 2 — Factor 4x²−4x−15 (non-monic, a=4, c=−15):\nac = 4×(−15) = −60.\nFind pair with product −60 and sum −4: (−10)(+6) = −60 ✓; −10+6 = −4 ✓.\nSplit: 4x²−10x+6x−15 = 2x(2x−5)+3(2x−5) = (2x+3)(2x−5).\nStep 3 — Complete: x(2x+3)(2x−5).\nVerify: (2x+3)(2x−5) = 4x²−10x+6x−15 = 4x²−4x−15; ×x = 4x³−4x²−15x ✓.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if GCF extraction, ac-method, and final three-factor form are all correct; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can apply GCF extraction, monic and non-monic trinomial factoring, and difference-of-squares pattern to completely factor polynomials.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 (incomplete GCF) or P76 (GCF missing or wrong): → TA-B01 (GCF-THEN-DONE repair), then re-gate\n- FAIL on Item 4 or P76 (ac-method error, leading coefficient ignored): → TA-B02 (AC-METHOD-ONLY-FOR-MONIC repair), then re-gate\n- FAIL on Item 3 (factored sum instead of difference, or stopped incomplete): → TA-B03 (IRREDUCIBLE-QUADRATIC-FACTORABLE repair), then re-gate\n- FAIL on Item 2 (monic error only): → return to A02 WE1 pattern; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated the ability to factor polynomials completely: GCF extraction, monic and non-monic trinomials, and special patterns including difference of squares.\n\nKey anchors to carry forward:\n- ALWAYS extract the GCF first; ALWAYS check whether the residual factor can be factored further.\n- Non-monic trinomial ax²+bx+c: use ac-method (find pair with product ac and sum b; split; group).\n- a²−b² = (a−b)(a+b); a²+b² is irreducible over ℝ (discriminant negative).\n- Complete factorisation ends when every factor is degree 1 or has negative discriminant.\n\nNext concepts: math.alg.polynomial-roots (solve polynomial equations by setting each factor to zero), math.alg.rational-expressions (simplify by factoring numerator and denominator).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 360,
+        "endLine": 453
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factoring",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Factor 12x² + 8x by extracting the GCF.\" Correct answer (4x(3x+2)) confirms GCF skill. Then: \"Is 3x+2 factorable further?\" (No — degree 1.) This establishes the completeness-check habit.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): integer factor tree for 60 = 2²×3×5; parallel polynomial factor diagram for 6x²+12x = 6x(x+2); confirm \"factored completely means no factor can be broken down further.\"\n- Rung 2 (structured): monic trinomial x²+7x+10 → find pair (2,5): product 10, sum 7 → (x+2)(x+5).\n- Rung 3 (full apply): non-monic and multi-step factoring independently.\n\n**Pacing note:** h=15 estimated hours; A01 in sessions 1–2, A02 in sessions 3–6, A03 in sessions 7–10; mastery gate in sessions 11–12.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factoring",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Factor completely: (a) x³−8; (b) x³+27; (c) 6x²−5x−6.\"\n[Expected: (a) (x−2)(x²+2x+4) [sum-of-cubes pattern a=x,b=2]; (b) (x+3)(x²−3x+9); (c) ac=−36; pair (−9)(4)=−36, −9+4=−5; rewrite 6x²−9x+4x−6=3x(2x−3)+2(2x−3)=(3x+2)(2x−3).]\n\n**Day 10 prompt:**\n\"Factor x⁴−5x²+4 completely. Hint: let u=x².\"\n[Expected: u²−5u+4=(u−1)(u−4)=(x²−1)(x²−4)=(x−1)(x+1)(x−2)(x+2). Four linear factors.]\n\n**Day 30 prompt:**\n\"A polynomial p(x) has roots at x=−2, x=1 (multiplicity 2), and x=3 with leading coefficient 2. Write p(x) in completely factored form. Then expand to standard form.\"\n[Expected: p(x)=2(x+2)(x−1)²(x−3)=2(x+2)(x²−2x+1)(x−3). Expanding: 2(x+2)(x−3)(x²−2x+1)=2(x²−x−6)(x²−2x+1)=2(x⁴−2x³+x²−x³+2x²−x−6x²+12x−6)=2(x⁴−3x³−3x²+11x−6)=2x⁴−6x³−6x²+22x−12.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 281,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "math.alg.factoring/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.factoring",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.alg.polynomial — polynomial structure, degree, leading coefficient, coefficient notation; needed to identify terms and their GCF\n- math.alg.factor-theorem — p(a)=0 ↔ (x−a) is a factor; rational root candidates; synthetic division for deflation; needed for degree-3+ polynomial factoring\n\n**Unlocked blueprints:**\n- math.alg.polynomial-roots — solving polynomial equations using complete factorisation; zeroproduct property\n- math.alg.rational-expressions — simplifying rational expressions requires factoring numerator and denominator\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring.md",
+        "startLine": 299,
+        "endLine": 313
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

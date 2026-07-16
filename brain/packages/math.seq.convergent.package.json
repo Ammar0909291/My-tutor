@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.convergent-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.convergent",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:797a6068f0a560598c0314f909c9a7da7e3098dbb9d9ed37faaaecdb502d1c2e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.convergent.md": "sha256:63a272d2de6e06988bc77a7206d6fd7d44bd92b32be421b72baf2623d6ea6538"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.seq.convergent",
+    "name": "Convergent Sequence",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.seq.sequence",
+      "math.calc.limits"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.convergent-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.convergent (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.convergent.md": "sha256:63a272d2de6e06988bc77a7206d6fd7d44bd92b32be421b72baf2623d6ea6538"
+      },
+      "contentHash": "sha256:7ad901db142caabe5ed6e5b846b749725d88e10da8b6108a07ec76ccd977a140",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.convergent.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.convergent.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.convergent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.convergent\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.convergent.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.convergent.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.convergent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.convergent\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.convergent.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.convergent.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.convergent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.convergent\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.convergent/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.convergent",
+      "title": "Convergent Sequence — cognitive map",
+      "content": "**Core concept:** A sequence {aₙ} converges to limit L if for every ε>0 there exists N∈ℕ such that |aₙ−L|<ε for all n>N. Informally: aₙ can be made arbitrarily close to L by taking n large enough. This is the discrete analogue of the calculus limit lim_{x→∞} f(x)=L, with the same ε logic but N replaces δ (ε-N vs ε-δ). A sequence that does not converge diverges — either to ±∞ or by oscillation. Every convergent sequence is bounded, but not every bounded sequence converges (e.g., (−1)ⁿ is bounded but oscillates).\n\n**Conceptual progression:**\n1. Informal definition: aₙ→L means the terms get arbitrarily close to L as n→∞.\n2. ε-strip picture: for any tolerance ε, all but finitely many terms lie within the ε-band (L−ε, L+ε).\n3. Formal ε-N definition: ∀ε>0 ∃N: n>N → |aₙ−L|<ε.\n4. Divergence types: diverges to +∞ or −∞ (unbounded); diverges by oscillation (bounded but no single limit).\n5. Key theorems: convergent → bounded (not converse); squeeze theorem for sequences; limit laws for sequences.\n\n**CPA arc (entry: C — advanced difficulty):**\n- Concrete: physical approximation — approximating √2 by 1, 1.4, 1.41, 1.414, … — the sequence converges to √2 even though it never exactly reaches it.\n- Pictorial: number line with ε-strip around L; sequence values eventually all inside the strip.\n- Abstract: ∀ε>0 ∃N: n>N → |aₙ−L|<ε.\n\n**Prior knowledge activated:** sequences (math.seq.sequence) — sequence definition, notation, arithmetic/geometric sequences; calculus limits (math.calc.limits) — lim_{x→∞} concept, ε-δ intuition, limit laws; absolute value inequalities |a|<ε ↔ −ε<a<ε.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.convergent",
+      "title": "CONVERGENCE-MEANS-EVENTUALLY-ZERO [FOUNDATIONAL]",
+      "content": "### MC-1: CONVERGENCE-MEANS-EVENTUALLY-ZERO [FOUNDATIONAL]\n**Description:** Learner believes a convergent sequence must converge to 0 — that \"converging\" means the terms get smaller and approach zero, not an arbitrary limit L.\n**Surface form:** \"The sequence aₙ=1+1/n converges because the 1/n part goes to zero.\"\n**Root cause:** Many textbook examples are sequences like 1/n, 1/n², whose limit happens to be 0. The learner abstracts \"terms shrink → converge → to zero\" rather than \"terms approach some fixed L.\" The concept of convergence to L≠0 is unseen.\n**Trigger condition:** Any sequence with a non-zero limit, especially aₙ=c+bₙ where bₙ→0.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.convergent",
+      "title": "BOUNDED-IMPLIES-CONVERGENT",
+      "content": "### MC-2: BOUNDED-IMPLIES-CONVERGENT\n**Description:** Learner believes any bounded sequence converges — that having all terms in a finite interval [m, M] is sufficient for convergence.\n**Surface form:** \"The sequence (−1)ⁿ is bounded between −1 and 1, so it converges.\"\n**Root cause:** The statement \"convergent → bounded\" is a theorem; the learner inverts the implication, believing \"bounded → convergent.\" The classic counterexample (−1)ⁿ was either not presented or not emphasised.\n**Trigger condition:** Any bounded oscillating or irregular sequence.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.convergent",
+      "title": "LIMIT-MEANS-EVENTUALLY-REACHES-L",
+      "content": "### MC-3: LIMIT-MEANS-EVENTUALLY-REACHES-L\n**Description:** Learner believes convergence means the sequence actually reaches the value L for large enough n — that there exists some finite N such that aₙ=L for all n>N.\n**Surface form:** \"1/n converges to 0, so eventually the terms ARE 0.\"\n**Root cause:** \"Getting close to L\" is interpreted as \"arriving at L.\" The ε-N definition says the DISTANCE |aₙ−L| becomes arbitrarily small but never requires it to be zero. Convergence is about approximation, not equality.\n**Trigger condition:** Any convergent sequence where aₙ≠L for all n (which is the typical case).\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.convergent",
+      "title": "Repair for MC-1 (CONVERGENCE-MEANS-EVENTUALLY-ZERO)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (CONVERGENCE-MEANS-EVENTUALLY-ZERO)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 113,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.convergent",
+      "title": "Repair for MC-2 (BOUNDED-IMPLIES-CONVERGENT)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (BOUNDED-IMPLIES-CONVERGENT)\",\"primitives\":[\"P04\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 167,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.convergent",
+      "title": "Repair for MC-3 (LIMIT-MEANS-EVENTUALLY-REACHES-L)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (LIMIT-MEANS-EVENTUALLY-REACHES-L)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 230,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.convergent",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.75 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Find the limit of aₙ = (5n−2)/(n+1), or state that it diverges.\"\n[Expected: Divide by n: (5−2/n)/(1+1/n) → 5/1 = 5 as n→∞. Converges to L=5.]\n\n**Item 2:**\n\"Does the sequence aₙ=(−1)ⁿ converge? Justify briefly.\"\n[Expected: No. Even terms = +1 → 1; odd terms = −1 → −1. Two different subsequential limits → diverges by oscillation. (Alternatively: for ε=1/2, no N makes all n>N terms within 0.5 of a single L, since consecutive terms differ by 2.)]\n\n**Item 3:**\nTrue or False: \"Every bounded sequence converges.\"\n[Expected: FALSE. Counterexample: (−1)ⁿ is bounded (|aₙ|=1 for all n) but diverges. Correct statement: every bounded MONOTONE sequence converges (Monotone Convergence Theorem).]\n\n**Item 4:**\n\"Find the limit of aₙ = cos(n)/n, or state that it diverges.\"\n[Expected: Squeeze: −1/n ≤ cos(n)/n ≤ 1/n. Both ±1/n→0. By the Squeeze Theorem, aₙ→0.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (cross-link probe: math.calc.limits)\n\n\"Consider aₙ = n/(n+1).\n\n(a) Find the limit of the sequence {aₙ} as n→∞ using the sequence definition.\n(b) Now define f(x) = x/(x+1) for real x>0. Find lim_{x→∞} f(x) using the calculus limit (as a continuous function).\n(c) Are the answers to (a) and (b) the same? Explain what structural connection links them.\n(d) For ε=0.01, find the smallest N∈ℕ such that |aₙ−1|<0.01 for all n>N.\"\n\n[Expected:\n(a) Divide by n: (1)/(1+1/n)→1. Sequence limit = 1.\n(b) f(x)=x/(x+1)=1−1/(x+1)→1 as x→∞. Calculus limit = 1.\n(c) Same answer (1). The sequence limit lim_{n→∞} aₙ equals lim_{x→∞} f(x) when aₙ=f(n) and f is a continuous function that tends to a limit at infinity. The ε-N definition for sequences is the discrete version of the ε-M (or ε-δ-at-infinity) definition for functions.\n(d) |aₙ−1|=|n/(n+1)−1|=1/(n+1). Need 1/(n+1)<0.01 → n+1>100 → n>99. Smallest N=99; all n>99 satisfy |aₙ−1|<0.01.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (a) and (b) both give 1, (c) identifies the connection correctly, and (d) gives N=99; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (≥4/5): Learner can classify convergent and divergent sequences, compute sequence limits algebraically, apply the squeeze theorem, and connect sequence limits to calculus limits.\n- FAIL (<4/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 (limit=0 instead of 5): → TA-B01 (CONVERGENCE-MEANS-EVENTUALLY-ZERO), then re-gate\n- FAIL on Item 2 (says converges because bounded): → TA-B02 (BOUNDED-IMPLIES-CONVERGENT), then re-gate\n- FAIL on Item 3 (TRUE): → TA-B02; clarify Monotone Convergence Theorem; re-gate\n- FAIL on Item 4 (cannot apply squeeze): → return to A03; re-drill squeeze technique; re-gate\n- FAIL on P76(d) (ε-N computation): → return to A01 ε-N representation; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 4/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to classify sequences as convergent or divergent, compute limits algebraically, apply the squeeze theorem, and understand the ε-N definition of convergence.\n\nKey anchors to carry forward:\n- Convergence: {aₙ}→L iff ∀ε>0 ∃N: n>N → |aₙ−L|<ε. L can be any real, not just 0.\n- Divergence: either unbounded (→±∞) or oscillatory (bounded but no single limit).\n- Bounded ≠ convergent. Convergent → bounded (with bounded+monotone → convergent).\n- Squeeze theorem: if bₙ≤aₙ≤cₙ and bₙ,cₙ→L then aₙ→L. Main tool for oscillatory-times-vanishing sequences.\n- Connection to calculus limits: lim_{n→∞} f(n) = lim_{x→∞} f(x) when f is continuous and the latter limit exists.\n\nNext concept: math.seq.series-convergence — the sequence of partial sums Sₙ=a₁+…+aₙ; an infinite series converges iff {Sₙ} converges.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 340,
+        "endLine": 437
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.convergent",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Write the first five terms of the sequence aₙ=n/(n+1). What value does the sequence appear to approach?\" If the learner correctly computes 1/2, 2/3, 3/4, 4/5, 5/6 and identifies the apparent limit as 1, proceed to A01. This confirms sequence evaluation and informal limit intuition.\n\n**Scaffolding ladder:**\n- Rung 1 (concrete): decimal approximation to √2 via 1, 1.4, 1.41, 1.414, 1.4142, … Never reaches √2 but gets within any specified tolerance. Map ε to \"tolerance.\"\n- Rung 2 (pictorial): draw a number line; mark L; draw an ε-strip around L; plot sequence values; show all but finitely many inside the strip.\n- Rung 3 (full analyze): given a sequence and a claimed limit, the learner checks the ε-N definition algebraically: find N in terms of ε such that n>N guarantees |aₙ−L|<ε.\n\n**Pacing note:** h=8 estimated hours; A01 in sessions 1–2; A02 in sessions 3–4; A03 + mastery gate in sessions 4–5.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.convergent",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Find the limit of aₙ = (n+sin n)/(2n+1).\"\n[Expected: −1≤sin n≤1, so n−1≤n+sin n≤n+1. Squeeze: (n−1)/(2n+1) ≤ aₙ ≤ (n+1)/(2n+1). Both bounds → 1/2. By squeeze theorem, aₙ→1/2.]\n\n**Day 10 prompt:**\n\"Prove or disprove: if aₙ→L and bₙ→M then aₙ+bₙ→L+M.\"\n[Expected: TRUE (sum rule). Proof: let ε>0. Choose N₁ s.t. n>N₁ → |aₙ−L|<ε/2; choose N₂ s.t. n>N₂ → |bₙ−M|<ε/2. Let N=max(N₁,N₂). For n>N: |(aₙ+bₙ)−(L+M)|≤|aₙ−L|+|bₙ−M|<ε/2+ε/2=ε. QED.]\n\n**Day 30 prompt:**\n\"Construct a bounded sequence that has exactly two subsequential limits: 0 and 1. Prove it diverges.\"\n[Expected: aₙ = (1+(−1)ⁿ)/2 = 0,1,0,1,… Even-indexed subsequence→1; odd-indexed→0. Bounded in [0,1]. If aₙ→L, then L=1 (from even subsequence) and L=0 (from odd subsequence) — contradiction. Diverges. Two distinct subsequential limits prevent convergence.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 260,
+        "endLine": 278
+      }
+    },
+    {
+      "assetId": "math.seq.convergent/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.convergent",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.seq.sequence — sequence definition, index notation, arithmetic/geometric sequences; provides the domain object (a sequence) that is classified here\n- math.calc.limits — lim_{x→∞} f(x)=L intuition and ε-δ structure; the ε-N definition of sequence convergence directly parallels the calculus limit framework with N replacing δ\n\n**Unlocked blueprints:**\n- math.seq.series-convergence — an infinite series ∑aₙ converges iff the sequence of partial sums converges; requires full mastery of sequence convergence definition\n\n**Cross-links:**\n- math.calc.limits (TIER 1) — P76 uses cross-link probe connecting sequence limits to calculus limits\n- math.real.convergence-sequences (NOT Tier 1) — rigorous ε-N proofs; not required here\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.convergent.md",
+        "startLine": 278,
+        "endLine": 293
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

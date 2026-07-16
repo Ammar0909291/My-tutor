@@ -1,0 +1,477 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.triangle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.triangle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ae63b1c7ce77f5df413bc59b7ff4d19515aad877c107819982d47269dfcf3a4f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.triangle.md": "sha256:6a0885a308a0749608c4dd596e09da3eb6e3bb3150706d3af99109ee39723e95"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.geom.triangle",
+    "name": "Triangle",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 20,
+    "prerequisites": [
+      "math.geom.angle",
+      "math.geom.line-segment"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.triangle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.triangle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.triangle.md": "sha256:6a0885a308a0749608c4dd596e09da3eb6e3bb3150706d3af99109ee39723e95"
+      },
+      "contentHash": "sha256:b4a6e7b8e289aa2467d36362ba1d21e8d2fb2bae93fa52169c8b2bfb892b92cd",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle.md#TA-A04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle.md#TA-A05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.triangle/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.geom.triangle",
+      "title": "Triangle — cognitive map",
+      "content": "**Core concept:** A triangle is a polygon formed by three line segments meeting at three vertices, enclosing three interior angles whose measures always sum to 180°. Triangles are classified along two independent axes: by side lengths (scalene, isosceles, equilateral) and by angle type (acute, right, obtuse). Both labels apply simultaneously to the same triangle.\n\n**Knowledge prerequisites activated:**\n- math.geom.angle: interior angle measurement in degrees; notation ∠A; angle sum\n- math.geom.line-segment: sides of a triangle are line segments with definite length\n\n**Concept structure:**\n1. **Definition**: three vertices A, B, C connected by three line segments (sides AB, BC, CA), enclosing three interior angles\n2. **Angle sum theorem**: ∠A + ∠B + ∠C = 180° — always, for every triangle regardless of size or shape\n3. **Side-length classification**: scalene (all different), isosceles (exactly two equal), equilateral (all three equal)\n4. **Angle-type classification**: acute (all angles < 90°), right (exactly one angle = 90°), obtuse (exactly one angle > 90°)\n5. **Combined classification**: the two axes are independent — a triangle is labeled by both simultaneously (e.g., isosceles right)\n6. **Altitude**: perpendicular segment from a vertex to the opposite side (or its extension) — a measurement auxiliary, not a side\n\n**Target understanding:** Given a triangle description, the learner applies the angle sum to find missing angles, classifies by both side and angle criteria simultaneously, and distinguishes altitude from side.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 26,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle",
+      "title": "ANGLE-SUM-NOT-180",
+      "content": "| MC-1 | ANGLE-SUM-NOT-180 | Two angles given, asked for third | Uses 360° instead of 180°; says angle sum depends on triangle size; obtains impossible angle values | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle",
+      "title": "TRIANGLE-TYPE-IS-EXCLUSIVE",
+      "content": "| MC-2 | TRIANGLE-TYPE-IS-EXCLUSIVE | Shown a right isosceles triangle | Says it is impossible to be both isosceles and right-angled; treats all six classification labels as a single mutually exclusive set | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle",
+      "title": "ALTITUDE-IS-A-SIDE",
+      "content": "| MC-3 | ALTITUDE-IS-A-SIDE | Asked for altitude of a triangle | Names a side (leg or hypotenuse) as the altitude; does not distinguish the perpendicular auxiliary from the boundary sides | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle",
+      "title": "\"The Three-Corner Figure\": Angle Sum and Anatomy (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"\\\"The Three-Corner Figure\\\": Angle Sum and Anatomy (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 72,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle",
+      "title": "Side-Length Classification (GR-1: P11 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Side-Length Classification (GR-1: P11 | GR-2: P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 110,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle",
+      "title": "Angle-Type Classification (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Angle-Type Classification (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 141,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle",
+      "title": "Combined Classification and Altitude (GR-1: P04 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Combined Classification and Altitude (GR-1: P04 | GR-2: P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 164,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 202,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle",
+      "title": "Repair: ANGLE-SUM-NOT-180 (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: ANGLE-SUM-NOT-180 (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 269,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle",
+      "title": "Repair: TRIANGLE-TYPE-IS-EXCLUSIVE (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: TRIANGLE-TYPE-IS-EXCLUSIVE (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 299,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle",
+      "title": "Repair: ALTITUDE-IS-A-SIDE (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: ALTITUDE-IS-A-SIDE (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 333,
+        "endLine": 439
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.triangle",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A05 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **In triangle ABC, ∠A = 48° and ∠B = 73°. Find ∠C.**\n   *(Expected: 180° − 48° − 73° = 59°)*\n\n2. **A triangle has sides 6 cm, 6 cm, 9 cm. Classify it by side length.**\n   *(Expected: isosceles — two sides equal)*\n\n3. **True/False:** A triangle cannot be both isosceles and right-angled at the same time.\n   *(Expected: FALSE — a right isosceles triangle has two equal legs and one 90° angle; angles 90°, 45°, 45°)*\n\n4. **In any triangle, the altitude from vertex A to side BC is one of the three sides of the triangle.**\n   *(Expected: FALSE — the altitude is a perpendicular auxiliary segment from A to line BC; it is not a side)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: cross-link to math.trig.right-triangle-trig — Tier 1 concept)\n\n*Right triangle bridge to trigonometry:*\n\n\"A right triangle has a right angle at vertex C and an angle of 30° at vertex A.\n\n(a) Find the angle at vertex B using the angle sum theorem.\n(b) Label the sides: the side opposite A (length p), the side opposite B (length q), and the hypotenuse (length r). Using the right-triangle convention, write the ratio sin(30°) = opposite/hypotenuse in terms of p and r.\n(c) If the hypotenuse r = 10, use sin(30°) = 0.5 to find p.\"\n\n*(Expected:\n(a) ∠B = 180° − 90° − 30° = 60°\n(b) sin(30°) = p/r — opposite to 30° is p; hypotenuse is r\n(c) p = 10 × 0.5 = 5)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.85; ⌈0.85×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 ANGLE-SUM-NOT-180 first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now apply the 180° angle sum to find missing angles, classify any triangle by both its side lengths and angle type simultaneously, and distinguish the altitude from the sides. These skills are foundational for the Pythagorean theorem and right-triangle trigonometry.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 202,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.triangle",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\n\"Three sticks\" model: lay three pencils on a desk to form a triangle. The three corner angles are the bends at each vertex. Physically rearrange the sticks into different triangles — the enclosed corner angles always add to a half-turn (180°). Measure and verify.\n\n**Progression Gate (C → P):** Learner consistently names the three angle measures, adds them, and obtains 180°.\n**Progression Gate (P → A):** Learner classifies the same triangle with two labels simultaneously and articulates why both apply.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 58,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.triangle",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Angle sum: find missing angle | \"Angles 55° and 75° — find third angle\" (50°) |\n| Day 3 | Side-length and angle-type classification | \"Triangle sides 6,6,8; angles 75°,75°,30° — classify fully\" (isosceles acute) |\n| Day 7 | Combined classification: dual-label | \"Sides 1,1,√2; angles 90°,45°,45° — full name?\" (isosceles right) |\n| Day 30 | Transfer: angle sum in composite figures | \"A quadrilateral is split into 2 triangles by a diagonal. What is the total interior angle sum of the quadrilateral?\" (2 × 180° = 360°) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 367,
+        "endLine": 378
+      }
+    },
+    {
+      "assetId": "math.geom.triangle/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.triangle",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.geom.angle (required): interior angle measurement in degrees; notation and sum computation\n- math.geom.line-segment (required): sides of a triangle are line segments; length measurement\n\n**Enables:**\n- math.geom.pythagorean-theorem: requires right triangle definition and side identification\n- math.trig.right-triangle-trig: requires angle sum in right triangles, side labeling, and 180° sum to determine all angles\n\n**Cross-links (GR-8):**\n- math.trig.right-triangle-trig (Tier 1): P76 cross-link probe uses the 30-60-90 right triangle to preview sin(30°) = opposite/hypotenuse — bridging angle sum directly to trigonometric ratio setup\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle.md",
+        "startLine": 378,
+        "endLine": 393
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

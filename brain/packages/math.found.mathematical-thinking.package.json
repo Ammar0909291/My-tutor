@@ -1,0 +1,1243 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.mathematical-thinking-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.mathematical-thinking",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6082f371f2ad345c5c1220f10441be15ac59d40185753933fb94cf0f6ee57b74",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.mathematical-thinking.md": "sha256:90f01d99558a220cfcc247591554965e98ff95149c4cabf6f8d09f7c67aeb1ab"
+    },
+    "assetCount": 39,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 4,
+      "teaching_action_meta": 30,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 30
+  },
+  "concept": {
+    "conceptId": "math.found.mathematical-thinking",
+    "name": "Mathematical Thinking",
+    "difficultyRaw": "foundational (mapped: 1)",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 8,
+    "prerequisites": [],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.mathematical-thinking-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.mathematical-thinking (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.mathematical-thinking.md": "sha256:90f01d99558a220cfcc247591554965e98ff95149c4cabf6f8d09f7c67aeb1ab"
+      },
+      "contentHash": "sha256:45b2d56ff3faeaea611f250d5a89752bf534b7a75147894a27a8916a40b0a019",
+      "ruleCount": 30,
+      "bandCounts": {
+        "3": 30
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-A03 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-A06 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-A07 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-B02 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-B03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-B04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-B04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-B05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-B05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-B06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-B06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-C01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-C02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-C03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-C04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-D05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-D05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-E04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-F01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-F01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-F02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-F02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-F03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-F03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-thinking.TA-F04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-thinking.md#TA-F04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-thinking"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-thinking\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.mathematical-thinking/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Learning Objective",
+      "content": "A student who achieves mastery **identifies which mathematical thinking move they are using** (pattern noticing, conjecturing, testing, counterexample, or constructing an argument), **applies at least one move explicitly** to a novel non-numeric situation, and **distinguishes mathematical thinking from mathematical content recall** when given paired examples.\n\nNOT: speed at calculation. NOT: knowledge of any specific formula or procedure. A student who produces correct numeric answers without being able to name a single thinking move has NOT achieved mastery.\n\n**Observable mastery criterion:** Given a novel observation (e.g., \"all the examples I've tried satisfy this rule\"), the student can say: \"That's a conjecture. To check it, I'd try a counterexample.\" — unprompted.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 27,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "— \"Mathematics is memorising rules and formulas.",
+      "content": "### MC-1 — \"Mathematics is memorising rules and formulas.\"\n\n**Trigger signal:** MISCONCEPTION:MC-1  \n**Active in:** DQ-2 response = A (confident); any TA where student frames math as recall  \n**Priority:** Foundational for MC-4 — repair MC-1 first if both are active (MAMR rule)\n\n**Conflict evidence authored:**  \n\"A mathematician who forgot all their formulas solved the problem by noticing a pattern and forming a conjecture. A student who memorised all the formulas could not start because no formula matched the problem. The mathematician — not the student — was doing mathematics.\"\n\n**Bridge text:**  \n\"Formulas are the OUTPUT of mathematical thinking. Someone noticed a pattern, conjectured a rule, and proved it. The formula records that result. Memorising the formula is storing the conclusion. Mathematical thinking is the process that found it.\"\n\n**Replacement text:**  \n\"Mathematical thinking is: noticing a pattern, forming a conjecture, testing it, looking for a counterexample, and constructing an argument. Content (formulas, facts) is what this process produces. The process itself is the mathematics.\"\n\n**Discrimination pairs:**  \n- IS mathematical thinking: noticing that odd + odd = even for every pair you try, then asking whether this is ALWAYS true  \n- NOT mathematical thinking: recalling that odd + odd = even from a memorised rule list\n\n**S6 path:** Do not frame MC-1 as \"wrong.\" Use: \"This is how many students are introduced to mathematics. But professional mathematicians work very differently.\" P30 before P27 mandatory.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 3,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "— \"Speed equals mathematical ability.",
+      "content": "### MC-2 — \"Speed equals mathematical ability.\"\n\n**Trigger signal:** MISCONCEPTION:MC-2  \n**Active in:** Student says \"I'm too slow,\" \"real mathematicians do this instantly,\" or shows anxiety about response time  \n\n**Conflict evidence authored:**  \n\"Andrew Wiles spent seven years on one problem. Maryam Mirzakhani described mathematics as 'slow thinking.' Every professional mathematician has said that good mathematical thinking is characterised by patience, not speed.\"\n\n**Bridge text:**  \n\"Speed is a product of familiarity. When you have seen something many times, you process it faster. Familiarity is not the same as mathematical thinking. Mathematical thinking is slow by nature — it means stopping when something seems obvious and asking: 'But WHY is this true? Is it ALWAYS true?'\"\n\n**Replacement text:**  \n\"A mathematician who pauses is thinking more carefully, not less. The student who rushes through a problem set without asking why has not thought mathematically about any of it.\"\n\n**Discrimination pairs:**  \n- IS evidence of mathematical thinking: pausing mid-problem to ask \"will my conjecture hold for negative numbers too?\"  \n- NOT evidence of mathematical thinking: finishing a 20-problem set in 5 minutes without checking a single answer\n\n**S6 path:** MC-2 co-occurs with S6 almost universally. Do not treat as a misconception to repair aggressively — the S6 regulation scaffolding (P30, P52, P53) addresses the emotional substrate. Add one P30 before P27 and frame as \"even professional mathematicians feel this.\"\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 26,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "— \"Mathematical thinking requires special talent — you're born with it or you're not.",
+      "content": "### MC-3 — \"Mathematical thinking requires special talent — you're born with it or you're not.\"\n\n**Trigger signal:** MISCONCEPTION:MC-3  \n**Active in:** Student says \"I'm not a math person,\" \"some people just have it,\" or attributes mathematical success to innate ability\n\n**Conflict evidence authored:**  \n\"Every professional mathematician who has described their development says they LEARNED to think mathematically. Anders Ericsson's research on expertise shows mathematical thinking follows the same deliberate practice pattern as chess, music, or athletics. There is no identified innate-talent marker for mathematical reasoning separate from practice.\"\n\n**Bridge text:**  \n\"The 5 moves we are learning — noticing, conjecturing, testing, finding counterexamples, arguing — are habits. They can be practised. They can be improved. A student who practises noticing patterns for six months will notice more patterns than one who doesn't. That is skill development, not talent discovery.\"\n\n**Replacement text:**  \n\"Mathematical thinking is practised. You are learning it right now. The fact that you are doing these moves, in this session, means you ARE doing mathematical thinking. Not observing it — doing it.\"\n\n**S6 path:** MC-3 IS the core of the S6 state. Do not treat as a distinct repair — it is the emotional foundation of low confidence. Do not use P27 (misconception naming) for S6+MC-3 students — name it only when the student explicitly asserts it as a factual claim. Use Protocol D's regulation scaffolding as the primary treatment.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 48,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "— \"There is always one correct method; I need to find the formula.",
+      "content": "### MC-4 — \"There is always one correct method; I need to find the formula.\"\n\n**Trigger signal:** MISCONCEPTION:MC-4  \n**Active in:** Student asks \"which formula should I use?\" before attempting any observation; refuses to conjecture without a procedure to follow\n\n**Conflict evidence authored:**  \n\"Present two valid proofs of the same mathematical fact using entirely different methods. Both are correct. Both are mathematical thinking. No single method is 'the' method.\"\n\n**Bridge text:**  \n\"The 5 moves can be used in any order. A mathematician might start with a counterexample, or start with an argument. There is no prescribed sequence. The moves are tools, not a recipe.\"\n\n**Replacement text:**  \n\"When you encounter a new problem, begin with whatever move you can make. Notice something. Make any conjecture. The specific starting point does not matter — beginning is what matters.\"\n\n**S6 path:** MC-4 in S6 students is almost always anxiety-driven (seeking a procedure as a safety mechanism). Replace P28 with P54. Provide a worked example of a mathematician starting a new problem without knowing the method.\n\n**MAMR note:** If MC-1 and MC-4 are both active, repair MC-1 first — MC-4 (\"one right method\") is partially downstream of MC-1 (\"math = formulas\"). Resolving MC-1 weakens MC-4's hold.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 66,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Diagnostic Anchor",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Diagnostic Anchor\",\"primitives\":[\"P02\",\"P30\",\"P41\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 14,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Concrete Pattern Experience (C-stage)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Concrete Pattern Experience (C-stage)\",\"primitives\":[\"P01\",\"P06\",\"P15\",\"P30\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 37,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Conjecture Formation (C-stage)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Conjecture Formation (C-stage)\",\"primitives\":[\"P02\",\"P14\",\"P16\",\"P21\",\"P27\",\"P36\",\"P42\",\"P49\",\"P53\",\"P54\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 66,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Name the Move — Perceptual Bridge (P-stage)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Name the Move — Perceptual Bridge (P-stage)\",\"primitives\":[\"P01\",\"P07\",\"P13\",\"P37\",\"P49\",\"P52\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 94,
+        "endLine": 131
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Metacognitive Application (P→A transition)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Metacognitive Application (P→A transition)\",\"primitives\":[\"P02\",\"P07\",\"P13\",\"P25\",\"P29\",\"P48\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 131,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Abstract Formalisation (A-stage)",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Abstract Formalisation (A-stage)\",\"primitives\":[\"P01\",\"P08\",\"P26\",\"P35\",\"P36\",\"P49\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 153,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P49\",\"P53\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 187,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Surface the Belief",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Surface the Belief\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 213,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Misconception Naming + Conflict Evidence",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Misconception Naming + Conflict Evidence\",\"primitives\":[\"P02\",\"P13\",\"P14\",\"P27\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 234,
+        "endLine": 263
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Bridge Construction",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Bridge Construction\",\"primitives\":[\"P01\",\"P25\",\"P31\",\"P36\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 263,
+        "endLine": 291
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-B04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Replacement Embedding",
+      "content": "{\"id\":\"TA-B04\",\"title\":\"Replacement Embedding\",\"primitives\":[\"P02\",\"P13\",\"P32\",\"P36\",\"P40\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 291,
+        "endLine": 313
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-B05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Discrimination Training",
+      "content": "{\"id\":\"TA-B05\",\"title\":\"Discrimination Training\",\"primitives\":[\"P01\",\"P16\",\"P26\",\"P33\",\"P37\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 313,
+        "endLine": 341
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-B06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-B06\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P27\",\"P30\",\"P49\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-B06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 341,
+        "endLine": 364
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Surface Existing Knowledge",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Surface Existing Knowledge\",\"primitives\":[\"P04\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 364,
+        "endLine": 376
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Map Experience to Moves",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"Map Experience to Moves\",\"primitives\":[\"P01\",\"P07\",\"P13\",\"P38\",\"P49\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 376,
+        "endLine": 397
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Apply All 5 Moves to Novel Situation",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"Apply All 5 Moves to Novel Situation\",\"primitives\":[\"P02\",\"P06\",\"P29\",\"P45\",\"P48\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 397,
+        "endLine": 419
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Abstract + Assessment",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"Abstract + Assessment\",\"primitives\":[\"P08\",\"P28\",\"P30\",\"P49\",\"P52\",\"P54\",\"P55\",\"P62\",\"P78\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 419,
+        "endLine": 441
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Low-Stakes Anchor",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Low-Stakes Anchor\",\"primitives\":[\"P02\",\"P30\",\"P41\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 441,
+        "endLine": 454
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Concrete (Physical Objects)",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Concrete (Physical Objects)\",\"primitives\":[\"P01\",\"P06\",\"P15\",\"P30\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 454,
+        "endLine": 469
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Guided Conjecture (S6-paced)",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Guided Conjecture (S6-paced)\",\"primitives\":[\"P02\",\"P30\",\"P42\",\"P49\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 469,
+        "endLine": 483
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Name the Moves (S6 paced)",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Name the Moves (S6 paced)\",\"primitives\":[\"P07\",\"P13\",\"P30\",\"P37\",\"P49\",\"P52\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 483,
+        "endLine": 498
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-D05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Formative (S6 paced)",
+      "content": "{\"id\":\"TA-D05\",\"title\":\"Formative (S6 paced)\",\"primitives\":[\"P30\",\"P49\",\"P52\",\"P54\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 498,
+        "endLine": 522
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Surface Tacit Reasoning",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Surface Tacit Reasoning\",\"primitives\":[\"P02\",\"P48\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 522,
+        "endLine": 533
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Map to Formal 5-Move Framework",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Map to Formal 5-Move Framework\",\"primitives\":[\"P08\",\"P38\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 533,
+        "endLine": 544
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Argue for the Framework",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Argue for the Framework\",\"primitives\":[\"P01\",\"P25\",\"P44\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 544,
+        "endLine": 563
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P62\",\"P76\",\"P77\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 563,
+        "endLine": 579
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-F01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Vocabulary Anchor + Concrete",
+      "content": "{\"id\":\"TA-F01\",\"title\":\"Vocabulary Anchor + Concrete\",\"primitives\":[\"P02\",\"P06\",\"P15\",\"P26\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 579,
+        "endLine": 594
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-F02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Vocabulary Building",
+      "content": "{\"id\":\"TA-F02\",\"title\":\"Vocabulary Building\",\"primitives\":[\"P01\",\"P26\",\"P37\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 594,
+        "endLine": 612
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-F03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Production",
+      "content": "{\"id\":\"TA-F03\",\"title\":\"Production\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 612,
+        "endLine": 627
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_action_meta/TA-F04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Mastery Gate (visual-first)",
+      "content": "{\"id\":\"TA-F04\",\"title\":\"Mastery Gate (visual-first)\",\"primitives\":[\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-F04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 627,
+        "endLine": 637
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Assessment Battery",
+      "content": "**Formative items F-1 and F-2 (used in P90 within Protocols):**\n\nF-1 (P74 — Classification):  \n\"Which of these is an example of mathematical thinking? (A) Recalling that 7×8=56. (B) Noticing that multiplying any number by 9 gives a result whose digits sum to 9, and asking whether this is always true.\"  \nExpected signal: CORRECT = B. INCORRECT = A → likely MC-1 still active.\n\nF-2 (P78 — Explanation):  \n\"In one sentence: what is the difference between memorising a mathematical fact and thinking mathematically?\"  \nExpected signal: CORRECT = student contrasts content (fact) with process (noticing, conjecturing, proving). PARTIAL = identifies one side but not both. INCORRECT = conflates them.\n\n---\n\n**Full battery (5 probe types):**\n\n| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (Classification) | \"Label each as 'mathematical thinking' or 'not mathematical thinking': (A) Memorising the formula for compound interest. (B) Asking whether the sum of any two odd numbers is always even. (C) Completing 50 long division problems correctly. (D) Noticing that Pascal's triangle contains Fibonacci numbers and wondering why.\" | CORRECT: B and D = yes; A and C = no (by themselves) |\n| P75 (Boundary) | \"A student applies the quadratic formula correctly to 20 different equations without errors. Has she done mathematical thinking?\" | CORRECT: Not by itself — applying a procedure is using the result of mathematical thinking, not performing it. Boundary: if she notices a pattern in the solutions and conjectures about it, THEN she is doing mathematical thinking. |\n| P76 (Transfer) | \"A biologist notices that every mammal she has observed is warm-blooded. She forms the hypothesis: all mammals are warm-blooded. Which mathematical thinking move is she performing?\" | CORRECT: Pattern noticing → Conjecturing (Move 1 → Move 2). She has not yet tested it or argued for it. |\n| P77 (Generation) | \"Generate your own conjecture. Choose any domain — numbers, shapes, everyday life. State what you noticed and what you conjecture.\" | CORRECT: Student produces a general statement ('I believe that for all...') preceded by a specific observation. Quality criterion: the conjecture must be testable. |\n| P78 (Explanation) | \"A student says: 'I can't be doing mathematical thinking because I haven't proved anything yet.' Is the student right? Explain.\" | CORRECT: No — noticing and conjecturing ARE mathematical thinking. Proof (Move 5) is the culmination, not the entry point. The student confuses one move for the whole process. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 856,
+        "endLine": 882
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Student State Matrix",
+      "content": "| State | Label | Entry Behaviour | Protocol |\n|---|---|---|---|\n| S0 | Complete Novice | No exposure to meta-cognitive framing; believes math = calculation or formula recall; can follow instructions but has no self-model of reasoning | Protocol A |\n| S2 | Misconception Carrier | Holds MC-1 (math = memorising) or MC-2 (speed = ability) actively; resists reframing; may argue against the 5-move model | Protocol B |\n| S3 | Conceptual Carrier | Has mathematical experience; reasons informally; missing the explicit vocabulary and frame for what they already do intuitively | Protocol C |\n| S6 | Low Confidence | Mathematically anxious (\"I'm not a math person\"); shuts down under any open question; needs high regulation scaffolding before any cognitive demand | Protocol D |\n| S8 | Accelerated | Already reasons mathematically by instinct; cannot articulate moves; needs formalisation, not introduction | Protocol E |\n| S9 | Second-Language Learner | Language is the primary barrier; conceptual access is available once vocabulary is stabilised | Protocol F |\n\nCombination states: S2+S6 (anxious and holds MC-3) → Protocol D with MC-3 repair embedded in TA-D01. S3+S9 → Protocol F with C-phase abbreviated.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 37,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Diagnostic Battery",
+      "content": "**Administration note:** Run DQ-1, DQ-2, DQ-3 in order before any teaching. Do not reveal the 5-move model before the diagnostic.\n\n---\n\n### DQ-1 — Open Observation (P41)\n**Stimulus:** \"When you picture a mathematician working — not a student doing homework, but a real mathematician — what are they doing?\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"solving equations / doing calculations / working with numbers\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n{ stimulus: \"memorising formulas / looking up theorems\", signal: \"MISCONCEPTION:MC-1\", mc_id: \"MC-1\" }\n{ stimulus: \"thinking carefully / proving things / finding patterns\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"blank / 'I don't know' / 'I can't picture it'\", signal: \"SIGNAL:NO_RESPONSE\", mc_id: null }\n{ stimulus: \"teaching / explaining to others\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → likely S3 or S8 → proceed to DQ-2\n- SIGNAL:INCORRECT → likely S0 → proceed to DQ-2\n- MISCONCEPTION:MC-1 → flag MC-1 active → route to Protocol B after DQ-3\n- SIGNAL:NO_RESPONSE → likely S0 or S6 → note; proceed to DQ-2 with extra regulation\n\n---\n\n### DQ-2 — Classify (P37)\n**Stimulus:** \"Which of these describes what mathematicians do most: (A) memorise facts, or (B) ask 'why does this work?' and try to prove it?\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"A with confidence\", signal: \"MISCONCEPTION:MC-1\", mc_id: \"MC-1\" }\n{ stimulus: \"A with hesitation / 'I think A?'\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n{ stimulus: \"B with explanation\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"B without explanation / guess\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"Both equally\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n```\n\n**Routing:**\n- MISCONCEPTION:MC-1 (from DQ-1 or DQ-2) → route to Protocol B\n- SIGNAL:CORRECT → DQ-3\n- SIGNAL:INCORRECT or PARTIAL → note; proceed to DQ-3\n\n---\n\n### DQ-3 — Generate (P40)\n**Stimulus:** \"Give me one example of mathematical thinking that has nothing to do with numbers.\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"Generates valid example (e.g. sorting shapes by attribute, asking 'is every square a rectangle?', noticing pattern in symmetry)\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"Attempts but grounds it in numbers ('like algebra?')\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"Cannot respond / blank / 'math is always numbers'\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n{ stimulus: \"Gives a non-mathematical example but with pattern-noticing reasoning\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n```\n\n**Routing:**\n- DQ-1=CORRECT + DQ-3=CORRECT → S3 or S8 → Protocol C or E (use confidence level to distinguish)\n- DQ-1=CORRECT + DQ-3=PARTIAL → S3 → Protocol C\n- DQ-1=INCORRECT + DQ-3=INCORRECT → S0 → Protocol A\n- Any DQ flagging low confidence (hesitation, \"I can't\", \"I don't know\") → S6 → Protocol D\n- MC-1 active at any point → Protocol B\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 52,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-thinking/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "math.found.mathematical-thinking",
+      "title": "Prerequisite Check",
+      "content": "`requires: []` — no KG prerequisites. However, the following entry-level cognitive behaviours are assumed. If absent, note for Protocol and add scaffolding in TA-01.\n\n**Entry check (P41):** \"What comes next in this sequence: 2, 4, 6, 8, ___? Tell me how you know.\"\n\n```\n{ stimulus: \"Gives 10 AND explains 'going up by 2'\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"Gives 10 but cannot explain\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"Gives wrong answer\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n```\n\n- SIGNAL:CORRECT → prerequisites met; begin Protocol.\n- SIGNAL:PARTIAL → prerequisites functionally met; add P15 (structured observation) before pattern tasks.\n- SIGNAL:INCORRECT → flag; begin Protocol A with extra concrete anchoring in TA-A02; do not move to perceptual until three CORRECT responses in C-stage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-thinking.md",
+        "startLine": 117,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

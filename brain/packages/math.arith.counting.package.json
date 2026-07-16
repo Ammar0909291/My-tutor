@@ -1,0 +1,342 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.counting-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.counting",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:65b9a1545c93f5e2a98a5d0c506366810a65766d7661ac11bf7bc2afde73763e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.counting.md": "sha256:e0536a6a1c35beef09980f70e065f172db55ab4e675f2fabfd68649b250a1be8"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.arith.counting",
+    "name": "Counting",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.found.natural-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.counting-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.counting (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.counting.md": "sha256:e0536a6a1c35beef09980f70e065f172db55ab4e675f2fabfd68649b250a1be8"
+      },
+      "contentHash": "sha256:58fbd435ced96955a0ac818b53c2cb3462634f42f7c69b29dcf33ac3eee3820a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.counting.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.counting.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.counting.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.counting.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.counting.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.counting"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.counting\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.counting/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.counting",
+      "title": "Counting — cognitive map",
+      "content": "### Core Insight\nCounting a set S means establishing a one-to-one correspondence (bijection) between the elements of S and an initial segment {1, 2, …, n} of the natural numbers. The number n reached at the end is the cardinality |S|. This makes counting independent of the order in which elements are tagged.\n\n### Conceptual Hierarchy\n```\nLevel 0 (Concrete): Count five specific objects by pointing and tagging 1, 2, 3, 4, 5.\nLevel 1 (Pictorial): Draw arrows from {1,2,3,4,5} to the objects; verify bijection.\nLevel 2 (Abstract): Define counting as a bijection f: {1,...,n} → S; |S| = n.\nLevel 3 (Transfer): Show two different bijections to S both yield the same cardinality.\n```\n\n### Formal Definition\n```\nLet S be a finite set. Counting S means constructing a bijection\n  f : {1, 2, …, n} → S  for some n ∈ ℕ₀.\nThe cardinality of S is |S| = n.\n  (If S = ∅, the unique function f: {} → ∅ is a bijection, so |∅| = 0.)\n\nBijection requirements:\n  Injective (one-to-one): f(i) ≠ f(j) for i ≠ j — each element gets at most one tag.\n  Surjective (onto): every element of S is tagged — no element is skipped.\n```\n\n### Five Counting Principles (Skill Execution Steps)\n```\nStep 1 (One-to-one correspondence): Tag each object exactly once with successive naturals.\nStep 2 (Stable order): Use tags 1, 2, 3, … in fixed sequence.\nStep 3 (Cardinality): The last tag used = |S|.\nStep 4 (Abstraction): The nature of the objects doesn't affect the count.\nStep 5 (Order irrelevance): Any tagging order gives the same cardinality.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 33,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.arith.counting/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.counting",
+      "title": "[FOUNDATIONAL]: COUNTING-WITHOUT-BIJECTION",
+      "content": "### MC-1 [FOUNDATIONAL]: COUNTING-WITHOUT-BIJECTION\n**Belief:** Counting means reciting number words in sequence while pointing; some objects may be tagged twice or skipped, and the count is still valid.\n**Origin:** Procedural counting habit from early learning that ignores the bijection constraint. Students say \"1, 2, 3\" rhythmically but don't track which objects have been tagged.\n**Trigger:** Asked to count S = {□, △, ○, ★, ♦} by pointing; student tags one object twice and skips another, arrives at 5 but the bijection is invalid.\n**Repair:** Emphasise the one-to-one rule: each object receives exactly one tag. Model explicit tracking (cross out or mark each object after tagging).\n**Priority:** FOUNDATIONAL — bijection validity underlies every other counting property.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.arith.counting/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.counting",
+      "title": "ORDER-DEPENDENT-CARDINALITY",
+      "content": "### MC-2: ORDER-DEPENDENT-CARDINALITY\n**Belief:** Counting the same set in a different order gives a different total, so cardinality is not well-defined.\n**Origin:** Conflating the sequence of tags assigned with the resulting cardinality. Students see f₁(3)=△ and f₂(3)=○ and conclude the count is \"different.\"\n**Trigger:** Asked to count S twice (different order); student says \"I got 5 then 5, but different bijections — which is right?\"\n**Repair:** Distinguish bijection (the assignment) from cardinality (the final n). Both bijections are valid; both end at n=5. Cardinality = the size of the domain of the bijection.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.arith.counting/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.counting",
+      "title": "PROCEDURE-REPLACES-STRUCTURE",
+      "content": "### MC-3: PROCEDURE-REPLACES-STRUCTURE\n**Belief:** Counting is just a memorised procedure (saying 1, 2, 3, …) with no mathematical structure; bijection language is unnecessary jargon.\n**Origin:** Students who can count fluently procedurally resist the formal bijection framing.\n**Trigger:** Asked \"why does order not matter?\"; student says \"it just doesn't\" without invoking bijection.\n**Repair:** Show explicitly that the bijection framing gives a proof: ANY bijection f: {1,...,n}→S has domain {1,...,n}, so the cardinality is always n regardless of which bijection is used.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 16,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "math.arith.counting/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting",
+      "title": "Concrete Foundation — Counting as Matching",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Foundation — Counting as Matching\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 120,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.arith.counting/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting",
+      "title": "Skill Execution — Bijection in Practice",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Skill Execution — Bijection in Practice\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 187,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "math.arith.counting/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting",
+      "title": "Abstract Layer — Cardinality and the Bijection Proof",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Abstract Layer — Cardinality and the Bijection Proof\",\"primitives\":[\"P04\",\"P11\",\"P27\",\"P49\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 269,
+        "endLine": 354
+      }
+    },
+    {
+      "assetId": "math.arith.counting/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.counting",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 354,
+        "endLine": 652
+      }
+    },
+    {
+      "assetId": "math.arith.counting/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.counting",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "### TA-A04: Mastery Gate (P91 Terminal)\n\n```\nP77 — MULTI-PROBLEM SET (4 problems)\n\nProblem 1:\n\"Count V = {vowels in 'equation'} by constructing an explicit bijection.\n(a) List V. (b) List all pairs (tag, element) of your bijection. (c) State |V|.\"\n['equation' has vowels: e, q, u, a, t, i, o, n → vowels: e, u, a, i, o → |V|=5]\n\nProblem 2:\n\"Let W = {x ∈ ℕ : 1 ≤ x ≤ 7 and x is odd}.\n(a) List W. (b) Count W using two different bijections (different tagging orders).\n(c) Confirm |W| is the same for both.\"\n[W = {1,3,5,7}, |W|=4]\n\nProblem 3:\n\"Is f: {1,2,3,4} → {■,▲,●,◆,★} defined by f(1)=■, f(2)=▲, f(3)=●, f(4)=◆\na valid counting bijection for S={■,▲,●,◆,★}? Explain what goes wrong.\"\n[Not surjective: ★ is untagged. f does not count S; it counts a 4-element subset.]\n\nProblem 4:\n\"Why is |∅| = 0? Use the bijection definition.\"\n[The function f: {} → ∅ is vacuously a bijection (no elements to violate\ninjectivity/surjectivity). Its domain has 0 elements, so |∅|=0.]\n```\n\n```\nP55 — SCORE (after P77)\nAward 1 point per problem.\nRunning total before P76: __/4.\n```\n\n```\nP76 — TRANSFER PROBE (P76 independence: math.disc.combinatorics NOT Tier 1)\n\"Let C = {red, blue, green, yellow, purple}.\n(a) Construct two bijections f and g from {1,...,5} to C that differ in at\n    least three assignments.\n(b) Verify both are valid (injective and surjective).\n(c) Confirm |C| = 5 for both bijections.\n(d) In one sentence, explain why any bijection from {1,...,n} to a finite set S\n    must have n = |S| regardless of which bijection is used.\"\n\n[Expected:\n(a) e.g. f: 1→red,2→blue,3→green,4→yellow,5→purple;\n         g: 1→purple,2→green,3→red,4→blue,5→yellow.\n(b) Each element appears exactly once in both. ✓\n(c) Both domains are {1,...,5}, so n=5, |C|=5. ✓\n(d) The cardinality |S| equals the size of the domain of any bijection to S;\n    since any bijection to S has the same domain size, |S| is well-defined.]\n```\n\n```\nP55 — SCORE (after P76)\nAward 1 point for P76.\nRunning total: __/5.\n```\n\n```\nP75 — MASTERY ASSESSMENT\nPass criterion: 5 out of 5 (⌈0.95 × 5⌉ = 5)\n```\n\n```\nP55 — SCORE (final)\nRecord pass/fail status.\n```\n\n```\nP74 — ROUTING DECISION\nScore = 5/5 → MASTERY ACHIEVED → P78 COMPLETION\nScore < 5/5 → NEEDS REVIEW → identify lowest-scoring item; activate Protocol B for its misconception\n```\n\n```\nP55 — SCORE (routing recorded)\n```\n\n```\nP78 — COMPLETION\n\"Counting checkpoint complete. You have established:\n  • Counting S = constructing a bijection f: {1,...,n} → S.\n  • |S| = n = the last tag number used in any valid bijection.\n  • Bijection requires both injectivity (no element tagged twice)\n    and surjectivity (no element skipped).\n  • Cardinality is well-defined: any valid bijection gives the same n.\n  • |∅| = 0 (empty bijection); |{x}| = 1.\nNext concepts: math.arith.addition (operating on counted quantities),\nmath.arith.place-value (representing cardinalities in positional notation).\"\n```\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair Chains)\n\n### Repair Chain B-1: COUNTING-WITHOUT-BIJECTION (MC-1 FOUNDATIONAL)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: Counting means reciting number words while pointing at objects —\n  some may be pointed at twice or missed.\n AFTER: Counting means constructing a bijection — each object gets\n  exactly one number tag, no skipping.\n\nThe bijection requirement has two parts:\n  (1) Injective: no object gets two tags.    (Each arrow goes to a DIFFERENT target.)\n  (2) Surjective: every object gets a tag.   (Every target receives EXACTLY ONE arrow.)\n\nProcedure fix: as you tag each object, mark it (cross it out, circle it).\nNever tag a marked object. Stop when all objects are marked.\"\n\nRepair exercise:\nCount Q = {α, β, γ} while physically marking each as tagged.\n  Tag 1: α → mark α.\n  Tag 2: β → mark β.\n  Tag 3: γ → mark γ.\n  All marked. |Q| = 3.\nStudent re-attempts with marking strategy; verify pairs.\n\nExit gate: \"What are the two rules a counting assignment must follow?\"\nExpected: (1) each element tagged exactly once; (2) no element skipped.\n→ Correct: return to TA-A01 P49 re-attempt.\n→ Incorrect: repeat P64 with two-tag/skip demonstration.\n```\n\n### Repair Chain B-2: ORDER-DEPENDENT-CARDINALITY (MC-2)\n\n```\nP41 — MISCONCEPTION DETECTOR\nDiagnostic: \"Count S={a,b,c} starting from b. What is |S|?\"\nIf student says \"3, but different from counting a-first (which gives 3 too) — which is correct?\": MC-2 confirmed.\n\nP27 — MISCONCEPTION NAMING\n\"ORDER-DEPENDENT-CARDINALITY: believing different bijections could give different cardinalities.\nThe cardinality is the size of the DOMAIN {1,...,n} of the bijection.\nBoth bijections to S have domain {1,...,n} for the SAME n.\nIt is impossible for one to end at 3 and another at 4 for the same finite S.\"\n\nP03 — ANALOGY BRIDGE\n\"Same guest list, two check-in staff at two doors — each assigns wristbands\nin a different order. At the end: both used exactly the same number of wristbands\nbecause there are exactly that many guests. Order of assignment ≠ number of guests.\"\n\nRepair exercise: count T={x,y,z,w} in order x,y,z,w and in order w,z,y,x.\nBoth yield n=4.\n\nExit gate: \"If f:{1,...,5}→S and g:{1,...,m}→S are both bijections, what is m?\"\nExpected: m=5.\n→ Correct: return to TA-A02.\n```\n\n### Repair Chain B-3: PROCEDURE-REPLACES-STRUCTURE (MC-3)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: Counting is just a procedure; bijection language adds nothing.\n AFTER: The bijection formalisation explains WHY the count is independent of order.\n\nWithout bijection: 'order doesn't matter because it just doesn't.'\nWith bijection: 'any bijection f:{1,...,n}→S has domain {1,...,n}.\n  The cardinality n is a property of S, not of f. Two bijections\n  to S cannot have different domain sizes (would imply a bijection\n  between {1,...,n} and {1,...,m} for n≠m, impossible for finite sets).'\n\nThis is a PROOF, not a procedure. The bijection language makes the proof possible.\"\n\nExit gate: \"In one sentence, explain using 'bijection' why |S| doesn't depend on counting order.\"\nExpected: any statement invoking 'domain of the bijection' or 'both bijections have {1,...,n} as domain.'\n→ Correct: return to TA-A03.\n```\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n```\nP89 — SPACED REPETITION\nReview schedule for math.arith.counting:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State the bijection definition of counting. What is |∅|?\"\n  Target: counting = bijection f:{1,...,n}→S; |∅|=0.\n\nInterval 2 (3 days):\n  Application: \"Count B = {letters in 'math'} using an explicit bijection.\n  Then count it again in a different order. State |B| both times.\"\n  Target: B={m,a,t,h}, |B|=4 both times.\n\nInterval 3 (7 days):\n  Transfer: \"f:{1,2,3}→{red,green,blue} and g:{1,2,3,4}→{red,green,blue,∅}.\n  What are |{red,green,blue}| and |{red,green,blue,∅}|?\"\n  Target: 3 and 4 respectively (∅ as element is distinct from the empty set).\n\nInterval 4 (21 days):\n  Integration: \"A student studying math.disc.combinatorics says: 'the number\n  of bijections from {1,...,n} to an n-element set S is n! (n-factorial).\n  Explain why this is consistent with counting: although n! bijections exist,\n  they all confirm the same cardinality |S|=n.\"\n  Target: all n! bijections have domain {1,...,n}; domain size = cardinality.\n```\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### GR-8: Cross-link documentation\n```\nIncoming prerequisite:\n  math.found.natural-numbers → Provides the natural number sequence {1,2,3,...}\n  used as the tag set in the bijection. Counting without natural numbers is\n  impossible (no tag domain).\n\nOutgoing unlocks:\n  math.arith.addition → Requires knowing |S| + |T| for disjoint S, T.\n  math.arith.place-value → Requires understanding that |S| is a single number n.\n\nCross-linked (non-prerequisite):\n  math.disc.combinatorics (NOT Tier 1) → Counting's bijection framework\n  underlies combinatorics: counting arrangements = counting bijections,\n  counting subsets = counting injections, etc.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.disc.combinatorics]\nmath.disc.combinatorics is NOT in Tier 1 set → P76 INDEPENDENCE\nP76 probe: two explicit bijections to same 5-element set; confirm same cardinality;\n  explain well-definedness. Self-contained, no cross-concept dependency.\n```\n\n---\n\n\n## Component 8 — Teaching Notes\n\n### Pedagogical Rationale\nCounting (bloom=apply) requires students to execute the bijection-construction procedure and also understand why it is well-defined. The P07 worked example pair in TA-A02 models both the construction (listing pairs) and the demonstration that two different bijections give the same cardinality — the second example is critical because it preempts MC-2 before students encounter it.\n\n### Common Session Failure Modes\n1. **Informal counting is automatic:** Students who have counted fluently since childhood resist writing out explicit pairs. The marking strategy (B-1) is essential — it converts procedural habit into verifiable bijection.\n2. **MC-2 often triggered by the worked example:** When students see f and g both map {1,...,5} to the same set in different orders, some momentarily believe the results could differ. The analogy (wristband check-in) resolves this without formal proof.\n3. **MC-3 is a meta-level resistance:** This repair chain is less about mathematics and more about convincing the student that formalism adds explanatory power. The proof sketch (\"any bijection between {1,...,n} and {1,...,m} forces n=m for finite sets\") is the key sentence.\n\n### Connections to Broader Curriculum\n- **Downstream — math.arith.addition:** Addition of cardinalities |S| + |T| for disjoint sets formalises as the cardinality of the disjoint union S⊔T.\n- **Downstream — math.arith.place-value:** Place value represents a natural number n (the cardinality) in base-10 using digit positions.\n- **Cross-domain — math.disc.combinatorics:** Combinatorics counts bijections (permutations), injections (arrangements), and arbitrary functions (sequences). The bijection framework here is the direct foundation.\n\n### Language Precision\n- Use \"construct a bijection\" not just \"count.\"\n- Distinguish \"the bijection f\" (the assignment) from \"the cardinality |S|\" (the result).\n- Never say \"counting gives a different answer if you start from a different element\" — cardinality is invariant.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n### Structural Validators\n- [x] V-1: Blueprint has all 10 components (0–8, 10).\n- [x] V-2: Metadata YAML complete with all required fields.\n- [x] V-3: concept_id matches filename `math.arith.counting`.\n- [x] V-4: difficulty=foundational, bloom_level=apply, mastery_threshold=0.95.\n- [x] V-5: estimated_hours=8, session_ta_cap=7.\n\n### Grammar Rule Validators\n- [x] V-6 (GR-1): Every non-repair TA opens with B-category primitive (TA-A01: P03+P06; TA-A02: P07; TA-A03: P04; TA-A04 is mastery gate).\n- [x] V-7 (GR-2): Every non-gate TA contains P49 with all 4 branches. TA-A01, TA-A02, TA-A03 each have P49.\n- [x] V-8 (GR-3): Mastery gate TA-A04 is terminal (ends with P78).\n- [x] V-9 (GR-4): P41 entry diagnostic gates P64 → Protocol B when MC-1 active.\n- [x] V-10 (GR-6): P91 compound (P77→P55→P76→P55→P75→P55→P74→P55→P78) complete in TA-A04.\n- [x] V-11 (GR-7): P76 present in mastery gate TA-A04.\n- [x] V-12 (GR-8): Cross-links documented in Component 7. math.disc.combinatorics named.\n- [x] V-13 (GR-9): P76 mode is INDEPENDENCE (math.disc.combinatorics NOT Tier 1). P76 probe is self-contained (two bijections to same set).\n- [x] V-14 (GR-10): MAMR stated in Component 0 and enforced in Component 3.\n\n### Content Validators\n- [x] V-15: Pass criterion = ⌈0.95 × 5⌉ = 5/5. P77 has 4 problems; P76 contributes 1; total n=5. ✓\n- [x] V-16: CPA_ENTRY_STAGE = C. foundational/apply always starts Concrete. ✓\n- [x] V-17: MC-1 is FOUNDATIONAL and cleared first per MAMR. ✓\n- [x] V-18: P49 INCORRECT branch activates P27 or P64 with repair pathway in all three non-gate TAs. ✓\n- [x] V-19: P76 probe independent of P77 problems (P77: specific counting tasks; P76: open-ended two-bijection construction + well-definedness argument). ✓\n- [x] V-20: Spaced repetition intervals are 1, 3, 7, 21 days with distinct prompts. ✓\n\n### bloom=apply Validator\n- [x] V-APPLY: P07 (WORKED EXAMPLE PAIR) present in TA-A02, modelling bijection construction and order-independence in paired examples. ✓\n\n### Automated Invariant Check (AIR)\n- [x] AIR-1: No implementation code present.\n- [x] AIR-2: No references to internal system variables.\n- [x] AIR-3: All cross-linked concept IDs use canonical prefix format.\n- [x] AIR-4: P91 sequence order is P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n- [x] AIR-5: Protocol B repair chains each have explicit exit gate with return instruction. ✓\n\n**VALIDATION RESULT: PASS — PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 354,
+        "endLine": 652
+      }
+    },
+    {
+      "assetId": "math.arith.counting/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.counting",
+      "title": "Scaffolding Protocol",
+      "content": "### Entry Diagnostic (P41 gate)\n```\nP41 — MISCONCEPTION DETECTOR\nPrompt: \"Count the elements of S = {☆, ♣, ♥, ◆, ♠} by assigning each a number\ntag. Show your assignment as a list of pairs (tag, element). Then state |S|.\"\n\nCORRECT (5 distinct pairs, each element appears once, |S|=5):\n→ No MC-1 detected → proceed to TA-A01 standard opening.\n\nINCORRECT (a pair appears twice, or an element is skipped; student says |S|=5):\n→ MC-1 FOUNDATIONAL active → P64 CONCEPTUAL SHIFT on bijection requirement\n→ Activate Protocol B (MC-1 Repair Chain)\n```\n\n### Prerequisite Bridge\nStudent completed math.found.natural-numbers. Counting extends natural numbers from abstract sequence (ℕ = {1, 2, 3, …}) to a concrete tool for measuring set size. The natural numbers provide the tag sequence; the bijection formalises the matching.\n\n### MAMR Enforcement\nMC-1 is FOUNDATIONAL. If active, the entire session prioritises bijection validity before order-irrelevance or structural arguments. MC-2 and MC-3 addressed FIFO once MC-1 cleared.\n\n### CPA Progression: C → P → A\n- **Concrete (C):** Physical or listed objects tagged with written numbers; pairs listed explicitly.\n- **Pictorial (P):** Arrow diagrams from {1,...,n} to the set S; verify injective + surjective visually.\n- **Abstract (A):** Formal bijection definition; proof that any two bijections to S give the same n.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 92,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "math.arith.counting/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.counting",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89 — SPACED REPETITION\nReview schedule for math.arith.counting:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State the bijection definition of counting. What is |∅|?\"\n  Target: counting = bijection f:{1,...,n}→S; |∅|=0.\n\nInterval 2 (3 days):\n  Application: \"Count B = {letters in 'math'} using an explicit bijection.\n  Then count it again in a different order. State |B| both times.\"\n  Target: B={m,a,t,h}, |B|=4 both times.\n\nInterval 3 (7 days):\n  Transfer: \"f:{1,2,3}→{red,green,blue} and g:{1,2,3,4}→{red,green,blue,∅}.\n  What are |{red,green,blue}| and |{red,green,blue,∅}|?\"\n  Target: 3 and 4 respectively (∅ as element is distinct from the empty set).\n\nInterval 4 (21 days):\n  Integration: \"A student studying math.disc.combinatorics says: 'the number\n  of bijections from {1,...,n} to an n-element set S is n! (n-factorial).\n  Explain why this is consistent with counting: although n! bijections exist,\n  they all confirm the same cardinality |S|=n.\"\n  Target: all n! bijections have domain {1,...,n}; domain size = cardinality.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 530,
+        "endLine": 560
+      }
+    },
+    {
+      "assetId": "math.arith.counting/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.counting",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### GR-8: Cross-link documentation\n```\nIncoming prerequisite:\n  math.found.natural-numbers → Provides the natural number sequence {1,2,3,...}\n  used as the tag set in the bijection. Counting without natural numbers is\n  impossible (no tag domain).\n\nOutgoing unlocks:\n  math.arith.addition → Requires knowing |S| + |T| for disjoint S, T.\n  math.arith.place-value → Requires understanding that |S| is a single number n.\n\nCross-linked (non-prerequisite):\n  math.disc.combinatorics (NOT Tier 1) → Counting's bijection framework\n  underlies combinatorics: counting arrangements = counting bijections,\n  counting subsets = counting injections, etc.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.disc.combinatorics]\nmath.disc.combinatorics is NOT in Tier 1 set → P76 INDEPENDENCE\nP76 probe: two explicit bijections to same 5-element set; confirm same cardinality;\n  explain well-definedness. Self-contained, no cross-concept dependency.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.counting.md",
+        "startLine": 560,
+        "endLine": 589
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

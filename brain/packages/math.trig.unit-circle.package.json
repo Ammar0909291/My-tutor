@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.unit-circle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.unit-circle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:335c25b426d8aae1259c4c841152ff62a6e5cd186d2b7161cf53a99dfdb65560",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.unit-circle.md": "sha256:46a7fd8f6f70d13339d309145268c4324bd75eb0a8ef18f5891559b4646334bc"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.trig.unit-circle",
+    "name": "Unit Circle",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.trig.right-triangle-trig",
+      "math.geom.circle"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.unit-circle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.unit-circle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.unit-circle.md": "sha256:46a7fd8f6f70d13339d309145268c4324bd75eb0a8ef18f5891559b4646334bc"
+      },
+      "contentHash": "sha256:82731e9bbd85d08e8575be1279654df3e4bfcf5d52d959df8275e154c93b4eef",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.unit-circle.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.unit-circle.md#TA-B01 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.unit-circle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.unit-circle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.unit-circle.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.unit-circle.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.unit-circle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.unit-circle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.unit-circle.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.unit-circle.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.unit-circle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.unit-circle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.unit-circle/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.unit-circle",
+      "title": "Unit Circle — cognitive map",
+      "content": "**Core concept:** The unit circle (radius 1, centred at the origin) extends the right-triangle definitions of sine and cosine to any angle. For a point (x, y) on the unit circle corresponding to angle θ (measured counter-clockwise from the positive x-axis), x = cos θ and y = sin θ. Because the hypotenuse is 1, the ratio definitions collapse to coordinate values. The identity sin²θ + cos²θ = 1 follows directly from the Pythagorean theorem (x²+y²=1). This framework defines trigonometric values for angles beyond 0°–90°.\n\n**Conceptual progression:**\n1. Unit circle definition: place a right triangle inside the circle, hypotenuse = 1. Then cos θ = adj/hyp = adj/1 = x; sin θ = opp/hyp = opp/1 = y.\n2. Coordinate pairs: every angle θ maps to a unique point (cos θ, sin θ) on the unit circle.\n3. Quadrant sign analysis: the signs of x (= cos θ) and y (= sin θ) in each quadrant.\n4. Key angle values: 0°, 30°, 45°, 60°, 90°, 180°, 270°, 360° — corresponding coordinates derived from special-triangle ratios.\n5. Reference angle: the acute angle between the terminal side and the x-axis; determines the magnitude; quadrant determines the sign.\n\n**CPA arc (entry: P):**\n- Pictorial: right-triangle diagram embedded in unit circle; coordinate grid showing labelled key-angle points; quadrant sign diagram.\n- Abstract: sin θ = y, cos θ = x; sin²θ + cos²θ = 1; reference angle rule.\n\n**Prior knowledge activated:** right-triangle trigonometry (math.trig.right-triangle-trig) — ratios sin/cos/tan; special angles 30-60-90 and 45-45-90; circle geometry (math.geom.circle) — radius, unit concept, equation x²+y²=r².\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.unit-circle",
+      "title": "UNIT-CIRCLE-CONTRADICTS-RIGHT-TRIANGLE [FOUNDATIONAL]",
+      "content": "### MC-1: UNIT-CIRCLE-CONTRADICTS-RIGHT-TRIANGLE [FOUNDATIONAL]\n**Description:** Learner believes the unit circle introduces entirely new, separate definitions of sin and cos that conflict with right-triangle definitions — thinks they are two different things that happen to share notation.\n**Surface form:** \"But in the right triangle sin θ = opposite/hypotenuse. On the unit circle sin θ = y. These are different formulas — which one is right?\"\n**Root cause:** The connection that the unit circle embeds the right triangle (with hypotenuse = 1) is never made explicit. The learner sees two formulas in different contexts and treats them as parallel competing systems.\n**Trigger condition:** Any problem that asks the learner to move between right-triangle and unit-circle representations.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.unit-circle",
+      "title": "X-IS-SIN-Y-IS-COS",
+      "content": "### MC-2: X-IS-SIN-Y-IS-COS\n**Description:** Learner swaps the coordinate assignment: believes x = sin θ and y = cos θ (or uses them interchangeably without a fixed rule).\n**Surface form:** \"cos 90° = 1 because at 90° the x-value is 0 and y-value is 1, and cos is the y-coordinate.\"\n**Root cause:** No memory anchor distinguishing x from cos or y from sin. The notation (x, y) on the grid does not visually cue which trig function is which.\n**Trigger condition:** Any coordinate read-off from the unit circle or application of a special angle.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.unit-circle",
+      "title": "ANGLE-INCREASES-CLOCKWISE",
+      "content": "### MC-3: ANGLE-INCREASES-CLOCKWISE\n**Description:** Learner measures angles clockwise from the positive x-axis, placing 90° in Q4 and 270° in Q2 — the opposite of the standard counter-clockwise convention.\n**Surface form:** \"At 90° we go right and down, so the point is (something positive, something negative).\"\n**Root cause:** Clockwise rotation is more common in everyday contexts (clocks, compass bearings). The mathematical convention of counter-clockwise positive angle is not reinforced during right-triangle work and feels arbitrary.\n**Trigger condition:** Any problem that requires placing an angle on the unit circle or reading coordinates from a specified angle.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.unit-circle",
+      "title": "Repair for MC-1 (UNIT-CIRCLE-CONTRADICTS-RIGHT-TRIANGLE)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (UNIT-CIRCLE-CONTRADICTS-RIGHT-TRIANGLE)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 111,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.unit-circle",
+      "title": "Repair for MC-2 (X-IS-SIN-Y-IS-COS)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (X-IS-SIN-Y-IS-COS)\",\"primitives\":[\"P04\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 166,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.unit-circle",
+      "title": "Repair for MC-3 (ANGLE-INCREASES-CLOCKWISE)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (ANGLE-INCREASES-CLOCKWISE)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 231,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.unit-circle",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"What are the coordinates of the unit-circle point at θ = 90°?\"\n[Expected: (cos 90°, sin 90°) = (0, 1). At 90° the terminal side points straight up; x = 0, y = 1.]\n\n**Item 2:**\nTrue or False: \"On the unit circle, the x-coordinate of the point at angle θ equals sin θ.\"\n[Expected: FALSE. The x-coordinate equals cos θ; the y-coordinate equals sin θ.]\n\n**Item 3:**\n\"Find sin(180°) and cos(180°).\"\n[Expected: At 180°, the point is (−1, 0). So cos 180° = −1 and sin 180° = 0.]\n\n**Item 4:**\n\"Find cos(270°).\"\n[Expected: At 270°, the point is (0, −1). So cos 270° = 0.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Find the exact coordinates of the unit-circle point at θ = 315°.\n\n(a) Identify the quadrant and the reference angle.\n(b) State the Q1 base values for the reference angle.\n(c) Apply quadrant signs to find (cos 315°, sin 315°).\n(d) Verify: confirm that the point satisfies x²+y²=1.\"\n\n[Expected:\n(a) 315° is between 270° and 360° → Q4. Reference angle = 360°−315° = 45°.\n(b) Q1 values for 45°: cos 45° = √2/2, sin 45° = √2/2.\n(c) Q4: cos positive, sin negative. So cos 315° = √2/2, sin 315° = −√2/2. Point: (√2/2, −√2/2).\n(d) (√2/2)²+(−√2/2)²=1/2+1/2=1 ✓.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (c) gives (√2/2, −√2/2) correctly and (d) confirms x²+y²=1, 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner can identify unit-circle coordinates using the reference-angle method with correct quadrant signs, and verifies using the Pythagorean identity.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 2 (claims x = sin θ): → TA-B02 (X-IS-SIN-Y-IS-COS repair), then re-gate\n- FAIL on Item 1 or Item 3 or Item 4 (axis-angle error, wrong sign for 180°/270°): → TA-B03 (ANGLE-INCREASES-CLOCKWISE repair) if signs are reversed; else return to A03 to reinforce axis-angle values\n- FAIL on P76 (wrong reference angle or wrong quadrant signs): → return to A03; re-drill reference-angle method; re-gate\n- FAIL on multiple items: → B01 if learner treats unit circle as separate system; else B02 + B03 as needed; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to locate points on the unit circle using the reference-angle method, assign correct signs by quadrant, and verify using the Pythagorean identity.\n\nKey anchors to carry forward:\n- Unit circle definition: for angle θ, the point on the unit circle is (cos θ, sin θ). x = cos θ (horizontal), y = sin θ (vertical).\n- Pythagorean identity: sin²θ + cos²θ = 1 — follows directly from x²+y²=1 with radius 1.\n- Reference angle method: find the acute angle to the nearest x-axis; read Q1 value; apply quadrant sign.\n- Counter-clockwise is the positive direction; 90° → top (0,1); 180° → left (−1,0); 270° → bottom (0,−1).\n\nNext concepts: math.trig.trig-functions (periodic sine and cosine graphs built from the unit circle), math.trig.trig-identities (Pythagorean family and quotient identities).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 339,
+        "endLine": 434
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.unit-circle",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"In a right triangle with hypotenuse 1 and angle θ at the origin, what are the lengths of the opposite and adjacent sides?\" If the learner states opposite = sin θ and adjacent = cos θ correctly, proceed to A01. This confirms they can apply right-triangle trig and are ready for the unit circle as an extension.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): draw a unit circle; draw a right triangle with one vertex at origin, hypotenuse reaching to the circle, angle θ at origin. Label the sides opp = y, adj = x, hyp = 1. Show sin θ = y/1 = y, cos θ = x/1 = x.\n- Rung 2 (structured): give a partially completed table of key angles; learner fills in coordinates using the right-triangle result for each special angle.\n- Rung 3 (full understand): learner identifies angle position, reads coordinates, determines signs from quadrant, and verifies sin²θ + cos²θ = 1.\n\n**Pacing note:** h=8 estimated hours; A01 in session 1; A02 in sessions 2–3; A03 + mastery gate in sessions 3–4.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.unit-circle",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Without a calculator, state the coordinates of the unit-circle point at θ = 225°. Then verify sin²225° + cos²225° = 1.\"\n[Expected: reference 45°, Q3. (−√2/2, −√2/2). Verify: (−√2/2)²+(−√2/2)²=1/2+1/2=1 ✓.]\n\n**Day 10 prompt:**\n\"For which angles θ in [0°, 360°) does sin θ = cos θ? Explain using the unit circle.\"\n[Expected: sin θ = cos θ when y = x, i.e., the line y=x intersects the unit circle. That occurs at θ = 45° (point (√2/2, √2/2)) and θ = 225° (point (−√2/2, −√2/2)). In both cases the x and y coordinates are equal.]\n\n**Day 30 prompt:**\n\"If cos θ = −1/2 and θ is in Q3, find sin θ and tan θ exactly.\"\n[Expected: cos²θ+sin²θ=1 → 1/4+sin²θ=1 → sin²θ=3/4 → sin θ=−√3/2 (negative in Q3). tan θ = sin θ/cos θ = (−√3/2)/(−1/2) = √3. Confirm: θ = 240°, reference 60° ✓.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 260,
+        "endLine": 278
+      }
+    },
+    {
+      "assetId": "math.trig.unit-circle/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.unit-circle",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.trig.right-triangle-trig — sin/cos/tan ratios, special triangles (30-60-90, 45-45-90), hypotenuse as the scaling denominator; the unit circle reuses these values with hyp=1\n- math.geom.circle — circle equation x²+y²=r²; the unit circle is r=1; understanding radius as constant distance from origin\n\n**Unlocked blueprints:**\n- math.trig.trig-functions — sin and cos as periodic functions of a continuous angle variable; graphs of sin θ and cos θ built directly from unit-circle coordinates\n- math.trig.trig-identities — Pythagorean identity sin²θ+cos²θ=1 and its rearrangements; quotient identity tan θ=sin θ/cos θ; all derived from unit-circle geometry\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.unit-circle.md",
+        "startLine": 278,
+        "endLine": 292
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

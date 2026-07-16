@@ -1,0 +1,353 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.normal-distribution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.normal-distribution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:649d4bb75965e5a5c88d401fce6e6f6cff455a8a54a2bbf3813b35813866f348",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.normal-distribution.md": "sha256:ea60ada458ae4be43269dd9cf3e27779f38af6957c37811b68e8336bd463e3b1"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.normal-distribution",
+    "name": "Normal Distribution",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.prob.continuous-distributions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.normal-distribution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.normal-distribution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.normal-distribution.md": "sha256:ea60ada458ae4be43269dd9cf3e27779f38af6957c37811b68e8336bd463e3b1"
+      },
+      "contentHash": "sha256:8f657e1924e0c8eec03f616bf5fdd641356b321ebf6c6beec51b33e94b5f5fbe",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.normal-distribution.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.normal-distribution.md#TA-A01 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.normal-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.normal-distribution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.normal-distribution.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.normal-distribution.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.normal-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.normal-distribution\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.normal-distribution.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.normal-distribution.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.normal-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.normal-distribution\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.normal-distribution.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.normal-distribution.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.normal-distribution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.normal-distribution\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.normal-distribution/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "Normal Distribution — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.prob.continuous-distributions**: Uniform U(a,b) and Exponential Exp(λ) PDFs; computing probabilities as areas; named distribution properties tables\n\n### Target Knowledge State\nStudent can identify X ~ N(μ, σ²) by its parameters; interpret μ as the center and σ as the spread; standardize to Z = (X−μ)/σ ~ N(0,1); use the standard normal table (or symmetry rules) to compute P(X<x), P(X>x), and P(a<X<b); and apply the 68-95-99.7 empirical rule.\n\n### Conceptual Obstacles\n1. Confusing σ (standard deviation) with σ² (variance) when interpreting N(μ, σ²) — plugging σ² into a formula that expects σ\n2. Standardizing in the wrong direction: computing Z=(μ−X)/σ instead of Z=(X−μ)/σ, reversing the tail\n3. Forgetting that P(X>μ) = 0.5 for any Normal by symmetry — instead computing it from scratch or guessing 0\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "Worked Example Pair",
+      "content": "### Teaching Action A02 — Worked Example Pair\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Apply Z-standardization and table lookup; use symmetry for two-sided intervals; address MC-2\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**Worked Example 1 — One-Sided Probability**\n\n*Problem:* X ~ N(50, 25) (μ=50, σ²=25, σ=5). Find P(X < 60).\n\n*Step 1 — Standardize:* Z = (60 − 50)/5 = **2**\n\n*Step 2 — Table lookup:* P(Z < 2) = Φ(2) = **0.9772**\n\nSo P(X < 60) = **0.9772** — about 97.7% of values fall below 60.\n\n*Also find P(X > 60):* P(X > 60) = 1 − 0.9772 = **0.0228**\n\n*Also find P(X < 45):* Z = (45−50)/5 = −1; P(Z < −1) = Φ(−1) = 1−Φ(1) = 1−0.8413 = **0.1587**\nNote Z is negative because 45 is below the mean (MC-2 addressed: X−μ = 45−50 = −5, not +5).\n\n---\n\n**Worked Example 2 — Symmetric Two-Sided Interval**\n\n*Problem:* X ~ N(100, 16) (μ=100, σ=4). Find P(92 < X < 108).\n\n*Step 1 — Standardize both endpoints:*\nZ₁ = (92 − 100)/4 = −8/4 = **−2**\nZ₂ = (108 − 100)/4 = 8/4 = **2**\n\n*Step 2 — Compute area between:*\nP(−2 < Z < 2) = Φ(2) − Φ(−2) = 0.9772 − 0.0228 = **0.9544**\n\n*Alternative using symmetry:* P(|Z| < 2) = 2·Φ(2) − 1 = 2(0.9772) − 1 = 0.9544 ✓\n\n*Interpretation:* About 95.4% of values lie within 2 standard deviations of the mean (the \"95 rule\").\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n*Probe:* X ~ N(0, 1) (already standard normal). Find P(X > 1).\n\n(A) 1 − Φ(1) = 1 − 0.8413 = 0.1587\n(B) Φ(1) = 0.8413\n(C) Φ(−1) = 0.1587 (by symmetry)\n(D) Both A and C, since they give the same value\n\n*Branch CORRECT (D):* Both A (direct complement) and C (symmetry) give 0.1587. P(X>1) = 1−Φ(1) = 0.1587 = Φ(−1). These two approaches are equivalent by symmetry of N(0,1). Proceed to A03.\n\n*Branch PARTIAL:* You found 0.1587 but may not have recognized that both methods are valid. P(X>1)=1−Φ(1) and Φ(−1)=1−Φ(1) always — the symmetry rule Φ(−z)=1−Φ(z) makes them identical. Proceed to A03.\n\n*Branch INCORRECT (B):* That gives P(X<1)=0.8413, the left-tail probability. For the right tail P(X>1): subtract from 1 → 1−0.8413=0.1587. Proceed to A03.\n\n*Branch NO_RESPONSE:* P(X>1)=1−P(X≤1)=1−Φ(1)=1−0.8413=0.1587. Equivalently, Φ(−1)=0.1587 by symmetry. Proceed to A03.\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 153,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "SIGMA-VS-SIGMA-SQUARED",
+      "content": "| MC-1 | SIGMA-VS-SIGMA-SQUARED | Student confuses σ and σ² when reading N(μ,σ²); for N(10,4) uses σ=4 (variance) instead of σ=√4=2 (standard deviation) in the Z formula | N(μ,σ²) with σ²≠1; any standardization step |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "STANDARDIZATION-SIGN-ERROR",
+      "content": "| MC-2 | STANDARDIZATION-SIGN-ERROR | Student computes Z=(μ−X)/σ (reversed) or divides by σ² instead of σ | Any Z-score computation, especially when x<μ |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "SYMMETRY-FORGOTTEN",
+      "content": "| MC-3 | SYMMETRY-FORGOTTEN | Student does not use Normal symmetry; computes P(X>μ) from scratch or writes 0 | Probability questions involving the mean or symmetric intervals |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "Bell Curve Analogy",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Bell Curve Analogy\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 66,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "Worked Example Pair",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 153,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "Shape Contrast",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Shape Contrast\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 215,
+        "endLine": 278
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 278,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Use the standard normal table values: Φ(0)=0.5, Φ(1)=0.8413, Φ(2)=0.9772, Φ(3)=0.9987.*\n\n**Problem 1.** X ~ N(0, 1). Find P(−1 < X < 2).\n\n**Problem 2.** X ~ N(80, 25) (σ = 5). Find P(X > 90).\n\n**Problem 3.** X ~ N(100, 4) (σ = 2). Find P(96 < X < 102).\n\n**Problem 4.** X ~ N(50, 100) (σ = 10). Using the empirical rule:\n(a) What interval contains approximately 95% of values?\n(b) What is P(X > 50)?\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. P(−1<X<2) = Φ(2)−Φ(−1) = 0.9772 − (1−0.8413) = 0.9772 − 0.1587 = **0.8185**\n\n2. Z=(90−80)/5=2; P(X>90)=P(Z>2)=1−Φ(2)=1−0.9772=**0.0228**\n\n3. Z₁=(96−100)/2=−2; Z₂=(102−100)/2=1;\n   P(96<X<102)=Φ(1)−Φ(−2)=0.8413−0.0228=**0.8185**\n\n4. (a) μ±2σ = 50±20 → [30, 70] ≈ 95% of values\n   (b) P(X>50)=P(X>μ)=**0.5** (by symmetry)\n\nScore 1 point per problem (P77 total: 4 points). Problem 3 and 4: both sub-parts must be correct.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence — cross_links NOT Tier-1)*\n\n*Problem:* IQ scores are modeled as X ~ N(100, 225) (μ=100, σ²=225, σ=15).\n\n(a) What is σ? (Read carefully from the N(μ,σ²) notation.)\n\n(b) Find P(X < 115). (Standardize, then use the table.)\n\n(c) Find P(85 < X < 130).\n\n(d) About what percentage of people have IQ above 130? What about above 145?\n\n*Expected answers:*\n\n(a) σ² = 225 → **σ = 15**\n\n(b) Z = (115−100)/15 = 1; P(X<115) = Φ(1) = **0.8413**\n\n(c) Z₁ = (85−100)/15 = −1; Z₂ = (130−100)/15 = 2;\n   P(85<X<130) = Φ(2)−Φ(−1) = 0.9772−0.1587 = **0.8185**\n\n(d) P(X>130): Z=(130−100)/15=2; P(Z>2)=1−0.9772=**0.0228 ≈ 2.3%**\n   P(X>145): Z=(145−100)/15=3; P(Z>3)=1−0.9987=**0.0013 ≈ 0.13%**\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all four parts correct).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.9 × 5⌉ = 5). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Identify missed item; if MC-1 → B01 repair; if complement/symmetry error → B02 repair; targeted re-explanation |\n| ≤ 3/5 | → Return to A01; re-engage bell curve analogy and notation; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.prob.normal-distribution` complete. Threshold 0.9 requires 5/5 correct.\n\n**Unlocks:** `math.prob.clt`\n\nNext concept recommendation: `math.prob.clt` (Central Limit Theorem) — explains why the Normal arises so universally.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 281,
+        "endLine": 395
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** Pictorial (P) — proficient learner.\n\n**Scaffolding sequence:**\n1. **A01 P03 ANALOGY BRIDGE** — connect symmetric bell-shaped histograms (familiar from descriptive statistics) to the theoretical bell curve; introduce N(μ,σ²) notation and the standardization Z=(X−μ)/σ\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: standardize and read Z-table (one-sided probability); WE2: use symmetry and two-sided interval\n3. **A03 P06 CONTRAST PAIR** — narrow vs. wide bell curves (varying σ); N(μ,σ²) vs. N(μ,4σ²); 68-95-99.7 empirical rule\n4. **A04 P91 Gate** — mastery assessment\n\n**V-3 (CPA Concrete stage):** N/A — proficient learner enters at Pictorial stage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 56,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | X ~ N(0, 1). Find P(X < −2) and P(−1 < X < 1). |\n| R2 | 3 days | X ~ N(70, 100) (σ=10). Find P(X > 80) and P(50 < X < 90). |\n| R3 | 7 days | X ~ N(μ, σ²). If P(X<μ+2σ)=0.9772, what is P(X>μ+2σ)? What is P(X<μ−2σ)? Use symmetry only. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 430,
+        "endLine": 440
+      }
+    },
+    {
+      "assetId": "math.prob.normal-distribution/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.normal-distribution",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | math.stats.normal-distribution (NOT Tier-1) |\n| P76_mode | independence (cross-linked concept is NOT Tier-1) |\n| Unlocks | math.prob.clt |\n| Requires (Tier-1) | math.prob.continuous-distributions |\n\n**GR-8 compliance:** cross_links = [math.stats.normal-distribution]; NOT Tier-1 → P76 uses independence mode.\n**GR-9 compliance:** P76 uses an independent novel problem (IQ scores) unrelated to the non-Tier-1 cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.normal-distribution.md",
+        "startLine": 440,
+        "endLine": 454
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

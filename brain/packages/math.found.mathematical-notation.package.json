@@ -1,0 +1,334 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.mathematical-notation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.mathematical-notation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8b784aff0583b1eec5fc9ff8b1804d6ea6fa609e0cf482e6c6b744dba5b27906",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.mathematical-notation.md": "sha256:b4be738613771f53e7a33f2ba54c551027a433b212790fd6b1884e336bef2516"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.found.mathematical-notation",
+    "name": "Mathematical Notation",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "remember",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.mathematical-language"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.mathematical-notation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.mathematical-notation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.mathematical-notation.md": "sha256:b4be738613771f53e7a33f2ba54c551027a433b212790fd6b1884e336bef2516"
+      },
+      "contentHash": "sha256:8216d0055e47ff87a892f87b76a15fb7d5b4ebbf6442fb2e469121035087fb52",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-notation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-notation.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-notation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-notation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-notation.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-notation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-notation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-notation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-notation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-notation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-notation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-notation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.mathematical-notation.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.mathematical-notation.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.mathematical-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.mathematical-notation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.mathematical-notation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "Learning Objectives",
+      "content": "On completion of all Protocol A Teaching Actions, a student will be able to:\n\n1. **Recall** and correctly write the standard symbols for arithmetic operations and comparisons.\n2. **Read** set-theoretic notation (∈, ∉, ⊆, ⊂, ∪, ∩, ∅, 𝒫(A), A×B) and state what each means.\n3. **Interpret** quantifier symbols (∀, ∃) and logical connectives (¬, ∧, ∨, ⟹, ⟺).\n4. **Decode** basic function notation (f: A→B, f(x)) and summation notation (∑).\n5. **Distinguish** symbols that are commonly confused: ⊆ vs. ⊂, ∈ vs. ⊆, ⟹ vs. ⟺.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 30,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "FOUNDATIONAL): ⊆ and ∈ Are Interchangeable",
+      "content": "### MC-1 (FOUNDATIONAL): ⊆ and ∈ Are Interchangeable\n**Label:** MEMBERSHIP-SUBSET-CONFUSION\n**Statement:** Student uses ∈ (membership) and ⊆ (subset) interchangeably — writing \"2 ⊆ ℕ\" or \"{2} ∈ ℕ\" instead of correctly pairing element with ∈ and subset with ⊆.\n**Trigger:** Asked to express \"2 is an element of ℕ\" → writes \"2 ⊆ ℕ\". Or \"the even numbers are a subset of ℕ\" → writes \"evens ∈ ℕ.\"\n**Root cause:** Both symbols relate a \"smaller thing\" to a \"larger thing\" — students don't register that ∈ is about a single object and ⊆ is about a collection.\n**Repair chain:** B-01 — element vs. set contrast.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "⊆ and ⊂ Are the Same Symbol",
+      "content": "### MC-2: ⊆ and ⊂ Are the Same Symbol\n**Label:** SUBSET-PROPER-CONFUSION\n**Statement:** Student treats ⊆ (subset or equal) and ⊂ (proper subset — some texts use this; other texts use ⊂ for the same as ⊆) as identical, not registering the potential strict/non-strict distinction.\n**Trigger:** Asked whether {1,2} ⊂ {1,2} → says YES without noting the convention ambiguity, or conversely says NO thinking ⊂ always means proper subset.\n**Root cause:** Different textbooks use ⊂ differently (some mean proper subset, others mean subset-or-equal). Students haven't been told to check their source's convention.\n**Repair chain:** B-02 — convention awareness drill.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "⟹ and ⟺ Are the Same Arrow",
+      "content": "### MC-3: ⟹ and ⟺ Are the Same Arrow\n**Label:** IMPLIES-IFF-CONFUSION\n**Statement:** Student uses ⟹ (implies, one-way) and ⟺ (if and only if, two-way) interchangeably.\n**Trigger:** Writes \"n is even ⟺ n² is even\" when they mean \"n is even ⟹ n² is even\" (the converse requires separate proof).\n**Root cause:** Both symbols are \"arrows\" connecting propositions; students see them as stylistic variants.\n**Repair chain:** B-03 — one-way vs. two-way arrow drill.\n\n**MAMR Protocol:** MC-1 is FOUNDATIONAL; MC-2 and MC-3 are secondary. MC-1 cleared first; MC-2 and MC-3 FIFO after.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 17,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "Arithmetic and Comparison Symbols",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Arithmetic and Comparison Symbols\",\"primitives\":[\"P03\",\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 9,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "Set-Theoretic Notation",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Set-Theoretic Notation\",\"primitives\":[\"P04\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 50,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "Logic and Quantifier Notation",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Logic and Quantifier Notation\",\"primitives\":[\"P04\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 101,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "Function and Advanced Notation",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Function and Advanced Notation\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 157,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 207,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "Assessment Item Bank",
+      "content": "| # | Type | Item | Answer | Targets |\n|---|---|---|---|---|\n| 1 | Correct/Fix | \"π ⊆ ℝ\" — correct? | NO — π is a number, not a set: π ∈ ℝ | MC-1 |\n| 2 | Correct/Fix | \"{π} ∈ ℝ\" — correct? | NO — {π} is a set: {π} ⊆ ℝ | MC-1 |\n| 3 | Translate | \"∀x ∈ ℝ: x² ≥ 0\" in words | For all real x, x squared is non-negative | ∀ |\n| 4 | Translate | \"There is no largest prime\" into symbols | ∀n ∈ ℕ: (n is prime) ⟹ (∃p ∈ ℕ: p is prime ∧ p > n) | ∀∃ combination |\n| 5 | True/False | ∅ ⊆ A for every set A. | TRUE | Empty set |\n| 6 | Evaluate | ∑ᵢ₌₀³ i² | 0+1+4+9 = 14 | Summation |\n| 7 | Choose | \"n > 5 ___ n > 3\": fill ⟹ or ⟺ | ⟹ only (n > 5 → n > 3; but n = 4 > 3 and 4 ≱ 5) | MC-3 |\n| 8 | Choose | \"n is odd ___ 2n+1 is odd\": fill ⟹ or ⟺ | ⟺ (both directions hold) | MC-3 |\n| 9 | Write | Express \"f maps ℕ to ℤ\" in notation | f: ℕ → ℤ | Function notation |\n| 10 | Compute | ⌊−2.3⌋ | −3 (floor rounds toward −∞) | Floor |\n| 11 | Identify | \\|{a, b, c}\\| — what does \\|·\\| mean here? | Cardinality = 3 (count of elements) | Context disambiguation |\n| 12 | Translate | \"∃!x ∈ ℝ: x² = 0\" in words | There is exactly one real number whose square is zero | ∃! |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 387,
+        "endLine": 406
+      }
+    },
+    {
+      "assetId": "math.found.mathematical-notation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.mathematical-notation",
+      "title": "Spaced Repetition Schedule",
+      "content": "**P89 Spaced Repetition:** Intervals — Day 1, Day 3, Day 7, Day 21, Day 60.\n\n| Day | Probe Focus | Sample Item |\n|---|---|---|\n| Day 1 | ∈ vs. ⊆ | Five sentences — choose ∈ or ⊆ |\n| Day 3 | ∀ and ∃ | Translate three quantified statements to symbols |\n| Day 7 | ⟹ vs. ⟺ | Three implications — one-way or both-ways? |\n| Day 21 | Summation | Evaluate ∑ᵢ₌₁⁶ (3i−2) |\n| Day 60 | Full table recall | Given a page of mathematics, identify every symbol used and state its meaning |\n\n**Decay protocol:** If student fails a spaced probe → reset to Day 1 + Protocol B (B-01 for ∈/⊆; B-02 for ⊆/⊂; B-03 for ⟹/⟺).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.mathematical-notation.md",
+        "startLine": 406,
+        "endLine": 422
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

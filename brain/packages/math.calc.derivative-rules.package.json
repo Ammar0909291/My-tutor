@@ -1,0 +1,354 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.derivative-rules-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.derivative-rules",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e73e31fa08697f1e9c48f1c53b78231b7643a36178baca254bdf2aa763824bcf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.derivative-rules.md": "sha256:e4b428a6de8c15f2168dc5e08f65e3af80a9211c60ef4cb0f98acd1191d0bae7"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.derivative-rules",
+    "name": "Basic Differentiation Rules",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.derivative-definition"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.derivative-rules-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.derivative-rules (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.derivative-rules.md": "sha256:e4b428a6de8c15f2168dc5e08f65e3af80a9211c60ef4cb0f98acd1191d0bae7"
+      },
+      "contentHash": "sha256:669626ae9a8a53e158c3b78ee624270f30c68f71e4c50d4a7f4ab01de355c6ec",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-rules.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-rules.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-rules.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-rules.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-rules\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-rules.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-rules.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-rules\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-rules.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-rules.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-rules\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.derivative-rules/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Basic Differentiation Rules — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.derivative-definition**: f'(x)=lim_{h→0}[f(x+h)−f(x)]/h; three-step expand→cancel h→limit procedure; non-differentiability at corners/discontinuities\n\n### Target Knowledge State\nStudent can fluently apply the power rule d/dx(xⁿ)=nxⁿ⁻¹ for any real constant n (positive integer, zero, negative, fractional), the constant multiple rule d/dx(cf)=cf', and the sum/difference rule d/dx(f±g)=f'±g'; can rewrite radical and rational expressions as fractional/negative powers before differentiating; correctly identifies when these rules DO and DO NOT apply (distinguishes power functions from exponential functions; knows products require rewriting or the upcoming product rule); and applies the rules fluently to physics/geometry contexts.\n\n### Conceptual Obstacles\n1. Applying d/dx(xⁿ)=nxⁿ⁻¹ to exponential functions: writing d/dx(eˣ)=xeˣ⁻¹ or d/dx(2ˣ)=x·2ˣ⁻¹ — the power rule requires a CONSTANT exponent and VARIABLE base, not the reverse\n2. Omitting the original coefficient: computing d/dx(3x²)=2x instead of 6x — the exponent multiplies the existing coefficient (3·2x)\n3. Distributing derivatives over products: computing d/dx[f(x)·g(x)]=f'(x)·g'(x), which is incorrect at this level; the correct approach is to first simplify the product into a single power when possible\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Worked Examples: Polynomials and Rational/Radical Functions",
+      "content": "### Teaching Action A02 — Worked Examples: Polynomials and Rational/Radical Functions\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Model the full differentiation procedure for polynomial and non-integer power functions; establish rewrite-first discipline for radical and rational expressions; address MC-2 in context\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**WE1 — Polynomial: f(x) = 4x³ − 5x² + 2x − 7**\n\n*Step 1 — Apply power rule term-by-term (sum rule):*\n- d/dx(4x³) = 4·3·x² = **12x²**\n- d/dx(−5x²) = (−5)·2·x = **−10x**\n- d/dx(2x) = 2·1·x⁰ = **2**\n- d/dx(−7) = **0**\n\n*Step 2 — Collect:*\n$$f'(x) = 12x^2 - 10x + 2$$\n\n*Self-check:* Degree of f is 3; degree of f' is 2 (always drops by 1 for polynomials). ✓\n\n*Common error demonstration:* Student writes d/dx(4x³)=3x² (omits the 4). Correct: 4·3x²=12x². The coefficient 4 multiplies the result 3x² — it does not vanish.\n\n---\n\n**WE2 — Radical and Rational: f(x) = √x + 3/x²**\n\n*Step 1 — Rewrite using power notation FIRST:*\n$$f(x) = x^{1/2} + 3x^{-2}$$\n\n*Step 2 — Differentiate each term:*\n- d/dx(x^(1/2)) = (1/2)x^(1/2−1) = (1/2)x^(−1/2) = **1/(2√x)**\n- d/dx(3x^(−2)) = 3·(−2)x^(−2−1) = **−6x^(−3) = −6/x³**\n\n*Step 3 — Collect:*\n$$f'(x) = \\frac{1}{2\\sqrt{x}} - \\frac{6}{x^3}$$\n\n*Rewriting rule table:*\n\n| Expression | Power form |\n|-----------|-----------|\n| √x | x^(1/2) |\n| ∛x | x^(1/3) |\n| 1/x | x^(−1) |\n| 1/x² | x^(−2) |\n| 1/xⁿ | x^(−n) |\n| x^(p/q) | p-th power of q-th root |\n\n*Discipline:* Never apply the power rule to 1/x² directly as written. Rewrite → then differentiate. This rewrite-first step catches most errors with rational and radical expressions.\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\nDifferentiate g(x) = 2x^(3/2) − 4/x.\n\n- **CORRECT** → Rewrite: 2x^(3/2) − 4x^(−1). Differentiate: 2·(3/2)x^(1/2) − 4·(−1)x^(−2) = 3x^(1/2) + 4x^(−2) = 3√x + 4/x². Correct!\n- **PARTIAL** → Student may forget the 4·(−1) sign flip: gets 4x^(−2) = 4/x² but writes +4/x² without the sign flip (already positive: 4·(−1)=−4, times x^(−2), then the minus in the original term — actually −4x^(−1) derivative = −4·(−1)x^(−2) = +4x^(−2) = +4/x²). Confirm the sign chain: −4x^(−1) → d/dx = −4·(−1)x^(−2) = +4/x².\n- **INCORRECT** → Student applies power rule without rewriting 1/x: writes d/dx(4/x)=4/1=4. Redirect: \"Rewrite 4/x as 4x^(−1), then apply the power rule.\"\n- **NO_RESPONSE** → Prompt: \"First rewrite 4/x as a power of x with a negative exponent. What is 1/x in power form?\"\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 122,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "POWER-RULE-FOR-EXPONENTIAL",
+      "content": "| MC-1 | POWER-RULE-FOR-EXPONENTIAL | Student applies d/dx(xⁿ)=nxⁿ⁻¹ to d/dx(eˣ) or d/dx(2ˣ), getting xeˣ⁻¹ or x·2ˣ⁻¹ | Any expression containing eˣ or aˣ; \"power rule everywhere\" thinking |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "COEFFICIENT-MULTIPLICATION-OMITTED",
+      "content": "| MC-2 | COEFFICIENT-MULTIPLICATION-OMITTED | Student writes d/dx(3x²)=2x, dropping the coefficient 3; confuses constant multiple rule with constant function rule | Any term with a leading coefficient; especially d/dx(cf(x)) with c≠1 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "DISTRIBUTING-DERIVATIVE-OVER-PRODUCTS",
+      "content": "| MC-3 | DISTRIBUTING-DERIVATIVE-OVER-PRODUCTS | Student writes d/dx[f(x)·g(x)]=f'(x)·g'(x) instead of simplifying to a single power first (or waiting for product rule) | Products like x²·x³ or (2x)(x³) where simplification is possible |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Discovering and Stating the Differentiation Rules",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Discovering and Stating the Differentiation Rules\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 64,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Worked Examples: Polynomials and Rational/Radical Functions",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Examples: Polynomials and Rational/Radical Functions\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 122,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Scope and Limits: What the Rules Can and Cannot Do",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Scope and Limits: What the Rules Can and Cannot Do\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 186,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 233,
+        "endLine": 467
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n**Purpose:** Assess fluent application of all four rules including non-integer powers and scope awareness\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 items)*\n\n**Item 1:** Differentiate f(x) = 7x⁴ − 3x² + x − 9.\n\n*Solution:*\nf'(x) = 7·4x³ − 3·2x + 1 − 0 = **28x³ − 6x + 1**\n\n**Item 2:** Differentiate g(x) = 2x^(3/2) − 4x^(−1) + 6.\n\n*Solution:*\ng'(x) = 2·(3/2)x^(1/2) − 4·(−1)x^(−2) + 0 = **3x^(1/2) + 4x^(−2) = 3√x + 4/x²**\n\n**Item 3:** Differentiate h(x) = (x²+1)/x (rewrite first).\n\n*Solution:*\nh(x) = x²/x + 1/x = x + x^(−1)\nh'(x) = 1 + (−1)x^(−2) = **1 − 1/x²**\n\n**Item 4:** True or false (with explanation): d/dx(e^x) = x·e^(x−1).\n\n*Solution:*\n**False.** The power rule d/dx(xⁿ)=nxⁿ⁻¹ applies when the BASE is the variable x and the EXPONENT is a constant. In eˣ, the BASE (e) is a constant and the EXPONENT (x) is the variable — the power rule does not apply. The correct derivative is d/dx(eˣ)=eˣ (a distinct rule, established later).\n\n---\n\n**[P55 — SCORE]** Count correct items (Items 1–4). Running total: _/4.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(independence mode)*\n\nA ball is thrown upward. Its height in metres is:\n$$s(t) = -4.9t^2 + 20t + 1.5, \\quad t \\geq 0$$\n\n**(a)** Use the differentiation rules (not the limit definition) to find the velocity function v(t) = s'(t).\n\n**(b)** Find the initial velocity v(0). What does it represent physically?\n\n**(c)** Find the time t* when the ball momentarily stops (v(t*)=0).\n\n**(d)** Find the maximum height. Compute s(t*).\n\n**(e)** Does the power rule apply to −4.9t²? Would it apply to a term like e^t if it appeared? Explain the difference in one sentence each.\n\n---\n\n*Expected solution:*\n\n(a) s(t)=−4.9t²+20t+1.5\nv(t) = s'(t) = −4.9·2t + 20·1 + 0 = **−9.8t + 20**\n\n(b) v(0) = 20 m/s. This is the launch speed of the ball at t=0.\n\n(c) v(t*)=0 → −9.8t*+20=0 → t* = 20/9.8 ≈ **2.04 s**\n\n(d) s(t*) = −4.9·(20/9.8)² + 20·(20/9.8) + 1.5\n= −4.9·(400/96.04) + 400/9.8 + 1.5\n= −4.9·4.163 + 40.816 + 1.5\n≈ −20.40 + 40.82 + 1.5 ≈ **21.9 m**\n\n(e) −4.9t²: base=t (variable), exponent=2 (constant) → **power rule applies**. If e^t appeared: base=e (constant), exponent=t (variable) → **power rule does NOT apply** (e^t is an exponential function, not a power function).\n\n---\n\n**[P55 — SCORE]** Score P76 (0 or 1). Running total: _/5.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]** MAMR = 5/5.\n\n- Score ≥ 5/5 → PASS → proceed to P74.\n- Score < 5/5 → FAIL → P74 routes to repair.\n\n---\n\n**[P55 — SCORE]** Record final pass/fail.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- **PASS (5/5):** Concept mastered. Proceed to math.calc.product-rule, math.calc.quotient-rule, and math.calc.chain-rule.\n- **FAIL:** Diagnose: Item 4 failed or (e) wrong → B-MC1 (exponential confusion). Items 1–3 coefficient errors → B-MC2. Product simplification wrong → B-MC3. After repair, re-enter A04.\n\n---\n\n**[P55 — SCORE]** Log routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession complete for math.calc.derivative-rules. MAMR 5/5 required; student has either passed (unlocking product/quotient/chain rules) or been routed to repair.\n\n---\n\n\n## Component 5 — Protocol B (Repair Sequences)\n\n### B-MC1 — Repair: POWER-RULE-FOR-EXPONENTIAL\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You applied d/dx(xⁿ)=nxⁿ⁻¹ to eˣ. The power rule only works when the BASE is the variable (x) and the EXPONENT is a constant number. In eˣ, those roles are reversed — the exponent is x and the base (e) is constant.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nApply the proposed rule d/dx(eˣ)=xeˣ⁻¹ and check it at x=1: gives 1·e⁰=1. But from the definition: [e^(1+h)−e^1]/h = e^1·[e^h−1]/h → e (since [e^h−1]/h→1 as h→0). The proposed rule gives 1; the definition gives e≈2.718. The formula is wrong.\n\n**[P64 — CONCEPTUAL SHIFT]**\nTwo entirely different families of functions:\n\n| | Power function | Exponential function |\n|-|---------------|---------------------|\n| Form | x^c (c constant) | c^x (c constant) |\n| Examples | x², x^(1/2), x^(−3) | eˣ, 2ˣ, 10ˣ |\n| Derivative | c·x^(c−1) (power rule) | c^x·ln(c) (separate rule) |\n\nCheck before applying power rule: \"Is the base the variable?\" If no → power rule does not apply.\n\n---\n\n### B-MC2 — Repair: COEFFICIENT-MULTIPLICATION-OMITTED\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You wrote d/dx(3x²)=2x, dropping the 3. The constant multiple rule says d/dx(cf)=c·f' — the constant factor c multiplies the derivative of f, it doesn't disappear.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nVerify numerically: f(x)=3x². f(2)=12; f(2.001)=3·(2.001)²=3·4.004001=12.012003. Slope ≈ (12.012003−12)/0.001 = 12.003 ≈ 12. But your answer 2x gives 2·2=4 at x=2. Correct answer 6x gives 6·2=12. The numerical check matches 12, not 4.\n\n**[P64 — CONCEPTUAL SHIFT]**\nThink of it as: f(x)=3·(x²). The 3 is a fixed scaling factor — it stretches the function vertically by 3. This also stretches the slope by 3. Derivative of x² is 2x; derivative of 3x² is 3 times larger: 3·2x=6x. The coefficient multiplies the rate of change, it doesn't vanish.\n\n---\n\n### B-MC3 — Repair: DISTRIBUTING-DERIVATIVE-OVER-PRODUCTS\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You applied d/dx(f·g)=f'·g'. Derivatives do NOT distribute over products the way they distribute over sums. The sum rule d/dx(f+g)=f'+g' is special — it does NOT extend to multiplication.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nTest on x²·x³=x⁵. Your formula: d/dx(x²)·d/dx(x³)=2x·3x²=6x³. But x²·x³=x⁵, so d/dx(x⁵)=5x⁴. These differ: 6x³≠5x⁴. At x=2: 6·8=48 vs 5·16=80. The formula f'·g' gives the wrong answer.\n\n**[P64 — CONCEPTUAL SHIFT]**\nAt this level, when both factors are power functions: combine them first using exponent rules (x^a·x^b=x^(a+b)), then differentiate the single resulting power. For x²·x³: combine to x⁵, then differentiate to 5x⁴. When the factors cannot be combined (like x²·sin(x)), a new rule — the Product Rule — is needed (upcoming blueprint). The sum rule is a special property of linearity; products do not have it.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | Differentiate f(x)=5x³−3x^(1/2)+2/x. [f'=15x²−(3/2)x^(−1/2)−2x^(−2)] |\n| Day 3 | True/False: d/dx(x·eˣ)=eˣ+x·eˣ. (True — this uses the product rule, but the student cannot verify yet; mark for revisit after product rule) |\n| Day 7 | f(x)=(x³−2x)/x for x≠0: simplify, then differentiate. [x²−2 → 2x] |\n| Day 14 | At what value of x does the tangent to f(x)=x³−3x have slope 0? [f'=3x²−3=0 → x=±1] |\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.derivative-definition | PACKAGE_READY | The definition is the source from which A01's Stage C derives the power rule pattern |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.calc.product-rule | Requires power rule fluency and understanding of rule scope |\n| math.calc.quotient-rule | Requires power rule and constant multiple rule |\n| math.calc.chain-rule | Requires fluency with basic differentiation rules |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Derive before stating:** A01's Stage C uses the definition to get d/dx(x²)=2x and d/dx(x³)=3x² before announcing the power rule. Students who see the rule emerge from two worked examples remember it structurally (\"bring the exponent down, reduce by 1\") rather than as an arbitrary formula. The Stage P table reinforces the pattern visually.\n\n**MC-1 is the highest-stakes error:** Applying d/dx(eˣ)=xeˣ⁻¹ propagates through all future calculus — chain rule, integration by parts, differential equations — as a persistent source of wrong answers. A03's contrast table (power function vs. exponential function) with the two-question check (\"Is the base the variable? Is the exponent a constant?\") should be referenced every time eˣ appears for the first few weeks.\n\n**Rewrite-first is a discipline, not a technique:** WE2 (A02) models writing x^(1/2) and 3x^(−2) explicitly before differentiating. Students who skip this step consistently make sign errors on d/dx(1/x) or reduce-power errors on d/dx(√x). Requiring the rewritten form as a visible intermediate step eliminates these.\n\n**P76 connects rules to physics:** The projectile problem ties the abstract derivative-rules to the concrete velocity=slope narrative from the prerequisite blueprint (math.calc.derivative-definition), and part (e) forces the student to articulate the power/exponential distinction in their own words — a strong retention technique.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| ID | Check | Status |\n|----|-------|--------|\n| V-1 | All Teaching Actions have assigned primitives | PASS |\n| V-2 | GR-1: A01 opens with P11 (B-category primitive, non-repair) | PASS |\n| V-3 | CPA entry stage = C for advanced difficulty | PASS |\n| V-4 | bloom=apply → P07 present in A02 (WORKED EXAMPLE PAIR) | PASS |\n| V-5 | GR-2: P49 present in A01, A02, A03, each with 4 branches | PASS |\n| V-6 | GR-3: A04 (P91) is terminal — no further TAs after gate | PASS |\n| V-7 | GR-4: All B-sequences open with P27+P41+P64 | PASS |\n| V-8 | GR-6: P91 is terminal in A04 | PASS |\n| V-9 | GR-7: P76 present inside A04 mastery gate | PASS |\n| V-10 | GR-9: cross_links=[] → P76 mode = independence | PASS |\n| V-11 | GR-10: MAMR=5/5 stated and enforced (thresh=0.9, n=5: ⌈0.9×5⌉=5) | PASS |\n| V-12 | PASS criterion (5/5) stated in P75 and P74 | PASS |\n| V-13 | GR-8: Component 7 documents all cross-blueprint dependencies | PASS |\n| V-14 | Standard structure: h=8 → 3 main TAs (A01,A02,A03) + gate (A04) | PASS |\n| V-15 | Component 0 metadata fields complete | PASS |\n| V-16 | Component 1 (prior anchors, target state, obstacles) complete | PASS |\n| V-17 | Component 2: 3 MCs with 1 foundational designated | PASS |\n| V-18 | Component 3 scaffolding protocol complete | PASS |\n| V-19 | Component 6 P89 schedule complete (4 intervals) | PASS |\n| V-20 | Component 8 teaching notes complete | PASS |\n| AIR | No prohibited operations (no curriculum modification, no framework redesign) | PASS |\n\n**Status: PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 233,
+        "endLine": 467
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner derives patterns from the definition before abstracting.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: use definition to compute d/dx(x²) and d/dx(x³); tabulate the emerging pattern; P: power table for n=0,1,2,3,4; A: power rule + constant multiple + sum/difference formally stated\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: polynomial 4x³−5x²+2x−7; WE2: radical/rational x^(1/2)+3x^(−2) requiring rewrite-first discipline\n3. **A03 P06 CONTRAST PAIR** — power functions vs exponential functions (MC-1 repair boundary); sum rule scope (applies term-by-term) vs product (requires product rule — preview)\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | Differentiate f(x)=5x³−3x^(1/2)+2/x. [f'=15x²−(3/2)x^(−1/2)−2x^(−2)] |\n| Day 3 | True/False: d/dx(x·eˣ)=eˣ+x·eˣ. (True — this uses the product rule, but the student cannot verify yet; mark for revisit after product rule) |\n| Day 7 | f(x)=(x³−2x)/x for x≠0: simplify, then differentiate. [x²−2 → 2x] |\n| Day 14 | At what value of x does the tangent to f(x)=x³−3x have slope 0? [f'=3x²−3=0 → x=±1] |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 397,
+        "endLine": 410
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-rules/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.derivative-rules",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.derivative-definition | PACKAGE_READY | The definition is the source from which A01's Stage C derives the power rule pattern |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.calc.product-rule | Requires power rule fluency and understanding of rule scope |\n| math.calc.quotient-rule | Requires power rule and constant multiple rule |\n| math.calc.chain-rule | Requires fluency with basic differentiation rules |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-rules.md",
+        "startLine": 410,
+        "endLine": 429
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

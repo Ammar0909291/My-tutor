@@ -1,0 +1,358 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.cauchy-riemann-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.cauchy-riemann",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2614218c71fbd370cbdedd293b0f83960167e046b23d08721c0de8eff2b72d88",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.cauchy-riemann.md": "sha256:6004ca55eab16114e22c47ed1beb734b352c7e44af372397ed4d409f6856372d"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.cauchy-riemann",
+    "name": "Cauchy-Riemann Equations",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cx.complex-function",
+      "math.calc.partial-derivatives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.cauchy-riemann-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.cauchy-riemann (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.cauchy-riemann.md": "sha256:6004ca55eab16114e22c47ed1beb734b352c7e44af372397ed4d409f6856372d"
+      },
+      "contentHash": "sha256:5e4e64c2ad2cd1941dbfb5278feeae51d964b104519c146c994c5d57a35b9d91",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.cauchy-riemann.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md#TA-A01 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.cauchy-riemann"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.cauchy-riemann\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.cauchy-riemann.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.cauchy-riemann"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.cauchy-riemann\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.cauchy-riemann.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.cauchy-riemann"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.cauchy-riemann\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.cauchy-riemann.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.cauchy-riemann"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.cauchy-riemann\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.cauchy-riemann/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Cauchy-Riemann Equations — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.cx.complex-function**: f(z)=u(x,y)+iv(x,y) decomposition; path-dependent limits; complex differentiability definition as a limit; why 2D limits are harder than 1D\n- **math.calc.partial-derivatives**: ∂f/∂x, ∂f/∂y; treating one variable as constant; Clairaut's theorem; mixed partials; chain rule for multivariable functions\n\n### Target Knowledge State\nStudent can state the Cauchy-Riemann (CR) equations (∂u/∂x=∂v/∂y and ∂u/∂y=−∂v/∂x); derive them by computing f'(z) from two directions and requiring agreement; apply them to verify complex differentiability, compute f'(z) from real and imaginary parts, identify where a function fails to be analytic; and apply the sufficient condition (CR + continuous first partials → holomorphic). Student correctly identifies f(z)=z̄ as a canonical non-analytic function and f(z)=|z|² as analytic only at the origin.\n\n### Conceptual Obstacles\n1. Believing f(z)=z̄ (complex conjugate) is analytic — z̄=x−iy has u=x, v=−y; ∂u/∂x=1 but ∂v/∂y=−1 → CR equations fail everywhere; it is nowhere analytic, yet it is smooth as a real function of (x,y)\n2. Assuming CR equations at a single point guarantee complex differentiability at that point — CR + continuous partials in a neighbourhood gives holomorphicity; CR at an isolated point does not (|z|⁴sin²(arg z) type examples)\n3. Equating real differentiability of u and v with complex differentiability of f — u and v can both be infinitely differentiable as real functions while the CR equations fail, meaning f is not complex-differentiable despite its components being smooth\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Worked Example Pair: Verifying CR and Computing f'(z)",
+      "content": "### Teaching Action A02 — Worked Example Pair: Verifying CR and Computing f'(z)\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Build the four-step workflow into procedural fluency; show CR verification for polynomial (WE1) and transcendental (WE2) analytic functions; model the f'(z) formula after CR are confirmed\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**WE1 — Polynomial: f(z)=z²**\n\n**Step 1 — Decompose:**\nf(z)=z²=(x+iy)²=x²−y²+2xyi\n→ u=x²−y², v=2xy\n\n**Step 2 — Compute four first partials:**\n$$\\frac{\\partial u}{\\partial x}=2x, \\quad \\frac{\\partial u}{\\partial y}=-2y, \\quad \\frac{\\partial v}{\\partial x}=2y, \\quad \\frac{\\partial v}{\\partial y}=2x$$\n\n**Step 3 — Check CR equations:**\n- First: ∂u/∂x = 2x = ∂v/∂y = 2x ✓\n- Second: ∂u/∂y = −2y = −∂v/∂x = −2y ✓\n\nCR equations hold everywhere. Partials are continuous polynomials → f is entire (holomorphic everywhere).\n\n**Step 4 — Compute f'(z):**\n$$f'(z) = \\frac{\\partial u}{\\partial x} + i\\frac{\\partial v}{\\partial x} = 2x + i(2y) = 2(x+iy) = 2z$$\n\nConfirms the expected result from complex algebra: d/dz(z²)=2z. ✓\n\n---\n\n**WE2 — Exponential: f(z)=eˣcos(y)+ieˣsin(y) = eᶻ**\n\n**Step 1 — Decompose:**\nu=eˣcos(y), v=eˣsin(y)\n\n**Step 2 — Compute four first partials:**\n$$\\frac{\\partial u}{\\partial x}=e^x\\cos(y), \\quad \\frac{\\partial u}{\\partial y}=-e^x\\sin(y)$$\n$$\\frac{\\partial v}{\\partial x}=e^x\\sin(y), \\quad \\frac{\\partial v}{\\partial y}=e^x\\cos(y)$$\n\n**Step 3 — Check CR equations:**\n- First: ∂u/∂x = eˣcos(y) = ∂v/∂y = eˣcos(y) ✓\n- Second: ∂u/∂y = −eˣsin(y) = −∂v/∂x = −eˣsin(y) ✓\n\nCR equations hold everywhere. Partials continuous → eᶻ is entire.\n\n**Step 4 — Compute f'(z):**\n$$f'(z) = e^x\\cos(y) + ie^x\\sin(y) = e^x(\\cos(y)+i\\sin(y)) = e^x \\cdot e^{iy} = e^{x+iy} = e^z$$\n\nConfirms d/dz(eᶻ)=eᶻ via the CR approach. ✓\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n**Prompt:** For f(z)=z³, write u and v, verify the CR equations, and find f'(z) using the CR formula.\n\n**CORRECT:** (x+iy)³=x³−3xy²+i(3x²y−y³). u=x³−3xy², v=3x²y−y³. ∂u/∂x=3x²−3y²=∂v/∂y=3x²−3y² ✓. ∂u/∂y=−6xy=−∂v/∂x=−6xy ✓. f'(z)=(3x²−3y²)+i(6xy)=3(x²−2xyi−y²)... actually 3(x+iy)²=3z². Let me verify: (3x²−3y²)+i(6xy)=3(x²+2xyi−y²)... wait. 3(x+iy)²=3(x²+2xyi+(iy)²)=3(x²+2xyi−y²)=3(x²−y²)+6xyi=3x²−3y²+6xyi ✓. So f'(z)=3z².\n→ \"Correct. CR confirm f=z³ is entire and f'(z)=3z² matches the complex power rule.\" → Proceed to A03.\n\n**PARTIAL:** Student correctly computes partials and confirms CR but cannot simplify f'(z)=3x²−3y²+6xyi as 3z².\n→ \"Factor: 3(x²−y²)+6xyi=3[(x²−y²)+2xyi]=3(x+iy)²=3z². Recognise the real and imaginary parts of z² to rewrite the partial-derivative formula back as a complex expression.\"\n\n**INCORRECT:** Student confuses ∂u/∂y with ∂u/∂x in the CR check (sign error).\n→ \"The CR equations are: (1) ∂u/∂x=∂v/∂y and (2) ∂u/∂y=−∂v/∂x. Note the minus sign in the second equation. For f=z³: ∂u/∂y=−6xy and −∂v/∂x=−(6xy)=−6xy. So ∂u/∂y=−∂v/∂x ✓. The minus sign is part of the CR structure — both equations must hold.\"\n\n**NO_RESPONSE:** → \"Step 1: (x+iy)³=x³+3x²(iy)+3x(iy)²+(iy)³=x³+3x²yi−3xy²−iy³=(x³−3xy²)+i(3x²y−y³). So u=x³−3xy², v=3x²y−y³. Step 2: ∂u/∂x=3x²−3y², ∂v/∂y=3x²−3y² ✓; ∂u/∂y=−6xy, ∂v/∂x=6xy → ∂u/∂y=−∂v/∂x ✓. Step 3: f'(z)=(3x²−3y²)+i(6xy)=3z².\"\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 151,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "CONJUGATE-IS-ANALYTIC",
+      "content": "| MC-1 | CONJUGATE-IS-ANALYTIC | Student claims f(z)=z̄ is analytic because it is \"smooth\" or \"one-to-one\"; does not check the CR equations; fails to see that ∂u/∂x=1≠−1=∂v/∂y | Any mention of z̄; functions that look smooth visually; students who confuse real smoothness with complex analyticity |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "POINTWISE-CR-IMPLIES-HOLOMORPHIC",
+      "content": "| MC-2 | POINTWISE-CR-IMPLIES-HOLOMORPHIC | Student concludes that CR at a point → complex differentiable at that point; unaware that continuous partials satisfying CR in an open neighbourhood are the sufficient condition | f(z)=|z|² which has CR at z=0 only; any function with an isolated point where CR hold |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "REAL-SMOOTH-IMPLIES-ANALYTIC",
+      "content": "| MC-3 | REAL-SMOOTH-IMPLIES-ANALYTIC | Student equates u,v∈C¹ (or C∞) as real functions with f=u+iv being complex-differentiable; ignores that complex differentiability is an additional constraint (the CR equations) not implied by real smoothness | Functions like f(z)=x²−y²+2xi (not z²): u=x²−y², v=2x; ∂u/∂x=2x, ∂v/∂y=0 → CR fails unless x=0 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Deriving the CR Equations from the Differentiability Limit",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving the CR Equations from the Differentiability Limit\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 65,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Worked Example Pair: Verifying CR and Computing f'(z)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair: Verifying CR and Computing f'(z)\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 151,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Contrast Pair: Analytic vs Non-Analytic; Necessary vs Sufficient",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast Pair: Analytic vs Non-Analytic; Necessary vs Sufficient\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 221,
+        "endLine": 287
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 287,
+        "endLine": 523
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess fluent CR verification, f'(z) computation, and non-analytic classification\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Verify that f(z)=sin(z)=sin(x)cosh(y)+icos(x)sinh(y) satisfies the CR equations and find f'(z).\n\n*Solution:* u=sin(x)cosh(y), v=cos(x)sinh(y).\n∂u/∂x=cos(x)cosh(y)=∂v/∂y=cos(x)cosh(y) ✓\n∂u/∂y=sin(x)sinh(y), −∂v/∂x=sin(x)sinh(y) ✓\nf'(z)=cos(x)cosh(y)+i(−sin(x)sinh(y))=cos(z). **f'(z)=cos(z)** ✓\n\n**Problem 2:** Show that f(z)=z̄ is nowhere analytic using the CR equations.\n\n*Solution:* u=x, v=−y. ∂u/∂x=1, ∂v/∂y=−1. CR1: 1≠−1 everywhere. **Nowhere analytic.**\n\n**Problem 3:** Find all points where f(z)=x³−3xy²+i(3x²y+y³) might be holomorphic.\n\n*Solution:* Note f(z)=(x+iy)³=z³? Check: (x+iy)³=x³+3x²(iy)+3x(iy)²+(iy)³=x³+3x²yi−3xy²−iy³=(x³−3xy²)+i(3x²y−y³). But here v=3x²y+y³ (note + sign on y³). So f≠z³.\nu=x³−3xy², v=3x²y+y³.\n∂u/∂x=3x²−3y², ∂v/∂y=3x²+3y². CR1: 3x²−3y²=3x²+3y² → −3y²=3y² → y²=0 → y=0.\n∂u/∂y=−6xy, −∂v/∂x=−6xy. CR2 holds for all (x,y). ✓\nCR hold only when y=0. Not holomorphic anywhere. Complex-differentiable only on the real axis (y=0 line), at isolated points.\n\n**Problem 4:** If f=u+iv is analytic and u(x,y)=x²−y², find v(x,y) (up to a constant) using the CR equations.\n\n*Solution:* ∂v/∂y=∂u/∂x=2x → v=2xy+h(x). Also −∂v/∂x=∂u/∂y=−2y → ∂v/∂x=2y → d/dx(2xy+h(x))=2y+h'(x)=2y → h'(x)=0 → h=const. **v=2xy+C**. So f(z)=x²−y²+i(2xy+C)=z²+iC.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** Let u(x,y)=eˣcos(y). Without being told what f is, use the CR equations to find a harmonic conjugate v(x,y) (so that f=u+iv is analytic). Then identify f(z) as a complex function of z=x+iy.\n\n**Expected solution:**\n\n**Step 1 — Find v using CR equations:**\n\nFrom CR: ∂v/∂y = ∂u/∂x = eˣcos(y).\n\nIntegrate with respect to y:\n$$v = \\int e^x\\cos(y)\\, dy = e^x\\sin(y) + h(x)$$\n\n**Step 2 — Use the second CR equation:**\n\n∂u/∂y = −eˣsin(y). CR requires ∂u/∂y = −∂v/∂x:\n$$-e^x\\sin(y) = -\\frac{\\partial v}{\\partial x} = -(e^x\\sin(y) + h'(x))$$\n$$-e^x\\sin(y) = -e^x\\sin(y) - h'(x) \\implies h'(x) = 0 \\implies h = C \\text{ (constant)}$$\n\nSo **v(x,y) = eˣsin(y) + C** (take C=0 for simplicity).\n\n**Step 3 — Identify f(z):**\n\n$$f(z) = e^x\\cos(y) + ie^x\\sin(y) = e^x(\\cos(y)+i\\sin(y)) = e^x\\cdot e^{iy} = e^{x+iy} = e^z$$\n\n**Verification:** CR equations for u=eˣcos(y), v=eˣsin(y) hold everywhere (verified in WE2). f(z)=eᶻ is entire. ✓\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.90 × 5⌉ = ⌈4.5⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.cx.analytic-functions and math.cx.harmonic-functions; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.cx.cauchy-riemann assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — CONJUGATE-IS-ANALYTIC (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Claiming f(z)=z̄ is analytic is the CONJUGATE-IS-ANALYTIC error. z̄=x−iy appears smooth and well-behaved, but the CR equations fail everywhere. Real smoothness ≠ complex analyticity.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is f(z)=z̄ analytic? Verify with CR.\"\n- MC-1 response: \"Yes, it's smooth / continuous / bijective.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"CR check for z̄: u=x, v=−y. ∂u/∂x=1, ∂v/∂y=−1. CR requires 1=−1: impossible. The failure is total — there is not a single point where z̄ is complex-differentiable. The intuition from real analysis (smooth = differentiable) fails completely in complex analysis. z̄ is the canonical non-analytic function: smooth as a map ℝ²→ℝ², yet nowhere complex-differentiable.\"\n\nPractice: Compute the limit (f(z+Δz)−f(z))/Δz for f(z)=z̄ along the real axis vs imaginary axis directly, and show they give different limits (1 vs −1).\n\n---\n\n### Repair Action B02 — POINTWISE-CR-IMPLIES-HOLOMORPHIC (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Concluding that CR equations at a single point imply holomorphicity there is POINTWISE-CR-IMPLIES-HOLOMORPHIC. The sufficient condition requires CR in an open neighbourhood, not at a single point.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"f(z)=|z|² has CR at z=0. Is f holomorphic at z=0?\"\n- MC-2 response: \"Yes, CR hold at z=0.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"CR at z=0 means f is complex-differentiable at z=0 (f'(0)=0). But holomorphic means differentiable in a neighbourhood. In any disc around 0, there are points z≠0 where CR fail (∂u/∂x=2x≠0=∂v/∂y unless x=0). So f is differentiable only at z=0 — an isolated point — and not holomorphic anywhere. Complex-differentiable at a single point is a degenerate situation in complex analysis; holomorphic (open domain) is the useful concept.\"\n\nPractice: Show f(z)=|z|⁴ is complex-differentiable only at z=0 using CR equations.\n\n---\n\n### Repair Action B03 — REAL-SMOOTH-IMPLIES-ANALYTIC (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Equating real-smooth components with complex analyticity is REAL-SMOOTH-IMPLIES-ANALYTIC. The CR equations are an additional constraint beyond smoothness — they encode the one-complex-variable structure.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"f(z)=x²+iy² — are u=x² and v=y² smooth? Is f analytic?\"\n- MC-3 response: \"Yes, x² and y² are smooth, so f is analytic.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"CR check: ∂u/∂x=2x, ∂v/∂y=2y. CR requires 2x=2y → x=y. CR hold only on the diagonal x=y, not in an open set. f is not analytic anywhere. u=x² and v=y² are both infinitely differentiable as real functions — but the CR equations fail. Complex analyticity imposes a rigid coupling between u and v that real smoothness does not.\"\n\nPractice: For u=x²−y² (smooth), find the unique v making f=u+iv analytic. Show v=2xy (not y²). Smooth v=y² doesn't work; the coupled CR system determines v uniquely (up to constant).\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Verify CR for f(z)=cos(z)=cos(x)cosh(y)−isin(x)sinh(y); find f'(z)=−sin(z) |\n| SR-2 | +3 days | State: (1) necessary condition for complex-diff; (2) sufficient condition for holomorphic; (3) canonical non-analytic example; (4) f'(z) formula from partials |\n| SR-3 | +7 days | Given u(x,y), find the harmonic conjugate v using CR (two-step integration); identify the resulting f(z) |\n| SR-4 | +14 days | Prove: if f is analytic and real-valued, then f is constant (use CR: ∂u/∂x=∂v/∂y=0 and ∂u/∂y=−∂v/∂x=0 since v=0; both partials zero → u constant by connected domain) |\n\nRetrieval flag: if student claims z̄ is analytic (MC-1) or confuses pointwise-CR with holomorphicity (MC-2) in any SR, re-execute B01/B02 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.cx.complex-function | f=u+iv decomposition, path-dependent limits, complex differentiability definition assumed |\n| Requires (Tier-1) | math.calc.partial-derivatives | First partial derivatives ∂u/∂x, ∂u/∂y, ∂v/∂x, ∂v/∂y and their computation assumed; continuity of partials used in sufficient condition |\n| Unlocks | math.cx.analytic-functions | CR equations are the gateway to analytic function theory; the sufficient condition is the working definition of holomorphic used throughout complex analysis |\n| Unlocks | math.cx.harmonic-functions | The harmonic conjugate construction (P76 transfer probe) leads directly to harmonic functions (u satisfies Laplace's equation when f=u+iv is analytic) |\n\n**GR-9:** cross_links=[] → P76 mode = independence (transfer probe is a harmonic conjugate reconstruction, self-contained within complex analysis).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=5 → standard structure (3 main TAs + gate)\n- bloom=apply → V-4 = PASS (P07 required; WE1=f(z)=z², WE2=f(z)=eᶻ in A02)\n- CPA_entry = C for expert learner: two-direction limit derivation in A01 before the CR formula; this is the most important pedagogical choice for this blueprint\n\n**Key teaching insight:** The CR equations feel like arbitrary constraints unless the student has derived them from first principles. A01's two-direction limit computation (real axis vs. imaginary axis, requiring agreement) transforms CR from a formula to be memorised into a structural inevitability. Students who derive CR themselves rarely forget the sign in the second equation (∂u/∂y=−∂v/∂x, not +∂v/∂x).\n\n**MC-1 permanence:** The z̄ example should be returned to in every spaced-repetition session. It is the most important single example in introductory complex analysis because it demonstrates that real smoothness and complex analyticity are genuinely different properties. The fact that |z̄|=|z| (same magnitude) makes z̄ seem \"close to z\" but this has no analytic relevance.\n\n**P76 design:** The harmonic conjugate construction (given u, find v so f=u+iv is analytic) is the most important skill beyond just checking CR. It appears throughout applications (conformal mapping, fluid dynamics, electrostatics). The P76 probe uses u=eˣcos(y) (the real part of eᶻ) and expects the student to recover v=eˣsin(y) and identify f=eᶻ — a transfer that requires understanding the two-step integration procedure and recognising the resulting complex exponential.\n\n**Problem 3 in P77:** The subtle sign choice in f=x³−3xy²+i(3x²y+y³) vs z³=(x³−3xy²)+i(3x²y−y³) tests careful computation and catches students who assume every polynomial is analytic. The positive y³ in v breaks the pattern.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.cx.cauchy-riemann ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.cx.complex-function ✓, math.calc.partial-derivatives ✓ | PASS |\n| V-3 | CPA entry = C for expert difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 present | P07 in A02 (WE1=f(z)=z², WE2=f(z)=eᶻ) ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | cross_links=[] → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.90×5⌉=⌈4.5⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=5 → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Harmonic conjugate of eˣcos(y); v=eˣsin(y) derived via two-step CR integration; f=eᶻ identified correctly ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 287,
+        "endLine": 523
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — expert learner computes f'(z) for f(z)=z² from two approach directions, observes that both limits must agree, and extracts the CR equations before seeing them stated.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: compute limit of (f(z+Δz)−f(z))/Δz for f(z)=z² via real axis (Δy=0) and imaginary axis (Δx=0); require agreement; extract four partial equations that form CR; P: u-v component diagram; A: CR equations stated formally + sufficient condition theorem\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: f(z)=z² verify CR and find f'(z); WE2: f(z)=eˣcos(y)+ieˣsin(y)=eᶻ verify CR\n3. **A03 P06 CONTRAST PAIR** — analytic (f=z²) vs non-analytic (f=z̄); |z|² analytic only at origin; sufficient condition vs necessary-only at a point\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Verify CR for f(z)=cos(z)=cos(x)cosh(y)−isin(x)sinh(y); find f'(z)=−sin(z) |\n| SR-2 | +3 days | State: (1) necessary condition for complex-diff; (2) sufficient condition for holomorphic; (3) canonical non-analytic example; (4) f'(z) formula from partials |\n| SR-3 | +7 days | Given u(x,y), find the harmonic conjugate v using CR (two-step integration); identify the resulting f(z) |\n| SR-4 | +14 days | Prove: if f is analytic and real-valued, then f is constant (use CR: ∂u/∂x=∂v/∂y=0 and ∂u/∂y=−∂v/∂x=0 since v=0; both partials zero → u constant by connected domain) |\n\nRetrieval flag: if student claims z̄ is analytic (MC-1) or confuses pointwise-CR with holomorphicity (MC-2) in any SR, re-execute B01/B02 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 452,
+        "endLine": 467
+      }
+    },
+    {
+      "assetId": "math.cx.cauchy-riemann/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.cauchy-riemann",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.cx.complex-function | f=u+iv decomposition, path-dependent limits, complex differentiability definition assumed |\n| Requires (Tier-1) | math.calc.partial-derivatives | First partial derivatives ∂u/∂x, ∂u/∂y, ∂v/∂x, ∂v/∂y and their computation assumed; continuity of partials used in sufficient condition |\n| Unlocks | math.cx.analytic-functions | CR equations are the gateway to analytic function theory; the sufficient condition is the working definition of holomorphic used throughout complex analysis |\n| Unlocks | math.cx.harmonic-functions | The harmonic conjugate construction (P76 transfer probe) leads directly to harmonic functions (u satisfies Laplace's equation when f=u+iv is analytic) |\n\n**GR-9:** cross_links=[] → P76 mode = independence (transfer probe is a harmonic conjugate reconstruction, self-contained within complex analysis).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.cauchy-riemann.md",
+        "startLine": 467,
+        "endLine": 482
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

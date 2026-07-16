@@ -1,0 +1,404 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.partial-order-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.partial-order",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e63b46eeaa2012b210bc7946a60892e5048bc498d4dbb4930e14ee3057516abe",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.partial-order.md": "sha256:2be2a78046b44b1c84afcdb8426c2c4ef992810f83579539966c67505dd49c90"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.found.partial-order",
+    "name": "Partial Order",
+    "difficultyRaw": "developing (2)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.reflexive-relation",
+      "math.found.transitive-relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.partial-order-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.partial-order (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.partial-order.md": "sha256:2be2a78046b44b1c84afcdb8426c2c4ef992810f83579539966c67505dd49c90"
+      },
+      "contentHash": "sha256:eeeee7c516158d2769fdc228de05a3ed691031b700c248806cb0deb555db7ca0",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.partial-order.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partial-order.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partial-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partial-order\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partial-order.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partial-order.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partial-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partial-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partial-order.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partial-order.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partial-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partial-order\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partial-order.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partial-order.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partial-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partial-order\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partial-order.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partial-order.md#TA-A05 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partial-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partial-order\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partial-order.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partial-order.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partial-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partial-order\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.partial-order.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.partial-order.md#TA-A07",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.partial-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.partial-order\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.partial-order/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.partial-order",
+      "title": "Learning Objectives",
+      "content": "On completion of all Protocol A Teaching Actions, a student will be able to:\n\n1. **Define** antisymmetry and explain how it differs from symmetry and asymmetry.\n2. **State** the three properties (reflexive, antisymmetric, transitive) that define a partial order.\n3. **Verify** whether a given relation is a partial order by systematically checking all three properties.\n4. **Give examples** of standard partial orders (≤ on ℤ, ⊆ on 𝒫(A), divisibility on ℕ) and identify incomparable elements in each.\n5. **Distinguish** partial orders from total orders by recognising that comparable pairs are not required for all pairs.\n6. **Explain** why the word \"partial\" captures the essential feature of the structure.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 30,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.partial-order",
+      "title": "FOUNDATIONAL): Antisymmetric ≠ \"Not Symmetric",
+      "content": "### MC-1 (FOUNDATIONAL): Antisymmetric ≠ \"Not Symmetric\"\n**Label:** ANTISYMM-NOT-NONSYMM\n**Statement:** Student interprets \"antisymmetric\" as \"the relation has no symmetric pair,\" meaning for every pair (a,b) with a≠b that is in R, its reverse (b,a) must NOT be in R. This is the definition of *asymmetric*, not *antisymmetric*. Antisymmetry only forbids BOTH (a,b) and (b,a) from being present when a ≠ b — it says nothing about which of the two must be present.\n**Trigger:** R = {(1,1),(2,2),(3,3),(1,2),(2,1)} — student correctly identifies antisymmetry is violated, but when asked why, says \"because (2,1) is in R and (1,2) is also in R, so it's not antisymmetric — antisymmetric means no pair and its reverse can coexist.\" That is correct for this example but for wrong reason (this is also asymmetric's criterion). The distinction surfaces when student wrongly concludes R = {(1,1),(2,2),(3,3),(1,2)} is NOT antisymmetric because \"(1,2) has no reverse (2,1) in R, so the relation isn't balanced.\"\n**Root cause:** The prefix \"anti\" is read as \"opposite of\" (symmetric's opposite = no symmetric pairs) rather than as its correct logical meaning (the conditional: both directions ⟹ equal).\n**Repair chain:** B-01 — conditional form drill.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.partial-order",
+      "title": "Partial Order Requires All Pairs Comparable",
+      "content": "### MC-2: Partial Order Requires All Pairs Comparable\n**Label:** TOTAL-ORDER-CONFUSION\n**Statement:** Student believes every partial order must have every pair of elements comparable (i.e., for any a,b: a≤b or b≤a). This confuses partial order with *total* order.\n**Trigger:** Given (𝒫({a,b}), ⊆), student says \"{a} and {b} are incomparable so ⊆ can't be a partial order.\"\n**Root cause:** Students' experience with ≤ on ℝ (a total order) is the dominant template; the word \"order\" triggers this template.\n**Repair chain:** B-02 — incomparable elements drill.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.partial-order",
+      "title": "Partial Order Uses Strict Inequality (< not ≤",
+      "content": "### MC-3: Partial Order Uses Strict Inequality (< not ≤)\n**Label:** STRICT-ORDERING\n**Statement:** Student believes a partial order must be irreflexive (like <), so the defining relation should NOT include self-pairs. This contradicts reflexivity (one of the three defining properties).\n**Trigger:** Given (ℤ, ≤), student says \"but ≤ can't be a partial order because a ≤ a is trivial and a partial order should only order distinct elements.\"\n**Root cause:** Confusing \"partial order\" (reflexive-based, sometimes called a non-strict order) with \"strict partial order\" (irreflexive+antisymmetric+transitive, based on <). Both are valid but different structures; the default \"partial order\" is the reflexive version.\n**Repair chain:** B-03 — reflexive vs. strict order contrast.\n\n**MAMR Protocol:** MC-1 is FOUNDATIONAL; MC-2 and MC-3 are secondary. If MC-1 is active, clear it completely before addressing MC-2 or MC-3. Secondary MCs cleared FIFO.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 17,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partial-order",
+      "title": "Antisymmetry — The New Property",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Antisymmetry — The New Property\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 9,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partial-order",
+      "title": "Partial Order Definition",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Partial Order Definition\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 70,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partial-order",
+      "title": "Verifying Partial Orders — Systematic Three-Property Check",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Verifying Partial Orders — Systematic Three-Property Check\",\"primitives\":[\"P07\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 121,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partial-order",
+      "title": "Standard Partial Order Examples",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Standard Partial Order Examples\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 177,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partial-order",
+      "title": "Comparable vs. Incomparable Elements",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Comparable vs. Incomparable Elements\",\"primitives\":[\"P06\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 223,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partial-order",
+      "title": "Partial Order vs. Total Order — The \"Partial\" in Partial Order",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Partial Order vs. Total Order — The \\\"Partial\\\" in Partial Order\",\"primitives\":[\"P03\",\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 274,
+        "endLine": 311
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.partial-order",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 311,
+        "endLine": 371
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.partial-order",
+      "title": "Assessment Item Bank",
+      "content": "| # | Type | Item | Answer | Targets |\n|---|---|---|---|---|\n| 1 | Verify | R = {(1,1),(2,2),(3,3),(1,2),(2,3),(1,3)} on {1,2,3}. Is R a partial order? | YES — reflexive, antisymmetric, transitive (linear chain) | Verification |\n| 2 | Verify | R = {(1,1),(2,2),(1,2),(2,1)} on {1,2}. Is R a partial order? | NO — antisymmetry fails: (1,2) and (2,1) with 1≠2 | MC-1 |\n| 3 | True/False | (ℤ, <) is a partial order. | FALSE — reflexivity fails (n < n is false) | MC-3 |\n| 4 | True/False | (ℤ, =) is a partial order. | TRUE — reflexive (n=n), antisymmetric (n=m and m=n ⟹ n=m), transitive (n=m and m=k ⟹ n=k) | Nonobvious example |\n| 5 | Find | In the poset ({1,2,4,8}, \\|), find all incomparable pairs. | None — this is actually a total order under divisibility: 1\\|2\\|4\\|8 | MC-2 detection |\n| 6 | Find | In the poset ({2,3,5,6,10,15}, \\|), find three incomparable pairs. | e.g., (2,3), (2,5), (3,5) — none of these pairs satisfy divisibility in either direction | Poset exploration |\n| 7 | Short answer | What axiom distinguishes a total order from a partial order? Give it formally. | Totality (connexity): ∀a,b ∈ A: a≤b OR b≤a | MC-2 |\n| 8 | Short answer | Is every total order a partial order? Is every partial order a total order? | Yes; no | Containment |\n| 9 | Construct | Construct a partial order on {1,2,3,4} with exactly one pair of incomparable elements. | e.g., R where 1≤2≤4, 1≤3≤4, but 2 and 3 incomparable. R = {self-pairs, (1,2),(1,3),(1,4),(2,4),(3,4)} | Construction |\n| 10 | Analysis | R is reflexive and transitive on A. Under what additional condition is R a partial order? | Antisymmetry — add: (a,b) ∈ R and (b,a) ∈ R ⟹ a=b | Structural |\n| 11 | True/False | The subset relation ⊆ on any collection of sets is always a partial order. | TRUE — reflexivity, antisymmetry (set extensionality), and transitivity always hold | Application |\n| 12 | Analysis | R is a partial order on A. If additionally every pair of elements is comparable, what structure is (A,R)? | A total order (chain) | Synthesis |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 491,
+        "endLine": 510
+      }
+    },
+    {
+      "assetId": "math.found.partial-order/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.partial-order",
+      "title": "Spaced Repetition Schedule",
+      "content": "**P89 Spaced Repetition:** Intervals — Day 1, Day 3, Day 7, Day 21, Day 60.\n\n| Day | Probe Focus | Sample Item |\n|---|---|---|\n| Day 1 | Three-property verification | Verify a given 4-element relation is or is not a partial order (RAT check) |\n| Day 3 | Antisymmetry | Classify three relations as antisymmetric or not; cite witnessing elements |\n| Day 7 | Comparable/incomparable | In a divisibility poset, list all incomparable pairs |\n| Day 21 | Standard examples | Is (ℚ, ≤) a partial order? A total order? How does it differ from (ℚ, <)? |\n| Day 60 | Real-world mapping | Describe a real-world partial order from your field; identify the three properties and find incomparable elements |\n\n**Decay protocol:** If student fails a spaced probe → reset to Day 1 + Protocol B (B-01 repair chain for antisymmetry issues; B-02 for incomparable-element issues; B-03 for reflexivity/strict confusion).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.partial-order.md",
+        "startLine": 510,
+        "endLine": 526
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

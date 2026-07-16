@@ -1,0 +1,342 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.binary-operation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.binary-operation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e250780a90dfb2238d1c26dc9e82487655e93c5f094a279d301b49afd22379b3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.binary-operation.md": "sha256:56bd8d88946b23a8206408e50f2053bcde91dccce37a093c844f097c9fe8b1e2"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.binary-operation",
+    "name": "",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.function-set-theoretic"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.binary-operation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.binary-operation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.binary-operation.md": "sha256:56bd8d88946b23a8206408e50f2053bcde91dccce37a093c844f097c9fe8b1e2"
+      },
+      "contentHash": "sha256:67632c6a84df9a6645e135eb16c99a6b13fd7726d99645b12f81f43d0f19fda5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.binary-operation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.binary-operation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.binary-operation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.binary-operation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.binary-operation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.binary-operation.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.binary-operation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.binary-operation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.binary-operation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.binary-operation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.binary-operation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.binary-operation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.binary-operation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.binary-operation.md#TA-A04 (addresses MC-2, MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.binary-operation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.binary-operation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.binary-operation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.binary-operation",
+      "title": "math.abst.binary-operation — cognitive map",
+      "content": "### Target Understanding\nA **binary operation** on a set S is a function ∗: S × S → S that assigns to every ordered pair\n(a, b) ∈ S × S exactly one element a∗b ∈ S.  The critical constraint is **closure**: the result\na∗b must lie in S for every a, b ∈ S.  Associativity, commutativity, the existence of an identity\nelement, and the existence of inverses are **additional properties** an operation may or may not\nhave — they are not part of the definition of a binary operation.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Familiar operations on ℤ: addition, subtraction, multiplication; checking closure by trying specific pairs |\n| **Pictorial (P)** | Cayley (operation) table for a small finite set; arrow diagram of ∗: S×S→S |\n| **Abstract (A)** | Formal definition: ∗: S×S→S total and well-defined; the four extra properties (associativity, commutativity, identity, inverse) as separate, optional attributes |\n\n### Prerequisite Knowledge (from KG)\n- **math.found.function-set-theoretic** — a function is a total, well-defined map from domain to codomain; ordered pairs; Cartesian product S×S\n\n### Key Distinctions\n| Property | Definition | Holds for + on ℤ? | Holds for − on ℤ? | Holds for × on ℕ? |\n|----------|------------|:-----------------:|:-----------------:|:-----------------:|\n| **Closure** | a∗b ∈ S for all a,b | ✓ | ✓ | ✓ |\n| **Commutativity** | a∗b = b∗a | ✓ | ✗ (3−5 ≠ 5−3) | ✓ |\n| **Associativity** | (a∗b)∗c = a∗(b∗c) | ✓ | ✗ | ✓ |\n| **Identity** | ∃e: a∗e=e∗a=a | ✓ (e=0) | ✗ | ✓ (e=1) |\n| **Inverses** | ∀a ∃a⁻¹: a∗a⁻¹=e | ✓ (−a) | n/a | ✗ (no 1/a in ℕ) |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 29,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.binary-operation",
+      "title": "CLOSURE-VIOLATION",
+      "content": "| MC-1 | CLOSURE-VIOLATION | Accepts subtraction on ℕ as a binary operation; doesn't check 2−5=−3∉ℕ | Treats any \"rule\" on a set as a binary operation without verifying that outputs stay in the set | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.binary-operation",
+      "title": "COMMUTATIVITY-REQUIRED",
+      "content": "| MC-2 | COMMUTATIVITY-REQUIRED | Claims matrix multiplication or function composition \"can't be a binary operation\" because they're not commutative | Conflates commutativity (an optional extra property) with the definition of binary operation | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.binary-operation",
+      "title": "ARITHMETIC-ONLY",
+      "content": "| MC-3 | ARITHMETIC-ONLY | Doesn't recognise set intersection, function composition, string concatenation, or XOR as binary operations | Mental model of \"operation\" anchored on +, −, ×, ÷ | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.binary-operation",
+      "title": "Entry: The Definition via Concrete Examples (P03 + P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: The Definition via Concrete Examples (P03 + P11 + P49)\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 96,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.binary-operation",
+      "title": "MC-1 Gate: Closure Check (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: Closure Check (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 141,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.binary-operation",
+      "title": "Properties: Contrast Commutative vs Non-Commutative (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Properties: Contrast Commutative vs Non-Commutative (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 188,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.binary-operation",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P03\",\"P06\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 229,
+        "endLine": 546
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.binary-operation",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Which is a binary operation on ℕ = {1, 2, 3, …}?\n(A) a ∗ b = |a − b| (absolute difference)\n(B) a ∗ b = a − b\n(C) a ∗ b = a / b\n(D) None of the above\n\n*(Target: A — |a − b| is always a non-negative integer, but wait: |2−5|=3 ∈ ℕ, |5−5|=0 ∉ ℕ if ℕ={1,2,3,...}. Actually |a-b|=0 when a=b, and 0∉ℕ under the convention ℕ={1,2,...}. So A also fails! Under ℕ = {0,1,2,...} (including zero), A works. This is ambiguous. Let me change Q1 to avoid this.)*\n\nRevised Q1: Which is a binary operation on ℤ (all integers)?\n(A) a ∗ b = a + b − 2\n(B) a ∗ b = a / b\n(C) a ∗ b = √(a + b)\n(D) a ∗ b = the larger of a and b\n\n*(Target: A and D are both valid on ℤ — but the question asks for a single answer. Let me say \"select all that apply.\" Actually for simplicity: A gives an integer (closed ✓); B may not give integer (1/3 ∉ ℤ, fails); C may not give integer (√3 ∉ ℤ, fails); D max(a,b) is always an integer ✓. So A and D. Let me make this a two-answer question.)*\n\nLet me redesign Q1 more cleanly:\n\n**Q1.** Decide: Is a ∗ b = a + b − 2 a binary operation on ℤ?  Justify in one sentence.\n\n*(Target: Yes — a+b−2 is always an integer when a,b ∈ ℤ. Closure holds. ✓)*\n\n**Q2.** Is matrix multiplication a binary operation on the set of all 2×2 real matrices?  Is it commutative?\n\n*(Target: Yes, binary operation (closed: 2×2 times 2×2 = 2×2). Not commutative: give example or state AB ≠ BA in general.)*\n\n**Q3.** Let S = {−1, 0, 1} and define a ∗ b = a × b (ordinary multiplication).\n(i) Is ∗ closed on S?  (ii) Is ∗ associative on S?\n\n*(Target: (i) Yes — check: (−1)×(−1)=1∈S, (−1)×0=0∈S, 1×1=1∈S, etc. All products of elements from {−1,0,1} stay in {−1,0,1}. ✓ (ii) Yes — multiplication of real numbers is associative.)*\n\n**Q4.** TRUE or FALSE: If ∗ is a binary operation on S, then a ∗ b must equal b ∗ a for all a, b ∈ S.\n\n*(Target: FALSE — commutativity is an optional property, not part of the definition. Matrix multiplication is a counterexample.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independence probe — self-contained.*\n\n> Let S = {0, 1, 2, 3} and define a ⊕ b = (a + b) mod 4 (the remainder when a + b is divided by 4).\n>\n> (a) Verify that ⊕ is closed on S by computing 2 ⊕ 3 and 3 ⊕ 3.\n> (b) Compute 1 ⊕ 3 and 3 ⊕ 1.  Is ⊕ commutative?\n> (c) Find an element e ∈ S such that a ⊕ e = a for all a ∈ S.  (This is the identity element.)\n> (d) For the element 3 ∈ S, find an element x such that 3 ⊕ x = e.  (This is the inverse of 3.)\n\n*Expected answers:*\n*(a) 2⊕3 = 5 mod 4 = 1 ∈ S ✓; 3⊕3 = 6 mod 4 = 2 ∈ S ✓.*\n*(b) 1⊕3 = 4 mod 4 = 0; 3⊕1 = 0. Equal — commutative for this pair. (In general, yes: (a+b) mod 4 = (b+a) mod 4.)*\n*(c) e = 0 — because a⊕0 = (a+0) mod 4 = a for all a ∈ S.*\n*(d) 3⊕1 = 0 = e, so the inverse of 3 is 1.*\n\n**[P55 — SCORE]**  Award 1 point for P76 if all four parts correct; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.90  →  ⌈0.90 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → closure gap → TB-R01.\n  - Q2 wrong → MC-2 or MC-3 → TB-R02 (matrix multiplication example).\n  - Q3 wrong → check (i) vs (ii) separately; closure gap → TB-R01; associativity gap → explain with numbers.\n  - Q4 wrong → MC-2 → TB-R02 (commutativity is optional; give counterexample).\n  - P76 wrong → map error to (a)/(b)/(c)/(d): closure → TB-R01; identity/inverse → re-derive from definition; commutativity → TB-R02.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.binary-operation\nMASTERY_REACHED: true\nUNLOCKS:         math.abst.group-theory\nNEXT_CONCEPT:    math.abst.group-theory\nSESSION_CLOSE:   \"You now understand that a binary operation is simply a closure-preserving\n                  rule on a set. Commutativity, associativity, identity, and inverses are\n                  extra properties an operation may have — and group theory is the study of\n                  operations that have all four.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: CLOSURE-VIOLATION (MC-1)\n\n**Trigger:** Student accepts an operation as binary despite the output leaving S on some pair.\n\n**Step 1 — Single counterexample suffices.**\n> To DISPROVE closure, you only need ONE pair (a, b) where a ∗ b ∉ S.\n\n**Step 2 — Structured check.**\n> For the claimed operation and set, pick a \"stress-test\" pair:\n> - If S ⊆ ℤ and ∗ = subtraction: try the smallest minus the largest.\n> - If ∗ = division: try 1 ÷ 2.\n> - If ∗ = square root: try √2 (irrational, likely outside the set).\n\n**Step 3 — Confirm the definition.**\n> Binary operation: ∗: S × S → S — the OUTPUT must be IN S for EVERY pair. Not just most.\n\n**Exit:** Return to the TA-A02 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: COMMUTATIVITY-REQUIRED (MC-2)\n\n**Trigger:** Student rejects an operation because a ∗ b ≠ b ∗ a.\n\n**Step 1 — State what the definition requires.**\n> The DEFINITION of binary operation only requires closure.\n> The question \"is it commutative?\" is SEPARATE.\n\n**Step 2 — Counterexample: matrix multiplication.**\n> Let A = [[1,1],[0,1]] and B = [[1,0],[1,1]].\n> AB = [[2,1],[1,1]], BA = [[1,1],[1,2]].  AB ≠ BA.\n> Yet matrix multiplication IS a binary operation on 2×2 real matrices — it is closed.\n> It is simply NOT commutative.\n\n**Step 3 — Reframe commutativity.**\n> Commutativity means \"order doesn't matter.\"\n> Binary operation means \"closure.\"\n> These are independent conditions.\n\n**Exit:** Return to TA-A03 P49 checkpoint, part (ii).\n\n---\n\n### TB-R03 · Repair: ARITHMETIC-ONLY (MC-3)\n\n**Trigger:** Student does not recognise non-arithmetic rules as binary operations.\n\n**Step 1 — Expand the example set.**\n> Three non-arithmetic binary operations:\n> 1. Set intersection ∩ on subsets of U: A ∩ B is always a subset of U → closed.\n> 2. String concatenation on strings: \"hello\" + \"world\" = \"helloworld\" → still a string → closed.\n> 3. XOR on {0,1}: 0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0 → all in {0,1} → closed.\n\n**Step 2 — Apply the closure test to each.**\n> For each one: \"Does every pair of inputs produce an output in S?\"\n> If yes, it is a binary operation — regardless of how it looks.\n\n**Step 3 — Restate the definition.**\n> A binary operation is ANY rule ∗: S×S→S.  The \"∗\" can be anything.\n\n**Exit:** Return to TA-A03 P49 checkpoint.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Is a ∗ b = 2^a a binary operation on ℤ? Explain.\"\n    Target: No — 2^a takes only one input (a), not two; or if interpreted as a∗b=2^(a+b),\n            check closure on ℤ: 2^(a+b) is always positive, so not in ℤ when result < 0\n            is needed... actually 2^(anything) > 0, so 2^(a+b) ∈ ℤ⁺ ⊆ ℤ. But the\n            function only depends on a, not b — it is not a genuine binary operation.\n            PASS if student identifies the problem.\n    Alternative probe: \"Is subtraction a binary operation on ℕ = {1,2,3,...}? Give a counterexample.\"\n    Target: No — 2−5=−3∉ℕ. PASS if counterexample given.\n\n  Interval-2 (+3 days):\n    Probe: \"Name one binary operation on ℤ that is NOT commutative.\"\n    Target: Subtraction (3−5 ≠ 5−3). PASS if correct with justification.\n\n  Interval-3 (+1 week):\n    Probe: \"Define a ∗ b = max(a,b) on ℝ. Is ∗ a binary operation? Is it commutative?\n            Does it have an identity element?\"\n    Target: Yes (closed, max(a,b)∈ℝ). Commutative (max(a,b)=max(b,a)). No identity\n            (there is no e ∈ ℝ with max(a,e)=a for all a, since for a < e we get e ≠ a).\n            PASS if all three answered correctly.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (closure check) and TA-A03 (contrast table).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.found.function-set-theoretic:\n    Used in:   TA-A01 (binary op defined as function ∗: S×S→S; arrow diagram),\n               TA-A02 P64 (output must land in codomain = S),\n               TA-A04 P76 (⊕ defined as a function on S={0,1,2,3}).\n    Assumed:   Student can read f: A→B notation; understands domain, codomain, Cartesian product.\n\nUNLOCKS_ENABLED:\n  math.abst.group-theory:\n    Dependency: Group theory studies binary operations with ALL FOUR extra properties\n                (closure, associativity, identity, inverses). Student must first hold the\n                definition of binary operation and understand that the four properties are\n                independent and optional.\n\nCROSS_LINKS_NOTED:\n  (none)\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. Closure is the ENTIRE definition; everything else is extra.**\nStudents typically arrive expecting a binary operation to be commutative, to have an identity, and\nto behave like arithmetic.  The fastest way to break this expectation is TB-R02's matrix\nmultiplication example — two 2×2 matrices whose product depends on order.  Use it early if MC-2\nappears.\n\n**2. The set S matters as much as the rule.**\nSubtraction on ℤ: binary operation.  Subtraction on ℕ: not a binary operation.  Same rule,\ndifferent set, different answer.  Emphasise this in TA-A02 to anchor MC-1 to the set, not just\nthe rule.\n\n**3. The Cayley table is the clearest Pictorial representation for finite sets.**\nFor the P76 probe, a 4×4 Cayley table for ⊕ on {0,1,2,3} makes closure visible as \"every entry\nin the table is in {0,1,2,3}.\"  If a student struggles with parts (a)–(b), suggest building the\nfull table.\n\n**4. bloom = understand: proofs not required, but justifications are.**\nStudents do not need to prove theorems about binary operations.  They need to explain why a given\nrule is or is not a binary operation on a given set, and identify whether specific properties\nhold, with one illustrative example or counterexample as evidence.\n\n**5. This blueprint is a direct prerequisite for group theory (math.abst.group-theory).**\nThe group axioms (closure, associativity, identity, inverse) are exactly the four optional\nproperties introduced in TA-A03.  Point this out in P78 so students see the purpose of the\nabstract definition they just learned.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.binary-operation\n===================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 7; 4 TAs used ≤ 7.\n[PASS] V-4   CPA_ENTRY_STAGE = C.\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02, P41 + P64).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03, TB-R02, TB-R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P03 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA; gate TAs exempt from GR-2 as\n               the P64 + P49 structure serves the gate function)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross_links to document (cross_links = []).\n[PASS] V-17  GR-9: P76 uses Independence mode (cross_links = []); probe is self-contained\n               (modular arithmetic on {0,1,2,3}, no external Tier 1 concept required).\n[PASS] V-18  GR-10: MAMR stated in Component 3; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.90 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   Core definition covered: ∗: S×S→S, closure.\n             Four optional properties (associativity, commutativity, identity, inverse) named\n             and explicitly labelled as optional.\n             MC-1 (closure violation) anchored to the set-dependence of the definition.\n             MC-2 (commutativity required) countered by matrix multiplication example.\n             MC-3 (arithmetic-only) countered by set intersection, string concatenation, XOR.\n             P76 probe exercises closure, commutativity, identity, and inverse on {0,1,2,3}\n             with modular addition — no external Tier 1 dependency.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 229,
+        "endLine": 546
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.binary-operation",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P03 concrete analogy + P11 representation shift + P49)\n      → TA-A02 (P41/P64 MC-1 gate: closure check + P49)\n      → TA-A03 (P06 contrast: closed vs not closed / commutative vs not + P49)\n      → TA-A04 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (closure re-anchoring)\n  MC-2 → TB-R02 (commutativity is optional)\n  MC-3 → TB-R03 (non-arithmetic examples)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 74,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.binary-operation",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Is a ∗ b = 2^a a binary operation on ℤ? Explain.\"\n    Target: No — 2^a takes only one input (a), not two; or if interpreted as a∗b=2^(a+b),\n            check closure on ℤ: 2^(a+b) is always positive, so not in ℤ when result < 0\n            is needed... actually 2^(anything) > 0, so 2^(a+b) ∈ ℤ⁺ ⊆ ℤ. But the\n            function only depends on a, not b — it is not a genuine binary operation.\n            PASS if student identifies the problem.\n    Alternative probe: \"Is subtraction a binary operation on ℕ = {1,2,3,...}? Give a counterexample.\"\n    Target: No — 2−5=−3∉ℕ. PASS if counterexample given.\n\n  Interval-2 (+3 days):\n    Probe: \"Name one binary operation on ℤ that is NOT commutative.\"\n    Target: Subtraction (3−5 ≠ 5−3). PASS if correct with justification.\n\n  Interval-3 (+1 week):\n    Probe: \"Define a ∗ b = max(a,b) on ℝ. Is ∗ a binary operation? Is it commutative?\n            Does it have an identity element?\"\n    Target: Yes (closed, max(a,b)∈ℝ). Commutative (max(a,b)=max(b,a)). No identity\n            (there is no e ∈ ℝ with max(a,e)=a for all a, since for a < e we get e ≠ a).\n            PASS if all three answered correctly.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (closure check) and TA-A03 (contrast table).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 403,
+        "endLine": 434
+      }
+    },
+    {
+      "assetId": "math.abst.binary-operation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.binary-operation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.found.function-set-theoretic:\n    Used in:   TA-A01 (binary op defined as function ∗: S×S→S; arrow diagram),\n               TA-A02 P64 (output must land in codomain = S),\n               TA-A04 P76 (⊕ defined as a function on S={0,1,2,3}).\n    Assumed:   Student can read f: A→B notation; understands domain, codomain, Cartesian product.\n\nUNLOCKS_ENABLED:\n  math.abst.group-theory:\n    Dependency: Group theory studies binary operations with ALL FOUR extra properties\n                (closure, associativity, identity, inverses). Student must first hold the\n                definition of binary operation and understand that the four properties are\n                independent and optional.\n\nCROSS_LINKS_NOTED:\n  (none)\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.binary-operation.md",
+        "startLine": 434,
+        "endLine": 458
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

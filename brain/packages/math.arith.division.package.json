@@ -1,0 +1,491 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.division-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.division",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:79bd731cc70efab30f8c77bea7c05b2e552299637721318a0c50e57f71f71d44",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.division.md": "sha256:d9b996c5cc4e2427492ffd9bf5367f6ee3ed10d842cf2ee9aa5183d574b88d22"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.arith.division",
+    "name": "Division",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "math.arith.multiplication"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.division-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.division (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.division.md": "sha256:d9b996c5cc4e2427492ffd9bf5367f6ee3ed10d842cf2ee9aa5183d574b88d22"
+      },
+      "contentHash": "sha256:29738a05bff6166f22315525c9a23e328e3bd4ae4158ed780ecc3f1877a0d867",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.division.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.division.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.division\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.division.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.division.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.division\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.division.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.division.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.division\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.division.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.division.md#TA-A04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.division\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.division.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.division.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.division\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.division.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.division.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.division\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.division.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.division.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.division\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.division.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.division.md#TA-B03 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.division"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.division\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.division/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.division",
+      "title": "Division — cognitive map",
+      "content": "### 1.1 Core Insight\nDivision is the inverse operation of multiplication: a ÷ b = c if and only if c × b = a (with b ≠ 0). For natural numbers, division may leave a remainder: a = b×q + r with 0 ≤ r < b. When r = 0, b divides a exactly. Division by zero is undefined — no number q satisfies 0×q = a for a ≠ 0.\n\n### 1.2 Knowledge Prerequisites (Activated)\n- **math.arith.multiplication:** a × b = c; long multiplication; commutative/distributive law; zero annihilator. Division is defined as multiplication's inverse; quotient verification uses multiplication.\n\n### 1.3 Conceptual Sequence\n1. Division as inverse of multiplication: a ÷ b = c iff c × b = a.\n2. Two models: partitive (share a equally among b groups, each gets c) and quotitive (how many groups of b fit in a?).\n3. Division algorithm: a = b × q + r, where q is the quotient, 0 ≤ r < b is the remainder.\n4. Exact division: r = 0 → \"b divides a exactly\"; remainder division: r > 0 → \"a ÷ b = q remainder r\".\n5. Non-commutativity: a ÷ b ≠ b ÷ a in general.\n6. Division by zero: undefined — 0×q = a has no solution for a ≠ 0; the inverse of multiplication by zero does not exist.\n\n### 1.4 Transfer Target\nComputing integer quotients and remainders; verifying via the division algorithm; recognising when exact division holds (r = 0) and applying this to divisibility in number theory.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 29,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.arith.division/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.arith.division",
+      "title": "Worked Example Pair: Exact and Remainder Division",
+      "content": "### TA-A02 — Worked Example Pair: Exact and Remainder Division\n**Primitives:** P07 (WORKED EXAMPLE PAIR), P49 (ADAPTIVE CHECKPOINT)\n**Grammar:** GR-1 ✓ (P07 is B-category); GR-2 ✓; bloom=apply → P07 required ✓\n\n**P07 — WORKED EXAMPLE PAIR**\n\n*Example 1 — exact division:*\n> Compute 56 ÷ 8.\n>\n> Ask: \"8 × ? = 56.\" Answer: 8 × 7 = 56. So 56 ÷ 8 = **7**, remainder **0**.\n>\n> Division algorithm: 56 = 8 × 7 + 0. Verify: 8 × 7 = 56 ✓.\n\n*Example 2 — division with remainder:*\n> Compute 47 ÷ 5.\n>\n> Ask: \"5 × ? is as large as possible without exceeding 47.\" 5 × 9 = 45 ≤ 47; 5 × 10 = 50 > 47.\n> Quotient q = 9. Remainder r = 47 − 45 = 2.\n>\n> **Answer: 47 ÷ 5 = 9 remainder 2.**\n>\n> Division algorithm: 47 = 5 × 9 + 2. Verify: 5 × 9 + 2 = 45 + 2 = 47 ✓.\n>\n> Note: r = 2 is a valid part of the answer, not an error.\n\n**P49 — ADAPTIVE CHECKPOINT**\n> \"Compute 38 ÷ 6. Give quotient and remainder. Verify using the division algorithm.\"\n\n| Branch | Criterion | Next |\n|---|---|---|\n| CORRECT | q=6, r=2; 6×6+2=38 ✓ | TA-A03 |\n| PARTIAL | q=6 correct; remainder 2 dropped or stated as \"none\" | TA-B03 (MC-3 repair) → TA-A03 |\n| INCORRECT | q=5 or q=7 | \"6×6=36≤38; 6×7=42>38. Which fits?\" |\n| NO_RESPONSE | No attempt | \"How many 6s fit in 38? Try 6×6=36. Is 36 close to 38?\" |\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 97,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.arith.division/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.division",
+      "title": "DIVISION-COMMUTATIVE",
+      "content": "| MC-1 | DIVISION-COMMUTATIVE | Claims a÷b = b÷a; writes 12÷4 = 4÷12 = 3 | Overgeneralises commutativity from multiplication to division | FOUNDATIONAL |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.arith.division/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.division",
+      "title": "DIVISION-BY-ZERO-DEFINED",
+      "content": "| MC-2 | DIVISION-BY-ZERO-DEFINED | Computes a÷0 = 0, or a÷0 = a | Pattern-matches from a×0=0 or a÷a=1; doesn't grasp \"no inverse exists\" | SECONDARY |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.arith.division/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.division",
+      "title": "REMAINDER-IGNORED",
+      "content": "| MC-3 | REMAINDER-IGNORED | Writes 13÷4 = 3, silently dropping the remainder | Only practised exact-division examples; remainder feels like an error rather than part of the answer | SECONDARY |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.division",
+      "title": "Concrete Opening: Equal Sharing",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Opening: Equal Sharing\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 70,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.division",
+      "title": "Worked Example Pair: Exact and Remainder Division",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair: Exact and Remainder Division\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 97,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.division",
+      "title": "Non-Commutativity: Contrast Pair",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Non-Commutativity: Contrast Pair\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 134,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.division",
+      "title": "Division by Zero: Pattern Induction",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Division by Zero: Pattern Induction\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 160,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.division",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 187,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.division",
+      "title": "Repair: DIVISION-COMMUTATIVE (MC-1 FOUNDATIONAL)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: DIVISION-COMMUTATIVE (MC-1 FOUNDATIONAL)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 234,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.division",
+      "title": "Repair: DIVISION-BY-ZERO-DEFINED (MC-2)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: DIVISION-BY-ZERO-DEFINED (MC-2)\",\"primitives\":[\"P27\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 257,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.division",
+      "title": "Repair: REMAINDER-IGNORED (MC-3)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: REMAINDER-IGNORED (MC-3)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 276,
+        "endLine": 373
+      }
+    },
+    {
+      "assetId": "math.arith.division/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.division",
+      "title": "Mastery Gate",
+      "content": "### TA-A05 — Mastery Gate\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n**Grammar:** GR-3 ✓ (terminal); GR-6 ✓; GR-7 ✓ (P76 in gate); GR-9: `math.nt.divisibility` is Tier 1 → P76 CROSS-LINK PROBE\n\n**pass_criterion:** ⌈0.90 × 5⌉ = **5 / 5** (4 P77 items + 1 P76 item)\n\n**P77 — MULTI-PROBLEM SET (4 items)**\n1. Compute 56 ÷ 8.\n2. Compute 47 ÷ 5 with quotient and remainder.\n3. True or false: 36 ÷ 4 = 4 ÷ 36.\n4. Verify item 2 using the division algorithm: write a = b×q + r and confirm.\n\n**P55 — SCORE** (tally P77 results)\n\n**P76 — TRANSFER PROBE (CROSS-LINK: `math.nt.divisibility`)**\n> In number theory, we write **b | a** (\"b divides a\") when a ÷ b has remainder 0 — that is, a = b×q for some integer q.\n>\n> (a) Does 4 | 28? Show by computing 28 ÷ 4.\n>\n> (b) Does 6 | 25? Show by computing 25 ÷ 6 and stating the remainder.\n>\n> (c) Does 4 | 28 imply 28 | 4? Compute 4 ÷ 28 to decide.\n\n*(Expected: (a) 28÷4=7 R0 → YES; (b) 25÷6=4 R1 → NO; (c) 4÷28=0 R4 → NO; divisibility is not symmetric.)*\n\n**P55 — SCORE** (add P76 result)\n\n**P75 — MASTERY ASSESSMENT**\n- pass: 5 / 5 → MASTERY ACHIEVED\n- fail: ≤ 4 / 5 → MASTERY NOT ACHIEVED\n\n**P55 — SCORE** (record mastery outcome)\n\n**P74 — ROUTING DECISION**\n- MASTERY ACHIEVED → P78\n- MASTERY NOT ACHIEVED → P77 items 1–2 failed → TA-A02; P77 item 3 failed → TA-B01; P77 item 4 or P76 remainder related → TA-B03; re-enter TA-A02\n\n**P55 — SCORE** (record routing)\n\n**P78 — COMPLETION**\n> \"You can now compute integer division with quotient and remainder, verify using the division algorithm a = b×q + r, and recognise that division is not commutative and division by zero is undefined. The transfer probe showed how exact division (r = 0) is the basis of divisibility in number theory — a topic central to all of arithmetic and algebra.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Protocol)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 187,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.division",
+      "title": "Scaffolding Protocol",
+      "content": "| Stage | Condition | Entry Action |\n|---|---|---|\n| C (Concrete) | foundational → always | Begin TA-A01 with equal-sharing analogy |\n| P (Pictorial) | After C → diagram of groups and remainders | TA-A02 P07 worked examples with grouping diagram |\n| A (Abstract) | After P → commutativity contrast and division-by-zero | TA-A03 and TA-A04 |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 62,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.arith.division/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.division",
+      "title": "P89 Spaced Repetition",
+      "content": "**P89 — SPACED REPETITION SCHEDULE**\n\n| Interval | Probe Type | Content |\n|---|---|---|\n| Day 1 (consolidation) | Computation | 48÷6 (exact) and 53÷7 (with remainder); verify both |\n| Day 3 | Property recall | Is 100÷4 = 4÷100? Why not? What is 7÷0? |\n| Day 7 | Division algorithm | Express 83=7×q+r; find q and r; verify |\n| Day 30 | Transfer | Does 7 | 49? Does 5 | 37? Write answer using divisibility notation |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 301,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "math.arith.division/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.division",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**GR-8 ✓:** All cross_links documented.\n\n| Dependency | Direction | Relationship |\n|---|---|---|\n| `math.arith.multiplication` | REQUIRES | Division defined as inverse: a÷b=c iff c×b=a |\n| `math.arith.fractions` | UNLOCKS | a÷b as a fraction a/b when b does not divide a exactly |\n| `math.nt.divisibility` | UNLOCKS + CROSS-LINK (Tier 1) | b | a iff a÷b has remainder 0; the bridge from arithmetic to number theory |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.division.md",
+        "startLine": 314,
+        "endLine": 326
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

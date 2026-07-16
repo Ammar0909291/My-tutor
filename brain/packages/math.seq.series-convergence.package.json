@@ -1,0 +1,336 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.series-convergence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.series-convergence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ebe5169df9f69745ce4ecee3362802a4d6a8ff94865e6a00b1f5790df78d2fa8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.series-convergence.md": "sha256:cc83ee56edc813251609248bfbcc5b301db30970383c9893fc2512e69b9d1792"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.series-convergence",
+    "name": "Convergence of Series",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 20,
+    "prerequisites": [
+      "math.seq.partial-sums",
+      "math.seq.convergent"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.series-convergence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.series-convergence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.series-convergence.md": "sha256:cc83ee56edc813251609248bfbcc5b301db30970383c9893fc2512e69b9d1792"
+      },
+      "contentHash": "sha256:9c4fa9837ea7a9c59b38e9eb731fc8df01559d96a65f3c13a2ad075e49a80828",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.series-convergence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.series-convergence.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.series-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.series-convergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.series-convergence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.series-convergence.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.series-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.series-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.series-convergence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.series-convergence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.series-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.series-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.series-convergence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.series-convergence.md#TA-A04 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.series-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.series-convergence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.series-convergence/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.series-convergence",
+      "title": "Convergence of Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.partial-sums**: Sₙ = a₁+a₂+⋯+aₙ; partial sums as a new sequence\n- **math.seq.convergent**: sequence {aₙ} converges iff lim_{n→∞} aₙ = L for some finite L\n\n### Target Knowledge State\nStudent understands that a series Σaₙ converges iff its sequence of partial sums {Sₙ} converges; can apply the geometric series formula (Σarⁿ converges iff |r|<1, sum=a/(1−r)); can use the Divergence Test (if aₙ↛0 then Σaₙ diverges); and can analyze the harmonic series as a canonical example of a divergent series whose terms tend to zero.\n\n### Conceptual Obstacles\n1. Believing aₙ→0 implies Σaₙ converges — the harmonic series Σ1/n diverges even though 1/n→0; the Divergence Test gives a sufficient condition for divergence, not a sufficient condition for convergence\n2. Confusing Sₙ (the nth partial sum, a finite number) with Σaₙ (the infinite series, a limit); treating any large partial sum as \"the sum\"\n3. For geometric series, thinking |r|<1 requires r>0; negative r with |r|<1 (e.g., r=−1/2) still yields a convergent alternating geometric series\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.series-convergence",
+      "title": "TERMS-TO-ZERO-IMPLIES-CONVERGENT",
+      "content": "| MC-1 | TERMS-TO-ZERO-IMPLIES-CONVERGENT | Student concludes Σaₙ converges because aₙ→0; applies to harmonic series (1/n→0 but Σ1/n diverges) | Any series where the terms visibly decrease to 0 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.series-convergence",
+      "title": "PARTIAL-SUM-AS-TOTAL-SUM",
+      "content": "| MC-2 | PARTIAL-SUM-AS-TOTAL-SUM | Student identifies Sₙ for a large n as the sum of the series; does not take the limit; confuses a finite approximation with the exact infinite sum | Series problems asking for the exact sum or convergence |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.series-convergence",
+      "title": "GEOMETRIC-RATIO-MUST-BE-POSITIVE",
+      "content": "| MC-3 | GEOMETRIC-RATIO-MUST-BE-POSITIVE | Student requires r>0 for convergence; overlooks that alternating geometric series with |r|<1 also converge | Geometric series with negative common ratio, e.g., Σ(−1/2)ⁿ |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.series-convergence",
+      "title": "Bouncing Ball to Formal Definition",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Bouncing Ball to Formal Definition\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 65,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.series-convergence",
+      "title": "Pattern Induction: Geometric and Harmonic",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pattern Induction: Geometric and Harmonic\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 148,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.series-convergence",
+      "title": "Convergent vs. Divergent Contrast",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Convergent vs. Divergent Contrast\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 207,
+        "endLine": 267
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.series-convergence",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 267,
+        "endLine": 472
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.series-convergence",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*For each series: state whether it converges or diverges, identify the test or formula used, and find the sum if convergent.*\n\n**Problem 1.** Σₙ₌₀^∞ (3/4)ⁿ\n\n**Problem 2.** Σₙ₌₀^∞ (−1/2)ⁿ\n\n**Problem 3.** Σₙ₌₁^∞ n/(n+2)\n\n**Problem 4.** Find S₄ (the 4th partial sum) of Σₙ₌₀^∞ (1/3)ⁿ. Then state the exact infinite sum and compare.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. Geometric, r=3/4, |r|<1 → **converges**; sum = 1/(1−3/4) = **4**\n\n2. Geometric, r=−1/2, |r|=1/2<1 → **converges**; sum = 1/(1−(−1/2)) = 1/(3/2) = **2/3**\n\n3. aₙ = n/(n+2) → 1 ≠ 0 as n→∞ → **diverges** by the Divergence Test\n\n4. S₄ = 1+1/3+1/9+1/27 = 27/27+9/27+3/27+1/27 = **40/27 ≈ 1.481**\n   Infinite sum: 1/(1−1/3) = 3/2 = **1.5** (S₄ is already close but the exact sum requires taking the limit)\n\nScore 1 point per problem (P77 total: 4 points). Problem 4: require both S₄ and the exact infinite sum.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence — cross_links NOT Tier-1)*\n\n*Problem:* A geometric series has first term a=12 and common ratio r=−1/3.\n\n(a) Verify the series converges and state the reason.\n\n(b) Compute the exact infinite sum.\n\n(c) Compute the 3rd partial sum S₃ (terms indexed from n=0: a, ar, ar²).\n\n(d) The partial sum S₃ differs from the infinite sum. Explain why the partial sum is not the answer to \"what does the series converge to?\" What is the correct definition of the sum of an infinite series?\n\n*Expected answers:*\n\n(a) r=−1/3, |r|=1/3<1 → **converges** (geometric series convergence criterion). Note r is negative — confirmed not a barrier to convergence (MC-3).\n\n(b) Sum = a/(1−r) = 12/(1−(−1/3)) = 12/(4/3) = **9**\n\n(c) S₃ = 12 + 12(−1/3) + 12(−1/3)² = 12 − 4 + 4/3 = 8 + 4/3 = **28/3 ≈ 9.33**\n\n(d) S₃ ≈ 9.33 overshoots the exact sum 9 (because the r=−1/3 term alternates, causing oscillation above and below the limit). The sum of an infinite series is defined as **lim_{n→∞} Sₙ** — the limit of the sequence of partial sums, not any particular Sₙ no matter how large n is.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all four parts correct).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.75 × 5⌉ = 4). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items; if Divergence Test misuse → B01; if partial-sum confusion → B02; targeted repair |\n| ≤ 2/5 | → Return to A01; re-engage bouncing ball and partial sum plot; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.series-convergence` complete. Threshold 0.75 requires 4/5 correct.\n\n**Unlocks:** `math.calc.power-series`\n\nNext concept recommendation: Child test blueprints — `math.seq.divergence-test`, `math.seq.comparison-test`, `math.seq.ratio-test`, `math.seq.integral-test` — each deepens the convergence analysis toolkit.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 270,
+        "endLine": 379
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.series-convergence",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: bouncing ball (physical infinite sum with finite total); P: plot of partial sums converging to a limit; A: formal definition Sₙ=Σᵢ₌₁ⁿaᵢ, Σaₙ converges iff lim Sₙ exists\n2. **A02 P04 PATTERN INDUCTION** — compute partial sums for geometric series (closed form telescopes), then for harmonic series (no upper bound); induce the Divergence Test from the contrapositive\n3. **A03 P06 CONTRAST PAIR** — convergent geometric (|r|<1) vs. divergent (|r|≥1); Divergence Test: what it CAN conclude vs. CANNOT conclude; harmonic vs. geometric\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.series-convergence",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Does Σ(2/5)ⁿ converge? If so, find the sum. |\n| R2 | 3 days | Does Σ n/(2n+1) converge or diverge? Apply the Divergence Test and state whether it gives a definitive answer. |\n| R3 | 7 days | A geometric series has sum 6 and first term 2. Find the common ratio r. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 413,
+        "endLine": 423
+      }
+    },
+    {
+      "assetId": "math.seq.series-convergence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.series-convergence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | math.calc.power-series (NOT Tier-1) |\n| P76_mode | independence (cross-link NOT Tier-1) |\n| Unlocks | math.calc.power-series |\n| Requires (Tier-1) | math.seq.partial-sums, math.seq.convergent |\n\n**GR-8 compliance:** cross_links = [math.calc.power-series]; NOT Tier-1 → documented.\n**GR-9 compliance:** P76 uses an independent problem (geometric series a=12, r=−1/3) unrelated to the non-Tier-1 cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.series-convergence.md",
+        "startLine": 423,
+        "endLine": 437
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

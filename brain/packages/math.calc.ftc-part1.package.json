@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.ftc-part1-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.ftc-part1",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:735d973d9aa5d85cecb9b74121d2bb9c8db25f3125283801bd9c3464120b05be",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.ftc-part1.md": "sha256:d388d593d49a89c3d69cb1068689599604863a1427b857df7b60e3c4e88cfda1"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.ftc-part1",
+    "name": "Fundamental Theorem of Calculus Part 1",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.definite-integral",
+      "math.calc.continuity"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.ftc-part1-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.ftc-part1 (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.ftc-part1.md": "sha256:d388d593d49a89c3d69cb1068689599604863a1427b857df7b60e3c4e88cfda1"
+      },
+      "contentHash": "sha256:73390a6214d33150370c8e059c5fa276792729629cba82de9a2d8aa35cef2803",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.ftc-part1.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ftc-part1.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ftc-part1"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ftc-part1\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.ftc-part1.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ftc-part1.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ftc-part1"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ftc-part1\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.ftc-part1.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ftc-part1.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ftc-part1"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ftc-part1\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.ftc-part1/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "Fundamental Theorem of Calculus Part 1 — cognitive map",
+      "content": "**Core concept:** FTC Part 1 asserts that differentiation and integration are inverse operations. If f is continuous on [a,b] and G(x) = ∫_a^x f(t)dt, then G′(x) = f(x) for every x in (a,b). The dummy variable t plays no role in the output: differentiating the accumulation function G recovers the integrand f evaluated at the upper limit. When the upper limit is a composite function u(x), the chain rule yields d/dx[∫_a^{u(x)} f(t)dt] = f(u(x))·u′(x).\n\n**Conceptual progression:**\n1. Accumulation function: G(x) = ∫_a^x f(t)dt is a function of the upper limit x.\n2. Geometric intuition: as x increases by Δx, the added area ≈ f(x)·Δx; so G′(x) = lim f(x)·Δx/Δx = f(x).\n3. FTC1 formal statement: f continuous on [a,b] → G′(x) = f(x) for x ∈ (a,b).\n4. Role of dummy variable: t is internal; the derivative output replaces t with the upper limit x.\n5. Chain rule extension: d/dx[∫_a^{u(x)} f(t)dt] = f(u(x))·u′(x).\n6. Contrast with FTC2: FTC1 differentiates an integral-defined function; FTC2 evaluates a definite integral using an antiderivative.\n\n**CPA arc (entry: C):**\n- Concrete: velocity v(t) and position function s(t) = ∫_0^t v(τ)dτ; differentiating position gives back velocity — the physical embodiment of G′ = f.\n- Pictorial: sliding-boundary shaded area under f; thin strip of height ≈ f(x) and width Δx; G′(x) = lim(Δx→0) f(x)Δx/Δx = f(x).\n- Abstract: G(x) = ∫_a^x f(t)dt ⟹ G′(x) = f(x); chain rule extension.\n\n**Prior knowledge activated:** definite integral (math.calc.definite-integral) — Riemann sum limit, signed area, integral properties; continuity (math.calc.continuity) — continuity on an interval is the hypothesis of FTC1; derivative and chain rule (math.calc.derivative-intro).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 20,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "VARIABLE-CONFUSION-T-AND-X [FOUNDATIONAL]",
+      "content": "### MC-1: VARIABLE-CONFUSION-T-AND-X [FOUNDATIONAL]\n**Description:** Learner retains the dummy integration variable t in the output of the derivative, writing G′(x) = f(t) instead of G′(x) = f(x).\n**Surface form:** \"G(x) = ∫_0^x sin(t)dt, so G′(x) = sin(t).\"\n**Root cause:** The learner does not recognise that t is a dummy variable that disappears upon differentiation; they believe the integrand formula must appear unchanged.\n**Trigger condition:** Any FTC1 application where the integrand is written in terms of t.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "LOWER-LIMIT-DETERMINES-FTC1",
+      "content": "### MC-2: LOWER-LIMIT-DETERMINES-FTC1\n**Description:** Learner believes FTC1 applies only when the lower limit of integration is 0; for G(x) = ∫_3^x f(t)dt, they claim the theorem doesn't hold or adds an offset.\n**Surface form:** \"G(x) = ∫_3^x t² dt — but the lower limit is 3, not 0, so G′(x) ≠ t².\"\n**Root cause:** FTC1 is often introduced with lower limit 0 in examples; the learner infers the lower limit is structurally important rather than seeing it as a fixed constant.\n**Trigger condition:** Any FTC1 problem with a non-zero constant lower limit.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "CHAIN-RULE-OMITTED",
+      "content": "### MC-3: CHAIN-RULE-OMITTED\n**Description:** When the upper limit is a composite function u(x), learner applies FTC1 but omits the chain rule factor u′(x), writing d/dx[∫_a^{u(x)} f(t)dt] = f(u(x)) without multiplying by u′(x).\n**Surface form:** \"d/dx[∫_0^{x²} cos(t)dt] = cos(x²).\"\n**Root cause:** The learner correctly applies FTC1 (substitute upper limit into integrand) but treats the composite upper limit as though it were simply x, forgetting the chain rule.\n**Trigger condition:** Any FTC1 problem with a composite upper limit such as x², sin(x), or x³.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "Repair for MC-1 (VARIABLE-CONFUSION-T-AND-X)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (VARIABLE-CONFUSION-T-AND-X)\",\"primitives\":[\"P04\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 129,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "Repair for MC-3 (CHAIN-RULE-OMITTED)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (CHAIN-RULE-OMITTED)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 198,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "Repair for MC-2 (LOWER-LIMIT-DETERMINES-FTC1)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (LOWER-LIMIT-DETERMINES-FTC1)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 259,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.80 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Find d/dx[∫_0^x √(1+t³) dt].\"\n[Expected: √(1+x³). FTC1 directly; no chain rule needed (upper limit = x).]\n\n**Item 2:**\n\"Find d/dx[∫_3^x cos(t²) dt].\"\n[Expected: cos(x²). FTC1 with non-zero lower limit a=3; lower limit is a constant, has no effect on the derivative.]\n\n**Item 3:**\n\"Find d/dx[∫_0^{x²} eᵗ dt].\"\n[Expected: e^{x²} · 2x. u=x², u′=2x; FTC1+chain rule: e^{x²}·2x.]\n\n**Item 4:**\n\"Identify and correct the error: 'd/dx[∫_0^{x³} t dt] = x³.'\"\n[Expected: Error — chain rule omitted. Correct: u=x³, u′=3x²; f(u)=u=x³; result = x³·3x² = 3x⁵. Alternatively: ∫_0^{x³} t dt = [t²/2]_0^{x³} = x⁶/2; d/dx[x⁶/2] = 3x⁵ ✓.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Evaluate:\n(a) d/dx[∫_2^x (t³+1) dt]\n(b) d/dx[∫_0^{x⁴} cos(t) dt]\"\n\n[Expected:\n(a) FTC1 directly (lower limit a=2 is a constant): x³+1.\n(b) u=x⁴, u′=4x³; FTC1+chain rule: cos(x⁴)·4x³.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if both (a) and (b) are correct; 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (4–5/5): Learner can apply FTC1 for simple and composite upper limits, recognise the dummy variable role, and apply the chain rule extension.\n- FAIL (<4/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 or 2 with G′(x)=f(t) (dummy variable retained): → TA-B01 (VARIABLE-CONFUSION-T-AND-X repair), then re-gate\n- FAIL on Item 2 citing non-zero lower limit as a blocker: → TA-B02 (LOWER-LIMIT-DETERMINES-FTC1 repair), then re-gate\n- FAIL on Item 3 or 4 or P76(b) — chain rule omitted: → TA-B03 (CHAIN-RULE-OMITTED repair), then re-gate\n- FAIL on one item only due to arithmetic error (correct method, wrong computation): → targeted correction; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 4/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated the ability to apply FTC Part 1: differentiating an accumulation integral gives back the integrand evaluated at the upper limit, extended by the chain rule for composite upper limits.\n\nKey anchors to carry forward:\n- d/dx[∫_a^x f(t)dt] = f(x) for any constant a (lower limit is irrelevant to the derivative).\n- t is a dummy variable; it is replaced by x in the output.\n- Composite upper limit u(x): multiply by u′(x). Never skip this factor.\n- FTC1 gives a FUNCTION; FTC2 gives a NUMBER. Different theorems, different jobs.\n\nNext concept: math.calc.ftc-part2 — evaluating definite integrals via antiderivatives.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 369,
+        "endLine": 459
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"What does ∫_0^4 v(t)dt represent if v(t) is a velocity function?\" Correct response (total displacement/distance in [0,4]) confirms the integral-as-accumulation understanding from math.calc.definite-integral. Then: \"If we replace 4 with a variable x to get G(x) = ∫_0^x v(t)dt, what does G(x) represent?\" This primes the accumulation-function idea before FTC1 is stated.\n\n**Scaffolding ladder:**\n- Rung 1 (concrete): position-velocity analogy; G(x) as cumulative displacement; G′ must equal v at each moment.\n- Rung 2 (pictorial): graph f(t); shade ∫_a^x f(t)dt; move x rightward by Δx; area of thin strip ≈ f(x)·Δx; G′(x) = f(x).\n- Rung 3 (abstract): FTC1 formal statement; practice with simple integrands; then composite upper limits with chain rule.\n\n**Pacing note:** h=6 estimated hours; A01 in session 1, A02 in sessions 2–3, A03 in sessions 4–5; mastery gate in session 6.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 66,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Find: (a) d/dx[∫_2^x (1+t⁴)^{1/2} dt]; (b) d/dx[∫_0^{tan x} t/(1+t²) dt].\"\n[Expected: (a) (1+x⁴)^{1/2}; (b) u=tan x, u′=sec²x; f(u)=(tan x)/(1+tan²x)=sin x·cos x; result: sin x·cos x·sec²x = sin x/cos x = tan x. (Alternatively: tan x/(1+tan²x) = sin x·cos x; ×sec²x = sin x/cos x = tan x.)]\n\n**Day 10 prompt:**\n\"Let F(x) = ∫_x^{x²} sin(t²) dt. Find F′(x).\"\n[Expected: split: F(x) = ∫_0^{x²} sin(t²)dt − ∫_0^x sin(t²)dt. Differentiate: F′(x) = sin(x⁴)·2x − sin(x²)·1 = 2x·sin(x⁴) − sin(x²).]\n\n**Day 30 prompt:**\n\"Define G(x) = ∫_0^x |sin(t)| dt. Is G differentiable at x = π? Find G′(π) if it exists.\"\n[Expected: |sin(t)| is continuous everywhere (including t=π, where |sin(π)|=0). By FTC1, G′(x) = |sin(x)| for all x. At x=π: G′(π) = |sin(π)| = 0. G is differentiable at π.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 291,
+        "endLine": 309
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part1/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.ftc-part1",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.calc.definite-integral — Riemann sum limit, signed area, integral as accumulation; the integrand f(t) and the notation ∫_a^x are assumed known\n- math.calc.continuity — continuity on [a,b] is the hypothesis of FTC1; the geometric argument (thin strip has height f(x)) requires continuity to ensure no jump in f near x\n\n**Unlocked blueprints:**\n- math.calc.ftc-part2 — evaluating definite integrals via antiderivatives; the companion theorem to FTC1\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part1.md",
+        "startLine": 309,
+        "endLine": 322
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.trig-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.trig-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eaa04c40ea4f4b818114051e1a933d227623c2edc7f5278881ade9af120582a6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.trig-functions.md": "sha256:10647fdf436f1446ba3da830e7f5ce8c44daee192947993f1333f1701f7643e2"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.trig.trig-functions",
+    "name": "Trigonometric Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.trig.unit-circle"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.trig-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.trig-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.trig-functions.md": "sha256:10647fdf436f1446ba3da830e7f5ce8c44daee192947993f1333f1701f7643e2"
+      },
+      "contentHash": "sha256:f8fba63cb13067b0af41c7ed0517546c09b6b4134d6a6bee26d46cb29186eb5b",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-functions.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-functions.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-functions\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-functions.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-functions.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-functions\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-functions.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-functions.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-functions\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.trig-functions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.trig-functions",
+      "title": "Trigonometric Functions — cognitive map",
+      "content": "**Core concept:** The trigonometric functions sin(x), cos(x), and tan(x) are defined for all real x (or all x in their natural domain) by extending the unit-circle definitions to the entire real line. Each full revolution of 2π produces identical (x, y) coordinates on the unit circle, making sin and cos periodic with period 2π. tan(x)=sin(x)/cos(x) is undefined when cos(x)=0 and has period π. The domain of sin and cos is all reals; the range of sin and cos is [−1, 1]; tan has domain ℝ∖{π/2+nπ} and range ℝ.\n\n**Conceptual progression:**\n1. Domain extension: the unit circle angle θ is allowed to be any real number (positive = counter-clockwise, negative = clockwise, greater than 2π = multiple revolutions).\n2. Periodicity: after a full revolution (2π), the point on the unit circle repeats → sin(x+2π)=sin(x), cos(x+2π)=cos(x).\n3. Tangent: tan(x)=sin(x)/cos(x)=y/x; undefined when x=0 on the unit circle (x-coordinate=0), i.e., when cos(x)=0; period π because sin and cos reverse sign simultaneously, so their ratio repeats every π.\n4. Graphs: sin starts at (0,0), rises to maximum 1 at π/2, returns to 0 at π, minimum −1 at 3π/2, returns at 2π. Cos starts at (0,1); it is a horizontal shift of sin by π/2. Tan has vertical asymptotes at ±π/2, ±3π/2, …\n5. Key values: derived from unit-circle angles 0, π/6, π/4, π/3, π/2 (exact values); extended to all quadrants via reference-angle signs.\n\n**CPA arc (entry: P):**\n- Pictorial: unit circle with angle sweeping counter-clockwise past 2π; sin/cos graphs as traces of y- and x-coordinate vs. angle; tan graph with asymptotes.\n- Abstract: sin(x+2π)=sin(x); cos(x+2π)=cos(x); tan(x+π)=tan(x); domain/range statements.\n\n**Prior knowledge activated:** unit circle (math.trig.unit-circle) — (cos θ, sin θ) coordinates, reference angle method, key angle values in all quadrants; function notation, domain, and range.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-functions",
+      "title": "PERIOD-IS-360-IN-RADIANS [FOUNDATIONAL]",
+      "content": "### MC-1: PERIOD-IS-360-IN-RADIANS [FOUNDATIONAL]\n**Description:** Learner states that sin(x) has period 360 when working in radians — treating the degree period (360°) as the radian period. Writes sin(x+360)=sin(x) instead of sin(x+2π)=sin(x).\n**Surface form:** \"sin(x) repeats every 360 units, so sin(370)=sin(10).\"\n**Root cause:** Right-triangle and early unit-circle work used degrees throughout. The learner memorised \"period=360\" without translating to radians: 360°=2π radians. When the variable is in radians, the period is 2π≈6.28, not 360.\n**Trigger condition:** Any problem involving the period of sin or cos with real-number (radian) inputs.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-functions",
+      "title": "TAN-PERIOD-IS-2PI",
+      "content": "### MC-2: TAN-PERIOD-IS-2PI\n**Description:** Learner claims tan(x) has period 2π, the same as sin and cos. Does not recognise that tan repeats every π because the sign reversal of both sin and cos in opposite quadrants cancels in the ratio.\n**Surface form:** \"All trig functions have period 2π.\"\n**Root cause:** \"Trig functions are periodic; the period is 2π\" — a generalisation from sin and cos that ignores the different periodicity of tan. Learners who have not traced through the sign cancellation cannot see why π suffices.\n**Trigger condition:** Any period identification problem involving tan.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-functions",
+      "title": "DOMAIN-RESTRICTED-TO-FIRST-QUADRANT",
+      "content": "### MC-3: DOMAIN-RESTRICTED-TO-FIRST-QUADRANT\n**Description:** Learner believes sin(x), cos(x), and tan(x) are only defined for x in [0°, 90°] (0 to π/2 radians) — the right-triangle domain — and cannot be evaluated for angles beyond the first quadrant or for negative angles.\n**Surface form:** \"sin(120°) isn't defined because the angle is bigger than 90°. Sine is only for right triangles.\"\n**Root cause:** Right-triangle definitions restrict θ to 0°<θ<90°. The unit-circle extension to all reals was not emphasised or was presented as a separate topic without explicit connection.\n**Trigger condition:** Any evaluation of a trig function at an angle outside [0°, 90°] or at a negative angle.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-functions",
+      "title": "Repair for MC-1 (PERIOD-IS-360-IN-RADIANS)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (PERIOD-IS-360-IN-RADIANS)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 116,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-functions",
+      "title": "Repair for MC-2 (TAN-PERIOD-IS-2PI)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (TAN-PERIOD-IS-2PI)\",\"primitives\":[\"P04\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 175,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-functions",
+      "title": "Repair for MC-3 (DOMAIN-RESTRICTED-TO-FIRST-QUADRANT)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (DOMAIN-RESTRICTED-TO-FIRST-QUADRANT)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 238,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.trig-functions",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.85 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"What is the period of sin(x) when x is in radians?\"\n[Expected: 2π. sin(x+2π)=sin(x) for all real x.]\n\n**Item 2:**\n\"What is the domain of tan(x)? State the values where it is undefined.\"\n[Expected: Domain = ℝ∖{π/2+nπ : n∈ℤ}. Undefined at x=±π/2, ±3π/2, ±5π/2, … (where cos x=0).]\n\n**Item 3:**\n\"Find the exact value of sin(5π/6).\"\n[Expected: 5π/6 is in Q2; reference angle=π/6. Q2: sin+. sin(5π/6)=+sin(π/6)=1/2.]\n\n**Item 4:**\nTrue or False: \"The period of tan(x) is 2π.\"\n[Expected: FALSE. Period of tan is π. Proof: tan(x+π)=sin(x+π)/cos(x+π)=(−sin x)/(−cos x)=tan x.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"For the function f(x) = cos(x):\n\n(a) State the period and range.\n(b) Find the exact value of cos(7π/6).\n(c) Find the exact value of cos(−π/4).\n(d) For which x in [0, 2π) does cos(x) = −1/2? Give exact answers.\"\n\n[Expected:\n(a) Period=2π; range=[−1,1].\n(b) 7π/6: Q3, reference angle=π/6, cos−. cos(7π/6)=−cos(π/6)=−√3/2.\n(c) cos is even: cos(−π/4)=cos(π/4)=√2/2.\n(d) cos=−1/2 in Q2 and Q3. Reference angle for 1/2 is π/3. Q2: x=π−π/3=2π/3. Q3: x=π+π/3=4π/3. Answers: x=2π/3 and x=4π/3.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if all four parts are correct (correct period/range, correct (b), correct (c) using even property, correct (d) giving both solutions); 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner understands periodicity, domain/range, and exact-value computation for sin, cos, tan across all quadrants.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 (period=360): → TA-B01 (PERIOD-IS-360-IN-RADIANS repair), then re-gate\n- FAIL on Item 4 (tan period=2π): → TA-B02 (TAN-PERIOD-IS-2PI repair), then re-gate\n- FAIL on Item 3 or P76(b,c) (trig value at non-Q1 angle): → TA-B03 if learner claims undefined; else return to A03 to re-drill reference-angle method; re-gate\n- FAIL on Item 2 (domain): → return to A02 contrast table; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated understanding of trigonometric functions as globally-defined periodic functions, their domains, ranges, periods, and exact values.\n\nKey anchors to carry forward:\n- sin(x) and cos(x): domain=ℝ, range=[−1,1], period=2π. Defined for all real x via unit circle.\n- tan(x): domain=ℝ∖{π/2+nπ}, range=ℝ, period=π. Tan repeats after π because the sign cancels in sin/cos.\n- Exact values: use reference angle (acute equivalent) + quadrant sign (ASTC rule).\n- Symmetry: cos(−x)=cos(x) (even); sin(−x)=−sin(x), tan(−x)=−tan(x) (odd).\n\nNext concepts: math.trig.trig-identities (Pythagorean family, angle-sum formulas), math.trig.inverse-trig (arcsin, arccos, arctan as restricted inverses).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 345,
+        "endLine": 440
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.trig-functions",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"State the coordinates of the unit-circle point at θ=3π/4.\" If the learner gives (−√2/2, √2/2) by the reference-angle method (ref=π/4, Q2: cos−, sin+), they are ready for A01. This confirms the unit-circle key-angle fluency needed to derive function values at non-standard angles.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): animate the angle θ increasing from 0 past 2π; plot the y-coordinate of the unit-circle point vs. θ to produce the sine wave; show the period emerges naturally as the circle completes.\n- Rung 2 (structured): table — learner fills in sin(θ), cos(θ), tan(θ) at θ=0, π/6, π/4, π/3, π/2, π, 3π/2, 2π from unit-circle knowledge.\n- Rung 3 (full understand): learner identifies period, domain, range, and key features from the graph without referencing the unit circle explicitly.\n\n**Pacing note:** h=10 estimated hours; A01 in sessions 1–2; A02 in sessions 3–4; A03 + mastery gate in sessions 4–5.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.trig-functions",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Find all x in [0, 2π) such that sin(x) = −√3/2. Give exact answers.\"\n[Expected: sin<0 in Q3 and Q4. Reference angle for √3/2 is π/3. Q3: x=π+π/3=4π/3. Q4: x=2π−π/3=5π/3. Answers: x=4π/3 and x=5π/3.]\n\n**Day 10 prompt:**\n\"A function f(x)=sin(x) satisfies f(x+T)=f(x) for all x. Prove that T=2π is the smallest such positive T.\"\n[Expected: Need to show no positive T<2π works. f(π/2)=1; if f(π/2+T)=1 then sin(π/2+T)=1 → π/2+T=π/2+2nπ → T=2nπ. Smallest positive T is 2π (n=1). Alternatively: sin is strictly increasing on (−π/2,π/2) so can only repeat values with period ≥ 2π, and 2π achieves it.]\n\n**Day 30 prompt:**\n\"For what values of x in [−π, π] is tan(x) > sin(x)? Express the answer as a union of intervals.\"\n[Expected: tan x − sin x = sin x/cos x − sin x = sin x(1/cos x − 1) = sin x (1−cos x)/cos x. Since 1−cos x ≥ 0 for all x (equality only at x=0), the sign is determined by sin x / cos x = tan x: positive in Q1 (0,π/2) and Q3 (−π,−π/2). But tan>sin: in (0,π/2): sin>0, cos<1 → 1/cos>1 → tan=sin/cos>sin ✓. In (−π,−π/2): sin<0, cos<0 → tan>0>sin ✓. Combined: tan x > sin x on (0,π/2)∪(−π,−π/2), excluding endpoints where tan is undefined or equal.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 267,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "math.trig.trig-functions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.trig-functions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.trig.unit-circle — (cos θ, sin θ) coordinates for all angles via reference-angle method; quadrant signs; key angle values at 0,π/6,π/4,π/3,π/2; the unit circle IS the definition being extended to all reals here\n\n**Unlocked blueprints:**\n- math.trig.trig-identities — Pythagorean identity sin²x+cos²x=1 and derived identities (tan²x+1=sec²x, etc.); angle-sum formulas; all assume the global definition of sin and cos proved here\n- math.trig.inverse-trig — arcsin, arccos, arctan defined as restricted inverses of sin, cos, tan; domain restriction to make them functions requires knowing the full domain and range of the originals\n\n**Cross-links:** math.func.periodic-function — NOT Tier 1; P76 uses independence mode.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-functions.md",
+        "startLine": 285,
+        "endLine": 298
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.matrix-multiplication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.matrix-multiplication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:106d3039cf5c48f51ea5a2c568e00bb4f2be405f87387f6bd2f936e5a0769e24",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md": "sha256:25dfee509c64902fe7d1ed6b9f4e14c24b20a6287dc1fbfbff8f6a49a130f6fb"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.linalg.matrix-multiplication",
+    "name": "Matrix Multiplication",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.matrix",
+      "math.linalg.dot-product"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.matrix-multiplication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.matrix-multiplication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md": "sha256:25dfee509c64902fe7d1ed6b9f4e14c24b20a6287dc1fbfbff8f6a49a130f6fb"
+      },
+      "contentHash": "sha256:575f256fdbcfe0b6138edf85b74a7b74f0fc9c784f1c06663d498673f85619d6",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-multiplication.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-multiplication.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-multiplication\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-multiplication.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-multiplication.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-multiplication\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-multiplication.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md#TA-B02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-multiplication\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.matrix-multiplication/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Matrix Multiplication — cognitive map",
+      "content": "**Core concept:** Matrix multiplication C = AB is defined by C_{ij} = Σ_k A_{ik}B_{kj} — the dot product of row i of A with column j of B. This requires the inner dimensions to match: A must be m×n and B must be n×p, producing C of size m×p. Matrix multiplication is generally non-commutative (AB ≠ BA).\n\n**Conceptual progression:**\n1. Compatibility check: inner dimensions must match — A(m×n) × B(n×p) is defined; result is m×p.\n2. Entry formula: each C_{ij} = row i of A · column j of B (dot product of vectors).\n3. Non-commutativity: AB and BA may differ, or one may be defined while the other is not.\n4. Ring structure: the set of n×n matrices under addition and multiplication forms a non-commutative ring.\n\n**CPA arc (entry: P):**\n- Pictorial: dimension diagrams showing inner/outer dimension matching; colour-coded row-times-column entry computations\n- Abstract: entry formula C_{ij} = Σ_k A_{ik}B_{kj}; general proof that AB ≠ BA using concrete 2×2 counterexample\n\n**Prior knowledge activated:** matrix as rectangular array of numbers; m×n dimension notation; dot product of two vectors as Σ a_k b_k\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 20,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "DIMENSION-RULE-IGNORED [FOUNDATIONAL]",
+      "content": "### MC-1: DIMENSION-RULE-IGNORED [FOUNDATIONAL]\n**Description:** Learner attempts to multiply matrices whose inner dimensions do not match.\n**Surface form:** Computes product of A(2×3) and B(2×3) claiming result is \"2×3\" or \"2×2\".\n**Root cause:** Treats matrix multiplication like scalar multiplication (element-wise), unaware that the inner dimension constraint is structural.\n**Trigger condition:** Any problem presenting two matrices with matching outer but non-matching inner dimensions.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "ROW-COLUMN-ORDER-REVERSED",
+      "content": "### MC-2: ROW-COLUMN-ORDER-REVERSED\n**Description:** Learner uses column i of A dotted with row j of B instead of row i dotted with column j.\n**Surface form:** For C = AB, computes C_{12} using column 1 of A times row 2 of B.\n**Root cause:** Confuses the index ordering of the entry formula; may remember \"rows and columns\" but applies them in reversed roles.\n**Trigger condition:** Any entry computation requiring identification of which factor contributes a row vs. a column.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "ASSUMES-COMMUTATIVITY",
+      "content": "### MC-3: ASSUMES-COMMUTATIVITY\n**Description:** Learner claims AB = BA for general matrices.\n**Surface form:** Computes AB and assumes BA must equal it without checking.\n**Root cause:** Transfers commutativity from scalar multiplication (ab = ba for numbers) to matrix multiplication without recognising that order-dependence arises from the non-symmetric entry formula.\n**Trigger condition:** Any problem asking about the relationship between AB and BA.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Dimension Rule and Entry Formula",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Dimension Rule and Entry Formula\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 81,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Non-Commutativity",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Non-Commutativity\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 117,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 155,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Repair: Dimension Rule Ignored",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: Dimension Rule Ignored\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 199,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Repair: Row-Column Reversal / Commutativity",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: Row-Column Reversal / Commutativity\",\"primitives\":[\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 215,
+        "endLine": 323
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A03 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 90% → PASS requires ⌈0.90 × 5⌉ = 5/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: A is 3×2 and B is 2×4. Is AB defined? If so, what are the dimensions of AB? [Answer: Yes, 3×4]\nItem 2: Compute [[1,2];[3,4]] × [[1,0];[0,1]]. [Answer: [[1,2];[3,4]] — multiplying by identity]\nItem 3: True or False — for any two square matrices A and B, AB = BA. [Answer: FALSE — non-commutative in general]\nItem 4: Find the (1,2) entry of [[2,1,3];[0,4,1]] × [[1,2];[3,0];[-1,1]]. [Answer: row 1 · col 2 = [2,1,3]·[2,0,1] = 4+0+3 = 7]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (cross-link to math.abst.ring-theory):**\nConsider the set M₂(ℝ) of all 2×2 real matrices under standard matrix addition and multiplication.\n\nLet A = [[1,1];[0,1]] and B = [[1,0];[1,1]].\n\n(a) Compute AB. [Answer: AB = [[2,1];[1,1]]]\n(b) Compute BA. [Answer: BA = [[1,1];[2,1]]]\n(c) Does AB = BA? [Answer: No]\n(d) This demonstrates that M₂(ℝ) is a non-commutative ring. What ring axiom does M₂(ℝ) fail for multiplication? [Answer: commutativity — it satisfies closure, associativity, distributivity, and has an identity (I) and additive inverses, but AB ≠ BA in general.]\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score 5/5 → PASS → P78 COMPLETION\n- Score < 5/5 → FAIL → Route to TA-B01 (dimension errors) or TA-B02 (entry computation / commutativity errors)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Matrix multiplication: mastered. You can check dimension compatibility, compute any entry using the row-column dot product formula, demonstrate non-commutativity with a counterexample, and connect the structure to abstract ring theory. This underpins matrix inverse, determinants, and linear transformations.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 155,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** Present A = [[1,0];[0,1]] (identity) × B = [[3,4];[5,6]]. Ask learner to state result dimensions and compute C_{11}. If correct → begin TA-A01. If incorrect → repair prerequisite (math.linalg.matrix).\n\n**Scaffolding ladder:**\n1. Dimension check only (no entry computation): which products are defined?\n2. Single-entry computation: find C_{11} or C_{12} for a given pair of small matrices\n3. Full 2×2 product computation: compute all 4 entries\n4. Non-commutativity: compute AB and BA for the same pair\n\n**Pacing gate:** Must score ≥ 5/5 on P91 to earn mastery credit (MAMR = 90%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 63,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.linalg.matrix-multiplication\n  MAMR: 0.90\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"Is a (4×2)×(2×3) product defined? What is its size?\"\n  session_3_probe: \"Compute [[2,0];[1,3]] × [[1,4];[2,1]].\"\n  session_7_probe: \"Find a 2×2 example where AB ≠ BA.\"\n  session_14_probe: \"Under what conditions is AB=BA guaranteed for 2×2 matrices?\"\n  session_30_probe: \"Explain why M_n(ℝ) is a ring. Is it commutative? Justify.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 228,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-multiplication/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.matrix-multiplication",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.linalg.matrix — matrix as m×n array; dimension notation; entry indexing [BLUEPRINT EXISTS]\n- math.linalg.dot-product — dot product as Σ a_k b_k [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.linalg.matrix-inverse — inverse requires square matrix and full-rank condition\n- math.linalg.determinant — determinant defined for square matrices (shares non-commutativity context)\n\n**Cross-links:** [math.abst.ring-theory] — Tier 1 concept; P76 cross-link probe used.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented.\n**GR-9 satisfied:** math.abst.ring-theory is Tier 1 → P76 cross-link probe applied in TA-A03.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-multiplication.md",
+        "startLine": 244,
+        "endLine": 261
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

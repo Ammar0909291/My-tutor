@@ -86,7 +86,7 @@ function sectionSpan(ast: BlueprintAST, s: BlueprintSection): BlueprintSourceSpa
  *  (no spine section) the "**Core idea:**" paragraph of the Concept Profile
  *  serves as the core explanation — same fallback blueprintLoader.ts uses. */
 function lowerCoreExplanation(ast: BlueprintAST): AssetNode[] {
-  const spine = firstSection(ast.sections, /concept spine|narrative spine/i)
+  const spine = firstSection(ast.sections, /concept spine|narrative spine|concept snapshot/i)
   if (spine) {
     // Worked examples embedded in the spine are lowered separately; keep the
     // explanation asset focused by cutting at the first Worked Example header.
@@ -158,6 +158,19 @@ function lowerWorkedExamples(ast: BlueprintAST): AssetNode[] {
         block.trim(), `WE-${h[1]}`, out.length + 1, sectionSpan(ast, spine), mcRefs(block),
       ))
     }
+    if (out.length > 0) return out
+  }
+
+  // Embedded-in-TA fallback (math corpus): the worked example IS a named
+  // Teaching Action ("### TA-A02 — Worked Example Pair: …") inside the main
+  // Protocol sequence, not a dedicated section. Uses the TA's own captured
+  // body text (parser.ts's primary TA_HEADER_RE shape only).
+  for (const ta of ast.teachingActions) {
+    if (ta.body && /worked example/i.test(ta.title)) {
+      out.push(makeAsset(
+        ast, 'worked_example', ta.title, ta.body, `WE-${ta.id}`, out.length + 1, ta.span, ta.referencedMisconceptionIds,
+      ))
+    }
   }
   return out
 }
@@ -177,20 +190,31 @@ function lowerMasteryProbes(ast: BlueprintAST): AssetNode[] {
   const section =
     firstSection(ast.sections, /mastery probe|mastery-probe/i) ??
     firstSection(ast.sections, /^assessment\b|assessment battery|assessment probes|assessment items|mastery gate|diagnostic probe set/i)
-  if (!section) return []
-
-  const text = sectionText(section)
-  const blocks = text.split(/(?=^\*\*MP-\d+)/m).filter((b) => /^\*\*MP-\d+/.test(b))
-  if (blocks.length > 0) {
-    return blocks.map((block, i) => {
-      const h = /^\*\*(MP-\d+)\s*(?:\(([^)]*)\))?/.exec(block)!
-      return makeAsset(
-        ast, 'mastery_probe', h[2]?.trim() || h[1],
-        block.trim(), h[1], i + 1, sectionSpan(ast, section), mcRefs(block),
-      )
-    })
+  if (section) {
+    const text = sectionText(section)
+    const blocks = text.split(/(?=^\*\*MP-\d+)/m).filter((b) => /^\*\*MP-\d+/.test(b))
+    if (blocks.length > 0) {
+      return blocks.map((block, i) => {
+        const h = /^\*\*(MP-\d+)\s*(?:\(([^)]*)\))?/.exec(block)!
+        return makeAsset(
+          ast, 'mastery_probe', h[2]?.trim() || h[1],
+          block.trim(), h[1], i + 1, sectionSpan(ast, section), mcRefs(block),
+        )
+      })
+    }
+    return [makeAsset(ast, 'mastery_probe', section.title, text, null, 1, sectionSpan(ast, section), mcRefs(text))]
   }
-  return [makeAsset(ast, 'mastery_probe', section.title, text, null, 1, sectionSpan(ast, section), mcRefs(text))]
+
+  // Embedded-in-TA fallback (math corpus): the mastery gate IS a named
+  // Teaching Action ("### Teaching Action A03 — Mastery Gate (P91)") inside
+  // the main Protocol sequence, not a dedicated section.
+  const out: AssetNode[] = []
+  for (const ta of ast.teachingActions) {
+    if (ta.body && /mastery (gate|assessment|probe)/i.test(ta.title)) {
+      out.push(makeAsset(ast, 'mastery_probe', ta.title, ta.body, `MP-${ta.id}`, out.length + 1, ta.span, ta.referencedMisconceptionIds))
+    }
+  }
+  return out
 }
 
 /** C7: Adaptive-Teaching Rules — advisory teaching adaptations (distinct from

@@ -1,0 +1,342 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.ring-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.ring-theory",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d4d7ab4e4a344a392dd8a204f43fc3928624a62c95bfcac95a394ee4e700c015",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.ring-theory.md": "sha256:a2f9026bc90d7f09d57392e4195f274c618f4d50fd240589709d69b8548195cf"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.ring-theory",
+    "name": "Ring Theory",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.abst.group-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.ring-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.ring-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.ring-theory.md": "sha256:a2f9026bc90d7f09d57392e4195f274c618f4d50fd240589709d69b8548195cf"
+      },
+      "contentHash": "sha256:310b1861d5a72da5be398c1c56a23ea8d5a04f6fac095c36dc892ca9f8075efa",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.ring-theory.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ring-theory.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ring-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ring-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.ring-theory.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ring-theory.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ring-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ring-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.ring-theory.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ring-theory.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ring-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ring-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.ring-theory.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ring-theory.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ring-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ring-theory\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.ring-theory/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.ring-theory",
+      "title": "Ring Theory — cognitive map",
+      "content": "### Core Insight\nA ring is an algebraic structure with two binary operations where the first forms an abelian group but the second is only required to be associative and closed — multiplicative inverses and identity are optional extras, not definitional requirements.\n\n### Conceptual Hierarchy\n```\nLevel 0 (Concrete): Familiar number systems (ℤ, ℤ/nℤ, matrices)\nLevel 1 (Pictorial): Two-operation tables; ring axiom checklist\nLevel 2 (Abstract): (R, +, ·) satisfying R1–R5; ring ≠ two groups\nLevel 3 (Transfer): Matrix ring M₂(ℝ); non-commutativity; sub-rings\n```\n\n### Ring Axioms (R1–R5)\n```\nLet R be a set with two binary operations + and ·.\n(R, +, ·) is a ring iff:\n  R1: (R, +) is an abelian group\n      (closure, associativity, identity 0, inverses −r, commutativity)\n  R2: · is closed: r·s ∈ R for all r, s ∈ R\n  R3: · is associative: (r·s)·t = r·(s·t)\n  R4: Left distributivity: r·(s+t) = r·s + r·t\n  R5: Right distributivity: (r+t)·s = r·s + t·s\n\nOptional (NOT required):\n  R6: Multiplicative identity (unit element 1, makes it a \"ring with unity\")\n  R7: Multiplicative commutativity (r·s = s·r, makes it \"commutative ring\")\n  R8: Multiplicative inverses (makes (R\\{0}, ·) a group)\n```\n\n### Key Distinctions\n| Property | + in ring | · in ring |\n|---|---|---|\n| Must be closed | YES (R1) | YES (R2) |\n| Must be associative | YES (R1) | YES (R3) |\n| Must have identity | YES (0) (R1) | NOT required |\n| Must have inverses | YES (R1) | NOT required |\n| Must be commutative | YES (R1) | NOT required |\n\n### Why This Matters\nRings capture the essential structure of integer-like arithmetic: you can always add and subtract, you can always multiply, but you cannot always divide. This is exactly the structure of ℤ, polynomials, and matrices.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 33,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.ring-theory",
+      "title": "[FOUNDATIONAL]: RING-IS-TWO-GROUPS",
+      "content": "### MC-1 [FOUNDATIONAL]: RING-IS-TWO-GROUPS\n**Belief:** A ring requires (R, ·) to be a group (with multiplicative inverses and identity), so ℤ is not a ring because 2 has no multiplicative inverse in ℤ.\n**Origin:** Students copy the group axiom template wholesale for multiplication.\n**Trigger:** \"Check if ℤ is a ring\" → student rejects because 2⁻¹ ∉ ℤ.\n**Repair:** Distinguish ring from field. Rings only require (R, +) to be a group; multiplication needs only closure + associativity + distributivity.\n**Priority:** FOUNDATIONAL — must clear before any example work.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.ring-theory",
+      "title": "DISTRIBUTIVITY-CONFUSED",
+      "content": "### MC-2: DISTRIBUTIVITY-CONFUSED\n**Belief:** Distributivity means a·(b·c) = (a·b)·(a·c) (distributing · over ·) rather than · over +.\n**Origin:** Pattern-matching \"distribute over\" without specifying which operation distributes over which.\n**Trigger:** Asked to verify distributivity, student writes a·(b·c) formula.\n**Repair:** Explicitly name: multiplication distributes over addition. Demonstrate numerically: 3·(4+5) = 3·4 + 3·5, not 3·(4·5).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.ring-theory",
+      "title": "COMMUTATIVITY-REQUIRED",
+      "content": "### MC-3: COMMUTATIVITY-REQUIRED\n**Belief:** All rings must satisfy r·s = s·r, so M₂(ℝ) cannot be a ring.\n**Origin:** All elementary examples (ℤ, ℝ, ℤ/nℤ) happen to be commutative rings; student overgeneralises.\n**Trigger:** Presented with matrix multiplication and asked if M₂(ℝ) is a ring.\n**Repair:** Show explicit non-commuting matrices: AB ≠ BA. Ring definition (R1–R5) never lists commutativity of ·.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 16,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ring-theory",
+      "title": "Concrete Foundation — What a Ring Is (Not)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Foundation — What a Ring Is (Not)\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 129,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ring-theory",
+      "title": "Distributivity and the Two-Operation Structure",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Distributivity and the Two-Operation Structure\",\"primitives\":[\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 202,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ring-theory",
+      "title": "Non-Commutative Ring — M₂(ℝ)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Non-Commutative Ring — M₂(ℝ)\",\"primitives\":[\"P04\",\"P11\",\"P27\",\"P49\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 282,
+        "endLine": 361
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ring-theory",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 361,
+        "endLine": 643
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.ring-theory",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "### TA-A04: Mastery Gate (P91 Terminal)\n\n```\nP77 — MULTI-PROBLEM SET (4 problems)\n\nProblem 1:\n\"List the five axioms R1–R5 from memory (labels and informal descriptions).\nThen state two properties that are NOT ring axioms.\"\n\nProblem 2:\n\"Is the set of even integers 2ℤ = {…,−4,−2,0,2,4,…} with ordinary + and ×\na ring? Verify each of R1–R5 explicitly.\"\n\nProblem 3:\n\"The set ℤ/6ℤ = {[0],[1],[2],[3],[4],[5]} with + and × mod 6.\n(a) Does every non-zero element have a multiplicative inverse? (b) Is ℤ/6ℤ still a ring?\"\n\nProblem 4:\n\"True or false: Every ring is a group. Justify.\"\n[Answer: False — a ring is not a single-operation structure, but (R,+) IS an abelian group.\nThe ring as a whole (R,+,·) is not a group because it has two operations.]\n```\n\n```\nP55 — SCORE (after P77)\nAward 1 point per problem.\nRunning total before P76: __/4.\n```\n\n```\nP76 — TRANSFER PROBE (cross-link: math.linalg.matrix-multiplication)\n\"Consider M₂(ℝ), the set of all 2×2 real matrices with matrix addition + and\nmatrix multiplication ·.\n\nYou already know from matrix multiplication that matrix multiplication is\nassociative and distributes over addition.\n\n(a) Verify that (M₂(ℝ), +) is an abelian group by checking all five\n    group axioms G1–G5 (using the concrete matrices [[1,0],[0,0]] and\n    [[0,1],[0,0]] in your verification of non-commutativity claim for G5).\n    Wait — is G5 (commutativity of +) satisfied for matrix addition?\n(b) Does M₂(ℝ) satisfy R2–R5?\n(c) Conclude whether M₂(ℝ) is a ring. Is it commutative?\"\n\n[Expected answer:\n(a) Matrix addition is commutative (A+B = B+A entry-wise), so G5 holds;\n    identity is zero matrix; inverse is −A. Full abelian group.\n(b) R2: product of 2×2 matrices is 2×2 (closed). R3: (AB)C=A(BC). \n    R4: A(B+C)=AB+AC. R5: (A+B)C=AC+BC. All hold.\n(c) M₂(ℝ) is a ring. Non-commutative (AB≠BA in general).]\n```\n\n```\nP55 — SCORE (after P76)\nAward 1 point for P76.\nRunning total: __/5.\n```\n\n```\nP75 — MASTERY ASSESSMENT\nPass criterion: 5 out of 5 (⌈0.85 × 5⌉ = 5)\n```\n\n```\nP55 — SCORE (final)\nRecord pass/fail status.\n```\n\n```\nP74 — ROUTING DECISION\nScore = 5/5 → MASTERY ACHIEVED → P78 COMPLETION\nScore < 5/5 → NEEDS REVIEW → identify lowest-scoring item; activate Protocol B for its misconception\n```\n\n```\nP55 — SCORE (routing recorded)\n```\n\n```\nP78 — COMPLETION\n\"Ring theory checkpoint complete. You have established:\n  • A ring (R, +, ·) requires (R, +) to be an abelian group plus multiplicative closure,\n    associativity, and distributivity — no multiplicative inverses or commutativity needed.\n  • ℤ is a ring; M₂(ℝ) is a non-commutative ring.\n  • Distributivity links + and ·: r·(s+t) = r·s + r·t (not r·(s·t)).\n  • Adding a multiplicative identity gives a ring-with-unity; adding commutativity gives a\n    commutative ring; adding all field axioms gives a field (next: math.abst.field).\nNext concept: math.abst.ideal — the ring-theoretic analogue of a normal subgroup.\"\n```\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair Chains)\n\n### Repair Chain B-1: RING-IS-TWO-GROUPS (MC-1 FOUNDATIONAL)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE (incorrect): A ring = a group under + AND a group under ·\n AFTER (correct): A ring = a group under + AND closure+associativity+distributivity under ·\n\nThe key difference: a GROUP under · requires inverses r⁻¹ and an identity.\nA RING only asks · to be closed and associative. No ·-inverses, no ·-identity required.\n\nThe structure that adds ·-inverses for all non-zero elements is called a FIELD.\nRing ≠ Field. ℤ is a ring; ℚ is a field.\"\n\nRepair exercise:\n\"For (ℤ, +, ×), does every integer have a multiplicative inverse in ℤ?\"\n→ NO (2 has none). \"Does that prevent ℤ from being a ring?\" → NO.\n\"Which axiom would require it?\" → None of R1–R5.\n\nExit gate: \"State in one sentence what the ring axioms require of multiplication.\"\nExpected: \"Multiplication must be closed, associative, and distribute over addition.\"\n→ If correct: return to main sequence at TA-A01 P49 re-attempt.\n→ If incorrect: repeat P64 with 2ℤ example.\n```\n\n### Repair Chain B-2: DISTRIBUTIVITY-CONFUSED (MC-2)\n\n```\nP41 — MISCONCEPTION DETECTOR\nDiagnostic: \"Write the formula for left distributivity in a ring.\"\nIf student writes a·(b·c) = (a·b)·(a·c): MC-2 confirmed.\n\nP27 — MISCONCEPTION NAMING\n\"DISTRIBUTIVITY-CONFUSED: distributing · over · instead of · over +.\nIn a ring, multiplication distributes over ADDITION: r·(s+t) = r·s + r·t.\nThe formula r·(s+t) on the left — note the + inside the parentheses.\"\n\nP03 — ANALOGY BRIDGE\n\"Think of the distributive property you first learned: 3×(4+5) = 3×4 + 3×5.\nThe operation INSIDE the parentheses is addition (+), not multiplication.\nIn ring theory this is exactly R4: · spreads into a sum, not into a product.\"\n\nRepair exercise: Verify R4 for (ℤ/5ℤ, +, ×): [3]·([2]+[4]) = [3]·[2] + [3]·[4].\n[2]+[4]=[6]=[1]; [3]·[1]=[3]. Right: [6]+[12]=[1]+[2]=[3]. Equal ✓.\n\nExit gate: \"Write R4 symbolically.\" → r·(s+t) = r·s + r·t.\n→ Correct: return to TA-A02.\n```\n\n### Repair Chain B-3: COMMUTATIVITY-REQUIRED (MC-3)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: All rings must have r·s = s·r.\n AFTER: Commutativity of · is an OPTIONAL property, not a ring axiom.\n\nTwo categories:\n  Commutative ring: satisfies R1–R5 AND r·s = s·r for all r, s.\n  Non-commutative ring: satisfies R1–R5 but · is not necessarily commutative.\n\nM₂(ℝ) is non-commutative. It is still a ring because R1–R5 hold.\"\n\nCounter-example: A=[[0,1],[0,0]], B=[[0,0],[1,0]].\nAB = [[1,0],[0,0]], BA = [[0,0],[0,1]]. AB ≠ BA.\n\"Does this violate R1–R5? No — none of R1–R5 list commutativity of ·.\"\n\nExit gate: \"Name one ring that is commutative and one that is not.\"\nExpected: ℤ (commutative), M₂(ℝ) (non-commutative).\n→ Correct: return to TA-A03.\n```\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n```\nP89 — SPACED REPETITION\nReview schedule for math.abst.ring-theory:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State R1–R5. Which axioms apply to + and which to ·?\"\n  Target: Verbatim recall of axiom structure.\n\nInterval 2 (3 days):\n  Application: \"Is ℝ[x] (polynomials with real coefficients) a ring? Justify.\"\n  Target: Polynomial multiplication is closed, associative, distributive; + forms abelian group.\n\nInterval 3 (7 days):\n  Transfer: \"Why is ℤ a ring but not a field? What would need to change?\"\n  Target: ℤ lacks ·-inverses for elements like 2, 3; field requires ·-inverses for all non-zero.\n\nInterval 4 (21 days):\n  Integration: \"A student in math.abst.ideal asks why a ring ideal I ⊂ R doesn't need its own\n  identity element. Explain using ring axioms.\"\n  Target: Ideal inherits additive group from R; · closure (I·R ⊆ I) doesn't invoke identity.\n```\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### GR-8: Cross-link documentation\n```\nIncoming prerequisite:\n  math.abst.group-theory → Provides abelian group definition (G1–G5).\n  R1 of ring is verbatim \"abelian group under +\"; group-theory must precede ring-theory.\n\nOutgoing unlocks:\n  math.abst.ideal → Requires ring as base structure; ideal = subring closed under ring multiplication.\n  math.abst.field → Ring + multiplicative group on R\\{0} = field.\n\nCross-linked (non-prerequisite):\n  math.linalg.matrix-multiplication (Tier 1) → Used in TA-A03 concrete example and P76 probe.\n  M₂(ℝ) verification bridges ring-theory and matrix algebra.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.linalg.matrix-multiplication]\nmath.linalg.matrix-multiplication IS in Tier 1 set → P76 CROSS-LINK PROBE\nP76 probe: verify M₂(ℝ) is a ring, explicitly checking additive group and multiplicative axioms,\n  bridging to student's matrix-multiplication knowledge.\n```\n\n---\n\n\n## Component 8 — Teaching Notes\n\n### Pedagogical Rationale\nRing theory introduces the first algebraic structure with TWO binary operations. The hardest conceptual leap is understanding that asymmetry is intentional: + is fully group-equipped while · is only partially structured. Students who understand this asymmetry correctly can later distinguish rings, integral domains, and fields as progressively stronger multiplicative structures.\n\n### Common Session Failure Modes\n1. **MC-1 dominates early minutes:** If the student has not seen the ring-vs-field distinction, expect the entire session to be consumed by MC-1 repair. This is normal and acceptable.\n2. **Commutativity confusion compounds MC-3:** Students who believe multiplication must commute may also reject ℤ as \"not a ring\" via a second path (thinking ℤ multiplication is \"too simple\"). Distinguish: ℤ multiplication IS commutative — that's fine, commutativity is optional not forbidden.\n3. **ℤ/nℤ examples with zero divisors:** ℤ/6ℤ contains [2]·[3]=[6]=[0] with [2],[3]≠[0] (zero divisors). This is valid for a ring; mention if the student asks, but don't introduce it as main content unless student is ready.\n\n### Connections to Broader Curriculum\n- **Downstream — math.abst.ideal:** Ideals are sub-structures of rings; the coset construction in ideal theory mirrors the normal subgroup + quotient group construction from group-theory.\n- **Downstream — math.abst.field:** Fields add the requirement that (R\\{0}, ·) is also a group. This is the cleanest way to motivate the field axioms after ring theory.\n- **Cross-domain — math.linalg.matrix-multiplication:** M₂(ℝ) is THE canonical example of a non-commutative ring. Students in linear algebra often encounter this example before abstract algebra; ring theory gives it formal structure.\n\n### Language Precision\n- Use \"ring\" only for structures satisfying R1–R5.\n- Say \"commutative ring\" or \"ring with unity\" when those extras hold.\n- Never say \"a ring requires inverses for multiplication\" — this conflates ring with division ring or field.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n### Structural Validators\n- [x] V-1: Blueprint has all 10 components (0–8, 10).\n- [x] V-2: Metadata YAML complete with all required fields.\n- [x] V-3: concept_id matches filename `math.abst.ring-theory`.\n- [x] V-4: difficulty=advanced, bloom_level=understand, mastery_threshold=0.85.\n- [x] V-5: estimated_hours=5, session_ta_cap=7.\n\n### Grammar Rule Validators\n- [x] V-6 (GR-1): Every non-repair TA opens with a B-category primitive (TA-A01: P06+P03; TA-A02: P11; TA-A03: P04; TA-A04 is mastery gate).\n- [x] V-7 (GR-2): Every non-gate TA contains P49 with all 4 branches (CORRECT/PARTIAL/INCORRECT/NO_RESPONSE). TA-A01, TA-A02, TA-A03 each have P49.\n- [x] V-8 (GR-3): Mastery gate TA-A04 is terminal (ends with P78).\n- [x] V-9 (GR-4): P41 entry diagnostic gates P64 → Protocol B when MC-1 active.\n- [x] V-10 (GR-6): P91 compound (P77→P55→P76→P55→P75→P55→P74→P55→P78) complete in TA-A04.\n- [x] V-11 (GR-7): P76 present in mastery gate TA-A04.\n- [x] V-12 (GR-8): Cross-links documented in Component 7. math.linalg.matrix-multiplication named.\n- [x] V-13 (GR-9): P76 mode is CROSS-LINK (math.linalg.matrix-multiplication is Tier 1). P76 probe asks student to verify M₂(ℝ) as ring.\n- [x] V-14 (GR-10): MAMR stated in Component 0 and enforced in Component 3.\n\n### Content Validators\n- [x] V-15: Pass criterion = ⌈0.85 × 5⌉ = 5/5. P77 has 4 problems; P76 contributes 1; total n=5. ✓\n- [x] V-16: CPA_ENTRY_STAGE = C. Advanced abstract concept; starts with concrete integers/matrices. ✓\n- [x] V-17: MC-1 is FOUNDATIONAL and cleared first per MAMR.\n- [x] V-18: P49 INCORRECT branch activates P27 or P64 with repair pathway in TA-A01, TA-A02, TA-A03.\n- [x] V-19: P76 probe is independent of P77 problems (different scenario: M₂(ℝ) full ring verification vs. P77 items on ℤ, 2ℤ, ℤ/6ℤ, group question).\n- [x] V-20: Spaced repetition intervals are 1, 3, 7, 21 days with distinct prompts.\n\n### Automated Invariant Check (AIR)\n- [x] AIR-1: No implementation code present.\n- [x] AIR-2: No references to internal system variables.\n- [x] AIR-3: All cross-linked concept IDs use canonical prefix format.\n- [x] AIR-4: P91 sequence order is P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n- [x] AIR-5: Protocol B repair chains each have explicit exit gate with return instruction.\n\n**VALIDATION RESULT: PASS — PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 361,
+        "endLine": 643
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.ring-theory",
+      "title": "Scaffolding Protocol",
+      "content": "### Entry Diagnostic (P41 gate)\n```\nP41 — MISCONCEPTION DETECTOR\nPrompt: \"True or false and explain: The integers ℤ = {…, −2, −1, 0, 1, 2, …}\nwith ordinary + and × form a ring.\"\n\nCORRECT path (ℤ is a ring, citing additive group + multiplicative closure/associativity/distributivity):\n→ No MC-1 detected → proceed to TA-A01 standard opening\n\nINCORRECT path (rejects ℤ because 2 has no multiplicative inverse, or\nbecause ×  is not an inverse operation):\n→ MC-1 FOUNDATIONAL active → P64 CONCEPTUAL SHIFT on ring vs. field distinction\n→ Activate Protocol B (MC-1 Repair Chain)\n```\n\n### Prerequisite Bridge\nStudent must have completed math.abst.group-theory. Ring-theory builds directly on group axioms: the additive component (R, +) is simply an abelian group; only the multiplicative component introduces new requirements.\n\n### MAMR Enforcement\nMC-1 is FOUNDATIONAL. If MC-1 is active, the entire session clears MC-1 before any engagement with MC-2 or MC-3 material. MC-2 and MC-3 addressed FIFO once MC-1 is cleared.\n\n### CPA Progression: C → P → A\n- **Concrete (C):** Specific elements in ℤ, 2×2 matrices; verify axioms numerically.\n- **Pictorial (P):** Two-operation axiom checklist table; arrows from + axioms to ring axioms.\n- **Abstract (A):** Formal definition with variables r, s, t ∈ R; symbolic proof of derived properties.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 100,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.ring-theory",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89 — SPACED REPETITION\nReview schedule for math.abst.ring-theory:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"State R1–R5. Which axioms apply to + and which to ·?\"\n  Target: Verbatim recall of axiom structure.\n\nInterval 2 (3 days):\n  Application: \"Is ℝ[x] (polynomials with real coefficients) a ring? Justify.\"\n  Target: Polynomial multiplication is closed, associative, distributive; + forms abelian group.\n\nInterval 3 (7 days):\n  Transfer: \"Why is ℤ a ring but not a field? What would need to change?\"\n  Target: ℤ lacks ·-inverses for elements like 2, 3; field requires ·-inverses for all non-zero.\n\nInterval 4 (21 days):\n  Integration: \"A student in math.abst.ideal asks why a ring ideal I ⊂ R doesn't need its own\n  identity element. Explain using ring axioms.\"\n  Target: Ideal inherits additive group from R; · closure (I·R ⊆ I) doesn't invoke identity.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 530,
+        "endLine": 556
+      }
+    },
+    {
+      "assetId": "math.abst.ring-theory/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.ring-theory",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### GR-8: Cross-link documentation\n```\nIncoming prerequisite:\n  math.abst.group-theory → Provides abelian group definition (G1–G5).\n  R1 of ring is verbatim \"abelian group under +\"; group-theory must precede ring-theory.\n\nOutgoing unlocks:\n  math.abst.ideal → Requires ring as base structure; ideal = subring closed under ring multiplication.\n  math.abst.field → Ring + multiplicative group on R\\{0} = field.\n\nCross-linked (non-prerequisite):\n  math.linalg.matrix-multiplication (Tier 1) → Used in TA-A03 concrete example and P76 probe.\n  M₂(ℝ) verification bridges ring-theory and matrix algebra.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.linalg.matrix-multiplication]\nmath.linalg.matrix-multiplication IS in Tier 1 set → P76 CROSS-LINK PROBE\nP76 probe: verify M₂(ℝ) is a ring, explicitly checking additive group and multiplicative axioms,\n  bridging to student's matrix-multiplication knowledge.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-theory.md",
+        "startLine": 556,
+        "endLine": 583
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

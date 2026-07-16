@@ -1,0 +1,344 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.vector-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.vector-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d76eab30acbf21d999285c950411f36e107019c3ec35b4ebb164717c5fe5c2be",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.vector-space.md": "sha256:b360e72560152724bc265ff19b08e555d7d32692dd7934918498ab211198bdef"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.vector-space",
+    "name": "Vector Space",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.vector-addition",
+      "math.linalg.scalar-multiplication",
+      "math.abst.field"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.vector-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.vector-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.vector-space.md": "sha256:b360e72560152724bc265ff19b08e555d7d32692dd7934918498ab211198bdef"
+      },
+      "contentHash": "sha256:4e5d843618f7bf6d807b8364b624f552d60dbc6b8ae730319531bc9905b32047",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector-space.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector-space.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector-space.md#TA-A03 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.vector-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.vector-space.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.vector-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.vector-space\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.vector-space/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.linalg.vector-space",
+      "title": "Vector Space — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.linalg.vector-addition**: vector sum in ℝⁿ component-wise; geometric parallelogram law; commutativity and associativity of addition; zero vector; additive inverse\n- **math.linalg.scalar-multiplication**: scaling a vector by a real number; distributivity over addition; identity scalar 1·v=v\n- **math.abst.field**: commutative ring with multiplicative inverses for all nonzero elements; ℚ, ℝ, ℂ, ℤₚ; scalars come from a field\n\n### Target Knowledge State\nStudent can state the eight vector-space axioms; recognise whether a given set with defined operations satisfies all axioms or fails at least one; identify the scalar field; explain why the zero vector and additive inverses are unique consequences of the axioms; connect the additive structure of a vector space to an abelian group; and give examples from ℝⁿ, polynomial spaces, and matrix spaces.\n\n### Conceptual Obstacles\n1. Assuming any set with addition and scalar multiplication is a vector space — closure under addition and scalar multiplication must be verified explicitly; operations can be redefined to break axioms while looking \"natural\"\n2. Confusing the zero element's defining property — the zero vector 0 is defined by 0+v=v for all v; students who write \"0=(0,0,…,0)\" only for ℝⁿ cannot generalise to polynomial or function spaces\n3. Assuming scalars can come from any number system — the scalar domain must be a field; using ℤ as scalars violates invertibility and breaks the axiom that scalar inverses can be applied (division by scalars must be possible)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 29,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.vector-space",
+      "title": "CLOSURE-UNSTATED",
+      "content": "| MC-1 | CLOSURE-UNSTATED | Student describes vector spaces without checking closure; assumes the set is automatically closed under the given operations without verification | Any proposed \"vector space\" where the underlying set might not be closed (e.g., {(x,y): x≥0}, non-standard operations) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.vector-space",
+      "title": "ZERO-VECTOR-POSITIONAL",
+      "content": "| MC-2 | ZERO-VECTOR-POSITIONAL | Student identifies the zero vector only as the tuple (0,0,…,0); cannot recognise the zero polynomial (p=0), the zero matrix (all entries 0), or the zero function as zero vectors in their respective spaces | Abstract vector spaces; polynomial or function spaces |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.vector-space",
+      "title": "SCALAR-DOMAIN-ARBITRARY",
+      "content": "| MC-3 | SCALAR-DOMAIN-ARBITRARY | Student assumes scalars can come from ℤ or any ring; does not verify that the scalar domain is a field; confusion arises in examples like ℤ-modules (which are not vector spaces) | Any example where the scalar ring is non-obvious; abstract definitions; connection to algebra |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector-space",
+      "title": "Inducing the Eight Axioms from Examples",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Inducing the Eight Axioms from Examples\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 66,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector-space",
+      "title": "Zero Vector and Additive Inverse as Derived Properties",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Zero Vector and Additive Inverse as Derived Properties\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 135,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector-space",
+      "title": "Contrast Pair: Valid Vector Space vs. Axiom Violations",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast Pair: Valid Vector Space vs. Axiom Violations\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 190,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.vector-space",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P04\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 258,
+        "endLine": 481
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.vector-space",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess understanding of vector-space axioms, zero elements, and the cross-link to group theory\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Is V = {f: [0,1]→ℝ: f(0)=1} a vector space over ℝ with standard addition and scalar multiplication?\n\n*Solution:* Not a vector space. The zero function satisfies 0(0)=0≠1, so 0∉V. Alternatively: take f,g∈V (f(0)=g(0)=1); then (f+g)(0)=2≠1, so V is not closed under addition. **Not a vector space.**\n\n**Problem 2:** In the space M₂ₓ₂ (2×2 real matrices), what is the zero vector? What is the additive inverse of A=[[1,2],[3,4]]?\n\n*Solution:* Zero vector: O=[[0,0],[0,0]]. Additive inverse: −A=[[−1,−2],[−3,−4]]. Check: A+(−A)=O ✓.\n\n**Problem 3:** Does the set V = {(x,y)∈ℝ²: x+2y=5} form a vector space (with standard operations)?\n\n*Solution:* The zero vector (0,0) satisfies 0+2(0)=0≠5, so 0∉V. V is not a subspace, and not a vector space. (Alternatively, closure fails: 2·(1,2)=(2,4), check: 2+2(4)=10≠5.)\n\n**Problem 4:** State (don't prove) which of the 8 axioms would fail if we redefined scalar multiplication in ℝ² as k·(a,b)=(ka,0) (scaling zeroes out the second component).\n\n*Solution:* Axiom S4 (identity scalar) fails: 1·(a,b)=(a,0)≠(a,b) (unless b=0). Also S1 fails: k((a,b)+(c,d))=k(a+c,b+d)=(k(a+c),0)=(ka+kc,0), but k(a,b)+k(c,d)=(ka,0)+(kc,0)=(ka+kc,0)... actually S1 holds here. S4 fails is the clearest.\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: cross-link probe — math.abst.group-theory)*\n\n**Prompt:** A vector space V over ℝ has an underlying additive structure (V, +).\n\n(a) State the four properties (from group theory) that make (V, +) an abelian group. Identify which of the 8 vector-space axioms provide each property.\n\n(b) The set of 2×2 invertible real matrices GL(2,ℝ) forms a group under matrix multiplication. Is GL(2,ℝ) a vector space over ℝ with standard scalar multiplication k·A=kA? Justify your answer by identifying one axiom that fails.\n\n**Expected solution:**\n\n(a) Abelian group (V, +) properties and their axiom sources:\n- **Closure:** built into V×V→V definition (the sum of two vectors stays in V)\n- **Associativity:** Axiom A2 ((u+v)+w = u+(v+w))\n- **Identity element (0):** Axiom A3 (∃ 0: 0+v=v)\n- **Inverse:** Axiom A4 (∀v, ∃(−v): v+(−v)=0)\n- **Commutativity:** Axiom A1 (u+v = v+u)\n\nSo (V, +) is an abelian group, and axioms A1-A4 exactly encode this structure. The remaining axioms S1-S4 link the field scalars to the group structure.\n\n(b) GL(2,ℝ) with scalar multiplication k·A=kA: take k=0 and A=I (identity matrix). Then 0·I = [[0,0],[0,0]] = O. But O is not invertible (det(O)=0), so O∉GL(2,ℝ). The \"zero vector\" (needed for Axiom A3) is the zero matrix O, but O∉GL(2,ℝ). So Axiom A3 fails: there is no zero vector in GL(2,ℝ). **GL(2,ℝ) with kA is not a vector space.**\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.linalg.linear-map and math.linalg.inner-product-space; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.linalg.vector-space assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — CLOSURE-UNSTATED (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming closure without checking is CLOSURE-UNSTATED. In any proposed vector space or subspace, you must verify that the sum and scalar multiple of elements stay inside the set — this is not automatic.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is W={(x,y,z)∈ℝ³: xyz=0} a subspace?\"\n- MC-1 response: \"Yes, the operations are standard.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Counterexample for xyz=0: take u=(1,0,0) (product=0) and v=(0,1,0) (product=0). Then u+v=(1,1,0); product=1·1·0=0 ✓ — closure holds here. But try u=(1,1,0) and v=(1,0,1): u+v=(2,1,1); product=2·1·1=2≠0. Not closed! W is not a subspace. Always test closure before concluding a subset is a subspace.\"\n\nPractice: Apply the 3-condition test to W={(x,y)∈ℝ²: y=x²}. Fails closure: (1,1)∈W, 2·(1,1)=(2,4); 4≠2²=4... actually 2·1=2, so y-coord=4, x-coord=2, but 4≠2²? Wait: 4=2²=4. Hmm. Then check addition: (1,1)+(1,1)=(2,2); 2≠2²=4. Not closed.\n\n---\n\n### Repair Action B02 — ZERO-VECTOR-POSITIONAL (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Identifying the zero vector only as (0,0,…,0) is ZERO-VECTOR-POSITIONAL. The zero vector is defined by its property (0+v=v), not by its appearance.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"What is the zero vector in P₃?\"\n- MC-2 response: \"0\" without specifying \"the zero polynomial.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"In P₃, the zero vector is the polynomial p(x)=0 (identically zero; all coefficients are zero: 0x³+0x²+0x+0). Verify: 0+q(x)=0+q(x)=q(x) for any polynomial q ✓. In M₂ₓ₂, the zero vector is the 2×2 zero matrix. In C([0,1]), it is the zero function f(x)=0 for all x. Each space has its own zero — identified by the axiom, not by appearance.\"\n\nPractice: Identify the zero vector in V=ℝ^{ℕ} (sequences of real numbers). Answer: the sequence (0,0,0,…).\n\n---\n\n### Repair Action B03 — SCALAR-DOMAIN-ARBITRARY (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Assuming any ring can serve as the scalar domain is SCALAR-DOMAIN-ARBITRARY. Vector spaces require a field of scalars — division by nonzero scalars must be possible.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Can we define a vector space over ℤ?\"\n- MC-3 response: \"Yes, scalars are just numbers.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"A vector space over ℤ would need: for any scalar 2 and vector v, the equation 2·w=v must be solvable for w. But in ℤ², 2·w=(1,0) requires w=(1/2,0)∉ℤ². The field axiom of invertibility makes this work: in ℝ or ℚ, 1/2 exists. ℤ-modules exist but are not vector spaces. The scalar domain must be a field.\"\n\nPractice: Explain why ℚ[√2]={a+b√2: a,b∈ℚ} can serve as the scalar domain of a vector space over ℚ (it is a field), but ℤ[√2]={a+b√2: a,b∈ℤ} cannot (it is only a ring).\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | State all 8 axioms from memory; identify the zero vector and additive inverse in P₂ |\n| SR-2 | +3 days | Apply the 3-condition subspace test to W={(A∈M₂ₓ₂: tr(A)=0} (trace-zero matrices) |\n| SR-3 | +7 days | Identify which axiom fails for each of three proposed non-vector-spaces (non-standard operations) |\n| SR-4 | +14 days | Explain why (V,+) is an abelian group and identify which axioms provide each group property (reinforces cross-link to group theory) |\n\nRetrieval flag: if student fails to specify the zero element in a non-ℝⁿ space (MC-2), or claims closure without verifying (MC-1), re-execute B01/B02.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.linalg.vector-addition | Axioms A1-A4 extend the geometric addition from ℝⁿ to abstract spaces |\n| Requires (Tier-1) | math.linalg.scalar-multiplication | Axioms S1-S4 formalise scaling; identity scalar S4 directly mirrors scalar multiplication prior knowledge |\n| Requires (Tier-1) | math.abst.field | The scalar domain must be a field; the field axioms underpin why scalar inversion is possible (math.abst.field blueprint) |\n| Cross-link (Tier-1) | math.abst.group-theory | (V,+) is an abelian group; P76 probe tests this connection by identifying axioms A1-A4 as the abelian group axioms |\n| Unlocks | math.linalg.linear-map | Linear maps are structure-preserving functions between vector spaces; requires vector-space definition |\n| Unlocks | math.linalg.inner-product-space | Inner product spaces add a scalar product structure to vector spaces |\n\n**GR-9:** cross_links=[math.abst.group-theory] (Tier 1, has blueprint) → P76 mode = cross-link probe (tests the abelian group structure of (V,+)).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=5 → standard structure (3 main TAs + gate)\n- bloom=understand → V-4 = N/A (no P07 required)\n- CPA_entry = P (Pictorial) for proficient difficulty; V-3 = N/A\n\n**Key teaching insight:** The 8-axiom list feels overwhelming as a definition without seeing where it comes from. A01's induction from familiar examples (ℝ², polynomials, matrices) transforms the axioms from arbitrary rules into observed patterns. Students who derive the axioms from examples retain them far better than students who memorise a list.\n\n**Subspace test (A03):** The 3-condition test is the working tool for linear algebra — students will use it in every subsequent course. Emphasising that \"if you're checking a subset of a known vector space, 3 conditions suffice\" saves enormous verification effort and reinforces why the other 5 axioms come for free from the surrounding space.\n\n**P76 design:** The cross-link to math.abst.group-theory tests whether the student sees that the additive axioms A1-A4 are exactly the abelian group axioms. The GL(2,ℝ) example is a careful choice: it is a group under multiplication, it has a scalar multiplication, yet it fails to be a vector space because the zero matrix is excluded. This shows that \"group + scalar multiplication\" is not enough — you also need a zero vector.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.linalg.vector-space ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.linalg.vector-addition ✓, math.linalg.scalar-multiplication ✓, math.abst.field ✓ | PASS |\n| V-3 | CPA entry rule | proficient → CPA=P; V-3=N/A ✓ | N/A |\n| V-4 | bloom=understand → P07 N/A | bloom=understand; no P07; V-4=N/A ✓ | N/A |\n| V-5 | GR-1: A01 opens with B-category primitive | P04 PATTERN INDUCTION ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires, cross-links, unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | cross_links=[math.abst.group-theory] (T1, has blueprint) → P76=cross-link probe ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=5 → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | GL(2,ℝ) fails Axiom A3 (zero matrix not invertible); abelian group structure identified via axioms A1-A4 ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 258,
+        "endLine": 481
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.vector-space",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** P (Pictorial) — proficient learner begins with a structured table of familiar examples, observing the shared properties before seeing the formal axiom list.\n\n**Scaffolding sequence:**\n1. **A01 P04 PATTERN INDUCTION** — P: side-by-side table of ℝ², ℝ³, P₂ (polynomials ≤ degree 2), M₂ₓ₂ (2×2 matrices) — show addition and scalar multiplication in each; induce the 8 common axioms from the pattern; A: formal definition of vector space over a field F\n2. **A02 P11 REPRESENTATION SHIFT** — P: axiom table with one concrete example per axiom; A: zero vector and additive inverse as theorems derived from axioms (uniqueness proofs)\n3. **A03 P06 CONTRAST PAIR** — valid vector space vs axiom-breaking set; ℤ-module vs ℝ-vector space; subspace criterion (3-condition test) vs arbitrary subset\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 58,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.vector-space",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | State all 8 axioms from memory; identify the zero vector and additive inverse in P₂ |\n| SR-2 | +3 days | Apply the 3-condition subspace test to W={(A∈M₂ₓ₂: tr(A)=0} (trace-zero matrices) |\n| SR-3 | +7 days | Identify which axiom fails for each of three proposed non-vector-spaces (non-standard operations) |\n| SR-4 | +14 days | Explain why (V,+) is an abelian group and identify which axioms provide each group property (reinforces cross-link to group theory) |\n\nRetrieval flag: if student fails to specify the zero element in a non-ℝⁿ space (MC-2), or claims closure without verifying (MC-1), re-execute B01/B02.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 410,
+        "endLine": 425
+      }
+    },
+    {
+      "assetId": "math.linalg.vector-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.vector-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.linalg.vector-addition | Axioms A1-A4 extend the geometric addition from ℝⁿ to abstract spaces |\n| Requires (Tier-1) | math.linalg.scalar-multiplication | Axioms S1-S4 formalise scaling; identity scalar S4 directly mirrors scalar multiplication prior knowledge |\n| Requires (Tier-1) | math.abst.field | The scalar domain must be a field; the field axioms underpin why scalar inversion is possible (math.abst.field blueprint) |\n| Cross-link (Tier-1) | math.abst.group-theory | (V,+) is an abelian group; P76 probe tests this connection by identifying axioms A1-A4 as the abelian group axioms |\n| Unlocks | math.linalg.linear-map | Linear maps are structure-preserving functions between vector spaces; requires vector-space definition |\n| Unlocks | math.linalg.inner-product-space | Inner product spaces add a scalar product structure to vector spaces |\n\n**GR-9:** cross_links=[math.abst.group-theory] (Tier 1, has blueprint) → P76 mode = cross-link probe (tests the abelian group structure of (V,+)).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.vector-space.md",
+        "startLine": 425,
+        "endLine": 442
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

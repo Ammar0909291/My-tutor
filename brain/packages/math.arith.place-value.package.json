@@ -1,0 +1,340 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.place-value-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.place-value",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f9e0b1a2a6dcc5469232ae56789f6b5c293bedb02598b72610c5b70690cab58a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.place-value.md": "sha256:02e71598c59b4348b6c90ac957bf4b89e6eb2c5a1b9d4f6cf459055f6dd08c62"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.arith.place-value",
+    "name": "Place Value",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.arith.counting"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.place-value-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.place-value (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.place-value.md": "sha256:02e71598c59b4348b6c90ac957bf4b89e6eb2c5a1b9d4f6cf459055f6dd08c62"
+      },
+      "contentHash": "sha256:5c06be8450a0a1649c823f51bd397d74108ef4b242e30a4aa04cae6cf0c53a99",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.place-value.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.place-value.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.place-value"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.place-value\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.place-value.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.place-value.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.place-value"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.place-value\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.place-value.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.place-value.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.place-value"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.place-value\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.place-value.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.place-value.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.place-value"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.place-value\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.place-value/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.arith.place-value",
+      "title": "Place Value — cognitive map",
+      "content": "### Core Insight\nIn base-10 positional notation, the VALUE of a digit depends on its POSITION. The digit '3' is worth 3, 30, 300, or 3000 depending on where it sits in the numeral. Each position represents a power of 10: ones (10⁰), tens (10¹), hundreds (10²), thousands (10³), and so on.\n\n### Conceptual Hierarchy\n```\nLevel 0 (Concrete): Use physical base-10 blocks — units, rods (10s), flats (100s), cubes (1000s).\nLevel 1 (Pictorial): Place-value chart with columns; expanded form diagram.\nLevel 2 (Abstract): Positional definition: value = digit × 10^position;\n                    expanded form; decimal extension (10⁻¹, 10⁻², …).\nLevel 3 (Transfer): Compare/order multi-digit numbers; understand why 1000 > 999.\n```\n\n### Key Facts\n```\nBase-10 place values (left to right: decreasing powers):\n  … | 10³=1000 | 10²=100 | 10¹=10 | 10⁰=1 | . | 10⁻¹=0.1 | 10⁻²=0.01 | …\n       thousands  hundreds   tens     ones   decimal  tenths    hundredths\n\nValue of digit d at position p: d × 10^p  (where ones place = p=0)\n\nExpanded form:\n  4,307 = 4×10³ + 3×10² + 0×10¹ + 7×10⁰ = 4000 + 300 + 0 + 7\n\nZero as placeholder:\n  4,307 ≠ 437. The zero in tens place keeps hundreds and ones in correct positions.\n  Without the placeholder zero, 43_7 is ambiguous.\n\nDecimal places:\n  2.54 = 2×10⁰ + 5×10⁻¹ + 4×10⁻² = 2 + 0.5 + 0.04\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 34,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.place-value",
+      "title": "[FOUNDATIONAL]: DIGIT-IS-VALUE",
+      "content": "### MC-1 [FOUNDATIONAL]: DIGIT-IS-VALUE\n**Belief:** The digit '3' in 3,482 is worth 3 (face value only), not 3,000. Students read digits in isolation without multiplying by the positional power.\n**Origin:** Digit recognition precedes place-value instruction; students name digits independently before learning positions.\n**Trigger:** \"What is the value of the digit 3 in 3,482?\" → student says \"3\" instead of \"3,000.\"\n**Repair:** Explicitly multiply: digit × place value = 3 × 1000 = 3,000. Use physical blocks (one 1000-cube for each thousand).\n**Priority:** FOUNDATIONAL — every arithmetic operation depends on knowing what each digit contributes.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.place-value",
+      "title": "EXPANDED-FORM-ADDITIVE-CONFUSION",
+      "content": "### MC-2: EXPANDED-FORM-ADDITIVE-CONFUSION\n**Belief:** Expanded form is a multiplication: 3,482 = 3 × 482 or 3 × 4 × 8 × 2, rather than a sum of positional values.\n**Origin:** Students see \"expanded\" and parse it as repeated multiplication.\n**Trigger:** \"Write 3,482 in expanded form.\" → student writes 3×4×8×2.\n**Repair:** Expanded form is a SUM: 3,000 + 400 + 80 + 2. Each term is one digit × one place value.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.place-value",
+      "title": "ZERO-PLACEHOLDER-INVISIBLE",
+      "content": "### MC-3: ZERO-PLACEHOLDER-INVISIBLE\n**Belief:** Zeros between non-zero digits can be dropped: 4,307 = 437.\n**Origin:** Students don't recognise that 0 in the tens place holds the hundreds and ones in their positions.\n**Trigger:** Asked to compare 4,307 and 437 — student says they're equal or confused.\n**Repair:** Write the place-value chart and show that removing 0 collapses the grid: '3' moves from hundreds to tens, '7' moves from ones to… missing column.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 16,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.place-value",
+      "title": "Concrete Foundation — Position Determines Value",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Concrete Foundation — Position Determines Value\",\"primitives\":[\"P03\",\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 120,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.place-value",
+      "title": "Expanded Form and Zero as Placeholder",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Expanded Form and Zero as Placeholder\",\"primitives\":[\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 189,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.place-value",
+      "title": "Decimal Places and Comparing Numbers",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Decimal Places and Comparing Numbers\",\"primitives\":[\"P04\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 256,
+        "endLine": 331
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.place-value",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91 Terminal)\",\"primitives\":[\"P03\",\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 331,
+        "endLine": 641
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.place-value",
+      "title": "Mastery Gate (P91 Terminal)",
+      "content": "### TA-A04: Mastery Gate (P91 Terminal)\n\n```\nP77 — MULTI-PROBLEM SET (4 problems)\n\nProblem 1:\n\"Write 508,070 in expanded form. State the value of the digit 5.\"\n\nProblem 2:\n\"A student writes: 'The number 2,005 in expanded form is 2×10³ + 5×10⁰.'\nIs this correct? If not, what is missing and why is it necessary?\"\n[The zero terms 0×10² and 0×10¹ are missing. They are needed to show\n hundreds and tens positions are zero, confirming the positional structure.]\n\nProblem 3:\n\"Order from least to greatest: 8.025 / 8.205 / 8.250 / 8.052.\nExplain which position first distinguishes the numbers.\"\n[8.025 < 8.052 < 8.205 < 8.250. Ones place = all 8 (tied).\n Tenths place: 0 (8.025, 8.052) vs. 2 (8.205, 8.250).\n Hundredths: 2 (8.025) vs. 5 (8.052).]\n\nProblem 4:\n\"What 6-digit number has: 4 in the ten-thousands place, 7 in the hundreds place,\n3 in the ones place, and 0 in all other places?\"\n[040,703 → 40,703. Written with all six positions: 0×10⁵ + 4×10⁴ + 0×10³ + 7×10² + 0×10¹ + 3×10⁰.]\n```\n\n```\nP55 — SCORE (after P77)\nAward 1 point per problem.\nRunning total before P76: __/4.\n```\n\n```\nP76 — TRANSFER PROBE (P76 independence: math.arith.number-base NOT Tier 1)\n\"The decimal system uses base 10 (ten digits: 0–9; each position worth 10× the next).\n\n(a) In the number 1,234 (base 10):\n    • Write the expanded form.\n    • State the value of each digit.\n\n(b) Suppose we used a base-2 (binary) system with only digits 0 and 1,\n    where each position is worth 2× the position to its right.\n    The binary number 1011 means: 1×2³ + 0×2² + 1×2¹ + 1×2⁰.\n    Calculate the base-10 value of 1011 in binary.\n\n(c) In one sentence, explain what 'place value' means without using the phrase 'base 10.'\n    Your sentence should apply equally to both the decimal and binary examples above.\"\n\n[Expected:\n(a) 1×10³ + 2×10² + 3×10¹ + 4×10⁰ = 1000+200+30+4. Values: 1000, 200, 30, 4.\n(b) 1×8 + 0×4 + 1×2 + 1×1 = 8+0+2+1 = 11 in base 10.\n(c) 'Place value means the value of a digit is determined by its position,\n    where each position represents a fixed multiple of the position to its right.']\n```\n\n```\nP55 — SCORE (after P76)\nAward 1 point for P76.\nRunning total: __/5.\n```\n\n```\nP75 — MASTERY ASSESSMENT\nPass criterion: 5 out of 5 (⌈0.90 × 5⌉ = 5)\n```\n\n```\nP55 — SCORE (final)\nRecord pass/fail status.\n```\n\n```\nP74 — ROUTING DECISION\nScore = 5/5 → MASTERY ACHIEVED → P78 COMPLETION\nScore < 5/5 → NEEDS REVIEW → identify lowest-scoring item; activate Protocol B for its misconception\n```\n\n```\nP55 — SCORE (routing recorded)\n```\n\n```\nP78 — COMPLETION\n\"Place value checkpoint complete. You have established:\n  • The value of a digit = digit × 10^(its position from the ones place).\n  • Expanded form = sum of all (digit × place value) terms, including zeros.\n  • Zero as placeholder: a '0' digit holds columns in their correct positions.\n  • Decimal places extend rightward as negative powers of 10.\n  • Comparing numbers: scan columns left to right; first differing column decides.\nNext concepts: math.arith.addition (adding digits column by column using place value),\nmath.arith.subtraction (borrowing across columns).\"\n```\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair Chains)\n\n### Repair Chain B-1: DIGIT-IS-VALUE (MC-1 FOUNDATIONAL)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: The digit '3' is always worth 3.\n AFTER: The digit '3' is worth 3 × (its place value).\n\nTwo things determine a digit's contribution:\n  (1) The digit symbol (0–9) — the FACE VALUE.\n  (2) The column position — the PLACE VALUE.\n  VALUE = FACE VALUE × PLACE VALUE.\n\nExamples:\n  '3' in ones column:      3 × 1    = 3\n  '3' in tens column:      3 × 10   = 30\n  '3' in hundreds column:  3 × 100  = 300\n  '3' in thousands column: 3 × 1000 = 3,000\"\n\nRepair exercise using base-10 blocks:\n  Show physically: one 1000-cube for each unit of the thousands digit.\n  If thousands digit is 3: three 1000-cubes = 3,000.\n  Place them in the 'thousands' section of a mat.\n\nRepair exercise (numerical):\n  Find the value of each digit in 9,081:\n    9 in thousands → 9 × 1000 = 9,000.\n    0 in hundreds → 0 × 100 = 0.\n    8 in tens → 8 × 10 = 80.\n    1 in ones → 1 × 1 = 1.\n\nExit gate: \"What is the value of the digit 7 in 7,406?\"\nExpected: 7,000.\n→ Correct: return to TA-A01 P49 re-attempt.\n→ Incorrect: repeat digit-column multiplication with new example.\n```\n\n### Repair Chain B-2: EXPANDED-FORM-ADDITIVE-CONFUSION (MC-2)\n\n```\nP41 — MISCONCEPTION DETECTOR\nDiagnostic: \"Write 2,506 in expanded form.\"\nIf student writes 2×5×0×6 or 2×506 or any multiplication: MC-2 confirmed.\n\nP27 — MISCONCEPTION NAMING\n\"EXPANDED-FORM-ADDITIVE-CONFUSION: writing expanded form as a product.\nExpanded form is a SUM of terms. Each term is a product (digit × power).\n2,506 = (2 × 1000) + (5 × 100) + (0 × 10) + (6 × 1)\n      = 2000 + 500 + 0 + 6.\"\n\nRepair exercise: Build from the place-value chart.\n  Write each position in the chart first, then sum the values.\n  2,506: chart → 2000 | 500 | 0 | 6 → sum = 2,506. ✓\n\nExit gate: \"Write 3,040 in expanded form as a sum.\"\nExpected: 3×1000 + 0×100 + 4×10 + 0×1 = 3000 + 0 + 40 + 0.\n→ Correct: return to TA-A02.\n```\n\n### Repair Chain B-3: ZERO-PLACEHOLDER-INVISIBLE (MC-3)\n\n```\nP64 — CONCEPTUAL SHIFT\n\"BEFORE: Zeros between non-zero digits can be dropped (4,307 = 437).\n AFTER: Each '0' digit holds a column position; removing it shifts all digits.\n\nThink of digits as standing in numbered columns. Removing a '0' collapses\nthat column — every digit to its left shifts one column to the right.\n\n4,307 with columns:  [4|Th][3|H][0|T][7|O] → value = 4000+300+0+7 = 4,307\n437 with columns:    [4|H][3|T][7|O]         → value = 400+30+7 = 437\nCOMPLETELY DIFFERENT numbers.\"\n\nVisual repair: number lines showing 4,307 vs. 437 at different magnitudes.\n\nRepair exercise: Determine which of 30,500 / 3,500 / 35,000 / 305 are different numbers.\nEach has different zero placement → different positional values → all four are different.\n\nExit gate: \"Change 40,050 by removing ONE zero. How does the number's value change?\"\nExpected: Removing the zero in thousands → 4,050 (40,050 → 4,050, a 36,000 decrease).\nOr removing the zero in hundreds → 4,050 (depending on which zero). Demonstrate column collapse.\n→ Correct: return to TA-A03.\n```\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n```\nP89 — SPACED REPETITION\nReview schedule for math.arith.place-value:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"What is the value of the digit 8 in 183,072?\n  Write 183,072 in expanded form.\"\n  Target: 8 in ten-thousands → 80,000.\n    1×10⁵ + 8×10⁴ + 3×10³ + 0×10² + 7×10¹ + 2×10⁰.\n\nInterval 2 (3 days):\n  Application: \"Order from least to greatest: 0.307 / 0.37 / 0.073 / 0.730.\n  Identify the first distinguishing position.\"\n  Target: 0.073 < 0.307 < 0.37 < 0.730. Tenths position: 0 vs 3 vs 7 first split.\n\nInterval 3 (7 days):\n  Transfer: \"A store price tag reads $12.50. Write this in expanded form.\n  Then explain why $12.05 ≠ $12.50 by referring to place values.\"\n  Target: 1×10¹+2×10⁰+5×10⁻¹+0×10⁻². Tenths vs. hundredths differ.\n\nInterval 4 (21 days):\n  Integration: \"Why does the column-addition algorithm in math.arith.addition\n  require aligning numbers by their ones digits before adding? Use place value to explain.\"\n  Target: aligning by ones ensures digits of the same place value are added together;\n    misalignment would add thousands to ones, giving wrong sums.\n```\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### GR-8: Cross-link documentation\n```\nIncoming prerequisite:\n  math.arith.counting → Counting establishes the natural number n = |S|.\n    Place value is how we WRITE n using digits 0–9 in positional notation.\n\nOutgoing unlocks:\n  math.arith.addition → Column addition requires knowing which place-value columns\n    to add together (ones with ones, tens with tens, etc.).\n  math.arith.subtraction → Borrowing (regrouping) requires understanding that\n    1 ten = 10 ones (place-value exchange).\n  math.arith.rounding → Rounding requires identifying a target position and\n    inspecting the adjacent position to the right.\n\nCross-linked (non-prerequisite):\n  math.arith.number-base (NOT Tier 1) → Generalises place value to bases other\n    than 10. The binary (base 2), hexadecimal (base 16) systems use the same\n    positional principle with different base values.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.arith.number-base]\nmath.arith.number-base is NOT Tier 1 → P76 INDEPENDENCE\nP76 probe: preview of binary (base-2) place value; student uses the same\n  positional principle to decode a binary number; explains place value abstractly.\n  Self-contained; no prerequisite of number-base knowledge beyond what is given.\n```\n\n---\n\n\n## Component 8 — Teaching Notes\n\n### Pedagogical Rationale\nPlace value (bloom=understand) requires conceptual understanding of WHY digit position determines value, not just procedural ability to name column positions. The two-layer architecture (face value × place value = positional contribution) is the central insight. The concreteness of base-10 blocks (or their virtual equivalent) is essential for early stages.\n\n### Common Session Failure Modes\n1. **MC-1 is near-universal at entry:** Students who can read \"3,482\" aloud can still think '3' is worth 3. The B-1 repair chain must be explicit about multiplication: face value × place value.\n2. **Zero terms in expanded form are routinely omitted:** Students instinctively skip zero-contribution terms. Reinforce: expanded form includes ALL positions, even those with digit 0.\n3. **Decimal place value is treated as separate:** Students who learn decimal place values as an entirely new system fail to connect 10⁻¹ to 10⁰ to 10¹ as part of one continuous positional scale. The pattern induction in TA-A03 unifies the two sides of the decimal point.\n\n### Connections to Broader Curriculum\n- **Downstream — math.arith.addition:** Column addition works because aligned digits have the same place value; carrying creates a unit of the next place.\n- **Downstream — math.arith.rounding:** Rounding to the nearest hundred means looking at the tens digit — both operations require precise place-value identification.\n- **Cross-domain — math.arith.number-base:** Understanding base 10 as one member of a family of positional systems prepares students for computer science (binary, hexadecimal) and number theory.\n\n### Language Precision\n- Always say \"the VALUE of the digit 3\" not just \"the digit 3\" — emphasise the distinction between digit and value.\n- \"Face value\" = the digit symbol (0–9); \"place value\" = the power of 10; \"positional value\" = face × place.\n- \"Placeholder zero\": the word \"placeholder\" carries the meaning — it holds other digits in their correct positions.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n### Structural Validators\n- [x] V-1: Blueprint has all 10 components (0–8, 10).\n- [x] V-2: Metadata YAML complete with all required fields.\n- [x] V-3: concept_id matches filename `math.arith.place-value`.\n- [x] V-4: difficulty=foundational, bloom_level=understand, mastery_threshold=0.90.\n- [x] V-5: estimated_hours=10, session_ta_cap=7.\n\n### Grammar Rule Validators\n- [x] V-6 (GR-1): Every non-repair TA opens with B-category primitive (TA-A01: P03+P06; TA-A02: P11; TA-A03: P04+P11; TA-A04 is mastery gate).\n- [x] V-7 (GR-2): Every non-gate TA contains P49 with all 4 branches. TA-A01, TA-A02, TA-A03 each have P49.\n- [x] V-8 (GR-3): Mastery gate TA-A04 is terminal (ends with P78).\n- [x] V-9 (GR-4): P41 entry diagnostic gates P64 → Protocol B when MC-1 active.\n- [x] V-10 (GR-6): P91 compound (P77→P55→P76→P55→P75→P55→P74→P55→P78) complete in TA-A04.\n- [x] V-11 (GR-7): P76 present in mastery gate TA-A04.\n- [x] V-12 (GR-8): Cross-links documented in Component 7. math.arith.number-base named.\n- [x] V-13 (GR-9): P76 mode is INDEPENDENCE (math.arith.number-base NOT Tier 1). P76 probe is self-contained (binary decoding using positional principle given on the spot).\n- [x] V-14 (GR-10): MAMR stated in Component 0 and enforced in Component 3.\n\n### Content Validators\n- [x] V-15: Pass criterion = ⌈0.90 × 5⌉ = 5/5. P77 has 4 problems; P76 contributes 1; total n=5. ✓\n- [x] V-16: CPA_ENTRY_STAGE = C. foundational always starts Concrete. ✓\n- [x] V-17: MC-1 is FOUNDATIONAL and cleared first per MAMR. ✓\n- [x] V-18: P49 INCORRECT branch activates P27 or P64 with repair pathway in all three non-gate TAs. ✓\n- [x] V-19: P76 probe independent of P77 problems (P77: 508,070 expanded form, zero analysis, decimal ordering, digit reconstruction; P76: binary system decoding — distinct). ✓\n- [x] V-20: Spaced repetition intervals are 1, 3, 7, 21 days with distinct prompts. ✓\n\n### Automated Invariant Check (AIR)\n- [x] AIR-1: No implementation code present.\n- [x] AIR-2: No references to internal system variables.\n- [x] AIR-3: All cross-linked concept IDs use canonical prefix format.\n- [x] AIR-4: P91 sequence order is P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n- [x] AIR-5: Protocol B repair chains each have explicit exit gate with return instruction. ✓\n\n**VALIDATION RESULT: PASS — PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 331,
+        "endLine": 641
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.place-value",
+      "title": "Scaffolding Protocol",
+      "content": "### Entry Diagnostic (P41 gate)\n```\nP41 — MISCONCEPTION DETECTOR\nPrompt: \"What is the value of the digit 5 in each number?\n  (a) 52    (b) 507    (c) 5,000    (d) 0.5\"\n\nCORRECT ((a) 50; (b) 500; (c) 5,000; (d) 0.5):\n→ No MC-1 detected → proceed to TA-A01 standard opening.\n\nINCORRECT (all answers are 5, or place and face value conflated):\n→ MC-1 FOUNDATIONAL active → P64 CONCEPTUAL SHIFT on digit vs. positional value\n→ Activate Protocol B (MC-1 Repair Chain)\n```\n\n### Prerequisite Bridge\nStudent completed math.arith.counting. Counting established |S| = n as a natural number. Place value is how we WRITE that number in base 10: the symbols 0–9 positioned left-to-right represent increasing powers of 10.\n\n### MAMR Enforcement\nMC-1 is FOUNDATIONAL. Until students distinguish face value (digit symbol) from positional value (digit × place), expanded form and zero-as-placeholder cannot be taught reliably. MC-2 and MC-3 FIFO after MC-1 cleared.\n\n### CPA Progression: C → P → A\n- **Concrete (C):** Base-10 blocks: 1-unit cubes, 10-rods, 100-flats, 1000-cubes. Build 3,482 physically.\n- **Pictorial (P):** Place-value chart with column headers; expanded-form diagram with arrows from each digit to its value.\n- **Abstract (A):** Positional formula digit × 10^position; expanded sum notation; decimal extension.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 92,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.place-value",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89 — SPACED REPETITION\nReview schedule for math.arith.place-value:\n\nInterval 1 (1 day after mastery):\n  Recall prompt: \"What is the value of the digit 8 in 183,072?\n  Write 183,072 in expanded form.\"\n  Target: 8 in ten-thousands → 80,000.\n    1×10⁵ + 8×10⁴ + 3×10³ + 0×10² + 7×10¹ + 2×10⁰.\n\nInterval 2 (3 days):\n  Application: \"Order from least to greatest: 0.307 / 0.37 / 0.073 / 0.730.\n  Identify the first distinguishing position.\"\n  Target: 0.073 < 0.307 < 0.37 < 0.730. Tenths position: 0 vs 3 vs 7 first split.\n\nInterval 3 (7 days):\n  Transfer: \"A store price tag reads $12.50. Write this in expanded form.\n  Then explain why $12.05 ≠ $12.50 by referring to place values.\"\n  Target: 1×10¹+2×10⁰+5×10⁻¹+0×10⁻². Tenths vs. hundredths differ.\n\nInterval 4 (21 days):\n  Integration: \"Why does the column-addition algorithm in math.arith.addition\n  require aligning numbers by their ones digits before adding? Use place value to explain.\"\n  Target: aligning by ones ensures digits of the same place value are added together;\n    misalignment would add thousands to ones, giving wrong sums.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 517,
+        "endLine": 548
+      }
+    },
+    {
+      "assetId": "math.arith.place-value/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.place-value",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### GR-8: Cross-link documentation\n```\nIncoming prerequisite:\n  math.arith.counting → Counting establishes the natural number n = |S|.\n    Place value is how we WRITE n using digits 0–9 in positional notation.\n\nOutgoing unlocks:\n  math.arith.addition → Column addition requires knowing which place-value columns\n    to add together (ones with ones, tens with tens, etc.).\n  math.arith.subtraction → Borrowing (regrouping) requires understanding that\n    1 ten = 10 ones (place-value exchange).\n  math.arith.rounding → Rounding requires identifying a target position and\n    inspecting the adjacent position to the right.\n\nCross-linked (non-prerequisite):\n  math.arith.number-base (NOT Tier 1) → Generalises place value to bases other\n    than 10. The binary (base 2), hexadecimal (base 16) systems use the same\n    positional principle with different base values.\n```\n\n### GR-9: P76 Mode Determination\n```\ncross_links = [math.arith.number-base]\nmath.arith.number-base is NOT Tier 1 → P76 INDEPENDENCE\nP76 probe: preview of binary (base-2) place value; student uses the same\n  positional principle to decode a binary number; explains place value abstractly.\n  Self-contained; no prerequisite of number-base knowledge beyond what is given.\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.place-value.md",
+        "startLine": 548,
+        "endLine": 581
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

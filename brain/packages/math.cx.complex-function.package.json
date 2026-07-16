@@ -1,0 +1,304 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.complex-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.complex-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d3874ca2ecaa393e0918811d18a704e74d6ab083b4b34b1185397acbf10ba9fd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.complex-function.md": "sha256:6669f8e4c956c3fefb227b2c70dbea495a59ad11c203c7497a22cb6b4e161dd6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cx.complex-function",
+    "name": "Complex-Valued Function",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.cx.complex-numbers-analysis",
+      "math.func.function-concept"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.complex-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.complex-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.complex-function.md": "sha256:6669f8e4c956c3fefb227b2c70dbea495a59ad11c203c7497a22cb6b4e161dd6"
+      },
+      "contentHash": "sha256:769f69946d3de3b5734f6cf616514c05c185659d06bd1e3a5552622241333eac",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-function.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-function.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-function.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-function.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-function\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.complex-function.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.complex-function.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.complex-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.complex-function\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.complex-function/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.cx.complex-function",
+      "title": "Complex-Valued Function — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.cx.complex-numbers-analysis**: z=x+iy; modulus |z|=√(x²+y²); conjugate z̄=x−iy; exponential form re^{iθ}; Argand plane\n- **math.func.function-concept**: function as input→output mapping; domain and codomain; f:A→B notation; single-variable f(x)\n\n### Target Knowledge State\nStudent understands that a complex-valued function f:ℂ→ℂ is decomposed as f(x+iy)=u(x,y)+iv(x,y), where u=Re(f) and v=Im(f) are real-valued functions of TWO real variables; can extract u and v from explicit f(z); understands that the complex limit lim_{z→z₀} f(z) requires the same value along every path in ℂ (infinitely many, including curves), making it strictly stronger than the real limit; and recognises path-dependence as a limit-failure criterion.\n\n### Conceptual Obstacles\n1. Writing f(x+iy)=u(x)+iv(y) — treating the components as separate single-variable functions of x and y respectively, rather than joint functions of the pair (x,y)\n2. Checking the limit along only one or two paths (e.g., real axis, imaginary axis) and concluding the complex limit exists\n3. Believing complex continuity is simply \"u continuous in x and v continuous in y separately,\" missing joint 2D continuity\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-function",
+      "title": "COMPONENT-INDEXED-WRONG",
+      "content": "| MC-1 | COMPONENT-INDEXED-WRONG | Student writes f(x+iy)=u(x)+iv(y): each component depends only on one real variable | Any u,v extraction step; first exposure to f(z)=z² or f(z)=z̄ |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-function",
+      "title": "REAL-AXIS-SUFFICES-FOR-LIMIT",
+      "content": "| MC-2 | REAL-AXIS-SUFFICES-FOR-LIMIT | Student checks limit along y=0 and y fixed, concludes the complex limit exists from those two paths alone | Any limit investigation; path-dependence examples |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.complex-function",
+      "title": "CONTINUITY-SEPARATED",
+      "content": "| MC-3 | CONTINUITY-SEPARATED | Student believes f is continuous at z₀ if u is continuous in x (with y fixed) and v is continuous in y (with x fixed); misses the joint (x,y) requirement | Continuity problems; transition from 1D continuity knowledge |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-function",
+      "title": "Component Decomposition: u(x,y)+iv(x,y)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Component Decomposition: u(x,y)+iv(x,y)\",\"primitives\":[\"P11\",\"P27\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 64,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-function",
+      "title": "Complex Limits Require All Paths",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Complex Limits Require All Paths\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 143,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.complex-function",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 190,
+        "endLine": 430
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.complex-function",
+      "title": "Mastery Gate",
+      "content": "### Teaching Action A03 — Mastery Gate\n\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n**Purpose:** Assess mastery of the complex function decomposition and limit concepts\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 items)*\n\n**Item 1:** f(z) = z² − z̄. Express as u(x,y)+iv(x,y) and evaluate f(3+4i).\n\n*Solution:*\nz² = (x²−y²)+2xyi; z̄ = x−iy\nf(z) = (x²−y²+2xyi)−(x−iy) = (x²−y²−x)+(2xy+y)i\nu(x,y) = x²−y²−x; v(x,y) = 2xy+y = y(2x+1)\n\nAt z=3+4i (x=3, y=4): u=9−16−3=−10; v=4(7)=28; f(3+4i)=−10+28i\n\n**Item 2:** f(z) = z̄/|z| for z≠0. Express u and v in terms of x and y.\n\n*Solution:*\nz̄=x−iy; |z|=√(x²+y²)\nf(z) = (x−iy)/√(x²+y²)\nu(x,y) = x/√(x²+y²); v(x,y) = −y/√(x²+y²)\n\n**Item 3:** Let k(z) = y²/(x²+y²) for z≠0. Compute lim_{z→0} k(z) along (i) y=0, (ii) x=0, (iii) y=2x. Does the complex limit exist?\n\n*Solution:*\n(i) y=0: 0/(x²)=0 → 0\n(ii) x=0: y²/y²=1 → 1\nPaths (i) and (ii) differ → **limit does not exist**.\n(iii) y=2x: 4x²/(x²+4x²)=4x²/(5x²)=4/5 (another different value, consistent with non-existence)\n\n**Item 4:** f(z) = Re(z)/|z| for z≠0. Along the real axis (y=0), f(z)=x/|x|. Explain why this shows f is not continuous at z=0 regardless of how f(0) is defined.\n\n*Solution:*\nAlong y=0, f = x/|x| = +1 for x>0 and −1 for x<0. The limit along the real axis alone does not converge (oscillates between +1 and −1 as x→0⁺ vs x→0⁻). Therefore no value f(0) can make f continuous at 0 — even the 1D real-axis sub-limit fails.\n\n---\n\n**[P55 — SCORE]** Count correct items (Items 1–4). Running total: _/4.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(independence mode)*\n\nConsider f(z) = z² − z̄² where z=x+iy.\n\n**(a)** Compute z² and z̄², then express f(z)=u(x,y)+iv(x,y) with explicit u and v.\n\n**(b)** Is f real-valued (v≡0), imaginary-valued (u≡0), or neither? Justify.\n\n**(c)** Investigate lim_{z→0} f(z)/|z|² by computing the ratio along (i) y=0, (ii) y=x, (iii) x=0. Do the limits agree?\n\n---\n\n*Expected solution:*\n\n(a) z²=(x²−y²)+2xyi; z̄²=(x²−y²)−2xyi; f(z)=z²−z̄²=(0)+4xyi → u(x,y)=0; v(x,y)=4xy\n\n(b) u≡0, so f is **purely imaginary-valued** (Im(f)=4xy, which can be any real number).\n\n(c) f(z)/|z|² = 4xyi/(x²+y²) = i·4xy/(x²+y²):\n- (i) y=0: 0/(x²)=0 → limit = 0\n- (ii) y=x: 4x²/(2x²)=2 → ratio = 2i, so limit is 2i\n- (iii) x=0: 0/y²=0 → limit = 0\n\nPaths (i)/(iii) give 0; path (ii) gives 2i. **The complex limit lim_{z→0} f(z)/|z|² does not exist.**\n\nThis is consistent with path-dependence of the function 4xy/(x²+y²) shown in A02.\n\n---\n\n**[P55 — SCORE]** Score P76 (0 or 1). Running total: _/5.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]** MAMR = 5/5.\n\n- Score ≥ 5/5 → PASS → proceed to P74.\n- Score < 5/5 → FAIL → P74 routes to repair.\n\n---\n\n**[P55 — SCORE]** Record final pass/fail determination.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- **PASS (5/5):** Concept mastered. Proceed to unlocked concepts (math.cx.cauchy-riemann, math.cx.analytic-functions).\n- **FAIL:** Diagnose: which items failed? MC-1 errors → Protocol B, sequence B-MC1. MC-2 errors → B-MC2. MC-3 errors → B-MC3. After repair, re-enter A03.\n\n---\n\n**[P55 — SCORE]** Log routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession complete for math.cx.complex-function. MAMR 5/5 required; student either passed (unlocking Cauchy-Riemann prerequisites) or has been routed to repair.\n\n---\n\n\n## Component 5 — Protocol B (Repair Sequences)\n\n### B-MC1 — Repair: COMPONENT-INDEXED-WRONG\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You wrote f(x+iy)=u(x)+iv(y) — treating u as a function of x only and v as a function of y only. This is a very natural first guess, but it's incorrect. Let me show you why with a concrete check.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nTake f(z)=z². Compute f(2+i) and f(1+2i):\n- f(2+i) = (2+i)² = 4+4i+i² = 3+4i → u(2,1)=3, v(2,1)=4\n- f(1+2i) = (1+2i)² = 1+4i+4i² = −3+4i → u(1,2)=−3, v(1,2)=4\n\nIf u depended only on x: u(2,1) and u(2,2) would be equal (same x=2). Let's check:\n- f(2+2i)=(2+2i)²=4+8i+4i²=0+8i → u(2,2)=0 ≠ u(2,1)=3\n\nSo u changes when y changes — u depends on y too.\n\n**[P64 — CONCEPTUAL SHIFT]**\nThink of z=x+iy as specifying a point (x,y) in a 2D plane. The function f maps this 2D point to another 2D point (u,v). Both u and v are height functions over the entire 2D input plane — they can (and generally do) depend on both coordinates x and y. Only very special functions (like Re(z) or Im(z)) have components that depend on just one coordinate.\n\n---\n\n### B-MC2 — Repair: REAL-AXIS-SUFFICES-FOR-LIMIT\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You checked the limit along the real axis and concluded it exists. But in ℂ, z→0 means the 2D point (x,y) can approach (0,0) from any direction or along any curved path — not just horizontally.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nTake g(z)=x²/(x²+y²). You found g=1 along y=0 (real axis). Now try along x=0 (imaginary axis): g=0²/(0²+y²)=0. The limit along the imaginary axis is 0, which differs from 1. Two paths giving different values conclusively proves the complex limit does not exist.\n\n**[P64 — CONCEPTUAL SHIFT]**\nIn 1D real analysis, you only need left and right limits to agree. In 2D (ℂ), there are infinitely many paths to any point — straight lines at every angle plus all curved paths. The complex limit is much more demanding: it requires agreement along ALL of them. A single pair of paths giving different values is enough to show non-existence; but verifying just a few paths can never prove existence (there might be some exotic path you haven't tried that gives a different value). Proving existence requires either algebra or the squeeze theorem.\n\n---\n\n### B-MC3 — Repair: CONTINUITY-SEPARATED\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You're checking continuity in x (holding y fixed) and in y (holding x fixed) separately. This is called separate continuity, and it is weaker than joint continuity in (x,y). A function can be separately continuous but fail to be jointly continuous.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDefine u(x,y)=xy/(x²+y²) for (x,y)≠(0,0) and u(0,0)=0.\n- Fix y=0: u(x,0)=0 for all x → continuous in x at x=0 ✓\n- Fix x=0: u(0,y)=0 for all y → continuous in y at y=0 ✓\n- Along y=x: u(x,x)=x²/(2x²)=1/2 for all x≠0 → limit along this path is 1/2 ≠ u(0,0)=0.\n\nSeparate continuity holds, but the function is NOT jointly continuous at (0,0).\n\n**[P64 — CONCEPTUAL SHIFT]**\nComplex continuity of f at z₀ means lim_{z→z₀} f(z)=f(z₀), which requires lim_{(x,y)→(x₀,y₀)} u(x,y)=u(x₀,y₀) and lim_{(x,y)→(x₀,y₀)} v(x,y)=v(x₀,y₀), both along EVERY path. Checking axes separately tells you about separate continuity — a necessary but not sufficient condition.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | Express f(z)=z³ as u(x,y)+iv(x,y). Evaluate at z=1+i. |\n| Day 3 | g(z)=xy/(x²+y²) for z≠0. Compute along y=0, y=x, y=−x as z→0. Does the limit exist? |\n| Day 7 | f(z)=z̄: identify u and v. Is f(z) a polynomial in z? (No — z̄ cannot be written as a power series in z.) |\n| Day 14 | Does lim_{z→i} (z²+1)/(z−i) exist? Factor z²+1=(z+i)(z−i) → limit = z+i|_{z=i} = 2i. Yes; explain why this is a complex limit, not just a real one. |\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.cx.complex-numbers-analysis | PACKAGE_READY | Modulus, conjugate, exponential form — structural prior |\n| math.func.function-concept | Required | f:A→B notation, domain/codomain — enables understanding f:ℂ→ℂ |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.cx.cauchy-riemann | Requires u,v decomposition and limit concepts from this blueprint |\n| math.cx.analytic-functions | Requires continuity and differentiability framework built here |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**The central shift:** Students entering from single-variable calculus know f(x): one input, one output. Complex functions are still \"one input → one output\" (z → f(z)), but each input and output carries two real coordinates. Framing the decomposition f(z)=u(x,y)+iv(x,y) as \"two real functions of two real variables\" — rather than \"a complex function of a complex variable\" — connects to terrain the student already knows (multivariable analysis is natural after this).\n\n**Path dependence is the key insight:** The move from 1D limits (two approach directions) to 2D limits (infinitely many paths) is what makes complex analysis genuinely harder than real analysis. The function x²/(x²+y²) is the clearest concrete example — it requires no algebra, just substitution along two axes. Use this example in A02 every time; it never fails to surprise students who expected limits to \"just work.\"\n\n**MC-1 diagnosis:** The error u(x)+iv(y) is almost always algebraic: students write z=x+iy but then treat x and y as separate independent tracks. The fix (A01 Stage C) is to compute a concrete example and show that changing y changes u. Once the numerical evidence is clear, the general u(x,y) notation feels correct rather than pedantic.\n\n**Teaching economy:** This is an h=3 concept — lean on A01 (decomposition) and A02 (limits). Don't expand into Cauchy-Riemann equations or analyticity here; those are the next blueprint. The goal of this blueprint is exactly: (1) can extract u,v from f(z), and (2) understands why complex limits are 2D limits.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| ID | Check | Status |\n|----|-------|--------|\n| V-1 | All Teaching Actions have assigned primitives | PASS |\n| V-2 | GR-1: A01 opens with P11 (B-category primitive, non-repair) | PASS |\n| V-3 | CPA entry stage = C for advanced difficulty | PASS |\n| V-4 | bloom=understand → no P07 required; V-4 = N/A | N/A |\n| V-5 | GR-2: P49 present in A01 and A02, each with 4 branches (CORRECT/PARTIAL/INCORRECT/NO_RESPONSE) | PASS |\n| V-6 | GR-3: A03 (P91) is terminal — no further TAs after gate | PASS |\n| V-7 | GR-4: All B-sequences open with P27+P41+P64 | PASS |\n| V-8 | GR-6: P91 is terminal in A03 | PASS |\n| V-9 | GR-7: P76 present inside A03 mastery gate | PASS |\n| V-10 | GR-9: cross_links=[] → P76 mode = independence | PASS |\n| V-11 | GR-10: MAMR=5/5 stated and enforced (thresh=0.9, n=5: ⌈0.9×5⌉=5) | PASS |\n| V-12 | PASS criterion (5/5) stated in P75 and P74 | PASS |\n| V-13 | GR-8: Component 7 documents all cross-blueprint dependencies | PASS |\n| V-14 | Lean structure: h=3 → 2 main TAs (A01,A02) + gate (A03) | PASS |\n| V-15 | Component 0 metadata fields complete | PASS |\n| V-16 | Component 1 (prior anchors, target state, obstacles) complete | PASS |\n| V-17 | Component 2: 3 MCs with 1 foundational designated | PASS |\n| V-18 | Component 3 scaffolding protocol complete | PASS |\n| V-19 | Component 6 P89 schedule complete (4 intervals) | PASS |\n| V-20 | Component 8 teaching notes complete | PASS |\n| AIR | No prohibited operations (no curriculum modification, no framework redesign) | PASS |\n\n**Status: PACKAGE_READY**",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 190,
+        "endLine": 430
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.complex-function",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner begins with concrete numerical computation.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: compute f(1+i) for f(z)=z² algebraically, extract u and v numerically; P: table of (x,y)→(u,v) showing both depend on both variables; A: formal definition f(z)=u(x,y)+iv(x,y) for all f:ℂ→ℂ\n2. **A02 P06 CONTRAST PAIR** — Real 1D limit (2 approach directions) vs complex 2D limit (infinitely many paths); concrete path-dependence failure for x²/(x²+y²)\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.complex-function",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | Express f(z)=z³ as u(x,y)+iv(x,y). Evaluate at z=1+i. |\n| Day 3 | g(z)=xy/(x²+y²) for z≠0. Compute along y=0, y=x, y=−x as z→0. Does the limit exist? |\n| Day 7 | f(z)=z̄: identify u and v. Is f(z) a polynomial in z? (No — z̄ cannot be written as a power series in z.) |\n| Day 14 | Does lim_{z→i} (z²+1)/(z−i) exist? Factor z²+1=(z+i)(z−i) → limit = z+i|_{z=i} = 2i. Yes; explain why this is a complex limit, not just a real one. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 360,
+        "endLine": 373
+      }
+    },
+    {
+      "assetId": "math.cx.complex-function/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.complex-function",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.cx.complex-numbers-analysis | PACKAGE_READY | Modulus, conjugate, exponential form — structural prior |\n| math.func.function-concept | Required | f:A→B notation, domain/codomain — enables understanding f:ℂ→ℂ |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.cx.cauchy-riemann | Requires u,v decomposition and limit concepts from this blueprint |\n| math.cx.analytic-functions | Requires continuity and differentiability framework built here |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.complex-function.md",
+        "startLine": 373,
+        "endLine": 392
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

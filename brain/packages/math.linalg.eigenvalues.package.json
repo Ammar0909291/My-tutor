@@ -1,0 +1,268 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.eigenvalues-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.eigenvalues",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c79d1fa17675e1eafcd531aa505dc62aa6eda6674e84e0f155c062a36e60e9b5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.eigenvalues.md": "sha256:adf76b2cbf7c8724a228f1a0d23ef47f093e997d4b6a9dc7d5faeda39927801e"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 2,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 2
+  },
+  "concept": {
+    "conceptId": "math.linalg.eigenvalues",
+    "name": "Eigenvalues and Eigenvectors",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.linalg.matrix-multiplication",
+      "math.linalg.determinant"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.eigenvalues-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.eigenvalues (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.eigenvalues.md": "sha256:adf76b2cbf7c8724a228f1a0d23ef47f093e997d4b6a9dc7d5faeda39927801e"
+      },
+      "contentHash": "sha256:150aa4486283b3124b96e4a333cceff23bd357312d58d539a0ce24b01fe2a701",
+      "ruleCount": 2,
+      "bandCounts": {
+        "3": 2
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.eigenvalues.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.eigenvalues.md#TA-B01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.eigenvalues"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.eigenvalues\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.eigenvalues.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.eigenvalues.md#TA-B02 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.eigenvalues"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.eigenvalues\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.eigenvalues/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "Eigenvalues and Eigenvectors — cognitive map",
+      "content": "**Core concept:** A nonzero vector v is an eigenvector of a square matrix A with eigenvalue λ if Av=λv — the matrix maps v to a scalar multiple of itself. Eigenvalues are found by solving the characteristic equation det(A−λI)=0. For each eigenvalue λ, the eigenspace ker(A−λI) contains all eigenvectors with that eigenvalue (plus the zero vector). Geometrically: eigenvectors are the FIXED DIRECTIONS of the linear transformation — only their scale changes, not their direction.\n\n**Conceptual progression:**\n1. Geometric idea: most transformations rotate AND scale vectors; eigenvectors are the special directions that are only SCALED (no rotation).\n2. Definition: Av=λv, v≠0. λ is the eigenvalue (how much scaling); v is the eigenvector (the fixed direction).\n3. Finding eigenvalues: Av=λv ↔ (A−λI)v=0 has a nonzero solution ↔ det(A−λI)=0 (characteristic equation).\n4. Finding eigenvectors: for each λ, solve (A−λI)v=0 — find the null space (eigenspace) of (A−λI).\n5. Characteristic polynomial: det(A−λI) is a degree-n polynomial in λ; its roots are the eigenvalues.\n6. Eigenvalues may be complex: rotation matrices over ℝ have no real eigenvalues; complex roots pair as conjugates.\n\n**CPA arc (entry: P):**\n- Pictorial: diagram of a vector before and after transformation showing scale-only (eigenvector) vs. rotation+scale (non-eigenvector); parallelogram of det(A−λI)=0 collapsing\n- Abstract: characteristic equation det(A−λI)=0; null space (A−λI)v=0; eigenspace notation Eλ=ker(A−λI)\n\n**Prior knowledge activated:** matrix multiplication (Av for a vector v); determinant (det(A−λI) is a polynomial in λ); solving linear equations (null space of (A−λI)); polynomial roots\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "EIGENVECTOR-CAN-BE-ZERO [FOUNDATIONAL]",
+      "content": "### MC-1: EIGENVECTOR-CAN-BE-ZERO [FOUNDATIONAL]\n**Description:** Learner accepts v=(0,0) or v=(0,0,0) as a valid eigenvector. Does not apply (or understand) the nonzero requirement in the definition Av=λv, v≠0.\n**Surface form:** \"For any matrix A and any λ, the zero vector satisfies Av=λv, so it's an eigenvector.\"\n**Root cause:** Algebraically, A·0=λ·0=0 for every A and λ — the zero vector satisfies the equation. The nonzero requirement is an explicit exclusion that must be stated and justified.\n**Trigger condition:** Any problem asking for eigenvectors of a given eigenvalue.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "EIGENVALUES-ARE-DIAGONAL-ENTRIES",
+      "content": "### MC-2: EIGENVALUES-ARE-DIAGONAL-ENTRIES\n**Description:** Learner reads off the diagonal entries of A as its eigenvalues, skipping the characteristic equation. Correct only for diagonal matrices; wrong in general.\n**Surface form:** \"A=[[3,1],[0,2]]. Eigenvalues are 3 and 2 because those are on the diagonal.\" (True here but for the wrong reason — coincidence that A is upper triangular.)\n**Root cause:** For diagonal and triangular matrices, diagonal entries ARE eigenvalues. Learner generalises this shortcut without realising it fails for non-triangular matrices.\n**Trigger condition:** Any non-diagonal matrix problem asking for eigenvalues.\n**Repair target:** TA-B01.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "EIGENVECTORS-ARE-UNIQUE",
+      "content": "### MC-3: EIGENVECTORS-ARE-UNIQUE\n**Description:** Learner believes each eigenvalue has exactly one eigenvector. Does not understand that the eigenspace is a subspace — any nonzero scalar multiple of an eigenvector is also an eigenvector with the same eigenvalue.\n**Surface form:** \"The eigenvector for λ=3 is (1,0). There's only one.\"\n**Root cause:** The characteristic equation gives a unique eigenvalue, so learner assumes a unique eigenvector follows. The distinction between \"unique solution\" (to a full-rank system) and \"eigenspace\" (null space, always at least one-dimensional) is not yet clear.\n**Trigger condition:** Any problem asking for the eigenspace or all eigenvectors for a given eigenvalue.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "Repair for MC-1 and MC-2 (ZERO-EIGENVECTOR / DIAGONAL-ENTRIES-ARE-EIGENVALUES)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 and MC-2 (ZERO-EIGENVECTOR / DIAGONAL-ENTRIES-ARE-EIGENVALUES)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 213,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "Repair for MC-3 (EIGENVECTORS-ARE-UNIQUE)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-3 (EIGENVECTORS-ARE-UNIQUE)\",\"primitives\":[\"P03\",\"P04\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 234,
+        "endLine": 431
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.90 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Find the eigenvalues of A=[[4,1],[0,3]].\"\n[Expected: Upper triangular — characteristic polynomial (4−λ)(3−λ)=0. Eigenvalues: λ=4 and λ=3. (Also derivable from det(A−λI) directly.)]\n\n**Item 2:**\n\"For A in Item 1, find an eigenvector for λ=3.\"\n[Expected: (A−3I)v=[[1,1],[0,0]]v=0 → v₁+v₂=0 → v₁=−v₂. Eigenvector: (−1,1) (or any scalar multiple, e.g. (1,−1)).]\n\n**Item 3:**\nTrue or False: \"The zero vector v=0 is an eigenvector of every matrix A.\"\n[Expected: FALSE. The definition requires v≠0. Although A·0=λ·0 for all λ, the zero vector is explicitly excluded from the definition of eigenvector.]\n\n**Item 4:**\n\"A 2×2 matrix has eigenvalues λ=5 and λ=−2. What is det(A)? What is tr(A)?\"\n[Expected: det(A)=5×(−2)=−10. tr(A)=5+(−2)=3.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"The matrix R = [[0,−1],[1,0]] represents a 90° counterclockwise rotation of the plane.\n\n(a) Compute the characteristic polynomial det(R−λI).\n(b) Do real eigenvalues exist? Solve for λ.\n(c) A 90° rotation maps every vector to a new direction perpendicular to its original direction. Explain in one sentence why this is consistent with your answer to (b).\"\n\n[Expected:\n(a) det([[−λ,−1],[1,−λ]]) = (−λ)(−λ)−(−1)(1) = λ²+1.\n(b) λ²+1=0 → λ²=−1. No real solutions. Eigenvalues are complex: λ=±i.\n(c) A 90° rotation has no real eigenvectors because no real direction is left pointing the same way (only scaled) — every real vector is rotated 90°, changing its direction. A fixed direction under a pure rotation would require the vector to point both in its original and rotated directions simultaneously, which is impossible for a nonzero real vector (unless the rotation is by 0° or 180°).]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (a) and (b) are correctly solved (λ²+1=0, no real eigenvalues) and (c) gives a correct geometric explanation. 0 if the characteristic polynomial is wrong or real eigenvalues are falsely claimed.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: 5 out of 5 (MAMR = ⌈0.90 × 5⌉ = 5).\n- PASS (5/5): Learner can find eigenvalues via characteristic equation, compute eigenvectors via null space, correctly excludes the zero vector, and recognises that rotation matrices have no real eigenvectors.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS (5/5): → P78 COMPLETION\n- FAIL on Item 3 (zero vector accepted): → TA-B01 (MC-1 repair)\n- FAIL on Item 1 (diagonal entries read directly without char. eqn.): → TA-B01 (MC-2 repair; note it happens to work for triangular A but not in general)\n- FAIL on Item 2 or P76 (eigenspace confusion): → TA-B02 (MC-3 repair; reinforce eigenspace as subspace)\n- FAIL on Item 4 (det/trace formulas): → Return to A03 pattern; re-gate\n- FAIL on multiple items: → TA-B01 then TA-B02; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated the ability to find eigenvalues via the characteristic equation and eigenvectors via null-space computation, and you understand the geometric meaning of eigenvectors as fixed directions under a linear transformation.\n\nKey anchors to carry forward:\n- Av=λv, v≠0 — the definition. Zero vector excluded always.\n- det(A−λI)=0 — the characteristic equation; its roots are the eigenvalues.\n- Eigenspace Eλ = ker(A−λI) — a subspace; any nonzero element is an eigenvector.\n- det(A) = product of eigenvalues; tr(A) = sum of eigenvalues.\n- Rotation matrices have no real eigenvectors — complex eigenvalues ±i.\n\nNext concepts: math.linalg.diagonalization — when A = PDP⁻¹ (diagonal D); math.linalg.spectral-theorem — symmetric matrices have real eigenvalues and orthonormal eigenvector bases.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 328,
+        "endLine": 423
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Compute det([[3−λ, 1],[0, 2−λ]]).\" If the learner correctly expands to (3−λ)(2−λ) = λ²−5λ+6, the prerequisites (determinant of a matrix with a parameter, polynomial multiplication) are active. Proceed to A01.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): Diagram showing a scaling-only transformation (the stretch along one axis). Learner identifies which vectors are scaled without rotation.\n- Rung 2 (partial abstract): Learner sets up (A−λI), computes its determinant symbolically, and factors the characteristic polynomial.\n- Rung 3 (full abstract): Learner solves (A−λI)v=0 for each eigenvalue and writes the eigenspace.\n\n**Pacing note:** h=6 estimated hours; A01–A02 in session 1; A03 + mastery gate in session 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 65,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Find the eigenvalues of A=[[2,1],[1,2]] and an eigenvector for each. Are the eigenvectors perpendicular?\"\n[Expected: char. poly. (2−λ)²−1=λ²−4λ+3=(λ−3)(λ−1)=0. λ=3: (1,1)/√2; λ=1: (1,−1)/√2. (1,1)·(1,−1)=0 ✓ — perpendicular. Symmetric matrices always have perpendicular eigenvectors.]\n\n**Day 10 prompt:**\n\"A has eigenvalues 2 and 3 with eigenvectors v₁=(1,0) and v₂=(0,1). What is A?\"\n[Expected: Av₁=2v₁=(2,0) → first column of A is (2,0). Av₂=3v₂=(0,3) → second column is (0,3). A=[[2,0],[0,3]].]\n\n**Day 30 prompt:**\n\"Why does a rotation matrix R_θ (rotation by angle θ ≠ 0°, 180°) have no real eigenvalues? What about θ=180°?\"\n[Expected: char. poly. of [[cos θ,−sin θ],[sin θ,cos θ]] is λ²−2(cos θ)λ+1=0. Discriminant: 4cos²θ−4=4(cos²θ−1)≤0 with equality only at θ=0°,180°. For θ≠0°,180°: discriminant<0 → no real roots. At θ=180°: R=−I, eigenvalue λ=−1, every nonzero vector is an eigenvector (everything flips direction).]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 247,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenvalues/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.eigenvalues",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.linalg.matrix-multiplication — Av for a column vector v; required for computing Av=λv\n- math.linalg.determinant — det(A−λI)=0 is the characteristic equation; determinant of a matrix with symbolic parameter λ\n\n**Unlocked blueprints:**\n- math.linalg.diagonalization — a matrix is diagonalizable if it has n linearly independent eigenvectors\n- math.linalg.spectral-theorem — symmetric matrices have real eigenvalues and an orthonormal eigenvector basis\n\n**Cross-links (non-Tier-1, reference only):**\n- math.de.char-equation — the characteristic equation of an ODE system Ax=λx mirrors the matrix eigenvalue equation; eigenvalues give the exponents in e^{λt} solutions\n- math.fnal.spectral-theory — eigenvalues generalise to infinite-dimensional linear operators (spectral theorem for compact/self-adjoint operators in functional analysis)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenvalues.md",
+        "startLine": 265,
+        "endLine": 281
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

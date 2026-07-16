@@ -1,0 +1,362 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.counting-principles-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.counting-principles",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4677c369e172d350ea0d9c6b7573bf55b55836a2d1b90297d4f868af8d172a70",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.counting-principles.md": "sha256:03e834bc8cefba02ad2856a445e1b9330273445c3917519ac05b02081a9ca963"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.disc.counting-principles",
+    "name": "Counting Principles",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.arith.multiplication",
+      "math.found.set-theory"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.counting-principles-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.counting-principles (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.counting-principles.md": "sha256:03e834bc8cefba02ad2856a445e1b9330273445c3917519ac05b02081a9ca963"
+      },
+      "contentHash": "sha256:abda26dd753e03427da87d50271b56d81e3d61a4876d089bc84e786cd7c42f9e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.counting-principles.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.counting-principles.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.counting-principles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.counting-principles\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.counting-principles.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.counting-principles.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.counting-principles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.counting-principles\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.counting-principles.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.counting-principles.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.counting-principles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.counting-principles\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.counting-principles.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.counting-principles.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.counting-principles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.counting-principles\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.counting-principles.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.counting-principles.md#TA-B02 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.counting-principles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.counting-principles\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.counting-principles/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Counting Principles — cognitive map",
+      "content": "**Core concept:** Two fundamental counting principles. Multiplication principle: if task A can be done in m ways and task B in n ways independently, then A followed by B can be done in m×n ways. Addition principle: if task A can be done in m ways or task B in n ways (mutually exclusive), then either A or B can be done in m+n ways.\n\n**Conceptual progression:**\n1. The question \"how many ways?\" requires distinguishing AND (sequential/independent) from OR (exclusive-choice) scenarios.\n2. Multiplication principle: independent sequential tasks multiply their counts.\n3. Addition principle: mutually exclusive choices add their counts.\n4. Extension: the multiplication principle chains across more than two tasks (m₁×m₂×…×mₖ for k independent sequential choices).\n\n**CPA arc (entry: C):**\n- Concrete: physical objects — shirt-and-trousers combinations laid out on a table; a tree diagram of all meal+drink pairs; a lock with digit wheels\n- Pictorial: systematic tree diagrams; 2D grids showing all pairs; tables of combinations\n- Abstract: multiplication principle formula m×n; addition principle formula m+n; n-stage extension m₁×m₂×…×mₖ\n\n**Prior knowledge activated:** multiplication as repeated addition; set theory (sets are collections with distinct elements; union and intersection); finite cardinality of sets\n\n**Threshold concept:** The AND/OR distinction — recognising whether choices are made sequentially-and-independently (→ multiply) or as one-among-mutually-exclusive-options (→ add). This single classification step determines which principle applies.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 20,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.counting-principles",
+      "title": "ADDITION-NOT-MULTIPLICATION [FOUNDATIONAL]",
+      "content": "### MC-1: ADDITION-NOT-MULTIPLICATION [FOUNDATIONAL]\n**Description:** Learner adds m+n for sequential independent tasks instead of multiplying m×n.\n**Surface form:** Given 4 shirts and 3 trousers, says there are 4+3=7 outfit combinations.\n**Root cause:** Intuitively treats \"two things\" as additive; has not yet grasped that each shirt pairs with EVERY trouser, generating a Cartesian product rather than a union.\n**Trigger condition:** Any problem where two or more independent sequential selections are made.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.counting-principles",
+      "title": "MULTIPLICATION-NOT-ADDITION",
+      "content": "### MC-2: MULTIPLICATION-NOT-ADDITION\n**Description:** Learner multiplies m×n for mutually exclusive choices instead of adding m+n.\n**Surface form:** A café offers 5 hot or 3 cold drinks. Learner says 5×3=15 total choices (as if ordering both).\n**Root cause:** Over-applies the multiplication principle from the first MC; conflates \"choosing one from each\" with \"choosing one from either.\"\n**Trigger condition:** Any problem where choices are exclusive (only one category can be selected).\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.counting-principles",
+      "title": "INDEPENDENCE-IGNORED",
+      "content": "### MC-3: INDEPENDENCE-IGNORED\n**Description:** Learner applies the multiplication principle without verifying that tasks are independent (i.e., that the number of ways to do task B does not depend on how task A was done).\n**Surface form:** Given 5 flavours and 3 toppings where one topping is \"no topping,\" multiplies 5×3 but then adds 5 for the no-topping case again (double-counting).\n**Root cause:** Applies the formula mechanically without checking whether the same option appears in multiple stages.\n**Trigger condition:** Problems where choices at one stage affect available choices at another.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Multiplication Principle",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Multiplication Principle\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 84,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Both Principles in Context",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Both Principles in Context\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 110,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 135,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Repair: Addition-Not-Multiplication",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: Addition-Not-Multiplication\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 177,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Repair: Multiplication-Not-Addition / Independence-Ignored",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: Multiplication-Not-Addition / Independence-Ignored\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 193,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A03 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 95% → PASS requires ⌈0.95 × 5⌉ = 5/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: A wardrobe has 4 shirts and 3 pairs of trousers. How many shirt-and-trouser outfits are possible? [Answer: 4×3=12]\nItem 2: A café offers 5 hot drinks and 3 cold drinks. A customer chooses exactly one drink. How many options? [Answer: 5+3=8]\nItem 3: A lock has 3 digit wheels each with digits 0–9. How many different lock combinations exist? [Answer: 10×10×10=1000]\nItem 4: True or False — if there are 4 routes from A to B and 6 routes from B to C, there are 10 routes from A to C via B. [Answer: FALSE — it's 4×6=24; the routes are chosen sequentially and independently]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (independence mode — cross_links: []):**\nA school prints ID cards with the format [capital letter][capital letter][digit] (e.g., AB7).\n\n(a) How many distinct ID cards are possible? [Answer: 26×26×10=6760]\n(b) How many ID cards have the letter 'M' as the first character? [Answer: 1×26×10=260]\n(c) How many ID cards have the first two characters the SAME letter (e.g., AA3, BB5)? [Answer: 26×1×10=260 — second letter must match first, leaving only 1 choice for position 2]\n(d) Are the ID cards in (b) and (c) mutually exclusive? Could a card satisfy both? [Answer: Yes — MA5 satisfies (b) (first letter M) but NOT (c) (first two letters are M and A, not the same). MM7 satisfies (c) (MM) and also (b) (first letter M). So they OVERLAP — not mutually exclusive. You cannot simply add the counts.]\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score 5/5 → PASS → P78 COMPLETION\n- Score < 5/5 → FAIL → Route to TA-B01 (multiplication-as-addition errors) or TA-B02 (addition-as-multiplication / independence errors)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Counting principles: mastered. You can correctly identify when to multiply (AND, sequential-independent) and when to add (OR, mutually exclusive), chain the multiplication principle across multiple stages, and recognise when sets overlap making simple addition invalid. This is the foundation of all combinatorics.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 135,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** Present: \"A coin is flipped and a die is rolled. How many outcomes are possible?\" If correct (12) → begin TA-A01. If learner says 8 (addition error) → TA-B01.\n\n**Scaffolding ladder:**\n1. Tree diagram for two small sets (2 shirts × 2 trousers) — count leaves directly\n2. Extend tree to 4×3 — observe counting the grid instead of drawing all branches\n3. Generalise to m×n for independent sequential choices\n4. Contrast with a menu: \"choose one main or one dessert\" — tree shows OR structure, branches don't combine\n\n**Pacing gate:** Must score ≥ 5/5 on P91 to earn mastery credit (MAMR = 95%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 66,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.counting-principles",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.disc.counting-principles\n  MAMR: 0.95\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"A sandwich shop offers 4 breads, 5 fillings, and 3 sauces. How many sandwiches?\"\n  session_3_probe: \"A team jersey comes in 6 colours or 3 patterns (not both). How many options?\"\n  session_7_probe: \"A password has 2 letters then 3 digits. How many passwords have no repeated digits?\"\n  session_14_probe: \"How many 3-letter words (repeated letters allowed) can be formed from A–Z?\"\n  session_30_probe: \"Explain when the multiplication and addition principles each apply. Give an original example of each.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 206,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "math.disc.counting-principles/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.counting-principles",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.arith.multiplication — multiplication as repeated addition; m×n operation [BLUEPRINT EXISTS]\n- math.found.set-theory — sets and cardinality; Cartesian product concept [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.disc.combinatorics — permutations and combinations (extend counting to ordered/unordered selections)\n\n**Cross-links:** [] — no Tier 1 cross-links.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented.\n**GR-9 satisfied:** P76 independence mode applied (cross_links empty).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.counting-principles.md",
+        "startLine": 222,
+        "endLine": 238
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

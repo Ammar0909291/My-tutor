@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.linear-equation-2var-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.linear-equation-2var",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:128d8d28587d109a1ffccb5a5e49fa8b8672a41489a62488429f9074eea03562",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.linear-equation-2var.md": "sha256:f28aaffb8b9f938f4e6ae414c094e2dd2e95f48c8dc4548b78b208bc5a6d7aca"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.alg.linear-equation-2var",
+    "name": "Linear Equation in Two Variables",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.linear-equation-1var"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.linear-equation-2var-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.linear-equation-2var (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.linear-equation-2var.md": "sha256:f28aaffb8b9f938f4e6ae414c094e2dd2e95f48c8dc4548b78b208bc5a6d7aca"
+      },
+      "contentHash": "sha256:bfadee316d12e9f9888f7804ed9d5806c56a0a8f64845afa99a3b970f14b5516",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-2var.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-2var\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-2var.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-2var\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-2var.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-2var\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-2var.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-2var\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-2var.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-2var\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-2var.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md#TA-B02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-2var\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.linear-equation-2var/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Linear Equation in Two Variables — cognitive map",
+      "content": "**Core concept:** A linear equation in two variables has the form ax + by = c. Unlike an equation in one variable, it has infinitely many solutions — each solution is an ordered pair (x, y). The complete solution set forms a straight line in the coordinate plane. Verifying a solution requires checking that BOTH x and y satisfy the equation simultaneously.\n\n**Conceptual progression:**\n1. A two-variable equation cannot be \"solved for a number\" — it can only be solved for an ordered pair.\n2. Infinitely many pairs (x, y) satisfy the equation; any one point on the line is a solution.\n3. A point NOT on the line does not satisfy the equation.\n4. To generate solutions: fix one variable (choose any value for x), solve for y (as a 1-variable equation), get one solution pair.\n5. The solution set — all solutions plotted together — forms a straight line.\n\n**CPA arc (entry: C):**\n- Concrete: budget constraint story — spending $a per x items and $b per y items for a total of $c; many valid purchase combinations exist\n- Pictorial: table of solutions (x, y); plotting pairs in a coordinate plane; seeing the line emerge\n- Abstract: general form ax + by = c; parametric family of solutions (x, t) → y = (c−ax)/b for any real t\n\n**Prior knowledge activated:** linear equation in one variable (balance principle, isolation technique); ordered pairs (x, y) in the coordinate plane; substitution to verify an equation\n\n**Threshold concept:** A two-variable equation is a CONSTRAINT, not a unique answer — it describes an entire relationship between two quantities, not a single value.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 20,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "ONE-SOLUTION-EXPECTED [FOUNDATIONAL]",
+      "content": "### MC-1: ONE-SOLUTION-EXPECTED [FOUNDATIONAL]\n**Description:** Learner expects the equation to yield a unique numerical solution, as in the one-variable case.\n**Surface form:** Given 2x + 3y = 12, learner tries to \"solve for x\" and gets x = (12−3y)/2, then says \"I need another equation to find a number.\"\n**Root cause:** Direct transfer of the one-variable solving schema; learner has not yet encountered the concept of a solution set as a set of ordered pairs.\n**Trigger condition:** Any initial encounter with a two-variable equation presented in isolation (not as a system).\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "SOLUTION-IS-JUST-X",
+      "content": "### MC-2: SOLUTION-IS-JUST-X\n**Description:** Learner solves for x only (or y only) and considers that alone to be the solution, ignoring the paired variable.\n**Surface form:** Given 2x + 3y = 12, sets y=0 and finds x=6, then reports \"x=6\" as the solution rather than \"(6, 0).\"\n**Root cause:** Applies the one-variable schema — isolate a variable, report that value — without recognising that a solution is always a complete pair (x, y).\n**Trigger condition:** Any problem asking \"find a solution\" without specifying that a pair is expected.\n**Repair target:** TA-B01.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "ARBITRARY-PAIR-IS-SOLUTION",
+      "content": "### MC-3: ARBITRARY-PAIR-IS-SOLUTION\n**Description:** Learner believes any pair (x, y) satisfies the equation, not just pairs on the line.\n**Surface form:** Given 2x + 3y = 12, tests (1, 1): 2(1)+3(1)=5≠12, but still reports it as a solution because \"x and y can be anything.\"\n**Root cause:** Misinterprets \"infinitely many solutions\" as \"any pair works,\" rather than \"all pairs that make the equation true.\"\n**Trigger condition:** Any problem asking whether a specific pair is a solution.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "The Solution Set Is Infinite",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Solution Set Is Infinite\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 85,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Verifying Solutions and Non-Solutions",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Verifying Solutions and Non-Solutions\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 107,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Contrast: One-Variable vs. Two-Variable Equations",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast: One-Variable vs. Two-Variable Equations\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 134,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 160,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Repair: One-Solution-Expected / Solution-Is-Just-X",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: One-Solution-Expected / Solution-Is-Just-X\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 202,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Repair: Arbitrary-Pair-Is-Solution",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: Arbitrary-Pair-Is-Solution\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 218,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A04 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 85% → PASS requires ⌈0.85 × 5⌉ = 5/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: Find two distinct solutions to 2x + 3y = 12. [Answers include: (0,4), (3,2), (6,0), (−3,6), etc. Any two correct pairs.]\nItem 2: Is (3, 2) a solution to 2x + 3y = 12? Verify by substitution. [Answer: 2(3)+3(2)=6+6=12 ✓ — yes]\nItem 3: True or False — the equation 3x + 2y = 18 has exactly one solution. [Answer: FALSE — infinitely many solutions form a line]\nItem 4: Find the y-intercept (set x=0) and x-intercept (set y=0) of 2x + 3y = 12. [Answer: y-intercept (0,4); x-intercept (6,0)]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (independence mode — T1 cross_links are empty):**\nA store sells apples for $2 each and oranges for $3 each. A customer spends exactly $12.\n\n(a) Write a linear equation in two variables modeling this situation. [Answer: 2a + 3r = 12, where a = apples, r = oranges]\n(b) Find three solutions with non-negative integer values. [Answer: (0,4), (3,2), (6,0)]\n(c) If the customer must buy at least 1 apple AND at least 1 orange, which of your solutions are valid? [Answer: only (3,2) from the listed set — (0,4) has no apples, (6,0) has no oranges]\n(d) Why does a CONTEXT often restrict the full solution set of a two-variable equation? [Answer: real-world constraints (non-negative quantities, integer counts, budget limits) select a subset of the infinitely many mathematical solutions]\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score 5/5 → PASS → P78 COMPLETION\n- Score < 5/5 → FAIL → Route to TA-B01 (one-solution / incomplete-pair errors) or TA-B02 (verification / non-solution errors)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Linear equation in two variables: mastered. You understand that ax+by=c has infinitely many solutions forming a line, that each solution is an ordered pair (x,y), and that verification requires substituting both variables simultaneously. This is the foundation for systems of linear equations and linear functions.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 160,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** \"How many solutions does 3x = 9 have?\" and \"Can you name a pair (x, y) that makes 2x + y = 8 true?\" If first correct and second answered with a valid pair → begin TA-A01. If learner cannot produce a pair → TA-B01.\n\n**Scaffolding ladder:**\n1. Budget story: spend $2 per apple and $3 per orange for $12 total — list valid (apple, orange) pairs\n2. Fix x=0: solve for y. Fix x=3: solve for y. Fix x=6: solve for y. Observe the pattern.\n3. Plot all found pairs and observe they form a line\n4. Verify that (1, 4) is NOT on the line 2x+3y=12 by substitution\n\n**Pacing gate:** Must score ≥ 5/5 on P91 to earn mastery credit (MAMR = 85%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 67,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.alg.linear-equation-2var\n  MAMR: 0.85\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"Find three solutions to x + 2y = 10.\"\n  session_3_probe: \"Is (4, 1) a solution to 3x − 2y = 10? Verify.\"\n  session_7_probe: \"How many solutions does 5x + y = 20 have? Find the intercepts.\"\n  session_14_probe: \"A farmer has chickens (2 legs) and cows (4 legs). There are 24 legs total. Write and explore the equation.\"\n  session_30_probe: \"Explain why a single linear equation in two variables cannot determine unique values of x and y without additional information.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 231,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-2var/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.linear-equation-2var",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.alg.linear-equation-1var — balance principle, isolation technique, solution as a single value [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.alg.system-linear-equations — two equations together pin down a unique point\n- math.func.linear-function — y = mx + b is the explicit form of ax + by = c solved for y\n\n**Cross-links:** [math.func.linear-function, math.geom.line-equation] — neither is Tier 1; P76 independence mode applied.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented.\n**GR-9 satisfied:** both cross_links are NOT Tier 1 → P76 independence mode applied.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-2var.md",
+        "startLine": 247,
+        "endLine": 263
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

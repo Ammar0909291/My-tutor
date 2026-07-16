@@ -1,0 +1,330 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.multivariable-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.multivariable-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:53a662957277f942e5c10c17ee2b3467bd0dde6ef785a40e17032dfa9a4c2c09",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.multivariable-intro.md": "sha256:8a2e6404000c4ec9050572118fec350d6b3a1ecad5e711a1e578670f158dae1d"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.multivariable-intro",
+    "name": "Introduction to Multivariable Calculus",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.derivative-definition",
+      "math.geom.vectors-3d"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.multivariable-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.multivariable-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.multivariable-intro.md": "sha256:8a2e6404000c4ec9050572118fec350d6b3a1ecad5e711a1e578670f158dae1d"
+      },
+      "contentHash": "sha256:f9fa90bd935f87382306f5e746b6d172ab5c5e01f548c99be91f97730d9b24e1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.multivariable-intro.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multivariable-intro.md#TA-A01 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multivariable-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multivariable-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multivariable-intro.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multivariable-intro.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multivariable-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multivariable-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multivariable-intro.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multivariable-intro.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multivariable-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multivariable-intro\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.multivariable-intro.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.multivariable-intro.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.multivariable-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.multivariable-intro\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.multivariable-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "Introduction to Multivariable Calculus — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.derivative-definition**: lim_{h→0}[f(x+h)−f(x)]/h; secant→tangent as limit; 1-variable limit requiring agreement from left and right\n- **math.geom.vectors-3d**: points and vectors in ℝ³; distance formula; coordinate geometry in 3D space\n\n### Target Knowledge State\nStudent understands that multivariable functions f(x,y): ℝ²→ℝ have a 2D domain (a region in the plane, not an interval), a 3D surface as their graph, and level curves f(x,y)=c as the planar \"slices\" of that surface; recognises that 2-variable limits require the same value along every path approaching (a,b) in ℝ² (infinitely many, including curves), and can distinguish functions for which the limit exists (by bounding/squeeze) from those for which it fails (by exhibiting two paths with different limits).\n\n### Conceptual Obstacles\n1. Concluding a 2-variable limit exists after checking only one or two axis-aligned paths — one pair of paths giving different values proves non-existence, but agreeing paths never prove existence\n2. Assuming every 3D surface or equation in (x,y,z) defines z as a function of (x,y) — the sphere x²+y²+z²=1 fails the \"vertical line (z-axis) test\" and is not a function\n3. Treating the domain of f(x,y) as a subset of ℝ (an interval) rather than a subset of ℝ² (a region in the plane, described by inequalities in both x and y)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "SINGLE-PATH-LIMIT",
+      "content": "| MC-1 | SINGLE-PATH-LIMIT | Student tests one or two paths and concludes the 2-variable limit exists; ignores that infinitely many other paths remain | Any 2-variable limit problem; \"I tried x=0 and y=0 and both gave 0, so the limit is 0\" |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "EVERY-SURFACE-IS-FUNCTION",
+      "content": "| MC-2 | EVERY-SURFACE-IS-FUNCTION | Student assumes any equation involving x, y, z defines z as a function of (x,y) | Domain/range questions; \"vertical plane test\" situations; equations like x²+y²+z²=r² |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "DOMAIN-IS-INTERVAL",
+      "content": "| MC-3 | DOMAIN-IS-INTERVAL | Student writes the domain as an interval (e.g., \"x≥0\") rather than a region in ℝ² (e.g., \"x²+y²≤4, all (x,y)\") | Finding domain of f(x,y)=√(4−x²−y²) or similar |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "Functions of Two Variables",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Functions of Two Variables\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 65,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "Multivariable Limits and Path Dependence",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multivariable Limits and Path Dependence\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 143,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "Single-Variable vs. Multivariable: A Comparison",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Single-Variable vs. Multivariable: A Comparison\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 218,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 253,
+        "endLine": 474
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77→P55→P76→P55→P75→P55→P74→P55→P78)\n**Purpose:** Assess mastery of 2-variable function domain, limit existence/non-existence, and continuity\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 items)*\n\n**Item 1:** f(x,y) = √(x−y²). (a) Find the domain. (b) Sketch/describe its shape in ℝ². (c) Write the level curve f=3 explicitly.\n\n*Solution:*\n(a) x−y²≥0 → x≥y². Domain: region to the right of (or on) the parabola x=y² in the (x,y)-plane.\n(b) This is a parabola opening rightward (unbounded domain).\n(c) f=3 → √(x−y²)=3 → x−y²=9 → x=y²+9. This is a parabola shifted 9 units right.\n\n**Item 2:** f(x,y) = (x²+y²−4)/(x²+y²). Find all (x,y) where f is not defined, and evaluate lim_{(x,y)→(1,0)} f.\n\n*Solution:*\nf undefined when x²+y²=0, i.e., (x,y)=(0,0) only.\nAt (1,0): x²+y²=1≠0 → f(1,0)=(1−4)/1=−3. Since f is continuous at (1,0) (denominator≠0), the limit equals f(1,0)=−3.\n\n**Item 3:** Determine whether lim_{(x,y)→(0,0)} f(x,y) exists for f(x,y) = (x−y)/(x+y).\n\n*Solution:*\nAlong y=0: x/x=1 → 1. Along x=0: −y/y=−1 → −1. Paths differ → **limit does not exist**.\n\n**Item 4:** Determine whether lim_{(x,y)→(0,0)} g(x,y) exists for g(x,y) = x²/(x²+y²+1).\n\n*Solution:*\nx²+y²+1≥1 for all (x,y), so denominator is bounded below by 1. As (x,y)→(0,0): numerator x²→0; denominator→1. Therefore g→0/1=0. (No 0/0 issue; g is continuous at (0,0).) **Limit = 0.**\n\n---\n\n**[P55 — SCORE]** Count correct items (Items 1–4). Running total: _/4.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(independence mode)*\n\nConsider the two functions for (x,y)≠(0,0):\n\n$$f(x,y) = \\frac{x^2 y}{x^2 + y^2}, \\quad g(x,y) = \\frac{x y}{x^2 + y^2}$$\n\n**(a)** Test lim_{(x,y)→(0,0)} f(x,y) along: y=0, y=x, y=x². What do the paths suggest?\n\n**(b)** Prove or disprove: lim_{(x,y)→(0,0)} f(x,y) = 0.\n*Hint:* Bound |f(x,y)| using |x²/(x²+y²)|≤1.\n\n**(c)** Test lim_{(x,y)→(0,0)} g(x,y) along: y=0, y=x.\n\n**(d)** Based on (b) and (c): which limit exists, which does not? What does this teach about path-testing vs. analytic bounding?\n\n---\n\n*Expected solution:*\n\n(a) f along y=0: 0; along y=x: x³/(2x²)=x/2→0; along y=x²: x²·x²/(x²+x⁴)=x⁴/(x²+x⁴)=x²/(1+x²)→0. All paths give 0.\n\n(b) |f(x,y)|=x²|y|/(x²+y²). Since x²≤x²+y², we have x²/(x²+y²)≤1. So |f|≤|y|. As (x,y)→(0,0), |y|→0. By squeeze: **lim f = 0. Exists.**\n\n(c) g along y=0: 0/x²=0; along y=x: x²/(2x²)=1/2. Different limits → **lim g does not exist.**\n\n(d) f converges (proved analytically); g diverges (two-path argument). **Path-testing can disprove a limit** (as in g — one pair of differing paths suffices). **Path-testing cannot prove a limit** (as in f — we checked 3 paths, all gave 0, but the squeeze proof was still necessary).\n\n---\n\n**[P55 — SCORE]** Score P76 (0 or 1). Running total: _/5.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]** MAMR = 4/5.\n\n- Score ≥ 4/5 → PASS → proceed to P74.\n- Score < 4/5 → FAIL → P74 routes to repair.\n\n---\n\n**[P55 — SCORE]** Record final pass/fail.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- **PASS (≥4/5):** Concept mastered. Proceed to math.calc.partial-derivatives.\n- **FAIL:** Diagnose missed items: domain errors → B-MC3; path-limit errors → B-MC1; surface/function confusion → B-MC2. After repair, re-enter A04.\n\n---\n\n**[P55 — SCORE]** Log routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession complete for math.calc.multivariable-intro. MAMR 4/5 required; student has either passed (unlocking partial derivatives) or been routed to repair.\n\n---\n\n\n## Component 5 — Protocol B (Repair Sequences)\n\n### B-MC1 — Repair: SINGLE-PATH-LIMIT\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You checked the limit along one or two paths and concluded it exists. In 2D, that's not enough — infinitely many paths approach any point, and the limit must agree along all of them.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nConsider h(x,y)=xy/(x²+y²). Along y=0: limit=0. Along y=2x: 2x²/(x²+4x²)=2/5. These differ → limit does not exist, even though y=0 gave 0 every time you tried it. The y=2x path was the counterexample you missed.\n\n**[P64 — CONCEPTUAL SHIFT]**\nIn ℝ², a point like (0,0) is approached by uncountably many paths. Checking even 100 paths cannot guarantee the 101st agrees. Path-testing is a disproof tool only — one disagreeing pair proves non-existence. To prove existence, you need either an algebraic continuity argument (denominator ≠ 0) or an analytic bound (squeeze theorem).\n\n---\n\n### B-MC2 — Repair: EVERY-SURFACE-IS-FUNCTION\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You treated a 3D surface as automatically defining z as a function of (x,y). Some surfaces do; some don't. The criterion is whether each (x,y) in the domain gives exactly one z.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nThe sphere x²+y²+z²=1. At (x,y)=(0,0): z²=1 → z=+1 or z=−1. Two different z-values for one (x,y) input — the sphere fails to define z as a function of (x,y). Compare: the upper hemisphere z=√(1−x²−y²) does define a function (unique z≥0 for each (x,y) with x²+y²≤1).\n\n**[P64 — CONCEPTUAL SHIFT]**\nThe vertical plane test: for each (x,y) in the domain, draw a vertical line (parallel to z-axis). If it intersects the surface in exactly one point, z=f(x,y) defines a function at that (x,y). Equations in x,y,z may define implicit surfaces (not functions), or multiple branches (each branch is a function). The equation of a surface is weaker than the definition of a function.\n\n---\n\n### B-MC3 — Repair: DOMAIN-IS-INTERVAL\n\n**Primitive sequence:** P27 → P41 → P64\n\n**[P27 — MISCONCEPTION NAMING]**\n\"You wrote the domain as an interval like −2≤x≤2 without mentioning y. The domain of f(x,y) is a set of pairs (x,y) — a region in ℝ², not a subset of ℝ.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nf(x,y)=√(4−x²−y²). The constraint is 4−x²−y²≥0 → x²+y²≤4. This is a disk in ℝ²: every pair (x,y) with distance from the origin at most 2. Writing \"−2≤x≤2\" captures only points on the x-axis, missing points like (1,√3) (which satisfies 1+3=4≤4 and is in the domain) and excluding nothing for y.\n\n**[P64 — CONCEPTUAL SHIFT]**\nThe domain of f(x,y) is a two-dimensional object: a region, bounded by curves in the (x,y)-plane. Always describe it as a set of pairs: {(x,y): condition}. Common shapes: disks (x²+y²≤r²), half-planes (ax+by>c), rectangles (a≤x≤b, c≤y≤d), and complements of curves. Draw the region, then write it algebraically.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | f(x,y)=ln(x²+y²−1): find domain; describe its shape in ℝ². [Outside unit circle: x²+y²>1] |\n| Day 3 | Does lim_{(x,y)→(0,0)} x²/(x²+y²) exist? Test y=0 (→1) and x=0 (→0). Conclude DNE. |\n| Day 7 | Does lim_{(x,y)→(0,0)} x³y/(x²+y²)² exist? Bound: x²/(x²+y²)≤1, so |x³y/(x²+y²)²|=|xy|·x²/(x²+y²)²≤|xy|/|z|²... try squeeze approach. |\n| Day 14 | True or false: if f(x,y) is continuous in x for each fixed y, and continuous in y for each fixed x, then f is continuous at that point. [False — give the xy/(x²+y²) counterexample.] |\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.derivative-definition | PACKAGE_READY | 1D limit machinery; secant/tangent intuition transferred to 2D |\n| math.geom.vectors-3d | Required | 3D coordinates needed to understand surfaces and graphs in ℝ³ |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.calc.partial-derivatives | Requires domain, limit, and surface concepts from this blueprint |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**The dimensionality jump:** Every new difficulty in multivariable calculus traces to the same root cause: the domain has gone from a 1D interval (left/right) to a 2D region (all directions). The path-dependence of limits is the most vivid consequence, and A02 should dwell on it. Students who absorb this once — that two disagreeing paths kill a limit, but no finite collection of agreeing paths proves one — develop the right instincts for partial derivatives, directional derivatives, and continuity in subsequent material.\n\n**f(x,y) = (x²−y²)/(x²+y²) is the canonical example:** It has limit 1 along the real axis, −1 along the imaginary axis, and (1−m²)/(1+m²) along y=mx — every line through the origin gives a different value. It simultaneously teaches path-dependence and the parametric-slope trick for lines through the origin.\n\n**Domain descriptions must be 2D:** Students with strong 1D backgrounds reliably write domains as intervals. A01's explicit table of domain shapes (disk, half-plane, parabolic region) with both algebraic and geometric descriptions corrects this. Require students to draw the domain region, not just write an inequality.\n\n**Continuity for nice functions:** Polynomial functions of x and y (like 3x²−2xy+y) are always continuous. Rational functions are continuous wherever the denominator is non-zero. This simple rule handles most computational continuity questions without limits. The genuinely tricky cases are functions defined by 0/0 forms near isolated points.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| ID | Check | Status |\n|----|-------|--------|\n| V-1 | All Teaching Actions have assigned primitives | PASS |\n| V-2 | GR-1: A01 opens with P11 (B-category primitive, non-repair) | PASS |\n| V-3 | CPA entry stage = C for advanced difficulty | PASS |\n| V-4 | bloom=understand → no P07 required; V-4 = N/A | N/A |\n| V-5 | GR-2: P49 present in A01, A02, A03, each with 4 branches | PASS |\n| V-6 | GR-3: A04 (P91) is terminal — no further TAs after gate | PASS |\n| V-7 | GR-4: All B-sequences open with P27+P41+P64 | PASS |\n| V-8 | GR-6: P91 is terminal in A04 | PASS |\n| V-9 | GR-7: P76 present inside A04 mastery gate | PASS |\n| V-10 | GR-9: cross_links=[] → P76 mode = independence | PASS |\n| V-11 | GR-10: MAMR=4/5 stated and enforced (thresh=0.8, n=5: ⌈0.8×5⌉=4) | PASS |\n| V-12 | PASS criterion (≥4/5) stated in P75 and P74 | PASS |\n| V-13 | GR-8: Component 7 documents all cross-blueprint dependencies | PASS |\n| V-14 | Standard structure: h=5 → 3 main TAs (A01,A02,A03) + gate (A04) | PASS |\n| V-15 | Component 0 metadata fields complete | PASS |\n| V-16 | Component 1 (prior anchors, target state, obstacles) complete | PASS |\n| V-17 | Component 2: 3 MCs with 1 foundational designated | PASS |\n| V-18 | Component 3 scaffolding protocol complete | PASS |\n| V-19 | Component 6 P89 schedule complete (4 intervals) | PASS |\n| V-20 | Component 8 teaching notes complete | PASS |\n| AIR | No prohibited operations (no curriculum modification, no framework redesign) | PASS |\n\n**Status: PACKAGE_READY**",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 253,
+        "endLine": 474
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner begins with concrete numerical evaluation before abstraction.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: evaluate f(x,y)=x²+y² at four specific points; P: contour map (level curves f=c as circles); A: formal definition f:D⊆ℝ²→ℝ; domain as a region in ℝ²; notation f(x,y)\n2. **A02 P03 ANALOGY BRIDGE** — Anchor: 1D limit (left/right agreement); Target: 2D limit (all-path agreement); transfer failure example for path-dependence; squeeze technique for existence\n3. **A03 P06 CONTRAST PAIR** — single-variable vs multivariable calculus side-by-side; surfaces vs curves; level curves vs isolated points; 2D path space vs 1D interval\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Interval | Prompt |\n|----------|--------|\n| Day 1 | f(x,y)=ln(x²+y²−1): find domain; describe its shape in ℝ². [Outside unit circle: x²+y²>1] |\n| Day 3 | Does lim_{(x,y)→(0,0)} x²/(x²+y²) exist? Test y=0 (→1) and x=0 (→0). Conclude DNE. |\n| Day 7 | Does lim_{(x,y)→(0,0)} x³y/(x²+y²)² exist? Bound: x²/(x²+y²)≤1, so |x³y/(x²+y²)²|=|xy|·x²/(x²+y²)²≤|xy|/|z|²... try squeeze approach. |\n| Day 14 | True or false: if f(x,y) is continuous in x for each fixed y, and continuous in y for each fixed x, then f is continuous at that point. [False — give the xy/(x²+y²) counterexample.] |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 405,
+        "endLine": 418
+      }
+    },
+    {
+      "assetId": "math.calc.multivariable-intro/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.multivariable-intro",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "### Prerequisite Blueprints Required\n| Concept ID | Blueprint Status | Dependency |\n|------------|-----------------|------------|\n| math.calc.derivative-definition | PACKAGE_READY | 1D limit machinery; secant/tangent intuition transferred to 2D |\n| math.geom.vectors-3d | Required | 3D coordinates needed to understand surfaces and graphs in ℝ³ |\n\n### Blueprints This Unlocks\n| Concept ID | Dependency |\n|------------|------------|\n| math.calc.partial-derivatives | Requires domain, limit, and surface concepts from this blueprint |\n\n### Cross-Links\n*(none — cross_links field is empty in the KG)*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.multivariable-intro.md",
+        "startLine": 418,
+        "endLine": 436
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

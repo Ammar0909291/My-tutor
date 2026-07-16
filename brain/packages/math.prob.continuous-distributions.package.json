@@ -1,0 +1,354 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.continuous-distributions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.continuous-distributions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5caabcf646f24a6ccfbadab1fe2c87a26123004e6fb353ee7f4aa6e3f93834f4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.continuous-distributions.md": "sha256:7055e17297878faab8d973a29dd776cde0ab490eb06e38b1ba3069617587d832"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.continuous-distributions",
+    "name": "Continuous Distributions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.prob.continuous-rv",
+      "math.prob.pdf"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.continuous-distributions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.continuous-distributions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.continuous-distributions.md": "sha256:7055e17297878faab8d973a29dd776cde0ab490eb06e38b1ba3069617587d832"
+      },
+      "contentHash": "sha256:043021d930da3acd5aa1075ac1c2f20903bb145391f47afa94e70936483e9084",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.continuous-distributions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.continuous-distributions.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.continuous-distributions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.continuous-distributions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.continuous-distributions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.continuous-distributions.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.continuous-distributions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.continuous-distributions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.continuous-distributions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.continuous-distributions.md#TA-A03 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.continuous-distributions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.continuous-distributions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.continuous-distributions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.continuous-distributions.md#TA-A04 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.continuous-distributions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.continuous-distributions\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.continuous-distributions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "Continuous Distributions — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.prob.continuous-rv**: continuous random variables; P(X=x)=0; probability as area under curve\n- **math.prob.pdf**: PDF properties (f(x)≥0, ∫f=1), CDF F(x)=P(X≤x), relationship f=F′\n\n### Target Knowledge State\nStudent can identify and apply the Uniform U(a,b) and Exponential Exp(λ) distributions: state their PDFs and CDFs, compute probabilities by formula or integration, state E[X] and Var[X], and apply the memoryless property of the Exponential. Student can also identify the Normal distribution by name and key parameters (μ, σ²) even without computing normal integrals directly.\n\n### Conceptual Obstacles\n1. For Uniform U(a,b), confusing f(x)=1/(b−a) with a probability and writing P(X=x)=1/(b−a) instead of P(c≤X≤d)=(d−c)/(b−a)\n2. For Exponential Exp(λ), confusing λ with the mean — E[Exp(λ)]=1/λ, not λ\n3. Failing to apply the memoryless property, instead computing conditional probabilities from scratch using the full CDF\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "Worked Example Pair",
+      "content": "### Teaching Action A02 — Worked Example Pair\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Apply Exponential and Uniform formulas; address MC-3 (memoryless)\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**Worked Example 1 — Exponential: Bus Waiting Time**\n\n*Problem:* Buses arrive at a stop at rate λ = 1/4 per minute (one bus every 4 minutes on average). X = wait time follows Exp(λ=1/4).\n\n*Compute:*\n\n(a) **E[X] and Var[X]:**\nE[X] = 1/(1/4) = **4 minutes**; Var[X] = 1/(1/4)² = **16 min²**\n\n(b) **P(X ≤ 3):**\nP(X ≤ 3) = 1 − e^{−(1/4)(3)} = 1 − e^{−0.75} ≈ 1 − 0.472 = **0.528**\n\n(c) **P(X > 6):**\nP(X > 6) = e^{−(1/4)(6)} = e^{−1.5} ≈ **0.223**\n\n(d) **Memoryless property:** You've already waited 4 minutes with no bus. Find P(X > 4+3 | X > 4).\nBy memoryless property: P(X > 7 | X > 4) = P(X > 3) = e^{−(1/4)(3)} = e^{−0.75} ≈ **0.472**\nNo calculation from the full CDF needed — the remaining wait is exactly like starting fresh.\n\n---\n\n**Worked Example 2 — Uniform: Random Arrival**\n\n*Problem:* A friend says they'll arrive between 2:00 PM and 2:30 PM, uniformly at random. X = minutes past 2:00 PM. X ~ U(0, 30).\n\n*Compute:*\n\n(a) **PDF and P(X ≤ 10):**\nf(x) = 1/30 for 0 ≤ x ≤ 30.\nP(X ≤ 10) = (10−0) × (1/30) = **1/3**\n\n(b) **P(10 ≤ X ≤ 25):**\nP(10 ≤ X ≤ 25) = (25−10) × (1/30) = 15/30 = **1/2**\n\n(c) **E[X] and Var[X]:**\nE[X] = (0+30)/2 = **15 minutes**\nVar[X] = (30−0)²/12 = 900/12 = **75 min²**\n\n*Note:* Uniform is NOT memoryless. If your friend hasn't arrived by 2:20 PM (X > 20), the remaining wait is not uniformly distributed on [0,30] — it is now U(20,30) (truncated). This contrasts with Exponential's memoryless property.\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n*Probe:* X ~ Exp(λ=2). You know X > 1. Find P(X > 1+0.5 | X > 1).\n\n(A) P(X > 1.5) = e^{−3} ≈ 0.050\n(B) P(X > 0.5) = e^{−1} ≈ 0.368\n(C) P(X > 1.5)/P(X > 1) = e^{−3}/e^{−2} = e^{−1} ≈ 0.368\n(D) Both B and C are correct approaches\n\n*Branch CORRECT (D):* Both B and C give the same result (e^{−1}), confirming the memoryless property. Method B directly applies P(X>s+t|X>s)=P(X>t). Method C uses the definition of conditional probability and arrives at the same answer — the memoryless property is self-consistent. Proceed to A03.\n\n*Branch PARTIAL:* You found the right numerical answer but may not have recognized both approaches are valid. The memoryless property means P(X>s+t|X>s)=P(X>t) — shortcut (B) and full conditional calculation (C) agree. Proceed to A03.\n\n*Branch INCORRECT (A):* Answer A computes P(X>1.5) without conditioning on X>1. When we know X>1, we use P(X>1.5|X>1)=P(X>0.5)=e^{−1} by the memoryless property. Proceed to A03.\n\n*Branch NO_RESPONSE:* Memoryless property: P(X>s+t|X>s)=P(X>t). Here s=1, t=0.5: P(X>1.5|X>1)=P(X>0.5)=e^{−λ(0.5)}=e^{−1}≈0.368. Proceed to A03.\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 136,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "DENSITY-AS-PROBABILITY",
+      "content": "| MC-1 | DENSITY-AS-PROBABILITY | Student treats f(x)=1/(b−a) as the probability of a single point for Uniform, writing P(X=3)=1/(b−a) rather than computing interval length × density | Uniform distribution problems asking for P(X∈interval) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "LAMBDA-IS-MEAN",
+      "content": "| MC-2 | LAMBDA-IS-MEAN | Student uses λ as E[X] for Exp(λ) instead of 1/λ; e.g., for Exp(2) states mean=2 when mean=1/2 | Any Exponential problem asking for E[X] or using the mean |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "MEMORYLESS-IGNORED",
+      "content": "| MC-3 | MEMORYLESS-IGNORED | Student recomputes P(X>s+t) from the CDF instead of recognizing P(X>s+t|X>s)=P(X>t), wasting effort and risking error | Conditional probability questions on Exponential waiting times |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "Density Curve Analogy",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Density Curve Analogy\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 67,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "Worked Example Pair",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 136,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "Uniform vs. Exponential Contrast",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Uniform vs. Exponential Contrast\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 206,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 269,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Show all work.*\n\n**Problem 1.** X ~ U(3, 11).\n(a) Find P(5 ≤ X ≤ 9).\n(b) Find E[X] and Var[X].\n\n**Problem 2.** X ~ Exp(λ = 1/3) (mean wait = 3 minutes).\n(a) Find P(X > 6).\n(b) Find P(X ≤ 2).\n\n**Problem 3.** X ~ Exp(λ = 0.5). Given that X > 2 (you've already waited 2 units), find P(X > 2+4 | X > 2). State which property you used.\n\n**Problem 4.** X ~ U(0, 20).\n(a) Find E[X] and Var[X].\n(b) Find P(X > 15 | X > 10).\n(Hint: Uniform is NOT memoryless — compute directly.)\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. (a) f(x)=1/(11−3)=1/8; P(5≤X≤9)=(9−5)/8=4/8=**1/2**\n   (b) E[X]=(3+11)/2=**7**; Var[X]=(11−3)²/12=64/12=**16/3≈5.33**\n\n2. (a) P(X>6)=e^{−(1/3)(6)}=e^{−2}≈**0.135**\n   (b) P(X≤2)=1−e^{−(1/3)(2)}=1−e^{−2/3}≈1−0.513=**0.487**\n\n3. By **memoryless property**: P(X>6|X>2)=P(X>4)=e^{−0.5×4}=e^{−2}≈**0.135**\n\n4. (a) E[X]=(0+20)/2=**10**; Var[X]=(20−0)²/12=400/12=**100/3≈33.33**\n   (b) P(X>15|X>10) = P(X∈(15,20])/P(X∈(10,20]) = (5/20)/(10/20) = 5/10 = **1/2**\n   (Alternative: given X>10, X is now uniform on (10,20]; P(X>15 in this range)=(20−15)/(20−10)=5/10=1/2)\n\nScore 1 point per problem (P77 total: 4 points). Partial credit: each problem has 2 parts; 1 point if both correct.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence — cross_links = [])*\n\n*Problem:* A call center receives complaints that take a random duration X to resolve. Analysis shows X ~ Exp(λ = 1/5) (average call takes 5 minutes).\n\n(a) Write the PDF of X and state E[X] and Var[X].\n\n(b) Find the probability a call is resolved within 3 minutes: P(X ≤ 3).\n\n(c) Find the probability a call takes more than 10 minutes: P(X > 10).\n\n(d) An agent has already spent 5 minutes on a call (X > 5). Using the memoryless property, find P(X > 5+5 | X > 5). Interpret this result in context.\n\n(e) Would X ~ Uniform be a more appropriate model than Exponential for call resolution times? Briefly justify.\n\n*Expected answers:*\n\n(a) f(x) = (1/5)e^{−x/5} for x ≥ 0; E[X] = 5 min; Var[X] = 25 min²\n\n(b) P(X≤3) = 1 − e^{−3/5} = 1 − e^{−0.6} ≈ 1 − 0.549 = **0.451**\n\n(c) P(X>10) = e^{−10/5} = e^{−2} ≈ **0.135**\n\n(d) P(X>10|X>5) = P(X>5) = e^{−5/5} = e^{−1} ≈ **0.368**\nInterpretation: Even after 5 minutes, the probability of needing at least 5 more minutes remains the same as if the call just started (≈36.8%). The Exponential has no memory of elapsed time.\n\n(e) Exponential is more appropriate: call resolution times are typically right-skewed (many short calls, few very long ones), and the memoryless property is a reasonable simplification when call duration doesn't depend on how long you've already been on the call. Uniform would imply all durations in [0, max] are equally likely, which is unrealistic.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all five parts substantively correct).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.9 × 5⌉ = 5). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Re-examine missed item; targeted re-explanation; concept marked proficient with review flag |\n| ≤ 3/5 | → Return to A01; re-engage density curve analogy; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.prob.continuous-distributions` complete. Threshold 0.9 requires 5/5 correct.\n\n**Unlocks:** No direct unlocks in the Tier-1 set from this node.\n\nNext recommendation: The Normal distribution (unlocked indirectly via probability pathway) — most important named distribution, requires the Central Limit Theorem prerequisite.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 272,
+        "endLine": 396
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** Pictorial (P) — proficient learner.\n\n**Scaffolding sequence:**\n1. **A01 P03 ANALOGY BRIDGE** — connect \"equally likely\" discrete outcomes to Uniform density; introduce Exponential as \"equally likely per unit time\" → decreasing density; pictorial density curves for both\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: Exp(λ) probability and mean; WE2: U(a,b) probability and mean with both methods\n3. **A03 P06 CONTRAST PAIR** — Uniform vs. Exponential (constant vs. decreasing density; symmetric vs. right-skewed; memoryless property); named distribution properties table\n4. **A04 P91 Gate** — mastery assessment\n\n**V-3 (CPA Concrete stage):** N/A — proficient learner enters at Pictorial stage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 57,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | X ~ U(1, 7). Find P(2 ≤ X ≤ 5) and E[X]. |\n| R2 | 3 days | X ~ Exp(λ=1/2). Find P(X>4) and E[X]. |\n| R3 | 7 days | X ~ Exp(λ=3). A component has survived 2 hours. Find P(it lasts at least 2 more hours), using the memoryless property. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 430,
+        "endLine": 440
+      }
+    },
+    {
+      "assetId": "math.prob.continuous-distributions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.continuous-distributions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | — |\n| P76_mode | independence (cross_links = []) |\n| Unlocks | (none in Tier-1 from this node) |\n| Requires (Tier-1) | math.prob.continuous-rv, math.prob.pdf |\n\n**GR-8 compliance:** No cross-links to document.\n**GR-9 compliance:** P76 uses an independent novel problem (call center, Exponential) unrelated to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.continuous-distributions.md",
+        "startLine": 440,
+        "endLine": 454
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

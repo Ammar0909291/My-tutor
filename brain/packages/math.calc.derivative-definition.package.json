@@ -1,0 +1,338 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.derivative-definition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.derivative-definition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:543d12c434458de6c9212fa56f033b263472f535a1548aec5570593ae95d73b9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.derivative-definition.md": "sha256:6f9ee533126976bda23580d328b24a305210f87efc100a404a37d011c6057727"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.derivative-definition",
+    "name": "Derivative (Definition)",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.continuity",
+      "math.calc.derivative-intro"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.derivative-definition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.derivative-definition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.derivative-definition.md": "sha256:6f9ee533126976bda23580d328b24a305210f87efc100a404a37d011c6057727"
+      },
+      "contentHash": "sha256:d98b0df8ccadfc5eccf8e84aa04f757ef4f077bce809444d6b957ae3ffa033f5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-definition.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-definition.md#TA-A01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-definition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-definition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-definition.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-definition.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-definition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-definition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-definition.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-definition.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-definition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-definition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-definition.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-definition.md#TA-A04 (addresses MC-3, MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-definition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-definition\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.derivative-definition/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "Derivative (Definition) — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.continuity**: limit definition; f continuous at c iff lim_{x→c} f(x)=f(c); continuity on intervals\n- **math.calc.derivative-intro**: intuitive notion of instantaneous rate of change; tangent line; introduction to f'(x) notation\n\n### Target Knowledge State\nStudent understands the formal limit definition f'(x)=lim_{h→0}[f(x+h)−f(x)]/h as the instantaneous rate of change; can compute f'(x) or f'(a) from the definition by simplifying the difference quotient and taking the limit; understands that differentiability at a point implies continuity at that point, but continuity does not imply differentiability; and can identify points of non-differentiability (corners, cusps, vertical tangents).\n\n### Conceptual Obstacles\n1. Treating the difference quotient (f(x+h)−f(x))/h at a fixed nonzero h as the derivative — not recognizing that the limit h→0 is essential\n2. Believing every continuous function is differentiable — not knowing about corners (|x| at 0) or cusps (x^{2/3} at 0)\n3. Failing to simplify the difference quotient algebraically before taking the limit — trying to substitute h=0 directly gives 0/0; the algebraic cancellation step is required\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "DIFFERENCE-QUOTIENT-IS-DERIVATIVE",
+      "content": "| MC-1 | DIFFERENCE-QUOTIENT-IS-DERIVATIVE | Student confuses the difference quotient (f(x+h)−f(x))/h for a specific h>0 with the derivative; treats it as the answer without taking h→0 | Any computation where the simplified quotient still contains h |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "CONTINUITY-IMPLIES-DIFFERENTIABILITY",
+      "content": "| MC-2 | CONTINUITY-IMPLIES-DIFFERENTIABILITY | Student concludes f is differentiable everywhere because f is continuous; fails to consider corner/cusp points | Problems involving |x|, x^{2/3}, or piecewise functions |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "DIRECT-SUBSTITUTION-INTO-QUOTIENT",
+      "content": "| MC-3 | DIRECT-SUBSTITUTION-INTO-QUOTIENT | Student tries to substitute h=0 directly into [f(x+h)−f(x)]/h before algebraic simplification; gets 0/0 and stops | Every derivative-from-definition computation; the indeterminate form 0/0 is the trigger |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "Instantaneous Rate Bridge",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Instantaneous Rate Bridge\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 65,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "Pattern Induction from Definition",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pattern Induction from Definition\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 135,
+        "endLine": 195
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "Differentiable vs. Non-Differentiable Contrast",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Differentiable vs. Non-Differentiable Contrast\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 195,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 254,
+        "endLine": 467
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Use the limit definition f'(x)=lim_{h→0}[f(x+h)−f(x)]/h.*\n\n**Problem 1.** f(x) = 3x − 7. Find f'(x) from the definition.\n\n**Problem 2.** f(x) = x² + 5x. Find f'(2) from the definition (compute at x=2 directly).\n\n**Problem 3.** f(x) = 1/x. Find f'(x) from the definition. Show all algebraic steps.\n\n**Problem 4.** g(x) = |2x − 4|. At which x-value does g have a corner? Is g differentiable there? Compute the one-sided difference quotient limits to justify.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. [3(x+h)−7−(3x−7)]/h = 3h/h = 3 → **f'(x) = 3**\n\n2. [(2+h)²+5(2+h)−(4+10)]/h = [4+4h+h²+10+5h−14]/h = [9h+h²]/h = 9+h → lim = **f'(2) = 9**\n\n3. [1/(x+h)−1/x]/h = [(x−x−h)/(x(x+h))]/h = [−h/(x(x+h))]/h = −1/(x(x+h)) → lim = **f'(x) = −1/x²**\n\n4. Corner at **x=2** (where 2x−4=0).\n   Right limit (h→0⁺): [|2(2+h)−4|−0]/h = |2h|/h = 2h/h = 2\n   Left limit (h→0⁻): [|2(2+h)−4|−0]/h = |2h|/h = −2h/h = −2 (since h<0, |2h|=−2h)\n   Limits disagree (2≠−2) → **not differentiable at x=2**. Differentiable for all x≠2.\n\nScore 1 point per problem (P77 total: 4 points). Problem 3: require explicit algebraic steps (not just the answer).\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence — cross_links NOT Tier-1)*\n\n*Problem:* A ball is thrown upward. Its height (in meters) at time t (in seconds) is h(t) = 20t − 5t².\n\n(a) Compute the difference quotient [h(t+Δt)−h(t)]/Δt and simplify.\n\n(b) Take the limit as Δt→0 to find h'(t), the instantaneous velocity.\n\n(c) Find the instantaneous velocity at t=1 and t=3.\n\n(d) At what time t does the ball reach its highest point? (Hint: v=h'(t)=0.)\n\n(e) Is h differentiable for all t≥0? Explain briefly.\n\n*Expected answers:*\n\n(a) [20(t+Δt)−5(t+Δt)²−(20t−5t²)]/Δt\n   = [20t+20Δt−5t²−10t·Δt−5(Δt)²−20t+5t²]/Δt\n   = [20Δt−10t·Δt−5(Δt)²]/Δt\n   = 20 − 10t − 5Δt\n\n(b) lim_{Δt→0}(20−10t−5Δt) = **h'(t) = 20 − 10t**\n\n(c) h'(1) = 20−10 = **10 m/s** (still rising); h'(3) = 20−30 = **−10 m/s** (falling)\n\n(d) h'(t)=0 → 20−10t=0 → **t=2 seconds** (maximum height)\n\n(e) Yes — h(t)=20t−5t² is a polynomial, so it is differentiable for all t∈ℝ (no corners, cusps, or discontinuities).\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all five parts correct).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.85 × 5⌉ = 5). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Re-examine missed item; if MC-3 (direct substitution) → B01; if MC-2 (continuity confusion) → B02; targeted repair |\n| ≤ 3/5 | → Return to A01; re-engage speedometer analogy and secant→tangent picture; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.calc.derivative-definition` complete. Threshold 0.85 requires 5/5 correct.\n\n**Unlocks:** `math.calc.derivative-rules`, `math.calc.mean-value-theorem`\n\nNext concept recommendation: `math.calc.derivative-rules` — the chain of power/product/chain rules builds directly on the definition proved here.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 257,
+        "endLine": 375
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: physical instantaneous velocity via speedometer vs. average speed; P: secant line → tangent line as Δx→0; A: limit definition f'(x)=lim_{h→0}[f(x+h)−f(x)]/h\n2. **A02 P04 PATTERN INDUCTION** — compute derivative from definition for f(x)=x, f(x)=x², f(x)=1/x; discover the cancellation pattern and power-rule hints\n3. **A03 P06 CONTRAST PAIR** — differentiable vs. non-differentiable at a point: smooth curve vs. corner (|x|) vs. cusp; one-sided derivative limits\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Using the definition, find f'(x) for f(x)=2x²−3x. |\n| R2 | 3 days | Find f'(4) from the definition for f(x)=√x. (Hint: rationalize using conjugate.) |\n| R3 | 7 days | At x=1, is g(x)=|x²−1| differentiable? Compute one-sided limits to decide. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 409,
+        "endLine": 419
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-definition/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.derivative-definition",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | math.real.differentiability-rigorous (NOT Tier-1) |\n| P76_mode | independence (cross-link NOT Tier-1) |\n| Unlocks | math.calc.derivative-rules, math.calc.mean-value-theorem |\n| Requires (Tier-1) | math.calc.continuity, math.calc.derivative-intro |\n\n**GR-8 compliance:** cross_links = [math.real.differentiability-rigorous]; NOT Tier-1 → documented.\n**GR-9 compliance:** P76 uses an independent problem (projectile motion h(t)=20t−5t²) unrelated to the non-Tier-1 cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-definition.md",
+        "startLine": 419,
+        "endLine": 433
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

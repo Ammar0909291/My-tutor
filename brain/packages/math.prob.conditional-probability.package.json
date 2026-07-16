@@ -1,0 +1,342 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.conditional-probability-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.conditional-probability",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a4bc6df8029d6615edbac39c4f798a30ed44b2d462967721aa3067e95e08c12a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.conditional-probability.md": "sha256:719bb2625a1d3258931200d7ac3239492d3270170621f6adc26a8c2f798db62a"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.conditional-probability",
+    "name": "",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.prob.probability-axioms"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.conditional-probability-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.conditional-probability (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.conditional-probability.md": "sha256:719bb2625a1d3258931200d7ac3239492d3270170621f6adc26a8c2f798db62a"
+      },
+      "contentHash": "sha256:857f02d1b013d54f14ce35917229cf9b5a1d7d46fda391754f51fbee59ff82f7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.conditional-probability.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.conditional-probability.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.conditional-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.conditional-probability\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.conditional-probability.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.conditional-probability.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.conditional-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.conditional-probability\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.conditional-probability.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.conditional-probability.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.conditional-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.conditional-probability\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.conditional-probability.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.conditional-probability.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.conditional-probability"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.conditional-probability\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.conditional-probability/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "math.prob.conditional-probability — cognitive map",
+      "content": "### Target Understanding\n**Conditional probability** P(A|B) is the probability of event A given that event B has already\noccurred, defined as P(A|B) = P(A ∩ B) / P(B), valid when P(B) > 0.  Conditioning on B restricts\nthe sample space from Ω to B: we ignore all outcomes outside B and rescale so the remaining\nprobabilities sum to 1.  This is the foundation of Bayesian reasoning.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Card-drawing without replacement; two-step experiment with updated counts |\n| **Pictorial (P)** | Venn diagram with B shaded as the new \"universe\"; reduced sample space |\n| **Abstract (A)** | Formula P(A|B) = P(A∩B)/P(B); asymmetry P(A|B) ≠ P(B|A) in general |\n\n### Prerequisite Knowledge (from KG)\n- **math.prob.probability-axioms** — Kolmogorov axioms; P(A∩B), P(A∪B), P(A^c); probability measure\n\n### Key Facts\n| Statement | Formula |\n|-----------|---------|\n| Definition | P(A\\|B) = P(A ∩ B) / P(B), P(B) > 0 |\n| Multiplication rule | P(A ∩ B) = P(A\\|B) × P(B) = P(B\\|A) × P(A) |\n| P(A\\|B) is itself a probability measure on B | P(Ω\\|B) = 1; P(A\\|B) ≥ 0; disjoint additivity holds within B |\n| Asymmetry | P(A\\|B) ≠ P(B\\|A) in general |\n| Undefined when | P(B) = 0 |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 31,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "CONDITIONAL-IS-JOINT",
+      "content": "| MC-1 | CONDITIONAL-IS-JOINT | Writes P(A\\|B) = P(A ∩ B) without dividing by P(B) | Reads \"probability of A and B\" rather than \"probability of A given B\"; missing the rescaling step | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "REVERSING-CONDITIONING",
+      "content": "| MC-2 | REVERSING-CONDITIONING | Writes P(A\\|B) = P(B\\|A) always; confuses which event is the condition | \"Given\" and \"of\" are treated as symmetric; no awareness that swapping condition changes the value | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "ZERO-DENOMINATOR-IGNORED",
+      "content": "| MC-3 | ZERO-DENOMINATOR-IGNORED | Attempts to compute P(A\\|B) without verifying P(B) > 0; divides by zero without flagging | No habit of checking the denominator's validity before applying the formula | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "Entry: Conditioning Restricts the Sample Space (P03 + P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: Conditioning Restricts the Sample Space (P03 + P11 + P49)\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 97,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "MC-1 Gate: The Conditional Probability Formula (P41 + P64 + P07 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: The Conditional Probability Formula (P41 + P64 + P07 + P49)\",\"primitives\":[\"P07\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 140,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "Asymmetry and Undefined Conditionals (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Asymmetry and Undefined Conditionals (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 189,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 249,
+        "endLine": 544
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** P(A ∩ B) = 0.15, P(B) = 0.25.  Find P(A|B).\n\n*(Target: 0.15/0.25 = 0.6.)*\n\n**Q2.** In a group of 100 people, 60 exercise and 30 eat healthy.  Of the 30 healthy eaters,\n20 also exercise.  Given a person exercises, what is the probability they eat healthy?\n\n*(Target: P(healthy ∩ exercise) = 20/100 = 0.2; P(exercise) = 60/100 = 0.6;\nP(healthy|exercise) = 0.2/0.6 = 1/3 ≈ 0.333.)*\n\n**Q3.** P(A) = 0.5, P(B|A) = 0.4.  Find P(A ∩ B) using the multiplication rule.\n\n*(Target: P(A ∩ B) = P(B|A) × P(A) = 0.4 × 0.5 = 0.2.)*\n\n**Q4.** TRUE or FALSE: \"P(A|B) is always equal to P(B|A).\"  If false, give a counterexample.\n\n*(Target: FALSE.  Counterexample from TA-A03: P(A|C)=1 ≠ P(C|A)=1/3, or any numerical example\nwhere P(A) ≠ P(B).)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independence probe — self-contained.*\n\n> A box contains 5 red chips and 3 blue chips.  You draw two chips **without replacement**.\n>\n> (a) What is P(second chip is red | first chip was red)?\n> (b) What is P(second chip is red | first chip was blue)?\n> (c) Are P(second red | first red) and P(second red | first blue) equal?\n>     What does this tell you about the draws?\n> (d) Use the multiplication rule to find P(both chips are red).\n\n*Expected answers:*\n*(a) After removing one red chip: 4 red, 3 blue remain (7 total). P = 4/7.*\n*(b) After removing one blue chip: 5 red, 2 blue remain (7 total). P = 5/7.*\n*(c) 4/7 ≠ 5/7 — the draws are NOT independent. Knowing the first outcome changes the\n    probability of the second.*\n*(d) P(both red) = P(first red) × P(second red | first red) = (5/8) × (4/7) = 20/56 = 5/14.*\n\n**[P55 — SCORE]**  Award 1 point for P76 if all four parts correct; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.90  →  ⌈0.90 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → MC-1 residual → TB-R01.\n  - Q2 wrong → identify whether error is in constructing P(A∩B) (counting) or dividing → TB-R01\n    if formula error; re-explain table-to-probability conversion if counting error.\n  - Q3 wrong → multiplication rule confusion → re-read the key facts table and retry.\n  - Q4 wrong → MC-2 residual → TB-R02.\n  - P76 wrong → (a)/(b) wrong → TB-R01 (updated counts); (c) wrong → re-read asymmetry;\n    (d) wrong → multiplication rule from Q3 repair.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.prob.conditional-probability\nMASTERY_REACHED: true\nUNLOCKS:         math.prob.independence, math.prob.bayes-theorem, math.prob.total-probability\nNEXT_CONCEPT:    math.prob.independence  (or math.prob.total-probability)\nSESSION_CLOSE:   \"You can now compute P(A|B) for any events with P(B)>0, apply the\n                  multiplication rule, and recognise that P(A|B) ≠ P(B|A) in general.\n                  These skills directly feed into Bayes' theorem and the law of total\n                  probability.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: CONDITIONAL-IS-JOINT (MC-1)\n\n**Trigger:** Student omits division by P(B); writes P(A|B) = P(A ∩ B).\n\n**Step 1 — Counting analogy.**\n> Return to the card example: B = \"red\" (26 cards), A ∩ B = \"red hearts\" (13 cards).\n> If you only wrote P(A ∩ B) = 13/52 = 0.25, you haven't used the information that the card IS red.\n> Knowing B happened means you're only in the 26-card world now.\n> So you count: 13 out of 26 = 13/26 = 0.5, not 13/52.\n\n**Step 2 — The formula's purpose.**\n> P(A|B) = P(A ∩ B) / P(B).\n> Dividing by P(B) rescales all probabilities inside B to sum to 1.\n> P(B|B) = P(B)/P(B) = 1 — \"given B, B is certain.\" That makes sense.\n> But P(A ∩ B) alone ≤ P(B), so P(A ∩ B) / P(B) ≤ 1. ✓\n\n**Step 3 — Numeric drill.**\n> Try: P(A ∩ B) = 0.3, P(B) = 0.6. P(A|B) = 0.3 / 0.6 = 0.5.\n\n**Exit:** Return to TA-A02 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: REVERSING-CONDITIONING (MC-2)\n\n**Trigger:** Student writes P(A|B) = P(B|A) or swaps numerator/denominator.\n\n**Step 1 — Two calculations side by side.**\n> Events: A = \"rolls 5 or 6\", P(A)=1/3.  B = \"rolls even\", P(B)=1/2.  A∩B = {6}, P(A∩B)=1/6.\n> P(A|B) = P(A∩B)/P(B) = (1/6)/(1/2) = 1/3.  \"Given even, the die shows 5 or 6\" → only 6 ✓.\n> P(B|A) = P(A∩B)/P(A) = (1/6)/(1/3) = 1/2.  \"Given 5 or 6, is it even?\" → only 6 of {5,6} ✓.\n\n**Step 2 — Denominator identification rule.**\n> The denominator is ALWAYS the probability of the **condition** (the event after the \"|\").\n> P(A|B): condition = B, denominator = P(B).\n> P(B|A): condition = A, denominator = P(A).\n> P(A∩B) is always the numerator regardless of which direction.\n\n**Exit:** Return to TA-A03 P49 checkpoint.\n\n---\n\n### TB-R03 · Repair: ZERO-DENOMINATOR-IGNORED (MC-3)\n\n**Trigger:** Student computes P(A|B) without checking P(B) > 0.\n\n**Step 1 — Why P(B) = 0 is a problem.**\n> P(A|B) means \"given that B occurred.\"  If P(B) = 0, event B never occurs.\n> Asking \"given that something impossible happened\" has no meaningful answer.\n> Mathematically, P(A|B) = P(A∩B)/P(B) = P(A∩B)/0 is undefined.\n\n**Step 2 — Build the habit.**\n> Before computing P(A|B):\n> Step 0: Check P(B) > 0.  If yes, proceed.  If no, write \"undefined.\"\n\n**Exit:** Continue with awareness of the check in subsequent problems.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"P(A∩B)=0.12, P(B)=0.3. Find P(A|B).\"\n    Target: 0.12/0.3 = 0.4. PASS if correct.\n\n  Interval-2 (+3 days):\n    Probe: \"P(A)=0.4, P(B)=0.6, P(A∩B)=0.2. Find P(A|B) and P(B|A). Are they equal?\"\n    Target: P(A|B)=0.2/0.6=1/3; P(B|A)=0.2/0.4=0.5. Not equal. PASS if both correct and\n            student correctly says they are unequal.\n\n  Interval-3 (+1 week):\n    Probe: \"P(A)=0.7, P(B|A)=0.3. Use the multiplication rule to find P(A∩B).\"\n    Target: P(A∩B)=P(B|A)×P(A)=0.3×0.7=0.21. PASS if correct.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (formula) or TA-A03 (asymmetry) as appropriate.\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.prob.probability-axioms:\n    Used in:   TA-A01 (P(A∩B) notation from prerequisite; probability as a measure on events),\n               TA-A02 (P(A∩B) used in the formula; axiom A2 ensures P(B|B)=1),\n               TA-A04 Q3 (multiplication rule P(A∩B)=P(B|A)×P(A)), P76 (draws without replacement).\n    Assumed:   Student can compute P(A∩B), P(A∪B); knows P(A)∈[0,1]; knows probability axioms.\n\nUNLOCKS_ENABLED:\n  math.prob.independence:\n    Dependency: Independence is defined as P(A|B) = P(A), i.e., conditioning on B does not\n                change the probability of A. Requires the conditional probability formula.\n  math.prob.bayes-theorem:\n    Dependency: Bayes' theorem P(A|B) = P(B|A)P(A)/P(B) rearranges the multiplication rule;\n                requires understanding of both P(A|B) and P(B|A).\n  math.prob.total-probability:\n    Dependency: Total probability P(B) = ΣP(B|Aᵢ)P(Aᵢ) uses P(B|Aᵢ) conditional probabilities.\n\nCROSS_LINKS_NOTED:\n  (none)\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. bloom = apply: formula execution is the primary goal.**\nStudents must be able to extract P(A∩B) and P(B) from problem descriptions (tables, words, or\ngiven values) and correctly divide.  The card-draw and marble examples in TA-A01 provide the\nConcrete anchoring needed before the abstract formula.  The P07 worked pair in TA-A02 models\nthe formula execution twice, including a common wrong approach.\n\n**2. MC-1 is driven by notation confusion, not conceptual confusion.**\nMost students understand that conditioning changes the sample space (they get the card example).\nThe error is algebraic: they write P(A∩B) instead of P(A∩B)/P(B).  The P64 explanation\n(\"dividing by P(B) rescales probabilities to sum to 1\") plus the P07 worked pair usually\nresolves MC-1 in one pass.\n\n**3. MC-2 (reversing conditioning) is the highest-stakes error.**\nConfusing P(A|B) with P(B|A) is the core error in prosecutor's fallacy reasoning (used in\nlegal/medical contexts).  TA-A03 Contrast A demonstrates this with both a symmetric and\nasymmetric case to prevent over-generalisation from the symmetric coincidence.\n\n**4. P76 probe exercises the multiplication rule forward.**\nParts (a)–(b) test the basic formula with updated counts; (c) introduces the concept of\nindependence (not yet taught) as a consequence; (d) applies the multiplication rule.  This\nsequencing previews math.prob.independence without teaching it — appropriate at bloom=apply.\n\n**5. The TA-A03 zero-denominator contrast is brief by design.**\nMC-3 is a procedural gap, not a conceptual one.  The repair (TB-R03) is a habit-building step,\nnot a deep conceptual intervention.  Don't over-invest time here; flag and move on.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.prob.conditional-probability\n=========================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 7; 4 TAs used ≤ 7.\n[PASS] V-4   CPA_ENTRY_STAGE = C (bloom = apply; concrete numerical entry required).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 + P07 + P49).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03 P06, TB-R02, TB-R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P03 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross_links to document (cross_links = []).\n[PASS] V-17  GR-9: P76 uses Independence mode (cross_links = []); probe is self-contained\n               (5 red + 3 blue chips drawn without replacement; no external Tier 1 concept).\n[PASS] V-18  GR-10: MAMR stated in Component 3; enforced — MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.90 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   Definition P(A|B) = P(A∩B)/P(B) taught with C→P→A CPA ladder.\n             Multiplication rule P(A∩B) = P(A|B)×P(B) derived and applied in Q3.\n             Asymmetry P(A|B) ≠ P(B|A) demonstrated with symmetric and asymmetric examples.\n             Undefined case P(B)=0 addressed in TA-A03 Contrast B and TB-R03.\n             bloom = apply served by: P03 Concrete card/marble examples, P07 worked formula\n             pairs, P76 multi-step draw-without-replacement probe.\n             MC-1 (missing denominator) addressed by P64 rescaling explanation + P07.\n             MC-2 (reversing conditioning) addressed by TA-A03 Contrast A + TB-R02.\n             MC-3 (zero denominator) addressed by TA-A03 Contrast B + TB-R03.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 249,
+        "endLine": 544
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P03 card-draw analogy: updated counts after conditioning + P11 + P49)\n      → TA-A02 (P41/P64 MC-1 gate: formula P(A|B)=P(A∩B)/P(B) + P07 worked pair + P49)\n      → TA-A03 (P06 contrast: P(A|B) vs P(B|A); zero-denominator check + P49)\n      → TA-A04 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (rescaling the reduced sample space)\n  MC-2 → TB-R02 (P(A|B) vs P(B|A) — two explicit calculations)\n  MC-3 → TB-R03 (undefined conditional; check P(B)>0 first)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 75,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"P(A∩B)=0.12, P(B)=0.3. Find P(A|B).\"\n    Target: 0.12/0.3 = 0.4. PASS if correct.\n\n  Interval-2 (+3 days):\n    Probe: \"P(A)=0.4, P(B)=0.6, P(A∩B)=0.2. Find P(A|B) and P(B|A). Are they equal?\"\n    Target: P(A|B)=0.2/0.6=1/3; P(B|A)=0.2/0.4=0.5. Not equal. PASS if both correct and\n            student correctly says they are unequal.\n\n  Interval-3 (+1 week):\n    Probe: \"P(A)=0.7, P(B|A)=0.3. Use the multiplication rule to find P(A∩B).\"\n    Target: P(A∩B)=P(B|A)×P(A)=0.3×0.7=0.21. PASS if correct.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (formula) or TA-A03 (asymmetry) as appropriate.\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 406,
+        "endLine": 429
+      }
+    },
+    {
+      "assetId": "math.prob.conditional-probability/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.conditional-probability",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.prob.probability-axioms:\n    Used in:   TA-A01 (P(A∩B) notation from prerequisite; probability as a measure on events),\n               TA-A02 (P(A∩B) used in the formula; axiom A2 ensures P(B|B)=1),\n               TA-A04 Q3 (multiplication rule P(A∩B)=P(B|A)×P(A)), P76 (draws without replacement).\n    Assumed:   Student can compute P(A∩B), P(A∪B); knows P(A)∈[0,1]; knows probability axioms.\n\nUNLOCKS_ENABLED:\n  math.prob.independence:\n    Dependency: Independence is defined as P(A|B) = P(A), i.e., conditioning on B does not\n                change the probability of A. Requires the conditional probability formula.\n  math.prob.bayes-theorem:\n    Dependency: Bayes' theorem P(A|B) = P(B|A)P(A)/P(B) rearranges the multiplication rule;\n                requires understanding of both P(A|B) and P(B|A).\n  math.prob.total-probability:\n    Dependency: Total probability P(B) = ΣP(B|Aᵢ)P(Aᵢ) uses P(B|Aᵢ) conditional probabilities.\n\nCROSS_LINKS_NOTED:\n  (none)\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.conditional-probability.md",
+        "startLine": 429,
+        "endLine": 456
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

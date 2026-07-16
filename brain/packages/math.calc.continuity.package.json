@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.continuity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.continuity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7fc3de6e8b812fe2b76923eb2fff418fcf8aaf57d9ae4dcfafe5bb2d56bb67ce",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.continuity.md": "sha256:e6b6a5cef219c72533f617a602f0dbea5257012f992a17c234fd1e4c49047cdd"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.continuity",
+    "name": "Continuity",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.limits"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.continuity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.continuity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.continuity.md": "sha256:e6b6a5cef219c72533f617a602f0dbea5257012f992a17c234fd1e4c49047cdd"
+      },
+      "contentHash": "sha256:d0e5ae2801da8d97ccd467c44e4979cb772e38704c5c7e242f20edd857d7d71f",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.continuity.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.continuity.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.continuity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.continuity.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.continuity.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.continuity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.continuity.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.continuity.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.continuity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.continuity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.continuity/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.continuity",
+      "title": "Continuity — cognitive map",
+      "content": "**Core concept:** A function f is continuous at x = a when three conditions hold simultaneously: (1) f(a) is defined; (2) lim_{x→a} f(x) exists; (3) lim_{x→a} f(x) = f(a). All three are required — a missing one produces a specific type of discontinuity. Three canonical discontinuity types: removable (hole), jump, and infinite (vertical asymptote). Piecewise functions require checking all three conditions at each boundary point. Continuity on an interval requires continuity at every point in the interval.\n\n**Conceptual progression:**\n1. Three-condition definition: f(a) defined AND limit exists AND limit equals f(a).\n2. Discontinuity classification: failure of condition (1) → point undefined; failure of condition (2) → limit does not exist (jump or oscillation); failure of condition (3) → removable discontinuity (limit exists, f(a) ≠ limit).\n3. Piecewise function analysis: evaluate left/right limits at boundary; check whether f(boundary) equals the limit; classify the discontinuity if any.\n4. Continuous functions on intervals: polynomials, rational functions (on their natural domain), sin, cos are all continuous everywhere on their domain; the three-condition test is trivial for these but required for piecewise.\n\n**CPA arc (entry: C — advanced difficulty):**\n- Concrete: physical motion analogy — a continuous path has no teleportation; a discontinuity is a jump or hole in the path.\n- Pictorial: graphs with marked holes (removable), vertical gaps (jump), vertical asymptotes (infinite).\n- Abstract: the three-condition definition; lim_{x→a} f(x) = f(a) as the unifying formula.\n\n**Prior knowledge activated:** limits (math.calc.limits) — one-sided limits, existence condition for a two-sided limit, limit laws; piecewise function evaluation; domain of rational functions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.continuity",
+      "title": "CONTINUOUS-MEANS-NO-GAPS [FOUNDATIONAL]",
+      "content": "### MC-1: CONTINUOUS-MEANS-NO-GAPS [FOUNDATIONAL]\n**Description:** Learner judges continuity by visual inspection alone — if the graph \"looks connected,\" the function is continuous. Does not check all three conditions, so misses removable discontinuities (hole with f(a) defined elsewhere) or a function defined piecewise where both pieces have the same limit but f(a) is wrong.\n**Surface form:** \"The graph looks like one connected piece with no gaps, so it must be continuous.\"\n**Root cause:** Continuity was introduced informally as \"you can draw it without lifting your pencil,\" and the learner never moved beyond this intuition to the three-condition algebraic test.\n**Trigger condition:** Any removable discontinuity problem where the graph appears visually smooth but a hole exists, or any piecewise function where pieces visually connect but f(a) ≠ limit.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.continuity",
+      "title": "LIMIT-EXISTS-MEANS-CONTINUOUS",
+      "content": "### MC-2: LIMIT-EXISTS-MEANS-CONTINUOUS\n**Description:** Learner believes that if lim_{x→a} f(x) exists, then f is automatically continuous at x = a. Ignores the third condition: limit must equal f(a).\n**Surface form:** \"The left and right limits are both 3, so the limit is 3, and the function must be continuous at x = 2.\"\n**Root cause:** The first two continuity conditions (f(a) defined; limit exists) are checked correctly, but the third condition (limit = f(a)) is treated as automatically satisfied once the limit exists.\n**Trigger condition:** Any piecewise or redefined function where the limit exists but f(a) is defined differently (e.g., g(a) = 6 while lim g = 5).\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.continuity",
+      "title": "PIECEWISE-ALWAYS-DISCONTINUOUS",
+      "content": "### MC-3: PIECEWISE-ALWAYS-DISCONTINUOUS\n**Description:** Learner assumes piecewise-defined functions are always discontinuous at their boundary points because the formula changes there.\n**Surface form:** \"Since the rule changes at x = 2, it can't be continuous there — piecewise functions are always discontinuous.\"\n**Root cause:** Piecewise functions are often introduced as examples of discontinuity in textbooks. The learner overgeneralises: formula change → discontinuity. They do not check whether the pieces happen to produce matching one-sided limits and function value.\n**Trigger condition:** Any piecewise function that is actually continuous at its boundary point.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.continuity",
+      "title": "Repair for MC-1 (CONTINUOUS-MEANS-NO-GAPS)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (CONTINUOUS-MEANS-NO-GAPS)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 114,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.continuity",
+      "title": "Repair for MC-2 (LIMIT-EXISTS-MEANS-CONTINUOUS)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (LIMIT-EXISTS-MEANS-CONTINUOUS)\",\"primitives\":[\"P04\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 165,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.continuity",
+      "title": "Repair for MC-3 (PIECEWISE-ALWAYS-DISCONTINUOUS)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (PIECEWISE-ALWAYS-DISCONTINUOUS)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 226,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.continuity",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.80 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"Is f(x) = x² continuous at x = 3? Apply the three-condition test.\"\n[Expected: C1: f(3)=9 ✓. C2: lim_{x→3} x²=9 ✓. C3: 9=9 ✓. All three hold → f is continuous at x=3. (Polynomials are continuous everywhere.)]\n\n**Item 2:**\n\"For g(x) = {x+1 for x<1; 3 for x≥1}, apply the three-condition test at x=1 and classify any discontinuity.\"\n[Expected: C1: g(1)=3 ✓. C2: lim_{x→1⁻}=2; lim_{x→1⁺}=3. 2≠3 → limit DNE → C2 fails. Jump discontinuity at x=1.]\n\n**Item 3:**\nTrue or False: \"If lim_{x→a} f(x) exists, then f is continuous at x = a.\"\n[Expected: FALSE. The limit existing satisfies C2 only. Continuity also requires C1 (f(a) defined) and C3 (limit = f(a)). Counterexample: f(x)=(x²−4)/(x−2) at x=2; limit=4 but f(2) undefined.]\n\n**Item 4:**\n\"Identify the type of discontinuity of f(x) = 1/(x−1) at x=1.\"\n[Expected: C1: f(1) undefined (denominator zero). C2: lim_{x→1⁻}=−∞; lim_{x→1⁺}=+∞. Limit DNE (infinite). Infinite discontinuity (vertical asymptote at x=1). C2 and C1 both fail.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"Analyse the piecewise function:\n  f(x) = {x²+1 for x≤2; 3x−1 for x>2}\n\nand then contrast it with:\n  g(x) = {x²+1 for x<2; 6 at x=2; 3x−1 for x>2}.\n\nFor each function at x=2:\n(a) Compute f(2) (or g(2)) — check C1.\n(b) Compute the left and right limits — check C2.\n(c) Check C3.\n(d) State whether the function is continuous or classify the discontinuity.\"\n\n[Expected:\nf(x):\n(a) f(2) = 4+1 = 5. C1 ✓.\n(b) lim_{x→2⁻} = 4+1 = 5; lim_{x→2⁺} = 3(2)−1 = 5. Both = 5 → limit = 5. C2 ✓.\n(c) lim = 5 = f(2) = 5. C3 ✓.\n(d) f is continuous at x=2.\n\ng(x):\n(a) g(2) = 6. C1 ✓.\n(b) lim_{x→2⁻} = 5; lim_{x→2⁺} = 5. Both = 5 → limit = 5. C2 ✓.\n(c) lim = 5 ≠ g(2) = 6. C3 FAILS.\n(d) Removable discontinuity at x=2. Fix: redefine g(2) = 5.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (d) correctly identifies f as continuous AND g as having a removable discontinuity, 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (≥4/5): Learner can apply the three-condition test, classify discontinuities, and distinguish removable from jump and infinite types.\n- FAIL (<4/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 3 or P76 (claims continuity from limit alone): → TA-B02 (LIMIT-EXISTS-MEANS-CONTINUOUS repair), then re-gate\n- FAIL on Item 2 (calls jump discontinuity \"removable\" or \"continuous\"): → TA-B01 (CONTINUOUS-MEANS-NO-GAPS) if concludes continuous; else re-explain jump vs removable classification; re-gate\n- FAIL on Item 4 (calls infinite discontinuity \"removable\"): → return to A02 discontinuity classification contrast; re-gate\n- FAIL on multiple items: → B01 + B02 as needed; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 4/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated ability to apply the three-condition continuity test, classify discontinuities, and analyse piecewise functions at boundary points.\n\nKey anchors to carry forward:\n- Three conditions for continuity at a: (C1) f(a) defined; (C2) lim_{x→a} f(x) exists; (C3) limit = f(a). All three required.\n- Discontinuity types: removable (C3 fails, limit exists) — fixable; jump (C2 fails, one-sided limits differ) — not fixable; infinite (C2 fails, limit ±∞) — vertical asymptote.\n- Piecewise at boundary: compute left limit, right limit, and f(a) separately; compare all three.\n- Limit existing is necessary but NOT sufficient for continuity — C3 is the joining condition.\n\nNext concepts: math.calc.differentiation (differentiability implies continuity; the derivative limit requires the function to be continuous), math.calc.intermediate-value-theorem (IVT requires continuity on a closed interval).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 333,
+        "endLine": 440
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.continuity",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Find lim_{x→2} (x²+1).\" If the learner evaluates the limit by direct substitution (giving 5) and justifies this as valid for polynomials, proceed to A01. This confirms they can compute limits and apply direct substitution, the core tool for continuity checking.\n\n**Scaffolding ladder:**\n- Rung 1 (concrete): motion analogy — a car moving on a road; a teleport (jump) or a missing section of road (hole) is a discontinuity. Map each to a condition failure.\n- Rung 2 (pictorial): labelled graphs showing one each of removable, jump, and infinite discontinuity; learner identifies which condition fails in each.\n- Rung 3 (full analyze): learner applies the three-condition checklist algebraically to piecewise functions without a graph.\n\n**Pacing note:** h=8 estimated hours; A01 in session 1; A02 in sessions 2–3; A03 + mastery gate in sessions 3–4.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.continuity",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Find all x at which f(x) = (x²−9)/(x−3) is discontinuous. Classify each discontinuity and determine whether it is removable.\"\n[Expected: f(3) undefined — C1 fails at x=3. Limit as x→3: (x+3)→6. Limit exists = 6; f(3) undefined → removable discontinuity. Fix: define f(3)=6. No other discontinuities (denominator only zero at x=3).]\n\n**Day 10 prompt:**\n\"For f(x) = {ax+1 for x<2; x²−1 for x≥2}, find the value of a that makes f continuous at x=2.\"\n[Expected: For continuity: lim_{x→2⁻} = 2a+1 must equal f(2) = 4−1 = 3 and lim_{x→2⁺} = 3. Set 2a+1=3 → a=1. Verify: left limit = 3 = f(2) = 3 ✓.]\n\n**Day 30 prompt:**\n\"Explain why the Intermediate Value Theorem (IVT) requires the function to be CONTINUOUS on [a,b], not just defined there. Give a counterexample showing the conclusion fails without continuity.\"\n[Expected: IVT states: if f is continuous on [a,b] and N is between f(a) and f(b), there exists c∈(a,b) with f(c)=N. Without continuity, the function can jump over N. Counterexample: f(x) = {1 for x∈[0,1]; 3 for x∈(1,2]}. f(0)=1, f(2)=3. N=2 is between 1 and 3, but f(x)∈{1,3} so there is no c with f(c)=2. The jump at x=1 allows the function to skip the value 2 entirely.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 255,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "math.calc.continuity/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.continuity",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.calc.limits — one-sided limits, two-sided limit existence, limit laws, direct substitution for polynomials; these are the computational tools for all three continuity conditions\n\n**Unlocked blueprints:**\n- math.calc.differentiation — derivative definition requires the limit lim_{h→0} [f(x+h)−f(x)]/h to exist; differentiability at a point implies continuity there (but not vice versa); continuity is the prerequisite concept\n- math.calc.intermediate-value-theorem — IVT applies only to continuous functions on closed intervals; a correct statement and application of IVT requires mastery of continuity\n\n**Cross-links:** math.real.continuity-rigorous (ε-δ definition), math.top.continuity-top (topological definition) — both are NOT Tier 1; P76 uses independence mode.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity.md",
+        "startLine": 273,
+        "endLine": 286
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

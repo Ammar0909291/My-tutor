@@ -1,0 +1,347 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.random-variable-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.random-variable",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0066c665db657b8fc40893525acb32fb9ae5461f6212f83575ef418f9405ca95",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.random-variable.md": "sha256:255f0a9b4c917cbec80e3cae0c54978e744fa3c505ca7c8c243c58a024d0b573"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.prob.random-variable",
+    "name": "",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.prob.probability-axioms",
+      "math.func.function-concept"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.random-variable-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.random-variable (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.random-variable.md": "sha256:255f0a9b4c917cbec80e3cae0c54978e744fa3c505ca7c8c243c58a024d0b573"
+      },
+      "contentHash": "sha256:56a648acc3469849f1d0bd8613877e9a80fb51d632200dbef30b5198430ae39e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.random-variable.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.random-variable.md#TA-A01 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.random-variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.random-variable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.random-variable.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.random-variable.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.random-variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.random-variable\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.random-variable.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.random-variable.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.random-variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.random-variable\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.random-variable.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.random-variable.md#TA-A04 (addresses MC-1, MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.random-variable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.random-variable\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.random-variable/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.random-variable",
+      "title": "math.prob.random-variable — cognitive map",
+      "content": "### Target Understanding\nA **random variable** X is a function X: Ω → ℝ that assigns a real number to every outcome in\nthe sample space Ω.  X is NOT a fixed number — it is a rule that produces different numbers\ndepending on which outcome occurred.  A **discrete** random variable has a countable range\n{x₁, x₂, …}; a **continuous** random variable has an uncountable range (typically an interval).\nThe event {X = x} means \"the set of all outcomes ω ∈ Ω such that X(ω) = x.\"\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Die roll: each outcome ω ∈ {1,…,6} is mapped to X(ω) = ω itself (or X = # dots); coin toss: X(H)=1, X(T)=0 |\n| **Pictorial (P)** | Arrow diagram X: Ω → ℝ; two rows — sample space on top, ℝ on bottom, arrows showing the mapping |\n| **Abstract (A)** | Formal: X is a function; {X = x} = X⁻¹(x) = {ω ∈ Ω : X(ω) = x}; discrete vs continuous defined by cardinality of range |\n\n### Prerequisite Knowledge (from KG)\n- **math.prob.probability-axioms** — sample space Ω, events as subsets, probability measure P\n- **math.func.function-concept** — function as a rule f: A → B; domain, codomain, range; well-defined\n\n### Key Distinctions\n| Property | Random Variable X | NOT a RV |\n|----------|:-----------------:|:--------:|\n| Is X a function? | ✓ X: Ω → ℝ | ✗ X = \"maybe 3 or 5\" (not a function) |\n| Has one value per outcome? | ✓ Each ω maps to exactly one X(ω) | ✗ X(ω) = \"any value\" |\n| Range is in ℝ | ✓ | ✗ Range is Ω itself (X must output real numbers) |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 30,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.random-variable",
+      "title": "RV-IS-FIXED-VALUE",
+      "content": "| MC-1 | RV-IS-FIXED-VALUE | Writes \"X = 4\" as if X is a constant; says \"X is the number 4\" | Confuses the random variable (the function) with its specific realised value X(ω); treats X like a variable in algebra | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.random-variable",
+      "title": "RV-IS-DISTRIBUTION",
+      "content": "| MC-2 | RV-IS-DISTRIBUTION | Says \"X is the probability distribution\"; conflates the function X:Ω→ℝ with the induced probability measure on ℝ | Jumps past the function layer and thinks the RV is the table of (value, probability) pairs | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.random-variable",
+      "title": "DISCRETE-MEANS-SMALL",
+      "content": "| MC-3 | DISCRETE-MEANS-SMALL | Calls a RV discrete because it has \"few\" values; calls continuous \"large\" or \"complex\"; doesn't use cardinability criterion | \"Discrete\" and \"continuous\" treated as colloquial size descriptors, not formal mathematical definitions | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.random-variable",
+      "title": "Entry: Random Variable as an Outcome-to-Number Machine (P03 + P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: Random Variable as an Outcome-to-Number Machine (P03 + P11 + P49)\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 96,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.random-variable",
+      "title": "MC-1 Gate: X Is a Function (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: X Is a Function (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 146,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.random-variable",
+      "title": "Discrete vs Continuous; RV vs Distribution (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Discrete vs Continuous; RV vs Distribution (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 194,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.random-variable",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P03\",\"P06\",\"P11\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 244,
+        "endLine": 565
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.random-variable",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** A bag has 2 red and 3 blue marbles.  You draw one.  Define X = 1 if red, 0 if blue.\nWrite X(ω) for every outcome ω ∈ Ω.  Then compute P(X = 1).\n\n*(Target: Ω = {r₁, r₂, b₁, b₂, b₃}. X(r₁)=X(r₂)=1, X(b₁)=X(b₂)=X(b₃)=0.\nP(X=1) = P({r₁,r₂}) = 2/5.)*\n\n**Q2.** Is the following a discrete or continuous random variable?  Justify.\n\"Y = the exact temperature (in °C) of a randomly chosen city at noon.\"\n\n*(Target: Continuous — temperature takes values in an interval (uncountable range).)*\n\n**Q3.** TRUE or FALSE: \"The random variable X for a fair die equals 3.5 on average, so X = 3.5.\"\n\n*(Target: FALSE.  3.5 is the expected value of X (average outcome), not a value X can actually\ntake.  X ∈ {1,2,3,4,5,6} — it never equals 3.5.  X is a function; 3.5 is a summary statistic.)*\n\n**Q4.** For the coin-flip RV X (X(H)=1, X(T)=0), a student writes:\n\"X is the distribution: P(X=0)=0.5, P(X=1)=0.5.\"\nWhat important distinction is the student missing?\n\n*(Target: X is the FUNCTION X:Ω→ℝ, not the distribution.  The distribution is derived FROM X\nby computing P(X=x).  The function X and its distribution are different mathematical objects.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independence probe — self-contained.*\n\n> Two fair dice are rolled.  Ω = {(i,j) : i,j ∈ {1,2,3,4,5,6}}, 36 equally-likely outcomes.\n> Define S: Ω → ℝ by S(i,j) = i + j (the sum of the two dice).\n>\n> (a) What is S(3,5)?  What is S(6,6)?\n> (b) List all outcomes (i,j) ∈ Ω such that S(i,j) = 7.\n> (c) Compute P(S = 7).\n> (d) Is S a discrete or continuous random variable?  Justify.\n\n*Expected answers:*\n*(a) S(3,5) = 8; S(6,6) = 12.*\n*(b) (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) — 6 outcomes.*\n*(c) P(S=7) = 6/36 = 1/6.*\n*(d) Discrete — the range of S is {2,3,4,…,12}, a finite (countable) set.*\n\n**[P55 — SCORE]**  Award 1 point for P76 if all four parts correct; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.90  →  ⌈0.90 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → MC-1 (didn't write X(ω) for each ω) → TB-R01.\n  - Q2 wrong → MC-3 (discrete/continuous confusion) → TB-R03.\n  - Q3 wrong → MC-1 or MC-2 (confuses X with expected value) → TB-R01 brief (X is a function;\n    3.5 is a derived number, not a value of X).\n  - Q4 wrong → MC-2 → TB-R02.\n  - P76 wrong → (a) simple evaluation → re-read the definition of S; (b)/(c) → TB-R01 (event\n    as preimage {ω : S(ω) = x}); (d) → TB-R03 (range is finite).\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.prob.random-variable\nMASTERY_REACHED: true\nUNLOCKS:         math.prob.distribution, math.prob.expected-value\nNEXT_CONCEPT:    math.prob.distribution\nSESSION_CLOSE:   \"You now understand that a random variable is a function X:Ω→ℝ, not a\n                  fixed number. You can evaluate X(ω) for any outcome, compute P(X=x)\n                  by counting preimages, and classify a RV as discrete or continuous by\n                  the cardinability of its range.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: RV-IS-FIXED-VALUE (MC-1)\n\n**Trigger:** Student writes X = specific number without specifying the mapping for all outcomes.\n\n**Step 1 — Function language.**\n> A random variable is a function.  A function needs a rule for EVERY input.\n> \"X = 4\" says nothing about when ω = 1, 2, 3, 5, or 6.\n\n**Step 2 — Write out the full mapping.**\n> For X = number of dots on a die:\n> X(1) = 1, X(2) = 2, X(3) = 3, X(4) = 4, X(5) = 5, X(6) = 6.\n> Only after writing this does X become a well-defined random variable.\n\n**Step 3 — Distinguish X from X(ω).**\n> X is the entire function (the machine).\n> X(4) = 4 is the output when the input is ω = 4.  That's a value, not the RV.\n\n**Exit:** Return to TA-A02 P49 checkpoint, part (i).\n\n---\n\n### TB-R02 · Repair: RV-IS-DISTRIBUTION (MC-2)\n\n**Trigger:** Student conflates the random variable X with its probability distribution.\n\n**Step 1 — Name the two objects.**\n> Object 1: Random variable X.  This is the function X: Ω → ℝ.\n> Object 2: Distribution of X.  This is the table (or formula) P(X = x) for each x in the range.\n\n**Step 2 — Show the derivation direction.**\n> You START with X (the function).\n> You COMPUTE the distribution: for each x, evaluate {ω : X(ω) = x} and find its probability.\n> The function comes first; the distribution is derived from it.\n\n**Step 3 — Concrete example.**\n> X for a fair coin: X(H) = 1, X(T) = 0 → this is the function.\n> Distribution: P(X=0) = P({T}) = 0.5; P(X=1) = P({H}) = 0.5 → these are derived probabilities.\n\n**Exit:** Return to TA-A03 P49 checkpoint, parts (ii) and (iv).\n\n---\n\n### TB-R03 · Repair: DISCRETE-MEANS-SMALL (MC-3)\n\n**Trigger:** Student uses \"few values\" for discrete or \"large\" for continuous.\n\n**Step 1 — The correct criterion.**\n> Discrete: the range of X can be listed as a sequence x₁, x₂, x₃, …  (finite or countably infinite).\n> Continuous: the range of X is an uncountable set (e.g., an interval — you cannot list all values).\n\n**Step 2 — Examples of each.**\n> Discrete (range is countable):\n>   - Die roll: range = {1,2,3,4,5,6} — finite ✓\n>   - Number of heads in infinite flips: range = {0,1,2,…} — countably infinite ✓\n> Continuous (range is uncountable):\n>   - Height of a random person: range = (140cm, 220cm) — uncountable ✓\n>   - Time until next bus: range = (0, ∞) — uncountable ✓\n\n**Step 3 — Counter the size intuition.**\n> {0,1,2,3,…,10000} is large but countable → DISCRETE.\n> [0,1] is small (it fits between 0 and 1) but uncountable → CONTINUOUS.\n> Size doesn't matter; countability does.\n\n**Exit:** Return to TA-A03 P49 checkpoint, part (iii).\n\n---\n\n<!-- COMPONENT 6: P89 Spaced Repetition -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"For Ω={1,2,3,4} (uniform), define X(ω)=ω². Write X(ω) for each ω and find P(X=9).\"\n    Target: X(1)=1, X(2)=4, X(3)=9, X(4)=16. P(X=9)=P({3})=1/4. PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"Is Y = weight of a randomly chosen tomato (in grams) discrete or continuous? Why?\"\n    Target: Continuous — weight in an interval (uncountable range). PASS if justification cites\n            countability criterion, not size.\n\n  Interval-3 (+1 week):\n    Probe: \"A student says 'X is its probability distribution.' What is wrong? Give a one-sentence\n            correction.\"\n    Target: X is a function X:Ω→ℝ; the distribution P(X=x) is derived from X, not X itself.\n            PASS if distinction is clear.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (function definition) or TA-A03 (contrasts).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.prob.probability-axioms:\n    Used in:   TA-A01 (sample space Ω; P(X=x) notation from probability measure),\n               TA-A02 (P(Y=1) computed via axioms on subsets of Ω),\n               TA-A04 Q1 (P(X=1) computed as probability of an event).\n    Assumed:   Student can compute P(A) for any event A ⊆ Ω; knows P(Ω)=1.\n\n  math.func.function-concept:\n    Used in:   TA-A01 (X as a function with domain Ω, codomain ℝ; well-defined map),\n               TA-A02 (P64: \"function\" language — domain, rule, output),\n               TA-A03 (RV vs distribution: function vs derived measure),\n               TA-A04 P77 Q1+Q4 (function evaluation; function vs derived object).\n    Assumed:   Student understands f: A→B notation; domain, codomain, rule, exactly-one-output.\n\nUNLOCKS_ENABLED:\n  math.prob.distribution:\n    Dependency: A distribution is the probability measure on ℝ induced by a random variable;\n                requires understanding of X as a function before studying its distribution.\n  math.prob.expected-value:\n    Dependency: E[X] = Σ x P(X=x) (discrete) requires knowing what P(X=x) means in terms\n                of the function X and the probability axioms.\n\nCROSS_LINKS_NOTED:\n  math.meas.measurable-function:\n    Status:    NOT Tier 1 — P76_MODE set to Independence.\n    Note:      Measurability (Borel sets, σ-algebra preimages) generalises the RV definition\n               to arbitrary measure spaces; deferred to measure theory. No cross-link probe.\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The function-concept prerequisite is essential.**\nStudents who have mastered `math.func.function-concept` (domain/codomain/rule) can immediately\nparse \"X: Ω → ℝ\" as a function.  Those who haven't will struggle with TA-A02's P64.  If\nthe student's function vocabulary is shaky, re-visit the function blueprint before proceeding.\n\n**2. MC-1 is driven by everyday language.**\nIn casual speech, \"the random variable X is 4\" is normal.  This conflates the function X with its\nrealised value.  TA-A02's P64 must shift this vocabulary: \"X(ω) is 4 when ω = 4\" distinguishes\nthe function from its output.  The arrow-diagram in P11 makes this visual.\n\n**3. MC-2 often appears as MC-1 in disguise.**\nWhen a student writes the distribution table and calls it X, they are simultaneously confusing X\nwith its distribution (MC-2) and X with a number (MC-1).  Check Q4 carefully: a student who\ndescribes the distribution as X needs TB-R02, not TB-R01.\n\n**4. MC-3 is purely definitional.**\n\"Countable\" is the key word.  Students who have seen the real numbers (through\n`math.found.real-numbers`) typically know that intervals are uncountable.  The counter-intuitive\ncontrast in TB-R03 (\"a large set can be discrete, a small interval is continuous\") is the most\neffective anchor.\n\n**5. P76 probe exercises preimage reasoning.**\nPart (b) asks for all outcomes ω such that S(ω) = 7.  This is X⁻¹(7) — the preimage.  At\nbloom=understand, students need to enumerate these explicitly (the 6 pairs summing to 7).  If a\nstudent struggles with (b), they are not yet comfortable thinking of events as preimages of values.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.prob.random-variable\n=================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 7; 4 TAs used ≤ 7.\n[PASS] V-4   CPA_ENTRY_STAGE = C (even at proficient difficulty; abstract function concept\n              needs concrete outcome-mapping examples first).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (math.meas.measurable-function\n              is NOT Tier 1).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 + P49).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03 P06 Contrast B and A; TB-R02, TB-R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P03 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: Cross-link math.meas.measurable-function documented in Component 7.\n[PASS] V-17  GR-9: P76 uses Independence mode (math.meas.measurable-function not Tier 1);\n              probe is self-contained (two dice, sum function S, 36-outcome space; no external\n              Tier 1 concept required beyond math.prob.probability-axioms prerequisite).\n[PASS] V-18  GR-10: MAMR stated in Component 3; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.90 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   Random variable defined as function X: Ω → ℝ; X(ω) vs X vs P(X=x) distinguished.\n             Concrete mapping (die, coin, marble) provided at C layer.\n             Arrow-diagram Pictorial representation included in P11.\n             Formal notation X: Ω → ℝ in P64 and P11.\n             Discrete vs continuous: countable vs uncountable range (correct criterion).\n             RV vs distribution: function vs induced probability measure (Contrast B in TA-A03).\n             MC-1 (X is a number) addressed by P64 + function-language repair TB-R01.\n             MC-2 (X is its distribution) addressed by Contrast B + TB-R02.\n             MC-3 (discrete = small) addressed by Contrast A + countability criterion TB-R03.\n             P76 probe exercises function evaluation, preimage computation, probability\n             computation, and discrete classification on the two-dice sum RV.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 244,
+        "endLine": 565
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.random-variable",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P03 analogy: X as outcome-to-number machine + P11 arrow diagram + P49)\n      → TA-A02 (P41/P64 MC-1 gate: X is a function, not a number + P49)\n      → TA-A03 (P06 contrast: discrete vs continuous; RV vs distribution + P49)\n      → TA-A04 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (function language: X(ω) vs X)\n  MC-2 → TB-R02 (RV = function; distribution = induced measure)\n  MC-3 → TB-R03 (countable vs uncountable range)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 74,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.random-variable",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"For Ω={1,2,3,4} (uniform), define X(ω)=ω². Write X(ω) for each ω and find P(X=9).\"\n    Target: X(1)=1, X(2)=4, X(3)=9, X(4)=16. P(X=9)=P({3})=1/4. PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"Is Y = weight of a randomly chosen tomato (in grams) discrete or continuous? Why?\"\n    Target: Continuous — weight in an interval (uncountable range). PASS if justification cites\n            countability criterion, not size.\n\n  Interval-3 (+1 week):\n    Probe: \"A student says 'X is its probability distribution.' What is wrong? Give a one-sentence\n            correction.\"\n    Target: X is a function X:Ω→ℝ; the distribution P(X=x) is derived from X, not X itself.\n            PASS if distinction is clear.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (function definition) or TA-A03 (contrasts).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 412,
+        "endLine": 437
+      }
+    },
+    {
+      "assetId": "math.prob.random-variable/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.random-variable",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.prob.probability-axioms:\n    Used in:   TA-A01 (sample space Ω; P(X=x) notation from probability measure),\n               TA-A02 (P(Y=1) computed via axioms on subsets of Ω),\n               TA-A04 Q1 (P(X=1) computed as probability of an event).\n    Assumed:   Student can compute P(A) for any event A ⊆ Ω; knows P(Ω)=1.\n\n  math.func.function-concept:\n    Used in:   TA-A01 (X as a function with domain Ω, codomain ℝ; well-defined map),\n               TA-A02 (P64: \"function\" language — domain, rule, output),\n               TA-A03 (RV vs distribution: function vs derived measure),\n               TA-A04 P77 Q1+Q4 (function evaluation; function vs derived object).\n    Assumed:   Student understands f: A→B notation; domain, codomain, rule, exactly-one-output.\n\nUNLOCKS_ENABLED:\n  math.prob.distribution:\n    Dependency: A distribution is the probability measure on ℝ induced by a random variable;\n                requires understanding of X as a function before studying its distribution.\n  math.prob.expected-value:\n    Dependency: E[X] = Σ x P(X=x) (discrete) requires knowing what P(X=x) means in terms\n                of the function X and the probability axioms.\n\nCROSS_LINKS_NOTED:\n  math.meas.measurable-function:\n    Status:    NOT Tier 1 — P76_MODE set to Independence.\n    Note:      Measurability (Borel sets, σ-algebra preimages) generalises the RV definition\n               to arbitrary measure spaces; deferred to measure theory. No cross-link probe.\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.random-variable.md",
+        "startLine": 437,
+        "endLine": 472
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

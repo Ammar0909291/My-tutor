@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.right-triangle-trig-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.right-triangle-trig",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e749606d7db620f938bdf8beeb1910fab01d1a0bc833699d61678a73beace9a2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.right-triangle-trig.md": "sha256:1971d48e31a3191adc8ff1b67466c8dc77e5ca694e090106e142b7373436942a"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.trig.right-triangle-trig",
+    "name": "Right-Triangle Trigonometry",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.geom.right-triangle",
+      "math.geom.similar-triangles",
+      "math.trig.angle-measure"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.right-triangle-trig-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.right-triangle-trig (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.right-triangle-trig.md": "sha256:1971d48e31a3191adc8ff1b67466c8dc77e5ca694e090106e142b7373436942a"
+      },
+      "contentHash": "sha256:33fa396e3cef42705c0e7c10572fbb4c26917cccfe1bbd45cf731a5abfc2ddff",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.right-triangle-trig.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.right-triangle-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.right-triangle-trig\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.right-triangle-trig.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.right-triangle-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.right-triangle-trig\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.right-triangle-trig.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.right-triangle-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.right-triangle-trig\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.right-triangle-trig/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "Right-Triangle Trigonometry — cognitive map",
+      "content": "**Core concept:** For a right triangle with an acute angle θ, sin θ = opposite/hypotenuse, cos θ = adjacent/hypotenuse, tan θ = opposite/adjacent (SOH-CAH-TOA). These ratios are well-defined because all right triangles with the same acute angle are similar — their side ratios are constant regardless of triangle size. The three ratios are used to find missing sides when one side and one angle are known, or to find angles when sides are known.\n\n**Conceptual progression:**\n1. Why ratios are constant: similar triangles → same angle → same ratio (from math.geom.similar-triangles).\n2. Labelling: hypotenuse always opposite the right angle; opposite and adjacent are RELATIVE to the chosen angle θ.\n3. SOH-CAH-TOA: three ratios; reciprocals csc, sec, cot (mentioned but not primary here).\n4. Special angles: 30-60-90 triangle (sides 1:√3:2) and 45-45-90 triangle (sides 1:1:√2) give exact values.\n5. Applications: find missing side given angle and one side; find angle given two sides (inverse trig preview).\n\n**CPA arc (entry: P):**\n- Pictorial: right triangle diagram with sides labelled \"opposite,\" \"adjacent,\" \"hypotenuse\" relative to angle θ; SOH-CAH-TOA mnemonic table; 30-60-90 and 45-45-90 diagrams\n- Abstract: ratio equations sin θ=opp/hyp, cos θ=adj/hyp, tan θ=opp/adj; Pythagorean theorem a²+b²=c²; inverse: θ=arcsin(opp/hyp)\n\n**Prior knowledge activated:** right triangle definition, hypotenuse, legs (math.geom.right-triangle); similar triangles and why ratios are constant (math.geom.similar-triangles); angle measure in degrees and radians (math.trig.angle-measure)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "OPPOSITE-ADJACENT-SWAP [FOUNDATIONAL]",
+      "content": "### MC-1: OPPOSITE-ADJACENT-SWAP [FOUNDATIONAL]\n**Description:** Learner confuses which side is \"opposite\" and which is \"adjacent\" — particularly when the reference angle is not at the conventional lower-left position. Writes sin θ = adjacent/hypotenuse (the formula for cos θ).\n**Surface form:** \"The side next to θ is the opposite side because it's touching the angle.\"\n**Root cause:** \"Adjacent\" means \"next to\" in everyday English, so the side nearest the angle seems like it should be \"adjacent to the angle\" — which it is. But \"opposite\" refers to the side ACROSS from θ (not touching θ), not the hypotenuse. The labelling is relative to the angle, not to a fixed orientation.\n**Trigger condition:** Any right triangle problem where the reference angle is not at the standard position, or any problem asking for sin vs. cos.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "TRIG-APPLIES-TO-ALL-TRIANGLES",
+      "content": "### MC-2: TRIG-APPLIES-TO-ALL-TRIANGLES\n**Description:** Learner applies SOH-CAH-TOA to non-right triangles — for example, computing sin θ = opposite/hypotenuse in a triangle with no right angle, calling the longest side the \"hypotenuse.\"\n**Surface form:** \"sin θ = 5/8 because 5 is opposite θ and 8 is the longest side (hypotenuse).\" [In a non-right triangle.]\n**Root cause:** The definition \"opposite/hypotenuse\" works for right triangles; learner extends it to all triangles without recognising that \"hypotenuse\" is defined only for right triangles (the side opposite the 90° angle).\n**Trigger condition:** Any triangle problem that does not have a clearly marked right angle.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "TAN-IS-OPP-OVER-HYP",
+      "content": "### MC-3: TAN-IS-OPP-OVER-HYP\n**Description:** Learner computes tan θ as opposite/hypotenuse (the formula for sin θ) instead of opposite/adjacent.\n**Surface form:** \"tan θ = 3/5 in a 3-4-5 triangle at the angle opposite the 3.\" [Correct sin; wrong tan.]\n**Root cause:** SOH-CAH-TOA requires distinguishing TOA (tan=opp/adj) from SOH (sin=opp/hyp). In a 3-4-5 triangle, the hypotenuse (5) is visually prominent and learner defaults to it as the denominator for all ratios.\n**Trigger condition:** Any problem asking for tan θ, especially in triangles where the hypotenuse is a round number.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "Repair for MC-1 (OPPOSITE-ADJACENT-SWAP)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (OPPOSITE-ADJACENT-SWAP)\",\"primitives\":[\"P07\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 116,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "Repair for MC-2 (TRIG-APPLIES-TO-ALL-TRIANGLES)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (TRIG-APPLIES-TO-ALL-TRIANGLES)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 170,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "Repair for MC-3 (TAN-IS-OPP-OVER-HYP)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (TAN-IS-OPP-OVER-HYP)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 235,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.90 × 5⌉ = 5 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"In a right triangle with legs 5 and 12 and hypotenuse 13, angle θ is opposite the leg of length 5. Find sin θ.\"\n[Expected: sin θ = opposite/hypotenuse = 5/13.]\n\n**Item 2:**\n\"A right triangle has a 45° angle and hypotenuse 8. Find the length of each leg.\"\n[Expected: leg = 8·sin 45° = 8·(√2/2) = 4√2. Both legs equal 4√2 (45-45-90 triangle).]\n\n**Item 3:**\nTrue or False: \"tan θ = opposite/hypotenuse.\"\n[Expected: FALSE. tan θ = opposite/adjacent. sin θ = opposite/hypotenuse.]\n\n**Item 4:**\n\"What is cos 60°?\"\n[Expected: cos 60° = 1/2. In a 30-60-90 triangle: adjacent to 60° is the short leg = 1; hypotenuse = 2; cos 60° = 1/2.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"A ladder of length 13 m leans against a vertical wall. The foot of the ladder is 5 m from the base of the wall on level ground.\n\n(a) Find the height h that the ladder reaches on the wall.\n(b) Let θ be the angle the ladder makes with the ground. Compute sin θ, cos θ, and tan θ as exact fractions.\n(c) Verify that sin²θ + cos²θ = 1.\"\n\n[Expected:\n(a) Right triangle: hypotenuse=13 (ladder), adjacent to θ=5 (ground distance), opposite=h (wall height). Pythagoras: h=√(13²−5²)=√(169−25)=√144=12 m.\n(b) sin θ=opp/hyp=12/13; cos θ=adj/hyp=5/13; tan θ=opp/adj=12/5.\n(c) sin²θ+cos²θ=(12/13)²+(5/13)²=144/169+25/169=169/169=1 ✓.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if (b) gives all three ratios correctly (12/13, 5/13, 12/5) and (c) verifies the identity, 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 5 out of 5.\n- PASS (5/5): Learner correctly identifies opposite/adjacent/hypotenuse relative to a chosen angle, computes all three trig ratios, applies them to find missing sides, and knows special angle values.\n- FAIL (<5/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 (sin gives cos value, i.e., 12/13): → TA-B01 (OPPOSITE-ADJACENT-SWAP repair), then re-gate\n- FAIL on Item 2 (uses wrong ratio for 45° problem): → Return to A02 (WE2 — 30-60-90 and 45-45-90 examples), then re-gate\n- FAIL on Item 3 (believes tan=opp/hyp): → TA-B03 (TAN-IS-OPP-OVER-HYP repair), then re-gate\n- FAIL on Item 4 (cannot recall cos 60°): → Return to A02 (WE2 — derive 30-60-90 ratios), then re-gate\n- FAIL on P76 (wrong sides or wrong ratio): → TA-B01 if wrong side labelled; TA-B03 if tan error; else return to A01, then re-gate\n- FAIL on multiple items: → B01 then B03; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 5/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated mastery of right-triangle trigonometry: correct labelling of sides relative to the reference angle, computation of all three ratios, application to find missing sides with special angles.\n\nKey anchors to carry forward:\n- SOH-CAH-TOA: Sin=Opp/Hyp, Cos=Adj/Hyp, Tan=Opp/Adj. Labelling is RELATIVE to θ.\n- Hypotenuse is always opposite the 90° angle; 'opposite' and 'adjacent' depend on which acute angle is θ.\n- Special angles: 30-60-90 (1:√3:2) and 45-45-90 (1:1:√2) give exact values.\n- sin²θ+cos²θ=1 (Pythagorean identity — follows from Pythagoras on the defining triangle).\n- tan θ=sin θ/cos θ (ratio identity).\n\nNext concepts: math.trig.unit-circle (extending trig to all angles), math.trig.law-of-sines (general triangles).\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 351,
+        "endLine": 447
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"In a right triangle with hypotenuse 10 and one leg 6, find the other leg.\" If the learner applies Pythagoras correctly (leg=√(100−36)=8) and correctly labels hypotenuse as the side opposite the right angle, proceed to A01. If the learner cannot identify the hypotenuse, review math.geom.right-triangle before starting.\n\n**Scaffolding ladder:**\n- Rung 1 (pictorial): provide a right triangle; label the reference angle θ; draw arrows from θ to each side labelling \"opposite,\" \"adjacent,\" \"hypotenuse\"; write the three ratios.\n- Rung 2 (ratio): given sides, compute all three ratios for both acute angles; observe that opposite/adjacent swaps between the two angles.\n- Rung 3 (full apply): given one side and one angle, set up a ratio equation and solve for the missing side.\n\n**Pacing note:** h=10 estimated hours; A01 in session 1; A02 in sessions 2–3; A03 + mastery gate in sessions 4–5.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"A ramp makes a 20° angle with the ground. The ramp is 6 m long. How high above the ground does the ramp reach? (Use sin 20°≈0.342.)\"\n[Expected: height = 6·sin 20° ≈ 6×0.342 = 2.052 m. sin 20°=opposite/hyp, so opposite=hyp·sin20°=6·0.342.]\n\n**Day 10 prompt:**\n\"Derive from scratch (without memorising): what are sin 45°, cos 45°, and tan 45°? Use a right isosceles triangle.\"\n[Expected: equal legs=1, hyp=√2. sin45°=1/√2=√2/2. cos45°=1/√2=√2/2. tan45°=1/1=1. Note sin45°=cos45° because the triangle is isosceles — equal legs, equal acute angles.]\n\n**Day 30 prompt:**\n\"In a right triangle with legs a and b and hypotenuse c, prove that sin²θ+cos²θ=1 for the acute angle θ opposite side a.\"\n[Expected: sin θ=a/c, cos θ=b/c. sin²θ+cos²θ=(a/c)²+(b/c)²=(a²+b²)/c²=c²/c²=1, using Pythagoras a²+b²=c². This is the Pythagorean identity — it follows directly from the Pythagorean theorem applied to the defining triangle.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 268,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "math.trig.right-triangle-trig/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.right-triangle-trig",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.geom.right-triangle — right angle, legs, hypotenuse; Pythagorean theorem a²+b²=c²\n- math.geom.similar-triangles — all right triangles with the same acute angle are similar; side ratios are constant → WHY trig ratios are well-defined\n- math.trig.angle-measure — degrees and radians; angle labelling conventions\n\n**Unlocked blueprints:**\n- math.trig.unit-circle — extending sin/cos beyond 0°–90° via the unit circle\n- math.trig.law-of-sines — sin A/a = sin B/b for general triangles\n- math.trig.law-of-cosines — c²=a²+b²−2ab·cos C for general triangles\n\n**Cross-links:** none (cross_links=[]).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.right-triangle-trig.md",
+        "startLine": 286,
+        "endLine": 302
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

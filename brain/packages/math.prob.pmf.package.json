@@ -1,0 +1,409 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.pmf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.pmf",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5802c49c3e7c5950ebdc51667aded0b68481f56e59eabe510d56ee5083703ed6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.pmf.md": "sha256:ae6cfe30f5c7630587cea07f4790cf9f84d62fabd94780fd174d243e4c85202c"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.prob.pmf",
+    "name": "Probability Mass Function",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.prob.discrete-rv"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.pmf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.pmf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.pmf.md": "sha256:ae6cfe30f5c7630587cea07f4790cf9f84d62fabd94780fd174d243e4c85202c"
+      },
+      "contentHash": "sha256:e7b1ae1dd74f799c9cf01a21d98055e39a6c02efa3a0448dfbf2d17259162b53",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.pmf.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pmf.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pmf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pmf\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.pmf.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pmf.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pmf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pmf\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.pmf.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pmf.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pmf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pmf\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.pmf.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pmf.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pmf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pmf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.pmf.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pmf.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pmf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pmf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.pmf.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.pmf.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.pmf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.pmf\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.pmf/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.pmf",
+      "title": "Probability Mass Function — cognitive map",
+      "content": "**Core concept:** The probability mass function (PMF) of a discrete random variable X assigns to each possible value x the probability p(x) = P(X = x). A valid PMF satisfies two axioms: (1) p(x) ≥ 0 for all x; (2) ∑ₓ p(x) = 1. The PMF completely characterises the distribution of X; from it, any event probability is computed as the sum of p(x) over the event's values.\n\n**Knowledge prerequisites activated:**\n- math.prob.discrete-rv: a discrete random variable X takes values from a finite or countably infinite set; each value has a probability; the PMF formalises this assignment\n\n**Concept structure:**\n1. **PMF definition**: p(x) = P(X = x) — the probability that X equals the specific value x\n2. **Axiom 1 (non-negativity)**: p(x) ≥ 0 for all x in the support; probabilities cannot be negative\n3. **Axiom 2 (normalisation)**: ∑_{all x} p(x) = 1 — total probability equals 1\n4. **Support**: the set of x values where p(x) > 0; values outside the support have p(x) = 0\n5. **Event probability**: P(X ∈ A) = ∑_{x ∈ A} p(x) for any set A of values\n6. **PMF table**: a complete listing of (x, p(x)) pairs — the canonical representation\n\n**Target understanding:** The learner verifies whether a given table is a valid PMF, finds unknown PMF values using the normalisation axiom, and computes event probabilities by summing the relevant PMF entries.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 26,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.pmf",
+      "title": "PMF-SUM-NOT-ONE",
+      "content": "| MC-1 | PMF-SUM-NOT-ONE | Constructing a PMF table with given partial values | Assigns the remaining probability so that ∑p(x) ≠ 1 — either miscomputes the residual, or assigns equal probabilities to all values without checking the sum | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.pmf",
+      "title": "PMF-IS-CDF",
+      "content": "| MC-2 | PMF-IS-CDF | Asked for P(X = 3) from a PMF table; or asked to compute P(X ≤ 3) | Reads P(X = 3) as a running total up to 3 (CDF) rather than the point probability; conversely, computes ∑_{x≤3} p(x) when asked only for p(3) | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.pmf",
+      "title": "PMF-NEGATIVE-ALLOWED",
+      "content": "| MC-3 | PMF-NEGATIVE-ALLOWED | PMF values must sum to 1 but one partial sum exceeds 1; learner tries to introduce a negative probability to compensate | Assigns p(x) < 0 for some x to make the total sum to 1; does not recognise that p(x) ≥ 0 is a hard axiom, not a guideline | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pmf",
+      "title": "PMF Definition and Axioms (GR-1: P04 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"PMF Definition and Axioms (GR-1: P04 | GR-2: P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 70,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pmf",
+      "title": "Verifying and Constructing PMFs (GR-1: P07 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Verifying and Constructing PMFs (GR-1: P07 | GR-2: P49)\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 125,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pmf",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 177,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pmf",
+      "title": "Repair: PMF-SUM-NOT-ONE (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: PMF-SUM-NOT-ONE (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 245,
+        "endLine": 278
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pmf",
+      "title": "Repair: PMF-IS-CDF (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: PMF-IS-CDF (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 278,
+        "endLine": 311
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.pmf",
+      "title": "Repair: PMF-NEGATIVE-ALLOWED (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: PMF-NEGATIVE-ALLOWED (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P04\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 311,
+        "endLine": 418
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.pmf",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A03 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **A discrete RV X has PMF: p(1) = 0.1, p(2) = 0.4, p(3) = 0.3, p(4) = k. Find k.**\n   *(Expected: k = 1 − 0.1 − 0.4 − 0.3 = 0.2)*\n\n2. **A PMF table shows: p(0) = 0.5, p(1) = 0.3, p(2) = 0.2. Find P(X ≥ 1).**\n   *(Expected: P(X ≥ 1) = p(1) + p(2) = 0.3 + 0.2 = 0.5)*\n\n3. **True/False:** A valid PMF can have p(3) = −0.1 if the remaining values sum to 1.1 so that the total is 1.\n   *(Expected: FALSE — the non-negativity axiom p(x) ≥ 0 for all x is inviolable; negative probabilities are not permitted regardless of the total)*\n\n4. **A loaded die has p(1) = p(2) = p(3) = p(4) = p(5) = 1/8. Find p(6). Is the PMF valid?**\n   *(Expected: p(6) = 1 − 5·(1/8) = 3/8; verify: 3/8 ≥ 0 ✓ and 5·(1/8)+3/8 = 8/8 = 1 ✓ → valid PMF)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: independence mode — cross_links=[], novel context)\n\n*Two-dice sum distribution:*\n\n\"A discrete random variable S represents the sum of two fair six-sided dice. The PMF is symmetric; selected values are:\nP(S=2) = 1/36, P(S=7) = 6/36, P(S=12) = 1/36.\n\n(a) Is P(S=7) ≥ 0? Does P(S=7) = 6/36 seem plausible given there are 6 ways to roll a sum of 7?\n(b) Given that P(S ≥ 9) = 10/36, find P(S ≤ 8) using the complement rule.\n(c) Without listing all 11 values (S = 2, 3, …, 12), explain in one sentence why ∑_{s=2}^{12} p(s) must equal 1.\"\n\n*(Expected:\n(a) Yes, 6/36 ≥ 0 ✓; plausible — the six pairs (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) all sum to 7\n(b) P(S ≤ 8) = 1 − P(S ≥ 9) = 1 − 10/36 = 26/36\n(c) S = 2, 3, …, 12 are all possible outcomes of the dice sum, forming a partition of the sample space — mutually exclusive and exhaustive events must have probabilities summing to 1)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.90; ⌈0.90×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 PMF-SUM-NOT-ONE first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now verify PMF validity using the non-negativity and normalisation axioms, find unknown PMF entries by solving the normalisation equation, and compute event probabilities by summing over the relevant support values. The PMF is the complete description of any discrete random variable's distribution.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 177,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.pmf",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** P — Pictorial\n\"Frequency bar chart\" model: each bar's height is the probability of that value. The bars cover all possible values and their heights sum to 1 — a full \"unit of probability\" distributed across the support. No bar dips below zero.\n\n**Progression Gate (P → A):** Learner consistently verifies both PMF axioms and uses the normalisation constraint to find unknown entries.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 57,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.pmf",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Find unknown PMF entry | \"p(1)=0.1, p(2)=0.3, p(3)=0.4, p(4)=k — find k\" (0.2) |\n| Day 3 | Compute event probabilities | \"P(X ≥ 2) with PMF from Day 1\" (0.3+0.4+0.2=0.9) |\n| Day 7 | Verify validity and identify failures | \"p(1)=0.5, p(2)=0.6: valid?\" (No — sum=1.1>1) |\n| Day 30 | Transfer to expected value setup | \"For p(x)=x/10, x=1,2,3,4: compute E[X]=∑x·p(x)\" (1×0.1+2×0.2+3×0.3+4×0.4=3.0) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 345,
+        "endLine": 356
+      }
+    },
+    {
+      "assetId": "math.prob.pmf/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.pmf",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.prob.discrete-rv (required): a discrete RV X assigns a numerical outcome to each experimental result; the PMF formalises the probability assignment as a function from values to probabilities\n\n**Enables:**\n- (no direct Tier 1 unlocks — cross_links=[], unlocks=[])\n  The PMF is the foundational representation for the entire discrete distribution toolbox (expected value, variance, moment generating function, named distributions such as Binomial, Poisson) in downstream non-Tier-1 concepts.\n\n**Cross-links (GR-8):**\n- (none — cross_links=[])\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.pmf.md",
+        "startLine": 356,
+        "endLine": 370
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

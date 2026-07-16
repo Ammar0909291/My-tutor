@@ -1,0 +1,403 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.function-set-theoretic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.function-set-theoretic",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fc1c242999ec2049733f377892c6b335e5b26d6834cc285169387c22b27e7e61",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.function-set-theoretic.md": "sha256:4f58bbc0aefb68107f3cd0ca2252b72772c1d25e6b8ac2a587e32ef1ce543caf"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.found.function-set-theoretic",
+    "name": "Function (Set-Theoretic)",
+    "difficultyRaw": "developing (2)",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.cartesian-product",
+      "math.found.relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.function-set-theoretic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.function-set-theoretic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.function-set-theoretic.md": "sha256:4f58bbc0aefb68107f3cd0ca2252b72772c1d25e6b8ac2a587e32ef1ce543caf"
+      },
+      "contentHash": "sha256:cdd777358d38883569288de02e4b35cea535a312c328b4f7a72ed3e3481e4032",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.function-set-theoretic.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.function-set-theoretic.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.function-set-theoretic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.function-set-theoretic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.function-set-theoretic.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.function-set-theoretic.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.function-set-theoretic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.function-set-theoretic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.function-set-theoretic.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.function-set-theoretic.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.function-set-theoretic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.function-set-theoretic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.function-set-theoretic.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.function-set-theoretic.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.function-set-theoretic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.function-set-theoretic\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.function-set-theoretic.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.function-set-theoretic.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.function-set-theoretic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.function-set-theoretic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.function-set-theoretic.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.function-set-theoretic.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.function-set-theoretic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.function-set-theoretic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.function-set-theoretic.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.function-set-theoretic.md#TA-A07",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.function-set-theoretic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.function-set-theoretic\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.function-set-theoretic/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Learning Objectives",
+      "content": "On completion of all Protocol A Teaching Actions, a student will be able to:\n\n1. **Define** a function as a relation that is both right-unique and left-total.\n2. **Verify** whether a given relation R ⊆ A×B is a function by checking both conditions.\n3. **Distinguish** domain, codomain, and image/range of a function.\n4. **Represent** a function in three equivalent forms: set of pairs, arrow diagram, formula.\n5. **Classify** functions as injective (one-to-one), surjective (onto), or bijective.\n6. **Connect** the set-theoretic definition to the informal input-output notion of function.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 30,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "FOUNDATIONAL): Left-Totality Forgotten",
+      "content": "### MC-1 (FOUNDATIONAL): Left-Totality Forgotten\n**Label:** DOMAIN-COVERAGE-OMISSION\n**Statement:** Student checks that every domain element with an output has exactly one output (right-uniqueness) but does not check that EVERY domain element has at least one output. The student declares a relation a function when some domain elements are unmatched.\n**Trigger:** R = {(1,a),(2,b)} on domain A = {1,2,3} and codomain B = {a,b,c} — student says \"every element that appears as a first component maps to exactly one output → function.\" Missing: 3 ∈ A has no pair in R.\n**Root cause:** Students focus on \"one output per input\" and stop there, not registering that \"every input must have an output\" is a separate, equally essential condition.\n**Repair chain:** B-01 — left-totality drill.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Function Requires a Formula",
+      "content": "### MC-2: Function Requires a Formula\n**Label:** FORMULA-ONLY\n**Statement:** Student believes a function must be expressible as a mathematical formula (e.g., f(x) = x² + 1) and rejects functions defined by lookup tables, finite sets of pairs, or recursive definitions.\n**Trigger:** Given the function f = {(1,a),(2,b),(3,b)} on {1,2,3} → {a,b,c} — student says \"this isn't a function because there's no formula for it.\"\n**Root cause:** School experience with functions (linear, quadratic, trigonometric) is exclusively formula-based; students overgeneralize this as the definition.\n**Repair chain:** B-02 — formula-free function examples.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Range Equals Codomain",
+      "content": "### MC-3: Range Equals Codomain\n**Label:** RANGE-CODOMAIN-CONFLATION\n**Statement:** Student treats the range/image (the actual set of output values that appear) as identical to the codomain (the declared output set). This leads to errors when deciding whether a function is surjective.\n**Trigger:** f: {1,2,3} → {a,b,c,d}, f = {(1,a),(2,b),(3,b)} — student says \"the range is {a,b,c,d}\" (mistakenly including c and d which are never output).\n**Root cause:** In everyday language, \"range\" and \"codomain\" are synonymous. In mathematics they are distinct.\n**Repair chain:** B-03 — range vs. codomain contrast.\n\n**MAMR Protocol:** MC-1 is FOUNDATIONAL; MC-2 and MC-3 are secondary. MC-1 cleared first; MC-2 and MC-3 FIFO after.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 17,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Function as a Right-Unique, Left-Total Relation",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Function as a Right-Unique, Left-Total Relation\",\"primitives\":[\"P03\",\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 9,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Three Representations",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Three Representations\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 71,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Domain, Codomain, and Image",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Domain, Codomain, and Image\",\"primitives\":[\"P06\",\"P27\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 125,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "When a Relation Is NOT a Function",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"When a Relation Is NOT a Function\",\"primitives\":[\"P07\",\"P41\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 169,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Injective, Surjective, Bijective",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Injective, Surjective, Bijective\",\"primitives\":[\"P03\",\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 222,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Function vs. Relation — The Full Spectrum",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Function vs. Relation — The Full Spectrum\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 269,
+        "endLine": 303
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 303,
+        "endLine": 365
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Assessment Item Bank",
+      "content": "| # | Type | Item | Answer | Targets |\n|---|---|---|---|---|\n| 1 | Verify | R = {(1,a),(2,a),(3,a)} on A={1,2,3}, B={a,b}. Is R a function? Injective? Surjective? | Function YES (LT✓, RU✓). Injective NO (1,2,3 all→a). Surjective NO (b unused). | Classification |\n| 2 | Verify | R = {(x,1),(x,2),(y,3)} on A={x,y}, B={1,2,3}. Is R a function? | NO — RU fails: x→1 and x→2. | MC-1 |\n| 3 | True/False | The empty function f: ∅ → B (domain is the empty set) is a valid function. | TRUE — LT vacuously holds (no elements to check); RU vacuously holds. | Edge case |\n| 4 | Short answer | What is the image of f: {1,2,3,4} → ℤ defined by f(n) = (−1)ⁿ? | {−1, 1} (alternating signs) | Image computation |\n| 5 | True/False | Every bijection has an inverse function. | TRUE — LT+RU of original gives RU+LT of inverse respectively. | Bijection |\n| 6 | Classify | f: ℝ → ℝ, f(x) = 2x + 1. Injective? Surjective? | Both (bijection) — injective: 2x₁+1=2x₂+1 ⟹ x₁=x₂; surjective: image = ℝ. | Real function |\n| 7 | Classify | f: ℝ → ℝ, f(x) = sin(x). Injective? Surjective? | Neither — not injective (sin(0)=sin(π)=0); not surjective (image=[-1,1] ⊊ ℝ). | Real function |\n| 8 | Construct | Give a function f: {1,2,3,4} → {a,b} that is surjective but not injective. | Any mapping where both a and b appear, e.g., f(1)=a,f(2)=a,f(3)=b,f(4)=b. | Construction |\n| 9 | Short answer | If f: A→B is bijective, what can you say about |A| and |B|? | |A| = |B| (bijection establishes that A and B have the same cardinality). | Cardinality |\n| 10 | True/False | A function can have more elements in its codomain than in its domain and still be surjective. | FALSE — if |B| > |A|, at least |B|−|A| elements of B go uncovered by a function from A. | Surjectivity |\n| 11 | Analysis | R = {(1,a),(2,b),(3,c),(3,d)} on A={1,2,3}, B={a,b,c,d}. Which condition fails? | RU — element 3 maps to both c and d. | RU check |\n| 12 | Connect | Explain in one sentence how the set-theoretic definition of function and the informal 'input-output machine' notion are related. | The machine analogy: LT = every button works (total); RU = the machine is deterministic (same input, always same output). | MC-2 / Cross-link |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 483,
+        "endLine": 502
+      }
+    },
+    {
+      "assetId": "math.found.function-set-theoretic/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.function-set-theoretic",
+      "title": "Spaced Repetition Schedule",
+      "content": "**P89 Spaced Repetition:** Intervals — Day 1, Day 3, Day 7, Day 21, Day 60.\n\n| Day | Probe Focus | Sample Item |\n|---|---|---|\n| Day 1 | LT + RU check | Given a relation table, verify whether it is a function |\n| Day 3 | Domain/codomain/image | Compute image of a given function |\n| Day 7 | Injective/Surjective/Bijective | Classify three functions from their definitions |\n| Day 21 | Non-formula functions | Give a real-world function defined by a table; verify LT+RU |\n| Day 60 | Cross-link integration | Describe how a calculus function (with a graph) is a set of ordered pairs; state LT and RU in that context |\n\n**Decay protocol:** If student fails a spaced probe → reset to Day 1 + Protocol B (B-01 for LT issues; B-02 for formula-only; B-03 for range/codomain confusion).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.function-set-theoretic.md",
+        "startLine": 502,
+        "endLine": 518
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

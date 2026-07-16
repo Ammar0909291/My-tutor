@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.ftc-part2-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.ftc-part2",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:476578059048416fdf20dedbd93ee154cf6ea62e3a45b95755ead20587659a20",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.ftc-part2.md": "sha256:e0bf5806e597ad14f8bbf73e2e33b4d424db6a6fbed797303018f2973889096b"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.ftc-part2",
+    "name": "Fundamental Theorem of Calculus Part 2",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.ftc-part1",
+      "math.calc.antiderivatives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.ftc-part2-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.ftc-part2 (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.ftc-part2.md": "sha256:e0bf5806e597ad14f8bbf73e2e33b4d424db6a6fbed797303018f2973889096b"
+      },
+      "contentHash": "sha256:8ab46cc09da59ef26b040069bfe7388605052a5fc3060cacbcef0f8a03e30edb",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.ftc-part2.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ftc-part2.md#TA-A01 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ftc-part2"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ftc-part2\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.ftc-part2.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ftc-part2.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ftc-part2"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ftc-part2\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.ftc-part2.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ftc-part2.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ftc-part2"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ftc-part2\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.ftc-part2.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.ftc-part2.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.ftc-part2"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.ftc-part2\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.ftc-part2/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "Fundamental Theorem of Calculus Part 2 — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.calc.ftc-part1**: d/dx[∫ₐˣ f(t)dt] = f(x); accumulation function; area-under-curve geometric meaning; signed area\n- **math.calc.antiderivatives**: antiderivative family F(x)+C; reverse power rule; antiderivatives of eˣ, trig functions; +C interpretation\n\n### Target Knowledge State\nStudent fluently evaluates definite integrals using the Evaluation Theorem ∫ₐᵇ f(x)dx = F(b)−F(a), where F is any antiderivative of f; correctly applies the subtraction order (upper minus lower); recognises that +C cancels and is omitted; distinguishes definite (numeric output) from indefinite (family) integrals; and applies the theorem to area, net-change, and applied problems.\n\n### Conceptual Obstacles\n1. Evaluating F(a)−F(b) instead of F(b)−F(a) — reversing the subtraction order negates the answer; especially dangerous when the result is negative by correct calculation\n2. Appending +C to the definite-integral result — failing to see that C cancels: [F(b)+C]−[F(a)+C] = F(b)−F(a)\n3. Evaluating the antiderivative at only one bound — writing F(b) or −F(a) and forgetting the subtraction, or evaluating at both but taking the wrong one as the full answer\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "Worked Example Pair: Applying the Evaluation Theorem",
+      "content": "### Teaching Action A02 — Worked Example Pair: Applying the Evaluation Theorem\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Build computational fluency across polynomial and radical integrands; model the bracket notation and two-step evaluation (find antiderivative, evaluate-and-subtract) so students internalise the correct pattern before independent practice\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**WE1 — Polynomial integrand: ∫₀³(2x+1)dx**\n\n**Step 1 — Find an antiderivative:**\n$$F(x) = x^2 + x \\quad \\text{(reverse power rule, no } {+C} \\text{)}$$\n\n**Step 2 — Apply the bracket notation:**\n$$\\bigl[x^2+x\\bigr]_0^3 = \\bigl(3^2+3\\bigr) - \\bigl(0^2+0\\bigr) = 12 - 0 = \\boxed{12}$$\n\n**Step 3 — Geometric check:** f(x)=2x+1 is a line from y=1 to y=7 over [0,3]. Area of trapezoid = ½(1+7)·3 = 12. ✓\n\n---\n\n**WE2 — Radical integrand: ∫₁⁴√x dx**\n\n**Step 1 — Rewrite as power:**\n$$\\sqrt{x} = x^{1/2}$$\n\n**Step 2 — Find antiderivative (reverse power rule):**\n$$F(x) = \\frac{x^{3/2}}{3/2} = \\frac{2}{3}x^{3/2}$$\n\n**Step 3 — Evaluate:**\n$$\\left[\\frac{2}{3}x^{3/2}\\right]_1^4 = \\frac{2}{3}(4)^{3/2} - \\frac{2}{3}(1)^{3/2} = \\frac{2}{3}(8) - \\frac{2}{3}(1) = \\frac{16}{3} - \\frac{2}{3} = \\frac{14}{3}$$\n\n**Note on (4)^{3/2}:** 4^{3/2} = (√4)³ = 2³ = 8. Always simplify the power at each bound separately before subtracting.\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n**Prompt:** Evaluate ∫₁²(4x³ − 6x)dx.\n\n**CORRECT:** F(x)=x⁴−3x²; [x⁴−3x²]₁² = (16−12)−(1−3) = 4−(−2) = 6.\n→ \"Correct. Note that F(1)=−2, so subtracting a negative adds: 4+2=6.\" → Proceed to A03.\n\n**PARTIAL:** Student gets F(x) right but evaluates F(2) only, giving 4 (MC-3).\n→ \"You evaluated at the upper bound correctly. Now subtract the value at the lower bound: F(1)=1−3=−2. So 4−(−2)=6.\"\n\n**INCORRECT:** Student writes F(2)−F(1) = (16−12)−(1−3) = 4+2 = 6 ✓ but then says \"minus, so 4−2=2\" (arithmetic).\n→ \"Be careful: F(1)=1⁴−3(1)²=1−3=−2. You are computing 4−(−2)=4+2=6.\"\n\n**NO_RESPONSE:** → \"Find F(x) by integrating term by term: ∫4x³dx=x⁴ and ∫6x dx=3x². So F(x)=x⁴−3x². Evaluate at x=2: 16−12=4. At x=1: 1−3=−2. Subtract: 4−(−2)=6.\"\n\n---",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 134,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "BOUNDS-SWAPPED",
+      "content": "| MC-1 | BOUNDS-SWAPPED | Student writes ∫ₐᵇ f(x)dx = F(a)−F(b), reversing upper and lower; error flips the sign of every answer | Any definite integral; especially visible when bounds are numbers with a < b but F(a) > F(b) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "C-IN-DEFINITE-INTEGRAL",
+      "content": "| MC-2 | C-IN-DEFINITE-INTEGRAL | Student writes [F(x)+C]ₐᵇ = F(b)−F(a)+C or adds +C after evaluating, treating the definite result as an indefinite antiderivative | Transition from indefinite to definite evaluation; especially after extensive practice with +C |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "SINGLE-BOUND-EVALUATION",
+      "content": "| MC-3 | SINGLE-BOUND-EVALUATION | Student evaluates the antiderivative at only the upper bound (or only the lower), writing ∫ₐᵇ f(x)dx = F(b) without subtracting F(a) | Multi-step problems; students who copy the differentiation pattern \"evaluate at the point\" |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "From Area Approximation to the Evaluation Theorem",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Area Approximation to the Evaluation Theorem\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 65,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "Worked Example Pair: Applying the Evaluation Theorem",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair: Applying the Evaluation Theorem\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 134,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "Contrast Pair: What Changes and What Doesn't",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast Pair: What Changes and What Doesn't\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 187,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 238,
+        "endLine": 453
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess fluent, transfer-ready application of the Evaluation Theorem\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Evaluate ∫₀¹(6x²−4x+1)dx.\n\n*Solution:* F(x)=2x³−2x²+x; [2x³−2x²+x]₀¹ = (2−2+1)−0 = **1**\n\n**Problem 2:** Evaluate ∫₁⁴(3/√x)dx. [Rewrite as 3x^{−1/2}.]\n\n*Solution:* F(x)=6√x; [6√x]₁⁴ = 6(2)−6(1) = 12−6 = **6**\n\n**Problem 3:** Evaluate ∫₀^{π/2} cos(x) dx.\n\n*Solution:* F(x)=sin(x); [sin(x)]₀^{π/2} = sin(π/2)−sin(0) = 1−0 = **1**\n\n**Problem 4:** Evaluate ∫₀²(eˣ+2x)dx.\n\n*Solution:* F(x)=eˣ+x²; [eˣ+x²]₀² = (e²+4)−(1+0) = **e²+3** ≈ 10.39\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n**Prompt:** A factory produces widgets at a rate R(t) = 30−2t units per hour (t in hours, 0 ≤ t ≤ 10). Set up and evaluate a definite integral to find the total number of widgets produced during the first 6 hours. Then find the time interval [0,T] during which production is positive.\n\n**Expected solution:**\n- Total widgets: ∫₀⁶(30−2t)dt = [30t−t²]₀⁶ = (180−36)−0 = **144 widgets**\n- Production is positive when R(t)=30−2t>0, i.e., t<15; so on [0,10] production is always positive (T=10)\n- Verification: at t=6, R(6)=30−12=18>0 (rate still positive, consistent)\n- Net-change interpretation: the definite integral gives total output (net change in total widgets), not the rate\n\n*Key observation:* R(t) is a linear function; answer can also be checked geometrically as a trapezoid area = ½(30+18)·6 = 144. ✓\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items, then re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.calc.u-substitution; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess in next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.calc.ftc-part2 assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — BOUNDS-SWAPPED (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"There is a specific error pattern here: the subtraction order in FTC Part 2 is F(b)−F(a), upper bound first. When a student writes F(a)−F(b), every answer is negated. This is called BOUNDS-SWAPPED.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: Evaluate ∫₁³(2x)dx.\n- Correct: F(x)=x²; [x²]₁³=9−1=8\n- BOUNDS-SWAPPED: 1−9=−8\n\nIf student writes −8: BOUNDS-SWAPPED confirmed → proceed to P64.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The bracket notation [F(x)]ₐᵇ means 'evaluate at top, subtract value at bottom.' Think of it as a two-slot machine: slot b (top) goes first, slot a (bottom) is subtracted. Write the formula before evaluating: ∫ₐᵇ f dx = F(b)−F(a). Let's redo: a=1, b=3. F(3)−F(1)=9−1=8.\"\n\nPractice: ∫₂⁵(1)dx = [x]₂⁵ = 5−2 = 3. Confirm student writes 5 before 2.\n\n---\n\n### Repair Action B02 — C-IN-DEFINITE-INTEGRAL (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"When moving from indefinite to definite integrals, some students keep writing +C. This is called C-IN-DEFINITE-INTEGRAL. Let me show you why +C disappears.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: Evaluate ∫₀²(3x²)dx.\n- Student answer includes +C: C-IN-DEFINITE-INTEGRAL confirmed.\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Let's use F(x)=x³+C and evaluate explicitly: [x³+C]₀²=(8+C)−(0+C)=8+C−C=8. The C cancels algebraically — always. For definite integrals, omit +C from the start since it contributes nothing.\"\n\nPractice: Evaluate ∫₋₁¹(4x)dx using F(x)=2x²+7 (C=7). [2x²+7]₋₁¹=(2+7)−(2+7)=0. Any C gives 0.\n\n---\n\n### Repair Action B03 — SINGLE-BOUND-EVALUATION (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Evaluating the antiderivative at only one bound is called SINGLE-BOUND-EVALUATION. FTC Part 2 requires two evaluations followed by a subtraction.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: Evaluate ∫₁⁴(2x)dx.\n- Correct: [x²]₁⁴=16−1=15\n- MC-3: Student writes only 16 or only −1\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"The integral accumulates change from a to b. Think of F(b) as the ending total and F(a) as the starting total; you need both to find the net change. Checklist before writing the answer: (1) Did I evaluate at the upper bound? (2) Did I evaluate at the lower bound? (3) Did I subtract upper minus lower?\"\n\nPractice: ∫₀³(1)dx=[x]₀³=3−0=3 (area of rectangle, width 3, height 1). Confirm both values written.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Evaluate ∫₀²(x²+1)dx; verify no +C, correct subtraction order |\n| SR-2 | +3 days | Mixed: polynomial, radical, trig; include one negative-value integrand to probe MC-1 |\n| SR-3 | +7 days | Applied problem: net displacement from velocity function v(t) |\n| SR-4 | +14 days | Chain ∫ₐᵇ f(x)dx with u-substitution (after math.calc.u-substitution is introduced) |\n\nRetrieval flag: if any SR answer includes +C or reverses bounds, re-execute B02/B01 before continuing.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.calc.ftc-part1 | FTC Part 1 establishes the antiderivative-area link and accumulation function; Part 2 is the computational shortcut |\n| Requires (Tier-1) | math.calc.antiderivatives | Antiderivative families, reverse power rule, and the +C family are assumed fluent |\n| Unlocks | math.calc.u-substitution | U-substitution extends the Evaluation Theorem to composite integrands |\n\n**GR-9:** cross_links=[] → P76 mode = independence (transfer probe is self-contained, not a cross-subject probe).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=5 → standard structure (3 main TAs + gate)\n- bloom=apply → V-4 = PASS (P07 required; WE1 and WE2 in A02)\n- CPA_entry = C for advanced learner: concrete rectangle approximation in A01 before algebraic rule\n\n**Key teaching insight:** The most common error is MC-1 (BOUNDS-SWAPPED), which occurs when students copy the template \"evaluate the function at the point\" from differentiation. The bracket notation [F(x)]ₐᵇ with an explicit upper-first reminder (A01, A03 Contrast 2) directly counters this. The +C cancellation proof in A01 Stage A (algebraic expansion) should be written out, not just stated, because students who see C+C=2C incorrectly need to see the subtraction: (F(b)+C)−(F(a)+C).\n\n**WE2 guidance:** (4)^{3/2} trips many students. Teach the rule: x^{3/2}=(√x)³. At x=4: (√4)³=2³=8. Having students compute each bound's power separately before subtracting prevents arithmetic errors.\n\n**Applied problem design (P76):** The net-change interpretation (∫R(t)dt = total production) is FTC Part 2's most important applied context. The transfer probe tests whether the student can set up the integral, not just evaluate a given one.\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.calc.ftc-part2 ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.calc.ftc-part1 ✓, math.calc.antiderivatives ✓ | PASS |\n| V-3 | CPA entry = C for advanced difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=apply → P07 present | P07 in A02 (WE1=polynomial, WE2=radical) ✓ | PASS |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01, A02, A03 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A04) is terminal | A04=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A04; A04 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A04 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | cross_links=[] → P76=independence ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=5 → standard (3 main TAs + gate); A01+A02+A03+A04 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | Factory production rate; definite integral setup + evaluation; correct 144 ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 238,
+        "endLine": 453
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner counts discrete rectangles for ∫₀³(2x+1)dx before seeing the antiderivative shortcut, making the area-number connection concrete before the algebraic procedure.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: approximate ∫₀³(2x+1)dx via 3 unit rectangles; P: shaded area diagram with exact value labelled 12; A: FTC Part 2 statement, bracket notation [F(x)]ₐᵇ, +C cancellation proof\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: polynomial integrand ∫₀³(2x+1)dx; WE2: radical integrand ∫₁⁴√x dx\n3. **A03 P06 CONTRAST PAIR** — definite vs indefinite; bounds-swapped sign change; +C present vs. cancelled\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Evaluate ∫₀²(x²+1)dx; verify no +C, correct subtraction order |\n| SR-2 | +3 days | Mixed: polynomial, radical, trig; include one negative-value integrand to probe MC-1 |\n| SR-3 | +7 days | Applied problem: net displacement from velocity function v(t) |\n| SR-4 | +14 days | Chain ∫ₐᵇ f(x)dx with u-substitution (after math.calc.u-substitution is introduced) |\n\nRetrieval flag: if any SR answer includes +C or reverses bounds, re-execute B02/B01 before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 385,
+        "endLine": 400
+      }
+    },
+    {
+      "assetId": "math.calc.ftc-part2/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.ftc-part2",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.calc.ftc-part1 | FTC Part 1 establishes the antiderivative-area link and accumulation function; Part 2 is the computational shortcut |\n| Requires (Tier-1) | math.calc.antiderivatives | Antiderivative families, reverse power rule, and the +C family are assumed fluent |\n| Unlocks | math.calc.u-substitution | U-substitution extends the Evaluation Theorem to composite integrands |\n\n**GR-9:** cross_links=[] → P76 mode = independence (transfer probe is self-contained, not a cross-subject probe).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.ftc-part2.md",
+        "startLine": 400,
+        "endLine": 414
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

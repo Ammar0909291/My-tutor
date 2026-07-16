@@ -46,6 +46,15 @@ export interface BlueprintTeachingAction {
   /** MC-* ids referenced anywhere in this TA's body (diagnostic dispatch, "Address MC-2", etc). */
   referencedMisconceptionIds: string[]
   span: BlueprintSourceSpan
+  /** Verbatim TA body text, when the extraction shape captured it (the
+   *  primary "### TA-x — Title" shape does; several structural fallback
+   *  shapes — bracket lines, table rows, grammar stanzas — do not, since
+   *  their "body" is just the routing line itself, already fully captured
+   *  by title/primitives/referencedMisconceptionIds). Asset lowering uses
+   *  this to recover content embedded INSIDE a named TA (e.g. a worked
+   *  example authored as "### TA-A02 — Worked Example Pair: …") rather than
+   *  under its own dedicated top-level section. */
+  body?: string
 }
 
 export interface BlueprintMisconception {

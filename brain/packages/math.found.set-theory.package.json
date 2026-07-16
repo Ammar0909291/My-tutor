@@ -1,0 +1,1151 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.set-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.set-theory",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f8426224540502a198a92d88a70688924c44912d88e40ca2a07b47c886b7fe0e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.set-theory.md": "sha256:173fd88488fa14144c743041ae1661c3ae4409a147f07d8bba145fa376ae34a9"
+    },
+    "assetCount": 36,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 4,
+      "teaching_action_meta": 27,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 27
+  },
+  "concept": {
+    "conceptId": "math.found.set-theory",
+    "name": "Set Theory",
+    "difficultyRaw": "developing (mapped: 2)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 16,
+    "prerequisites": [
+      "math.found.logic",
+      "math.found.mathematical-language"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.set-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.set-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.set-theory.md": "sha256:173fd88488fa14144c743041ae1661c3ae4409a147f07d8bba145fa376ae34a9"
+      },
+      "contentHash": "sha256:a8fa69d3c6ab8d80cda02edb4bb4e1c95f84a6d69bc6e44f66943ae767e9d419",
+      "ruleCount": 27,
+      "bandCounts": {
+        "3": 27
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-A03 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-A06 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-A07 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-B01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-B02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-B03 (addresses MC-2, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-C01 (addresses MC-2, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-C02 (addresses MC-2, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-C03 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-C04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-E04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-E05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-E05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-F01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-F01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-F02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-F02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-F03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-F03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-theory.TA-F04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-theory.md#TA-F04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.set-theory/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.set-theory",
+      "title": "Learning Objective",
+      "content": "A student who achieves mastery **states whether an object belongs to a given set (∈ / ∉), evaluates a set operation (union, intersection, complement) by producing the resulting set, determines whether one set is a subset of another with a correct justification, and explains why set membership is a yes/no question independent of order or repetition.**\n\nNOT: listing set elements fluently without understanding membership rules. NOT: drawing Venn diagrams without being able to answer a membership question from them. A student who asserts {3,2,1} ≠ {1,2,3} or that {1,1,2} contains two copies of 1 has NOT achieved mastery.\n\n**Observable mastery criterion:** Given two sets A and B defined by set-builder notation, the student correctly computes A∪B, A∩B, and determines whether A⊆B — and explains each result in one sentence.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 27,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.set-theory",
+      "title": "— \"{∅} and ∅ are the same set.",
+      "content": "### MC-1 — \"{∅} and ∅ are the same set.\"\n\n**Trigger signal:** MISCONCEPTION:MC-1  \n**Active in:** Any TA where student treats the empty set and a set containing the empty set as equivalent\n\n**Conflict evidence:** \"∅ has no elements — |∅| = 0. {∅} has one element — the empty set itself — |{∅}| = 1. Ask: is ∅ ∈ ∅? No. Is ∅ ∈ {∅}? Yes. Different answer → different set.\"\n\n**Bridge text:** \"Curly braces always create a new set from what is inside them. {∅} creates a set whose single member is the empty set. Just as {apple} is not the same as apple, {∅} is not the same as ∅.\"\n\n**Replacement text:** \"∅ contains nothing. {∅} contains one thing: ∅. Their cardinalities differ: |∅|=0, |{∅}|=1.\"\n\n**Discrimination pairs:**\n- IS ∅: the set you get when you take all integers greater than 5 AND less than 3 simultaneously\n- IS {∅}: the set whose only member is the empty set\n\n**S6 path:** Introduce only if explicitly surfaced by student question — do not volunteer this distinction during Protocol E until solid membership understanding is established.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 3,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.set-theory",
+      "title": "— \"Set order matters: {1,2,3} ≠ {3,2,1}.",
+      "content": "### MC-2 — \"Set order matters: {1,2,3} ≠ {3,2,1}.\"\n\n**Trigger signal:** MISCONCEPTION:MC-2  \n**Active in:** DQ-2=MC-2; any roster notation task where student reorders and claims difference\n\n**Conflict evidence:** \"The set is defined by its MEMBERSHIP RULE, not by a listing sequence. The rule for {1,2,3} is: 'x belongs if and only if x is 1, 2, or 3.' The rule for {3,2,1} is identical. Same rule → same set.\"\n\n**Bridge text:** \"A set is like a guest list — it records WHO is invited. The order the names appear on the paper does not affect who is invited.\"\n\n**Replacement text:** \"Sets are equal if and only if they have exactly the same elements. Order of listing is irrelevant.\"\n\n**Discrimination pairs:**\n- Same set: {a, b, c} and {c, a, b}\n- Different sets: {1, 2} and {1, 2, 3}\n\n**S6 path:** Use physical object rearrangement in a circle. \"I moved the coins. Did any coin leave? Did any new coin arrive? Same set.\"\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 22,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.set-theory",
+      "title": "— \"A subset must be strictly smaller than the superset.",
+      "content": "### MC-3 — \"A subset must be strictly smaller than the superset.\"\n\n**Trigger signal:** MISCONCEPTION:MC-3  \n**Active in:** DQ-3 — student says A⊆A is false or uncertain\n\n**Conflict evidence:** \"Check the definition: A ⊆ B iff for all x, if x ∈ A then x ∈ B. Apply to B = A: for all x, if x ∈ A then x ∈ A. This is trivially true. The definition never says A and B must be different sizes.\"\n\n**Bridge text:** \"⊆ (subset-of-or-equal-to) is defined to allow equality. ⊂ (proper subset) requires A ≠ B. Every set A satisfies A ⊆ A but NOT A ⊂ A. The difference is in the symbol.\"\n\n**Replacement text:** \"A ⊆ B asks: does A add anything to B? If A = B, the answer is no — everything in A is already in B. So A ⊆ A.\"\n\n**Discrimination pairs:**\n- IS a subset: {1,2} ⊆ {1,2,3} (yes — ⊆ and ⊂ both hold)\n- IS a subset (surprising): {1,2,3} ⊆ {1,2,3} (yes — ⊆ holds; ⊂ does not)\n- IS NOT a subset: {1,2,4} ⊆ {1,2,3} — fails because 4 ∈ A but 4 ∉ B\n\n**S6 path:** Do not lead with the formal definition. Begin with the physical analogy: \"Is every item in this box also in this box? Well, it IS the same box.\"\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 41,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "math.found.set-theory",
+      "title": "— \"Sets can contain duplicate elements.",
+      "content": "### MC-4 — \"Sets can contain duplicate elements.\"\n\n**Trigger signal:** MISCONCEPTION:MC-4  \n**Active in:** DQ-2=MC-4; union operation producing duplicated elements in the result\n\n**Conflict evidence:** \"Membership is a binary property: either x ∈ A or x ∉ A. There is no concept of x being in A 'twice.' If x satisfies the membership rule, it is in. If it doesn't, it isn't. There is no third state.\"\n\n**Bridge text:** \"A set is defined by a membership RULE (a proposition about each candidate element). For any element x, the proposition 'x ∈ A' is either TRUE or FALSE. TRUE means x is in — once. The rule doesn't fire multiple times for the same element.\"\n\n**Replacement text:** \"{1, 1, 2} is the same set as {1, 2}. The repeated 1 is ignored because 1 is already in the set. Cardinality |{1,1,2}| = 2.\"\n\n**S6 path:** Use the light-switch analogy (ON/OFF for membership). Repeating the element doesn't flip the switch a second time.\n\n---\n\n**MAMR note:** MC-2 (order) and MC-4 (duplicates) can be simultaneously active. They are independent of each other — repair in detection order (FIFO). Neither is foundational for the other.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 61,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Set as Sorted Collection (C-stage)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Set as Sorted Collection (C-stage)\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P15\",\"P26\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 14,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Membership Notation and Roster Form (C-stage)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Membership Notation and Roster Form (C-stage)\",\"primitives\":[\"P01\",\"P06\",\"P08\",\"P10\",\"P17\",\"P37\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 40,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Order Doesn't Matter; No Duplicates (C-stage)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Order Doesn't Matter; No Duplicates (C-stage)\",\"primitives\":[\"P02\",\"P06\",\"P19\",\"P26\",\"P27\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 67,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Special Sets and Set-Builder Notation (P-stage)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Special Sets and Set-Builder Notation (P-stage)\",\"primitives\":[\"P01\",\"P07\",\"P10\",\"P13\",\"P17\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 92,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Subsets (P-stage)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Subsets (P-stage)\",\"primitives\":[\"P02\",\"P07\",\"P13\",\"P17\",\"P25\",\"P26\",\"P35\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 120,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Set Operations: Union and Intersection (A-stage)",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Set Operations: Union and Intersection (A-stage)\",\"primitives\":[\"P01\",\"P07\",\"P08\",\"P10\",\"P26\",\"P27\",\"P35\",\"P49\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 147,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate\",\"primitives\":[\"P01\",\"P49\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 176,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Surface the Subset Error",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Surface the Subset Error\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 197,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "MC-3 Repair: Reflexivity of Subset",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"MC-3 Repair: Reflexivity of Subset\",\"primitives\":[\"P01\",\"P16\",\"P25\",\"P26\",\"P31\",\"P33\",\"P49\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 216,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Mastery Confirmation",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Mastery Confirmation\",\"primitives\":[\"P62\",\"P90\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-4\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 238,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Surface and Name the Misconception",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Surface and Name the Misconception\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\",\"MC-4\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 254,
+        "endLine": 264
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "MC-2: Order Is Not a Set Property",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-2: Order Is Not a Set Property\",\"primitives\":[\"P06\",\"P27\",\"P33\",\"P34\",\"P49\",\"P55\"],\"addresses\":[\"MC-2\",\"MC-4\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 264,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "MC-4: No Duplicates",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-4: No Duplicates\",\"primitives\":[\"P06\",\"P19\",\"P27\",\"P33\",\"P49\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 277,
+        "endLine": 287
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Formative and Gate",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"Formative and Gate\",\"primitives\":[\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 287,
+        "endLine": 303
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Formalise Existing Knowledge",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Formalise Existing Knowledge\",\"primitives\":[\"P04\",\"P07\",\"P13\",\"P35\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 303,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Subset Proof Technique",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Subset Proof Technique\",\"primitives\":[\"P02\",\"P08\",\"P25\",\"P44\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 314,
+        "endLine": 324
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Power Set (S3/S8 extension — bloom=understand at higher depth)",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Power Set (S3/S8 extension — bloom=understand at higher depth)\",\"primitives\":[\"P08\",\"P23\",\"P42\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 324,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P28\",\"P30\",\"P52\",\"P54\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 333,
+        "endLine": 349
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Low-Stakes Anchor",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Low-Stakes Anchor\",\"primitives\":[\"P02\",\"P30\",\"P41\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 349,
+        "endLine": 356
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Concrete Membership",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Concrete Membership\",\"primitives\":[\"P06\",\"P15\",\"P30\",\"P34\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 356,
+        "endLine": 362
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Notation Introduction (pace-controlled)",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Notation Introduction (pace-controlled)\",\"primitives\":[\"P30\",\"P35\",\"P49\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 362,
+        "endLine": 368
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Operations (visual-first)",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"Operations (visual-first)\",\"primitives\":[\"P07\",\"P30\",\"P35\",\"P49\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 368,
+        "endLine": 374
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-E05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-E05\",\"title\":\"Mastery Gate\",\"primitives\":[\"P30\",\"P49\",\"P52\",\"P54\",\"P55\",\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 374,
+        "endLine": 391
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-F01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Vocabulary with Icons",
+      "content": "{\"id\":\"TA-F01\",\"title\":\"Vocabulary with Icons\",\"primitives\":[\"P02\",\"P06\",\"P26\",\"P37\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 391,
+        "endLine": 403
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-F02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Subset Visually",
+      "content": "{\"id\":\"TA-F02\",\"title\":\"Subset Visually\",\"primitives\":[\"P07\",\"P26\",\"P37\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 403,
+        "endLine": 409
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-F03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Operations Visually",
+      "content": "{\"id\":\"TA-F03\",\"title\":\"Operations Visually\",\"primitives\":[\"P07\",\"P13\",\"P35\",\"P49\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 409,
+        "endLine": 415
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_action_meta/TA-F04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-theory",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-F04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P62\",\"P90\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-F04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 415,
+        "endLine": 423
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.set-theory",
+      "title": "Assessment Battery",
+      "content": "**Formative items F-1 and F-2:**\n\nF-1 (P74 — Classification):  \n\"Let A = {x ∈ ℤ | x² < 10}. List the elements of A. Then answer: is 3 ∈ A? Is −3 ∈ A? Is 0 ∈ A? Is π ∈ A?\"  \nExpected CORRECT: A = {−3, −2, −1, 0, 1, 2, 3} (since 3²=9<10, (−3)²=9<10). 3∈A=Yes, −3∈A=Yes, 0∈A=Yes, π∈A=No (π²≈9.87<10 — accept Yes with correct computation; intended answer = borderline, but π∉ℤ so No).\n\nF-2 (P78 — Explanation):  \n\"Explain in your own words why {1, 2, 3} = {3, 1, 2} but {1, 2, 3} ≠ {1, 2, 4}.\"  \nExpected CORRECT: First pair — same elements regardless of order. Second pair — 3 ∈ first set but 3 ∉ second; 4 ∈ second but 4 ∉ first. Sets are equal iff they have exactly the same elements.\n\n---\n\n**Full battery:**\n\n| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (Classification) | \"Classify each relationship as ∈, ∉, ⊆, or ⊄ (or both ∈ and ⊆ if applicable): (A) 3 ___ {1,2,3,4}. (B) {1,3} ___ {1,2,3,4}. (C) {1,5} ___ {1,2,3,4}. (D) ∅ ___ {1,2,3}.\" | CORRECT: A=∈; B=⊆; C=⊄ (5 not in second set); D=⊆ (vacuously) |\n| P75 (Boundary) | \"Is A ∩ B = ∅ possible when A and B are non-empty? Give an example or explain why not.\" | CORRECT: Yes — e.g. A={1,2}, B={3,4}; no elements in common; A∩B=∅. These are DISJOINT sets. |\n| P76 (Transfer) | \"In a database: UserSet = {users who logged in today}; AdminSet = {users with admin rights}. Describe in set notation the users who logged in today AND have admin rights.\" | CORRECT: UserSet ∩ AdminSet |\n| P77 (Generation) | \"Write a set in set-builder notation that contains exactly the positive even integers less than 10.\" | CORRECT: {x ∈ ℤ | x > 0 AND x < 10 AND x is even} = {2, 4, 6, 8}. Accept equivalent formulations. |\n| P78 (Explanation) | \"A student computes A ∪ B = {1, 2, 2, 3, 4} for A={1,2,3} and B={2,3,4}. What error has the student made and what is the correct answer?\" | CORRECT: Student included duplicate 2. Sets have no duplicates. Correct: A∪B = {1,2,3,4}. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 632,
+        "endLine": 658
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.set-theory",
+      "title": "Student State Matrix",
+      "content": "| State | Label | Entry Behaviour | Protocol |\n|---|---|---|---|\n| S0 | Complete Novice | No exposure to set language; can sort physical objects by attribute but has no formal notation | Protocol A |\n| S1 | Procedural Carrier | Can write roster notation and recognise ∈; makes systematic errors on subset (thinks ⊆ requires strictly fewer elements) or on operations | Protocol B |\n| S2 | Misconception Carrier | Holds MC-2 (order matters in sets) or MC-4 (duplicates allowed) confidently; notation surface knowledge masks error | Protocol C |\n| S3 | Conceptual Carrier | Knows what a set is informally; missing formal notation, subset proof technique, or set-builder notation | Protocol D |\n| S6 | Low Confidence | Anxious about formal mathematical notation; can sort objects physically but shuts down at ∈ or ∅ symbols | Protocol E |\n| S9 | Second-Language Learner | Set vocabulary (element, member, subset, union, intersection) does not map cleanly to L1; visual approach first | Protocol F |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 37,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.found.set-theory",
+      "title": "Diagnostic Battery",
+      "content": "---\n\n### DQ-1 — Set Membership Intuition (P41)\n\n**Stimulus:** \"I have a collection: {2, 4, 6, 8}. Is 4 in this collection? Is 5? Is 4.0?\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"4=yes, 5=no, 4.0=yes (or correctly identifies 4.0=4)\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"4=yes, 5=no, 4.0=no (treats 4.0 as different from 4)\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n{ stimulus: \"Any answer claiming 4 is not in the collection\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n{ stimulus: \"Cannot engage\", signal: \"SIGNAL:NO_RESPONSE\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → DQ-2\n- SIGNAL:PARTIAL → note for TA-A01 emphasis on membership equality; DQ-2\n- SIGNAL:INCORRECT → S0; DQ-2\n- SIGNAL:NO_RESPONSE → S0 or S6\n\n---\n\n### DQ-2 — Order and Repetition (P35)\n\n**Stimulus:** \"Are these the same set or different sets?  \n(A) {1, 2, 3} and {3, 1, 2}  \n(B) {a, a, b} and {a, b}\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"A=same, B=same (no order; no duplicates)\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"A=different (order matters)\", signal: \"MISCONCEPTION:MC-2\", mc_id: \"MC-2\" }\n{ stimulus: \"B=different (duplicates matter)\", signal: \"MISCONCEPTION:MC-4\", mc_id: \"MC-4\" }\n{ stimulus: \"A=same, B=different\", signal: \"MISCONCEPTION:MC-4\", mc_id: \"MC-4\" }\n{ stimulus: \"A=different, B=same\", signal: \"MISCONCEPTION:MC-2\", mc_id: \"MC-2\" }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → DQ-3\n- MISCONCEPTION:MC-2 or MC-4 → flag; continue DQ-3; route to Protocol C\n\n---\n\n### DQ-3 — Subset Intuition (P41)\n\n**Stimulus:** \"Let A = {1, 2, 3} and B = {1, 2, 3, 4, 5}. Is A a subset of B? Now: is A a subset of A?\"\n\n**Response taxonomy:**\n```\n{ stimulus: \"A⊆B=yes and A⊆A=yes (every set is a subset of itself)\", signal: \"SIGNAL:CORRECT\", mc_id: null }\n{ stimulus: \"A⊆B=yes but A⊆A=no or 'uncertain' (thinks subset must be strictly smaller)\", signal: \"MISCONCEPTION:MC-3\", mc_id: \"MC-3\" }\n{ stimulus: \"A⊆B=no (does not understand subset)\", signal: \"SIGNAL:INCORRECT\", mc_id: null }\n{ stimulus: \"Unsure about both\", signal: \"SIGNAL:PARTIAL\", mc_id: null }\n```\n\n**Routing:**\n- SIGNAL:CORRECT → S3 or S1 → use Protocol D or B (check DQ-2 + prerequisite results)\n- MISCONCEPTION:MC-3 → Protocol C with MC-3 repair emphasis\n- SIGNAL:INCORRECT → S0 → Protocol A\n- SIGNAL:PARTIAL → S0 → Protocol A\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-4",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 50,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.found.set-theory/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "math.found.set-theory",
+      "title": "Prerequisite Check",
+      "content": "`requires: [math.found.logic, math.found.mathematical-language]`\n\n**PC-1 (logic):** \"True or False: 'If x ∈ {1,2,3}, then x < 4.' Is this true for all possible x in the set?\"  \nExpected CORRECT: Yes — 1, 2, 3 are all < 4.  \nSIGNAL:INCORRECT → student cannot evaluate a conditional over a set → flag; reinforce in TA-A01.\n\n**PC-2 (mathematical language):** \"What does the symbol ∈ mean?\"  \nExpected CORRECT: \"is an element of / is in / belongs to\" or similar.  \nSIGNAL:INCORRECT → ∈ not known → introduce in TA-A01 before proceeding to membership questions.\n\n**Gap repair:** If PC-2 fails: P02 → P26[definition: \"∈ means 'is an element of.' x ∈ A means 'x belongs to the set A.'\"] → P37[classify: 3 membership questions] → P55 → P49 → then continue.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-theory.md",
+        "startLine": 115,
+        "endLine": 131
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

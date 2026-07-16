@@ -38,7 +38,7 @@ interface RawSection {
 // Separators observed in the live corpus: "Component N — Title" (phys),
 // "Component N: Title" (math, landed 2026-07-16), "Section N — Title",
 // "N. Title" (protocol format), "CN — Title" (compact expert-physics format).
-const SECTION_HEADER_RE = /^##\s+(?:Component\s+\d+\s*[—:]\s*|Section\s+\d+\s+—\s+|C\d+\s+—\s+|\d+\.\s+)(.+)$/gm
+const SECTION_HEADER_RE = /^##\s+(?:Component\s+\d+\s*(?:\(continued\)\s*)?[—:]\s*|Section\s+\d+\s+—\s+|C\d+\s+—\s+|\d+\.\s+)(.+)$/gm
 
 function splitSections(content: string): RawSection[] {
   const lines = content.split('\n')
@@ -109,8 +109,12 @@ function listField(block: string, ...keys: string[]): string[] {
  *  the C0 section (e.g. phys.astro.*) instead of a fenced key:value block. */
 function tableField(body: string, ...labels: string[]): string | null {
   for (const label of labels) {
-    const re = new RegExp(`^\\|\\s*\\*{0,2}${label}\\*{0,2}\\s*\\|\\s*([^|\\n]+)\\|?\\s*$`, 'mi')
-    const v = re.exec(body)?.[1]?.trim()
+    // Field-name cell may be wrapped in bold and/or backticks, and/or carry a
+    // trailing colon inside the emphasis: "**Blueprint ID:**".
+    const re = new RegExp(`^\\|\\s*[*\`]{0,2}${label}:?[*\`]{0,2}\\s*\\|\\s*([^|\\n]+)\\|?\\s*$`, 'mi')
+    // Table cells commonly wrap values in backticks (`math.arith.division`) —
+    // strip them so conceptId/prerequisite matching sees the bare id.
+    const v = re.exec(body)?.[1]?.trim().replace(/`/g, '')
     if (v) return v
   }
   return null
@@ -118,7 +122,7 @@ function tableField(body: string, ...labels: string[]): string | null {
 
 function extractMetadata(sections: RawSection[], conceptIdFromFilename: string): BlueprintMetadata {
   // The math corpus titles its C0 section just "Metadata".
-  const c0 = findSection(sections, /concept (profile|metadata|identity)|^metadata$/i)
+  const c0 = findSection(sections, /concept (profile|metadata|identity)|^metadata\b/i)
   // Protocol-format C0s author bare `key: value` lines with no fence — the
   // section body itself is the block then (scalarField keys are specific
   // enough that surrounding prose can't collide).
@@ -130,23 +134,31 @@ function extractMetadata(sections: RawSection[], conceptIdFromFilename: string):
     if (c0 && /^\|/m.test(c0.body)) {
       // Both label conventions appear in table C0s: Title-Case ("Concept ID",
       // phys.astro) and snake_case ("concept_id", math corpus).
-      const masteryStr = tableField(c0.body, 'Mastery Threshold', 'mastery_threshold')
-      const hoursStr = tableField(c0.body, 'Estimated Hours', 'Estimated study hours', 'estimated_hours')
-      let prereqsRaw = tableField(c0.body, 'Prerequisites', 'prerequisites', 'requires \\(Tier-1\\)', 'requires') ?? ''
+      const masteryStr = tableField(c0.body, 'Mastery Threshold', 'mastery_threshold', 'Mastery')
+      const hoursStr = tableField(c0.body, 'Estimated Hours', 'Estimated study hours', 'estimated_hours', 'Est\\.? Hours')
+      let prereqsRaw = tableField(
+        c0.body, 'Prerequisites', 'prerequisites', 'Prerequisites\\s*\\([^)]*\\)', 'requires \\(Tier-1\\)', 'requires',
+      ) ?? ''
+      // A table cell literally reading "[]" means zero prerequisites, not a
+      // single prerequisite named "[]".
+      if (prereqsRaw.replace(/[[\]\s]/g, '') === '') prereqsRaw = ''
       if (!prereqsRaw) {
         // math variant: prerequisites live outside the table as a bold
         // "**prerequisites:** [a, b]" line in the same section.
         prereqsRaw = listField(c0.body.replace(/\*\*/g, ''), 'prerequisites', 'requires').join(', ')
       }
       return {
-        conceptId: tableField(c0.body, 'Concept ID', 'concept_id') ?? conceptIdFromFilename,
-        name: tableField(c0.body, 'Name', 'Display name', 'concept_name', 'name') ?? '',
+        conceptId: tableField(c0.body, 'Concept ID', 'concept_id', 'BLUEPRINT_ID', 'KG_ID', 'KG concept ID', 'Blueprint ID') ?? conceptIdFromFilename,
+        name: tableField(c0.body, 'Name', 'Display name', 'concept_name', 'name', 'Concept name') ?? '',
         difficultyRaw: tableField(c0.body, 'Difficulty', 'difficulty') ?? '',
         bloom: tableField(c0.body, 'Bloom Level', 'Bloom', 'bloom') ?? '',
+        // "Mastery" / "Est. Hours" — the compact Section-format's short labels.
         masteryThreshold: masteryStr ? parseFloat(masteryStr) : null,
         estimatedHours: hoursStr ? parseFloat(hoursStr) : null,
+        // math.found.* separates a table-cell prerequisite list with "·"
+        // instead of a comma; split on either.
         prerequisites: prereqsRaw
-          .split(',').map((s) => s.trim()).filter((s) => s.length > 0 && s.toLowerCase() !== 'none'),
+          .split(/[,·]/).map((s) => s.trim()).filter((s) => s.length > 0 && s.toLowerCase() !== 'none'),
         sessionCapRaw: tableField(c0.body, 'Session Cap', 'session_cap', 'session_ta_cap'),
         status: tableField(c0.body, 'Status', 'status') ?? '',
       }
@@ -190,7 +202,7 @@ function extractMetadata(sections: RawSection[], conceptIdFromFilename: string):
   // falls back to the child label when no same-line value exists.
   const difficultyRaw = scalarField(block, 'difficulty', 'kg_difficulty') ??
     (/^\s*difficulty\s*:\s*\n\s+label\s*:\s*(.+)$/mi.exec(block)?.[1]?.trim() ?? '')
-  const bloom = scalarField(block, 'bloom', 'bloom_target') ?? ''
+  const bloom = scalarField(block, 'bloom', 'bloom_target', 'bloom_level') ?? ''
   const masteryThresholdStr = scalarField(block, 'mastery_threshold')
   const estimatedHoursStr = scalarField(block, 'estimated_hours')
   const sessionCapRaw = scalarField(block, 'session_cap')
@@ -213,7 +225,7 @@ function extractMetadata(sections: RawSection[], conceptIdFromFilename: string):
 // ── C4 Teaching Actions extraction ───────────────────────────────────────────
 
 // TA header separators in the corpus: "—" / "-" (phys, eng), "·" (math).
-const TA_HEADER_RE = /^(?:###\s+|\*\*)(TA-[A-Za-z0-9]+)\s*(?:—|-|·)\s*([^[\n*]+?)(?:\s*\[([^\]]*)\])?\s*\*{0,2}\s*$/gm
+const TA_HEADER_RE = /^(?:#{3,4}\s+|\*\*)(TA-[A-Za-z0-9]+)\s*(?:—|-|·|:)\s*([^[\n*]+?)(?:\s*\[([^\]]*)\])?\s*\*{0,2}\s*$/gm
 
 function extractTeachingActions(sections: RawSection[], file: string): BlueprintTeachingAction[] {
   const taSection =
@@ -280,6 +292,7 @@ function extractTeachingActions(sections: RawSection[], file: string): Blueprint
       primitives: [...primitiveSet],
       referencedMisconceptionIds: [...mcSet],
       span: { file, startLine, endLine },
+      body: body.trim(),
     })
   }
   if (actions.length > 0) return actions
@@ -356,6 +369,27 @@ function extractTeachingActions(sections: RawSection[], file: string): Blueprint
       }
       if (out.length > 0) return out
     }
+  }
+
+  // Shape 6 — bare bullet-point adaptive routing under the Teaching Actions
+  // section itself, no TA-id/table/bracket structure at all (math.prob.*
+  // "- Learner does X → trigger MC-N bridge." lines). One synthesized TA per
+  // bullet, in authored order — the routing prose IS the teaching action.
+  if (taSection) {
+    const out: BlueprintTeachingAction[] = []
+    const bulletRe = /^-\s+(.+)$/gm
+    let bullet: RegExpExecArray | null
+    while ((bullet = bulletRe.exec(taSection.body)) !== null) {
+      const startLine = taSection.startLine + taSection.body.slice(0, bullet.index).split('\n').length - 1
+      out.push({
+        id: `TA-${out.length + 1}`,
+        title: bullet[1].trim(),
+        primitives: [...new Set([...bullet[0].matchAll(/\bP\d{1,3}\b/g)].map((p) => p[0]))],
+        referencedMisconceptionIds: [...new Set([...bullet[0].matchAll(/\bMC-[A-Za-z0-9_-]+\b/g)].map((p) => p[0]))],
+        span: { file, startLine, endLine: startLine },
+      })
+    }
+    if (out.length > 0) return out
   }
 
   return actions
@@ -440,6 +474,9 @@ function extractFromNumberedRows(sectionBody: string, file: string): BlueprintTe
 // ── C3 Misconceptions extraction ─────────────────────────────────────────────
 
 const MC_HEADER_RE = /^###\s+(MC-[A-Za-z0-9_-]+)[:\s]*(.*)$/gm
+// Bold-only header, no "###" at all: "**MC-1 (FOUNDATIONAL) — Sets preserve
+// order …**" (math.found.set/relation/cartesian-product/transitive-relation).
+const MC_BOLD_HEADER_RE = /^\*\*(MC-[A-Za-z0-9_-]+)\b\s*([^*]*)\*\*\s*$/gm
 
 function extractMisconceptions(sections: RawSection[], file: string): BlueprintMisconception[] {
   const mcSection =
@@ -458,6 +495,15 @@ function extractMisconceptions(sections: RawSection[], file: string): BlueprintM
     const label = m[2].replace(/^["(]+|[")]+$/g, '').replace(/^:\s*/, '').trim()
     headerMatches.push({ id, label, index: m.index })
   }
+  MC_BOLD_HEADER_RE.lastIndex = 0
+  while ((m = MC_BOLD_HEADER_RE.exec(haystack)) !== null) {
+    const id = m[1]
+    if (seen.has(id)) continue
+    seen.add(id)
+    const label = m[2].replace(/^["(]+|[")]+$/g, '').replace(/^:\s*/, '').trim()
+    headerMatches.push({ id, label, index: m.index })
+  }
+  headerMatches.sort((a, b) => a.index - b.index)
 
   const out: BlueprintMisconception[] = []
   for (let i = 0; i < headerMatches.length; i++) {

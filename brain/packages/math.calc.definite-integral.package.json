@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.definite-integral-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.definite-integral",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:203dc5d4b9336b78183ed04ef711fe3596f89771509d41ce53218ab2529ad401",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.definite-integral.md": "sha256:b0450f0e8b38bdab590367865fb909536f0d6deb04382afee4e8bb9d3a9684aa"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.definite-integral",
+    "name": "Definite Integral",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.riemann-sums"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.definite-integral-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.definite-integral (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.definite-integral.md": "sha256:b0450f0e8b38bdab590367865fb909536f0d6deb04382afee4e8bb9d3a9684aa"
+      },
+      "contentHash": "sha256:92ebfa30894d45b46caed9aa94dabc52e0d5dfd10ba25821ee793b13679eb363",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.definite-integral.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.definite-integral.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.definite-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.definite-integral\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.definite-integral.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.definite-integral.md#TA-B02 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.definite-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.definite-integral\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.definite-integral.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.definite-integral.md#TA-B03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.definite-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.definite-integral\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.definite-integral/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.calc.definite-integral",
+      "title": "Definite Integral — cognitive map",
+      "content": "**Core concept:** The definite integral ∫_a^b f(x)dx is defined as the limit of Riemann sums: lim_{n→∞} Σᵢ f(xᵢ*)Δx. It measures the signed area between the graph of f and the x-axis from x=a to x=b. Regions above the x-axis contribute positively; regions below contribute negatively. The integral is a single real number, not a function. Key properties: linearity (∫(αf+βg)=α∫f+β∫g), additivity over intervals (∫_a^c f = ∫_a^b f + ∫_b^c f), and reversal of limits (∫_a^b f = −∫_b^a f).\n\n**Conceptual progression:**\n1. Definition as Riemann sum limit: partition [a,b], choose sample points, form Σ f(xᵢ*)Δxᵢ, take n→∞.\n2. Signed area interpretation: ∫_a^b f(x)dx = (area above x-axis) − (area below x-axis) from a to b.\n3. Reversal property: ∫_a^b f = −∫_b^a f. Special case: ∫_a^a f = 0.\n4. Interval additivity: ∫_a^c f = ∫_a^b f + ∫_b^c f for any b (including b outside [a,c]).\n5. Comparison: if f(x)≤g(x) on [a,b] then ∫_a^b f ≤ ∫_a^b g. Bounds: m(b−a)≤∫_a^b f ≤ M(b−a) where m,M are bounds of f.\n\n**CPA arc (entry: C — advanced difficulty):**\n- Concrete: net displacement analogy — if velocity v(t) is positive (moving right) then area above t-axis = distance; negative v(t) means leftward movement subtracts from net displacement. Net displacement = ∫_a^b v(t)dt = signed area.\n- Pictorial: graph of f with shaded regions above (positive) and below (negative) the x-axis; labelled with \"−\" for below; net integral shown.\n- Abstract: ∫_a^b f(x)dx = lim_{n→∞} Σᵢ f(xᵢ*)Δx; reversal and additivity formulas.\n\n**Prior knowledge activated:** Riemann sums (math.calc.riemann-sums) — partition, sample points, Δx=( b−a)/n, sum Σf(xᵢ*)Δx; limit concept (math.calc.limits); signed area intuition from geometry.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 20,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.definite-integral",
+      "title": "INTEGRAL-IS-ALWAYS-POSITIVE-AREA [FOUNDATIONAL]",
+      "content": "### MC-1: INTEGRAL-IS-ALWAYS-POSITIVE-AREA [FOUNDATIONAL]\n**Description:** Learner believes ∫_a^b f(x)dx always equals the total (unsigned) area between the curve and the x-axis — ignores the signed nature, so regions below the x-axis are added (not subtracted). Gives a positive result even when the net integral is zero or negative.\n**Surface form:** \"∫_{−1}^{1} x dx = the area of two triangles, each of area 1/2, total = 1.\"\n**Root cause:** \"Area\" is always positive in everyday language and in most geometric contexts. The word \"area\" in the definition causes the learner to interpret the integral as absolute area. The signed nature (cancellation of positive and negative) requires explicit emphasis.\n**Trigger condition:** Any integral over an interval where f changes sign, or any integral of an odd function over a symmetric interval.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.definite-integral",
+      "title": "DEFINITE-INTEGRAL-NEEDS-ANTIDERIVATIVE",
+      "content": "### MC-2: DEFINITE-INTEGRAL-NEEDS-ANTIDERIVATIVE\n**Description:** Learner believes that evaluating ∫_a^b f(x)dx requires finding an antiderivative F(x) and computing F(b)−F(a). Does not recognise that the definite integral is a number defined geometrically/as a limit, and can sometimes be computed from geometry alone without antidifferentiation.\n**Surface form:** \"I can't evaluate ∫_0^2 √(4−x²) dx because I don't know the antiderivative of √(4−x²).\"\n**Root cause:** The Fundamental Theorem of Calculus (FTC) is the primary computational tool for definite integrals in most curricula; learners conflate the DEFINITION of the integral (Riemann sum limit) with the COMPUTATION method (FTC). But √(4−x²) over [0,2] is a quarter-circle of radius 2 — area = π.\n**Trigger condition:** Any definite integral over a simple geometric shape (semicircle, triangle, trapezoid) where the antiderivative is unknown or complicated.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.calc.definite-integral",
+      "title": "INTEGRAL-ORDER-DOESNT-MATTER",
+      "content": "### MC-3: INTEGRAL-ORDER-DOESNT-MATTER\n**Description:** Learner writes ∫_a^b f(x)dx = ∫_b^a f(x)dx, treating the limits of integration as unordered. Does not know the reversal property: ∫_a^b f = −∫_b^a f.\n**Surface form:** \"∫_3^1 x dx = ∫_1^3 x dx = 4.\"\n**Root cause:** Sums (ΣAᵢ) don't depend on the order of the summands. Learner applies this commutative intuition to integrals, ignoring that reversing the limits of integration reverses the direction of traversal and negates the integral.\n**Repair target:** TA-B03.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 17,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.definite-integral",
+      "title": "Repair for MC-1 (INTEGRAL-IS-ALWAYS-POSITIVE-AREA)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair for MC-1 (INTEGRAL-IS-ALWAYS-POSITIVE-AREA)\",\"primitives\":[\"P06\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 119,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.definite-integral",
+      "title": "Repair for MC-2 (DEFINITE-INTEGRAL-NEEDS-ANTIDERIVATIVE)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair for MC-2 (DEFINITE-INTEGRAL-NEEDS-ANTIDERIVATIVE)\",\"primitives\":[\"P04\",\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 179,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.definite-integral",
+      "title": "Repair for MC-3 (INTEGRAL-ORDER-DOESNT-MATTER)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair for MC-3 (INTEGRAL-ORDER-DOESNT-MATTER)\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 234,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.definite-integral",
+      "title": "Protocol A, TA-A04 [MASTERY GATE: P91]",
+      "content": "### P91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\n**MAMR: PASS = ⌈0.80 × 5⌉ = 4 out of 5**\n\n---\n\n#### P77 — MULTI-PROBLEM SET (4 items)\n\n**Item 1:**\n\"f(x) is above the x-axis on [0,2] (area=4) and below on [2,5] (area=3). Find ∫_0^5 f(x)dx.\"\n[Expected: Signed area: +4−3=1. ∫_0^5 f=1.]\n\n**Item 2:**\n\"Given ∫_1^5 f(x)dx=8 and ∫_1^3 f(x)dx=5, find ∫_3^5 f(x)dx.\"\n[Expected: Additivity: ∫_1^5=∫_1^3+∫_3^5 → 8=5+∫_3^5 → ∫_3^5=3.]\n\n**Item 3:**\nTrue or False: \"∫_5^1 f(x)dx = ∫_1^5 f(x)dx.\"\n[Expected: FALSE. Reversal: ∫_5^1 f = −∫_1^5 f. They are negatives of each other, not equal (unless both are 0).]\n\n**Item 4:**\n\"Evaluate ∫_0^3 2 dx geometrically (without finding an antiderivative).\"\n[Expected: f(x)=2 is a horizontal line at height 2. On [0,3], the region is a rectangle with width 3 and height 2. Area = 6. ∫_0^3 2 dx = 6.]\n\n---\n\n#### P55 — SCORE after P77\nScore each item 1 point for correct, 0 for incorrect. Record score /4.\n\n---\n\n#### P76 — TRANSFER PROBE (independence mode)\n\n\"The graph of f(x) on [−2, 4] has the following properties:\n- On [−2, 0]: f(x) > 0, and the region between f and the x-axis is a triangle with base 2 and height 3.\n- On [0, 4]: f(x) < 0, and the region between f and the x-axis is a rectangle with width 4 and height 1.\n\n(a) Find ∫_{−2}^{0} f(x)dx.\n(b) Find ∫_{0}^{4} f(x)dx.\n(c) Find ∫_{−2}^{4} f(x)dx.\n(d) Find ∫_{4}^{−2} f(x)dx.\"\n\n[Expected:\n(a) f>0 on [−2,0]; triangle area = (1/2)(2)(3)=3. ∫_{−2}^{0} f = +3.\n(b) f<0 on [0,4]; rectangle area = 4·1=4, but negative. ∫_0^4 f = −4.\n(c) By additivity: ∫_{−2}^{4} f = 3+(−4) = −1.\n(d) By reversal: ∫_4^{−2} f = −∫_{−2}^4 f = −(−1) = 1.]\n\n---\n\n#### P55 — SCORE after P76\nScore P76 as 1 point if all four parts are correct ((a)=3, (b)=−4, (c)=−1, (d)=1); 0 otherwise.\n\n---\n\n#### P75 — MASTERY ASSESSMENT\n\nTotal score = P77 score (0–4) + P76 score (0–1) = 0–5.\nPASS threshold: ≥ 4 out of 5.\n- PASS (≥4/5): Learner understands signed area, interval additivity, the reversal property, and geometric evaluation.\n- FAIL (<4/5): Identify which items failed; route to repair.\n\n---\n\n#### P55 — SCORE (mastery total)\nRecord final score and PASS/FAIL status in session memory.\n\n---\n\n#### P74 — ROUTING DECISION\n\n- PASS: → P78 COMPLETION\n- FAIL on Item 1 or P76(b) (treats negative-area region as positive): → TA-B01 (INTEGRAL-IS-ALWAYS-POSITIVE-AREA), then re-gate\n- FAIL on Item 3 (TRUE) or P76(d) (gets −1 instead of 1): → TA-B03 (INTEGRAL-ORDER-DOESNT-MATTER), then re-gate\n- FAIL on Item 4 (cannot evaluate without antiderivative): → TA-B02 (DEFINITE-INTEGRAL-NEEDS-ANTIDERIVATIVE), then re-gate\n- FAIL on Item 2 (additivity error): → return to A02 additivity/reversal section; re-gate\n\n---\n\n#### P55 — SCORE (post-repair if applicable)\nRe-administer two fresh equivalent items + P76 equivalent. Apply MAMR 4/5. Record repair score separately.\n\n---\n\n#### P78 — COMPLETION\n\n\"You have demonstrated understanding of the definite integral as signed area, its properties, and geometric evaluation.\n\nKey anchors to carry forward:\n- Definition: ∫_a^b f(x)dx = lim_{n→∞} Σ f(xᵢ*)Δx. A single real number — signed area.\n- Signed: regions below x-axis contribute NEGATIVELY. ∫ of an odd function over symmetric interval = 0.\n- Reversal: ∫_a^b f = −∫_b^a f. ∫_a^a f = 0.\n- Additivity: ∫_a^c f = ∫_a^b f + ∫_b^c f for any b.\n- Linearity: ∫(αf+βg)=α∫f+β∫g.\n- Geometry: triangles, rectangles, semicircles can be evaluated without antiderivatives.\n\nNext concepts: math.calc.ftc-part1 and math.calc.ftc-part2 — the Fundamental Theorem connects the definite integral to antiderivatives: ∫_a^b f(x)dx=F(b)−F(a) where F'=f.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 341,
+        "endLine": 440
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.definite-integral",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry assessment:** \"Compute the left-Riemann sum for f(x)=x² on [0,2] using n=4 rectangles. What does the sum approximate?\" If the learner correctly computes Δx=0.5, evaluates f at 0, 0.5, 1, 1.5, sums 0.5·(0+0.25+1+2.25)=0.5·3.5=1.75, and identifies this as an approximation to ∫_0^2 x² dx, proceed to A01. This confirms the Riemann sum concept and the integral-as-limit idea.\n\n**Scaffolding ladder:**\n- Rung 1 (concrete): velocity-time graph; shade regions above and below t-axis; interpret positive as \"moved right\" and negative as \"moved left\"; net displacement = signed area.\n- Rung 2 (pictorial): graph of f with labelled positive and negative regions; compute integral as (positive area)−(negative area).\n- Rung 3 (full understand): apply reversal property, interval additivity, and comparison theorems algebraically.\n\n**Pacing note:** h=10 estimated hours; A01 in sessions 1–2; A02 in sessions 3–4; A03 + mastery gate in sessions 4–5.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 64,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.definite-integral",
+      "title": "P89 Spaced Repetition",
+      "content": "**Interval schedule:** Day 1 (initial), Day 3, Day 10, Day 30.\n\n**Day 3 prompt:**\n\"Without computing antiderivatives: (a) Find ∫_{−3}^{3} x³ dx. (b) Find ∫_0^4 √(16−x²) dx.\"\n[Expected: (a) x³ is odd on [−3,3]: integral=0. (b) y=√(16−x²) is the upper half of a circle of radius 4; on [0,4] it is a quarter-circle: area=π(16)/4=4π.]\n\n**Day 10 prompt:**\n\"Show algebraically that if ∫_a^b f(x)dx=I and ∫_b^c f(x)dx=J then ∫_c^a f(x)dx=−I−J.\"\n[Expected: ∫_c^a f = −∫_a^c f = −(∫_a^b f + ∫_b^c f) = −(I+J) = −I−J.]\n\n**Day 30 prompt:**\n\"Prove: if f(x)≥0 on [a,b] then ∫_a^b f(x)dx≥0 using the Riemann sum definition.\"\n[Expected: Since f(xᵢ*)≥0 and Δxᵢ=(b−a)/n>0 for a<b, each summand f(xᵢ*)Δxᵢ≥0. The sum Σf(xᵢ*)Δxᵢ≥0. The limit of non-negative quantities is non-negative. So ∫_a^b f≥0.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 263,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "math.calc.definite-integral/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.definite-integral",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Prerequisite blueprints (must be PACKAGE_READY before delivery):**\n- math.calc.riemann-sums — partition, sample points, sum formula Σf(xᵢ*)Δx, and the idea that the definite integral is the limit of these sums; the current blueprint is the formalisation and properties of that limit\n\n**Unlocked blueprints:**\n- math.calc.ftc-part1 — Fundamental Theorem of Calculus Part 1: d/dx ∫_a^x f(t)dt = f(x); requires the definite integral as a function of its upper limit\n- math.calc.ftc-part2 — FTC Part 2: ∫_a^b f(x)dx = F(b)−F(a); the primary computational tool for definite integrals, built on the definite integral concept developed here\n\n**Cross-links:** math.real.riemann-integral — NOT Tier 1; P76 uses independence mode.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.definite-integral.md",
+        "startLine": 281,
+        "endLine": 294
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

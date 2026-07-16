@@ -1,0 +1,433 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.linear-equation-1var-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.linear-equation-1var",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cda9cbf329b1b01fe0d8506f88b3b679618a1b2898a7c9f11d10ceaa6fff82de",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.linear-equation-1var.md": "sha256:5d57cff33a0f2fc9a007fab5d7ed14cceb55fe2b5ae81f7af4897a731cac0175"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "math.alg.linear-equation-1var",
+    "name": "Linear Equation in One Variable",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.alg.equation",
+      "math.alg.simplification"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.linear-equation-1var-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.linear-equation-1var (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.linear-equation-1var.md": "sha256:5d57cff33a0f2fc9a007fab5d7ed14cceb55fe2b5ae81f7af4897a731cac0175"
+      },
+      "contentHash": "sha256:4a9c8611f7bc6eeb9706cc2adc9efd8deb6eb3ba4fc35bcc7b02fc2e0bdefcec",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-1var.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-1var\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-1var.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-1var\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-1var.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-1var\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-1var.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-1var\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-1var.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-1var\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-1var.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-1var\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.linear-equation-1var.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md#TA-B02 (addresses MC-1, MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.linear-equation-1var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.linear-equation-1var\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.linear-equation-1var/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Linear Equation in One Variable — cognitive map",
+      "content": "**Core concept:** A linear equation in one variable has the form ax + b = c (a ≠ 0), with a unique solution x = (c − b)/a found by isolating the variable through inverse operations applied equally to both sides.\n\n**Conceptual progression:**\n1. Equations represent balance — both sides must remain equal throughout solving.\n2. Inverse operations (add/subtract, multiply/divide) undo operations while preserving equality.\n3. The isolation sequence: simplify each side → move variable terms to one side → move constants to the other → divide by coefficient.\n4. Solutions can be verified by substitution back into the original equation.\n\n**CPA arc (entry: C):**\n- Concrete: balance scales — physical or drawn — with objects representing the unknown; adding/removing equal weights on both sides\n- Pictorial: balance diagrams with symbolic weights (x-tiles and unit tiles); bar models showing partitioned totals\n- Abstract: symbolic manipulation with inverse operations; general form ax + b = c → x = (c − b)/a\n\n**Prior knowledge activated:** equation as a statement of equality; variable as placeholder for an unknown value; simplification (combining like terms, distributing); arithmetic inverse operations\n\n**Threshold concept:** The balance principle — any operation performed on one side must be performed identically on the other; this preserves equality and is the single invariant across all solution methods.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 20,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "BALANCE-NOT-MAINTAINED [FOUNDATIONAL]",
+      "content": "### MC-1: BALANCE-NOT-MAINTAINED [FOUNDATIONAL]\n**Description:** Learner applies an operation to only one side of the equation.\n**Surface form:** From 3x + 5 = 20, subtracts 5 to get 3x = 20 (instead of 3x = 15).\n**Root cause:** Treats the equation as a string to manipulate rather than a balanced relationship; equation-as-symbol not equation-as-constraint.\n**Trigger condition:** Any step requiring a constant to move across the equals sign.\n**Repair target:** TA-B01 → P27 + P41 + P64 restoring the balance-as-invariant frame.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "WRONG-OPERATION-ORDER",
+      "content": "### MC-2: WRONG-OPERATION-ORDER\n**Description:** Learner divides by the coefficient before removing the constant, producing a fractional intermediate.\n**Surface form:** From 3x + 5 = 20, divides by 3 first → x + 5/3 = 20/3, then struggles with fractions.\n**Root cause:** Applies PEMDAS in reverse (division before subtraction) without understanding that subtraction first simplifies the arithmetic path.\n**Trigger condition:** Equations with a coefficient ≠ 1 and a constant term.\n**Repair target:** TA-B02.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "SIGN-ERROR-TRANSPOSING",
+      "content": "### MC-3: SIGN-ERROR-TRANSPOSING\n**Description:** Learner moves a term across the equals sign without changing its sign.\n**Surface form:** From 3x + 5 = 20, writes 3x = 20 + 5 = 25.\n**Root cause:** Treats \"moving\" as physical relocation, not as applying the inverse operation to both sides.\n**Trigger condition:** Any subtraction step required to isolate the variable term.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Balance Principle and One-Step Equations",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Balance Principle and One-Step Equations\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 89,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Solving Two-Step and Simplification Equations",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Solving Two-Step and Simplification Equations\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 111,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Contrast: Valid vs. Invalid Solution Strategies",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast: Valid vs. Invalid Solution Strategies\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 142,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Pattern: Isolation Sequence",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Pattern: Isolation Sequence\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 175,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 204,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Repair: Balance-Not-Maintained",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: Balance-Not-Maintained\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 247,
+        "endLine": 268
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Repair: Sign Error / Wrong Operation Order",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: Sign Error / Wrong Operation Order\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 268,
+        "endLine": 384
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A05 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 90% → PASS requires ⌈0.90 × 5⌉ = 5/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: Solve 3x + 5 = 20. [Answer: x = 5]\nItem 2: Solve 7 − 2x = 1. [Answer: x = 3]\nItem 3: True or False — the solution to 2x + 6 = 10 is x = 5. [Answer: FALSE; 2(5)+6=16≠10; correct solution is x=2]\nItem 4: Solve 4(x − 1) + 2 = 14. [Answer: x = 4; distribute → 4x−4+2=14 → 4x−2=14 → 4x=16 → x=4]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (independence mode — cross_links: []):**\nWord problem: A taxi charges a flat fee of $3 plus $2 per kilometre. A passenger pays $17 in total. How many kilometres did they travel?\n\nModel the situation as a linear equation: 3 + 2d = 17.\nSolve: subtract 3 from both sides → 2d = 14 → divide by 2 → d = 7 km.\nVerify: 3 + 2(7) = 3 + 14 = 17 ✓.\n\nWhat does the balance principle look like in this context? (The total cost is fixed at $17 — every rearrangement must preserve that total.)\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score 5/5 → PASS → P78 COMPLETION\n- Score < 5/5 → FAIL → Route to TA-B01 (if balance-principle errors) or TA-B02 (if procedure/sign errors)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Linear equations in one variable: mastered. You can model real-world constraints algebraically, apply the balance principle reliably, and solve equations with distribution and simplification. This underpins everything from quadratic equations to systems of equations.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 204,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** Present 2x = 10 (no constant). If correct → begin TA-A01. If incorrect → repair prerequisite (math.alg.equation).\n\n**Scaffolding ladder:**\n1. Balance-scale stories with integer unknowns (C stage)\n2. Equations of form x + b = c (one-step, addition inverse only)\n3. Equations of form ax = c (one-step, multiplication inverse only)\n4. Equations of form ax + b = c (two-step, both inverses)\n5. Equations requiring simplification first: distribution, like terms\n\n**Worked example progression (P07):**\n- WE-1: Two-step direct: 3x + 5 = 20 → subtract 5 both sides → 3x = 15 → divide by 3 → x = 5\n- WE-2: Simplification-first: 3(2x − 1) + 2x = 10 → distribute → 8x − 3 = 10 → 8x = 13 → x = 13/8\n\n**Pacing gate:** Must score ≥ 5/5 on P91 to earn mastery credit (MAMR = 90%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 66,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.alg.linear-equation-1var\n  MAMR: 0.90\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"Solve 5x − 8 = 22.\"\n  session_3_probe: \"A train ticket costs $4 plus $1.50 per station. Maria paid $16. How many stations?\"\n  session_7_probe: \"Solve 2(3x + 4) − 5 = 19.\"\n  session_14_probe: \"Solve −4x + 7 = −9. Verify your answer.\"\n  session_30_probe: \"Write and solve a linear equation modeling: three consecutive integers sum to 72.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 286,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "math.alg.linear-equation-1var/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.linear-equation-1var",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.alg.equation — equation as equality statement, variable notation [BLUEPRINT EXISTS]\n- math.alg.simplification — distribution, combining like terms [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.alg.linear-equation-2var — systems of two linear equations\n- math.alg.inequalities — linear inequalities (same balance logic, flipped for negatives)\n- math.alg.quadratic-equation — quadratic equations (isolation technique extended)\n\n**Cross-links:** [] — no Tier 1 cross-links.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented above.\n**GR-9 satisfied:** P76 independence mode applied (cross_links empty).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.linear-equation-1var.md",
+        "startLine": 302,
+        "endLine": 320
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

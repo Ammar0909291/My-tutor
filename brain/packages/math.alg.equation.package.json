@@ -1,0 +1,480 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:db17782f542a3148a42e8cc9da1838f5faf97a4a459df076b77dd06625e2824b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.equation.md": "sha256:6db82d357d38e80ea559cab332909848710d2dd8cd96f17c6f01f2787fee0a9e"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.alg.equation",
+    "name": "Equation",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.alg.expression"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.equation.md": "sha256:6db82d357d38e80ea559cab332909848710d2dd8cd96f17c6f01f2787fee0a9e"
+      },
+      "contentHash": "sha256:ae3444a5e2f7d4b6be475c94d21f0231752342f34d9dcf3ce8b0758dae1fc0a2",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.equation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.equation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.equation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.equation.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.equation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.equation.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.equation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.equation.md#TA-A04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.equation.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.equation.md#TA-A05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.equation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.equation.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.equation.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.equation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.equation.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.equation.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.equation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.equation.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.equation.md#TA-B03 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.equation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.equation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.alg.equation",
+      "title": "Equation — cognitive map",
+      "content": "**Core concept:** An equation is a statement asserting that two algebraic expressions are equal, written with an = sign between them. Unlike an expression (which is evaluated), an equation is solved — finding all values of the variable(s) that make the statement true. A solution is a value that, when substituted, produces a true equality. Equations may have one solution, no solutions, or infinitely many solutions.\n\n**Knowledge prerequisites activated:**\n- math.alg.expression: the left-hand side (LHS) and right-hand side (RHS) of an equation are each algebraic expressions\n\n**Concept structure:**\n1. **Structure**: LHS = RHS — two expressions connected by the = sign\n2. **Solving vs. evaluating**: equations are solved (find variable values making LHS=RHS true); expressions are evaluated (substitute a specific value to get a number)\n3. **Solution verification**: substitute the candidate value into both sides; if LHS=RHS, it is a solution\n4. **Solution counts**: one unique solution (most linear equations), no solution (contradiction), infinitely many (identity)\n\n**Target understanding:** The learner distinguishes an equation from an expression, verifies whether a given value is a solution by substitution, understands that the goal of solving is finding values that make the equality true, and recognises that not every equation has exactly one solution.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 26,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.alg.equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.equation",
+      "title": "EQUATION-IS-EXPRESSION",
+      "content": "| MC-1 | EQUATION-IS-EXPRESSION | Shown 2x+3=7; asked what to do with it | Evaluates or simplifies as if no = sign exists; treats it as an expression to compute rather than a statement to satisfy | B01 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.alg.equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.equation",
+      "title": "SOLVING-MEANS-SIMPLIFYING",
+      "content": "| MC-2 | SOLVING-MEANS-SIMPLIFYING | Working on 2x+3=7 | Simplifies to 2x=4 then stops; does not isolate the variable to x=2; confuses \"simplified form\" with \"solved\" | B02 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.alg.equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.equation",
+      "title": "SOLUTION-IS-UNIQUE-ALWAYS",
+      "content": "| MC-3 | SOLUTION-IS-UNIQUE-ALWAYS | Asked about x+3=x+3 or x+1=x | Insists every equation must have exactly one solution; cannot process no-solution or all-values cases | B03 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.equation",
+      "title": "The Balance Scale: Equations as Balanced Claims (GR-1: P03 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Balance Scale: Equations as Balanced Claims (GR-1: P03 | GR-2: P49)\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 69,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.equation",
+      "title": "Equation vs. Expression; LHS, RHS, and the = Sign (GR-1: P11 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Equation vs. Expression; LHS, RHS, and the = Sign (GR-1: P11 | GR-2: P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 103,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.equation",
+      "title": "Solving vs. Simplifying; The Goal of Solving (GR-1: P06 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Solving vs. Simplifying; The Goal of Solving (GR-1: P06 | GR-2: P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 141,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.equation",
+      "title": "One Solution, No Solution, Infinitely Many (GR-1: P04 | GR-2: P49)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"One Solution, No Solution, Infinitely Many (GR-1: P04 | GR-2: P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 174,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.equation",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 212,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.equation",
+      "title": "Repair: EQUATION-IS-EXPRESSION (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: EQUATION-IS-EXPRESSION (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 281,
+        "endLine": 308
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.equation",
+      "title": "Repair: SOLVING-MEANS-SIMPLIFYING (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: SOLVING-MEANS-SIMPLIFYING (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P27\",\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 308,
+        "endLine": 336
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.equation",
+      "title": "Repair: SOLUTION-IS-UNIQUE-ALWAYS (GR-4: P27 + P41 + P64 | GR-2: P49)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Repair: SOLUTION-IS-UNIQUE-ALWAYS (GR-4: P27 + P41 + P64 | GR-2: P49)\",\"primitives\":[\"P03\",\"P06\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 336,
+        "endLine": 436
+      }
+    },
+    {
+      "assetId": "math.alg.equation/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.equation",
+      "title": "Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)",
+      "content": "### TA-A05 — Mastery Gate (GR-3: P91 terminal | GR-6: P91 in this TA only | GR-7: P76)\n\n**P91 NAMED COMPOUND: P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78**\n\n---\n\n**P77 MULTI-PROBLEM SET**\n\n1. **Is 3x−4=11 an equation?** What would solving it mean?\n   *(Expected: YES — an equation has an = sign; solving means finding x so that 3x−4=11)*\n\n2. **Verify that x=5 is a solution of 3x−4=11.** Show LHS and RHS.\n   *(Expected: LHS=3(5)−4=15−4=11; RHS=11; LHS=RHS ✓; YES, x=5 is a solution)*\n\n3. **True/False:** Every equation has exactly one solution.\n   *(Expected: FALSE — some have zero solutions (e.g., x=x+1), some have infinitely many (e.g., x+2=x+2))*\n\n4. **How many solutions does x+3=x+3 have?** Show the simplification step.\n   *(Expected: subtract x: 3=3, always true → infinitely many solutions)*\n\n**P55 SCORE** (P77): ___/4\n\n---\n\n**P76 TRANSFER PROBE** (GR-9: independence mode — cross_links=[], novel context)\n\n*Taxi fare context:*\n\n\"A taxi company charges a flat fee of $3 plus $2 per kilometre.\n\n(a) Write an equation for when the total cost equals $15. Define your variable.\n(b) Solve for the variable.\n(c) Verify your solution by substituting back into the equation.\n(d) Does this equation have one solution, no solution, or infinitely many? Why?\"\n\n*(Expected:*\n*(a) Let k = kilometres; equation: 3+2k = 15*\n*(b) Subtract 3: 2k=12; divide by 2: k=6*\n*(c) LHS: 3+2(6)=3+12=15; RHS: 15; LHS=RHS ✓*\n*(d) One unique solution — a linear equation in one variable with a non-zero coefficient of k.)*\n\n**P55 SCORE** (P76): ___/1\n\n---\n\n**P75 MASTERY ASSESSMENT**\nTotal: P77_score + P76_score = ___/5\nPASS criterion: **5/5** (threshold 0.90; ⌈0.90×5⌉ = 5)\n\n**P55 SCORE** (total): ___/5\n\n---\n\n**P74 ROUTING DECISION**\n→ **PASS** (5/5): → P78\n→ **FAIL** (<5/5): → B01 (MAMR: clear MC-1 EQUATION-IS-EXPRESSION first; then B02 or B03 as flagged)\n\n**P55 SCORE** (route logged): ___\n\n---\n\n**P78 COMPLETION**\n\"You can now identify an equation by its = sign, distinguish it from an expression, verify solutions by substitution, understand what solving means (isolating the variable), and recognise that equations may have one, zero, or infinitely many solutions. Linear equations in one variable build directly on this foundation.\"\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 212,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.equation",
+      "title": "Scaffolding Protocol",
+      "content": "**CPA Entry Stage:** C — Concrete\nBalance-scale model: an equation is a balanced scale. Each side holds weights (expressions). Solving means finding the unknown weight that keeps the scale balanced.\n\n**Progression Gate (C → P):** Learner can identify LHS and RHS of a given equation and correctly substitute a value to verify or refute it as a solution.\n**Progression Gate (P → A):** Learner distinguishes expression from equation by the = sign, verifies solutions by substitution, and states how many solutions a given simple equation has.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 55,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.alg.equation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.equation",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Interval | Review Focus | Probe Type |\n|---|---|---|\n| Day 1 | Expression vs. equation; LHS/RHS identification | \"Label LHS and RHS: 4x−1=7\" |\n| Day 3 | Verification by substitution | \"Is x=3 a solution of 2x+1=7?\" (YES: 7=7) |\n| Day 7 | Solution count: one / none / infinitely many | \"How many solutions: 2x=2x? x+1=x?\" |\n| Day 30 | Real-world equation setup and solve | Taxi fare or similar contextual equation |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 363,
+        "endLine": 374
+      }
+    },
+    {
+      "assetId": "math.alg.equation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.equation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Depends on:**\n- math.alg.expression (required): the LHS and RHS of every equation are algebraic expressions; the equation concept is built directly on the expression concept\n\n**Enables:**\n- math.alg.linear-equation-1var: solving linear equations in one variable — the core skill of introductory algebra; uses the solving framework established here\n- math.alg.inequality: an inequality replaces = with <, >, ≤, ≥; same concept of finding values satisfying a statement\n\n**Cross-links (GR-8):**\n- (none — cross_links=[])\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.equation.md",
+        "startLine": 374,
+        "endLine": 388
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

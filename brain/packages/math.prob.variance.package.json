@@ -1,0 +1,321 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.prob.variance-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.prob.variance",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1e0f9e3d6bd3ba6df159986c5f8e8d60a8c0e422cabe69ecde669222f30625c8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.prob.variance.md": "sha256:fd13a995b5a5c8a05bfff9691beff04cb1c07827900d9f9a30ab804e65d4113c"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.prob.variance",
+    "name": "Variance",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.prob.expected-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.prob.variance-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.prob.variance (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.prob.variance.md": "sha256:fd13a995b5a5c8a05bfff9691beff04cb1c07827900d9f9a30ab804e65d4113c"
+      },
+      "contentHash": "sha256:6691639b89b99bcac970a9e113608e94da0469e4df1fd8a67790f86a8702a7d7",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.prob.variance.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.variance.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.variance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.variance\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.variance.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.variance.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.variance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.variance\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.prob.variance.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.prob.variance.md#TA-A03 (addresses MC-1, MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.prob.variance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.prob.variance\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.prob.variance/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.prob.variance",
+      "title": "Variance — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.prob.expected-value**: E[X] = Σx·P(X=x) (discrete) or ∫x·f(x)dx (continuous); E[X] as center of mass of the distribution\n\n### Target Knowledge State\nStudent can compute Var(X) = E[X²] − (E[X])² for both discrete and continuous RVs, interpret variance as spread around the mean, and apply the scaling and shift rules: Var(aX+b) = a²·Var(X).\n\n### Conceptual Obstacles\n1. Computing E[X²] but forgetting to subtract (E[X])² — writing Var(X) = E[X²] instead of E[X²] − (E[X])²\n2. Confusing Var(X) with standard deviation σ = √Var(X) — reporting σ as the variance\n3. Believing that adding a constant shifts the variance: Var(X+c) = Var(X)+c (incorrect); the correct rule is Var(X+c) = Var(X)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.prob.variance/worked_example/WE-TA-A02",
+      "kind": "worked_example",
+      "conceptId": "math.prob.variance",
+      "title": "Worked Example Pair",
+      "content": "### Teaching Action A02 — Worked Example Pair\n\n**Primitive:** P07 WORKED EXAMPLE PAIR\n**Purpose:** Apply both formulas step-by-step; connect continuous case to integral; address MC-2 and MC-3\n\n---\n\n**[P07 — WORKED EXAMPLE PAIR]**\n\n**Worked Example 1 — Discrete PMF**\n\n*Problem:* X has PMF: P(X=0)=1/4, P(X=2)=1/2, P(X=4)=1/4. Find Var(X).\n\n*Step 1 — Find E[X]:*\nE[X] = 0(1/4) + 2(1/2) + 4(1/4) = 0 + 1 + 1 = **2**\n\n*Step 2 — Find E[X²]:*\nE[X²] = 0²(1/4) + 2²(1/2) + 4²(1/4) = 0 + 2 + 4 = **6**\n\n*Step 3 — Apply shortcut:*\nVar(X) = E[X²] − (E[X])² = 6 − 2² = 6 − 4 = **2**\n\n*Standard deviation:* σ = √Var(X) = √2 ≈ 1.41 (note: the variance is 2, not √2)\n\n---\n\n**Worked Example 2 — Continuous Uniform U(0, 4)**\n\n*Problem:* X ~ U(0, 4), f(x) = 1/4 on [0, 4]. Find Var(X).\n\n*Step 1 — Find E[X]:*\nE[X] = (0+4)/2 = **2** (by symmetry)\n\n*Step 2 — Find E[X²] via integral:*\nE[X²] = ∫₀⁴ x² · (1/4) dx = (1/4)[x³/3]₀⁴ = (1/4)(64/3) = **16/3**\n\n*Step 3 — Apply shortcut:*\nVar(X) = E[X²] − (E[X])² = 16/3 − 4 = 16/3 − 12/3 = **4/3**\n\n*Cross-check with Uniform formula:* Var[U(a,b)] = (b−a)²/12 = 16/12 = 4/3 ✓\n\n*Linear transform example:* Let Y = 3X + 1. Then:\nE[Y] = 3E[X]+1 = 7;  Var(Y) = 3²·Var(X) = 9·(4/3) = **12**\nNote that the constant +1 contributes nothing to variance (MC-3 addressed).\n\n---\n\n**[P49 — ADAPTIVE CHECKPOINT]**\n\n*Probe:* Var(X) = 16. Find Var(2X − 5).\n\n(A) 32 − 5 = 27\n(B) 4 · 16 = 64\n(C) 4 · 16 − 5 = 59\n(D) 2 · 16 = 32\n\n*Branch CORRECT (B):* Var(2X−5) = 2²·Var(X) = 4·16 = 64. ✓ The constant −5 does not affect variance; only the coefficient 2 matters, and it contributes as 2² = 4. Proceed to A03.\n\n*Branch PARTIAL:* You applied the scaling rule but may have included the constant. Var(aX+b) = a²·Var(X) — constants b vanish. Here: 2²·16 = 64. Proceed to A03.\n\n*Branch INCORRECT (A, C, or D):* Var(aX+b) = a²·Var(X). Here a=2, so the multiplier is a²=4, not a=2. Constants b shift the distribution but leave spread unchanged. Var(2X−5) = 4·16 = 64. Proceed to A03.\n\n*Branch NO_RESPONSE:* Var(aX+b) = a²·Var(X). Var(2X−5) = 2²·Var(X) = 4·16 = 64. The constant −5 has no effect on variance. Proceed to A03.\n\n---\n\n\n## Component 4 (continued) — P91 Mastery Gate",
+      "localKey": "WE-TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 137,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "math.prob.variance/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.prob.variance",
+      "title": "VARIANCE-IS-E[X²]",
+      "content": "| MC-1 | VARIANCE-IS-E[X²] | Student computes E[X²] and reports it as Var(X), omitting the subtraction of (E[X])² | Any Var(X) computation where E[X] ≠ 0 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.prob.variance/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.prob.variance",
+      "title": "VARIANCE-IS-STANDARD-DEVIATION",
+      "content": "| MC-2 | VARIANCE-IS-STANDARD-DEVIATION | Student computes √(E[X²]−(E[X])²) and calls the result the variance; confuses σ with σ² | When the problem asks for Var(X) but student takes the square root |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.prob.variance/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.prob.variance",
+      "title": "SHIFT-CHANGES-VARIANCE",
+      "content": "| MC-3 | SHIFT-CHANGES-VARIANCE | Student writes Var(X+c) = Var(X)+c or Var(X+c) = Var(X+c); does not know that a constant shift does not change spread | Linear transform problems Var(aX+b) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.prob.variance/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.variance",
+      "title": "Spread-from-Center Analogy",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Spread-from-Center Analogy\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 65,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "math.prob.variance/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.variance",
+      "title": "Worked Example Pair",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Worked Example Pair\",\"primitives\":[\"P07\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 137,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "math.prob.variance/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.prob.variance",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 206,
+        "endLine": 418
+      }
+    },
+    {
+      "assetId": "math.prob.variance/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.prob.variance",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A03 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Show all work. Use the shortcut formula Var(X) = E[X²] − (E[X])².*\n\n**Problem 1.** X has PMF: P(X=−1)=1/2, P(X=1)=1/2. Find Var(X).\n\n**Problem 2.** X has PMF: P(X=0)=0.3, P(X=2)=0.4, P(X=5)=0.3. Find E[X] and Var(X).\n\n**Problem 3.** Var(X) = 9. Find:\n(a) Var(3X + 7)\n(b) Var(−X)\n(c) Var(X − 4)\n\n**Problem 4.** X ~ U(2, 8). Find Var(X) using both:\n(a) The Uniform variance formula (b−a)²/12\n(b) The integral shortcut E[X²] − (E[X])²\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. E[X] = −1(1/2)+1(1/2) = 0; E[X²] = 1(1/2)+1(1/2) = 1; Var(X) = 1 − 0 = **1**\n\n2. E[X] = 0(0.3)+2(0.4)+5(0.3) = 0.8+1.5 = **2.3**\n   E[X²] = 0(0.3)+4(0.4)+25(0.3) = 1.6+7.5 = **9.1**\n   Var(X) = 9.1 − (2.3)² = 9.1 − 5.29 = **3.81**\n\n3. (a) Var(3X+7) = 9·Var(X) = **81**\n   (b) Var(−X) = (−1)²·Var(X) = Var(X) = **9** (flipping sign doesn't change spread)\n   (c) Var(X−4) = Var(X) = **9** (constant shift)\n\n4. (a) (8−2)²/12 = 36/12 = **3**\n   (b) E[X]=(2+8)/2=5; E[X²]=(1/6)∫₂⁸x²dx=(1/6)[x³/3]₂⁸=(1/6)(512/3−8/3)=(1/6)(504/3)=28; Var=28−25=**3** ✓\n\nScore 1 point per problem (P77 total: 4 points). Problem 2: both E[X] and Var must be correct for the point.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence — cross_links = [])*\n\n*Problem:* A fair game pays X dollars, where X=1, 3, or 5 each with probability 1/3.\n\n(a) Find E[X] and Var(X).\n\n(b) Define Y = 2X − 1 (double the winnings minus $1 entry fee). Find E[Y] and Var(Y) using the linear transform rules — do NOT recompute from the PMF of Y.\n\n(c) Which has more spread: X or Y? Justify using the variances.\n\n*Expected answers:*\n\n(a) E[X] = (1+3+5)/3 = **3** (equal probabilities, so arithmetic mean)\n   E[X²] = (1+9+25)/3 = 35/3\n   Var(X) = 35/3 − 9 = 35/3 − 27/3 = **8/3 ≈ 2.67**\n\n(b) E[Y] = 2E[X]−1 = 2(3)−1 = **5**\n   Var(Y) = 2²·Var(X) = 4·(8/3) = **32/3 ≈ 10.67**\n\n(c) Y has more spread: Var(Y)=32/3 > Var(X)=8/3. The factor-of-2 scaling doubles the distances from the mean, and since variance squares the distances, Var(Y)=4·Var(X).\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all three parts correct).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.9 × 5⌉ = 5). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Re-examine missed item; identify whether error is MC-1 (wrong formula) or MC-3 (shift rule); targeted repair |\n| ≤ 3/5 | → Return to A01; re-engage spread analogy; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.prob.variance` complete. Threshold 0.9 requires 5/5 correct.\n\n**Unlocks:** `math.prob.covariance`, `math.prob.chebyshev`\n\nNext concept recommendation: `math.prob.standard-deviation` (child node) or `math.prob.covariance` — both build directly on Var(X).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 209,
+        "endLine": 326
+      }
+    },
+    {
+      "assetId": "math.prob.variance/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.variance",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** Pictorial (P) — proficient learner.\n\n**Scaffolding sequence:**\n1. **A01 P03 ANALOGY BRIDGE** — connect \"spread from center\" (visually: distribution width vs. balance point) to the squared-deviation formula; introduce both definition Var = E[(X−μ)²] and shortcut Var = E[X²] − μ²\n2. **A02 P07 WORKED EXAMPLE PAIR** — WE1: discrete PMF (apply shortcut); WE2: continuous Uniform (integral + formula cross-check)\n3. **A03 P91 Gate** — mastery assessment\n\n**V-3 (CPA Concrete stage):** N/A — proficient learner enters at Pictorial stage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 56,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.prob.variance/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.prob.variance",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | X has PMF: P(X=1)=1/3, P(X=2)=1/3, P(X=3)=1/3. Find Var(X). |\n| R2 | 3 days | X ~ U(0,6). Find Var(X) using both the formula and integration. |\n| R3 | 7 days | If Var(X)=4, find Var(5X−3) and Var(−2X+1). |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 360,
+        "endLine": 370
+      }
+    },
+    {
+      "assetId": "math.prob.variance/reference/1",
+      "kind": "reference",
+      "conceptId": "math.prob.variance",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | — |\n| P76_mode | independence (cross_links = []) |\n| Unlocks | math.prob.covariance, math.prob.chebyshev |\n| Requires (Tier-1) | math.prob.expected-value |\n\n**GR-8 compliance:** No cross-links to document.\n**GR-9 compliance:** P76 uses an independent novel problem (fair game payoff) unrelated to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.prob.variance.md",
+        "startLine": 370,
+        "endLine": 384
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

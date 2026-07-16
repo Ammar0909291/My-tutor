@@ -1,0 +1,304 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.field-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.field",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dfedc16a19631054813c12d072fbca9e4f726e54549076b70614fa66983614b1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.field.md": "sha256:6280973ebd34940633caec1502b06d67a6897634ae191ce46e886010c7dee030"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.abst.field",
+    "name": "Field",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.ring-theory",
+      "math.abst.prime-ideal"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.field-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.field (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.field.md": "sha256:6280973ebd34940633caec1502b06d67a6897634ae191ce46e886010c7dee030"
+      },
+      "contentHash": "sha256:08996dfa59c6a4c9cafeb9638149b5afe954c6a6ea5b2b84f11d6f215397ea06",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.field.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.field.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.field\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.field.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.field.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.field\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.field.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.field.md#TA-A03 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.field\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.field/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.field",
+      "title": "Field — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.abst.ring-theory**: ring axioms (addition + multiplication, distributivity); commutative rings; units (invertible elements); zero divisors; integral domains (commutative, no zero divisors)\n- **math.abst.prime-ideal**: maximal ideal M iff R/M is a field; ⟨p⟩ maximal in ℤ iff p is prime → ℤ/⟨p⟩=ℤₚ is a field; chain of ideals; quotient ring structure\n\n### Target Knowledge State\nStudent can state the field definition (commutative ring where every nonzero element is invertible); recognise the standard fields (ℚ, ℝ, ℂ, ℤₚ for prime p); verify a given ring is or is not a field by checking the nonzero-invertibility condition; state the characteristic of a field (0 or prime); explain why the scalar domain of a vector space must be a field; and distinguish fields from integral domains and arbitrary commutative rings by counterexample.\n\n### Conceptual Obstacles\n1. Trying to invert 0 — the axiom \"every nonzero element has a multiplicative inverse\" explicitly excludes 0; attempting 0⁻¹ produces contradiction (0·a=0≠1 for any a); the exclusion is definitional, not a gap\n2. Treating ℤ as a field — ℤ is a commutative ring and an integral domain with no zero divisors, but 2 has no multiplicative inverse in ℤ (2·a=1 requires a=1/2∉ℤ); being an integral domain is necessary but not sufficient for a field\n3. Equating \"characteristic p\" with \"the field has p elements\" — ℤₚ does have p elements, but ℚ has char 0 and infinitely many elements; GF(p²) has characteristic p and p² elements; characteristic counts how many times 1 must be added to reach 0, not how many elements exist\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.abst.field/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.field",
+      "title": "ZERO-INVERSE",
+      "content": "| MC-1 | ZERO-INVERSE | Student attempts to define 0⁻¹ or claims 0 must be invertible for the ring to be a field; confuses \"every element invertible\" with \"every nonzero element invertible\" | Any discussion of the field axioms; especially when the student lists \"every element has an inverse\" without the qualifier |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.abst.field/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.field",
+      "title": "RING-NOT-FIELD",
+      "content": "| MC-2 | RING-NOT-FIELD | Student identifies ℤ or another integral domain as a field because \"multiplication exists and there are no zero divisors\"; cannot explain the missing inverses | Integral domain vs. field comparison; examples like ℤ, ℤ[x] |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.abst.field/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.field",
+      "title": "CHARACTERISTIC-CONFUSION",
+      "content": "| MC-3 | CHARACTERISTIC-CONFUSION | Student equates characteristic p with \"the field has p elements\"; unaware that char p means 1+1+⋯+1 (p times)=0, not a cardinality statement | Any discussion of ℤₚ, GF(p²), or the characteristic of ℚ/ℝ/ℂ |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.abst.field/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.field",
+      "title": "From Division Failure to the Field Definition",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Division Failure to the Field Definition\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 64,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.abst.field/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.field",
+      "title": "Contrast: Field vs Ring vs Integral Domain; Characteristic; Vector Spaces",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Contrast: Field vs Ring vs Integral Domain; Characteristic; Vector Spaces\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 134,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "math.abst.field/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.field",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 197,
+        "endLine": 416
+      }
+    },
+    {
+      "assetId": "math.abst.field/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.field",
+      "title": "Mastery Gate (P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (P91)\n\n**Primitive:** P91 = P77→P55→P76→P55→P75→P55→P74→P55→P78\n**Purpose:** Assess fluent classification and understanding of fields, including the cross-link to vector spaces\n\n---\n\n**[P77 — MULTI-PROBLEM SET]** *(4 problems)*\n\n**Problem 1:** Is ℤ₄ a field? Give a specific non-invertible nonzero element.\n\n*Solution:* ℤ₄ is not a field. The element 2 has no inverse: 2·1=2, 2·2=4≡0, 2·3=6≡2. No product equals 1. (Also: 2·2=0 in ℤ₄ — zero divisor, so not even integral domain.)\n\n**Problem 2:** Is ℝ a field? Is ℝ[x] a field?\n\n*Solution:* ℝ is a field (every nonzero real a has inverse 1/a∈ℝ). ℝ[x] is NOT a field: the polynomial x has no inverse in ℝ[x] (x·f(x) has degree ≥ 1 for f≠0, so x·f≠1).\n\n**Problem 3:** What is the characteristic of ℤ₇? Of ℤ? Explain.\n\n*Solution:* char(ℤ₇)=7: in ℤ₇, 1+1+⋯+1 (7 times)=7≡0, and no smaller sum equals 0. char(ℤ)=0: no finite sum of 1s ever equals 0 in ℤ.\n\n**Problem 4:** True or false: every integral domain is a field.\n\n*Solution:* **False.** ℤ is an integral domain (no zero divisors, commutative) but 2 has no multiplicative inverse in ℤ. (A finite integral domain IS a field — but infinite ones need not be.)\n\n---\n\n**[P55 — SCORE]**\nCount correct responses. Record raw score S₁ (0–4) after P77.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: cross-link probe — math.linalg.vector-space)*\n\n**Prompt:** Every vector space V over ℝ uses the real numbers as scalars — and ℝ is a field.\n\n(a) Which specific field property of ℝ ensures that for any nonzero scalar λ∈ℝ and any vector v∈V, the equation λ·w=v has a unique solution w∈V?\n\n(b) Suppose we tried to define a \"vector space over ℤ\" (using integers as scalars). Show by example that scalar division can fail: give specific integer λ≠0 and a specific \"vector\" v∈ℤ² such that λ·w=v has no solution w∈ℤ².\n\n(c) What field axiom is violated by ℤ, and why does this make ℤ unsuitable as a scalar domain?\n\n**Expected solution:**\n\n(a) The field axiom \"every nonzero element has a multiplicative inverse\": since λ≠0 in ℝ, λ⁻¹=1/λ∈ℝ exists. Setting w=λ⁻¹·v gives λ·w=λ·(λ⁻¹·v)=(λλ⁻¹)·v=1·v=v. Uniqueness: if λ·w₁=v=λ·w₂, then λ⁻¹·(λ·w₁)=λ⁻¹·(λ·w₂), so w₁=w₂.\n\n(b) Take λ=2 and v=(1,0)∈ℤ². The equation 2·w=v means 2·(w₁,w₂)=(1,0), so w₁=1/2∉ℤ. No solution exists in ℤ².\n\n(c) ℤ violates the invertibility axiom: 2∈ℤ, 2≠0, but 2⁻¹=1/2∉ℤ. Without inverses for all nonzero scalars, scaling cannot always be reversed, and the vector-space axiom \"for each v∈V and λ≠0, the equation λ·w=v has a unique solution\" fails.\n\n---\n\n**[P55 — SCORE]**\nRecord transfer score S₂ (0 or 1) after P76.\n\nTotal score S = S₁ + S₂ (max 5).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR: 5/5 (⌈0.85 × 5⌉ = ⌈4.25⌉ = 5)\n\n- S ≥ 5: MASTERY ACHIEVED → proceed to P74\n- S = 4: NEAR MASTERY → attempt repair on missed items; re-gate at next session\n- S ≤ 3: MASTERY NOT ACHIEVED → execute Protocol B\n\n---\n\n**[P55 — SCORE]**\nRecord mastery determination (ACHIEVED / NEAR / NOT ACHIEVED).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n- MASTERY ACHIEVED → unlock math.abst.field-extension; record completion\n- NEAR MASTERY → flag for Protocol B on specific missed item(s); re-assess next session\n- MASTERY NOT ACHIEVED → execute Protocol B immediately\n\n---\n\n**[P55 — SCORE]**\nRecord routing outcome.\n\n---\n\n**[P78 — COMPLETION]**\n\nSession record: concept math.abst.field assessed. Mastery status logged. Student directed to next concept or repair protocol per P74 routing.\n\n---\n\n\n## Component 5 — Protocol B (Misconception Repair)\n\n### Repair Action B01 — ZERO-INVERSE (MC-1)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"A specific error: stating 'every element of a field has a multiplicative inverse' without the word 'nonzero.' This is ZERO-INVERSE. In any ring, 0·a=0 for all a — no element a can satisfy 0·a=1. The definition's nonzero qualifier is not optional.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"State the field definition in your own words.\"\n- MC-1 response: \"Every element has an inverse.\"\n- Correct: \"Every nonzero element has an inverse.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Proof that 0 can never have an inverse: suppose 0·a=1 for some a. Then 0=0·a=1. But 1≠0 in any non-trivial ring. Contradiction. So 0⁻¹ does not exist by a theorem — the definition correctly excludes 0 to avoid this. Field axiom: every element a with a≠0 has an inverse.\"\n\nPractice: Restate the field definition writing \"a≠0\" explicitly before the ∃a⁻¹ clause.\n\n---\n\n### Repair Action B02 — RING-NOT-FIELD (MC-2)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Classifying an integral domain (like ℤ) as a field is the RING-NOT-FIELD error. An integral domain has no zero divisors but may still lack multiplicative inverses for non-unit elements.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"Is ℤ a field? Why or why not?\"\n- MC-2 response: \"Yes, because it has no zero divisors.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"No zero divisors is the integral domain condition, not the field condition. Fields require every nonzero element to have an inverse. In ℤ: does 2 have an inverse? Need 2·a=1, so a=1/2. But 1/2∉ℤ. ℤ fails the field test. Upgrade path: ℤ → field of fractions ℚ (adjoin all a/b, b≠0) — that's why ℚ is a field.\"\n\nPractice: For each of {ℤ, ℤ[x], ℝ, ℤ₁₁}, determine field/non-field. Name a specific non-invertible nonzero element for any non-field.\n\n---\n\n### Repair Action B03 — CHARACTERISTIC-CONFUSION (MC-3)\n\n**[P27 — MISCONCEPTION NAMING]**\n\"Equating 'characteristic p' with 'the field has p elements' is CHARACTERISTIC-CONFUSION. Characteristic is an additive order question, not a cardinality statement.\"\n\n**[P41 — MISCONCEPTION DETECTOR]**\nDiagnostic: \"What is the characteristic of ℚ?\"\n- MC-3 response: \"ℚ is infinite, so no characteristic\" or \"characteristic = ∞.\"\n\n**[P64 — CONCEPTUAL SHIFT]**\n\"Characteristic 0 means no finite sum of 1s ever equals 0 — not that the field is finite or that char=∞. ℚ has char 0. GF(4) has char 2 and 4 elements. ℤ₅ has char 5 and 5 elements. The formula: char F = smallest n with n·1=0, or 0 if none. Char is always 0 or prime (theorem: char p → p is prime).\"\n\nPractice: Compute char of GF(9) (char=3; GF(9) has 9=3² elements). Confirm char≠element-count.\n\n---\n\n\n## Component 6 — P89 Spaced Repetition Schedule\n\n**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Classify: ℤ₁₃, ℤ[i] (Gaussian integers), ℝ[x] — field or not? Explain each using invertibility criterion |\n| SR-2 | +3 days | State from memory: field definition, three examples of char-0 fields, two finite fields; explain why char must be 0 or prime |\n| SR-3 | +7 days | Explain why a vector space needs its scalar domain to be a field (invertibility for unique scalar division) |\n| SR-4 | +14 days | Prove: a finite integral domain is a field (for each nonzero a, the map x↦ax is injective on a finite set, hence surjective, so 1 is in the image) |\n\nRetrieval flag: any reappearance of ZERO-INVERSE (no \"nonzero\" qualifier) or RING-NOT-FIELD → re-execute B01/B02.\n\n---\n\n\n## Component 7 — Cross-Blueprint Dependencies\n\n**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.abst.ring-theory | Field is a special commutative ring; ring axioms and unit definition assumed |\n| Requires (Tier-1) | math.abst.prime-ideal | Maximal ideal criterion (R/M is a field) used as a motivating bridge from prime/maximal ideals to field structure |\n| Cross-link (Tier-1) | math.linalg.vector-space | Fields are the scalar domains of vector spaces; P76 cross-link probe tests this connection |\n| Unlocks | math.abst.field-extension | Field extensions (adjoin elements to a field) are the central object of Galois theory |\n\n**GR-9:** cross_links=[math.linalg.vector-space] (Tier 1) → P76 mode = cross-link probe (transfer probe tests the field-as-scalar-domain relationship).\n\n---\n\n\n## Component 8 — Teaching Notes\n\n**Structural decisions:**\n- h=4 → lean structure (2 main TAs + gate)\n- bloom=understand → V-4 = N/A (no P07 required; concept-classification and definition tasks)\n- CPA_entry = C for advanced learner: concrete ℤ vs ℚ division comparison in A01 before the axiom\n\n**Key teaching insight:** The field concept is often presented purely abstractly, but the concrete failure of division in ℤ (3/2∉ℤ) is the strongest motivator for why the invertibility axiom matters. A01 Stage C leads with this failure before the definition, so the definition feels like a formalization of something already understood.\n\n**Cross-link design (P76):** The connection between fields and vector spaces is foundational to linear algebra — every vector space definition begins \"let F be a field.\" The P76 transfer probe asks the student to diagnose concretely why ℤ fails as a scalar domain (λ=2, v=(1,0): no solution to 2·w=(1,0) in ℤ²), directly linking the field axiom to a linear algebra consequence. This probe is more valuable than a further abstract-algebra exercise because it spans two major subject areas.\n\n**MC-1 repair note:** The \"nonzero\" qualifier is so small that students frequently drop it without noticing. In teaching, it helps to typographically emphasise it: \"every **nonzero** element has an inverse\" with stress and repetition, and to explicitly prove 0⁻¹ cannot exist (B01).\n\n---\n\n\n## Component 10 — Validation Checklist\n\n| Code | Rule | Check | Status |\n|------|------|-------|--------|\n| V-1 | Concept ID matches KG | math.abst.field ✓ | PASS |\n| V-2 | All Tier-1 requires have existing blueprints | math.abst.ring-theory ✓, math.abst.prime-ideal ✓ | PASS |\n| V-3 | CPA entry = C for advanced difficulty | C (Concrete) ✓ | PASS |\n| V-4 | bloom=understand → P07 N/A | bloom=understand; no P07; V-4=N/A ✓ | N/A |\n| V-5 | GR-1: A01 opens with B-category primitive | P11 REPRESENTATION SHIFT ✓ | PASS |\n| V-6 | GR-2: each non-gate TA has P49 with 4 branches | A01 and A02 each have P49 CORRECT/PARTIAL/INCORRECT/NO_RESPONSE ✓ | PASS |\n| V-7 | GR-3: gate TA (A03) is terminal | A03=P91; no further TAs ✓ | PASS |\n| V-8 | GR-4: repair TAs open with P27+P41+P64 | B01, B02, B03 each: P27→P41→P64 ✓ | PASS |\n| V-9 | GR-6: P91 terminal in its TA | P91 is A03; A03 is the last TA ✓ | PASS |\n| V-10 | GR-7: P76 present in mastery gate | P76 in A03 between P77 and P75 ✓ | PASS |\n| V-11 | GR-8: cross_links documented in Component 7 | requires, cross-links, and unlocks documented ✓ | PASS |\n| V-12 | GR-9: P76 mode correct for cross_links | cross_links=[math.linalg.vector-space] (Tier 1) → P76=cross-link probe ✓ | PASS |\n| V-13 | GR-10: MAMR stated and enforced | MAMR=5/5 stated in C0 and P75 gate ✓ | PASS |\n| V-14 | MAMR formula correct | ⌈0.85×5⌉=⌈4.25⌉=5; PASS=5/5 ✓ | PASS |\n| V-15 | P91 structure complete | P77(4)→P55→P76(1)→P55→P75→P55→P74→P55→P78 ✓ | PASS |\n| V-16 | P77 has exactly 4 problems | Problems 1–4 verified ✓ | PASS |\n| V-17 | 3 misconceptions with FOUNDATIONAL declared | MC-1 FOUNDATIONAL, MC-2, MC-3 ✓ | PASS |\n| V-18 | P89 spaced repetition present | Component 6 with 4 SR intervals ✓ | PASS |\n| V-19 | Structure matches h | h=4 → lean (2 main TAs + gate); A01+A02+A03 ✓ | PASS |\n| V-20 | P76 transfer probe is novel and correct | ℤ vs ℝ scalar domain; λ=2, v=(1,0) counterexample; field axiom identified correctly ✓ | PASS |\n| AIR | All internal references consistent | Concept IDs, MAMR, bloom, difficulty consistent throughout ✓ | PASS |",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 197,
+        "endLine": 416
+      }
+    },
+    {
+      "assetId": "math.abst.field/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.field",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — advanced learner compares ℤ and ℚ on specific division failures before seeing the abstract axiom; the concrete failure (3/2∉ℤ) motivates the invertibility requirement.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — C: ℤ vs ℚ side by side — 2·(1/2)=1 in ℚ but 1/2∉ℤ; division by any nonzero number always works in ℚ; P: comparison table of ring types; A: field axioms (commutative ring + every nonzero element has a multiplicative inverse), standard examples\n2. **A02 P06 CONTRAST PAIR** — field vs. integral domain vs. commutative ring; ℤₚ vs ℤₙ (n composite); characteristic of a field; vector-space scalar requirement\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 57,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.abst.field/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.field",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "**[P89 — SPACED REPETITION]**\n\n| Review | Delay | Focus |\n|--------|-------|-------|\n| SR-1 | +1 day | Classify: ℤ₁₃, ℤ[i] (Gaussian integers), ℝ[x] — field or not? Explain each using invertibility criterion |\n| SR-2 | +3 days | State from memory: field definition, three examples of char-0 fields, two finite fields; explain why char must be 0 or prime |\n| SR-3 | +7 days | Explain why a vector space needs its scalar domain to be a field (invertibility for unique scalar division) |\n| SR-4 | +14 days | Prove: a finite integral domain is a field (for each nonzero a, the map x↦ax is injective on a finite set, hence surjective, so 1 is in the image) |\n\nRetrieval flag: any reappearance of ZERO-INVERSE (no \"nonzero\" qualifier) or RING-NOT-FIELD → re-execute B01/B02.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 347,
+        "endLine": 362
+      }
+    },
+    {
+      "assetId": "math.abst.field/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.field",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**[GR-8: Cross-link documentation]**\n\n| Direction | Concept | Relationship |\n|-----------|---------|--------------|\n| Requires (Tier-1) | math.abst.ring-theory | Field is a special commutative ring; ring axioms and unit definition assumed |\n| Requires (Tier-1) | math.abst.prime-ideal | Maximal ideal criterion (R/M is a field) used as a motivating bridge from prime/maximal ideals to field structure |\n| Cross-link (Tier-1) | math.linalg.vector-space | Fields are the scalar domains of vector spaces; P76 cross-link probe tests this connection |\n| Unlocks | math.abst.field-extension | Field extensions (adjoin elements to a field) are the central object of Galois theory |\n\n**GR-9:** cross_links=[math.linalg.vector-space] (Tier 1) → P76 mode = cross-link probe (transfer probe tests the field-as-scalar-domain relationship).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.field.md",
+        "startLine": 362,
+        "endLine": 377
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

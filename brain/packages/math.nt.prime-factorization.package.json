@@ -1,0 +1,396 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.nt.prime-factorization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.nt.prime-factorization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4a43bf0bb0949e969c7e077f50108bf0385aaec042c446fb786172190970327a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.nt.prime-factorization.md": "sha256:5be4050a6ba2a6542d332d00e0b22bcbd1ae3cfe5c93fd141549496cce0c82b5"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "math.nt.prime-factorization",
+    "name": "Prime Factorization",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.nt.prime-number",
+      "math.nt.divisibility"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.nt.prime-factorization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.nt.prime-factorization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.nt.prime-factorization.md": "sha256:5be4050a6ba2a6542d332d00e0b22bcbd1ae3cfe5c93fd141549496cce0c82b5"
+      },
+      "contentHash": "sha256:222549caf2528618ec2582d1406ae48df7b8c7fa0e346be976c95a0a34d0aea7",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-factorization.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-factorization.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-factorization.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-factorization.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-factorization\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-factorization.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-factorization.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-factorization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-factorization.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-factorization.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-factorization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-factorization.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-factorization.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-factorization\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.nt.prime-factorization.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.nt.prime-factorization.md#TA-B02 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.nt.prime-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.nt.prime-factorization\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.nt.prime-factorization/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Prime Factorization — cognitive map",
+      "content": "**Core concept:** Every composite integer can be written as a product of prime powers, and this factorization is unique up to the order of factors (Fundamental Theorem of Arithmetic). The canonical form is n = p₁^a₁ × p₂^a₂ × … × pₖ^aₖ with primes in ascending order.\n\n**Conceptual progression:**\n1. A composite number can always be split further until only primes remain.\n2. Factor trees and repeated division are two systematic methods to reach the prime factorization.\n3. The factorization is unique — different factor trees for the same number always produce the same set of prime factors with the same exponents.\n4. Canonical form: write primes in ascending order with exponents (e.g., 2³ × 3 × 5).\n\n**CPA arc (entry: C):**\n- Concrete: factor trees drawn on paper — splitting 48 into 2×24, then 2×12, then 2×6, then 2×3; the \"leaves\" are all prime\n- Pictorial: two different factor trees for the same number converging to the same prime base; systematic division table\n- Abstract: canonical form p₁^a₁ × p₂^a₂ × …; prime counting function; applications to GCD/LCM\n\n**Prior knowledge activated:** definition of prime vs. composite numbers; divisibility rules (by 2, 3, 5, 7); basic multiplication and exponent notation\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 20,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "STOPS-AT-COMPOSITE-FACTOR [FOUNDATIONAL]",
+      "content": "### MC-1: STOPS-AT-COMPOSITE-FACTOR [FOUNDATIONAL]\n**Description:** Learner halts factorization when reaching a composite factor, leaving the factorization incomplete.\n**Surface form:** Writes 72 = 8 × 9 and stops, rather than continuing to 2³ × 3².\n**Root cause:** Does not check whether each factor is itself prime before stopping; confuses \"factored\" with \"prime-factored.\"\n**Trigger condition:** Any composite number with composite intermediate factors.\n**Repair target:** TA-B01.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "ONE-IS-PRIME",
+      "content": "### MC-2: ONE-IS-PRIME\n**Description:** Learner includes 1 as a prime factor (e.g., writes 12 = 1 × 2² × 3).\n**Surface form:** Starts the factor tree with 1 × 12, includes 1 in the prime factorization.\n**Root cause:** 1 is divisible only by 1 and itself — learner applies a garbled definition of prime (doesn't recall the \"greater than 1\" requirement).\n**Trigger condition:** Any factorization where the learner might introduce 1.\n**Repair target:** TA-B01.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "FACTORIZATION-ORDER-MATTERS",
+      "content": "### MC-3: FACTORIZATION-ORDER-MATTERS\n**Description:** Learner believes 2 × 3² × 5 and 5 × 3² × 2 are different factorizations.\n**Surface form:** After finding two valid factor trees that arrive at primes in different orders, learner reports two different answers.\n**Root cause:** Does not recognise commutativity of multiplication at the prime-factorization level; uniqueness theorem not yet internalised.\n**Trigger condition:** Any pair of factor trees for the same number that generate primes in a different order.\n**Repair target:** TA-B02.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 17,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Factor Trees and the Primality Stop Rule",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Factor Trees and the Primality Stop Rule\",\"primitives\":[\"P03\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 82,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Division Method and the Uniqueness Principle",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Division Method and the Uniqueness Principle\",\"primitives\":[\"P07\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 106,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Contrast: Complete vs. Incomplete Factorizations",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast: Complete vs. Incomplete Factorizations\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 130,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 159,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Repair: Stops-at-Composite / One-Is-Prime",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Repair: Stops-at-Composite / One-Is-Prime\",\"primitives\":[\"P27\",\"P41\",\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 198,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Repair: Factorization-Order-Matters",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Repair: Factorization-Order-Matters\",\"primitives\":[\"P03\",\"P07\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 214,
+        "endLine": 323
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Mastery Gate (P91)",
+      "content": "### TA-A04 — Mastery Gate (P91)\n**Primitive sequence:** P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n\nMAMR: 85% → PASS requires ⌈0.85 × 5⌉ = 5/5 (4 P77 items + 1 P76 item).\n\n**P77 — MULTI-PROBLEM SET (4 items):**\n\nItem 1: Write the prime factorization of 48. [Answer: 48 = 2⁴ × 3]\nItem 2: Write the prime factorization of 45. [Answer: 45 = 3² × 5]\nItem 3: True or False — 1 is a prime factor of every integer. [Answer: FALSE — 1 is not prime]\nItem 4: Is 72 = 2³ × 9 a complete prime factorization? If not, write the correct form. [Answer: No — 9=3² is composite; correct: 72 = 2³ × 3²]\n\n**P55 — SCORE:** Record items correct out of 4.\n\n**P76 — TRANSFER PROBE (independence mode — cross_links: []):**\n(a) Find the prime factorization of 360. [Answer: 360 = 2³ × 3² × 5]\n(b) A number n is a perfect square if and only if every prime in its factorization appears to an even exponent. Is 360 a perfect square? [Answer: No — 2 appears to the 3rd power (odd), and 5 appears to the 1st power (odd)]\n(c) What is the smallest integer k such that 360k is a perfect square? [Answer: k = 2 × 5 = 10; gives 360×10 = 3600 = 2⁴×3²×5², all even exponents]\n\n**P55 — SCORE:** Record P76 correct (1) or incorrect (0).\n\n**P75 — MASTERY ASSESSMENT:** Total score = P77 score + P76 score (max 5).\n\n**P55 — SCORE:** Final score out of 5.\n\n**P74 — ROUTING DECISION:**\n- Score 5/5 → PASS → P78 COMPLETION\n- Score < 5/5 → FAIL → Route to TA-B01 (incomplete factorization / 1-is-prime errors) or TA-B02 (order/uniqueness errors)\n\n**P55 — SCORE:** Log routing outcome.\n\n**P78 — COMPLETION:**\n> \"Prime factorization: mastered. You can decompose any composite integer into its canonical prime power form using factor trees or division, recognize when a factorization is incomplete, and apply the uniqueness property. This is the cornerstone of GCD, LCM, and the Fundamental Theorem of Arithmetic.\"\n\n---\n\n\n## Component 5 — Protocol B (Repair Path)",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 159,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry diagnostic:** \"Is 6 a prime number or composite? Factor 12 as a product of primes.\" If correct (12 = 2² × 3) → begin TA-A01. If incorrect → repair prerequisite (math.nt.prime-number).\n\n**Scaffolding ladder:**\n1. Factor tree for a small number (12) — verify all leaves are prime\n2. Factor tree for a 2-digit number (48) — check each branch for primality\n3. Division method for a larger number (360) — divide repeatedly by smallest prime that works\n4. Compare two factor trees for the same number — observe same primes emerge\n\n**Pacing gate:** Must score ≥ 5/5 on P91 to earn mastery credit (MAMR = 85%).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 64,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "```\nP89:\n  concept_id: math.nt.prime-factorization\n  MAMR: 0.85\n  intervals: [1, 3, 7, 14, 30]\n  session_1_probe: \"Find the prime factorization of 90.\"\n  session_3_probe: \"Is 144 a perfect square? Use prime factorization to justify.\"\n  session_7_probe: \"Find the prime factorization of 420.\"\n  session_14_probe: \"What is the smallest n such that 2²×3×n is a perfect cube?\"\n  session_30_probe: \"Explain in your own words why every composite number has a unique prime factorization.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 227,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "math.nt.prime-factorization/reference/1",
+      "kind": "reference",
+      "conceptId": "math.nt.prime-factorization",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "**Requires (prerequisites with blueprints):**\n- math.nt.prime-number — definition of prime; primality testing [BLUEPRINT EXISTS]\n- math.nt.divisibility — divisibility rules; factor/multiple relationship [BLUEPRINT EXISTS]\n\n**Unlocks:**\n- math.nt.gcd — greatest common divisor (uses shared prime factors)\n- math.nt.lcm — least common multiple (uses prime factorizations)\n- math.nt.fundamental-theorem-arithmetic — formal statement of uniqueness\n\n**Cross-links:** [] — no Tier 1 cross-links.\n\n**GR-8 satisfied:** all prerequisite and unlock relationships documented.\n**GR-9 satisfied:** P76 independence mode applied (cross_links empty).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.nt.prime-factorization.md",
+        "startLine": 243,
+        "endLine": 261
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
