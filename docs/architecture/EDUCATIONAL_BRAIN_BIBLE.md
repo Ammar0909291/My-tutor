@@ -1359,3 +1359,26 @@ Assessment) — not due yet.
   production-serving-path change; this is authoring/compilation
   infrastructure sitting upstream of the frozen K4 Policy Engine and the
   existing AssetIdentity DB model, not a replacement for either.
+- **2026-07-16 — Evidence Loop closed (ADR 13 Phase 2 read side; owner-directed).**
+  The Evidence Engine's writer half (W1-3, `appendEvidenceEvent`, single
+  writer route.ts) finally gains its readers — no new telemetry, no schema
+  change, nothing written by the read path. New modules in
+  `src/lib/teaching/evidence/`: `evidenceReader.ts` (normalizes the existing
+  surfaces — EvidenceEvent PROBE_OUTCOME/MISCONCEPTION_DETECTED/
+  LEARNER_FEEDBACK-recovery rows, TeachingStrategyEvent, TopicProgress,
+  MistakeRecord, plus brain/packages identity — into one `LessonEvidence`
+  per (user, session, concept) with a deterministic outcome classifier incl.
+  the failure-then-vanish/abandoned signature), `learningAnalytics.ts`
+  (subject-agnostic: most-failed concepts, misconception frequency,
+  teaching-action success via the ADR 13 L5 strategy→next-probe join,
+  recovery success via the L1 what-followed join, probe discrimination,
+  time-to-mastery, repeat-remediation/regrowth, drop-off points),
+  `authoringFeedback.ts` (deterministic findings: blueprint_needs_revision,
+  weak_misconception, weak_probe, missing_worked_examples,
+  missing_recovery_strategy, weak_package — each citing its evidence
+  numbers), `packageFeedback.ts` (per-Educational-Package effectiveness/
+  evidence/mastery/failure summaries + rule-based recommendations; never
+  edits a package), `evidenceLoad.ts` (the only impure file: read-only
+  prisma loads + brain/packages inspector). CLI: `npm run evidence:report`
+  (stdout or `--out` markdown files). Pure core is DB/fs-free; 33 tests in
+  `src/tests/evidenceLoop.test.ts`. Suite 1201 passed/1 skipped, tsc clean.
