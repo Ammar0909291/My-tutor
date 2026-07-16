@@ -2,6 +2,7 @@ import Groq from 'groq-sdk'
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
+import { extractVoiceTimingSignal, type WhisperVerboseTranscription } from '@/lib/voice/voiceSignal'
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' })
 
@@ -28,14 +29,22 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Speech recognition unavailable' }, { status: 503 })
     }
 
-    let transcription
+    let transcription: WhisperVerboseTranscription
     try {
-      transcription = await groq.audio.transcriptions.create({
+      // Claude Recommendation #7 (Voice Signal Recovery): verbose_json
+      // recovers per-segment start/end timestamps and log-probabilities at
+      // zero extra latency for segment-level granularity (word-level would
+      // cost more — not requested). The groq-sdk's typed response only
+      // declares `{ text }`; the runtime payload carries the full Whisper
+      // verbose_json shape (duration/segments), hence the cast.
+      const raw = await groq.audio.transcriptions.create({
         file: audioFile,
         model: 'whisper-large-v3',
         language: lang,
-        response_format: 'json',
+        response_format: 'verbose_json',
+        timestamp_granularities: ['segment'],
       })
+      transcription = raw as unknown as WhisperVerboseTranscription
     } catch (groqErr: unknown) {
       const status = (groqErr as any)?.status
       const msg = (groqErr as any)?.message ?? 'unknown'
@@ -43,7 +52,16 @@ export async function POST(req: Request) {
       throw groqErr
     }
 
-    return NextResponse.json({ text: transcription.text })
+    // Telemetry only — never affects the transcript returned to the
+    // client. Extraction is pure and never throws (malformed/missing
+    // segment data degrades to nulls, not an error), so a transcription
+    // that already succeeded can never fail here.
+    const voiceSignal = extractVoiceTimingSignal(transcription)
+
+    // Backward compatible: `text` is unchanged from the previous plain
+    // `json` contract; `voiceSignal` is a new, additive field older
+    // clients simply ignore.
+    return NextResponse.json({ text: transcription.text, voiceSignal })
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : 'STT error'
     console.error('[stt] error:', msg)

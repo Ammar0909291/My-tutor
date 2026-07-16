@@ -26,6 +26,21 @@ import {
 } from '@/lib/teaching/assets'
 import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 
+// Voice Signal Recovery (Claude Recommendation #7): mirrors
+// VoiceTimingSignal (src/lib/voice/voiceSignal.ts) exactly — never trust a
+// network payload blind, so every numeric field is bounds-checked even
+// though the client only ever forwards what the STT route just computed.
+const voiceSignalSchema = z.object({
+  durationMs: z.number().finite().nonnegative().nullable(),
+  speechDurationMs: z.number().finite().nonnegative().nullable(),
+  silenceDurationMs: z.number().finite().nonnegative().nullable(),
+  segmentCount: z.number().int().nonnegative(),
+  pauseCount: z.number().int().nonnegative(),
+  totalPauseMs: z.number().finite().nonnegative(),
+  longestPauseMs: z.number().finite().nonnegative(),
+  avgConfidence: z.number().min(0).max(1).nullable(),
+}).optional()
+
 const schema = z.object({
   sessionId: z.string(),
   message: z.string().min(1).max(8000),
@@ -34,6 +49,10 @@ const schema = z.object({
   // teaching engine must not assume unread text was read. Optional and
   // additive: older clients simply never send it.
   lastExplanationRead: z.boolean().optional(),
+  // Voice Signal Recovery (Claude Recommendation #7): present only when
+  // this turn's message originated from voice dictation. Optional and
+  // additive — older clients simply never send it.
+  voiceSignal: voiceSignalSchema,
 })
 
 export async function POST(req: Request) {
@@ -49,7 +68,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { sessionId, message, lastExplanationRead } = schema.parse(body)
+    const { sessionId, message, lastExplanationRead, voiceSignal } = schema.parse(body)
 
     // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
     // learner response latency is measured server-side from message
@@ -2645,6 +2664,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           category:  EvidenceCategory.MISCONCEPTION_DETECTED,
           outcome:   teachingSignal.phrase.slice(0, 200),
           strength:  0.5,
+        })
+      }
+
+      // VOICE SIGNAL RECOVERY (Claude Recommendation #7): if this turn's
+      // message originated from voice dictation, the client forwards the
+      // timing signal recovered from Whisper's verbose_json output at STT
+      // time (src/lib/voice/voiceSignal.ts) — segment durations, pauses,
+      // and a log-probability-derived confidence proxy. No new evidence
+      // schema: reuses the existing LEARNER_FEEDBACK category (already the
+      // generic bucket for system-observed, non-correctness signals — see
+      // the RECOVERY write below for the same pattern) with the same
+      // pipe-delimited outcome-string convention PROBE_OUTCOME uses above.
+      // Telemetry only — never read by any teaching-decision path; strength
+      // is always 0.0 (not a correctness signal), and rawScore carries the
+      // one scalar most useful for analytics queries (avgConfidence).
+      if (voiceSignal) {
+        appendEvidenceEvent({
+          userId,
+          sessionId,
+          turnId:    assistantMessage.id,
+          conceptId: resolvedConceptId ?? memoryState?.conceptId ?? learnSession.subject.slug,
+          language:  teachingLang,
+          gradeBand: memoryState?.gradeBand ?? GradeBand.ADULT,
+          category:  EvidenceCategory.LEARNER_FEEDBACK,
+          outcome:   `voice:duration=${voiceSignal.durationMs ?? 'na'}` +
+                     `|speech=${voiceSignal.speechDurationMs ?? 'na'}` +
+                     `|pauses=${voiceSignal.pauseCount}` +
+                     `|totalPause=${voiceSignal.totalPauseMs}` +
+                     `|longestPause=${voiceSignal.longestPauseMs}` +
+                     `|conf=${voiceSignal.avgConfidence !== null ? voiceSignal.avgConfidence.toFixed(2) : 'na'}`,
+          strength:  0.0,
+          rawScore:  voiceSignal.avgConfidence ?? undefined,
         })
       }
 

@@ -12,6 +12,7 @@ import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, SERVER_TTS_LANGS, LANG_LOCALE, canUseSpeechRecognition, type VoiceType, type TeachingLang } from '@/lib/tts'
+import type { VoiceTimingSignal } from '@/lib/voice/voiceSignal'
 import { useDraftMessage, clearDraft } from '@/lib/hooks/useDraftMessage'
 import { LearnerPositionPanel, LockedTopicDetail } from '@/components/learn/LearnerPositionPanel'
 import { recordLastLesson } from '@/lib/hooks/useLastLesson'
@@ -677,7 +678,7 @@ function QuickActionsAndCheck({
 }: {
   teachingLanguage: TeachingLang
   sessionId: string | null
-  sendMessage: (sid: string, text: string, showInUI?: boolean) => Promise<void>
+  sendMessage: (sid: string, text: string, showInUI?: boolean, voiceSignal?: VoiceTimingSignal) => Promise<void>
   setActiveTab: (tab: ActiveTab) => void
 }) {
   const ICONS = { simpler: Sparkles, example: Users, diagram: ImageIcon, challenge: Trophy }
@@ -882,6 +883,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const speechRecognitionRef = useRef<any>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const sessionIdRef = useRef<string|null>(null)
+  // Voice Signal Recovery (Claude Recommendation #7): the timing signal
+  // recovered from the most recent Whisper transcription, attached to the
+  // next sendMessage() call the same way attachedFile is — consumed and
+  // cleared on send, overwritten by the next recording. Telemetry only;
+  // never read by any teaching-decision code path.
+  const pendingVoiceSignalRef = useRef<VoiceTimingSignal | null>(null)
 
   // ─── WhatsApp-style history: MOUNT-TIME restoration ───────────────────────
   // Root-cause fix: the previous implementation (commit bea64a3) placed the
@@ -1257,7 +1264,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [code, language, stdinInput, isRunning])
 
   // Send message
-  const sendMessage = useCallback(async (sid: string, text: string, showInUI = true) => {
+  const sendMessage = useCallback(async (sid: string, text: string, showInUI = true, voiceSignal?: VoiceTimingSignal) => {
     setIsStreaming(true)
     if (showInUI) setMessages((p) => [...p, { id: `u-${Date.now()}`, role: 'user', content: text, ts: Date.now() }])
     const aid = `a-${Date.now()}`
@@ -1272,6 +1279,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               sessionId: sid, message: text, userId: userId ?? 'anonymous',
+              // Voice Signal Recovery (Claude Recommendation #7): forwarded
+              // only when this turn originated from voice dictation —
+              // additive, telemetry-only, undefined for typed messages.
+              voiceSignal,
               // Bug 8 (mastery gate): tell the engine whether the previous
               // long collapsed explanation was ever expanded — unread text
               // must never be assumed read. undefined = nothing collapsed.
@@ -1712,7 +1723,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setInput('')
     clearDraft(`lesson_${subjectSlug}`)
     if (textareaRef.current) textareaRef.current.style.height = 'auto'
-    sendMessage(sessionId, msg, true)
+    // Voice Signal Recovery: consume-and-clear, same lifecycle as attachedFile.
+    const voiceSignal = pendingVoiceSignalRef.current
+    pendingVoiceSignalRef.current = null
+    sendMessage(sessionId, msg, true, voiceSignal ?? undefined)
   }
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() }
@@ -1721,6 +1735,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setInput(e.target.value)
     e.target.style.height = 'auto'
     e.target.style.height = `${Math.min(e.target.scrollHeight, 96)}px`
+    // Voice Signal Recovery: a manual edit means the text no longer purely
+    // reflects the recorded utterance — don't attribute stale timing data
+    // to whatever the user ends up sending.
+    pendingVoiceSignalRef.current = null
   }
 
   // Mic
@@ -1760,9 +1778,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           const rawBody = await res.text()
           console.log('[STT-CLIENT] response body:', rawBody)
           if (res.ok) {
-            let errBody: { text?: string } = {}
+            let errBody: { text?: string; voiceSignal?: VoiceTimingSignal } = {}
             try { errBody = JSON.parse(rawBody) } catch { /* non-JSON */ }
-            if (errBody.text?.trim()) setInput((prev) => prev ? prev + ' ' + errBody.text! : errBody.text!)
+            if (errBody.text?.trim()) {
+              setInput((prev) => prev ? prev + ' ' + errBody.text! : errBody.text!)
+              // Voice Signal Recovery: attach to whatever gets sent next.
+              // Best-effort only — never blocks or alters dictation itself.
+              pendingVoiceSignalRef.current = errBody.voiceSignal ?? null
+            }
           } else {
             let errBody: { error?: string } = {}
             try { errBody = JSON.parse(rawBody) } catch { /* non-JSON */ }
