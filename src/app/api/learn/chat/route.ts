@@ -1797,10 +1797,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           sessionEpisodeHoisted = deriveEpisode(prevEpisode, boundary, turnReceivedAt, prevLastSignal)
           sessionEpisodeFreshHoisted = boundary
           if (boundary) {
+            // Spaced Retrieval Scheduler (Claude Recommendation #8, wired in
+            // here per the follow-up recommendation): the session OPENING's
+            // due-review count now comes from the real forgetting-curve
+            // scheduler (scheduleReviews/loadReviewQueue over Student
+            // Intelligence), not the per-turn interval-ladder nudge above
+            // (libraryDueRevisionCountHoisted / spacedRevision.ts, which
+            // stays exactly as-is for its own, separate every-turn purpose).
+            // Fail-safe: a scheduler error never blocks the turn — it just
+            // means no due-review nudge this opening, same as before this
+            // wiring existed.
+            let dueReviewCount = 0
+            try {
+              const { loadReviewQueue } = await import('@/lib/teaching/retrieval/spacedRetrievalScheduler')
+              const reviewQueue = await loadReviewQueue(userId, { now: new Date(turnReceivedAt) })
+              dueReviewCount = reviewQueue.overdue.length + reviewQueue.dueToday.length
+            } catch (err) {
+              console.warn('[learn/chat] spaced retrieval scheduler unavailable — no due-review nudge this opening:', err)
+            }
             // OPENING (07 §1 + §8 rules 2–3): engineered win first when
             // owed → one-breath continuity → due reviews BEFORE new content.
             systemPrompt += buildOpeningBlock({
-              dueReviewCount: libraryDueRevisionCountHoisted,
+              dueReviewCount,
               retroWinOwed: sessionEpisodeHoisted.retroWinOwed,
               isFreshBoundary: true,
               hadPreviousEpisode: prevEpisode !== null || lastMsgAt !== null,
