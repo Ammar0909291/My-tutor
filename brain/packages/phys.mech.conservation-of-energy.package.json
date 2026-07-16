@@ -1,0 +1,545 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.conservation-of-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.conservation-of-energy",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:79c2cd8038a527e5f0ffc34433f839fa1326e3e9cb01287875d2bcbaf7c2e790",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md": "sha256:9c3a1dc4281c8e20efc9756f32893dbd1bb057f2a2ffbcb7bb32413d14f0f8f1"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.conservation-of-energy",
+    "name": "Conservation of Energy",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.kinetic-energy",
+      "phys.mech.potential-energy",
+      "phys.mech.work-energy-theorem"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.conservation-of-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.conservation-of-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md": "sha256:9c3a1dc4281c8e20efc9756f32893dbd1bb057f2a2ffbcb7bb32413d14f0f8f1"
+      },
+      "contentHash": "sha256:54141e4d3d48514abcafa60a21b99676e0e107e0617f2daae013fe52d082f95c",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-energy\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-energy\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-energy\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md#TA-4 (addresses MC-FRICTION-CONSERVES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-energy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md#TA-5 (addresses MC-PATH-MATTERS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-energy.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-energy.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-energy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.conservation-of-energy/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Conservation of Energy — core explanation",
+      "content": "**Core Insight:** In an isolated system with no non-conservative forces, the total mechanical\nenergy (KE + PE) is constant. Energy transforms between kinetic and potential forms but is\nnever created or destroyed. When friction or air resistance acts, mechanical energy decreases —\nbut total energy (including thermal) is still conserved.\n\n**Formal Statements:**\n\n*Conservative system (no friction/air resistance):*\nE_total = KE + PE = constant\nKE_i + PE_i = KE_f + PE_f\n½mv_i² + mgh_i = ½mv_f² + mgh_f\n\n*Non-conservative system (with friction):*\nKE_i + PE_i = KE_f + PE_f + W_friction\n(W_friction = μ_k N × d = energy lost to heat)\n\n**Key properties:**\n- Mechanical energy is conserved ONLY when all forces are conservative (gravity, springs).\n- Friction, air resistance, drag are non-conservative → they dissipate mechanical energy.\n- The reference level for PE cancels out: only ΔPE = mg Δh appears in the equation.\n- Path is irrelevant for conservative forces: only initial and final heights matter.\n- Conservation of energy is often the fastest solver for speed-vs-height problems.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 27,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Frictionless roller coaster",
+      "content": "**Worked Example 1 (Frictionless roller coaster):**\nA 500 kg cart starts at rest at height h = 20 m. Find speed at h = 5 m.\nKE_i + PE_i = KE_f + PE_f\n0 + 500×9.8×20 = ½×500×v_f² + 500×9.8×5\n98 000 = 250v_f² + 24 500\nv_f² = (98 000 − 24 500)/250 = 294\nv_f = √294 ≈ 17.1 m/s.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 27,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "With friction — slide",
+      "content": "**Worked Example 2 (With friction — slide):**\nA 3 kg block slides from rest at top of a 4 m frictionless ramp (height 2 m) then travels\n3 m across a rough floor (μ_k = 0.3). Find final speed. g = 10.\nTotal PE_i = 3×10×2 = 60 J. W_friction = μ_k × mg × d = 0.3×30×3 = 27 J.\nKE_f = 60 − 27 = 33 J. v_f = √(2×33/3) = √22 ≈ 4.69 m/s.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 27,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Spring-mass",
+      "content": "**Worked Example 3 (Spring-mass):**\nA spring (k = 500 N/m) compressed 0.2 m launches a 0.5 kg ball. Find launch speed.\nEPE_i = ½×500×0.04 = 10 J = KE_f = ½×0.5×v_f²\nv_f = √(2×10/0.5) = √40 ≈ 6.32 m/s.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 27,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/misconception/MC-FRICTION-CONSERVES",
+      "kind": "misconception",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Priority 1",
+      "content": "### MC-FRICTION-CONSERVES (Priority 1)\n**Label:** \"Conservation of energy applies even with friction — mechanical energy is still constant\"\n\n**Trigger signals:**\n- Applies KE_i + PE_i = KE_f + PE_f in a friction scenario and gets the wrong answer\n- Says \"energy is always conserved so I can use the same equation\"\n- Attributes erroneous speed to the pendulum returning lower than its release height\n\n**Conflict evidence [P28]:**\n\"A 2 kg block slides from rest at the top of a 3 m high frictionless ramp.\nUsing conservation: ½mv² = mgh → v = √(2×10×3) = √60 ≈ 7.75 m/s at the bottom.\nNow the same scenario but with friction force 5 N over 5 m slope length.\nW_friction = 5×5 = 25 J. If we use KE_f = mgh − W_friction = 60 − 25 = 35 J.\nv = √(2×35/2) = √35 ≈ 5.92 m/s.\nBoth cannot be correct. Which formula applies when friction acts?\"\n\n**Bridge [P30]:**\n\"Total energy (mechanical + thermal) is always conserved. But mechanical energy = KE + PE\ndecreases when friction converts some into heat. The equation KE_i + PE_i = KE_f + PE_f\nholds ONLY if zero mechanical energy is lost to friction. When friction is present, add it\nto the right side as 'energy dissipated.'\"\n\n**Replacement [P31]:**\n\"With friction: KE_i + PE_i = KE_f + PE_f + W_friction_dissipated.\nWithout friction: KE_i + PE_i = KE_f + PE_f.\nAlways identify: is the system conservative (no friction/drag)? If not, account for losses.\"\n\n**Discrimination pairs [P33]:**\n- Frictionless ramp: full PE converts to KE ✓\n- Same ramp with friction: less KE at bottom than PE at top (some lost to heat) ✓\n\n**s6_path:** Start with frictionless examples only; introduce friction in TA-5 using a simple\n\"energy lost = friction × distance\" calculation before full integration.\n\n---",
+      "localKey": "MC-FRICTION-CONSERVES",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-CONSERVES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/misconception/MC-PATH-MATTERS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Priority 2",
+      "content": "### MC-PATH-MATTERS (Priority 2)\n**Label:** \"The path taken between two heights affects the final speed (conservation should account for it)\"\n\n**Trigger signals:**\n- Computes different final speeds for a ball sliding down a curved vs straight ramp to the same height\n- Believes a longer curved path gives less final speed \"because it traveled more distance\"\n- Says \"the slope angle must matter — different angles give different speeds\"\n\n**Conflict evidence [P28]:**\n\"Ball A slides down a straight 60° ramp from height 4 m.\nBall B slides down a curved 'waterslide' ramp from the same height 4 m.\nBoth frictionless. Both start at rest. Using conservation:\nv_f = √(2gh) = √(2×10×4) = √80 ≈ 8.94 m/s for both.\nSame final speed, different paths. Does the path length appear in the formula?\"\n\n**Bridge [P30]:**\n\"Conservation of energy for gravity only depends on height change, not path. Gravity is a\nconservative force — work done against it depends only on vertical displacement. That's why\nthe formula KE_i + PE_i = KE_f + PE_f has h (height), not L (path length). The path is irrelevant.\"\n\n**Replacement [P31]:**\n\"For conservative forces (gravity, springs): only initial and final positions matter.\nPath length, slope angle, and route are irrelevant to the final speed.\nThis path-independence is the defining property of conservative forces.\"\n\n**Discrimination pairs [P33]:**\n- Straight ramp vs curved ramp, same height: same v_f (frictionless) ✓\n- Same height, with friction: longer path → more W_friction → lower KE_f ✓ (friction is path-dependent — good contrast)\n\n**s6_path:** Skip the curved-vs-straight comparison initially; establish v_f = √(2gh) for straight\nramp; present as a single formula before introducing path independence.\n\n---",
+      "localKey": "MC-PATH-MATTERS",
+      "language": "en",
+      "refs": [
+        "MC-PATH-MATTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 39,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 15,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 36,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "MC-FRICTION-CONSERVES Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-FRICTION-CONSERVES Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-FRICTION-CONSERVES\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-CONSERVES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 49,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "MC-PATH-MATTERS Probe + Spring Systems",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-PATH-MATTERS Probe + Spring Systems\",\"primitives\":[\"P07\",\"P08\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-PATH-MATTERS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PATH-MATTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 68,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 89,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 110,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Apply — frictionless fall",
+      "content": "**MP-1 (Apply — frictionless fall):**\n\"A 3 kg ball rolls from rest at h = 8 m down a frictionless ramp. Find v at h = 2 m. (g = 10)\"\nExpected: KE = mg(8−2) = 180 J; v = √(2×180/3) = √120 ≈ 10.95 m/s.\n_Discriminates: basic conservation; height difference, not total height._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 295,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Apply — with friction loss",
+      "content": "**MP-2 (Apply — with friction loss):**\n\"A 4 kg block slides from 5 m height. Friction dissipates 30 J. Find v_f at the bottom. (g = 10)\"\nExpected: KE_f = 200 − 30 = 170 J; v_f = √(2×170/4) = √85 ≈ 9.22 m/s.\n_Discriminates: MC-FRICTION-CONSERVES resolution._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-CONSERVES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 295,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Apply — spring launch",
+      "content": "**MP-3 (Apply — spring launch):**\n\"A spring (k = 400 N/m) is compressed 0.1 m and launches a 0.2 kg ball. Find launch speed.\"\nExpected: EPE = ½×400×0.01 = 2 J; v = √(2×2/0.2) = √20 ≈ 4.47 m/s.\n_Discriminates: EPE → KE transfer._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 295,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Analyze — path independence",
+      "content": "**MP-4 (Analyze — path independence):**\n\"Ball A rolls down a steep short ramp; Ball B rolls down a gentle long ramp. Both start from\nthe same height (5 m) and both are frictionless. Which has the greater speed at the bottom?\"\nExpected: Same. v = √(2gh) = √(2×10×5) = 10 m/s for both.\n_Discriminates: MC-PATH-MATTERS resolution._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-PATH-MATTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 295,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Analyze — find friction from energy data",
+      "content": "**MP-5 (Analyze — find friction from energy data):**\n\"A 2 kg ball released at 10 m reaches the ground with v = 12 m/s. (g = 10)\nHow much energy was lost to friction?\"\nExpected: PE_i = 200 J; KE_f = ½×2×144 = 144 J; W_friction = 200−144 = 56 J.\n_Discriminates: backward problem — uses conservation to find friction, not speed._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 295,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.kinetic-energy        ──►\nphys.mech.potential-energy      ──►  phys.mech.conservation-of-energy\nphys.mech.work-energy-theorem   ──►\n```\n\n**PD-1 (KE prerequisite):**\n\"A 4 kg object moves at 5 m/s. KE?\"\nExpected: 50 J.\n\n**PD-2 (GPE prerequisite):**\n\"A 3 kg ball is 4 m above the floor. GPE? (g = 9.8)\"\nExpected: 117.6 J.\n\n**PD-3 (Work–Energy Theorem):**\n\"A 2 kg object at rest. Applied 10 N, friction 4 N, displacement 5 m. Find v_f.\"\nExpected: W_net = 30 J; v_f = √30 ≈ 5.48 m/s.\n\nAll three must pass before TA-3. Gap in any → repair that concept first.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 73,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Under what conditions is KE + PE constant? What breaks that conservation?\"\nThreshold: Must state 'no friction / no air resistance' and 'friction dissipates mechanical energy'.\n\n**FA-2 (TA-4 exit):** \"3 kg block, height 4 m, frictionless. v at bottom? Now friction removes 24 J. v?\"\nExpected: v_frictionless = √(2×10×4) = √80 ≈ 8.94; v_friction = √(2×(120−24)/3) = √64 = 8 m/s.\nIf student gives same answer for both → MC-FRICTION-CONSERVES not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"Two frictionless ramps — steep vs gentle — from height 3 m. Same v_f?\"\nExpected: Yes. If student says no → MC-PATH-MATTERS not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\nOtherwise → targeted re-teach of failed probe type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-CONSERVES",
+        "MC-PATH-MATTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 328,
+        "endLine": 345
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Begin with the ball-drop (PD-1-type) using g = 10 for clean arithmetic.\n- Only frictionless problems in TA-3 and TA-4; defer friction to TA-5.\n- Use the energy bar diagram heavily — visual reassurance that totals match.\n- Break spring problems into: \"step 1: EPE = ? step 2: set EPE = KE, solve v.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (backward — find friction from energy data) at TA-3.\n- Challenge: \"A ball is thrown upward at 15 m/s. How high does it reach? No energy formula\n  given — derive it from conservation.\" (h = v²/2g)\n- Introduce non-conservative problem early; spring-mass in TA-5.\n\n**S4 (Prereq gap):**\n- PD-1 gap (KE) → repair KE = ½mv² first.\n- PD-2 gap (GPE) → repair GPE = mgh, reference level.\n- PD-3 gap (Work–Energy Theorem) → repair W_net = ΔKE before this concept.\n- All gaps must be resolved before TA-3; prioritise in PD-3 → PD-2 → PD-1 order (most complex first).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 345,
+        "endLine": 367
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-energy/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-energy",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → Conservation formula → MC-FRICTION-CONSERVES repair).\n**Session 2 (≥24 h later):** Retrieval: \"State conservation of energy. When does it fail?\"\n  → TA-5 (MC-PATH-MATTERS, spring systems) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe integrating all energy concepts:\n  \"A 500 kg car rolls from rest at the top of a hill (h = 20 m). Friction dissipates 40 kJ.\n  Find v at the bottom. What average power did friction act at if the hill took 8 s?\"\n  (Combines conservation + friction loss + power = W/t.)\n**Pre-momentum session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.kinetic-energy, phys.mech.potential-energy,\nphys.mech.work-energy-theorem, phys.mech.power — the four form the complete energy cluster.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-CONSERVES",
+        "MC-PATH-MATTERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md",
+        "startLine": 367,
+        "endLine": 383
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

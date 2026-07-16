@@ -177,7 +177,7 @@ None of these is derivable from energy conservation alone."
 
 *Clausius: heat can't spontaneously flow cold→hot. Kelvin-Planck: cyclic engine can't be 100% efficient.*
 
-**Turn 6 [P28 conflict — MC-ONLY-FOR-HEAT]:** "A cell assembles an ordered protein — local entropy decreases. Does this violate the second law?"
+**Turn 6 [P28 conflict — MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT]:** "A cell assembles an ordered protein — local entropy decreases. Does this violate the second law?"
 
 *No — cell also releases heat to surroundings; ΔS_universe > 0.*
 
@@ -203,7 +203,7 @@ None of these is derivable from energy conservation alone."
 → [WE-1: Clausius/Kelvin-Planck equivalence proof]
 → [P51 check-in: two classical statements]
 → [WE-2: Carnot's theorem — proof by contradiction]
-→ [MC-ONLY-FOR-HEAT: P28 conflict (biological cell) → P30 bridge → P31 → P33]
+→ [MC-SECOND-LAW-ONLY-APPLIES-TO-HEAT: P28 conflict (biological cell) → P30 bridge → P31 → P33]
 → [P52 narrow: ΔS_universe ≥ 0 — reversible vs irreversible]
 → [P62 retrieval seed: P4-d Carnot bound check]
 → [WE-3: statistical interpretation — microstates and probability]

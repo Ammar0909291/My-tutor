@@ -1,0 +1,518 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.hamilton-jacobi-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.hamilton-jacobi-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:86009229ead9cdb6d40e785eec6eeca821b56a051e38d04197283ad254c358e5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md": "sha256:a9f5c2d23b03924238c2c594684bec60f3082a9c9dc2fb61267955fceb6d056b"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.hamilton-jacobi-equation",
+    "name": "Hamilton-Jacobi Equation",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.mech.canonical-transformations"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.hamilton-jacobi-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.hamilton-jacobi-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md": "sha256:a9f5c2d23b03924238c2c594684bec60f3082a9c9dc2fb61267955fceb6d056b"
+      },
+      "contentHash": "sha256:54a80d85b19bc80cc78773c8fb35ab1962b3b6a7e702ee39c2a4b9d34400d671",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamilton-jacobi-equation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamilton-jacobi-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamilton-jacobi-equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamilton-jacobi-equation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamilton-jacobi-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamilton-jacobi-equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamilton-jacobi-equation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamilton-jacobi-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamilton-jacobi-equation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamilton-jacobi-equation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md#TA-4 (addresses MC-HJ-ALWAYS-SEPARABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamilton-jacobi-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamilton-jacobi-equation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamilton-jacobi-equation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamilton-jacobi-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamilton-jacobi-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamilton-jacobi-equation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamilton-jacobi-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamilton-jacobi-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamilton-jacobi-equation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamilton-jacobi-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamilton-jacobi-equation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Hamilton-Jacobi Equation — Core Idea (one sentence)",
+      "content": "The Hamilton-Jacobi equation converts the problem of solving Hamilton's equations into finding a single scalar function S(q,t) — Hamilton's principal function — such that all new momenta Pᵢ are constants of the motion.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 20,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Free particle (1D)",
+      "content": "### Example 1 — Free particle (1D)\nH = p²/2m; HJ equation: (1/2m)(∂S/∂x)² + ∂S/∂t = 0.\nTry S(x,α,t) = αx − α²t/(2m) (α = constant momentum).\nCheck: ∂S/∂x = α, ∂S/∂t = −α²/(2m). Equation satisfied ✓\nNew coordinates: Q = ∂S/∂α = x − αt/m = x₀. Trajectory: x = αt/m + x₀ = pt/m + x₀. Recovers x = x₀ + vt ✓",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Harmonic oscillator (time-independent)",
+      "content": "### Example 2 — Harmonic oscillator (time-independent)\nH = p²/2m + mω²q²/2 = E (const) → use W(q) (Hamilton's characteristic function).\nHJ: (1/2m)(dW/dq)² + mω²q²/2 = E.\ndW/dq = √(2mE − m²ω²q²); integrate → W(q,E) = ∫√(2mE − m²ω²q²) dq.\nNew momentum: P = E (a constant); Q = ∂W/∂E = ∫(m/√(2mE − m²ω²q²))dq = (1/ω)arcsin(qω√(m/2E)).\nInvert: q(t) = √(2E/mω²) sin(ωQ) = A sin(ωt + φ). Exact solution recovered.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Kepler problem (separation)",
+      "content": "### Example 3 — Kepler problem (separation)\nH = p_r²/(2m) + p_φ²/(2mr²) − k/r = E.\nS = W_r(r,E,l) + lφ − Et (l = angular momentum constant).\nSeparation: (dW_r/dr)² = 2m(E + k/r) − l²/r² → orbit equation from Q_E = ∂S/∂E = const and Q_l = ∂S/∂l = const.\nRecovers elliptical orbits (Kepler's first law) as a consequence of the HJ equation constants.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/misconception/MC-HJ-S-IS-ACTION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "\"S is just the action integral; I can compute it separately.\"",
+      "content": "| MC-HJ-S-IS-ACTION | \"S is just the action integral; I can compute it separately.\" | \"I'll integrate L dt to get S.\" | S is the action only along actual trajectories; the HJ equation determines S(q,α,t) as a function of coordinates and constants of motion α, not as a number for a given path. S satisfies ∂S/∂t + H(q,∂S/∂q,t)=0 regardless of whether the trajectory is known. |",
+      "localKey": "MC-HJ-S-IS-ACTION",
+      "language": "en",
+      "refs": [
+        "MC-HJ-S-IS-ACTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/misconception/MC-HJ-ALWAYS-SEPARABLE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "\"If there are multiple coordinates, you can always separate them.\"",
+      "content": "| MC-HJ-ALWAYS-SEPARABLE | \"If there are multiple coordinates, you can always separate them.\" | \"Just separate S = S₁(q₁)+S₂(q₂).\" | Separability requires specific conditions: H must be separable in each coordinate; cyclic coordinates always separate; for others, separability is a property of the Hamiltonian, not guaranteed. Liouville-separability and Stäckel conditions define when full separation is possible. |",
+      "localKey": "MC-HJ-ALWAYS-SEPARABLE",
+      "language": "en",
+      "refs": [
+        "MC-HJ-ALWAYS-SEPARABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Concrete hook",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete hook\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-HJ-ALWAYS-SEPARABLE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-HJ-ALWAYS-SEPARABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): Write the Hamilton-Jacobi equation for a system with Hamiltonian H(q,p,t). What is the condition on K that motivates it?  \n*Answer*: ∂S/∂t + H(q,∂S/∂q,t) = 0; derived from F₂=S with the goal K=H+∂F₂/∂t=0.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For a free particle H=p²/2m, verify that S=px−p²t/(2m) satisfies the HJ equation.  \n*Answer*: ∂S/∂t=−p²/(2m); ∂S/∂x=p; (1/2m)(∂S/∂x)²=p²/(2m). Sum=0 ✓",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): In the time-independent HJ approach, what is Hamilton's characteristic function W and how does it relate to S?  \n*Answer*: When H has no explicit t-dependence, separate S(q,α,t)=W(q,α)−Et; W satisfies H(q,∂W/∂q)=E; trajectories from Qᵢ=∂W/∂αᵢ=const (plus t appears only in Q_E=∂W/∂E−t=const).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): For the harmonic oscillator, the solution gives q=A sin(ωt+φ). Identify what plays the role of the two constants of integration in the HJ framework.  \n*Answer*: Two constants α: α₁=E (energy, the separation constant) and α₂=φ (phase, from integrating Q=∂W/∂E=const+t); these replace the two initial conditions (q₀,p₀).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A student uses separation S=S_x(x)+S_y(y) for H=p_x²/(2m)+p_y²/(2m)+xy. Critique this approach.  \n*Answer*: H has a coupling term xy that cannot be written as H_x(x,p_x)+H_y(y,p_y); therefore separation is invalid. S_x depends on the constant E_x but there is no way to assign a constant to x alone. The student needs a different approach (e.g., rotate to normal coordinates).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student confuses S with the Lagrangian action integral | Use concrete check: \"Evaluate S at a specific q,t — it gives a number that depends on the constant α, not just a number. It's a function of q AND the constants of motion.\" |\n| Student gets partial derivatives correct but wrong Q expression | Verify they differentiated S with respect to αᵢ (the new momenta), not qᵢ |\n| Student asks \"when is the HJ method better than Hamilton's equations?\" | \"When the system is separable: for Kepler, 2D oscillator, with HJ you get the full orbit in one integral rather than solving 2N ODEs\" |\n| Student frustrated by implicit trajectory | Demonstrate with Example 1: Q=x−pt/m=x₀ → x=x₀+pt/m; the implicit equation inverts trivially here |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 99,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What canonical transformation has K=0 everywhere?\" (connection to canonical transformations)\nCORE-1 (15 min): TA-1 + TA-2 (K=0 motivation + notation)\nCORE-2 (20 min): TA-3 + TA-4 (derivation + MC diagnostic)\nCORE-3 (20 min): TA-5 (harmonic oscillator full derivation)\nDRILL  (10 min): TA-6 (5-step procedure applied to free particle)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"The HJ equation bridges classical mechanics and quantum mechanics — in QM, S/ℏ becomes the phase of the wavefunction (WKB approximation, next subject).\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.mech.hamilton-jacobi-equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamilton-jacobi-equation",
+      "title": "Known Sticking Points",
+      "content": "1. **S vs W distinction**: Students use S and W interchangeably; clarify: S includes −Et factor for time-independent systems; W is the spatial part only.\n2. **K=0 motivation**: \"Why force K=0?\" — it makes new Q,P all constants, so equations of motion are trivially Q̇ᵢ=0, Ṗᵢ=0; the whole dynamics is encoded in S.\n3. **Integration vs trajectory**: Students expect to get x(t) directly from the HJ equation; emphasize that Q=∂W/∂E=t+const gives the trajectory implicitly (invert for q(t)).\n4. **Separation conditions**: Stäckel conditions are rarely taught explicitly; for this level, state: cyclic coordinates always separate; verify separability by checking whether H can be written as Σᵢ Hᵢ(qᵢ,pᵢ).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamilton-jacobi-equation.md",
+        "startLine": 90,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

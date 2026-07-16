@@ -1,0 +1,524 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.generalized-coordinates-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.generalized-coordinates",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a1481584a3edad831cd15ce4c8ae352d3f2d815b091f7c502977636769077d7f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md": "sha256:26df1f77dd2be2a73efd6cbdaf1aa2b4038457a15f9539c734260122e0789869"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 2,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.generalized-coordinates",
+    "name": "Generalized Coordinates and Configuration Space",
+    "difficultyRaw": "expert (6)",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.mech.conservative-forces",
+      "phys.mech.kinematics-2d"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.generalized-coordinates-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.generalized-coordinates (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md": "sha256:26df1f77dd2be2a73efd6cbdaf1aa2b4038457a15f9539c734260122e0789869"
+      },
+      "contentHash": "sha256:5ebb667c38a0c6a3871be9be05fba6585d8eb495281ce256fc1fbc69ca700c88",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.generalized-coordinates.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.generalized-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.generalized-coordinates\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.generalized-coordinates.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.generalized-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.generalized-coordinates\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.generalized-coordinates.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.generalized-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.generalized-coordinates\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.generalized-coordinates.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md#TA-4 (addresses MC-COORD-MUST-BE-CARTESIAN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.generalized-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.generalized-coordinates\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.generalized-coordinates.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md#TA-5 (addresses MC-CONSTRAINT-REDUCES-FREEDOM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.generalized-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.generalized-coordinates\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.generalized-coordinates.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.generalized-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.generalized-coordinates\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.generalized-coordinates.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.generalized-coordinates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.generalized-coordinates\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.generalized-coordinates/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Generalized Coordinates and Configuration Space — core explanation",
+      "content": "**Core Insight:** Generalized coordinates are the smallest independent set of parameters that\ncompletely specifies the configuration of a mechanical system. For a system with N particles in\n3D and k holonomic constraints, the number of degrees of freedom is f = 3N − k. The generalized\ncoordinates q₁, q₂, …, qf can be any convenient quantities (angles, arc lengths, ratios) — not\nnecessarily Cartesian positions. The space swept by all possible (q₁, …, qf) is configuration\nspace.\n\n**Formal Definitions:**\n\nHolonomic constraint: a constraint expressible as f(r₁, r₂, …, t) = 0 (reduces DOF by 1 each).\n\nDegrees of freedom: f = 3N − k (k = number of independent holonomic constraints).\n\nGeneralized coordinates: any set {qᵢ}, i = 1…f, that parameterizes all allowed configurations.\n\nTransformation:  rⱼ = rⱼ(q₁, q₂, …, qf, t)   (Cartesian positions expressed in terms of qᵢ).\n\nGeneralized velocity: q̇ᵢ = dqᵢ/dt.\n\n**Canonical examples:**\n\n| System | N | Constraints k | DOF f | Natural coordinates |\n|--------|---|--------------|-------|---------------------|\n| Bead on wire (3D) | 1 | 2 | 1 | arc length s |\n| Pendulum (2D) | 1 | 1 (fixed length) | 1 | angle θ |\n| Double pendulum | 2 | 2 (fixed lengths) | 2 | θ₁, θ₂ |\n| Planet (2D) | 1 | 0 | 2 | r, φ (polar) |\n| Rigid body (3D) | ∞ | ∞ − 6 | 6 | 3 position + 3 Euler angles |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 25,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Pendulum",
+      "content": "**Worked Example 1 (Pendulum):**\nA simple pendulum: mass m, fixed string length L.\nN = 1 (one particle), k = 1 (length constraint: x² + y² = L²).\nf = 3(1) − 1 = 2... but pendulum is planar → f = 2(1) − 1 = 1.\nNatural q: angle θ. Position: x = L sinθ, y = −L cosθ.\nOne coordinate θ completely specifies the configuration.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 25,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Double pendulum",
+      "content": "**Worked Example 2 (Double pendulum):**\nTwo masses, two fixed strings of lengths L₁, L₂.\nConstraints: string 1 fixed length, string 2 fixed length → k = 2.\nPlanar: f = 2(2) − 2 = 2. Coordinates: θ₁ (angle of upper rod), θ₂ (angle of lower rod relative to vertical).\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 25,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/misconception/MC-COORD-MUST-BE-CARTESIAN",
+      "kind": "misconception",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Priority 1",
+      "content": "### MC-COORD-MUST-BE-CARTESIAN (Priority 1)\n**Label:** \"Coordinates must be x, y, z — you can't use angles or arc lengths as coordinates\"\n\n**Trigger signals:**\n- Insists on writing x, y, z even for constrained systems\n- Says \"but coordinates have to be in metres\"\n- Struggles with θ as a coordinate (\"it's not a position\")\n\n**Conflict evidence [P28]:**\n\"A pendulum swings. If I insist on using x and y, I need x² + y² = L² always. That's two\nnumbers with one constraint. But the pendulum has only one independent motion — it swings.\nOne coordinate should be enough. θ specifies where the bob is completely. Why is θ not a\nvalid coordinate?\"\n\n**Bridge [P30]:**\n\"A coordinate is any quantity that uniquely specifies a configuration — no restriction to\ndistance units. θ in radians is as valid as x in metres. The only requirement: given θ, you\ncan find x and y uniquely (x = L sinθ, y = −L cosθ). Generalized coordinates can be angles,\nlengths along a curve, or any measurable parameter.\"\n\n**Replacement [P31]:**\n\"Count constraints first: DOF = 3N − k. Choose any f quantities that parameterize the\nallowed configurations. Angles, arc lengths, ratios — all valid. Write x = x(q₁, …, qf, t)\nto connect back to Cartesian.\"\n\n**Discrimination pairs [P33]:**\n- Pendulum: θ (angle, scalar, one DOF) vs x, y (two variables, one constraint) — θ is simpler ✓\n- Bead on ring: arc length s (one DOF) vs x, y, z (three, two constraints) — s is simpler ✓\n\n**s6_path:** Fix a pendulum example. \"One number, θ, tells us everything. Any number that\ndoes that is a valid coordinate.\"\n\n---",
+      "localKey": "MC-COORD-MUST-BE-CARTESIAN",
+      "language": "en",
+      "refs": [
+        "MC-COORD-MUST-BE-CARTESIAN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 3,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/misconception/MC-CONSTRAINT-REDUCES-FREEDOM",
+      "kind": "misconception",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Priority 2",
+      "content": "### MC-CONSTRAINT-REDUCES-FREEDOM (Priority 2)\n**Label:** \"A constraint adds force; it doesn't remove degrees of freedom\"\n\n**Trigger signals:**\n- Counts DOF as 3N regardless of constraints\n- Conflates constraint forces (normal, tension) with constraint equations\n- Says \"even with the constraint, the particle can still move in 3D\"\n\n**Conflict evidence [P28]:**\n\"A bead threaded on a wire can only move along the wire — it has 1 DOF regardless of how\nmany force components act on it. The wire exerts a normal force, yes. But that force is always\nperpendicular to motion; it does no work and the bead cannot leave the wire. So we have 3D space\nbut only 1D freedom of movement. Where did the 2 dimensions of freedom go?\"\n\n**Bridge [P30]:**\n\"A holonomic constraint f(r, t) = 0 reduces the independent motions by 1. It does this by\nmaking one coordinate derivable from the others — the constraint is a geometrical restriction\non where the particle can be, not just a force. DOF = 3N − k counts the remaining independent\ndimensions of motion.\"\n\n**Replacement [P31]:**\n\"For each holonomic constraint, subtract 1 from 3N. The result f tells you how many\nindependent parameters you need. Those f parameters are the generalized coordinates. The\nconstraint forces (normal, tension) are reaction forces that enforce the geometry — they appear\nimplicitly; you don't need to compute them in Lagrangian mechanics.\"\n\n**Discrimination pairs [P33]:**\n- Pendulum: 1 constraint → f = 1 (not 2 or 3) ✓\n- Ball on table surface: 1 constraint (z = 0) → f = 2 (x, y move freely) ✓\n\n**s6_path:** \"Count which directions the particle cannot move in. Each blocked direction is one\nconstraint, reducing DOF by 1.\"\n\n---",
+      "localKey": "MC-CONSTRAINT-REDUCES-FREEDOM",
+      "language": "en",
+      "refs": [
+        "MC-CONSTRAINT-REDUCES-FREEDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 37,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 3,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Conceptual Development",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Conceptual Development\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 20,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 36,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "MC-COORD-MUST-BE-CARTESIAN Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-COORD-MUST-BE-CARTESIAN Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-COORD-MUST-BE-CARTESIAN\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-COORD-MUST-BE-CARTESIAN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 49,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "MC-CONSTRAINT-REDUCES-FREEDOM Probe + DOF Practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-CONSTRAINT-REDUCES-FREEDOM Probe + DOF Practice\",\"primitives\":[\"P10\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-CONSTRAINT-REDUCES-FREEDOM\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CONSTRAINT-REDUCES-FREEDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 68,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 87,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 112,
+        "endLine": 131
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Understand — DOF formula",
+      "content": "**MP-1 (Understand — DOF formula):**\n\"A planar double pendulum has masses m₁, m₂ and fixed string lengths L₁, L₂.\n(a) How many particles? (b) How many constraints? (c) DOF?\"\nExpected: (a) 2 particles; (b) 2 constraints (fixed lengths, planar → k=2); (c) f = 2(2) − 2 = 2.\n_Discriminates: f = 2N − k for planar case; constraint counting._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 292,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Understand — coordinate choice",
+      "content": "**MP-2 (Understand — coordinate choice):**\n\"A mass slides without friction on the inner surface of a fixed sphere of radius R.\nSuggest the minimal set of generalized coordinates and state their range.\"\nExpected: θ ∈ [0, π] (polar angle from vertical axis), φ ∈ [0, 2π) (azimuthal angle);\n2 DOF; 2 coordinates.\n_Discriminates: 2D surface → 2 DOF; natural spherical coordinates._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 292,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Apply — transformation",
+      "content": "**MP-3 (Apply — transformation):**\n\"A simple pendulum of length L oscillates in a vertical plane. Write x(θ), y(θ)\nand derive ẋ(θ, θ̇), ẏ(θ, θ̇).\"\nExpected: x = L sinθ, y = −L cosθ; ẋ = L cosθ · θ̇, ẏ = L sinθ · θ̇.\n_Discriminates: chain rule for generalized velocities._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 292,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Understand — constraint classification",
+      "content": "**MP-4 (Understand — constraint classification):**\n\"For each system, state whether the constraint is holonomic or not:\n(a) Bead on a rigid wire: |r|² = R².\n(b) Particle constrained to stay inside a sphere: |r| ≤ R.\n(c) Rolling without slipping (pure rolling condition).\"\nExpected: (a) holonomic; (b) NOT holonomic (inequality, not equation); (c) non-holonomic\n(the rolling constraint involves velocities in a way not integrable to a position constraint).\n_Discriminates: distinction between holonomic, inequality, and non-holonomic constraints._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 292,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Understand — configuration space",
+      "content": "**MP-5 (Understand — configuration space):**\n\"A planar pendulum (angle θ ∈ (−π, π]) can swing all the way around. What is its\nconfiguration space topologically? What if the pendulum can only swing between −90° and +90°?\"\nExpected: Full-circle pendulum: configuration space = S¹ (circle); limited pendulum:\nconfiguration space = interval (segment of a line).\n_Discriminates: topology of configuration space; physical interpretation of coordinate range._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 292,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.conservative-forces  ──►\n                                     phys.mech.generalized-coordinates\nphys.mech.kinematics-2d        ──►\n```\n\n**PD-1 (Conservative forces — potential energy):**\n\"A mass on a frictionless ramp (height h) has V = mgh. Is the normal force a constraint force?\nWhat work does it do?\"\nExpected: N is a constraint force (perpendicular to motion → W = 0); V = mgh is the only potential.\n\n**PD-2 (2D kinematics — polar coordinates):**\n\"A particle moves in a circle of radius R. Express its velocity in terms of angle θ and θ̇.\"\nExpected: v = Rθ̇ (tangential); |v| = Rθ̇.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 70,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"DOF formula? Example: single pendulum.\"\nThreshold: f = 3N − k; single pendulum f = 1.\n\n**FA-2 (TA-4 exit):** \"Why is θ sufficient for a pendulum? What makes it a valid generalized coordinate?\"\nExpected: θ uniquely determines (x, y) via x = L sinθ, y = −L cosθ; it parameterizes all\nallowed configurations; constraint is automatically satisfied.\n\n**FA-3 (TA-5 exit):** \"Two masses, rigid rod in 3D. DOF?\"\nExpected: f = 5 (3 for CM + 2 for rod direction). If student says 6 → MC-CONSTRAINT-REDUCES-FREEDOM not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CONSTRAINT-REDUCES-FREEDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 333,
+        "endLine": 349
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Stay with planar examples only (θ for pendulum, s for bead on wire).\n- Skip non-holonomic constraints in first pass (TA-5 MP-4 part (c)).\n- Reassure: \"One number specifies where everything is. Count the constraints, subtract from 3N.\"\n- Build from pendulum (1 DOF) before anything more complex.\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-4 (non-holonomic) and MP-5 (topology of configuration space).\n- Challenge: \"For a double pendulum, write T in terms of θ₁, θ₂, θ̇₁, θ̇₂. Is there a\n  cross-term (θ̇₁θ̇₂)?  Show why.\"\n- Discuss non-holonomic constraints and why they don't reduce DOF.\n\n**S4 (Prereq gap):**\n- PD-1 gap (conservative forces) → repair potential energy and work concepts before returning.\n- PD-2 gap (2D kinematics / polar) → repair velocity components in polar coordinates.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 349,
+        "endLine": 369
+      }
+    },
+    {
+      "assetId": "phys.mech.generalized-coordinates/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.generalized-coordinates",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → DOF formula → MC-COORD probe).\n**Session 2 (≥24 h later):** Retrieval: \"DOF formula? Single pendulum coordinates?\"\n  → TA-5 (MC-CONSTRAINT probe) → TA-6 (Problem set, at least problems 1–3).\n**Session 3 (≥72 h later):** Interleaved probe:\n  \"A particle is confined to the surface of a cone z = α√(x²+y²). How many DOF?\n  What are natural generalized coordinates?\"\n  (Answer: 2 DOF — use r (distance from cone axis) and φ (azimuthal angle);\n  then z = αr automatically.)\n**Pre-Euler-Lagrange session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.conservative-forces (potential energy in q coordinates),\nphys.mech.euler-lagrange-equation (next concept in chain).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-COORD",
+        "MC-CONSTRAINT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.generalized-coordinates.md",
+        "startLine": 369,
+        "endLine": 386
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

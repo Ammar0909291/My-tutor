@@ -29,7 +29,7 @@ import { validateBlueprintAst } from './semanticValidator'
 import { lowerBlueprintToDraftPack } from './lowering'
 import { lowerBlueprintToAssets } from './assetLowering'
 
-const PACKAGE_COMPILER_ID = 'blueprint-frontend@0.2.0-phase1.5'
+const PACKAGE_COMPILER_ID = 'blueprint-frontend@0.3.0-physics-migration'
 const LANGUAGE_DEFAULT = 'en'
 
 /** AST (parsed + semantically validated by the caller) → DRAFT package. */

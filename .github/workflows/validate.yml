@@ -57,9 +57,8 @@ jobs:
       - name: Educational Package determinism (--check)
         run: |
           set -e
-          for f in brain/packages/*.package.json; do
-            [ -e "$f" ] || continue
-            concept=$(basename "$f" .package.json)
-            echo "=== ${concept} ==="
-            npm run compile:package -- "${concept}" --check
+          # Batch mode: one in-process pass per prefix covers every committed
+          # artifact (217 physics packages as of 2026-07-16).
+          for prefix in $(ls brain/packages/ | sed 's/\..*//' | sort -u); do
+            npm run compile:package -- --prefix "${prefix}." --check
           done

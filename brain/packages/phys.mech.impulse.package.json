@@ -1,0 +1,543 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.impulse-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.impulse",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7cb22688cd11bbe7860c3b86cb0b2c8d83d944e61623df3b0aadcedbe612ea8f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.impulse.md": "sha256:f04b5aa838338af48c548542275d945474174202d5eb0e6bb407e370ddc2a231"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.impulse",
+    "name": "Impulse",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.momentum"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.impulse-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.impulse (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.impulse.md": "sha256:f04b5aa838338af48c548542275d945474174202d5eb0e6bb407e370ddc2a231"
+      },
+      "contentHash": "sha256:ff9019cf9b2a88a0afe9d6f38e27641b797fc35d89579abb680053ce6ed8f70d",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.impulse.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.impulse.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.impulse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.impulse\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.impulse.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.impulse.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.impulse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.impulse\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.impulse.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.impulse.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.impulse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.impulse\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.impulse.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.impulse.md#TA-4 (addresses MC-IMPULSE-IS-FORCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.impulse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.impulse\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.impulse.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.impulse.md#TA-5 (addresses MC-DELTAP-DIRECTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.impulse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.impulse\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.impulse.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.impulse.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.impulse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.impulse\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.impulse.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.impulse.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.impulse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.impulse\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.impulse/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.impulse",
+      "title": "Impulse — core explanation",
+      "content": "**Core Insight:** Impulse is the product of force and the time over which it acts. It equals the\nchange in momentum. The Impulse–Momentum Theorem (J = FΔt = Δp) explains why extending contact\ntime reduces force for the same change in momentum — the foundation of airbags, crash helmets,\nand sports technique.\n\n**Formal Definitions:**\nJ = FΔt            (impulse, when F is constant)\nJ = Δp = p_f − p_i = mv_f − mv_i    (Impulse–Momentum Theorem)\n\nUnits: N·s = kg·m/s (same as momentum — no coincidence).\n\nFor a variable force: J = area under the F-t graph.\n\n**Key properties:**\n- Impulse is a vector: direction = direction of force (= direction of Δp).\n- Same Δp can be achieved by large F over short time, or small F over long time.\n- The \"long contact time\" strategy: airbags, crumple zones, bending knees on landing.\n- Newton's 2nd Law in impulse form: F_avg = Δp/Δt.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.impulse",
+      "title": "Basic impulse",
+      "content": "**Worked Example 1 (Basic impulse):**\nA 0.5 kg ball moving at 4 m/s east bounces off a wall at 4 m/s west.\nΔp = m(v_f − v_i) = 0.5 × (−4 − 4) = −4 kg·m/s (westward).\nJ = −4 N·s. If contact time = 0.02 s: F_avg = Δp/Δt = −4/0.02 = −200 N (westward).",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.impulse",
+      "title": "Extending contact time",
+      "content": "**Worked Example 2 (Extending contact time):**\nA 70 kg skydiver hits the ground at 10 m/s and comes to rest.\nΔp = 70 × (0 − 10) = −700 kg·m/s.\nIf contact time = 0.05 s (stiff landing): F_avg = 700/0.05 = 14 000 N.\nIf contact time = 0.5 s (knees bent): F_avg = 700/0.5 = 1 400 N — 10× lower force.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.impulse",
+      "title": "Find v_f from impulse",
+      "content": "**Worked Example 3 (Find v_f from impulse):**\nA 3 kg object at rest receives impulse J = 24 N·s eastward.\nΔp = 24 kg·m/s = m × v_f → v_f = 24/3 = 8 m/s east.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/misconception/MC-IMPULSE-IS-FORCE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.impulse",
+      "title": "Priority 1",
+      "content": "### MC-IMPULSE-IS-FORCE (Priority 1)\n**Label:** \"Impulse is just another word for force — bigger force always means bigger impulse\"\n\n**Trigger signals:**\n- Equates impulse with force magnitude\n- Says \"the wall exerts more impulse than the hand because walls are harder\"\n- Ignores time when comparing impulses\n\n**Conflict evidence [P28]:**\n\"Scenario A: A force of 1000 N acts for 0.001 s. Impulse = 1000 × 0.001 = 1 N·s.\nScenario B: A force of 10 N acts for 1 s. Impulse = 10 × 1 = 10 N·s.\nScenario B's impulse is 10× larger despite the force being 100× smaller. Can impulse equal force?\"\n\n**Bridge [P30]:**\n\"Impulse = force × time. A brief but large force can have a smaller impulse than a gentle but\nsustained force. Think of a dripping tap vs a single punch — the tap delivers far more total water\n(impulse-analogy) over time, even though each drop is tiny.\"\n\n**Replacement [P31]:**\n\"J = FΔt. Both force AND duration matter. To compare impulses you must know both.\nA powerful but brief hit can give less impulse than a gentle sustained push.\"\n\n**Discrimination pairs [P33]:**\n- 500 N for 0.002 s: J = 1 N·s vs 5 N for 0.5 s: J = 2.5 N·s (gentle wins) ✓\n- Same ball, same Δp, different contact times: more time → less force ✓\n\n**s6_path:** Skip the force-comparison; use only the airbag analogy: \"same Δp, longer time,\nsmaller force — that's why airbags save lives.\" Start with Worked Example 2.\n\n---",
+      "localKey": "MC-IMPULSE-IS-FORCE",
+      "language": "en",
+      "refs": [
+        "MC-IMPULSE-IS-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 3,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/misconception/MC-DELTAP-DIRECTION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.impulse",
+      "title": "Priority 2",
+      "content": "### MC-DELTAP-DIRECTION (Priority 2)\n**Label:** \"Δp (and impulse) is always positive — it can't point 'backwards'\"\n\n**Trigger signals:**\n- Assigns positive impulse to a ball bouncing back from a wall (reverses direction)\n- Writes |p_f| − |p_i| instead of p_f − p_i (takes magnitudes before subtracting)\n- Confused when the impulse direction is opposite to the initial motion direction\n\n**Conflict evidence [P28]:**\n\"A 0.2 kg ball moves east at 5 m/s and bounces west at 5 m/s.\nYou wrote Δp = |−1| − |+1| = 0. But the ball clearly changed its motion dramatically!\nLet's use signs: Δp = m(v_f − v_i) = 0.2×(−5 − 5) = 0.2×(−10) = −2 kg·m/s.\nThe impulse was 2 N·s westward — that's what the wall exerted. Is zero correct?\"\n\n**Bridge [P30]:**\n\"Δp = p_f − p_i must be computed with signs (vectors), never magnitudes. A ball bouncing\nreverses velocity: v_f is opposite to v_i in sign. The wall's force is westward, so the impulse\nis westward (negative), and Δp is negative (westward). That's physically correct.\"\n\n**Replacement [P31]:**\n\"Always assign: one direction = positive. Compute v_f and v_i as signed numbers.\nΔp = m × (v_f − v_i). Subtract after assigning signs — never subtract magnitudes first.\"\n\n**Discrimination pairs [P33]:**\n- Ball bouncing: Δp = m(−v − v) = −2mv (not zero) ✓\n- Ball slowing from +6 to +2: Δp = m(2−6) = −4m (negative, opposing motion) ✓\n\n**s6_path:** Use east-only bouncing analogy: \"ball hits wall and reverses — velocity goes from\n+5 to −5. Show the number line.\"\n\n---",
+      "localKey": "MC-DELTAP-DIRECTION",
+      "language": "en",
+      "refs": [
+        "MC-DELTAP-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 34,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.impulse",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.impulse",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 15,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.impulse",
+      "title": "Prerequisite Check + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 39,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.impulse",
+      "title": "MC-IMPULSE-IS-FORCE Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-IMPULSE-IS-FORCE Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-IMPULSE-IS-FORCE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-IMPULSE-IS-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 52,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.impulse",
+      "title": "MC-DELTAP-DIRECTION Probe + Bouncing Ball Work",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-DELTAP-DIRECTION Probe + Bouncing Ball Work\",\"primitives\":[\"P10\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-DELTAP-DIRECTION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-DELTAP-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 70,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.impulse",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 86,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.impulse",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 107,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.impulse",
+      "title": "Apply — find v_f",
+      "content": "**MP-1 (Apply — find v_f):**\n\"A 4 kg object at rest receives an impulse of 32 N·s eastward. Find v_f.\"\nExpected: v_f = J/m = 32/4 = 8 m/s east.\n_Discriminates: J = Δp = mv_f (from rest)._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 266,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.impulse",
+      "title": "Apply — find force",
+      "content": "**MP-2 (Apply — find force):**\n\"A 0.4 kg ball moves east at 6 m/s and is caught (stops). Contact time = 0.08 s.\nAverage catching force?\"\nExpected: Δp = 0.4×(0−6) = −2.4 N·s; F = 2.4/0.08 = 30 N westward.\n_Discriminates: Δp with direction; F_avg = Δp/Δt._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 266,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.impulse",
+      "title": "Apply — extended contact time",
+      "content": "**MP-3 (Apply — extended contact time):**\n\"A 2 kg ball hits a wall at 5 m/s east and stops. Contact time A = 0.01 s; Contact time B = 0.1 s.\nCompare the force in each case.\"\nExpected: Δp = 10 N·s; F_A = 1000 N; F_B = 100 N. B exerts 10× less force.\n_Discriminates: MC-IMPULSE-IS-FORCE resolution; time-force tradeoff._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-IMPULSE-IS-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 266,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.impulse",
+      "title": "Apply — bouncing with direction",
+      "content": "**MP-4 (Apply — bouncing with direction):**\n\"A 0.5 kg ball moves east at 8 m/s and bounces west at 4 m/s. Find Δp.\"\nExpected: Δp = 0.5×(−4−8) = −6 kg·m/s (westward). |J| = 6 N·s.\n_Discriminates: MC-DELTAP-DIRECTION resolution; magnitudes not subtracted._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-DELTAP-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 266,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.impulse",
+      "title": "Apply — F-t graph area",
+      "content": "**MP-5 (Apply — F-t graph area):**\n\"An F-t graph shows a triangular impulse: peak force 600 N at t = 0.1 s, rising from zero and\nfalling back to zero. What is the total impulse?\"\nExpected: Area = ½ × base × height = ½ × 0.2 × 600 = 60 N·s.\n_Discriminates: impulse as area under F-t graph; triangular case._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 266,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.impulse",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.momentum  ──────────────────►  phys.mech.impulse\n   (p = mv; Δp = m Δv; direction convention)\n   REQUIRED: student can compute momentum and momentum change with signs\n```\n\n**PD-1 (Momentum prerequisite):**\n\"A 2 kg ball moves east at 6 m/s and slows to 2 m/s east. Compute Δp.\"\nExpected: Δp = 2×(2−6) = −8 kg·m/s (impulse was westward — opposing motion).\n\nIf student cannot compute Δp with signs → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 63,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.impulse",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"J = ? (formula). What is the unit of impulse? What does the area under an F-t graph equal?\"\nThreshold: J = FΔt = Δp; N·s (or kg·m/s); impulse.\n\n**FA-2 (TA-4 exit):** \"Force A = 800 N for 0.002 s; Force B = 8 N for 0.2 s. Which delivers more impulse?\"\nExpected: J_A = 1.6 N·s < J_B = 1.6 N·s — equal (good discriminator!).\nIf student says \"A because it's bigger\" → MC-IMPULSE-IS-FORCE not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"0.4 kg ball, east 5 m/s → west 5 m/s. Δp?\"\nExpected: 0.4×(−5−5) = −4 kg·m/s. If student writes 0 → MC-DELTAP-DIRECTION not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-4. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-IMPULSE-IS-FORCE",
+        "MC-DELTAP-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 300,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.impulse",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only \"ball from rest → moving\" (no bouncing) in TA-3.\n- Introduce bouncing (reversed direction) only in TA-5 after simpler cases are secure.\n- Break every problem: \"Step 1 — compute Δp. Step 2 — apply J = FΔt.\"\n- Reassure: \"Two formulas: J = FΔt and J = Δp. The theorem says they're equal.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (F-t triangle area) at TA-3.\n- Challenge: \"Design the crumple zone thickness for a 1500 kg car at 90 km/h so peak force ≤ 30 kN.\"\n- Spend TA-6 on the design problem (Problem 5) and triangular/variable force F-t graph.\n\n**S4 (Prereq gap — Momentum):**\n- Detect via PD-1 failure at TA-3.\n- Repair: mini-session on p = mv and signed Δp before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 316,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.impulse/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.impulse",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → J = FΔt = Δp → MC-IMPULSE-IS-FORCE repair).\n**Session 2 (≥24 h later):** Retrieval: \"State the Impulse-Momentum Theorem. How does it explain airbags?\"\n  → TA-5 (MC-DELTAP-DIRECTION, bouncing) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining impulse and conservation:\n  \"Ball A (0.5 kg, 10 m/s east) hits Ball B (0.5 kg, rest). Contact time = 0.05 s.\n  If they exert equal and opposite forces (Newton's 3rd), what impulse does each receive?\n  What are the final velocities if it's a perfectly elastic collision?\"\n  (Previews conservation of momentum.)\n**Pre-conservation-of-momentum session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.momentum (Δp), phys.mech.newtons-second-law (F = Δp/Δt),\nphys.mech.conservation-of-momentum (next concept in chain).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-IMPULSE-IS-FORCE",
+        "MC-DELTAP-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.impulse.md",
+        "startLine": 335,
+        "endLine": 352
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

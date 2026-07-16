@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.mutual-inductance-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.mutual-inductance",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:37747249cede293dd102f5edf90b14d6ae1b33ad0735b2af38b682bf488a77ad",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.mutual-inductance.md": "sha256:0bf8e4b70fb912f74a8c9fde54bc5f9e44e4aa9c5ac5c5dd56a01677730018b7"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.em.mutual-inductance",
+    "name": "Mutual Inductance",
+    "difficultyRaw": "label: advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.self-inductance"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.mutual-inductance-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.mutual-inductance (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.mutual-inductance.md": "sha256:0bf8e4b70fb912f74a8c9fde54bc5f9e44e4aa9c5ac5c5dd56a01677730018b7"
+      },
+      "contentHash": "sha256:af67837847464f1354d6849bdf1ffde8318124829e321d484484538b0a7f8ddc",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.mutual-inductance.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.mutual-inductance.md#TA-1 (addresses MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.mutual-inductance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.mutual-inductance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.mutual-inductance.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.mutual-inductance.md#TA-2 (addresses MC-TRANSFORMER-CAN-AMPLIFY-POWER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.mutual-inductance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.mutual-inductance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.mutual-inductance.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.mutual-inductance.md#TA-3 (addresses MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.mutual-inductance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.mutual-inductance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.mutual-inductance/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Mutual Inductance — Concept Explanation Blocks",
+      "content": "### Block 1-A — Definition\nWhen a changing current in coil 1 induces an EMF in coil 2, the two coils are **mutually coupled**. The **mutual inductance M** is defined by:\n\n> **ε₂ = −M dI₁/dt** and equivalently **ε₁ = −M dI₂/dt**\n\nM is symmetric: the same M describes coupling in either direction (Neumann formula proves M₁₂ = M₂₁).\n\nM in terms of flux linkage:\n> **M = N₂Φ₂₁/I₁ = N₁Φ₁₂/I₂**\n\nWhere Φ₂₁ is the flux through each turn of coil 2 due to current I₁ in coil 1. Units: Henry (H).\n\n### Block 1-B — Coupling Coefficient and Maximum M\nThe **coupling coefficient k** (0 ≤ k ≤ 1):\n> **k = M/√(L₁L₂)**\n\n- k = 1: perfect coupling (all flux from coil 1 threads coil 2)\n- k = 0: no coupling (coils are orthogonal or widely separated)\n- **Transformer**: k ≈ 1 (iron core channels all flux)\n- **Loosely coupled coils**: k ≈ 0.01–0.3\n\nMaximum possible M: **M_max = √(L₁L₂)** (at k=1)\n\nTotal stored energy in two coupled inductors:\n> **U = ½L₁I₁² + ½L₂I₂² ± MI₁I₂**\n\n(+ for currents wound in same direction; − for opposite directions)\n\n### Block 1-C — The Ideal Transformer\nA transformer has two coils wound on the same iron core (k ≈ 1):\n\n> **V₂/V₁ = N₂/N₁** (voltage ratio)\n> **I₁/I₂ = N₂/N₁** (current ratio — from power conservation)\n> **P₁ = P₂** (ideal: 100% efficiency)\n\nThe transformer is the central application of mutual inductance:\n- Step-up transformer: N₂ > N₁ → V₂ > V₁ (used in power transmission: high V, low I, low losses)\n- Step-down transformer: N₂ < N₁ → V₂ < V₁ (used at consumer end: 230V→5V for phone chargers)\n- Isolation transformer: N₁ = N₂ → V₁ = V₂ but galvanic isolation (safety)\n\nImpedance transformation: load Z_L on secondary appears as Z_primary = (N₁/N₂)² × Z_L (used in impedance matching for maximum power transfer).\n\n### Block 1-D — Coupled Inductors in Circuits\nSeries connection (series-aiding, dots on same end):\n> **L_total = L₁ + L₂ + 2M** (fields reinforce)\n\nSeries connection (series-opposing, dots on opposite ends):\n> **L_total = L₁ + L₂ − 2M** (fields partially cancel)\n\nIn parallel (assuming equal inductors, aiding):\n> **1/L_total = 1/(L₁ + M) + 1/(L₂ + M)** (complicated in general)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 27,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Mutual Inductance and Induced EMF",
+      "content": "### WE-1 — Mutual Inductance and Induced EMF\n**Problem:** Two coils: coil 1 (N₁ = 200 turns, self-inductance L₁ = 40 mH), coil 2 (N₂ = 800 turns). Coupling coefficient k = 0.6. Current in coil 1 changes at dI₁/dt = 50 A/s. Find: (a) L₂ (using M = k√(L₁L₂)), (b) M, (c) EMF induced in coil 2.\n\n**Solution:**\nFrom M = k√(L₁L₂) and the relationship N₂/N₁ = √(L₂/L₁) for same core geometry:\n\nActually use: for solenoids sharing a core, L ∝ N², so L₂/L₁ = (N₂/N₁)² = (800/200)² = 16.  \n(a) L₂ = 16 × L₁ = 16 × 40 = **640 mH**\n\n(b) M = k√(L₁L₂) = 0.6 × √(40×10⁻³ × 640×10⁻³) = 0.6 × √(25.6×10⁻³) = 0.6 × 0.160 = **96 mH**\n\n(c) ε₂ = M × |dI₁/dt| = 96×10⁻³ × 50 = **4.8 V**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 83,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Ideal Transformer",
+      "content": "### WE-2 — Ideal Transformer\n**Problem:** An ideal transformer: N₁ = 500 turns, N₂ = 50 turns. Primary: V₁ = 230 V, I₁ = 0.2 A. Find: (a) V₂, (b) I₂, (c) power. Then a 10 Ω load is connected to secondary — find I₂ and I₁.\n\n**Solution:**\n(a) V₂ = V₁ × N₂/N₁ = 230 × 50/500 = **23 V**\n\n(b) I₂ = I₁ × N₁/N₂ = 0.2 × 500/50 = **2.0 A**\n\n(c) P₁ = V₁I₁ = 230 × 0.2 = 46 W; P₂ = V₂I₂ = 23 × 2.0 = **46 W** ✓ (ideal: no losses)\n\nWith R_L = 10 Ω on secondary:  \nI₂ = V₂/R_L = 23/10 = 2.3 A  \nI₁ = I₂ × N₂/N₁ = 2.3 × 50/500 = **0.23 A**\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 83,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Impedance Transformation",
+      "content": "### WE-3 — Impedance Transformation\n**Problem:** An audio amplifier (output impedance Z_s = 5000 Ω) is connected to a speaker (Z_L = 8 Ω). Find the transformer turns ratio N₁/N₂ for maximum power transfer (impedance matching). Find the transformed impedance seen by the amplifier.\n\n**Solution:**\nMaximum power transfer when source impedance = load impedance as seen from primary:\n\nZ_primary = (N₁/N₂)² × Z_L  \nSet Z_primary = Z_s: (N₁/N₂)² = Z_s/Z_L = 5000/8 = 625  \n**N₁/N₂ = 25** (step-down transformer, 25:1)\n\nVerify: Z_primary = (25)² × 8 = 625 × 8 = **5000 Ω** ✓ — amplifier \"sees\" a 5000 Ω load, matching its output impedance.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 83,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/misconception/MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC",
+      "kind": "misconception",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "- **trigger_signal:** Student says \"M₁₂ ≠ M₂₁ because coil 2 is larger/has more turns than coil 1.",
+      "content": "### MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC\n- **trigger_signal:** Student says \"M₁₂ ≠ M₂₁ because coil 2 is larger/has more turns than coil 1.\"\n- **conflict_evidence [P28]:** \"The Neumann formula M₁₂ = (μ₀/4π)∮∮(dl₁·dl₂/r₁₂) is symmetric in the two circuits — swapping 1↔2 gives the same result. This is a mathematical theorem: M₁₂ = M₂₁ exactly, regardless of size, shape, or number of turns. Experimentally: measure EMF₂ from dI₁/dt → M. Then measure EMF₁ from dI₂/dt → same M. The Neumann formula also gives M = k√(L₁L₂) = k√(L₂L₁) — symmetric.\"\n- **bridge_text [P30]:** \"The symmetry feels counterintuitive because coil 2 (with more turns) collects more flux from coil 1 than vice versa. But coil 1 (with fewer turns) also has a lower self-inductance. When you drive coil 1 with dI/dt and get EMF in coil 2, the effect balances exactly against driving coil 2 and getting EMF in coil 1. The ratio M/√(L₁L₂) = k is the same in both directions.\"\n- **replacement_text [P31]:** \"M₁₂ = M₂₁ = M (symmetric). M = k√(L₁L₂) = k√(L₂L₁). ε₂ = −M dI₁/dt and ε₁ = −M dI₂/dt use the same M. This symmetry is exact — it follows from Maxwell's equations.\"\n- **discrimination_pairs [P33]:**\n  - More turns in coil 2: N₂ > N₁ → L₂ > L₁ → but M = k√(L₁L₂) is symmetric\n  - Driving coil 1: ε₂ = M dI₁/dt — uses same M\n  - Driving coil 2: ε₁ = M dI₂/dt — uses same M\n- **s6_path:** Prove M₁₂ = M₂₁ for two concentric circular loops using Neumann formula (qualitative sketch); measure experimentally both ways.\n\n---",
+      "localKey": "MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC",
+      "language": "en",
+      "refs": [
+        "MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/misconception/MC-TRANSFORMER-CAN-AMPLIFY-POWER",
+      "kind": "misconception",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "- **trigger_signal:** Student says \"step-up transformers amplify power because they increase voltage.",
+      "content": "### MC-TRANSFORMER-CAN-AMPLIFY-POWER\n- **trigger_signal:** Student says \"step-up transformers amplify power because they increase voltage.\"\n- **conflict_evidence [P28]:** \"Energy conservation: for an ideal transformer, P₁ = V₁I₁ = P₂ = V₂I₂. WE-2: P₁ = 46 W; P₂ = 46 W. If voltage increases by N₂/N₁ = 10, current decreases by the same factor 10. Power = V×I remains constant. No machine can output more energy than it receives — this is the first law of thermodynamics. Real transformers have efficiency 95–99.5%, so P₂ < P₁ (never more).\"\n- **bridge_text [P30]:** \"A step-up transformer trades current for voltage, like a mechanical lever trades distance for force. A lever can lift a heavy weight with a small force by moving through a large distance — but the work done (force × distance) is the same on both sides. Similarly, a transformer increases V but decreases I by the same factor — power = V×I is conserved.\"\n- **replacement_text [P31]:** \"Transformers redistribute voltage and current while conserving power: V₂/V₁ = N₂/N₁; I₂/I₁ = N₁/N₂; P₁ = P₂ (ideal). A step-up transformer increases V and decreases I. No power amplification — transformation only.\"\n- **discrimination_pairs [P33]:**\n  - Electronic amplifier: takes small signal + DC power → large signal; real power gain; needs power supply\n  - Ideal transformer: V up, I down; power conserved; no power supply needed; cannot amplify power\n  - Real transformer efficiency: η = P₂/P₁ ≈ 95–99.5% (losses in core and windings)\n- **s6_path:** Calculate primary and secondary power for any transformer example; always verify P₁ ≈ P₂ (or P₂ < P₁ for real devices).\n\n---",
+      "localKey": "MC-TRANSFORMER-CAN-AMPLIFY-POWER",
+      "language": "en",
+      "refs": [
+        "MC-TRANSFORMER-CAN-AMPLIFY-POWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 16,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Definition and formula: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Definition and formula: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 231,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Coupling coefficient and transformer: Block 1-B, WE-1, WE-2",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Coupling coefficient and transformer: Block 1-B, WE-1, WE-2\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-TRANSFORMER-CAN-AMPLIFY-POWER\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-TRANSFORMER-CAN-AMPLIFY-POWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 241,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "WE-3: impedance matching for audio",
+      "content": "{\"id\":\"TA-3\",\"title\":\"WE-3: impedance matching for audio\",\"primitives\":[\"P36\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[\"MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 246,
+        "endLine": 319
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** For an ideal transformer with N₁ = 100 and N₂ = 400:\n**(a) V₂ = 4V₁** (b) V₂ = V₁/4 (c) I₂ = 4I₁ (d) P₂ = 4P₁\n\n**A2 (Short answer):** State the relationship between M, L₁, L₂, and coupling coefficient k.\n[M = k√(L₁L₂); 0 ≤ k ≤ 1]\n\n**A3 (True/False):** M₁₂ ≠ M₂₁ when the two coils have different numbers of turns.\n[FALSE — M₁₂ = M₂₁ = M always (Neumann formula)]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** A transformer has 240V primary, 12V secondary. A 6Ω load is connected to the secondary. Find: (a) turns ratio, (b) I₂, (c) I₁, (d) power in load.\n[(a) N₁/N₂ = 240/12 = 20. (b) I₂ = 12/6 = 2.0A. (c) I₁ = I₂×N₂/N₁ = 2.0/20 = 0.1A. (d) P = 12×2 = 24W. Check: P₁ = 240×0.1 = 24W ✓]\n\n**B2:** Two coils: L₁ = 10 mH, L₂ = 40 mH, k = 0.8. Find M, and the total inductance when connected in series-aiding and series-opposing.\n[M = 0.8√(10×40)×10⁻³ = 0.8×20×10⁻³ = 16 mH. Series-aiding: L = 10+40+2×16 = 82 mH. Series-opposing: L = 10+40−2×16 = 18 mH.]\n\n**B3:** Why are power transmission lines operated at high voltage (400 kV) rather than the 230 V used at homes?\n[P_loss = I²R; to transmit P watts at V volts, I = P/V; lower I → lower losses I²R. At 400kV, I is 400000/230 ≈ 1739× smaller than at 230V; losses are (1739)² ≈ 3M× smaller. Transformers (mutual inductance) step up to 400kV at the generating station and step back down to 230V at the substation.]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** Two solenoids share a core: L₁ = 100 mH, L₂ = 400 mH, k = 0.9. (a) Find M. (b) Current I₁ = 2A is switched off in 5 ms. Find |ε₂|. (c) At steady state with I₁ = 2A and I₂ = 0.5A (aiding), find total energy stored.\n[(a) M = 0.9√(0.1×0.4) = 0.9×0.2 = 180 mH. (b) |ε₂| = M×|dI₁/dt| = 0.18×(2/0.005) = 0.18×400 = 72V. (c) U = ½L₁I₁² + ½L₂I₂² + MI₁I₂ = ½×0.1×4 + ½×0.4×0.25 + 0.18×2×0.5 = 0.2 + 0.05 + 0.18 = 0.43 J.]\n\n**C2 (Synthesis):** A power company transmits 10 MW over 100 km of cable (resistance 0.1 Ω/km total = 10 Ω). Calculate I²R losses and efficiency when transmitted at (a) 11 kV, (b) 400 kV. Find the transformer turns ratio needed to step from 11 kV to 400 kV.\n[(a) I = P/V = 10⁷/11000 = 909 A; P_loss = 909²×10 = 8.26 MW; efficiency = (10−8.26)/10 = 17.4% — terrible! (b) I = 10⁷/400000 = 25 A; P_loss = 25²×10 = 6250 W = 0.006 MW; efficiency = (10−0.006)/10 = 99.94% ✓. Turns ratio: N₁/N₂ = 11000/400000 = 1/36.4 (step-up transformer, N₂/N₁ = 36.4).]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 158,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks current ratio) | Clarify: V₂/V₁ = N₂/N₁; I₁/I₂ = N₂/N₁ (inverse); current ratio is inverted from voltage ratio |\n| Probe A3 wrong (says asymmetric) | Deploy MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC; Neumann formula; verify with WE-1 |\n| Probe B3 incomplete | Quantify: calculate P_loss at both voltages; the 10⁶× reduction in losses is the key point |\n| Probe C1(c) wrong (energy sign) | For aiding currents: +MI₁I₂; for opposing: −MI₁I₂; total energy must be ≥ 0 always |\n| Student asks about wireless charging | Explain: k≈0.3−0.7 for separated coils; compensate with resonance at same frequency; efficiency drops with k but acceptable for convenience |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 264,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.em.mutual-inductance/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.mutual-inductance",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Mutual inductance is what allows energy to jump between circuits without electrical contact. It's the principle behind every transformer, wireless charger, and induction cooktop. Today we'll quantify it and design a transformer.\"\n\n[P41 — Diagnostic]\n\"A battery charger converts 230V AC to 5V DC. How does it reduce the voltage without large resistors wasting energy as heat?\"\n→ Correct (transformer): \"Exactly — and transformers work by mutual inductance.\"\n→ Incorrect: \"The answer reveals one of the most important inventions of the 19th century.\"\n\n[P06 — Concrete anchor]\n\"Two coils near each other, like a transmitter and receiver. Current changing in coil 1 creates a changing B field, which creates changing flux through coil 2, which induces EMF in coil 2 — even with no electrical connection. This is mutual induction.\"\n\n[TA-1 — Definition and formula: Block 1-A]\n\"ε₂ = −M dI₁/dt; M = k√(L₁L₂). M₁₂ = M₂₁ = M (symmetric).\"\n\n[P28 — Conflict evidence for MC-MUTUAL-INDUCTANCE-IS-NOT-SYMMETRIC]\n\"M₁₂ = M₂₁ always — Neumann formula proves it. More turns in coil 2 → more flux collected per turn → BUT lower self-inductance in coil 1 → the effects exactly balance. M = k√(L₁L₂) = k√(L₂L₁) — manifestly symmetric.\"\n\n[P51 — Check-in]\n\"If I drive coil 1 and measure ε₂, I get M = ε₂/(dI₁/dt) = 50 mH. If I drive coil 2 instead, what M would I measure?\"\n[50 mH — same, by symmetry]\n\n[TA-2 — Coupling coefficient and transformer: Block 1-B, WE-1, WE-2]\n\n[P28 — Conflict evidence for MC-TRANSFORMER-CAN-AMPLIFY-POWER]\n\"P₂ = V₂I₂ = (N₂V₁/N₁)(N₁I₁/N₂) = V₁I₁ = P₁. Voltage up by ratio, current down by same ratio. Power = product, conserved. First law of thermodynamics: no transformer can output more than it inputs.\"\n\n[TA-3 — WE-3: impedance matching for audio]\n\n[P52 — Narrow]\n\"Three formulas: ε₂ = −M dI₁/dt; M = k√(L₁L₂); V₂/V₁ = N₂/N₁ and I₁/I₂ = N₂/N₁ (transformer).\"\n\n[P62 — Retrieval seed]\n\"Write from memory: mutual inductance definition, symmetry, transformer V and I ratios, power conservation, coupling coefficient.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Mutual inductance M: the coupling between two coils. M = k√(L₁L₂); ε₂ = −M dI₁/dt. Transformer: V₂/V₁ = N₂/N₁ (voltage ratio); I₁/I₂ = N₂/N₁ (current ratio); P conserved. Transformers enable long-distance power transmission at high voltage, low current, low loss.\"\n\n[P85 — Regulation tail]\n\"Shakiest: M symmetry, the transformer ratios, or the impedance matching?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the M and EMF retrieval quiz.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.mutual-inductance.md",
+        "startLine": 213,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

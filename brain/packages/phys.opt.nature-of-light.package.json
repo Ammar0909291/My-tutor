@@ -1,0 +1,429 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.nature-of-light-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.nature-of-light",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:edb8bcfd5cd89089dd382eff5e560ba8fec111ee78a3214eeaa2b29747000517",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.nature-of-light.md": "sha256:8f15e5c95b94aeacce46ce7d9efdfd042f782bbee7cf2718d68bc4acb76128fa"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.nature-of-light",
+    "name": "\"Nature of Light: Ray and Wave Models\"",
+    "difficultyRaw": "label: proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.wave.wave-properties"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.nature-of-light-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.nature-of-light (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.nature-of-light.md": "sha256:8f15e5c95b94aeacce46ce7d9efdfd042f782bbee7cf2718d68bc4acb76128fa"
+      },
+      "contentHash": "sha256:2c2e8a45f54571db4bffd4b8d68c6a19c847800b97e3ceab1660c77834d58b55",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.nature-of-light.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.nature-of-light.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.nature-of-light"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.nature-of-light\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.nature-of-light.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.nature-of-light.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.nature-of-light"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.nature-of-light\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.nature-of-light.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.nature-of-light.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.nature-of-light"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.nature-of-light\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.nature-of-light.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.nature-of-light.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.nature-of-light"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.nature-of-light\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.nature-of-light.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.nature-of-light.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.nature-of-light"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.nature-of-light\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.nature-of-light.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.nature-of-light.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.nature-of-light"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.nature-of-light\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.nature-of-light.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.nature-of-light.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.nature-of-light"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.nature-of-light\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.nature-of-light/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "\"Nature of Light: Ray and Wave Models\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nDrop a pebble in a pond and ripples spread outward in all directions — that is wave behavior. Fire a bullet and it travels in a straight line, hits a target, and transfers all its energy in one point — that is particle behavior. For three centuries, scientists debated which of these pictures describes light. The astonishing answer, arrived at through experiments in the 19th and 20th centuries, is: light is **both**, depending on which experiment you run.\n\nWhen light passes through two narrow slits and creates alternating bright and dark bands on a screen, it is behaving as a wave — the two paths interfere. When light strikes a metal surface and ejects electrons only if its frequency is above a sharp threshold (regardless of how bright it is), it is behaving as a stream of particles called **photons**. This is the **dual nature of light** — one of the deepest and most non-intuitive discoveries in physics.\n\n### Level 2 — Developing Understanding\n\n**Wave properties of light in vacuum:**\n- Speed: c = 3×10⁸ m/s (exact: 299,792,458 m/s)\n- Wave relationship: c = f × λ → f = c/λ\n- Visible spectrum: λ ≈ 400 nm (violet) to 700 nm (red)\n- Corresponding frequency range: f ≈ 4.3×10¹⁴ Hz (red) to 7.5×10¹⁴ Hz (violet)\n\n**Photon (particle) properties:**\n- Each photon carries energy: E = hf = hc/λ\n- Planck's constant: h = 6.626×10⁻³⁴ J·s\n- Higher frequency (shorter wavelength) → more energy per photon\n- Intensity = (energy per photon) × (photon flux) = hf × (n/A) — increasing brightness increases photon count, not photon energy\n\n**Speed of light in a medium:**\n- v = c/n, where n ≥ 1 is the refractive index of the medium\n- n = 1 for vacuum; n ≈ 1.0003 for air; n ≈ 1.5 for glass; n ≈ 1.33 for water\n- Entering a medium: speed decreases, wavelength shortens (λ_medium = λ₀/n), frequency unchanged\n- Frequency is invariant because the source sets it; wave crests cannot pile up at a boundary\n\n**Historical models timeline:**\n\n| Period | Model | Key figure | Core idea | Key evidence |\n|--------|-------|------------|-----------|--------------|\n| 1670s | Corpuscular | Newton | Light = stream of particles traveling in straight lines | Explains sharp shadows, reflection geometrically |\n| 1678 | Wave (mechanical) | Huygens | Light = waves in a mechanical aether; wavefronts propagate | Explains refraction via Huygens' principle |\n| 1865 | Electromagnetic | Maxwell | Light = coupled E and B field oscillations; c = 1/√(μ₀ε₀) | Unified electricity, magnetism, and optics |\n| 1905 | Photon (quantum) | Einstein | Light = discrete quanta of energy E = hf | Explains photoelectric effect threshold |\n\n### Level 3 — Proficient Synthesis\n\n**Wave evidence — Young's Double-Slit Experiment (1801):**\n\nThomas Young directed coherent light through two narrow slits separated by distance d. On a screen at distance L, an interference pattern appeared: equally-spaced bright fringes (constructive interference, path difference = mλ) alternating with dark fringes (destructive interference, path difference = (m + ½)λ). Fringe spacing: Δy = λL/d.\n\nA particle model cannot produce this pattern — particles would form exactly two bright spots, not many fringes. The interference pattern requires that light from the two slits can reinforce or cancel, which is only possible if light has a wavelength and phase. This experiment is definitive wave evidence.\n\n**Particle evidence — Photoelectric Effect (1887/1905):**\n\nWhen light strikes a metal surface, electrons can be ejected. Classical wave theory predictions (all contradicted by experiment):\n- Any frequency, if bright enough, should eventually eject electrons → WRONG: below threshold frequency f₀, NO electrons at all\n- Brighter waves → faster electrons → WRONG: intensity affects electron count, not kinetic energy\n- Low intensity should cause a time delay before ejection → WRONG: electrons appear immediately above f₀\n\nObserved facts:\n- Threshold frequency f₀ is metal-specific (depends on work function φ = hf₀)\n- Below f₀: zero electrons regardless of intensity\n- Above f₀: electrons ejected immediately; KE_max = hf − φ\n- Above f₀: more intensity → more electrons, but each electron's KE_max is unchanged\n\nEinstein's 1905 explanation: light arrives as individual photons of energy E = hf. One photon ejects one electron. If hf < φ, the photon lacks the energy to free the electron — no matter how many such photons arrive. Above threshold, the excess energy appears as kinetic energy: KE_max = hf − φ.\n\n**Dual nature synthesis:**\n\nNeither wave nor particle is the complete description. Light exhibits wave behavior in experiments probing its spatial coherence over many wavelengths (interference, diffraction, polarization). Light exhibits particle behavior in experiments probing individual energy-exchange events (photoelectric effect, Compton scattering). Both descriptions are simultaneously valid; which appears depends on the experimental setup. This complementarity is a fundamental feature of quantum physics, not a gap in understanding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 25,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": ": Photon Energy for Red and Blue Light",
+      "content": "### WE-1: Photon Energy for Red and Blue Light\n\n**Problem:** Calculate the photon energy for:\n(a) Red light: λ = 700 nm\n(b) Blue light: λ = 400 nm\n(c) Show which color has more energy per photon and explain the ratio.\n\n**Solution:**\n\nGiven: h = 6.626×10⁻³⁴ J·s, c = 3.00×10⁸ m/s, 1 eV = 1.6×10⁻¹⁹ J\n\n**(a) Red light (λ = 700 nm = 7.00×10⁻⁷ m):**\n\nE_red = hc/λ = (6.626×10⁻³⁴ × 3.00×10⁸) / (7.00×10⁻⁷)\n\n= (1.988×10⁻²⁵) / (7.00×10⁻⁷)\n\n= **2.84×10⁻¹⁹ J**\n\nIn eV: 2.84×10⁻¹⁹ / 1.6×10⁻¹⁹ = **1.77 eV**\n\n**(b) Blue light (λ = 400 nm = 4.00×10⁻⁷ m):**\n\nE_blue = hc/λ = (6.626×10⁻³⁴ × 3.00×10⁸) / (4.00×10⁻⁷)\n\n= (1.988×10⁻²⁵) / (4.00×10⁻⁷)\n\n= **4.97×10⁻¹⁹ J**\n\nIn eV: 4.97×10⁻¹⁹ / 1.6×10⁻¹⁹ = **3.11 eV**\n\n**(c) Comparison:**\n\nE_blue / E_red = λ_red / λ_blue = 700 / 400 = **1.75**\n\nBlue photons carry 75% more energy than red photons. Since E = hc/λ, energy is inversely proportional to wavelength (equivalently, directly proportional to frequency). Shorter wavelength → higher frequency → higher energy per photon. This is why UV light (shorter λ than blue) causes sunburn by breaking chemical bonds, while infrared (longer λ than red) does not.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 91,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": ": Wavelength from Photon Energy in eV",
+      "content": "### WE-2: Wavelength from Photon Energy in eV\n\n**Problem:** A photon has energy E = 3.1 eV. Find its wavelength and identify the region of the EM spectrum.\n\n**Solution:**\n\n**Step 1 — Convert energy to joules:**\n\nE = 3.1 eV × 1.6×10⁻¹⁹ J/eV = 4.96×10⁻¹⁹ J\n\n**Step 2 — Apply E = hc/λ → λ = hc/E:**\n\nλ = (6.626×10⁻³⁴ × 3.00×10⁸) / (4.96×10⁻¹⁹)\n\n= (1.988×10⁻²⁵) / (4.96×10⁻¹⁹)\n\n= **4.00×10⁻⁷ m = 400 nm**\n\n**Spectrum identification:** λ = 400 nm lies at the violet end of the visible spectrum (visible range: 400–700 nm). This photon sits at the boundary between visible violet and near-ultraviolet.\n\n**Cross-check using frequency:**\n\nf = E/h = (4.96×10⁻¹⁹) / (6.626×10⁻³⁴) = 7.49×10¹⁴ Hz\n\nλ = c/f = (3.00×10⁸) / (7.49×10¹⁴) = 4.01×10⁻⁷ m ≈ 400 nm ✓\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 91,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": ": Light Entering Glass — Frequency Invariance",
+      "content": "### WE-3: Light Entering Glass — Frequency Invariance\n\n**Problem:** Yellow light (λ₀ = 589 nm in vacuum) enters a glass block with refractive index n = 1.50.\n(a) Find the speed of light in glass.\n(b) Find the wavelength in glass.\n(c) Find the frequency in vacuum and in glass.\n(d) Explain physically why frequency is invariant but wavelength is not.\n\n**Solution:**\n\n**(a) Speed in glass:**\n\nv = c/n = (3.00×10⁸) / 1.50 = **2.00×10⁸ m/s**\n\nLight slows to two-thirds of its vacuum speed inside the glass.\n\n**(b) Wavelength in glass:**\n\nλ_glass = λ₀/n = 589 / 1.50 = **393 nm**\n\nAlternatively: λ_glass = v/f = v × (λ₀/c) = λ₀ × (v/c) = λ₀/n ✓\n\n**(c) Frequency:**\n\nIn vacuum: f = c/λ₀ = (3.00×10⁸) / (589×10⁻⁹) = **5.09×10¹⁴ Hz**\n\nIn glass: f = v/λ_glass = (2.00×10⁸) / (393×10⁻⁹) = 5.09×10¹⁴ Hz\n\n**Frequency is identical in both media.** ✓\n\n**(d) Physical explanation:**\n\nFrequency is determined by the source (the oscillating atoms emitting the light) and cannot change at a boundary. Wave crests arrive at the vacuum–glass interface at a fixed rate set by the source; they must leave at the same rate — if they did not, crests would accumulate at the boundary, which is physically impossible. Since f is fixed and v = c/n decreases inside the glass, wavelength must decrease by the same factor n to keep v = fλ consistent: λ_glass = v/f = (c/n)/f = λ₀/n. The photon energy E = hf also remains unchanged across the boundary (energy is conserved at each refraction event).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 91,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "MC-LIGHT-IS-PURELY-A-WAVE",
+      "content": "### MC-1: MC-LIGHT-IS-PURELY-A-WAVE\n\n**trigger_signal:** Student states \"light is just an EM wave\" or holds that the wave model fully explains all light phenomena; cannot explain why below the threshold frequency no electrons are ejected regardless of light intensity.\n\n**conflict_evidence [P28]:** Classical wave theory makes a clear prediction: any frequency of light, given sufficient intensity, should eventually deliver enough energy to eject electrons from a metal surface — because a brighter wave carries more energy per unit area per second. Test this prediction directly: shine intense red light (λ = 700 nm, I = 1000 W/m²) on sodium metal (work function φ ≈ 2.3 eV). Zero electrons. Not slow ones, not delayed ones — none, even after minutes. Now switch to dim ultraviolet light (λ = 200 nm) at a tiny fraction of that intensity: electrons appear immediately and copiously. The energy per unit area per second (intensity) is irrelevant. What matters is the frequency of each individual quantum. Classical wave theory has no mechanism to explain a sharp frequency threshold — it predicts that enough brightness always wins. The observation proves it wrong.\n\n**bridge_text [P30]:** Wave-particle duality is not physics failing to decide what light is. It is the fundamental quantum nature of the entity: which behavior appears depends on what the experiment measures. Interference and diffraction probe spatial coherence across many cycles — wave behavior appears. The photoelectric effect probes the transfer of energy from a single quantum to a single electron — particle behavior appears. Both descriptions are simultaneously true. Neither is the \"real\" one.\n\n**replacement_text [P31]:** Light exhibits wave behavior in experiments that probe its spatial extent over many wavelengths (double-slit interference, diffraction, polarization). Light exhibits particle behavior in experiments that probe individual energy-exchange events (photoelectric effect, Compton scattering). The complete description — wave-particle duality — requires both. Either model alone is incomplete.\n\n**discrimination_pairs [P33]:**\n- \"Light passes through two slits and creates an interference pattern → it is a wave\" → TRUE but incomplete: this shows wave behavior; particle model cannot explain fringe spacing\n- \"Light below threshold frequency never ejects electrons regardless of intensity → it must consist of discrete energy quanta\" → TRUE: this is the defining particle evidence\n- \"Shine very bright red light on zinc long enough → eventually electrons will be ejected\" → FALSE: photon energy E = hf_red is fixed and below zinc's work function; more photons cannot change individual photon energy\n- \"Blue light ejects electrons from a metal more energetically than red light of equal intensity\" → TRUE: E_blue = hf_blue > E_red = hf_red; each blue photon has more energy to share with the electron\n\n**s6_path:** If student is anxious at quantum duality → do NOT begin with the conflict. Instead pose a pure observation: \"Here is what happens in the lab — shine UV on zinc and an ammeter deflects. Shine bright red, no deflection. Describe only what you see. What could explain why frequency matters but brightness does not?\" Build the threshold observation before naming duality; the student arrives at the particle picture through curiosity rather than confrontation.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY",
+      "content": "### MC-2: MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY\n\n**trigger_signal:** Student says \"brighter light = higher energy photons,\" claims increasing brightness increases the energy of individual photons, or uses intensity as a proxy for photon energy in threshold calculations.\n\n**conflict_evidence [P28]:** Consider two light sources: Source A emits 10⁶ photons per second of red light (λ = 700 nm, f = 4.3×10¹⁴ Hz); Source B emits 1 photon per second of ultraviolet light (λ = 200 nm, f = 1.5×10¹⁵ Hz). Source A is one million times more intense, yet each of its photons carries E_A = hf_red = 2.84×10⁻¹⁹ J ≈ 1.77 eV, while Source B's single photon carries E_B = hf_UV = 9.93×10⁻¹⁹ J ≈ 6.21 eV. Shine Source A on zinc (φ = 3.5 eV): no electrons — each individual photon is too weak. Shine Source B: one electron ejected per second with KE_max = 6.21 − 3.5 = 2.71 eV. Intensity (brightness) is irrelevant to what each photon can do; only frequency matters.\n\n**bridge_text [P30]:** Intensity and photon energy are two entirely independent quantities. Intensity (W/m²) = (energy per photon) × (photon flux per unit area) = hf × (n/A). A beam can be intense because it has many low-energy photons (high n/A, low f), or it can be dim but carry high-energy photons (low n/A, high f). These properties do not constrain each other.\n\n**replacement_text [P31]:** Photon energy E = hf depends ONLY on frequency (equivalently, on color or wavelength: E = hc/λ). Changing the brightness of a source changes the number of photons emitted per second — it does not change the energy of each individual photon. To change photon energy, change the frequency: use a different color, or a source operating at a different frequency.\n\n**discrimination_pairs [P33]:**\n- \"Double the brightness of a green laser → each photon now has twice the energy\" → FALSE: doubling brightness doubles photon count; each photon still has E = hf_green, unchanged\n- \"Switch from red to blue light at the same total power → each photon has more energy, but fewer photons are emitted per second\" → TRUE: E_blue > E_red; if total power P = N × hf is constant, more energy per photon means fewer photons\n- \"A bright red beam can eject electrons from copper (φ = 4.7 eV) if it is intense enough\" → FALSE: E_red ≈ 1.77 eV < 4.7 eV; no individual photon can overcome the work function regardless of how many are present\n- \"A dim UV beam (few photons/second) ejects fewer electrons than a bright red beam, but each ejected electron has more kinetic energy\" → TRUE: fewer events above threshold (dim UV) but each event imparts KE_max = hf_UV − φ > 0\n\n**s6_path:** If student is anxious at the photon-count distinction → use a simple analogy before formulas: \"A cinema full of children cannot lift a 200 kg barbell — their combined weight is irrelevant because no single child can lift it. One Olympic weightlifter can. The number in the room (intensity) doesn't help if no individual is strong enough (photon energy below threshold).\" Then map: children = low-energy photons, weightlifter = high-energy photon, barbell = work function.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 256,
+        "endLine": 262
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Pictorial Anchor: EM spectrum and wave-model relationships",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Pictorial Anchor: EM spectrum and wave-model relationships\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 262,
+        "endLine": 275
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Conflict Evidence: MC-1 gate",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Evidence: MC-1 gate\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 275,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Check + P36 — Probe: photon energy and intensity decoupled",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Check + P36 — Probe: photon energy and intensity decoupled\",\"primitives\":[\"P36\",\"P51\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 289,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Diagram: speed in medium and frequency invariance",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Diagram: speed in medium and frequency invariance\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 305,
+        "endLine": 317
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Probe; student-solved formative: WE-2",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Probe; student-solved formative: WE-2\",\"primitives\":[\"P36\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 317,
+        "endLine": 331
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Mastery gate + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery gate + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P51\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 331,
+        "endLine": 439
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S0/S3):** Violet light has wavelength λ = 420 nm in vacuum.\n(a) Calculate its frequency.\n(b) Calculate its energy in joules and convert to eV.\n(c) Is this photon more or less energetic than a red photon at λ = 650 nm? Explain using E = hc/λ.\n\n*Expected: f = 7.14×10¹⁴ Hz; E = 4.73×10⁻¹⁹ J = 2.96 eV; more energetic than red (E_red ≈ 1.91 eV) because shorter wavelength → higher frequency → higher E per photon.*\n\n**P-2 (Developing — identifies S3/S6):** Monochromatic light (λ₀ = 540 nm in vacuum) enters crown glass (n = 1.52).\n(a) Find the speed in the glass.\n(b) Find the wavelength in the glass.\n(c) Find the frequency in the glass.\n(d) Explain in one sentence why frequency is invariant across the boundary.\n\n*Expected: (a) v = 1.97×10⁸ m/s; (b) λ_glass = 355 nm; (c) f = 5.56×10¹⁴ Hz (same as in vacuum); (d) frequency is set by the source — crests arrive and depart the boundary at the same rate, so frequency cannot change.*\n\n**P-3 (Proficient — identifies S6/S9):** Ultraviolet light of frequency f = 1.5×10¹⁵ Hz shines on a metal with work function φ = 4.0 eV.\n(a) Find the photon energy in eV.\n(b) State whether the photoelectric effect occurs.\n(c) If it does, calculate KE_max of the emitted electrons.\n(d) Would doubling the UV intensity double KE_max? Explain.\n\n*Expected: (a) E = hf = (6.626×10⁻³⁴)(1.5×10¹⁵) = 9.94×10⁻¹⁹ J = 6.21 eV; (b) yes, 6.21 eV > 4.0 eV; (c) KE_max = 6.21 − 4.0 = 2.21 eV; (d) no — doubling intensity doubles the number of ejected electrons per second but each electron's KE_max = hf − φ depends only on frequency, not intensity.*\n\n**P-4 (Mastery gate — confirms S9; ≥0.80 across all four parts required):**\n(a) Explain why the photoelectric effect cannot be explained by the wave model of light, using specifically the threshold frequency observation.\n(b) A student claims: \"If I shine a very bright red laser (λ = 660 nm) on tungsten (φ = 4.5 eV), the surface will eventually emit electrons.\" Calculate E_red in eV, identify the error, and correct it.\n(c) Light has wavelength 310 nm in vacuum and 207 nm in a liquid. Calculate the refractive index of the liquid.\n(d) Name one experiment that provides wave evidence for light and one that provides particle evidence. For each, state what the experiment demonstrates and why the other model cannot explain it.\n\n*Expected: (a) wave model predicts any frequency + enough intensity ejects electrons — the sharp frequency threshold with zero emission below it (regardless of intensity) falsifies this; (b) E_red = hc/λ = (6.626×10⁻³⁴ × 3×10⁸)/(660×10⁻⁹) = 3.01×10⁻¹⁹ J = 1.88 eV; 1.88 eV < 4.5 eV so no electrons regardless of brightness; error is assuming intensity compensates for photon energy; (c) n = λ₀/λ_liquid = 310/207 = 1.50; (d) Young's double-slit → interference fringes prove wave nature (particles cannot interfere); photoelectric threshold → sharp cutoff frequency proves photon/particle nature (continuous waves cannot explain it).*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 348,
+        "endLine": 383
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: P (perceptual bridge; difficulty 4, bloom=understand).\n\n**TA-1 [P01 — Session Open]**\n\n\"You flip a light switch and your room fills instantly — light traveled at 3×10⁸ m/s from the bulb to your eyes. But what IS that light, physically? Newton said: tiny particles streaming outward. Huygens said: waves, like ripples on a pond. Maxwell unified electricity and magnetism and proved light is an electromagnetic wave in 1865. Then in 1905, Einstein showed Maxwell was incomplete. Today we examine all the evidence, follow the historical argument, and arrive at the modern picture — which is stranger and more beautiful than any of the earlier models. Before we start: when you see a clean sharp shadow cast by a lamp, does that suggest wave or particle behavior to you?\"\n\n[Elicit response; diagnose S0 if student cannot engage with wave/particle distinction; S3 if student immediately invokes wave model; S6 if student hesitates or expresses uncertainty about the question itself.]\n\n**TA-2 [P06 — Pictorial Anchor: EM spectrum and wave-model relationships]**\n\n\"[Display: EM spectrum with frequency axis running radio → microwave → IR → visible (400–700 nm color-coded) → UV → X-ray → gamma. Below: wavelength scale. Above: photon energy bar (E = hf) increasing left to right.]\n\nAll electromagnetic waves travel at c = 3×10⁸ m/s in vacuum and obey c = f × λ. Visible light is a narrow slice: 400 nm (violet) to 700 nm (red). Let's put numbers on the wave model before we challenge it.\n\nQuick calculation: What is the frequency of red light at λ = 700 nm?\nf = c/λ = (3×10⁸) / (700×10⁻⁹) = 4.29×10¹⁴ Hz.\nAnd violet at 400 nm? f = 7.50×10¹⁴ Hz.\nNotice: shorter wavelength → higher frequency. The photon energy bar above the spectrum runs in the same direction — we will use it shortly.\"\n\n[S3 students complete this immediately. S0 students need to establish f = c/λ before moving on — spend one additional example here if needed.]\n\n**TA-3 [P28 — Conflict Evidence: MC-1 gate]**\n\n\"[Display: photoelectric effect schematic — light source, metal plate, ammeter, voltage supply.]\n\nHere is the experiment that broke the wave model. Shine light on a metal surface. If light is purely a wave delivering energy continuously, any frequency with enough brightness should eventually eject electrons. Let's test it.\n\nIntense red light on sodium metal — no electrons. None. Increase brightness tenfold — still none. Now switch to dim ultraviolet — electrons appear immediately, at any intensity above zero.\n\nThe threshold is absolute: below a critical frequency f₀ (determined by the metal), no electrons are ejected regardless of brightness. Above f₀, electrons appear the instant light hits the surface.\n\nThis observation is impossible in a pure wave picture. Einstein's 1905 solution: light arrives as individual packets — photons — each carrying E = hf. A single photon must have enough energy (hf ≥ φ, the work function) to eject one electron. More photons per second (brighter light) means more electrons, but each photon's energy is fixed by its frequency. Below threshold, each photon is individually too weak — and no number of weak photons can do what one strong photon can.\"\n\n[For S3 students, this is the primary challenge. For S6 students, deliver this slowly and invite questions after each observation; delay naming \"photon\" until the observation is fully established.]\n\n**TA-4 [P51 — Check + P36 — Probe: photon energy and intensity decoupled]**\n\n\"Quick check before we calculate: I increase the brightness of a red laser from 1 mW to 1 kW. Does the energy of each individual photon change? [Elicit prediction. Correct answer: no — only the photon count changes.]\n\nNow let's compute. For red light (λ = 700 nm):\nE = hc/λ = (6.626×10⁻³⁴ × 3×10⁸) / (700×10⁻⁹) = 2.84×10⁻¹⁹ J = 1.77 eV\n\nFor blue light (λ = 400 nm):\nE = hc/λ = (6.626×10⁻³⁴ × 3×10⁸) / (400×10⁻⁹) = 4.97×10⁻¹⁹ J = 3.11 eV\n\n[→ WE-1 full walkthrough]\n\nProbe: A zinc surface has work function φ = 3.5 eV. Will red light (1.77 eV) eject electrons? Will blue light (3.11 eV)? Will very bright red light? [Elicit. Correct: red — no regardless of brightness; blue — yes.]\"\n\n[P85 regulation_tail: \"This is the central result: color determines photon energy; brightness determines photon count. Write down E = hf in your notes with the label 'color ↔ energy.' This is load-bearing for everything that follows.\"]\n\n**TA-5 [P06 — Diagram: speed in medium and frequency invariance]**\n\n\"[Display: wavefront diagram split at a vacuum–glass interface. Left (vacuum): wavelength λ₀ = 589 nm, speed c, frequency f labeled. Right (glass, n = 1.5): wavefronts compressed, wavelength λ_glass = 393 nm, speed c/1.5 = 2×10⁸ m/s, same frequency f.]\n\nWhen light crosses from vacuum into a medium: speed decreases by factor n, wavelength shortens by the same factor n, frequency stays constant.\n\nWhy? The source sets the frequency — the rate at which crests are emitted. When a crest enters the glass, another must leave the boundary at that same rate; otherwise crests would pile up at the interface, which cannot happen. So f is locked by the source. Since v = fλ and v drops by n, λ must drop by n too.\n\n[→ WE-3 full solution: yellow light entering glass, n = 1.50.]\n\nProbe: In glass, what is the photon energy compared to vacuum? [Elicit. Correct: unchanged — E = hf, frequency is the same, so energy is the same. Energy is conserved at the boundary.]\"\n\n**TA-6 [P36 — Probe; student-solved formative: WE-2]**\n\n\"Now a student problem. Work through it independently, then we will compare.\n\nA photon has energy E = 3.1 eV. Find its wavelength and identify the spectrum region.\n\n[Allow 3–4 minutes. → WE-2 solution walkthrough as needed.]\n\nFollow-up probes:\n(1) This photon hits a sodium surface (φ = 2.3 eV). Does it eject an electron? If so, what is KE_max? [Correct: yes; KE_max = 3.1 − 2.3 = 0.8 eV]\n(2) Which experimental evidence tells us this photon has particle character? Which tells us light at this frequency also behaves as a wave? [Correct: photoelectric effect for particle; double-slit interference at the same λ for wave]\"\n\n[P85 regulation_tail: \"You have now used E = hf from two directions — wavelength to energy, and energy to wavelength. Both directions appear in problems and on assessments. Notice you are applying the photon model in the same sentence as identifying a visible wavelength — that is the dual-nature framing in action.\"]\n\n**TA-7 [P68 — Mastery gate + P85 + P91]**\n\n\"Final session gate (0.80 required across all four parts):\n\n(1) Red light (λ = 620 nm) and green light (λ = 500 nm) both illuminate a copper surface (work function φ = 4.7 eV). Does either cause the photoelectric effect? Calculate E for each and justify.\n\n(2) Yellow light (λ₀ = 589 nm) enters water (n = 1.33). Find the speed, wavelength, and frequency in water.\n\n(3) In Young's double-slit experiment with λ = 500 nm, slit separation d = 0.10 mm, screen distance L = 1.5 m, find the fringe spacing Δy = λL/d.\n\n(4) Explain in two sentences why the photoelectric threshold frequency is sharp (not gradual) — and why this rules out a pure wave model.\n\nClosing thought: Maxwell predicted in 1865 that light is an electromagnetic wave. Einstein proved in 1905 that light also behaves as particles. Neither was wrong. Together they revealed that quantum objects do not fit into the classical categories of wave OR particle — they are something deeper that exhibits both behaviors depending on how we look. Quantum electrodynamics eventually unified the two descriptions, but the dual nature of light remains one of the most profound results in all of physics.\n\nSpaced retrieval: +2 days (f = c/λ and E = hf calculation), +5 days (photoelectric threshold reasoning and work function), +2 weeks (v = c/n and frequency invariance in medium).\"\n\n[P91 gate: threshold 0.80. If not reached → review photoelectric threshold diagram (TA-3) and frequency-invariance argument (TA-5) before rescheduling the mastery gate.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 249,
+        "endLine": 348
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

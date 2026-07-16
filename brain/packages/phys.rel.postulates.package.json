@@ -1,0 +1,480 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.postulates-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.postulates",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:36d78ed17ab8e1a3e23953bb55b38d6babc0e1d00b989620b4ca1ef82e56491b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.postulates.md": "sha256:c4b3d4bd4805b535b66d0ea0968558f0a66e16383795f01c8a4c68589c6bffd2"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.rel.postulates",
+    "name": "Postulates of Special Relativity",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.relative-motion",
+      "phys.em.electromagnetic-waves"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.postulates-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.postulates (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.postulates.md": "sha256:c4b3d4bd4805b535b66d0ea0968558f0a66e16383795f01c8a4c68589c6bffd2"
+      },
+      "contentHash": "sha256:84056997da98c7fdfa4e87a8fbeb7b466a774b58e7b149c44ae4cb7585210ba2",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.postulates.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.postulates.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.postulates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.postulates\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.postulates.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.postulates.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.postulates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.postulates\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.postulates.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.postulates.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.postulates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.postulates\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.postulates.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.postulates.md#TA-4 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.postulates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.postulates\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.postulates.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.postulates.md#TA-5 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.postulates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.postulates\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.postulates.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.postulates.md#TA-6 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.postulates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.postulates\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.postulates/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.rel.postulates",
+      "title": "Postulates of Special Relativity — core explanation",
+      "content": "**Core Insight:** Einstein's two postulates of special relativity are:  \n1. **Principle of Relativity:** The laws of physics are the same in all inertial (non-accelerating)\n   reference frames.  \n2. **Constancy of the Speed of Light:** The speed of light in a vacuum is c = 3 × 10⁸ m/s in all\n   inertial frames, regardless of the motion of the source or observer.\n\nThese two postulates are simple to state but jointly produce consequences (time dilation, length\ncontraction, relativity of simultaneity) that violate every intuition built on Newtonian mechanics.\nMastery here is not yet computational — it is conceptual: understanding why the postulates were\nnecessary, what they assert, and what logical consequence the constant speed of light has for\nsimultaneity.\n\n**Why Postulate 2 Is Revolutionary:**  \nIn Newtonian mechanics, velocities add: a ball thrown at 20 m/s from a train moving at 30 m/s\ntravels at 50 m/s. Maxwell's equations predict that light travels at c regardless of the source's\nvelocity — incompatible with the Newtonian addition rule. The Michelson-Morley experiment (1887)\ntried to detect the difference in c due to Earth's motion through the aether — and found nothing.\nEinstein's postulate asserts c = constant as a fundamental law, abandoning the Newtonian addition\nrule for velocities near c.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 23,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS",
+      "content": "### MC-1: MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS\n**Probe:** \"A spaceship moves toward Earth at 0.8c and turns on a headlight. How fast does the\nheadlight beam travel, measured by an observer on Earth?\"  \n**Characteristic phrase:** \"0.8c + c = 1.8c — it should be faster.\"  \n**Trigger:** Galilean velocity addition, which works perfectly for everyday speeds.  \n**Conflict evidence [P28]:** The Michelson-Morley experiment measured the speed of light in two\nperpendicular directions as Earth orbited the Sun at 30 km/s. Expected difference: ~30 km/s.\nMeasured difference: zero. Repeated experiments confirm c = 299,792,458 m/s regardless of source\nor observer motion.  \n**Bridge [P30]:** \"Galilean addition is an approximation that works for speeds ≪ c. At speeds\ncomparable to c, it fails. The speed of light is a fundamental constant — like a cosmic speed\nlimit that does not shift when you yourself are moving.\"  \n**Replacement [P31]:** The light travels at c relative to the Earth observer, regardless of the\nspaceship's speed. Relativistic velocity addition (not taught here) gives a result ≤ c.  \n**Discrimination pairs [P33]:** Spaceship at 0.8c fires light: Earth measures light at (A) 1.8c,\n(B) 0.2c, (C) c. Correct: (C).  \n**S6 repair path:** TA-3 (Michelson-Morley evidence) → TA-4 (Einstein's resolution).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES",
+      "content": "### MC-2: MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES\n**Probe:** \"A person in a spinning merry-go-round says: 'The laws of physics are the same in my\nframe.' Is this consistent with Einstein's first postulate?\"  \n**Characteristic phrase:** \"All motion is relative, so all frames are equivalent.\"  \n**Trigger:** Conflating \"all motion is relative\" (true) with \"all frames are equivalent\" (false\nwithout the inertial restriction).  \n**Conflict evidence [P28]:** A rotating frame is non-inertial — objects experience centrifugal and\nCoriolis pseudo-forces. Physics in that frame looks different (balls flying outward, Foucault\npendulum precessing). Einstein's P1 explicitly says \"inertial frames.\"  \n**Bridge [P30]:** \"The merry-go-round rider feels pushed outward — that is the centrifugal effect,\nabsent in an inertial frame. Physics is not the same. Postulate 1 applies only where there is no\nnet force needed to explain apparent motions — no pseudo-forces, no acceleration.\"  \n**Replacement [P31]:** P1 applies to inertial (non-accelerating) frames only. Rotating, accelerating,\nand gravitating frames are non-inertial — general relativity handles those.  \n**Discrimination pairs [P33]:** P1 applies to: (A) all frames, (B) inertial frames only, (C) frames\nat rest. Correct: (B).  \n**S6 repair path:** TA-2 (inertial vs. non-inertial frame identification exercise).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-SIMULTANEITY-IS-AN-ILLUSION",
+      "content": "### MC-3: MC-SIMULTANEITY-IS-AN-ILLUSION\n**Probe:** \"In the moving train thought experiment, event A (lightning at the front) and event B\n(lightning at the rear) are simultaneous in the ground frame but not in the train frame. Does\nthis mean one observer is wrong?\"  \n**Characteristic phrase:** \"One of them must be lying.\"  \n**Trigger:** Students expect \"true\" physics to be absolute; frame-dependent results seem like\nerrors.  \n**Conflict evidence [P28]:** Both observers correctly apply the laws of physics in their own frame.\nThe measured arrival times of light signals are different — not due to error or illusion — but\nbecause the propagation distance is genuinely different in each frame, given that c is constant\nin both.  \n**Bridge [P30]:** \"Neither is wrong. Simultaneity is a relationship between events and a frame of\nreference, like 'north' is a relationship between a direction and a map. North on one map is not\nnorth on another rotated map — but both are correct maps. Similarly, simultaneity in S is not the\nsame relation as in S'.\"  \n**Replacement [P31]:** Simultaneity is frame-dependent for spatially separated events. Both\nobservers are correct; they disagree because simultaneity is not absolute.  \n**Discrimination pairs [P33]:** Two spacelike-separated events simultaneous in frame S: in frame S'\nthey are (A) still simultaneous (one frame must be right), (B) not simultaneous (relativity of\nsimultaneity), (C) cannot be determined. Correct: (B).  \n**S6 repair path:** TA-5 (train simultaneity thought experiment, step by step).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 39,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-AETHER-DISPROVED-RELATIVITY-IS-JUST-A-THEORY",
+      "content": "### MC-4: MC-AETHER-DISPROVED-RELATIVITY-IS-JUST-A-THEORY\n**Probe:** \"The Michelson-Morley experiment 'failed' to detect the aether. Does this prove Einstein\nwas right?\"  \n**Characteristic phrase:** \"It just means they couldn't find the aether yet.\"  \n**Trigger:** Misunderstanding what MM showed and what constitutes scientific evidence.  \n**Conflict evidence [P28]:** MM was replicated many times with increasing precision; subsequent\nexperiments (Kennedy-Thorndike, Ives-Stilwell, modern laser experiments) all confirm c is\nconstant to 1 part in 10¹⁵. Special relativity has been tested in particle accelerators (muon\nlifetimes), GPS satellites, and nuclear reactions. It is one of the most precisely verified\ntheories in physics.  \n**Bridge [P30]:** \"The MM experiment alone does not prove Einstein right — it just eliminated\nthe aether. Einstein's theory predicts specific quantitative values (time dilation factors,\nenergy-momentum relations) that have been verified independently to extraordinary precision.\nThe theory is validated by its predictions, not just by one failure of a competing theory.\"  \n**Replacement [P31]:** Special relativity is validated by quantitative predictions confirmed\nacross many independent experiments; the MM experiment eliminated the aether model but Einstein's\npostulates stand on their own predictive success.  \n**Discrimination pairs [P33]:** The Michelson-Morley experiment: (A) proved special relativity,\n(B) eliminated the aether but special relativity stands on separate experimental tests, (C) was\nlater found to be wrong. Correct: (B).  \n**S6 repair path:** TA-3 (experimental evidence table for special relativity).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 61,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.postulates",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.postulates",
+      "title": "Postulate Pair Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Postulate Pair Introduction\",\"primitives\":[\"P1\",\"P14\",\"P2\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 10,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.postulates",
+      "title": "Michelson-Morley Evidence",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Michelson-Morley Evidence\",\"primitives\":[\"P14\",\"P2\",\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 17,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-1 Diagnostic",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-1 Diagnostic\",\"primitives\":[\"P14\",\"P2\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 24,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.postulates",
+      "title": "Simultaneity Thought Experiment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Simultaneity Thought Experiment\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 30,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.postulates",
+      "title": "Closure & Self-Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Closure & Self-Assessment\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 37,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.postulates",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \nPass criteria — student correctly:  \n(a) States both postulates accurately, including the inertial-frame qualifier on P1  \n(b) Identifies that c is the same for all inertial observers regardless of source motion  \n(c) Explains the Michelson-Morley result and what it implies  \n(d) Correctly resolves a simultaneity thought experiment in two frames  \nFailure on (a) → restart from TA-2. Failure on (b) → TA-4. Failure on (c) → TA-3. Failure on\n(d) → TA-5.\n\n**Formative Golden Probe (FA-1):**  \n\"State Einstein's two postulates of special relativity in your own words. Which part was new in\n1905?\"  \nExpected: P1 (laws same in all inertial frames — this was Galileo's principle, not new). P2 (c\nconstant in all inertial frames — this was new and contradicted Galilean velocity addition).  \nThreshold: Both postulates correctly stated; P2 identified as the new contribution.\n\n**Formative Golden Probe (FA-2):**  \n\"A rocket moves away from Earth at 0.5c and fires a laser beam forward. What speed does an\nEarth observer measure for the laser beam?\"  \nExpected: c. P2 says c is constant for all observers regardless of source motion.  \nThreshold: Answer is c with explicit reference to P2.\n\n**Formative Golden Probe (FA-3):**  \n\"In the moving-train simultaneity thought experiment, lightning strikes both ends of the train\nsimultaneously in the ground frame. In the train frame, which end receives the light signal\nfirst, and why?\"  \nExpected: The rear of the train receives the signal first. In the train frame, the train is at\nrest but the ground observer is moving backward. However, the standard setup is: in the platform\nframe, the events are simultaneous. In the train frame, the front of the train is moving away from\nthe midpoint light source, so it receives the rear-to-front-travelling light later; the rear is\nmoving toward the source, receiving light sooner. Front receives second, rear receives first.  \nThreshold: Correct identification (rear first) with the c = constant argument, not intuition.\n\n**Formative Golden Probe (FA-4):**  \n\"Why does GPS need to account for special relativity? What would happen if it didn't?\"  \nExpected: Satellite clocks travel at ~3.87 km/s relative to Earth — special relativity predicts\nthey tick more slowly than ground clocks. Without correction, GPS positional error accumulates at\n~2 km/day from SR alone (additional GR correction is in the opposite direction and larger).  \nThreshold: SR effect named (time dilation); consequence correctly identified (positional error).\n\n**Confidence Calibration:** After FA-3, ask for confidence before and after. This thought\nexperiment is often answered with low confidence but high accuracy — helping students recognize\ntheir own physical reasoning is sound.\n\n**Delayed Retrieval (Session + 3 days):**  \n\"Without notes: state the two postulates. A rocket at 0.9c fires a laser — how fast does an\nobserver at rest measure the laser?\"  \nThreshold: Both postulates stated; c given for the laser speed.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 343,
+        "endLine": 396
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.postulates",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nTwo trains pass each other. Each passenger says \"I am at rest; the other train is moving.\" Both\nare right — motion is relative to a reference frame. Now a lighthouse beam sweeps between them.\nBoth passengers measure the light's speed: c. Not c + train speed. Just c. This is impossible\nin Newtonian mechanics and demands explanation.\n\n**Stage 2 — Representational (R)**  \nDraw two inertial reference frames S and S'. Frame S' moves at velocity v relative to S. An event\n(a lightning bolt) occurs at position x in S. According to Galilean relativity, S' would assign\nx' = x − vt. The speed of light in S is c. In S', Galilean addition predicts c − v. But experiment\n(Michelson-Morley) gives c. One of (Galilean) space or time must yield. Einstein chose to modify\nboth.\n\n**Stage 3 — Abstract (A)**  \nThe two postulates jointly rule out absolute simultaneity. Thought experiment: a light pulse from\nthe centre of a moving train carriage reaches both ends simultaneously in the train's frame.\nIn the platform frame, the rear end is moving toward the light source and the front end is\nmoving away — the rear end receives the pulse first. Simultaneity is frame-dependent. This is\nthe logical consequence of postulate 2 applied to the standard of simultaneity.\n\n**Stage 4 — Transfer (T)**  \nThe postulates are not a description of light specifically — they are constraints on the structure\nof spacetime. All particles (not just photons) travel at ≤ c. The postulates imply the Lorentz\ntransformation (next concept), which implies time dilation, length contraction, and mass-energy\nequivalence. The GPS satellite system explicitly corrects for relativistic time dilation — the\npostulates have engineering consequences at 1 part in 10⁹.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 47,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.postulates",
+      "title": "Why Beginners Fail",
+      "content": "1. **Postulate 1 seems obvious, Postulate 2 seems impossible:** Students accept P1 immediately\n   (motion is relative — they've heard that). They then struggle to believe P2 because every\n   intuition says velocities add. This asymmetric acceptance means they never genuinely integrate\n   the two postulates as a unified system.\n\n2. **Conflating \"the speed of light is constant\" with \"you cannot catch up to light\":**  \n   Students think P2 just means you can never quite reach c. It means something stronger: whether\n   you are moving toward or away from a light source at any speed, you always measure that light\n   travels at c relative to you. The speed does not shift by v.\n\n3. **Failure to identify \"inertial frame\":** Students treat P1 as universal (applying to any\n   frame, including rotating ones). The restriction to inertial frames is the key qualifier;\n   general relativity addresses non-inertial frames.\n\n4. **Believing simultaneity is an illusion:** Students sometimes say \"both frames are right, so\n   neither is real.\" Relativity does not say events are illusory — it says simultaneity (the\n   temporal ordering of spacelike-separated events) is frame-dependent. Events that are causally\n   connected have a universal ordering; only spacelike-separated events can disagree.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 78,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.postulates",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Two trains pass each other in empty space. Each passenger says they are at\nrest. Both are right — and that is Postulate 1. Now each measures the speed of a light beam\npassing by. Both get c = 3 × 10⁸ m/s. That seems impossible — and that is Postulate 2. These\ntwo statements together rebuilt all of physics.\"\n\n**Key explanatory moves:**\n- \"Postulate 1 is not news — Galileo said it. You can't tell if you're moving at constant speed\n  just by looking inside your ship. It's when you combine P1 with P2 that everything breaks.\"\n- \"Constant c means: it does not matter if you run toward or away from a light source. You\n  always measure the same speed. This is not intuitive. This is not Galileo. This is Einstein.\"\n- \"Simultaneity is not a property of two events — it is a relationship between two events and\n  a frame. Change the frame, and simultaneous can become not-simultaneous.\"\n\n**Common recovery phrases:**\n- If student expects velocity addition: \"Write c on the board. Add v. Cross it out. c + v is\n  not allowed — it violates P2. The experimental proof is GPS.\"\n- If student says simultaneity is an illusion: \"The light arrival times are genuinely different\n  in the platform frame — not an illusion, not an error. The measurement is correct in each frame.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 320,
+        "endLine": 343
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.postulates",
+      "title": "Recovery Notes",
+      "content": "**S0 (no prior relative-motion knowledge):** The prerequisite phys.mech.relative-motion must be\nin place — students need to understand the concept of reference frames and Galilean velocity\naddition before encountering their failure. Without this, P2 has no foil.\n\n**S3 (confuses inertial with non-inertial):** Use kinesthetic D-1 — the braking bus example.\nAsk the student to stand on a skateboard and be suddenly stopped. The feeling of being \"thrown\nforward\" is the pseudo-force in the non-inertial frame. Inertial frames are those without this\nfeeling.\n\n**S6 (MC-SPEED-OF-LIGHT-ADDS dominant):** Go directly to the MM experiment evidence. \"Michelson\nand Morley expected to see c + v_Earth or c − v_Earth. They measured c. This is not philosophy —\nit is a measurement repeated thousands of times to 1 part in 10¹⁵. Galilean addition for light\nis simply wrong.\"\n\n**S9 (knows postulates but cannot apply to thought experiments):** Slow down the simultaneity\nthought experiment to individual frames. At each step: \"Which frame are we in? What is the speed\nof light in this frame? Where is the light source? Where is the receiver? How far does the light\ntravel?\" Force step-by-step frame-by-frame reasoning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SPEED-OF-LIGHT-ADDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 396,
+        "endLine": 419
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.postulates",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Declarative (postulate statements) + conceptual (simultaneity consequence).\nThe two postulates must be learned as a paired unit, not independently — P2 only has impact in\nthe context of P1.\n\n**Spaced retrieval plan:**\n- Session + 1 day: \"State the two postulates. Which is new? What does the Michelson-Morley\n  experiment show?\"\n- Session + 4 days: \"A starship moves at 0.7c and turns on a headlight. What does an Earth\n  astronomer measure for the speed of that light? Why?\" (Consolidate P2 under pressure)\n- Session + 8 days: \"In the moving-train thought experiment, which end receives the lightning\n  first in each frame? Explain using c = constant.\" (Simultaneity retrieval)\n\n**Interleaving partners:** phys.mech.relative-motion (Galilean relativity, the foil),\nphys.rel.simultaneity (immediate consequence, next concept), phys.rel.time-dilation (quantitative\nconsequence).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 419,
+        "endLine": 439
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.postulates",
+      "title": "Transfer Map",
+      "content": "**Near transfer:**\n- phys.rel.simultaneity: directly derived from P1 + P2, first quantitative consequence\n- phys.rel.time-dilation: derived from the light-clock argument\n- phys.rel.length-contraction: derived from time dilation + P1\n- phys.rel.lorentz-transform: the mathematical synthesis of all relativistic effects\n\n**Far transfer:**\n- GPS engineering: quantitative time-dilation correction applied in production systems\n- Particle accelerator design: relativistic mass-energy must be accounted for in beam dynamics\n- Muon lifetime experiments: atmospheric muons reaching sea level despite short half-life —\n  confirmed by time dilation (and length contraction from the muon's perspective)\n- Astrophysics: relativistic jets from quasars; gravitational time dilation (general relativity\n  extension)\n\n**Structural abstraction:** The postulates encode a deep symmetry principle: physics has no\npreferred frame (P1) and has a universal speed limit (P2). This symmetry (Lorentz invariance)\nis the foundational constraint of all modern particle physics — the Standard Model is built on it.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 439,
+        "endLine": 461
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.rel.postulates",
+      "title": "Curriculum Feedback",
+      "content": "**Does this concept position correctly in the KG?**  \nYes. Requiring phys.mech.relative-motion (Galilean relativity) provides the framework that P2\noverthrows. Requiring phys.em.electromagnetic-waves gives Maxwell's c as the source of the\ncrisis. The concept correctly unlocks phys.rel.simultaneity as the first consequence.\n\n**Missing prerequisite?**  \nA node for phys.mod.michelson-morley-experiment would help — currently the MM experiment is\nintroduced as narrative in this blueprint. Students who have never heard of MM lose the\nhistorical-necessity argument for P2. Consider adding MM as background reading or a pre-session\nhook.\n\n**Recommended teaching sequence:** phys.mech.relative-motion → phys.em.electromagnetic-waves\n→ phys.rel.postulates → phys.rel.simultaneity → phys.rel.time-dilation. Teach these consecutively\n— breaking the chain with unrelated topics weakens the causal narrative.\n\n**Asset opportunity:** An animated Michelson-Morley interferometer simulation (showing the\nexpected vs. measured fringe shift, with adjustable Earth velocity) would make the null result\nviscerally clear rather than just stated.\n\n---\n\n## Package Validation Checklist\n\n```\nV-1   concept_id matches KG exactly: phys.rel.postulates ✓\nV-2   all 10 KG fields present: id/name/requires/unlocks/cross_links/difficulty/bloom/\n      mastery_threshold/estimated_hours/description ✓\nV-3   description consistent with KG: laws same in all inertial frames; c constant ✓\nV-4   4-stage CPA+ model present: Concrete / Representational / Abstract / Transfer ✓\nV-5   ≥3 failure modes documented: 4 listed in Component 3 ✓\nV-6   4 misconceptions present: MC-1…MC-4 ✓\nV-7   each MC has probe + characteristic phrase: ✓ for all 4\nV-8   ≥2 misconceptions engineered:\n      MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS,\n      MC-SIMULTANEITY-IS-AN-ILLUSION ✓\nV-9   each MC has all 6 fields: trigger / conflict evidence [P28] / bridge [P30] /\n      replacement [P31] / discrimination pairs [P33] / s6_path ✓\nV-10  TA count = session_cap (6 TAs): TA-1…TA-6 ✓\nV-11  TA-1 is Concrete [P01, P06]: two-trains-and-lighthouse anchor ✓\nV-12  TA-4 is first MC diagnostic probe [P14, P28, P31, P33, P36]:\n      MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS ✓\nV-13  TA-6 is closure [P68, P85, P91] ✓\nV-14  ≥5 P91 mastery probes with expected answers: FA-1…FA-4 + delayed retrieval ✓\nV-15  4 formative assessments with thresholds and loop-back paths: FA-1…FA-4 ✓\nV-16  S0/S3/S6/S9 protocols specified in Component 12 ✓\nV-17  3-session spaced retrieval plan present: Component 13 ✓\nV-18  interleaving partners named: mech.relative-motion, rel.simultaneity, rel.time-dilation ✓\nV-19  cross_links match KG edges: [] ✓\nV-20  status = READY, all V-checks PASS ✓\n```\n\n**Status: READY / PACKAGE_READY — V-1 through V-20 PASS**",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 461,
+        "endLine": 515
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

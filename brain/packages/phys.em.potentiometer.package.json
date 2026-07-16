@@ -1,0 +1,344 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.potentiometer-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.potentiometer",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2b03eb3f662c22a9d2480a3dd6430cacd2fb0afd34bef6b3fe6ad96e8ac1ade4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.potentiometer.md": "sha256:8b8669a3b5aa1e833bf896011a9c21808ad0b97b8b14c0b380feb342824066b5"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.potentiometer",
+    "name": "Potentiometer",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.em.kirchhoffs-laws"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.potentiometer-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.potentiometer (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.potentiometer.md": "sha256:8b8669a3b5aa1e833bf896011a9c21808ad0b97b8b14c0b380feb342824066b5"
+      },
+      "contentHash": "sha256:fffb6ffceab8843d5094d819fedf17ef6a11af5efef26d90b9b8dfa4bbc9bc59",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.potentiometer.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.potentiometer.md#TA-1 (addresses MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.potentiometer"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.potentiometer\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.potentiometer.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.potentiometer.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.potentiometer"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.potentiometer\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.potentiometer.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.potentiometer.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.potentiometer"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.potentiometer\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.potentiometer.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.potentiometer.md#TA-4 (addresses MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.potentiometer"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.potentiometer\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.potentiometer/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Potentiometer — Concept Explanation Blocks",
+      "content": "### Block 1-A — What a Potentiometer Does\nA potentiometer is a **null instrument** for measuring EMF and potential difference without drawing current from the source under test. A long uniform resistance wire (or a calibrated resistance box) carries a **driver current** I from a driver battery. The potential gradient (voltage per unit length) along the wire is:\n\n> **k = V_wire / L = ε_driver / L** (if wire resistance >> external resistance, and driver current is steady)\n\nA source of unknown EMF (ε_x) is connected in opposition through a galvanometer. The jockey (sliding contact) is moved along the wire until the galvanometer reads zero at length l:\n\n> **ε_x = k × l = (ε_driver / L) × l**\n\nAt null, no current flows from ε_x → EMF is measured exactly (no terminal voltage correction needed).\n\n### Block 1-B — Comparison with Voltmeter\nA voltmeter draws a small current from the source being measured, creating a voltage drop across internal resistance r. A potentiometer at null draws zero current → measures true EMF (not terminal voltage). This is the fundamental advantage: **zero current at balance → no loading error**.\n\nIf a standard cell (ε_s, known) balances at l_s and unknown cell balances at l_x:\n\n> **ε_x / ε_s = l_x / l_s**   ⟹   **ε_x = ε_s × (l_x / l_s)**\n\nThis ratio method eliminates the potential gradient k entirely, removing the need for wire calibration.\n\n### Block 1-C — Measuring Internal Resistance\n1. Balance unknown cell with switch S open → balance length l₁ → measures ε_x (open circuit, no current from cell).\n2. Connect known resistance R_ext across cell, close S. Now cell drives I = ε_x / (r + R_ext). Terminal voltage V = ε_x × R_ext / (r + R_ext) balances at l₂.\n3. Since ε_x / V = l₁ / l₂:  \n   **r = R_ext × (l₁ − l₂) / l₂**\n\n### Block 1-D — Calibration and Practical Factors\n- **Driver current must be constant**: connect a rheostat in the driver circuit to adjust current; standardise against a known (Weston) cell.\n- **Wire uniformity**: non-uniform cross-section causes non-linear potential gradient → errors.\n- **Sensitivity**: longer wire L → smaller k → finer resolution of l.\n- **Range extension**: for ε_x > ε_driver (impossible to balance), use a resistor in series with ε_x to reduce effective EMF; alternatively use a high-ratio potential divider on the driver side.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 27,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Direct EMF Measurement",
+      "content": "### WE-1 — Direct EMF Measurement\n**Problem:** A potentiometer wire of length L = 1.0 m has driver EMF ε_driver = 2.0 V (internal resistance negligible). An unknown cell balances at l = 65.0 cm. Find ε_x.\n\n**Solution:**\nk = ε_driver / L = 2.0 / 1.0 = 2.0 V/m  \nε_x = k × l = 2.0 × 0.650 = **1.30 V**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 63,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Ratio Method with Standard Cell",
+      "content": "### WE-2 — Ratio Method with Standard Cell\n**Problem:** Standard cell ε_s = 1.018 V balances at l_s = 50.9 cm. Unknown cell balances at l_x = 64.3 cm. Find ε_x.\n\n**Solution:**\nε_x = ε_s × (l_x / l_s) = 1.018 × (64.3 / 50.9) = 1.018 × 1.2632 = **1.286 V**\n\nNote: k and driver current cancelled — result depends only on the length ratio and ε_s.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 63,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Internal Resistance via Potentiometer",
+      "content": "### WE-3 — Internal Resistance via Potentiometer\n**Problem:** Unknown cell balances at l₁ = 75.0 cm (open circuit). When R_ext = 5.0 Ω is connected, balance shifts to l₂ = 60.0 cm. Find internal resistance r.\n\n**Solution:**\nr = R_ext × (l₁ − l₂) / l₂ = 5.0 × (75.0 − 60.0) / 60.0 = 5.0 × 15.0 / 60.0 = **1.25 Ω**\n\nVerify: ratio ε_x/V = l₁/l₂ = 75/60 = 1.25; so V = ε_x/1.25; r = (ε_x − V)/I = (ε_x/1.25)(0.25 × R_ext × 1.25/(ε_x)) ... simpler via formula: r = R_ext(l₁−l₂)/l₂ = 5×15/60 = 1.25Ω ✓\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 63,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/misconception/MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR",
+      "kind": "misconception",
+      "conceptId": "phys.em.potentiometer",
+      "title": "- **trigger_signal:** Student confuses the precision measurement instrument with a common 3-terminal variable resistor (also called a \"pot\" in electronics).",
+      "content": "### MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR\n- **trigger_signal:** Student confuses the precision measurement instrument with a common 3-terminal variable resistor (also called a \"pot\" in electronics).\n- **conflict_evidence [P28]:** \"A variable resistor (rheostat) changes resistance and is used to control current. A potentiometer as a measurement instrument uses a uniform wire to create a known potential gradient; the key feature is the null condition where galvanometer current = 0. Completely different purpose and operation.\"\n- **bridge_text [P30]:** \"In everyday electronics, 'potentiometer' does mean a variable resistor (like a volume knob). In physics, it refers to a precision null-balance circuit. Same name, different meaning — context tells you which. In this topic, we always mean the physics measurement device.\"\n- **replacement_text [P31]:** \"In this context, a potentiometer is a null-balance instrument: uniform wire + driver current + galvanometer. At balance (G=0), ε_x = kl. It measures true EMF by drawing zero current from the source under test.\"\n- **discrimination_pairs [P33]:**\n  - Variable resistor (electronics): 3 terminals, divides voltage, always draws current\n  - Potentiometer (physics instrument): wire/driver circuit, galvanometer, null at balance, zero current from source\n- **s6_path:** If still confused, draw both circuits side by side; label functions explicitly.\n\n---",
+      "localKey": "MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR",
+      "language": "en",
+      "refs": [
+        "MC-POTENTIOMETER-IS-JUST-A-VARIABLE-RESISTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/misconception/MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE",
+      "kind": "misconception",
+      "conceptId": "phys.em.potentiometer",
+      "title": "- **trigger_signal:** Student says \"the potentiometer measures the voltage the battery delivers\" or confuses null-balance EMF with terminal voltage.",
+      "content": "### MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE\n- **trigger_signal:** Student says \"the potentiometer measures the voltage the battery delivers\" or confuses null-balance EMF with terminal voltage.\n- **conflict_evidence [P28]:** \"At the null point, the galvanometer reads zero. Zero current means zero current flowing FROM the cell under test. If no current flows, V_terminal = ε − I×r = ε − 0 = ε. The potentiometer always measures the open-circuit EMF, not the terminal voltage under load.\"\n- **bridge_text [P30]:** \"A voltmeter measures terminal voltage because it draws current from the source (even a 'good' voltmeter draws some). The potentiometer opposes the source's voltage exactly at null — like pushing two carts head-on until neither moves. At standstill, no force (no current) is transmitted. That's why we measure true EMF.\"\n- **replacement_text [P31]:** \"Potentiometer at null: I_from_source = 0 → V_terminal = ε (open circuit). Therefore the potentiometer measures true EMF, not terminal voltage. This is its critical advantage over a voltmeter.\"\n- **discrimination_pairs [P33]:**\n  - Voltmeter measurement: reads V_terminal = ε − Ir (slightly less than ε)\n  - Potentiometer at null: reads ε (true EMF, because I=0 from source)\n- **s6_path:** Link to EMF blueprint (Block 1-C, open-circuit measurement); reinforce that null = no current = terminal voltage equals EMF.\n\n---",
+      "localKey": "MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE",
+      "language": "en",
+      "refs": [
+        "MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Instrument description and null condition: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Instrument description and null condition: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 193,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Ratio method: Block 1-B, WE-2",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Ratio method: Block 1-B, WE-2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 202,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Internal resistance measurement: Block 1-C, WE-3",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Internal resistance measurement: Block 1-C, WE-3\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 205,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Practical considerations: Block 1-D",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Practical considerations: Block 1-D\",\"primitives\":[\"P36\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[\"MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 211,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** At the null point of a potentiometer, the current through the galvanometer is:\n(a) Maximum **(b) Zero** (c) Equal to driver current (d) Inversely proportional to EMF\n\n**A2 (Short answer):** Why does a potentiometer measure true EMF while a voltmeter only measures terminal voltage?\n[At null, no current flows from the source under test; hence no Ir drop; V_terminal = ε − 0 = ε]\n\n**A3 (Fill-in):** In the ratio method: ε_x = ε_s × ______.\n[l_x / l_s]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** Standard cell (1.080 V) balances at 54.0 cm. Unknown cell balances at 72.0 cm. Find ε_x.\n[ε_x = 1.080 × 72.0/54.0 = 1.080 × 1.333 = 1.44 V]\n\n**B2:** A cell balances at l₁ = 80 cm (open circuit). With R = 8 Ω connected, balance shifts to l₂ = 64 cm. Find r.\n[r = 8 × (80−64)/64 = 8 × 16/64 = 2.0 Ω]\n\n**B3:** If the driver battery voltage decreases by 10% (all else unchanged), what happens to the balance length for ε_x?\n[k decreases by 10%; l must increase by ~11% (same ε_x = k×l; if k drops, l must rise). Specifically: l_new = l_old × (1/0.9) = 1.111 × l_old. This is why a stable driver current is essential.]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** A potentiometer wire 2.0 m long. Driver: ε=4.0V, internal resistance=1Ω, series rheostat=3Ω. A standard cell (ε_s=1.02V) balances at l_s=51.0cm. Unknown cell balances at l_x=73.5cm. (a) Find k. (b) Verify ε_s using k. (c) Find ε_x using ratio method.\n[(a) k = ε_s/l_s = 1.02/0.510 = 2.0 V/m; (b) ε_s = k × l_s = 2.0 × 0.510 = 1.02 V ✓; (c) ε_x = ε_s × l_x/l_s = 1.02 × 73.5/51.0 = 1.47 V]\n\n**C2 (Error analysis):** The driver battery internal resistance increases from 0 to 2Ω during a measurement. How does this affect the balance length for ε_x? What systematic error results?\n[Driver current I = ε_driver/(r_driver + R_rheostat + R_wire). If r increases, I decreases; k = I × ρ/A (resistance per unit length) decreases; so balance length increases. If calibrated at r=0 but measured at r=2Ω, the balance length found corresponds to a lower k than assumed → ε_x calculated = k_assumed × l_measured > actual ε_x → systematic overestimate. Fix: re-standardise against known cell after any driver change.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 120,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A2 wrong (says \"voltmeter and potentiometer are same\") | Deploy MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE; draw both circuits |\n| Probe B1 arithmetic error | Check ratio l_x/l_s; ensure lengths in same unit |\n| Probe B3 wrong (says balance length unchanged) | Derive k = I×r_wire/L; show k depends on driver current; re-derive |\n| Probe C2 wrong | Trace driver current through circuit; show how r increase reduces I reduces k |\n| Asks why not just use a digital voltmeter | Explain that even high-impedance DMM (10MΩ) draws 0.1μA; potentiometer draws truly zero; for primary standards, null matters |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 226,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "phys.em.potentiometer/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.potentiometer",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we'll learn how to measure a battery's true EMF — not the reading under load, but the actual stored chemical energy per coulomb. This requires an instrument that takes the measurement without disturbing what it's measuring.\"\n\n[P41 — Diagnostic]\n\"What's the difference between a battery's EMF and its terminal voltage? How would you measure each?\"\n→ Correct (terminal voltage = ε−Ir; voltmeter measures terminal V): excellent — potentiometer fixes this.\n→ Incorrect: revisit phys.em.emf briefly.\n\n[P06 — Concrete anchor]\n\"Imagine pushing two magnets face-to-face: when the repulsion exactly balances the push, neither moves — no force transfers. The potentiometer does the electrical equivalent: it sets up an opposing voltage that exactly balances ε_x, so no current flows from the source. At that exact balance, we read the length — and that length encodes the EMF.\"\n\n[TA-1 — Instrument description and null condition: Block 1-A]\n\"Uniform wire, driver current I, potential gradient k = ε_driver/L. At null: ε_x = kl.\"\n\n[P28 — Conflict evidence for MC-POTENTIOMETER-MEASURES-TERMINAL-VOLTAGE]\n\"At null, galvanometer current = 0. Zero current from the cell. So V_terminal = ε − I×r = ε − 0×r = ε. The potentiometer can only be seeing the true EMF.\"\n\n[P51 — Check-in]\n\"Say it in one sentence: what does the potentiometer measure and why?\"\n\n[TA-2 — Ratio method: Block 1-B, WE-2]\n\"With standard cell as reference: ε_x/ε_s = l_x/l_s. No calibration of k needed. Walk through WE-2.\"\n\n[TA-3 — Internal resistance measurement: Block 1-C, WE-3]\n\"Open circuit → l₁ = ε_x. Under load → l₂ = terminal voltage. Ratio gives r.\"\n\n[P52 — Narrow]\n\"Three formulas only: ε_x=kl; ε_x=ε_s(l_x/l_s); r=R_ext(l₁−l₂)/l₂. Everything else is a special case.\"\n\n[TA-4 — Practical considerations: Block 1-D]\n\n[P62 — Retrieval seed]\n\"Write from memory: what is null, what is measured at null, the ratio formula, and the r formula.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Potentiometer: null instrument, measures true EMF (not terminal voltage), ratio method eliminates calibration. Also measures r via two-step null procedure.\"\n\n[P85 — Regulation tail]\n\"Clearest point? Shakiest point?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the +1 day retrieval practice.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.potentiometer.md",
+        "startLine": 175,
+        "endLine": 226
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

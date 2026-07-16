@@ -37,8 +37,8 @@ interface RawSection {
 
 // Separators observed in the live corpus: "Component N — Title" (phys),
 // "Component N: Title" (math, landed 2026-07-16), "Section N — Title",
-// "N. Title" (protocol format).
-const SECTION_HEADER_RE = /^##\s+(?:Component\s+\d+\s*[—:]\s*|Section\s+\d+\s+—\s+|\d+\.\s+)(.+)$/gm
+// "N. Title" (protocol format), "CN — Title" (compact expert-physics format).
+const SECTION_HEADER_RE = /^##\s+(?:Component\s+\d+\s*[—:]\s*|Section\s+\d+\s+—\s+|C\d+\s+—\s+|\d+\.\s+)(.+)$/gm
 
 function splitSections(content: string): RawSection[] {
   const lines = content.split('\n')
@@ -70,10 +70,11 @@ function extractFencedBlock(body: string): string | null {
 
 /** Reads a scalar `key: value` field from a fenced metadata block.
  *  Case-insensitive and indentation-tolerant: the math corpus authors
- *  `STATUS:` / nested `KG_FIELDS:` children with leading whitespace. */
+ *  `STATUS:` / nested `KG_FIELDS:` children with leading whitespace, and the
+ *  compact expert-physics format pads keys (`concept_id        : value`). */
 function scalarField(block: string, ...keys: string[]): string | null {
   for (const key of keys) {
-    const re = new RegExp(`^\\s*${key}:\\s*(.+)$`, 'mi')
+    const re = new RegExp(`^\\s*${key}\\s*:\\s*(.+)$`, 'mi')
     const v = re.exec(block)?.[1]?.trim()
     if (v) return v
   }
@@ -85,12 +86,12 @@ function scalarField(block: string, ...keys: string[]): string | null {
  *  Identity variant, e.g. phys.em.*). */
 function listField(block: string, ...keys: string[]): string[] {
   for (const key of keys) {
-    const bracketRe = new RegExp(`^\\s*${key}:\\s*\\[([\\s\\S]*?)\\]`, 'mi')
+    const bracketRe = new RegExp(`^\\s*${key}\\s*:\\s*\\[([\\s\\S]*?)\\]`, 'mi')
     const raw = bracketRe.exec(block)?.[1]
     if (raw !== undefined) {
       return raw.split(',').map((s) => s.trim()).filter((s) => s.length > 0)
     }
-    const yamlRe = new RegExp(`^\\s*${key}:\\s*\\n((?:\\s+-\\s+.+\\n?)+)`, 'mi')
+    const yamlRe = new RegExp(`^\\s*${key}\\s*:\\s*\\n((?:\\s+-\\s+.+\\n?)+)`, 'mi')
     const yamlRaw = yamlRe.exec(block)?.[1]
     if (yamlRaw !== undefined) {
       return yamlRaw
@@ -102,12 +103,69 @@ function listField(block: string, ...keys: string[]): string[] {
   return []
 }
 
+/** Section-format metadata variant: a markdown table `| Field | Value |` in
+ *  the C0 section (e.g. phys.astro.*) instead of a fenced key:value block. */
+function tableField(body: string, ...labels: string[]): string | null {
+  for (const label of labels) {
+    const re = new RegExp(`^\\|\\s*\\*{0,2}${label}\\*{0,2}\\s*\\|\\s*([^|\\n]+)\\|?\\s*$`, 'mi')
+    const v = re.exec(body)?.[1]?.trim()
+    if (v) return v
+  }
+  return null
+}
+
 function extractMetadata(sections: RawSection[], conceptIdFromFilename: string): BlueprintMetadata {
   // The math corpus titles its C0 section just "Metadata".
   const c0 = findSection(sections, /concept (profile|metadata|identity)|^metadata$/i)
-  const block = c0 ? extractFencedBlock(c0.body) : null
+  // Protocol-format C0s author bare `key: value` lines with no fence — the
+  // section body itself is the block then (scalarField keys are specific
+  // enough that surrounding prose can't collide).
+  const block = c0 ? (extractFencedBlock(c0.body) ?? (/^concept_id\s*:/m.test(c0.body) ? c0.body : null)) : null
 
   if (!block) {
+    // Table-form C0 (Section-format corpus): read the same fields from
+    // `| Field | Value |` rows before giving up.
+    if (c0 && /^\|/m.test(c0.body)) {
+      const masteryStr = tableField(c0.body, 'Mastery Threshold')
+      const hoursStr = tableField(c0.body, 'Estimated Hours', 'Estimated study hours')
+      return {
+        conceptId: tableField(c0.body, 'Concept ID') ?? conceptIdFromFilename,
+        name: tableField(c0.body, 'Name', 'Display name') ?? '',
+        difficultyRaw: tableField(c0.body, 'Difficulty') ?? '',
+        bloom: tableField(c0.body, 'Bloom Level', 'Bloom') ?? '',
+        masteryThreshold: masteryStr ? parseFloat(masteryStr) : null,
+        estimatedHours: hoursStr ? parseFloat(hoursStr) : null,
+        prerequisites: (tableField(c0.body, 'Prerequisites') ?? '')
+          .split(',').map((s) => s.trim()).filter((s) => s.length > 0 && s.toLowerCase() !== 'none'),
+        sessionCapRaw: tableField(c0.body, 'Session Cap'),
+        status: tableField(c0.body, 'Status') ?? '',
+      }
+    }
+    // Bullet-form C0: "- **Concept ID**: value" lines (phys.mod/qm/nuc corpus).
+    if (c0 && /^-\s+\*\*Concept ID\*\*/m.test(c0.body)) {
+      const bullet = (...labels: string[]): string | null => {
+        for (const label of labels) {
+          const re = new RegExp(`^-\\s+\\*\\*${label}\\*\\*\\s*:\\s*(.+)$`, 'mi')
+          const v = re.exec(c0.body)?.[1]?.trim()
+          if (v) return v
+        }
+        return null
+      }
+      const masteryStr = bullet('Mastery Threshold')
+      const hoursStr = bullet('Estimated Hours')
+      return {
+        conceptId: bullet('Concept ID') ?? conceptIdFromFilename,
+        name: bullet('Name') ?? '',
+        difficultyRaw: bullet('Difficulty') ?? '',
+        bloom: bullet('Bloom Level', 'Bloom') ?? '',
+        masteryThreshold: masteryStr ? parseFloat(masteryStr) : null,
+        estimatedHours: hoursStr ? parseFloat(hoursStr) : null,
+        prerequisites: (bullet('Prerequisites') ?? '')
+          .split(',').map((s) => s.trim()).filter((s) => s.length > 0 && s.toLowerCase() !== 'none'),
+        sessionCapRaw: bullet('Session Cap'),
+        status: bullet('Status') ?? '',
+      }
+    }
     return {
       conceptId: conceptIdFromFilename,
       name: '', difficultyRaw: '', bloom: '',
@@ -117,9 +175,9 @@ function extractMetadata(sections: RawSection[], conceptIdFromFilename: string):
   }
 
   const conceptId = scalarField(block, 'concept_id', 'BLUEPRINT_ID', 'id') ?? conceptIdFromFilename
-  const name = scalarField(block, 'name') ?? ''
-  const difficultyRaw = scalarField(block, 'difficulty') ?? ''
-  const bloom = scalarField(block, 'bloom') ?? ''
+  const name = scalarField(block, 'name', 'display_name') ?? ''
+  const difficultyRaw = scalarField(block, 'difficulty', 'kg_difficulty') ?? ''
+  const bloom = scalarField(block, 'bloom', 'bloom_target') ?? ''
   const masteryThresholdStr = scalarField(block, 'mastery_threshold')
   const estimatedHoursStr = scalarField(block, 'estimated_hours')
   const sessionCapRaw = scalarField(block, 'session_cap')
@@ -162,6 +220,15 @@ function extractTeachingActions(sections: RawSection[], file: string): Blueprint
   while ((m = TA_HEADER_RE.exec(haystack)) !== null) {
     headerMatches.push({ id: m[1], title: m[2].trim(), bracket: m[3], index: m.index })
   }
+  // Bracket-titled bold headers: "**TA-3 [P28 — Conflict Evidence: MC-1]**"
+  // (phys.opt.* Session Script) and "**TA-1 [EXPLAIN]:** description"
+  // (phys.stat.* Teaching Actions). Title = bracket text after any P-code.
+  const bracketBoldRe = /^\*\*(TA-[A-Za-z0-9]+)\s*\[([^\]]*)\]\s*:?\s*\*\*/gm
+  while ((m = bracketBoldRe.exec(haystack)) !== null) {
+    const title = m[2].replace(/^P\d{1,3}\s*(?:—|-|:)?\s*/, '').trim() || m[1]
+    headerMatches.push({ id: m[1], title, bracket: m[2], index: m.index })
+  }
+  headerMatches.sort((a, b) => a.index - b.index)
 
   const actions: BlueprintTeachingAction[] = []
   const seen = new Set<string>()
@@ -196,7 +263,154 @@ function extractTeachingActions(sections: RawSection[], file: string): Blueprint
       span: { file, startLine, endLine },
     })
   }
+  if (actions.length > 0) return actions
+
+  // ── Fallback shapes (each observed in the live physics corpus) ────────────
+
+  // Shape 2 — bracket-TA lines inside a Session Flow Script fence:
+  //   "[TA-1 — AC waveform and RMS: Block 1-A]" (phys.em.* Session Flow).
+  // Each TA's body runs to the next bracket-TA line, so the [P..] primitive
+  // lines that FOLLOW a TA (repairs, check-ins) attribute to it in sequence.
+  const bracketTa = extractFromMatches(
+    haystack, file,
+    /^\[(TA-[A-Za-z0-9]+)\s*(?:—|-|:)\s*([^\]]+)\]\s*$/gm,
+  )
+  if (bracketTa.length > 0) return bracketTa
+
+  // Shape 3 — table rows with explicit TA ids:
+  //   "| TA-1 | P04 | Physical motivation | …detail… |" (compact C-format).
+  const tableTa = extractFromTableRows(haystack, file)
+  if (tableTa.length > 0) return tableTa
+
+  // Shape 4 — numbered priority table under the Teaching Actions section:
+  //   "| 1 | Compute tidal force … | trigger |" (Section-format, phys.astro.*).
+  // Only inside an explicit TA section — a numbered table elsewhere is data.
+  if (taSection) {
+    const numbered = extractFromNumberedRows(taSection.body, file)
+    if (numbered.length > 0) return numbered
+  }
+
+  // Shape 4b — numbered bold list under the Teaching Actions section:
+  //   "1. **Operator concept**: Introduce operator as …" (phys.qm/mod corpus).
+  if (taSection) {
+    const out: BlueprintTeachingAction[] = []
+    const itemRe = /^\d{1,2}\.\s+\*\*([^*]+)\*\*\s*:?\s*([^\n]*)$/gm
+    let item: RegExpExecArray | null
+    while ((item = itemRe.exec(taSection.body)) !== null) {
+      const whole = item[0]
+      const startLine = taSection.startLine + taSection.body.slice(0, item.index).split('\n').length - 1
+      out.push({
+        id: `TA-${out.length + 1}`,
+        title: item[1].trim(),
+        primitives: [...new Set([...whole.matchAll(/\bP\d{1,3}\b/g)].map((p) => p[0]))],
+        referencedMisconceptionIds: [...new Set([...whole.matchAll(/\bMC-[A-Za-z0-9_-]+\b/g)].map((p) => p[0]))],
+        span: { file, startLine, endLine: startLine },
+      })
+    }
+    if (out.length > 0) return out
+  }
+
+  // Shape 5 — Lesson Composition Grammar stanzas: a fenced block of
+  //   "[P01: session-open] → [P62: retrieval-seed] …" lines separated by
+  // blank lines (phys.em.gauss-law style). One TA per stanza.
+  const grammarSection = sections.find((s) => /lesson composition|session plan/i.test(s.title)) ??
+    sections.find((s) => /session[- ]flow/i.test(s.title))
+  if (grammarSection) {
+    const fence = /```(?:text)?\s*\n([\s\S]*?)```/.exec(grammarSection.body)?.[1]
+    if (fence) {
+      const out: BlueprintTeachingAction[] = []
+      const stanzas = fence.split(/\n\s*\n/).map((s) => s.trim()).filter((s) => /\[P\d/.test(s))
+      for (const stanza of stanzas) {
+        const label = /\[P\d{1,3}\s*(?:—|-|:)\s*([^\]\n]+)\]/.exec(stanza)?.[1]?.trim()
+        out.push({
+          id: `TA-${out.length + 1}`,
+          title: label ?? `Composition step ${out.length + 1}`,
+          primitives: [...new Set([...stanza.matchAll(/\bP\d{1,3}\b/g)].map((p) => p[0]))],
+          referencedMisconceptionIds: [...new Set([...stanza.matchAll(/\bMC-[A-Za-z0-9_-]+\b/g)].map((p) => p[0]))],
+          span: { file, startLine: grammarSection.startLine, endLine: grammarSection.startLine },
+        })
+      }
+      if (out.length > 0) return out
+    }
+  }
+
   return actions
+}
+
+/** Sequential id-bearing matches → TAs, each body running to the next match. */
+function extractFromMatches(haystack: string, file: string, re: RegExp): BlueprintTeachingAction[] {
+  const found: Array<{ id: string; title: string; index: number }> = []
+  let m: RegExpExecArray | null
+  while ((m = re.exec(haystack)) !== null) {
+    found.push({ id: m[1], title: m[2].trim(), index: m.index })
+  }
+  const out: BlueprintTeachingAction[] = []
+  const seen = new Set<string>()
+  for (let i = 0; i < found.length; i++) {
+    if (seen.has(found[i].id)) continue
+    seen.add(found[i].id)
+    const end = i + 1 < found.length ? found[i + 1].index : haystack.length
+    const body = haystack.slice(found[i].index, end)
+    out.push({
+      id: found[i].id,
+      title: found[i].title,
+      primitives: [...new Set([...body.matchAll(/\bP\d{1,3}\b/g)].map((p) => p[0]))],
+      referencedMisconceptionIds: [...new Set([...body.matchAll(/\bMC-[A-Za-z0-9_-]+\b/g)].map((p) => p[0]))],
+      span: {
+        file,
+        startLine: haystack.slice(0, found[i].index).split('\n').length,
+        endLine: haystack.slice(0, end).split('\n').length,
+      },
+    })
+  }
+  return out
+}
+
+/** "| TA-1 | P04 | Action-type | Detail |" rows — one TA per row. Title is
+ *  the first non-primitive text cell after the id. */
+function extractFromTableRows(haystack: string, file: string): BlueprintTeachingAction[] {
+  const out: BlueprintTeachingAction[] = []
+  const seen = new Set<string>()
+  const rowRe = /^\|\s*(TA-[A-Za-z0-9]+)\s*\|(.+)$/gm
+  let m: RegExpExecArray | null
+  while ((m = rowRe.exec(haystack)) !== null) {
+    if (seen.has(m[1])) continue
+    seen.add(m[1])
+    const cells = m[2].split('|').map((c) => c.trim()).filter((c) => c.length > 0)
+    const title = cells.find((c) => !/^P\d{1,3}$/.test(c)) ?? m[1]
+    const startLine = haystack.slice(0, m.index).split('\n').length
+    out.push({
+      id: m[1],
+      title,
+      primitives: [...new Set([...m[0].matchAll(/\bP\d{1,3}\b/g)].map((p) => p[0]))],
+      referencedMisconceptionIds: [...new Set([...m[0].matchAll(/\bMC-[A-Za-z0-9_-]+\b/g)].map((p) => p[0]))],
+      span: { file, startLine, endLine: startLine },
+    })
+  }
+  return out
+}
+
+/** "| 1 | action text | trigger |" priority rows (Section-format Teaching
+ *  Actions tables) — synthesized ids TA-1..TA-N from the priority column. */
+function extractFromNumberedRows(sectionBody: string, file: string): BlueprintTeachingAction[] {
+  const out: BlueprintTeachingAction[] = []
+  const seen = new Set<string>()
+  const rowRe = /^\|\s*(\d{1,2})\s*\|\s*([^|]+)\|([^\n]*)$/gm
+  let m: RegExpExecArray | null
+  while ((m = rowRe.exec(sectionBody)) !== null) {
+    const id = `TA-${m[1]}`
+    if (seen.has(id)) continue
+    seen.add(id)
+    const startLine = sectionBody.slice(0, m.index).split('\n').length
+    out.push({
+      id,
+      title: m[2].trim(),
+      primitives: [...new Set([...m[0].matchAll(/\bP\d{1,3}\b/g)].map((p) => p[0]))],
+      referencedMisconceptionIds: [...new Set([...m[0].matchAll(/\bMC-[A-Za-z0-9_-]+\b/g)].map((p) => p[0]))],
+      span: { file, startLine, endLine: startLine },
+    })
+  }
+  return out
 }
 
 // ── C3 Misconceptions extraction ─────────────────────────────────────────────
@@ -288,6 +502,46 @@ export function parseBlueprintMarkdown(file: string, source: string, conceptIdFr
 
   const teachingActions = extractTeachingActions(sections, file)
   const misconceptions = extractMisconceptions(sections, file)
+
+  // Authored TA prose often refers to a misconception loosely:
+  //   - truncated id     ("MC-BRACKET-ZERO" for "MC-BRACKET-ZERO-MEANS-INDEPENDENT")
+  //   - slug-as-label    ("MC-BOHR-MODEL-…" when the MC is defined as
+  //                       "### MC-1: MC-BOHR-MODEL-…" — id MC-1, slug in label)
+  //   - dropped word     ("…-MORE-ENERGY-AT-ALL-TIMES" for
+  //                       "…-MORE-ENERGY-STORED-AT-ALL-TIMES")
+  // Resolve a reference to a defined id when the mapping is UNIQUE:
+  // exact label-slug match, unique proper id-prefix, or a unique defined id
+  // sharing ≥4 leading dash-segments. Ambiguous/unmatched refs are left
+  // as-is for BFV04 to flag.
+  const definedIds = misconceptions.map((mc) => mc.id)
+  const definedSet = new Set(definedIds)
+  const labelToId = new Map<string, string>()
+  for (const mc of misconceptions) {
+    const slug = /^MC-[A-Za-z0-9_-]+/.exec(mc.label)?.[0]?.replace(/-+$/, '')
+    if (slug && !labelToId.has(slug)) labelToId.set(slug, mc.id)
+  }
+  const leadingSegs = (a: string, b: string): number => {
+    const as = a.split('-'); const bs = b.split('-')
+    let n = 0
+    while (n < as.length && n < bs.length && as[n] === bs[n]) n++
+    return n
+  }
+  for (const ta of teachingActions) {
+    ta.referencedMisconceptionIds = [...new Set(ta.referencedMisconceptionIds.map((ref) => {
+      if (definedSet.has(ref)) return ref
+      const byLabel = labelToId.get(ref)
+      if (byLabel) return byLabel
+      const byPrefix = definedIds.filter((d) => d.startsWith(`${ref}-`))
+      if (byPrefix.length === 1) return byPrefix[0]
+      const bySegs = definedIds.filter((d) => leadingSegs(ref, d) >= 4)
+      if (bySegs.length === 1) return bySegs[0]
+      // Last resort: a paraphrased id ("MC-ADIABATIC-IS-ISOTHERMAL" for
+      // "MC-ADIABATIC-MEANS-CONSTANT-TEMPERATURE") — resolve only when
+      // exactly ONE defined MC shares the same topic segment ("MC-<TOPIC>-").
+      const byTopic = definedIds.filter((d) => leadingSegs(ref, d) >= 2)
+      return byTopic.length === 1 ? byTopic[0] : ref
+    }))]
+  }
 
   const span: BlueprintSourceSpan = { file, startLine: 1, endLine: source.split('\n').length }
 

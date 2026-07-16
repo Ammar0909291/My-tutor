@@ -1,0 +1,381 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.inclined-plane-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.inclined-plane",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:244b106df52f06fdad14bc260be1906fdc0addb9d6b3338c87c1cbf90bc7a8fe",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.inclined-plane.md": "sha256:7fae2938d9cc3d6093ea8a574e26ee2c81dfb04a161b51b6089d35adacde63a2"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.inclined-plane",
+    "name": "Motion on Inclined Planes",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.friction",
+      "phys.mech.normal-force"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.inclined-plane-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.inclined-plane (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.inclined-plane.md": "sha256:7fae2938d9cc3d6093ea8a574e26ee2c81dfb04a161b51b6089d35adacde63a2"
+      },
+      "contentHash": "sha256:548457074d6060ef3866f2b3fdcd3aa041e02179b4e1a285c65ff5226307ed80",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.inclined-plane.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.inclined-plane.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.inclined-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.inclined-plane\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.inclined-plane.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.inclined-plane.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.inclined-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.inclined-plane\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.inclined-plane.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.inclined-plane.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.inclined-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.inclined-plane\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.inclined-plane.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.inclined-plane.md#TA-4 (addresses MC-FRICTION-DIRECTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.inclined-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.inclined-plane\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.inclined-plane.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.inclined-plane.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.inclined-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.inclined-plane\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.inclined-plane.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.inclined-plane.md#TA-6 (addresses MC-FRICTION-WRONG-N)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.inclined-plane"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.inclined-plane\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.inclined-plane/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. **Resolves weight** along two incline-aligned axes: mg sinθ (parallel to slope, down the slope) and mg cosθ (perpendicular to slope, into the slope); draws and labels all forces correctly on a rotated-axis free-body diagram.\n2. Writes the two **Newton's Second Law equations** — one along the slope, one perpendicular to it — and uses the perpendicular equation to find N = mg cosθ before computing friction f = μN, then solves the parallel equation for the acceleration.\n3. Handles the **direction of friction** correctly for each case: friction opposes impending or actual motion (up the slope when the object slides or is on the verge of sliding down; down the slope when pushed up).\n\nA student who resolves forces along horizontal/vertical rather than along/perpendicular to the slope (causing impossible simultaneous-equation tangles), or who uses mg instead of mg cosθ for the normal force and hence mg cosθ × μ as friction, has **NOT** achieved mastery — incorrect axis choice and the resulting wrong friction are the dominant failure modes for all subsequent incline, circular, and banked-road problems.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/misconception/MC-FRICTION-WRONG-N",
+      "kind": "misconception",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Friction on an incline = μ × weight (not μ × normal force",
+      "content": "### MC-FRICTION-WRONG-N: \"Friction on an incline = μ × weight (not μ × normal force)\"\ntrigger_signal: student writes f = μmg on an incline instead of f = μ mg cosθ.\nconflict_evidence [P28]: \"You used the full weight in the friction formula. But friction depends on how hard the surfaces press together — that's the NORMAL force, perpendicular to the slope. On a 30° slope N = mg cos30° = 0.866 mg, noticeably less than mg. At 90° (a vertical wall) N = mg cos90° = 0 — no friction at all, yet your formula would give f = μmg, a large nonzero value. A block on a vertical wall with no other force would not be held by friction — the formula breaks down.\"\nbridge_text [P30]: \"Friction = μN always. On an incline, find N from the perpendicular equation: N = mg cosθ. Substitute that into f = μN. Using mg directly skips the cosθ and overstates friction for any slope angle.\"\nreplacement_text [P31]: \"Step 1: N = mg cosθ from the perpendicular equation. Step 2: f = μN = μ mg cosθ. Never plug mg directly into the friction formula on an incline.\"\ndiscrimination_pairs [P33]: [\"flat floor: N = mg → f = μmg ✓ (cosθ = 1)\", \"30° incline: N = mg cos30°, f = μ mg cos30° ✓\", \"30° incline, using f = μmg: ✗ overestimates N\"]\ns6_path: skip P28; demonstrate with the 90° vertical-wall limiting case as a shared thought experiment (no friction possible), then P30.",
+      "localKey": "MC-FRICTION-WRONG-N",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-WRONG-N"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/misconception/MC-FRICTION-DIRECTION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Friction always acts up the slope regardless of direction of motion",
+      "content": "### MC-FRICTION-DIRECTION: \"Friction always acts up the slope regardless of direction of motion\"\ntrigger_signal: student draws friction up the slope even when the block is being pushed upward.\nconflict_evidence [P28]: \"The block is sliding UP the slope — you drew friction upward, in the SAME direction as the motion. But friction always OPPOSES relative motion. If the block slides up, friction opposes the upward slide and acts DOWN the slope. When it slides down, friction acts up. The direction flips with the motion — it is never fixed.\"\nbridge_text [P30]: \"Ask: which way is the block moving (or tending to move) relative to the surface? Friction always points in the OPPOSITE direction. For sliding down → friction up. For sliding up → friction down. For impending slide down → friction up (up to μ_s N).\"\nreplacement_text [P31]: \"Before drawing the friction arrow, state the direction of actual or impending relative motion. Draw friction opposing that direction.\"\ndiscrimination_pairs [P33]: [\"sliding down: friction up the slope ✓\", \"sliding up: friction down the slope ✓\", \"stationary, tending to slide down: friction up (static) ✓\", \"sliding up, friction drawn up: ✗ adds to motion rather than opposing it\"]\ns6_path: skip P28; use the \"rub your hand along the table — does friction push your hand forward or backward?\" analogy as a shared felt observation, then P30.",
+      "localKey": "MC-FRICTION-DIRECTION",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Tilt the Axes, Not the Physics",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Tilt the Axes, Not the Physics\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Decomposing Weight — mg sinθ and mg cosθ",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Decomposing Weight — mg sinθ and mg cosθ\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Two Equations — Perpendicular Then Parallel",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Two Equations — Perpendicular Then Parallel\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Misconception Probe — Friction Direction Changes",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Friction Direction Changes\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-FRICTION-DIRECTION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-FRICTION-WRONG-N\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-WRONG-N"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Block sliding down slope: friction acts up or down the slope?\" | CORRECT = up (opposes downward slide) |\n| P74 (classify) | \"On a 40° incline, N = mg or N = mg cos40°?\" | CORRECT = mg cos40° |\n| P75 (boundary) | \"At what angle does a block just begin to slide? Derive the condition.\" | CORRECT = tanθ = μ_s |\n| P76 (transfer) | \"6 kg block pushed up 20° slope at constant velocity, μ_k = 0.25, g = 10 — applied force?\" | CORRECT = mg sin20° + μ_k mg cos20° ≈ 34.6 N |\n| P77 (generate) | \"Set up (no solve) the two-equation system for 3 kg block sliding down 40° slope, μ_k = 0.35.\" | CORRECT = N = mg cos40° ; mg sin40° − μ_k N = ma |\n| P78 (explain) | \"Why slope-aligned axes; what is the two-step solve sequence?\" | CORRECT = N first from ⊥ eq; friction from N; a from ∥ eq |\n| P79 (predict) | \"Block gently released on rough slope — which weight component must exceed which friction limit to start sliding?\" | CORRECT = mg sinθ > μ_s mg cosθ → tanθ > μ_s |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 178,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No strategy for incline force resolution | Draws forces but cannot decompose into components | Protocol A (Concrete) |\n| S1 | Resolves along horizontal/vertical axes | Produces correct force magnitudes but wrong equations | Protocol B (Counterexample-first) |\n| S2-WRONG-AXIS | Always uses horizontal/vertical instead of slope-aligned axes | Sets up an avoidable simultaneous-equation tangle | Misconception Engine → Protocol C |\n| S2-FRICTION-WRONG-N | Uses mg (not mg cosθ) for N in friction formula | Overstates friction; wrong acceleration | Misconception Engine → Protocol C |\n| S3 | Correct axes and N; wrong friction direction or sign | Flips friction direction for objects pushed up vs sliding down | Protocol C (Guided Questioning) |\n| S6 | Anxiety at rotating axes and trigonometry | Freezes at sinθ/cosθ components | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"A block rests on a 30° slope. How do you find the component of its weight along the slope?\"\n  \"Weight component along slope = mg sin30°; normal force = mg cos30°\" → S3. Enter Protocol C.\n  \"Resolve horizontally and vertically — then convert\" → S1. Enter Protocol B.\n  Cannot decompose weight on a slope → DB-2.\n\nDB-2 (misconception probe):\n\"A 4 kg block slides down a rough 25° incline (μ_k = 0.3, g = 10). What is the friction force? (Write the formula, not the number.)\"\n  \"f = μ_k N = μ_k mg cos25°\" → S3. Enter Protocol C.\n  \"f = μ_k mg\" (uses weight not normal force) → SIGNAL:MISCONCEPTION:MC-FRICTION-WRONG-N. Enter Misconception Engine.\n  Cannot set up the problem → S0. Enter Protocol A.\n  Distress → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with inclined-plane problems — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-WRONG-N"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.inclined-plane/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.inclined-plane",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.normal-force`):\n\"On an incline at angle θ, what is the normal force on the object in terms of m, g, θ?\"\n  Cannot state N = mg cosθ → flag PREREQ-GAP-NORMAL-FORCE.\n  In-session minimum repair: one P06 anchor (tilted surface diagram, perpendicular projection) — then resume. Deep gap → schedule `phys.mech.normal-force` (S4 route).\n\nPD-2 (for `phys.mech.friction`):\n\"What formula gives kinetic friction, and which force goes in the formula?\"\n  Cannot state f_k = μ_k N (normal force) → flag PREREQ-GAP-FRICTION.\n  In-session minimum repair: one P06 anchor recalling f = μN — then resume. Deep gap → schedule `phys.mech.friction` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.inclined-plane.md",
+        "startLine": 59,
+        "endLine": 71
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

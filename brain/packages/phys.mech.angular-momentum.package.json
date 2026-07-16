@@ -4,7 +4,7 @@
     "packageId": "phys.mech.angular-momentum-package",
     "packageVersion": "0.1.0-draft",
     "conceptId": "phys.mech.angular-momentum",
-    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
     "contentHash": "sha256:7f5645729a28df2308678808fcfe4327c5945423fa9ea5e05e7eb4b7f387bb68",
     "sourceLock": {

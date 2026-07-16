@@ -1,0 +1,429 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.reflection-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.reflection",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b8599923160dac5b5e1669f7e4ae865ba45e2a7b5f5180930e72d56b30b9aa2f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.reflection.md": "sha256:3afafd1396f87667b47f06bbfb19f74e06e3699e92571c9ed5b9d0cc950f5aa8"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.reflection",
+    "name": "\"Reflection of Light\"",
+    "difficultyRaw": "label: developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.opt.nature-of-light"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.reflection-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.reflection (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.reflection.md": "sha256:3afafd1396f87667b47f06bbfb19f74e06e3699e92571c9ed5b9d0cc950f5aa8"
+      },
+      "contentHash": "sha256:7985d34d2c7ecf4c6f5f8fedf3d0e5e634fb0ed119661b6ffaf4f491d7221197",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.reflection.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.reflection.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.reflection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.reflection\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.reflection.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.reflection.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.reflection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.reflection\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.reflection.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.reflection.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.reflection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.reflection\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.reflection.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.reflection.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.reflection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.reflection\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.reflection.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.reflection.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.reflection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.reflection\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.reflection.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.reflection.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.reflection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.reflection\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.reflection.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.reflection.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.reflection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.reflection\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.reflection/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.reflection",
+      "title": "\"Reflection of Light\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nWhen you see yourself in a mirror, light from your face bounces off the smooth surface and travels to your eye. This bouncing has a precise rule: the angle at which light arrives equals the angle at which it leaves. The angles are always measured from an imaginary line perpendicular to the surface (the normal), not from the surface itself. This is the Law of Reflection — simple, exact, and the same for all wavelengths of light.\n\n### Level 2 — Developing Understanding\n\n**The Law of Reflection:**\n\n**∠i = ∠r**\n\nWhere:\n- ∠i = angle of incidence (between incoming ray and normal to surface)\n- ∠r = angle of reflection (between reflected ray and normal to surface)\n- Both angles measured from the **normal**, not the surface\n- Incident ray, reflected ray, and normal are **coplanar** (all in the same plane)\n\n**Types of reflection:**\n\n| Type | Surface | Result |\n|------|---------|--------|\n| Specular | Smooth (mirror, calm water) | Clear, distinct image |\n| Diffuse | Rough (paper, wall) | Scattered in many directions; no image |\n\nDiffuse reflection is why non-shiny objects are visible — they scatter light to your eyes from all angles.\n\n**Image in a plane mirror:**\n- Image is **virtual** (appears to be behind the mirror)\n- Image is **erect** (same orientation as object)\n- Image is **laterally inverted** (left ↔ right reversed)\n- Image distance behind mirror = object distance in front of mirror (d_image = d_object)\n- Image size = object size (magnification m = 1)\n\n**Reflection from a curved surface:** follows the same Law of Reflection at each point — the normal at each point is radial (pointing toward/away from centre of curvature).\n\n### Level 3 — Proficient Synthesis\n\n**Deviation produced by a plane mirror:**\nWhen a ray strikes a plane mirror at angle of incidence i, it is deviated by angle δ = 180° − 2i.\n\nWhen a mirror rotates by angle θ, the reflected ray rotates by 2θ (used in galvanometers).\n\n**Lateral inversion:** The apparent left-right reversal in a mirror is actually a front-back reversal along the normal to the mirror — your left hand appears as a right hand because what was facing you now faces the mirror. The spatial dimension perpendicular to the mirror is inverted.\n\n**Multiple reflections between two plane mirrors at angle θ:**\nNumber of images = (360°/θ) − 1, when 360°/θ is an integer.\n\nExamples:\n- θ = 90°: (360/90) − 1 = 3 images\n- θ = 60°: (360/60) − 1 = 5 images\n- θ = 45°: (360/45) − 1 = 7 images\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 25,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.reflection",
+      "title": ": Applying the Law of Reflection",
+      "content": "### WE-1: Applying the Law of Reflection\n\n**Problem:** A ray of light strikes a plane mirror at 35° to the mirror surface. Find:\n(a) The angle of incidence.\n(b) The angle of reflection.\n(c) The total deviation of the ray.\n\n**Solution:**\n\nThe angle of incidence is measured from the normal, not from the surface.\nSince the ray makes 35° with the mirror surface:\n(a) Angle of incidence: ∠i = 90° − 35° = **55°**\n\n(b) By the Law of Reflection: ∠r = ∠i = **55°**\n\n(c) Total deviation: δ = 180° − 2i = 180° − 2(55°) = 180° − 110° = **70°**\n\n(The original ray direction and the reflected ray direction differ by 70°.)\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 80,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.reflection",
+      "title": ": Images in Two Mirrors",
+      "content": "### WE-2: Images in Two Mirrors\n\n**Problem:** Two plane mirrors are placed at 60° to each other. An object is placed between them.\n(a) How many images are formed?\n(b) A ray strikes one mirror at ∠i = 40°. After reflecting off both mirrors, what is the final direction of the ray relative to the incident ray?\n\n**Solution:**\n\n(a) n = (360°/θ) − 1 = (360°/60°) − 1 = 6 − 1 = **5 images**\n\n(b) First reflection: ray deviates by δ₁ = 180° − 2(40°) = 100°.\nAfter the first reflection, the ray makes angle (180° − 100° − 60°) = 20° with the second mirror,\nso ∠i₂ = 90° − 20° = 70° at the second mirror.\nδ₂ = 180° − 2(70°) = 40°.\n\nTotal deviation = δ₁ + δ₂ = 100° + 40° = 140°.\n\nAlternatively, for two mirrors at angle θ, the total deviation is:\n**δ_total = 360° − 2θ = 360° − 2(60°) = 240°**\n\nWait — re-examine: the formula for two-mirror retroreflection total deviation is 2(180° − θ) = 360° − 2θ only for specific geometry. Using the step-by-step result: **total deviation = 140°** for these specific angles.\n\nNote: For parallel mirrors (θ = 0°), δ = 360° − 0° = 360° → ray doubles back. This is the principle of corner retroreflectors.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 80,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.reflection",
+      "title": ": Image Distance in Plane Mirror",
+      "content": "### WE-3: Image Distance in Plane Mirror\n\n**Problem:** A person stands 2.0 m in front of a plane mirror. \n(a) How far is the image from the mirror?\n(b) How far is the image from the person?\n(c) If the person walks 0.5 m closer to the mirror, how does the image distance to the person change?\n\n**Solution:**\n\n(a) Image distance = object distance = **2.0 m behind the mirror**\n\n(b) Total distance from person to image = d_object + d_image = 2.0 + 2.0 = **4.0 m**\n\n(c) New object distance = 2.0 − 0.5 = 1.5 m → image distance = 1.5 m behind mirror.\nPerson is now 1.5 m in front → image is 1.5 m behind → total = **3.0 m**.\nThe image moved closer by 1.0 m (the image moves twice as fast as the person — for every 0.5 m the person moves, the image moves 0.5 m, so the gap closes by 1.0 m).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 80,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.reflection",
+      "title": "MC-REFLECTION-ANGLE-FROM-SURFACE",
+      "content": "### MC-1: MC-REFLECTION-ANGLE-FROM-SURFACE\n\n**trigger_signal:** Student writes ∠i = 35° when the ray makes 35° with the mirror, rather than 55° (complement); states \"the angle of reflection equals the angle between the ray and the surface.\"\n\n**conflict_evidence [P28]:** Draw the geometry: if a ray makes 35° with the mirror surface, the normal is perpendicular to the surface (90° from it). The angle between the ray and the normal = 90° − 35° = 55°. If you measure from the surface instead: a ray at 35° to the surface reflects at 35° to the surface — that would be true ONLY if the reflected ray goes straight along the surface (0° to normal), which is impossible. Measuring from the surface gives different numerical predictions than the Law of Reflection and fails to correctly predict where reflected light actually goes.\n\n**bridge_text [P30]:** The normal is the reference, not the surface, because the normal is unique (one perpendicular direction per flat surface point). The surface itself could be tilted at any angle — the angle you make with it depends on which direction you call \"along the surface.\" The normal is unambiguous and always 90° to the surface.\n\n**replacement_text [P31]:** The Law of Reflection states ∠i = ∠r, where BOTH angles are measured from the normal to the surface at the point of incidence. If a ray makes angle α with the surface, the angle of incidence is ∠i = 90° − α. The reflected ray also makes angle (90° − α) with the surface, so both make angle α with the surface — but the law itself is stated in terms of the normal.\n\n**discrimination_pairs [P33]:**\n- \"A ray hitting a mirror at 30° to the surface reflects at 30° to the surface\" → CORRECT numerically, but stated incorrectly — the angle of incidence is 60° (from normal), not 30°.\n- \"A ray at 30° to the normal reflects at 30° to the normal, not 60° to the surface\" → CORRECT — the reflection angle is 30° from the normal = 60° from the surface.\n\n**s6_path:** If student fails angle identification on first probe → draw normal explicitly, label ∠i from normal, redo probe before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.reflection",
+      "title": "MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES",
+      "content": "### MC-2: MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES\n\n**trigger_signal:** Student expects to see a clear image reflected from a white wall or paper; claims \"any smooth-looking surface forms a clear image.\"\n\n**conflict_evidence [P28]:** A white sheet of paper scatters light in all directions — you can see the paper from any angle, but you see no image of yourself in it. A mirror also appears white under some lighting conditions, yet it forms a clear image. The difference is not color but surface roughness at the scale of the wavelength of light (400–700 nm). Paper has surface irregularities ~10–100 μm, which is thousands of wavelengths — each tiny facet reflects by the Law of Reflection, but in a different direction → diffuse scattering. A mirror has surface irregularities < λ/10 (~40 nm) → all facets parallel → all reflections in the same direction → specular.\n\n**bridge_text [P30]:** The Law of Reflection (∠i = ∠r) applies to every tiny patch of every surface. The difference between specular and diffuse is whether all those tiny patches point in the same direction. If yes → all reflected rays are parallel → image. If no → scattered rays → no image but the surface is visible.\n\n**replacement_text [P31]:** Specular reflection requires a surface whose roughness is much smaller than the wavelength of light (< λ/10 ≈ 40–70 nm for visible light). Diffuse reflection occurs when surface irregularities exceed the wavelength. Both obey ∠i = ∠r locally, but only specular reflection produces the macroscopic coherent outgoing beam needed for image formation.\n\n**discrimination_pairs [P33]:**\n- \"A glossy magazine cover reflects images because it doesn't obey the law of reflection\" → FALSE: it obeys the law locally; its surface is smooth enough for specular reflection.\n- \"Diffuse reflection violates the law of reflection\" → FALSE: each micro-facet reflects by the law; the scattered result is because different facets point different ways.\n\n**s6_path:** If student scores < 0.60 on \"which surface reflects images\" probe → surface-roughness comparison diagram (AFM-scale images of mirror vs. paper) before re-probe.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.reflection",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 204,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.reflection",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 208,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.reflection",
+      "title": "Conflict Evidence: MC-1",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Evidence: MC-1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 211,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.reflection",
+      "title": "Check-in",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 214,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.reflection",
+      "title": "Pictorial: image in plane mirror",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Pictorial: image in plane mirror\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 218,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.reflection",
+      "title": "Pictorial: two mirrors at angle",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pictorial: two mirrors at angle\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 221,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.reflection",
+      "title": "Mastery Probe + P68 + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Probe + P68 + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P36\",\"P51\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 224,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.reflection",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** A ray of light strikes a plane mirror at 50° to the mirror surface. Find the angle of incidence, angle of reflection, and the angle between the incident and reflected rays.\n\n**P-2 (Developing — identifies S6):** You stand 1.8 m from a plane mirror. (a) Where is your image? (b) How far from you is your image? (c) If you walk toward the mirror at 0.5 m/s, how fast does the image approach you?\n\n**P-3 (Proficient — identifies S9):** Two plane mirrors are inclined at 72° to each other. (a) How many images of a candle placed between them can you see? (b) A ray hits the first mirror at ∠i = 50°. At what angle does it hit the second mirror? Show the geometry.\n\n**P-4 (Mastery gate — confirms S9):** Explain why (a) your bathroom mirror shows a laterally inverted image — specifically, what dimension is actually inverted and why, and (b) a rough wall scatters light diffusely even though each surface point obeys ∠i = ∠r. Then solve: a ray in a retroreflector hits two mirrors at 90° to each other. Show that the output ray is always anti-parallel to the input ray, regardless of the angle of incidence on the first mirror. Required: conceptual explanations + geometric proof for mastery gate at 0.80.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 232,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.opt.reflection",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: C (difficulty 3 → full CPA track).\n\n**TA-1 [P01 — Session Open]**\n\"Stand an arm's length from a mirror. Cover your left eye. Which eye does your reflection cover? Take 30 seconds to decide — left or right? And why? Today we'll understand exactly what a mirror does to light and why images appear where they do. First: estimate the angle your reflection makes with your eyes — how does that relate to where you're standing?\"\n[Diagnose S0/S3 by whether student mentions angles from normal or surface]\n\n**TA-2 [P06 — Concrete Anchor]**\n\"[Display: mirror diagram with incident ray, normal, reflected ray, angles labeled.] Here is the rule: angle of incidence (from the normal) equals angle of reflection (from the normal). The normal is the perpendicular to the surface — never measure from the surface itself. Practice: a ray makes 40° with the mirror surface. What is ∠i? What is ∠r? Where does the reflected ray go?\" [→ WE-1 core procedure]\n\n**TA-3 [P28 — Conflict Evidence: MC-1]**\n\"Common trap: if the ray makes 35° with the mirror, many students write ∠i = 35°. Let's test that. If ∠i = 35° from the surface, the normal is at 90° to the surface. Draw it: the ray is 35° from the surface means it's 55° from the normal. Law of reflection: reflected ray is 55° from normal on the other side. Total deviation = 70°, NOT 110°. Try it with both angles and see which prediction matches where the reflected ray actually appears.\" [→ MC-1 drill]\n\n**TA-4 [P51 — Check-in]**\n\"Quick check: A ray hits a plane mirror and reflects. The angle between the incident ray and reflected ray is 80°. What is the angle of incidence? [Answer: 40°; total deviation = 2×∠i gives incident + reflected between-angle = 2i → i = 40°.] If you got 80°, you added rather than halved — try again.\"\n[Identifies S3 lingering errors before moving to image formation]\n\n**TA-5 [P06 — Pictorial: image in plane mirror]**\n\"[Display: object in front of plane mirror, image position behind, ray diagram.] Two rules for plane mirror image: (1) each reflected ray appears to diverge from a point behind the mirror — that's where the image is. (2) Image distance = object distance (symmetric about mirror). The image is virtual (no light actually passes through it), erect, same size, laterally inverted.\" [→ WE-3]\n\n**TA-6 [P06 — Pictorial: two mirrors at angle]**\n\"[Display: two mirrors at 60° with 5 image positions marked.] Formula: n = (360°/θ) − 1 when 360°/θ is a whole number. At θ = 60°: n = 5. Why? Each image acts as an object for the other mirror, cascading until the geometry closes. Verify with θ = 90° → n = 3. [→ WE-2]\"\n\n**TA-7 [P36 — Mastery Probe + P68 + P85 + P91]**\n\"Final probe: (1) A ray makes 25° with a mirror surface — find ∠i, ∠r, and deviation. (2) An object stands 3 m from a plane mirror. Where is the image? How far from the object? (3) Two mirrors are at 45° — how many images? (4) Explain in one sentence why a white wall doesn't form your reflection even though it reflects light.\n\nClosing thought: The law ∠i = ∠r, described by Euclid in 300 BCE, is the same law that makes optical fibers, telescopes, and camera design possible.\n\nSpaced retrieval: +1 day (angle-from-normal identification), +4 days (image distance and properties), +2 weeks (n-images formula and specular vs. diffuse distinction).\"\n\n[P91 gate: threshold 0.80. Failure → remediation on normal identification before re-probe.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 197,
+        "endLine": 232
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

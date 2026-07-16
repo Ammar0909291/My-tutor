@@ -1,0 +1,543 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.angular-kinematics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.angular-kinematics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:673bac542726ca4ada54f72f8b157152b7852277e7f73a88699ea72f3000c9aa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.angular-kinematics.md": "sha256:754c860d9c821500aebb2bc9d2af2d81bd4e9303ee6af689a1dcac5be3bccf08"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.angular-kinematics",
+    "name": "Angular Kinematics",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.kinematics-1d"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.angular-kinematics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.angular-kinematics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.angular-kinematics.md": "sha256:754c860d9c821500aebb2bc9d2af2d81bd4e9303ee6af689a1dcac5be3bccf08"
+      },
+      "contentHash": "sha256:ab6e424583c6f4347d3a08d890c2a4a75034da8f39608a5aed0aad510bd1f2e6",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-kinematics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-kinematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-kinematics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-kinematics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-kinematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-kinematics\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-kinematics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-kinematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-kinematics\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-kinematics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md#TA-4 (addresses MC-SAME-TANGENTIAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-kinematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-kinematics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-kinematics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md#TA-5 (addresses MC-DEGREES-NOT-RADIANS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-kinematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-kinematics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-kinematics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-kinematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-kinematics\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-kinematics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-kinematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-kinematics\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.angular-kinematics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Angular Kinematics — core explanation",
+      "content": "**Core Insight:** Rotational motion has angular analogs of every linear kinematic quantity.\nAngle (θ) replaces displacement, angular velocity (ω) replaces velocity, angular acceleration (α)\nreplaces acceleration. The equations are structurally identical — once the analogy is clear,\nthe student already knows rotational kinematics.\n\n**Quantities and analogies:**\n\n| Linear | Angular | Unit |\n|--------|---------|------|\n| Displacement s (m) | Angle θ (rad) | radian |\n| Velocity v (m/s) | Angular velocity ω (rad/s) | rad/s |\n| Acceleration a (m/s²) | Angular acceleration α (rad/s²) | rad/s² |\n| F = ma | τ = Iα | (later) |\n\n**Radian measure:**\nθ (rad) = arc length / radius = s/r.\nFull circle: θ = 2π rad = 360°. One revolution = 2π rad.\nConvert: θ(rad) = θ(°) × π/180.\n\n**Angular kinematic equations (uniform α, analogous to SUVAT):**\nω_f = ω_i + αt\nθ = ω_i t + ½αt²\nω_f² = ω_i² + 2αθ\nθ = (ω_i + ω_f)/2 × t\n\n**Tangential-angular link:**\nv = rω (tangential speed at radius r)\na_t = rα (tangential acceleration at radius r)\na_c = v²/r = rω² (centripetal acceleration at radius r)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 26,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Basic",
+      "content": "**Worked Example 1 (Basic):**\nA wheel starts from rest and reaches 6 rad/s in 3 s with uniform α.\nα = Δω/Δt = 6/3 = 2 rad/s².\nθ = ½αt² = ½×2×9 = 9 rad.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 26,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Tangential speed",
+      "content": "**Worked Example 2 (Tangential speed):**\nSame wheel (ω = 6 rad/s), radius 0.4 m.\nv = rω = 0.4 × 6 = 2.4 m/s.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 26,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Angular SUVAT",
+      "content": "**Worked Example 3 (Angular SUVAT):**\nA fan blade (ω_i = 10 rad/s) decelerates at α = −2 rad/s². How many revolutions before stopping?\nω_f = 0: 0 = 100 + 2×(−2)×θ → θ = 25 rad = 25/(2π) ≈ 3.98 revolutions.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 26,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/misconception/MC-SAME-TANGENTIAL",
+      "kind": "misconception",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Priority 1",
+      "content": "### MC-SAME-TANGENTIAL (Priority 1)\n**Label:** \"All points on a rotating body have the same speed (or tangential velocity)\"\n\n**Trigger signals:**\n- Says all points on a wheel have the same speed\n- Computes v = rω for the centre (r = 0) and claims it's the same as the rim\n- Confused why the edge of a record wears faster than the centre\n\n**Conflict evidence [P28]:**\n\"A disc of radius 0.5 m rotates at ω = 4 rad/s. Speed at the rim: v = 0.5×4 = 2 m/s.\nSpeed at r = 0.2 m: v = 0.2×4 = 0.8 m/s. Speed at the centre (r = 0): v = 0 m/s.\nIf all points had the same speed, which formula would you use? Is 2 = 0.8 = 0 consistent?\"\n\n**Bridge [P30]:**\n\"All points share the same ω — they rotate through the same angle in the same time.\nBut tangential speed v = rω — larger r means faster tangential speed. The outer edge of a\nrecord player travels a much greater distance in one revolution than a point near the centre.\"\n\n**Replacement [P31]:**\n\"ω is the same for all points on a rigid rotating body.\nv = rω — tangential speed varies with distance from the axis.\nAt the axis (r = 0): v = 0 (the centre doesn't translate).\nAt maximum r (rim): v is maximum.\"\n\n**Discrimination pairs [P33]:**\n- Point A (r = 0.3) vs Point B (r = 0.6) on same disc: same ω, v_B = 2× v_A ✓\n- Records worn more at edge: higher v → more friction at larger r ✓\n\n**s6_path:** Use a single spoke of a bicycle wheel: \"the tip moves much faster than the hub — can you see why?\"\nBuild v = rω from the concrete before formalising.\n\n---",
+      "localKey": "MC-SAME-TANGENTIAL",
+      "language": "en",
+      "refs": [
+        "MC-SAME-TANGENTIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 3,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/misconception/MC-DEGREES-NOT-RADIANS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Priority 2",
+      "content": "### MC-DEGREES-NOT-RADIANS (Priority 2)\n**Label:** \"Angles should be in degrees — radians are just a confusing conversion\"\n\n**Trigger signals:**\n- Substitutes θ in degrees into ω = θ/t or v = rω\n- Converts angle to degrees mid-calculation then fails to convert back\n- Says \"2π rad = 360° so I'll just use 360 in the formula\"\n\n**Conflict evidence [P28]:**\n\"A point at r = 0.5 m on a disc rotates 90°. What is the arc length?\nUsing degrees: s = r × θ = 0.5 × 90 = 45 m — this is longer than the disc's entire circumference (2π×0.5 ≈ 3.14 m). Something is wrong.\nUsing radians: 90° = π/2 rad. s = 0.5 × π/2 = 0.785 m. This is ¼ of the circumference. ✓\"\n\n**Bridge [P30]:**\n\"Radians are the natural unit: the definition θ = s/r only works in radians (dimensionless ratio).\nWhen you use degrees in formulas like v = rω or s = rθ, the numbers are off by a factor of π/180.\nRadians aren't optional — they're baked into the formula's derivation.\"\n\n**Replacement [P31]:**\n\"Always convert degrees to radians before substituting into any angular formula.\nθ(rad) = θ(°) × π/180. Once you're in radians, v = rω, s = rθ, and all SUVAT analogs work directly.\"\n\n**Discrimination pairs [P33]:**\n- 180° = π rad: arc at r = 1 m is π m (half circumference) ✓\n- 360° = 2π rad: full circumference = 2πr ✓ (not 360r) ✓\n\n**s6_path:** Use the mnemonic \"radian = ratio\" — θ = s/r, so θ is dimensionless, and radians\nare just the unit name for that dimensionless ratio. Avoid the word \"conversion.\"\n\n---",
+      "localKey": "MC-DEGREES-NOT-RADIANS",
+      "language": "en",
+      "refs": [
+        "MC-DEGREES-NOT-RADIANS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 36,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 14,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Prerequisite Check + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 29,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "MC-SAME-TANGENTIAL Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-SAME-TANGENTIAL Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-SAME-TANGENTIAL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SAME-TANGENTIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 42,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "MC-DEGREES-NOT-RADIANS Probe + Arc Length Practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-DEGREES-NOT-RADIANS Probe + Arc Length Practice\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-DEGREES-NOT-RADIANS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-DEGREES-NOT-RADIANS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 59,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 74,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 94,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Apply — basic α and θ",
+      "content": "**MP-1 (Apply — basic α and θ):**\n\"A flywheel starts at rest and reaches ω = 12 rad/s with α = 3 rad/s². Find t and θ.\"\nExpected: t = 4 s; θ = ½×3×16 = 24 rad.\n_Discriminates: angular SUVAT from rest._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Apply — tangential speed",
+      "content": "**MP-2 (Apply — tangential speed):**\n\"A disc rotates at ω = 8 rad/s. Point A is at r = 0.25 m; Point B is at r = 0.5 m.\nFind the tangential speed of each.\"\nExpected: v_A = 2 m/s; v_B = 4 m/s.\n_Discriminates: MC-SAME-TANGENTIAL resolution; v = rω._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-SAME-TANGENTIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Apply — radian conversion + arc length",
+      "content": "**MP-3 (Apply — radian conversion + arc length):**\n\"A wheel of radius 0.4 m rotates 270°. Find θ in radians and the arc length at the rim.\"\nExpected: θ = 270×π/180 = 3π/2 ≈ 4.71 rad; s = 0.4×4.71 = 1.885 m.\n_Discriminates: MC-DEGREES-NOT-RADIANS resolution._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-DEGREES-NOT-RADIANS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Apply — SUVAT stopping",
+      "content": "**MP-4 (Apply — SUVAT stopping):**\n\"A motor at ω = 24 rad/s decelerates at α = 6 rad/s². How long before it stops? θ covered?\"\nExpected: t = 4 s; θ = 24×4 − ½×6×16 = 96−48 = 48 rad.\n_Discriminates: angular SUVAT with deceleration._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Apply — centripetal",
+      "content": "**MP-5 (Apply — centripetal):**\n\"A point at r = 0.5 m on a disc rotating at ω = 10 rad/s. Find: (a) tangential speed,\n(b) centripetal acceleration.\"\nExpected: v = 5 m/s; a_c = rω² = 0.5×100 = 50 m/s².\n_Discriminates: v = rω and a_c = rω² distinction._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.kinematics-1d  ──────────────►  phys.mech.angular-kinematics\n   (SUVAT equations and their logic)\n   REQUIRED: student can apply v = u + at and s = ut + ½at²\n```\n\n**PD-1 (Linear kinematics prerequisite):**\n\"An object at rest accelerates at 3 m/s² for 4 s. Find final velocity and displacement.\"\nExpected: v = 12 m/s; s = ½×3×16 = 24 m.\n\nIf student cannot apply SUVAT → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 73,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Write the four angular SUVAT equations. What unit must angles be in?\"\nThreshold: All 4 equations correct; unit = radians.\n\n**FA-2 (TA-4 exit):** \"Disc ω = 3 rad/s. Point A at r = 0.1, Point B at r = 0.4. Both v?\"\nExpected: 0.3 m/s vs 1.2 m/s. If student says equal → MC-SAME-TANGENTIAL not resolved.\n\n**FA-3 (TA-5 exit):** \"θ = 180°. Convert to radians. Arc length at r = 0.5 m?\"\nExpected: θ = π rad; s = 0.5π ≈ 1.57 m. If student writes s = 90 → MC-DEGREES-NOT-RADIANS not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SAME-TANGENTIAL",
+        "MC-DEGREES-NOT-RADIANS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 297,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Lead with the analogy table heavily: \"θ is just s with a new name.\"\n- Use ω = θ/t before introducing SUVAT equations — establish ω conceptually first.\n- Skip centripetal acceleration (MP-5) in first session if anxiety remains; it's secondary.\n- Reassure: \"You already know 4 equations — these are the same 4, just with Greek letters.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (centripetal requires chaining v = rω and a_c = v²/r) at TA-3.\n- Challenge: \"A point on a disc has a_t = rα = 0.6 m/s² and a_c = 3 m/s². Find the total\n  acceleration magnitude.\" (Pythagoras: a = √(0.36+9) ≈ 3.06 m/s².)\n- Spend TA-6 on rpm conversions and the centripetal acceleration problem.\n\n**S4 (Prereq gap — Linear kinematics):**\n- Detect via PD-1 failure at TA-3.\n- Repair: mini-session on v = u + at, s = ut + ½at², v² = u² + 2as before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 312,
+        "endLine": 332
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-kinematics/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.angular-kinematics",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → angular SUVAT → MC-SAME-TANGENTIAL repair).\n**Session 2 (≥24 h later):** Retrieval: \"ω vs v: which is shared? How does v vary across the disc?\"\n  → TA-5 (MC-DEGREES-NOT-RADIANS, arc length) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining linear and angular:\n  \"A wheel of radius 0.3 m starts from rest. α = 5 rad/s². After 4 s:\n  (a) ω, (b) θ, (c) tangential speed at rim, (d) centripetal acceleration at rim.\"\n  (Chains all angular kinematics results.)\n**Pre-torque session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.kinematics-1d (structural analogy),\nphys.mech.circular-motion (centripetal acceleration link).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SAME-TANGENTIAL",
+        "MC-DEGREES-NOT-RADIANS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-kinematics.md",
+        "startLine": 332,
+        "endLine": 348
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,545 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.boltzmann-factor-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.boltzmann-factor",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a5b5aff4051d307a69520c4888a614aa84661f854b6cf5aaf6ef0bbab1eae799",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md": "sha256:778da5e3cc4df35904d4ea9c928363bd199951eb28ef0e00bdcb3cd60eb32bc8"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "phys.stat.boltzmann-factor",
+    "name": "Boltzmann Factor and Statistical Weight",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.stat.probability-basics"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.boltzmann-factor-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.boltzmann-factor (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md": "sha256:778da5e3cc4df35904d4ea9c928363bd199951eb28ef0e00bdcb3cd60eb32bc8"
+      },
+      "contentHash": "sha256:9ea8b5757c8e63c43e1c954594c399a3f3603c6aab89891977622b9304e7d70f",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.boltzmann-factor.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.boltzmann-factor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.boltzmann-factor\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.boltzmann-factor.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.boltzmann-factor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.boltzmann-factor\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.boltzmann-factor.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.boltzmann-factor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.boltzmann-factor\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.boltzmann-factor.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.boltzmann-factor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.boltzmann-factor\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.boltzmann-factor.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md#TA-5 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.boltzmann-factor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.boltzmann-factor\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.boltzmann-factor.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md#TA-6 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.boltzmann-factor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.boltzmann-factor\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.boltzmann-factor.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.boltzmann-factor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.boltzmann-factor\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.boltzmann-factor.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.boltzmann-factor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.boltzmann-factor\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.boltzmann-factor/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Boltzmann Factor and Statistical Weight — core explanation",
+      "content": "**Core Insight:** When a small system is in thermal contact with a large heat reservoir at\ntemperature T, the probability of the system being in a microstate of energy E is proportional\nto the Boltzmann factor:  \n  P(E) ∝ e^{−E/(k_B T)}  \nThe constant of proportionality comes from normalization. This is the most important result in\nall of statistical mechanics — it underlies the Maxwell-Boltzmann speed distribution, chemical\nreaction rates (Arrhenius equation), semiconductor physics (carrier concentration), and\nBoltzmann machines in machine learning.\n\n**The Canonical Ensemble Result:**  \n  P(E_i) = e^{−E_i/(k_B T)} / Z   where Z = Σ_i e^{−E_i/(k_B T)} (partition function)\n\n**The Physical Insight:** Higher energy states are exponentially less probable. Temperature\ncontrols how much energy is available to explore high-energy states. At T → 0: only the ground\nstate is occupied. At T → ∞: all states equally probable. The Boltzmann factor e^{−E/k_BT}\nis the bridge from the equal-probability postulate (all microstates equally likely for an\nisolated system) to the thermal probability distribution (exponential for a system with a\nreservoir).\n\n**Key Ratio:** P(E₂)/P(E₁) = e^{−(E₂−E₁)/(k_BT)}. If E₂ − E₁ = k_BT: P₂/P₁ = e⁻¹ ≈ 0.37.\nThe k_BT energy scale is the natural unit of thermal energy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 21,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z",
+      "content": "### MC-1: MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z\n**Probe:** \"A system has two energy levels, 0 and 0.1 eV. At T = 300 K (k_BT ≈ 0.026 eV).\nWhat is the probability of being in the upper level?\"  \n**Characteristic phrase:** \"P = e^{−0.1/0.026} = 0.021.\"  \n**Trigger:** Students omit the partition function normalisation.  \n**Conflict evidence [P28]:** Without Z: P = e^{−3.85} = 0.021. But P₀ = e⁰ = 1 (also unnormalised).\nP₀ + P_ε = 1.021 ≠ 1. Probabilities must sum to 1. The correct computation: Z = 1 + 0.021 = 1.021.\nP_ε = 0.021/1.021 = 0.0206. P₀ = 1/1.021 = 0.979. Check: 0.0206 + 0.979 ≈ 1 ✓.  \n**Bridge [P30]:** \"The Boltzmann factor e^{−E/k_BT} gives the relative weight, not the probability.\nTo get a probability, divide by the sum of all weights: Z = Σ e^{−E_i/k_BT}. The partition\nfunction Z is the normalisation constant.\"  \n**Replacement [P31]:** P(E_i) = e^{−E_i/k_BT} / Z, where Z = Σ_i e^{−E_i/k_BT}.  \n**Discrimination pairs [P33]:** P(E = 0.1 eV at 300 K) with Z = 1.021: (A) 0.021 (unnormalized),\n(B) 0.0206 (normalised), (C) 0.5. Correct: (B).  \n**S6 repair path:** TA-3 (two-state system — explicit Z computation).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 3,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E",
+      "content": "### MC-2: MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E\n**Probe:** \"Does increasing temperature increase or decrease the probability of being in a high-\nenergy state? What does the formula predict?\"  \n**Characteristic phrase:** \"Higher T means the exponent is smaller (less negative), so probability\ndecreases.\"  \n**Trigger:** Students correctly read that −E/k_BT becomes less negative as T increases, but\nincorrectly conclude the probability falls. They forget the partition function also changes.  \n**Conflict evidence [P28]:** At T₁: P_high/P_low = e^{−ΔE/k_BT₁}. At T₂ > T₁: the exponent is\nless negative → P_high/P_low is larger → high-energy states are relatively more probable at\nhigher T. The partition function increases with T, but the ratio P_high/P_low unambiguously\nincreases.  \n**Bridge [P30]:** \"The exponent −E/k_BT becomes less negative at higher T. e^{less negative} is\ncloser to 1 (larger). So the Boltzmann weight of the high-energy state increases relative to the\nlow-energy state. Higher T → more states accessible → high-energy states more populated.\"  \n**Replacement [P31]:** Higher T → larger Boltzmann factor for high-energy states → higher\nrelative probability for high-energy states.  \n**Discrimination pairs [P33]:** Doubling T affects P_high/P_low: (A) decreases (exponent more\nnegative), (B) increases (exponent less negative), (C) no change. Correct: (B).  \n**S6 repair path:** TA-4 (plot P_ε vs. T for two-state system — sigmoid curve going upward).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 19,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA",
+      "content": "### MC-3: MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA\n**Probe:** \"What is the difference between S = k_B ln Ω and P ∝ e^{−E/k_BT}? When do you use each?\"  \n**Characteristic phrase:** \"They're both Boltzmann — same thing.\"  \n**Trigger:** Both involve k_B and Boltzmann's name; students merge them.  \n**Conflict evidence [P28]:** S = k_B ln Ω: applied to an isolated system with fixed energy;\ncounts microstates; gives the entropy of a macrostate. P ∝ e^{−E/k_BT}: applied to a small system\nin contact with a heat reservoir at temperature T; gives the probability of a microstate at\na given energy. These are two different physical situations requiring two different formulas.  \n**Bridge [P30]:** \"S = k_B ln Ω: isolated box, fixed energy, count arrangements. Boltzmann factor:\nsystem touches a reservoir, energy can fluctuate, probability depends on energy and temperature.\nThe bridge between them: the Boltzmann factor is derived from the fundamental postulate by\ncounting reservoir microstates — but the formula itself is for the subsystem, not the whole\nisolated system.\"  \n**Replacement [P31]:** S = k_B ln Ω applies to isolated systems (fixed energy). P = e^{−E/k_BT}/Z\napplies to systems in thermal contact with a reservoir (variable energy, fixed T).  \n**Discrimination pairs [P33]:** For a system in a heat bath at temperature T, which formula gives\nthe probability of a specific microstate? (A) S = k_B ln Ω, (B) P = e^{−E/k_BT}/Z, (C) both\nequally. Correct: (B).  \n**S6 repair path:** TA-5 (side-by-side table: isolated system vs. reservoir system, their\nformulae, when to use each).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 39,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "MC-BOLTZMANN-FACTOR-LINEAR-IN-T",
+      "content": "### MC-4: MC-BOLTZMANN-FACTOR-LINEAR-IN-T\n**Probe:** \"Increasing T from 300 K to 600 K — what happens to e^{−E/(k_BT)} for E = 0.5 eV?\nDoes the probability double?\"  \n**Characteristic phrase:** \"Double the T means double the probability.\"  \n**Trigger:** Students apply linear intuition to an exponential function.  \n**Conflict evidence [P28]:** At 300 K: k_BT ≈ 0.026 eV. e^{−0.5/0.026} = e^{−19.2} ≈ 4.5×10⁻⁹.\nAt 600 K: k_BT ≈ 0.052 eV. e^{−0.5/0.052} = e^{−9.6} ≈ 6.8×10⁻⁵. Ratio: 6.8×10⁻⁵/4.5×10⁻⁹\n≈ 15,000. Doubling T increased the probability by a factor of 15,000, not 2. The exponential\namplifies the linear change in T dramatically.  \n**Bridge [P30]:** \"Doubling T halves the exponent magnitude. But e^{−x/2} ≫ e^{−x} by a factor\nof e^{x/2}. For large x (E ≫ k_BT), this factor is enormous. The exponential is the key: it\nturns small changes in T into enormous changes in probability.\"  \n**Replacement [P31]:** The Boltzmann factor is exponential in −E/(k_BT). Doubling T from 300 to\n600 K can increase probability by orders of magnitude, not by factor 2.  \n**Discrimination pairs [P33]:** Doubling T for a high-energy state (E ≫ k_BT): probability\n(A) doubles, (B) increases by a large exponential factor, (C) halves (less negative exponent).\nCorrect: (B).  \n**S6 repair path:** TA-6 (numerical comparison at T and 2T for specific E).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 60,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "k_BT as Energy Scale",
+      "content": "{\"id\":\"TA-2\",\"title\":\"k_BT as Energy Scale\",\"primitives\":[\"P14\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Two-State System and Partition Function",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Two-State System and Partition Function\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "T-Dependence and MC-2 Diagnostic",
+      "content": "{\"id\":\"TA-4\",\"title\":\"T-Dependence and MC-2 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Isolated vs. Reservoir Distinction",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Isolated vs. Reservoir Distinction\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 19,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Arrhenius and MC-4 Diagnostic",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Arrhenius and MC-4 Diagnostic\",\"primitives\":[\"P28\",\"P31\",\"P50\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 23,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Derivation from Reservoir Entropy",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Derivation from Reservoir Entropy\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 27,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Closure",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Closure\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 31,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \n(a) Compute Boltzmann factor and Z for a 2- or 3-state system; (b) normalise to get P;\n(c) compare e^{−E/k_BT} at two temperatures; (d) state what k_BT means physically.\nFailures: (a)/(b) → TA-3; (c) → TA-6; (d) → TA-2.\n\n**FA-1:** System with states 0, 0.05 eV, 0.15 eV at T = 300 K. Find Z and P for each state.  \nExpected: k_BT = 0.026 eV. Weights: 1, e^{−1.92}=0.146, e^{−5.77}=0.00311. Z = 1.149.\nP₀ = 0.870, P₁ = 0.127, P₂ = 0.0027. Sum ≈ 1.000 ✓.\n\n**FA-2:** E = 1.0 eV. Compare Boltzmann factor at 300 K and 1000 K.  \nExpected: At 300 K: e^{−38.5} ≈ 2.1×10⁻¹⁷. At 1000 K: e^{−11.6} ≈ 9.0×10⁻⁶.\nRatio = 4.3×10¹¹. Temperature tripling increases probability by ~10¹¹.\n\n**FA-3:** Activation energy E_a = 0.8 eV. Rate at T₁ = 300 K: k₁. Rate at T₂ = 320 K: k₂.\nFind k₂/k₁.  \nExpected: k₂/k₁ = e^{−E_a/k_BT₂} / e^{−E_a/k_BT₁} = e^{E_a(1/T₁ − 1/T₂)/k_B}.\n1/T₁ − 1/T₂ = 1/300 − 1/320 = (320−300)/(300×320) = 20/96000 = 2.08×10⁻⁴ K⁻¹.\nE_a/k_B = 0.8 eV / 8.617×10⁻⁵ eV/K = 9283 K.\nk₂/k₁ = e^{9283 × 2.08×10⁻⁴} = e^{1.93} ≈ 6.9. ~7× rate increase for 20 K rise.\n\n**FA-4:** Explain in 2 sentences why k_BT is called the \"natural energy scale\" of thermal physics.  \nExpected: k_BT is the typical energy available from thermal fluctuations at temperature T. States\nwith energy E ≫ k_BT are exponentially suppressed; states with E ≤ k_BT are thermally accessible;\nk_BT sets the boundary between \"thermally accessible\" and \"frozen out.\"\n\n**Delayed Retrieval (Day +4):** \"Write P(E_i). Compute k_BT at T = 600 K. Two-state system\n(0 and 0.05 eV) — find P₁ at this T. Compare with T = 300 K.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 308,
+        "endLine": 340
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nA cup of coffee: most molecules have moderate energy; a few have high enough energy to evaporate\n(escape the liquid). The fraction that evaporate depends on temperature (hot coffee evaporates\nfaster). The Boltzmann factor quantifies this: the fraction of molecules with enough energy E\nto escape is proportional to e^{−E/(k_BT)}.\n\n**Stage 2 — Representational (R)**  \nTwo-state system: energy levels 0 and ε. Probabilities P₀ = 1/Z, P_ε = e^{−ε/(k_BT)}/Z where\nZ = 1 + e^{−ε/(k_BT)}. At T = 0: P₀ → 1, P_ε → 0 (only ground state). At T → ∞: P₀ = P_ε = 1/2\n(equally likely). Plot P_ε vs. T: sigmoid curve from 0 to 0.5.\n\n**Stage 3 — Abstract (A)**  \nDerivation from the fundamental postulate: the reservoir has many more states available when the\nsystem is in a low-energy state (so the reservoir has more energy). The multiplicity of the\nreservoir Ω_R(E_total − E_system) = e^{S_R/k_B}. For a small energy change: S_R changes by\n−E/T. Combined: Ω_R ∝ e^{−E/(k_BT)}. The most probable microstate of the whole system (system\n+ reservoir) has this weighting. The partition function Z normalises the distribution.\n\n**Stage 4 — Transfer (T)**  \nArrhenius equation: k = A e^{−E_a/(k_BT)} — reaction rate proportional to Boltzmann factor for\nactivation energy E_a. Semiconductor carrier concentration: n ∝ e^{−E_gap/(2k_BT)}. Maxwell-\nBoltzmann distribution (next concept): f(v) ∝ e^{−mv²/(2k_BT)} = e^{−KE/(k_BT)}. Atmospheric\npressure: P(h) ∝ e^{−mgh/(k_BT)} (barometric formula). Boltzmann machine (neural network):\nstate probability ∝ e^{−E/(T)} — same functional form.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 47,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Why Beginners Fail",
+      "content": "1. **Not recognising the energy scale k_BT:** Students treat k_BT as just a formula component.\n   k_BT is the natural unit of thermal energy at temperature T. Room temperature: k_BT ≈ 0.025 eV.\n   If E ≫ k_BT, the Boltzmann factor is negligible. If E ≈ k_BT, the state is substantially\n   populated. Students must internalise this ratio.\n\n2. **Forgetting the partition function:** Students write P(E) = e^{−E/k_BT} without normalisation.\n   This is not a probability (it doesn't sum to 1). P(E_i) = e^{−E_i/k_BT} / Z.\n\n3. **Confusing Boltzmann factor with Boltzmann's entropy formula:** S = k_B ln Ω is about\n   counting microstates of an isolated system. The Boltzmann factor e^{−E/k_BT} is for a system\n   in contact with a thermal reservoir. Two different applications of the same constant k_B.\n\n4. **Expecting a linear T-dependence:** Students expect that doubling T halves the energy\n   requirement. The exponential dependence means doubling T has a much more dramatic effect on\n   the probability ratio. The exponential is the key mathematical feature.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 76,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Here is one equation that governs: how fast your food spoils, how quickly\nyour car engine works, why LEDs emit light, why stars shine, and why electrons conduct in\nsemiconductors. That equation is P ∝ e^{−E/(k_BT)}. The Boltzmann factor.\"\n\n**Key explanatory moves:**\n- \"k_BT at 300 K = 0.026 eV. That is the 'coin' of thermal energy. If an energy level costs\n  much more than one coin, it is rarely visited. If it costs about one coin, it is accessible.\"\n- \"To get a probability, divide by Z. The Boltzmann factor is a weight. Z adds up all the weights.\n  P = weight / total weight.\"\n- \"The exponential is not subtle. For E = 0.5 eV at 300 K vs. 600 K: probability increases by\n  15,000×. Linear thinking fails here completely.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 292,
+        "endLine": 308
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Recovery Notes",
+      "content": "**S0:** Requires phys.stat.probability-basics. Without Ω, the fundamental postulate, and S = k_B\nln Ω, the derivation of the Boltzmann factor is unmotivated.\n\n**S3 (confuses S = k_B ln Ω with Boltzmann factor):** Use the side-by-side table from TA-5.\nPhysical situation → which formula. Isolated system at fixed energy → S = k_B ln Ω. System in\nheat bath at temperature T → P = e^{−E/k_BT}/Z.\n\n**S6 (forgets partition function):** Every time the student writes e^{−E/k_BT}, add \"/Z\" in\nred. Require the student to always compute Z before computing any probability.\n\n**S9 (computes P correctly but cannot state physical meaning of k_BT):** Require the student\nto compute k_BT at room temperature and compare to three specific energies (chemical bond, VdW\ninteraction, photon). Build intuition for the scale before applying the formula.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 340,
+        "endLine": 358
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Memory & Review",
+      "content": "**Spaced retrieval:**\n- Day +1: Write P(E_i). Compute k_BT at 300 K and 1000 K. Two-state: find Z and P₁.\n- Day +5: Three-state system (0, 0.1, 0.3 eV) at 500 K. Complete probability table.\n- Day +12: Arrhenius: E_a = 1.2 eV. Rate at 300 K vs. 350 K. Is the 10°C rule satisfied?\n\n**Interleaving partners:** phys.stat.probability-basics (foundational postulate),\nphys.stat.maxwell-boltzmann (distribution of speeds — Boltzmann factor applied to KE),\nphys.stat.partition-function (full Z formalism).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 358,
+        "endLine": 371
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** phys.stat.maxwell-boltzmann (f(v) ∝ e^{−mv²/2k_BT}); phys.stat.partition-\nfunction (Z framework); phys.stat.bose-einstein / phys.stat.fermi-dirac (quantum corrections)\n\n**Far transfer:** Arrhenius kinetics; semiconductor engineering (carrier concentrations);\natmospheric barometric formula; LED and laser physics; stellar nuclear burning rates; Boltzmann\nmachines in ML; protein folding (energy landscape)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 371,
+        "endLine": 382
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "Curriculum Feedback",
+      "content": "Correct KG positioning. Requires phys.stat.probability-basics (fundamental postulate, Ω counting).\nCorrectly unlocks phys.stat.maxwell-boltzmann and phys.stat.partition-function.\n\n---\n\n## Package Validation Checklist\n\n```\nV-1 through V-20: all PASS. Status: READY / PACKAGE_READY — V-1 through V-20 PASS\n```",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 382,
+        "endLine": 394
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

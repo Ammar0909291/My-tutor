@@ -1,0 +1,380 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.vector-addition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.vector-addition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bae98739c135a01fbfd0ac281c9d3562ae0f3bd4d27cc1cfdecb70a8b4b80910",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.vector-addition.md": "sha256:976ad140cfa7cdbf4584bcee97ab17ea2893e466c67fe9d0827173843db37e11"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.meas.vector-addition",
+    "name": "Vector Addition and Resolution",
+    "difficultyRaw": "developing (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.meas.scalars-vectors"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.vector-addition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.vector-addition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.vector-addition.md": "sha256:976ad140cfa7cdbf4584bcee97ab17ea2893e466c67fe9d0827173843db37e11"
+      },
+      "contentHash": "sha256:18b7972796b0068fef2c9a13a1a42971be7a08429489640a60b7cb35c1fd0604",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-addition.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-addition.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-addition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-addition.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-addition.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-addition\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-addition.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-addition.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-addition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-addition.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-addition.md#TA-4 (addresses MC-SCALAR-SUM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-addition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-addition.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-addition.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-addition\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-addition.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-addition.md#TA-6 (addresses MC-SCALAR-SUM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-addition\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.vector-addition/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Adds two vectors by the **head-to-tail / parallelogram** method and states that the resultant depends on both magnitudes AND the angle between them — not on the magnitudes alone.\n2. **Resolves** a vector into orthogonal components (Vₓ = V cos θ, Vᵧ = V sin θ) and reconstructs the resultant from components (magnitude √(Vₓ²+Vᵧ²), direction tan⁻¹(Vᵧ/Vₓ)).\n3. Reasons about the range of a resultant: for two vectors of magnitudes a and b, the resultant lies between |a−b| (opposed) and a+b (aligned) — so a resultant can be smaller than either vector.\n\nA student who computes 3 + 4 = 7 for two forces regardless of their directions, or who can quote V cos θ but cannot say why the resultant of a 3 N and 4 N force is 5 N at right angles (not 7 N), has **NOT** achieved mastery — the arithmetic without the direction-dependence fails at every 2-D force, velocity, and field problem downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/misconception/MC-SCALAR-SUM",
+      "kind": "misconception",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "The resultant is just the magnitudes added",
+      "content": "### MC-SCALAR-SUM: \"The resultant is just the magnitudes added\"\ntrigger_signal: student adds vector magnitudes arithmetically regardless of direction (3 N + 4 N = 7 N at any angle).\nconflict_evidence [P28]: \"Walk it with me: 3 tiles east, then 4 tiles north. If they simply added to 7, you'd be 7 tiles away in a straight line. Measure the straight-line distance from start to finish — it's 5, not 7. Where did the other 2 go?\"\nbridge_text [P30]: \"Vectors carry direction. Only when they point the SAME way do their sizes add straight (7). At a right angle you close a triangle: √(3²+4²) = 5. The angle between them changes the resultant.\"\nreplacement_text [P31]: \"Add vectors head-to-tail (or by components), not by adding magnitudes. The resultant depends on both sizes and the angle between them.\"\ndiscrimination_pairs [P33]: [\"3 & 4 aligned → 7 (add straight)\", \"3 & 4 opposed → 1 (subtract)\", \"3 & 4 at 90° → 5 (Pythagoras)\"]\ns6_path: skip P28; walk the 3-then-4 path together as a shared observation and go straight to bridge_text (P30).",
+      "localKey": "MC-SCALAR-SUM",
+      "language": "en",
+      "refs": [
+        "MC-SCALAR-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/misconception/MC-RESULTANT-ALWAYS-LARGER",
+      "kind": "misconception",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Combining two vectors always makes a bigger one",
+      "content": "### MC-RESULTANT-ALWAYS-LARGER: \"Combining two vectors always makes a bigger one\"\ntrigger_signal: student assumes the resultant must exceed both inputs; surprised a resultant can be smaller.\nconflict_evidence [P28]: \"Two people push a box with equal force — one from the left, one from the right. Two forces, both real. What is the net push on the box?\"\nbridge_text [P30]: \"Because vectors have direction, they can partly or fully cancel. Two equal opposed vectors give zero; two at a wide angle give a resultant smaller than either. Bigger is only guaranteed when they're aligned.\"\nreplacement_text [P31]: \"The resultant of magnitudes a and b lies between |a−b| and a+b — so it can be smaller than either, equal to their difference, or as large as their sum.\"\ndiscrimination_pairs [P33]: [\"equal, aligned → doubled\", \"equal, opposed → zero\", \"equal, 120° apart → smaller than one\"]\ns6_path: skip P28; use the two-people-pushing image as a gentle shared puzzle, then P30.",
+      "localKey": "MC-RESULTANT-ALWAYS-LARGER",
+      "language": "en",
+      "refs": [
+        "MC-RESULTANT-ALWAYS-LARGER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Two Walks, One Displacement",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two Walks, One Displacement\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Head-to-Tail & the Angle Matters",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Head-to-Tail & the Angle Matters\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P14\",\"P15\",\"P17\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Resolving into Components — Notation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Resolving into Components — Notation\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P10\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Adding by Components + Misconception Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Adding by Components + Misconception Probe\",\"primitives\":[\"P02\",\"P13\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-SCALAR-SUM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SCALAR-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 38,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 46,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-SCALAR-SUM\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-SCALAR-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 53,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"3 N and 4 N at right angles: resultant 7 N or 5 N?\" | CORRECT = 5 N |\n| P74 (classify) | \"Component of V at angle θ ALONG the x-axis: V cos θ or V sin θ?\" | CORRECT = V cos θ |\n| P75 (boundary) | \"Largest and smallest possible resultant of 6 N and 8 N?\" | CORRECT = 14 N and 2 N |\n| P76 (transfer) | \"Swimmer 2 m/s across, current 1.5 m/s down — actual speed?\" | CORRECT = 2.5 m/s (√(2²+1.5²)) |\n| P77 (generate) | \"Two vectors whose resultant is smaller than either — give them.\" | CORRECT = valid (e.g. wide angle) |\n| P78 (explain) | \"How do you add vectors, and why does the angle matter?\" | CORRECT = head-to-tail/components + angle-dependence |\n| P79 (predict) | \"Two 5 N forces at 120°: resultant bigger or smaller than 5 N?\" | CORRECT = smaller (= 5 N exactly, but reasons 'not doubled') |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 175,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No exposure to combining vectors | Cannot combine two arrows in any way | Protocol A (Concrete) |\n| S1 | \"Add the numbers\" schema from scalars | Adds magnitudes; ignores angle entirely | Protocol B (Counterexample-first) |\n| S2-SCALAR-SUM | Believes resultant = sum of magnitudes always | Says 3 N + 4 N = 7 N whatever the angle | Misconception Engine → Protocol C |\n| S3 | Can add collinear/parallel; fails angled | OK for same-line vectors; stuck at an angle | Protocol C (Guided Questioning) |\n| S4 | Prerequisite gap on scalar/vector distinction | Treats vectors as plain numbers | Protocol D → prereq repair |\n| S6 | Anxiety at trig/component notation | Freezes at sin/cos and √ | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you combined two vectors — like two forces or two displacements — into a single overall one before?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A box is pulled with a 3 N force pointing east and a 4 N force pointing north, at the same time. What single force do they add up to? How did you get it?\"\n  \"5 N, north-east — because at right angles you use the triangle/√(3²+4²)\" → S3. Enter Protocol C.\n  \"5 N\" (no reason) → clarify \"How?\" → if right-angle reasoning → S3 | if guessed → S1.\n  \"7 N\" → SIGNAL:MISCONCEPTION:MC-SCALAR-SUM. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with adding vectors — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 = \"7 N\" → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SCALAR-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 39,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-addition/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.vector-addition",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.scalars-vectors`):\n\"What's the difference between speed and velocity — or between distance and displacement?\"\n  Cannot cite that one has direction and the other doesn't → flag PREREQ-GAP-SCALARS-VECTORS.\n  In-session minimum repair: P06 arrow anchor (walk 3 steps east — a displacement has size AND direction) + one P34, then resume. Deep gap → schedule `phys.meas.scalars-vectors` (S4 route, Protocol D).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-addition.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

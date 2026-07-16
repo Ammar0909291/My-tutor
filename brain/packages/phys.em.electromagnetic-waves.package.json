@@ -1,0 +1,431 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.electromagnetic-waves-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.electromagnetic-waves",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:032fcbbb711493ef1afdf790b9f6489c618c238b22b20fe2eb47c44478d80e46",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md": "sha256:487c7f7a38e369784d8c2240dec212032e22b837bd2f81a087de2d5f755ac1ca"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.electromagnetic-waves",
+    "name": "\"Electromagnetic Waves and the EM Spectrum\"",
+    "difficultyRaw": "label: advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.maxwells-equations"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.electromagnetic-waves-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.electromagnetic-waves (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md": "sha256:487c7f7a38e369784d8c2240dec212032e22b837bd2f81a087de2d5f755ac1ca"
+      },
+      "contentHash": "sha256:11ef478d88fc30bd2aa8e80166cd9726f32d2afea8787bb5ccdd3274639e2d51",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.electromagnetic-waves.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electromagnetic-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electromagnetic-waves\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electromagnetic-waves.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electromagnetic-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electromagnetic-waves\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electromagnetic-waves.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electromagnetic-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electromagnetic-waves\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electromagnetic-waves.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electromagnetic-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electromagnetic-waves\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electromagnetic-waves.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electromagnetic-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electromagnetic-waves\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electromagnetic-waves.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electromagnetic-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electromagnetic-waves\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electromagnetic-waves.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electromagnetic-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electromagnetic-waves\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.electromagnetic-waves/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "\"Electromagnetic Waves and the EM Spectrum\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nDrop a pebble in a still pond. Ripples spread outward — but what's waving? The water surface. Now imagine electric and magnetic fields as an invisible \"medium\" that can wave, except they need no physical medium at all. An EM wave is a coupled ripple in E and B fields: a changing E creates a B (Ampere-Maxwell), that changing B creates an E (Faraday), and so on — the ripple sustains itself indefinitely through empty space at c = 3×10⁸ m/s. Visible light, radio signals, microwaves, X-rays — all are the same phenomenon at different frequencies.\n\n### Level 2 — Developing Understanding\n\n**Structure of an EM wave (plane wave propagating along +x axis):**\n- E oscillates along y: E_y = E₀sin(kx − ωt)\n- B oscillates along z: B_z = B₀sin(kx − ωt)\n- E ⊥ B ⊥ direction of propagation (transverse wave)\n- E and B are in phase (both maxima at same time and place)\n- Amplitude relation: **E₀ = cB₀** (or equivalently E₀/B₀ = c)\n\n**Key parameters:**\n- Wave speed in vacuum: c = λf = 1/√(μ₀ε₀) ≈ 3×10⁸ m/s\n- Wave speed in medium: v = c/n, where n = √(ε_r μ_r) (refractive index)\n- Wavenumber: k = 2π/λ\n- Angular frequency: ω = 2πf\n\n**Energy in EM waves:**\n- Energy density: u = ε₀E² = B²/μ₀ (both equal; total u = ε₀E²)\n- Poynting vector (energy flux): **S = (1/μ₀)(E×B)** [W/m²]\n- Intensity (average power per area): **I = ½ε₀cE₀² = cε₀E_rms² = P/A**\n- Radiation pressure:\n  - Absorption: P_rad = I/c\n  - Reflection: P_rad = 2I/c\n\n**The EM spectrum (frequency increasing →):**\n\n| Type | Frequency range | Wavelength range | Source / application |\n|------|----------------|------------------|---------------------|\n| Radio | 3 Hz – 3 GHz | >0.1 m | Communication, MRI |\n| Microwave | 3 GHz – 300 GHz | 1 mm – 0.1 m | Radar, cooking, WiFi |\n| Infrared (IR) | 300 GHz – 400 THz | 740 nm – 1 mm | Heat, remote sensing |\n| Visible | 400 THz – 700 THz | 400 – 740 nm | Human vision |\n| Ultraviolet (UV) | 700 THz – 30 PHz | 10 – 400 nm | Sterilization, sunburn |\n| X-ray | 30 PHz – 30 EHz | 0.01 – 10 nm | Medical imaging, crystallography |\n| Gamma (γ) | >30 EHz | <0.01 nm | Nuclear decay, cancer treatment |\n\nAll travel at c = 3×10⁸ m/s in vacuum, differ only in frequency/wavelength.\n\n### Level 3 — Proficient Synthesis\n\n**Deriving intensity from the Poynting vector:**\n\nS = (E×B)/μ₀ in a plane wave → |S| = EB/μ₀ = E(E/c)/μ₀ = E²/(cμ₀) = ε₀cE²\n\nTime-average (sin² averages to ½): **⟨S⟩ = I = ½ε₀cE₀²**\n\n**Radiation pressure derivation:**\n\nMomentum density of EM wave: g = S/c² = u/c\n\nPressure = force/area = momentum delivered per area per time = u (energy density) × c / c = u\n\nFor absorption (momentum absorbed): P = I/c\nFor reflection (momentum reversed): P = 2I/c\n\n**Polarization:**\n- Linear polarization: E oscillates in one fixed plane (e.g., always along y)\n- Malus's Law (transmitted intensity through polarizer at angle θ): I = I₀cos²θ\n- Natural light is unpolarized → first polarizer reduces intensity to I₀/2\n- Brewster's angle for polarization by reflection: tan(θ_B) = n₂/n₁\n\n**EM waves in matter:**\n- Attenuation: amplitude decreases as E = E₀e^{−αx} (absorption)\n- Dispersion: different frequencies travel at different speeds (n depends on f) → white light splits in glass\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 25,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": ": E₀/B₀ Relation and Intensity",
+      "content": "### WE-1: E₀/B₀ Relation and Intensity\n\n**Problem:** An EM wave traveling in vacuum has electric field amplitude E₀ = 300 V/m.\n(a) Find the magnetic field amplitude B₀.\n(b) Find the intensity of the wave.\n(c) Find the radiation pressure on a surface that completely absorbs the wave.\n\n**Solution:**\n\n**(a) Magnetic amplitude:**\nE₀ = cB₀\nB₀ = E₀/c = 300 / (3×10⁸)\n**B₀ = 1×10⁻⁶ T = 1 μT**\n\n**(b) Intensity:**\nI = ½ε₀cE₀²\n= ½ × (8.85×10⁻¹²) × (3×10⁸) × (300)²\n= ½ × 8.85×10⁻¹² × 3×10⁸ × 9×10⁴\n= ½ × 8.85 × 3 × 9 × 10⁰\n= ½ × 238.95\n**I ≈ 119 W/m²**\n\n**(c) Radiation pressure (absorption):**\nP_rad = I/c = 119 / (3×10⁸)\n**P_rad ≈ 3.97×10⁻⁷ Pa ≈ 4×10⁻⁷ Pa**\n\nNote: This is extremely small — radiation pressure is significant only in high-intensity laser beams or in space (solar sails).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 97,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": ": Speed and Frequency in a Medium",
+      "content": "### WE-2: Speed and Frequency in a Medium\n\n**Problem:** An EM wave with frequency f = 5×10¹⁴ Hz (green light) enters glass with ε_r = 2.25 (μ_r ≈ 1 for glass). Find:\n(a) The wave speed in glass.\n(b) The wavelength in glass.\n(c) The wavelength in vacuum.\n\n**Solution:**\n\n**(a) Speed in glass:**\nn = √(ε_r × μ_r) = √(2.25 × 1) = √2.25 = 1.50\nv = c/n = (3×10⁸) / 1.50\n**v = 2×10⁸ m/s**\n\n**(b) Wavelength in glass:**\nλ_glass = v/f = (2×10⁸) / (5×10¹⁴)\n**λ_glass = 4×10⁻⁷ m = 400 nm**\n\n**(c) Wavelength in vacuum:**\nλ₀ = c/f = (3×10⁸) / (5×10¹⁴)\n**λ₀ = 6×10⁻⁷ m = 600 nm**\n\nNote: Frequency does NOT change as the wave enters a medium — only speed and wavelength change. The photon energy (E = hf) depends on f, not λ, so energy is conserved. λ_glass = λ₀/n = 600/1.5 = 400 nm ✓\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 97,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": ": Radiation Pressure — Solar Sail",
+      "content": "### WE-3: Radiation Pressure — Solar Sail\n\n**Problem:** A solar sail of area 1000 m² is placed in space at Earth's distance from the Sun, where the solar intensity is I = 1360 W/m². The sail is a perfect reflector.\n(a) Find the radiation force on the sail.\n(b) If the spacecraft mass is 500 kg, find the resulting acceleration.\n(c) Compare this to Earth's gravitational field (g = 9.8 m/s²).\n\n**Solution:**\n\n**(a) Radiation pressure (perfect reflection):**\nP_rad = 2I/c = 2 × 1360 / (3×10⁸)\n= 2720 / (3×10⁸)\n= 9.07×10⁻⁶ Pa\n\nForce: F = P_rad × A = 9.07×10⁻⁶ × 1000\n**F ≈ 9.07×10⁻³ N ≈ 9.1 mN**\n\n**(b) Acceleration:**\na = F/m = 9.07×10⁻³ / 500\n**a ≈ 1.81×10⁻⁵ m/s² ≈ 18 μm/s²**\n\n**(c) Comparison to g:**\na/g = 1.81×10⁻⁵ / 9.8 ≈ 1.85×10⁻⁶\n\n**Solar radiation pressure gives acceleration ≈ 1.85 millionths of g.** Despite being tiny, it accumulates over months in frictionless space — solar sails are a genuine proposed propulsion method for deep-space missions. In 2010, Japan's IKAROS spacecraft was the first to demonstrate solar-sail propulsion in interplanetary space.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 97,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "MC-EM-WAVES-REQUIRE-A-MEDIUM",
+      "content": "### MC-1: MC-EM-WAVES-REQUIRE-A-MEDIUM\n\n**trigger_signal:** Student states \"EM waves travel through the aether,\" asks \"what vibrates in an EM wave,\" or claims \"radio waves can't reach satellites because there's no air in space.\"\n\n**conflict_evidence [P28]:** The Michelson-Morley experiment (1887) searched for the luminiferous aether — the medium thought to carry light — by measuring whether light's speed differed along Earth's direction of motion. It found no difference. If light required a medium, the medium's wind would change c measurably. Maxwell's derivation shows why: the wave equation ∇²E = μ₀ε₀∂²E/∂t² contains only field properties (μ₀, ε₀), no medium properties. What \"waves\" in an EM wave is the electric and magnetic field themselves — they are the medium and the wave simultaneously. GPS satellites, deep-space probes, and the Hubble Space Telescope all demonstrate EM wave propagation in near-perfect vacuum daily.\n\n**bridge_text [P30]:** In a mechanical wave (sound, water), the medium stores energy by being displaced. In an EM wave, energy is stored in the E and B fields themselves (u = ε₀E²). There is no material that needs to be present to store or transmit this energy — the fields carry it. The fields can exist in vacuum; vacuum is not empty of fields, just empty of matter.\n\n**replacement_text [P31]:** EM waves are self-sustaining field oscillations — no material medium required. A changing E field generates B (Ampere-Maxwell), that changing B generates E (Faraday), and the cycle propagates through vacuum at c = 3×10⁸ m/s. The \"medium\" is the electromagnetic field itself, which permeates all space, including absolute vacuum.\n\n**discrimination_pairs [P33]:**\n- \"Light cannot travel through the vacuum of interplanetary space\" → FALSE: all astronomical observations depend on light propagating 10⁸ to 10²⁶ meters of vacuum.\n- \"Sound and light both travel by displacing something\" → FALSE: sound displaces matter (requires medium); light oscillates self-sustaining field values requiring no material substrate.\n\n**s6_path:** If student scores < 0.60 on \"what is the medium for EM waves\" probe → show Michelson-Morley result and Maxwell equation vacuum derivation before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "MC-E-AND-B-FIELDS-OUT-OF-PHASE",
+      "content": "### MC-2: MC-E-AND-B-FIELDS-OUT-OF-PHASE\n\n**trigger_signal:** Student draws E at maximum when B is zero (or vice versa), states \"E and B alternate so when one is up the other is down,\" or confuses phase relationship with polarization direction.\n\n**conflict_evidence [P28]:** The plane-wave solutions of Maxwell's equations in vacuum are E_y = E₀sin(kx−ωt) and B_z = B₀sin(kx−ωt). Both contain the same sin(kx−ωt) factor — they are in phase. When E is at its maximum, B is at its maximum simultaneously, at the same location. If they were 90° out of phase (like the E-field and current in a capacitor), the Poynting vector S = E×B/μ₀ would time-average to zero — the wave would carry no net energy flow, which contradicts the fact that sunlight warms your skin.\n\n**bridge_text [P30]:** The confusion often comes from comparing EM waves to AC circuits: in a capacitor circuit, E and I are 90° out of phase. But in an EM wave, E and B play the role of two voltages in a resonant LC circuit at natural frequency — at resonance, energy sloshes between them with zero phase lag. The amplitude relationship E₀ = cB₀ holds at every point and instant.\n\n**replacement_text [P31]:** In a plane EM wave, E and B are always in phase (zero phase difference). Both reach their maxima and cross zero at the same time and place. They oscillate in perpendicular planes — E along y, B along z, propagation along x — but their peaks and zeros coincide. E₀ = cB₀ is not just an average relation; it holds instantaneously.\n\n**discrimination_pairs [P33]:**\n- \"When the electric field in an EM wave is maximum, the magnetic field is zero\" → FALSE: both are maximum simultaneously; E_y = E₀sin(kx−ωt) and B_z = B₀sin(kx−ωt) have the same phase.\n- \"E and B are perpendicular in an EM wave, so they must be out of phase\" → FALSE: perpendicular refers to their spatial directions (planes of oscillation), not their phase; same phase, different planes.\n\n**s6_path:** If student fails phase-relationship probe → assign E-B phase animation (synchronized oscillation display) + numerical check I = ½ε₀cE₀² > 0 proof.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 239,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Pictorial Anchor: transverse wave diagram",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Pictorial Anchor: transverse wave diagram\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 243,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Conflict Evidence: MC-1",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Evidence: MC-1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 246,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Replacement: MC-2",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Replacement: MC-2\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 249,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Narrow: EM spectrum and medium effects",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Narrow: EM spectrum and medium effects\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 252,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Diagnostic: radiation pressure",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Diagnostic: radiation pressure\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 255,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Mastery Probe + P68 + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Probe + P68 + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P41\",\"P52\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 258,
+        "endLine": 340
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** An EM wave in vacuum has wavelength λ = 3 m. Find its frequency and identify what region of the EM spectrum it belongs to. Explain why it can travel through the vacuum of space without a medium.\n\n**P-2 (Developing — identifies S6):** An EM wave has magnetic field amplitude B₀ = 2×10⁻⁷ T.\n(a) Find E₀.\n(b) Find the intensity.\n(c) If this wave strikes a perfectly reflecting mirror of area 0.5 m², find the radiation force.\n\n**P-3 (Proficient — identifies S9):** A polarized light beam of intensity 80 W/m² passes through a polarizing filter whose transmission axis makes 30° with the beam's polarization direction. (a) Find the transmitted intensity. (b) If this transmitted beam then passes through a second filter at 60° to the first, find the final intensity. (c) Why does the intensity not drop to zero even at large angles?\n\n**P-4 (Mastery gate — confirms S9):** Explain, in terms of Maxwell's equations, why:\n(a) the E and B fields of an EM wave must be in phase,\n(b) the amplitude ratio must be E₀/B₀ = c,\n(c) EM waves can propagate in vacuum.\nThen calculate: a radio station broadcasts at 100 MHz with radiated power P = 50 kW. At distance r = 10 km from the antenna (assume isotropic radiation), find E₀, B₀, and radiation pressure on an absorbing antenna of area 1 cm². Required: 4/4 at ≥0.80 accuracy to pass mastery gate.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 266,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "phys.em.electromagnetic-waves/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.electromagnetic-waves",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: P (perceptual bridge; difficulty 5, bloom=understand).\n\n**TA-1 [P01 — Session Open]**\n\"A radio signal left the Voyager 1 spacecraft 23 billion km away and arrived at NASA's antenna 21 hours later. Nothing but vacuum in between. What is traveling? What carries the energy? Today we examine the physical structure of electromagnetic waves — the coupled field oscillations that Maxwell's equations demand. Start with: in an EM wave, what exactly is oscillating?\"\n[Diagnose S0 vs. S3 by response to \"what oscillates\"]\n\n**TA-2 [P06 — Pictorial Anchor: transverse wave diagram]**\n\"[Display: 3D diagram of E along y, B along z, propagation along x. Both sinusoidal with identical phase.] Notice three things: E ⊥ B ⊥ propagation direction. Both fields oscillate in phase — same peaks, same zeros. And the amplitude ratio is fixed: E₀/B₀ = c. These are not arbitrary conventions — they come directly from Maxwell's equations. Let's establish the numbers concretely.\" [→ WE-1]\n\n**TA-3 [P28 — Conflict Evidence: MC-1]**\n\"Let's address the medium question directly. [Display: Michelson-Morley experimental result — flat null.] In 1887 Michelson and Morley searched for the medium (aether) that light supposedly needs. They found none. Maxwell's equation derivation tells us why: the wave equation contains only μ₀ and ε₀ — field properties of vacuum, not properties of any material. GPS, radio telescopes, and solar panels all depend on EM waves crossing the vacuum of space. No medium is required or present.\"\n\n**TA-4 [P31 — Replacement: MC-2]**\n\"Now the phase question. [Display: synchronized animation of E and B sinusoids with same phase.] Many students expect E and B to alternate like E and I in an RC circuit. But this is an EM wave at vacuum, not a circuit. The plane-wave solutions: E_y = E₀sin(kx−ωt) and B_z = B₀sin(kx−ωt) — identical argument inside the sine. When E is maximum, B is maximum. If they were 90° out of phase, the Poynting vector S = E×B/μ₀ would time-average to zero — the wave would carry no energy. But sunlight carries 1360 W/m². [→ MC-2 discrimination pairs]\"\n\n**TA-5 [P52 — Narrow: EM spectrum and medium effects]**\n\"The EM spectrum is one wave phenomenon at different frequencies. [Display: spectrum table from radio to gamma.] All travel at c in vacuum. In matter: v = c/n, wavelength shortens, frequency unchanged. Calculate: green light (600 nm in vacuum) enters glass (n=1.5). What is λ in glass?\" [→ WE-2; confirms n and medium effects at S6]\n\n**TA-6 [P41 — Diagnostic: radiation pressure]**\n\"Radiation pressure: does light exert a force? Quick calculation setup: a 1 kW laser beam (I = 10⁶ W/m² for a tight beam) aimed at a black target. P_rad = I/c. Find F if the beam area is 1 mm². [A = 10⁻⁶ m². F = I×A/c = 10⁶×10⁻⁶/(3×10⁸) = 10⁰/(3×10⁸) ≈ 3.3 nN.] Tiny — but real. What happens for a mirror (perfect reflector)?\" [→ WE-3 for engineering-scale example]\n\n**TA-7 [P36 — Mastery Probe + P68 + P85 + P91]**\n\"Final probe: (1) An EM wave has E₀ = 120 V/m. Find B₀, intensity, and radiation pressure on an absorbing surface. (2) Light enters a medium with n = 1.33 (water). Find the speed and wavelength if f = 6×10¹⁴ Hz. (3) In what order do radio waves, X-rays, and visible light appear in the EM spectrum from lowest to highest frequency?\n\nClosing thought: Every technology that communicates wirelessly — your phone, GPS, WiFi, satellite TV — operates because Maxwell's equations predicted that E and B could sustain each other through empty space. That prediction was made in 1865, seventeen years before Hertz demonstrated radio waves experimentally.\n\nSpaced retrieval: +1 day (E₀ = cB₀ derivation origin), +4 days (intensity formula and spectrum order), +2 weeks (radiation pressure for absorber vs. reflector).\"\n\n[P91 gate: threshold 0.80. If not reached → review E-B phase diagram and spectrum ordering exercise.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electromagnetic-waves.md",
+        "startLine": 232,
+        "endLine": 266
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

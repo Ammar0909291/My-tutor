@@ -1,0 +1,521 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.wkb-approximation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.wkb-approximation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:70df21bfe29be8dec8233b1e6eca494e7e54c6dc55aab9b1f971162f9a692f22",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.wkb-approximation.md": "sha256:bb54b0f4d2252ca62e8519ce1cdd4a518186e52d36c3b5cd4028cba04967ebac"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.wkb-approximation",
+    "name": "WKB Approximation",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.qm.quantum-tunneling",
+      "phys.qm.variational-method"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.wkb-approximation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.wkb-approximation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.wkb-approximation.md": "sha256:bb54b0f4d2252ca62e8519ce1cdd4a518186e52d36c3b5cd4028cba04967ebac"
+      },
+      "contentHash": "sha256:538e9735ce55ad8e13abb884b017e40e59b060ec0029088ce4f6b7952497b330",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.wkb-approximation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wkb-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wkb-approximation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wkb-approximation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wkb-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wkb-approximation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wkb-approximation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wkb-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wkb-approximation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wkb-approximation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md#TA-4 (addresses MC-WKB-TUNNELING-FORMULA)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wkb-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wkb-approximation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wkb-approximation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wkb-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wkb-approximation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wkb-approximation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wkb-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wkb-approximation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wkb-approximation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wkb-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wkb-approximation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.wkb-approximation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "WKB Approximation — Core Idea (one sentence)",
+      "content": "The WKB (Wentzel-Kramers-Brillouin) approximation constructs approximate wavefunctions from the local de Broglie wavelength when the potential varies slowly compared to that wavelength, bridging quantum and classical mechanics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 20,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "WKB in a classically allowed region",
+      "content": "### Example 1 — WKB in a classically allowed region\nSchrödinger: −(ℏ²/2m)ψ'' + V(x)ψ = Eψ → ψ'' = −[p(x)/ℏ]²ψ where p(x) = √(2m(E−V(x))).\nWKB ansatz: ψ(x) = A(x) exp(iS(x)/ℏ); expand S = S₀ + ℏS₁ + ...\nLeading order: (dS₀/dx)² = p²(x) → S₀ = ±∫p(x)dx.\nWKB wavefunction: ψ_WKB(x) = C/√(p(x)) · exp(±i∫p(x)dx/ℏ).\nInterpretation: amplitude ∝ 1/√p — slower classical motion (smaller p) → larger amplitude (more time spent there).",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Quantization condition (Bohr-Sommerfeld)",
+      "content": "### Example 2 — Quantization condition (Bohr-Sommerfeld)\nFor a bound state with two turning points x₁, x₂:\n∮p(x)dx = (n + 1/2)·2πℏ = (2n+1)πℏ, n=0,1,2,...\nApplication — harmonic oscillator: p(x) = √(2m(E − mω²x²/2)), turning points at x = ±√(2E/mω²).\n∮p dx = πE/ω = (n+1/2)·πℏ → E = (n+1/2)ℏω. Exact result! (WKB exact for quadratic potentials.)",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Alpha decay tunneling rate (Gamow factor)",
+      "content": "### Example 3 — Alpha decay tunneling rate (Gamow factor)\nCoulomb barrier: V(r) = Zze²/(4πε₀r) for r > R_nuclear.\nTurning point r₂: E = V(r₂) → r₂ = Zze²/(4πε₀E).\nWKB tunneling factor: G = exp(−2∫_{R}^{r₂} |p(r)|dr/ℏ) where |p|=√(2m(V−E)).\nGamow factor G depends sensitively on E — explains enormous variation in alpha decay half-lives (10⁻⁷ s to 10¹⁰ yr) from small energy differences.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/misconception/MC-WKB-EXACT-CLASSICALLY",
+      "kind": "misconception",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "\"WKB gives the exact answer in the classical limit ℏ→0.\"",
+      "content": "| MC-WKB-EXACT-CLASSICALLY | \"WKB gives the exact answer in the classical limit ℏ→0.\" | \"Since ℏ is small, WKB is exact for any problem.\" | WKB fails at classical turning points (where p(x)=0 and λ→∞); connection formulas must patch the solution across turning points. The approximation requires |dλ/dx|≪1, which breaks down at turning points regardless of ℏ. |",
+      "localKey": "MC-WKB-EXACT-CLASSICALLY",
+      "language": "en",
+      "refs": [
+        "MC-WKB-EXACT-CLASSICALLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/misconception/MC-WKB-TUNNELING-FORMULA",
+      "kind": "misconception",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "\"The tunneling probability is e^(−κa) where a is the barrier width.\"",
+      "content": "| MC-WKB-TUNNELING-FORMULA | \"The tunneling probability is e^(−κa) where a is the barrier width.\" | \"Just use the simple exponential decay.\" | This is only the constant-barrier result. For a spatially varying barrier V(x), the WKB tunneling factor is T ∝ exp(−2∫|p(x)|dx/ℏ) where the integral runs across the classically forbidden region; using barrier width × single κ misses the shape of V(x). |",
+      "localKey": "MC-WKB-TUNNELING-FORMULA",
+      "language": "en",
+      "refs": [
+        "MC-WKB-TUNNELING-FORMULA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Concrete hook",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete hook\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-WKB-TUNNELING-FORMULA\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-WKB-TUNNELING-FORMULA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): Write the WKB wavefunction in a classically allowed region. What is the validity condition?  \n*Answer*: ψ = C/√p(x) · exp(±i∫p(x)dx/ℏ); valid when |dλ/dx| = |d(h/p)/dx| ≪ 1 (potential varies slowly on the scale of λ).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For a particle in an infinite square well (V=0, 0<x<L), apply Bohr-Sommerfeld to find the allowed energies. Compare to exact result.  \n*Answer*: p = √(2mE) = const; ∮p dx = 2pL = 2nπℏ → E = n²π²ℏ²/(2mL²). WKB gives n+0 not n+1/2 here because the well has hard walls (δ=π/2 at each wall, total phase = π already counted). Exact result: same formula. WKB exact for square wells.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "MP-3",
+      "content": "**MP-3** (apply): A particle encounters a parabolic barrier V(x)=V₀−mω²x²/2. Write the Gamow tunneling factor if the particle has energy E < V₀.  \n*Answer*: Turning points: V₀−mω²x²/2 = E → x = ±√(2(V₀−E)/mω²). G = exp(−2∫|p|dx/ℏ) where |p|=√(2m(V₀−E−mω²x²/2)); evaluate integral (Gaussian form) → G = exp(−π(V₀−E)/ℏω).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): WKB predicts that the amplitude of ψ is larger where kinetic energy is small. Explain this physically.  \n*Answer*: A classical particle slows down near turning points; it spends more time there → quantum probability amplitude is larger. 1/√p reflects the classical velocity distribution — higher probability where velocity is lower.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): At a classical turning point, WKB diverges (1/√p → ∞ as p→0). How is this handled in practice?  \n*Answer*: Connection formulas derived from the Airy equation patch the WKB solutions on both sides of the turning point; the Airy function Ai(z) is finite everywhere and connects the oscillatory solution to the evanescent one without divergence. The divergence is a breakdown of the WKB approximation, not of the physics.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student uses −κa formula for non-constant barrier | Direct to MC-WKB-TUNNELING-FORMULA; draw V(x) vs barrier; show ∫|p|dx collapses to |p|·a only for constant V |\n| Student unsure which region is classically allowed | Check sign of E−V(x): positive → allowed (oscillatory p real), negative → forbidden (evanescent p imaginary) |\n| Student frustrated by Airy functions | \"We won't compute Airy functions — connection formulas give us the matching conditions. The key result: oscillatory solution on one side, decaying on the other, with specific phase.\" |\n| Student asks about accuracy of WKB for hydrogen atom | Good test: WKB gives exact energies for the 1D radial problem (r-variable) due to the 1/√p amplitude factor matching the exact solution's oscillation count |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-WKB-TUNNELING-FORMULA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 99,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What is quantum tunneling? Write T ~ e^(-2κa) for constant barrier.\"\nCORE-1 (15 min): TA-1 + TA-2 (hook + local momentum notation + validity condition)\nCORE-2 (20 min): TA-3 + TA-4 (Bohr-Sommerfeld derivation + MC tunneling diagnostic)\nCORE-3 (20 min): TA-5 (harmonic oscillator Bohr-Sommerfeld — exact E_n recovered)\nDRILL  (10 min): TA-6 (three-step WKB procedure on V(x) sketch problems)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"The WKB approximation connects ψ to the HJ principal function S via ψ ∝ e^(iS/ℏ) — the Bohr-Sommerfeld condition is the quantization of classical action.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.qm.wkb-approximation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.wkb-approximation",
+      "title": "Known Sticking Points",
+      "content": "1. **Turning point divergence**: Students alarmed by 1/√p → ∞; clarify it's an approximation breakdown, not a physical divergence, patched by Airy functions.\n2. **Phase of 1/2 in Bohr-Sommerfeld**: The (n+1/2) vs n factor depends on boundary condition type; hard wall contributes π/2, soft turning point contributes π/4 each (Maslov index).\n3. **Sign of exponent in tunneling**: Students confuse ±; classically forbidden region: |p|=√(2m(V−E)) is real, exponent is −2∫|p|dx/ℏ (decay); always negative.\n4. **Validity condition**: Students state \"ℏ small\" instead of |dλ/dx|≪1; correct by showing the condition is geometric, about potential variation rate.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wkb-approximation.md",
+        "startLine": 90,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

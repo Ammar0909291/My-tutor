@@ -1,0 +1,473 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.astro.dark-matter-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.astro.dark-matter",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dc50bf3d32d0f53d81bb11f29c207472632d15fbfed626e4af1d51a242fec6e4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.astro.dark-matter.md": "sha256:ba2ef2749892d5577939e97eb863aeed8cebcc89c658c08a0864c6ab50301a26"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.astro.dark-matter",
+    "name": "Dark Matter and Dark Energy",
+    "difficultyRaw": "Advanced",
+    "bloom": "Analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.astro.cosmology"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.astro.dark-matter-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.astro.dark-matter (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.astro.dark-matter.md": "sha256:ba2ef2749892d5577939e97eb863aeed8cebcc89c658c08a0864c6ab50301a26"
+      },
+      "contentHash": "sha256:9bf81cd3189e74c9125d3f425467fdaf6955a1292ff395dde7b4cbd06c340f62",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.astro.dark-matter.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.dark-matter.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.dark-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.dark-matter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.dark-matter.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.dark-matter.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.dark-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.dark-matter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.dark-matter.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.dark-matter.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.dark-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.dark-matter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.dark-matter.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.dark-matter.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.dark-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.dark-matter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.dark-matter.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.dark-matter.md#TA-5 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.dark-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.dark-matter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.dark-matter.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.dark-matter.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.dark-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.dark-matter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.astro.dark-matter/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Dark Matter and Dark Energy — core explanation",
+      "content": "**One-sentence definition:**  \nDark matter is an invisible, non-luminous form of matter inferred from gravitational effects, and dark energy is the unknown form driving the accelerating expansion of the universe; together they constitute ≈ 95% of the total energy content of the cosmos.\n\n**Why it matters:**  \nThe standard model of cosmology (ΛCDM) works precisely only by invoking these two unknown components. Every rotation curve of a spiral galaxy, every galaxy cluster lensing map, and every measurement of cosmic acceleration points to physics beyond the Standard Model of particles. Understanding what dark matter and dark energy *are* is arguably the deepest open problem in modern physics.\n\n**Core quantities and relations:**\n\n| Symbol / Relation | Meaning |\n|---|---|\n| Ω_m ≈ 0.315 | total matter density fraction (baryonic + dark) |\n| Ω_b ≈ 0.049 | baryonic (ordinary) matter fraction |\n| Ω_DM ≈ 0.266 | dark matter density fraction |\n| Ω_Λ ≈ 0.685 | dark energy (cosmological constant) fraction |\n| Ω_total = Ω_m + Ω_Λ ≈ 1 | flat universe (from CMB) |\n| v_rot = const | flat galaxy rotation curve |\n| v²/r = GM(r)/r² | Newtonian orbital velocity formula |\n| M(r) ∝ r (for flat curve) | implies ρ ∝ 1/r² halo profile |\n| Θ = 4GM/c²b | gravitational lensing deflection angle |\n| ρ_Λ = Λc²/8πG | dark energy density from cosmological constant |\n| w = p/(ρc²) = −1 | equation of state for Λ (cosmological constant) |\n| a(t) ∝ e^(H_Λ t) | de Sitter exponential expansion (Λ dominated) |\n\n**The 95% breakdown:**  \n- ≈ 5% ordinary (baryonic) matter — atoms, stars, gas, us  \n- ≈ 27% dark matter — gravitates, does not emit/absorb light  \n- ≈ 68% dark energy — anti-gravitates, drives acceleration  \n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 30,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Dark matter is just ordinary matter we haven't detected yet (dark gas, dim stars, black holes",
+      "content": "### MC-1: \"Dark matter is just ordinary matter we haven't detected yet (dark gas, dim stars, black holes)\"\n\n**Probe question:** \"Could the missing mass in galaxy clusters just be very faint ordinary matter — cold gas, dead stars, primordial black holes — that we haven't been able to image?\"\n\n**Characteristic phrase:** \"Maybe it's just gas that's too cold to glow, or black holes too small to detect.\"\n\n**Trigger:** Students correctly know that most of the universe is not stars, and that gas clouds and stellar remnants exist. They extend this to: dark matter = hard-to-detect ordinary matter.\n\n**Conflict evidence (P28):** Big Bang Nucleosynthesis pins baryonic matter at Ω_b ≈ 0.049. This comes from the observed ratios of H/D/He-3/He-4/Li-7 — ratios that are exquisitely sensitive to the baryon-to-photon ratio η. If dark matter were baryonic, η would have to be much larger, predicting far less deuterium and much more He-4 than observed. The CMB independently measures Ω_b = 0.049 ± 0.001. All baryons are accounted for; dark matter must be non-baryonic.\n\n**Bridge (P30):** \"BBN is a baryon thermometer. The amounts of deuterium and helium produced 3 minutes after the Big Bang depend precisely on how many protons and neutrons per photon existed. The observed ratios lock in Ω_b ≈ 5%. There is no room for extra baryons hiding in dark halos — they would have already changed the light element abundances.\"\n\n**Replacement concept (P31):** Dark matter is a non-baryonic particle species that does not interact electromagnetically and was not synthesized in BBN in significant amounts. Its nature is unknown, but it is not made of protons or neutrons.\n\n**Discrimination pairs (P33):**\n- Ordinary dark matter (MACHOs) → constrained by microlensing, BBN, CMB; cannot account for Ω_DM ≈ 0.27\n- Non-baryonic dark matter (WIMPs, axions) → not constrained by BBN; fits all observations\n\n**S6 repair path:** Walk through the BBN calculation: n_b/n_γ = η determines D/H ratio. Show the observational value (D/H ≈ 2.5 × 10⁻⁵) and the BBN curve — it pins η tightly. Then show Ω_b = η × (n_γ/n_b) × m_p/ρ_crit → Ω_b ≈ 0.049. No room for extra baryons.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 3,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Dark matter and dark energy are the same thing — just unknown stuff in the universe",
+      "content": "### MC-2: \"Dark matter and dark energy are the same thing — just unknown stuff in the universe\"\n\n**Probe question:** \"You're studying ΛCDM. Someone says 'the universe is 95% dark stuff.' What does this dark stuff do?\"\n\n**Characteristic phrase:** \"Both are just things we don't understand — they're kind of the same mystery.\"\n\n**Trigger:** Both are \"dark,\" both are unknown, both sound like exotic additions to physics. Students lump them.\n\n**Conflict evidence (P28):** Dark matter *clusters*: it forms halos that grow over time, seeding galaxy and structure formation. Dark energy is smooth and homogeneous on all scales — it does not cluster. Dark matter's gravitational effect *decelerates* expansion; dark energy's negative-pressure effect *accelerates* expansion. The Bullet Cluster shows dark matter collects where the cluster mass is; dark energy has no spatial structure to observe directly.\n\n**Bridge (P30):** \"Dark matter is like invisible bricks — it has mass, it gravitates, it clumps, and it formed the scaffolding on which galaxies and clusters grew. Dark energy is like a uniform background pressure — it doesn't cluster, doesn't form halos, and acts against gravity on the largest scales, speeding up the expansion of space itself.\"\n\n**Replacement concept (P31):** Dark matter and dark energy are distinct: dark matter is a particle (or field) with positive energy density and negligible pressure (w ≈ 0); dark energy has equation of state w ≈ −1 (negative pressure equals energy density), causing cosmic acceleration.\n\n**Discrimination pairs (P33):**\n- Dark matter: w ≈ 0, clusters, needed for structure formation, Bullet Cluster evidence\n- Dark energy: w ≈ −1, smooth, needed for cosmic acceleration, Type Ia SN + CMB evidence\n\n**S6 repair path:** Use the Friedmann equation to show both contributions. Sketch the scale factor a(t): matter-dominated deceleration vs. Λ-dominated acceleration. Then show the pie chart and explicitly name the different observational probes for each component.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 25,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "The flat rotation curve can be explained by Modified Newtonian Dynamics, so dark matter might not exist",
+      "content": "### MC-3: \"The flat rotation curve can be explained by Modified Newtonian Dynamics, so dark matter might not exist\"\n\n**Probe question:** \"MOND modifies gravity at low accelerations and fits galaxy rotation curves perfectly. Does this mean we don't need dark matter?\"\n\n**Characteristic phrase:** \"MOND works for rotation curves — why add invisible particles when you can just tweak gravity?\"\n\n**Trigger:** MOND was designed to fit rotation curves and does so for many spiral galaxies with one free parameter (a₀ ≈ 1.2 × 10⁻¹⁰ m/s²). Students see this as Occam's razor — simpler modification vs. new particle.\n\n**Conflict evidence (P28):** Three fatal problems for MOND: (1) The Bullet Cluster: the mass map (from lensing) is offset from the gas (X-ray) by ~200 kpc. MOND predicts the mass follows the baryons; it cannot produce this offset without dark matter. (2) CMB: the third acoustic peak height relative to the second requires non-baryonic matter to provide the extra gravity that boosts compression in acoustic oscillations — MOND has no covariant extension that reproduces the CMB power spectrum. (3) Large-scale structure: the growth of filaments, clusters, and voids from tiny CMB fluctuations requires the extra gravitational pull of collisionless dark matter seeding structure before baryon-photon decoupling. MOND cannot do this without ad hoc additions.\n\n**Bridge (P30):** \"MOND is a phenomenological formula for individual galaxies. It's like having a formula that fits the shape of every planet's orbit in the solar system but cannot predict why the Earth has a moon. Dark matter + GR is not just about rotation curves — it explains the early universe, the CMB, and the Bullet Cluster in a single framework. MOND has no such extension.\"\n\n**Replacement concept (P31):** Dark matter is the hypothesis that survives all observational tests simultaneously: rotation curves, lensing, CMB, large-scale structure, and Bullet-Cluster-type mergers. MOND was never more than a rotation-curve fitting formula and is observationally falsified by the Bullet Cluster.\n\n**Discrimination pairs (P33):**\n- MOND: fits spiral galaxy rotation curves; fails for Bullet Cluster, CMB, large-scale structure\n- Dark matter + GR: fits rotation curves, Bullet Cluster, CMB, large-scale structure simultaneously\n\n**S6 repair path:** Show the Bullet Cluster image. Ask: \"Where is the mass according to lensing? Where is the gas?\" Then: \"What does MOND predict for the mass center? Does it match?\" Let the student see the offset.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 47,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "The cosmological constant Λ is a fudge factor Einstein added and later removed — it's not a real physical concept",
+      "content": "### MC-4: \"The cosmological constant Λ is a fudge factor Einstein added and later removed — it's not a real physical concept\"\n\n**Probe question:** \"Einstein called Λ his biggest blunder and removed it. Why is Λ back in the equations?\"\n\n**Characteristic phrase:** \"Λ is just a fudge factor — we're forcing the equations to fit the data.\"\n\n**Trigger:** Students know the historical story: Einstein introduced Λ for a static universe, then removed it after Hubble's discovery. They interpret its reintroduction as dishonest.\n\n**Conflict evidence (P28):** In 1998, two independent teams (Perlmutter et al., Riess et al.) measured Type Ia supernovae as standard candles at high redshift. They found distant supernovae are ≈ 25% fainter than expected for a decelerating universe — the universe's expansion is *accelerating*. This is a direct measurement, not a theory choice. A positive Λ (or equivalent dark energy with w ≈ −1) is the simplest explanation. It also independently fixes the age of the universe at ≈ 13.8 Gyr (consistent with the oldest stars), which a matter-only model cannot.\n\n**Bridge (P30):** \"Einstein removed Λ because he thought it was unjustified. But Nature put it back. The supernova data from 1998 required an accelerating expansion — and Λ is the simplest term in the field equations that produces acceleration. It's not a fudge; it's a measurement that says the vacuum has nonzero energy density.\"\n\n**Replacement concept (P31):** Λ (or dark energy with w ≈ −1) is the empirically required term that explains cosmic acceleration, measured independently by Type Ia supernovae, CMB peak positions, and baryon acoustic oscillations. It represents energy stored in the vacuum (though explaining *why* Λ has its observed value is the cosmological constant problem — unsolved).\n\n**Discrimination pairs (P33):**\n- Historical Λ (Einstein): introduced without observational motivation for a static universe\n- Modern Λ (ΛCDM): required by three independent observational probes of cosmic acceleration\n\n**S6 repair path:** Show the supernova Hubble diagram — magnitude vs. redshift — with the two cases overlaid: deceleration and acceleration. Let the student see that high-z supernovae fall below the deceleration curve. Then ask: what term in the Friedmann equation produces positive acceleration (ä > 0)?\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 69,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Activate prior knowledge",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Activate prior knowledge\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 7,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Rotation curve demonstration",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Rotation curve demonstration\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 8,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Misconception probe",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Misconception probe\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 9,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Bullet Cluster analysis",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Bullet Cluster analysis\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 10,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Dark energy vs. dark matter contrast",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Dark energy vs. dark matter contrast\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 11,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Mastery consolidation",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery consolidation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 12,
+        "endLine": 12
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student can (1) explain the flat rotation curve argument and derive M(r) ∝ r from v = constant; (2) state at least two independent observational probes of dark matter and two of dark energy; (3) distinguish dark matter from dark energy using w values and clustering behavior; (4) explain why MOND is insufficient (Bullet Cluster); (5) explain why dark matter must be non-baryonic (BBN + CMB baryon fraction).\n\n**FA-1 — Rotation curve calculation:**  \n*Prompt:* \"A galaxy's rotation curve is flat at v = 220 km/s out to r = 40 kpc. What is the mass enclosed within 40 kpc? Express in solar masses (M_sun = 2 × 10³⁰ kg; 1 pc = 3.086 × 10¹⁶ m).\"  \n*Expected answer:* M = v²r/G = (2.2×10⁵)² × (40×3.086×10¹⁹) / (6.674×10⁻¹¹) ≈ 4.5×10⁴¹ kg ≈ 2.2×10¹¹ M_sun  \n*Threshold:* Correct setup and order of magnitude (within factor 2).\n\n**FA-2 — Evidence classification:**  \n*Prompt:* \"Classify each piece of evidence as primarily supporting dark matter (DM), dark energy (DE), or both: (a) flat galaxy rotation curves, (b) Type Ia supernova Hubble diagram, (c) CMB acoustic peak heights, (d) Bullet Cluster lensing vs. X-ray offset, (e) Baryon Acoustic Oscillations, (f) BBN light element abundances.\"  \n*Expected answers:* (a) DM, (b) DE, (c) Both (peak heights→DM, geometry→DE), (d) DM, (e) Both, (f) DM (constrains Ω_b, leaving room for non-baryonic DM)  \n*Threshold:* 5/6 correct with explanation.\n\n**FA-3 — MOND critique:**  \n*Prompt:* \"MOND explains galaxy rotation curves without dark matter. Name two observations that MOND cannot explain but dark matter + GR can.\"  \n*Expected answer:* Any two from: Bullet Cluster mass-gas offset; CMB third peak amplitude requiring non-baryonic matter; large-scale structure growth from CMB-epoch fluctuations; cluster X-ray gas fraction (baryonic fraction in clusters matches Ω_b/Ω_m ≈ 0.16 when accounting for dark matter halos).  \n*Threshold:* Two distinct, correct examples with brief justification.\n\n**FA-4 — Dark energy equation of state:**  \n*Prompt:* \"A substance has equation of state w = p/(ρc²) = −1. (a) What is its pressure in terms of energy density? (b) Show using ä/a = −(4πG/3)(ρ + 3p/c²) that this substance causes cosmic acceleration. (c) What is this substance called?\"  \n*Expected answer:* (a) p = −ρc²; (b) ρ + 3p/c² = ρ − 3ρ = −2ρ < 0 → ä > 0 ✓; (c) cosmological constant / dark energy.  \n*Threshold:* All three parts correct.\n\n**Confidence calibration:**  \nAfter FA-1 and FA-3, ask: \"How confident are you in this answer (0–100%)?\" Flag overconfidence (>80% but incorrect) for S3 recovery; flag underconfidence (<40% but correct) with explicit reassurance and discussion of the reasoning.\n\n**Delayed retrieval (spaced):**  \nAt next session: \"Without looking at notes, state the evidence that dark matter must be non-baryonic. What does BBN measure and what does it rule out?\" Tests durable encoding of the non-baryonic constraint.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 359,
+        "endLine": 391
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Stage C — Concrete (tangible anchor)\n\n**Galaxy rotation curve demonstration:**  \nShow a record player: if it were a solar system, the edge spins slower than the center (Keplerian v ∝ 1/√r). Now show a real spiral galaxy's rotation curve measured via 21 cm radio line of neutral hydrogen — the curve is flat out to 50–100 kpc, far beyond visible stars. Something invisible is adding mass beyond the stellar disk. Draw the visible galaxy as a thin bright pancake embedded in a vast invisible spherical halo. The halo is the dark matter.\n\n**Bullet Cluster photograph:**  \nTwo galaxy clusters have collided. The hot X-ray gas (ordinary matter — visible, blue in X-ray) was slowed by electromagnetic drag. The mass inferred from gravitational lensing (shown in pink overlay) passed straight through with no drag. The mass is not where the gas is. Dark matter is separated from ordinary matter in the collision.\n\n**Cosmic acceleration analogy:**  \nThrow a ball up. Normal gravity decelerates it. Now imagine an invisible wind that *accelerates* it as it climbs. Dark energy is that wind — acting against gravity on cosmic scales. The universe's expansion was decelerating after the Big Bang, then ≈ 5 billion years ago began accelerating. Something with negative pressure is responsible.\n\n### Stage R — Representational (diagrams and graphs)\n\n1. **Galaxy rotation curve graph:** x-axis = radius from galactic center (kpc), y-axis = orbital speed (km/s). Draw: (a) expected Keplerian decline (dashed, ∝ 1/√r) from visible matter, (b) observed flat curve (solid). Shade the gap — this is dark matter's gravitational contribution. Label the visible disk limit (~15 kpc) and the flat portion extending to ~60 kpc.\n\n2. **Matter-energy pie chart:** Draw three slices: 5% baryonic (label \"us\"), 27% dark matter, 68% dark energy. Label Ω symbols. Emphasize that the 5% is everything we have ever directly detected.\n\n3. **Bullet Cluster schematic:** Two overlapping regions, offset. Left region: blue blob (X-ray gas, baryonic matter from collision). Right+left outskirts: pink mass distribution (from lensing, dark matter). The spatial offset is the key signature.\n\n4. **Scale factor graph:** a(t) vs. time. Draw: early matter-dominated phase (a ∝ t^(2/3), decelerating), then the inflection ~5 Gyr ago, then the exponential acceleration (dark energy domination). Mark \"now\" and \"Big Bang.\" Label the transition epoch.\n\n### Stage A — Abstract (mathematical framework)\n\n**Why the flat rotation curve implies a dark halo:**  \nFor a circular orbit: v² = GM(r)/r. If v = constant, then M(r) = v²r/G ∝ r. The enclosed mass grows linearly with radius even beyond visible matter → ρ(r) = dM/dr / (4πr²) ∝ 1/r². This is the NFW halo density profile at large r. The mass keeps growing even where there are no stars or gas.\n\n**Gravitational lensing as dark matter probe:**  \nLight bends around mass (GR result): deflection angle Θ = 4GM/(c²b), where b = impact parameter. By mapping how background galaxy images are distorted (sheared), we reconstruct the projected mass distribution. This lensing mass map applied to galaxy clusters reveals 5–10× more mass than the luminous matter. The lensing map aligns with the dark matter halo, not the gas.\n\n**Cosmological constant as dark energy:**  \nEinstein's field equations with Λ: G_μν + Λg_μν = 8πG/c⁴ T_μν. Λ acts as a fluid with energy density ρ_Λ = Λc²/8πG and pressure p_Λ = −ρ_Λ c² (equation of state w = −1). Negative pressure produces repulsive gravity at large scales. The Friedmann equation with Λ:\n\n    (ȧ/a)² = H² = 8πGρ_m/(3) + Λc²/3\n\nWhen Λ term dominates: ȧ/a = H_Λ = const → a(t) ∝ e^(H_Λ t) (de Sitter exponential).\n\n**CMB evidence for flat universe:**  \nThe angular size of CMB acoustic peaks (first peak at ℓ ≈ 220) measures the curvature of space. Ω_total = 1 (flat) requires Ω_m + Ω_Λ ≈ 1. Since Ω_m ≈ 0.315, we need Ω_Λ ≈ 0.685. This is independent confirmation of dark energy from the early universe.\n\n**Dark matter candidates (theoretical landscape):**  \n- WIMPs (Weakly Interacting Massive Particles): χ mass ~GeV–TeV, interact only via weak force + gravity. Thermal relic density naturally gives Ω_DM ≈ 0.27 (\"WIMP miracle\"). Searched in underground detectors (LUX, XENONnT), LHC, and indirect detection (Fermi-LAT gamma rays).\n- Axions: ultra-light (μeV–meV), pseudo-Goldstone bosons from PQ symmetry breaking. ADMX microwave cavity experiment. Also solve the strong-CP problem.\n- Sterile neutrinos: right-handed, no SM interactions. Warm dark matter candidate.\n- Primordial black holes (PBHs): formed in early universe, constrained by microlensing + GW events.\n\n### Stage T — Transfer (generalisation beyond the chapter)\n\n- Galaxy cluster mass-to-light ratios in any cluster observation\n- Gravitational lensing maps in any deep field (Hubble Frontier Fields)\n- CMB power spectrum fits to ΛCDM in any cosmological survey (Planck, DESI)\n- Modified gravity (MOND) vs. particle dark matter debate\n- Dark energy surveys measuring w(z) — is Λ truly constant, or is it dynamic (quintessence)?\n- Direct detection experiments (XENONnT, LZ) constraining WIMP cross-section vs. mass\n- The \"coincidence problem\": why Ω_DM ≈ 5.4 × Ω_b (why 5.4, not 1 or 1000?)\n- The cosmological constant problem: why Λ is 10^120 smaller than quantum field theory predicts (the worst fine-tuning in physics)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 62,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Why Beginners Fail (Four Failure Modes)",
+      "content": "**Failure Mode 1 — Conflation of dark matter and antimatter**  \nStudents confuse dark matter with antimatter because both are \"invisible\" in everyday life. Antimatter has the same mass as matter but opposite charge — it annihilates on contact with matter producing gamma rays. Dark matter does not annihilate with ordinary matter (at detectable rates), does not interact electromagnetically, and its antiparticle (if it has one) may be itself. Dark matter is not antimatter.\n\n**Failure Mode 2 — Thinking dark matter might just be ordinary matter we can't see**  \nStudents propose: maybe it's just dark gas clouds, rogue planets, or black holes — ordinary matter that doesn't emit light. This is falsified by BBN: the baryon density at nucleosynthesis (Ω_b ≈ 0.049) matches light element abundances. If dark matter were baryonic, BBN would predict different element ratios. Also, MACHOs (massive compact halo objects) are strongly constrained by microlensing surveys. The dark matter is non-baryonic.\n\n**Failure Mode 3 — Confusing dark matter and dark energy**  \nStudents treat them as one thing. They are completely different: dark matter *clusters* gravitationally (forms halos, filaments, clusters) and *decelerates* expansion; dark energy is smooth, uniform, and *accelerates* expansion. Dark matter is needed to explain structure formation; dark energy is needed to explain the current acceleration. They have opposite gravitational effects and opposite observational signatures.\n\n**Failure Mode 4 — Believing the flat rotation curve proves MOND over dark matter**  \nMOND (Modified Newtonian Dynamics) also fits galaxy rotation curves by changing the force law at low acceleration. Students think this eliminates dark matter. But MOND cannot simultaneously explain: (1) the Bullet Cluster offset, (2) CMB acoustic peak heights requiring non-baryonic matter, (3) large-scale structure (filaments, voids) formation needing collisionless dark matter. Dark matter plus GR is the model that fits all observations simultaneously; MOND is a galaxy-scale fitting formula without a covariant extension that works everywhere.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 122,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:**  \n\"Here is one of the most humbling facts in modern science: everything you've ever seen, touched, or measured — every atom, every star, every galaxy — accounts for only about 5 percent of the total energy content of the universe. The other 95 percent is completely unknown. Today we're going to look at the evidence for this and understand why physicists are so confident the dark sector is real.\"\n\n**During rotation curve explanation:**  \n\"Think back to how planets orbit the Sun — Mercury is fast, Neptune is slow, because the Sun's gravity pulls less hard at larger distances. Now imagine you're measuring how fast stars and gas orbit the center of a spiral galaxy. You'd expect the same pattern: fast in the middle, slow at the edge. But when Vera Rubin did exactly this measurement in the 1970s, she found the curve was flat — constant speed all the way out to the edge of the gas disk. The only way that's possible is if there's a huge, invisible spherical halo of mass extending far beyond the visible galaxy. That's dark matter.\"\n\n**During dark energy explanation:**  \n\"In 1998, two teams of astronomers were trying to measure how much the universe's expansion was slowing down — because gravity should be pulling everything back. Instead, they found the expansion is speeding up. It's as if you throw a ball in the air and instead of slowing down, it accelerates away from you. Something is pushing space apart with increasing strength. We call it dark energy, and we have absolutely no idea what it is. What we do know is that it makes up about 68 percent of the universe's total energy budget.\"\n\n**Closing frame:**  \n\"You've now seen three completely independent lines of evidence for dark matter — rotation curves, gravitational lensing, and the CMB — and three for dark energy — supernovae, CMB peak positions, and baryon acoustic oscillations. Each was measured by different teams using different instruments and different physics. They all agree. The dark sector is one of the best-established mysteries in science. Solving it — finding what dark matter particles are, understanding why the vacuum has energy — will likely rewrite physics beyond the Standard Model.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 343,
+        "endLine": 359
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Recovery Notes",
+      "content": "**S0 — Prior knowledge gap (hasn't completed phys.astro.cosmology):**  \nPrerequisite flag. Student needs: Hubble's law, ΛCDM concept, CMB basics, Big Bang framework. Redirect to phys.astro.cosmology. Do not teach rotation curves without the cosmological context — student cannot situate Ω values or understand why non-baryonic matter matters.\n\n**S3 — Misconception persisting after first correction:**  \nIf student still conflates DM and DE after Explanation A: use the Friedmann equation explicitly. Show ρ_DM ∝ a⁻³ (dilutes) vs. ρ_Λ = const (does not dilute). Draw a(t) graph. Show DM dominated early, Λ dominates late. The equation makes the distinction concrete and unmistakable.\n\n**S6 — Conceptual confusion about what \"dark\" means:**  \nIf student thinks \"dark\" means merely optically dark (like a dark nebula): use the full EM spectrum argument. Dark nebulae absorb visible but emit strongly in infrared and radio. Dark matter emits nothing at any wavelength — confirmed by X-ray, radio, infrared surveys of galaxies and clusters. The adjective \"dark\" means electromagnetically inert, not merely optically opaque.\n\n**S9 — High achiever / extension:**  \nAssign: (1) Derive the NFW density profile ρ(r) = ρ_s / [(r/r_s)(1+r/r_s)²] and show it gives v ∝ const at intermediate radii. (2) Compute the Schwarzschild radius of a WIMP with mass 100 GeV and compare to the proton radius — what does this imply about its size? (3) Research the \"Hubble tension\" (H₀ from CMB = 67.4 vs. from Cepheids = 73.0 km/s/Mpc) and propose one dark-sector explanation. (4) Read the 1998 Perlmutter et al. paper abstract and identify which data they used.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 391,
+        "endLine": 407
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Memory and Review",
+      "content": "**One-sentence summary:**  \nThe universe is 95% dark sector: ≈ 27% dark matter (non-baryonic, gravitationally clustering, inferred from rotation curves, lensing, and CMB) and ≈ 68% dark energy (vacuum energy with w = −1, causing cosmic acceleration, inferred from Type Ia SNe and CMB geometry).\n\n**Core equations to memorize:**  \n- v = const → M(r) = v²r/G ∝ r (flat rotation curve implies linear mass growth)  \n- Ω_total = Ω_b + Ω_DM + Ω_Λ ≈ 0.049 + 0.266 + 0.685 = 1  \n- w = p/(ρc²) = −1 for Λ; ρ + 3p/c² = −2ρ < 0 → acceleration  \n\n**Retrieval practice schedule:**  \n- Day 1: Explain the flat rotation curve argument (no notes).  \n- Day 3: State three independent probes of dark matter and distinguish from dark energy.  \n- Day 7: Derive the dark energy acceleration condition from the Friedmann equation.  \n- Day 14: Name the observational evidence that MOND is insufficient.  \n- Day 30: Reconstruct the ΛCDM pie chart from memory with Ω values.  \n\n**Interleaving:**  \nThis concept links directly to: phys.astro.cosmology (Friedmann equation, BBN, CMB), phys.astro.black-holes (lensing, event horizon), phys.rel.spacetime (general relativistic framework for Friedmann equation), phys.qm.pauli-exclusion (degeneracy pressure in WD/NS, structurally analogous dark matter detection logic). Review rotation curves alongside the virial theorem from classical mechanics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 407,
+        "endLine": 429
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Transfer Map",
+      "content": "**Near transfer (same domain, different context):**  \n- Galaxy cluster mass measurements via velocity dispersion (virial theorem) — same logic as rotation curves, different observable\n- Strong lensing arcs around clusters vs. weak lensing shear statistics — different lensing regimes, same underlying dark matter mass reconstruction\n- Milky Way dark matter halo constraints from stellar streams and satellite galaxy distributions\n\n**Far transfer (different domain, same structure):**  \n- Neutrino mass bounds from cosmology: like dark matter, neutrinos are weakly interacting and constrained indirectly (from CMB + large-scale structure suppression of small-scale power)\n- Aether debates in 19th-century physics: an invisible medium invoked to explain observed effects, eventually eliminated by a better theory. Dark matter could follow a similar trajectory (MOND history) or be confirmed by direct detection (WIMPs). Same epistemic structure: indirect inference → direct test campaign\n- In particle physics: inferring the W/Z bosons indirectly from Fermi's effective theory before direct detection at CERN — same pattern of \"we know it must be there from indirect effects\"\n\n**Structural abstraction:**  \nThe dark matter / dark energy inference is the paradigm case of *gravitational indirect inference* in astrophysics: when the kinematics of visible tracers (stars, gas, galaxies) disagree with the gravity of visible matter, the options are (a) new matter or (b) modified gravity. The dark matter hypothesis wins when *multiple independent gravitational probes agree* but modified gravity struggles to unify them. This same logic applies to: the predicted existence of black holes (inferred from GR before observed), the prediction of Neptune (inferred from Uranus's orbital anomalies), and potentially future discoveries of dark sector components.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 429,
+        "endLine": 446
+      }
+    },
+    {
+      "assetId": "phys.astro.dark-matter/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.astro.dark-matter",
+      "title": "Curriculum Feedback",
+      "content": "**Accuracy check:**  \nAll values (Ω parameters, H₀, T_CMB, Y_He, R_s) are consistent with Planck 2018 results. The WIMP miracle calculation giving Ω_DM ≈ 0.27 for a ~100 GeV particle with weak-scale cross-section is schematic — exact value depends on freeze-out temperature and g*. The Bullet Cluster deflection was determined by Clowe et al. 2006 — reference appropriate for advanced learners. NFW profile is schematic at the resolution of this blueprint.\n\n**Prerequisite sufficiency check:**  \nphys.astro.cosmology is the sole prerequisite. It provides: Friedmann equation, Ω notation, CMB basics, BBN, and the ΛCDM framework. This is sufficient. The Schwarzschild metric (phys.rel.spacetime) is cited for lensing deflection; students who have not completed that module can accept the lensing result without the full GR derivation.\n\n**Difficulty calibration:**  \nThis is the most conceptually sophisticated topic in the astrophysics sub-graph — not because the math is harder (it is not — rotation curve calculation requires only v = √(GM/r)), but because the epistemic structure is novel: the primary evidence is *absence* (no light) combined with *indirect gravitational inference*. Students must become comfortable with indirect evidence. The four misconceptions are all forms of resisting this epistemic pattern.\n\n**Scope boundaries:**  \nThis blueprint does NOT cover: warm vs. cold dark matter distinction and its effect on structure formation (beyond scope); quintessence and dynamical dark energy w(z) models (beyond scope — requires dark energy field theory); the cosmological constant problem (magnitude of Λ from QFT — can be mentioned in S9 extension but not assessed); specific WIMP direct detection cross-section exclusion limits (current experimental frontier, appropriate for research context).\n\n**KG connection:**  \nThis concept is the leaf node of the astrophysics chain: phys.astro.cosmology → phys.astro.dark-matter. It also receives transfer connections from phys.astro.black-holes (gravitational lensing overlap) and phys.rel.spacetime (Friedmann equation GR foundation). It terminates the physics curriculum's astrophysics sub-graph. No further concepts depend on it — it is a culminating synthesis concept for the domain.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.dark-matter.md",
+        "startLine": 446,
+        "endLine": 466
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

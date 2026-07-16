@@ -1,0 +1,541 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.conservation-of-momentum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.conservation-of-momentum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:48c8ef1d9e8032c2496d7c9206fff733c1faaa4ba7997e77b3953fba6cd1f991",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md": "sha256:981fe17d4b0584e56934384f74fe3f4393f0c958613172f53f0d6f991ead3c33"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.conservation-of-momentum",
+    "name": "Conservation of Momentum",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.impulse",
+      "phys.mech.newtons-third-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.conservation-of-momentum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.conservation-of-momentum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md": "sha256:981fe17d4b0584e56934384f74fe3f4393f0c958613172f53f0d6f991ead3c33"
+      },
+      "contentHash": "sha256:66a6a537e80b866550f3825ca6ebf3729ea8bb0242e6a366f2b22648aa03c96c",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-momentum.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-momentum\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-momentum.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-momentum\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-momentum.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-momentum\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-momentum.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md#TA-4 (addresses MC-MOMENTUM-LOST)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-momentum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-momentum.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md#TA-5 (addresses MC-INTERNAL-EXTERNAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-momentum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-momentum.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-momentum.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-momentum\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.conservation-of-momentum/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Conservation of Momentum — core explanation",
+      "content": "**Core Insight:** The total momentum of an isolated system (no external net force) is constant.\nInternal forces (Newton's 3rd Law pairs) cancel out in the total, leaving the sum unchanged.\nThis is the most powerful single principle in classical mechanics — it applies to explosions,\ncollisions, recoil, and rocket propulsion.\n\n**Formal Statement:**\nIf F_net_external = 0:\nΣp_before = Σp_after\nm₁v₁ᵢ + m₂v₂ᵢ = m₁v₁f + m₂v₂f\n\n**Why it works (Newton's 3rd Law link):**\nDuring a collision, A exerts force F on B; B exerts −F on A (Newton's 3rd).\nBoth act for the same time Δt. Impulses: +FΔt on B, −FΔt on A. They cancel.\nTotal Δp of system = 0 → total p unchanged. ✓\n\n**Key properties:**\n- Applies even when mechanical energy is NOT conserved (e.g., perfectly inelastic collisions).\n- Applies in both 1D and 2D (vector equation in each dimension separately).\n- \"Isolated system\" means no net external force — gravity and normal cancel on a flat surface.\n- Rocket propulsion: exhaust backward → rocket forward (no external medium required).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 26,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Two objects colliding and sticking",
+      "content": "**Worked Example 1 (Two objects colliding and sticking):**\nCar A: 1000 kg, 20 m/s east. Car B: 1500 kg, at rest. They lock together. Find v_f.\nTotal p_before = 1000×20 + 1500×0 = 20 000 kg·m/s.\n(m_A + m_B)v_f = 20 000 → v_f = 20 000/2500 = 8 m/s east.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 26,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Recoil/explosion",
+      "content": "**Worked Example 2 (Recoil/explosion):**\nA 5 kg rifle fires a 0.02 kg bullet at 400 m/s east. Initial total p = 0.\n0.02×400 + 5×v_rifle = 0 → v_rifle = −8/5 = −1.6 m/s (west — recoil).",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 26,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Head-on with opposite directions",
+      "content": "**Worked Example 3 (Head-on with opposite directions):**\nBall A: 3 kg, east 6 m/s. Ball B: 2 kg, west 4 m/s (v = −4).\np_before = 3×6 + 2×(−4) = 18 − 8 = 10 kg·m/s east.\nAfter A stops (v_Af = 0): 3×0 + 2×v_Bf = 10 → v_Bf = 5 m/s east.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 26,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/misconception/MC-MOMENTUM-LOST",
+      "kind": "misconception",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Priority 1",
+      "content": "### MC-MOMENTUM-LOST (Priority 1)\n**Label:** \"Momentum is lost in collisions — especially when objects stop or slow down\"\n\n**Trigger signals:**\n- Says \"A gave some of its momentum to B but lost the rest\"\n- Claims total momentum after collision is less than before (without noting external force)\n- Checks only one object's momentum after the event\n\n**Conflict evidence [P28]:**\n\"Car A (1000 kg, 15 m/s east) hits stationary Car B (2000 kg). They stick.\nBefore: p_total = 1000×15 + 0 = 15 000 kg·m/s.\nv_f = 15 000/(1000+2000) = 5 m/s east.\nAfter: p_total = 3000×5 = 15 000 kg·m/s.\nBefore = After. Did momentum disappear?\"\n\n**Bridge [P30]:**\n\"Momentum is transferred between objects, not lost. What A loses, B gains — exactly.\nThis is because Newton's 3rd Law forces are equal and opposite, so their impulses cancel\nin the total. The total is locked; it cannot decrease (in an isolated system).\"\n\n**Replacement [P31]:**\n\"Conservation: p_total_before = p_total_after. Always check the TOTAL (sum of all objects),\nnever just one object in isolation. One object slowing down means another speeds up by the\nexact compensating amount.\"\n\n**Discrimination pairs [P33]:**\n- Sticking collision: individual momenta change, total unchanged ✓\n- Explosion from rest: total starts and ends at zero; pieces fly in opposite directions ✓\n\n**s6_path:** Skip conflict example; use only the explosion-from-rest scenario (intuitively clear:\nif nothing was moving, the pieces must be equal and opposite).\n\n---",
+      "localKey": "MC-MOMENTUM-LOST",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-LOST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 3,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/misconception/MC-INTERNAL-EXTERNAL",
+      "kind": "misconception",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Priority 2",
+      "content": "### MC-INTERNAL-EXTERNAL (Priority 2)\n**Label:** \"Conservation applies in all situations — even when there's an external force\"\n\n**Trigger signals:**\n- Applies conservation when a wall or floor exerts an unaccounted force on the system\n- Says \"gravity doesn't count as an external force\"\n- Ignores friction with the floor when computing post-collision state\n\n**Conflict evidence [P28]:**\n\"A 3 kg ball (east, 10 m/s) hits a fixed wall and bounces back at 10 m/s west.\nBefore: p = +30 kg·m/s. After: p = −30 kg·m/s. Total changed by 60 kg·m/s.\nYou said momentum is conserved here. It isn't — why? What force acted on the system?\"\n\n**Bridge [P30]:**\n\"The wall is external to the ball system. It exerts a force on the ball (the impulse that\nreversed it) without receiving equal momentum back — because the wall is fixed to the Earth.\nThe Earth's momentum changes by 60 kg·m/s — but Earth is so massive you don't notice.\n'Isolated system' must include everything that exerts a net external force.\"\n\n**Replacement [P31]:**\n\"Conservation of momentum requires NO net external force on the system.\nFor a collision on a frictionless surface between two free objects: isolated ✓.\nBall bouncing off a wall: wall + Earth must be included, or the ball alone is not isolated ✗.\nAlways define the system and check for external forces before applying conservation.\"\n\n**Discrimination pairs [P33]:**\n- Two pucks colliding on ice (frictionless): isolated, conservation applies ✓\n- Ball bouncing off fixed wall: external force → conservation doesn't apply to ball alone ✓\n\n**s6_path:** Defer the wall example; use only puck-on-ice scenarios where isolation is obvious.\n\n---",
+      "localKey": "MC-INTERNAL-EXTERNAL",
+      "language": "en",
+      "refs": [
+        "MC-INTERNAL-EXTERNAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 37,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 14,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "MC-MOMENTUM-LOST Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-MOMENTUM-LOST Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-MOMENTUM-LOST\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-LOST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 45,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "MC-INTERNAL-EXTERNAL Probe + System Definition",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-INTERNAL-EXTERNAL Probe + System Definition\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P34\"],\"addresses\":[\"MC-INTERNAL-EXTERNAL\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-INTERNAL-EXTERNAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 65,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 82,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 103,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Apply — sticking",
+      "content": "**MP-1 (Apply — sticking):**\n\"A 2 kg cart (east 6 m/s) collides and sticks with a 4 kg cart at rest. Find v_f.\"\nExpected: p = 12; v_f = 12/6 = 2 m/s east.\n_Discriminates: basic conservation for inelastic collision._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 272,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Apply — head-on",
+      "content": "**MP-2 (Apply — head-on):**\n\"Ball A: 3 kg east 8 m/s. Ball B: 2 kg west 3 m/s. After: A moves east at 2 m/s. Find v_Bf.\"\nExpected: p_before = 24−6 = 18; p_after = 6 + 2v_Bf = 18 → v_Bf = 6 m/s east.\n_Discriminates: vector signs in head-on collision._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 272,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Apply — explosion from rest",
+      "content": "**MP-3 (Apply — explosion from rest):**\n\"A 10 kg stationary device explodes: 3 kg piece goes west at 8 m/s. Find v of 7 kg piece.\"\nExpected: 0 = 3×(−8) + 7×v → v = 24/7 ≈ 3.43 m/s east.\n_Discriminates: explosion from zero total momentum._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 272,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Apply — recoil",
+      "content": "**MP-4 (Apply — recoil):**\n\"A 4 kg gun fires 0.02 kg bullet at 500 m/s east. Gun recoil speed?\"\nExpected: 0.02×500 + 4×v = 0 → v = −2.5 m/s west.\n_Discriminates: recoil; small mass × high speed = large mass × small speed._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 272,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Analyze — isolation check",
+      "content": "**MP-5 (Analyze — isolation check):**\n\"Two ice pucks on a frictionless surface collide. Is momentum conserved? Why?\nA puck hits a stationary wall. Is momentum conserved for the puck alone? Why not?\"\nExpected: Puck-puck: isolated (friction-free, no external horizontal force) → conserved.\nPuck-wall: wall exerts external force → not conserved for puck alone.\n_Discriminates: MC-INTERNAL-EXTERNAL resolution; conceptual reasoning._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [
+        "MC-INTERNAL-EXTERNAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 272,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.impulse          ──►\n                                phys.mech.conservation-of-momentum\nphys.mech.newtons-third-law ──►\n```\n\n**PD-1 (Impulse prerequisite):**\n\"A 0.5 kg ball bounces off a wall, east at 8 m/s → west at 6 m/s. Δp?\"\nExpected: 0.5×(−6−8) = −7 N·s (westward).\n\n**PD-2 (Newton's 3rd Law prerequisite):**\n\"During a collision, object A exerts 200 N on B. What force does B exert on A?\"\nExpected: 200 N in the opposite direction (Newton's 3rd).\n\nBoth must pass before TA-3. Gap in either → repair that concept first.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 65,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"State the law of conservation of momentum. When does it apply?\"\nThreshold: \"Σp_before = Σp_after\" + \"when no external net force / isolated system.\"\n\n**FA-2 (TA-4 exit):** \"4 kg (east 10) + 6 kg (at rest) → stick. v_f? Total p before = after?\"\nExpected: v_f = 4 m/s; p_before = 40 = p_after = 40. If student gets different total before vs after\nwithout an external force → MC-MOMENTUM-LOST not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"Name one scenario where conservation of momentum does NOT apply\nfor the objects-only system.\" Expected: any collision with external force (wall, friction, gravity\nwithout ground).\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-LOST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 305,
+        "endLine": 322
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only east-direction cases in TA-3 (no head-on until TA-5).\n- Break into steps: (1) compute total p_before; (2) set = p_after; (3) solve for unknown.\n- Start TA-6 with Problem 1 (sticking — simplest); skip Problem 5 if anxiety remains.\n- Reassure: \"One formula: total before = total after. Add up momenta, set equal.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (isolation check) at TA-3 before calculation problems.\n- Challenge: \"A 3-body explosion: 10 kg splits into 3 kg (east 8), 4 kg (north 3), and ?\n  Find the third piece's velocity.\" (2D vector momentum — extends the lesson.)\n- Advance quickly to recoil and explosion; spend TA-6 on Problems 4 and 5.\n\n**S4 (Prereq gap):**\n- PD-1 gap (Impulse) → repair signed Δp, J = FΔt before returning.\n- PD-2 gap (Newton's 3rd) → repair action-reaction pairs, equal magnitude, opposite direction.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 322,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-momentum/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-momentum",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → Σp conservation → MC-MOMENTUM-LOST repair).\n**Session 2 (≥24 h later):** Retrieval: \"State conservation of momentum. When must you define\n  the system carefully?\" → TA-5 (MC-INTERNAL-EXTERNAL) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining conservation of momentum and energy:\n  \"4 kg (east 6) + 2 kg (at rest) → stick. Find v_f, p_before, p_after, KE_before, KE_after.\n  Is KE conserved? (No — inelastic.) Is p conserved? (Yes.)\"\n  (Distinguishes conservation of momentum from conservation of energy.)\n**Pre-collisions session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.impulse (J = Δp link), phys.mech.newtons-third-law\n(why internal forces cancel), phys.mech.conservation-of-energy (what IS conserved vs not).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-LOST",
+        "MC-INTERNAL-EXTERNAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-momentum.md",
+        "startLine": 342,
+        "endLine": 358
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

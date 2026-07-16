@@ -1,0 +1,433 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.maxwells-equations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.maxwells-equations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fcf40dfccfe560f46de9ffde23eefab62eb7d47255e7365444d8dde710e26624",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.maxwells-equations.md": "sha256:8d07ca4ed00719f6048407a312595fbbb131556f1a82924292496ca778ba6fbf"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.maxwells-equations",
+    "name": "\"Maxwell's Equations and Displacement Current\"",
+    "difficultyRaw": "label: expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.em.gauss-law",
+      "phys.em.amperes-law",
+      "phys.em.faradays-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.maxwells-equations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.maxwells-equations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.maxwells-equations.md": "sha256:8d07ca4ed00719f6048407a312595fbbb131556f1a82924292496ca778ba6fbf"
+      },
+      "contentHash": "sha256:b6b9183ce87d6e0c9aa02aed2ee5649ec43576effb3f715f6233b6967c77e855",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.maxwells-equations.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.maxwells-equations.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.maxwells-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.maxwells-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.maxwells-equations.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.maxwells-equations.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.maxwells-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.maxwells-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.maxwells-equations.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.maxwells-equations.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.maxwells-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.maxwells-equations\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.maxwells-equations.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.maxwells-equations.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.maxwells-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.maxwells-equations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.maxwells-equations.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.maxwells-equations.md#TA-5 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.maxwells-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.maxwells-equations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.maxwells-equations.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.maxwells-equations.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.maxwells-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.maxwells-equations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.maxwells-equations.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.maxwells-equations.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.maxwells-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.maxwells-equations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.maxwells-equations/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "\"Maxwell's Equations and Displacement Current\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nImagine electricity and magnetism as two different languages that describe the same reality. Before Maxwell (1865), scientists had four separate laws — each describing one phenomenon. Maxwell noticed a gap: Ampere's Law was incomplete. He added one extra term — \"displacement current\" — and suddenly the four laws, read together, sang in harmony. From that harmony, he derived a wave equation and calculated its speed: c = 1/√(μ₀ε₀) ≈ 3×10⁸ m/s. This matched the known speed of light. Maxwell's conclusion: light is an electromagnetic wave.\n\n### Level 2 — Developing Understanding\n\nMaxwell's four equations, in integral form:\n\n| # | Name | Integral form | Physical meaning |\n|---|------|---------------|-----------------|\n| 1 | Gauss's Law for E | ∮E·dA = Q_enc/ε₀ | Electric flux through closed surface = enclosed charge/ε₀ |\n| 2 | Gauss's Law for B | ∮B·dA = 0 | No magnetic monopoles; magnetic flux through any closed surface is zero |\n| 3 | Faraday's Law | ∮E·dl = −dΦ_B/dt | Changing magnetic flux induces circulating EMF |\n| 4 | Ampere-Maxwell | ∮B·dl = μ₀(I_enc + ε₀dΦ_E/dt) | Currents AND changing electric flux create circulating B |\n\nThe new term Maxwell added: **displacement current** I_d = ε₀dΦ_E/dt\n\nThis is NOT a flow of charges. It is the rate of change of electric flux in a region of space (e.g., the gap between capacitor plates where no conduction current flows, yet B fields encircle the gap as if current flowed through).\n\nWhy it matters: without I_d, Ampere's Law was inconsistent — for a surface cutting the capacitor gap, I_enc = 0, giving B = 0, contradicting a surface that intercepted the wire giving B ≠ 0. Adding I_d restores consistency: the changing E field between plates contributes the same total as the conduction current through the wire.\n\n### Level 3 — Proficient Synthesis\n\n**From equations to wave equation:**\n\nApply curl(∇×) to Faraday's Law:\n∇×(∇×E) = −∂(∇×B)/∂t\n\nUse vector identity: ∇×(∇×E) = ∇(∇·E) − ∇²E\n\nIn vacuum (ρ=0, J=0): ∇·E = 0, and ∇×B = μ₀ε₀∂E/∂t\n\nSubstituting: −∇²E = −μ₀ε₀∂²E/∂t²\n\nThis gives: **∇²E = μ₀ε₀∂²E/∂t²**\n\nComparing to the wave equation ∇²ψ = (1/v²)∂²ψ/∂t²:\n\n**c = 1/√(μ₀ε₀) = 1/√(4π×10⁻⁷ × 8.85×10⁻¹²) ≈ 3×10⁸ m/s**\n\nDifferential (local) form of Maxwell's equations:\n\n| Equation | Differential form |\n|----------|------------------|\n| Gauss (E) | ∇·E = ρ/ε₀ |\n| Gauss (B) | ∇·B = 0 |\n| Faraday | ∇×E = −∂B/∂t |\n| Ampere-Maxwell | ∇×B = μ₀J + μ₀ε₀∂E/∂t |\n\n**Self-sustaining wave mechanism:** A changing B creates E (Faraday). That changing E creates B (Ampere-Maxwell). The cycle sustains itself through vacuum indefinitely — no medium required.\n\n**In matter:** Replace ε₀ → ε (= ε_r ε₀) and μ₀ → μ (= μ_r μ₀), giving v = 1/√(με) = c/n where refractive index n = √(ε_r μ_r).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 27,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": ": Displacement Current Between Capacitor Plates",
+      "content": "### WE-1: Displacement Current Between Capacitor Plates\n\n**Problem:** A parallel-plate capacitor (plate area A = 4×10⁻² m², separation d = 5 mm) is being charged so that the voltage across it increases at dV/dt = 2×10⁶ V/s. Find the displacement current between the plates and compare it to the conduction current in the leads.\n\n**Solution:**\n\nElectric field between plates: E = V/d → dE/dt = (1/d)(dV/dt)\n\nElectric flux through plate area: Φ_E = EA → dΦ_E/dt = A × dE/dt = A/d × dV/dt\n\nDisplacement current:\nI_d = ε₀(dΦ_E/dt) = ε₀ × A/d × dV/dt\nI_d = 8.85×10⁻¹² × (4×10⁻²/5×10⁻³) × 2×10⁶\nI_d = 8.85×10⁻¹² × 8 × 2×10⁶\nI_d = 8.85×10⁻¹² × 1.6×10⁷\n**I_d ≈ 1.42×10⁻⁴ A = 0.142 mA**\n\nThis equals the conduction current in the leads charging the capacitor — as required for Ampere-Maxwell's Law to be self-consistent at any surface bounded by the same loop.\n\n**Key conclusion:** Magnetic field around the capacitor gap is identical to the field around the wire, even though no charge physically crosses the gap.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 84,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": ": Verify c = 1/√(μ₀ε₀)",
+      "content": "### WE-2: Verify c = 1/√(μ₀ε₀)\n\n**Problem:** Using the known values μ₀ = 4π×10⁻⁷ T·m/A and ε₀ = 8.85×10⁻¹² C²/(N·m²), compute the speed of EM waves predicted by Maxwell's equations and compare to the measured speed of light.\n\n**Solution:**\n\nc = 1/√(μ₀ε₀)\n\nμ₀ε₀ = (4π×10⁻⁷)(8.85×10⁻¹²)\n= (4 × 3.1416 × 10⁻⁷)(8.85×10⁻¹²)\n= (12.566×10⁻⁷)(8.85×10⁻¹²)\n= 111.2×10⁻¹⁹\n= 1.112×10⁻¹⁷ m⁻²·s²\n\nc = 1/√(1.112×10⁻¹⁷)\n= 1/(1.055×10⁻⁸·⁵)\n= 1/(3.34×10⁻⁹)\n**c ≈ 2.99×10⁸ m/s ≈ 3×10⁸ m/s ✓**\n\nThis matches the experimentally measured speed of light — Maxwell's equations thus PREDICT that light is an electromagnetic wave, derived purely from electric and magnetic measurements, with no assumption about light at all.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 84,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": ": Analyzing Which Maxwell Equation Applies",
+      "content": "### WE-3: Analyzing Which Maxwell Equation Applies\n\n**Problem:** For each scenario below, identify which Maxwell equation directly explains the phenomenon:\n(a) A positive charge creates outward electric field lines.\n(b) Cutting a bar magnet gives two smaller magnets, not isolated poles.\n(c) Moving a magnet toward a conducting loop induces a current in it.\n(d) An antenna carrying alternating current radiates a magnetic field even in the gaps between current-carrying segments.\n\n**Solution:**\n\n(a) **Gauss's Law for E** (Equation 1): ∮E·dA = Q_enc/ε₀\nElectric flux through any closed surface around a positive charge equals Q/ε₀ > 0 → field lines diverge outward.\n\n(b) **Gauss's Law for B** (Equation 2): ∮B·dA = 0\nMagnetic field lines always form closed loops (no monopoles). Every cut exposes both ends of closed loops → each piece has its own north-south pair.\n\n(c) **Faraday's Law** (Equation 3): ∮E·dl = −dΦ_B/dt\nChanging magnetic flux (moving magnet) induces circulating electric field → drives current in the loop.\n\n(d) **Ampere-Maxwell Law** (Equation 4): ∮B·dl = μ₀(I_enc + ε₀dΦ_E/dt)\nIn antenna gaps (no conduction current), the rapidly changing E field (I_d = ε₀dΦ_E/dt) acts as source of B, allowing B to propagate continuously away from the antenna. Without displacement current, EM radiation could not exist.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 84,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT",
+      "content": "### MC-1: MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT\n\n**trigger_signal:** Student treats each equation in isolation, calculates B from Ampere's Law without considering that a changing E might exist, or states \"Faraday's Law only applies to inductors.\"\n\n**conflict_evidence [P28]:** Consider a region of space far from any charges or currents (deep space). Faraday's Law says: if B changes at that point, it creates a circulating E there. Ampere-Maxwell says: that changing E creates a circulating B at a nearby point. Each law drives the other — change in B spawns changing E spawns changing B. The four equations are not independent statements; they're a coupled system. Solving them simultaneously produces the wave equation: ∂²E/∂x² = μ₀ε₀∂²E/∂t². None of the four equations alone can predict an EM wave.\n\n**bridge_text [P30]:** Think of Maxwell's equations like four rules in a conversation between E and B: Gauss sets the starting conditions, Faraday and Ampere-Maxwell are the two listening-and-responding rules (each reacts to the other's changes), and Gauss's B rule ensures the conversation has no dead ends. Remove any one rule and the conversation breaks down — no wave emerges.\n\n**replacement_text [P31]:** Maxwell's four equations are a coupled system: Equations 3 and 4 are dynamically linked (each drives the other in time). The predictive power — including c = 1/√(μ₀ε₀) and the very existence of EM radiation — emerges only from solving all four simultaneously. No single equation predicts electromagnetic waves.\n\n**discrimination_pairs [P33]:**\n- \"Faraday's Law alone describes how inductors work\" → FALSE: it describes how any changing magnetic flux creates circulating electric field, linked to Ampere-Maxwell for wave propagation.\n- \"Maxwell's equations are four independent empirical laws\" → FALSE: they're coupled; two are divergence equations (initial/boundary conditions) and two are curl equations (dynamics) forming one unified field theory.\n\n**s6_path:** If student scores < 0.60 on Faraday/Ampere coupling probe → assign coupling visualization (oscillating E→B→E chain animation) before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT",
+      "content": "### MC-2: MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT\n\n**trigger_signal:** Student states \"current flows between capacitor plates,\" describes displacement current as \"electrons jumping across the gap,\" or asks \"which direction do the electrons move in the displacement current?\"\n\n**conflict_evidence [P28]:** A parallel-plate capacitor with a vacuum gap: measuring instruments confirm no charge carriers cross the gap — if they did, the capacitor would be a short circuit and stop charging. Yet if you place an Ampere loop around the gap and measure the B field with a Hall probe, it is exactly what Ampere's Law with I_d = ε₀dΦ_E/dt would predict, the same as for the wire. The B field doesn't care whether its source is moving charges or changing flux — both produce identical circulating B. Displacement current is a source term in Maxwell's equation, not a physical flow.\n\n**bridge_text [P30]:** The name \"displacement current\" is historical — Maxwell named it so because of an older mechanical model of the aether. Don't let the word \"current\" mislead. What it represents is the time rate of change of electric flux: I_d = ε₀dΦ_E/dt. It has the same units as current (amperes) and produces the same B field as a real current, but no charge moves. It is a mathematical term that ensures Ampere's Law is consistent when applied to surfaces that don't intercept any conductor.\n\n**replacement_text [P31]:** Displacement current I_d = ε₀dΦ_E/dt is NOT a flow of charge — it is the rate of change of electric flux in a region of space. No electrons cross the gap. Its effect on the magnetic field is indistinguishable from conduction current, but its physical origin is purely the time-variation of E. This generalization was Maxwell's key insight and the mathematical bridge that makes EM wave propagation possible in vacuum.\n\n**discrimination_pairs [P33]:**\n- \"Between capacitor plates, displacement current means electrons are accelerating across the gap\" → FALSE: no charges cross; I_d = ε₀dΦ_E/dt is a field quantity, not a particle current.\n- \"Displacement current produces no magnetic field because it's not real current\" → FALSE: I_d contributes to ∮B·dl exactly as conduction current does — both are sources of B in Ampere-Maxwell Law.\n\n**s6_path:** If student answers < 0.55 on \"what crosses the capacitor gap\" probe → run discrimination pair drill before re-probing.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 212,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 216,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "Retrieval Seed",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Retrieval Seed\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 219,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "+ P31 — Bridge + Replacement: MC-2",
+      "content": "{\"id\":\"TA-4\",\"title\":\"+ P31 — Bridge + Replacement: MC-2\",\"primitives\":[\"P30\",\"P31\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 223,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "Conflict Evidence: MC-1",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Conflict Evidence: MC-1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 226,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "Diagnostic",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Diagnostic\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 229,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "Mastery Probe + P68 + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Probe + P68 + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P36\",\"P41\",\"P62\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 232,
+        "endLine": 313
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** Ampere's original law states ∮B·dl = μ₀I_enc. What observable inconsistency does this create for a capacitor being charged? How does Maxwell's addition resolve it?\n\n**P-2 (Developing — identifies S6):** A circular capacitor has radius r = 0.05 m and E between its plates increasing at dE/dt = 3×10¹¹ V/(m·s). Calculate the magnetic field at radius r = 0.05 m from the axis (at the plate edge) using the displacement current concept.\n\n**P-3 (Proficient — identifies S9):** Starting only from Faraday's Law and Ampere-Maxwell Law in vacuum, sketch the steps of the derivation that leads to the wave equation ∇²E = μ₀ε₀∂²E/∂t². What assumptions are required at each step?\n\n**P-4 (Mastery gate — confirms S9):** Identify which Maxwell equation is the primary explanation for each:\n(a) EM waves can propagate through the vacuum of space with no medium.\n(b) A compass needle deflects when placed near a current-carrying wire.\n(c) A radio transmitter antenna creates oscillating E fields that generate oscillating B fields that propagate away.\n(d) Magnetic field lines never start or end at a point.\nState the equation, the key term, and the physical principle each involves. Required score: 4/4 at ≥0.80 accuracy to pass mastery gate.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 240,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: C (thought experiment anchor; physics + analyze bloom).\n\n**TA-1 [P01 — Session Open]**\n\"You've studied Gauss's Law, Faraday's Law, and Ampere's Law separately. Today we unify them — and discover that their unity predicts something neither equation alone can: the existence of light itself. First, a thought experiment: if you have a capacitor being charged, what 'current' flows inside the gap between the plates? Take 30 seconds to write your answer.\"\n[Collect response → diagnose S0/S3 state]\n\n**TA-2 [P06 — Concrete Anchor]**\n\"Let's build the capacitor-gap paradox concretely. [Display: capacitor connected to AC source, loop drawn around the gap.] If we apply Ampere's Law to Loop A (through the wire), we get B > 0. If we apply it to Loop B (through the gap), we get I_enc = 0 → B = 0. Same loop, same field, two different answers? That's the contradiction Maxwell resolved. He added I_d = ε₀dΦ_E/dt. Let's verify it works numerically.\" [→ WE-1]\n\n**TA-3 [P62 — Retrieval Seed]**\n\"Before we write all four equations, retrieve what you already know: state Gauss's Law for E, Gauss's Law for B, and Faraday's Law from memory. Don't look at notes. What physical situation does each one describe?\"\n[5-minute retrieval → consolidates prerequisite knowledge for coupling discussion]\n\n**TA-4 [P30 + P31 — Bridge + Replacement: MC-2]**\n\"Now we address displacement current directly. [Display: timeline of E field growing between plates.] The phrase 'displacement current' sounds like electrons jumping across the gap — but that's a historical misnomer. I_d = ε₀dΦ_E/dt is a field quantity, a time rate of change of flux, not a flow of charges. No electron crosses the gap. Yet it produces B exactly as real current does. Let's confront the misconception explicitly.\" [→ MC-2 discrimination pairs]\n\n**TA-5 [P28 — Conflict Evidence: MC-1]**\n\"Here's the unity claim tested. [Display: wave equation derivation.] Take ∇× of Faraday's Law. Substitute Ampere-Maxwell. Use ∇·E = 0 in vacuum. You get ∇²E = μ₀ε₀∂²E/∂t². This is a wave equation — it emerges ONLY because Equations 3 and 4 are coupled. Without that coupling, without the displacement current term, the derivation breaks at the substitution step and no wave results. Let's verify the predicted speed.\" [→ WE-2]\n\n**TA-6 [P41 — Diagnostic]**\n\"Quick diagnostic — four scenarios: (a) positive charge creates radial E field, (b) bar magnet cut in half gives two magnets, (c) moving magnet induces loop current, (d) antenna radiates even in gaps between current segments. For each: which of the four Maxwell equations directly explains it? Write your equation number and the key term.\" [→ WE-3; maps to S6 vs. S9 diagnosis]\n\n**TA-7 [P36 — Mastery Probe + P68 + P85 + P91]**\n\"Final probe: (1) Write Ampere-Maxwell Law and identify every term. (2) A parallel plate capacitor has plate area 0.01 m² and E increasing at 10⁹ V/(m·s). Find I_d. (3) Why does c = 1/√(μ₀ε₀) tell us that Maxwell's equations were always a theory of light? (4) How do Equations 3 and 4 couple to produce self-sustaining waves?\n\nClosing thought: Maxwell unified electricity, magnetism, and optics without a single experiment — through mathematical consistency alone. That is the power of well-chosen equations.\n\nSpaced retrieval scheduled: +1 day (displacement current mechanism), +4 days (four equations from memory), +2 weeks (wave derivation steps).\"\n\n[P91 gate: threshold 0.80. If not reached → flag for S6 → S9 remediation on differential form and coupling.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 205,
+        "endLine": 240
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

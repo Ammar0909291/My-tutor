@@ -1,0 +1,1041 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.rc-circuits-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.rc-circuits",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:de34b93e729725648540e70fc00be73af0397d16362fa27ba50dc8400aff43ba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.rc-circuits.md": "sha256:9105e029f0cee4e6ed2c7eb89653bc575bf6fcff96854af0196fad6755157e64"
+    },
+    "assetCount": 33,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 24,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 24
+  },
+  "concept": {
+    "conceptId": "phys.em.rc-circuits",
+    "name": "RC Circuits",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.capacitance",
+      "phys.em.kirchhoffs-laws"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.rc-circuits-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.rc-circuits (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.rc-circuits.md": "sha256:9105e029f0cee4e6ed2c7eb89653bc575bf6fcff96854af0196fad6755157e64"
+      },
+      "contentHash": "sha256:d2b1d551fd4685ab1c34ae97d9a207e8dc1fa17c58f3c3ecc899a82ad44d424c",
+      "ruleCount": 24,
+      "bandCounts": {
+        "3": 24
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-10 (addresses MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-11 (addresses MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-12 (addresses MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-13 (addresses MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-23",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-23",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-24",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-24",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-3 (addresses MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS, MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-6 (addresses MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-7 (addresses MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-8 (addresses MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.rc-circuits.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.rc-circuits.md#TA-9 (addresses MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.rc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.rc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.rc-circuits/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "RC Circuits — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nAn RC circuit is the simplest circuit that changes with time. Connect a resistor (R) and a capacitor (C) in series with a battery: the capacitor does not charge instantly — the resistor slows the flow of charge, so the voltage across the capacitor rises gradually in a smooth, curved fashion. Disconnect the battery and let the capacitor discharge back through the resistor: the voltage decays away in an equally smooth, curved fall.\n\nThese two behaviours — exponential rise and exponential decay — appear everywhere in engineering and physics. The camera flash charges a large capacitor slowly through a small battery, then dumps its energy through a xenon lamp in a fraction of a millisecond. The touch-screen on a phone uses RC time constants to detect your finger. The heart defibrillator charges a capacitor and releases it in a controlled pulse. In every case, the essential physics is the same: the resistor controls how fast charge can move, and the capacitor determines how much charge must move to reach the final voltage. Together they create a **natural time scale τ = RC** — the time constant — that governs the entire transient response.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**Deriving the charging equations from KVL:**\n\nFor a loop containing battery ε, resistor R, and initially uncharged capacitor C, Kirchhoff's Voltage Law gives:\n\n$$\\varepsilon = V_R + V_C = IR + \\frac{Q}{C} = R\\frac{dQ}{dt} + \\frac{Q}{C}$$\n\nThis is a first-order linear ODE with constant coefficients. Its solution with initial condition Q(0) = 0:\n\n$$Q(t) = C\\varepsilon\\!\\left(1 - e^{-t/\\tau}\\right), \\qquad \\tau = RC$$\n\nDifferentiating Q(t) gives current; dividing by C gives capacitor voltage:\n\n$$I(t) = \\frac{\\varepsilon}{R}\\,e^{-t/\\tau}, \\qquad V_C(t) = \\varepsilon\\!\\left(1 - e^{-t/\\tau}\\right)$$\n\n**Discharging equations:**\n\nRemove the battery; the capacitor (initially at V₀) discharges through R. KVL gives 0 = IR + V_C. Solving with Q(0) = CV₀:\n\n$$V_C(t) = V_0\\,e^{-t/\\tau}, \\qquad I(t) = \\frac{V_0}{R}\\,e^{-t/\\tau}$$\n\n**The time constant τ = RC:**\n\n- Units: [Ω][F] = (V/A)(C/V) = C/A = s ✓\n- At t = τ (charging): V_C = ε(1 − e⁻¹) = **0.632 ε** (reaches 63.2% of final value)\n- At t = τ (discharging): V_C = V₀ e⁻¹ = **0.368 V₀** (retains 36.8% of initial value)\n- These two percentages are complements: 63.2% + 36.8% = 100%\n\n**Boundary conditions (critical for circuit analysis):**\n\n| Time | Capacitor state | Capacitor model | Current |\n|---|---|---|---|\n| t = 0 (uncharged) | V_C = 0 | **Short circuit** (wire) | I = ε/R (maximum) |\n| 0 < t < ∞ | 0 < V_C < ε | Exponential transient | I decays from ε/R to 0 |\n| t → ∞ (fully charged) | V_C = ε | **Open circuit** | I = 0 |\n\nAt t = 0: KVL gives ε = I(0)R + 0 → I(0) = ε/R, as if C were a wire.\nAt t → ∞: I = 0, so all ε appears across C, as if no current path exists.\n\n**5τ rule:** After 5 time constants, e⁻⁵ ≈ 0.0067 (0.67% error). Engineers and physicists treat the circuit as having reached its final state after 5τ.\n\n**Energy bookkeeping (charging, uncharged → full):**\n\n- Final charge stored: Q_∞ = Cε\n- Energy delivered by battery: W_battery = Q_∞ · ε = **Cε²**\n- Energy stored in capacitor: U_C = ½CV_C² |_{V_C = ε} = **½Cε²**\n- Energy dissipated in R: W_R = W_battery − U_C = **½Cε²**\n\nThe battery energy splits **exactly 50/50** between storage and dissipation, **regardless of R**. A larger R slows the process but does not change the energy split — the longer charging time exactly compensates for the lower current.\n\n### Tier 3 — Formal\n\n**Solution via integrating factor:**\n\nThe charging ODE rearranged:\n\n$$\\frac{dQ}{dt} + \\frac{Q}{RC} = \\frac{\\varepsilon}{R}$$\n\nIntegrating factor: μ(t) = e^{t/RC}. Multiply through:\n\n$$\\frac{d}{dt}\\!\\left(Q\\,e^{t/RC}\\right) = \\frac{\\varepsilon}{R}\\,e^{t/RC}$$\n\nIntegrate both sides from 0 to t with Q(0) = 0:\n\n$$Q\\,e^{t/RC} - 0 = C\\varepsilon\\!\\left(e^{t/RC} - 1\\right)$$\n$$\\implies Q(t) = C\\varepsilon\\!\\left(1 - e^{-t/RC}\\right) \\checkmark$$\n\n**Discharging:** Same ODE with ε = 0; initial condition Q(0) = CV₀ yields Q(t) = CV₀ e^{−t/RC} ✓\n\n**Proof of R-independence of energy dissipation:**\n\n$$W_R = \\int_0^\\infty I^2(t)\\,R\\,dt = \\int_0^\\infty \\left(\\frac{\\varepsilon}{R}\\right)^2 e^{-2t/RC}\\cdot R\\,dt = \\frac{\\varepsilon^2}{R}\\int_0^\\infty e^{-2t/RC}\\,dt$$\n\n$$= \\frac{\\varepsilon^2}{R}\\cdot\\frac{RC}{2} = \\frac{C\\varepsilon^2}{2} = \\frac{1}{2}C\\varepsilon^2$$\n\nR cancels exactly. Larger R → smaller I² (factor R²), but longer timescale τ = RC (factor R) — the two effects cancel. W_R = ½Cε² for any finite R, including the limit R → 0 (where energy is lost in arc discharge and radiation).\n\n**General solution (capacitor initially at V_i, final state V_f):**\n\n$$V_C(t) = V_f + (V_i - V_f)\\,e^{-t/\\tau}$$\n\nThis single formula covers all cases: charging (V_i = 0, V_f = ε), discharging (V_i = V₀, V_f = 0), and partial charge/recharge (arbitrary V_i, V_f).\n\n**Thevenin reduction for multi-element RC networks:** Any resistor network seen by a single capacitor reduces to a Thevenin equivalent (V_th, R_th). The time constant is τ = R_th C and the final voltage is V_th. This is the canonical method for complex single-capacitor circuits.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 28,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "(Charging — time constant and multi-point analysis)",
+      "content": "### WE-1 (Charging — time constant and multi-point analysis)\n\n**Problem:** A series RC circuit has R = 10 kΩ, C = 100 μF, battery ε = 12 V. Capacitor initially uncharged. (a) Find τ. (b) Find V_C at t = τ, t = 2τ, and t = 5τ. (c) Find I at t = 0 and t = τ.\n\n**Worked solution:**\n\n*(a) Time constant:*\n$$\\tau = RC = (10\\times10^3\\,\\Omega)(100\\times10^{-6}\\,\\text{F}) = 1.0\\text{ s}$$\n\n*(b) Capacitor voltage — V_C(t) = 12(1 − e^{−t/1.0}):*\n\nAt t = τ = 1.0 s:\n$$V_C = 12\\bigl(1 - e^{-1}\\bigr) = 12\\,(1 - 0.368) = 12\\times0.632 = 7.58\\text{ V}$$\nThis is 63.2% of ε — the defining signature of one time constant.\n\nAt t = 2τ = 2.0 s:\n$$V_C = 12\\bigl(1 - e^{-2}\\bigr) = 12\\,(1 - 0.135) = 12\\times0.865 = 10.38\\text{ V}$$\n(86.5% of ε)\n\nAt t = 5τ = 5.0 s:\n$$V_C = 12\\bigl(1 - e^{-5}\\bigr) = 12\\,(1 - 0.0067) = 12\\times0.9933 = 11.92\\text{ V}$$\n(99.3% of ε → 5τ rule: treat as fully charged)\n\n*(c) Current — I(t) = (12/10 000) e^{−t} = 1.2 mA × e^{−t}:*\n\nAt t = 0: $I = \\varepsilon/R = 12/10\\,000 = \\mathbf{1.2\\text{ mA}}$ (maximum; C acts as short circuit)\n\nAt t = τ: $I = 1.2\\text{ mA}\\times e^{-1} = 1.2\\times0.368 = \\mathbf{0.44\\text{ mA}}$\n\n**Answer:** τ = 1.0 s; V_C(τ) = 7.58 V, V_C(2τ) = 10.38 V, V_C(5τ) = 11.92 V; I(0) = 1.2 mA, I(τ) = 0.44 mA.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 124,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "(Discharging — finding time from voltage target)",
+      "content": "### WE-2 (Discharging — finding time from voltage target)\n\n**Problem:** A capacitor C = 200 μF, charged to V₀ = 20 V, discharges through R = 5 kΩ. (a) Find τ. (b) Find the time for V_C to fall to 5 V. (c) Find the initial discharge current.\n\n**Worked solution:**\n\n*(a) Time constant:*\n$$\\tau = RC = (5\\times10^3)(200\\times10^{-6}) = 1.0\\text{ s}$$\n\n*(b) Time to reach 5 V — V_C(t) = 20 e^{−t/1.0}:*\n\nSet V_C = 5 V:\n$$5 = 20\\,e^{-t} \\implies e^{-t} = \\frac{5}{20} = 0.25$$\n$$-t = \\ln(0.25) = -1.386 \\implies t = \\mathbf{1.39\\text{ s}}$$\n\nSanity check: 5 V is 25% of 20 V. Since e⁻¹ = 36.8% and e⁻² = 13.5%, the answer must lie between τ and 2τ. 1.39 s ∈ (1.0, 2.0) ✓\n\n*(c) Initial discharge current:*\n$$I(0) = \\frac{V_0}{R} = \\frac{20}{5000} = \\mathbf{4.0\\text{ mA}}$$\n\nThe current flows in the discharge direction (capacitor is the source driving current through R).\n\n**Answer:** τ = 1.0 s; t = 1.39 s to reach 5 V; I(0) = 4.0 mA.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 124,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "(Energy bookkeeping — proving R-independence)",
+      "content": "### WE-3 (Energy bookkeeping — proving R-independence)\n\n**Problem:** C = 50 μF charges from ε = 10 V through R = 2 kΩ (starting uncharged). (a) Total energy from battery. (b) Energy stored in capacitor. (c) Energy dissipated in R. (d) Show the 50/50 split is independent of R.\n\n**Worked solution:**\n\n*(a) Energy from battery:*\n\nTotal charge delivered to capacitor at full charge: Q_∞ = Cε = (50×10⁻⁶)(10) = 500 μC\n\nEvery coulomb is pushed through ε = 10 V by the battery:\n$$W_\\text{battery} = Q_\\infty\\cdot\\varepsilon = C\\varepsilon^2 = (50\\times10^{-6})(10)^2 = \\mathbf{5.0\\text{ mJ}}$$\n\n*(b) Energy stored in capacitor:*\n$$U_C = \\tfrac{1}{2}C\\varepsilon^2 = \\tfrac{1}{2}(50\\times10^{-6})(100) = \\mathbf{2.5\\text{ mJ}}$$\n\n*(c) Energy dissipated in R:*\n$$W_R = W_\\text{battery} - U_C = 5.0 - 2.5 = \\mathbf{2.5\\text{ mJ}}$$\n\nThe dissipated energy equals the stored energy — the battery energy splits exactly 50/50.\n\n*(d) R-independence proof:*\n\n$$W_R = \\int_0^\\infty I^2(t)\\,R\\,dt = \\int_0^\\infty\\!\\frac{\\varepsilon^2}{R^2}e^{-2t/RC}\\cdot R\\,dt = \\frac{\\varepsilon^2}{R}\\cdot\\frac{RC}{2} = \\frac{C\\varepsilon^2}{2}$$\n\nR cancels completely. Verify: with R = 4 kΩ instead of 2 kΩ, τ doubles (charging is slower), but W_R = ½(50×10⁻⁶)(100) = 2.5 mJ — **identical**. This result holds for any R > 0.\n\n**Answer:** W_battery = 5.0 mJ; U_C = 2.5 mJ; W_R = 2.5 mJ (always equal, for any value of R).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 124,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/misconception/MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R",
+      "kind": "misconception",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "**Trigger signal:** Student states \"a larger resistance provides more drive so charging is faster,\" or claims τ decreases when R increases, or predicts I₀ = ε/R being larger means the capacitor charges faster without accounting for the time factor.",
+      "content": "### MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\n\n**Trigger signal:** Student states \"a larger resistance provides more drive so charging is faster,\" or claims τ decreases when R increases, or predicts I₀ = ε/R being larger means the capacitor charges faster without accounting for the time factor.\n\n**Conflict evidence [P28]:** \"Test the claim by taking R to its logical limit. If larger R meant faster charging, then R → ∞ (open circuit) should charge the capacitor in zero time. But with R = ∞, no current flows at all — the capacitor never charges. Going the other way: R → 0 (short circuit) charges the capacitor as fast as physics allows, not slower. The formula τ = RC shows both R and C enter symmetrically: double either one and the charging time doubles. Larger R limits the current I = (ε − V_C)/R at every instant, so each coulomb of charge takes longer to arrive at the capacitor plates.\"\n\n**Bridge text [P30]:** \"Think of filling a water tank (capacitor) through a pipe (resistor) connected to a reservoir (battery). A narrower pipe (larger R) slows the flow rate even though the reservoir pressure (ε) is unchanged — so the tank fills more slowly. The fill time depends on both the pipe width and the tank volume. τ = RC: the pipe width is 1/R and the tank size is C; both determine how long the filling takes.\"\n\n**Replacement text [P31]:** \"The time constant τ = RC is directly proportional to both R and C. Larger R → larger τ → slower charging (it takes longer to accumulate the charge Cε against the growing back-EMF V_C). Larger C → larger τ → slower charging (more charge must arrive before V_C reaches ε). To charge faster: decrease R, decrease C, or both. While I₀ = ε/R is larger with smaller R, this is precisely why smaller R charges faster — more coulombs per second arrive at the plates.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Larger R → larger τ → slower charging curve\" | \"Larger R → more current → faster charging\" |\n| \"τ = RC: R and C contribute equally to the time scale\" | \"τ depends only on R; C sets the final charge, not the speed\" |\n| \"R → ∞: τ → ∞; capacitor never charges\" | \"R → ∞: maximum drive; instant charging\" |\n| \"I₀ = ε/R: smaller R gives larger initial current → faster charge buildup\" | \"Higher initial voltage drop across R means faster capacitor charging\" |\n\n**s6_path:** Calculate τ for R = 1 kΩ, 10 kΩ, and 100 kΩ with the same C = 100 μF (τ = 0.1 s, 1.0 s, 10 s). Plot all three V_C(t) curves on the same axes. Observe that the curve with the largest R is the flattest and slowest — the opposite of the student's prediction.\n\n---",
+      "localKey": "MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R",
+      "language": "en",
+      "refs": [
+        "MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 3,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/misconception/MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS",
+      "kind": "misconception",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "**Trigger signal:** Student replaces the capacitor with an open circuit at t = 0 (concluding I(0) = 0 initially), or states \"capacitors block DC so no current flows when the switch is first closed,\" or sets up KVL at t = 0 with V_C = ε rather than V_C = 0.",
+      "content": "### MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\n\n**Trigger signal:** Student replaces the capacitor with an open circuit at t = 0 (concluding I(0) = 0 initially), or states \"capacitors block DC so no current flows when the switch is first closed,\" or sets up KVL at t = 0 with V_C = ε rather than V_C = 0.\n\n**Conflict evidence [P28]:** \"If the capacitor were open at t = 0, no current would flow and no charge could accumulate on its plates — the capacitor would remain uncharged indefinitely, which contradicts its purpose. Measure the current in the circuit immediately after closing the switch: it equals ε/R, exactly as if the capacitor were replaced by a wire. At t = 0, V_C = 0 (no charge yet stored), so KVL gives ε = I(0)R + 0, hence I(0) = ε/R. The open-circuit behaviour — I = 0, V_C = ε — is only achieved at t → ∞ after sufficient charging time.\"\n\n**Bridge text [P30]:** \"A capacitor's effective opposition to current is not fixed — it evolves throughout charging. At t = 0 (uncharged, V_C = 0): the capacitor exerts zero back-EMF, all of ε drives current through R, and the capacitor behaves like a short circuit. As charge accumulates, V_C rises and opposes further current flow. At t → ∞ (V_C = ε): the back-EMF exactly cancels ε, current falls to zero, and the capacitor now behaves like an open circuit. The statement 'capacitors block DC' accurately describes only the final steady state.\"\n\n**Replacement text [P31]:** \"Capacitor behaviour in a DC transient circuit is time-dependent: (1) t = 0, uncharged (V_C = 0): capacitor acts as a short circuit; I(0) = ε/R (maximum current). (2) t → ∞, fully charged (V_C = ε): capacitor acts as an open circuit; I(∞) = 0. (3) Transient (0 < t < ∞): V_C(t) = ε(1 − e^{−t/τ}), I(t) = (ε/R)e^{−t/τ}. The two extreme models are the initial condition and the final steady state of the same exponential process.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"t = 0, uncharged C: short circuit; I(0) = ε/R\" | \"t = 0: capacitor open; I(0) = 0\" |\n| \"t → ∞: open circuit; I(∞) = 0; V_C = ε\" | \"Capacitor always blocks DC current at every instant\" |\n| \"Transient: V_C grows from 0 to ε; I decays from ε/R to 0\" | \"No current flows at any time in a DC capacitor circuit\" |\n| \"Open-circuit model is a limiting (steady-state) case, not an instantaneous property\" | \"Replace capacitor with open circuit to find I at any DC instant\" |\n\n**s6_path:** Draw the circuit at t = 0 (V_C = 0; replace C with a wire) and calculate I(0) = ε/R. Then draw the circuit at t → ∞ (I = 0; replace C with an open circuit) and confirm V_C = ε. Contrast both limiting models with the intermediate transient described by the exponential equations.\n\n---",
+      "localKey": "MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS",
+      "language": "en",
+      "refs": [
+        "MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 25,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "retrieval-seed",
+      "content": "{\"id\":\"TA-2\",\"title\":\"retrieval-seed\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "diagnostic",
+      "content": "{\"id\":\"TA-3\",\"title\":\"diagnostic\",\"primitives\":[\"P41\"],\"addresses\":[\"MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\",\"MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS",
+        "MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-4\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-6\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "bridge-text",
+      "content": "{\"id\":\"TA-7\",\"title\":\"bridge-text\",\"primitives\":[\"P30\"],\"addresses\":[\"MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "replacement-text",
+      "content": "{\"id\":\"TA-8\",\"title\":\"replacement-text\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\"]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [
+        "MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "discrimination-pairs",
+      "content": "{\"id\":\"TA-9\",\"title\":\"discrimination-pairs\",\"primitives\":[\"P33\"],\"addresses\":[\"MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\"]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [
+        "MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-10\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\"]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [
+        "MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "bridge-text",
+      "content": "{\"id\":\"TA-11\",\"title\":\"bridge-text\",\"primitives\":[\"P30\"],\"addresses\":[\"MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\"]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [
+        "MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "replacement-text",
+      "content": "{\"id\":\"TA-12\",\"title\":\"replacement-text\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\"]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [
+        "MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "discrimination-pairs",
+      "content": "{\"id\":\"TA-13\",\"title\":\"discrimination-pairs\",\"primitives\":[\"P33\"],\"addresses\":[\"MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\"]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [
+        "MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-14\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "narrow",
+      "content": "{\"id\":\"TA-15\",\"title\":\"narrow\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-16\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-17\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "narrow",
+      "content": "{\"id\":\"TA-18\",\"title\":\"narrow\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-19\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P52\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-20\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-22\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-23",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-23\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-23",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/teaching_action_meta/TA-24",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "close",
+      "content": "{\"id\":\"TA-24\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-24",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "Assessment Probes",
+      "content": "### Set A — Retrieval / Recognition (Bloom: Remember)\n\n**A-1:** Write the formula for the time constant. What are its SI units? If R = 4 kΩ and C = 500 μF, calculate τ.\n\n**Answer key:**\nτ = RC; units: seconds (Ω × F = s).\nτ = (4×10³)(500×10⁻⁶) = **2.0 s**\n\n---\n\n**A-2:** Complete each blank: \"At t = 0 with an uncharged capacitor, the capacitor acts as a ___, and the current is ___. At t → ∞, the capacitor acts as a ___, and the current is ___.\"\n\n**Answer key:**\nShort circuit (wire); ε/R (maximum). Open circuit; 0.\n\n---\n\n**A-3:** Write the charging equations for V_C(t) and I(t) from memory. At t = τ, what percentage of the final EMF has V_C reached? After how many time constants is a capacitor considered fully charged?\n\n**Answer key:**\nV_C(t) = ε(1 − e^{−t/τ}); I(t) = (ε/R)e^{−t/τ}.\nAt t = τ: 63.2% of ε. Fully charged after 5τ (within 0.67% of ε).\n\n---\n\n### Set B — Application (Bloom: Apply)\n\n**B-1:** A 20 μF capacitor charges to ε = 15 V through R = 3 kΩ. Find: (a) τ; (b) V_C at t = 2τ; (c) I at t = 0; (d) the time (in terms of τ) at which I equals half its initial value.\n\n**Answer key:**\n(a) τ = (3×10³)(20×10⁻⁶) = **60 ms**\n(b) V_C(2τ) = 15(1 − e⁻²) = 15 × 0.865 = **12.97 V**\n(c) I(0) = 15/3 000 = **5.0 mA**\n(d) I = 2.5 mA when e^{−t/τ} = 0.5 → t = τ ln 2 ≈ **0.693τ** ≈ 41.6 ms\n\n---\n\n**B-2:** A charged capacitor (C = 10 μF, V₀ = 30 V) discharges through R = 2 kΩ. Find: (a) τ; (b) V_C after 3τ; (c) the time for V_C to fall to 10% of V₀.\n\n**Answer key:**\n(a) τ = (2×10³)(10×10⁻⁶) = **20 ms**\n(b) V_C(3τ) = 30 e⁻³ = 30 × 0.0498 = **1.49 V**\n(c) 3 = 30 e^{−t/0.02} → e^{−t/0.02} = 0.1 → t = 0.02 ln 10 = **46.1 ms** (≈ 2.30τ)\n\n---\n\n### Set C — Analysis / Synthesis (Bloom: Analyze)\n\n**C-1 (Energy analysis):** A 100 μF capacitor charges to ε = 50 V via R₁ = 1 kΩ. (a) Energy from battery? (b) Energy stored? (c) The experiment is repeated with R₂ = 10 kΩ (same C, same ε). How do the stored and dissipated energies change?\n\n**Answer key:**\n(a) W_battery = Cε² = (100×10⁻⁶)(50²) = **0.25 J**\n(b) U_C = ½Cε² = **0.125 J**\n(c) Stored energy = ½Cε² = **0.125 J** (same; depends only on C and ε, not R). Dissipated energy = **0.125 J** (same). The 50/50 split is R-independent; only the charging duration changes.\n\n---\n\n**C-2 (Inverse problem):** An oscilloscope displays a rising voltage that reaches 63.2% of 9 V at t = 0.50 s, then remains constant. (a) What circuit produces this curve? (b) What is τ? (c) If C = 100 μF, find R. (d) Describe the shape of the current-through-R curve.\n\n**Answer key:**\n(a) RC charging circuit (series RC with ε = 9 V, uncharged capacitor, switch closed at t = 0)\n(b) 63.2% of ε at t = τ → **τ = 0.50 s**\n(c) R = τ/C = 0.50/(100×10⁻⁶) = **5.0 kΩ**\n(d) I(t) = (9/5 000)e^{−t/0.50} = 1.8 mA × e^{−2t}: exponential decay starting at 1.8 mA, falling to 0 with the same τ = 0.50 s. The current curve is the mirror image (in terms of rise vs. decay) of the voltage curve.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 262,
+        "endLine": 331
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "Adaptive Branching Table",
+      "content": "| Observed signal | Branch target | Action |\n|---|---|---|\n| Student answers I(0) = 0 or V_C(0) = ε | MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS active | Run [P28] → [P30] → [P31] → [P33] sequence for that MC; then re-administer the diagnostic before presenting WE-1 |\n| Student predicts \"larger R → faster charging\" | MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R active | Run [P28] → [P30] → [P31] → [P33] sequence; then calculate τ explicitly for R = 1 kΩ, 10 kΩ, 100 kΩ with same C and compare |\n| Student cannot write KVL or Q = CV | Prerequisite gap (phys.em.kirchhoffs-laws or phys.em.capacitance) | Pause RC circuit content; review the relevant prerequisite for one TA; then re-enter from [P62: retrieval-seed] |\n| Student is fluent on Tier 1 and both prerequisites; no misconceptions detected | Accelerated path | Skip Tier 1 explanation; begin directly with WE-1; substitute Set C probes (C-1, C-2) for Set B as mastery probes |\n| Student score on mastery probe 60–79% | Partial mastery | Use [P52: narrow] to isolate the failing sub-skill (τ calculation, exponential inversion, or energy bookkeeping); offer one fresh item on that sub-skill only |\n| Student score on mastery probe < 60% | Re-teach | Return to Tier 2 from the boundary-condition section; slow down through the ODE derivation; redo WE-1 with student leading; re-probe with a fresh B-level item |\n| Student asks \"what about AC circuits or reactive impedance?\" | Cross-link preview (phys.em.lc-circuits) | Briefly state: in AC circuits the capacitor's impedance is Z_C = 1/(jωC), which depends on frequency; this links to LC circuits and resonance. Defer full treatment to the phys.em.lc-circuits blueprint |\n| Student asks \"what if the capacitor is pre-charged to V_i ≠ 0?\" | Extension — general solution | Present V_C(t) = V_f + (V_i − V_f)e^{−t/τ}; verify it reduces to charging when V_i = 0 and to discharging when V_f = 0; apply to a worked example with V_i = 5 V, V_f = 10 V |\n| Student completes all Set C items with ≥ 95% | Mastery acceleration | Introduce Thevenin reduction: for any resistor network driving one capacitor, replace the network with (V_th, R_th); compute τ = R_th C and V_f = V_th; apply to a two-resistor voltage-divider driving a capacitor |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS",
+        "MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 495,
+        "endLine": 511
+      }
+    },
+    {
+      "assetId": "phys.em.rc-circuits/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.rc-circuits",
+      "title": "Session Flow Script",
+      "content": "```\n[P01: session-open]\n  State learning goal: \"By the end of this session you will be able\n  to apply τ = RC to predict V_C(t) and I(t) during charging and\n  discharging, correctly apply both boundary conditions (t = 0 and\n  t → ∞), and calculate the energy stored and dissipated when a\n  capacitor charges through a resistor.\"\n\n[P62: retrieval-seed]\n  \"What is capacitance? State Q = CV. Now state Kirchhoff's Voltage\n  Law for a closed loop. Can you write KVL for a loop containing\n  a battery ε, a resistor R, and a capacitor C?\"\n  → If fluent on both prerequisites: proceed to Tier 2.\n  → If shaky on KVL or Q = CV: spend one TA reviewing\n    phys.em.kirchhoffs-laws (KVL loop equation) and\n    phys.em.capacitance (Q = CV, C = ε₀A/d) before continuing.\n\n[P41: diagnostic]\n  \"When you close the switch in an RC circuit at t = 0,\n  what is the current? What is the voltage across C?\"\n  → Listen for MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\n    (student says I = 0 or V_C = ε at t = 0).\n  → Listen for MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\n    (student predicts larger R → faster charging).\n  → Record which misconceptions are active before proceeding.\n\n[P06: concrete-anchor]\n  \"Camera flash: C ~ 1 000 μF charges from a 1.5 V AA cell\n  through R ~ 10 kΩ → τ = RC = 10 s. Slow charging over seconds.\n  The shutter button connects the flash tube (R_lamp ~ 0.1 Ω) →\n  τ = RC = 100 μs. The entire stored energy dumps in a flash.\n  Same capacitor, same charge, two wildly different time constants\n  set by R. Larger R → larger τ.\"\n\n[P51: check-in]\n  \"Before we derive the equations, any questions about what\n  happens physically when a capacitor charges through a resistor?\"\n\n[P28: conflict-evidence] — MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\n  \"Suppose larger R really did mean faster charging. Take R → ∞.\n  What happens? With an open circuit, no current can flow at all.\n  The capacitor never charges. So larger R cannot mean faster.\n  Formula: τ = RC. Larger R → larger τ → slower.\"\n\n[P30: bridge-text] — MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\n  \"Resistance is a bottleneck for charge flow. Bigger bottleneck →\n  slower charge accumulation → longer time to reach full voltage.\n  τ = RC: both the bottleneck size and the tank capacity set the\n  fill time equally.\"\n\n[P31: replacement-text] — MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\n  \"Larger R → larger τ → slower charging. Larger C → larger τ →\n  slower charging. To charge faster: use smaller R, smaller C,\n  or both. I₀ = ε/R is larger with smaller R — which is exactly\n  why smaller R charges faster.\"\n\n[P33: discrimination-pairs] — MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R\n  Drill the four valid/invalid pairs. Confirm student can\n  distinguish \"larger R → slower\" from \"larger R → larger I₀.\"\n\n[P28: conflict-evidence] — MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\n  \"If the capacitor were open at t = 0, I = 0 and no charge\n  could ever reach the plates — the capacitor would stay uncharged\n  forever. Measure V across R at t = 0: it equals ε. So I(0) = ε/R,\n  identical to what you would get if you replaced C with a wire.\"\n\n[P30: bridge-text] — MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\n  \"At t = 0, V_C = 0: no back-EMF, all ε across R → short circuit.\n  At t → ∞, V_C = ε: back-EMF cancels ε, I = 0 → open circuit.\n  The capacitor transitions from short to open as it charges.\"\n\n[P31: replacement-text] — MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\n  \"t = 0 (uncharged C): short circuit; I = ε/R. t → ∞: open circuit;\n  I = 0, V_C = ε. Transient: V_C = ε(1 − e^{−t/τ}), I = (ε/R)e^{−t/τ}.\n  'Capacitors block DC' describes the steady-state limit only.\"\n\n[P33: discrimination-pairs] — MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS\n  Drill all four valid/invalid pairs. Confirm student can apply\n  the correct boundary condition at t = 0 and t → ∞.\n\n[P06: concrete-anchor] — WE-1 (Charging)\n  Work through R = 10 kΩ, C = 100 μF, ε = 12 V step by step.\n  τ = 1.0 s. V_C(τ) = 7.58 V = 63.2% of 12 V. I(0) = 1.2 mA.\n  I(τ) = 0.44 mA. Mark the three time points on a sketch of\n  the V_C(t) curve drawn on the board.\n\n[P52: narrow]\n  \"In WE-1, why does the current decrease even though ε is constant?\n  What is growing that opposes the current?\"\n  → Expected: V_C grows → net driving voltage = ε − V_C falls →\n    I = (ε − V_C)/R falls. This is the physical meaning of the ODE.\n\n[P06: concrete-anchor] — WE-2 (Discharging)\n  Work through C = 200 μF, V₀ = 20 V, R = 5 kΩ.\n  τ = 1.0 s. Set up 5 = 20 e^{−t} → t = ln 4 = 1.39 s.\n  Emphasise the logarithm step: to find t, take ln of both sides.\n  Sanity-check: 1.39 s is between τ and 2τ; 25% is between\n  36.8% (at τ) and 13.5% (at 2τ). ✓\n\n[P06: concrete-anchor] — WE-3 (Energy)\n  Work through C = 50 μF, ε = 10 V, R = 2 kΩ.\n  W_battery = 5.0 mJ. U_C = 2.5 mJ. W_R = 2.5 mJ.\n  Write the integral proof. Cancel R. State the result:\n  \"Always 50/50, for any R.\"\n\n[P52: narrow]\n  \"If R were doubled to 4 kΩ, what would W_R be?\n  What if R were halved to 1 kΩ?\"\n  → Expected: still 2.5 mJ in both cases.\n  → Follow up: \"What does change when R changes?\"\n  → Expected: the time taken (τ changes), not the energy amounts.\n\n[P36: mastery-probe]\n  Administer Set B: B-1 (charging) and B-2 (discharging).\n  Score against answer key.\n  → ≥ 80%: proceed to P91.\n  → 60–79%: identify the failing step (τ calculation, log inversion,\n    or boundary condition); rework that step with a P52 narrowing\n    question; offer one fresh item; re-score.\n  → < 60%: return to Tier 2 from boundary conditions; redo WE-1\n    with student driving the computation; re-probe.\n\n[P51: check-in]\n  \"How are you finding the natural log step? Is it clear\n  when to use it and how to set up the equation?\"\n\n[P91: mastery-gate]\n  Threshold 0.80. If met: set retrieval schedule, close session.\n  If not met: one more targeted cycle on the weakest sub-skill\n  before closing.\n\n[P85: regulation-tail]\n  Note emotional regulation needs: frustration with exponentials\n  is common. Reassure that τ = RC is the single key formula —\n  the exponential form is always the same shape, only the numbers\n  change. Normalise taking a moment to set up before calculating.\n\n[P89: retrieval-schedule]\n  Schedule R-1 (+1 day), R-2 (+3 days), R-3 (+7 days),\n  R-4 (+21 days) per Component 5 protocol.\n\n[P68: close]\n  \"Today: τ = RC governs every RC transient. Charging rises\n  exponentially from 0 to ε; discharging decays from V₀ to 0 —\n  both with the same τ. Boundary conditions: short at t = 0,\n  open at t → ∞. Energy: always splits 50/50 between storage\n  and dissipation, regardless of R. Retrieval probe in 24 hours.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.rc-circuits.md",
+        "startLine": 342,
+        "endLine": 495
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

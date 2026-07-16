@@ -1,0 +1,518 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.canonical-transformations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.canonical-transformations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d3c038a002a6c22ceaa1ade166c60ee072213dcc5423494dd71dc173bbd0373f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.canonical-transformations.md": "sha256:dcdbaa62772994341451494486b5ec67d8ac9bc749493c751f6513a82f585ea3"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.canonical-transformations",
+    "name": "Canonical Transformations",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.mech.poisson-brackets"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.canonical-transformations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.canonical-transformations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.canonical-transformations.md": "sha256:dcdbaa62772994341451494486b5ec67d8ac9bc749493c751f6513a82f585ea3"
+      },
+      "contentHash": "sha256:72715c61f433daba64aae71f70afe40f2642aefb8171df5d2e446c3d59dc2f70",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.canonical-transformations.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.canonical-transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.canonical-transformations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.canonical-transformations.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.canonical-transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.canonical-transformations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.canonical-transformations.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.canonical-transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.canonical-transformations\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.canonical-transformations.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md#TA-4 (addresses MC-CT-ANY-COORD-CHANGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.canonical-transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.canonical-transformations\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.canonical-transformations.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.canonical-transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.canonical-transformations\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.canonical-transformations.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.canonical-transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.canonical-transformations\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.canonical-transformations.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.canonical-transformations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.canonical-transformations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.canonical-transformations/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Canonical Transformations — Core Idea (one sentence)",
+      "content": "A canonical transformation is a change of phase-space coordinates (q,p) → (Q,P) that preserves the form of Hamilton's equations — equivalently, one that preserves Poisson brackets.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 20,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Identity transformation via F₂",
+      "content": "### Example 1 — Identity transformation via F₂\nGenerating function F₂(q,p,P) = qP (type-2: old q, new P).\nRelations: Q = ∂F₂/∂P = q; p = ∂F₂/∂q = P.\nConclusion: Q=q, P=p — the identity is trivially canonical.\nConfirms: {Q,P}={q,p}=1 ✓",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Exchange transformation (q↔p swap)",
+      "content": "### Example 2 — Exchange transformation (q↔p swap)\nF₁(q,Q) = qQ (type-1: old q, new Q).\nRelations: p = ∂F₁/∂q = Q; P = −∂F₁/∂Q = −q.\nNew Hamiltonian K(Q,P) = H(q,p) = H(Q,−P).\nSignificance: position and momentum play symmetric roles — the harmonic oscillator H=p²/2m+mω²q²/2 becomes K=Q²/2m+mω²P²/2 (same form, swapped names).",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Action-angle variables for harmonic oscillator",
+      "content": "### Example 3 — Action-angle variables for harmonic oscillator\nOld: (x, p) with H = p²/2m + mω²x²/2.\nDefine I = E/ω (action), θ = ωt + θ₀ (angle).\nTransform: x = √(2I/mω) sin θ, p = √(2mωI) cos θ.\nNew Hamiltonian K = ωI — cyclic in θ → İ = 0 (action conserved), θ̇ = ω (uniform rotation).\nApplication: K=ωI makes equations of motion trivial; generalizes to integrable systems.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/misconception/MC-CT-ANY-COORD-CHANGE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "\"Any coordinate change is canonical.\"",
+      "content": "| MC-CT-ANY-COORD-CHANGE | \"Any coordinate change is canonical.\" | \"I can transform to any variables I want.\" | Only transformations satisfying {Qᵢ,Pⱼ}=δᵢⱼ, {Qᵢ,Qⱼ}=0, {Pᵢ,Pⱼ}=0 are canonical; point transformations Q=Q(q,t) are canonical, but arbitrary (q,p)→(Q,P) mixing generally is not. |",
+      "localKey": "MC-CT-ANY-COORD-CHANGE",
+      "language": "en",
+      "refs": [
+        "MC-CT-ANY-COORD-CHANGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/misconception/MC-CT-GENERATING-IS-POTENTIAL",
+      "kind": "misconception",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "\"The generating function is like a potential energy.\"",
+      "content": "| MC-CT-GENERATING-IS-POTENTIAL | \"The generating function is like a potential energy.\" | \"F just generates the new coordinates.\" | F is a bridge function relating old and new variables via partial derivatives; four types F₁–F₄ suit different boundary conditions; F has units of action (J·s), not energy. |",
+      "localKey": "MC-CT-GENERATING-IS-POTENTIAL",
+      "language": "en",
+      "refs": [
+        "MC-CT-GENERATING-IS-POTENTIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Concrete hook",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete hook\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-CT-ANY-COORD-CHANGE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-CT-ANY-COORD-CHANGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): State the condition on Poisson brackets for (Q,P) to be a canonical transformation of (q,p).  \n*Answer*: {Qᵢ,Pⱼ}_{q,p}=δᵢⱼ, {Qᵢ,Qⱼ}=0, {Pᵢ,Pⱼ}=0.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For F₁(q,Q)=qQ, find p and P in terms of q and Q. Is this canonical?  \n*Answer*: p=∂F₁/∂q=Q, P=−∂F₁/∂Q=−q. Check: {Q,P}_{q,p}={Q,−q}=−{Q,q}=−(−1)=1 ✓ Canonical.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): For the harmonic oscillator H=p²/2m+mω²x²/2, using action-angle variables, write the new Hamiltonian K(I,θ) and state the equations of motion.  \n*Answer*: K=ωI; θ̇=∂K/∂I=ω, İ=−∂K/∂θ=0.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze-MC): A student says \"Q=2q, P=p/2 is canonical because it's just a scaling.\" Verify or refute.  \n*Answer*: {Q,P}={2q,p/2}=2·(1/2)·{q,p}=1·1=1 ✓ This scaling IS canonical (symplectic with unit determinant). Correct student's reasoning: must check {Q,P}, not just \"it looks like scaling.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): Show that Hamilton's equations are preserved under a canonical transformation: if dQᵢ/dt=∂K/∂Pᵢ and dPᵢ/dt=−∂K/∂Qᵢ hold, what is K in terms of H and the generating function F₂?  \n*Answer*: K(Q,P,t)=H(q(Q,P),p(Q,P),t)+∂F₂/∂t. If F₂ has no explicit t-dependence, K=H expressed in new variables.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student computes {Q,P}≠1 for a claimed-canonical transform | Validate the computation; confirm non-canonicity; distinguish from non-symplectic coordinate changes |\n| Student inverts F₂ derivatives correctly but gets wrong K | Check whether ∂F₂/∂t term was dropped; ask \"does your generating function depend on time?\" |\n| Student asks \"why do we need four types?\" | Explain: each type suits different boundary conditions; F₁ for q,Q known; F₂ for q,P known (Legendre analog); connects to different physical parameterizations |\n| Student confuses symplectic matrix J with angular momentum J | Use script J for symplectic, bold **J** for angular momentum; flag the collision immediately |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 99,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What does {f,H}=0 mean?\" linking from Poisson brackets\nCORE-1 (15 min): TA-1 + TA-2 (hook + notation + four generating functions)\nCORE-2 (20 min): TA-3 + TA-4 (derivation + MC diagnostic probe)\nCORE-3 (20 min): TA-5 (action-angle example, full derivation)\nDRILL  (10 min): TA-6 (four-type derivative relations from memory)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Hamilton-Jacobi chooses F₂ to make K=0 everywhere — next session.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.mech.canonical-transformations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.canonical-transformations",
+      "title": "Known Sticking Points",
+      "content": "1. **Four generating functions**: Students conflate F₁–F₄; remedy — table with old/new variables and sign conventions posted visibly; F₂ is the most common in applications.\n2. **Symplectic condition**: The matrix form MᵀJM=J is abstract; always translate back to Poisson-bracket condition for concreteness.\n3. **Action-angle variables**: \"How did you know to define I=E/ω?\" — motivation is that adiabatic invariants are actions; preview the Hamilton-Jacobi connection.\n4. **New Hamiltonian**: K=H+∂F/∂t confuses students — emphasize K=H only when ∂F/∂t=0 (most textbook examples).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.canonical-transformations.md",
+        "startLine": 90,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

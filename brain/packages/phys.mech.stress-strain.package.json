@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.stress-strain-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.stress-strain",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:508764be3f884aeb21d4a2edd6e1c8f88aa96dcdd1509a33af0d82968e7b930e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.stress-strain.md": "sha256:b1617cd24e1b9798614e32dd76bbe26b30272fab8c3bb4d6d281f617bffe6760"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.stress-strain",
+    "name": "Stress and Strain",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.hookes-law"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.stress-strain-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.stress-strain (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.stress-strain.md": "sha256:b1617cd24e1b9798614e32dd76bbe26b30272fab8c3bb4d6d281f617bffe6760"
+      },
+      "contentHash": "sha256:0478f3de83137df7c6ff401c6adc11dc2cb0861a5b56e06c73c8954910643bd6",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.stress-strain.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.stress-strain.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.stress-strain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.stress-strain\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.stress-strain.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.stress-strain.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.stress-strain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.stress-strain\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.stress-strain.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.stress-strain.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.stress-strain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.stress-strain\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.stress-strain.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.stress-strain.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.stress-strain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.stress-strain\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.stress-strain.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.stress-strain.md#TA-5 (addresses MC-YOUNG-MODULUS-IS-STIFFNESS, MC-STRESS-IS-FORCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.stress-strain"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.stress-strain\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.stress-strain/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "Stress and Strain — Conceptual Development Sequence",
+      "content": "**TA-1 — Stress and Strain Definitions [C]**\n\nTensile stress (pulling/compression along axis):\n```\nσ = F/A        (Pa = N/m²)\n```\n\nTensile strain (fractional extension):\n```\nε = ΔL/L      (dimensionless)\n```\n\nYoung's modulus (modulus of elasticity):\n```\nE = σ/ε = (F/A)/(ΔL/L) = FL/(AΔL)      (Pa or GPa)\n```\n\nRearranged for extension:\n```\nΔL = FL/(AE)\n```\n\nTable of Young's moduli:\n\n| Material | E (GPa) |\n|---|---|\n| Rubber | 0.01–0.1 |\n| Wood | 1–10 |\n| Bone | 15–25 |\n| Concrete | 30 |\n| Aluminium | 70 |\n| Glass | 70 |\n| Steel | 200 |\n| Diamond | 1000 |\n\n**TA-2 — The Stress-Strain Curve [C→P]**\n\nRegions of a typical metal stress-strain graph (σ vs. ε):\n\n1. **Proportional limit (Hooke's region)**: σ ∝ ε, linear. Slope = E.\n2. **Elastic limit**: maximum stress for fully reversible deformation.\n3. **Yield point**: material begins plastic deformation (permanent change).\n4. **Work hardening / plastic region**: material continues to deform with increasing stress.\n5. **Ultimate tensile strength (UTS)**: maximum stress the material withstands.\n6. **Fracture point**: material breaks.\n\nKey distinction: elastic region (below elastic limit) — material returns to original shape. Plastic region — permanent deformation.\n\n**TA-3 — Shear Stress and Shear Modulus [C→P]**\n\nShear stress: force parallel to a surface:\n```\nτ = F_parallel / A      (Pa)\n```\n\nShear strain: angle of deformation φ:\n```\nγ = tan φ ≈ φ    (for small angles, dimensionless)\n```\n\nShear modulus (modulus of rigidity):\n```\nG = τ/γ      (Pa)\n```\n\nBulk modulus: for uniform compression (e.g., fluid pressure on all sides):\n```\nK = −V × dP/dV    (resistance to volume change)\n```\n\n**TA-4 — Elastic Potential Energy in Materials [P]**\n\nEnergy stored per unit volume (elastic energy density):\n```\nu = ½ σε = σ²/(2E) = Eε²/2\n```\n\nTotal elastic PE stored in a rod (volume V = AL):\n```\nU = u × V = ½ × (F/A) × (ΔL/L) × AL = ½ FΔL = ½ kΔL²\n```\n\nThis confirms: Hooke's Law PE = ½kx² is a special case of elastic strain energy = ½FΔL.\n\n**TA-5 — Tensile, Compressive, and Breaking Stress [P]**\n\nDifferent failure modes:\n- **Tensile failure**: stress in tension exceeds UTS → fracture (brittle materials like glass) or necking (ductile materials like steel).\n- **Compressive failure**: excess compression → buckling (slender columns) or crushing.\n- **Shear failure**: excess shear → sliding fracture (rivets, bolts in shear).\n\nFactor of safety: in engineering, working stress = UTS / (factor of safety). Typical factors of safety: 2–4 for buildings, up to 10 for aircraft.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 72,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/misconception/MC-STRESS-IS-FORCE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "- **Trigger signal:** Student writes \"stress = force\" or says \"more force means more stress regardless of area.",
+      "content": "### MC-STRESS-IS-FORCE\n- **Trigger signal:** Student writes \"stress = force\" or says \"more force means more stress regardless of area.\"\n- **Conflict evidence [P28]:** \"A 1000 N force applied to a steel bar of cross-section 0.01 m² gives stress σ = 1000/0.01 = 100 000 Pa = 100 kPa. The same 1000 N force on a 0.001 m² bar gives σ = 1 000 000 Pa = 1 MPa — ten times the stress on a bar with ten times less cross-section. The smaller bar is ten times more likely to break. Stress = force per unit area, not force alone.\"\n- **Bridge text [P30]:** \"Stress is to materials what pressure is to fluids. Just as a pin hurts more than a finger (same force, smaller area → more pressure), a thin wire breaks more easily than a thick wire under the same load (same force, smaller area → more stress).\"\n- **Replacement text [P31]:** \"σ = F/A (tensile stress, units: Pa = N/m²). For the same applied force, a smaller cross-section produces higher stress. A material breaks when σ exceeds its ultimate tensile strength (UTS) — a material property in Pa, not a force.\"\n- **Discrimination pairs [P33]:**\n  - 1000 N on 10 cm² area: σ = 10⁶ Pa = 1 MPa ✓\n  - 1000 N on 1 cm² area: σ = 10⁷ Pa = 10 MPa ✓ (10× more stress)\n- **s6_path:** \"Force breaks bones; stress breaks materials. The same force that's harmless spread over your palm would pierce skin on a needle tip. Stress = force / area.\"\n\n---",
+      "localKey": "MC-STRESS-IS-FORCE",
+      "language": "en",
+      "refs": [
+        "MC-STRESS-IS-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/misconception/MC-YOUNG-MODULUS-IS-STIFFNESS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "- **Trigger signal:** Student confuses Young's modulus E with the spring constant k, or says \"a larger E means the wire stretches more.",
+      "content": "### MC-YOUNG-MODULUS-IS-STIFFNESS\n- **Trigger signal:** Student confuses Young's modulus E with the spring constant k, or says \"a larger E means the wire stretches more.\"\n- **Conflict evidence [P28]:** \"Spring constant k depends on the wire's geometry (length and area): k = EA/L. Young's modulus E is a material property — it doesn't change when you make the wire thicker or shorter. Steel always has E ≈ 200 GPa; rubber E ≈ 0.01–0.1 GPa. A short, thick steel rod has a very large k but the same E as a long thin steel wire. E describes the material; k describes the object.\"\n- **Bridge text [P30]:** \"Young's modulus E = σ/ε (stress/strain) — it measures how resistant the material is to deformation per unit strain. The spring constant k = EA/L combines the material's E with the object's geometry. For the same material, a shorter or wider rod has a larger k (harder to stretch) but the same E.\"\n- **Replacement text [P31]:** \"E = σ/ε = (F/A)/(ΔL/L) — material property (GPa). k = EA/L — object property (N/m). Same material, different geometries → same E but different k. Always distinguish material properties (E, UTS, yield stress) from object properties (k).\"\n- **Discrimination pairs [P33]:**\n  - Steel wire 1 m long, 1 mm²: k = 200×10⁹ × 10⁻⁶ / 1 = 200 N/m ✓\n  - Steel wire 0.5 m long, 1 mm²: k = 200×10⁹ × 10⁻⁶ / 0.5 = 400 N/m ✓ (same E, double k)\n- **s6_path:** \"E is like the personality of the material — steel is steel wherever you cut it. k is like the stiffness of a specific spring — depends on how you made it. Same personality, different object.\"\n\n---",
+      "localKey": "MC-YOUNG-MODULUS-IS-STIFFNESS",
+      "language": "en",
+      "refs": [
+        "MC-YOUNG-MODULUS-IS-STIFFNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "Stress and Strain Definitions",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Stress and Strain Definitions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 74,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "The Stress-Strain Curve",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Stress-Strain Curve\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 109,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "Shear Stress and Shear Modulus",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Shear Stress and Shear Modulus\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 122,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "Elastic Potential Energy in Materials",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Elastic Potential Energy in Materials\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 144,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "Tensile, Compressive, and Breaking Stress",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Tensile, Compressive, and Breaking Stress\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-STRESS-IS-FORCE\",\"MC-YOUNG-MODULUS-IS-STIFFNESS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-YOUNG-MODULUS-IS-STIFFNESS",
+        "MC-STRESS-IS-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 158,
+        "endLine": 317
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Stress and cross-section**\n\"Two wires made of the same steel: wire A (diameter 2 mm) and wire B (diameter 4 mm). The same 500 N load is applied to each. Calculate the stress in each wire. Which is more likely to break?\"\n\n*Target:* A_A = π(1×10⁻³)² = 3.14×10⁻⁶ m²; σ_A = 500/3.14×10⁻⁶ = 159 MPa. A_B = π(2×10⁻³)² = 12.57×10⁻⁶ m²; σ_B = 500/12.57×10⁻⁶ = 39.8 MPa. Wire A has 4× the stress (area is ¼) → A more likely to break.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Young's modulus vs. spring constant**\n\"An aluminium rod (E = 70 GPa, L = 0.5 m, A = 10⁻⁴ m²). (a) Find k. (b) Find extension under 700 N.\"\n\n*Target:* k = EA/L = 70×10⁹×10⁻⁴/0.5 = 1.4×10⁷ N/m. ΔL = F/k = 700/(1.4×10⁷) = 5×10⁻⁵ m = 0.05 mm.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Stress-strain curve interpretation**\n\"A material's stress-strain curve shows: linear to σ = 250 MPa (ε = 0.001); then yield region; UTS = 400 MPa; fracture at ε = 0.15. (a) What is E? (b) Is this likely a metal or ceramic? (c) Why does the curve flatten near UTS?\"\n\n*Target:* E = σ/ε = 250/0.001 = 250 GPa (steel-like). Metal — large plastic region (ε goes to 0.15 before fracture); ceramic fractures near elastic limit with almost no plastic region. Flattening near UTS: necking begins (local reduction in cross-section); nominal stress calculated on original area, but actual stress at the neck rises while force drops.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Elastic energy**\n\"A steel wire (k = 5000 N/m) is stretched 2 cm. (a) PE stored? (b) If a 100 g mass is attached to the wire and set oscillating, what is the maximum speed at the natural length position?\"\n\n*Target:* U = ½kx² = ½×5000×4×10⁻⁴ = 1 J. At natural length: ½mv² = U → v = √(2U/m) = √(2/0.1) = √20 = 4.47 m/s.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Engineering application**\n\"A steel cable (E = 200 GPa, L = 50 m, A = 10⁻³ m²) supports a 10 000 kg lift. (a) Find extension. (b) Find stress. (c) If UTS of the steel is 500 MPa, what safety factor does this represent?\"\n\n*Target:* F = 10 000×9.8 = 98 000 N; ΔL = FL/(AE) = 98 000×50/(10⁻³×2×10¹¹) = 4.9×10⁶/2×10⁸ = 0.0245 m = 24.5 mm; σ = F/A = 98 000/10⁻³ = 98 MPa; safety factor = 500/98 ≈ 5.1 (reasonable for lift cables).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "Adaptive Flags",
+      "content": "- **Unit discipline**: Young's modulus in GPa (10⁹ Pa). When computing ΔL = FL/(AE), ensure A is in m², L in m, F in N, E in Pa (not GPa). Unit mismatch is the dominant arithmetic error.\n- **Stress-strain curve details**: the curve shape differs significantly for ductile metals (steel — long plastic region), brittle materials (glass — fracture at elastic limit), and polymers (rubber — non-linear from the start). Show at least two contrasting curves.\n- **k = EA/L derivation**: derive explicitly (TA-1 end or TA-2 beginning) — this bridges Hooke's Law and Young's modulus and resolves MC-YOUNG-MODULUS-IS-STIFFNESS at a structural level.\n- **WE-3 energy release**: when a wire snaps, its elastic PE goes into deforming/vibrating the wire (as heat and sound), not into the hanging mass. This surprises students who expect the mass to jump.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-YOUNG-MODULUS-IS-STIFFNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 279,
+        "endLine": 288
+      }
+    },
+    {
+      "assetId": "phys.mech.stress-strain/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.stress-strain",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — rubber vs. steel rod provocation\n  ↓\n[P41] PD-1 (Hooke's Law; elastic limit concept)\n  ↓ PASS\n[P06] Anchor: same force, same geometry, different materials → E captures the difference\n  ↓\nTA-1: σ = F/A; ε = ΔL/L; E = σ/ε; Young's moduli table [C]\n  ↓\nTA-2: Stress-strain curve; regions; yield, UTS, fracture [C→P]\n  ↓\n[P28] Conflict: \"Young's modulus is the spring constant\" → MC-YOUNG-MODULUS-IS-STIFFNESS\n  ↓\nWE-1: Calculate σ, ε, E from measurements\n  ↓\n[P51] Check-in MP-1 (stress vs. cross-section)\n  ↓ monitor\nTA-3: Shear stress/strain; G; bulk modulus K [C→P]\n  ↓\nWE-2 → WE-3 (extension; elastic energy)\n  ↓\nTA-4: Elastic energy density; U = ½FΔL = ½kΔL² [P]\n  ↓\nTA-5: Failure modes; factor of safety [P]\n  ↓\n[P36] MP-2 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"A 1000 N load on a 2 mm diameter steel rod (E=200 GPa, L=1 m). Find ΔL.\"\n[P68]; [P85]; [P89] 1/3/7 days; [P91] 80% gate\n```\n\n**Protocol routing:** S0: full CPA; begin with physical stretch of rubber band and steel (or virtual lab); draw stress-strain curve by hand; S1: knows E = σ/ε but thinks E = k → MC-YOUNG-MODULUS-IS-STIFFNESS; S4: PD-1 fail → hookes-law; S6: [F] — \"Two steps: compute stress (F/A), compute strain (ΔL/L), divide to get E or rearrange for what's unknown\"; S7: open with MP-5 (safety factor calculation — engineering context that goes beyond formula substitution).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.stress-strain.md",
+        "startLine": 242,
+        "endLine": 279
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

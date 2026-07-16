@@ -1,0 +1,406 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.entropy-statistical-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.entropy-statistical",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:daf15400e50a3046589ee2efb8149cf67d9000366297fbf50f9efa4b2d4c4818",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.entropy-statistical.md": "sha256:91457e061d121abc4ed1f1e084ba16a47f95130c549bd938671f95211b714fca"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.stat.entropy-statistical",
+    "name": "Statistical Definition of Entropy",
+    "difficultyRaw": "Expert",
+    "bloom": "Analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.stat.partition-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.entropy-statistical-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.entropy-statistical (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.entropy-statistical.md": "sha256:91457e061d121abc4ed1f1e084ba16a47f95130c549bd938671f95211b714fca"
+      },
+      "contentHash": "sha256:81c0d4c7be96759b287e142db4ae2175c07366b9cac66dcc52e202f987a64660",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.entropy-statistical.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.entropy-statistical"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.entropy-statistical\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.entropy-statistical.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.entropy-statistical"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.entropy-statistical\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.entropy-statistical.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md#TA-3 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.entropy-statistical"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.entropy-statistical\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.entropy-statistical.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md#TA-4 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.entropy-statistical"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.entropy-statistical\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.entropy-statistical/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Statistical Definition of Entropy — core explanation",
+      "content": "**One-sentence definition:** Boltzmann's formula S = k_B ln Ω defines entropy as the logarithm of the number of microstates Ω consistent with a macrostate, providing the fundamental link between statistical mechanics and thermodynamic entropy.\n\n**The core insight:** Entropy is not fundamentally about disorder or heat flow — it is a count. Ω is the number of microscopic arrangements (microstates) that produce the same macroscopic state (macrostate). Systems evolve toward higher-entropy macrostates because there are exponentially more microstates there. The logarithm makes entropy extensive (additive); k_B converts it to SI units matching the thermodynamic definition dS = δQ_rev/T.\n\n**Conceptual chain:**\n1. Macrostate vs. microstate: macrostate = {N, V, T, P, U} (thermodynamic variables); microstate = positions and momenta of all N particles.\n2. Multiplicity Ω: the number of microstates consistent with a given macrostate.\n3. Equal a priori probabilities: in an isolated system, all accessible microstates are equally likely (fundamental postulate of statistical mechanics).\n4. Boltzmann's formula: S = k_B ln Ω. Derived from requiring S to be extensive and match thermodynamic entropy.\n5. Entropy increase: macrostates with large Ω are overwhelmingly probable → systems spontaneously evolve to macrostates with larger Ω (→ larger S). The second law is a statistical near-certainty, not an absolute law.\n6. Connection to thermodynamics: from Z = Σ e^(−βEᵢ), Ω(E) = e^(S(E)/k_B) → canonical ensemble entropy S = k_B ln Z + ⟨E⟩/T.\n7. Third law: as T → 0, the system approaches its unique ground state: Ω → 1 → S → k_B ln 1 = 0.\n8. Shannon entropy: H = −Σ pᵢ ln pᵢ — the general entropy for arbitrary probability distributions. Reduces to k_B ln Ω when all microstates are equally probable (pᵢ = 1/Ω).\n\n**Central equations:**\n- Boltzmann: S = k_B ln Ω\n- Shannon/Gibbs: S = −k_B Σᵢ pᵢ ln pᵢ\n- Stirling: ln N! ≈ N ln N − N (needed for large N calculations)\n- Entropy from partition function: S = k_B ln Z + ⟨E⟩/T = k_B(ln Z + β⟨E⟩)\n- Extensivity: Ω_total = Ω_A × Ω_B → S_total = S_A + S_B (from ln of product)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 18,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Entropy measures disorder",
+      "content": "### MC-1: \"Entropy measures disorder\"\n- **Probe:** \"A crystal of ice at 0°C vs. a perfect crystal at absolute zero — which has more entropy? What is the 'disorder' in each?\"\n- **Characteristic phrase:** \"More disordered = higher entropy.\"\n- **Trigger:** Textbooks and popular science frequently use \"disorder\" as a synonym for entropy.\n- **Conflict evidence [P28]:** (a) A gas of N₂ molecules has high entropy. A perfectly ordered crystal of diamond (one of the most \"orderly\" structures in nature) also has nonzero entropy at room temperature — its phonons provide Ω > 1 microstates. (b) Mixing two different gases increases entropy (mixing entropy), but the mixture looks no more \"disordered\" to the eye. (c) \"Disorder\" has no precise mathematical definition; Ω does. The two concepts diverge in subtle cases (polymer folding, black holes).\n- **Bridge [P30]:** \"'Disorder' is a useful first approximation — more microstates often looks more disordered. But entropy's true meaning is the count of microstates: S = k_B ln Ω. This is precise, computable, and connects directly to the thermodynamic formula dS = δQ/T.\"\n- **Replacement [P31]:** Entropy = k_B × logarithm of the number of accessible microstates. It is a precise count, not a qualitative impression of messiness.\n- **Discrimination pairs [P33]:** A well-shuffled deck looks disordered; entropy ~ k_B ln(52!). But a protein in its native (folded) state looks \"ordered\" and has low conformational entropy — yet the surrounding water (freed from hydrophobic contacts) gains more entropy. Total entropy still increases. \"Disorder\" gives the wrong intuition here.\n- **S6 repair path:** Calculate Ω for the Einstein solid for a specific (N, q). Compute S = k_B ln Ω. Compare to the qualitative \"disorder\" assessment — do they always agree? (At high T, yes; at low T the distinction matters.)",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "The second law is an absolute law that can never be violated",
+      "content": "### MC-2: \"The second law is an absolute law that can never be violated\"\n- **Probe:** \"Could a gas spontaneously compress into one half of its container?\"\n- **Characteristic phrase:** \"Entropy can never decrease — it's a law of physics.\"\n- **Trigger:** \"Law of physics\" implies absolute truth.\n- **Conflict evidence [P28]:** For N molecules, the probability of spontaneous compression into one half is (1/2)^N. For N = 1 molecule: P = 1/2 — it happens half the time! For N = 10: P ≈ 0.001. For N = 10²³: P ≈ 10^(−3×10²²) — never in cosmic history, but not zero. Fluctuation theorem: for small systems over short times, entropy-decreasing fluctuations are measurable. Maxwell's demon thought experiment explores the information cost of apparent violation.\n- **Bridge [P30]:** \"The second law is a statistical law: entropy decrease is overwhelmingly improbable for macroscopic systems. For small systems (nanodevices, single molecules), entropy can spontaneously decrease and does. The second law is about the overwhelming weight of numbers, not an absolute prohibition.\"\n- **Replacement [P31]:** The second law is a statistical near-certainty for macroscopic systems. Entropy can decrease in small systems (fluctuations), and the probability of a macroscopic entropy decrease is fantastically small but nonzero.\n- **Discrimination pairs [P33]:** \"The sun will rise tomorrow\" — not an absolute law (the sun could go supernova tonight), but for all practical purposes certain. Similarly, the second law is near-certain for large systems, not absolutely certain.\n- **S6 repair path:** Compute the probability of spontaneous compression for N = 10 molecules vs. N = 100 molecules. Show the exponential decrease in probability with N. Introduce the concept of a fluctuation.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Ω is the probability of a macrostate",
+      "content": "### MC-3: \"Ω is the probability of a macrostate\"\n- **Probe:** \"A system with two macrostates: macrostate A has Ω_A = 10, macrostate B has Ω_B = 100. What is the probability of macrostate A?\"\n- **Characteristic phrase:** \"Ω is the probability, so P(A) = 10.\"\n- **Trigger:** Students know \"high Ω = more probable\" and conflate Ω with probability.\n- **Conflict evidence [P28]:** Ω is a count (number of microstates), not a probability. Ω = 10 means there are 10 microstates producing macrostate A. The probability P(A) = Ω_A / Ω_total = 10/(10+100) = 10/110 ≈ 0.09. Ω = 100 does not mean probability = 100; it means probability = 100/110 ≈ 0.91.\n- **Bridge [P30]:** \"Ω counts the number of ways to realize a macrostate. The probability of that macrostate is Ω divided by the total number of microstates over all macrostates. High Ω means high probability, but Ω itself is not a probability.\"\n- **Replacement [P31]:** P(macrostate) = Ω(macrostate) / Σ_all macrostates Ω. Ω is a count; P is a ratio. S = k_B ln Ω — entropy uses ln of the count, not the count itself.\n- **Discrimination pairs [P33]:** The number of ways to roll a 7 with two dice is Ω = 6 (out of 36 total). P(7) = 6/36 = 1/6. Ω = 6 ≠ P = 1/6.\n- **S6 repair path:** Explicitly compute both Ω and P for the two-macrostate system. Verify Σ P = 1. Verify S_A = k_B ln Ω_A = k_B ln 10, not k_B ln(P_A) = k_B ln(10/110).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Entropy from the partition function (S = k_B ln Z + ⟨E⟩/T) is a different quantity from S = k_B ln Ω",
+      "content": "### MC-4: \"Entropy from the partition function (S = k_B ln Z + ⟨E⟩/T) is a different quantity from S = k_B ln Ω\"\n- **Probe:** \"Is the entropy computed from the partition function the same as Boltzmann's entropy?\"\n- **Characteristic phrase:** \"The thermodynamic formula uses Z; the statistical formula uses Ω. They must be different entropies.\"\n- **Trigger:** Two different-looking formulas — students assume they are different objects.\n- **Conflict evidence [P28]:** Both formulas give the same numerical result for any system. They are two different expressions for the same physical quantity. The microcanonical (Boltzmann) uses Ω at fixed energy; the canonical (partition function) uses Z at fixed temperature. The two ensembles give the same thermodynamics in the thermodynamic limit.\n- **Bridge [P30]:** \"The canonical entropy S = k_B ln Z + ⟨E⟩/T is the thermal average of S = −k_B Σ pᵢ ln pᵢ (Gibbs entropy) evaluated for canonical probabilities pᵢ = e^(−βEᵢ)/Z. In the microcanonical ensemble, all Ω microstates are equally probable, so Gibbs entropy reduces to k_B ln Ω. Same quantity, different ensemble.\"\n- **Replacement [P31]:** S = k_B ln Ω (microcanonical) = −k_B Σ pᵢ ln pᵢ (Gibbs, general) = k_B ln Z + ⟨E⟩/T (canonical). All three are the same entropy — they agree in the thermodynamic limit.\n- **Discrimination pairs [P33]:** Speed of a gas can be computed from kinetic theory (⟨v²⟩ = 3k_BT/m) or from the Maxwell-Boltzmann distribution — same result, different computational path.\n- **S6 repair path:** For the 2-state system: Ω = 2 at high T (both states equally populated). S = k_B ln 2. From partition function: S = k_B ln Z + ⟨E⟩/T = k_B ln 2 (since ⟨E⟩ = 0 by symmetry at high T). Match verified.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "PROBE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"PROBE\",\"primitives\":[],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "SYNTHESIZE",
+      "content": "{\"id\":\"TA-4\",\"title\":\"SYNTHESIZE\",\"primitives\":[],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly computes Ω for a simple system (Einstein solid or coin flips), correctly applies S = k_B ln Ω with Stirling's approximation, correctly states the fundamental postulate, and correctly identifies the probabilistic (not absolute) nature of the second law. Score ≥ 80%.\n\n**FA-1 — Multiplicity calculation:**\n*Q: An Einstein solid has N=3 oscillators and q=4 quanta of energy. How many microstates Ω does it have? What is the entropy?*\nExpected: Ω = C(q+N−1, N−1) = C(6, 2) = 15. S = k_B ln 15 ≈ 2.71 k_B.\nThreshold: Correct Ω = 15 and correct S.\n\n**FA-2 — Entropy of equilibration:**\n*Q: System A has N=2 oscillators and q_A quanta; System B has N=2 oscillators and q_B quanta; q_A + q_B = 4 = fixed. Compute Ω_total = Ω_A × Ω_B for each partition of energy (q_A = 0,1,2,3,4). Find the equilibrium partition.*\nExpected: Ω_A = C(q_A+1, 1) = q_A + 1. Ω_B = q_B + 1 = 5 − q_A. Ω_total = (q_A+1)(5−q_A). Max at q_A = 2: Ω_total = 3 × 3 = 9. Equilibrium: equal energy in each system.\nThreshold: Correct Ω_total for all 5 partitions; correct identification of maximum.\n\n**FA-3 — Extensivity of entropy:**\n*Q: System A alone has Ω_A = 100. System B alone has Ω_B = 1000. If combined (treated as independent), what is Ω_total and S_total? Verify S_total = S_A + S_B.*\nExpected: Ω_total = 10^5. S_total = k_B ln 10^5 = 5k_B ln 10. S_A = 2k_B ln 10. S_B = 3k_B ln 10. S_A + S_B = 5k_B ln 10 = S_total. ✓ Entropy is extensive because logarithm converts product (Ω_A × Ω_B) to sum (S_A + S_B).\nThreshold: Correct demonstration of extensivity.\n\n**FA-4 — Statistical nature of the second law:**\n*Q: A box contains N = 6 gas molecules. Initially all are in the left half. After equilibrating, what is the probability they all spontaneously return to the left half? How does this compare to N = 60?*\nExpected: P(N=6) = (1/2)^6 ≈ 1.6%. P(N=60) = (1/2)^60 ≈ 8.7 × 10⁻¹⁹. The probability decreases exponentially with N. For macroscopic N ~ 10²³, the probability is ludicrously small — the second law is a practical certainty.\nThreshold: Correct formula (1/2)^N for both, correct comparison showing exponential decrease with N.\n\n**Confidence calibration:** After FA-2, students who find Ω_total = 9 but are uncertain it represents the equilibrium state receive targeted reassurance: \"Maximum total Ω = maximum total entropy = thermal equilibrium, by the second law.\"\n\n**Delayed retrieval (session + 3):** \"State Boltzmann's formula. Why is the logarithm used instead of Ω itself? What is the fundamental postulate of statistical mechanics?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 205,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Card deck analogy: a new deck has 1 ordered microstate (ordered = low entropy). A shuffled deck has 52! ≈ 8 × 10⁶⁷ microstates — all produce \"shuffled\" (high entropy). Probability of returning to ordered state by random shuffling: 1/52! ≈ 10⁻⁶⁸ — statistically impossible, not absolutely impossible.\n- Coin flips: 100 coins. Macrostate \"50 heads\" has Ω = C(100,50) ≈ 10²⁹ microstates. Macrostate \"100 heads\" has Ω = 1. After random tosses: overwhelmingly likely to find ~50 heads — not because of a law forcing it, but because there are 10²⁹ times as many ways to be there.\n- Gas expansion: a gas in the left half of a box has Ω_initial. After removing a partition, it fills the whole box with Ω_final = 2^N × Ω_initial. S increases by Nk_B ln 2. The chance of spontaneous re-compression: (1/2)^N → impossible for macroscopic N.\n\n### Representational (Iconic)\n- Bar chart of Ω vs. macrostate (e.g., number of heads in 4 coins): Ω = 1, 4, 6, 4, 1 for 0, 1, 2, 3, 4 heads. The most probable macrostate (2 heads) has the highest Ω. For 10²³ coins, the peak is overwhelmingly sharp.\n- S = k_B ln Ω: show Ω increasing exponentially with N → S increasing linearly (the logarithm makes it extensive).\n- Phase space diagram: each microstate is a point in the 6N-dimensional phase space. The macrostate is a region containing Ω equally likely points.\n\n### Abstract (Symbolic)\n- Einstein solid example: N oscillators, total energy U = q ℏω (q quanta). Ω(N,q) = C(q+N−1, N−1) = (q+N−1)! / (q!(N−1)!). S = k_B ln Ω ≈ k_B[(q+N) ln(q+N) − q ln q − N ln N] (using Stirling). At high T (q >> N): S ≈ Nk_B ln(eU/Nℏω) — matches classical thermodynamics.\n- Gibbs entropy: S = −k_B Σ pᵢ ln pᵢ. Equal probs (pᵢ = 1/Ω): S = −k_B × Ω × (1/Ω) ln(1/Ω) = k_B ln Ω. Reduces to Boltzmann. Non-equal probs (canonical ensemble): S = −k_B Σ pᵢ ln pᵢ = k_B Σ pᵢ(βEᵢ + ln Z) = β⟨E⟩ k_B + k_B ln Z — matches the thermodynamic formula S = (U − F)/T.\n\n### Transfer (+)\n- Information theory: Shannon entropy H = −Σ pᵢ log₂ pᵢ (in bits) = S/k_B ln 2. Landauer's principle: erasing one bit of information costs at least k_BT ln 2 of energy — entropy and information are physically equivalent.\n- Black hole entropy: S_BH = k_B c³ A / (4 G ℏ) (Bekenstein-Hawking) — proportional to horizon area. The number of microstates of a black hole is exp(A c³/4Gℏ) — an area law, not a volume law. Profound departure from ordinary thermodynamics.\n- Biology: protein folding — the native state has low Ω (one specific fold) but very low energy; denatured states have high Ω. Folding is driven by both energy (H-bonds, hydrophobic effect) and entropy (solvent entropy).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 43,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — \"Entropy is disorder\":** Students treat entropy as a qualitative measure of \"messiness.\" While a useful intuition, it fails to explain: (a) why entropy is extensive, (b) why S = k_B ln Ω gives the same result as dS = δQ/T, (c) what \"disorder\" means precisely for a perfect crystal at T > 0. The correct concept is: entropy counts microstates.\n\n**Mode 2 — \"The second law is absolute\":** Students think entropy can never decrease. In fact, entropy can spontaneously decrease in small systems (Brownian motion, fluctuations). The second law is a statistical statement: for macroscopic systems, decreases are overwhelmingly improbable but not logically impossible. A glass of water can spontaneously freeze — it's just absurdly unlikely.\n\n**Mode 3 — Stirling's approximation errors:** Computing ln Ω for large systems requires Stirling: ln N! ≈ N ln N − N. Students either forget the −N term or apply Stirling when N is small (N < 10, where Stirling is inaccurate).\n\n**Mode 4 — Confusing Ω with probability:** Students think Ω is the probability of a macrostate. Ω is the NUMBER of microstates (not a probability). The probability of a macrostate is Ω/Ω_total. When all macrostates have equal total Ω_total = Σ_macrostates Ω, the most probable macrostate is the one with the most microstates.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 66,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Ludwig Boltzmann spent the last decades of his life defending a radical claim: that thermodynamic entropy was nothing more than counting — S = k_B ln Ω. His contemporaries, including Mach, rejected atomism and thought Boltzmann was being mystical. Boltzmann died by suicide in 1906. Two years later, the atomic hypothesis was vindicated by Einstein's analysis of Brownian motion. The formula S = k_B ln Ω is inscribed on Boltzmann's gravestone — his vindication, carved in stone.\"\n\n**At the fundamental postulate:**\n\"The key assumption underlying all of statistical mechanics is: in an isolated system at equilibrium, all accessible microstates are equally probable. There's no theoretical derivation of this postulate — it is a hypothesis that we accept because the predictions derived from it match every experiment. From this one assumption, and only this one assumption, plus the definition S = k_B ln Ω, the entire structure of equilibrium thermodynamics follows.\"\n\n**At the second law:**\n\"The second law of thermodynamics is not a law like Newton's second law — a precise mathematical statement about forces. It is a statement about probability. Entropy decreases happen. They are just overwhelmingly improbable for macroscopic systems. For N = 10²³ molecules, the probability of spontaneous compression is so small that even if you tried it 10^(10²³) times, you'd never see it. That's why we call it a law. But it's really a theorem about the weight of large numbers — a theorem that would embarrass any mathematician by calling itself a 'law.'\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 192,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.stat.partition-function — the connection between Ω and Z (canonical entropy from Z) requires knowing what Z is and how S is derived from it. Without this, only the Boltzmann formula S = k_B ln Ω can be presented in isolation.\n\n**S3:** Student can state S = k_B ln Ω but cannot compute Ω for a specific system. Drill Einstein solid calculations: C(q+N−1, N−1) for small N and q. Practice the combinatorial formula step by step.\n\n**S6:** Student uses \"disorder\" language and gives qualitatively wrong predictions. Assign the polymer folding thought experiment: a single protein chain has one native (folded) configuration with low entropy (Ω ~ 1) and many unfolded configurations (Ω >> 1). But the surrounding solvent molecules gain entropy when hydrophobic groups are buried — the total entropy increases upon folding. \"Disorder\" fails here; Ω counting gives the right answer.\n\n**S9:** Introduce the fluctuation theorem: P(ΔS = −X)/P(ΔS = +X) = e^(−X/k_B) — entropy-decreasing fluctuations are exponentially suppressed. Introduce Maxwell's demon and the information-entropy connection. Landauer's principle: one bit erasure costs k_BT ln 2 of entropy production.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 235,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual (Boltzmann formula, fundamental postulate, second law as probability) + procedural (Ω calculation for Einstein solid, Stirling approximation).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"State Boltzmann's formula. What is Ω? What is the fundamental postulate?\"\n- Session + 3: \"Calculate Ω for an Einstein solid with N=4, q=2. Find the entropy.\"\n- Session + 7: \"Is the second law absolute or statistical? Give a quantitative example with N molecules.\"\n\n**Interleaving partners:** phys.stat.partition-function (prerequisite — connects canonical entropy to Z); phys.therm.entropy (thermodynamic definition dS = δQ/T — now seen as a consequence of S = k_B ln Ω); phys.stat.fermi-dirac and phys.stat.bose-einstein (successors — use statistical counting with quantum constraints on Ω).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 247,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Ideal gas entropy: S = Nk_B[ln(V/N) + (3/2)ln(U/N) + const] (Sackur-Tetrode equation). Derives from counting phase-space microstates. The extensivity of S (linear in N) requires the N! Gibbs correction in Z_N.\n\n**Far transfer:** Information theory and computation: S = k_B ln Ω is isomorphic to Shannon entropy H = −Σ p log p. Landauer's principle — minimum energy cost of computation. Maxwell's demon — apparent violation of second law resolved by the entropy cost of erasure. The connection between physics and information theory is deep and active: it underlies quantum computing, black hole thermodynamics, and AdS/CFT.\n\n**Structural abstraction:** \"The most likely outcome is the one with the most ways to happen.\" This is Bayesian reasoning, combinatorics, information theory, and statistical mechanics all expressing the same principle. The logarithm makes it additive (entropy is extensive); the Boltzmann factor e^(−βE) weights energy costs; the combination gives the canonical ensemble. The principle generalizes to non-equilibrium statistical mechanics (Jarzynski equality, fluctuation theorems) and to quantum systems (von Neumann entropy S = −k_B Tr(ρ ln ρ)).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 260,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "phys.stat.entropy-statistical/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.stat.entropy-statistical",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.stat.partition-function is necessary for connecting S to Z. The concept also heavily references the second law of thermodynamics — phys.therm.entropy (thermodynamic definition) should ideally be a prerequisite or co-requisite.\n- **Unlock readiness:** This concept unlocks the deep understanding needed for phys.stat.fermi-dirac and phys.stat.bose-einstein — quantum statistics are defined by specific ways of counting microstates (Ω) with exclusion (Fermi) or no exclusion (Bose) constraints.\n- **Difficulty calibration:** Expert/analyze is appropriate. The combinatorial counting (Stirling, C(q+N−1, N−1)) requires mathematical maturity. The conceptual demands (fundamental postulate, second law as statistics, connection to information) are very high.\n- **Suggested problem set:** (1) Enumerate all microstates of Einstein solid (N=3, q=3). (2) Einstein solid (N=4, q=4): compute Ω and S; verify S is extensive when combining two (N=2, q=2) systems. (3) Two Einstein solids: find the equilibrium energy partition that maximizes Ω_total. (4) Calculate the mixing entropy when two equal quantities of different ideal gases are combined. (5) Estimate the probability of spontaneous compression for N = 50 molecules.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.entropy-statistical.md",
+        "startLine": 270,
+        "endLine": 280
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

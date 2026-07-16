@@ -1,0 +1,543 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.power-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.power",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:11548b13cdbf918018878e792733ad26e06243206e519d04901084dbf1d292a3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.power.md": "sha256:e76154423819898b36e5142ff357ccfece331b9ef68bfda0f3e1dbfbc3292a71"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.power",
+    "name": "Power",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.work"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.power-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.power (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.power.md": "sha256:e76154423819898b36e5142ff357ccfece331b9ef68bfda0f3e1dbfbc3292a71"
+      },
+      "contentHash": "sha256:65f76e40c3b8c382107c81f0052e8686ccef2d16cc377ecf8afefb4ca856953e",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.power.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.power.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.power\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.power.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.power.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.power\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.power.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.power.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.power\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.power.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.power.md#TA-4 (addresses MC-POWER-IS-ENERGY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.power.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.power.md#TA-5 (addresses MC-POWER-CONSTANT-V)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.power.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.power.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.power\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.power.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.power.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.power\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.power/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.power",
+      "title": "Power — core explanation",
+      "content": "**Core Insight:** Power is the rate of doing work (or the rate of energy transfer). Two machines\ncan do the same work; the one that does it faster has higher power. Power is a scalar.\n\n**Formal Definitions:**\nP = W / t       (average power)\nP = Fv          (instantaneous power when force and velocity are parallel)\n\nwhere W is work in joules (J), t is time in seconds (s), F is force (N), v is speed (m/s).\nUnit: watt (W) = J/s = kg·m²/s³. Also: 1 horsepower (hp) ≈ 746 W.\n\n**Key properties:**\n- Power does not tell you how much work was done — only how quickly.\n- Same work, shorter time → higher power.\n- P = Fv is useful for engines (rated by power and speed, not by work done).\n- Power can be negative: if a braking force opposes motion, P = Fv cosθ with θ = 180° → negative.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 24,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.power/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.power",
+      "title": "Average power",
+      "content": "**Worked Example 1 (Average power):**\nA worker lifts a 50 kg box 2 m in 4 s.\nWork = mgh = 50 × 9.8 × 2 = 980 J.\nP = W/t = 980/4 = 245 W.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 24,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.power/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.power",
+      "title": "P = Fv",
+      "content": "**Worked Example 2 (P = Fv):**\nA car engine exerts a 3000 N driving force at 20 m/s.\nP = Fv = 3000 × 20 = 60 000 W = 60 kW.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 24,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.power/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.power",
+      "title": "Find time from power",
+      "content": "**Worked Example 3 (Find time from power):**\nA 1200 W motor does 18 000 J of work. How long does it run?\nt = W/P = 18 000/1200 = 15 s.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 24,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.power/misconception/MC-POWER-IS-ENERGY",
+      "kind": "misconception",
+      "conceptId": "phys.mech.power",
+      "title": "Priority 1",
+      "content": "### MC-POWER-IS-ENERGY (Priority 1)\n**Label:** \"Power and energy (work) are the same thing\"\n\n**Trigger signals:**\n- Says \"the car has more power so it did more work\"\n- Confused when two engines with different powers do the same work\n- Uses P and W interchangeably in equations\n\n**Conflict evidence [P28]:**\n\"Two cranes lift identical 500 kg loads 10 m. Crane A takes 20 s, Crane B takes 5 s.\nWork done by A = Work done by B = 500×9.8×10 = 49 000 J — identical.\nBut power of A = 49 000/20 = 2450 W; power of B = 49 000/5 = 9800 W — four times more.\nSame work, different power. What is power measuring that work is not?\"\n\n**Bridge [P30]:**\n\"Power is the rate of work, not work itself. Energy/work is the 'amount'; power is the 'speed\nof delivery.' A light bulb and a kettle may use the same total energy in a day, but the kettle\ndraws far more power in the short time it runs — it delivers energy faster.\"\n\n**Replacement [P31]:**\n\"P = W/t. Power is work per unit time. Same work in less time = more power.\nA machine with high power can do a job faster — it doesn't necessarily do more work.\"\n\n**Discrimination pairs [P33]:**\n- Crane A (2450 W, 20 s, 49 kJ) vs Crane B (9800 W, 5 s, 49 kJ): same work, ×4 power ✓\n- Dim bulb (40 W, 10 hours = 1.44 MJ) vs kettle (2000 W, 3 min = 360 kJ): lower power, more total energy ✓\n\n**s6_path:** Skip the crane conflict; use only the light-bulb-vs-torch analogy:\n\"A torch and a floodlight both use batteries — which runs out faster?\"\n\n---",
+      "localKey": "MC-POWER-IS-ENERGY",
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 3,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.power/misconception/MC-POWER-CONSTANT-V",
+      "kind": "misconception",
+      "conceptId": "phys.mech.power",
+      "title": "Priority 2",
+      "content": "### MC-POWER-CONSTANT-V (Priority 2)\n**Label:** \"P = Fv requires the object to be accelerating — it doesn't apply at constant speed\"\n\n**Trigger signals:**\n- Hesitates to use P = Fv for a car at constant velocity\n- Says \"P = Fv only works when the car is speeding up\"\n- Claims power is zero when velocity is constant because acceleration = 0\n\n**Conflict evidence [P28]:**\n\"A car cruises at constant 30 m/s on a flat road. The engine exerts 4000 N to overcome air\nresistance and friction. Using P = W/t: in 1 second the engine moves the car 30 m,\ndoing W = 4000 × 30 = 120 000 J. P = 120 000/1 = 120 kW.\nUsing P = Fv = 4000 × 30 = 120 000 W = 120 kW. Both give the same answer at constant speed.\nWhen is P = Fv wrong to use?\"\n\n**Bridge [P30]:**\n\"P = Fv = (F)(v) is the instantaneous power at any instant — it doesn't require acceleration.\nAt constant velocity on a flat road, the engine still exerts force to maintain speed against\nfriction. That force times speed is the power delivered. Zero acceleration does not mean\nzero force, and it certainly doesn't mean zero power.\"\n\n**Replacement [P31]:**\n\"P = Fv holds at any instant regardless of whether the object accelerates.\nIt equals the rate at which the force does work on the object.\nAt constant velocity: F ≠ 0 (balances resistance), so P = Fv ≠ 0.\"\n\n**Discrimination pairs [P33]:**\n- Constant speed 20 m/s, 5000 N engine force: P = 100 kW (not zero) ✓\n- Acceleration phase vs cruise phase at same speed: same P = Fv if same F and v ✓\n\n**s6_path:** Only use P = W/t form; verify P = Fv matches it; then state: \"Both work — choose the\neasier one.\" Avoid discussing acceleration vs. constant speed if it causes confusion.\n\n---",
+      "localKey": "MC-POWER-CONSTANT-V",
+      "language": "en",
+      "refs": [
+        "MC-POWER-CONSTANT-V"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 35,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.power",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.power",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 14,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.power",
+      "title": "Prerequisite Check + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 35,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.power",
+      "title": "MC-POWER-IS-ENERGY Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-POWER-IS-ENERGY Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-POWER-IS-ENERGY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 47,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.power",
+      "title": "MC-POWER-CONSTANT-V Probe + P = Fv Practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-POWER-CONSTANT-V Probe + P = Fv Practice\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-POWER-CONSTANT-V\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-POWER-CONSTANT-V"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 63,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.power",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 78,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.power",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 94,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "phys.mech.power/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.power",
+      "title": "Apply — basic P = W/t",
+      "content": "**MP-1 (Apply — basic P = W/t):**\n\"A pump does 45 000 J of work in 1.5 min. What is its average power?\"\nExpected: P = 45 000 / 90 = 500 W.\n_Discriminates: correct unit conversion (min → s) and P = W/t._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 250,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.power/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.power",
+      "title": "Apply — P = Fv",
+      "content": "**MP-2 (Apply — P = Fv):**\n\"A car engine exerts 2500 N at a constant speed of 30 m/s. What power does it deliver?\"\nExpected: P = 2500 × 30 = 75 000 W = 75 kW.\n_Discriminates: P = Fv at constant speed; MC-POWER-CONSTANT-V resolution._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-POWER-CONSTANT-V"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 250,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.power/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.power",
+      "title": "Apply — find time",
+      "content": "**MP-3 (Apply — find time):**\n\"A 750 W motor must lift a 60 kg load 4 m. How long does this take? (g = 9.8)\"\nExpected: W = 60×9.8×4 = 2352 J; t = 2352/750 = 3.14 s.\n_Discriminates: multi-step: W first, then t = W/P._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 250,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.power/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.power",
+      "title": "Understand — work vs power",
+      "content": "**MP-4 (Understand — work vs power):**\n\"Crane A (3000 W) lifts a load in 30 s. Crane B (1500 W) lifts the same load in 60 s.\nWhich crane did more work?\"\nExpected: Equal. W_A = 3000×30 = 90 000 J = W_B = 1500×60 = 90 000 J.\n_Discriminates: MC-POWER-IS-ENERGY resolution._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 250,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.power/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.power",
+      "title": "Apply — find force from power",
+      "content": "**MP-5 (Apply — find force from power):**\n\"A speedboat engine delivers 120 kW at a speed of 15 m/s. What is the driving force?\"\nExpected: F = P/v = 120 000/15 = 8000 N.\n_Discriminates: algebraic rearrangement of P = Fv._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 250,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.power",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.work  ──────────────────────►  phys.mech.power\n   (W = Fd cosθ; W = mgh for vertical lift)\n   REQUIRED: student can compute work done in a physical scenario\n```\n\n**PD-1 (Work prerequisite):**\n\"A 10 N force pulls a box 6 m horizontally (cos0° = 1). What work is done?\"\nExpected: W = 60 J.\n\nIf student cannot compute W → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 57,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.power",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Complete: P = ___ (two formulas). Units of power?\"\nThreshold: Both P = W/t and P = Fv; unit = watt (W) or J/s.\nIf not → re-deliver P08 before TA-3.\n\n**FA-2 (TA-4 exit):** \"Two workers each lift 100 kg by 3 m. Worker A takes 6 s, Worker B 12 s.\nWho did more work? Who is more powerful?\"\nExpected: Same work (2940 J each); A is more powerful (490 W vs 245 W).\nIf student says A did more work → MC-POWER-IS-ENERGY not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"A car at constant 20 m/s, engine force 4000 N. Power = ?\"\nExpected: 80 000 W = 80 kW. If student writes 0 → MC-POWER-CONSTANT-V not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\nOtherwise → targeted re-teach of failed probe type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-ENERGY",
+        "MC-POWER-CONSTANT-V"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 282,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.power",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Begin with P = W/t only; defer P = Fv to TA-5.\n- Reassure: \"Power is just work divided by time — that's all.\"\n- Problem set: use only P = W/t problems in TA-6 for first pass; introduce P = Fv problems\n  only after 3 correct P = W/t answers.\n- Simplify units: use g = 10 to reduce arithmetic burden.\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-4 (same-work trap) at TA-3 before guided practice.\n- Challenge: \"Engine rated at 100 kW at maximum speed 50 m/s — what force? At 25 m/s with\n  same power rating, what force?\" (Force doubles at half speed.)\n- Speed through P = W/t into P = Fv quickly; spend TA-6 on the inverse: finding F from P and v.\n\n**S4 (Prereq gap — Work):**\n- Detect via PD-1 failure at TA-3.\n- Repair: mini-session on W = Fd cosθ; W = mgh; then return.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 301,
+        "endLine": 322
+      }
+    },
+    {
+      "assetId": "phys.mech.power/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.power",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → P = W/t → MC-POWER-IS-ENERGY repair).\n**Session 2 (≥24 h later):** Retrieval cold-start: \"Power formula? If time halves, what happens\n  to power for same work?\" → TA-5 (MC-POWER-CONSTANT-V, P = Fv) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe mixing Work, KE, and Power:\n  \"A 1000 kg car accelerates from rest to 20 m/s in 5 s. What average power does the engine deliver?\"\n  (KE gained = ½×1000×400 = 200 000 J; P = 200 000/5 = 40 000 W — previews Work–Energy Theorem.)\n**Pre-work-energy-theorem session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.work (W = Fd cosθ), phys.mech.kinetic-energy (KE = ½mv²).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-ENERGY",
+        "MC-POWER-CONSTANT-V"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.power.md",
+        "startLine": 322,
+        "endLine": 336
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

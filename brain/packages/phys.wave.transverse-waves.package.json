@@ -1,0 +1,355 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.transverse-waves-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.transverse-waves",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b958a617a8ddf595dddc038bf7d3c99ce4e3d2f2c4e24da42c1ed377b9c40fbc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.transverse-waves.md": "sha256:d8130181a17fe585e67ea71f0718a13a75d5985618f0517ffb4679369deaa8a0"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.transverse-waves",
+    "name": "Transverse Waves",
+    "difficultyRaw": "label: proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.wave.wave-properties"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.transverse-waves-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.transverse-waves (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.transverse-waves.md": "sha256:d8130181a17fe585e67ea71f0718a13a75d5985618f0517ffb4679369deaa8a0"
+      },
+      "contentHash": "sha256:45b92df52a00fa9f7c546883f06f8a1bdefda8736d8bc930e2eb5812d87c94b1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.transverse-waves.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.transverse-waves.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.transverse-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.transverse-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.transverse-waves.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.transverse-waves.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.transverse-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.transverse-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.transverse-waves.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.transverse-waves.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.transverse-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.transverse-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.transverse-waves.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.transverse-waves.md#TA-4 (addresses MC-AMPLITUDE-IS-WAVELENGTH, MC-TRANSVERSE-PARTICLES-MOVE-FORWARD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.transverse-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.transverse-waves\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.transverse-waves/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "Transverse Waves — Conceptual Development Sequence",
+      "content": "**TA-1 — Definition and Geometry [C]**\n\nA transverse wave: particle displacement is perpendicular to the direction of wave propagation.\n\nSnapshot (displacement–position graph at one instant):\n```\ny(x) = A sin(2πx/λ)\n```\n\nKey features:\n- Crest: y = +A (maximum positive displacement)\n- Trough: y = −A (maximum negative displacement)\n- Node/equilibrium crossings: y = 0\n- Wavelength λ: horizontal distance, crest to crest (or trough to trough, or any two identical phase points)\n- Amplitude A: vertical distance from equilibrium to crest\n\n**TA-2 — Displacement–Time Graph [C→P]**\n\nFor a fixed position x₀, the displacement varies with time:\n```\ny(t) = A sin(2πft)\n```\n\nThis gives the time-history of one particle — it oscillates with period T = 1/f.\n\nDistinguish the two graphs:\n- y–x graph (snapshot): shows wave shape at one instant → read λ from horizontal axis\n- y–t graph (time history of one point): shows particle oscillation → read T from horizontal axis\n\nCommon error: reading T from the y–x graph or λ from the y–t graph. The x-axis labels tell you which graph you have.\n\n**TA-3 — Particle Velocity in a Transverse Wave [C→P]**\n\nThe particle at position x oscillates transversely. At the crest or trough: displacement is maximum, particle velocity = 0 (momentarily at rest). At y = 0 (equilibrium crossing): displacement = 0, particle velocity is maximum.\n\nMaximum particle speed: v_p,max = Aω = 2πfA (not the wave speed v!)\n\nWave speed v = fλ (speed of pattern propagation — horizontal).\nParticle speed v_p: perpendicular to wave direction; varies sinusoidally in time.\n\n**TA-4 — Polarisation of Transverse Waves [P]**\n\nBecause transverse wave particles can oscillate in any direction perpendicular to propagation, transverse waves can be polarised. Polarisation: restricting the oscillation direction to a single plane.\n\nExample: rope wave — vertical shake → vertical plane polarisation; horizontal shake → horizontal plane.\n\nLight is a transverse electromagnetic wave and can be polarised by a polaroid filter (explored in phys.opt.polarization). Longitudinal waves (sound) cannot be polarised — the only oscillation direction is along the propagation axis.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 76,
+        "endLine": 128
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/misconception/MC-TRANSVERSE-PARTICLES-MOVE-FORWARD",
+      "kind": "misconception",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "- **Trigger signal:** Student draws transverse wave particles moving in the direction of wave propagation, or confuses the wave velocity with particle velocity.",
+      "content": "### MC-TRANSVERSE-PARTICLES-MOVE-FORWARD\n- **Trigger signal:** Student draws transverse wave particles moving in the direction of wave propagation, or confuses the wave velocity with particle velocity.\n- **Conflict evidence [P28]:** \"In a transverse wave, the medium particles oscillate perpendicular to the wave's travel direction — at 90° to it. Flick one end of a rope sideways: a wave pattern runs along the rope (horizontally), but each section of rope only moves up and down (vertically). Film a single point on the rope — it bobs up and down between +A and −A; it does not move horizontally along the rope. Wave speed v = fλ gives how fast the pattern travels; particle speed is maximum at the equilibrium point and is v_particle_max = Aω = 2πfA (a completely different quantity, perpendicular to v).\"\n- **Bridge text [P30]:** \"Wave velocity (v = fλ) is the speed of the disturbance pattern along the propagation direction. Particle velocity (v_p = dy/dt for each medium particle) is perpendicular to the propagation direction in a transverse wave. These are different vectors in different directions.\"\n- **Replacement text [P31]:** \"Transverse wave: particle oscillation direction ⊥ wave propagation direction. Particle displacement is perpendicular to the wave's travel. Draw them at right angles — wave arrow horizontal, particle arrow vertical.\"\n- **Discrimination pairs [P33]:**\n  - Wave propagation: horizontal (→) at speed v = fλ ✓\n  - Particle motion at crest: momentarily at rest (instantaneous velocity = 0); about to move downward ✓\n  - Particle motion at equilibrium crossing: maximum speed (upward or downward), perpendicular to wave direction ✓\n- **s6_path:** \"Shake a rope end up and down — your hand moves up and down, but the wave runs along the rope. Two perpendicular directions. Simple.\"\n\n---",
+      "localKey": "MC-TRANSVERSE-PARTICLES-MOVE-FORWARD",
+      "language": "en",
+      "refs": [
+        "MC-TRANSVERSE-PARTICLES-MOVE-FORWARD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/misconception/MC-AMPLITUDE-IS-WAVELENGTH",
+      "kind": "misconception",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "- **Trigger signal:** Student draws the amplitude as the horizontal distance between two crests, or confuses A and λ.",
+      "content": "### MC-AMPLITUDE-IS-WAVELENGTH\n- **Trigger signal:** Student draws the amplitude as the horizontal distance between two crests, or confuses A and λ.\n- **Conflict evidence [P28]:** \"Amplitude A is the maximum displacement from the equilibrium (rest) position — it is a vertical measurement on a displacement-distance graph. Wavelength λ is the horizontal distance between two adjacent points in phase (e.g., crest to crest). A graph of displacement y vs. position x: A is the height of the crest above the x-axis; λ is the horizontal distance from one crest to the next. They are measured in different directions on the same graph.\"\n- **Bridge text [P30]:** \"On a y–x wave graph: look vertically from equilibrium (y=0) to the crest → that's A. Look horizontally from one crest to the next crest → that's λ. Both have units of metres, which is why they're confused — but they measure perpendicular things.\"\n- **Replacement text [P31]:** \"A = max vertical displacement from equilibrium (height of wave). λ = horizontal distance for one complete cycle (crest to crest). On a y–x graph: A is vertical; λ is horizontal.\"\n- **Discrimination pairs [P33]:**\n  - Crest at y = 5 cm, trough at y = −5 cm: A = 5 cm (not 10 cm — from equilibrium to crest) ✓\n  - Crest at x = 1 m, next crest at x = 3 m: λ = 2 m (horizontal) ✓\n- **s6_path:** \"Two different rulers: one pointing up (amplitude), one pointing sideways (wavelength). Same graph, different directions.\"\n\n---",
+      "localKey": "MC-AMPLITUDE-IS-WAVELENGTH",
+      "language": "en",
+      "refs": [
+        "MC-AMPLITUDE-IS-WAVELENGTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "Definition and Geometry",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Definition and Geometry\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 78,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "Displacement–Time Graph",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Displacement–Time Graph\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 94,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "Particle Velocity in a Transverse Wave",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Particle Velocity in a Transverse Wave\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 109,
+        "endLine": 118
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "Polarisation of Transverse Waves",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Polarisation of Transverse Waves\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-AMPLITUDE-IS-WAVELENGTH\",\"MC-TRANSVERSE-PARTICLES-MOVE-FORWARD\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-AMPLITUDE-IS-WAVELENGTH",
+        "MC-TRANSVERSE-PARTICLES-MOVE-FORWARD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 118,
+        "endLine": 268
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Graph reading: y–x**\n\"From a displacement–position graph at one instant: the wave oscillates between y = +4 cm and y = −4 cm; crests are spaced 1.2 m apart. If the wave travels at 18 m/s, find: A, λ, f, T.\"\n\n*Target:* A = 4 cm = 0.04 m; λ = 1.2 m; f = v/λ = 18/1.2 = 15 Hz; T = 1/15 = 0.067 s.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 165,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Graph reading: y–t**\n\"A y–t graph of a particle shows amplitude 2 cm and period 0.025 s. The wave speed is 40 m/s. Find: f, λ, v_p,max.\"\n\n*Target:* f = 1/0.025 = 40 Hz; λ = v/f = 40/40 = 1 m; v_p,max = 2π×40×0.02 = 5.03 m/s.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 165,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Particle direction**\n\"A transverse wave travels in the +x direction. At one instant, a particle at x = 0.3 m is at y = 0 and moving in the +y direction. Sketch the wave shape at that instant and mark the position x = 0.3 m.\"\n\n*Target:* The particle is at equilibrium crossing and moving upward → the wave has a rising zero crossing at x = 0.3 m. The crest is λ/4 behind (at smaller x) and the trough is λ/4 ahead (at larger x) in the direction of propagation. (For a rightward-travelling wave using y = A sin(kx − ωt), a particle at y=0 moving upward means the local slope dy/dx > 0.)",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 165,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Polarisation discrimination**\n\"Which of these can be polarised: (a) sound waves in air, (b) light from a lamp, (c) ripples on water, (d) radio waves from an aerial? Explain.\"\n\n*Target:* (a) No — sound is longitudinal, cannot be polarised. (b) Yes — light is transverse EM wave; unpolarised lamp light can be polarised by a filter. (c) Yes — water surface ripples are transverse (up/down oscillation ⊥ propagation). (d) Yes — radio waves are transverse EM waves; aerials produce specific polarisation (typically vertical or horizontal linear polarisation).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 165,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: compare wave speed and particle speed**\n\"A wave with A = 10 cm, f = 5 Hz, λ = 2 m. (a) Compare the wave speed and maximum particle speed. (b) For what amplitude would the maximum particle speed equal the wave speed?\"\n\n*Target:* (a) v_wave = fλ = 5×2 = 10 m/s; v_p,max = 2πfA = 2π×5×0.10 = 3.14 m/s. Wave travels faster than particles. (b) v_p,max = v_wave → 2πfA = fλ → A = λ/(2π) = 2/(2π) = 0.318 m = 31.8 cm. (This is a very large amplitude — for most real waves A ≪ λ.)\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 165,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "Adaptive Flags",
+      "content": "- **y–x vs. y–t graph confusion**: the most common error. Always label the horizontal axis explicitly: \"position x (m)\" or \"time t (s)\". The graphs look identical in shape — only the axis label distinguishes them. Drill this with MP-2.\n- **Crest particle velocity = 0**: counter-intuitive. At the crest, the particle is momentarily at rest (it's at maximum displacement, about to reverse direction). Students expect maximum speed at the crest. Use SHM analogy: a pendulum at its highest point is momentarily at rest.\n- **Polarisation scope**: full polarisation treatment (Brewster's angle, Malus's law) belongs in phys.opt.polarization. Here: establish that transverse waves can be polarised; longitudinal waves cannot.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 231,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.wave.transverse-waves/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.wave.transverse-waves",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — rope wave demonstration\n  ↓\n[P41] PD-1 (v=fλ; λ; f from prior wave-properties)\n  ↓ PASS\n[P06] Anchor: transverse rope wave; tape-marked point moves only vertically\n  ↓\nTA-1: Definition; y–x snapshot graph; A and λ on graph [C]\n  ↓\n[P28] Conflict: \"amplitude = horizontal wavelength\" → MC-AMPLITUDE-IS-WAVELENGTH\n  ↓\nWE-1: Reading A and λ from y–x graph\n  ↓\n[P51] Check-in MP-1 (all four quantities from y–x graph)\n  ↓ monitor\nTA-2: y–t graph (one particle's time history); distinguish from y–x [C→P]\n  ↓\n[P28] Conflict: \"particles move forward\" → MC-TRANSVERSE-PARTICLES-MOVE-FORWARD\n  ↓\nTA-3: Particle velocity vs. wave speed [C→P]\n  ↓\nWE-2 → WE-3 (particle speed; two-graph synthesis)\n  ↓\nTA-4: Polarisation of transverse waves [P]\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"A transverse wave has A=5 cm, f=20 Hz, v=8 m/s. What is the max particle speed? What is λ?\"\n[P68]; [P85]; [P89] 1/3/7 days; [P91] 80% gate\n```\n\n**Protocol routing:** S0: full CPA — rope + tape marker before any graph; S1: can read v=fλ but confuses A and λ on graph → MC-AMPLITUDE-IS-WAVELENGTH; S4: PD-1 fail → wave-properties; S6: [F] — \"Two perpendicular things: wave travels horizontally, particles move vertically. Two different speeds. Done.\"; S7: open with MP-5 (when does particle speed equal wave speed? — requires synthesis of both formulas).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.transverse-waves.md",
+        "startLine": 194,
+        "endLine": 231
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

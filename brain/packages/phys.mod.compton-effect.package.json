@@ -1,0 +1,508 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.compton-effect-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.compton-effect",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:60c34e9c57b6a514d38ede03b1e65afc2b071733d19eee60198a6cde028a6386",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.compton-effect.md": "sha256:8ff22692ce23ca4ba5500cd2a95c8c54834017ce61048ddc46d34e92677e3174"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mod.compton-effect",
+    "name": "Compton Scattering",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mod.photons"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.compton-effect-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.compton-effect (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.compton-effect.md": "sha256:8ff22692ce23ca4ba5500cd2a95c8c54834017ce61048ddc46d34e92677e3174"
+      },
+      "contentHash": "sha256:45a0e783d7fd5a8d7a126ac06b8689daa90bb811e5ffb4b5c2fac2d3d9a20a08",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.compton-effect.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.compton-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.compton-effect\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.compton-effect.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.compton-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.compton-effect\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.compton-effect.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.compton-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.compton-effect\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.compton-effect.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.compton-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.compton-effect\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.compton-effect.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-5 (addresses MC-1, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.compton-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.compton-effect\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.compton-effect.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.compton-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.compton-effect\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.compton-effect.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.compton-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.compton-effect\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.compton-effect/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Compton Scattering — core explanation",
+      "content": "**Core Insight:** Compton scattering is the elastic collision between a photon and a free electron,\nin which the photon transfers some of its momentum to the electron, decreasing its frequency\n(increasing its wavelength). This is impossible in the wave model of light — waves scatter\nwithout changing wavelength. The observed wavelength shift proves that photons carry momentum\np = h/λ and behave as particles in collisions.\n\n**The One Equation That Matters (Compton shift formula):**  \n  Δλ = λ' − λ = (h/m_e c)(1 − cos θ)  \nwhere h/m_e c = λ_C = 2.426 × 10⁻¹² m (the Compton wavelength of the electron), θ is the\nscattering angle, and Δλ is the wavelength increase of the scattered photon.\n\n**The Key Proof:** Compton (1923) measured the X-ray wavelength before and after scattering from\na graphite target. The shift precisely matched the formula derived from photon-momentum conservation\n(relativistic 4-momentum). The wave model predicted zero wavelength shift (elastic wave scattering\nleaves wavelength unchanged). Zero vs. the measured Δλ — the wave model was decisively falsified\nat the level of individual photon collisions.\n\n**Why This Matters:** The photoelectric effect established photon energy (E = hf). Compton\nscattering established photon momentum (p = h/λ) as a directly measured quantity. Together they\ncomplete the particle description of light.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 24,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH",
+      "content": "### MC-1: MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH\n**Probe:** \"Does the Compton wavelength shift depend on the initial wavelength of the X-ray?\nWhy did Compton use X-rays rather than visible light?\"  \n**Characteristic phrase:** \"Shorter wavelength = bigger shift.\"  \n**Trigger:** Confusion between the absolute shift Δλ and the fractional shift Δλ/λ.  \n**Conflict evidence [P28]:** Δλ = λ_C(1 − cos θ): no λ appears in this formula. The absolute\nshift is the same for any initial wavelength at the same scattering angle. However, Δλ/λ is\nmuch larger for X-rays (λ ~ 0.1 nm) than for visible light (λ ~ 500 nm). Δλ_max = 2λ_C ≈\n4.85 pm. For X-rays: fractional shift ≈ 4.85/100 ≈ 5%. For visible light: ≈ 4.85/500,000 ≈\n0.001% — undetectable by 1923 instruments.  \n**Bridge [P30]:** \"The shift Δλ is fixed by h, m_e, c, and θ — all constants plus the scattering\nangle. No λ in the formula. Compton chose X-rays because 5% is detectable; 0.001% is not.\"  \n**Replacement [P31]:** Δλ is independent of initial wavelength; Δλ/λ is smaller for longer\nwavelengths, making detection harder.  \n**Discrimination pairs [P33]:** Compton shift for visible light vs. X-rays at same θ: (A) larger\nfor X-rays (shorter λ), (B) same absolute shift, (C) zero for visible light. Correct: (B).  \n**S6 repair path:** TA-4 (formula inspection: point out λ is absent from Δλ).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC-WAVE-MODEL-PREDICTS-SAME-RESULT",
+      "content": "### MC-2: MC-WAVE-MODEL-PREDICTS-SAME-RESULT\n**Probe:** \"What does the classical wave model predict for the wavelength of X-rays scattered by\nelectrons? How does this differ from the experimental result?\"  \n**Characteristic phrase:** \"The wave model can also explain the shift somehow.\"  \n**Trigger:** Students assume the wave model can be patched to explain any observation.  \n**Conflict evidence [P28]:** In the classical wave model, an incident X-ray oscillates the electron\nwhich then re-radiates at the same frequency (Thomson scattering). The scattered wavelength equals\nthe incident wavelength: Δλ = 0. Compton measured Δλ ≠ 0 for X-rays, exactly matching the\nphoton-momentum formula. Thomson scattering (classical) appears as a separate peak in the\nCompton spectrum at λ = λ₀ (from bound electrons that carry away the whole atom's recoil).  \n**Bridge [P30]:** \"The classical model predicts one peak in the scattered spectrum, at λ₀. Compton\nfound two peaks: one at λ₀ (Thomson, from bound electrons) and one at λ₀ + Δλ (Compton, from\nnearly free electrons). The second peak cannot be explained by wave theory.\"  \n**Replacement [P31]:** Classical Thomson scattering predicts Δλ = 0; Compton scattering produces\nΔλ > 0, inconsistent with the wave model and explained only by photon momentum.  \n**Discrimination pairs [P33]:** Classical wave model prediction for scattered X-ray wavelength:\n(A) increased by Δλ = λ_C(1−cos θ), (B) unchanged (Δλ = 0), (C) decreased. Correct: (B).  \n**S6 repair path:** TA-3 (comparison of wave prediction vs. Compton's experimental spectrum).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 21,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC-COMPTON-IS-ABSORPTION-AND-REEMISSION",
+      "content": "### MC-3: MC-COMPTON-IS-ABSORPTION-AND-REEMISSION\n**Probe:** \"In Compton scattering, the photon enters the material and a photon exits. Is the\nexiting photon the same as the entering one, or a new photon?\"  \n**Characteristic phrase:** \"The electron absorbs and re-emits a new photon.\"  \n**Trigger:** Analogy to the photoelectric effect (absorption) or fluorescence (absorb-reemit).  \n**Conflict evidence [P28]:** Compton scattering is an elastic collision — energy and momentum are\nconserved in a single interaction, and the photon is not absorbed. The outgoing photon is the\ncontinuation of the same electromagnetic interaction, now with altered energy and direction.\nFluorescence involves absorption into a bound state followed by re-emission, typically with a\ntime delay and isotropic emission. Compton scattering shows angle-dependent wavelength shift,\nnot isotropic — this is a kinematic signature of an elastic collision, not an absorb-reemit process.  \n**Bridge [P30]:** \"In the photoelectric effect, the electron absorbs the photon completely —\nno photon exits. In Compton scattering, the photon bounces off the electron, deflected and\nredshifted, like a ball bouncing off another ball. The photon continues to exist; it is not\nabsorbed.\"  \n**Replacement [P31]:** Compton scattering is an elastic photon-electron collision; the photon\nis not absorbed; the same photon exits with reduced energy (increased wavelength).  \n**Discrimination pairs [P33]:** Compton scattering involves: (A) absorption of photon and re-\nemission of a new photon, (B) elastic scattering — original photon redirected with energy loss,\n(C) photon splitting into two lower-energy photons. Correct: (B).  \n**S6 repair path:** TA-2 (snooker ball elastic collision analogy → comparison with photoelectric\nabsorption).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 40,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC-COMPTON-SHIFT-ZERO-AT-θ=0",
+      "content": "### MC-4: MC-COMPTON-SHIFT-ZERO-AT-θ=0\n**Probe:** \"What is the Compton wavelength shift when the photon is scattered at θ = 0° (forward\nscattering)? At θ = 90°? At θ = 180°?\"  \n**Characteristic phrase:** \"At θ = 0 the shift is maximum because the photon is going straight\nthrough.\"  \n**Trigger:** Incorrect physical reasoning about when momentum transfer is maximum.  \n**Conflict evidence [P28]:** Δλ = λ_C(1 − cos θ). At θ = 0: cos 0 = 1, Δλ = 0 (photon goes\nstraight through, no collision, no momentum transfer). At θ = 90°: cos 90° = 0, Δλ = λ_C.\nAt θ = 180°: cos 180° = −1, Δλ = 2λ_C (maximum backscatter, maximum momentum transfer).  \n**Bridge [P30]:** \"Think of the snooker ball: if the moving ball grazes the stationary ball very\nslightly (θ ≈ 0, forward scatter), it barely transfers momentum. If it hits it head-on and\nbounces straight back (θ = 180°, backscatter), it transfers maximum momentum. Same for photons:\nbackscatter = maximum Δλ.\"  \n**Replacement [P31]:** Δλ = 0 for forward scattering (θ = 0); Δλ = 2λ_C for backscattering\n(θ = 180°); Δλ = λ_C for 90° scattering.  \n**Discrimination pairs [P33]:** Maximum Compton shift occurs at θ = (A) 0°, (B) 90°, (C) 180°.\nCorrect: (C).  \n**S6 repair path:** TA-4 (Δλ vs. θ graph from the formula; tabulate for θ = 0, 60, 90, 120, 180).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 63,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Wave Model Failure",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Wave Model Failure\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Collision Diagram and Conservation Laws",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Collision Diagram and Conservation Laws\",\"primitives\":[\"P14\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Compton Formula Derivation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Compton Formula Derivation\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC Diagnostics",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC Diagnostics\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-4\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 27,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Energy Budget Calculation",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Energy Budget Calculation\",\"primitives\":[\"P50\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 33,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Closure & Self-Assessment",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure & Self-Assessment\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 39,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \nPass criteria — student correctly:  \n(a) States the Compton formula Δλ = (h/m_e c)(1 − cos θ)  \n(b) Computes Δλ for given θ  \n(c) Explains why the wave model predicts zero shift  \n(d) Identifies maximum and minimum shift angles  \nFailure on (a) or (b) → restart from TA-4. Failure on (c) → TA-2. Failure on (d) → TA-5.\n\n**Formative Golden Probe (FA-1):**  \n\"X-rays of wavelength 0.070 nm are scattered at θ = 90°. Find the wavelength of the scattered\nX-ray and the kinetic energy of the recoil electron.\"  \nExpected: Δλ = λ_C = 2.426 pm. λ' = 0.070 nm + 0.00243 nm = 0.07243 nm.\nE₀ = hc/λ₀ = 6.626×10⁻³⁴×3×10⁸/0.07×10⁻⁹ = 2.84×10⁻¹⁵ J.\nE' = hc/λ' = 2.74×10⁻¹⁵ J. KE_electron = 0.10×10⁻¹⁵ J = 0.62 keV.  \nThreshold: Correct Δλ, λ', and KE with units.\n\n**Formative Golden Probe (FA-2):**  \n\"Find the maximum possible wavelength shift in Compton scattering. For what angle does this occur?\"  \nExpected: Maximum at θ = 180°: Δλ_max = 2λ_C = 2 × 2.426 pm = 4.852 pm (backscattering).  \nThreshold: Correct angle (180°) and correct Δλ_max.\n\n**Formative Golden Probe (FA-3):**  \n\"In Compton's original experiment, X-rays of wavelength 0.0709 nm were scattered at 135°.\nCalculate the predicted wavelength shift and compare with the measured value of 0.00340 nm.\"  \nExpected: Δλ = 2.426×10⁻¹² × (1 − cos 135°) = 2.426×10⁻¹² × (1 + 0.707) = 2.426×10⁻¹² × 1.707\n= 4.14 pm = 0.00414 nm. Close to 0.00340 nm (textbook values vary by source; 0.00414 nm is\nthe theoretical prediction; discrepancies arise from instrumental precision and bound-electron\ncorrections).  \nThreshold: Correct formula application; awareness of why small discrepancies exist.\n\n**Formative Golden Probe (FA-4):**  \n\"Why would Compton scattering be essentially unobservable with visible light? Use numbers.\"  \nExpected: Δλ_max = 4.85 pm = 0.00485 nm. Visible light λ ≈ 500 nm. Fractional shift =\n0.00485/500 ≈ 10⁻⁵ = 0.001%. This is far below the wavelength resolution of any 1920s (or most\nmodern) optical spectrometer. X-rays have λ ≈ 0.07 nm, so fractional shift ≈ 7% — easily\ndetectable.  \nThreshold: Numerical comparison given; resolution argument stated.\n\n**Confidence Calibration:** After FA-3, ask for confidence. The discrepancy between prediction\nand textbook value is a good teaching moment about measurement uncertainty and model idealization.\n\n**Delayed Retrieval (Session + 3 days):**  \n\"Without notes: state the Compton formula. At θ = 90°, what is Δλ in pm? Why can't you observe\nCompton scattering with a flashlight?\"  \nThreshold: All three answered correctly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 345,
+        "endLine": 395
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nA snooker ball (photon) strikes a stationary ball (electron) at an angle. The moving ball slows\nand deflects; the stationary ball moves. By conservation of momentum and energy, the moving ball\nloses speed. For a photon, \"slowing\" means lower frequency (longer wavelength) — the photon\nredshifts. The deflected electron recoils with the gained kinetic energy.\n\n**Stage 2 — Representational (R)**  \nBefore: photon with wavelength λ, momentum p₀ = h/λ, travels in x-direction. Electron at rest,\nmass m_e.  \nAfter: photon with wavelength λ' > λ, momentum p' = h/λ', scattered at angle θ. Electron recoils\nat angle φ with momentum p_e and kinetic energy KE = E_photon_lost.  \nApply conservation of energy and momentum (x and y components). Eliminate φ using the electron\nrecoil equations. Result: Δλ = (h/m_e c)(1 − cos θ).\n\n**Stage 3 — Abstract (A)**  \nThe derivation requires relativistic energy-momentum for the electron (E² = (p_e c)² + (m_e c²)²).\nThis is why Δλ involves m_e c — the rest energy of the electron enters via relativistic mechanics.\nFor non-relativistic electrons (nearly always the case in Compton experiments), KE_electron =\nΔλ × hc/λ²λ' ≈ (hc/λ²)Δλ for small Δλ. The Compton wavelength λ_C = h/(m_e c) = 2.426 pm sets\nthe scale: Δλ ≤ 2λ_C (maximum shift at θ = 180°, backscattering) = 4.85 pm.\n\n**Stage 4 — Transfer (T)**  \nCompton scattering in medical imaging (CT scanners, PET): scattered X-ray photons produce\nbackground noise. Compton suppression shields in gamma-ray detectors. Inverse Compton scattering\n(electron gives energy to photon): used by astrophysicists to explain synchrotron radiation and\nX-ray production by relativistic electrons in quasar jets. Compton scattering cross-section\n(Klein-Nishina formula) determines X-ray attenuation in tissue.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 49,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Why Beginners Fail",
+      "content": "1. **Not applying relativistic momentum to the electron:** The derivation requires E² = (pc)² +\n   (m_e c²)². Students who use p = m_e v for the recoil electron get a wrong result and cannot\n   recover the Compton formula. The correct derivation requires eliminating the electron angle φ\n   using relativistic energy-momentum.\n\n2. **Forgetting that Δλ depends on θ, not on λ:** Students expect the fractional wavelength\n   shift to be constant. The shift Δλ = λ_C(1 − cos θ) is an absolute shift that does not\n   depend on the initial wavelength. The fractional shift Δλ/λ = λ_C(1 − cos θ)/λ does depend\n   on λ, which is why Compton used X-rays (λ ~ pm) not visible light (λ ~ 500 nm, where the\n   fractional shift is unmeasurably small).\n\n3. **Confusing the scattered photon with a new photon:** Students sometimes think the original\n   photon is absorbed and a new photon is emitted (like fluorescence). Compton scattering is an\n   elastic collision — the same photon continues, now with different wavelength and direction.\n\n4. **Not recognising the wave model's failure:** Students often accept the formula without\n   appreciating that the wave model predicts zero shift. This is the critical pedagogical point\n   — the measurement of Δλ ≠ 0 was the decisive proof of photon momentum.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 81,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Compton's experiment is simple: shine X-rays at a graphite block and measure\nthe wavelength of the scattered X-rays. The wave model says: same wavelength out as in.\nCompton found: wavelength out > wavelength in, by exactly (h/m_e c)(1 − cos θ). The wave model\nwas wrong. The photon model was right.\"\n\n**Key explanatory moves:**\n- \"Δλ = λ_C(1 − cos θ): no initial wavelength in this formula. The shift is absolute, not\n  relative. X-rays make it detectable; visible light makes it unmeasurable.\"\n- \"θ = 0: photon flies straight through, no collision, Δλ = 0. θ = 180°: photon bounces\n  back, maximum collision, Δλ = 2λ_C. This is exactly what you'd expect for an elastic ball\n  collision.\"\n- \"The m_e in the denominator tells you: a heavier scatterer would give a smaller shift.\n  Compton from a proton: Δλ_p = h/(m_p c) = 1.32 fm — 1800× smaller, essentially zero.\n  Only free electrons show observable Compton shifts.\"\n\n**Common recovery phrases:**\n- If student expects larger shift for visible light: \"Write the formula. Does λ appear? No.\n  The absolute shift is the same. The fractional shift Δλ/λ is smaller for visible light.\"\n- If student treats Compton as absorption: \"After the collision, the photon still exists —\n  it exits at angle θ with wavelength λ' > λ. The photon is not absorbed; it is deflected.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 320,
+        "endLine": 345
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Recovery Notes",
+      "content": "**S0 (no prior photons concept):** The prerequisite phys.mod.photons must be satisfied. Without\np = h/λ for photons, the entire derivation is unmotivated.\n\n**S3 (knows formula but misidentifies θ):** Draw the geometry carefully: θ is the angle between\nthe incident photon direction and the scattered photon direction. Draw before/after separately.\nLabel every angle explicitly. Prevent angle confusion by always computing cos θ from the formula\nbefore applying any specific value.\n\n**S6 (MC-COMPTON-SHIFT-ZERO-AT-θ=0 dominant):** Use the snooker analogy physically. \"If you push\na ball and it grazes another ball (θ ≈ 0), it barely deflects and the target barely moves. If it\nhits head-on and bounces straight back (θ = 180°), maximum transfer. Now compute: (1 − cos 0) = 0\nvs. (1 − cos 180°) = 2. The formula matches the intuition.\"\n\n**S9 (can compute but cannot connect to the wave model failure):** Require the student to state\nwhat the classical Thomson-scattering prediction would be (Δλ = 0), then show them Compton's\noriginal spectrum image with the shifted and unshifted peaks. \"Two peaks: the model predicted\none. The second peak is proof of the photon model.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-COMPTON-SHIFT-ZERO-AT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 395,
+        "endLine": 417
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (Compton formula) + conceptual (wave model failure + billiard\ncollision picture). Both must be encoded together — the formula without the physical picture\nis fragile.\n\n**Spaced retrieval plan:**\n- Session + 1 day: \"State the Compton formula. What is the Compton wavelength of the electron?\n  At what angle is the shift zero? Maximum?\" (Formula and angle recall)\n- Session + 4 days: \"X-rays of λ = 0.05 nm scatter at θ = 60°. Find the new wavelength and\n  the electron recoil kinetic energy.\" (Quantitative application under time pressure)\n- Session + 9 days: \"Why is Compton scattering unobservable with visible light? What would you\n  need to use instead? Why does the wave model get the wrong answer?\" (Conceptual integration)\n\n**Interleaving partners:** phys.mod.photons (photon momentum prerequisite), phys.mod.de-broglie\n(extends momentum-wave duality to matter), phys.mod.photoelectric-effect (photon energy — the\ntwin pillar to photon momentum).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 417,
+        "endLine": 437
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Transfer Map",
+      "content": "**Near transfer:**\n- phys.mod.de-broglie: by symmetry, if photon momentum gives wave properties, matter particles\n  (electron with momentum p) should also have wave properties (λ = h/p)\n- Pair production: a photon with energy > 2m_e c² can create an electron-positron pair — the\n  inverse of Compton annihilation\n\n**Far transfer:**\n- Medical imaging: Compton scattering is the dominant X-ray interaction in soft tissue for\n  energies 100 keV – 10 MeV; determines contrast in CT scans\n- Astrophysics: inverse Compton scattering (electrons boost photon energy) explains X-ray\n  emission from synchrotron sources and the Sunyaev-Zel'dovich effect\n- Radiation shielding: Compton cross-section determines how thick lead or water must be to\n  attenuate gamma rays\n- Positron emission tomography (PET): annihilation photons at 511 keV can Compton scatter\n  in the detector material\n\n**Structural abstraction:** Conservation of 4-momentum (energy + 3-momentum, fully relativistic)\nis the universal tool for particle scattering calculations. Compton scattering is the simplest\nnon-trivial application — one massless particle colliding with one massive particle at rest. The\nsame mathematical structure appears in particle physics collision calculations at the LHC.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 437,
+        "endLine": 462
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "Curriculum Feedback",
+      "content": "**Does this concept position correctly in the KG?**  \nYes. Requiring phys.mod.photons gives the photon momentum p = h/λ as a prerequisite.\nCompton scattering is the direct experimental application and proof of that momentum.\nNo unlocks in the KG — this is a terminal node in the modern physics track.\n\n**Missing prerequisite?**  \nThe derivation requires relativistic energy-momentum (E² = (pc)² + (m_e c²)²). Students who\nhave not seen phys.rel.mass-energy may need a brief relativistic mechanics reminder before\nthe derivation. Consider adding a session bridge.\n\n**Recommended teaching pair:** phys.mod.photons + phys.mod.compton-effect should be taught\nin consecutive sessions (photon energy then photon momentum, cemented by Compton's experiment).\nThe two sessions form the complete experimental proof of the photon model.\n\n**Asset opportunity:** An interactive Compton spectrum viewer — drag the scattering angle, watch\nthe shifted peak move (Δλ updating in real time), compare with the Thomson peak at fixed λ₀ —\nwould make the angular dependence viscerally clear.\n\n---\n\n## Package Validation Checklist\n\n```\nV-1   concept_id matches KG exactly: phys.mod.compton-effect ✓\nV-2   all 10 KG fields present: id/name/requires/unlocks/cross_links/difficulty/bloom/\n      mastery_threshold/estimated_hours/description ✓\nV-3   description consistent with KG: wavelength increase of X-rays scattered by electrons,\n      confirming particle nature of photons ✓\nV-4   4-stage CPA+ model present: Concrete / Representational / Abstract / Transfer ✓\nV-5   ≥3 failure modes documented: 4 listed in Component 3 ✓\nV-6   4 misconceptions present: MC-1…MC-4 ✓\nV-7   each MC has probe + characteristic phrase: ✓ for all 4\nV-8   ≥2 misconceptions engineered:\n      MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH,\n      MC-WAVE-MODEL-PREDICTS-SAME-RESULT ✓\nV-9   each MC has all 6 fields: trigger / conflict evidence [P28] / bridge [P30] /\n      replacement [P31] / discrimination pairs [P33] / s6_path ✓\nV-10  TA count = session_cap (7 TAs): TA-1…TA-7 ✓\nV-11  TA-1 is Concrete [P01, P06]: billiard ball collision anchor ✓\nV-12  TA-5 is first MC diagnostic probe [P14, P28, P31, P33, P36]:\n      MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH + MC-COMPTON-SHIFT-ZERO-AT-θ=0 ✓\nV-13  TA-7 is closure [P68, P85, P91] ✓\nV-14  ≥5 P91 mastery probes with expected answers: FA-1…FA-4 + delayed retrieval ✓\nV-15  4 formative assessments with thresholds and loop-back paths: FA-1…FA-4 ✓\nV-16  S0/S3/S6/S9 protocols specified in Component 12 ✓\nV-17  3-session spaced retrieval plan present: Component 13 ✓\nV-18  interleaving partners named: mod.photons, mod.de-broglie, mod.photoelectric-effect ✓\nV-19  cross_links match KG edges: [] ✓\nV-20  status = READY, all V-checks PASS ✓\n```\n\n**Status: READY / PACKAGE_READY — V-1 through V-20 PASS**",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 462,
+        "endLine": 516
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

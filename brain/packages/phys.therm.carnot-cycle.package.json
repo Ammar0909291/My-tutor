@@ -1,0 +1,344 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.carnot-cycle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.carnot-cycle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7301cab85e56004827a01947bff0d458f442a49b7233e92afa846aa8335b75c0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.carnot-cycle.md": "sha256:5c9373e4004fd096703aebcefcb2f0ecc35052e67aaa512f18bba9cd30993c36"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.therm.carnot-cycle",
+    "name": "Carnot Cycle",
+    "difficultyRaw": "label: advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.therm.entropy",
+      "phys.therm.heat-engines"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.carnot-cycle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.carnot-cycle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.carnot-cycle.md": "sha256:5c9373e4004fd096703aebcefcb2f0ecc35052e67aaa512f18bba9cd30993c36"
+      },
+      "contentHash": "sha256:9e1b09fc994de8019a6d70f6abd0b9f165812383d4e016585213cadf993c6b2c",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.carnot-cycle.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.carnot-cycle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.carnot-cycle\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.carnot-cycle.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md#TA-2 (addresses MC-CARNOT-IS-REAL-ENGINE, MC-CARNOT-EFFICIENCY-USES-CELSIUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.carnot-cycle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.carnot-cycle\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.carnot-cycle.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.carnot-cycle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.carnot-cycle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.carnot-cycle.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.carnot-cycle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.carnot-cycle\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.carnot-cycle.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.carnot-cycle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.carnot-cycle\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.carnot-cycle/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "Carnot Cycle — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nImagine you are designing the **most efficient possible engine** — one that wastes as little heat as possible. The Carnot cycle is that theoretical ideal. It runs between two temperature reservoirs (a hot source and a cold sink) and performs exactly four carefully chosen steps: two that happen without any heat flow, and two that happen so slowly the temperature stays perfectly constant. No real engine can beat it. Its efficiency depends only on the temperatures of the two reservoirs — nothing else. Higher hot temperature or lower cold temperature both improve it.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\nThe Carnot cycle consists of four reversible processes performed on an ideal gas:\n\n1. **Isothermal expansion** (A→B at T_H): The gas absorbs heat Q_H from the hot reservoir while expanding at constant T_H. Work is done by the gas.\n2. **Adiabatic expansion** (B→C): The gas expands with no heat exchange, cooling from T_H to T_C.\n3. **Isothermal compression** (C→D at T_C): The gas releases heat Q_C to the cold reservoir while being compressed at constant T_C.\n4. **Adiabatic compression** (D→A): The gas is compressed with no heat exchange, warming from T_C back to T_H.\n\nThe cycle is reversible throughout, so ΔS_universe = 0. This is why Carnot efficiency is the maximum possible for any heat engine operating between T_H and T_C.\n\n**Carnot efficiency:**\n$$\\eta_\\text{Carnot} = 1 - \\frac{T_C}{T_H}$$\n\nwhere temperatures are in Kelvin.\n\n**Key results from the entropy analysis:**\n- Isothermal expansion: ΔS_system = +Q_H/T_H (entropy gained from reservoir)\n- Isothermal compression: ΔS_system = −Q_C/T_C (entropy given to cold reservoir)\n- Adiabatic steps: ΔS = 0 each\n- Full cycle: ΔS_system = 0 (state function, returns to start)\n- Reversibility requires: Q_H/T_H = Q_C/T_C → Q_C/Q_H = T_C/T_H\n\nThis gives: η = 1 − Q_C/Q_H = 1 − T_C/T_H\n\n**Carnot's theorem** (proved by contradiction via the second law): No heat engine operating between two temperatures T_C and T_H can be more efficient than a Carnot engine. All reversible engines have the same efficiency η_Carnot.\n\n### Tier 3 — Formal / Mathematical (S1 advanced / post-mastery)\n\n**P-V diagram for an ideal gas Carnot cycle:**\n\n- A→B (isothermal at T_H): PV = nRT_H = const; W_AB = nRT_H ln(V_B/V_A); Q_AB = W_AB = Q_H\n- B→C (adiabatic): TV^(γ−1) = const; T_H V_B^(γ−1) = T_C V_C^(γ−1)\n- C→D (isothermal at T_C): W_CD = nRT_C ln(V_D/V_C) < 0; Q_CD = W_CD = −Q_C (heat released)\n- D→A (adiabatic): T_C V_D^(γ−1) = T_H V_A^(γ−1)\n\n**Proof that Q_H/T_H = Q_C/T_C using adiabatic relations:**\n\nFrom adiabatic steps: V_B/V_A = V_C/V_D (the compression ratios are equal).\n\nTherefore:\n$$Q_H = nRT_H \\ln(V_B/V_A), \\quad Q_C = nRT_C \\ln(V_C/V_D) = nRT_C \\ln(V_B/V_A)$$\n$$\\frac{Q_C}{Q_H} = \\frac{T_C}{T_H}$$\n\n**Coefficient of Performance (COP) — Carnot refrigerator:**\n$$\\text{COP}_\\text{Carnot} = \\frac{T_C}{T_H - T_C}$$\n\n**Carnot's theorem proof by contradiction:**\nSuppose a super-engine E exists with η_E > η_Carnot. Use E to drive a Carnot refrigerator in reverse. Net result: heat flows spontaneously from cold to hot with no other effect — violates Clausius statement of the second law. Contradiction. ∴ η_E ≤ η_Carnot for all engines. For reversible engines: η = η_Carnot exactly (running either direction).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 29,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "(Foundational — Carnot efficiency from temperatures)",
+      "content": "### WE-1 (Foundational — Carnot efficiency from temperatures)\n\n**Problem:** A Carnot engine operates between a hot reservoir at 600 K and a cold reservoir at 300 K. What is its maximum efficiency?\n\n**Worked solution:**\n\n*Step 1 — Apply Carnot efficiency formula:*\n$$\\eta_\\text{Carnot} = 1 - \\frac{T_C}{T_H} = 1 - \\frac{300\\text{ K}}{600\\text{ K}} = 1 - 0.5 = 0.50$$\n\n*Step 2 — Interpret:*\nMaximum efficiency = 50%. Even this ideal engine must reject half the heat input to the cold reservoir. No real engine can exceed 50% between these temperatures.\n\n**Answer:** η_max = 50%\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 87,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "(Core — Full cycle heat and work analysis)",
+      "content": "### WE-2 (Core — Full cycle heat and work analysis)\n\n**Problem:** A Carnot engine absorbs 800 J from a reservoir at 500 K and rejects heat to a reservoir at 300 K. Find: (a) efficiency, (b) heat rejected Q_C, (c) net work output.\n\n**Worked solution:**\n\n*Step 1 — Carnot efficiency:*\n$$\\eta = 1 - \\frac{T_C}{T_H} = 1 - \\frac{300}{500} = 1 - 0.6 = 0.40 = 40\\%$$\n\n*Step 2 — Net work:*\n$$W_\\text{net} = \\eta \\cdot Q_H = 0.40 \\times 800\\text{ J} = 320\\text{ J}$$\n\n*Step 3 — Heat rejected (First Law for cycle: ΔU = 0):*\n$$Q_C = Q_H - W_\\text{net} = 800 - 320 = 480\\text{ J}$$\n\n*Verification via entropy:* Q_H/T_H = 800/500 = 1.6 J/K; Q_C/T_C = 480/300 = 1.6 J/K ✓ (equal, so reversible)\n\n**Answer:** η = 40%, Q_C = 480 J, W_net = 320 J\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 87,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "(Advanced — Proving a claim about efficiency)",
+      "content": "### WE-3 (Advanced — Proving a claim about efficiency)\n\n**Problem:** An inventor claims a heat engine operating between 600 K and 400 K produces 500 J of work from 800 J of heat input. Is this claim thermodynamically valid?\n\n**Worked solution:**\n\n*Step 1 — Calculate claimed efficiency:*\n$$\\eta_\\text{claimed} = \\frac{W}{Q_H} = \\frac{500}{800} = 0.625 = 62.5\\%$$\n\n*Step 2 — Calculate Carnot (maximum) efficiency:*\n$$\\eta_\\text{Carnot} = 1 - \\frac{400}{600} = 1 - 0.667 = 0.333 = 33.3\\%$$\n\n*Step 3 — Compare:*\n62.5% > 33.3%. The claimed efficiency exceeds the Carnot limit.\n\n*Step 4 — Conclusion:*\nThis violates the second law (Carnot's theorem). The claim is impossible — the engine would need to be a perpetual motion machine of the second kind. Either the claimed work output or heat input figures are wrong, or the inventor is measuring temperatures incorrectly.\n\n**Answer:** Claim is **invalid** — 62.5% > 33.3% (Carnot limit), violates second law.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 87,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/misconception/MC-CARNOT-IS-REAL-ENGINE",
+      "kind": "misconception",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "**Trigger signal:** Student says \"the Carnot engine is the best real engine\" or asks \"where can I buy a Carnot engine?",
+      "content": "### MC-CARNOT-IS-REAL-ENGINE\n\n**Trigger signal:** Student says \"the Carnot engine is the best real engine\" or asks \"where can I buy a Carnot engine?\"\n\n**Conflict evidence [P28]:** \"No heat engine operating between the same temperatures can exceed Carnot efficiency — but Carnot processes require quasi-static steps, which take infinitely long. A real engine that delivers zero power per cycle (infinite time) is useless. Practical engines trade efficiency for finite power output.\"\n\n**Bridge text [P30]:** \"The Carnot cycle sets the theoretical ceiling — like knowing the speed of light limits travel. It's a benchmark, not a blueprint. Engineers optimize real engines (Rankine, Otto, Diesel) to approach Carnot while delivering practical power in finite time.\"\n\n**Replacement text [P31]:** \"The Carnot cycle is an idealized reversible cycle — it defines the maximum possible efficiency for any heat engine between T_H and T_C. Real engines are irreversible and therefore less efficient. The Carnot limit is a thermodynamic law, not an engineering target to be reached.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"No real engine exceeds Carnot efficiency between the same reservoirs\" | \"The Carnot engine is the most powerful real engine\" |\n| \"Carnot efficiency depends only on T_H and T_C (in Kelvin)\" | \"Carnot efficiency depends on the working substance\" |\n| \"A reversible engine achieves Carnot efficiency\" | \"Any sufficiently well-built engine beats Carnot\" |\n\n**s6_path:** Validate the engineering intuition (\"great that you're thinking about real applications!\"), then clarify the distinction between theoretical maximum and practical optimum.\n\n---",
+      "localKey": "MC-CARNOT-IS-REAL-ENGINE",
+      "language": "en",
+      "refs": [
+        "MC-CARNOT-IS-REAL-ENGINE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/misconception/MC-CARNOT-EFFICIENCY-USES-CELSIUS",
+      "kind": "misconception",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "**Trigger signal:** Student substitutes Celsius temperatures into η = 1 − T_C/T_H; e.g., \"η = 1 − 27/127 = 0.787\" instead of \"η = 1 − 300/400 = 0.25.",
+      "content": "### MC-CARNOT-EFFICIENCY-USES-CELSIUS\n\n**Trigger signal:** Student substitutes Celsius temperatures into η = 1 − T_C/T_H; e.g., \"η = 1 − 27/127 = 0.787\" instead of \"η = 1 − 300/400 = 0.25.\"\n\n**Conflict evidence [P28]:** \"Try: T_H = 127°C = 400 K, T_C = 27°C = 300 K. Celsius formula gives η = 1 − 27/127 = 78.7%. Kelvin formula gives η = 1 − 300/400 = 25%. The Carnot derivation requires absolute temperature because we used Q_H/T_H = Q_C/T_C from entropy (dS = δQ_rev/T), where T is always absolute thermodynamic temperature in Kelvin.\"\n\n**Bridge text [P30]:** \"Temperature differences in Celsius equal differences in Kelvin, which is why ΔT problems work in either scale. But ratios T_C/T_H are NOT equal — 300/400 ≠ 27/127. The Carnot formula involves a ratio, so Kelvin is mandatory.\"\n\n**Replacement text [P31]:** \"In η = 1 − T_C/T_H, both temperatures are absolute (Kelvin). Always convert: T(K) = T(°C) + 273.15. The formula fails — giving nonsensical or impossible efficiencies — if Celsius values are substituted directly.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"η = 1 − 300K/400K = 25%\" | \"η = 1 − 27°C/127°C = 78.7%\" |\n| \"ΔT = 100°C = 100 K (differences are equal)\" | \"T_C/T_H = 27/127 (ratio valid in Celsius)\" |\n| \"Convert first, then compute the ratio\" | \"Ratios work in Celsius if both temperatures are on the same scale\" |\n\n**s6_path:** Remind student this is a common calculation trap; the rule is simple and worth internalizing once.\n\n---",
+      "localKey": "MC-CARNOT-EFFICIENCY-USES-CELSIUS",
+      "language": "en",
+      "refs": [
+        "MC-CARNOT-EFFICIENCY-USES-CELSIUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 242,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-CARNOT-EFFICIENCY-USES-CELSIUS\",\"MC-CARNOT-IS-REAL-ENGINE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-CARNOT-IS-REAL-ENGINE",
+        "MC-CARNOT-EFFICIENCY-USES-CELSIUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 242,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 242,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P28\",\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 242,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 242,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.therm.carnot-cycle/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.carnot-cycle",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState Carnot's theorem.\n\n**Answer:** No heat engine operating between two heat reservoirs at temperatures T_H and T_C can be more efficient than a Carnot (reversible) engine operating between the same two reservoirs. All reversible engines have the same efficiency η_Carnot = 1 − T_C/T_H.\n\n---\n\n### AP-2 (Bloom: Understand)\nWhy does the Carnot efficiency depend only on the reservoir temperatures and not on the working substance?\n\n**Answer:** The derivation of Q_H/T_H = Q_C/T_C relies only on the entropy being a state function and the cycle being reversible — both facts independent of the working substance. The ratio Q_C/Q_H = T_C/T_H holds regardless of whether the gas is ideal, real, or replaced by another working material, provided the cycle is reversible.\n\n---\n\n### AP-3 (Bloom: Apply)\nA power plant burns fuel to produce steam at 560°C and discharges to a river at 20°C. What is the maximum thermodynamic efficiency?\n\n**Answer:** T_H = 833 K, T_C = 293 K; η_max = 1 − 293/833 = 0.648 = **64.8%**\n\n---\n\n### AP-4 (Bloom: Analyze)\nTwo engineers debate: Engineer A says \"we can improve efficiency by lowering T_C.\" Engineer B says \"we can improve efficiency by raising T_H.\" Given T_H = 600 K and T_C = 300 K, which strategy gives a bigger efficiency gain for a 50 K improvement?\n\n**Answer:**\nCurrent η = 1 − 300/600 = 50%.\nLower T_C by 50 K: η = 1 − 250/600 = 58.3% (gain = 8.3%)\nRaise T_H by 50 K: η = 1 − 300/650 = 53.8% (gain = 3.8%)\n**Engineer A's strategy** (lower T_C) gives a larger gain for the same 50 K change. Note: in practice, T_C is often fixed by environment (river, atmosphere), making T_H the controllable lever.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.carnot-cycle.md",
+        "startLine": 274,
+        "endLine": 308
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

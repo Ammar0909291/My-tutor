@@ -1,0 +1,223 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.temperature-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.temperature",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ca30e8b4e82ec1dc3034db8c35576dff196ccdb0ee7898f7df6eeca8bdc28fb5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.temperature.md": "sha256:f1c3bc534b97c385ae365a7da5708964ac416fa7180a39fd5c795fcbc879beb5"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 1,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 1
+  },
+  "concept": {
+    "conceptId": "phys.therm.temperature",
+    "name": "Temperature and Temperature Scales",
+    "difficultyRaw": "label: foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.meas.units"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.temperature-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.temperature (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.temperature.md": "sha256:f1c3bc534b97c385ae365a7da5708964ac416fa7180a39fd5c795fcbc879beb5"
+      },
+      "contentHash": "sha256:293f99b9116c434fdd6706994b99db4ecfd84ff64a8ac94e9cc9caabc92f10c2",
+      "ruleCount": 1,
+      "bandCounts": {
+        "3": 1
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-1 (addresses MC-TEMPERATURE-IS-HEAT, MC-CELSIUS-RATIO-VALID)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.temperature/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.therm.temperature",
+      "title": "Temperature and Temperature Scales — core explanation",
+      "content": "**Hook (S0 novice):** Touch an ice cube and a metal spoon sitting on the same table — the spoon feels colder, even though both are at the same room temperature. Your sense of hot and cold is not measuring temperature; it is measuring heat flow rate. Temperature is the physical property that determines the direction of spontaneous heat flow — and defining it precisely enough to measure it reliably took two centuries of science.\n\n**Conceptual arc:**\n1. Temperature as the \"thermal pressure\" that drives heat flow: heat flows spontaneously from high-T to low-T regions.\n2. Empirical temperature scales: Celsius (0°C = ice point, 100°C = steam point at 1 atm); Fahrenheit (32°F = ice, 212°F = steam).\n3. Conversion: T(°F) = (9/5)T(°C) + 32; T(°C) = (5/9)(T(°F) − 32).\n4. Thermometric property: any measurable physical property that varies monotonically with temperature (length of mercury column, electrical resistance, gas pressure at constant volume).\n5. Absolute (Kelvin) scale: T(K) = T(°C) + 273.15. Based on constant-volume gas thermometer extrapolated to zero pressure → absolute zero = 0 K = −273.15°C.\n6. Absolute zero: the temperature at which an ideal gas would exert zero pressure — the lowest possible temperature (third law; practically unreachable but approachable).\n7. SI unit: the kelvin (K), not \"degree kelvin.\" Defined since 2019 by fixing k_B = 1.380649 × 10⁻²³ J/K.\n8. Why Kelvin matters: all thermodynamic equations (gas law, Carnot efficiency, kinetic energy) require absolute temperature — using Celsius gives wrong answers.\n\n**Closing synthesis:** Temperature is not \"amount of heat\" — it is the intensive property that governs heat flow direction. The Kelvin scale's power is that it is absolute: T = 0 is meaningful (no random thermal motion), and all ratios T₁/T₂ have physical significance (Carnot efficiency depends on them). Celsius is a practical measurement tool; Kelvin is the language of thermodynamics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 29,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.temperature",
+      "title": "(Concrete — scale conversion)",
+      "content": "### WE-1 (Concrete — scale conversion)\n\n**Scenario:** Normal body temperature is 98.6°F. Convert to Celsius and Kelvin. Standard room temperature is 20°C — express in Fahrenheit and Kelvin.\n\n**Body temperature:**\n°C: T = (5/9)(98.6 − 32) = (5/9)(66.6) = 37.0°C.\nK: T = 37.0 + 273.15 = 310.15 K ≈ 310 K.\n\n**Room temperature (20°C):**\n°F: T = (9/5)(20) + 32 = 36 + 32 = 68°F.\nK: T = 20 + 273.15 = 293.15 K ≈ 293 K.\n\n**Answer:** Body temp = 37°C = 310 K. Room temp = 68°F = 293 K.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 47,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.temperature",
+      "title": "(Bridging — thermometric property)",
+      "content": "### WE-2 (Bridging — thermometric property)\n\n**Scenario:** A resistance thermometer has resistance R = 100 Ω at 0°C and R = 138.5 Ω at 100°C. Assuming R varies linearly with temperature, find:\n(a) the temperature when R = 120 Ω.\n(b) The resistance at −40°C.\n\n**Linear model:** R(T) = R₀ + (ΔR/ΔT) × T = 100 + (38.5/100) × T = 100 + 0.385T [Ω, T in °C].\n\n**(a) T when R = 120 Ω:**\n120 = 100 + 0.385T → T = 20/0.385 = 51.9°C.\n\n**(b) R at −40°C:**\nR = 100 + 0.385 × (−40) = 100 − 15.4 = 84.6 Ω.\n\n**Answer:** 120 Ω → 51.9°C; at −40°C: R = 84.6 Ω.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 47,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.temperature",
+      "title": "(Abstract — absolute zero from gas thermometer)",
+      "content": "### WE-3 (Abstract — absolute zero from gas thermometer)\n\n**Concept:** A constant-volume gas thermometer gives P = 1.000 × 10⁵ Pa at 0°C and P = 1.366 × 10⁵ Pa at 100°C. Using the linear P–T relationship, extrapolate to find absolute zero (the temperature where P = 0).\n\n**Linear model:** P(T) = P₀ + (ΔP/ΔT) × T.\nΔP/ΔT = (1.366 − 1.000) × 10⁵ / 100 = 366 Pa/°C.\nP = 1.000 × 10⁵ + 366T.\n\n**Extrapolate to P = 0:**\n0 = 1.000 × 10⁵ + 366T → T = −1.000 × 10⁵ / 366 = −273.2°C.\n\n**Answer:** Absolute zero ≈ −273.2°C — in excellent agreement with the accepted −273.15°C. This shows why the Kelvin scale's zero is physically meaningful: it's where gas pressure would vanish.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 47,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/misconception/MC-TEMPERATURE-IS-HEAT",
+      "kind": "misconception",
+      "conceptId": "phys.therm.temperature",
+      "title": "**Trigger signal:** Student says \"the metal spoon is colder than the wooden spoon because it has less heat\" or \"hotter things have more temperature-heat.",
+      "content": "### MC-TEMPERATURE-IS-HEAT\n\n**Trigger signal:** Student says \"the metal spoon is colder than the wooden spoon because it has less heat\" or \"hotter things have more temperature-heat.\"\n\n**Conflict evidence [P28]:** \"Two blocks: 1 kg of iron at 80°C and 10 kg of water at 20°C. Which has more total thermal energy? Which is at higher temperature? Does heat flow from iron to water or water to iron?\"\n\n*Iron: hotter (80°C > 20°C) → heat flows from iron to water. But 10 kg of water contains far more total thermal energy than 1 kg of iron. Temperature ≠ total thermal energy.*\n\n**Bridge text [P30]:** \"Temperature is an intensive property — it doesn't depend on how much material you have. Heat (thermal energy) is an extensive property — it scales with mass. A single match flame has a higher temperature than a warm bath, but contains far less heat. Temperature tells you the direction of heat flow; it doesn't tell you how much energy is stored.\"\n\n**Replacement text [P31]:** \"Temperature = thermal 'pressure' that drives heat flow. Heat = thermal energy transferred. They are related (hotter things generally have more thermal energy per particle) but not identical. Two objects at the same temperature have zero net heat flow between them — that is the operational definition of 'same temperature.'\"\n\n**Discrimination pairs [P33]:**\n- \"A 5 kg block of copper at 50°C and a 5 g copper penny at 50°C: which has more heat?\" → 5 kg block (more mass → more thermal energy). Same temperature though.\n- \"Which direction does heat flow: from 200°C steel nail into 20°C swimming pool?\" → From nail to pool (higher T to lower T), even though pool has vastly more total thermal energy.\n\n**s6_path:** \"Temperature is the 'pressure'; heat is the 'fluid'. Pressure drives flow, but the reservoir can be larger on the low-pressure side.\"\n\n---",
+      "localKey": "MC-TEMPERATURE-IS-HEAT",
+      "language": "en",
+      "refs": [
+        "MC-TEMPERATURE-IS-HEAT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/misconception/MC-CELSIUS-RATIO-VALID",
+      "kind": "misconception",
+      "conceptId": "phys.therm.temperature",
+      "title": "**Trigger signal:** Student treats Celsius ratios as physically meaningful — e.g., \"20°C is twice as hot as 10°C\" or uses Celsius in a gas-law calculation.",
+      "content": "### MC-CELSIUS-RATIO-VALID\n\n**Trigger signal:** Student treats Celsius ratios as physically meaningful — e.g., \"20°C is twice as hot as 10°C\" or uses Celsius in a gas-law calculation.\n\n**Conflict evidence [P28]:** \"Using the ideal gas law: P₁/T₁ = P₂/T₂. If T₁ = 10°C and T₂ = 20°C, is the pressure ratio P₂/P₁ = 2? Calculate using Kelvin and check.\"\n\n*In Kelvin: T₁ = 283 K, T₂ = 293 K. P₂/P₁ = 293/283 = 1.035 — a 3.5% change, not doubling.*\n\n**Bridge text [P30]:** \"The Celsius scale is anchored at 0°C by convention (water's ice point) — not by any physical zero. Absolute zero is at −273.15°C. Ratios of Celsius values have no physical meaning because the zero is arbitrary. Kelvin sets zero at absolute zero, so all ratios T₁/T₂ and differences T₂ − T₁ have thermodynamic meaning.\"\n\n**Replacement text [P31]:** \"For any equation where temperature appears multiplicatively or as a ratio (gas laws, Carnot efficiency η = 1 − T_C/T_H, kinetic energy ∝ T), always convert to Kelvin first. For differences only (thermal expansion ΔT = T₂ − T₁), Celsius is fine because the offset cancels.\"\n\n**Discrimination pairs [P33]:**\n- \"Carnot efficiency: hot reservoir 200°C, cold reservoir 100°C. Is efficiency 50%?\" → No — in Kelvin: T_H = 473 K, T_C = 373 K. η = 1 − 373/473 = 21.1%, not 50%.\n- \"Steel rail expands ΔL = LαΔT as temperature rises from 10°C to 40°C. Can you use ΔT = 30 in Celsius?\" → Yes — ΔT is a difference; Celsius offset cancels.\n\n**s6_path:** \"Rule: differences OK in Celsius; ratios and absolute values → must use Kelvin.\"\n\n---",
+      "localKey": "MC-CELSIUS-RATIO-VALID",
+      "language": "en",
+      "refs": [
+        "MC-CELSIUS-RATIO-VALID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "Composition step 1",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Composition step 1\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P4\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-CELSIUS-RATIO-VALID\",\"MC-TEMPERATURE-IS-HEAT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-TEMPERATURE-IS-HEAT",
+        "MC-CELSIUS-RATIO-VALID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 199,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.temperature",
+      "title": "Diagnostic Probe Set",
+      "content": "**P4-a (conversion):** Convert 37°C to Fahrenheit and Kelvin.\n*°F: (9/5)(37) + 32 = 66.6 + 32 = 98.6°F. K: 37 + 273.15 = 310.15 K.*\n\n**P4-b (direction of heat flow):** A 300 K block touches a 280 K block. In which direction does heat spontaneously flow?\n*From 300 K to 280 K (high T to low T).*\n\n**P4-c (scale reasoning):** \"40°C is twice as hot as 20°C.\" True or false? Justify.\n*False — in Kelvin: 313 K vs. 293 K. The ratio is 1.068:1, not 2:1. Celsius ratios are meaningless thermodynamically.*\n\n**P4-d (gas law — Celsius trap):** A gas at T = 27°C is heated to T = 54°C at constant volume. By what factor does pressure increase?\n*Must use Kelvin: T₁ = 300 K, T₂ = 327 K. P₂/P₁ = 327/300 = 1.09 — 9% increase, not doubling.*\n\n**P4-e (absolute zero extrapolation):** A gas has P = 2.0 × 10⁵ Pa at 127°C and P = 1.5 × 10⁵ Pa at 27°C. Extrapolate linearly to find the temperature at P = 0.\n*ΔP/ΔT = (2.0 − 1.5) × 10⁵ / (127 − 27) = 5 × 10⁴/100 = 500 Pa/°C. At P=0: 0 = 1.5 × 10⁵ + 500(T − 27) → T − 27 = −300 → T = −273°C. ✓*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 140,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.temperature",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: metal vs wooden spoon] → [P06 anchor: heat flow direction = temperature]\n→ [MC-TEMPERATURE-IS-HEAT: P28 conflict → P30 bridge → P31 replacement → P33 pairs]\n→ [WE-1: scale conversions — body and room temperature]\n→ [P51 check-in]\n→ [MC-CELSIUS-RATIO-VALID: P28 conflict (Carnot trap) → P30 bridge → P31 rule → P33 pairs]\n→ [WE-2: resistance thermometer — linear thermometric property]\n→ [P52 narrow: when Celsius OK vs. must use Kelvin]\n→ [WE-3: absolute zero extrapolation from gas thermometer]\n→ [P62 retrieval seed: conversions −40°C and 77°F]\n→ [P36 mastery probe: Charles's law — doubles volume, find T in °C]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 199,
+        "endLine": 220
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

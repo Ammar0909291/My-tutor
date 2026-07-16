@@ -1,0 +1,381 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.friction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.friction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ac36d9f8b43a84a8b97abfbdb7b22d0a4df00cd147984da9bc216a8387e2659d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.friction.md": "sha256:3bbb6ce56426f6c5d1f724cec9721d053f57a5e237c8bb99cd39411933d5251a"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.friction",
+    "name": "Friction",
+    "difficultyRaw": "developing (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.free-body-diagram"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.friction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.friction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.friction.md": "sha256:3bbb6ce56426f6c5d1f724cec9721d053f57a5e237c8bb99cd39411933d5251a"
+      },
+      "contentHash": "sha256:667af2e83519021e1e49665c7c6a3a485320e22ad8d1b48df56e9e2aaa6672af",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.friction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.friction.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.friction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.friction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.friction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.friction.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.friction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.friction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.friction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.friction.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.friction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.friction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.friction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.friction.md#TA-4 (addresses MC-FRICTION-USES-WEIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.friction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.friction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.friction.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.friction.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.friction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.friction\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.friction.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.friction.md#TA-6 (addresses MC-STATIC-ALWAYS-MAX, MC-FRICTION-USES-WEIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.friction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.friction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.friction/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.friction",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Distinguishes **static friction** (adjusts up to a maximum f_s ≤ μ_s N to prevent sliding) from **kinetic friction** (constant f_k = μ_k N once sliding), and knows μ_s ≥ μ_k.\n2. Computes the friction force using f = μN with the **normal force N** (not the weight, when these differ — e.g. on an incline or with a vertical applied-force component), and directs it **opposing relative motion or its tendency**.\n3. Reasons that static friction is **not fixed**: it equals only what is needed to prevent motion, up to its maximum — so a stationary pushed object has friction equal to the push, not μ_s N.\n\nA student who always sets friction to μ times the weight (ignoring that N ≠ mg on an incline), or who treats static friction as a fixed value μ_s N even when the object isn't on the verge of slipping, has **NOT** achieved mastery — the \"friction = μ × weight, always maxed\" error corrupts every incline, equilibrium, and dynamics problem downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/misconception/MC-FRICTION-USES-WEIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.friction",
+      "title": "Friction is always μ times the weight",
+      "content": "### MC-FRICTION-USES-WEIGHT: \"Friction is always μ times the weight\"\ntrigger_signal: student computes f = μmg on an incline or when a vertical applied-force component changes the normal force.\nconflict_evidence [P28]: \"You used the weight for N. But on a 30° incline the block doesn't press the slope with its full weight — only the component perpendicular to the slope, mg cosθ, pushes into the surface. The steeper the slope, the LESS it presses, the LESS the friction. If friction stayed at μmg regardless of angle, a block on a near-vertical wall would still have huge friction — but it barely touches the wall.\"\nbridge_text [P30]: \"Friction depends on the NORMAL force — how hard the surfaces press together — not the weight. Read N off the free-body diagram every time. On flat ground with no vertical push, N happens to equal mg; on an incline N = mg cosθ; if you push down at an angle, N > mg. Use the actual N.\"\nreplacement_text [P31]: \"f = μN, where N is the normal force from the diagram. Only substitute mg for N after confirming the surface is horizontal with no vertical force component.\"\ndiscrimination_pairs [P33]: [\"box on flat floor, horizontal push: N = mg, f = μmg ✓\", \"box on 30° incline: N = mg cos30°, f = μmg cos30° ✓\", \"box on incline using f = μmg: ✗ overestimates N\"]\ns6_path: skip P28; tilt a book slowly and ask \"does it press the surface as hard when steeper?\" as a shared felt observation, then P30.",
+      "localKey": "MC-FRICTION-USES-WEIGHT",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-USES-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/misconception/MC-STATIC-ALWAYS-MAX",
+      "kind": "misconception",
+      "conceptId": "phys.mech.friction",
+      "title": "Static friction is always μ_s N",
+      "content": "### MC-STATIC-ALWAYS-MAX: \"Static friction is always μ_s N\"\ntrigger_signal: student sets a stationary object's friction to μ_s N even when the applied force is below the slipping threshold.\nconflict_evidence [P28]: \"You pushed the box with 20 N and it stayed still. You said friction = μ_s N = 40 N. But if friction really were 40 N against your 20 N push, the net force would be 20 N backward — the box would accelerate BACKWARD, into your hand. It doesn't move at all. So friction must be exactly 20 N here, matching your push. μ_s N = 40 N is only the MAXIMUM it could reach.\"\nbridge_text [P30]: \"Static friction is a responsive force: it provides exactly enough to prevent sliding, no more. It grows to match the applied force, up to a ceiling of μ_s N. Below that ceiling, friction = the applied force. Only at the instant of slipping does it reach μ_s N.\"\nreplacement_text [P31]: \"For a stationary object, static friction = whatever balances the other forces (≤ μ_s N). Compute the applied force first; friction matches it until the μ_s N limit is exceeded.\"\ndiscrimination_pairs [P33]: [\"push 20 N, max static 40 N, box still: f_s = 20 N ✓\", \"push 45 N, max static 40 N: exceeds limit → slides, f drops to kinetic ✓\", \"push 20 N, claiming f_s = 40 N: ✗ would push the box backward\"]\ns6_path: skip P28; walk \"the box is still, so what must friction equal?\" as a gentle shared balance, then P30.",
+      "localKey": "MC-STATIC-ALWAYS-MAX",
+      "language": "en",
+      "refs": [
+        "MC-STATIC-ALWAYS-MAX"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.friction",
+      "title": "The Force That Fights Sliding",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Force That Fights Sliding\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.friction",
+      "title": "f = μN — Normal Force, Not Weight",
+      "content": "{\"id\":\"TA-2\",\"title\":\"f = μN — Normal Force, Not Weight\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.friction",
+      "title": "Static Friction Adjusts",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Static Friction Adjusts\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.friction",
+      "title": "Misconception Probe — Which Normal Force?",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Which Normal Force?\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-FRICTION-USES-WEIGHT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-USES-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.friction",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.friction",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-FRICTION-USES-WEIGHT\",\"MC-STATIC-ALWAYS-MAX\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-STATIC-ALWAYS-MAX",
+        "MC-FRICTION-USES-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.friction",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Flat floor, horizontal push: N = weight? 30° incline: N = weight?\" | CORRECT = yes flat; no incline (N = mg cosθ) |\n| P74 (classify) | \"Is μ_s greater than, less than, or equal to μ_k?\" | CORRECT = greater (μ_s ≥ μ_k) |\n| P75 (boundary) | \"Is friction always μN? When is it less?\" | CORRECT = static friction is ≤ μ_s N, often less |\n| P76 (transfer) | \"6 kg block up 20° incline, μ_k = 0.3, g = 10, sliding up — friction magnitude and direction?\" | CORRECT ≈ 16.9 N, down the slope |\n| P77 (generate) | \"Scenario where static friction is NOT at maximum — give its value.\" | CORRECT = below-threshold push, f = push |\n| P78 (explain) | \"How do static and kinetic friction differ; why use N not weight?\" | CORRECT = static adjustable ≤ μ_s N; kinetic constant μ_k N; N is contact press |\n| P79 (predict) | \"Crate won't budge, then slides and feels easier — μ_s vs μ_k?\" | CORRECT = μ_s > μ_k |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.friction",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No formal friction model | Knows friction \"slows things\" but no f = μN | Protocol A (Concrete) |\n| S1 | \"Friction = μ × weight\" fixed rule | Uses mg for N even on inclines; ignores static/kinetic split | Protocol B (Counterexample-first) |\n| S2-FRICTION-USES-WEIGHT | Uses weight instead of normal force | Sets f = μmg on an incline where N < mg | Misconception Engine → Protocol C |\n| S2-STATIC-ALWAYS-MAX | Treats static friction as always μ_s N | Says a lightly-pushed stationary box has friction μ_s N | Misconception Engine → Protocol C |\n| S3 | Uses f = μN; slips on which μ or which N | Correct method; wrong coefficient or normal in incline case | Protocol C (Guided Questioning) |\n| S6 | Anxiety at the μ_s/μ_k split and incline normals | Freezes at two coefficients and resolved normals | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.friction",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What is friction, and do you know a formula for how big it is?\"\n  States f = μN and mentions static vs kinetic → S3. Enter Protocol C.\n  \"Friction = μ times the weight\" (fixed, no static/kinetic, weight not normal) → S1. Enter Protocol B.\n  \"It just slows things down\" / no formula → DB-2.\n\nDB-2 (misconception probe):\n\"A 10 kg box sits on a rough floor (μ_s = 0.4). You push it horizontally with 20 N and it does NOT move. What is the friction force on it right now? (g = 10)\"\n  \"20 N — static friction matches the push to keep it still; the max is μ_s N = 40 N, so 20 N is below the limit\" → S3. Enter Protocol C.\n  \"40 N — friction = μ_s × N = 0.4 × 100\" → SIGNAL:MISCONCEPTION:MC-STATIC-ALWAYS-MAX. Enter Misconception Engine.\n  \"I don't know how to find it\" → S0. Enter Protocol A.\n  Pause / distress → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with friction problems — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-STATIC-ALWAYS-MAX"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.friction/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.friction",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.free-body-diagram`):\n\"On a free-body diagram of a box on the ground, which force is the normal force, and which way does it point?\"\n  Cannot identify the normal force perpendicular to the surface → flag PREREQ-GAP-FBD.\n  In-session minimum repair: one P06 anchor (draw a box, mark N perpendicular to the surface) — then resume. Deep gap → schedule `phys.mech.free-body-diagram` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.friction.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

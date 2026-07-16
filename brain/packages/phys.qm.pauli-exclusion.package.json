@@ -1,0 +1,369 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.pauli-exclusion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.pauli-exclusion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1f7082ed5b957cb267a04922bacdba50ad6897ce2ea7da69ddf2c281591a830e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md": "sha256:e8245694a69bdd0374445d22013f3abce0fc3cbb0a9120fc5c8f8355961c4541"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.qm.pauli-exclusion",
+    "name": "Pauli Exclusion Principle",
+    "difficultyRaw": "Expert",
+    "bloom": "Analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.qm.spin"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.pauli-exclusion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.pauli-exclusion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md": "sha256:e8245694a69bdd0374445d22013f3abce0fc3cbb0a9120fc5c8f8355961c4541"
+      },
+      "contentHash": "sha256:3ad175c4fa9c6ba5b47b633b293e29eff27daee950052638a35fd40a01ea0bf4",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.pauli-exclusion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.pauli-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.pauli-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.pauli-exclusion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.pauli-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.pauli-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.pauli-exclusion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.pauli-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.pauli-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.pauli-exclusion/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Pauli Exclusion Principle — core explanation",
+      "content": "**Core Claim:** No two fermions (particles with half-integer spin, like electrons) can occupy the same quantum state simultaneously; this arises from the antisymmetry requirement on multi-particle wave functions ψ(1,2) = −ψ(2,1), and it underpins the structure of matter — atomic electron configurations, white dwarf degeneracy pressure, and the stability of all ordinary matter.\n\n**Why It Matters:** Without the Pauli exclusion principle, all electrons would collapse into the ground state, atoms could not form distinct chemical elements, metals would not conduct, and white dwarfs would collapse to black holes. It is the foundational reason matter has structure and size.\n\n**Threshold Concept:** The Pauli exclusion principle is not an arbitrary rule — it is a consequence of a deeper symmetry: identical fermions must have antisymmetric wave functions under particle exchange. The exclusion emerges automatically: if two particles share all quantum numbers, the antisymmetric wave function vanishes identically, meaning the state simply does not exist.\n\n**Prerequisite Knowledge Check:**\n- Electron spin and quantum states (n, l, m_l, m_s) (phys.qm.spin)\n- Hydrogen atom quantum numbers (phys.qm.hydrogen-atom-qm recommended)\n- Concept of identical particles in quantum mechanics\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Pauli is just about charge repulsion",
+      "content": "### MC-1: Pauli is just about charge repulsion\n- **Probe:** \"Why can't two electrons occupy the same state — is it because they repel each other?\"\n- **Characteristic phrase:** \"They push each other away electrically.\"\n- **Trigger:** Coulomb repulsion is the most familiar electron-electron interaction.\n- **Conflict evidence [P28]:** Neutrons are electrically neutral — yet no two neutrons can occupy the same quantum state. Neutron star stability requires neutron degeneracy pressure, which is purely Pauli-based, not electromagnetic. If Pauli were just Coulomb, neutral particles would have no exclusion.\n- **Bridge [P30]:** Pauli exclusion comes from the antisymmetry requirement on the many-body wave function — a quantum-mechanical symmetry requirement unrelated to charge.\n- **Replacement [P31]:** Any two identical fermions (same species, same spin) cannot share a quantum state because their joint wave function must be antisymmetric, making it vanish when they share all quantum numbers.\n- **Discrimination pairs [P33]:** Electrons (fermions, charged): Pauli + Coulomb repulsion both present. Neutrons (fermions, neutral): Pauli applies, Coulomb does not. Photons (bosons, neutral): neither Pauli nor Coulomb; many photons can occupy the same mode (laser).\n- **S6 repair path:** Discuss neutron stars — ask \"If Pauli were just Coulomb, why would a neutron star not collapse?\" The answer requires recognizing neutron degeneracy pressure.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Each atomic orbital holds only 1 electron",
+      "content": "### MC-2: Each atomic orbital holds only 1 electron\n- **Probe:** \"How many electrons fit in a 2p orbital?\"\n- **Characteristic phrase:** \"One, since Pauli says no two can share the same state.\"\n- **Trigger:** Forgetting that m_s = ±½ gives two distinct states per orbital.\n- **Conflict evidence [P28]:** A \"2p orbital\" specified only by (n=2, l=1, m_l) is not a fully specified quantum state. Adding m_s distinguishes (2,1,m_l,+½) from (2,1,m_l,−½) — two different states, both allowed. Neon (Z=10) has 2p filled with 6 electrons (2 per m_l value × 3 m_l values), confirmed by spectroscopy.\n- **Bridge [P30]:** The Pauli constraint applies to fully specified states: all four quantum numbers (n, l, m_l, m_s). Two electrons can share (n,l,m_l) if they have opposite m_s.\n- **Replacement [P31]:** Each spatial orbital (n,l,m_l) can hold exactly 2 electrons: one with m_s = +½ and one with m_s = −½.\n- **Discrimination pairs [P33]:** \"1s orbital\" = spatial orbital, holds 2. \"1s state with m_s=+½\" = one fully specified quantum state, holds 1.\n- **S6 repair path:** Build electron configuration of carbon (Z=6) step by step with all four quantum numbers specified for each electron.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Bosons also obey Pauli exclusion",
+      "content": "### MC-3: Bosons also obey Pauli exclusion\n- **Probe:** \"Can two photons be in the same quantum state?\"\n- **Characteristic phrase:** \"No — particles can't share a state.\"\n- **Trigger:** Over-generalizing Pauli to all particles.\n- **Conflict evidence [P28]:** A laser concentrates millions of photons into the same mode (frequency, polarization, direction). BEC (Bose-Einstein Condensate) puts millions of bosonic atoms into the same ground state. Both directly contradict Pauli for bosons.\n- **Bridge [P30]:** Pauli applies only to fermions (half-integer spin). Bosons (integer spin) have symmetric wave functions — they prefer to occupy the same state (Bose-Einstein enhancement).\n- **Replacement [P31]:** Fermions (e⁻, p, n, quarks): antisymmetric wave function → Pauli exclusion. Bosons (photon, ⁴He, Higgs): symmetric wave function → no exclusion, bosons prefer to bunch.\n- **Discrimination pairs [P33]:** Laser: 10²⁰ photons in same mode — bosons. Fermi gas: electrons in metal, each in distinct k-state up to Fermi energy — fermions.\n- **S6 repair path:** Classify by spin: electrons (s=½ fermion), photons (s=1 boson), protons (s=½ fermion), ⁴He (spin-0 boson), ³He (spin-½ fermion).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "The Slater determinant is just a trick",
+      "content": "### MC-4: The Slater determinant is just a trick\n- **Probe:** \"Why use a determinant for many-electron wave functions?\"\n- **Characteristic phrase:** \"It's just a mathematical formality — doesn't mean anything physical.\"\n- **Trigger:** Algebra disconnected from physics.\n- **Conflict evidence [P28]:** Swapping two rows of a determinant changes its sign → ψ(2,1) = −ψ(1,2) — antisymmetry is automatic. Setting two rows equal gives det = 0 → Pauli exclusion is automatic. The determinant encodes both antisymmetry and exclusion in one structure.\n- **Bridge [P30]:** The Slater determinant is not a trick; it is the unique way to write a multi-fermion wave function that satisfies antisymmetry. Hartree-Fock theory (the foundation of computational quantum chemistry) is built on Slater determinants.\n- **Replacement [P31]:** ψ(1,2) = (1/√2)|φ_a(1) φ_a(2); φ_b(1) φ_b(2)| = (1/√2)[φ_a(1)φ_b(2)−φ_b(1)φ_a(2)]. If φ_a = φ_b, the two rows are identical → det = 0 → that state cannot exist.\n- **Discrimination pairs [P33]:** Hartree (no antisymmetry): ψ = φ_a(1)φ_b(2), wrong for fermions. Slater (antisymmetric): ψ = (1/√2)(φ_a(1)φ_b(2)−φ_b(1)φ_a(2)), correct for fermions.\n- **S6 repair path:** Write the Slater determinant for helium ground state (1s↑, 1s↓); show it is nonzero. Then write for two electrons both in (1s↑) and show the determinant vanishes.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Show Slater determinant vanishes when two rows identical",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Show Slater determinant vanishes when two rows identical\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 7,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Work through He and Li electron configurations with all four quantum numbers",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Work through He and Li electron configurations with all four quantum numbers\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 8,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Contrast fermion (electron, neutron) vs. boson (photon, ⁴He) to explain laser/BEC",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Contrast fermion (electron, neutron) vs. boson (photon, ⁴He) to explain laser/BEC\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 9,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Write electron configurations using Pauli; construct Slater determinant for two electrons; explain degeneracy pressure in qualitative terms.\n\n**FA-1:** \"Write the ground-state electron configuration of oxygen (Z=8).\"\n*Expected:* 1s²2s²2p⁴. Verify: 2+2+4 = 8 ✓. Pauli: each subshell correctly filled to its maximum. 2p⁴ means three 2p orbitals: two with paired electrons, one with a single electron (Hund's rule).\n*Threshold:* Correct configuration; correct 2p filling with Hund's rule.\n\n**FA-2:** \"Why does the 2×2 Slater determinant vanish when both electrons occupy the 1s↑ state?\"\n*Expected:* The two rows of the determinant become identical → det = 0. Physically: the antisymmetric wave function equals its own negative → ψ = 0, meaning this quantum state does not exist.\n*Threshold:* Explicit connection between identical rows → det = 0 → state nonexistent.\n\n**FA-3:** \"Can two photons be in the same quantum state? Explain why or why not.\"\n*Expected:* Yes — photons are bosons (spin-1, integer spin). Their wave function is symmetric under exchange, not antisymmetric. No Pauli exclusion applies. Example: laser light, where 10²⁰ photons occupy the same mode.\n*Threshold:* Identifies photons as bosons; invokes symmetric wave function; gives example.\n\n**FA-4:** \"What is electron degeneracy pressure and why does it persist at T=0?\"\n*Expected:* Pauli exclusion forces electrons to fill quantum states from the bottom up to the Fermi energy E_F, even at T=0. These electrons have nonzero kinetic energy that cannot be removed by cooling — zero-point kinetic energy from Pauli. The resulting pressure P ∝ n^(5/3) resists compression without any thermal support.\n*Threshold:* Identifies Pauli as source (not thermal); explains Fermi energy concept; notes T=0 persistence.\n\n**Confidence calibration:** After FA-2, ask \"If the first row is φ_a(1) and the second row is φ_b(1), can you write out the full 3×3 Slater determinant for three electrons?\" Many learners who understand 2×2 cannot generalize. This probes whether mastery is genuine or surface-level.\n\n**Delayed retrieval:** Return at day 7: \"Derive from antisymmetry why no two electrons can share all four quantum numbers. Show the algebraic step that makes ψ = 0.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 187,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** Imagine seats on a quantum bus: each seat is labeled by a unique (n, l, m_l, m_s) ticket. Rule: two passengers with identical tickets cannot both board. Electrons try to board, each needing a distinct ticket. Once all seats are filled, the bus is full — no more passengers, regardless of energy.\n\n**Representational:**\n- Electron configuration of carbon (Z=6): 1s²2s²2p² — filling order with Pauli constraint\n- Slater determinant for two-electron system:\n  ψ(1,2) = (1/√2)[φ_a(1)φ_b(2) − φ_a(2)φ_b(1)]\n  If a = b: ψ(1,2) = (1/√2)[φ_a(1)φ_a(2) − φ_a(2)φ_a(1)] = 0\n- Box diagrams: each orbital box holds at most 2 electrons (↑ and ↓)\n\n**Abstract:**\n- Fermions: half-integer spin (electrons, protons, neutrons, quarks)\n- Antisymmetry: ψ(r₁,r₂) = −ψ(r₂,r₁) for any two-fermion system\n- Bosons: integer spin (photons, ⁴He) — symmetric: ψ(r₁,r₂) = +ψ(r₂,r₁) — Bose-Einstein condensation (no exclusion)\n- Slater determinant: many-electron wave function automatically antisymmetric\n- Degeneracy pressure: N electrons fill up to Fermi energy E_F = (ℏ²/2m)(3π²n)^(2/3) where n = electron density; quantum pressure P = (2/5)nE_F resists compression even at T=0\n\n**Transfer:** White dwarf stability: electron degeneracy pressure (Pauli) resists gravitational collapse. Neutron star: neutron degeneracy pressure (Pauli, fermions). Chemistry: Aufbau principle and Hund's rules are Pauli + energy minimization.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 36,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Why Beginners Fail",
+      "content": "1. **Pauli as an empirical rule:** Learners accept \"no two electrons with same quantum numbers\" as a given, without understanding it follows from antisymmetry of the wave function.\n2. **Confusing Pauli with energy minimization:** \"Electrons avoid each other due to repulsion.\" Pauli exclusion is a quantum-mechanical effect independent of charge repulsion — neutral fermions (neutrons) also obey it.\n3. **Forgetting m_s:** Learners write each orbital as holding 1 electron, forgetting spin m_s = ±½ allows 2 electrons per orbital.\n4. **Bosons vs. fermions confusion:** Learners apply Pauli to photons (bosons) or think all particles obey exclusion.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 58,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"Pauli exclusion is why you don't fall through your chair. The electrons in the chair's atoms can't occupy the same states as your electrons — they resist compression, giving matter its impenetrability. This isn't just chemistry — it's what holds white dwarf stars up against gravity.\"\n\n**Pacing:** Start with the chemical consequence (electron configurations, periodic table), then derive it from antisymmetry. Physical motivation before mathematical derivation.\n\n**Common impasse language:** \"Is it just a rule? No — it's a theorem. Antisymmetric wave functions for identical fermions automatically give zero when any two particles share a state. We don't postulate the exclusion; it falls out of the math.\"\n\n**Closing consolidation:** \"One principle — antisymmetry of many-fermion wave functions — explains atomic structure, the periodic table, the conductivity of metals, the stability of white dwarfs, and the rigidity of matter. That's the power of a deep symmetry principle.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 175,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner does not know what quantum numbers (n,l,m_l,m_s) mean or how to assign them. Return to phys.qm.spin and phys.qm.hydrogen-atom-qm.\n\n**S3 — Partial understanding:** Can recite Pauli principle but cannot apply it to electron configurations or connect to antisymmetry. Intervention: step-by-step configuration building for C, N, O with all four quantum numbers explicitly listed.\n\n**S6 — Misconception detected:** MC-1 (Pauli = Coulomb repulsion). Intervention: neutron star argument — neutral particles obey Pauli, so it cannot be electromagnetic.\n\n**S9 — Near mastery:** Understands exclusion for atoms but cannot connect to macroscopic stability (degeneracy pressure). Intervention: estimate E_F for copper (n ≈ 8.5×10²⁸ m⁻³) and show E_F ≈ 7 eV — comparable to chemical binding energies, far above thermal energy at room temperature.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 213,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Principled (why antisymmetry → exclusion, not just what the rule is) + procedural (electron configuration building, Slater determinant).\n\n**Spaced retrieval schedule:** Day 1 (electron configuration of Na; explain Pauli in one sentence), Day 3 (write Slater determinant for He; show vanishing for same-state case), Day 7 (explain degeneracy pressure without looking up), Day 21 (explain why matter is stable and rigid — connect Pauli to everyday solidity).\n\n**Interleaving partners:** phys.qm.spin (spin quantum number m_s is essential for 2-electron-per-orbital capacity), phys.qm.hydrogen-atom-qm (quantum numbers n,l,m_l that Pauli applies to), phys.stat.fermi-dirac (Fermi-Dirac distribution is the thermal generalization of Pauli exclusion filling).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 225,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Electron configurations for all elements (chemistry); Hund's rules for degenerate orbital filling; molecular orbital theory (bonding/antibonding pairs).\n\n**Far transfer:** White dwarf stars: electron degeneracy pressure resists collapse up to the Chandrasekhar limit (1.4 M_sun). Neutron stars: neutron degeneracy pressure takes over when electron degeneracy fails. Metallic conductivity: electrons in a band fill up to E_F with the Fermi surface determining conduction properties.\n\n**Structural abstraction:** The antisymmetry requirement for identical fermions is a fundamental symmetry of nature (related to the spin-statistics theorem, a consequence of relativistic quantum field theory). It applies to all fermions universally: electrons, protons, neutrons, quarks. Wherever you see matter resisting compression or maintaining distinct chemical identities, Pauli exclusion is the cause.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 235,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.qm.pauli-exclusion/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.pauli-exclusion",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.qm.spin is the immediate prerequisite (m_s is the fourth quantum number). phys.qm.hydrogen-atom-qm provides the n,l,m_l quantum numbers that Pauli applies to.\n\n**Common pacing error:** Presenting Pauli as an empirical rule before deriving it from antisymmetry. Learners who learn the rule without the derivation cannot explain why it holds or why it's limited to fermions.\n\n**Assessment gap:** Most curricula test electron configuration writing but rarely test the Slater determinant vanishing, the distinction from Coulomb repulsion, or degeneracy pressure.\n\n**Suggested pairing:** Pair with phys.stat.fermi-dirac for the thermal extension: Fermi-Dirac f(E) = 1/(e^((E-μ)/kT)+1) is the probability that a state is occupied, ranging from ~1 (below E_F) to ~0 (above E_F) — the direct thermal generalization of Pauli filling.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.pauli-exclusion.md",
+        "startLine": 245,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

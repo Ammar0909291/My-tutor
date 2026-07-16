@@ -1,0 +1,369 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.spacetime-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.spacetime",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:068150ae14830fbfa969a3d38a99e6a05c78fd2d06628da9c91bf92abeff6ed7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.spacetime.md": "sha256:07b8c85b5ae6be58eeaa4b63cc4199eadee7183747119f7f75f884215b4423ff"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.rel.spacetime",
+    "name": "Spacetime Interval and Four-Vectors",
+    "difficultyRaw": "Expert",
+    "bloom": "Analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.rel.mass-energy"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.spacetime-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.spacetime (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.spacetime.md": "sha256:07b8c85b5ae6be58eeaa4b63cc4199eadee7183747119f7f75f884215b4423ff"
+      },
+      "contentHash": "sha256:6ddc4d804cfd8f4360d3d669335d4f289c9444d51f6c15c35ebb50c90d476dfa",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.spacetime.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.spacetime.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.spacetime"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.spacetime\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.spacetime.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.spacetime.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.spacetime"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.spacetime\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.spacetime.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.spacetime.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.spacetime"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.spacetime\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.spacetime/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Spacetime Interval and Four-Vectors — core explanation",
+      "content": "**Core Claim:** Space and time are not separate — they form a unified four-dimensional spacetime; the spacetime interval s² = c²t² − x² − y² − z² is invariant under Lorentz transformations (all inertial observers agree on it), and physical laws are most elegantly expressed as four-vectors A^μ = (A⁰, A¹, A², A³) whose inner product A_μA^μ is Lorentz invariant.\n\n**Why It Matters:** The four-vector framework is the language of all relativistic physics — relativistic mechanics, electrodynamics (four-potential, four-current), and general relativity all use this structure. The invariant interval replaces separate space and time distances with a geometric truth that every observer agrees upon, revealing the deep structure of spacetime.\n\n**Threshold Concept:** Spacetime is a 4D geometric object, not space + a clock. Events are points in spacetime; the \"distance\" between events is the invariant interval s². Different observers disagree on Δt and Δx separately but always agree on Δs² = c²Δt² − Δx² − Δy² − Δz².\n\n**Prerequisite Knowledge Check:**\n- Lorentz transformations (phys.rel.lorentz-transform)\n- Mass-energy equivalence, relativistic energy-momentum (phys.rel.mass-energy)\n- Four-momentum: p^μ = (E/c, p_x, p_y, p_z)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Different observers measure different spacetime intervals",
+      "content": "### MC-1: Different observers measure different spacetime intervals\n- **Probe:** \"If observer A measures s² = 9 m², what does observer B measure for the same two events?\"\n- **Characteristic phrase:** \"B measures a different interval since they're moving differently.\"\n- **Trigger:** Over-generalizing that \"everything is relative\" in relativity.\n- **Conflict evidence [P28]:** Lorentz transformation: x' = γ(x−vt), t' = γ(t−vx/c²). Direct computation: c²t'² − x'² = γ²(ct−βx)² − γ²(x−βct)² = γ²(1−β²)(c²t²−x²) = c²t²−x² (since γ²(1−β²)=1). QED: invariance is exact.\n- **Bridge [P30]:** The interval combines space and time in precisely the way that cancels the mixing from Lorentz boosts. That's why s² (not Δx alone or Δt alone) is the geometrically meaningful quantity.\n- **Replacement [P31]:** The spacetime interval s² is Lorentz invariant — every inertial observer computes the same value. What IS observer-dependent: Δx, Δt, and whether two events are simultaneous.\n- **Discrimination pairs [P33]:** Δx: frame-dependent (length contraction). Δt: frame-dependent (time dilation). s²: frame-independent. |A⃗|²: frame-dependent. A_μA^μ: frame-independent.\n- **S6 repair path:** Have learner apply Lorentz transformation to specific numerical example and recompute s² in the new frame.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Spacelike intervals are unphysical",
+      "content": "### MC-2: Spacelike intervals are unphysical\n- **Probe:** \"What does it mean for two events to have spacelike separation?\"\n- **Characteristic phrase:** \"Spacelike is imaginary — it doesn't correspond to anything real.\"\n- **Trigger:** In (+−−−) convention, spacelike gives s² < 0 which seems unphysical.\n- **Conflict evidence [P28]:** The event \"you read this word\" and \"a star exploded in Andromeda 3 seconds ago\" have spacelike separation — they're both real events. Spacelike means no causal connection, not nonexistence. There exists a frame where they're simultaneous.\n- **Bridge [P30]:** Spacelike means |Δx| > c|Δt| — the spatial separation exceeds what light could bridge. Physically: no signal could have passed between them; they cannot be causally related.\n- **Replacement [P31]:** Spacelike: s² < 0 (in +−−−). Real, physical events — just causally disconnected. There exists a frame where they are simultaneous (Δt' = 0), and the proper spatial distance √(−s²) is the minimum spatial separation any frame assigns them.\n- **Discrimination pairs [P33]:** Timelike s² > 0: a cause can precede its effect (all frames agree on the causal order). Lightlike s² = 0: only light can connect them. Spacelike s² < 0: causal order can differ between frames (different observers disagree on which happened first).\n- **S6 repair path:** Draw the Minkowski diagram; classify several event pairs by interval type; find the frame where spacelike pair is simultaneous.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Four-momentum inner product is p⃗·p⃗ = |p⃗|²",
+      "content": "### MC-3: Four-momentum inner product is p⃗·p⃗ = |p⃗|²\n- **Probe:** \"What is p_μp^μ for a particle with 3-momentum p⃗ and energy E?\"\n- **Characteristic phrase:** \"p·p = |p|² = p_x² + p_y² + p_z².\"\n- **Trigger:** Transferring 3D dot product to four-vectors.\n- **Conflict evidence [P28]:** Four-momentum: p^μ = (E/c, p⃗). Inner product: p_μp^μ = (E/c)² − |p⃗|² = (mc)². If the learner uses 3D dot product they get |p⃗|² ≠ (mc)².\n- **Bridge [P30]:** The Minkowski metric has a relative sign: (+−−−). The time component enters with +, space with −. This is what makes the combination Lorentz-invariant.\n- **Replacement [P31]:** p_μp^μ = (E/c)² − p_x² − p_y² − p_z² = (mc)². For a photon (m=0): E = pc. For a particle at rest (p⃗=0): E = mc². Both follow from the same invariant.\n- **Discrimination pairs [P33]:** 3D: p⃗·p⃗ = |p|² — positive definite. 4D Minkowski: p_μp^μ = (E/c)²−|p|² = (mc)² — indefinite, can be zero (photon) or positive (massive particle).\n- **S6 repair path:** Compute p_μp^μ for an electron at rest and in motion; verify both give (m_e c)².",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Proper time is observer-dependent",
+      "content": "### MC-4: Proper time is observer-dependent\n- **Probe:** \"Does the astronaut's wristwatch (proper time) depend on who observes it?\"\n- **Characteristic phrase:** \"The proper time depends on the frame.\"\n- **Trigger:** General confusion that \"everything is relative\" extends to proper time.\n- **Conflict evidence [P28]:** τ = ∫dτ = ∫ds/c along the worldline — a geometric property of the path, independent of who measures it. When the astronaut returns from a trip and both observers compare clocks side-by-side, they must agree on what the wristwatch reads. This is one reading, one number — it cannot depend on the observer.\n- **Bridge [P30]:** Proper time is like the arc length of a curve: different coordinate systems describe the curve differently, but the total arc length is a geometric invariant.\n- **Replacement [P31]:** Proper time τ is the time elapsed on the object's own clock, invariant (all observers agree). Coordinate time t is the time in a specific inertial frame, frame-dependent. Relation: dτ = dt/γ.\n- **Discrimination pairs [P33]:** τ: one value, all agree. t: different values in different frames. Twin paradox resolution: the twin who accelerated has shorter τ — all frames agree the traveling twin is younger.\n- **S6 repair path:** Use twin paradox: compute total τ for the traveling twin using dτ = dt√(1−v²/c²) integrated along their worldline.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Derive interval invariance algebraically from Lorentz transformation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Derive interval invariance algebraically from Lorentz transformation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 7,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Draw Minkowski diagram classifying events into timelike/spacelike/lightlike",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Draw Minkowski diagram classifying events into timelike/spacelike/lightlike\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 8,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Compute p_μp^μ for a photon and a massive particle",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Compute p_μp^μ for a photon and a massive particle\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 9,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Compute spacetime interval; classify events; evaluate four-vector inner products; explain invariance of proper time.\n\n**FA-1:** \"Two events are separated by Δt = 4 ns and Δx = 2 m. Is the interval timelike or spacelike? What is s²?\"\n*Expected:* c·Δt = (3×10⁸)(4×10⁻⁹) = 1.2 m. s² = (1.2)² − (2)² = 1.44 − 4 = −2.56 m². Spacelike (s² < 0 in +−−− convention).\n*Threshold:* Correct sign convention applied; correct classification.\n\n**FA-2:** \"An unstable particle has rest mass m = 1 GeV/c². It's observed with total energy E = 3 GeV. What is |p⃗|?\"\n*Expected:* p_μp^μ = (mc)² → (E/c)² − |p|² = (mc)² → |p|² = (E/c)² − (mc)² = 9−1 = 8 (GeV/c)² → |p| = 2√2 GeV/c.\n*Threshold:* Correct use of energy-momentum invariant.\n\n**FA-3:** \"What is the proper time elapsed on a clock moving at v = 0.8c for 10 s (coordinate time)?\"\n*Expected:* γ = 1/√(1−0.64) = 1/0.6 = 5/3. dτ = dt/γ → τ = t/γ = 10/(5/3) = 6 s.\n*Threshold:* Correct dτ = dt/γ applied; recognizes τ < t.\n\n**FA-4:** \"Two events are spacelike separated. Can their causal order (which happened first) differ between inertial frames? Why?\"\n*Expected:* Yes — for spacelike separation, there exists a frame where they are simultaneous and other frames where either event is first. This is allowed because no causal signal can connect them (they're outside each other's light cones). If they were timelike, the causal order would be frame-independent.\n*Threshold:* Correctly states yes with light-cone reasoning; distinguishes from timelike case.\n\n**Confidence calibration:** After FA-1, ask: \"Could you find a frame where these two events are simultaneous?\" (For spacelike: yes, find v such that Δt' = 0.) This probes deeper geometric understanding beyond interval computation.\n\n**Delayed retrieval:** Return at day 7: \"Write the four-momentum of a photon moving in the x-direction with energy E. Verify p_μp^μ = 0.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 191,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** Two events (a lightning strike and a thunder clap). Observer A on a train measures them as separated by Δt_A and Δx_A. Observer B on the ground measures Δt_B and Δx_B — different values. Yet c²Δt_A² − Δx_A² = c²Δt_B² − Δx_B². The combination is the same for both — a shared geometric truth.\n\n**Representational:**\n- Spacetime diagram (Minkowski): time axis vertical, space horizontal; events as points; worldlines as curves\n- Light cone: the set of all events connected to the origin by light signals; future cone (ct > 0) and past cone (ct < 0)\n- Timelike, lightlike, spacelike intervals:\n  - s² > 0 (using + − − − convention): timelike — a massive particle can connect both events\n  - s² = 0: lightlike — only light connects them\n  - s² < 0: spacelike — no signal can connect them; causal order can differ between observers\n\n**Abstract:**\n- Metric tensor (flat spacetime / Minkowski): η^μν = diag(+1, −1, −1, −1) (using +−−− convention)\n- Invariant interval: ds² = η_μν dx^μ dx^ν = c²dt² − dx² − dy² − dz²\n- Four-vector: A^μ = (A⁰, A⃗); covariant form A_μ = η_μν A^ν = (A⁰, −A⃗)\n- Lorentz invariant inner product: A_μB^μ = A⁰B⁰ − A⃗·B⃗ = invariant\n- Four-velocity: U^μ = γ(c, v⃗); U_μU^μ = c²\n- Four-momentum: p^μ = mU^μ = (E/c, p⃗); p_μp^μ = (mc)² → E² = (pc)² + (mc²)²\n- Four-gradient: ∂^μ = (∂/c∂t, −∇)\n- Proper time: dτ = ds/c = dt/γ (elapsed time on the moving object's own clock)\n\n**Transfer:** Electrodynamics: four-current J^μ = (cρ, J⃗); four-potential A^μ = (φ/c, A⃗); continuity equation ∂_μJ^μ = 0 (charge conservation). GR: flat η_μν replaced by curved g_μν(x) — spacetime curvature is gravity.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 36,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Why Beginners Fail",
+      "content": "1. **Sign convention anxiety:** Different textbooks use (+−−−) or (−+++). Learners either guess or copy signs without understanding which convention is in use, leading to sign errors throughout.\n2. **Conflating proper time with coordinate time:** Proper time τ is the time on the moving object's own clock; it is invariant. Coordinate time t is frame-dependent. Learners often confuse dτ = dt/γ with time dilation (they are the same equation, but conceptually distinct: τ is intrinsic, t is extrinsic).\n3. **Four-vectors seem like arbitrary 4-tuples:** Learners add ct to (x,y,z) without understanding *why*: the combination must transform as a four-vector under Lorentz transformations. The key insight — that the Lorentz transformation mixes time and space — is what makes ct the right fourth component.\n4. **Interval sign interpretation:** Timelike (s²>0) and spacelike (s²<0) intervals confuse learners in the (+−−−) convention. They expect \"positive = real = physical\" and interpret spacelike as unphysical.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 62,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"Galileo said space is relative — different observers measure different positions. Einstein added: time is relative too. But there's something neither can touch: the spacetime interval. It's what the universe actually measures, and every observer agrees on it.\"\n\n**Pacing:** Establish interval invariance numerically (Demo 1) before the formalism. Learners need to see the specific numbers agree before they'll believe the abstract statement.\n\n**Common impasse language:** \"Confused by the minus sign in the metric? That minus sign is what separates relativity from ordinary 3D geometry. Without it, boosts would be rotations in Euclidean space — nothing would change. The minus sign creates the light cone, causal structure, and everything special about relativity.\"\n\n**Closing consolidation:** \"Four-vectors are the language of relativistic physics: one equation in four-vector form is automatically valid in every frame. That's why physicists write p^μ, J^μ, A^μ — not to be fancy, but because the covariant form guarantees the physics doesn't change when you change frames.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner is shaky on Lorentz transformations. Return to phys.rel.lorentz-transform before interval invariance.\n\n**S3 — Partial understanding:** Can compute s² but cannot classify intervals or explain proper time. Intervention: systematic Minkowski diagram exercise — draw 10 event pairs, classify each, find the frame where spacelike pairs are simultaneous.\n\n**S6 — Misconception detected:** MC-3 (3D dot product for four-vectors). Intervention: explicit index-lowering with η_μν: p_μ = η_μν p^ν → p_0 = p⁰, p_i = −p^i. Then p_μp^μ = p⁰p⁰ − p^i p^i.\n\n**S9 — Near mastery:** Understands flat spacetime but can't see the connection to GR. Intervention: explain that g_μν(x) (curved) replaces η_μν (flat); geodesics in curved spacetime describe gravitational trajectories — same four-vector language, more general metric.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 217,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Structural (Minkowski diagram intuition) + procedural (interval computation, four-vector inner products).\n\n**Spaced retrieval schedule:** Day 1 (compute interval, classify events), Day 3 (four-momentum inner product, particle physics kinematics), Day 7 (derive proper time, twin paradox), Day 21 (four-current continuity equation, connection to electrodynamics).\n\n**Interleaving partners:** phys.rel.lorentz-transform (Lorentz boost is the transformation that preserves s²), phys.rel.mass-energy (E²=(pc)²+(mc²)² is p_μp^μ=(mc)² in disguise), phys.astro.black-holes (general relativity extends flat η_μν to curved g_μν).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 229,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Relativistic kinematics: threshold energy for particle creation; invariant mass of a resonance peak; four-momentum conservation in decays and collisions.\n\n**Far transfer:** Electrodynamics: Maxwell's equations in covariant form (F^μν = ∂^μA^ν − ∂^νA^μ; ∂_νF^μν = J^μ/ε₀c) — four equations become two. General relativity: replace η_μν → g_μν(x); Einstein field equation G_μν = 8πG/c⁴ T_μν — the geometry of curved spacetime is gravity.\n\n**Structural abstraction:** The Minkowski metric η_μν and the four-vector framework are the mathematical foundation for all of modern relativistic physics. The principle — write equations in covariant form so they're automatically valid in every frame — extends beyond relativity to gauge theories (QED, QCD, electroweak unification). Mastering four-vectors is mastering the grammar of modern theoretical physics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 239,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.rel.spacetime/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.rel.spacetime",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.rel.mass-energy provides E²=(pc)²+(mc²)² — learners should see this as p_μp^μ=(mc)² in the four-vector language. The connection makes the blueprint self-reinforcing.\n\n**Common pacing error:** Introducing four-vectors algebraically before deriving interval invariance. The invariance proof should come first — it motivates why the four-vector structure is natural.\n\n**Assessment gap:** Most curricula test interval computation but rarely test interval classification (timelike/spacelike), proper time derivation, or four-vector inner products in particle physics context.\n\n**Suggested pairing:** Pair with phys.astro.black-holes for a follow-up session where the flat metric η_μν is replaced by the Schwarzschild metric — the natural next step in the four-vector language.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.spacetime.md",
+        "startLine": 249,
+        "endLine": 262
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

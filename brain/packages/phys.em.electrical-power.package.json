@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.electrical-power-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.electrical-power",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:49f2d58ad87415d75866a5b1b0cc771b2eeec97b0b2ebf9843f889fc97cd6ca9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.electrical-power.md": "sha256:dfa50a330ab12fbbbf632ed93cd0b559b47320b6a46cfaaddc57936e31002952"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.electrical-power",
+    "name": "Electrical Power",
+    "difficultyRaw": "label: developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.ohms-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.electrical-power-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.electrical-power (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.electrical-power.md": "sha256:dfa50a330ab12fbbbf632ed93cd0b559b47320b6a46cfaaddc57936e31002952"
+      },
+      "contentHash": "sha256:aed2b511b00c444e060ffcd80de3149ffc9db4c609f55045cb756fa52d106ae8",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.electrical-power.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrical-power.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrical-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrical-power\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrical-power.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrical-power.md#TA-2 (addresses MC-POWER-IS-ALWAYS-IV, MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrical-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrical-power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrical-power.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrical-power.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrical-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrical-power\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrical-power.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrical-power.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrical-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrical-power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrical-power.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrical-power.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrical-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrical-power\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.electrical-power/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.electrical-power",
+      "title": "Electrical Power — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nA 100 W light bulb uses 100 joules of energy every second. A 2 kW electric kettle uses 2000 joules per second. **Electrical power** is the rate at which electrical energy is converted — to heat, light, or mechanical work. Three equivalent formulas: P = IV, P = I²R, P = V²/R. Your electricity bill is paid for energy (kilowatt-hours): 1 kWh = 3.6 MJ, costing a few cents per hour of 1000 W use.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**Power formulas:**\n$$P = IV = I^2R = \\frac{V^2}{R}$$\n\nDerived from: work done moving charge Q through voltage V is W = QV; power = W/t = (Q/t)V = IV.\n\nUsing Ohm's Law (V = IR):\nP = IV = I(IR) = I²R\nP = IV = (V/R)V = V²/R\n\n**Units:** watt (W) = J/s. 1 W = 1 V × 1 A.\n\n**Which formula to use:**\n- P = IV: when both I and V are known.\n- P = I²R: when I and R are known (avoids computing V first).\n- P = V²/R: when V and R are known (avoids computing I first).\n\n**Joule heating (thermal energy):** Electrical power dissipated in a resistor becomes heat. Rate: P = I²R. Over time: Q_heat = I²Rt (joules). This is why resistors can overheat — always check power rating.\n\n**Power rating of appliances:** A rated wattage is at a specified voltage. A 60 W / 240 V lamp: R = V²/P = 240²/60 = 960 Ω. At 120 V: P = V²/R = 120²/960 = 15 W (only 15 W, not 60 W — designed for 240 V).\n\n**Household energy calculation:**\nEnergy = P × t. Cost = Energy × price per kWh.\n10 A at 230 V for 2 hours: E = (10)(230)(7200) = 16.56 MJ = 4.6 kWh.\n\n**Power in series vs. parallel:**\n- Series: same I → P_k = I²R_k ∝ R_k (higher R → more power).\n- Parallel: same V → P_k = V²/R_k ∝ 1/R_k (lower R → more power).\n\n### Tier 3 — Formal\n\n**Maximum power transfer theorem:** For a source with internal resistance R_int connected to external load R_L, maximum power transferred to load occurs when R_L = R_int. At matching: P_max = V_oc²/(4R_int), where V_oc is open-circuit voltage. Efficiency at max power transfer = 50%.\n\n**Power density (specific power):** For practical design, P/V (watt density), P/A (watt per square metre), or P/m (watt per metre for line heating) are important constraints.\n\n**AC power:** For resistive loads, P_avg = I_rms × V_rms = I_rms²R = V_rms²/R (same as DC formulas but with rms values). For reactive loads (L, C): P_avg = V_rms I_rms cosφ, where φ is the phase angle (power factor covered in phys.em.ac-basics).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 28,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electrical-power",
+      "title": "(Three formulas — all equivalent)",
+      "content": "### WE-1 (Three formulas — all equivalent)\n\n**Problem:** A resistor R = 100 Ω has 5.0 A flowing through it. Find P using all three formulas.\n\n**Worked solution:**\n\nV = IR = (5.0)(100) = 500 V\n\nP = IV = (5.0)(500) = **2500 W**\nP = I²R = (5.0)²(100) = 25 × 100 = **2500 W** ✓\nP = V²/R = (500)²/100 = 250000/100 = **2500 W** ✓\n\n**Answer:** P = 2500 W = 2.5 kW (all three formulas agree).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 74,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electrical-power",
+      "title": "(Power in a circuit — series analysis)",
+      "content": "### WE-2 (Power in a circuit — series analysis)\n\n**Problem:** A 9 V battery powers a series circuit: R₁ = 3 Ω and R₂ = 6 Ω. Find power dissipated in each resistor and verify it sums to total power from battery.\n\n**Worked solution:**\n\n*Step 1 — Total current:*\nR_eq = 3 + 6 = 9 Ω; I = 9/9 = 1.0 A\n\n*Step 2 — Power in each:*\nP₁ = I²R₁ = (1.0)²(3) = 3.0 W\nP₂ = I²R₂ = (1.0)²(6) = 6.0 W\n\n*Step 3 — Total power:*\nP_total = P₁ + P₂ = 3 + 6 = 9.0 W\n\nVerify: P_battery = εI = (9)(1.0) = 9.0 W ✓ (energy conservation)\n\n**Answer:** P₁ = 3 W; P₂ = 6 W; total = 9 W (= battery power)\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 74,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electrical-power",
+      "title": "(Energy and cost calculation)",
+      "content": "### WE-3 (Energy and cost calculation)\n\n**Problem:** A house has: 10 × 60 W lamps; 1 × 2.0 kW kettle (used 3 times/day × 5 min each); 1 × 1.5 kW toaster (used 4 times/day × 3 min each). Find total daily energy in kWh and cost at 0.15 $/kWh.\n\n**Worked solution:**\n\n*Lamps:* 10 × 0.060 kW × 6 h/day = 3.60 kWh/day (assume 6 h total on)\n\n*Kettle:* 2.0 kW × (3 × 5/60) h = 2.0 × 0.25 = **0.50 kWh/day**\n\n*Toaster:* 1.5 kW × (4 × 3/60) h = 1.5 × 0.20 = **0.30 kWh/day**\n\n*Total:* 3.60 + 0.50 + 0.30 = **4.40 kWh/day**\n\n*Cost:* 4.40 × $0.15 = **$0.66/day**\n\n**Answer:** 4.40 kWh/day; cost $0.66/day\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 74,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/misconception/MC-POWER-IS-ALWAYS-IV",
+      "kind": "misconception",
+      "conceptId": "phys.em.electrical-power",
+      "title": "**Trigger signal:** Student always uses P = IV even when V is not given and must be computed from I and R first, leading to unnecessary steps. Or: student forgets P = I²R when only I and R are known.",
+      "content": "### MC-POWER-IS-ALWAYS-IV\n\n**Trigger signal:** Student always uses P = IV even when V is not given and must be computed from I and R first, leading to unnecessary steps. Or: student forgets P = I²R when only I and R are known.\n\n**Conflict evidence [P28]:** \"P = IV, I²R, and V²/R are all exactly equivalent for resistors. If you know I = 3 A and R = 50 Ω: fastest path is P = I²R = 9×50 = 450 W. Using P = IV requires first computing V = IR = 150 V, then P = (3)(150) = 450 W — same answer, one extra step. All three formulas are the same thing rearranged.\"\n\n**Bridge text [P30]:** \"P = IV is one of three equivalent formulas. Choose based on what's given: I and R → use I²R (no need to find V). V and R → use V²/R (no need to find I). I and V → use IV directly. Memorise all three and recognise that Ohm's Law connects them.\"\n\n**Replacement text [P31]:** \"There are three equivalent power formulas: P = IV, P = I²R, P = V²/R. All are exact for resistors obeying Ohm's Law. Select based on given information: avoid computing a third variable just to use a formula you know — use the formula that works directly with the two known quantities. This is a significant time saver in multi-step circuit problems.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Given I and R → use P = I²R directly\" | \"Always find V first, then use P = IV\" |\n| \"All three formulas are equivalent (same numerical result)\" | \"P = IV is always more accurate than P = I²R\" |\n| \"Given V and R → use P = V²/R (no I needed)\" | \"Must find I to use P = IV even when R is given\" |\n\n**s6_path:** Practice selecting the most efficient formula: given data → choose form → compute. Verify answers agree when the same quantity is calculated two ways.\n\n---",
+      "localKey": "MC-POWER-IS-ALWAYS-IV",
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-ALWAYS-IV"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/misconception/MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER",
+      "kind": "misconception",
+      "conceptId": "phys.em.electrical-power",
+      "title": "**Trigger signal:** Student says \"more resistance = more power dissipation\" without specifying whether series or parallel.",
+      "content": "### MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER\n\n**Trigger signal:** Student says \"more resistance = more power dissipation\" without specifying whether series or parallel.\n\n**Conflict evidence [P28]:** \"Series circuit: P = I²R — same I, so larger R dissipates more (P ∝ R). Parallel circuit: P = V²/R — same V, so larger R dissipates LESS (P ∝ 1/R). In parallel: the 100 Ω branch dissipates only 1/10 the power of the 10 Ω branch at the same voltage. The answer depends entirely on whether current or voltage is held constant.\"\n\n**Bridge text [P30]:** \"The key question is: what's the same? Series → same current → P ∝ R. Parallel → same voltage → P ∝ 1/R. A 'high-resistance' element in parallel actually draws less current and less power than a low-resistance element at the same voltage.\"\n\n**Replacement text [P31]:** \"Power dissipation and resistance have opposite relationships in series vs. parallel. Series (same I): P = I²R — higher R → more power. Parallel (same V): P = V²/R — higher R → less power. Always identify whether elements are in series (same I) or parallel (same V) before deciding which element dissipates more.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Series (same I): larger R → more power (P = I²R)\" | \"More resistance always means more power dissipated\" |\n| \"Parallel (same V): larger R → less power (P = V²/R)\" | \"High-R element in parallel draws more power\" |\n| \"First identify: series (same I) or parallel (same V)?\" | \"P ∝ R regardless of circuit configuration\" |\n\n**s6_path:** Show a specific example: 10 Ω and 100 Ω in series (same I): power ratio 1:10. Then in parallel (same V): power ratio 10:1. The relationship inverts.\n\n---",
+      "localKey": "MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER",
+      "language": "en",
+      "refs": [
+        "MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrical-power",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 223,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrical-power",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER\",\"MC-POWER-IS-ALWAYS-IV\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-ALWAYS-IV",
+        "MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 223,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrical-power",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 223,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrical-power",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 223,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrical-power",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 223,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.em.electrical-power/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.electrical-power",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState the three equivalent formulas for electrical power in a resistor.\n\n**Answer:** P = IV; P = I²R; P = V²/R. All are equivalent via Ohm's Law V = IR.\n\n---\n\n### AP-2 (Bloom: Understand)\nA 60 W / 120 V light bulb is connected to 240 V by mistake. What happens to the power, and why?\n\n**Answer:** R = V²/P = 120²/60 = 240 Ω (assumed constant). At 240 V: P = V²/R = 240²/240 = 240 W — four times the rated power. The filament would receive 4× its rated power, overheat almost instantly, and likely burn out (open circuit). Power scales as V² — double the voltage quadruples the power.\n\n---\n\n### AP-3 (Bloom: Apply)\nFind the power rating of a resistor that carries 0.50 A when connected to a 6.0 V source.\n\n**Answer:** P = IV = (0.50)(6.0) = **3.0 W**. The resistor must have a power rating ≥ 3.0 W to avoid burning out (typically choose the next standard rating: 3.5 W or 5 W).\n\n---\n\n### AP-4 (Bloom: Analyze)\nThree appliances (1.5 kW heater, 0.8 kW TV, 0.3 kW lamp) are connected in parallel to a 230 V household supply. Find: (a) total power, (b) total current drawn, (c) resistance of each appliance.\n\n**Answer:**\n(a) P_total = 1500 + 800 + 300 = **2600 W = 2.6 kW**\n(b) I_total = P_total/V = 2600/230 = **11.3 A**\n(c) R_heater = V²/P = 230²/1500 = **35.3 Ω**; R_TV = 230²/800 = **66.1 Ω**; R_lamp = 230²/300 = **176 Ω**\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrical-power.md",
+        "startLine": 255,
+        "endLine": 288
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

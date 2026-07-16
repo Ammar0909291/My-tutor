@@ -1,0 +1,538 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.hamiltons-equations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.hamiltons-equations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9eeb4fd4c4856e925bb325289e70260e5c101e4fb7494068d9719fe793a3aa7c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md": "sha256:fce04e7a17bcd42258fa26c78f15af40e63bd393429556920a76583b94b10187"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.hamiltons-equations",
+    "name": "Hamilton's Equations of Motion",
+    "difficultyRaw": "expert (6)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "phys.mech.hamiltonian"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.hamiltons-equations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.hamiltons-equations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md": "sha256:fce04e7a17bcd42258fa26c78f15af40e63bd393429556920a76583b94b10187"
+      },
+      "contentHash": "sha256:eef7979c9c9cd25dd256eb3723c831a95176a0a41662d7445386b03202a63285",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltons-equations.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltons-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltons-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltons-equations.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltons-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltons-equations\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltons-equations.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltons-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltons-equations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltons-equations.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md#TA-4 (addresses MC-SIGN-BOTH-POSITIVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltons-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltons-equations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltons-equations.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md#TA-5 (addresses MC-TWO-EQUATIONS-REDUNDANT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltons-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltons-equations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltons-equations.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltons-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltons-equations\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltons-equations.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltons-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltons-equations\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.hamiltons-equations/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Hamilton's Equations of Motion — core explanation",
+      "content": "**Core Insight:** Hamilton's equations are a pair of first-order ODEs that replace Newton's\nsingle second-order ODE. For each generalized coordinate qᵢ with conjugate momentum pᵢ:\n\n    q̇ᵢ = +∂H/∂pᵢ\n    ṗᵢ = −∂H/∂qᵢ\n\nThese 2f equations (f per coordinate, f per momentum) give the equations of motion.\nThey treat q and p symmetrically. The sign asymmetry (+ for q̇, − for ṗ) encodes the\ngeometry of phase space and is the origin of symplectic structure.\n\n**Properties:**\n- H = const along every trajectory (when ∂H/∂t = 0) — Liouville's theorem precursor.\n- dH/dt = ∂H/∂t (H changes only if explicitly time-dependent).\n- Cyclic coordinate qᵢ (∂H/∂qᵢ = 0) → ṗᵢ = 0 → pᵢ = const (conservation, same as Lagrangian).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Spring-mass",
+      "content": "**Worked Example 1 (Spring-mass):**\nH = p²/(2m) + ½kx².\nq̇ = ∂H/∂p = p/m  →  ẋ = p/m  (velocity from momentum)\nṗ = −∂H/∂x = −kx  →  dp/dt = −kx  (Newton's law: F = −kx)\n\nCombining: ẍ = ṗ/m = −kx/m  →  ẍ + (k/m)x = 0 ✓",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Pendulum",
+      "content": "**Worked Example 2 (Pendulum):**\nH = p_θ²/(2mL²) − mgL cosθ.\nθ̇ = ∂H/∂p_θ = p_θ/(mL²)\nṗ_θ = −∂H/∂θ = −mgL sinθ\n\nCombining: mL²θ̈ = ṗ_θ = −mgL sinθ  →  θ̈ + (g/L) sinθ = 0 ✓",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Central force, angular momentum",
+      "content": "**Worked Example 3 (Central force, angular momentum):**\nH = p_r²/(2m) + p_φ²/(2mr²) + V(r).\nφ̇ = ∂H/∂p_φ = p_φ/(mr²);  ṗ_φ = −∂H/∂φ = 0  →  p_φ = const (angular momentum).\nr̈: combine r̈ = ∂H/∂p_r|_time derivative → gives effective radial equation.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/misconception/MC-SIGN-BOTH-POSITIVE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Priority 1",
+      "content": "### MC-SIGN-BOTH-POSITIVE (Priority 1)\n**Label:** \"Both Hamilton's equations have + signs: q̇ = +∂H/∂p and ṗ = +∂H/∂q\"\n\n**Trigger signals:**\n- Writes ṗᵢ = +∂H/∂qᵢ (misses the minus sign)\n- Gets wrong sign for force in spring problem\n- Says \"the minus sign looks wrong — shouldn't force be in the direction of increasing q?\"\n\n**Conflict evidence [P28]:**\n\"Spring: H = p²/(2m) + ½kx². If ṗ = +∂H/∂x = +kx, then dp/dt = +kx → force is in +x\ndirection when stretched to +x. But a compressed/stretched spring exerts restoring force:\nF = −kx (toward equilibrium). The + sign gives the wrong physics. Where does the − come from?\"\n\n**Bridge [P30]:**\n\"The − sign in ṗ = −∂H/∂qᵢ comes from the Legendre transform. In Lagrangian terms:\nṗᵢ = d/dt(∂L/∂q̇ᵢ) = ∂L/∂qᵢ (E-L equation). And ∂L/∂q = −∂V/∂q = F (since L = T − V).\nSo ṗᵢ = ∂L/∂qᵢ. But H = Σpq̇ − L → ∂H/∂qᵢ = −∂L/∂qᵢ. Hence ṗᵢ = −∂H/∂qᵢ.\nThe minus sign is forced by the Legendre transform.\"\n\n**Replacement [P31]:**\n\"Memorize the asymmetric pair: q̇ᵢ = +∂H/∂pᵢ and ṗᵢ = −∂H/∂qᵢ. Plus for q, minus for p.\nMnemonic: 'q flows with H's momentum gradient; p flows against H's position gradient.'\"\n\n**Discrimination pairs [P33]:**\n- Spring with −∂H/∂x = −kx: restoring force (correct) ✓\n- Spring with +∂H/∂x = +kx: anti-restoring force (wrong physics) ✗\n\n**s6_path:** \"Write the equations at the top of every problem: q̇ = +∂H/∂p, ṗ = −∂H/∂q.\nBox them. Refer back every time.\"\n\n---",
+      "localKey": "MC-SIGN-BOTH-POSITIVE",
+      "language": "en",
+      "refs": [
+        "MC-SIGN-BOTH-POSITIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 3,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/misconception/MC-TWO-EQUATIONS-REDUNDANT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Priority 2",
+      "content": "### MC-TWO-EQUATIONS-REDUNDANT (Priority 2)\n**Label:** \"Hamilton's two equations are just two ways of writing the same equation\"\n\n**Trigger signals:**\n- Derives only one of the two equations and stops\n- Claims ẋ = p/m is trivial (just the definition of momentum)\n- Does not see that BOTH are needed to get the full dynamics\n\n**Conflict evidence [P28]:**\n\"For the spring: if I only use ṗ = −kx, I have dp/dt = −kx. One equation in two unknowns\n(x and p). I need a second equation to solve for both. The second equation ẋ = p/m tells me\nhow x and p are related dynamically. Together they give ẍ = −(k/m)x. Without both, I'm stuck.\nWhy is ẋ = p/m not 'trivially obvious'?\"\n\n**Bridge [P30]:**\n\"In phase space, x and p are independent variables. ẋ = p/m is the equation of motion for x\n(how x evolves in time); ṗ = −kx is the equation of motion for p. Both are needed to integrate\nthe trajectory (x(t), p(t)) in phase space. In Hamiltonian mechanics, we don't have ẍ — only\nfirst-order equations ẋ and ṗ, which together give second-order dynamics.\"\n\n**Replacement [P31]:**\n\"Hamilton's equations: always write BOTH. q̇ = +∂H/∂p gives the velocity equation.\nṗ = −∂H/∂q gives the force equation. Together they fully determine (q(t), p(t)).\"\n\n**Discrimination pairs [P33]:**\n- Using only ṗ = −kx: stuck with two unknowns (x, p) and one equation ✓\n- Using both: solve to get ẍ + (k/m)x = 0, fully determined ✓\n\n**s6_path:** \"Two equations per DOF, always. ẋ equation (velocity) + ṗ equation (force).\"\n\n---",
+      "localKey": "MC-TWO-EQUATIONS-REDUNDANT",
+      "language": "en",
+      "refs": [
+        "MC-TWO-EQUATIONS-REDUNDANT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 35,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 3,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Equation Statement and Derivation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Equation Statement and Derivation\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 19,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 34,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "MC-SIGN-BOTH-POSITIVE Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-SIGN-BOTH-POSITIVE Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-SIGN-BOTH-POSITIVE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SIGN-BOTH-POSITIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 51,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "MC-TWO-EQUATIONS-REDUNDANT Probe + Practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-TWO-EQUATIONS-REDUNDANT Probe + Practice\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-TWO-EQUATIONS-REDUNDANT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-TWO-EQUATIONS-REDUNDANT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 89,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 116,
+        "endLine": 133
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Apply — spring Hamilton's equations",
+      "content": "**MP-1 (Apply — spring Hamilton's equations):**\n\"H = p²/(2m) + ½kx². Write both Hamilton's equations and combine them to get ẍ + (k/m)x = 0.\"\nExpected: ẋ = p/m; ṗ = −kx; differentiate first: ẍ = ṗ/m = −kx/m ✓.\n_Discriminates: both equations; correct signs; combination procedure._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 279,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Apply — pendulum equations",
+      "content": "**MP-2 (Apply — pendulum equations):**\n\"H = p_θ²/(2mL²) − mgL cosθ. Write Hamilton's equations and derive θ̈ + (g/L) sinθ = 0.\"\nExpected: θ̇ = p_θ/(mL²); ṗ_θ = −mgL sinθ; combine: mL²θ̈ = −mgL sinθ ✓.\n_Discriminates: pendulum H; sign of ṗ_θ._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 279,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Apply — conservation from Hamilton",
+      "content": "**MP-3 (Apply — conservation from Hamilton):**\n\"H = p_r²/(2m) + p_φ²/(2mr²) + V(r). Show that angular momentum is conserved using\nHamilton's equations (without solving for the trajectory).\"\nExpected: ṗ_φ = −∂H/∂φ = 0 → p_φ = const.\n_Discriminates: conservation from cyclic coordinate in H._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 279,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Apply — energy conservation",
+      "content": "**MP-4 (Apply — energy conservation):**\n\"Show that dH/dt = ∂H/∂t for any H(q, p, t) using Hamilton's equations.\"\nExpected: dH/dt = Σᵢ[(∂H/∂qᵢ)q̇ᵢ + (∂H/∂pᵢ)ṗᵢ] + ∂H/∂t\n= Σᵢ[(∂H/∂qᵢ)(∂H/∂pᵢ) + (∂H/∂pᵢ)(−∂H/∂qᵢ)] + ∂H/∂t = 0 + ∂H/∂t = ∂H/∂t.\n_Discriminates: chain rule + Hamilton's equations; algebraic cancellation._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 279,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Apply — 3D central force",
+      "content": "**MP-5 (Apply — 3D central force):**\n\"H = p_r²/(2m) + p_θ²/(2mr²) + p_φ²/(2mr² sin²θ) + V(r) (spherical coordinates).\nWrite ṗ_φ and ṗ_θ. What is conserved? Why is p_θ not conserved?\"\nExpected: ṗ_φ = −∂H/∂φ = 0 → p_φ = L_z = const.\nṗ_θ = −∂H/∂θ = (p_φ² cosθ)/(mr² sin³θ) ≠ 0 → p_θ not conserved (θ appears in H).\n_Discriminates: 3D spherical Hamilton's equations; identifying which momenta are constant._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 279,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.hamiltonian  ──►  phys.mech.hamiltons-equations\n```\n\n**PD-1 (Hamiltonian construction):**\n\"Derive H for a simple pendulum (L = ½mL²θ̇² + mgL cosθ).\"\nExpected: H = p_θ²/(2mL²) − mgL cosθ.\n\n**PD-2 (Partial derivatives of H):**\n\"For H = p²/(2m) + ½kx², compute ∂H/∂p and ∂H/∂x.\"\nExpected: ∂H/∂p = p/m; ∂H/∂x = kx.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 63,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Write both Hamilton's equations from memory. Which has + and which has −?\"\nThreshold: q̇ᵢ = +∂H/∂pᵢ; ṗᵢ = −∂H/∂qᵢ.\n\n**FA-2 (TA-4 exit):** \"Pendulum: correct sign for ṗ_θ?\"\nExpected: ṗ_θ = −∂H/∂θ = −mgL sinθ. If student writes +mgL sinθ → MC-SIGN-BOTH-POSITIVE not resolved.\n\n**FA-3 (TA-5 exit):** \"Why do you need BOTH Hamilton's equations, not just ṗ = −∂H/∂q?\"\nExpected: Need both to update (q, p) in phase space; ẋ = p/m tells x how to evolve given p;\nwithout it, cannot integrate trajectory.\n\n**FA-4 (Session exit):** MP-1 and MP-2. Both correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SIGN-BOTH-POSITIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 314,
+        "endLine": 330
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Stay on spring-mass and pendulum only.\n- Emphasize: two partial derivatives, two equations. No second derivatives needed.\n- Skip phase space topology (TA-5 problem 3 — inverted oscillator).\n\n**S7 (Overconfident) path [Protocol G]:**\n- MP-4 (algebraic proof of dH/dt = ∂H/∂t).\n- MP-5 (3D spherical Hamilton's equations; θ momentum not conserved).\n- Preview: Poisson brackets as the next natural step.\n\n**S4 (Prereq gap):**\n- PD-1 gap (Hamiltonian construction) → return to Legendre transform; cannot apply Hamilton's\n  equations without knowing H.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 330,
+        "endLine": 348
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltons-equations/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamiltons-equations",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → equations statement → MC-SIGN probe).\n**Session 2 (≥24 h later):** Retrieval: \"Write Hamilton's equations from memory for H = p²/2m + ½kx².\"\n  → TA-5 (MC-REDUNDANT probe) → TA-6 problems 1–3.\n**Session 3 (≥72 h later):** \"For the Kepler problem H = p_r²/(2m) + p_φ²/(2mr²) − k/r,\n  write all four Hamilton's equations and identify what is conserved.\"\n**Pre-Poisson-brackets session:** All 5 P91 probes cold; require 4/5.\n\n**Interleaving partners:** phys.mech.hamiltonian (prerequisite),\nphys.mech.poisson-brackets (next concept),\nphys.mech.cyclic-coordinates-conservation-laws (conservation in H formulation).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SIGN",
+        "MC-REDUNDANT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltons-equations.md",
+        "startLine": 348,
+        "endLine": 363
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

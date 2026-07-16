@@ -1,0 +1,406 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.fermi-dirac-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.fermi-dirac",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5a6b3deb43ad82702bec390f444df1185d6e4e586cc43a17abea1423d6a3060e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.fermi-dirac.md": "sha256:2c5f66c47873b1dab780df7e5305ac8a433cdeb726c15e7b13738216ec4cfd4f"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.stat.fermi-dirac",
+    "name": "Fermi-Dirac Statistics",
+    "difficultyRaw": "Expert",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.stat.partition-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.fermi-dirac-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.fermi-dirac (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.fermi-dirac.md": "sha256:2c5f66c47873b1dab780df7e5305ac8a433cdeb726c15e7b13738216ec4cfd4f"
+      },
+      "contentHash": "sha256:d3283670de14261b3ee79effb93c93e6ccf08fadb4f1f98525a0ace03c0c9709",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.fermi-dirac.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fermi-dirac"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fermi-dirac\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fermi-dirac.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fermi-dirac"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fermi-dirac\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fermi-dirac.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md#TA-3 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fermi-dirac"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fermi-dirac\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fermi-dirac.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fermi-dirac"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fermi-dirac\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.fermi-dirac/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Fermi-Dirac Statistics — core explanation",
+      "content": "**One-sentence definition:** Fermi-Dirac statistics describe the thermal occupation of quantum states by fermions (particles with half-integer spin) subject to the Pauli exclusion principle: the mean occupation number of state i is f(Eᵢ) = 1/(e^((Eᵢ−μ)/k_BT) + 1).\n\n**The core insight:** The +1 in the denominator (vs. −1 for bosons, 0 for classical) enforces the Pauli exclusion principle: no quantum state can be occupied by more than one fermion. At T = 0, fermions fill all states up to the Fermi energy E_F and leave all states above E_F empty — the sharpest possible occupation distribution. At finite T, only states within ~k_BT of E_F are affected. This makes fermion systems (electrons in metals, electrons in white dwarfs) very different from classical gases.\n\n**Conceptual chain:**\n1. Fermions: particles with half-integer spin (electrons, protons, neutrons, quarks). Obey Pauli exclusion: at most one particle per quantum state.\n2. Grand canonical ensemble: particle number N fluctuates; chemical potential μ is fixed. Z = Π_i (1 + e^(−β(Eᵢ−μ)}) (for one fermion per state: either occupied or empty).\n3. Mean occupation: f(E) = ⟨n⟩ = 1/(e^(β(E−μ)) + 1). This is the Fermi-Dirac distribution.\n4. At T = 0: f(E) = 1 for E < μ = E_F and f(E) = 0 for E > E_F (step function). E_F = Fermi energy.\n5. At T > 0: smooth sigmoid around E_F over energy range ~k_BT.\n6. Chemical potential μ: E_F at T=0; decreases slightly with T for electrons in metals (μ ≈ E_F at room temperature since k_BT << E_F for metals).\n7. Fermi energy for a 3D electron gas: E_F = (ℏ²/2m)(3π²n)^(2/3) where n = N/V.\n8. Electronic heat capacity: C_V = (π²/2)Nk_B × (k_BT/E_F) << Nk_B. Much smaller than classical (3/2)Nk_B because only electrons near E_F are thermally active.\n9. Degeneracy pressure: even at T = 0, electrons have kinetic energy and exert pressure (Pauli pressure). Supports white dwarf stars against gravitational collapse.\n\n**Central equations:**\n- Fermi-Dirac distribution: f(E) = 1/(e^((E−μ)/k_BT) + 1)\n- At T = 0: f(E) = θ(E_F − E) (step function)\n- Fermi energy (3D free electron gas): E_F = (ℏ²/2m)(3π²n)^(2/3)\n- Electronic heat capacity: C_V = (π²/3)k_B²T D(E_F) = (π²/2)Nk_B(k_BT/E_F)\n- Fermi temperature: T_F = E_F/k_B (room temperature << T_F for metals)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 18,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "The Fermi-Dirac distribution can be approximated by Maxwell-Boltzmann for electrons in metals at room temperature",
+      "content": "### MC-1: \"The Fermi-Dirac distribution can be approximated by Maxwell-Boltzmann for electrons in metals at room temperature\"\n- **Probe:** \"At what energy does the Fermi-Dirac distribution differ significantly from Maxwell-Boltzmann for electrons in copper (E_F ≈ 7 eV) at T = 300 K?\"\n- **Characteristic phrase:** \"Room temperature is low, so Maxwell-Boltzmann is fine.\"\n- **Trigger:** Classical statistics give correct results for ideal gases at room temperature. Students overgeneralize.\n- **Conflict evidence [P28]:** k_BT at 300 K ≈ 0.026 eV. E_F for copper ≈ 7 eV. k_BT/E_F ≈ 0.4%. The Maxwell-Boltzmann distribution predicts f(E) ≈ e^(−E/k_BT) → f(7 eV) ≈ e^(−7/0.026) ≈ e^(−269) ≈ 10⁻¹¹⁷. The Fermi-Dirac distribution gives f(E_F) = 1/2. The two differ by 117 orders of magnitude at the Fermi energy. The electron gas in copper is deeply degenerate, not classical.\n- **Bridge [P30]:** \"Maxwell-Boltzmann is valid when average occupation << 1 (i.e., many more states than particles). For electrons in metals, states are densely packed — the Fermi temperature T_F = E_F/k_B ~ 80,000 K for copper. At T = 300 K << T_F, the quantum effect (Pauli exclusion) dominates. Use Maxwell-Boltzmann only when T >> T_F.\"\n- **Replacement [P31]:** The Fermi-Dirac distribution is required for electrons in metals at all reasonable temperatures (T << T_F ≈ tens of thousands of K). Maxwell-Boltzmann applies only for T >> T_F — i.e., at temperatures where the metal would be vaporized.\n- **Discrimination pairs [P33]:** A dilute gas of He atoms at room temperature is classical (T >> T_F because T_F is millikelvin for He at atmospheric density). Electrons in Cu are highly quantum (T_F ≈ 80,000 K >> 300 K).\n- **S6 repair path:** Compute T_F for copper: E_F = 7 eV → T_F = 7 eV / (8.62×10⁻⁵ eV/K) ≈ 81,000 K. Room temperature is 300/81,000 ≈ 0.4% of T_F. The system is almost as quantum as it would be at T = 0.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "f(E_F) = 1 at T = 0",
+      "content": "### MC-2: \"f(E_F) = 1 at T = 0\"\n- **Probe:** \"What is f(E) for E slightly above E_F at T = 0? For E slightly below E_F?\"\n- **Characteristic phrase:** \"f(E_F) = 1 because E_F is the highest occupied state.\"\n- **Trigger:** E_F is often called \"the highest occupied energy level,\" leading students to think f(E_F) = 1 for all T.\n- **Conflict evidence [P28]:** At T = 0: f(E) = 1 for E < E_F and f(E) = 0 for E > E_F. At T = 0, f(E_F) is undefined (the step function has a discontinuity there). At any finite T: f(E_F) = 1/(e^0 + 1) = 1/2 — always exactly ½ at E = μ.\n- **Bridge [P30]:** \"The Fermi-Dirac distribution at E = μ gives f = 1/2 regardless of temperature. At T = 0, the step function has a discontinuity exactly at E_F = μ. The general statement is: f(μ) = 1/2 for all T > 0. As T → 0, the distribution sharpens into a step function with f = 1 below μ and f = 0 above μ.\"\n- **Replacement [P31]:** f(μ) = 1/2 for all T > 0. At T = 0, f is a step function: f = 1 for E < E_F, f = 0 for E > E_F. E_F is the T = 0 chemical potential.\n- **Discrimination pairs [P33]:** At T = 0: \"fully occupied\" means f = 1 for all states below E_F. At T > 0: the highest occupied states have f < 1 and some states above E_F have f > 0. f(E_F) = 1/2 is a clean symmetry point.\n- **S6 repair path:** Plot f(E) vs. E for T = 0 and T > 0. Label f(E_F) = 1/2 at T > 0. Show how the step sharpens as T → 0, with f(E_F) remaining 1/2 throughout.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Electronic heat capacity of metals should be C_V = 3/2 Nk_B per electron (classical prediction",
+      "content": "### MC-3: \"Electronic heat capacity of metals should be C_V = 3/2 Nk_B per electron (classical prediction)\"\n- **Probe:** \"A metal has N free electrons. What is the classical prediction for the electronic heat capacity? What does Fermi-Dirac statistics give?\"\n- **Characteristic phrase:** \"Each electron contributes 3/2 k_B to heat capacity (equipartition).\"\n- **Trigger:** Classical equipartition theorem: each degree of freedom contributes k_B/2 per particle. Three translational degrees of freedom → 3/2 k_B per particle.\n- **Conflict evidence [P28]:** Classical: C_V^(electronic) = 3/2 Nk_B. Measured for metals: C_V^(electronic) is about 100× smaller at room temperature. Fermi-Dirac prediction: C_V = (π²/2)Nk_B(k_BT/E_F) ≈ (π²/2) × 0.004 × Nk_B ≈ 0.02 Nk_B for copper at 300 K — about 75× smaller than classical. The Fermi-Dirac result matches experiment; the classical result fails dramatically.\n- **Bridge [P30]:** \"Only electrons within ~k_BT of E_F can be thermally excited (there are empty states just above E_F for them to jump to). All electrons deep below E_F have no empty states to jump to (Pauli exclusion) and cannot absorb thermal energy. The fraction of active electrons is ~k_BT/E_F << 1. Hence C_V is proportional to (k_BT/E_F) × Nk_B — much smaller than classical.\"\n- **Replacement [P31]:** Electronic heat capacity: C_V = (π²/2)(k_BT/E_F)Nk_B << 3/2 Nk_B. Only the electrons near E_F contribute. This is one of the early triumphs of Fermi-Dirac statistics (Sommerfeld, 1927).\n- **Discrimination pairs [P33]:** Classical gas (low n, high T): all molecules contribute to C_V → 3/2 Nk_B. Electron gas in metal (high n, T << T_F): only electrons near E_F contribute → C_V << 3/2 Nk_B.\n- **S6 repair path:** Compute (k_BT/E_F) for copper at 300 K: 0.026/7 ≈ 0.004. C_V^(FD) ≈ (π²/2) × 0.004 Nk_B ≈ 0.02 Nk_B. Compare to 1.5 Nk_B classical. Show the experimental value (linear C_V vs. T at low T in metals) matches the Fermi-Dirac prediction.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Fermi energy is the energy of the most energetic electron in the system",
+      "content": "### MC-4: \"Fermi energy is the energy of the most energetic electron in the system\"\n- **Probe:** \"Is the Fermi energy always equal to the energy of the fastest electron in the system?\"\n- **Characteristic phrase:** \"E_F is the maximum electron energy.\"\n- **Trigger:** At T = 0, E_F is the top of the filled states — the most energetic occupied state. Students generalize this to all temperatures and all fermion systems.\n- **Conflict evidence [P28]:** At T > 0, some electrons are thermally excited above E_F. The \"maximum electron energy\" is no longer E_F — it's the energy of the tail of the Fermi-Dirac distribution (which extends to infinity in principle). E_F is the chemical potential μ at T = 0, but at T > 0, it is μ (the chemical potential), which depends on T. In semiconductors, E_F may lie in the band gap — no electrons have that energy, yet E_F is still well-defined.\n- **Bridge [P30]:** \"E_F is the chemical potential of the electron gas at T = 0. It is defined by N = ∫₀^{E_F} g(E) dE — the energy at which all states are filled when T = 0. At T > 0, the chemical potential μ ≈ E_F (for metals) and f(E_F) = 1/2. But some electrons have E > E_F at finite T.\"\n- **Replacement [P31]:** E_F = μ at T = 0, defined so that N = ∫₀^{E_F} g(E) dE. At T > 0, μ ≈ E_F (metals), f(E_F) = 1/2. The \"maximum electron energy\" (highest occupied state) is above E_F at T > 0.\n- **Discrimination pairs [P33]:** The median income in a country (like E_F, 50% above and 50% below) is not the maximum income. The maximum income can be much higher. E_F is the \"median energy\" (f = 1/2 there), not the maximum.\n- **S6 repair path:** Plot the Fermi-Dirac distribution at T = 1000 K for copper. Show f(E) > 0 for energies above E_F = 7 eV (thermally excited electrons). These electrons have E > E_F — the Fermi energy is not the maximum electron energy at finite T.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "DERIVE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"DERIVE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "CALCULATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"CALCULATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "PROBE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"PROBE\",\"primitives\":[],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student derives f(E) from the grand partition function, correctly evaluates f(E) at T = 0 and finite T, correctly computes E_F and electronic C_V using the Sommerfeld model, and correctly identifies the physical reason for the small electronic heat capacity. Score ≥ 80%.\n\n**FA-1 — f(E) at key points:**\n*Q: For an electron gas with μ = 5 eV at T = 1000 K (k_BT ≈ 0.086 eV), compute f(E) at E = 5 eV, E = 5.5 eV, E = 4.5 eV.*\nExpected: f(5 eV) = 1/2 (E = μ). f(5.5 eV) = 1/(e^(0.5/0.086) + 1) = 1/(e^{5.8} + 1) ≈ 1/(330 + 1) ≈ 0.003. f(4.5 eV) = 1/(e^{−5.8} + 1) ≈ 1/(0.003 + 1) ≈ 0.997.\nThreshold: f(μ) = 1/2; correct computation at ±0.5 eV; correct observation that f quickly approaches 0 above μ and 1 below μ.\n\n**FA-2 — Fermi energy calculation:**\n*Q: An electron gas has number density n = 6.0 × 10²⁸ m⁻³. Calculate E_F in eV. (ℏ = 1.055×10⁻³⁴ J·s, m = 9.11×10⁻³¹ kg)*\nExpected: E_F = (ℏ²/2m)(3π²n)^(2/3). (3π²×6×10²⁸)^(2/3) ≈ (1.78×10³⁰)^(2/3) ≈ 1.48×10²⁰ m⁻². E_F ≈ (1.055×10⁻³⁴)²/(2×9.11×10⁻³¹) × 1.48×10²⁰ ≈ 8.9×10⁻¹⁹ J ≈ 5.6 eV.\nThreshold: Correct formula application and result within ±0.3 eV.\n\n**FA-3 — Electronic heat capacity:**\n*Q: For the electron gas in FA-2 (E_F = 5.6 eV), compare the Sommerfeld electronic heat capacity at T = 300 K to the classical prediction (per electron, in units of k_B).*\nExpected: Classical: 3/2 k_B. Fermi-Dirac: (π²/2)(k_BT/E_F)k_B = (π²/2)(0.026/5.6)k_B ≈ 0.023k_B. Ratio: 1.5/0.023 ≈ 65 — the Fermi-Dirac prediction is ~65× smaller.\nThreshold: Correct Sommerfeld formula, correct ratio.\n\n**FA-4 — Physical explanation:**\n*Q: Explain in 3 sentences why the electronic heat capacity of a metal is much smaller than the classical equipartition value.*\nExpected: (1) At T = 300 K, k_BT ≈ 0.026 eV << E_F ≈ 7 eV for typical metals. (2) Only electrons within ~k_BT of E_F have access to unoccupied states just above them (Pauli exclusion prevents electrons deeper in the Fermi sea from absorbing thermal energy — all states above them are occupied). (3) This \"active fraction\" is ~k_BT/E_F ≈ 0.4% of all electrons, reducing C_V by the same factor relative to the classical value.\nThreshold: Must correctly invoke Pauli exclusion and the fraction k_BT/E_F.\n\n**Confidence calibration:** After FA-3, students who compute the wrong ratio (e.g., compute C_V for the whole gas and compare to 3Nk_B/2 rather than per-electron quantities) receive targeted feedback on unit consistency.\n\n**Delayed retrieval (session + 3):** \"State the Fermi-Dirac distribution. What is f(E_F) at any T > 0? Why is the electronic heat capacity much smaller than 3/2 Nk_B for metals?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 219,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Parking garage analogy: cars (fermions) fill the lowest available floors (energy states). At T = 0, all floors below E_F are completely full; all above E_F are empty. At T > 0, a few cars on the top occupied floor can \"jump\" to the lowest empty floor — only those near E_F are thermally mobile.\n- Staircase filling: draw energy states as steps. Fermions fill from the bottom up (T=0), one per step. This is analogous to filling atomic orbitals with the aufbau principle.\n- White dwarf star: even at T = 0 K (hypothetically), electron degeneracy pressure would prevent collapse. The pressure is not thermal — it is purely quantum mechanical, arising from the exclusion principle forcing electrons into high-energy states.\n\n### Representational (Iconic)\n- Fermi-Dirac distribution plot: f(E) vs. E for T = 0 (step function), T = 1000 K, T = 10,000 K. Show the softening around E_F ≈ 5 eV (typical metal).\n- Density of states × distribution: n(E) = g(E) f(E). The occupied states form a filled band from 0 to ~E_F.\n- Comparison to Maxwell-Boltzmann: at E >> μ, Fermi-Dirac → Maxwell-Boltzmann. At E ~ μ, they diverge dramatically.\n- Temperature scale: T_F = E_F/k_B ~ 50,000 K for typical metals. Room temperature ~ 0.6% of T_F. Electrons are almost completely degenerate at room temperature.\n\n### Abstract (Symbolic)\n- Grand partition function derivation: for one state with energy E, allowed occupations are n = 0 or n = 1 (Pauli). Z_state = 1 + e^(−β(E−μ)). ⟨n⟩ = ∂(ln Z_state)/∂(βμ) = e^(−β(E−μ))/(1 + e^(−β(E−μ)}) = 1/(e^(β(E−μ)) + 1).\n- Fermi energy derivation: N = ∫₀^{E_F} g(E) dE where g(E) = (V/2π²)(2m/ℏ²)^(3/2) √E. Integral → N = (V/3π²)(2mE_F/ℏ²)^(3/2) → E_F = (ℏ²/2m)(3π²N/V)^(2/3).\n- Electronic heat capacity (Sommerfeld): C_V = (π²/2)Nk_B(k_BT/E_F). The factor (k_BT/E_F) << 1 at room temperature explains why electronic heat capacity of metals is small (historically puzzling in the classical model, which predicted C_V = 3Nk_B/2).\n\n### Transfer (+)\n- Semiconductors: valence band (full at T=0) and conduction band (empty at T=0) separated by band gap E_g. Fermi level sits in the gap. Thermal excitation across the gap (n ∝ e^(−E_g/2k_BT)) determines conductivity.\n- White dwarf stars: electron degeneracy pressure P = (ℏ²/5m)(3π²)^(2/3)(N/V)^(5/3) — independent of temperature. Chandrasekhar limit (1.4 M_sun): beyond this mass, degeneracy pressure can no longer support the star → collapse to neutron star or black hole.\n- Metals: Ohm's law, electrical and thermal conductivity all derive from the Sommerfeld free electron model with Fermi-Dirac statistics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 44,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Treating fermions as classical particles:** Students apply Maxwell-Boltzmann statistics to electrons. This fails at energies near and below E_F — the classical distribution gives occupation > 1 (impossible for fermions) and underpredicts the average kinetic energy.\n\n**Mode 2 — Confusing f(E) with the number of electrons at energy E:** f(E) is the mean occupation of a state at energy E — a number between 0 and 1. The number of electrons in energy range [E, E+dE] is g(E) f(E) dE, where g(E) is the density of states. Students often omit g(E).\n\n**Mode 3 — Thinking μ = E_F always:** The chemical potential μ = E_F exactly only at T = 0. At finite T, μ decreases slightly. For metals at room temperature, μ ≈ E_F is an excellent approximation (since k_BT << E_F), but in semiconductors or at high T, μ can be far from E_F.\n\n**Mode 4 — Confusing Fermi-Dirac with classical Boltzmann limit:** At E − μ >> k_BT (high energy tail), f(E) ≈ e^(−(E−μ)/k_BT) — the Maxwell-Boltzmann form. Students apply this approximation everywhere, including at E < μ where f → 1, not 0.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 69,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"By 1920, physicists knew metals conducted electricity because electrons were free to move. They tried to compute the heat capacity of metals using classical statistics. Every classical calculation gave C_V = 3/2 Nk_B per free electron — an enormous contribution. But experiments showed the electronic heat capacity of metals was about 100 times smaller. Nobody could explain why. Then in 1927, Arnold Sommerfeld applied Fermi-Dirac statistics — just introduced by Fermi and Dirac — and the mystery dissolved. The answer was Pauli exclusion.\"\n\n**At the distribution derivation:**\n\"Each quantum state can hold 0 or 1 electron — that's Pauli exclusion. So for each state at energy E, the grand partition function is just two terms: empty (weight 1) and occupied (weight e^(−β(E−μ))). The mean occupation is: occupied weight / total weight = e^(−β(E−μ))/(1 + e^(−β(E−μ)}) = 1/(e^(β(E−μ)) + 1). That's it. That's the Fermi-Dirac distribution. The +1 in the denominator comes from counting only two occupancy states: 0 and 1. If electrons could pile up without restriction (bosons), the denominator would have a −1 — we'll see that with Bose-Einstein statistics.\"\n\n**At the heat capacity resolution:**\n\"At T = 300 K, k_BT ≈ 0.026 eV. E_F ≈ 7 eV for copper. Think about what this means: thermal energy k_BT is only 0.4% of E_F. Which electrons can absorb this thermal energy? An electron at energy E can jump to energy E + k_BT only if that state is empty. But below E_F, all states are occupied. An electron 1 eV below E_F cannot jump up 0.026 eV — the nearby state is already full. Only electrons within ~k_BT of E_F have access to empty states just above them. That's 0.4% of all electrons. So only 0.4% contribute to the heat capacity. C_V ≈ 0.004 × (3/2 Nk_B) — about 80× smaller than classical. That's why electronic heat capacity of metals is small.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 206,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.stat.partition-function — the Fermi-Dirac distribution is derived from the grand partition function for a single state. Without knowing what a partition function is and how to compute mean occupation from it, the derivation is unmotivated.\n\n**S3:** Student can state f(E) but cannot derive it or compute E_F. Run the single-state grand partition function derivation (Explanation B) step by step. Then compute E_F for copper using Demo 2.\n\n**S6:** Student uses Maxwell-Boltzmann for electron calculations. Run MC-1 repair: compute T_F for copper (80,000 K). Since T << T_F, the system is deeply quantum — Maxwell-Boltzmann fails by orders of magnitude.\n\n**S9:** Introduce the density of states g(E) for a 3D free electron gas: g(E) = (V/2π²)(2m/ℏ²)^(3/2) √E. Show that N = ∫₀^{E_F} g(E) dE gives the Fermi energy formula. Introduce the concept of effective mass m*: in a crystal, g(E) has the same form but with m* replacing m — accounts for band structure effects and explains the discrepancy between calculated and measured γ.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 249,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (f(E) formula, E_F formula, Sommerfeld C_V formula) + conceptual (Pauli exclusion → step function at T=0, small C_V, degeneracy pressure).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Write the Fermi-Dirac distribution. What is f(E_F)? What is f(E) at T=0 for E < E_F and E > E_F?\"\n- Session + 3: \"Why is the electronic heat capacity of metals ~100× smaller than the classical prediction? Give the Sommerfeld formula.\"\n- Session + 7: \"An electron gas has E_F = 4 eV. At T = 500 K, what fraction of electrons have energy within k_BT of E_F?\"\n\n**Interleaving partners:** phys.stat.partition-function (prerequisite — grand partition function derivation); phys.stat.bose-einstein (counterpart — bosons, no Pauli exclusion, −1 in denominator instead of +1); phys.stat.entropy-statistical (counterpart — Ω counting with Pauli constraints gives Fermi-Dirac).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 261,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Semiconductors: p-n junction, transistors, band gap engineering — all rely on Fermi-Dirac statistics with μ in the band gap. n-type vs. p-type doping shifts μ toward conduction or valence band.\n\n**Far transfer:** Neutron stars: neutron degeneracy pressure (same Fermi-Dirac statistics, but for neutrons with m_n >> m_e → much higher density needed to reach degeneracy). The Tolman-Oppenheimer-Volkoff limit: maximum neutron star mass ~3 M_sun before collapse to a black hole.\n\n**Structural abstraction:** \"Exclusion principle → filling from the bottom up → quantum zero-point energy and pressure.\" This structure appears in nuclear shell model (nucleons fill nuclear energy levels → magic numbers), atomic structure (electrons fill atomic orbitals → Aufbau principle, Hund's rules), and astrophysics (white dwarfs, neutron stars). The physical principle is the same in all cases.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 274,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "phys.stat.fermi-dirac/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.stat.fermi-dirac",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.stat.partition-function is necessary. phys.stat.entropy-statistical (counting microstates with Pauli constraints) provides conceptual grounding for why Ω is counted differently for fermions. Both should be covered before this concept.\n- **Unlock readiness:** No formal unlocks listed, but this concept is prerequisite for any discussion of solid-state physics, semiconductors, and astrophysical degeneracy. It is a natural prerequisite for quantum mechanics-based chemistry and device physics.\n- **Difficulty calibration:** Expert/apply is appropriate. The derivation of f(E) is accessible (simple grand partition function), but the calculation of E_F and C_V requires integration of g(E) and use of density-of-states concepts that are new at this level.\n- **Suggested problem set:** (1) Derive f(E) from the grand partition function for fermions. (2) Compute E_F for aluminum (n = 1.81 × 10²⁹ m⁻³, 3 free electrons per atom). (3) Compare Sommerfeld C_V to classical C_V for Al at 300 K and 77 K. (4) Show that for E − μ >> k_BT, f(E) → e^(−(E−μ)/k_BT) (Maxwell-Boltzmann limit). (5) Estimate the degeneracy pressure of a white dwarf electron gas (n ~ 10³⁶ m⁻³, electrons relativistic — note this requires relativistic generalization).\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fermi-dirac.md",
+        "startLine": 284,
+        "endLine": 294
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

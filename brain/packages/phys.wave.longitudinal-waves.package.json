@@ -1,0 +1,355 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.longitudinal-waves-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.longitudinal-waves",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:94a59202a90fcdfcbc57bf77c9900c133eeb97855a1da1adcd39a2f07b75bf2e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md": "sha256:41d4f3ed7eebef32d409beefe4dc9c9c21d2bb6e3dd7dc394e4c962cdba32bd4"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.longitudinal-waves",
+    "name": "Longitudinal Waves",
+    "difficultyRaw": "label: proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.wave.wave-properties"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.longitudinal-waves-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.longitudinal-waves (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md": "sha256:41d4f3ed7eebef32d409beefe4dc9c9c21d2bb6e3dd7dc394e4c962cdba32bd4"
+      },
+      "contentHash": "sha256:f05a5746b82012b3be40a6b22cdd3193f3ad6a592ddc91e18c758f8d71ce4dba",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.longitudinal-waves.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.longitudinal-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.longitudinal-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.longitudinal-waves.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.longitudinal-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.longitudinal-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.longitudinal-waves.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.longitudinal-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.longitudinal-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.longitudinal-waves.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md#TA-4 (addresses MC-LONGITUDINAL-NO-WAVELENGTH, MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.longitudinal-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.longitudinal-waves\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.longitudinal-waves/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "Longitudinal Waves — Conceptual Development Sequence",
+      "content": "**TA-1 — Definition and Geometry [C]**\n\nLongitudinal wave: particle displacement is parallel to (along) the direction of wave propagation.\n\nThe wave produces alternating regions:\n- **Compression**: particles pushed closer together; local pressure above ambient; particle displacement in the +x direction on the leading half, −x on the trailing half\n- **Rarefaction**: particles spread apart; local pressure below ambient; particle displacement opposite to the compression case\n\nWavelength λ: distance between adjacent compressions (or adjacent rarefactions).\nAmplitude A: maximum particle displacement from equilibrium (measured along propagation direction).\n\nAll wave relations still apply: v = fλ, T = 1/f.\n\n**TA-2 — Displacement and Pressure Graphs [C→P]**\n\nTwo ways to represent a longitudinal wave at one instant:\n\n**Displacement graph**: y (particle displacement, rightward positive) vs. x (position). Sinusoidal — looks identical to a transverse wave snapshot. BUT: y is in the same direction as x (both horizontal). Compressions occur where displacement changes from + to − (particles converging from both sides).\n\n**Pressure graph**: ΔP vs. x. Also sinusoidal, but 90° out of phase with the displacement graph. Pressure maximum (compression) occurs where displacement = 0 and particles are converging. At a compression: ΔP = +maximum; at a rarefaction: ΔP = −maximum.\n\nKey phase relationship: pressure maximum at displacement = 0; displacement maximum where pressure = 0. (They are 90° out of phase.)\n\n**TA-3 — Speed of Longitudinal Waves [C→P]**\n\nWave speed depends on the medium's restoring-force-to-inertia ratio:\n\nIn a fluid (gas or liquid):\n```\nv = √(B/ρ)      where B = bulk modulus (Pa), ρ = density (kg/m³)\n```\n\nIn air at 20°C: B ≈ 1.42 × 10⁵ Pa, ρ = 1.20 kg/m³ → v = √(1.42×10⁵/1.20) ≈ 344 m/s.\n\nTemperature dependence (gases): v ∝ √T (absolute temperature). Approximation: v_air ≈ 331 + 0.6θ (m/s) where θ is temperature in °C.\n\nSpeed in different media: gases (~300–400 m/s) < liquids (~1000–1500 m/s) < solids (~2000–6000 m/s). Denser media are not necessarily slower — it's the ratio B/ρ that matters. Steel: B_steel/ρ_steel → v ≈ 5100 m/s despite very high density.\n\n**TA-4 — Applications: Seismology and Ultrasonics [P]**\n\n**Seismic waves**: earthquakes generate both P-waves (longitudinal, primary, fastest, travel through solids and liquids) and S-waves (transverse, secondary, slower, only through solids). Using arrival time difference of P and S waves: distance to earthquake epicentre = Δt × v_P × v_S / (v_P − v_S).\n\n**Ultrasonics**: frequencies > 20 kHz. Medical ultrasound (1–20 MHz): short λ enables fine resolution (resolution ≈ λ/2). Sonar: submarine range = v_water × t_echo / 2. Non-destructive testing: detect cracks by echo timing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 77,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/misconception/MC-LONGITUDINAL-NO-WAVELENGTH",
+      "kind": "misconception",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "- **Trigger signal:** Student says \"longitudinal waves don't have a wavelength because you can't see crests and troughs\" or cannot identify λ in a compression wave.",
+      "content": "### MC-LONGITUDINAL-NO-WAVELENGTH\n- **Trigger signal:** Student says \"longitudinal waves don't have a wavelength because you can't see crests and troughs\" or cannot identify λ in a compression wave.\n- **Conflict evidence [P28]:** \"Longitudinal waves do have a wavelength — it is the distance between two adjacent compressions (or two adjacent rarefactions). On a longitudinal wave diagram showing compressions (dense regions) and rarefactions (sparse regions): λ = compression-to-compression distance. For sound in air at 440 Hz: λ = 343/440 = 0.78 m. This is a perfectly well-defined wavelength. The displacement–position graph for a longitudinal wave is still sinusoidal — just the displacement is in the direction of propagation rather than perpendicular to it. Every property (λ, f, T, A, v) applies identically to longitudinal and transverse waves.\"\n- **Bridge text [P30]:** \"Wavelength is a property of any periodic wave — the repeat distance. For a longitudinal wave: one compression + one rarefaction = one full cycle = one wavelength. Compression (maximum rightward displacement of particles) corresponds to a 'crest'; rarefaction (maximum leftward displacement) corresponds to a 'trough'. Same mathematics, different geometry.\"\n- **Replacement text [P31]:** \"Longitudinal wave: λ = distance between adjacent compressions (or adjacent rarefactions). Compressions ↔ crests; rarefactions ↔ troughs. All wave properties (λ, f, T, A, v = fλ) apply equally to longitudinal waves.\"\n- **Discrimination pairs [P33]:**\n  - Longitudinal wave snapshot: compressions at x = 0.3 m and x = 1.1 m → λ = 0.8 m ✓\n  - Same wave: v = 340 m/s, f = 340/0.8 = 425 Hz ✓\n- **s6_path:** \"Sound is a longitudinal wave — yet we routinely say 'middle C has wavelength 1.3 m.' Of course longitudinal waves have wavelengths.\"\n\n---",
+      "localKey": "MC-LONGITUDINAL-NO-WAVELENGTH",
+      "language": "en",
+      "refs": [
+        "MC-LONGITUDINAL-NO-WAVELENGTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/misconception/MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE",
+      "kind": "misconception",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "- **Trigger signal:** Student says the air \"blows\" from the speaker to your ear when you hear sound.",
+      "content": "### MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE\n- **Trigger signal:** Student says the air \"blows\" from the speaker to your ear when you hear sound.\n- **Conflict evidence [P28]:** \"When sound travels from a speaker to your ear, air molecules oscillate back and forth locally — they do not stream from speaker to ear. A single air molecule near the speaker vibrates only a fraction of a millimetre (the acoustic amplitude). Sound in air at normal volumes has particle displacement amplitudes of order 10–100 nm. The energy of the sound travels at ~340 m/s as a pattern of compressions; individual molecules oscillate at the sound frequency but stay essentially in place. If air molecules streamed at 340 m/s, you would feel a powerful wind every time someone spoke — you don't.\"\n- **Bridge text [P30]:** \"Longitudinal waves transfer energy through the medium by particle-to-particle coupling: a compressed region pushes neighbouring air, which then compresses, propagating the pattern. Each particle only moves a tiny distance (amplitude A) in the direction of wave travel — then returns. The wave pattern propagates; matter stays behind.\"\n- **Replacement text [P31]:** \"In a longitudinal wave, particles oscillate with amplitude A along the propagation direction — but stay near their equilibrium positions (net displacement ≈ 0). The energy (compression pattern) propagates at v = fλ. Particles do not travel with the wave.\"\n- **Discrimination pairs [P33]:**\n  - Sound particle: oscillates back and forth ~10–100 nm at audio frequency; net displacement ≈ 0 ✓\n  - Sound wave front: travels at ~340 m/s from source to listener ✓\n- **s6_path:** \"Dominoes falling: each domino only tips over (stays on the floor). The 'wave' of falling travels across the table fast. No domino migrates from one end to the other.\"\n\n---",
+      "localKey": "MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE",
+      "language": "en",
+      "refs": [
+        "MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "Definition and Geometry",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Definition and Geometry\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 79,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "Displacement and Pressure Graphs",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Displacement and Pressure Graphs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 92,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "Speed of Longitudinal Waves",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Speed of Longitudinal Waves\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 102,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "Applications: Seismology and Ultrasonics",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Applications: Seismology and Ultrasonics\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-LONGITUDINAL-NO-WAVELENGTH\",\"MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-LONGITUDINAL-NO-WAVELENGTH",
+        "MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 117,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Compression and rarefaction identification**\n\"A longitudinal wave snapshot shows compressions at x = 0.2 m, 0.9 m, 1.6 m and rarefactions at x = 0.55 m, 1.25 m. Find λ, f (if v = 280 m/s), and the compression-to-rarefaction spacing.\"\n\n*Target:* λ = 0.9−0.2 = 0.7 m; f = 280/0.7 = 400 Hz; compression-to-rarefaction = λ/2 = 0.35 m. Check: 0.2+0.35 = 0.55 ✓",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 168,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Displacement vs. pressure graph**\n\"At a compression: (a) is particle displacement maximum, zero, or minimum? (b) Is pressure above or below ambient? (c) Where on a displacement-time graph is a particle that is at a compression centre?\"\n\n*Target:* (a) Zero (particles are converging — they're passing through equilibrium). (b) Above ambient (maximum positive ΔP). (c) At the equilibrium crossing, moving in the direction of propagation (maximum speed in that direction). Pressure and displacement are 90° out of phase.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 168,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Speed in different media**\n\"Sound travels at 343 m/s in air and 1480 m/s in water. A 500 Hz note passes from air into water. (a) Does the frequency change? (b) Find λ in each medium. (c) By what factor does the wavelength change?\"\n\n*Target:* (a) No — frequency is set by the source. (b) λ_air = 343/500 = 0.686 m; λ_water = 1480/500 = 2.96 m. (c) Factor = 1480/343 ≈ 4.31. Same factor as speed ratio — confirms v = fλ with f constant.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 168,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Ultrasound resolution**\n\"A medical ultrasound probe uses 5 MHz in tissue (v_tissue = 1540 m/s). (a) Find λ. (b) A tumour 3 mm across — can this ultrasound resolve it? (Resolution ≈ λ/2.)\"\n\n*Target:* λ = 1540/(5×10⁶) = 3.08×10⁻⁴ m = 0.308 mm. Resolution ≈ 0.154 mm. Tumour 3 mm > 0.154 mm → resolvable ✓. (In practice, higher frequencies give better resolution but are absorbed more quickly — a clinical trade-off.)",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 168,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: sonar**\n\"A submarine emits a 20 kHz sonar pulse. The echo returns 0.6 s later. Speed of sound in seawater = 1520 m/s. Find: (a) the distance to the target, (b) the wavelength of the sonar pulse, (c) the size of the smallest object that can be resolved.\"\n\n*Target:* (a) d = v × t/2 = 1520 × 0.3 = 456 m. (b) λ = 1520/(20×10³) = 0.076 m = 7.6 cm. (c) Resolution ≈ λ/2 = 3.8 cm.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 168,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "Adaptive Flags",
+      "content": "- **Displacement vs. pressure phase offset**: this is the subtlest concept here. Compression = maximum pressure = zero displacement (particles at equilibrium, converging). Students consistently confuse maximum pressure with maximum displacement. Use the analogy of a spring: maximum force (pressure) when coils are closest (maximum compression); maximum velocity when passing through natural length (displacement = 0).\n- **Speed in solids vs. gases**: students expect denser materials to carry waves slower (more mass to move). But liquids and solids have much higher bulk moduli than gases — the extra restoring force more than compensates the extra density. Steel (~5100 m/s) is far faster than air (340 m/s) despite being ~7000× denser. Emphasise the B/ρ ratio.\n- **Seismic P vs. S waves**: an excellent cross-domain example. P-waves (longitudinal) can travel through Earth's liquid outer core; S-waves (transverse) cannot. The \"shadow zone\" for S-waves first suggested Earth has a liquid outer core — beautiful physics detective story.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 234,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.wave.longitudinal-waves/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.wave.longitudinal-waves",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — slinky compression pulse demonstration\n  ↓\n[P41] PD-1 (transverse wave vocabulary; particle direction perpendicular to wave)\n  ↓ PASS\n[P06] Anchor: slinky longitudinal wave; candle flame and hand clap\n  ↓\nTA-1: Definition; compressions and rarefactions; λ in longitudinal wave [C]\n  ↓\n[P28] Conflict: \"no wavelength in longitudinal waves\" → MC-LONGITUDINAL-NO-WAVELENGTH\n  ↓\nWE-1: Compression spacing → λ, f, λ/2 for compression-to-rarefaction\n  ↓\n[P51] Check-in MP-1 (identify λ and f from compression/rarefaction positions)\n  ↓ monitor\nTA-2: Displacement vs. pressure graphs; 90° phase offset [C→P]\n  ↓\n[P28] Conflict: \"air blows from speaker to ear\" → MC-LONGITUDINAL-PARTICLES-MOVE-WITH-WAVE\n  ↓\nTA-3: Speed formula v=√(B/ρ); temperature dependence; speed in media [C→P]\n  ↓\nWE-2 → WE-3 (speed vs. temperature; seismic arrival time)\n  ↓\nTA-4: Seismology; ultrasonics; sonar [P]\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Sound at 500 Hz in air (v=340 m/s). Compression spacing? Compression-to-rarefaction?\"\n[P68]; [P85]; [P89] 1/3/7 days; [P91] 80% gate\n```\n\n**Protocol routing:** S0: full CPA — slinky and candle before any diagram; S1: understands compressions but denies λ exists → MC-LONGITUDINAL-NO-WAVELENGTH; S4: PD-1 fail → wave-properties + transverse-waves; S6: [F] — \"Same wave, different geometry: particle motion is along (not across) the wave direction. Everything else: v=fλ, still applies\"; S7: open with MP-2 (displacement vs. pressure phase offset — tests whether they can reason about 90° offset without a diagram given).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.longitudinal-waves.md",
+        "startLine": 197,
+        "endLine": 234
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

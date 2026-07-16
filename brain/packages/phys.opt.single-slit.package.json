@@ -1,0 +1,510 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.single-slit-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.single-slit",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ae2103f0e6ed9875efc6df1c693f7bbf5f90a412fe3125ef6fd11eb43e0c6d80",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.single-slit.md": "sha256:b3aa6b494351a3ff06ec8749660fb24e56c11194af5466e547d632b7a6144477"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.single-slit",
+    "name": "Single-Slit Diffraction",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.opt.diffraction"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.single-slit-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.single-slit (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.single-slit.md": "sha256:b3aa6b494351a3ff06ec8749660fb24e56c11194af5466e547d632b7a6144477"
+      },
+      "contentHash": "sha256:6fb333ec9d861e81b3bbec42d0975630f24c7e48d569ab7c50af68a01aa2ec67",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.single-slit.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.single-slit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.single-slit\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.single-slit.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.single-slit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.single-slit\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.single-slit.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.single-slit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.single-slit\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.single-slit.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.single-slit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.single-slit\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.single-slit.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-5 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.single-slit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.single-slit\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.single-slit.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.single-slit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.single-slit\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.single-slit.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.single-slit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.single-slit\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.single-slit/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Single-Slit Diffraction — core explanation",
+      "content": "**Core Insight:** Single-slit diffraction is the quantitative analysis of the intensity distribution\nproduced when a plane wave passes through one aperture of width a. The central maximum is twice as\nwide as any secondary maximum. Every feature of the pattern follows from one condition: a sin θ = mλ\nfor dark fringes (m = ±1, ±2, …). Mastery means (1) deriving the dark-fringe positions, (2)\ncomputing linear fringe positions using y_m = mλD/a, (3) explaining why the central maximum is\ntwice as wide as secondary maxima, (4) predicting pattern changes when a or λ change, and (5)\ncalculating secondary-maximum intensities using the sinc² formula.\n\n**The Two Equations That Matter:**\n  Dark fringes: a sin θ = mλ   (m = ±1, ±2, …; note: m = 0 is the central maximum, NOT a dark fringe)  \n  Intensity:    I(θ) = I₀ (sin α / α)²  where α = πa sin θ / λ\n\n**The Key Asymmetry:** The central maximum spans from m = −1 to m = +1 dark fringe, making it\ntwice as wide as any secondary maximum (which spans from m to m+1). Students must recognise this\nasymmetry explicitly — it is the most distinctive feature of the single-slit pattern.\n\n**Why This Is Hard:** The formula is deceptively similar to Young's double-slit formula but the\nmeaning of m is inverted (m = 0 is bright in Young's, m = 0 would be the central maximum; in\nsingle-slit, m = 0 gives the bright central max but the formula gives dark fringes for integer m).\nThis sign/offset confusion produces systematic errors.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 23,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES",
+      "content": "### MC-1: MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES\n**Probe:** \"In a single-slit pattern, compare the width of the central maximum to the width of the\nfirst secondary maximum. Are they equal?\"  \n**Characteristic phrase:** \"They should all be the same width.\"  \n**Trigger:** Analogy to Young's uniform-fringe-spacing pattern.  \n**Conflict evidence [P28]:** Dark fringes at m = ±1 bound the central maximum; it spans 2θ₁.\nDark fringes at m = 1 and m = 2 bound the first secondary maximum; it spans θ₂ − θ₁ = θ₁. The\ncentral maximum is exactly twice as wide.  \n**Bridge [P30]:** \"The central maximum is special: it has zero path difference and no cancellation\npartner. The first dark fringe appears at both sides of it simultaneously. Secondary maxima are\nbounded by two dark fringes, each one m step apart — so they are half as wide.\"  \n**Replacement [P31]:** Central maximum angular width = 2λ/a; secondary maximum angular width = λ/a.  \n**Discrimination pairs [P33]:** Width of central max vs. first secondary max: (A) equal, (B) central\nis twice as wide, (C) secondary is twice as wide. Correct: (B).  \n**S6 repair path:** TA-3 (measured intensity scan) → TA-4 (formula derivation for both widths).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 3,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-M=0-IS-DARK",
+      "content": "### MC-2: MC-M=0-IS-DARK\n**Probe:** \"Using the formula a sin θ = mλ, what is the fringe at m = 0? Is it bright or dark?\"  \n**Characteristic phrase:** \"m = 0 means no path difference — that should be a dark fringe.\"  \n**Trigger:** Misreading the formula; forgetting that the formula gives dark fringes, not all fringes.  \n**Conflict evidence [P28]:** At m = 0, sin θ = 0, θ = 0 — this is the central maximum (brightest\npoint). The formula a sin θ = mλ gives positions of dark fringes; m = 0 happens to give θ = 0, but\nthe physical interpretation is that zero path difference means zero cancellation, hence maximum\nbrightness.  \n**Bridge [P30]:** \"The formula is a dark-fringe formula. Plug in m = 0: you get θ = 0, which is\nthe straight-through direction — the brightest point. Coincidentally that is m = 0, but it is not\na dark fringe. Dark fringes start at m = ±1.\"  \n**Replacement [P31]:** The formula gives dark-fringe positions; m = 0 is excluded because the\ncentral maximum is not dark.  \n**Discrimination pairs [P33]:** At θ = 0: (A) dark fringe (m = 0 rule), (B) central bright maximum,\n(C) secondary maximum. Correct: (B).  \n**S6 repair path:** TA-2 (visual pattern identification) → explicit formula-interpretation drill.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 19,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-SECONDARIES-EQUAL-BRIGHTNESS",
+      "content": "### MC-3: MC-SECONDARIES-EQUAL-BRIGHTNESS\n**Probe:** \"After the central maximum, do all secondary maxima have the same brightness? Why or\nwhy not?\"  \n**Characteristic phrase:** \"Yes, they should all be the same brightness.\"  \n**Trigger:** Analogy to Young's equal-intensity fringes.  \n**Conflict evidence [P28]:** The sinc² envelope decays: secondary maxima at α ≈ 3π/2, 5π/2, …\ngive I/I₀ ≈ 4/9π² ≈ 0.045, 4/25π² ≈ 0.016, … Each is roughly 22×, 61× dimmer than the central\nmaximum.  \n**Bridge [P30]:** \"In Young's, each slit contributes equal amplitude regardless of angle —\nuniform fringes. Here, the amplitude from the slit varies with angle because the phasor diagram\nchanges shape. The sinc function tells us how it decays.\"  \n**Replacement [P31]:** Secondary maxima intensities decrease monotonically following the sinc²\nenvelope; they are not equal.  \n**Discrimination pairs [P33]:** First vs. second secondary maximum: (A) same intensity, (B) first\nbrighter, (C) second brighter. Correct: (B).  \n**S6 repair path:** TA-5 (intensity profile measurement or simulation).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 36,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-SINGLE-SLIT-FORMULA-SAME-AS-YOUNGS",
+      "content": "### MC-4: MC-SINGLE-SLIT-FORMULA-SAME-AS-YOUNGS\n**Probe:** \"In Young's double-slit, d sin θ = mλ gives bright fringes at integer m. In single-slit,\na sin θ = mλ — does integer m give bright or dark fringes?\"  \n**Characteristic phrase:** \"Same formula, same answer — bright fringes.\"  \n**Trigger:** Surface similarity of the two formulas.  \n**Conflict evidence [P28]:** In Young's, d sin θ = mλ → constructive interference → bright.\nIn single-slit, a sin θ = mλ → complete paired cancellation → dark. The formulas look identical\nbut mean opposite things physically.  \n**Bridge [P30]:** \"Both formulas involve a path difference = integer × λ. In Young's, that means\nthe two separate waves arrive in phase — bright. In single-slit, that means the top half and\nbottom half of the aperture completely cancel each other — dark. The geometry determines the\ninterpretation.\"  \n**Replacement [P31]:** In single-slit, integer m gives dark fringes; the formula is a destructive-\ninterference condition, not constructive.  \n**Discrimination pairs [P33]:** a sin θ = mλ → (A) bright, (B) dark, (C) depends on m. Correct: (B).  \n**S6 repair path:** TA-2 (side-by-side Young's vs. single-slit formula table) → TA-4 paired\nderivation.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 53,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Formula Orientation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Formula Orientation\",\"primitives\":[\"P14\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 9,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Paired-Strip Derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Paired-Strip Derivation\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 16,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Width Asymmetry",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Width Asymmetry\",\"primitives\":[\"P14\",\"P28\",\"P31\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 23,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-1 & MC-3 Diagnostic",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-1 & MC-3 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 30,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Quantitative Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Quantitative Problem Set\",\"primitives\":[\"P50\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 37,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Closure & Self-Assessment",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure & Self-Assessment\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 44,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \nPass criteria — student correctly:  \n(a) Identifies dark-fringe positions using a sin θ = mλ  \n(b) Computes y_m = mλD/a for m = 1, 2, 3  \n(c) States that the central maximum is twice as wide as secondary maxima  \n(d) Identifies that secondary maxima decrease in intensity following sinc² envelope  \nFailure on (a) or (b) → restart from TA-3. Failure on (c) → return to TA-4. Failure on (d) → TA-5.\n\n**Formative Golden Probe (FA-1):**  \n\"A single slit of width 0.3 mm is illuminated with λ = 600 nm. Screen is 2 m away. Find: (a) the\nposition of the second dark fringe, (b) the width of the central maximum.\"  \nExpected: (a) y₂ = 2λD/a = 2 × 600×10⁻⁹ × 2 / (0.3×10⁻³) = 8 mm. (b) Width = 2y₁ = 8 mm.  \nThreshold: Both correct with units.\n\n**Formative Golden Probe (FA-2):**  \n\"In a single-slit experiment, the central maximum is 12 mm wide and the screen is 1.8 m from the\nslit. If λ = 500 nm, find the slit width.\"  \nExpected: Half-width y₁ = 6 mm; a = λD/y₁ = 500×10⁻⁹ × 1.8 / (6×10⁻³) = 0.15 mm.  \nThreshold: Correct identification that half-width (not full width) is used in the formula.\n\n**Formative Golden Probe (FA-3):**  \n\"What happens to the single-slit pattern when the slit width is tripled? Describe the new central\nmaximum width and the positions of the first and second dark fringes.\"  \nExpected: All fringe widths reduce by factor 3. New y₁ = λD/(3a_old); new y₂ = 2λD/(3a_old).  \nThreshold: Inverse relationship stated clearly; quantitative reduction by factor 3 given.\n\n**Formative Golden Probe (FA-4):**  \n\"Why is the central maximum in single-slit diffraction twice as wide as the secondary maxima?\nGive the geometric reason, not the formula.\"  \nExpected: The central maximum extends from the first dark fringe on one side to the first dark\nfringe on the other — spanning 2θ₁. Each secondary maximum is bounded by two consecutive dark\nfringes, spanning only θ₁.  \nThreshold: The asymmetry explained geometrically without recourse to the formula.\n\n**Confidence Calibration:** After each probe, ask for confidence rating. Flag persistent over-\nconfidence on the m = 0 confusion.\n\n**Delayed Retrieval (Session + 3 days):**  \n\"Without looking at notes: state the condition for the mth dark fringe in single-slit diffraction.\nWhy is the central maximum twice as wide as secondary maxima?\"  \nThreshold: Both answered correctly unaided.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 322,
+        "endLine": 368
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nProject a single-slit pattern on a wall: one wide, bright central stripe with flanking dimmer\nstripes. Ask: \"Why is the middle so much brighter? Why are the side stripes dimmer and narrower?\"\nThese are the questions the session answers.\n\n**Stage 2 — Representational (R)**  \nDivide the slit into pairs of strips. A ray from strip k in the upper half pairs with strip k in\nthe lower half. Path difference between each pair: (a/2) sin θ. When (a/2) sin θ = λ/2, i.e.\na sin θ = λ, the pair cancels. The entire slit is cancelled in pairs → first dark fringe.\nThe central maximum has no cancellation partner at θ = 0.\n\n**Stage 3 — Abstract (A)**  \nFull phasor integration gives I(θ) = I₀ (sin α / α)² with α = πa sin θ / λ. Secondary maxima\noccur where dI/dα = 0, giving α ≈ 3π/2, 5π/2, … Their intensities are I₀/22, I₀/61, …\nThe central maximum has intensity I₀ and angular half-width λ/a.\n\n**Stage 4 — Transfer (T)**  \nThe sinc² function is universal: it describes antenna radiation patterns, spectral leakage in\nsignal processing (windowing), optical transfer functions, and diffraction from rectangular\napertures in 2D. Single-slit mastery is the entry point to all of these.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 48,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Why Beginners Fail",
+      "content": "1. **m = 0 confusion:** In Young's double-slit, m = 0 is the central bright fringe and dark\n   fringes occur at m = ±½, ±3/2, … In single-slit, dark fringes occur at integer m (m ≠ 0) and\n   the central maximum is NOT at \"m = 0\" in the dark-fringe formula. Students mix the two formulas.\n\n2. **Central maximum width miscounted:** Students count the central maximum as one fringe width\n   and expect it to equal secondary maxima width. The central maximum spans 2λ/a, others span λ/a.\n   This factor of 2 must be derived, not memorised.\n\n3. **Pattern symmetry assumption:** Students expect all secondary maxima to have the same intensity\n   as each other. The sinc² envelope means each successive secondary maximum is dimmer. Students\n   who only know the dark-fringe positions miss this.\n\n4. **Confusing path difference (a sin θ) with geometry (a/2 sin θ):** The paired-strip argument\n   uses the half-slit width a/2; the final formula uses the full width a. The factor-of-2 bookkeeping\n   is a persistent error site.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 73,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Look at that pattern. [Point to D-1.] The middle stripe is wider than the side\nstripes. That is not a coincidence — it is because the middle stripe is not bounded by two dark\nfringes like the others. It is bounded by the first dark fringe on both sides — so it spans twice\nthe distance.\"\n\n**Key explanatory moves:**\n- \"Divide the slit. Upper half, lower half. Pair each strip with its partner. When each pair\n  cancels, the whole slit goes dark. That is your dark fringe condition.\"\n- \"The formula a sin θ = mλ is a destructive-interference formula. Do not confuse it with Young's\n  constructive-interference formula. Same shape, opposite meaning.\"\n- \"Why do secondary maxima get dimmer? The phasors form an arc, not a straight line. The longer\n  the arc, the smaller the net amplitude.\"\n\n**Common recovery phrases:**\n- If m = 0 confusion: \"Write: dark fringes at m = 1, 2, 3, not m = 0. The formula at m = 0\n  gives θ = 0, which is the central maximum — but the formula is still a dark-fringe formula.\n  m = 0 is a limiting case that lands on the bright maximum by coincidence of geometry.\"\n- If width confusion: \"Central max: goes from −θ₁ to +θ₁. Width = 2θ₁. First secondary: goes\n  from θ₁ to θ₂. Width = θ₁. The '2' is not a mystery — it is because the central max has a\n  dark fringe on each side symmetrically.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 297,
+        "endLine": 322
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Recovery Notes",
+      "content": "**S0 (no prior exposure to phys.opt.diffraction):** Do not proceed. The prerequisite teaches\nHuygens and the physical mechanism. Without it, the paired-strip derivation is unmotivated.\n\n**S3 (knows diffraction generally but confuses single-slit with Young's):** Use the side-by-side\ncomparison: write d sin θ = mλ (Young's, constructive) and a sin θ = mλ (single-slit, destructive)\nnext to each other. \"Same structure, opposite meaning.\" Run TA-2 explicitly.\n\n**S6 (MC-M=0-IS-DARK dominant):** Draw the intensity pattern on the board. Label θ = 0 as \"central\nbright maximum.\" Then write the formula. Then note: \"At m = 0, this formula gives θ = 0 — but you\nalready drew that as a bright maximum. So the formula describes dark fringes at m = 1, 2, 3 only.\"\n\n**S9 (procedural, cannot explain width asymmetry):** Require the student to point to the dark\nfringes on the physical pattern (D-1), count them, and state the boundary condition for the central\nmaximum vs. each secondary maximum. Conceptual understanding must precede formula re-use.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-M"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 368,
+        "endLine": 387
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural-conceptual hybrid. The formula a sin θ = mλ is fast to recall but\nthe m = 0 exclusion and the 2:1 width ratio require conceptual anchoring. Teach them as two\nseparate memory targets.\n\n**Spaced retrieval plan:**\n- Session + 1 day: \"State the single-slit dark fringe condition. What does m = 0 give, and is\n  it dark or bright?\" (Formula check + m = 0 disambiguation)\n- Session + 4 days: \"A slit of width 0.25 mm is illuminated with λ = 640 nm, D = 1.5 m. Find\n  y₁ and the full width of the central maximum.\" (Quantitative application)\n- Session + 9 days: \"Why is the central maximum twice as wide as secondary maxima? Also: a telescope\n  has a 50 mm lens. λ = 500 nm. What is the angular resolution? How does this relate to single-\n  slit diffraction?\" (Conceptual check + transfer to Rayleigh)\n\n**Interleaving partners:** phys.opt.diffraction (general diffraction, this concept's prerequisite),\nphys.opt.youngs-experiment (contrast: constructive vs. destructive conditions), phys.opt.diffraction-\ngrating (generalization to N slits with the diffraction envelope modulating fringe intensities).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 387,
+        "endLine": 408
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Transfer Map",
+      "content": "**Near transfer:**\n- Diffraction grating: individual slit diffraction provides the intensity envelope modulating the\n  grating's interference peaks\n- Circular aperture diffraction: replaces a sin θ = mλ with the Bessel-function result; first\n  minimum at 1.22λ/D (Rayleigh criterion)\n\n**Far transfer:**\n- Optical instruments: resolving power limited by diffraction of circular apertures\n- Antenna theory: antenna beam-width pattern = sinc²(πL sin θ / λ) for a linear array of length L\n- Signal processing: time-domain rectangular window → frequency-domain sinc² spectrum (spectral\n  leakage)\n- X-ray diffraction: Bragg's law peaks are modulated by the form factor, which is the 3D single-\n  crystal analogue of the single-slit sinc² function\n- Electron diffraction: same geometry confirms de Broglie wavelengths\n\n**Structural abstraction:** sinc² = the universal footprint of a finite uniform window in any\nphysical system. Anywhere that energy is distributed uniformly across a finite interval and\nsuperimposed at a remote field point, the sinc² result follows.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 408,
+        "endLine": 431
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.opt.single-slit",
+      "title": "Curriculum Feedback",
+      "content": "**Does this concept position correctly in the KG?**  \nYes. Requiring phys.opt.diffraction ensures the student already knows Huygens, the paired-strip\nidea, and the general dark-fringe condition — the current concept is purely the quantitative\nspecialization with the sinc² intensity profile. Correct ordering.\n\n**Missing prerequisite?**  \nNone. The phys.opt.diffraction prerequisite covers all needed concepts.\n\n**Recommended teaching pair:** phys.opt.diffraction + phys.opt.single-slit are best taught in\nback-to-back sessions (diffraction establishes mechanism; single-slit provides quantitative depth).\nThe same laser + slit apparatus works for both; D-2 (quantitative measurement) bridges perfectly.\n\n**Asset opportunity:** An interactive sinc² plotter with live a and λ sliders — showing dark-fringe\npositions and secondary-maximum intensities updating in real-time — would resolve MC-3\n(equal-brightness assumption) far more efficiently than any static diagram. Priority: high.\n\n---\n\n## Package Validation Checklist\n\n```\nV-1   concept_id matches KG exactly: phys.opt.single-slit ✓\nV-2   all 10 KG fields present: id/name/requires/unlocks/cross_links/difficulty/bloom/\n      mastery_threshold/estimated_hours/description ✓\nV-3   description consistent with KG: central maximum flanked by progressively weaker\n      secondary maxima through narrow slit ✓\nV-4   4-stage CPA+ model present: Concrete / Representational / Abstract / Transfer ✓\nV-5   ≥3 failure modes documented: 4 listed in Component 3 ✓\nV-6   4 misconceptions present: MC-1…MC-4 ✓\nV-7   each MC has probe + characteristic phrase: ✓ for all 4\nV-8   ≥2 misconceptions engineered:\n      MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES,\n      MC-M=0-IS-DARK ✓\nV-9   each MC has all 6 fields: trigger / conflict evidence [P28] / bridge [P30] /\n      replacement [P31] / discrimination pairs [P33] / s6_path ✓\nV-10  TA count = session_cap (7 TAs): TA-1…TA-7 ✓\nV-11  TA-1 is Concrete [P01, P06]: single-slit pattern observation anchor ✓\nV-12  TA-5 is first MC diagnostic probe [P14, P28, P31, P33, P36]:\n      MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES + MC-SECONDARIES-EQUAL-BRIGHTNESS ✓\nV-13  TA-7 is closure [P68, P85, P91] ✓\nV-14  ≥5 P91 mastery probes with expected answers: FA-1…FA-4 + delayed retrieval ✓\nV-15  4 formative assessments with thresholds and loop-back paths: FA-1…FA-4 ✓\nV-16  S0/S3/S6/S9 protocols specified in Component 12 ✓\nV-17  3-session spaced retrieval plan present: Component 13 ✓\nV-18  interleaving partners named: diffraction, youngs-experiment, diffraction-grating ✓\nV-19  cross_links match KG edges: [] ✓\nV-20  status = READY, all V-checks PASS ✓\n```\n\n**Status: READY / PACKAGE_READY — V-1 through V-20 PASS**",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 431,
+        "endLine": 483
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

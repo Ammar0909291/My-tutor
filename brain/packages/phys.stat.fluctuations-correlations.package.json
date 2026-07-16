@@ -1,0 +1,520 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.fluctuations-correlations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.fluctuations-correlations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:547953d0d71d70cd45cf759637d9cdb0dd22574715e8ff84b3072859c0d25983",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md": "sha256:1dcd1fd2fb335eb1fa5d89cd9fff62dd10adee560751eda82bd574e66a55dc4b"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.stat.fluctuations-correlations",
+    "name": "Fluctuations and Correlations",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 9,
+    "prerequisites": [
+      "phys.stat.partition-function"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.fluctuations-correlations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.fluctuations-correlations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md": "sha256:1dcd1fd2fb335eb1fa5d89cd9fff62dd10adee560751eda82bd574e66a55dc4b"
+      },
+      "contentHash": "sha256:6b58ebc3e3fa25ca3b6504988b1c21f39e1b64ccaa7e3648ed51587033e725ee",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.fluctuations-correlations.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fluctuations-correlations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fluctuations-correlations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fluctuations-correlations.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fluctuations-correlations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fluctuations-correlations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fluctuations-correlations.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fluctuations-correlations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fluctuations-correlations\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fluctuations-correlations.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md#TA-4 (addresses MC-FL-FLUCTUATIONS-NEGLIGIBLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fluctuations-correlations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fluctuations-correlations\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fluctuations-correlations.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fluctuations-correlations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fluctuations-correlations\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fluctuations-correlations.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fluctuations-correlations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fluctuations-correlations\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.fluctuations-correlations.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.fluctuations-correlations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.fluctuations-correlations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.fluctuations-correlations/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Fluctuations and Correlations — Core Idea (one sentence)",
+      "content": "Fluctuations of thermodynamic quantities around their mean values are directly related to response functions (heat capacity, compressibility, susceptibility) via the fluctuation-dissipation theorem, and diverge at critical points along with the correlation length.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 20,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Energy fluctuations and heat capacity",
+      "content": "### Example 1 — Energy fluctuations and heat capacity\nCanonical ensemble: ⟨E⟩ = −∂ ln Z/∂β.\n⟨E²⟩ = (1/Z)Σ_i E_i²e^{−βE_i} = ∂²(ln Z)/∂β² + (∂ ln Z/∂β)².\nVariance: (δE)² = ⟨E²⟩−⟨E⟩² = ∂²(ln Z)/∂β² = kT² C_V.\nRelative fluctuation: δE/⟨E⟩ ~ (kT²C_V)^{1/2}/⟨E⟩ ~ 1/√N → 0 for large systems.\nPhysical content: measuring C_V = (δE)²/kT² is EQUIVALENT to measuring energy fluctuations.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 34,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Particle number fluctuations and compressibility",
+      "content": "### Example 2 — Particle number fluctuations and compressibility\nGrand canonical: ⟨N⟩ = kT ∂ ln Ξ/∂μ.\n(δN)² = kT ∂⟨N⟩/∂μ = kT² ∂²(ln Ξ)/∂μ².\nIsothermal compressibility: κ_T = −(1/V)(∂V/∂P)_{T,N} = (δN)²/(kT⟨N⟩V·ρ).\nAt a gas-liquid critical point: κ_T → ∞ (critical point divergence) ↔ (δN)² → ∞.\nCritical opalescence: density fluctuations ~ wavelength of light → system scatters light strongly → opaque at critical point.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 34,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Pair correlation function",
+      "content": "### Example 3 — Pair correlation function\nDefinition: G(r₁,r₂) = ⟨n(r₁)n(r₂)⟩−⟨n(r₁)⟩⟨n(r₂)⟩ for a uniform system: G(r)=G(|r₁−r₂|).\nAbove T_c: G(r) = A e^{−r/ξ}/r^{d−2+η} (Ornstein-Zernicke, η small).\nAt T_c: ξ→∞; G(r) ~ r^{−(d−2+η)} (power law, long-range correlations).\nBelow T_c: G(r) → (⟨m⟩)² > 0 as r→∞ (spontaneous magnetization persists).\nStructure factor: S(k) = ∫G(r)e^{ik·r}d³r → diverges as S(k)~1/(k²+ξ^{−2}) near k=0 at T≈T_c.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 34,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/misconception/MC-FL-FLUCTUATIONS-NEGLIGIBLE",
+      "kind": "misconception",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "\"For large N, fluctuations are negligible — statistical mechanics only predicts averages.\"",
+      "content": "| MC-FL-FLUCTUATIONS-NEGLIGIBLE | \"For large N, fluctuations are negligible — statistical mechanics only predicts averages.\" | \"Standard deviation is O(1/√N) so we can ignore it.\" | Relative fluctuations δA/⟨A⟩ ~ 1/√N → 0, but absolute fluctuations grow, and response functions ARE the fluctuations: C_V = (1/kT²)(⟨E²⟩−⟨E⟩²); compressibility κ_T ∝ ⟨(δN)²⟩. Fluctuations are physically measurable (light scattering, critical opalescence) and diverge at phase transitions. |",
+      "localKey": "MC-FL-FLUCTUATIONS-NEGLIGIBLE",
+      "language": "en",
+      "refs": [
+        "MC-FL-FLUCTUATIONS-NEGLIGIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/misconception/MC-FL-CORRELATION-IS-SAME-AS-CORRELATION",
+      "kind": "misconception",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "\"'Correlation function' in stat mech means the Pearson correlation.\"",
+      "content": "| MC-FL-CORRELATION-IS-SAME-AS-CORRELATION | \"'Correlation function' in stat mech means the Pearson correlation.\" | \"High correlation means the variables are linearly related.\" | The pair correlation function G(r)=⟨s(r)s(0)⟩−⟨s⟩² measures how fluctuations at position 0 predict fluctuations at position r. It decays as e^{−r/ξ} with correlation length ξ; at a critical point ξ→∞ and G(r)~r^{−(d−2+η)} (power law, not exponential). |",
+      "localKey": "MC-FL-CORRELATION-IS-SAME-AS-CORRELATION",
+      "language": "en",
+      "refs": [
+        "MC-FL-CORRELATION-IS-SAME-AS-CORRELATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-FL-FLUCTUATIONS-NEGLIGIBLE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-FL-FLUCTUATIONS-NEGLIGIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): State the fluctuation-dissipation relation connecting energy fluctuations to heat capacity. What does this tell you about measuring C_V?  \n*Answer*: (δE)² = ⟨E²⟩−⟨E⟩² = kT²C_V; measuring C_V is equivalent to measuring the variance of energy fluctuations. C_V can in principle be extracted from energy time-series even without changing T.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For a 2-level system with energies ±ε and canonical partition function Z=2cosh(βε), compute the energy variance (δE)² and verify (δE)²=kT²C_V.  \n*Answer*: ⟨E⟩=−ε tanh(βε); ⟨E²⟩=ε²; (δE)²=ε²−ε²tanh²(βε)=ε²sech²(βε). C_V=d⟨E⟩/dT=(ε/T)²sech²(βε)/k; kT²C_V=ε²sech²(βε) ✓",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): Near the critical point, the correlation length ξ → ∞ as ξ ~ |T−T_c|^{−ν}. What does this mean for the spatial extent of fluctuations?  \n*Answer*: Correlated fluctuations span a region of size ξ; near T_c, this region grows without bound — fluctuations at different positions are strongly correlated over macroscopic distances. This is why the system can't be treated as local: mean-field theory (which ignores long-range correlations) breaks down near T_c.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): The structure factor S(k) peaks at small k near T_c. How does this explain why x-ray or neutron scattering experiments are used to measure ξ?  \n*Answer*: S(k) = ∫G(r)e^{ik·r}d³r ≈ S(0)/(1+k²ξ²) (Lorentzian). The peak width at k=0 is ~1/ξ → measuring the width of S(k) near k=0 directly gives ξ. As T→T_c, the peak narrows (ξ→∞), observable as enhanced scattering at small angles.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A student argues \"fluctuations at equilibrium die out quickly — they're transient.\" Evaluate this claim.  \n*Answer*: For isolated fluctuations the claim has merit — the fluctuation-dissipation theorem says decay time τ is related to response via τ ∝ χ. But at T_c, χ → ∞ and τ → ∞ (critical slowing down) — fluctuations persist for macroscopic times. Far from T_c, fluctuations also have spatial structure (correlation length ξ) and temporal persistence that CAN matter, e.g. in diffusion, 1/f noise, and Brownian motion.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student says fluctuations are always 1/√N small | MC-FL-FLUCTUATIONS-NEGLIGIBLE diagnostic: ask \"what happens to κ_T at T_c?\" diverges; \"what does that say about (δN)²?\" → diverges; absolute fluctuations are macroscopic at criticality |\n| Student confuses G(r) with g(r) | \"g(r) = 1 + G(r)/ρ is the radial distribution function (equals 1 for uncorrelated fluid); G(r)=⟨n(r)n(0)⟩−⟨n⟩² is the correlation function (equals 0 for uncorrelated); both are used but measure different things\" |\n| Student asks \"how do we measure ξ experimentally?\" | \"Neutron/X-ray scattering: S(k) peak width = 1/ξ; alternatively, measure C_V → ξ from C_V ~ ξ^(α/ν) scaling relation\" |\n| Student confused by critical slowing down | \"Near T_c, τ_relax ~ ξ^z (dynamical exponent z); slow fluctuations = system takes forever to equilibrate near criticality — relevant for simulations (need exponential more time near T_c)\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FL-FLUCTUATIONS-NEGLIGIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 101,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What is C_V? How is it defined from thermodynamics?\"\nCORE-1 (15 min): TA-1 + TA-2 (critical opalescence hook + notation)\nCORE-2 (20 min): TA-3 + TA-4 (derive (δE)²=kT²C_V + MC at T_c)\nCORE-3 (20 min): TA-5 (pair correlation function: above/at/below T_c)\nDRILL  (10 min): TA-6 (magnetic susceptibility = (δM)²/kT derivation)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Phase transitions are where fluctuations diverge — next session: the Landau theory of how order parameters emerge at phase transitions.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 112,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "phys.stat.fluctuations-correlations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.fluctuations-correlations",
+      "title": "Known Sticking Points",
+      "content": "1. **Relative vs absolute fluctuations**: Always specify which is meant; relative ~ 1/√N → 0 for large N, but absolute (δE) ~ √N and (δE)² ~ N (extensive).\n2. **Correlation function sign**: G(r)<0 is possible (anti-correlations) — e.g., particle-hole correlations; students assume G(r)≥0.\n3. **Structure factor vs pair distribution function**: S(k) is Fourier transform of G(r); g(r)=1+G(r)/ρ is the radial distribution function; distinguish carefully.\n4. **Fluctuation-dissipation vs Fluctuation theorem**: FDT (Green-Kubo) is the classical/quantum result; Fluctuation theorem (Crooks, Jarzynski) is a modern nonequilibrium generalization — don't conflate.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.fluctuations-correlations.md",
+        "startLine": 92,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

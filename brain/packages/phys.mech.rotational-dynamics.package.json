@@ -1,0 +1,544 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.rotational-dynamics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.rotational-dynamics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bdec280624acb8333d3a12935999e5ba5c0c2f56c7fcb710bd9d11b475250688",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md": "sha256:a9924338a3bb228c3d746c9797676ca241fad2a190fe36fde9c1c83d50e08093"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.rotational-dynamics",
+    "name": "Rotational Dynamics",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.torque",
+      "phys.mech.moment-of-inertia"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.rotational-dynamics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.rotational-dynamics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md": "sha256:a9924338a3bb228c3d746c9797676ca241fad2a190fe36fde9c1c83d50e08093"
+      },
+      "contentHash": "sha256:e4c774b70c71641f76a5ad47a22ee7e3a1598094186bb65b2915e300634a2462",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.rotational-dynamics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rotational-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rotational-dynamics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rotational-dynamics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rotational-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rotational-dynamics\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rotational-dynamics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rotational-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rotational-dynamics\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rotational-dynamics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md#TA-4 (addresses MC-ALPHA-EQUALS-TORQUE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rotational-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rotational-dynamics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rotational-dynamics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md#TA-5 (addresses MC-ROTATIONAL-KE-IGNORED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rotational-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rotational-dynamics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rotational-dynamics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rotational-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rotational-dynamics\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rotational-dynamics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rotational-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rotational-dynamics\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.rotational-dynamics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Rotational Dynamics — core explanation",
+      "content": "**Core Insight:** Rotational dynamics is Newton's 2nd Law for rotation. The net torque on an\nobject equals its moment of inertia times angular acceleration: τ_net = Iα. This is the\ncomplete rotational analog of F_net = ma — every linear dynamics technique maps directly\nto rotation.\n\n**Newton's 2nd Law for Rotation:**\nΣ τ = I α\n\nwhere Σ τ is the net torque (N·m), I is the moment of inertia (kg·m²), and α is the angular\nacceleration (rad/s²).\n\n**Linear–Rotational analog table (complete):**\n\n| Linear | Rotational |\n|--------|-----------|\n| F = ma | τ = Iα |\n| p = mv | L = Iω |\n| W = Fs | W = τθ |\n| KE = ½mv² | KE_rot = ½Iω² |\n| P = Fv | P = τω |\n\n**Rotational kinetic energy:**\nKE_rot = ½Iω²\n\n**Rotational work:**\nW_rot = τ × θ    (τ constant, θ in radians)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 25,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Find α",
+      "content": "**Worked Example 1 (Find α):**\nA solid disc (M = 4 kg, R = 0.5 m) has I = ½×4×0.25 = 0.5 kg·m².\nNet torque = 3 N·m.\nα = τ/I = 3/0.5 = 6 rad/s².",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 25,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Find torque from α",
+      "content": "**Worked Example 2 (Find torque from α):**\nA flywheel (I = 2 kg·m²) needs to reach ω = 10 rad/s from rest in 4 s.\nα = 10/4 = 2.5 rad/s². τ = Iα = 2×2.5 = 5 N·m.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 25,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Rotational KE",
+      "content": "**Worked Example 3 (Rotational KE):**\nThe disc in Example 1 reaches ω = 12 rad/s.\nKE_rot = ½ × 0.5 × 144 = 36 J.\nWork done = τ × θ = 3 × θ. From ω² = 2αθ → θ = 144/(2×6) = 12 rad.\nW = 3×12 = 36 J. ✓ (Energy consistent.)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 25,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/misconception/MC-ALPHA-EQUALS-TORQUE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Priority 1",
+      "content": "### MC-ALPHA-EQUALS-TORQUE (Priority 1)\n**Label:** \"Angular acceleration equals torque — larger torque always means proportionally larger α\"\n\n**Trigger signals:**\n- Equates α = τ without dividing by I\n- Says \"double the torque → double α\" without noting that I matters\n- Computes α = τ/m (uses linear mass instead of I)\n\n**Conflict evidence [P28]:**\n\"Two discs: Disc A (I = 2 kg·m²) and Disc B (I = 0.5 kg·m²). Both receive τ = 4 N·m.\nIf α = τ: both get α = 4 rad/s². But:\nα_A = 4/2 = 2 rad/s²; α_B = 4/0.5 = 8 rad/s².\nSame torque, very different α — by a factor of 4. What determines α?\"\n\n**Bridge [P30]:**\n\"α = τ/I. Torque is the 'push'; I is the 'resistance.' Just like F = ma → a = F/m,\nwe have τ = Iα → α = τ/I. A heavy flywheel (large I) resists angular acceleration\neven under large torque. You must divide by I.\"\n\n**Replacement [P31]:**\n\"α = τ_net / I. Always identify both τ_net AND I before computing α.\nFor the same torque: larger I → smaller α. This is why flywheels store energy\n(large I → hard to change ω).\"\n\n**Discrimination pairs [P33]:**\n- Same τ, different I: I doubles → α halves ✓\n- Same α desired: if I doubles, τ must double to maintain same α ✓\n\n**s6_path:** Use a single numerical example only; avoid the comparison side-by-side if it causes\ncognitive overload. \"τ = Iα → α = τ/I. One step.\"\n\n---",
+      "localKey": "MC-ALPHA-EQUALS-TORQUE",
+      "language": "en",
+      "refs": [
+        "MC-ALPHA-EQUALS-TORQUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 3,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/misconception/MC-ROTATIONAL-KE-IGNORED",
+      "kind": "misconception",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Priority 2",
+      "content": "### MC-ROTATIONAL-KE-IGNORED (Priority 2)\n**Label:** \"Rotational kinetic energy doesn't exist — only translational KE = ½mv² applies\"\n\n**Trigger signals:**\n- Uses only KE = ½mv² even for spinning objects\n- Says \"the wheel is rolling so KE = ½mv²\"\n- Ignores ½Iω² term in energy calculations\n\n**Conflict evidence [P28]:**\n\"A solid disc (M = 2 kg, R = 0.5 m, I = 0.25 kg·m²) spins at ω = 6 rad/s about its centre (no translation).\nYou said KE = ½mv² = ½×2×0 = 0 (v of centre = 0 for pure rotation).\nBut the disc is clearly moving — its parts are sweeping around. Let's compute KE_rot:\n½Iω² = ½×0.25×36 = 4.5 J. The energy is non-zero. Where does it come from?\"\n\n**Bridge [P30]:**\n\"KE = ½mv² counts translational energy of the centre of mass. Rotating objects also have\nrotational kinetic energy ½Iω² — the energy of spinning motion about the CM.\nFor pure rotation (CM stationary): total KE = ½Iω² only.\nFor rolling without slipping: total KE = ½mv² + ½Iω² (both terms).\"\n\n**Replacement [P31]:**\n\"Total KE = ½mv²_cm + ½Iω². For pure spin (no translation): ½Iω² only.\nFor rolling: both terms. Never ignore ½Iω² for rotating bodies.\nRolling problems: v_cm = Rω links the two terms.\"\n\n**Discrimination pairs [P33]:**\n- Spinning disc (pure rotation): KE = ½Iω² only ✓\n- Rolling sphere: KE = ½mv² + ½Iω² (both) ✓\n\n**s6_path:** Start with pure rotation (no translation) to isolate KE_rot = ½Iω²;\nrolling (both terms) deferred to phys.mech.rolling-motion.\n\n---",
+      "localKey": "MC-ROTATIONAL-KE-IGNORED",
+      "language": "en",
+      "refs": [
+        "MC-ROTATIONAL-KE-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 36,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 14,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "MC-ALPHA-EQUALS-TORQUE Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-ALPHA-EQUALS-TORQUE Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-ALPHA-EQUALS-TORQUE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ALPHA-EQUALS-TORQUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 39,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "MC-ROTATIONAL-KE-IGNORED Probe + Energy Work",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-ROTATIONAL-KE-IGNORED Probe + Energy Work\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-ROTATIONAL-KE-IGNORED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ROTATIONAL-KE-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 56,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 72,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 92,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Apply — find α",
+      "content": "**MP-1 (Apply — find α):**\n\"A solid cylinder (M = 5 kg, R = 0.4 m, I = 0.4 kg·m²). Net τ = 3.2 N·m. Find α.\"\nExpected: α = 3.2/0.4 = 8 rad/s².\n_Discriminates: τ = Iα → α = τ/I; MC-ALPHA-EQUALS-TORQUE resolution._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-ALPHA-EQUALS-TORQUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 267,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Apply — find τ",
+      "content": "**MP-2 (Apply — find τ):**\n\"A disc (I = 3 kg·m²) needs α = 6 rad/s². Required net torque?\"\nExpected: τ = 3×6 = 18 N·m.\n_Discriminates: rearrangement of τ = Iα._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 267,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Apply — rotational KE",
+      "content": "**MP-3 (Apply — rotational KE):**\n\"A solid sphere (I = 0.4 kg·m²) spinning at ω = 5 rad/s. KE_rot?\"\nExpected: KE = ½×0.4×25 = 5 J.\n_Discriminates: MC-ROTATIONAL-KE-IGNORED resolution._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-ROTATIONAL-KE-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 267,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Apply — work and KE",
+      "content": "**MP-4 (Apply — work and KE):**\n\"A torque of 8 N·m acts on a flywheel (I = 2 kg·m²) through θ = 12 rad (from rest). Find ω.\"\nExpected: W = 96 J = ½×2×ω²; ω = √96 ≈ 9.8 rad/s.\n_Discriminates: W_rot = τθ + energy theorem chain._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 267,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Analyze — design",
+      "content": "**MP-5 (Analyze — design):**\n\"Two motors, same τ = 10 N·m. Motor A drives a flywheel with I = 5 kg·m²;\nMotor B drives one with I = 1 kg·m². After 4 s from rest, compare ω and KE_rot of each.\"\nExpected: α_A = 2, α_B = 10. ω_A = 8, ω_B = 40.\nKE_A = ½×5×64 = 160 J; KE_B = ½×1×1600 = 800 J.\n_Discriminates: full chain τ→α→ω→KE; effect of I on all downstream quantities._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 267,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.torque            ──►\n                                 phys.mech.rotational-dynamics\nphys.mech.moment-of-inertia ──►\n```\n\n**PD-1 (Torque prerequisite):**\n\"A 20 N force perpendicularly at r = 0.3 m from a pivot. τ?\"\nExpected: 6 N·m.\n\n**PD-2 (Moment of inertia prerequisite):**\n\"Solid disc M = 6 kg, R = 0.4 m. I?\"\nExpected: I = ½×6×0.16 = 0.48 kg·m².\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 71,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"τ = Iα. Rearranged to find α? Find τ?\"\nThreshold: α = τ/I; τ = Iα. Units: α in rad/s², τ in N·m, I in kg·m².\n\n**FA-2 (TA-4 exit):** \"I = 6 kg·m², τ = 12 N·m. α?\"\nExpected: 2 rad/s². If student says 12 → MC-ALPHA-EQUALS-TORQUE not resolved.\n\n**FA-3 (TA-5 exit):** \"Disc spinning at ω = 8 rad/s, I = 0.5 kg·m². KE_rot?\"\nExpected: ½×0.5×64 = 16 J. If student writes 0 → MC-ROTATIONAL-KE-IGNORED not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ALPHA-EQUALS-TORQUE",
+        "MC-ROTATIONAL-KE-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 300,
+        "endLine": 315
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only the single-step α = τ/I in TA-3 and TA-4.\n- Defer KE_rot = ½Iω² to TA-5; W = τθ to TA-6.\n- Reassure: \"One equation: τ = Iα. Same shape as F = ma — you already know how to use it.\"\n- Build from Worked Example 1 (find α) before attempting find-τ or KE problems.\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (full chain design problem) at TA-3.\n- Challenge: \"A motor with P = 2 kW and ω = 100 rad/s drives a flywheel. Find τ, and\n  then the time to reach ω from rest if I = 4 kg·m².\" (τ = P/ω = 20 N·m; α = 5; t = 20 s.)\n- Spend TA-6 on Problems 4 and 5.\n\n**S4 (Prereq gap):**\n- PD-1 gap (Torque) → repair τ = rF sinθ before returning.\n- PD-2 gap (Moment of inertia) → repair I = Σmr² and standard shapes before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 315,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.rotational-dynamics/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.rotational-dynamics",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → τ = Iα → MC-ALPHA-EQUALS-TORQUE repair).\n**Session 2 (≥24 h later):** Retrieval: \"τ = Iα. How does doubling I affect α for same τ?\"\n  → TA-5 (MC-ROTATIONAL-KE-IGNORED, W = τθ) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining linear and rotational dynamics:\n  \"A mass m hangs from a cord wrapped around a disc (M, R). Find α of the disc and a of the mass.\"\n  (τ = mgR − tension×R; separate linear eq for m; solve simultaneously. Previews Atwood-with-pulley.)\n**Pre-angular-momentum session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.torque (τ), phys.mech.moment-of-inertia (I),\nphys.mech.newtons-second-law (F = ma structural analogy).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ALPHA-EQUALS-TORQUE",
+        "MC-ROTATIONAL-KE-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rotational-dynamics.md",
+        "startLine": 335,
+        "endLine": 350
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

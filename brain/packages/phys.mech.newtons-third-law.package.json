@@ -1,0 +1,382 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.newtons-third-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.newtons-third-law",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2a7fcb23908c01bdd9b7d8aaada3b9f99b83aa2d5930e97cd27b21a2ec4f26f4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.newtons-third-law.md": "sha256:799f2317acae457be9143187f615cd8828d81286672a91b35d7fa418ccc9400a"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.newtons-third-law",
+    "name": "Newton's Third Law — Action-Reaction",
+    "difficultyRaw": "developing (2)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.newtons-second-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.newtons-third-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.newtons-third-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.newtons-third-law.md": "sha256:799f2317acae457be9143187f615cd8828d81286672a91b35d7fa418ccc9400a"
+      },
+      "contentHash": "sha256:20b32b46ed7681ae49ddb0dcd8d2d3f2e8afb12efc321fff63b221e247415349",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-third-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-third-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-third-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-third-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-third-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-third-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-third-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md#TA-4 (addresses MC-SAME-OBJECT-PAIR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-third-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-third-law.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-third-law\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-third-law.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md#TA-6 (addresses MC-BIGGER-EXERTS-MORE, MC-SAME-OBJECT-PAIR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-third-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.newtons-third-law/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States Newton's Third Law: when object A exerts a force on object B, object B exerts an **equal in magnitude, opposite in direction** force on A — and that the two forces **always act on different objects**.\n2. Correctly identifies the reaction partner of a given force by naming both objects (\"Earth pulls ball down\" ↔ \"ball pulls Earth up\"), and never pairs two forces that act on the same object.\n3. Explains why action-reaction pairs **do not cancel** (they act on different bodies) — distinguishing them from balanced forces on a single body (Second Law / equilibrium).\n\nA student who says \"the reaction force is the normal force balancing weight\" (both act on the same object — a First-Law balance, not a Third-Law pair), or who thinks the larger object in a collision exerts the larger force, has **NOT** achieved mastery — the same-object pairing error is the single most common Third-Law failure and undermines all force analysis downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/misconception/MC-SAME-OBJECT-PAIR",
+      "kind": "misconception",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Two forces on the same object form an action-reaction pair",
+      "content": "### MC-SAME-OBJECT-PAIR: \"Two forces on the same object form an action-reaction pair\"\ntrigger_signal: student calls weight-and-normal-force (both on a resting book) a Third-Law pair, or pairs any two forces acting on one body.\nconflict_evidence [P28]: \"You paired the book's weight with the table's push. But BOTH of those act on the BOOK. A Third-Law pair has one force on each of TWO objects. Test it: remove the table. The book's weight is still there — but the 'partner' vanished. A real reaction partner is tied to its force forever. The true partner of 'Earth pulls book down' is 'book pulls Earth up' — that one acts on the Earth, and it never disappears.\"\nbridge_text [P30]: \"The reaction to a force always acts on the OTHER object in the interaction. Weight = Earth pulling book (acts on book); its reaction = book pulling Earth (acts on Earth). The table's normal force is a separate interaction (table–book), and it balances the weight on the book — that's the First Law, not the Third.\"\nreplacement_text [P31]: \"To find a reaction partner, swap the two objects: 'A on B' → 'B on A.' If your two forces act on the same object, they are NOT a Third-Law pair — they are balanced (or unbalanced) forces on one body.\"\ndiscrimination_pairs [P33]: [\"Earth pulls book down ↔ book pulls Earth up: TRUE pair (two objects) ✓\", \"book's weight + table's normal force: both on book → NOT a pair (same object) ✗\", \"table pushes book up ↔ book pushes table down: TRUE pair (two objects) ✓\"]\ns6_path: skip P28; use \"which object does each force push on?\" as a gentle shared sorting task with the paired-force table, then P30.",
+      "localKey": "MC-SAME-OBJECT-PAIR",
+      "language": "en",
+      "refs": [
+        "MC-SAME-OBJECT-PAIR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/misconception/MC-BIGGER-EXERTS-MORE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "A bigger or faster object exerts a larger force in a collision",
+      "content": "### MC-BIGGER-EXERTS-MORE: \"A bigger or faster object exerts a larger force in a collision\"\ntrigger_signal: student claims the truck hits the car harder than the car hits the truck, or the fast object exerts more force.\nconflict_evidence [P28]: \"The truck and car push on each other during the crash. Newton's Third Law says those two forces are equal in size — always, no exceptions, regardless of mass or speed. What differs is the EFFECT: the same force gives the light car a huge acceleration (a = F/m, small m) and the heavy truck a tiny one (large m). Equal forces, wildly unequal accelerations. The damage difference is about mass, not about force.\"\nbridge_text [P30]: \"In every interaction the two forces are equal and opposite — that's the Third Law, no exceptions. Different outcomes come from the Second Law: the same force produces a larger acceleration on a smaller mass. Force equal; acceleration unequal.\"\nreplacement_text [P31]: \"Collision forces are always equal (Third Law). The damage/motion difference is explained by a = F/m (Second Law), not by unequal forces.\"\ndiscrimination_pairs [P33]: [\"truck–car crash: forces equal ✓, accelerations unequal (car's larger) ✓\", \"mosquito–lorry: forces equal ✓, mosquito's acceleration enormous ✓\", \"'truck exerts more force': ✗ violates the Third Law\"]\ns6_path: skip P28; walk the \"same force, but a = F/m — which one gets flung?\" reasoning gently as a shared calculation, then P30.",
+      "localKey": "MC-BIGGER-EXERTS-MORE",
+      "language": "en",
+      "refs": [
+        "MC-BIGGER-EXERTS-MORE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Push and Be Pushed",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Push and Be Pushed\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Naming the Pair — Two Objects, Always",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Naming the Pair — Two Objects, Always\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Why the Pair Doesn't Cancel",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Why the Pair Doesn't Cancel\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Misconception Probe — Same-Object Pairing",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Same-Object Pairing\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-SAME-OBJECT-PAIR\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SAME-OBJECT-PAIR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-BIGGER-EXERTS-MORE\",\"MC-SAME-OBJECT-PAIR\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-BIGGER-EXERTS-MORE",
+        "MC-SAME-OBJECT-PAIR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Book on table: is normal force the reaction to weight?\" | CORRECT = no; both act on the book (balanced, not a pair) |\n| P74 (classify) | \"Swimmer pushes water back — what is the reaction and on what?\" | CORRECT = water pushes swimmer forward (on the swimmer) |\n| P75 (boundary) | \"Why don't action-reaction forces cancel?\" | CORRECT = they act on different objects |\n| P76 (transfer) | \"Rocket expels gas down — explain the upward thrust via the pair.\" | CORRECT = rocket pushes gas down ↔ gas pushes rocket up |\n| P77 (generate) | \"Give an everyday reaction pair, naming both objects and directions.\" | CORRECT = valid two-object pair |\n| P78 (explain) | \"State the Third Law and the different-objects rule.\" | CORRECT = equal, opposite, on two different bodies |\n| P79 (predict) | \"Truck hits car — which exerts the greater force?\" | CORRECT = equal forces |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No exposure to action-reaction | Cannot state any reciprocal-force idea | Protocol A (Concrete) |\n| S1 | \"Every action has a reaction\" slogan only | Recites the phrase; can't identify a real pair | Protocol B (Counterexample-first) |\n| S2-SAME-OBJECT-PAIR | Pairs two forces on the same object | Calls weight-and-normal-force an action-reaction pair | Misconception Engine → Protocol C |\n| S2-BIGGER-EXERTS-MORE | Thinks larger/faster object exerts a bigger force | \"The truck hits the car harder than the car hits the truck\" | Misconception Engine → Protocol C |\n| S3 | States the law; falters on the different-objects rule | Correct magnitudes; muddles which object each force acts on | Protocol C (Guided Questioning) |\n| S6 | Anxiety at the counterintuitive equal-force claim | Freezes at \"the car pushes the truck just as hard\" | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"When you push on a wall, does the wall push back on you? What can you say about the two forces?\"\n  \"Yes — equal and opposite, and they act on different objects (me and the wall)\" → S3. Enter Protocol C.\n  \"Every action has an equal and opposite reaction\" (slogan, no object identification) → S1. Enter Protocol B.\n  \"No / I don't know\" → DB-2.\n\nDB-2 (misconception probe):\n\"A large truck collides head-on with a small car. During the collision, which exerts the greater force on the other — the truck on the car, or the car on the truck?\"\n  \"Equal forces — Newton's Third Law; they act on different vehicles\" → S3. Enter Protocol C.\n  \"The truck exerts more force\" → SIGNAL:MISCONCEPTION:MC-BIGGER-EXERTS-MORE. Enter Misconception Engine.\n  \"A book on a table — its weight and the table's push are the action-reaction pair\" (if offered) → SIGNAL:MISCONCEPTION:MC-SAME-OBJECT-PAIR. Enter Misconception Engine.\n  Pause / discomfort → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with action-reaction pairs — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-BIGGER-EXERTS-MORE",
+        "MC-SAME-OBJECT-PAIR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-third-law/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-third-law",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.newtons-second-law`):\n\"What does net force do to an object, and how is it related to acceleration?\"\n  Cannot connect net force to a = ΣF/m → flag PREREQ-GAP-SECOND-LAW.\n  In-session minimum repair: one P06 anchor (ΣF = ma; net force on one body) — then resume. Deep gap → schedule `phys.mech.newtons-second-law` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-third-law.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

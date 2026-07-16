@@ -1,0 +1,519 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.angular-momentum-addition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.angular-momentum-addition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6ff48f88f945e82a083b37d6fb2f3d676186ff7679efe34a3e465f3f971af7d5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md": "sha256:f4d6f188653d49187542e9be99757039cbad8553fdb3ecc3af606cc8ef433a8b"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.angular-momentum-addition",
+    "name": "Angular Momentum Addition (Clebsch-Gordan)",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.qm.spin",
+      "phys.qm.hydrogen-atom-qm"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.angular-momentum-addition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.angular-momentum-addition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md": "sha256:f4d6f188653d49187542e9be99757039cbad8553fdb3ecc3af606cc8ef433a8b"
+      },
+      "contentHash": "sha256:74d0f88d4a9fb726001142d78742c3f179d81627f562eb2f71559225091355eb",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.angular-momentum-addition.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.angular-momentum-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.angular-momentum-addition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.angular-momentum-addition.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.angular-momentum-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.angular-momentum-addition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.angular-momentum-addition.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.angular-momentum-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.angular-momentum-addition\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.angular-momentum-addition.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md#TA-4 (addresses MC-AMA-ONE-TOTAL-J)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.angular-momentum-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.angular-momentum-addition\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.angular-momentum-addition.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.angular-momentum-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.angular-momentum-addition\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.angular-momentum-addition.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.angular-momentum-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.angular-momentum-addition\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.angular-momentum-addition.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.angular-momentum-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.angular-momentum-addition\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.angular-momentum-addition/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Angular Momentum Addition (Clebsch-Gordan) — Core Idea (one sentence)",
+      "content": "When two quantum systems with angular momenta j₁ and j₂ are combined, the total angular momentum j ranges from |j₁−j₂| to j₁+j₂ in integer steps, with Clebsch-Gordan coefficients giving the expansion of combined states in the coupled basis.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 20,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Adding j₁=1/2, j₂=1/2 (two spin-1/2 particles)",
+      "content": "### Example 1 — Adding j₁=1/2, j₂=1/2 (two spin-1/2 particles)\nPossible totals: j = |1/2−1/2|…1/2+1/2 = 0, 1.\nj=1 (triplet, 3 states): |1,1⟩=|↑↑⟩; |1,0⟩=(|↑↓⟩+|↓↑⟩)/√2; |1,−1⟩=|↓↓⟩.\nj=0 (singlet, 1 state): |0,0⟩=(|↑↓⟩−|↓↑⟩)/√2.\nTotal: 4 states = (2·1/2+1)² ✓. Triplet symmetric; singlet antisymmetric under exchange.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Adding j₁=1, j₂=1/2 (spin-orbit coupling for p-electron)",
+      "content": "### Example 2 — Adding j₁=1, j₂=1/2 (spin-orbit coupling for p-electron)\nPossible totals: j = |1−1/2|…1+1/2 = 1/2, 3/2.\nj=3/2: 4 states (m_j = −3/2, −1/2, +1/2, +3/2).\nj=1/2: 2 states (m_j = −1/2, +1/2).\nTotal: 6 states = 3×2 ✓.\nKey CG coefficients (m_j=+1/2 sector): |3/2,+1/2⟩ = √(2/3)|m_l=0,↑⟩ + √(1/3)|m_l=1,↓⟩; |1/2,+1/2⟩ = −√(1/3)|m_l=0,↑⟩ + √(2/3)|m_l=1,↓⟩.\nApplication: fine structure splitting of hydrogen p-levels into 2p₁/₂ and 2p₃/₂.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Clebsch-Gordan coefficient calculation for |j₁,j₂;j,m⟩",
+      "content": "### Example 3 — Clebsch-Gordan coefficient calculation for |j₁,j₂;j,m⟩\n|j=j₁+j₂, m=j⟩ = |j₁,m₁=j₁⟩|j₂,m₂=j₂⟩ (stretched state, CG=1).\nApply J₋ = J₋⁽¹⁾ + J₋⁽²⁾ to generate lower-m states; use orthogonality to find j=j₁+j₂−1 states.\nExample: from |1,1⟩|1/2,1/2⟩ = |3/2,3/2⟩, apply J₋: √3|3/2,1/2⟩ = √2|1,0⟩|1/2,1/2⟩ + |1,1⟩|1/2,−1/2⟩. Extract |3/2,1/2⟩ = (√2/√3)|m_l=0,↑⟩ + (1/√3)|m_l=1,↓⟩ = CG from Example 2 ✓\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/misconception/MC-AMA-VECTOR-ADD",
+      "kind": "misconception",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "\"Total angular momentum J = L + S just adds the z-components: M = m_L + m_S.\"",
+      "content": "| MC-AMA-VECTOR-ADD | \"Total angular momentum J = L + S just adds the z-components: M = m_L + m_S.\" | \"I add m_L=1 and m_S=1/2 to get M=3/2.\" | m_z values DO add: Mⱼ = m_l + m_s. But the TOTAL quantum number j does NOT add classically; j ranges from |j₁−j₂| to j₁+j₂. States with the same M but different j must be found by diagonalizing J² in the uncoupled basis. |",
+      "localKey": "MC-AMA-VECTOR-ADD",
+      "language": "en",
+      "refs": [
+        "MC-AMA-VECTOR-ADD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/misconception/MC-AMA-ONE-TOTAL-J",
+      "kind": "misconception",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "\"Adding j₁=1 and j₂=1/2 gives j=3/2 only.\"",
+      "content": "| MC-AMA-ONE-TOTAL-J | \"Adding j₁=1 and j₂=1/2 gives j=3/2 only.\" | \"Total spin is just 1+1/2=3/2.\" | Adding j₁=1 and j₂=1/2 gives TWO possible total angular momenta: j=3/2 (four states) AND j=1/2 (two states). Total count = (2j₁+1)(2j₂+1) = 3×2 = 6 states in both bases — must match. |",
+      "localKey": "MC-AMA-ONE-TOTAL-J",
+      "language": "en",
+      "refs": [
+        "MC-AMA-ONE-TOTAL-J"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-AMA-ONE-TOTAL-J\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-AMA-ONE-TOTAL-J"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): What are the allowed total angular momentum values j when combining j₁=2 and j₂=3/2? How many states in each?  \n*Answer*: j = 7/2, 5/2, 3/2, 1/2; states: 8, 6, 4, 2; total = 20 = 5×4 ✓",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): Write the state |j=1,m_j=0⟩ for two spin-1/2 particles (j₁=j₂=1/2).  \n*Answer*: From Example 1 or lowering J: |1,0⟩ = (|↑↓⟩+|↓↑⟩)/√2 (symmetric triplet state).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "MP-3",
+      "content": "**MP-3** (apply): For j₁=1, j₂=1/2, what is the CG coefficient ⟨j₁=1,m₁=1; j₂=1/2,m₂=−1/2 | j=1/2, m_j=1/2⟩?  \n*Answer*: From Example 2: |1/2,+1/2⟩ = −√(1/3)|m_l=0,↑⟩ + √(2/3)|m_l=1,↓⟩. The CG coefficient ⟨1,1;1/2,−1/2|1/2,1/2⟩ = √(2/3).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): Why does the hydrogen 2p level split into 2p₁/₂ and 2p₃/₂ with a 2:1 degeneracy ratio?  \n*Answer*: j=3/2 has 2j+1=4 states (m_j=−3/2,−1/2,+1/2,+3/2); j=1/2 has 2 states — ratio 2:1. Spin-orbit coupling Ĥ_SO ∝ L·S = (J²−L²−S²)/2 has different expectation value for each j, causing the energy split.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A student says \"I can just use the uncoupled basis |m_l,m_s⟩ for all hydrogen calculations — why bother with j,m_j?\" Assess this.  \n*Answer*: For energy eigenstates, |j,m_j⟩ diagonalizes the spin-orbit Hamiltonian (L·S diagonal in coupled basis). In the uncoupled basis, |m_l,m_s⟩ are mixed by spin-orbit coupling — not energy eigenstates. The student is correct that both bases span the same space, but the coupled basis makes the physics transparent and computations tractable.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student lists wrong total j values | Make them list all possible values step by step: start from j₁+j₂, subtract 1 until reaching |j₁−j₂|; state count always = (2j₁+1)(2j₂+1) |\n| Student gets CG coefficient wrong sign | \"Sign conventions are standard but not obvious — use the Condon-Shortley tables; what matters for physics is |CG|², not sign alone\" |\n| Student asks \"what is L·S in terms of m_l, m_s?\" | L·S = (J²−L²−S²)/2; in coupled basis eigenvalue = [j(j+1)−l(l+1)−s(s+1)]ℏ²/2; in uncoupled basis it mixes states with same m_l+m_s — that's why we want the coupled basis |\n| Student confused why j goes in integer steps | General rule from J₊,J₋ ladder operators: |j₁−j₂| ≤ j ≤ j₁+j₂ in steps of 1; analogy with triangle inequality for classical vectors |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 99,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"Hydrogen 2p: how many degenerate states? What quantum numbers label them?\"\nCORE-1 (15 min): TA-1 + TA-2 (fine structure motivation + coupled/uncoupled bases)\nCORE-2 (20 min): TA-3 + TA-4 (CG expansion + MC diagnostic j-values)\nCORE-3 (20 min): TA-5 (spin-orbit j=1, 1/2 example: derive CG for m_j=1/2 sector)\nDRILL  (10 min): TA-6 (lowering-operator method for j₁=j₂=1)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Scattering theory uses angular momentum decomposition (partial waves) — l is the orbital angular momentum of the scattered particle, and the same CG technology applies.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.qm.angular-momentum-addition/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.angular-momentum-addition",
+      "title": "Known Sticking Points",
+      "content": "1. **m_z adds but j doesn't**: The single most common error; always verify with a state-count check.\n2. **CG coefficients signs**: Signs are convention-dependent (Condon-Shortley convention); students should use tables or the lowering-operator method rather than memorizing signs.\n3. **Orthogonality of coupled basis**: Students unsure how to find lower-j states; emphasize they must be orthogonal to the higher-j state with the same m.\n4. **Physical meaning**: CG coefficients are amplitudes (probability = |CG|²) for measuring a specific (m₁,m₂) when the combined state has (j,m_j).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md",
+        "startLine": 90,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

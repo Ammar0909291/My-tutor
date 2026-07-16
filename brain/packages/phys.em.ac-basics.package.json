@@ -1,0 +1,347 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.ac-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.ac-basics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c2dfcc8bf7340740c9a7cb47f5bfff46a0f595d25fec3218056b2ab237f4f477",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.ac-basics.md": "sha256:ca8982c6c56467eb32664e306f7ff00dcc9660b959f088fc2bbc613e1a0f146a"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.ac-basics",
+    "name": "AC Circuit Basics",
+    "difficultyRaw": "label: advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.em.ohms-law",
+      "phys.em.faradays-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.ac-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.ac-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.ac-basics.md": "sha256:ca8982c6c56467eb32664e306f7ff00dcc9660b959f088fc2bbc613e1a0f146a"
+      },
+      "contentHash": "sha256:d7f310f660d90a7f710375475f5398863f5092a69cec995565826a2c7dcd9516",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-basics.md#TA-1 (addresses MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-basics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-basics.md#TA-3 (addresses MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-basics.md#TA-4 (addresses MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.ac-basics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.ac-basics",
+      "title": "AC Circuit Basics — Concept Explanation Blocks",
+      "content": "### Block 1-A — AC Waveform and Key Parameters\nAn AC source produces a sinusoidally varying voltage:\n\n> **v(t) = V_m sin(ωt + φ)** or V_m cos(ωt)\n\nParameters:\n- V_m (or V_p): peak voltage (amplitude)\n- ω = 2πf: angular frequency (rad/s)\n- f: frequency (Hz); T = 1/f: period (s)\n- φ: phase angle (rad)\n\n**RMS values** (root mean square) — what appears on meters and power ratings:\n> **V_rms = V_m/√2 ≈ 0.707 V_m**\n> **I_rms = I_m/√2 ≈ 0.707 I_m**\n\nRMS voltage produces the same average power in a resistor as an equal DC voltage. Household supply: 230 V_rms (UK/EU), 120 V_rms (US); peak = 325 V or 170 V respectively.\n\nAverage power: **P_avg = V_rms I_rms cos φ** (where φ is the phase difference between V and I)\n\n### Block 1-B — Resistor, Capacitor, Inductor in AC\n\n**Resistor** (R):\n- V and I are **in phase** (φ = 0)\n- V_R = IR (Ohm's law holds instantaneously)\n- Opposition: R (unchanged with frequency)\n\n**Capacitor** (C):\n- Current **leads** voltage by 90° (φ = −90°): I = C dV/dt; when V = V_m sinωt, I = CV_mω cosωt\n- Opposition: **capacitive reactance X_C = 1/(ωC)** — decreases with frequency\n- At high f: X_C → 0 (C acts as short circuit); at f=0 (DC): X_C → ∞ (open circuit)\n\n**Inductor** (L):\n- Voltage **leads** current by 90° (φ = +90°): V = L dI/dt; if I = I_m sinωt, V = LI_mω cosωt\n- Opposition: **inductive reactance X_L = ωL** — increases with frequency\n- At high f: X_L → ∞ (blocks AC); at f=0 (DC): X_L = 0 (short circuit)\n\nMnemonic: **CIVIL** — In a Capacitor I leads V; In a coil (L), V leads I.\n\n### Block 1-C — Series RLC Circuit and Impedance\nTotal opposition to AC current: **impedance Z**\n\nFor series RLC:\n> **Z = √(R² + (X_L − X_C)²)**\n\nPhase angle: **tan φ = (X_L − X_C)/R**\n\nCurrent amplitude: **I_m = V_m/Z**\n\nAt **resonance**: X_L = X_C → X_L − X_C = 0 → Z = R (minimum) → I_m maximum\n> **ω₀ = 1/√(LC)** (resonant angular frequency)\n\nQuality factor: **Q = ω₀L/R = 1/(ω₀CR)** (sharpness of resonance)\n\n### Block 1-D — Average Power in AC Circuits\nOnly the resistive component dissipates power:\n\n> **P = I²_rms R = V²_rms/Z² × R = V_rms I_rms cos φ**\n\n**Power factor** cos φ: ratio of real power to apparent power.\n- Pure R: cos φ = 1 (all power dissipated)\n- Pure L or C: cos φ = 0 (no power dissipated — reactive elements)\n- Series RLC: 0 ≤ cos φ ≤ 1\n\nAt resonance: φ = 0 → cos φ = 1 → power factor = 1 → maximum power transfer to R.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 29,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.ac-basics",
+      "title": "RMS and Peak Values",
+      "content": "### WE-1 — RMS and Peak Values\n**Problem:** UK household supply: V_rms = 230 V, f = 50 Hz. Find: (a) V_m, (b) ω, (c) T, (d) instantaneous voltage at t = 3.0 ms.\n\n**Solution:**\n(a) V_m = V_rms × √2 = 230 × 1.414 = **325 V**\n\n(b) ω = 2πf = 2π × 50 = **314 rad/s**\n\n(c) T = 1/f = 1/50 = **20 ms**\n\n(d) v(t) = 325 sin(314 × 3.0×10⁻³) = 325 sin(0.942) = 325 × 0.809 = **263 V**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 98,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.ac-basics",
+      "title": "Series RLC at Off-Resonance",
+      "content": "### WE-2 — Series RLC at Off-Resonance\n**Problem:** Series RLC circuit: R = 30 Ω, L = 100 mH, C = 50 μF, V_rms = 120 V, f = 60 Hz. Find: (a) X_L, X_C, (b) Z, (c) I_rms, (d) phase angle φ, (e) average power.\n\n**Solution:**\n(a) X_L = ωL = 2π×60×0.10 = **37.7 Ω**  \n    X_C = 1/(ωC) = 1/(2π×60×50×10⁻⁶) = **53.1 Ω**\n\n(b) Z = √(R² + (X_L−X_C)²) = √(900 + (37.7−53.1)²) = √(900 + 237) = √1137 = **33.7 Ω**\n\n(c) I_rms = V_rms/Z = 120/33.7 = **3.56 A**\n\n(d) tan φ = (X_L−X_C)/R = (37.7−53.1)/30 = −15.4/30 = −0.513 → φ = **−27.2°** (capacitive, I leads V)\n\n(e) P = I²_rms × R = (3.56)² × 30 = 12.67 × 30 = **380 W**  \n    Or: P = V_rms × I_rms × cos φ = 120 × 3.56 × cos(27.2°) = 427 × 0.890 = 380 W ✓\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 98,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.ac-basics",
+      "title": "Resonance",
+      "content": "### WE-3 — Resonance\n**Problem:** Series RLC: L = 200 mH, C = 5.0 μF, R = 10 Ω, V_rms = 50 V. Find: (a) resonant frequency, (b) I_rms at resonance, (c) V_L and V_C at resonance, (d) Q factor.\n\n**Solution:**\n(a) ω₀ = 1/√(LC) = 1/√(0.20 × 5×10⁻⁶) = 1/√(10⁻⁶) = **1000 rad/s** → f₀ = 1000/(2π) = **159 Hz**\n\n(b) At resonance: Z = R = 10 Ω → I_rms = 50/10 = **5.0 A**\n\n(c) X_L = X_C = ω₀L = 1000 × 0.20 = 200 Ω  \n    V_L = I_rms × X_L = 5.0 × 200 = **1000 V** (much larger than supply!)  \n    V_C = I_rms × X_C = 5.0 × 200 = **1000 V** (equal, opposing V_L — they cancel in series)\n\n(d) Q = ω₀L/R = 1000 × 0.20/10 = **20**  \n    Interpretation: voltage across L or C is Q = 20 times the supply voltage — voltage magnification at resonance.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 98,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/misconception/MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM",
+      "kind": "misconception",
+      "conceptId": "phys.em.ac-basics",
+      "title": "- **trigger_signal:** Student says \"RMS voltage is just the average of the AC wave, so for a sine wave it's V_m/2.",
+      "content": "### MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM\n- **trigger_signal:** Student says \"RMS voltage is just the average of the AC wave, so for a sine wave it's V_m/2.\"\n- **conflict_evidence [P28]:** \"The average of a full-cycle sine wave is zero — positive and negative half-cycles cancel exactly. The simple average of a 325 V peak waveform is 0 V, which would imply a light bulb sees no voltage at all — clearly wrong. RMS stands for Root Mean Square: square the wave (making all values positive), take the mean, then take the square root. For a sine: √(V_m²/2) = V_m/√2 ≈ 0.707V_m. This is NOT the same as the average of |v| = 2V_m/π ≈ 0.637V_m (average rectified) or V_m/2 (average of peak).\"\n- **bridge_text [P30]:** \"The RMS formula is designed to give the DC equivalent for power: P = V²/R. For AC, P_avg = (V_m²/2)/R = V_rms²/R where V_rms = V_m/√2. This makes V_rms the voltage that would produce the same average power in a resistor as the same DC voltage — a physically meaningful and practically useful definition.\"\n- **replacement_text [P31]:** \"V_rms = V_m/√2 ≈ 0.707V_m (for sine waves). This is NOT the average (which is zero for a full cycle), NOT V_m/2, NOT V_m/π. It is the square root of the time-averaged square: √<v²> = √(V_m²/2).\"\n- **discrimination_pairs [P33]:**\n  - Average of full sine wave: 0 (positive and negative halves cancel)\n  - Average of |sin| (full-wave rectified): 2V_m/π ≈ 0.637V_m\n  - RMS: V_m/√2 ≈ 0.707V_m (correct for power calculations)\n  - Peak: V_m (instantaneous maximum)\n- **s6_path:** Compute ∫₀ᵀ sin²(ωt) dt / T = ½ algebraically; take square root to get 1/√2.\n\n---",
+      "localKey": "MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM",
+      "language": "en",
+      "refs": [
+        "MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 3,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/misconception/MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC",
+      "kind": "misconception",
+      "conceptId": "phys.em.ac-basics",
+      "title": "- **trigger_signal:** Student writes V_R + V_L + V_C = V_total (arithmetic sum) or is puzzled when component voltages exceed supply voltage.",
+      "content": "### MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC\n- **trigger_signal:** Student writes V_R + V_L + V_C = V_total (arithmetic sum) or is puzzled when component voltages exceed supply voltage.\n- **conflict_evidence [P28]:** \"WE-3: V_L = V_C = 1000 V in a circuit supplied by only 50 V. If voltages added arithmetically: 1000 + 1000 + I×R = 2010 V ≠ 50 V. The resolution: V_L and V_C are 180° out of phase (they cancel in series). Voltages in AC circuits must be added as phasors (vectors): √(V_R² + (V_L−V_C)²) = V_total. Instantaneous voltages do add arithmetically — but peak values and RMS values add as phasors.\"\n- **bridge_text [P30]:** \"In DC circuits, V = V_R + V_C + V_L by KVL — and this is always true instantaneously. The subtlety: when voltages are oscillating at 90° relative phase, their peaks don't occur at the same time. Adding peaks (RMS values) requires phasors, like adding forces at right angles: F_net = √(F_x² + F_y²), not F_x + F_y.\"\n- **replacement_text [P31]:** \"Instantaneous KVL: v(t) = v_R(t) + v_L(t) + v_C(t) — always exact. RMS voltage magnitudes: V_total = √(V_R² + (V_L − V_C)²) — phasor addition. Individual component voltages can exceed total supply voltage (resonance: V_L = V_C = QV_total >> V_total).\"\n- **discrimination_pairs [P33]:**\n  - DC: V = V_R + V_L + V_C (arithmetic; all in phase)\n  - AC off-resonance: |V_total| = √(V_R² + (V_L−V_C)²) (phasor sum)\n  - AC at resonance: V_L = V_C, they cancel; V_total = V_R only (even though V_L, V_C >> V_R)\n- **s6_path:** Draw phasor diagram for WE-2: V_R along x-axis, V_L upward, V_C downward; resultant = diagonal; show magnitude = Z × I = V_total.\n\n---",
+      "localKey": "MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC",
+      "language": "en",
+      "refs": [
+        "MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 17,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-basics",
+      "title": "AC waveform and RMS: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"AC waveform and RMS: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 251,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-basics",
+      "title": "R, L, C individually in AC: Block 1-B",
+      "content": "{\"id\":\"TA-2\",\"title\":\"R, L, C individually in AC: Block 1-B\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 261,
+        "endLine": 264
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-basics",
+      "title": "WE-1 and WE-2: series RLC, impedance, power",
+      "content": "{\"id\":\"TA-3\",\"title\":\"WE-1 and WE-2: series RLC, impedance, power\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 264,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-basics",
+      "title": "WE-3: resonance and Q factor",
+      "content": "{\"id\":\"TA-4\",\"title\":\"WE-3: resonance and Q factor\",\"primitives\":[\"P36\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[\"MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 269,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.ac-basics",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** In a pure capacitor connected to AC, the current:\n**(a) Leads voltage by 90°** (b) Lags voltage by 90° (c) Is in phase with voltage (d) Leads voltage by 45°\n\n**A2 (Short answer):** Define impedance Z of a series RLC circuit and write the formula for resonant frequency ω₀.\n[Z = √(R² + (X_L−X_C)²); ω₀ = 1/√(LC)]\n\n**A3 (Fill-in):** V_rms = ______ × V_m for a sinusoidal AC waveform.\n[1/√2 ≈ 0.707]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** A series RLC circuit at resonance has V_rms = 10 V, R = 5 Ω, Q = 50. Find I_rms at resonance and V_L at resonance.\n[I_rms = V_rms/R = 2.0 A (Z=R at resonance); V_L = Q×V_rms = 50×10 = 500 V]\n\n**B2:** At what frequency does a 100 μF capacitor have the same reactance as a 100 mH inductor? What is that reactance?\n[X_C = X_L → 1/(ωC) = ωL → ω = 1/√(LC) = 1/√(0.1×10⁻⁴) = 1/√(10⁻⁵) = 316 rad/s → f = 50.3 Hz; X = ωL = 316×0.1 = 31.6 Ω]\n\n**B3:** A motor has power factor 0.75 and draws 10 A_rms from 240 V_rms supply. Find: (a) real power consumed, (b) apparent power, (c) reactive power.\n[(a) P = V_rms × I_rms × cosφ = 240×10×0.75 = 1800 W. (b) S = V_rms × I_rms = 240×10 = 2400 VA (apparent). (c) Q = √(S²−P²) = √(2400²−1800²) = √(2160000) = 1470 VAR (reactive).]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** Series RLC: R=50Ω, L=0.30H, C=12μF, V_m=200V. (a) Find ω₀. (b) At ω = 200 rad/s: find X_L, X_C, Z, I_m, φ, and P_avg. (c) At resonance: find I_m, V_L,m, V_C,m, and Q.\n[(a) ω₀ = 1/√(0.3×12×10⁻⁶) = 1/√(3.6×10⁻⁶) = 527 rad/s. (b) X_L=200×0.3=60Ω; X_C=1/(200×12×10⁻⁶)=417Ω; Z=√(2500+(60−417)²)=√(2500+127449)=√129949=360Ω; I_m=200/360=0.556A; tanφ=(60−417)/50=−7.14→φ=−82°(strongly capacitive); P=½I_m²R=½×0.309×50=7.73W. (c) At ω₀=527: Z=R=50Ω; I_m=200/50=4.0A; X_L=X_C=527×0.3=158Ω; V_L,m=I_m×X_L=4.0×158=632V; V_C,m=632V; Q=ω₀L/R=527×0.3/50=3.16.]\n\n**C2 (Synthesis):** A power utility delivers P = 1.0 MW at V_rms = 11 kV with power factor 0.60. (a) Find I_rms. (b) Find heat loss if transmission line resistance R_line = 0.50 Ω. (c) Find new I_rms if power factor is improved to 0.95 by adding capacitors. (d) Find new heat loss and percentage saving.\n[(a) I = P/(V×cosφ) = 10⁶/(11000×0.60) = 151.5 A. (b) P_loss = I²R = 151.5²×0.5 = 11,476 W ≈ 11.5 kW. (c) I_new = 10⁶/(11000×0.95) = 95.7 A. (d) P_loss_new = 95.7²×0.5 = 4,579 W ≈ 4.6 kW; saving = (11476−4579)/11476 = 60% reduction in transmission losses.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 178,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.ac-basics",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks lag) | Deploy CIVIL mnemonic; show I=CdV/dt mathematically: if V=sinωt, I=Cωcosωt=cos leads sin by 90° |\n| Probe A3 wrong (says 0.5) | Deploy MC-RMS-IS-THE-AVERAGE; derive √<sin²> = 1/√2 step by step |\n| Probe B3 wrong (reactive power) | Define: S=apparent (VA), P=real (W), Q_reactive=reactive (VAR); S²=P²+Q² |\n| Probe C1(c) wrong (V_L at resonance) | V_L = I_m × X_L = I_m × ω₀L; at resonance I_m=V_m/R; so V_L = V_m × ω₀L/R = Q×V_m |\n| Student asks about complex impedance | Preview: Z = R + j(X_L−X_C); |Z| = √(R²+(X_L−X_C)²); φ = arctan((X_L−X_C)/R); same result, more general framework |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-RMS-IS-THE-AVERAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 287,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "phys.em.ac-basics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.ac-basics",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"AC circuits power the world — every motor, transformer, and power grid runs on alternating current. Today we'll understand why, and how the phase relationships between voltage and current determine efficiency.\"\n\n[P41 — Diagnostic]\n\"Household power is 230 V. Is this the peak or RMS voltage? What is the other one?\"\n→ Correct (230V is RMS; peak ≈ 325V): \"Exactly — let's see why RMS is the useful quantity.\"\n→ Incorrect: \"Great question — the answer reveals something subtle about AC averages.\"\n\n[P06 — Concrete anchor]\n\"A sine wave averages to zero — useless for measuring power. The trick: square it first (all positive), average, then square root again. That's V_rms = V_m/√2. A 230 V_rms supply produces the same average heating in a resistor as 230 V DC.\"\n\n[TA-1 — AC waveform and RMS: Block 1-A]\n\"v(t) = V_m sinωt; V_rms = V_m/√2. UK: 230V rms → 325V peak.\"\n\n[P28 — Conflict evidence for MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM]\n\"Average of a full sine wave = 0. But V_rms = V_m/√2 = 0.707V_m ≠ 0. Square first (makes all positive) → average → root. That's why the math works.\"\n\n[P51 — Check-in]\n\"A 120 V_rms supply has a peak of _____ V. A 200 V peak AC has V_rms = _____ V.\"\n[170V; 141V]\n\n[TA-2 — R, L, C individually in AC: Block 1-B]\n\"CIVIL: Capacitor I leads V; coIL V leads I. Reactances X_C = 1/ωC, X_L = ωL.\"\n\n[TA-3 — WE-1 and WE-2: series RLC, impedance, power]\n\n[P28 — Conflict evidence for MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY]\n\"WE-3: V_L = V_C = 1000V in a 50V circuit. Arithmetic sum = 2010V ≠ 50V. Phasor sum: V_L and V_C cancel (180° apart) → only V_R = 50V survives. Always add AC voltages as phasors.\"\n\n[TA-4 — WE-3: resonance and Q factor]\n\n[P52 — Narrow]\n\"Three key formulas: Z = √(R²+(X_L−X_C)²); ω₀ = 1/√(LC); V_rms = V_m/√2. CIVIL for phase.\"\n\n[P62 — Retrieval seed]\n\"Write from memory: V_rms formula, CIVIL rule, impedance Z, resonant frequency, power formula, Q definition.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"AC fundamentals: V_rms = V_m/√2 (power equivalent). R: in phase. L: V leads I (X_L=ωL). C: I leads V (X_C=1/ωC). Series RLC: Z = √(R²+(X_L−X_C)²); resonance at ω₀=1/√(LC), Z minimum, I maximum, Q = voltage magnification.\"\n\n[P85 — Regulation tail]\n\"Shakiest: the CIVIL rule, the phasor addition, or resonance and Q?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the series RLC retrieval problem.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-basics.md",
+        "startLine": 233,
+        "endLine": 287
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,431 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.mirrors-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.mirrors",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ceb86cb9d8d4f14fbf7bcb509cf1c5e35f700fb8f44fc6beb70e2e4a50b0677e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.mirrors.md": "sha256:9e4acf4d797985cb6276162c110c2f0c7d6f662b4b298a6df954ea85e8537f77"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.mirrors",
+    "name": "\"Curved Mirrors — Concave and Convex\"",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.opt.reflection"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.mirrors-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.mirrors (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.mirrors.md": "sha256:9e4acf4d797985cb6276162c110c2f0c7d6f662b4b298a6df954ea85e8537f77"
+      },
+      "contentHash": "sha256:b191d72a9aa681ce17ab893d297b9e43fe37f04436dd26d1840c4535bfa9dcfc",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.mirrors.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.mirrors.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.mirrors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.mirrors\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.mirrors.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.mirrors.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.mirrors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.mirrors\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.mirrors.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.mirrors.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.mirrors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.mirrors\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.mirrors.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.mirrors.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.mirrors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.mirrors\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.mirrors.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.mirrors.md#TA-5 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.mirrors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.mirrors\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.mirrors.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.mirrors.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.mirrors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.mirrors\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.mirrors.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.mirrors.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.mirrors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.mirrors\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.mirrors/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.mirrors",
+      "title": "\"Curved Mirrors — Concave and Convex\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nLook into the back of a shiny spoon — your face appears upright and small. Flip the spoon and look into the concave side — your face appears upright and magnified when close, then upside-down when you move away. This is curved mirror behavior. A concave mirror (reflecting surface curves inward, like a cave) can either magnify or invert depending on object distance. A convex mirror (reflecting surface curves outward, like the back of the spoon) always produces a small, upright, virtual image — which is why car rear-view mirrors and security mirrors are convex (they give a wide field of view).\n\n### Level 2 — Developing Understanding\n\n**Key terminology:**\n- **Pole (P):** Centre of the mirror surface\n- **Centre of curvature (C):** Centre of the sphere the mirror is part of; at distance R from P\n- **Radius of curvature (R):** R = 2f\n- **Principal focus (F):** Point where paraxial rays parallel to principal axis converge (concave) or appear to diverge from (convex); at distance f from P\n- **Focal length (f):** f = R/2\n\n**Sign convention (New Cartesian — distances measured from pole P):**\n- Incident light travels left to right\n- Distances measured in direction of incident light: positive\n- Distances measured against incident light: negative\n- Concave mirror: f = negative (F on same side as object)\n- Convex mirror: f = positive (F on opposite side from object)\n\n**Mirror formula:**\n**1/v + 1/u = 1/f = 2/R**\n\nWhere u = object distance (negative for real object), v = image distance, f = focal length.\n\n**Magnification:**\nm = −v/u\n\n| m sign | m magnitude | Image |\n|--------|-------------|-------|\n| m > 0 | any | Virtual, erect |\n| m < 0 | any | Real, inverted |\n| |m| > 1 | — | Magnified |\n| |m| < 1 | — | Diminished |\n\n**Concave mirror — image types by object position:**\n\n| Object position | Image position | Type | Orientation | Size |\n|----------------|---------------|------|-------------|------|\n| At ∞ | At F | Real | Inverted | Point |\n| Beyond C (u > 2f) | Between F and C | Real | Inverted | Diminished |\n| At C (u = 2f) | At C (v = 2f) | Real | Inverted | Same size |\n| Between C and F | Beyond C | Real | Inverted | Magnified |\n| At F | At ∞ | Real | — | — |\n| Between F and P | Behind mirror | Virtual | Erect | Magnified |\n\n**Convex mirror:** Always produces virtual, erect, diminished image (regardless of object position). f > 0 in NC convention.\n\n### Level 3 — Proficient Synthesis\n\n**Ray diagram rules (3 standard rays for concave mirror):**\n1. Ray parallel to principal axis → reflects through F (concave) or appears to come from F (convex)\n2. Ray through F → reflects parallel to principal axis\n3. Ray through C → reflects back on itself (normal incidence at curved surface)\n\n**Power of a mirror:** P = 1/f (in diopters if f in metres). Concave: P > 0. Convex: P < 0.\n\n**Derivation of mirror formula (geometric):**\nFor concave mirror with object AB at distance u, image A'B' at v:\nUsing similar triangles and the geometry of the focal length gives 1/v + 1/u = 1/f.\n\n**Extended objects and real images:** A real image is formed when reflected rays actually converge. It can be projected on a screen. A virtual image is formed when reflected rays diverge — extensions behind the mirror appear to converge there; cannot be projected.\n\n**Applications:**\n- Concave: shaving/makeup mirror (object between F and P → virtual, erect, magnified), car headlights/torches (object at F → parallel beam), solar concentrators, telescope mirrors\n- Convex: rear-view mirrors, security mirrors (wide field of view), road junction mirrors\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 25,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.mirrors",
+      "title": ": Concave Mirror — Object Beyond C",
+      "content": "### WE-1: Concave Mirror — Object Beyond C\n\n**Problem:** A concave mirror has focal length f = −20 cm (using New Cartesian sign convention). An object is placed 30 cm in front of the mirror (u = −30 cm). Find:\n(a) Image distance v.\n(b) Magnification m.\n(c) Nature of the image.\n\n**Solution:**\n\n**(a) Mirror formula:**\n1/v + 1/u = 1/f\n1/v = 1/f − 1/u = 1/(−20) − 1/(−30)\n= −1/20 + 1/30\n= −3/60 + 2/60\n= −1/60\n\n**v = −60 cm**\n\n(Negative → image is on the same side as the object → real image)\n\n**(b) Magnification:**\nm = −v/u = −(−60)/(−30) = −60/30 = **−2**\n\n(Negative → inverted; |m| = 2 → magnified)\n\n**(c) Nature:** Real, inverted, magnified (2×). Located 60 cm from mirror on same side as object (in front of mirror).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 96,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.mirrors",
+      "title": ": Convex Mirror — Rear-View Application",
+      "content": "### WE-2: Convex Mirror — Rear-View Application\n\n**Problem:** A convex rear-view mirror has focal length f = +25 cm. A car is 150 cm behind the mirror (u = −150 cm). Find the image position and magnification. Explain why convex mirrors are preferred for rear-view.\n\n**Solution:**\n\n**Mirror formula:**\n1/v = 1/f − 1/u = 1/25 − 1/(−150)\n= 1/25 + 1/150\n= 6/150 + 1/150\n= 7/150\n\n**v = 150/7 ≈ +21.4 cm**\n\n(Positive → image behind mirror → virtual)\n\n**Magnification:**\nm = −v/u = −(+21.4)/(−150) = +21.4/150 = **+0.143**\n\n(Positive → erect; |m| < 1 → diminished)\n\n**Why convex for rear-view:** Convex mirror always produces upright (erect) image visible at a glance. The diminished image subtends a larger angular field of view — the driver sees a wider scene compressed into a small mirror. The trade-off: distances appear larger (objects look farther than they are) — hence the warning \"Objects in mirror are closer than they appear.\"\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 96,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.mirrors",
+      "title": ": Finding Object Position for Required Magnification",
+      "content": "### WE-3: Finding Object Position for Required Magnification\n\n**Problem:** A dentist uses a concave mirror (f = −2.5 cm) to produce an upright image magnified 5 times of a tooth. How far from the mirror should the tooth be placed?\n\n**Solution:**\n\nFor an upright (erect) image from a concave mirror: image must be virtual → v > 0 (behind mirror, using NC convention where concave f < 0).\n\nWait — with NC sign convention: real objects have u < 0. Virtual image of concave mirror (erect, magnified) has v > 0.\n\nGiven m = +5 (erect, magnified): m = −v/u → +5 = −v/u → v = −5u\n\nObject at u (negative): v = −5u (positive since u is negative → v > 0 ✓)\n\nMirror formula:\n1/v + 1/u = 1/f\n1/(−5u) + 1/u = 1/(−2.5)\n(−1 + 5)/(5u) = 1/(−2.5)\n4/(5u) = −1/2.5 = −0.4\n4 = 5u × (−0.4) = −2u\nu = 4/(−2) = **−2.0 cm**\n\nThe tooth should be placed **2.0 cm** from the mirror (between the focus and the pole, since |f| = 2.5 cm and |u| = 2.0 cm < 2.5 cm).\n\nCheck: v = −5u = −5×(−2) = +10 cm (virtual image behind mirror) ✓\n1/v + 1/u = 1/10 + 1/(−2) = 0.1 − 0.5 = −0.4 = 1/f = 1/(−2.5) = −0.4 ✓\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 96,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.mirrors",
+      "title": "MC-CONCAVE-MIRROR-ALWAYS-FORMS-REAL-IMAGE",
+      "content": "### MC-1: MC-CONCAVE-MIRROR-ALWAYS-FORMS-REAL-IMAGE\n\n**trigger_signal:** Student states \"concave mirrors always produce real inverted images\" or \"only convex mirrors can form virtual images.\"\n\n**conflict_evidence [P28]:** Use the mirror formula: for f = −20 cm (concave) and u = −10 cm (object between F and P, since |f| = 20 cm and |u| = 10 cm < 20 cm): 1/v = 1/(−20) − 1/(−10) = −0.05 + 0.10 = +0.05 → v = +20 cm. A positive v means the image is behind the mirror — virtual. The magnification m = −v/u = −(+20)/(−10) = +2 > 0 → erect. This is exactly the dentist's magnifying mirror situation. A concave mirror forms a virtual, erect, magnified image when the object is inside the focal length.\n\n**bridge_text [P30]:** Think of the concave mirror as having two \"personalities\" depending on where the object is. When the object is far (outside F), it converges rays to a real focus — real image. When the object is close (inside F), the reflected rays diverge — but their extensions behind the mirror converge, giving a virtual image. The focal point F is the boundary: outside F → real image; inside F → virtual image.\n\n**replacement_text [P31]:** A concave mirror forms a VIRTUAL image when the object is placed between the pole and the focus (|u| < |f|). In this case v > 0 (image behind mirror), m > 0 (erect), and |m| > 1 (magnified). This is the operating principle of shaving mirrors, makeup mirrors, and dental examination mirrors. Both concave and convex mirrors can produce virtual images; neither is \"always real\" or \"always virtual.\"\n\n**discrimination_pairs [P33]:**\n- \"A concave mirror used as a shaving mirror must produce a real image so you can see your reflection\" → FALSE: it produces a virtual, erect, magnified image (object is between F and P). Real images cannot be seen by looking into the mirror.\n- \"Convex mirrors always form virtual images; concave mirrors always form real images\" → FALSE: concave mirrors form virtual images when u < f; the distinction is by object position, not mirror type alone.\n\n**s6_path:** If student fails \"which mirror forms virtual image\" probe → assign ray diagram for object between F and P for concave mirror, confirm virtual image location before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.mirrors",
+      "title": "MC-MAGNIFICATION-SIGN-GIVES-IMAGE-SIZE",
+      "content": "### MC-2: MC-MAGNIFICATION-SIGN-GIVES-IMAGE-SIZE\n\n**trigger_signal:** Student states \"m = −2 means the image is half the size\" or \"m = −2 means the image is reduced\" (confusing the sign with the magnitude).\n\n**conflict_evidence [P28]:** Calculate WE-1: m = −2. A negative magnification means the image is inverted (upside-down), NOT smaller. The magnitude |m| = 2 means the image is twice the height of the object. Check: image height h' = m × h_object = (−2) × 3 cm = −6 cm (negative height = inverted, magnitude 6 cm = twice 3 cm). If it were smaller, we'd need |m| < 1. The sign and magnitude carry different information.\n\n**bridge_text [P30]:** Magnification m = −v/u encodes two separate facts: (1) the sign tells orientation (positive = erect, negative = inverted); (2) the magnitude |m| tells size ratio (|m| > 1 = larger, |m| < 1 = smaller, |m| = 1 = same size). These are independent of each other — you can have m = −3 (inverted and 3× larger) or m = −0.5 (inverted and half size).\n\n**replacement_text [P31]:** For magnification m: sign → orientation (m > 0: erect/virtual; m < 0: inverted/real), magnitude → size (|m| > 1: magnified; |m| < 1: diminished; |m| = 1: same). m = −2 means inverted AND 2× larger (magnified). m = −0.5 means inverted AND half size (diminished). Always separate the sign and magnitude information.\n\n**discrimination_pairs [P33]:**\n- \"m = −3 means the image is one-third the size\" → FALSE: |m| = 3 means 3× larger; negative sign means inverted.\n- \"m = +0.4 means the image is smaller but upright\" → CORRECT: |m| = 0.4 < 1 (diminished), m > 0 (erect/virtual). ✓\n\n**s6_path:** If student confuses sign with size → assign three rapid-fire m interpretation exercises (given m, state: real/virtual? erect/inverted? larger/smaller?) before mastery gate.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 237,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Concrete Anchor: Sign Convention",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Concrete Anchor: Sign Convention\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 241,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Conflict Evidence: MC-1",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Evidence: MC-1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 244,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Worked Examples walkthrough",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Worked Examples walkthrough\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 247,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Replacement: MC-2",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Replacement: MC-2\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 250,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Check-in",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 253,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Mastery Probe + P68 + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Probe + P68 + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P51\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 257,
+        "endLine": 329
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** A concave mirror has f = −30 cm. An object is at u = −45 cm. Find v, m, and state: real or virtual? Erect or inverted? Magnified or diminished?\n\n**P-2 (Developing — identifies S6):** A convex mirror has radius of curvature R = 40 cm. An object stands 60 cm in front of it. Find (a) focal length, (b) image distance, (c) magnification. Explain why the image is always virtual for a convex mirror using the mirror formula.\n\n**P-3 (Proficient — identifies S9):** A concave mirror is used as a make-up mirror. If the person's face is 15 cm from the mirror and the focal length is −20 cm, find (a) image position, (b) magnification. Draw a qualitative ray diagram. Show that for any object inside the focal length, the concave mirror formula always gives a positive v (virtual image).\n\n**P-4 (Mastery gate — confirms S9):** (a) An object is placed between the focus and pole of a concave mirror (f = −12 cm, u = −8 cm). Find v and m, classify the image. (b) A convex mirror (f = +15 cm) is used as a security mirror. For an object 3 m away, find image position and the angular field of view advantage over a plane mirror of equal size. (c) Derive the result that, for a concave mirror, the image is real if and only if |u| > |f|. Required: 3/3 at ≥0.80 accuracy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 265,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "phys.opt.mirrors/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.opt.mirrors",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: C (difficulty 4, accelerated P track).\n\n**TA-1 [P01 — Session Open]**\n\"Look into the back of a spoon (convex side). What do you see? Now look into the concave side — first close, then at arm's length. Describe how the image changes. Today we build the mathematical model that explains this: the mirror formula 1/v + 1/u = 1/f. Starting question: for a concave mirror, can the image ever be upright? Write your prediction.\"\n[Diagnose S0/S3 — checks whether student thinks concave always inverts]\n\n**TA-2 [P06 — Concrete Anchor: Sign Convention]**\n\"[Display: New Cartesian coordinate system with mirror at origin, principal axis, C, F, P labeled.] Sign rule: distances measured from pole P. In the direction of incident light (left to right): positive. Against incident light: negative. Real object: u is always negative. Concave mirror: f negative (F is on same side as object). Convex mirror: f positive (F is behind mirror). Practice: u = −30 cm, f = −20 cm. Before computing, predict: will the image be real or virtual?\"\n\n**TA-3 [P28 — Conflict Evidence: MC-1]**\n\"Concave always real? Let's test. f = −20 cm. Object at u = −10 cm (inside focal length). Mirror formula: 1/v = 1/f − 1/u = 1/(−20) − 1/(−10) = −0.05 + 0.10 = +0.05 → v = +20 cm. Positive v = behind the mirror = virtual. And m = −(+20)/(−10) = +2 → erect and 2× magnified. This IS the shaving mirror. So: object outside F → real image; object inside F → virtual, erect, magnified. The focal point is the dividing line.\" [→ MC-1 discrimination pairs]\n\n**TA-4 [P06 — Worked Examples walkthrough]**\n\"Now let's work through all three cases: beyond C → real, inverted, diminished (WE-1); convex → always virtual, erect, diminished (WE-2); finding object position for required m (WE-3). Take WE-1 first — complete the calculation of v and m.\" [→ WE-1 student practice → WE-2 → WE-3]\n\n**TA-5 [P31 — Replacement: MC-2]**\n\"Magnification trap: m = −2. Students often say 'the image is half size.' Let's unpack: m = −v/u. Sign: negative → inverted. Magnitude: |m| = 2 → twice the object height. So m = −2 means inverted AND 2× bigger. Always separate: sign = orientation, magnitude = size ratio. Quick drill: what do m = −0.5, m = +3, and m = −1 each tell you?\" [→ MC-2 drill]\n\n**TA-6 [P51 — Check-in]**\n\"Ray diagram check: For a concave mirror with f = −10 cm and object at u = −25 cm, draw (or describe) the three standard rays and locate the image. Is the image between F and C, beyond C, or at C? Real or virtual? Check numerically.\"\n[Confirms S6 → S9 transition; catches students who solve algebraically without geometric intuition]\n\n**TA-7 [P36 — Mastery Probe + P68 + P85 + P91]**\n\"Final probe: (1) A concave mirror (f = −15 cm) has object at u = −10 cm. Find v, m, and describe the image fully. (2) A convex mirror (f = +30 cm) has object at u = −90 cm. Find image position, m, and explain the practical advantage over a plane mirror for this application. (3) A concave mirror (f = −25 cm) must produce an inverted image magnified 3×. Find u and v.\n\nClosing thought: The 6.5-meter primary mirror of the James Webb Space Telescope is composed of 18 hexagonal concave gold-coated beryllium segments working together as one concave mirror — collecting infrared light from galaxies 13.6 billion light-years away.\n\nSpaced retrieval: +1 day (sign convention and mirror formula setup), +4 days (magnification interpretation — sign vs. magnitude), +2 weeks (full image classification table for concave mirror).\"\n\n[P91 gate: threshold 0.80. Failure → review NC sign convention and concave virtual-image case before re-probe.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.mirrors.md",
+        "startLine": 230,
+        "endLine": 265
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

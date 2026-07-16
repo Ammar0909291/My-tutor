@@ -1,0 +1,380 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.tension-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.tension",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2606cbde48f6ee4bb72e7db9370e5274d4497a6d562f2a1f1e72e6daa846f3f1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.tension.md": "sha256:710088f3d47c750ef23dfa1510686f02e9a295f6927735e2aa0b490f2d826427"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.tension",
+    "name": "Tension",
+    "difficultyRaw": "developing (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.free-body-diagram"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.tension-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.tension (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.tension.md": "sha256:710088f3d47c750ef23dfa1510686f02e9a295f6927735e2aa0b490f2d826427"
+      },
+      "contentHash": "sha256:d3215c0ebae9b9bc875d5badc45196e11d02a5f511a7b8c9857c30baa52c857e",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.tension.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.tension.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.tension\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.tension.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.tension.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.tension\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.tension.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.tension.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.tension\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.tension.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.tension.md#TA-4 (addresses MC-TENSION-EQUALS-WEIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.tension\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.tension.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.tension.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.tension\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.tension.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.tension.md#TA-6 (addresses MC-TENSION-EQUALS-WEIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.tension\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.tension/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.tension",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States that tension is a **pull** transmitted along a rope or string — it acts on the object attached to the rope end, pointing **away from the object along the rope**; ropes cannot push.\n2. For a **massless, inextensible rope over a frictionless pulley**, applies the fact that tension is the **same magnitude throughout** the rope, and uses this to write equations for each body in a connected system separately.\n3. Solves a **two-body connected-system** (e.g. Atwood machine or horizontally-linked blocks) by (a) drawing a free-body diagram for each body, (b) writing ΣF = ma for each, and (c) solving the simultaneous equations for T and a.\n\nA student who sets tension equal to the weight of the hanging mass (true only at equilibrium, not when the system accelerates), or who writes a single equation for two objects as if they are one block without checking sign conventions, has **NOT** achieved mastery — both errors collapse in Atwood-machine and multi-body problems at every subsequent level.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/misconception/MC-TENSION-EQUALS-WEIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.tension",
+      "title": "Tension equals the weight of the hanging mass",
+      "content": "### MC-TENSION-EQUALS-WEIGHT: \"Tension equals the weight of the hanging mass\"\ntrigger_signal: student sets T = m_hanging × g in a system that is clearly accelerating.\nconflict_evidence [P28]: \"You said T = m₂g = 50 N for the 5 kg mass. Apply ΣF to that mass: m₂g − T = m₂a → 50 − 50 = 5a → a = 0. The system has zero acceleration. But the 5 kg is heavier — it should accelerate downward. If T = m₂g, the system can't move. We see it does move, so T < m₂g.\"\nbridge_text [P30]: \"T = mg is only true when the system is in equilibrium (a = 0) — e.g. a hanging mass at rest. When the system accelerates, the net force on the mass drives that acceleration: ΣF = ma. Rearrange to find T: T = m(g ± a), which is different from mg unless a = 0.\"\nreplacement_text [P31]: \"Write ΣF = ma for each body separately. Solve for T from the equations — never assume T = mg when the system moves.\"\ndiscrimination_pairs [P33]: [\"hanging mass at rest: T = mg ✓ (a = 0)\", \"hanging mass accelerating up: T = m(g + a) > mg ✓\", \"Atwood machine accelerating: T between m₁g and m₂g ✓\", \"setting T = m₂g in Atwood: ✗ forces a = 0\"]\ns6_path: skip P28; use \"if T = mg, does the mass speed up or stay still?\" as a gentle shared question to surface the contradiction, then P30.",
+      "localKey": "MC-TENSION-EQUALS-WEIGHT",
+      "language": "en",
+      "refs": [
+        "MC-TENSION-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/misconception/MC-ROPE-PUSHES",
+      "kind": "misconception",
+      "conceptId": "phys.mech.tension",
+      "title": "A rope can exert a pushing (compressive) force",
+      "content": "### MC-ROPE-PUSHES: \"A rope can exert a pushing (compressive) force\"\ntrigger_signal: student draws a tension arrow pointing toward the object (pushing it) rather than away from it along the rope.\nconflict_evidence [P28]: \"Lay the rope on a table and try to push a block with it. The rope immediately goes slack — it can't transmit a push, only a pull. A rope under compression has zero tension; it just buckles. All rope forces are pulls: they act away from the object, along the rope, toward the attachment point.\"\nbridge_text [P30]: \"Tension is always a pull. Every tension arrow must point away from the object, along the rope. If you ever draw a tension arrow pointing toward the object, you are drawing a push — impossible for a rope. A rod can push; a rope cannot.\"\nreplacement_text [P31]: \"Tension arrows point away from the object. No exceptions for ropes. If the problem needs a push, there is a rod or rigid contact, not a rope.\"\ndiscrimination_pairs [P33]: [\"hanging weight: T arrow points up (away from weight, along rope) ✓\", \"block pulled by rope: T arrow points toward the rope/anchor end ✓\", \"tension arrow pointing toward the object: ✗ that's a push, impossible for a rope\"]\ns6_path: skip P28; physically demonstrate a limp rope going slack when pushed, then P30.",
+      "localKey": "MC-ROPE-PUSHES",
+      "language": "en",
+      "refs": [
+        "MC-ROPE-PUSHES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.tension",
+      "title": "A Rope Pulls — Never Pushes",
+      "content": "{\"id\":\"TA-1\",\"title\":\"A Rope Pulls — Never Pushes\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.tension",
+      "title": "Constant T in a Massless Rope",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Constant T in a Massless Rope\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.tension",
+      "title": "Two Bodies, Two Equations",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Two Bodies, Two Equations\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.tension",
+      "title": "Misconception Probe — T ≠ Weight When Accelerating",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — T ≠ Weight When Accelerating\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-TENSION-EQUALS-WEIGHT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-TENSION-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.tension",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.tension",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-TENSION-EQUALS-WEIGHT\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-TENSION-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.tension",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"On mass A's diagram (connected to B by rope), tension points: toward B or away from B?\" | CORRECT = away from A, toward B (a pull) |\n| P74 (classify) | \"Can a rope exert a compression force on a block?\" | CORRECT = no; only tension (pull) |\n| P75 (boundary) | \"When is T = mg for a hanging mass? When is T ≠ mg?\" | CORRECT = equilibrium (a=0); T ≠ mg when accelerating |\n| P76 (transfer) | \"6 kg + 4 kg linked on frictionless surface, pulled by 12 N — find a and T.\" | CORRECT = a = 1.2 m/s²; T = 4.8 N |\n| P77 (generate) | \"Set up the two-equation system for Atwood m₁=2, m₂=7 kg.\" | CORRECT = m₂g−T=m₂a; T−m₁g=m₁a labelled |\n| P78 (explain) | \"Why draw separate diagrams? Why is T ≠ weight in an accelerating system?\" | CORRECT = each body has its own equation; T ≠ mg unless a=0 |\n| P79 (predict) | \"Two linked blocks, 6+4 kg, 12 N pull — is T greater or less than 12 N?\" | CORRECT = less; T = 4.8 N |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.tension",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No formal model of tension | Cannot describe what a rope \"does\" to each attached object | Protocol A (Concrete) |\n| S1 | \"Tension = weight of hanging mass\" rule | Sets T = mg for the hanging block in all cases | Protocol B (Counterexample-first) |\n| S2-TENSION-EQUALS-WEIGHT | Treats T = mg_hanging as always true | Gives T = m₂g even when the system accelerates | Misconception Engine → Protocol C |\n| S2-ROPE-PUSHES | Treats a rope as able to push | Draws a compression arrow from a rope | Misconception Engine → Protocol C |\n| S3 | Understands pull; fails to separate bodies | Writes one equation for both objects as a unit; wrong T | Protocol C (Guided Questioning) |\n| S6 | Anxiety at simultaneous equations for two bodies | Freezes at writing two separate equations | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.tension",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"A rope connects two objects. What does it do to each one, and which way does the tension pull on each?\"\n  \"It pulls each object toward the other — away from the object along the rope\" → S3. Enter Protocol C.\n  \"The tension is equal to the weight of the heavier object / the hanging mass\" → S1. Enter Protocol B.\n  Cannot describe a tension force → DB-2.\n\nDB-2 (misconception probe):\n\"Two masses hang on either side of a pulley — 3 kg on the left, 5 kg on the right. The system accelerates. Is the tension in the rope equal to 5g (the heavier mass's weight)?  Why or why not?\"\n  \"No — if T = 5g, the 5 kg mass has net force zero and can't accelerate; T must be between 3g and 5g\" → S3. Enter Protocol C.\n  \"Yes — tension = weight of the heavier mass\" → SIGNAL:MISCONCEPTION:MC-TENSION-EQUALS-WEIGHT. Enter Misconception Engine.\n  Pause / cannot reason → S0. Enter Protocol A.\n  Distress → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with tension and connected-system problems — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-TENSION-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.tension/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.tension",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.free-body-diagram`):\n\"For a hanging mass connected to a rope, draw its free-body diagram and name each force.\"\n  Cannot draw weight down + tension up → flag PREREQ-GAP-FBD.\n  In-session minimum repair: one P06 anchor (hanging mass diagram: T up, mg down) — then resume. Deep gap → schedule `phys.mech.free-body-diagram` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.tension.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

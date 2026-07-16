@@ -23,6 +23,7 @@ export type { AssetNode, EducationalPackage }
  *  A package produced by an unknown compiler is REJECTED, never guessed at. */
 export const SUPPORTED_PACKAGE_COMPILERS: readonly string[] = [
   'blueprint-frontend@0.2.0-phase1.5',
+  'blueprint-frontend@0.3.0-physics-migration',
 ]
 
 export type PackageLoadResult =

@@ -1,0 +1,404 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.length-contraction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.length-contraction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ae1718aba4a795dacfe4976c0949514be5cd4a3952db20600c4ca2cc53b09363",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.length-contraction.md": "sha256:e12678b752b5c591a2fda1d5fed2737bed4910aab192cfd1f1e58c4ef896c963"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.rel.length-contraction",
+    "name": "Length Contraction",
+    "difficultyRaw": "Advanced",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.rel.time-dilation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.length-contraction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.length-contraction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.length-contraction.md": "sha256:e12678b752b5c591a2fda1d5fed2737bed4910aab192cfd1f1e58c4ef896c963"
+      },
+      "contentHash": "sha256:ba8a901c04e364ff63adb84290a7b0d536cf66dd81d2f87a053256f606a75019",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.length-contraction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.length-contraction.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.length-contraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.length-contraction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.length-contraction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.length-contraction.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.length-contraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.length-contraction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.length-contraction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.length-contraction.md#TA-3 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.length-contraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.length-contraction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.length-contraction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.length-contraction.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.length-contraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.length-contraction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.length-contraction/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Length Contraction — core explanation",
+      "content": "**One-sentence definition:** A moving object is measured to be shorter along the direction of motion by a factor of 1/γ relative to its proper (rest) length: L = L₀/γ = L₀√(1 − v²/c²).\n\n**The core insight:** Length contraction is the spatial consequence of time dilation. If a moving clock runs slow (time dilation), then a moving ruler must contract — otherwise distances traveled would be inconsistent between frames. Length contraction and time dilation are two sides of the same spacetime coin: the invariant spacetime interval.\n\n**Conceptual chain:**\n1. Time dilation: moving clock ticks slowly by factor γ: Δt = γΔτ.\n2. Consider a spaceship of proper length L₀ traveling at speed v.\n3. In the ground frame: the ship takes time Δt = L₀/v to pass a ground observer (if ship were not contracted).\n4. But the ship's clock runs slow: ship's travel time is Δτ = Δt/γ.\n5. From the ship's frame: the distance to the destination is covered in time Δτ at speed v → L = vΔτ = L₀/γ.\n6. The contracted length: L = L₀/γ = L₀√(1 − v²/c²).\n7. Key features: contraction only along direction of motion; perpendicular dimensions unchanged; symmetric between frames; proper length is the maximum (rest frame measurement).\n\n**Central equations:**\n- Length contraction: L = L₀/γ = L₀√(1 − v²/c²)\n- Lorentz factor: γ = 1/√(1 − v²/c²) ≥ 1\n- Direction: contraction only along the direction of motion\n- Proper length L₀: length measured in frame where object is at rest\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 18,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Length contraction physically compresses the object",
+      "content": "### MC-1: \"Length contraction physically compresses the object\"\n- **Probe:** \"If you ride on the spaceship, does your body feel compressed?\"\n- **Characteristic phrase:** \"The ship is squished as it speeds up.\"\n- **Trigger:** The word \"contraction\" implies physical compression to students with everyday intuition.\n- **Conflict evidence [P28]:** In the ship's rest frame, the ship has its full proper length L₀ — no compression, no distortion, no force. An astronaut on board measures the ship as normal. The contraction is only measured by the outside frame.\n- **Bridge [P30]:** \"Length contraction is a consequence of how different frames disagree about simultaneity — about when they measure the positions of the ship's endpoints. The ship itself is not compressed; its length measurement differs between frames.\"\n- **Replacement [P31]:** Length contraction is a measurement effect: two frames disagree on the ship's length because they disagree on which events constitute \"measuring both endpoints at the same time.\" Neither frame is wrong; both are correct in their own reference frame.\n- **Discrimination pairs [P33]:** A sound wave compresses air physically (the air molecules are actually closer together). A moving spaceship is not physically compressed — atoms in the ship are not closer together in the ship's frame.\n- **S6 repair path:** Solve in both frames. In ship's frame: ship has length L₀, everything normal. In ground frame: ship has length L = L₀/γ. Both analyses predict the same observable outcomes (e.g., time to pass a ground observer).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Contraction applies to all dimensions",
+      "content": "### MC-2: \"Contraction applies to all dimensions\"\n- **Probe:** \"A moving sphere — does it appear as a pancake or an egg?\"\n- **Characteristic phrase:** \"The whole object shrinks in all directions.\"\n- **Trigger:** The general notion \"at high speeds things shrink\" doesn't specify direction.\n- **Conflict evidence [P28]:** Lorentz transform derivation: x' = γ(x − vt) contracts the x-direction. y' = y and z' = z — no change in perpendicular directions. This is a prediction of special relativity confirmed by the internal consistency of Maxwell's equations.\n- **Bridge [P30]:** \"Contraction occurs because moving and stationary frames disagree about time. This disagreement only affects the direction of motion — time and distance along the direction of travel are coupled (x and t mix in the Lorentz transform). Perpendicular directions are untouched.\"\n- **Replacement [P31]:** Length contraction is strictly longitudinal. A sphere moving along x-axis appears as an oblate spheroid (flattened in x, unchanged in y and z): it looks like a pancake, not a smaller sphere.\n- **Discrimination pairs [P33]:** Squeezing a ball (isotropic pressure) contracts all dimensions. Special relativity (anisotropic: v is in one direction) contracts only along v.\n- **S6 repair path:** Write the Lorentz transform explicitly: (t', x', y', z'). Point to y' = y, z' = z. These are literal equalities — no contraction perpendicular to motion.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "L₀ is the 'apparent' length, L is the 'real' length",
+      "content": "### MC-3: \"L₀ is the 'apparent' length, L is the 'real' length\"\n- **Probe:** \"Which length is the true length of the spaceship — L₀ or L?\"\n- **Characteristic phrase:** \"L₀ is what the ship looks like when it's not moving; L is its true length.\"\n- **Trigger:** \"Proper\" sounds like it means official or real; students invert it and think the contracted length is somehow more real.\n- **Conflict evidence [P28]:** The proper length L₀ is measured in the rest frame and is the maximum length any frame measures for that object. It is an intrinsic property of the object. The contracted length L < L₀ is measured by a frame in which the object is moving — it is equally valid but smaller.\n- **Bridge [P30]:** \"'Proper' means 'belonging to the object' (from French 'propre' = own). The proper length is the object's length in its own rest frame — the most natural measurement. The contracted length is equally real to the observer who measures it.\"\n- **Replacement [P31]:** Both lengths are equally \"real\" in their respective frames. L₀ is the maximum; L ≤ L₀ for any moving frame. Neither is privileged; both are correct within their frame.\n- **Discrimination pairs [P33]:** A mountain's height in local coordinates vs. its projected height on a 2D map are both real measurements; neither is the \"true\" height while the other is \"apparent.\" Context (frame) determines the value.\n- **S6 repair path:** Emphasize that L₀ is a rest-frame measurement (special, because only one frame is the rest frame of the object). L varies with v and is smaller for faster frames. The invariant spacetime interval, not L₀ or L, is the truly frame-independent quantity.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "If I measure your ruler as shorter, you measure mine as longer",
+      "content": "### MC-4: \"If I measure your ruler as shorter, you measure mine as longer\"\n- **Probe:** \"Frame A measures frame B's 1-meter ruler as 0.5 m. Does frame B measure frame A's ruler as 2 m?\"\n- **Characteristic phrase:** \"If one is contracted, the other must be expanded to compensate.\"\n- **Trigger:** Students expect conservation-like symmetry: if something shrinks in one place, it must grow somewhere else.\n- **Conflict evidence [P28]:** By symmetry of the Lorentz transform, each frame measures the other's rulers as equally contracted by the same factor 1/γ. If v = 0.87c, A measures B's 1 m ruler as 0.5 m, AND B measures A's 1 m ruler as 0.5 m. Both see the other as contracted.\n- **Bridge [P30]:** \"The symmetry of special relativity means neither frame is preferred. Both A and B are entitled to say 'I am at rest and you are moving.' Both therefore measure the other's rulers as contracted. The paradox resolves when you account for the relativity of simultaneity: the two measurements of the rod's endpoints are not simultaneous in the same way in both frames.\"\n- **Replacement [P31]:** Length contraction is symmetric: each frame measures the other's lengths as contracted. There is no reciprocal expansion. The invariant spacetime interval ensures consistency.\n- **Discrimination pairs [P33]:** Doppler effect is symmetric too: if A hears B's siren at a higher frequency, B hears A's siren at a lower frequency — not at a higher frequency. Symmetry doesn't mean inverse.\n- **S6 repair path:** Work through the symmetric length contraction scenario step by step, emphasizing that each frame applies the same formula (L = L₀/γ) to the other's ruler.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "PROBE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"PROBE\",\"primitives\":[],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "DERIVE + CONSOLIDATE",
+      "content": "{\"id\":\"TA-4\",\"title\":\"DERIVE + CONSOLIDATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly applies L = L₀/γ, identifies proper length, restricts contraction to the longitudinal direction, and explains the muon survival from both frames. Score ≥ 80%.\n\n**FA-1 — Calculation:**\n*Q: A spaceship has proper length 500 m. It travels at v = 0.6c. What length does a ground observer measure?*\nExpected: γ = 1/√(1 − 0.36) = 1/√0.64 = 1/0.8 = 1.25. L = 500/1.25 = 400 m.\nThreshold: Correct γ calculation and L = 400 m (±5 m).\n\n**FA-2 — Directionality:**\n*Q: The same spaceship (500 m long, 50 m wide) travels at v = 0.6c. What are the contracted dimensions?*\nExpected: Length (along motion) contracts to 400 m. Width remains 50 m unchanged.\nThreshold: Must correctly state width is unchanged.\n\n**FA-3 — Proper length identification:**\n*Q: Observer A measures a moving rod as 3 m. Observer B, at rest relative to the rod, measures it as 5 m. Which measurement is the proper length? What is γ?*\nExpected: L₀ = 5 m (rest frame = proper length). L = 3 m. γ = L₀/L = 5/3 ≈ 1.67.\nThreshold: Correct identification of proper length and γ.\n\n**FA-4 — Muon survival (dual frames):**\n*Q: A muon travels at v = 0.995c (γ ≈ 10). Its proper lifetime is 2.2 μs. (a) How far does it travel in the lab frame? (b) In the muon frame, what is the contracted thickness of the 10 km atmosphere?*\nExpected: (a) d = v × γτ = 0.995c × 10 × 2.2 μs ≈ 6.6 km — reaches sea level from 10 km altitude if created at ~7 km. (b) L = 10 km / 10 = 1 km.\nThreshold: Correct application of time dilation in (a) and length contraction in (b), with consistent answers.\n\n**Confidence calibration:** After FA-1, student rates confidence. Students who solve correctly with low confidence (<50%) are asked: \"What step were you uncertain about?\" — targeted reassurance on the specific step.\n\n**Delayed retrieval (session + 3):** \"A proton at 0.9c travels 1 m in the lab. How far does the proton's ruler measure the same 1 m track?\" Expected: L = 1 m / γ = 1 × √(1−0.81) = 1 × √0.19 ≈ 0.44 m.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 206,
+        "endLine": 236
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Ruler analogy: hold a ruler at arm's length facing you (full length L₀). Now tilt it away at an angle — it appears shorter. This is a 2D spatial analogy to the 4D spacetime rotation that causes length contraction.\n- Muon scenario (inverted from time dilation): muons created at 10 km altitude reach sea level. From the muon's frame, the atmosphere is contracted from 10 km to ~640 m — that's why the muon survives; it only has to traverse 640 m in its lifetime.\n- Garage paradox (physical setup): a 20 m pole carried at high speed fits inside a 10 m garage. How? The pole contracts to 10 m in the garage frame — momentarily fits.\n\n### Representational (Iconic)\n- Spacetime diagram: worldlines of the front and rear of a moving object. The spatial length at any moment (horizontal slice) is shorter for the moving object than in its rest frame.\n- Side-by-side illustration: (left) spaceship at rest, length L₀; (right) same spaceship at v = 0.87c, length L₀/2.\n- Direction specificity diagram: moving rocket is contracted in the direction of travel (front-to-back); width and height are unchanged.\n- Plot of L/L₀ vs. v/c: curve starting at 1.0 for v=0, declining toward 0 as v → c. Mark v=0.87c (L = 0.5L₀), v=0.99c (L = 0.14L₀).\n\n### Abstract (Symbolic)\n- Derive from time dilation: from moving frame, distance = v × proper time = v × (Δt/γ) = L₀/γ.\n- Alternative derivation: from spacetime interval invariance. Proper length is the spatial extent measured simultaneously in the rest frame. A Lorentz boost gives L = L₀/γ.\n- Note: \"simultaneously\" is frame-dependent. The length measurement requires two simultaneous position readings of the object's endpoints — simultaneity is relative, which is why contraction occurs.\n- Invariant interval: (Δs)² = (cΔt)² − (Δx)² is the same in all inertial frames. This is the underlying reason both time dilation and length contraction occur and are consistent.\n\n### Transfer (+)\n- Muon cosmic ray survival (quantitative check): L = 10 km/γ. At v = 0.9998c, γ ≈ 50; L ≈ 200 m. Muon survives the 200 m traverse in its lifetime.\n- GPS: relativistic corrections include length contraction effects in satellite orbital calculations.\n- Heavy-ion colliders: gold nuclei traveling at v ≈ 0.9999c appear contracted to pancake shapes — relevant for collision geometry.\n- Terrell rotation: at high speed, extended objects appear rotated (not just contracted) due to finite light travel time — a subtlety beyond the textbook calculation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 41,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — \"The object is physically crushed\":** Students think the object is actually compressed — atoms are pushed together. In fact, the object is undisturbed in its own rest frame; contraction is a measurement effect due to the relativity of simultaneity.\n\n**Mode 2 — Applying contraction to both directions:** Students apply the factor 1/γ to the width and height of the moving object as well. Length contraction is strictly longitudinal (along the direction of motion); transverse dimensions are unchanged.\n\n**Mode 3 — Confusing proper length and contracted length:** Students don't know which frame gives L₀. The proper length L₀ is always the rest-frame measurement — the longest measurement of that dimension. Any moving frame gives a shorter length. Common error: students use L (contracted) as the \"real\" length and L₀ as the \"apparent\" one.\n\n**Mode 4 — Symmetry confusion:** Students expect that if A measures B's rod as contracted, then B measures A's rod as longer. In fact, both measure the other's rod as contracted — length contraction is symmetric, just like time dilation. This seems paradoxical but is consistent; the resolution requires careful attention to simultaneity.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 68,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Last time I told you that moving clocks run slow. Today I want to push on that — because here's a consequence that took even Einstein's contemporaries time to accept: moving rulers are shorter. Not appear shorter due to perspective. Not shorter because they're compressed. Actually, genuinely, measurably shorter — in the moving frame. Let's see why this has to be true.\"\n\n**At the derivation:**\n\"The spaceship crosses my lab in time Δt = L₀/v. That's simple. But the ship's own clock — which runs slow by γ — records only Δτ = L₀/(vγ). Now I switch frames. In the ship's frame, the ship is stationary. The lab is moving backward at speed v for time Δτ. The distance the lab front-wall covers is v × Δτ = L₀/γ. That distance is the ship's length as seen from the ship. But it's exactly L₀/γ — the contracted length. The formula didn't come from nowhere; it came from time dilation, which came from the two postulates. The whole structure is logically unavoidable.\"\n\n**At the garage paradox:**\n\"The pole is longer than the garage in the rest frame. It fits in the garage frame. Doesn't fit in the pole frame. Who's right? Both are right. The question 'does it fit simultaneously?' has a frame-dependent answer because 'simultaneously' is frame-dependent. This is not a contradiction. It's a demonstration that the concept of 'simultaneous fit' requires specifying a frame. No physics — no collision, no explosion — is paradoxical; what's frame-dependent is the description, not the outcome.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 193,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.rel.time-dilation first — length contraction cannot be motivated without the concept of proper time and γ. Do not proceed without γ being a familiar calculation.\n\n**S3:** Student can apply the formula but cannot explain why contraction occurs. Use Explanation C (simultaneity root cause) and the tilted ruler analogy. Emphasize: measuring a length requires defining \"simultaneous\" endpoints — and that definition is frame-dependent.\n\n**S6:** Student systematically applies contraction to all dimensions. Show Lorentz transform explicitly: y' = y, z' = z are equalities, not approximations. Ask student to compute the width of a moving sphere — should get the same value in both frames.\n\n**S9:** Introduce the Terrell rotation: at relativistic speeds, what you photographically see is not simply a contracted shape — finite light travel time from different parts of the object distorts the image into a rotation. Assign the student to derive the Terrell rotation angle θ = arcsin(v/c) for a simple rod geometry.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 236,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (L = L₀/γ, direction, proper length) + conceptual (simultaneity as root cause, dual-frame consistency).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"State the length contraction formula. Which frame gives the proper length? Which dimensions are affected?\"\n- Session + 3: \"A particle at v = 0.8c (γ = 5/3) moves through a 10 m detector. What length does the particle measure for the detector?\"\n- Session + 7: \"Explain the garage paradox: a 20 m pole at v = 0.87c (γ=2) 'fits' in a 10 m garage. How is this consistent with the pole measuring the garage as 5 m?\"\n\n**Interleaving partners:** phys.rel.time-dilation (prerequisite — both are time and space expressions of the same Lorentz transform), phys.rel.lorentz-transform (successor — unifies both effects), phys.rel.simultaneity (conceptual root — why contraction occurs).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 248,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Heavy-ion collisions (LHC): gold nuclei at 0.9999c appear as γ ~ 7000 contracted pancakes — collision geometry calculations depend on this.\n\n**Far transfer:** GPS satellite corrections: relativistic corrections to satellite orbital distances are essential for meter-level accuracy. Both time dilation (dominant) and length contraction (secondary) corrections are applied.\n\n**Structural abstraction:** \"Coordinate length depends on the frame.\" This transfers to general relativity (Schwarzschild metric: radial distances near black holes are frame-dependent) and to projective geometry (shadows and projections change apparent lengths without changing the object).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 261,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "phys.rel.length-contraction/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.rel.length-contraction",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.rel.time-dilation is necessary — both γ and the logic of proper vs. dilated time are needed to derive L = L₀/γ. phys.rel.simultaneity is also heavily referenced and should be explicitly prerequisite or co-requisite.\n- **Unlock readiness:** phys.rel.lorentz-transform can follow immediately — length contraction and time dilation are the two empirical inputs to the full Lorentz transform; students are ready after this concept.\n- **Difficulty calibration:** Advanced/apply is appropriate. The formula is simple; the conceptual content (simultaneity root, directionality, garage paradox, dual-frame consistency) is demanding and requires substantial discussion.\n- **Suggested lab:** PhET Relativity simulation (length contraction mode) or Lorentz transformation simulation. The muon survival calculation is a standard quantitative exercise — assign FA-4 as homework with full dual-frame calculation.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.length-contraction.md",
+        "startLine": 271,
+        "endLine": 281
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,431 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.brewsters-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.brewsters-law",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:50aa656ae7e3b35f8a590334dd0f62840494f52fda940fce9f22347932114206",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.brewsters-law.md": "sha256:b294bbc5dfb139bbcd3153785440b9f60155c9d220fe21087e93674e3d81e2c8"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.brewsters-law",
+    "name": "\"Brewster's Law and Polarization by Reflection\"",
+    "difficultyRaw": "label: advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.opt.polarization"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.brewsters-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.brewsters-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.brewsters-law.md": "sha256:b294bbc5dfb139bbcd3153785440b9f60155c9d220fe21087e93674e3d81e2c8"
+      },
+      "contentHash": "sha256:aade0037417e45630ab1dfa78bee82cb0dc06f82d1304a97c9f8ed93ff8d8074",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.brewsters-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.brewsters-law.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.brewsters-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.brewsters-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.brewsters-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.brewsters-law.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.brewsters-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.brewsters-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.brewsters-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.brewsters-law.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.brewsters-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.brewsters-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.brewsters-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.brewsters-law.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.brewsters-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.brewsters-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.brewsters-law.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.brewsters-law.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.brewsters-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.brewsters-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.brewsters-law.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.brewsters-law.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.brewsters-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.brewsters-law\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.brewsters-law.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.brewsters-law.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.brewsters-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.brewsters-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.brewsters-law/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "\"Brewster's Law and Polarization by Reflection\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nStand near a lake on a sunny day. At a steep angle looking down, you can see fish underwater — the glare is minimal. At a shallower angle (closer to horizontal), the lake's surface becomes a bright mirror-like sheet of glare — a reflection so strong it hides everything below. This glare is polarized light. At exactly Brewster's angle, the reflected ray is completely polarized (oscillating only horizontally) while the transmitted ray is only partially polarized. Polarized sunglasses, which block horizontal E-field oscillations, eliminate this glare. The angle at which complete polarization occurs depends only on the ratio of refractive indices of the two media.\n\n### Level 2 — Developing Understanding\n\n**Brewster's Law:**\n\nAt Brewster's angle θ_B, the reflected ray is COMPLETELY polarized perpendicular to the plane of incidence (s-polarized, or TE-polarized — E oscillates horizontally if incidence is in a vertical plane).\n\n**tan θ_B = n₂/n₁**\n\nFor air (n₁ = 1) → glass (n₂ = 1.5): tan θ_B = 1.5 → **θ_B ≈ 56.3°**\nFor air → water (n₂ = 1.33): tan θ_B = 1.33 → **θ_B ≈ 53.1°**\nFor air → diamond (n₂ = 2.42): tan θ_B = 2.42 → **θ_B ≈ 67.5°**\n\n**Geometric relationship at Brewster's angle:**\nAt θ_B, the reflected and refracted (transmitted) rays are perpendicular:\nθ_B + θ_r = 90°  (where θ_r is the refraction angle)\n\nThis can be derived: if θ_r = 90° − θ_B, Snell's Law gives:\nn₁ sin θ_B = n₂ sin θ_r = n₂ sin(90° − θ_B) = n₂ cos θ_B\n→ **tan θ_B = n₂/n₁** ✓\n\n**Polarization states:**\n- Reflected ray: fully s-polarized (E ⊥ plane of incidence)\n- Refracted ray: partially polarized (contains more s-polarized than p-polarized, but not purely polarized)\n- Degree of polarization increases through multiple glass plates (pile-of-plates polarizer)\n\n**Applications:**\n- Polarized sunglasses: transmission axis vertical → blocks horizontal (s-) polarized glare from horizontal surfaces\n- Laser physics: Brewster windows allow p-polarized light to pass with zero reflection loss (anti-reflection geometry)\n- Photography: circular polarizing filters eliminate Brewster-angle reflections from glass and water surfaces\n\n**Why the reflected ray is completely polarized at θ_B:**\nThe electromagnetic explanation (Fresnel equations): the p-polarized component (E in the plane of incidence) requires oscillating dipoles to radiate along their length. At θ_B, the reflected direction is exactly along the dipole oscillation axis — a dipole radiates zero power along its axis. So the p-polarized reflected ray has zero amplitude → only s-polarization is reflected.\n\n### Level 3 — Proficient Synthesis\n\n**Fresnel reflection coefficients (qualitative):**\nThe amplitude reflection coefficients for s and p polarizations differ:\n- r_s = (n₁cos θ_i − n₂cos θ_t) / (n₁cos θ_i + n₂cos θ_t) [never zero for n₁ ≠ n₂]\n- r_p = (n₂cos θ_i − n₁cos θ_t) / (n₂cos θ_i + n₁cos θ_t) [zero at Brewster's angle]\n\nAt θ_B: r_p = 0 because n₂cos θ_B = n₁cos θ_r and θ_B + θ_r = 90°.\n\n**Pile-of-plates polarizer:**\nA single surface at Brewster's angle partially polarizes the transmitted beam. After N glass plates (2N surfaces), the degree of polarization increases. The transmitted beam approaches full p-polarization as N → ∞. Useful for wavelengths where dichroic polarizers have poor performance (IR, UV).\n\n**Brewster angle from both sides:**\n- Air→glass at θ_B = arctan(n): angle measured from air side\n- Glass→air at θ_B' = arctan(1/n) = 90° − θ_B: angle measured from glass side\n- These are complementary: θ_B + θ_B' = 90°\n\n**Laser Brewster windows:**\nIn gas lasers, the laser tube ends with glass plates set at Brewster's angle. P-polarized light (E in the plane of incidence) passes with zero reflection at each surface. S-polarized light reflects significantly and undergoes higher loss. After multiple passes through the cavity, only p-polarized light oscillates → natural selection of one linear polarization.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 25,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": ": Finding Brewster's Angle",
+      "content": "### WE-1: Finding Brewster's Angle\n\n**Problem:** Light travels from air into the following materials. Find Brewster's angle for each:\n(a) Window glass (n = 1.52)\n(b) Water (n = 1.33)\n(c) A glass-water interface (light from glass n=1.52 into water n=1.33)\n\n**Solution:**\n\n**(a) Air → glass:**\ntan θ_B = n₂/n₁ = 1.52/1.00 = 1.52\n**θ_B = arctan(1.52) ≈ 56.7°**\n\nVerify: refracted angle θ_r = 90° − θ_B = 33.3°. Check with Snell's: sin(56.7°)/sin(33.3°) = 0.836/0.549 = 1.52 ✓\n\n**(b) Air → water:**\ntan θ_B = 1.33/1.00 = 1.33\n**θ_B = arctan(1.33) ≈ 53.1°**\n\n**(c) Glass → water:**\ntan θ_B = n₂/n₁ = 1.33/1.52 = 0.875\n**θ_B = arctan(0.875) ≈ 41.2°**\n\nNote: Brewster's angle at glass→water is smaller than at air→glass, and both reflected rays are fully s-polarized.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 86,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": ": Polarized Sunglasses and Glare Reduction",
+      "content": "### WE-2: Polarized Sunglasses and Glare Reduction\n\n**Problem:** Sunlight reflects off a smooth lake surface (n = 1.33) at the Brewster angle.\n(a) What is the Brewster angle for this surface?\n(b) The reflected light is 100% s-polarized (horizontal). Polarized sunglasses have their transmission axis vertical (transmits vertical/p-polarized E-field, blocks horizontal). What fraction of the reflected glare is blocked?\n(c) If 30% of the total reflected light is at Brewster's angle (s-polarized), and the remaining 70% is unpolarized (reflected at other angles), what fraction of total reflected light is blocked by the sunglasses?\n\n**Solution:**\n\n**(a) Brewster angle:**\ntan θ_B = 1.33/1.00 → **θ_B ≈ 53.1°**\n\n**(b) Blocking the Brewster-angle reflected light:**\nReflected light at θ_B is 100% s-polarized (horizontal). Sunglasses transmit vertical only → block all horizontal.\n**Fraction blocked = 100%** of the Brewster-angle reflected component.\n\n**(c) Total blocking:**\nBrewster component (100% s-polarized): 30% of total reflected → all 30% blocked.\nNon-Brewster component (unpolarized): 70% → sunglasses block 50% of this (the horizontal component) → blocked = 35%.\n\nTotal blocked = 30% + 35% = **65% of total reflected light blocked.**\nTotal transmitted = 35% of original.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 86,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": ": Brewster Window in a Laser",
+      "content": "### WE-3: Brewster Window in a Laser\n\n**Problem:** A He-Ne laser tube uses glass Brewster windows (n = 1.52). At each Brewster window, p-polarized light passes with zero reflection loss, while s-polarized light has reflectance R_s ≈ 0.15 (15%) per surface.\n(a) A round trip involves passing 4 Brewster surfaces (2 windows × 2 passes). After 1000 round trips, what fraction of the initial s-polarized power remains?\n(b) What fraction of p-polarized power remains after 1000 round trips?\n(c) Explain why He-Ne lasers emit linearly polarized light.\n\n**Solution:**\n\n**(a) S-polarized after 1000 round trips:**\nAt each of 4 surfaces per round trip: fraction transmitted = 1 − R_s = 1 − 0.15 = 0.85\nAfter 1 round trip: (0.85)⁴ = 0.522 (52.2% remaining)\nAfter 1000 round trips: (0.85)^{4000} = 0.85^{4000}\n\nThis is astronomically small: log₁₀(0.85^{4000}) = 4000 × log₁₀(0.85) = 4000 × (−0.0706) = −282.4\n(0.85)^{4000} = 10^{−282.4} ≈ **essentially zero**\n\n**(b) P-polarized after 1000 round trips:**\nZero reflection loss per surface: transmitted fraction = 1 − 0 = 1.00\nAfter 1000 round trips: (1.00)^{4000} = **1.00 = 100%** (no loss from the Brewster windows)\n\n**(c) Why linearly polarized emission:**\nThe laser cavity selects the polarization state with lowest loss. P-polarized light experiences zero reflection loss at Brewster windows → oscillates with near-100% efficiency. S-polarized light loses 15% per surface → after a few round trips, its intensity is negligibly small compared to p-polarized. Natural selection of p-polarization occurs without any active polarizer. Result: all He-Ne lasers with Brewster windows emit completely p-linearly polarized light.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 86,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY",
+      "content": "### MC-1: MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY\n\n**trigger_signal:** Student states \"at Brewster's angle, both reflected AND refracted rays are completely polarized\" or \"the refracted ray becomes pure p-polarized.\"\n\n**conflict_evidence [P28]:** The Fresnel equations show: at Brewster's angle, r_p = 0 (no p-reflection) → reflected ray contains only s-polarization (100% s-polarized). But the refracted ray contains ALL the p-polarized light that wasn't reflected PLUS most of the s-polarized light (most s is transmitted too, just not 100%). The refracted ray is partially polarized — it has more p than s, but is not purely p. Measurement: degree of polarization of refracted ray at θ_B for glass ≈ 0.38 (much less than 100%). Complete polarization of the refracted beam requires a \"pile of plates\" — many surfaces.\n\n**bridge_text [P30]:** At Brewster's angle, r_p = 0 means the p-component has NO reflected ray — ALL p-polarized light goes into the refracted beam. But plenty of s-polarized light also refracts (most of it does). So the refracted beam has a mix: 100% of the p + most of the s. It's richer in p-polarization but not pure p.\n\n**replacement_text [P31]:** At Brewster's angle: the REFLECTED ray is completely s-polarized (100%). The refracted ray is only PARTIALLY polarized — it contains all the p-component but also significant s-component. To produce a completely p-polarized transmitted beam, one needs multiple plates (pile-of-plates polarizer) or a birefringent crystal. Brewster's angle gives complete polarization only for the reflected ray.\n\n**discrimination_pairs [P33]:**\n- \"At Brewster's angle, the refracted ray is completely p-polarized\" → FALSE: it contains s-polarization too (just less than in the reflected ray).\n- \"At Brewster's angle, the reflected ray is completely s-polarized\" → TRUE: r_p = 0 → no p-component in reflected ray. ✓\n\n**s6_path:** If student fails \"which ray is completely polarized\" probe → Fresnel coefficient display (show r_p = 0 but r_s ≠ 0 at θ_B) + comparison of reflected vs. refracted polarization states before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS",
+      "content": "### MC-2: MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS\n\n**trigger_signal:** Student states \"polarized sunglasses eliminate all reflections from water and glass surfaces.\"\n\n**conflict_evidence [P28]:** Reflections at non-Brewster angles are NOT completely polarized — they are partially polarized or unpolarized. Polarized sunglasses block the horizontal (s-) component, but partial reflections at steep angles (normal incidence) are unpolarized → sunglasses only block half of these. Also, reflections from vertical surfaces (like a window reflecting a building across the street) may have vertically polarized components that sunglasses transmit. WE-2 part (c) showed only 65% of total reflected light is blocked by sunglasses, not 100%.\n\n**bridge_text [P30]:** Polarized sunglasses are optimized for the specific case: horizontal reflective surfaces (roads, water) viewed at angles near Brewster's angle. In that specific geometry, glare is almost completely eliminated. But other reflections (from walls, at very steep angles, from vertical surfaces) involve mixed polarization states and are only partially reduced.\n\n**replacement_text [P31]:** Polarized sunglasses are specifically effective against glare from horizontal surfaces (water, roads) viewed near Brewster's angle — there, reflected light is nearly completely s-polarized (horizontal), which the sunglasses block almost entirely. Reflections at other angles or from non-horizontal surfaces are only partially reduced. The sunglasses block the horizontal E-field component from ALL light — not just reflections — reducing overall intensity by ~50% for unpolarized and ~100% for horizontally polarized glare.\n\n**discrimination_pairs [P33]:**\n- \"Polarized sunglasses completely eliminate all reflected glare in all directions\" → FALSE: effective near Brewster's angle on horizontal surfaces; partial for other geometries.\n- \"Polarized sunglasses are effective at reducing road glare while driving because roads are nearly horizontal\" → TRUE: pavement glare at low sun angles ≈ Brewster angle (53°) → mostly horizontal polarization → sunglasses nearly eliminate it. ✓\n\n**s6_path:** If student thinks polarizers block all reflections → WE-2 (c) calculation showing only 65% blocked before mastery gate.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 222,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 226,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Conflict Evidence: MC-1",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Evidence: MC-1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 229,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Replacement: MC-2",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Replacement: MC-2\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 232,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Pictorial: geometric relationship",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Pictorial: geometric relationship\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 235,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Diagnostic: laser Brewster window",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Diagnostic: laser Brewster window\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 238,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Mastery Probe + P68 + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Probe + P68 + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P41\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 241,
+        "endLine": 313
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** (a) State Brewster's Law. (b) Find Brewster's angle for light hitting glass (n=1.6) from air. (c) Which polarization component is absent in the reflected ray at this angle?\n\n**P-2 (Developing — identifies S6):** Light hits a water surface (n=1.33) from air at Brewster's angle. (a) Find θ_B. (b) What is the angle between the reflected and refracted rays? Show this using geometry. (c) If the incident light is completely s-polarized (intensity I₀), what is the reflected intensity compared to normal-incidence reflection?\n\n**P-3 (Proficient — identifies S9):** A pile-of-plates polarizer consists of 4 glass plates (8 surfaces, each at Brewster's angle). For each surface: T_p = 1 (no p reflection), T_s = 0.85 (15% s reflection, 85% s transmission). (a) For an unpolarized beam I₀, find the ratio I_p/I_s after passing through all 8 surfaces. (b) Calculate the degree of polarization P = (I_p − I_s)/(I_p + I_s) of the transmitted beam.\n\n**P-4 (Mastery gate — confirms S9):** (a) Derive Brewster's Law from Snell's Law using the condition that reflected and refracted rays are perpendicular. (b) An optical glass (n=1.52) is used as a laser Brewster window. For s-polarized light, reflectance per surface R_s = [(n−1)/(n+1)]² at Brewster's angle. Calculate R_s and find the number of round trips after which s-polarized intensity drops to 1% of initial (4 surfaces per round trip). (c) Why is the Brewster angle for a glass→air surface the complement of the air→glass Brewster angle? Required: 3/3 at ≥0.80 accuracy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 249,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: C (difficulty 5, accelerated P track).\n\n**TA-1 [P01 — Session Open]**\n\"Why do polarized sunglasses eliminate glare from a lake but not from a white wall? And why are they designed with horizontal-blocking transmission axes rather than vertical? These two questions contain Brewster's Law. First: predict — at what angle to a water surface would glare be most strongly polarized? Why would it matter that light is at that specific angle?\"\n[Diagnose S0/S3 — does student know reflected light is polarized?]\n\n**TA-2 [P06 — Concrete Anchor]**\n\"[Display: light ray hitting glass surface at various angles — refracted and reflected rays shown with polarization state.] At any angle: both s and p components reflect and refract. At Brewster's angle: the p-component has zero reflection amplitude (dipole argument: reflected p-ray would be along the dipole's oscillation axis → zero radiation). Formula: tan θ_B = n₂/n₁. Reflected ray becomes 100% s-polarized. Refracted ray: still partially mixed.\" [→ WE-1]\n\n**TA-3 [P28 — Conflict Evidence: MC-1]**\n\"Which ray is completely polarized? Test: at Brewster's angle for glass (n=1.5), measure polarization of refracted ray. Result: degree of polarization ≈ 38%, not 100%. Now measure reflected ray: 100% s-polarized. The Fresnel equations show r_p = 0 → reflected p component = 0. But r_s ≠ 0 → s still partially reflects. Refracted ray = (all transmitted p) + (most transmitted s) → partially polarized. Only the REFLECTED ray achieves complete polarization at θ_B.\" [→ MC-1 discrimination pairs]\n\n**TA-4 [P31 — Replacement: MC-2]**\n\"Do polarized sunglasses block ALL reflections? Calculate: lake reflects at Brewster angle (53°) → 100% s-polarized → sunglasses block all of it. But light reflected at 20° (steep) → mostly unpolarized → sunglasses only block 50%. And vertical windows → p-polarized component is vertical → sunglasses transmit it. WE-2(c) shows 65% of typical mixed reflection is blocked — not 100%.\" [→ WE-2]\n\n**TA-5 [P06 — Pictorial: geometric relationship]**\n\"[Display: at Brewster angle, reflected ray and refracted ray are perpendicular (90° between them).] This is not a coincidence — it follows from Snell's Law when θ_B + θ_r = 90°. Derive: n₁ sinθ_B = n₂ sinθ_r = n₂ sin(90°−θ_B) = n₂ cosθ_B → tanθ_B = n₂/n₁. The perpendicularity of reflected and refracted rays is the geometric signature of Brewster's angle.\"\n\n**TA-6 [P41 — Diagnostic: laser Brewster window]**\n\"A He-Ne laser uses Brewster windows (n=1.52). S-polarized light loses 15% per surface; p-polarized loses 0%. 4 surfaces per round trip. After just 10 round trips, what fraction of s-polarized intensity remains? [Answer: (0.85)^{40} ≈ 0.002 = 0.2%.] After 100 round trips? [≈ 6×10⁻²⁷ ≈ 0.] Why does the laser naturally emit only p-polarized light? [→ WE-3 walkthrough]\"\n\n**TA-7 [P36 — Mastery Probe + P68 + P85 + P91]**\n\"Final probe: (1) Light hits a glass slab (n=1.60) from air at 58°. Is this greater or less than Brewster's angle? Calculate θ_B and determine the polarization state of the reflected ray. (2) Identify the Brewster angle at a glass-water boundary (n₁=1.50, n₂=1.33). (3) A polarized beam (horizontal E-field, I₀=100 W/m²) reflects off a horizontal water surface at exactly Brewster's angle. What intensity is reflected? What intensity is transmitted?\n\nClosing thought: Brewster published this law in 1815, before Maxwell's electromagnetic theory. He discovered empirically what was only explained physically decades later — that the geometry of dipole radiation forbids the p-polarized component from reflecting at one specific angle.\n\nSpaced retrieval: +1 day (tan θ_B = n₂/n₁ and which ray is completely polarized), +4 days (perpendicularity condition derivation), +2 weeks (pile-of-plates and laser Brewster window applications).\"\n\n[P91 gate: threshold 0.80. Failure → MC-1 \"which ray is fully polarized\" drill before re-probe.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 215,
+        "endLine": 249
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

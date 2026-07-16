@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.capacitance-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.capacitance",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4575ace5e6688dad2fb51416fffb7f6257ae5f376d7b12d8693ce57bfa3fd62e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.capacitance.md": "sha256:939de6f5305f6cf8775ea2536a74b6b1fd3c8e259831726bf983005087ebbb1b"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.capacitance",
+    "name": "Capacitance",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.em.electric-potential"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.capacitance-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.capacitance (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.capacitance.md": "sha256:939de6f5305f6cf8775ea2536a74b6b1fd3c8e259831726bf983005087ebbb1b"
+      },
+      "contentHash": "sha256:eeb287f6217eb50891da95d882d94efe40ed41b497dfbbec832c3027264285c0",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.capacitance.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.capacitance.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.capacitance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.capacitance\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.capacitance.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.capacitance.md#TA-2 (addresses MC-SERIES-CAPACITORS-ADD-DIRECTLY, MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.capacitance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.capacitance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.capacitance.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.capacitance.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.capacitance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.capacitance\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.capacitance.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.capacitance.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.capacitance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.capacitance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.capacitance.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.capacitance.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.capacitance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.capacitance\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.capacitance/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.capacitance",
+      "title": "Capacitance — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nA capacitor is like a tiny rechargeable bucket for electric charge — it can store charge and release it quickly. Two metal plates facing each other, separated by a small gap: charge one plate positive, the other negative, and energy is stored in the electric field between them. **Capacitance** is how much charge you can store per volt of potential difference: C = Q/V. A large capacitance means you can store a lot of charge at a low voltage. Capacitors smooth voltage fluctuations in power supplies, store energy for camera flashes, and filter signals in circuits.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**Definition:**\n$$C = \\frac{Q}{V}$$\n\nwhere Q is the charge on one plate and V is the potential difference between the plates. Units: farad (F) = C/V. 1 farad is enormous — typical capacitors are μF, nF, or pF.\n\n**Parallel-plate capacitor:**\n$$C = \\frac{\\varepsilon_0 A}{d}$$\n\nwhere A is the plate area, d is the plate separation. Increasing A or decreasing d increases C.\n\n**Derivation:** E = σ/ε₀ = Q/(ε₀A) (from Gauss's Law); V = Ed = Qd/(ε₀A); C = Q/V = ε₀A/d. ✓\n\n**Capacitors in combination:**\n- Parallel: C_eq = C₁ + C₂ + ... (same V; charges add)\n- Series: 1/C_eq = 1/C₁ + 1/C₂ + ... (same Q; voltages add)\n\n**Charging and energy:**\nWhen a capacitor is charged to voltage V, charge Q = CV is stored and energy U = ½CV² = ½QV = Q²/(2C) is stored in the electric field between the plates.\n\n**Field energy density:**\n$$u_E = \\frac{1}{2}\\varepsilon_0 E^2$$\n\nTotal energy: U = u_E × Volume = ½ε₀E² × (A·d) = ½ε₀(V/d)²(Ad) = ½ε₀V²A/d = ½CV² ✓\n\n**Other geometries:**\n- Spherical capacitor (inner radius a, outer b): C = 4πε₀ab/(b−a)\n- Cylindrical capacitor (length L, radii a, b): C = 2πε₀L/ln(b/a)\n- Isolated sphere of radius R: C = 4πε₀R (V = kQ/R → C = R/k = 4πε₀R)\n\n### Tier 3 — Formal\n\n**Capacitance from Poisson's equation:** For a known geometry, solve ∇²V = 0 between conductors with boundary conditions V₁ on one plate and V₂ on the other. Then C = Q/ΔV where Q = ε₀∮E·dA.\n\n**Time constant:** When connected to a resistance R, capacitor charges with τ = RC (see phys.em.rc-circuits).\n\n**Displacement current:** In a capacitor with changing V(t), the field between plates changes: ∂E/∂t ≠ 0. Maxwell added displacement current I_D = ε₀ d(EA)/dt = C dV/dt to Ampere's Law to maintain ∇·J + ∂ρ/∂t = 0. This predicts electromagnetic waves (Maxwell's equations → phys.em.electromagnetic-waves).\n\n**Capacitance and conformal mapping:** 2D capacitor geometries solved analytically via complex potential methods — important in microelectronics design.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 29,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.capacitance",
+      "title": "(Parallel plate — basic)",
+      "content": "### WE-1 (Parallel plate — basic)\n\n**Problem:** A parallel-plate capacitor has plates of area 0.04 m² separated by 2.0 mm. (a) Find C. (b) If connected to a 12 V battery, find Q and E between plates.\n\n**Worked solution:**\n\n*(a) Capacitance:*\n$$C = \\frac{\\varepsilon_0 A}{d} = \\frac{(8.854\\times10^{-12})(0.04)}{2.0\\times10^{-3}} = \\frac{3.542\\times10^{-13}}{2.0\\times10^{-3}} = 1.77\\times10^{-10}\\text{ F} = 177\\text{ pF}$$\n\n*(b) Charge and field:*\n$$Q = CV = (1.77\\times10^{-10})(12) = 2.12\\times10^{-9}\\text{ C} = 2.12\\text{ nC}$$\n$$E = \\frac{V}{d} = \\frac{12}{2.0\\times10^{-3}} = 6000\\text{ V/m} = 6.0\\text{ kV/m}$$\n\n**Answer:** C = 177 pF; Q = 2.12 nC; E = 6.0 kV/m\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 78,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.capacitance",
+      "title": "(Combination — series and parallel)",
+      "content": "### WE-2 (Combination — series and parallel)\n\n**Problem:** Three capacitors: C₁ = 4 μF, C₂ = 6 μF, C₃ = 3 μF. C₁ and C₂ are in parallel; this combination is in series with C₃. Find C_eq and total charge stored if V = 24 V.\n\n**Worked solution:**\n\n*Step 1 — Parallel combination of C₁ and C₂:*\nC₁₂ = C₁ + C₂ = 4 + 6 = 10 μF\n\n*Step 2 — Series with C₃:*\n$$\\frac{1}{C_\\text{eq}} = \\frac{1}{C_{12}} + \\frac{1}{C_3} = \\frac{1}{10} + \\frac{1}{3} = \\frac{3+10}{30} = \\frac{13}{30}$$\n$$C_\\text{eq} = \\frac{30}{13} \\approx 2.31\\text{ μF}$$\n\n*Step 3 — Total charge:*\nQ = C_eq × V = (2.31×10⁻⁶)(24) = **55.4 μC**\n\n**Answer:** C_eq = 2.31 μF; Q = 55.4 μC\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 78,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.capacitance",
+      "title": "(Energy stored)",
+      "content": "### WE-3 (Energy stored)\n\n**Problem:** A 50 μF capacitor is charged to 200 V. (a) Find stored energy. (b) The capacitor is disconnected from the battery and connected to an uncharged 50 μF capacitor. Find the final voltage and energy, and explain the energy discrepancy.\n\n**Worked solution:**\n\n*(a) Initial energy:*\n$$U_i = \\frac{1}{2}CV^2 = \\frac{1}{2}(50\\times10^{-6})(200)^2 = \\frac{1}{2}(50\\times10^{-6})(40000) = 1.0\\text{ J}$$\n\n*(b) After connecting to second capacitor:*\nCharge is conserved: Q_i = CV = (50×10⁻⁶)(200) = 0.01 C\nNew C_eq = 50 + 50 = 100 μF (parallel)\nNew V_f = Q_i/C_eq = 0.01/(100×10⁻⁶) = 100 V\n\nFinal energy: U_f = ½C_eq V_f² = ½(100×10⁻⁶)(100)² = ½(10⁻⁴)(10⁴) = 0.5 J\n\nEnergy lost: ΔU = 1.0 − 0.5 = 0.5 J (50% lost!)\n\nEnergy is dissipated as heat (and some as electromagnetic radiation) in the connecting wire — even a zero-resistance wire loses energy because charge redistribution is irreversible when two capacitors at different voltages are connected directly.\n\n**Answer:** V_f = 100 V; U_f = 0.5 J; 0.5 J dissipated in resistive/radiative losses.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 78,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/misconception/MC-SERIES-CAPACITORS-ADD-DIRECTLY",
+      "kind": "misconception",
+      "conceptId": "phys.em.capacitance",
+      "title": "**Trigger signal:** Student applies C_eq = C₁ + C₂ for capacitors in series (confusing with resistors in parallel or capacitors in parallel).",
+      "content": "### MC-SERIES-CAPACITORS-ADD-DIRECTLY\n\n**Trigger signal:** Student applies C_eq = C₁ + C₂ for capacitors in series (confusing with resistors in parallel or capacitors in parallel).\n\n**Conflict evidence [P28]:** \"For two 4 μF capacitors in series: incorrect formula gives C_eq = 8 μF. Correct: 1/C_eq = 1/4 + 1/4 = 1/2 → C_eq = 2 μF. The series combination is always smaller than either capacitor. Physical reason: in series, the same charge Q must appear on each capacitor, but the voltage splits — more total voltage needed for the same charge, so effective C = Q/V_total is smaller.\"\n\n**Bridge text [P30]:** \"Series capacitors add like parallel resistors (reciprocals add). The mnemonic: capacitors combine opposite to resistors. Series capacitors → reciprocals add; parallel capacitors → values add directly. Physical reason: series → voltage splits (same Q), so the combined system requires more voltage → lower C. Parallel → charge adds (same V), so the combined system stores more charge → higher C.\"\n\n**Replacement text [P31]:** \"Capacitors in series: 1/C_eq = 1/C₁ + 1/C₂ + ... (reciprocals add; C_eq is smaller than each). Capacitors in parallel: C_eq = C₁ + C₂ + ... (values add; C_eq is larger than each). Series: same Q on each, voltages split. Parallel: same V across each, charges add. Remember: capacitors combine opposite to resistors.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Capacitors in series: 1/C_eq = 1/C₁ + 1/C₂\" | \"Capacitors in series: C_eq = C₁ + C₂\" |\n| \"Series C_eq < each individual C\" | \"Series C_eq > each individual C\" |\n| \"Capacitors in parallel: C_eq = C₁ + C₂\" | \"Capacitors in parallel: 1/C_eq = 1/C₁ + 1/C₂\" |\n\n**s6_path:** Draw the series circuit and emphasize: the same charge Q must flow onto each plate — so voltage adds V = V₁ + V₂, and C = Q/(V₁+V₂) is less than Q/V₁.\n\n---",
+      "localKey": "MC-SERIES-CAPACITORS-ADD-DIRECTLY",
+      "language": "en",
+      "refs": [
+        "MC-SERIES-CAPACITORS-ADD-DIRECTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/misconception/MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE",
+      "kind": "misconception",
+      "conceptId": "phys.em.capacitance",
+      "title": "**Trigger signal:** Student reasons \"more space between plates → more room for charge → higher capacitance.",
+      "content": "### MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE\n\n**Trigger signal:** Student reasons \"more space between plates → more room for charge → higher capacitance.\"\n\n**Conflict evidence [P28]:** \"C = ε₀A/d — C is inversely proportional to d. Double the separation → C halves. Physical reason: larger d means the field E = V/d for the same V is weaker, so less charge accumulates on the plates (Q = CV = ε₀AV/d decreases). Or: for the same charge Q, the voltage V = Qd/(ε₀A) is larger — a lower C = Q/V. Larger d = harder to maintain the field = less charge stored per volt.\"\n\n**Bridge text [P30]:** \"Closer plates → stronger electric field for the same voltage → more charge held per volt → higher capacitance. Farther plates → field is weaker for the same V → less charge → lower capacitance. Think of it as the plates attracting each other: closer → stronger attraction → more charge can be held.\"\n\n**Replacement text [P31]:** \"Capacitance C = ε₀A/d decreases when plate separation d increases. Closer plates: same voltage creates a stronger field → more charge stored → higher C. Farther plates: same voltage creates weaker field → less charge → lower C. Increasing A increases C (more plate area for charge); increasing d decreases C.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"C = ε₀A/d → C decreases as d increases\" | \"Larger gap → more room → higher capacitance\" |\n| \"Closer plates → stronger field for same V → more charge → higher C\" | \"Farther plates store more charge\" |\n| \"C proportional to A, inversely proportional to d\" | \"C proportional to d\" |\n\n**s6_path:** Compute C for d = 1 mm and d = 2 mm with same A. Show C halves when d doubles.\n\n---",
+      "localKey": "MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE",
+      "language": "en",
+      "refs": [
+        "MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.capacitance",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.capacitance",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE\",\"MC-SERIES-CAPACITORS-ADD-DIRECTLY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SERIES-CAPACITORS-ADD-DIRECTLY",
+        "MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.capacitance",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.capacitance",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.capacitance",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.capacitance/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.capacitance",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState the combination rules for capacitors in series and parallel. How do they differ from resistors?\n\n**Answer:** Series: 1/C_eq = Σ1/Cᵢ (C_eq less than smallest). Parallel: C_eq = ΣCᵢ (adds directly). This is opposite to resistors: series resistors add (R_eq = ΣRᵢ); parallel resistors use reciprocals (1/R_eq = Σ1/Rᵢ). Capacitors combine opposite to resistors.\n\n---\n\n### AP-2 (Bloom: Understand)\nA charged capacitor is disconnected from a battery, and then the plates are pulled farther apart. What happens to V, Q, E, and U?\n\n**Answer:** Q is conserved (no charge path). C = ε₀A/d → d increases → C decreases. V = Q/C → V increases. E = V/d: V increases but d increases too — E = Q/(ε₀A) = constant (E depends on surface charge density σ = Q/A, unchanged). U = Q²/(2C) → d increases → C decreases → U increases. The extra energy comes from the work done pulling the plates apart against the attractive electrostatic force.\n\n---\n\n### AP-3 (Bloom: Apply)\nA 4 μF and an 8 μF capacitor are connected in series across a 120 V supply. Find: (a) C_eq, (b) total charge, (c) voltage across each capacitor.\n\n**Answer:**\n(a) 1/C_eq = 1/4 + 1/8 = 3/8 → C_eq = 8/3 ≈ **2.67 μF**\n(b) Q = C_eq × V = (8/3×10⁻⁶)(120) = **320 μC**\n(c) V₁ = Q/C₁ = 320×10⁻⁶/4×10⁻⁶ = **80 V**; V₂ = Q/C₂ = 320×10⁻⁶/8×10⁻⁶ = **40 V**; Check: 80+40 = 120 V ✓\n\n---\n\n### AP-4 (Bloom: Analyze)\nTwo capacitors C₁ = 3 μF (charged to 60 V) and C₂ = 6 μF (uncharged) are connected in parallel. Find the final voltage and the fraction of energy lost.\n\n**Answer:**\nInitial charge: Q₁ = (3×10⁻⁶)(60) = 180 μC; Q₂ = 0. Total Q = 180 μC.\nC_eq = 3 + 6 = 9 μF. V_f = 180×10⁻⁶/9×10⁻⁶ = **20 V**\nU_i = ½(3×10⁻⁶)(60)² = ½(3×10⁻⁶)(3600) = 5.4×10⁻³ J\nU_f = ½(9×10⁻⁶)(20)² = ½(9×10⁻⁶)(400) = 1.8×10⁻³ J\nFraction lost = (5.4−1.8)/5.4 = 3.6/5.4 = **0.667 = 66.7%** dissipated.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.capacitance.md",
+        "startLine": 262,
+        "endLine": 300
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

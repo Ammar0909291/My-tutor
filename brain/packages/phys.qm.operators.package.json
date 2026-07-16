@@ -1,0 +1,503 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.operators-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.operators",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:53e9be931d02f5ffd7b8704b89047d76da7f6771853ddbb707751a3067c8c9b5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.operators.md": "sha256:485feb0c4fd3ced3286f1c0e0e7ad34b439712b8cdb4c57af5d4ce86cb896014"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.operators",
+    "name": "Quantum Operators and Observables",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": null,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.qm.schrodinger-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.operators-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.operators (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.operators.md": "sha256:485feb0c4fd3ced3286f1c0e0e7ad34b439712b8cdb4c57af5d4ce86cb896014"
+      },
+      "contentHash": "sha256:b73e49055b6a8b3312c16f8a2c16549f76c55a94ceb581439eff6273d69c18b9",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.operators.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.operators.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.operators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.operators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.operators.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.operators.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.operators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.operators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.operators.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.operators.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.operators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.operators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.operators.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.operators.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.operators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.operators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.operators.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.operators.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.operators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.operators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.operators.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.operators.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.operators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.operators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.operators.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.operators.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.operators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.operators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.operators/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.operators",
+      "title": "Quantum Operators and Observables — core explanation",
+      "content": "### Core Idea\nEvery measurable physical quantity (observable) in quantum mechanics is associated with a Hermitian operator. Measurement of an observable Â on a state ψ gives one of its eigenvalues aₙ, with probability |⟨φₙ|ψ⟩|² where φₙ is the corresponding eigenfunction. After measurement, the state collapses to φₙ. Non-commuting operators (like x̂ and p̂) cannot be simultaneously sharp — this is the mathematical origin of the uncertainty principle.\n\n### Conceptual Ladder\n1. **Recall**: Schrödinger equation Ĥψ = Eψ; eigenvalue E; eigenfunction φ.\n2. **Understand**: Every observable has an operator; eigenvalues are the only possible measurement outcomes.\n3. **Apply**: Compute expectation values ⟨Â⟩ = ⟨ψ|Â|ψ⟩; use commutators [Â,B̂] to test simultaneous measurability.\n4. **Extend**: Hermitian operators guarantee real eigenvalues; eigenfunctions are orthonormal; expansion in eigenbasis is always possible.\n\n### Key Formula Set\n- **Operator representations** (position basis):\n  - x̂ → multiply by x; x̂f(x) = x·f(x)\n  - p̂ → −iℏ ∂/∂x\n  - Ĥ → −ℏ²/(2m) ∂²/∂x² + V(x)\n  - Angular momentum: L̂_z → −iℏ ∂/∂φ; L̂² → −ℏ²[1/sinθ ∂/∂θ(sinθ ∂/∂θ) + 1/sin²θ ∂²/∂φ²]\n- **Eigenvalue equation**: Âφₙ = aₙφₙ\n- **Hermitian condition**: ⟨ψ|Âχ⟩ = ⟨Âψ|χ⟩ for all ψ, χ\n  - Consequence: all eigenvalues are real; eigenvectors for different eigenvalues are orthogonal\n- **Expectation value**: ⟨Â⟩ = ⟨ψ|Â|ψ⟩ = ∫ψ*(x) Â ψ(x) dx\n- **Expansion theorem**: ψ = Σcₙφₙ, where cₙ = ⟨φₙ|ψ⟩\n- **Born rule for Â**: P(aₙ) = |cₙ|² = |⟨φₙ|ψ⟩|²\n- **Commutator**: [Â,B̂] = ÂB̂ − B̂Â\n  - [x̂, p̂] = iℏ (fundamental canonical commutation relation)\n  - [Ĥ, x̂] = −iℏp̂/m (connects position and momentum evolution)\n  - [L̂_x, L̂_y] = iℏL̂_z (angular momentum algebra)\n- **Generalized uncertainty principle**: ΔA·ΔB ≥ ½|⟨[Â,B̂]⟩|\n\n### Canonical Example\n**Momentum eigenvalue equation**: p̂φₖ = ℏkφₖ → −iℏ dφₖ/dx = ℏk φₖ → φₖ(x) = (1/√2π)e^(ikx).\nThese are plane waves; eigenfunctions for different k are orthogonal: ∫φₖ*φₖ'dx = δ(k−k').\nExpansion: ψ(x) = ∫c(k)e^(ikx) dk/(2π)^(1/2) — this is the Fourier transform; c(k) = ⟨φₖ|ψ⟩ = ψ̃(k).\n\n**Commutator verification**: [x̂, p̂]ψ = x̂(−iℏ∂ψ/∂x) − (−iℏ∂/∂x)(xψ) = −iℏx∂ψ/∂x + iℏ(ψ + x∂ψ/∂x) = iℏψ → [x̂,p̂] = iℏ ✓.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 16,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.operators",
+      "title": "Operators act on the system, not on the wave function",
+      "content": "### MC-1: \"Operators act on the system, not on the wave function\"\n- **Probe**: \"What does the momentum operator p̂ do?\"\n- **Characteristic phrase**: \"p̂ measures the momentum of the particle.\"\n- **Trigger**: Confusing the operator (a mathematical object) with the physical act of measurement.\n- **Conflict evidence**: p̂ = −iℏ∂/∂x acts on ψ(x) to produce a new function (−iℏ)∂ψ/∂x. It doesn't perform a measurement — it appears inside integrals like ⟨p⟩ = ∫ψ*p̂ψdx.\n- **Bridge**: The operator is a recipe for constructing the expectation value, not a measurement device. The Born postulate separately governs what happens in an actual measurement.\n- **Replacement**: Operator Â appears in the expectation value formula ⟨Â⟩ = ∫ψ*Âψdx. A physical measurement selects an eigenvalue; the operator encodes the mathematical structure of that process.\n- **Discrimination pairs**: \"p̂ψ = −iℏ∂ψ/∂x (mathematical operation)\" ✓ vs. \"p̂ measures momentum\" ✗\n- **S6 repair path**: Compute ⟨p̂⟩ for ψ = A sin(nπx/L) step by step. Students perform the integral explicitly.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.operators",
+      "title": "The expectation value is what we'll measure",
+      "content": "### MC-2: \"The expectation value is what we'll measure\"\n- **Probe**: \"A particle is in ψ = (1/√2)φ₁ + (1/√2)φ₂. What energy do we measure?\"\n- **Characteristic phrase**: \"The energy is ⟨H⟩ = (E₁+E₂)/2.\"\n- **Trigger**: Confusing statistical average with individual measurement outcome.\n- **Conflict evidence**: Each individual energy measurement gives E₁ (with prob 1/2) or E₂ (with prob 1/2). ⟨H⟩ = (E₁+E₂)/2 is the mean over many measurements, not the outcome of a single one.\n- **Bridge**: ⟨height of a population⟩ = 170 cm doesn't mean each person is 170 cm tall. Average is a collective property; each measurement gives an actual eigenvalue.\n- **Replacement**: Individual measurement → eigenvalue aₙ with probability |⟨φₙ|ψ⟩|². ⟨Â⟩ = mean over many measurements = Σ|cₙ|²aₙ.\n- **Discrimination pairs**: \"Single measurement: one of E₁, E₂\" ✓ vs. \"Single measurement: (E₁+E₂)/2\" ✗\n- **S6 repair path**: Simulate with coin flips: heads = E₁, tails = E₂. Do 10 flips. Average → ≈ (E₁+E₂)/2. Each flip → one value. Connect to quantum measurement.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.operators",
+      "title": "[x̂, p̂] = 0 because x times p equals p times x as numbers",
+      "content": "### MC-3: \"[x̂, p̂] = 0 because x times p equals p times x as numbers\"\n- **Probe**: \"Is [x̂, p̂] = 0?\"\n- **Characteristic phrase**: \"Multiplication commutes, so x × p = p × x.\"\n- **Trigger**: Applying scalar multiplication rules to operators.\n- **Conflict evidence**: Compute [x̂,p̂]ψ = x(−iℏ∂ψ/∂x) − (−iℏ)∂(xψ)/∂x = −iℏx∂ψ/∂x + iℏψ + iℏx∂ψ/∂x = iℏψ ≠ 0.\n- **Bridge**: Operators follow function composition rules, not multiplication. Applying x first (multiply by x) then differentiating is not the same as differentiating first then multiplying by x — because the derivative also acts on the x.\n- **Replacement**: [x̂,p̂] = iℏ ≠ 0. This is the fundamental commutation relation; it follows from the product rule of differentiation applied to xψ.\n- **Discrimination pairs**: \"[x̂,p̂] = iℏ (from product rule)\" ✓ vs. \"[x̂,p̂] = 0 (from scalar analogy)\" ✗\n- **S6 repair path**: Compute [x̂,p̂]e^(ikx) explicitly; verify result = iℏe^(ikx).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.operators",
+      "title": "Hermitian means the matrix is symmetric (real entries",
+      "content": "### MC-4: \"Hermitian means the matrix is symmetric (real entries)\"\n- **Probe**: \"Is the momentum operator p̂ = −iℏ∂/∂x Hermitian?\"\n- **Characteristic phrase**: \"It has an i in it, so it can't be Hermitian.\"\n- **Trigger**: Confusing real symmetric matrices (a special case) with the general Hermitian condition.\n- **Conflict evidence**: Hermitian (self-adjoint) condition: ⟨ψ|p̂φ⟩ = ⟨p̂ψ|φ⟩. Verify: ∫ψ*(−iℏ∂φ/∂x)dx = [integrate by parts] = ∫(iℏ∂ψ*/∂x)φ dx = ⟨p̂ψ|φ⟩ ✓. Despite the i, p̂ is Hermitian.\n- **Bridge**: For matrices, Hermitian means Â = Â† (conjugate transpose). For differential operators, Hermitian means ⟨ψ|Âφ⟩ = ⟨Âψ|φ⟩ (integral condition). The matrix definition is a special case.\n- **Replacement**: Hermitian for operators = ⟨ψ|Âφ⟩ = ⟨Âψ|φ⟩. p̂ satisfies this via integration by parts, despite having a factor of i.\n- **Discrimination pairs**: \"p̂ Hermitian: ⟨ψ|p̂φ⟩ = ⟨p̂ψ|φ⟩ (verified by IBP)\" ✓ vs. \"p̂ not Hermitian because it contains i\" ✗\n- **S6 repair path**: Perform the integration by parts to verify p̂ is Hermitian for ψ = sin(πx/L) and φ = sin(2πx/L) on [0,L].\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.operators",
+      "title": "Operator concept",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Operator concept\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 216,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.operators",
+      "title": "Eigenvalue equation drill",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Eigenvalue equation drill\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.operators",
+      "title": "Expectation value calculation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Expectation value calculation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 218,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.operators",
+      "title": "Hermitian verification",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Hermitian verification\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 219,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.operators",
+      "title": "Commutator calculation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Commutator calculation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.operators",
+      "title": "Compatible vs. incompatible observables",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Compatible vs. incompatible observables\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 221,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.operators",
+      "title": "Generalized uncertainty principle",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Generalized uncertainty principle\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 222,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.operators",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) apply p̂ = −iℏ∂/∂x to given wave functions, (2) compute expectation values via integration, (3) verify eigenvalue equations, (4) compute commutators [Â,B̂] explicitly, (5) use the generalized uncertainty principle.\n\n### Formative Assessment 1 — Eigenvalue verification\n**Prompt**: \"Show that ψ = e^(ikx) is an eigenfunction of p̂ = −iℏ ∂/∂x and find the eigenvalue.\"\n**Expected answer**: p̂ψ = −iℏ × ik × e^(ikx) = ℏk e^(ikx) = ℏkψ. Eigenvalue = ℏk.\n**Threshold**: Correct differentiation and identification of eigenvalue ℏk.\n\n### Formative Assessment 2 — Expectation value\n**Prompt**: \"For ψ = √(2/L) sin(2πx/L) on [0,L], compute ⟨p̂⟩ and ⟨p̂²⟩.\"\n**Expected answer**: ⟨p̂⟩ = 0 (integral of sin·cos over symmetric domain). ⟨p̂²⟩ = ψ is eigenstate of p̂² with eigenvalue (2πℏ/L)² → ⟨p̂²⟩ = (2πℏ/L)². Alternatively: ⟨KE⟩ = ⟨p̂²⟩/2m = E₂ = 4π²ℏ²/(2mL²) → ⟨p̂²⟩ = 4π²ℏ²/L².\n**Threshold**: ⟨p̂⟩ = 0 required; ⟨p̂²⟩ correct to the n=2 formula.\n\n### Formative Assessment 3 — Commutator\n**Prompt**: \"Compute [x̂, p̂²] = x̂p̂² − p̂²x̂ explicitly (act on test function ψ). Express the result in terms of p̂.\"\n**Expected answer**: [x̂,p̂²] = [x̂,p̂]p̂ + p̂[x̂,p̂] = iℏp̂ + p̂(iℏ) = 2iℏp̂.\n**Threshold**: Correct application of commutator identity [A,BC] = [A,B]C + B[A,C]; final result 2iℏp̂.\n\n### Formative Assessment 4 — Simultaneous eigenstates\n**Prompt**: \"The free-particle Hamiltonian is Ĥ = p̂²/2m. Show that [Ĥ,p̂] = 0, and explain what this means physically.\"\n**Expected answer**: [Ĥ,p̂] = [p̂²/2m, p̂] = (1/2m)[p̂²,p̂] = (1/2m)(p̂[p̂,p̂] + [p̂,p̂]p̂) = 0. Physically: energy and momentum can simultaneously be definite values. The energy eigenstates e^(±ikx) are also momentum eigenstates — a free particle with definite energy has definite momentum.\n**Threshold**: Must show [p̂,p̂] = 0 and arrive at [Ĥ,p̂] = 0; must state physical implication.\n\n### Confidence Calibration\nAfter FA2: \"How confident are you (0–100%) that ⟨p̂⟩ = 0 for the sin(2πx/L) state? What's an alternative way to see this without computing the integral?\" (Answer: The state is a standing wave = superposition of e^(ikx) and e^(−ikx) with equal amplitudes; ⟨p̂⟩ = ℏk × (1/2) + (−ℏk) × (1/2) = 0.)\n\n### Delayed Retrieval\nTwo weeks later: Without notes, state the generalized uncertainty principle; apply it to [L̂_x, L̂_y] = iℏL̂_z to get ΔL_x · ΔL_y ≥ ℏ|⟨L̂_z⟩|/2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 240,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.operators",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nThink of a poll with yes/no questions. Asking \"Are you happy?\" and then \"Are you sad?\" — the answers are not independent. Quantum observables are similar: measuring one can disturb another. Incompatible observables (like x and p) are like questions that interfere with each other — you cannot get sharp answers to both simultaneously. Compatible observables (like energy and angular momentum in the hydrogen atom) don't interfere — they can both be sharp simultaneously.\n\nPhysically: measuring x with a narrow slit localizes the particle (small Δx) but scatters its momentum (large Δp). The slit is a physical instantiation of the non-commutativity of x̂ and p̂.\n\n### Representational (Diagrams and Symbols)\n- **Eigenvalue spectrum diagram**: Line spectrum for discrete eigenvalues (like infinite well energies Eₙ); continuous spectrum for position/momentum operators.\n- **Operator action diagram**: Show Ĥφₙ = Eₙφₙ graphically — wave function \"comes back\" scaled after Ĥ acts.\n- **Commutator table**: 3×3 table for [L̂_x, L̂_y], [L̂_y, L̂_z], [L̂_z, L̂_x] = iℏL̂_z (cyclic), [L̂², L̂_z] = 0.\n- **Expectation value integral**: Area under ψ*(x) × (Âψ)(x) curve — visual for ⟨Â⟩.\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Apply p̂ = −iℏ∂/∂x to a given ψ(x) to get p̂ψ.\n2. Compute ⟨p̂⟩ = ∫ψ*(−iℏ∂ψ/∂x)dx for a given ψ.\n3. Verify Hermitian property: ⟨ψ|p̂φ⟩ = ⟨p̂ψ|φ⟩ using integration by parts.\n4. Compute [x̂, p̂] explicitly on a test function ψ.\n5. Apply generalized uncertainty principle to [L̂_x, L̂_y] = iℏL̂_z.\n\n### Transfer (Novel Contexts)\n- **Angular momentum**: L̂_z = −iℏ∂/∂φ; eigenfunctions e^(imφ) with m ∈ ℤ; [L̂², L̂_z] = 0 → simultaneous eigenstates exist (quantum numbers n, l, m for hydrogen).\n- **Spin-½**: Spin operators Ŝ = (ℏ/2)σ where σ are Pauli matrices. [Ŝ_x, Ŝ_y] = iℏŜ_z. Spin is an operator that acts on a 2-component spinor, not a spatial wave function.\n- **Time evolution**: iℏ dÂ/dt = [Â, Ĥ] + ∂Â/∂t (Heisenberg equation). If [Â,Ĥ] = 0, then ⟨Â⟩ is conserved — the quantum version of Noether's theorem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 54,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.operators",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: Treating operators like numbers\nStudents write Â·B̂ = B̂·Â (multiplication is commutative for numbers but not operators). The canonical commutation relation [x̂,p̂] = iℏ ≠ 0 is the central example. Students must be trained to test commutativity explicitly.\n\n### Failure Mode 2: Confusing eigenvalues with expectation values\nIf ψ is not an eigenstate of Â, then ⟨Â⟩ is the average over many measurements, but each individual measurement gives one of the eigenvalues aₙ — not ⟨Â⟩. Students conflate these two things.\n\n### Failure Mode 3: Computing expectation values incorrectly (missing complex conjugate)\n⟨Â⟩ = ∫ψ* Âψ dx — the ψ on the left must be complex conjugated; the operator acts on the ψ on the right only. Students either conjugate both or neither.\n\n### Failure Mode 4: Not recognizing when two observables can be simultaneously sharp\nTwo observables can both have definite values simultaneously if and only if [Â,B̂] = 0 and ψ is a simultaneous eigenstate. Students need to check commutativity before claiming sharp values exist.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 82,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.operators",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"In classical mechanics, every quantity has a definite value. In quantum mechanics, observables are operators — and whether two of them can simultaneously have definite values depends on whether they commute.\"\n\n**Core explanation**: \"When you see Âφ = aφ, you're reading: 'φ is special — applying Â to it just scales it by the number a.' That number is the eigenvalue — the only possible measurement outcome when the system is in state φ. For a general state ψ, measurement gives one of many eigenvalues, with probability |⟨φₙ|ψ⟩|².\"\n\n**Common error interception**: \"Before computing ⟨Â⟩, ask: is the ψ on the left conjugated? The formula is ∫ψ* Âψ dx — the * goes on the first ψ only, and the operator acts on the second ψ.\"\n\n**Checkpoint question**: \"For the momentum eigenstate φₖ = e^(ikx), what is ⟨p̂⟩? What is Δp?\" (⟨p̂⟩ = ℏk exactly; Δp = 0 since this is an eigenstate. Every measurement gives exactly ℏk.)\n\n**Closing move**: \"Everything in quantum mechanics — energy levels, selection rules, spin, angular momentum — traces back to this operator framework. Once you're fluent with Hermitian operators and commutators, you have the key to all of quantum mechanics.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 226,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.operators",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"What does an operator even do?\"\nBack to basics: an operator is a recipe for transforming functions. Give three examples: (1) multiply by x → x·ψ; (2) differentiate → ∂ψ/∂x; (3) negate and differentiate → −∂ψ/∂x. All three are operators in function space. p̂ = −iℏ∂/∂x is just #3 with a constant. Practice applying p̂ to 5 different functions before moving to eigenvalue equations.\n\n### S3 — Can identify operators but cannot compute expectation values\nDrill the integral formula step by step: write ∫ψ*(−iℏ∂ψ/∂x)dx; separate into real and imaginary parts; recognize the product ψ*∂ψ/∂x = sin × cos type integral → 0 for symmetric eigenstates. Use explicit numerical examples (L = 1 m, n = 1 if needed to remove abstraction).\n\n### S6 — Cannot work with commutators\nTreat the commutator as a two-step process: (1) compute ÂB̂ψ (apply B̂ first, then Â); (2) compute B̂Âψ (apply Â first, then B̂); (3) subtract. Never compute \"ÂB̂\" symbolically without acting on a test function first. Use ψ = x² or ψ = e^(ax) as a concrete test function where derivatives are explicit.\n\n### S9 — Cannot connect operators to physical interpretation\nReturn to the infinite well: students have computed E₁, E₂, E₃. Now re-derive them using Ĥφₙ = Eₙφₙ → same eigenvalue equation, same solutions, same energies. The operator formalism is not new physics — it's a more powerful language for the same physics. Show that ⟨Ĥ⟩ = E₁ when ψ = φ₁ (trivially), and ⟨Ĥ⟩ = (E₁+E₂)/2 when ψ = (φ₁+φ₂)/√2 — both consistent with physical expectations.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 273,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.operators",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nProcedural (operator algebra, expectation value integrals, commutator calculations) + conceptual (Hermitian → real eigenvalues, commutator → uncertainty) + structural (the operator formalism as the universal language of QM).\n\n### Spaced Retrieval Schedule\n- Day 1: Apply p̂ to three wave functions; identify which are eigenstates.\n- Day 3: Compute ⟨Ĥ⟩ for a superposition state.\n- Day 7: Compute [x̂,p̂] from scratch.\n- Day 14: Verify Hermitian property of Ĥ for infinite well.\n- Day 30: Apply generalized uncertainty principle to angular momentum commutator.\n\n### Interleaving Partners\n- phys.qm.schrodinger-equation (Ĥ = −ℏ²/2m ∂²/∂x² + V is the first operator students met)\n- phys.qm.uncertainty-principle (Δx·Δp ≥ ℏ/2 follows from [x̂,p̂] = iℏ)\n- phys.qm.spin (Pauli matrices as 2×2 operator matrices — same algebra)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 289,
+        "endLine": 308
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.operators",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Compute expectation value of any one-dimensional operator for a given ψ.\n- Determine if two observables are compatible (commuting operators).\n- Apply generalized uncertainty principle from a given commutator.\n\n### Far Transfer\n- **Quantum field theory**: Field operators replace wave function operators; commutation relations define particle statistics (bosons vs. fermions).\n- **Quantum information**: Quantum gates are unitary operators on qubit state vectors; quantum measurement is an eigenvalue projection.\n- **NMR/MRI physics**: Spin angular momentum operators govern nuclear spin dynamics; pulse sequences manipulate spin operators precisely.\n\n### Structural Abstraction\nThe operator-observable correspondence — physical quantity → Hermitian operator → eigenvalues as measurement outcomes — is the deepest structural feature of quantum mechanics. It unifies the particle (discrete eigenvalues, discrete events) and wave (superposition, interference) aspects of quantum physics in a single mathematical framework. This framework (Hilbert space, self-adjoint operators, spectral theorem, Born rule) remains valid in quantum field theory, quantum gravity, and all known extensions of quantum mechanics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 308,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "phys.qm.operators/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.operators",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.qm.schrodinger-equation introduced Ĥ = −ℏ²/(2m)∂²/∂x² + V and the eigenvalue equation Ĥφ = Eφ. Students who completed that blueprint have already worked with one operator. This blueprint generalizes the framework to all observables. The prerequisite is necessary and sufficient.\n\n### Unlock Readiness\nThis blueprint unlocks phys.qm.hydrogen-atom-qm, phys.qm.spin, phys.qm.perturbation-theory, and phys.qm.selection-rules — all of which require fluency with operators, commutators, and eigenvalue equations. The operator formalism built here is the foundation for all of quantum mechanics beyond the basic wave-particle picture.\n\n### Suggested Flag\nAngular momentum operators (L̂², L̂_z) can be introduced here as a preview without full derivation, providing motivation for the hydrogen atom blueprint. Flag this as a bridge moment: \"We'll solve the hydrogen atom in the next blueprint using exactly these techniques.\"\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.operators.md",
+        "startLine": 325,
+        "endLine": 339
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

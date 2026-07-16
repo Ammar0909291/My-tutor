@@ -1,0 +1,223 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.zeroth-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.zeroth-law",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f806d39e6a7d57e5255d7b6810e76ef3775bbde87988b425e11f86e2d28d853f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.zeroth-law.md": "sha256:f8dfc291841cf87118b25b74ff44e4055e4fc9c0658e58428a3d3e774ab3faad"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 1,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 1
+  },
+  "concept": {
+    "conceptId": "phys.therm.zeroth-law",
+    "name": "Zeroth Law of Thermodynamics",
+    "difficultyRaw": "label: developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.therm.temperature"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.zeroth-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.zeroth-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.zeroth-law.md": "sha256:f8dfc291841cf87118b25b74ff44e4055e4fc9c0658e58428a3d3e774ab3faad"
+      },
+      "contentHash": "sha256:6df3f1bcda7067a63b4ef933919dbbc555ce7f172a5cb5a62ab6b7778d28d55d",
+      "ruleCount": 1,
+      "bandCounts": {
+        "3": 1
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.zeroth-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.zeroth-law.md#TA-1 (addresses MC-ZEROTH-LAW-TRIVIAL, MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.zeroth-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.zeroth-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.zeroth-law/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "Zeroth Law of Thermodynamics — core explanation",
+      "content": "**Hook (S0 novice):** You calibrate a thermometer by placing it in ice water (0°C) and boiling water (100°C). Then you use that thermometer to measure an unknown sample. You trust that if the thermometer reads the same value for two objects, those two objects are at the same temperature. But WHY is that trust justified? What physical principle says that \"same thermometer reading\" means \"same temperature\"?\n\n**Conceptual arc:**\n1. Operational definition of thermal equilibrium: two objects are in thermal equilibrium when no heat flows between them on contact.\n2. The Zeroth Law (formal statement): if object A is in thermal equilibrium with object C, and object B is in thermal equilibrium with object C, then A is in thermal equilibrium with B.\n3. Symbolic: A↔C and B↔C → A↔B. (↔ = \"in thermal equilibrium with\")\n4. Why \"zeroth\"? The first and second laws were formulated first. When physicists realised this more fundamental principle had been assumed implicitly in all thermometry, they retroactively named it \"zeroth\" to preserve the existing numbering.\n5. Thermometer as \"object C\": the thermometer (C) reaches equilibrium with body A → same temperature. Then the same thermometer reaches equilibrium with body B → same temperature. Zeroth law guarantees A and B are at the same temperature.\n6. Temperature as an equivalence class: the Zeroth Law partitions all physical objects into equivalence classes of \"same temperature.\" Temperature is the label for each class.\n7. Consequence: temperature is a transitive, symmetric, and reflexive relation — the mathematical properties of an equivalence relation.\n8. Practical implication: thermometry works. Without the Zeroth Law, there would be no logical basis for using any thermometer to compare temperatures of two different objects.\n\n**Closing synthesis:** The Zeroth Law is the logical foundation of thermometry. It is so obvious that it went unstated for decades — yet without it, the concept of \"temperature\" collapses. The law says that temperature is a consistent, transitive property: if A = C and B = C (in temperature) then A = B. This transitivity is what makes a thermometer trustworthy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 27,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.therm.zeroth-law/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "(Concrete — applying the law)",
+      "content": "### WE-1 (Concrete — applying the law)\n\n**Scenario:** Three metal blocks A, B, C are placed in contact with a thermometer one at a time. Block A gives a reading of 47°C; block B gives 47°C; block C gives 63°C.\n\n(a) Are A and B in thermal equilibrium with each other?\n(b) If A and C are brought into contact, which way does heat flow?\n(c) After A and C reach equilibrium, what is the final temperature (assume equal heat capacities and equal masses)?\n\n**(a):** By the Zeroth Law, A is in equilibrium with the thermometer at 47°C, and B is in equilibrium with the thermometer at 47°C. Therefore A is in equilibrium with B — no heat flows if they are brought into contact. ✓\n\n**(b):** A is at 47°C, C is at 63°C. Heat flows from C (higher T) to A (lower T).\n\n**(c):** For equal masses m and equal heat capacity c: Q_lost = Q_gained.\nmc(63 − T_f) = mc(T_f − 47) → 63 − T_f = T_f − 47 → T_f = (63 + 47)/2 = 55°C.\n\n**Answer:** (a) Yes — in equilibrium. (b) C → A. (c) T_f = 55°C.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 45,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.therm.zeroth-law/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "(Bridging — thermometer reliability)",
+      "content": "### WE-2 (Bridging — thermometer reliability)\n\n**Scenario:** A student argues: \"My thermometer reads 25°C for glass of water, and 25°C for a metal bar. But maybe the glass of water and metal bar are at different temperatures — perhaps my thermometer just responds the same way to two different things.\"\n\n**Challenge:** Use the Zeroth Law to explain why this reasoning is incorrect, and what physical test would resolve any remaining doubt.\n\n**Explanation:** When the thermometer is in thermal equilibrium with the water (reading 25°C), no heat flows between thermometer and water — they are at the same temperature by the definition of thermal equilibrium. Similarly for the metal bar. The Zeroth Law then guarantees water and bar are in equilibrium with each other, hence the same temperature.\n\n**Empirical test:** Remove the thermometer. Place the water glass and metal bar in direct thermal contact. Wait for steady state. If no heat flows (temperature doesn't change), the Zeroth Law is confirmed. In practice, any sensitive temperature probe would show zero temperature difference after equilibration.\n\n**Answer:** The Zeroth Law is precisely the physical principle ruling out the student's scenario. Thermal equilibrium with the same thermometer → thermal equilibrium with each other.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 45,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.therm.zeroth-law/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "(Abstract — equivalence relation)",
+      "content": "### WE-3 (Abstract — equivalence relation)\n\n**Show** that \"is in thermal equilibrium with\" defines an equivalence relation on the set of all physical objects.\n\n**Three properties required:**\n\n**Reflexive:** Is every object in thermal equilibrium with itself? Yes — an isolated object has no net heat flow to itself. ✓\n\n**Symmetric:** If A is in thermal equilibrium with B, is B in thermal equilibrium with A? Yes — thermal equilibrium means zero net heat flow in either direction; the relationship is symmetric by definition. ✓\n\n**Transitive:** If A ↔ C and B ↔ C, is A ↔ B? This is exactly the Zeroth Law — it provides transitivity. ✓\n\n**Conclusion:** \"Is in thermal equilibrium with\" is an equivalence relation. It partitions all objects into equivalence classes, each class characterized by a single real number: the temperature. Temperature is therefore a well-defined quantity whose existence is guaranteed by the Zeroth Law.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 45,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.therm.zeroth-law/misconception/MC-ZEROTH-LAW-TRIVIAL",
+      "kind": "misconception",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "**Trigger signal:** Student says \"of course if A = B and A = C then B = C — that's just math, not physics.",
+      "content": "### MC-ZEROTH-LAW-TRIVIAL\n\n**Trigger signal:** Student says \"of course if A = B and A = C then B = C — that's just math, not physics.\"\n\n**Conflict evidence [P28]:** \"Is this always true for physical properties? Block A is the same colour as paint sample C; paint sample C matches colour of object B. Does it follow that A and B are the same colour? Now consider: Object A has the same pressure as fluid C; fluid C has the same pressure as object B. Does it follow that A and B are in pressure equilibrium? What about electrical potential? Can you think of a physical property where this transitivity FAILS?\"\n\n*Colour: not necessarily (metamerism — two objects match a reference under one light but not under another). Pressure equilibrium: can fail in complex connected systems. The transitivity of thermal equilibrium is a non-trivial empirical fact, not a logical necessity.*\n\n**Bridge text [P30]:** \"The Zeroth Law is empirical — it is a physical law, not a logical truth. It has been tested millions of times through thermometry and has always held. But in principle, temperature could have been a non-transitive property of matter (imagine a material where A ↔ C and B ↔ C but A and B exchanged heat when brought together). The fact that this never happens is what makes thermometry possible.\"\n\n**Replacement text [P31]:** \"The Zeroth Law makes a testable, falsifiable claim about the physical world: thermal equilibrium is transitive. If you ever found two objects that individually equilibrated with the same thermometer but exchanged heat when brought together, the Zeroth Law would be violated. It has never been violated. Its non-triviality is why it earns the status of a law of physics.\"\n\n**Discrimination pairs [P33]:**\n- \"Two colour samples match a reference under sunlight. Are they the same colour under fluorescent light?\" → Not necessarily (metamerism). Colour matching is not transitive. Temperature is — the Zeroth Law asserts this.\n- \"Can you state the Zeroth Law's content in one sentence without using the word 'temperature'?\" → \"If two objects are each in thermal equilibrium with a third object, they are in thermal equilibrium with each other.\" Temperature is then defined as the common property.\n\n**s6_path:** \"The law is simple to state but profound in content — it says that the physical world permits a consistent, transitive temperature scale to exist.\"\n\n---",
+      "localKey": "MC-ZEROTH-LAW-TRIVIAL",
+      "language": "en",
+      "refs": [
+        "MC-ZEROTH-LAW-TRIVIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.zeroth-law/misconception/MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY",
+      "kind": "misconception",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "**Trigger signal:** Student says \"thermal equilibrium just means same temperature — it's circular, not a useful definition.",
+      "content": "### MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY\n\n**Trigger signal:** Student says \"thermal equilibrium just means same temperature — it's circular, not a useful definition.\"\n\n**Conflict evidence [P28]:** \"Define 'same temperature' without using the concept of temperature. How do you know two objects are at the same temperature without measuring temperature first? What operational test can you perform using only heat flow observations?\"\n\n*You can observe whether heat flows between two objects in contact. If no heat flows, they are in thermal equilibrium. This is empirically testable without presupposing any temperature concept.*\n\n**Bridge text [P30]:** \"Thermal equilibrium (defined operationally: no net heat flow on contact) is the primitive concept. Temperature is the derived concept — it is the property that two objects share when they are in thermal equilibrium. The Zeroth Law then guarantees that this property is consistent and transitive. The logical order is: heat flow observation → equilibrium definition → temperature concept, not the other way around.\"\n\n**Replacement text [P31]:** \"The correct logical chain: (1) We observe that some pairs of objects in contact exchange heat (disequilibrium), and others do not (equilibrium). (2) We define 'thermal equilibrium' as the no-heat-flow state — this is a direct physical observation. (3) The Zeroth Law tells us this relation is transitive. (4) We then define 'temperature' as the label for each equivalence class. Temperature is not assumed — it is derived from the observable fact of heat flow.\"\n\n**Discrimination pairs [P33]:**\n- \"Without any thermometer, how could you determine experimentally that two objects are at the same temperature?\" → Bring them into contact; observe (over sufficient time) whether any heat flows. If not, they are in equilibrium.\n- \"Does the Zeroth Law say anything about what temperature IS, or only about when two temperatures are EQUAL?\" → Only about when they are equal (transitivity of equilibrium). The Zeroth Law doesn't define the Kelvin scale or any numerical value — those require additional conventions (like fixing the triple point of water).\n\n**s6_path:** \"Thermal equilibrium is the observation; temperature is the name we give to the property that objects share when in equilibrium.\"\n\n---",
+      "localKey": "MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY",
+      "language": "en",
+      "refs": [
+        "MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.zeroth-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "Composition step 1",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Composition step 1\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P4\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY\",\"MC-ZEROTH-LAW-TRIVIAL\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-ZEROTH-LAW-TRIVIAL",
+        "MC-THERMAL-EQUILIBRIUM-IS-SAME-TEMPERATURE-TRIVIALLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 197,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "phys.therm.zeroth-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "Diagnostic Probe Set",
+      "content": "**P4-a (prereq check):** Two objects at the same temperature: which way does heat flow when they are brought into contact?\n*No heat flows — they are in thermal equilibrium.*\n\n**P4-b (law application):** Object X is in thermal equilibrium with Object Y. Object Z is also in thermal equilibrium with Object Y. What does the Zeroth Law tell you about X and Z?\n*X and Z are in thermal equilibrium with each other.*\n\n**P4-c (thermometer justification):** A thermometer reads 37°C for patient A and 37°C for patient B. The Zeroth Law justifies concluding what?\n*Patients A and B are at the same temperature — in thermal equilibrium with each other (though not literally in contact).*\n\n**P4-d (why \"zeroth\"):** Why was this law called \"zeroth\" rather than given the next available number?\n*It was recognized after the 1st and 2nd laws were named, but is more fundamental (logically precedes them). Named \"zeroth\" to preserve the existing numbering system.*\n\n**P4-e (equivalence class):** State the three properties that \"is in thermal equilibrium with\" satisfies, and identify which one the Zeroth Law specifically provides.\n*Reflexive (trivially), symmetric (by definition of equilibrium), transitive (← this is what the Zeroth Law provides).*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 138,
+        "endLine": 157
+      }
+    },
+    {
+      "assetId": "phys.therm.zeroth-law/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.zeroth-law",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: thermometer trust question] → [P06 anchor: thermal equilibrium without \"temperature\"]\n→ [P30 bridge: Zeroth Law statement]\n→ [MC-ZEROTH-LAW-TRIVIAL: P28 conflict (colour metamerism) → P31 replacement → P33 pairs]\n→ [WE-1: three blocks scenario — applying the law]\n→ [P51 check-in]\n→ [P52 narrow: transitivity = the specific contribution of the Zeroth Law]\n→ [MC-THERMAL-EQUILIBRIUM-TRIVIALLY-CIRCULAR: P28 → P30 → P31 → P33]\n→ [WE-2: thermometer reliability challenge and resolution]\n→ [P62 retrieval seed: law stated without \"temperature\"]\n→ [WE-3: equivalence relation proof]\n→ [P36 mastery probe: X/Y/Z rod scenario]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.zeroth-law.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

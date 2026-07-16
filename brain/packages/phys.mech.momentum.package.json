@@ -1,0 +1,557 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.momentum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.momentum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:846504f791bde5271378290a2dc50cae412d25756306cb32f4a22247e0c96bf7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.momentum.md": "sha256:891de0e7114ebfaa19f93a94e3a196173d49cbf2333e71e114ff05bd3a1843b6"
+    },
+    "assetCount": 23,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 4,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.momentum",
+    "name": "Momentum",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.newtons-second-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.momentum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.momentum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.momentum.md": "sha256:891de0e7114ebfaa19f93a94e3a196173d49cbf2333e71e114ff05bd3a1843b6"
+      },
+      "contentHash": "sha256:a640daf6d08360511aa6b18d3b6068e1be948d260cd5ee4adadab7ec31137b20",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.momentum.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.momentum.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.momentum\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.momentum.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.momentum.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.momentum\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.momentum.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.momentum.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.momentum\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.momentum.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.momentum.md#TA-4 (addresses MC-MOMENTUM-IS-SPEED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.momentum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.momentum.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.momentum.md#TA-5 (addresses MC-MOMENTUM-IS-SCALAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.momentum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.momentum.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.momentum.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.momentum.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.momentum.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.momentum\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.momentum/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.momentum",
+      "title": "Momentum — core explanation",
+      "content": "**Core Insight:** Momentum is the product of an object's mass and velocity. It is a vector\nquantity — direction matters. Momentum captures \"how hard it is to stop\" something: a large\nmass or high speed both increase momentum. The rate of change of momentum equals the net force\n(Newton's 2nd Law in its most general form).\n\n**Formal Definition:**\np = mv\n\nwhere p is momentum (kg·m/s), m is mass (kg), v is velocity (m/s, with direction).\n\n**Newton's 2nd Law in momentum form:**\nF_net = Δp/Δt = m(Δv/Δt) = ma    (when mass is constant)\n\n**Key properties:**\n- Momentum is a vector: p direction = v direction.\n- A system's total momentum = vector sum of all individual momenta.\n- Momentum ≠ kinetic energy: p = mv (vector), KE = ½mv² (scalar, always ≥ 0).\n- Two objects with the same p can have very different KE (e.g., different masses).\n- Momentum is the bridge to impulse (Δp = FΔt) and conservation of momentum.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 24,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.momentum",
+      "title": "Basic",
+      "content": "**Worked Example 1 (Basic):**\nA 3 kg ball moves at 4 m/s east. p = 3 × 4 = 12 kg·m/s east.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 24,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.momentum",
+      "title": "Direction matters",
+      "content": "**Worked Example 2 (Direction matters):**\nA 5 kg ball moves at 6 m/s west. p = 5 × 6 = 30 kg·m/s west (not east).",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 24,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.momentum",
+      "title": "Two objects, total momentum",
+      "content": "**Worked Example 3 (Two objects, total momentum):**\nCar A: 1000 kg moving east at 15 m/s → p_A = 15 000 kg·m/s east.\nCar B: 1500 kg moving west at 10 m/s → p_B = 15 000 kg·m/s west.\nTotal p = 15 000 − 15 000 = 0 (net momentum is zero — they cancel).",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 24,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/worked_example/WE-4",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.momentum",
+      "title": "p vs KE",
+      "content": "**Worked Example 4 (p vs KE):**\nObject A: 4 kg, 6 m/s → p = 24 kg·m/s, KE = 72 J.\nObject B: 9 kg, 8/3 m/s → p = 24 kg·m/s, KE = 32 J.\nSame momentum, different KE. A has more KE because it's faster.\n\n---",
+      "localKey": "WE-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 24,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/misconception/MC-MOMENTUM-IS-SPEED",
+      "kind": "misconception",
+      "conceptId": "phys.mech.momentum",
+      "title": "Priority 1",
+      "content": "### MC-MOMENTUM-IS-SPEED (Priority 1)\n**Label:** \"Momentum is the same as speed or velocity — a fast object always has more momentum\"\n\n**Trigger signals:**\n- Says \"the car has more momentum because it's faster\" without considering mass\n- Computes momentum as v only (forgets ×m)\n- Claims a fast bicycle has more momentum than a slow lorry\n\n**Conflict evidence [P28]:**\n\"A 0.1 kg tennis ball moves at 50 m/s. A 1000 kg truck moves at 2 m/s.\nTennis ball momentum: 0.1 × 50 = 5 kg·m/s.\nTruck momentum: 1000 × 2 = 2000 kg·m/s.\nWhich is harder to stop? Which has more momentum? Is it the faster object?\"\n\n**Bridge [P30]:**\n\"Momentum = mass × velocity. A very massive object at low speed can have far more momentum\nthan a light object at high speed. That's why a truck at walking speed is so dangerous — its\nmass amplifies its momentum enormously.\"\n\n**Replacement [P31]:**\n\"p = mv. Both mass AND velocity contribute. To rank objects by momentum, you must compute\nboth factors. A fast light object vs a slow heavy object — you cannot tell without the numbers.\"\n\n**Discrimination pairs [P33]:**\n- Tennis ball (0.1 kg, 50 m/s): p = 5 kg·m/s vs Truck (1000 kg, 2 m/s): p = 2000 kg·m/s ✓\n- Racing car (800 kg, 60 m/s): p = 48 000 vs Pedestrian (70 kg, 2 m/s): p = 140 ✓\n\n**s6_path:** Skip the truck-vs-tennis comparison; use a simpler pair: 2 kg at 3 m/s vs 6 kg at 1 m/s\n(p = 6 vs 6 — equal, even though speeds differ).\n\n---",
+      "localKey": "MC-MOMENTUM-IS-SPEED",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-IS-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 3,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/misconception/MC-MOMENTUM-IS-SCALAR",
+      "kind": "misconception",
+      "conceptId": "phys.mech.momentum",
+      "title": "Priority 2",
+      "content": "### MC-MOMENTUM-IS-SCALAR (Priority 2)\n**Label:** \"Momentum is a positive number — direction doesn't matter\"\n\n**Trigger signals:**\n- Adds momenta of objects moving in opposite directions without considering signs\n- Says total momentum of two equal-mass, equal-speed objects moving oppositely is \"2mv\"\n- Confused when p_total = 0 while the system is still in motion\n\n**Conflict evidence [P28]:**\n\"A 2 kg ball moves east at 5 m/s: p_A = +10 kg·m/s.\nA 2 kg ball moves west at 5 m/s: p_B = −10 kg·m/s.\nIf we add magnitudes: 10 + 10 = 20. But east + west cancel, so total = 0.\nWhich is the correct total momentum? What happens if they collide and stick together?\"\n\n**Bridge [P30]:**\n\"Momentum is a vector. Vectors in opposite directions subtract, not add. Define one direction\nas positive; the opposite is negative. Always assign signs before summing. Total momentum of\nzero means the system as a whole has no net motion tendency — even though both parts are moving.\"\n\n**Replacement [P31]:**\n\"Total p = Σ(m_i × v_i) with signs. East = +, West = −. Or North = +, South = −.\nThe direction convention must be stated and applied consistently. p_total = 0 does not mean\n'no objects are moving' — it means 'net motion of the centre of mass is zero.'\"\n\n**Discrimination pairs [P33]:**\n- Two identical balls moving oppositely: p_total = 0 (not 2mv) ✓\n- Same balls both moving east: p_total = 2mv ✓\n\n**s6_path:** Use only one-dimensional east-only examples for TA-4 if S6 is flagged. Introduce\nnegative momentum (westward) in TA-5 only after the vector concept is secure.\n\n---",
+      "localKey": "MC-MOMENTUM-IS-SCALAR",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-IS-SCALAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 35,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.momentum",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.momentum",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 14,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.momentum",
+      "title": "Prerequisite Check + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 36,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.momentum",
+      "title": "MC-MOMENTUM-IS-SPEED Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-MOMENTUM-IS-SPEED Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-MOMENTUM-IS-SPEED\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-IS-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 49,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.momentum",
+      "title": "MC-MOMENTUM-IS-SCALAR Probe + Total Momentum Practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-MOMENTUM-IS-SCALAR Probe + Total Momentum Practice\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-MOMENTUM-IS-SCALAR\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-IS-SCALAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 66,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.momentum",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 81,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.momentum",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 100,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.momentum",
+      "title": "Apply — basic",
+      "content": "**MP-1 (Apply — basic):**\n\"A 0.5 kg ball moves at 8 m/s east. What is its momentum?\"\nExpected: p = 4 kg·m/s east.\n_Discriminates: basic p = mv with direction._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 263,
+        "endLine": 295
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.momentum",
+      "title": "Apply — mass vs speed",
+      "content": "**MP-2 (Apply — mass vs speed):**\n\"A 3 kg ball at 4 m/s vs a 1 kg ball at 10 m/s. Which has greater momentum?\"\nExpected: 3×4=12 vs 1×10=10 → 3 kg ball has greater momentum.\n_Discriminates: MC-MOMENTUM-IS-SPEED resolution._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-IS-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 263,
+        "endLine": 295
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.momentum",
+      "title": "Apply — total momentum with direction",
+      "content": "**MP-3 (Apply — total momentum with direction):**\n\"A 4 kg ball moves east at 6 m/s. A 3 kg ball moves west at 4 m/s.\nTotal momentum of the system?\"\nExpected: +24 − 12 = +12 kg·m/s east.\n_Discriminates: MC-MOMENTUM-IS-SCALAR resolution._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-IS-SCALAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 263,
+        "endLine": 295
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.momentum",
+      "title": "Apply — Newton's 2nd in momentum form",
+      "content": "**MP-4 (Apply — Newton's 2nd in momentum form):**\n\"A 2 kg object's velocity changes from +3 m/s to +9 m/s in 3 s. What net force acted?\"\nExpected: Δp = 2×(9−3) = 12 kg·m/s; F = 12/3 = 4 N.\n_Discriminates: F = Δp/Δt; links momentum to Newton's laws._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 263,
+        "endLine": 295
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.momentum",
+      "title": "Analyze — p vs KE comparison",
+      "content": "**MP-5 (Analyze — p vs KE comparison):**\n\"Object A: 4 kg, 3 m/s. Object B: 1 kg, 6 m/s. Which has more momentum? Which has more KE?\"\nExpected: p_A = 12, p_B = 6 → A more momentum. KE_A = 18, KE_B = 18 → equal KE.\n_Discriminates: momentum and KE are distinct; can have equal KE but unequal momentum._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 263,
+        "endLine": 295
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.momentum",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.newtons-second-law  ──────────►  phys.mech.momentum\n   (F_net = ma; understanding that force changes velocity)\n   REQUIRED: student knows Newton's 2nd Law and can compute F = ma\n```\n\n**PD-1 (Newton's 2nd Law):**\n\"A 5 kg object experiences F_net = 20 N. What acceleration?\"\nExpected: a = 4 m/s².\n\nIf student cannot apply F = ma → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 64,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.momentum",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"p = ? Units? Is it a scalar or vector?\"\nThreshold: p = mv; kg·m/s; vector (direction = direction of v).\n\n**FA-2 (TA-4 exit):** \"A 2 kg object at 3 m/s vs a 0.5 kg object at 20 m/s. Which has more p?\"\nExpected: 2×3 = 6 vs 0.5×20 = 10 → lighter object has more p in this case.\nIf student says heavier object → MC-MOMENTUM-IS-SPEED not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"3 kg east at 5 m/s + 3 kg west at 5 m/s. Total p?\"\nExpected: 0 kg·m/s. If student says 30 → MC-MOMENTUM-IS-SCALAR not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-IS-SPEED",
+        "MC-MOMENTUM-IS-SCALAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 295,
+        "endLine": 311
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.momentum",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only eastward motion (all positive) in TA-3 and TA-4.\n- Introduce negative momentum (westward) only in TA-5 after positive-only examples are secure.\n- Start with Problem 1 only from the TA-6 set; add complexity step by step.\n- Reassure: \"p = mv — just two numbers multiplied.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (p vs KE comparison) at TA-3 — catches students who conflate them.\n- Challenge: \"Design a scenario where a lighter object stops a heavier one dead (requires equal\n  and opposite momenta) — what speeds do you need?\"\n- Spend TA-6 extra time on F = Δp/Δt problems.\n\n**S4 (Prereq gap — Newton's 2nd Law):**\n- Detect via PD-1 failure at TA-3.\n- Repair: mini-session on F_net = ma, then introduce F = Δp/Δt as the same law.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 311,
+        "endLine": 331
+      }
+    },
+    {
+      "assetId": "phys.mech.momentum/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.momentum",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → formula → MC-MOMENTUM-IS-SPEED repair).\n**Session 2 (≥24 h later):** Retrieval: \"p formula? Is it scalar or vector?\"\n  → TA-5 (direction, total p) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining momentum and kinetic energy:\n  \"Find two objects with equal KE but different momenta. Find two with equal momenta but different KE.\"\n  (Forces student to compare p = mv against KE = ½mv² systematically.)\n**Pre-impulse session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.kinetic-energy (p vs KE distinction), phys.mech.newtons-second-law\n(F = Δp/Δt).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-IS-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.momentum.md",
+        "startLine": 331,
+        "endLine": 346
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

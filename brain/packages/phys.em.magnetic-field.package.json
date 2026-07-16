@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.magnetic-field-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.magnetic-field",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7b0714c16592d621585a2e8b64386cd59ada806f1259d75a2370f96be520b8bb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.magnetic-field.md": "sha256:28cd7834c790f3d9f28cb7a51803c601b1a38893db51844a34cd339af0fc3ae0"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.magnetic-field",
+    "name": "Magnetic Field",
+    "difficultyRaw": "label: developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.electric-current"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.magnetic-field-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.magnetic-field (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.magnetic-field.md": "sha256:28cd7834c790f3d9f28cb7a51803c601b1a38893db51844a34cd339af0fc3ae0"
+      },
+      "contentHash": "sha256:b6e98ecfc0365426264f1b3836800495b4e3d85be17ff0441722ba20e4f93d33",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-field.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-field.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-field\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-field.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-field.md#TA-2 (addresses MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE, MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-field\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-field.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-field.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-field\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-field.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-field.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-field\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-field.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-field.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-field\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.magnetic-field/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "Magnetic Field — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nHold a compass near a wire carrying current — the needle deflects. Move a magnet near a wire — a current appears. These phenomena reveal the **magnetic field**: a region of space where magnetic forces act on moving charges and current-carrying conductors. The magnetic field B is a vector — it has both magnitude and direction. Field lines form closed loops (unlike electric field lines, they have no beginning or end), circling around currents and running from north to south pole outside a bar magnet. The SI unit is the tesla (T): 1 T = 1 N/(A·m).\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**Sources of magnetic fields:**\n1. Moving electric charges (current → magnetic field, discovered by Ørsted 1820)\n2. Permanent magnets (microscopic magnetic moments of electrons)\n3. Changing electric fields (Maxwell's addition — displacement current)\n\n**Field of a long straight wire (distance r from wire, current I):**\n$$B = \\frac{\\mu_0 I}{2\\pi r}$$\n\nwhere μ₀ = 4π × 10⁻⁷ T·m/A is the permeability of free space. Direction: right-hand rule — curl fingers in direction of B when thumb points in current direction.\n\n**Right-hand rules:**\n- Wire: wrap right hand around wire with thumb in current direction → fingers point in B direction (circumferential circles)\n- Solenoid: curl right-hand fingers in coil current direction → thumb points in B direction (inside, along axis)\n\n**Magnetic field properties:**\n1. **No magnetic monopoles:** B field lines are always closed loops (∮B·dA = 0, Gauss's law for magnetism).\n2. **Superposition:** B_total = sum of B from each source.\n3. **Direction:** perpendicular to both current direction and radius vector (from Biot-Savart).\n\n**Bar magnet field lines:**\n- Outside: from N pole to S pole (convention)\n- Inside: from S to N (completing closed loops)\n- Field is strongest at the poles.\n\n**Comparison with electric field:**\n| Property | Electric field E | Magnetic field B |\n|---|---|---|\n| Source | Charges | Moving charges / currents |\n| Lines | Start/end on charges | Always closed loops |\n| Force on | Stationary + moving charges | Only moving charges |\n| Unit | N/C = V/m | T = N/(A·m) = Wb/m² |\n\n### Tier 3 — Formal\n\n**Gauss's Law for magnetism:**\n$$\\oint \\vec{B}\\cdot d\\vec{A} = 0$$\n\n(No magnetic monopoles — all B field lines are closed; this is Maxwell's second equation.)\n\n**Biot-Savart Law (field element from current element):**\n$$d\\vec{B} = \\frac{\\mu_0}{4\\pi}\\frac{Id\\vec{l}\\times\\hat{r}}{r^2}$$\n\nIntegration gives the field of any current configuration. For a long straight wire: recovers B = μ₀I/(2πr).\n\n**Magnetic dipole moment:** For a current loop of area A carrying current I:\nm = IA (ampere-square-meters, A·m²)\n\nTorque on a magnetic dipole in field B: τ = m × B (analogous to electric dipole τ = p × E).\n\n**Terrestrial field:** Earth's surface field ≈ 25–65 μT (0.25–0.65 Gauss). Compass needles align with the horizontal component.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 29,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "(Field of a straight wire)",
+      "content": "### WE-1 (Field of a straight wire)\n\n**Problem:** A long straight wire carries a current of 8.0 A. Find the magnetic field at a point 5.0 cm from the wire.\n\n**Worked solution:**\n\n$$B = \\frac{\\mu_0 I}{2\\pi r} = \\frac{(4\\pi\\times10^{-7})(8.0)}{2\\pi(0.05)}$$\n$$B = \\frac{4\\pi\\times10^{-7}\\times8.0}{2\\pi\\times0.05} = \\frac{4\\times8.0\\times10^{-7}}{2\\times0.05} = \\frac{32\\times10^{-7}}{0.10} = 3.2\\times10^{-5}\\text{ T} = 32\\text{ μT}$$\n\nDirection: Use right-hand rule — if current goes up (+y), B at a point to the right of the wire points out of the page (+z direction by right-hand rule).\n\n**Answer:** B = 32 μT, directed using right-hand rule around the wire.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 90,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "(Direction — right-hand rule)",
+      "content": "### WE-2 (Direction — right-hand rule)\n\n**Problem:** Two parallel wires, A and B, are 10 cm apart. Wire A carries 5 A upward; wire B carries 3 A downward. At the midpoint between them, what is the direction of B from each wire and which way does the net B point?\n\n**Worked solution:**\n\n*Step 1 — B from wire A at midpoint (5 cm to the right of A, current upward):*\nRight-hand rule: thumb up → fingers curl → at point to the right of A, B points out of page.\n\n*Step 2 — B from wire B at midpoint (5 cm to the left of B, current downward):*\nRight-hand rule: thumb down → fingers curl other way → at point to the left of B (the midpoint), B also points out of page.\n\n*Step 3 — Net B:*\nBoth contributions point out of page → they add.\nB_A = μ₀(5)/(2π×0.05) = 20 μT; B_B = μ₀(3)/(2π×0.05) = 12 μT\nB_net = 20 + 12 = **32 μT out of page**\n\n**Answer:** B_net = 32 μT directed out of the page.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 90,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "(Field lines — bar magnet conceptual)",
+      "content": "### WE-3 (Field lines — bar magnet conceptual)\n\n**Problem:** Describe the magnetic field line pattern for a bar magnet and explain why the field lines never cross and must form closed loops.\n\n**Worked solution:**\n\n*Field lines outside:*\nEmerge from N pole, arc through space, enter S pole. Denser near the poles (stronger field).\n\n*Field lines inside the magnet:*\nContinue from S pole to N pole through the material, completing closed loops.\n\n*No crossing:*\nField lines can't cross because B at each point has a unique direction — a crossing would imply two different directions at one point, which is physically impossible.\n\n*Closed loops:*\n∮B·dA = 0 (Gauss's law for magnetism): no magnetic monopoles, so field lines have no beginning or end — they always close on themselves.\n\n*Comparison with E:*\nElectric field lines start on + charges and end on − charges. Magnetic field lines have no sources or sinks — they form complete closed loops.\n\n**Answer:** Closed loops: N→S outside, S→N inside; no crossing (unique B at each point); no monopoles (divergence = 0).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 90,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/misconception/MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE",
+      "kind": "misconception",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "**Trigger signal:** Student thinks field lines \"start\" at the north pole and \"end\" at the south pole, treating poles like positive/negative charges.",
+      "content": "### MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE\n\n**Trigger signal:** Student thinks field lines \"start\" at the north pole and \"end\" at the south pole, treating poles like positive/negative charges.\n\n**Conflict evidence [P28]:** \"Electric field lines truly start at positive charges and end at negative charges (∮E·dA = Q_enc/ε₀ ≠ 0). But Gauss's law for magnetism states ∮B·dA = 0 — no magnetic monopoles exist. A magnetic field line that 'starts' at the north pole must continue inside the magnet, emerge from the south pole, continue outside, and return — it's a closed loop. Cut a bar magnet in half: you don't separate the poles; you get two complete magnets, each with N and S poles.\"\n\n**Bridge text [P30]:** \"The convention that B field lines emerge from N poles is about direction, not about starting or ending. The lines emerge from N, arc to S, and then continue through the magnet interior back to N — a complete loop. There are no magnetic monopoles to serve as sources or sinks.\"\n\n**Replacement text [P31]:** \"Magnetic field lines form closed loops. By convention, they emerge from the N pole and enter the S pole externally, then continue through the magnet material from S to N. This completes the loop. Because ∮B·dA = 0, there are no magnetic 'charges' (monopoles) where lines start or end. Cutting a magnet always produces two complete magnets — isolated monopoles have never been observed.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"B field lines form closed loops (∮B·dA = 0)\" | \"B field lines start at N pole (monopole source)\" |\n| \"Cutting a magnet gives two complete magnets, not isolated poles\" | \"Cutting a magnet separates N and S poles\" |\n| \"B direction convention: N→S outside, S→N inside\" | \"B lines start on N, end on S, like E lines on charges\" |\n\n**s6_path:** Draw the complete loop: N→space→S→inside magnet→N. Show that it's closed. Ask student to predict what happens when a magnet is cut.\n\n---",
+      "localKey": "MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE",
+      "language": "en",
+      "refs": [
+        "MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/misconception/MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES",
+      "kind": "misconception",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "**Trigger signal:** Student says a magnetic field exerts force on a stationary charge, or doesn't realize motion is required.",
+      "content": "### MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES\n\n**Trigger signal:** Student says a magnetic field exerts force on a stationary charge, or doesn't realize motion is required.\n\n**Conflict evidence [P28]:** \"The magnetic force on a charge is F = qv×B. For a stationary charge: v = 0 → F = q(0)×B = 0. No force. Place a proton at rest between strong magnets — it feels no force from the magnets. Move it perpendicular to B — it curves. This is verified in particle accelerators: magnetic fields deflect particle beams (moving charges) but do no work on them (F ⊥ v). A static magnetic field cannot accelerate a stationary charge.\"\n\n**Bridge text [P30]:** \"The key distinction: electric forces act on all charges (moving or stationary); magnetic forces act only on moving charges. This is why magnets don't attract pieces of neutral wire carrying no current, but do attract wires carrying current (moving electrons experience F = qv×B).\"\n\n**Replacement text [P31]:** \"The magnetic force on a charge is F = qv×B — velocity v is required. A stationary charge (v = 0) feels zero magnetic force, regardless of how strong the field B is. The electric force F = qE acts on stationary charges; the magnetic force F = qv×B acts only on charges in motion. A magnetic field alone cannot do work on a charge (F ⊥ v always), but it can change the direction of motion.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Magnetic force requires charge to be moving (F = qv×B)\" | \"Magnetic field exerts force on stationary charges\" |\n| \"Static B does no work (F ⊥ v → P = F·v = 0)\" | \"Magnetic force can accelerate a stationary particle\" |\n| \"Electric force acts on stationary charges; magnetic does not\" | \"B field is needed to accelerate a charge from rest\" |\n\n**s6_path:** Worked experiment: place a charge at rest near a magnet — no force. Move the charge — it feels a force. This is the defining property of the magnetic interaction.\n\n---",
+      "localKey": "MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES",
+      "language": "en",
+      "refs": [
+        "MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE\",\"MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-MAGNETIC-FIELD-LINES-COME-FROM-NORTH-POLE",
+        "MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-field/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.magnetic-field",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nWhat is the SI unit of magnetic field and what does 1 T represent physically?\n\n**Answer:** Tesla (T). 1 T = 1 N/(A·m) — a 1 T field exerts a force of 1 N on a 1 m segment of wire carrying 1 A, oriented perpendicularly to the field. Equivalently: 1 T = 1 Wb/m² (weber per square meter).\n\n---\n\n### AP-2 (Bloom: Understand)\nWhy can a magnetic field never do work on a moving charged particle?\n\n**Answer:** The magnetic force F = qv×B is always perpendicular to the velocity v (by the cross product). Power = F·v = 0 when F ⊥ v. Therefore, the magnetic force never does work — it can change the direction of motion but never the speed or kinetic energy of the particle.\n\n---\n\n### AP-3 (Bloom: Apply)\nAt what distance from a wire carrying 20 A is the magnetic field equal to Earth's surface field (50 μT)?\n\n**Answer:** B = μ₀I/(2πr) → r = μ₀I/(2πB) = (4π×10⁻⁷×20)/(2π×50×10⁻⁶) = (8π×10⁻⁶)/(10⁻⁴π) = 8×10⁻⁶/10⁻⁴ = **0.08 m = 8 cm**\n\n---\n\n### AP-4 (Bloom: Analyze)\nTwo long parallel wires 20 cm apart carry 10 A each. Wire 1 is at x = 0, Wire 2 at x = 0.20 m. Find B at x = −0.10 m (left of Wire 1) if both currents are in the +y direction.\n\n**Answer:**\nB₁ at x = −0.10 m (10 cm left of Wire 1):\nRight-hand rule: current in +y, point is to the left → B points in −z (into page) ... wait.\nCurl right hand: thumb up (+y), at a point to the left of the wire (−x direction from wire), fingers point: at −x from wire, B is in −z direction (into page? Let me verify: at +x from wire, B is in −z (into page); at −x from wire, B is in +z (out of page)).\nCorrect: at −x from Wire 1, B₁ in +z (out of page).\nB₁ = μ₀I/(2πr₁) = μ₀(10)/(2π×0.10) = 20 μT out of page.\n\nB₂ from Wire 2 at x = 0.20 m (point is 0.30 m to its left, i.e. at −x from Wire 2):\nAt −x from Wire 2, B₂ in +z (out of page).\nB₂ = μ₀(10)/(2π×0.30) = 6.67 μT out of page.\n\nNet: B = 20 + 6.67 = **26.7 μT out of page** (both contributions add, same direction).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-field.md",
+        "startLine": 281,
+        "endLine": 322
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

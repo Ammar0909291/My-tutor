@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.resistivity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.resistivity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8e5ec67fea45f977effb14b48dc682e509b764a355e28d37825a46eb750b6168",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.resistivity.md": "sha256:89d9f2c353cddd7b8570d50a96473675476e97df0fc889105c8680d8214ce03e"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.resistivity",
+    "name": "Resistivity",
+    "difficultyRaw": "label: proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.ohms-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.resistivity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.resistivity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.resistivity.md": "sha256:89d9f2c353cddd7b8570d50a96473675476e97df0fc889105c8680d8214ce03e"
+      },
+      "contentHash": "sha256:665084b29bc1bf22fb6aa0610328383bb5dbe167fb8c4ff2b58869bb57487b68",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.resistivity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.resistivity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.resistivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.resistivity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.resistivity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.resistivity.md#TA-2 (addresses MC-LONGER-WIRE-HAS-LOWER-RESISTANCE, MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.resistivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.resistivity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.resistivity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.resistivity.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.resistivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.resistivity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.resistivity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.resistivity.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.resistivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.resistivity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.resistivity.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.resistivity.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.resistivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.resistivity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.resistivity/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.resistivity",
+      "title": "Resistivity — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nDifferent materials resist electric current differently: copper wire conducts electricity easily; rubber blocks it almost completely. This material property is called **resistivity** (ρ). A wire's total resistance depends on resistivity, length (longer → harder to push current through), and cross-section (thicker → easier). The formula R = ρL/A connects the microscopic material property (ρ) to the macroscopic circuit parameter (R). Resistivity also changes with temperature — metals get more resistive when hot; semiconductors get less resistive.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**Resistance from resistivity:**\n$$R = \\frac{\\rho L}{A}$$\n\nwhere ρ = resistivity [Ω·m], L = length [m], A = cross-sectional area [m²].\n\n**Units of ρ:** Ω·m (ohm-metres). For copper: ρ ≈ 1.7 × 10⁻⁸ Ω·m. For silicon: ρ ≈ 640 Ω·m. For glass: ρ ≈ 10¹⁰–10¹⁴ Ω·m.\n\n**Conductivity σ:** σ = 1/ρ [S/m = Ω⁻¹m⁻¹]. Ohm's Law in local form: J = σE.\n\n**Classification by resistivity:**\n- Conductors: ρ < 10⁻⁶ Ω·m (metals, graphite)\n- Semiconductors: 10⁻⁶ < ρ < 10⁶ Ω·m (silicon, germanium)\n- Insulators: ρ > 10⁶ Ω·m (rubber, glass, Teflon)\n- Superconductors: ρ = 0 below critical temperature T_c\n\n**Temperature dependence:**\nFor metals (positive temperature coefficient):\n$$R(T) = R_0[1 + \\alpha(T - T_0)]$$\n\nwhere α is the temperature coefficient of resistance (typically 3–5 × 10⁻³ °C⁻¹ for metals).\n\nFor semiconductors: ρ decreases with increasing T (more carriers thermally excited across the band gap — negative temperature coefficient).\n\n**Drude model microscopic basis:**\nρ = m/(ne²τ), where m = electron mass, n = carrier density, e = charge, τ = mean collision time. Higher T → shorter τ (more lattice vibrations) → higher ρ for metals.\n\n**Wire resistance scaling:**\nIf wire length is doubled: R → 2R (proportional).\nIf wire radius is doubled: A = πr² → 4A → R → R/4 (inverse with area).\nIf both doubled: R → 2R/4 = R/2.\n\n### Tier 3 — Formal\n\n**Resistivity tensor (anisotropic materials):**\nIn crystals with different conductivity along different axes: J = σ̄E (tensorial J = σE fails; must use matrix σᵢⱼ). Graphite has very different ρ along vs. perpendicular to basal planes.\n\n**Matthiessen's rule:**\n$$\\rho_\\text{total} = \\rho_\\text{phonon}(T) + \\rho_\\text{impurity}$$\n\nThe total resistivity of a metal at temperature T has contributions from lattice vibrations (phonons, T-dependent) and impurities (T-independent). This sum is independent of the scattering mechanism — a powerful simplification.\n\n**Superconductivity:** Below T_c (e.g., 9.2 K for niobium), certain materials develop zero DC resistance and expel magnetic fields (Meissner effect). Explained by BCS theory (Cooper pairs of electrons form a coherent quantum state). Applications: MRI magnets, maglev trains.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 28,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.resistivity",
+      "title": "(R from ρ, L, A)",
+      "content": "### WE-1 (R from ρ, L, A)\n\n**Problem:** A copper wire (ρ = 1.7 × 10⁻⁸ Ω·m) has length 100 m and diameter 2.0 mm. Find its resistance.\n\n**Worked solution:**\n\n*Step 1 — Cross-sectional area:*\nr = 1.0 × 10⁻³ m; A = πr² = π(10⁻³)² = 3.14 × 10⁻⁶ m²\n\n*Step 2 — R = ρL/A:*\n$$R = \\frac{(1.7\\times10^{-8})(100)}{3.14\\times10^{-6}} = \\frac{1.7\\times10^{-6}}{3.14\\times10^{-6}} = 0.541\\text{ Ω}$$\n\n**Answer:** R = 0.54 Ω (very low — copper is an excellent conductor)\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 81,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.resistivity",
+      "title": "(Temperature dependence)",
+      "content": "### WE-2 (Temperature dependence)\n\n**Problem:** A tungsten filament has R₀ = 10 Ω at 20°C. When lit, it reaches 1520°C. If α = 4.5 × 10⁻³ °C⁻¹, find R at operating temperature. Is the bulb ohmic?\n\n**Worked solution:**\n\n*Step 1 — Temperature rise:*\nΔT = 1520 − 20 = 1500°C\n\n*Step 2 — R at operating temperature:*\nR = R₀[1 + α ΔT] = 10[1 + (4.5×10⁻³)(1500)] = 10[1 + 6.75] = 10 × 7.75 = **77.5 Ω**\n\n*Step 3 — Ohmic?*\nR = 10 Ω cold, 77.5 Ω hot — R varies significantly with temperature → **non-ohmic** (over the full operating range). At any fixed temperature it obeys Ohm's Law (R constant), but temperature changes with current.\n\n**Answer:** R = 77.5 Ω at 1520°C; non-ohmic over its operating range (R varies with T).\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 81,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.resistivity",
+      "title": "(Wire comparison)",
+      "content": "### WE-3 (Wire comparison)\n\n**Problem:** Wire A (copper, ρ_Cu = 1.7 × 10⁻⁸ Ω·m, diameter 2 mm, length 100 m) and Wire B (nichrome, ρ_Ni = 1.0 × 10⁻⁶ Ω·m, diameter 0.5 mm, length 1 m) are compared. Find R_A and R_B.\n\n**Worked solution:**\n\n*Wire A:* A_A = π(10⁻³)² = 3.14×10⁻⁶ m²\nR_A = (1.7×10⁻⁸ × 100)/(3.14×10⁻⁶) = 0.541 Ω\n\n*Wire B:* A_B = π(0.25×10⁻³)² = π(6.25×10⁻⁸) = 1.96×10⁻⁷ m²\nR_B = (1.0×10⁻⁶ × 1)/(1.96×10⁻⁷) = 1.0×10⁻⁶/1.96×10⁻⁷ = **5.1 Ω**\n\nWire B (nichrome, 1 m long!) is more resistive than Wire A (copper, 100 m long). This is why heating elements use nichrome — high ρ means practical resistance with short lengths.\n\n**Answer:** R_A = 0.54 Ω; R_B = 5.1 Ω\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 81,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/misconception/MC-LONGER-WIRE-HAS-LOWER-RESISTANCE",
+      "kind": "misconception",
+      "conceptId": "phys.em.resistivity",
+      "title": "**Trigger signal:** Student says \"more wire gives more path for electrons — easier to conduct\" or inverts the length dependence.",
+      "content": "### MC-LONGER-WIRE-HAS-LOWER-RESISTANCE\n\n**Trigger signal:** Student says \"more wire gives more path for electrons — easier to conduct\" or inverts the length dependence.\n\n**Conflict evidence [P28]:** \"Calculate: 1 m copper wire R₁ = ρ/A; 2 m copper wire R₂ = 2ρ/A = 2R₁. Longer wire — twice the resistance. Physical reason: electrons must travel further, suffering more collisions. Each collision transfers momentum to the lattice — more collisions per unit charge → more resistance. Connecting two equal resistors in series doubles the total resistance.\"\n\n**Bridge text [P30]:** \"Think of a pipe carrying water: a longer pipe has more friction — harder to maintain the same flow rate (current) for the same pressure difference (voltage). Resistance is proportional to length: R = ρL/A. Short, fat wire → low R. Long, thin wire → high R.\"\n\n**Replacement text [P31]:** \"Resistance R = ρL/A increases with length (directly proportional) and decreases with cross-sectional area. Longer wire → more electron collisions along the path → higher resistance. Thicker wire → more parallel paths for electrons → lower resistance. This is why extension cords use thicker wire for higher power devices.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"R ∝ L: doubling length doubles R\" | \"Longer wire → more path → lower R\" |\n| \"R ∝ 1/A: thicker wire → lower R\" | \"Thicker wire resists more (more material)\" |\n| \"Nichrome heater: short length, high ρ → practical high R\" | \"Long wire always has lower resistance than short wire\" |\n\n**s6_path:** Compute R for 1 m and 2 m of the same wire. Show R doubles. The misconception likely comes from confusing \"path length\" with \"parallel paths\" — more path length is a series connection, not a parallel one.\n\n---",
+      "localKey": "MC-LONGER-WIRE-HAS-LOWER-RESISTANCE",
+      "language": "en",
+      "refs": [
+        "MC-LONGER-WIRE-HAS-LOWER-RESISTANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/misconception/MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE",
+      "kind": "misconception",
+      "conceptId": "phys.em.resistivity",
+      "title": "**Trigger signal:** Student applies the metal formula R = R₀[1 + αΔT] with positive α to semiconductors, or says \"all materials get more resistive when heated.",
+      "content": "### MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE\n\n**Trigger signal:** Student applies the metal formula R = R₀[1 + αΔT] with positive α to semiconductors, or says \"all materials get more resistive when heated.\"\n\n**Conflict evidence [P28]:** \"Silicon at 20°C: ρ ≈ 640 Ω·m. At 100°C: ρ drops to ≈ 4 Ω·m — more than 100× decrease. This is the thermistor effect: as T rises, more electrons are thermally excited across the semiconductor's band gap into the conduction band. More carriers n → lower ρ = m/(ne²τ). For metals: n is fixed; τ decreases with T → ρ increases. For semiconductors: n increases exponentially with T; this dominates → ρ decreases.\"\n\n**Bridge text [P30]:** \"Metals: fixed number of electrons, but lattice vibrations increase (shorter τ) → more resistance at higher T. Semiconductors: very few free electrons at low T; heating liberates more → exponentially more carriers → dramatically lower resistance. The effect dominates: ρ_semiconductor ∝ e^(+E_g/2kT) — drops exponentially as T rises.\"\n\n**Replacement text [P31]:** \"The temperature coefficient of resistance α is positive for metals (R increases with T) and negative for semiconductors and insulators (R decreases with T). For semiconductors: thermal energy excites electrons across the band gap, dramatically increasing carrier density and dramatically decreasing resistance. This is the basis of thermistors (temperature sensors). Do not apply the metal formula R = R₀[1 + αΔT] to semiconductors.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Metals: R increases with T (positive α)\" | \"All materials: R increases with T\" |\n| \"Semiconductors: R decreases with T (negative α)\" | \"α is always positive for any material\" |\n| \"Thermistors use semiconductor's negative α for temperature sensing\" | \"Metal formula R = R₀(1+αΔT) applies to semiconductors\" |\n\n**s6_path:** Show the NTC (Negative Temperature Coefficient) thermistor datasheet — R drops rapidly with T. Contrast with PTC (Positive Temperature Coefficient) thermistor (uses PTCR ceramic) for safety circuits.\n\n---",
+      "localKey": "MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE",
+      "language": "en",
+      "refs": [
+        "MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.resistivity",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.resistivity",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-LONGER-WIRE-HAS-LOWER-RESISTANCE\",\"MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-LONGER-WIRE-HAS-LOWER-RESISTANCE",
+        "MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.resistivity",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.resistivity",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.resistivity",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.resistivity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.resistivity",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState the formula relating resistance R to resistivity ρ, length L, and cross-sectional area A.\n\n**Answer:** R = ρL/A. R increases with L (proportional), decreases with A (inversely proportional), and depends on the material through ρ.\n\n---\n\n### AP-2 (Bloom: Understand)\nExplain why the resistivity of metals increases with temperature while the resistivity of semiconductors decreases.\n\n**Answer:** In metals, the number of free electrons n is approximately constant (fixed by the atomic structure). As T increases, lattice vibrations (phonons) increase, reducing the mean collision time τ — electrons collide more frequently. Since ρ = m/(ne²τ), reduced τ → higher ρ. In semiconductors, n increases exponentially with T as electrons are thermally excited across the energy gap. This exponential increase in n dominates the modest decrease in τ, so ρ ∝ 1/n decreases dramatically with T.\n\n---\n\n### AP-3 (Bloom: Apply)\nA resistor is made from a wire of resistivity 5 × 10⁻⁷ Ω·m, cross-section 0.10 mm² and length 2.0 m. Find R. If the wire is redesigned with half the length and double the cross-section, find new R.\n\n**Answer:**\nOriginal: R = (5×10⁻⁷ × 2.0)/(0.10×10⁻⁶) = 10⁻⁶/10⁻⁷ = **10 Ω**\nNew: L → 1.0 m, A → 0.20 mm² = 0.20×10⁻⁶ m²\nR_new = (5×10⁻⁷ × 1.0)/(0.20×10⁻⁶) = 5×10⁻⁷/2×10⁻⁷ = **2.5 Ω** (4× reduction: L halved = ÷2, A doubled = ÷2 → total ÷4)\n\n---\n\n### AP-4 (Bloom: Analyze)\nThe resistivity of a semiconductor thermistor decreases by a factor of 10 for every 30°C rise in temperature. Starting from R = 100 kΩ at 20°C, find R at 80°C and explain the practical consequence for circuit design.\n\n**Answer:** Temperature rise = 80 − 20 = 60°C = 2 × 30°C intervals. Factor of 10 decrease each interval → R_80 = 100 kΩ / (10 × 10) = **1 kΩ** (100× decrease in resistance). Consequence: the current through the thermistor increases 100× over this temperature range. Circuits using such thermistors must either be designed for this current range or include current-limiting resistors in series to protect the circuit and maintain linearity of the readout.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.resistivity.md",
+        "startLine": 252,
+        "endLine": 285
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

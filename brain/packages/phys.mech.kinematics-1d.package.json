@@ -1,0 +1,378 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.kinematics-1d-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.kinematics-1d",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4e3784014230b93ecaf3a375d0abf49d63c2389cd5cf875a0be6e71e5cca1e0c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.kinematics-1d.md": "sha256:4defb8d43152024d236f8237c3237de247068399109e1054b7a3a9efe1e2a17d"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.kinematics-1d",
+    "name": "Kinematics in One Dimension",
+    "difficultyRaw": "developing (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.acceleration"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.kinematics-1d-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.kinematics-1d (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.kinematics-1d.md": "sha256:4defb8d43152024d236f8237c3237de247068399109e1054b7a3a9efe1e2a17d"
+      },
+      "contentHash": "sha256:00c926d42d527e70ff6796b6b99fce1cec17d04f4f030436297d472369a4cf64",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-1d.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-1d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-1d\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-1d.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-1d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-1d\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-1d.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-1d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-1d\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-1d.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md#TA-4 (addresses MC-APPLIES-ALWAYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-1d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-1d\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-1d.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-1d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-1d\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-1d.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md#TA-6 (addresses MC-APPLIES-ALWAYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-1d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-1d\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.kinematics-1d/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States the **condition for validity**: the four kinematic equations apply only to motion with **uniform (constant) acceleration** in a straight line.\n2. For a given problem, identifies the three known kinematic quantities among {s, u, v, a, t} and selects the one equation that contains all three knowns and the unknown, then solves correctly.\n3. Handles the **signed-vector** nature of all five quantities — a negative result means the quantity points opposite to the chosen positive direction — and does not default to magnitudes or drop signs.\n\nA student who applies a kinematic equation to non-uniform acceleration (e.g., a car in city traffic), or who picks an equation at random and algebra-forces a result, has **NOT** achieved mastery — blind equation selection with no validity check is the most dangerous failure mode in kinematics and propagates into every projectile, circular, and rotational problem downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/misconception/MC-APPLIES-ALWAYS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Kinematic equations work for any motion, not just uniform acceleration",
+      "content": "### MC-APPLIES-ALWAYS: \"Kinematic equations work for any motion, not just uniform acceleration\"\ntrigger_signal: student applies SUVAT equations to a described non-uniform scenario (city traffic, variable engine force, real car journey).\nconflict_evidence [P28]: \"A car at a traffic light accelerates, then brakes, then idles. For which phase is 'a' constant? None of them as a whole. The equation v = u + at requires that 'a' stays the same for the entire duration. If it changes halfway through, you get a different answer from what actually happened — and you have no way to know how wrong it is.\"\nbridge_text [P30]: \"Kinematic equations are derived assuming 'a' is a constant — the same value at every instant. If acceleration varies, these equations do not apply. You need numerical methods or the area under a velocity-time graph instead.\"\nreplacement_text [P31]: \"Before using any kinematic equation, confirm the acceleration is constant throughout the interval. If in doubt, state the assumption explicitly.\"\ndiscrimination_pairs [P33]: [\"stone dropped from rest: a = g = constant → SUVAT valid ✓\", \"car accelerating under constant engine force on flat road (no wind): a ≈ constant → SUVAT approximately valid ✓\", \"car braking with increasing brake pressure: a changes → SUVAT invalid ✗\"]\ns6_path: skip P28; use the traffic-light scenario as a gentle shared question — \"is the acceleration the same at every moment of the whole journey?\" — then P30.",
+      "localKey": "MC-APPLIES-ALWAYS",
+      "language": "en",
+      "refs": [
+        "MC-APPLIES-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/misconception/MC-DISPLACEMENT-CONFUSION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "s in the kinematic equations is total distance, not displacement",
+      "content": "### MC-DISPLACEMENT-CONFUSION: \"s in the kinematic equations is total distance, not displacement\"\ntrigger_signal: student gets a non-zero s for a ball thrown up and caught at the same height, or gives only positive values for s when a negative result is physically meaningful.\nconflict_evidence [P28]: \"The ball goes up 20 m and comes back down 20 m. You said s = 40 m. But the equation gives s = 0 for the full trip. Which do you trust? s is displacement — final position minus initial position. The ball returned to the same height, so s = 0. Distance = 40 m is a different quantity.\"\nbridge_text [P30]: \"In all kinematic equations, s stands for displacement — the change in position, with sign. It is NOT the total distance. For a round trip, s = 0. For motion that goes below the starting point, s is negative.\"\nreplacement_text [P31]: \"Always substitute displacement (Δx = x_final − x_initial) for s, not total path length. Choose a positive direction and assign signs consistently.\"\ndiscrimination_pairs [P33]: [\"ball up 20 m, caught at start: s = 0 ✓, distance = 40 m ✓ (different things)\", \"ball up, not caught (still in air at t): s = positive (above start) ✓\", \"ball lands below launch point: s = negative ✓\"]\ns6_path: skip P28; use the up-and-back ball on paper with a marked start and finish at the same point — \"where did it end up?\" — then P30.",
+      "localKey": "MC-DISPLACEMENT-CONFUSION",
+      "language": "en",
+      "refs": [
+        "MC-DISPLACEMENT-CONFUSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Deriving the Equations from What We Know",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Deriving the Equations from What We Know\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Variable Identification — The Selection Step",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Variable Identification — The Selection Step\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 19,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Signed Values — Direction Matters",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Signed Values — Direction Matters\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 29,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Misconception Probe — Validity Condition",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Validity Condition\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-APPLIES-ALWAYS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-APPLIES-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 37,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 44,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-APPLIES-ALWAYS\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-APPLIES-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 51,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Given u, v, a — which equation gives s without needing t?\" | CORRECT = v² = u² + 2as |\n| P74 (classify) | \"City traffic: constant a assumed — valid or not?\" | CORRECT = not valid; acceleration varies |\n| P75 (boundary) | \"Why do kinematic equations fail for non-uniform acceleration?\" | CORRECT = derived assuming constant a |\n| P76 (transfer) | \"Train brakes from 30 m/s to rest at 1.5 m/s² — braking distance and time?\" | CORRECT = s = 300 m; t = 20 s |\n| P77 (generate) | \"Write a problem where v² = u² + 2as is the right choice — solve it.\" | CORRECT = valid problem, correct selection |\n| P78 (explain) | \"How do you choose which kinematic equation to use?\" | CORRECT = identify 3 knowns, find equation without the unwanted 5th variable |\n| P79 (predict) | \"Ball thrown up at 15 m/s, caught at same height — predict displacement.\" | CORRECT = 0 m |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 174,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No exposure to kinematic equations | Cannot name any of {s, u, v, a, t} in context | Protocol A (Concrete) |\n| S1 | Memorises equations without selection logic | Picks any equation; tries algebra until one works | Protocol B (Counterexample-first) |\n| S2-APPLIES-ALWAYS | Applies SUVAT to non-uniform acceleration | Uses v = u + at for a car stop-starting in traffic | Misconception Engine → Protocol C |\n| S2-DISPLACEMENT-CONFUSION | Treats s as distance, not displacement | Gives positive s for a ball thrown up and caught at the same height | Misconception Engine → Protocol C |\n| S3 | Selects and solves correctly; drops signs | Correct magnitude, wrong sign on a or s | Protocol C (Guided Questioning) |\n| S6 | Anxiety at simultaneous algebraic manipulation | Freezes when rearranging three-variable equations | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What is the condition under which the kinematic equations work? Can you name any of them?\"\n  States \"constant/uniform acceleration\" and recalls at least one equation → S3. Enter Protocol C.\n  Recalls equations but cannot state the condition → S1. Enter Protocol B.\n  Cannot recall equations or condition → DB-2.\n\nDB-2 (application probe):\n\"A car starts from rest and reaches 20 m/s with a constant acceleration of 4 m/s². How long did it take and how far did it travel?\"\n  Correctly uses v = u + at → t = 5 s; then s = ut + ½at² → s = 50 m → S3. Enter Protocol C.\n  Selects a wrong equation but shows systematic variable-identification attempt → S1. Enter Protocol B.\n  \"I don't know where to start\" → S0. Enter Protocol A.\n  Pause / distress → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with the kinematic equations — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 errors → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-1d/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.kinematics-1d",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.acceleration`):\n\"State the definition of acceleration and its formula.\"\n  Cannot state a = Δv/Δt → flag PREREQ-GAP-ACCELERATION.\n  In-session minimum repair: one P06 anchor (a = Δv/Δt, unit m/s²) — then resume. Deep gap → schedule `phys.mech.acceleration` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

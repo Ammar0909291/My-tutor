@@ -1,0 +1,390 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.escape-velocity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.escape-velocity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6d7c255b5431fa391f176b6bc59226a6ffe4b124b034521e454c4209dddb8cd5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.escape-velocity.md": "sha256:05cf75e09833c3720f2f3120d1a191bcb1a0a0437ba95708ac6917b562c8ff3e"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.escape-velocity",
+    "name": "Escape Velocity",
+    "difficultyRaw": "label: advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.gravitational-potential",
+      "phys.mech.conservation-of-energy"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.escape-velocity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.escape-velocity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.escape-velocity.md": "sha256:05cf75e09833c3720f2f3120d1a191bcb1a0a0437ba95708ac6917b562c8ff3e"
+      },
+      "contentHash": "sha256:e782b58fc6273f998ee4f097f91c697dcadb7490d512c9e49d3a8d816212f05a",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.escape-velocity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.escape-velocity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.escape-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.escape-velocity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.escape-velocity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.escape-velocity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.escape-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.escape-velocity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.escape-velocity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.escape-velocity.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.escape-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.escape-velocity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.escape-velocity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.escape-velocity.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.escape-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.escape-velocity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.escape-velocity.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.escape-velocity.md#TA-5 (addresses MC-ESCAPE-DEPENDS-ON-MASS, MC-ESCAPE-REQUIRES-THRUST)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.escape-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.escape-velocity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.escape-velocity/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "Escape Velocity — Conceptual Development Sequence",
+      "content": "**TA-1 — Derivation from Energy Conservation [C]**\n\nStarting condition: object at radius r with speed v_e, zero further propulsion.\nFinal condition: object at r = ∞ with v = 0 (minimum escape — just barely makes it).\n\nEnergy conservation:\n```\n½mv_e² + (−GMm/r) = 0 + 0\n\n½mv_e² = GMm/r\n\nv_e² = 2GM/r\n\nv_e = √(2GM/r)\n```\n\nNote: m cancels → escape velocity is independent of the object's mass.\n\nFor a launch from the surface (r = R_planet):\n```\nv_e = √(2GM/R)\n```\n\nUsing g = GM/R² (surface gravitational field):\n```\nv_e = √(2gR)\n```\n\n**TA-2 — Escape Velocity Values and Comparisons [C→P]**\n\n| Body | M (kg) | R (km) | v_e (km/s) |\n|---|---|---|---|\n| Earth | 5.97 × 10²⁴ | 6 371 | 11.2 |\n| Moon | 7.34 × 10²² | 1 737 | 2.38 |\n| Mars | 6.39 × 10²³ | 3 390 | 5.03 |\n| Sun | 1.99 × 10³⁰ | 696 000 | 617.5 |\n| Neutron star | ~2 × 10³⁰ | ~10 | ~2 × 10⁵ |\n| Black hole | ≥ M_sun | ≤ R_s (= 2GM/c²) | ≥ c |\n\nKey insight — what determines v_e:\n- More massive → higher v_e (larger M in numerator)\n- Smaller radius → higher v_e (smaller R in denominator)\n- A neutron star: Sun's mass compressed to 10 km radius → v_e ≈ 2/3 c\n\n**TA-3 — Three Energy Regimes [C→P]**\n\nFor an object launched from r = R with speed v:\n\n```\nE = ½mv² − GMm/R\n```\n\n| E | Trajectory | Description |\n|---|---|---|\n| E < 0 | Ellipse (bound) | Object returns; orbit is closed |\n| E = 0 | Parabola | Object just escapes (v = v_e) |\n| E > 0 | Hyperbola | Object escapes with excess speed |\n\nAt infinity (r → ∞): v_∞ = √(v² − v_e²) (excess speed at infinity for E > 0).\n\n**TA-4 — Escape from Non-Surface Locations [P]**\n\nEscape velocity depends on r, not just the planet's surface. From any orbital radius r:\n\n```\nv_e(r) = √(2GM/r)\n```\n\nRelationship to orbital speed:\n```\nv_orbital(r) = √(GM/r)   (circular orbit)\nv_e(r) = √2 × v_orbital(r)   ≈ 1.414 × v_orbital\n```\n\nThis means a satellite in circular orbit needs to increase its speed by a factor of √2 to escape from that orbit. From LEO (r ≈ 6770 km):\n```\nv_orbital ≈ 7670 m/s\nv_e ≈ 10 840 m/s\nΔv needed ≈ 3170 m/s   (Δv to escape from LEO)\n```\n\n**TA-5 — Black Holes: Schwarzschild Radius [P]**\n\nIf v_e = c (speed of light), Newtonian formula gives the Schwarzschild radius:\n\n```\nc = √(2GM/R_s)  →  R_s = 2GM/c²\n```\n\nFor the Sun: R_s = 2 × 6.674 × 10⁻¹¹ × 1.99 × 10³⁰ / (3 × 10⁸)² ≈ 2950 m ≈ 3 km.\n\n**Note**: this is a Newtonian calculation that gives the correct answer for the wrong reason (general relativity is needed for full treatment). Present as a conceptual bridge, not a rigorous derivation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 87,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/misconception/MC-ESCAPE-REQUIRES-THRUST",
+      "kind": "misconception",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "- **Trigger signal:** Student says \"the rocket must keep its engines on to escape Earth\" or thinks escape velocity only applies to self-powered vehicles.",
+      "content": "### MC-ESCAPE-REQUIRES-THRUST\n- **Trigger signal:** Student says \"the rocket must keep its engines on to escape Earth\" or thinks escape velocity only applies to self-powered vehicles.\n- **Conflict evidence [P28]:** \"Escape velocity is the minimum speed needed at launch such that no further propulsion is required — the object coasts to infinity on kinetic energy alone. A baseball thrown at 11.2 km/s from Earth's surface would escape Earth's gravity with engines off (ignoring air resistance). The condition is purely energetic: KE at launch ≥ |U at launch|. A rocket that escapes slowly with continuous thrust needs far less initial speed — but escape velocity specifically refers to the unpropelled case.\"\n- **Bridge text [P30]:** \"Escape velocity is an energy condition, not a dynamics condition. We ask: 'What launch KE just equals the depth of the gravitational potential well?' If KE ≥ |U|, the total energy E ≥ 0 and the object escapes. No engines required after the initial impulse.\"\n- **Replacement text [P31]:** \"Escape velocity v_e = √(2GM/r) is the minimum speed for an unpropelled object to escape to infinity (reach r = ∞ with zero speed left). Below v_e, the object follows a closed (bound) orbit or falls back. Above v_e, it follows a hyperbolic escape trajectory.\"\n- **Discrimination pairs [P33]:**\n  - A rocket with continuous thrust can escape at any speed (time-integrated work overcomes gravity).\n  - A baseball at exactly v_e escapes with no thrust after launch.\n  - A baseball at 0.9 v_e always falls back — no amount of waiting helps; it's energetically trapped.\n- **s6_path:** \"The word 'escape' makes it sound like something dramatic. It just means: the launch energy is enough that gravity can never pull you back, even with infinite time. Think of it as the energy threshold to leave the gravitational well.\"\n\n---",
+      "localKey": "MC-ESCAPE-REQUIRES-THRUST",
+      "language": "en",
+      "refs": [
+        "MC-ESCAPE-REQUIRES-THRUST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/misconception/MC-ESCAPE-DEPENDS-ON-MASS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "- **Trigger signal:** Student says \"heavier objects need more speed to escape\" or tries to include m in the v_e formula.",
+      "content": "### MC-ESCAPE-DEPENDS-ON-MASS\n- **Trigger signal:** Student says \"heavier objects need more speed to escape\" or tries to include m in the v_e formula.\n- **Conflict evidence [P28]:** \"From energy conservation: ½mv_e² = GMm/r. The mass m cancels from both sides: v_e² = 2GM/r — mass of the escaping object does not appear. A 1 kg ball and a 1000 kg rocket launched from the same point in the same gravitational field have the same escape velocity. (The rocket needs much more energy overall — 1000× more — but the same speed.)\"\n- **Bridge text [P30]:** \"This is exactly like free-fall: all objects fall at the same acceleration g regardless of mass (Galileo's result). Escape velocity is the reverse of free-fall from infinity — and mass cancels there too, for the same reason.\"\n- **Replacement text [P31]:** \"v_e = √(2GM/r) depends only on the source mass M and the launch radius r. The escaping object's mass determines the energy needed (E = ½mv_e²) but not the speed.\"\n- **Discrimination pairs [P33]:**\n  - v_e from Earth's surface ≈ 11.2 km/s for a 1 kg probe ✓\n  - v_e from Earth's surface ≈ 11.2 km/s for a 10 000 kg spacecraft ✓ (same speed; 10 000× more energy)\n- **s6_path:** \"The mass cancellation surprises almost everyone. Write out the energy equation and watch m cancel — that's the proof.\"\n\n---",
+      "localKey": "MC-ESCAPE-DEPENDS-ON-MASS",
+      "language": "en",
+      "refs": [
+        "MC-ESCAPE-DEPENDS-ON-MASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "Derivation from Energy Conservation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Derivation from Energy Conservation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 89,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "Escape Velocity Values and Comparisons",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Escape Velocity Values and Comparisons\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 117,
+        "endLine": 133
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "Three Energy Regimes",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Three Energy Regimes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 133,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "Escape from Non-Surface Locations",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Escape from Non-Surface Locations\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 149,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "Black Holes: Schwarzschild Radius",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Black Holes: Schwarzschild Radius\",\"primitives\":[\"P01\",\"P06\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ESCAPE-DEPENDS-ON-MASS\",\"MC-ESCAPE-REQUIRES-THRUST\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ESCAPE-DEPENDS-ON-MASS",
+        "MC-ESCAPE-REQUIRES-THRUST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 170,
+        "endLine": 345
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Derivation check**\n\"Derive v_e from energy conservation. Start with: KE_launch + U_launch = KE_final + U_final, and state the conditions at launch and at infinity. Show that mass cancels.\"\n\n*Target:* Full derivation: ½mv² − GMm/r = 0 + 0 → v_e = √(2GM/r). Explicit mass cancellation shown.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 236,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Formula comparison**\n\"Write v_e in terms of surface gravity g and planet radius R (do not use M or G).\"\n\n*Target:* g = GM/R² → GM = gR² → v_e = √(2gR). On Earth: v_e = √(2 × 9.8 × 6.37 × 10⁶) = √(1.25 × 10⁸) ≈ 11 180 m/s ✓.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 236,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Regime identification**\n\"A probe is launched at 8 km/s from Earth's surface. Is it bound or unbound? What trajectory does it follow? (v_e = 11.2 km/s)\"\n\n*Target:* 8 < 11.2 km/s → E < 0 → bound → elliptical orbit (or suborbital if direction is wrong, but energetically bound).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 236,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Escape from orbit**\n\"A satellite is in circular orbit at r = 2R_E from Earth's centre. What is its orbital speed? What speed would it need to escape from this orbit? By what factor must it increase speed?\"\n\n*Target:* v_orb = √(GM_E/(2R_E)) = √(3.13 × 10⁷) ≈ 5600 m/s; v_e = √(2GM_E/(2R_E)) = √2 × v_orb ≈ 7920 m/s; factor = √2 ≈ 1.414.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 236,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: hypothetical planet**\n\"A planet has mass M = 2M_Earth and radius R = 0.5R_Earth. Calculate v_e relative to Earth's v_e. A human can run at 10 m/s — can they jump-escape this planet? (v_e_Earth = 11 200 m/s)\"\n\n*Target:* v_e ∝ √(M/R) → v_e_planet/v_e_Earth = √(2M_E / 0.5R_E) / √(M_E/R_E) = √(2/0.5) = √4 = 2 → v_e_planet = 22 400 m/s. Running at 10 m/s: hopelessly bound. Even at 22 km/s, no — but a fun scale comparison.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 236,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "Adaptive Flags",
+      "content": "- **Mass cancellation must be shown explicitly**: never skip the step where m cancels. Students who see it written out once believe it; students told it verbally often doubt it.\n- **v_e is unpropelled by definition**: if a problem involves a rocket with continuous thrust, note that v_e doesn't apply directly — the problem becomes a continuous work/energy integration, not a single launch condition.\n- **Black hole TA-5 caveat**: emphasise this is Newtonian analogy only. The correct black hole physics requires general relativity. The Schwarzschild radius formula is numerically correct but derives from a different physical mechanism (spacetime curvature).\n- **Connection to orbital mechanics**: v_e = √2 × v_orbital (TA-4) is one of the most important ratios in spaceflight. Reinforce it with the LEO example — students heading to phys.mech.orbital-mechanics will use this ratio repeatedly.\n- **Air resistance**: all derivations assume vacuum. Earth's atmospheric drag means actual launch vehicles burn far more fuel than the energy calculation suggests. Note this explicitly to avoid naive application of v_e to real rockets.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 306,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "phys.mech.escape-velocity/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.escape-velocity",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — rubber-sheet well provocation (marble escape speed)\n  ↓\n[P41] PD-1 (exact gravitational PE) + PD-2 (energy conservation)\n  ↓ PASS both\n[P06] Anchor: marble rolling out of well → v_e = √(2GM/r)\n  ↓\nTA-1: Full energy derivation; mass cancels [C]\n  ↓\nTA-2: Comparative v_e table; what determines escape speed [C→P]\n  ↓\n[P14] Predict: \"A satellite in LEO needs Δv to escape. Is it more or less than v_e from the surface?\"\n  ↓\nTA-3: Three energy regimes (E < 0, E = 0, E > 0) [C→P]\n  ↓\nWE-1 → WE-2 → WE-3 (escalating; WE-3 targets MC-ESCAPE-DEPENDS-ON-MASS)\n  ↓\nTA-4: Escape from orbit; v_e = √2 × v_orbital [P]\n  ↓\nTA-5: Black holes — Schwarzschild radius (conceptual bridge) [P]\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval schedule seed: \"What is v_e from a planet of mass M and radius R?\"\n[P68] Session close\n[P85] Regulation tail\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80% MP-set; re-route if below threshold\n```\n\n**Protocol routing:**\n- S0 (novice): full CPA path; use concrete rubber-sheet anchor extensively; walk through mass-cancellation algebra step by step.\n- S1 (schema without grounding): knows v_e = 11.2 km/s for Earth but not where it comes from; focus on TA-1 derivation before values.\n- S4 (prereq gap): PD-1 fail → gravitational-potential; PD-2 fail → conservation-of-energy.\n- S6 (anxiety): [F] protocol — \"One equation, one derivation: ½mv² = GMm/r → v = √(2GM/r). Everything else is applying this.\"\n- S7 (overconfident): open with MP-5 (hypothetical planet with v_e factor calculation) — the √(M/R) ratio surprises students who confuse linear scaling.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.escape-velocity.md",
+        "startLine": 265,
+        "endLine": 306
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

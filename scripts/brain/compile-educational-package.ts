@@ -36,20 +36,14 @@ function knownConceptIds(conceptId: string): Set<string> | undefined {
   return new Set(kg.concepts.map((c) => c.id))
 }
 
-function main(): void {
-  const args = process.argv.slice(2).filter((a) => a !== '--')
-  const check = args.includes('--check')
-  const conceptId = args.find((a) => !a.startsWith('--'))
-  if (!conceptId) {
-    console.error('usage: npm run compile:package -- <conceptId> [--check]')
-    process.exit(2)
-  }
-
+/** Compile one concept. Returns true on success. quiet: one summary line
+ *  instead of the full per-concept report (batch mode). */
+function compileOne(conceptId: string, check: boolean, quiet: boolean): boolean {
   const blueprintFile = `docs/curriculum/blueprints/${conceptId}.md`
   const absBlueprint = path.join(process.cwd(), blueprintFile)
   if (!fs.existsSync(absBlueprint)) {
     console.error(`no blueprint at ${blueprintFile}`)
-    process.exit(2)
+    return false
   }
 
   const source = fs.readFileSync(absBlueprint, 'utf-8')
@@ -58,11 +52,11 @@ function main(): void {
   })
 
   for (const d of result.diagnostics) {
-    console.log(`  [${d.severity}] ${d.code}: ${d.message}`)
+    if (!quiet || d.severity === 'E') console.log(`  [${d.severity}] ${d.code}: ${d.message}`)
   }
   if (!result.ok || !result.educationalPackage) {
     console.error(`compile FAILED for ${conceptId}`)
-    process.exit(1)
+    return false
   }
 
   const pkg = result.educationalPackage
@@ -73,24 +67,59 @@ function main(): void {
   if (check) {
     if (!fs.existsSync(outPath)) {
       console.error(`--check: no existing artifact at ${outPath}`)
-      process.exit(1)
+      return false
     }
     const existing = fs.readFileSync(outPath, 'utf-8')
     if (existing !== artifact) {
       console.error(`--check: DRIFT — recompiled artifact differs from ${outPath}`)
-      process.exit(1)
+      return false
     }
-    console.log(`--check OK: ${outPath} is byte-identical to a fresh compile (${pkg.manifest.contentHash})`)
-    return
+    console.log(`--check OK: ${conceptId} (${pkg.manifest.contentHash})`)
+    return true
   }
 
   fs.mkdirSync(outDir, { recursive: true })
   fs.writeFileSync(outPath, artifact)
-  console.log(`wrote ${outPath}`)
-  console.log(`  status:  ${pkg.status}`)
-  console.log(`  rules:   ${pkg.manifest.ruleCount}`)
-  console.log(`  assets:  ${pkg.manifest.assetCount} ${JSON.stringify(pkg.manifest.assetCounts)}`)
-  console.log(`  hash:    ${pkg.manifest.contentHash}`)
+  if (quiet) {
+    console.log(`${conceptId}: ${pkg.manifest.ruleCount} rules, ${pkg.manifest.assetCount} assets`)
+  } else {
+    console.log(`wrote ${outPath}`)
+    console.log(`  status:  ${pkg.status}`)
+    console.log(`  rules:   ${pkg.manifest.ruleCount}`)
+    console.log(`  assets:  ${pkg.manifest.assetCount} ${JSON.stringify(pkg.manifest.assetCounts)}`)
+    console.log(`  hash:    ${pkg.manifest.contentHash}`)
+  }
+  return true
+}
+
+function main(): void {
+  const args = process.argv.slice(2).filter((a) => a !== '--')
+  const check = args.includes('--check')
+  const prefixArg = args.indexOf('--prefix')
+  const prefix = prefixArg !== -1 ? args[prefixArg + 1] : null
+  const conceptId = args.find((a, i) => !a.startsWith('--') && (prefixArg === -1 || i !== prefixArg + 1))
+
+  if (prefix) {
+    // Batch mode: every blueprint whose filename starts with the prefix
+    // (e.g. --prefix phys. compiles the whole physics corpus in-process).
+    const dir = path.join(process.cwd(), 'docs', 'curriculum', 'blueprints')
+    const ids = fs.readdirSync(dir)
+      .filter((f) => f.startsWith(prefix) && f.endsWith('.md'))
+      .map((f) => f.replace(/\.md$/, ''))
+      .sort()
+    let failed = 0
+    for (const id of ids) {
+      if (!compileOne(id, check, true)) failed++
+    }
+    console.log(`\n${check ? 'checked' : 'compiled'} ${ids.length - failed}/${ids.length} packages for prefix "${prefix}"`)
+    process.exit(failed > 0 ? 1 : 0)
+  }
+
+  if (!conceptId) {
+    console.error('usage: npm run compile:package -- <conceptId> [--check] | --prefix <idPrefix> [--check]')
+    process.exit(2)
+  }
+  process.exit(compileOne(conceptId, check, false) ? 0 : 1)
 }
 
 main()

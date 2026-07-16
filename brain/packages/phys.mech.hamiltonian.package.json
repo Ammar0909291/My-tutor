@@ -1,0 +1,539 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.hamiltonian-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.hamiltonian",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:20319767d9b7e036a8b92ebe06dc002a2d10e9d113b786f6c0ae213b98625598",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.hamiltonian.md": "sha256:9cc727fc42d89d2b75c0d8ef9e570ce948fbfca38371e81ad44ab89a66428c1f"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.hamiltonian",
+    "name": "The Hamiltonian and Legendre Transform",
+    "difficultyRaw": "expert (6)",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.mech.euler-lagrange-equation"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.hamiltonian-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.hamiltonian (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.hamiltonian.md": "sha256:9cc727fc42d89d2b75c0d8ef9e570ce948fbfca38371e81ad44ab89a66428c1f"
+      },
+      "contentHash": "sha256:7a37b3a1e1e2f2b75641046f4814dc937588e3ad838d2098bf516a804ae7f79a",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltonian.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltonian.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltonian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltonian\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltonian.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltonian.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltonian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltonian\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltonian.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltonian.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltonian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltonian\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltonian.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltonian.md#TA-4 (addresses MC-H-IS-L)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltonian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltonian\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltonian.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltonian.md#TA-5 (addresses MC-H-ALWAYS-ENERGY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltonian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltonian\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltonian.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltonian.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltonian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltonian\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hamiltonian.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hamiltonian.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hamiltonian"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hamiltonian\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.hamiltonian/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "The Hamiltonian and Legendre Transform — core explanation",
+      "content": "**Core Insight:** The Hamiltonian H is obtained from the Lagrangian L via a Legendre\ntransform with respect to generalized velocities. It is a function of generalized coordinates\nqᵢ and canonical momenta pᵢ (not q̇ᵢ). When the kinetic energy is a quadratic function of\nvelocities and the constraints are time-independent:\n\n    H = Σᵢ pᵢq̇ᵢ − L = T + V = total energy\n\nThe Hamiltonian moves mechanics from the (q, q̇, t) space used by the Lagrangian to the\n(q, p, t) phase space — a symmetric first-order framework that is the foundation of\nHamiltonian mechanics, quantum mechanics, and statistical mechanics.\n\n**Formal Definitions:**\n\nCanonical (generalized) momentum: pᵢ = ∂L/∂q̇ᵢ\n\nLegendre transform: H(q, p, t) = Σᵢ pᵢq̇ᵢ − L(q, q̇, t)   [with q̇ expressed in terms of p]\n\nWhen T is quadratic in q̇ and constraints time-independent: H = T + V = E.\n\nPhase space: the 2f-dimensional space with coordinates (q₁, …, qf, p₁, …, pf).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 25,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Simple pendulum",
+      "content": "**Worked Example 1 (Simple pendulum):**\nL = ½mL²θ̇² + mgL cosθ.\np_θ = ∂L/∂θ̇ = mL²θ̇  →  θ̇ = p_θ/(mL²).\nH = p_θ · θ̇ − L = p_θ · p_θ/(mL²) − [½mL²(p_θ/mL²)² + mgL cosθ]\n  = p_θ²/(mL²) − p_θ²/(2mL²) − mgL cosθ\n  = p_θ²/(2mL²) − mgL cosθ\n  = T + V = E ✓",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 25,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Spring-mass in 1D",
+      "content": "**Worked Example 2 (Spring-mass in 1D):**\nL = ½mẋ² − ½kx².\np = mẋ  →  ẋ = p/m.\nH = p·ẋ − L = p·(p/m) − [½m(p/m)² − ½kx²]\n  = p²/m − p²/(2m) + ½kx²\n  = p²/(2m) + ½kx²\n  = T + V ✓",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 25,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "2D polar, free particle",
+      "content": "**Worked Example 3 (2D polar, free particle):**\nT = ½m(ṙ² + r²φ̇²).\np_r = mṙ, p_φ = mr²φ̇.\nṙ = p_r/m, φ̇ = p_φ/(mr²).\nH = p_r²/(2m) + p_φ²/(2mr²)   (kinetic energy in phase space variables).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 25,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/misconception/MC-H-IS-L",
+      "kind": "misconception",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Priority 1",
+      "content": "### MC-H-IS-L (Priority 1)\n**Label:** \"The Hamiltonian H is just the Lagrangian with different notation\"\n\n**Trigger signals:**\n- Writes H = T − V (confuses H with L)\n- Says H and L are the same object evaluated differently\n- Cannot state the different domains: L(q, q̇, t) vs H(q, p, t)\n\n**Conflict evidence [P28]:**\n\"For a spring: L = T − V = ½mẋ² − ½kx². H = T + V = p²/(2m) + ½kx².\nAt maximum stretch (x = A, ẋ = 0, p = 0): L = 0 − ½kA² = −½kA² < 0.\nH = 0 + ½kA² = ½kA² > 0. Same magnitude, opposite sign. Same thing?\"\n\n**Bridge [P30]:**\n\"L = T − V; H = T + V. They use different independent variables: L takes (q, q̇, t) as inputs;\nH takes (q, p, t) as inputs. The Legendre transform is the mathematical operation that switches\nfrom velocity to momentum as the independent variable. They encode the same physics\nbut are different mathematical objects with different signs and different domains.\"\n\n**Replacement [P31]:**\n\"L(q, q̇, t) = T − V. H(q, p, t) = T + V (when T quadratic, constraints time-independent).\nTwo different functions. Derive H from L: (1) compute pᵢ = ∂L/∂q̇ᵢ; (2) solve for q̇ᵢ(q, p);\n(3) H = Σpᵢq̇ᵢ − L, substituting everything in terms of q and p.\"\n\n**Discrimination pairs [P33]:**\n- At v = 0: L = −V, H = V (opposite) ✓\n- At x = 0 (equilibrium): L = T, H = T (coincide — misleading!) — but only at this instant ✓\n\n**s6_path:** \"H = T + V. L = T − V. Write both on the page for comparison every time.\"\n\n---",
+      "localKey": "MC-H-IS-L",
+      "language": "en",
+      "refs": [
+        "MC-H-IS-L"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 3,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/misconception/MC-H-ALWAYS-ENERGY",
+      "kind": "misconception",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Priority 2",
+      "content": "### MC-H-ALWAYS-ENERGY (Priority 2)\n**Label:** \"H always equals the total energy T + V\"\n\n**Trigger signals:**\n- Assumes H = E without checking whether constraints are time-dependent\n- Applies H = E to systems with explicitly time-dependent L\n- Does not know when H ≠ E\n\n**Conflict evidence [P28]:**\n\"Consider a bead on a wire that is being pulled outward at constant speed v₀ (the wire\nrotates so that r increases as r = r₀ + v₀t). The constraint is time-dependent.\nIn this case H = Σpᵢq̇ᵢ − L, but T contains cross-terms from the moving constraint,\nso H ≠ T + V. H is still conserved (if ∂L/∂t = 0 in the new frame), but it does not\nequal the energy in the lab frame. When is H guaranteed to equal T + V?\"\n\n**Bridge [P30]:**\n\"H = T + V requires two conditions: (1) the kinetic energy T is a homogeneous quadratic\nfunction of the velocities q̇ᵢ (no linear terms), AND (2) the constraints are\ntime-independent. When either fails — time-dependent constraints or non-standard T —\nH may not equal the mechanical energy, though it is still a well-defined conserved\nquantity if ∂L/∂t = 0.\"\n\n**Replacement [P31]:**\n\"H = Σpᵢq̇ᵢ − L always. H = T + V only when T is quadratic in q̇ and constraints are\ntime-independent. Check both conditions before writing H = E.\"\n\n**Discrimination pairs [P33]:**\n- Simple pendulum (time-independent): H = E = T + V ✓\n- Bead on expanding ring (time-dependent constraint): H ≠ E (compute explicitly to show) ✓\n\n**s6_path:** \"For all standard problems in this course: T is quadratic, constraints are\nfixed → H = E = T + V. State this condition explicitly.\"\n\n---",
+      "localKey": "MC-H-ALWAYS-ENERGY",
+      "language": "en",
+      "refs": [
+        "MC-H-ALWAYS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 35,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 3,
+        "endLine": 20
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Legendre Transform Procedure",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Legendre Transform Procedure\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 20,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 33,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "MC-H-IS-L Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-H-IS-L Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-H-IS-L\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-H-IS-L"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 52,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "MC-H-ALWAYS-ENERGY Probe + Phase Space",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-H-ALWAYS-ENERGY Probe + Phase Space\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-H-ALWAYS-ENERGY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-H-ALWAYS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 69,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 91,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 119,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Understand — Legendre transform procedure",
+      "content": "**MP-1 (Understand — Legendre transform procedure):**\n\"A particle moves in a 1D potential V(x). L = ½mẋ² − V(x).\nCarry out the Legendre transform to find H(x, p).\"\nExpected: p = mẋ → ẋ = p/m; H = p·(p/m) − [½m(p/m)² − V(x)] = p²/(2m) + V(x).\n_Discriminates: three-step Legendre transform._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 296,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Understand — domain of H vs L",
+      "content": "**MP-2 (Understand — domain of H vs L):**\n\"What are the independent variables of L? Of H? Why does this difference matter?\"\nExpected: L = L(q, q̇, t): q and q̇ independent. H = H(q, p, t): q and p independent.\nMatters because the equations derived from H (Hamilton's equations) treat q and p symmetrically.\n_Discriminates: variable distinction; not just L vs E sign._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 296,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Apply — pendulum H",
+      "content": "**MP-3 (Apply — pendulum H):**\n\"L = ½mL²θ̇² + mgL cosθ. Derive H(θ, p_θ). What is p_θ physically?\"\nExpected: p_θ = mL²θ̇ (angular momentum). H = p_θ²/(2mL²) − mgL cosθ = T + V.\n_Discriminates: full derivation; physical interpretation of p_θ._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 296,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Understand — H = E conditions",
+      "content": "**MP-4 (Understand — H = E conditions):**\n\"A charged particle (charge q) moves in a magnetic field B(x,t) (time-varying).\nDoes H necessarily equal the total kinetic energy? Explain.\"\nExpected: In a magnetic field, the canonical momentum p = mv + qA (includes vector potential A);\nT = (p − qA)²/(2m) ≠ p²/(2m). H ≠ T alone (and H ≠ T + V_electric in general).\nThe condition T = quadratic in q̇ must be checked carefully.\n_Discriminates: H ≠ E in non-trivial cases; standard mechanics vs EM._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 296,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Apply — phase space",
+      "content": "**MP-5 (Apply — phase space):**\n\"For H = p²/(2m) + mgx (particle under gravity in 1D, x measured upward):\n(a) Sketch the phase space portrait (qualitative: what shape are the H = const curves?).\n(b) At (x = 0, p = p₀ > 0): does the particle move up or down? What is ẋ?\"\nExpected: (a) Parabolas opening to the left (as x increases, |p| decreases).\n(b) p₀ > 0 → p = mẋ > 0 → ẋ > 0 → moving upward; ẋ = p₀/m.\n_Discriminates: reading phase space; sign conventions._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 296,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.euler-lagrange-equation  ──►  phys.mech.hamiltonian\n```\n\n**PD-1 (Canonical momentum definition):**\n\"For L = ½mẋ² − V(x), compute p = ∂L/∂ẋ.\"\nExpected: p = mẋ.\n\n**PD-2 (Expressing q̇ in terms of p):**\n\"If p = mẋ, express ẋ in terms of p.\"\nExpected: ẋ = p/m.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 72,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Three-step Legendre transform recipe?\"\nThreshold: (1) pᵢ = ∂L/∂q̇ᵢ; (2) solve q̇ᵢ(p); (3) H = Σpᵢq̇ᵢ − L.\n\n**FA-2 (TA-4 exit):** \"At maximum spring stretch: L = ? H = ? Are they equal?\"\nExpected: L = −½kA² < 0; H = +½kA² > 0; L ≠ H.\nIf student writes L = H → MC-H-IS-L not resolved.\n\n**FA-3 (TA-5 exit):** \"When does H = T + V?\"\nExpected: When T is quadratic in q̇ AND constraints are time-independent.\n\n**FA-4 (Session exit):** MP-1 and MP-3. Both correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-H-IS-L"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 335,
+        "endLine": 351
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Stay on spring-mass (1D) throughout TA-3 and TA-4.\n- Reassure: \"Three steps: compute p, solve for q̇, plug into H = pq̇ − L.\"\n- Skip time-dependent constraint example (TA-5 MC-H-ALWAYS-ENERGY collision) in first pass.\n\n**S7 (Overconfident) path [Protocol G]:**\n- MP-4 (charged particle in magnetic field: canonical vs kinetic momentum).\n- Discuss non-standard kinetic energies (rotating frames, relativistic T).\n- Preview: Routhian (partial Legendre transform, hybrid L/H for rotating systems).\n\n**S4 (Prereq gap):**\n- PD-1 gap (canonical momentum) → return to E-L equation; drill pᵢ = ∂L/∂q̇ᵢ.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-H-ALWAYS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 351,
+        "endLine": 368
+      }
+    },
+    {
+      "assetId": "phys.mech.hamiltonian/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.hamiltonian",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → Legendre transform → MC-H-IS-L).\n**Session 2 (≥24 h later):** Retrieval: \"Three steps of Legendre transform. When H = E?\"\n  → TA-5 (phase space portrait) → TA-6 problems 1–3.\n**Session 3 (≥72 h later):** Interleaved: \"From H = p_θ²/(2mL²) − mgL cosθ, derive\n  dH/dt using partial derivatives. Show H = const for the pendulum.\"\n**Pre-Hamilton's-equations session:** All 5 P91 probes cold; require 4/5.\n\n**Interleaving partners:** phys.mech.euler-lagrange-equation (prerequisite),\nphys.mech.hamiltons-equations (next concept),\nphys.mech.cyclic-coordinates-conservation-laws (cyclic q in H formulation).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-H-IS-L"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hamiltonian.md",
+        "startLine": 368,
+        "endLine": 383
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

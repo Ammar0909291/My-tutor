@@ -1,0 +1,542 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.conservation-of-angular-momentum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.conservation-of-angular-momentum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:16d1c64122527aeea00f959403c00967ca44583e2e72c6a6c85fb23588475bf1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md": "sha256:ebcc99768394e984e3d6390f5db706042883ed32c804f9a03eb33d0e15a6c0c5"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.conservation-of-angular-momentum",
+    "name": "Conservation of Angular Momentum",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.angular-momentum"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.conservation-of-angular-momentum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.conservation-of-angular-momentum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md": "sha256:ebcc99768394e984e3d6390f5db706042883ed32c804f9a03eb33d0e15a6c0c5"
+      },
+      "contentHash": "sha256:244733fcf1a52b514b86438d7cb16fcefc1edf62b42f747f45abb5b22aa60968",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-angular-momentum.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-angular-momentum\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-angular-momentum.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-angular-momentum\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-angular-momentum.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-angular-momentum\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-angular-momentum.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md#TA-4 (addresses MC-ANGULAR-SPEED-FREE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-angular-momentum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-angular-momentum.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md#TA-5 (addresses MC-KE-CONSERVED-ROTATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-angular-momentum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-angular-momentum.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-angular-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservation-of-angular-momentum.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservation-of-angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservation-of-angular-momentum\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Conservation of Angular Momentum — core explanation",
+      "content": "**Core Insight:** When the net external torque on a system is zero, the total angular momentum\nis conserved. This explains phenomena ranging from figure skating to planetary formation to\npulsars. Unlike linear momentum conservation, angular momentum can be redistributed within the\nsame object by changing its moment of inertia.\n\n**Formal Statement:**\nIf Σ τ_external = 0:\nL_total = constant\nI_i ω_i = I_f ω_f    (for a single body changing shape)\nΣ I_i ω_i (before) = Σ I_i ω_i (after)    (for a system of bodies)\n\n**Key properties:**\n- Internal forces/torques cannot change the total L (Newton's 3rd applies in rotation too).\n- An object can change its own ω by redistributing mass (changing I) with zero external torque.\n- This is distinct from linear momentum conservation: a body can change its own ω just by\n  restructuring (a skater can't change her own linear speed without an external force).\n- KE is NOT generally conserved when I changes (skater does internal work pulling arms in).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 26,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Figure skater — single body",
+      "content": "**Worked Example 1 (Figure skater — single body):**\nSkater: I_i = 4 kg·m², ω_i = 2 rad/s. Arms pulled in: I_f = 1 kg·m².\nL conserved: I_i ω_i = I_f ω_f → 4×2 = 1×ω_f → ω_f = 8 rad/s.\nKE_i = ½×4×4 = 8 J. KE_f = ½×1×64 = 32 J. Skater did 24 J of internal work.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 26,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Two-body system",
+      "content": "**Worked Example 2 (Two-body system):**\nA spinning disc (I_d = 3 kg·m², ω_d = 10 rad/s) catches a non-rotating ring (I_r = 1 kg·m²).\nL_before = 3×10 = 30 kg·m²/s.\nL_after = (3+1)×ω_f = 30 → ω_f = 7.5 rad/s.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 26,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Astrophysical — collapsing star",
+      "content": "**Worked Example 3 (Astrophysical — collapsing star):**\nA star collapses: R shrinks by factor 10 → I shrinks by factor 100 (I ∝ R²).\nL conserved: ω increases by factor 100.\n(Pulsar periods ~ms explain why rapidly-rotating neutron stars exist.)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 26,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/misconception/MC-ANGULAR-SPEED-FREE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Priority 1",
+      "content": "### MC-ANGULAR-SPEED-FREE (Priority 1)\n**Label:** \"A spinning skater speeds up because she is pushing off the ice or exerting an external force\"\n\n**Trigger signals:**\n- Says the skater speeds up because she \"pushed off\" or \"the ice pushed her\"\n- Thinks an external torque is required for the skater to spin faster\n- Cannot explain the source of increased ω without inventing an external agent\n\n**Conflict evidence [P28]:**\n\"The skater spins on frictionless ice (nearly zero external torque on her rotation axis).\nShe pulls her arms in. ω increases dramatically. But no external torque acted.\nIf external torque caused the speed-up, where is it? The ice can't provide torque about her vertical axis.\nWhat DID change?\"\n\n**Bridge [P30]:**\n\"L = Iω = constant (no external torque). The skater changed her own I by pulling her arms in\n(mass moved closer to the axis → smaller I). With L constant, smaller I forces larger ω.\nNo external agent needed — she redistributed her own mass. Internal forces suffice to change\nI (and thus ω), though they cannot change L.\"\n\n**Replacement [P31]:**\n\"Conservation of angular momentum: L = Iω = constant when τ_external = 0.\nChanging ω requires changing I — achieved by redistributing mass (arms in/out).\nThe increase in ω has a definite source: it's the reciprocal change in I. No external torque needed.\"\n\n**Discrimination pairs [P33]:**\n- Skater pulls arms in: I decreases → ω increases, L unchanged ✓\n- Skater extends arms: I increases → ω decreases, L unchanged ✓\n\n**s6_path:** Use the L = Iω equation as a number puzzle first: \"if I halves, ω doubles — just\nalgebra.\" Build the mechanics-explanation only after the arithmetic is secure.\n\n---",
+      "localKey": "MC-ANGULAR-SPEED-FREE",
+      "language": "en",
+      "refs": [
+        "MC-ANGULAR-SPEED-FREE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 3,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/misconception/MC-KE-CONSERVED-ROTATION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Priority 2",
+      "content": "### MC-KE-CONSERVED-ROTATION (Priority 2)\n**Label:** \"Conservation of angular momentum also means rotational KE is conserved\"\n\n**Trigger signals:**\n- Says \"energy is always conserved so KE must stay the same when I changes\"\n- Computes ω_f using both L conservation AND KE conservation (over-constrained — wrong)\n- Surprised that KE increased when the skater pulled her arms in\n\n**Conflict evidence [P28]:**\n\"Skater: I_i = 4, ω_i = 2. I_f = 1 (arms in). L conserved → ω_f = 8.\nKE_i = ½×4×4 = 8 J. KE_f = ½×1×64 = 32 J. KE increased 4×.\nIf KE were conserved, we'd need ½×4×4 = ½×1×ω_f² → ω_f = 4 rad/s. NOT consistent with L\nconservation. Which law governs here — and what explains the extra KE?\"\n\n**Bridge [P30]:**\n\"KE is not conserved when I changes because the skater does internal work pulling her arms in\nagainst centrifugal tendency. Total energy IS conserved: extra KE = work done by skater's muscles.\nConservation of angular momentum is the rule when τ_external = 0; KE is not automatically conserved.\"\n\n**Replacement [P31]:**\n\"When I changes with no external torque: use ONLY L = I_i ω_i = I_f ω_f.\nDo NOT assume KE is conserved — it generally isn't. ΔKE = internal work done.\nCompare: in linear momentum conservation during perfectly inelastic collision: p conserved, KE not.\"\n\n**Discrimination pairs [P33]:**\n- Disc catches ring (two-body): L conserved, KE decreases (some becomes heat/deformation) ✓\n- Skater pulls arms in: L conserved, KE increases (internal muscle work done) ✓\n\n**s6_path:** Defer the KE analysis to a single statement: \"KE changes when I changes — the\nskater's muscles do work. We'll compute only L conservation.\" Don't attempt KE calculation until\nMC-ANGULAR-SPEED-FREE is resolved.\n\n---",
+      "localKey": "MC-KE-CONSERVED-ROTATION",
+      "language": "en",
+      "refs": [
+        "MC-KE-CONSERVED-ROTATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 37,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 14,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Prerequisite Check + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 33,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "MC-ANGULAR-SPEED-FREE Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-ANGULAR-SPEED-FREE Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-ANGULAR-SPEED-FREE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ANGULAR-SPEED-FREE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 44,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "MC-KE-CONSERVED-ROTATION Probe + Two-Body System",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-KE-CONSERVED-ROTATION Probe + Two-Body System\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-KE-CONSERVED-ROTATION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-KE-CONSERVED-ROTATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 62,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 79,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 100,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Apply — single body",
+      "content": "**MP-1 (Apply — single body):**\n\"A skater (I_i = 6 kg·m², ω_i = 2 rad/s) pulls arms in to I_f = 1.5 kg·m². No external torque.\nFind ω_f.\"\nExpected: L = 12; ω_f = 12/1.5 = 8 rad/s.\n_Discriminates: basic conservation with changing I._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 263,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Apply — two-body sticking",
+      "content": "**MP-2 (Apply — two-body sticking):**\n\"A rotating disc (I_d = 4 kg·m², ω = 6 rad/s) has a ring (I_r = 2 kg·m², ω = 0) dropped on it.\nFind ω_f.\"\nExpected: L = 24; ω_f = 24/6 = 4 rad/s.\n_Discriminates: two-body L conservation; analogous to perfectly inelastic linear collision._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 263,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Apply — KE analysis",
+      "content": "**MP-3 (Apply — KE analysis):**\n\"For MP-1 above: compute KE before and after. What happened to KE?\"\nExpected: KE_i = ½×6×4 = 12 J; KE_f = ½×1.5×64 = 48 J. KE increased by 36 J (muscle work).\n_Discriminates: MC-KE-CONSERVED-ROTATION resolution._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-KE-CONSERVED-ROTATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 263,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Apply — find I",
+      "content": "**MP-4 (Apply — find I):**\n\"A ballerina's angular momentum is 10 kg·m²/s. Arms out: ω = 2 rad/s. Arms in: ω = 5 rad/s.\nFind I with arms out and arms in.\"\nExpected: I_out = 10/2 = 5 kg·m²; I_in = 10/5 = 2 kg·m².\n_Discriminates: algebraic rearrangement; L conservation verifiable._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 263,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Analyze — physical explanation",
+      "content": "**MP-5 (Analyze — physical explanation):**\n\"A neutron star forms from a collapsing gas cloud. The star rotates much faster than the original\ncloud. Use conservation of angular momentum to explain this qualitatively AND quantitatively\nif R decreases by a factor of 10⁵.\"\nExpected: Qualitative: I ∝ R² → smaller R → smaller I → same L → larger ω.\nQuantitative: R/10⁵ → I/10¹⁰ → ω increases by factor 10¹⁰.\n_Discriminates: MC-ANGULAR-SPEED-FREE resolution; applying L conservation to astrophysics._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [
+        "MC-ANGULAR-SPEED-FREE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 263,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.angular-momentum  ──────────────►  phys.mech.conservation-of-angular-momentum\n   (L = Iω; τ = ΔL/Δt; understanding that zero torque → constant L)\n   REQUIRED: student can compute L and angular impulse\n```\n\n**PD-1 (Angular momentum prerequisite):**\n\"A disc (I = 2 kg·m², ω = 6 rad/s). L?\"\nExpected: L = 12 kg·m²/s.\n\nIf student cannot compute L → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 63,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"When is angular momentum conserved? Write the condition.\"\nThreshold: \"When Σ τ_external = 0\" (no net external torque).\n\n**FA-2 (TA-4 exit):** \"Skater (I_i = 3, ω_i = 4) pulls to I_f = 1. ω_f? What caused the speed-up?\"\nExpected: ω_f = 12 rad/s; caused by decrease in I (redistribution of mass) with L = constant.\nIf student says \"external force\" → MC-ANGULAR-SPEED-FREE not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"Skater above: KE_i = ? KE_f = ? Is KE conserved?\"\nExpected: KE_i = ½×3×16 = 24 J; KE_f = ½×1×144 = 72 J. KE NOT conserved (muscles did 48 J of work).\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ANGULAR-SPEED-FREE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 300,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only the I_i ω_i = I_f ω_f equation; present as direct proportion-inversion.\n- Defer KE analysis to a second session; label it \"optional extension.\"\n- Reassure: \"One equation: L = constant. The only question is: what is I_i? What is I_f? Then solve.\"\n- Skip two-body system in TA-5 on first pass if anxiety is high.\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (astrophysical application) at TA-3.\n- Challenge: \"Two ice dancers, connected by a cord, circle each other at ω = 2 rad/s.\n  They pull the cord in, halving their separation. What is ω_f? (Each is a point mass m at r.)\"\n  (I = 2mr²; L conserved → ω_f = 4ω_i = 8 rad/s. Also: KE quadruples — where from? Cord tension work.)\n- Spend TA-6 on Problem 4 (find I_f) and Problem 3 (KE analysis).\n\n**S4 (Prereq gap — Angular momentum):**\n- Detect via PD-1 failure at TA-3.\n- Repair: L = Iω, τ = ΔL/Δt before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 316,
+        "endLine": 337
+      }
+    },
+    {
+      "assetId": "phys.mech.conservation-of-angular-momentum/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.conservation-of-angular-momentum",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → L = I_iω_i = I_fω_f → MC-ANGULAR-SPEED-FREE repair).\n**Session 2 (≥24 h later):** Retrieval: \"When is L conserved? One example.\"\n  → TA-5 (MC-KE-CONSERVED, two-body) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe:\n  \"Compare linear and angular conservation:\n   (a) A perfectly inelastic linear collision: p conserved, KE not.\n   (b) A rotating object pulls its mass in: L conserved, KE not (muscle work).\n   In both cases: what IS conserved, what ISN'T, and why?\"\n  (Crystallises the distinction between momentum conservation and energy conservation.)\n**Pre-rolling-motion session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.angular-momentum (L = Iω), phys.mech.conservation-of-momentum\n(structural analogy — both depend on no external force/torque).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ANGULAR-SPEED-FREE",
+        "MC-KE-CONSERVED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservation-of-angular-momentum.md",
+        "startLine": 337,
+        "endLine": 355
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

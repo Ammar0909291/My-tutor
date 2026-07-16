@@ -1,0 +1,520 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.chemical-potential-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.chemical-potential",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c82c77479a5a432400eee569c3dd8e311a40c0c9c8a3e2f76fe71d8858b0a93d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.chemical-potential.md": "sha256:5d1c109d5fd0eaa1627064e7946362dc55e47f43abd77fd22c9d6bfb841a9144"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.stat.chemical-potential",
+    "name": "Chemical Potential",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.stat.grand-canonical-ensemble"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.chemical-potential-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.chemical-potential (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.chemical-potential.md": "sha256:5d1c109d5fd0eaa1627064e7946362dc55e47f43abd77fd22c9d6bfb841a9144"
+      },
+      "contentHash": "sha256:ac1b7f5200724925daf334111499be7b574c670a05fdb8adaac4b06386ae0b7a",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.chemical-potential.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.chemical-potential.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.chemical-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.chemical-potential\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.chemical-potential.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.chemical-potential.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.chemical-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.chemical-potential\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.chemical-potential.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.chemical-potential.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.chemical-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.chemical-potential\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.chemical-potential.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.chemical-potential.md#TA-4 (addresses MC-CP-HIGHER-MU-MORE-STABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.chemical-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.chemical-potential\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.chemical-potential.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.chemical-potential.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.chemical-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.chemical-potential\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.chemical-potential.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.chemical-potential.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.chemical-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.chemical-potential\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.chemical-potential.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.chemical-potential.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.chemical-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.chemical-potential\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.chemical-potential/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Chemical Potential — Core Idea (one sentence)",
+      "content": "Chemical potential μ is the free energy cost of adding one particle to a system at fixed T and V, and it governs particle flow between subsystems, phase coexistence, and the occupation of quantum states in statistical mechanics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 20,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Chemical potential of an ideal gas",
+      "content": "### Example 1 — Chemical potential of an ideal gas\nF = NkT[ln(Nλ³/V) − 1] (Helmholtz free energy).\nμ = (∂F/∂N)_{T,V} = kT ln(Nλ³/V) = kT ln(ρλ³) where ρ=N/V, λ=h/√(2πmkT).\nFeatures: μ increases with density ρ (more particles → harder to add one more), decreases with T (more accessible states → easier to add a particle). For dilute gas: μ < 0 always (since ρλ³ ≪ 1 → ln < 0).",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Phase coexistence (vapor-liquid)",
+      "content": "### Example 2 — Phase coexistence (vapor-liquid)\nAt coexistence: T₁=T₂=T, P₁=P₂=P, μ_vapor=μ_liquid.\nμ_vapor = μ°_g + kT ln(P/P°) (ideal gas reference).\nμ_liquid ≈ μ°_l (incompressible, nearly constant).\nSetting equal: ln(P_sat/P°) = (μ°_l − μ°_g)/kT → P_sat = P° exp(−L/kT) where L = molar latent heat.\nClausius-Clapeyron: dP_sat/dT = L/(T·ΔV) emerges naturally from μ equalization condition.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Fermi energy as chemical potential at T=0",
+      "content": "### Example 3 — Fermi energy as chemical potential at T=0\nFermi-Dirac: ⟨n_ε⟩ = 1/(e^{β(ε−μ)}+1).\nAt T→0: step function ⟨n_ε⟩ = θ(μ−ε). All states below μ filled, all above empty.\nAt T=0, μ = E_F (Fermi energy): adding one more electron costs exactly E_F (next available state).\nFor 3D free electrons: E_F = (ℏ²/2m)(3π²n)^{2/3} → μ(T=0) grows as n^{2/3}.\nAt finite T: μ(T) ≈ E_F[1−(π²/12)(kT/E_F)²] (Sommerfeld expansion, μ decreases from E_F).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/misconception/MC-CP-HIGHER-MU-MORE-STABLE",
+      "kind": "misconception",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "\"Higher chemical potential means the phase is more stable.\"",
+      "content": "| MC-CP-HIGHER-MU-MORE-STABLE | \"Higher chemical potential means the phase is more stable.\" | \"The phase with higher μ wins.\" | Particles flow from HIGH μ to LOW μ (like heat flows from high T to low T); the phase with LOWER μ at given T,P is thermodynamically stable. At a phase transition, μ₁=μ₂; above/below this T or P, one phase has lower μ and is favored. |",
+      "localKey": "MC-CP-HIGHER-MU-MORE-STABLE",
+      "language": "en",
+      "refs": [
+        "MC-CP-HIGHER-MU-MORE-STABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/misconception/MC-CP-MU-ONLY-CHEMISTRY",
+      "kind": "misconception",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "\"Chemical potential only matters for chemical reactions.\"",
+      "content": "| MC-CP-MU-ONLY-CHEMISTRY | \"Chemical potential only matters for chemical reactions.\" | \"This is just for chemists.\" | μ controls ALL particle-number-changing processes: phase transitions, quantum statistics (FD/BE occupation), BEC (μ→0 from below), semiconductor doping (quasi-Fermi levels), electrochemistry, osmosis. In condensed matter and QM, μ is as fundamental as T. |",
+      "localKey": "MC-CP-MU-ONLY-CHEMISTRY",
+      "language": "en",
+      "refs": [
+        "MC-CP-MU-ONLY-CHEMISTRY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-CP-HIGHER-MU-MORE-STABLE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-CP-HIGHER-MU-MORE-STABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): Give two equivalent definitions of chemical potential. For which thermodynamic potential is each the appropriate partial derivative?  \n*Answer*: μ = (∂F/∂N)_{T,V} [Helmholtz]; μ = (∂G/∂N)_{T,P} [Gibbs]; μ = (∂U/∂N)_{S,V} [internal energy].",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For an ideal gas at density ρ, temperature T, and particle mass m, compute μ. Under what condition is μ < 0?  \n*Answer*: μ = kT ln(ρλ³) where λ = h/√(2πmkT). μ < 0 when ρλ³ < 1 (dilute classical gas — almost always for classical ideal gas).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): At the liquid-vapor coexistence curve, both phases have the same T and P. What additional condition holds? What breaks when T exceeds the critical temperature?  \n*Answer*: μ_liquid = μ_vapor. Above T_c, the distinction between liquid and vapor disappears — μ becomes a single analytic function of T,P (no discontinuity in ∂μ/∂P or ∂μ/∂T), so no coexistence line exists.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze-MC): A semiconductor has electrons with quasi-Fermi level (chemical potential) μ_n and holes with μ_p. Under illumination μ_n − μ_p > 0. What does this mean physically and where does the excess go in a solar cell?  \n*Answer*: Illumination drives electrons and holes out of equilibrium (equilibrium requires μ_n = μ_p = E_F). The difference μ_n − μ_p = eV (open-circuit voltage) — it's the free energy per particle stored in the non-equilibrium charge separation, extracted as electric voltage. This is the operating principle of a p-n junction solar cell.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): For non-interacting bosons, μ must satisfy μ < ε_min. For photons in a cavity, ε_min = 0. Evaluate: what is μ for photons? Why don't photons condense at low T?  \n*Answer*: Photons have μ = 0 always — photon number is not conserved (photons are created/destroyed in thermal equilibrium, so there is no reservoir constraint on N, and the minimization giving μ gives 0). Photons don't condense in 3D because they travel at c and ε_min=0 with dispersion ε=ℏck (no rest mass energy gap) — formal BEC requires a confining potential; photon BEC in confined optical cavities is an active research area.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student says \"higher μ = more stable\" | MC-CP-HIGHER-MU-MORE-STABLE diagnostic: \"Draw G(T) for ice and water — which phase has lower G (=μ per particle) below 0°C? Above?\" Direct them to plot. |\n| Student confused about photons having μ=0 | \"Photon number isn't conserved — no Lagrange multiplier for N needed in the grand partition function. μ=0 is exact, not an approximation; it's why Planck's law has just T.\" |\n| Student asks \"what is the chemical potential of an electron in a metal?\" | \"E_F at T=0; slightly below E_F at room temperature (Sommerfeld correction is tiny for metals: kT ≈ 25 meV, E_F ≈ 5-10 eV for typical metals).\" |\n| Student confuses μ as electrochemical potential in electrochemistry | \"In electrochemistry, μ̃ = μ + zeφ (electrochemical potential includes electric potential energy). The same equilibrium condition μ̃_A = μ̃_B, but now both chemical and electrical contributions count.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CP-HIGHER-MU-MORE-STABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 99,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What is the grand canonical ensemble? What is fixed?\"\nCORE-1 (15 min): TA-1 + TA-2 (osmosis motivation + three definitions of μ)\nCORE-2 (20 min): TA-3 + TA-4 (ideal gas μ derivation + MC phase stability)\nCORE-3 (20 min): TA-5 (Fermi energy = μ at T=0, Sommerfeld T-correction)\nDRILL  (10 min): TA-6 (identify μ formula or condition for five system types)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Phase transitions occur where μ curves for different phases cross — next session examines what happens at the crossing, including the Landau theory of phase transitions.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.stat.chemical-potential/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.chemical-potential",
+      "title": "Known Sticking Points",
+      "content": "1. **μ < 0 for classical gas**: Students alarmed that free energy decreases when adding a particle; clarify that at low density, adding a particle gains more entropy than it costs in energy, so ΔF < 0.\n2. **Multiple definitions of μ**: Three equivalent definitions above; which to use depends on which variables are fixed; for most stat mech: use (∂F/∂N)_{T,V}.\n3. **μ at phase transition**: Students think μ is discontinuous at a first-order phase transition; clarify that μ is CONTINUOUS (equal in both phases) while its derivatives (density, entropy) are discontinuous.\n4. **Quasi-Fermi levels**: The concept that electrons and holes can have different μ is non-trivial; it requires deviation from equilibrium (injection, illumination).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.chemical-potential.md",
+        "startLine": 90,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

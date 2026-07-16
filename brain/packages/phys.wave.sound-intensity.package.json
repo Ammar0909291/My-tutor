@@ -1,0 +1,355 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.sound-intensity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.sound-intensity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b1376f63d55404a60c271d7d79754cd94ff4bff114e9035c56d02b70ad117e8a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.sound-intensity.md": "sha256:7552a9605cc67f39ba44d25c18971b5bdd7551f94957c0a5e753643812c1a799"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.sound-intensity",
+    "name": "Sound Intensity",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.wave.sound-waves"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.sound-intensity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.sound-intensity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.sound-intensity.md": "sha256:7552a9605cc67f39ba44d25c18971b5bdd7551f94957c0a5e753643812c1a799"
+      },
+      "contentHash": "sha256:87189eaaca9cdc851967da81b140e2209b2006300c82a2a5aa76ae5b32658b42",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.sound-intensity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.sound-intensity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.sound-intensity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.sound-intensity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.sound-intensity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.sound-intensity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.sound-intensity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.sound-intensity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.sound-intensity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.sound-intensity.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.sound-intensity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.sound-intensity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.sound-intensity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.sound-intensity.md#TA-4 (addresses MC-DECIBELS-LINEAR, MC-INTENSITY-SAME-AS-LOUDNESS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.sound-intensity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.sound-intensity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.sound-intensity/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "Sound Intensity — Conceptual Development Sequence",
+      "content": "**TA-1 — Intensity Definition [C]**\n\nSound intensity I: power P crossing a surface of area A perpendicularly:\n```\nI = P/A     (W/m²)\n```\n\nFor a point source radiating isotropically (equally in all directions) at distance r:\n```\nI = P/(4πr²)      (inverse square law)\n```\n\nIntensity doubles when amplitude doubles? No — intensity ∝ (amplitude)². Doubling A → I × 4.\n\n**TA-2 — The Decibel Scale [C→P]**\n\nThe range of audible intensity: 10⁻¹² W/m² (threshold of hearing, I₀) to ~1 W/m² (threshold of pain).\n\nIntensity level in decibels:\n```\nβ = 10 log₁₀(I/I₀)     where I₀ = 10⁻¹² W/m²\n```\n\nInverse: I = I₀ × 10^(β/10)\n\nKey reference points:\n| Level (dB) | Intensity (W/m²) | Example |\n|---|---|---|\n| 0 | 10⁻¹² | Threshold of hearing |\n| 20 | 10⁻¹⁰ | Whisper |\n| 40 | 10⁻⁸ | Library |\n| 60 | 10⁻⁶ | Conversation |\n| 80 | 10⁻⁴ | Heavy traffic |\n| 90 | 10⁻³ | Lawnmower |\n| 110 | 10⁻¹ | Rock concert |\n| 120 | 1 | Threshold of pain |\n\n**TA-3 — Adding dB Levels [C→P]**\n\nWhen combining two independent sound sources of equal intensity:\n- Intensity doubles: I_total = 2I\n- dB increase: Δβ = 10 log₁₀(2) ≈ 3 dB\n\nSo two identical sources raise the level by only 3 dB, not double the dB.\n\nGeneral: β₁ and β₂ → I₁ = I₀×10^(β₁/10); I₂ = I₀×10^(β₂/10); I_total = I₁ + I₂; β_total = 10 log₁₀(I_total/I₀).\n\nDistance and level: if distance increases by factor n, intensity decreases by n²:\n```\nΔβ = −10 log₁₀(n²) = −20 log₁₀(n)\n```\n\nDoubling distance (n=2): Δβ = −20 log₁₀(2) ≈ −6 dB.\n\n**TA-4 — Hearing, Noise Exposure, and Health [P]**\n\nSafe exposure limits (OSHA / WHO):\n- 85 dB: 8-hour exposure limit\n- 90 dB: 2-hour limit\n- 100 dB: 15-minute limit\n- For every 5 dB increase: safe exposure time halves\n\nNoise-induced hearing loss (NIHL): sustained exposure to > 85 dB causes permanent damage to hair cells in the cochlea. Hair cells do not regenerate. Tinnitus (ringing ears) is often the first warning sign.\n\nActive noise cancellation (ANC): microphone measures incoming sound; electronics generate an equal-amplitude, opposite-phase (antiphase) sound; superposition reduces net sound. Used in headphones and aircraft cabin noise reduction.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 75,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/misconception/MC-DECIBELS-LINEAR",
+      "kind": "misconception",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "- **Trigger signal:** Student says \"20 dB is twice as loud as 10 dB\" or \"60 dB is three times 20 dB.",
+      "content": "### MC-DECIBELS-LINEAR\n- **Trigger signal:** Student says \"20 dB is twice as loud as 10 dB\" or \"60 dB is three times 20 dB.\"\n- **Conflict evidence [P28]:** \"The decibel scale is logarithmic. 10 dB represents a 10× increase in intensity, NOT a 2× increase. So 20 dB = 10² = 100× the threshold intensity; 30 dB = 10³ = 1000×; 60 dB = 10⁶ = 1 000 000× the threshold intensity. A 60 dB office is not '3 times louder' than a 20 dB library — it is 10⁴ = 10 000 times more intense. Each 10 dB step multiplies intensity by 10. The logarithm compresses the enormous range of human hearing (10⁻¹² to 1 W/m²) into a 0–120 dB scale.\"\n- **Bridge text [P30]:** \"β = 10 log₁₀(I/I₀). A change of +10 dB means log₁₀ increases by 1, so I increases by 10¹ = 10. A change of +20 dB means I increases by 10² = 100. Each +10 dB is a ×10 in intensity. Each +3 dB is approximately ×2 in intensity.\"\n- **Replacement text [P31]:** \"β (dB) = 10 log₁₀(I/I₀). +10 dB → ×10 intensity; +20 dB → ×100; +3 dB ≈ ×2. Never add dB values linearly for intensity ratios — convert to intensity first.\"\n- **Discrimination pairs [P33]:**\n  - 0 dB: I = 10⁻¹² W/m² (threshold of hearing) ✓\n  - 10 dB: I = 10⁻¹¹ W/m² (10× more intense) ✓\n  - 60 dB: I = 10⁻⁶ W/m² (10⁶× threshold, not 60× threshold) ✓\n- **s6_path:** \"The logarithm exists precisely because human hearing spans a factor of a trillion in intensity (10⁰ to 10¹²). Without logs, you'd be writing 'this sound has intensity 10⁻⁶ W/m²' for everything. Decibels pack that range into 0–120.\"\n\n---",
+      "localKey": "MC-DECIBELS-LINEAR",
+      "language": "en",
+      "refs": [
+        "MC-DECIBELS-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/misconception/MC-INTENSITY-SAME-AS-LOUDNESS",
+      "kind": "misconception",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "- **Trigger signal:** Student equates intensity (a physical, objective quantity in W/m²) with loudness (a subjective perceptual quality).",
+      "content": "### MC-INTENSITY-SAME-AS-LOUDNESS\n- **Trigger signal:** Student equates intensity (a physical, objective quantity in W/m²) with loudness (a subjective perceptual quality).\n- **Conflict evidence [P28]:** \"Intensity is a physical measurement: power per unit area (W/m²), measured with a calibrated microphone. Loudness (or 'perceived loudness') is a subjective human perception that depends on frequency as well as intensity. A 1000 Hz tone at 60 dB is perceived as louder than an 80 Hz tone at the same 60 dB intensity — because the human ear is less sensitive at low frequencies (the Fletcher-Munson equal-loudness contours show this). The phon scale and sone scale attempt to quantify perceived loudness, but they are not the same as dB. A sound can be intense but not very loud (if it's outside the hearing range), or a quieter sound at a preferred frequency can be perceived as louder.\"\n- **Bridge text [P30]:** \"Intensity (W/m²) → decibels (dB): objective physical scale. Loudness (phon): subjective perceptual scale corrected for human hearing frequency sensitivity. At 1000 Hz: 1 phon = 1 dB by definition. At 100 Hz: a sound that is perceived as 40 phon requires about 50 dB of intensity level.\"\n- **Replacement text [P31]:** \"Intensity (W/m²) and dB: objective. Loudness/phon: subjective, frequency-dependent. For physics problems: use intensity and dB. Note that perceived loudness also depends on frequency — this is why hi-fi systems have bass and treble controls.\"\n- **Discrimination pairs [P33]:**\n  - Dog whistle at 60 dB (inaudible to humans at 25 kHz): high intensity, near-zero perceived loudness for humans ✓\n  - Soft piano note at 1000 Hz at 40 dB: moderate intensity, quite audible (human ear most sensitive at ~1000–4000 Hz) ✓\n- **s6_path:** \"A bat call at 100 kHz might have high intensity — you won't hear it. Intensity is physics; loudness is psychology.\"\n\n---",
+      "localKey": "MC-INTENSITY-SAME-AS-LOUDNESS",
+      "language": "en",
+      "refs": [
+        "MC-INTENSITY-SAME-AS-LOUDNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "Intensity Definition",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Intensity Definition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 77,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "The Decibel Scale",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Decibel Scale\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 91,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "Adding dB Levels",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Adding dB Levels\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 114,
+        "endLine": 131
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "Hearing, Noise Exposure, and Health",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Hearing, Noise Exposure, and Health\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-DECIBELS-LINEAR\",\"MC-INTENSITY-SAME-AS-LOUDNESS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-DECIBELS-LINEAR",
+        "MC-INTENSITY-SAME-AS-LOUDNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 131,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — dB to intensity**\n\"Convert to intensity: (a) 50 dB, (b) 120 dB, (c) 37 dB.\"\n\n*Target:* (a) I = 10⁻¹²×10⁵ = 10⁻⁷ W/m². (b) I = 10⁻¹²×10¹² = 1 W/m². (c) I = 10⁻¹²×10^3.7 = 10⁻¹²×5012 = 5.01×10⁻⁹ W/m².",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Inverse square law**\n\"At 5 m from a speaker, the level is 80 dB. Find: (a) the level at 20 m; (b) the distance at which the level drops to 60 dB.\"\n\n*Target:* (a) Distance ×4: Δβ = −20log(4) = −12 dB → 68 dB. (b) From 80 to 60 dB is −20 dB → distance ×10 → 50 m.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Source power**\n\"A loudspeaker radiates 2 W of acoustic power uniformly. (a) Find the intensity at 3 m. (b) Find the dB level at 3 m.\"\n\n*Target:* (a) I = 2/(4π×9) = 2/113.1 = 0.01769 W/m². (b) β = 10log(0.01769/10⁻¹²) = 10log(1.769×10¹⁰) = 10×10.248 = 102.5 dB.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Double machine problem**\n\"A single machine produces 70 dB. (a) What level do 4 identical machines produce? (b) How many identical machines are needed to raise the level from 70 dB to 80 dB?\"\n\n*Target:* (a) 4 machines: I×4; β = 70+10log(4) = 70+6 = 76 dB. (b) +10 dB requires I×10 → 10 machines needed.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: noise exposure**\n\"A worker is exposed to 88 dB for 4 hours. For the remaining 4 hours they move to a quieter area at 82 dB. (a) Find the intensity during each period. (b) What is the average intensity over 8 hours? (c) Comment on hearing safety (85 dB is the 8-hour limit).\"\n\n*Target:* (a) I₈₈ = 10⁻¹²×10^8.8 = 6.31×10⁻⁴ W/m²; I₈₂ = 10⁻¹²×10^8.2 = 1.585×10⁻⁴ W/m². (b) Avg = (4×6.31 + 4×1.585)/(8) × 10⁻⁴ = (25.24+6.34)/8 × 10⁻⁴ = 3.948×10⁻⁴ W/m². (c) β_avg = 10log(3.948×10⁻⁴/10⁻¹²) = 10log(3.948×10⁸) = 85.96 dB. This exceeds the 85 dB 8-hour limit — the worker needs hearing protection or shorter exposure at 88 dB.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "Adaptive Flags",
+      "content": "- **log₁₀ not ln**: the decibel formula uses log base 10 (common log), not natural log. Many students default to ln on calculators. Always check: log₁₀(10) = 1, not 2.303.\n- **I ∝ A²**: when students ask \"what happens to dB if amplitude doubles?\" — I quadruples (×4), so β increases by 10log(4) ≈ 6 dB. Connect: doubling A → +6 dB, not +3 dB.\n- **Adding dB for simultaneous sources**: two sources at the same dB give +3 dB, not double the dB. This surprises students every time. Drive it home with WE-3.\n- **Perceived loudness scope**: the Fletcher-Munson curves and phon/sone scales are for enrichment only. A-level physics focuses on the objective intensity and dB level; perceptual loudness is a psychoacoustics topic.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 251,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-intensity/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.wave.sound-intensity",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — rock concert vs. library — dB table\n  ↓\n[P41] PD-1 (inverse square law; point source intensity = P/(4πr²))\n  ↓ PASS\n[P06] Anchor: decibel table; step back from speaker by ×2 → −6 dB\n  ↓\nTA-1: Intensity I = P/A; inverse square I ∝ 1/r² [C]\n  ↓\nTA-2: Decibel scale β = 10 log(I/I₀); reference points table [C→P]\n  ↓\n[P28] Conflict: \"dB scale is linear\" → MC-DECIBELS-LINEAR\n  ↓\nWE-1: dB from intensity; WE-2: level vs. distance\n  ↓\n[P51] Check-in MP-1 (three dB-to-intensity conversions)\n  ↓ monitor\nTA-3: Adding dB levels; +3 dB per doubling of sources; distance formula [C→P]\n  ↓\n[P28] Conflict: \"intensity = loudness\" → MC-INTENSITY-SAME-AS-LOUDNESS\n  ↓\nWE-3: Combining two and three machines\n  ↓\nTA-4: Safe exposure limits; NIHL; active noise cancellation [P]\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Intensity doubles → dB increases by how much? Distance doubles → dB changes by how much?\"\n[P68]; [P85]; [P89] 1/3/7 days; [P91] 80% gate\n```\n\n**Protocol routing:** S0: full CPA — dB table and \"step back from speaker\" demo before formulas; S1: can use β=10log(I/I₀) but thinks dB is linear → MC-DECIBELS-LINEAR; S4: PD-1 fail → wave-properties (intensity section); S6: [F] — \"+10 dB = ×10 intensity; +3 dB = ×2 intensity. That's the whole scale.\"; S7: open with MP-5 (noise exposure time-weighted average — requires converting between dB and W/m² and back, plus health reasoning).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-intensity.md",
+        "startLine": 214,
+        "endLine": 251
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

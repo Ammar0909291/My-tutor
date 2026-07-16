@@ -1,0 +1,390 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.orbital-mechanics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.orbital-mechanics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bb610f44a9b31864a49fbb8e3fc070694ac80847a3be8ce179da5317766e3394",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md": "sha256:15f0c24454afb6d85a09eeca4610efe2b49b038b843aa17c47d12a0edb88a9a0"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.orbital-mechanics",
+    "name": "Circular Orbital Mechanics",
+    "difficultyRaw": "label: advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.mech.gravitational-potential",
+      "phys.mech.circular-motion"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.orbital-mechanics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.orbital-mechanics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md": "sha256:15f0c24454afb6d85a09eeca4610efe2b49b038b843aa17c47d12a0edb88a9a0"
+      },
+      "contentHash": "sha256:02d96ab5d2268e588e0d1ce63a174c48d0327de75b26bdd878256277e4472316",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.orbital-mechanics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.orbital-mechanics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.orbital-mechanics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.orbital-mechanics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.orbital-mechanics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.orbital-mechanics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.orbital-mechanics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.orbital-mechanics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.orbital-mechanics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.orbital-mechanics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.orbital-mechanics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.orbital-mechanics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.orbital-mechanics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md#TA-5 (addresses MC-HIGHER-ORBIT-FASTER, MC-ORBITAL-SPEED-DEPENDS-ON-MASS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.orbital-mechanics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.orbital-mechanics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.orbital-mechanics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "Circular Orbital Mechanics — Conceptual Development Sequence",
+      "content": "**TA-1 — Deriving Orbital Speed and Period [C]**\n\nForce balance for circular orbit (inward = centripetal):\n```\nGMm/r² = mv²/r\n\nv² = GM/r\n\nv = √(GM/r)       (orbital speed — mass of satellite cancels)\n```\n\nPeriod T = circumference / speed:\n```\nT = 2πr/v = 2πr/√(GM/r) = 2π√(r³/GM)\n\nT² = (4π²/GM) × r³     (Kepler's Third Law for circular orbits!)\n```\n\nKey numerical values for Earth (GM_E = 3.986 × 10¹⁴ m³/s²):\n\n| Orbit | r (km) | v (m/s) | T |\n|---|---|---|---|\n| LEO (~400 km) | 6 771 | 7 672 | 92 min |\n| GEO | 42 157 | 3 070 | 24 h |\n| Moon | 384 000 | 1 022 | 27.3 days |\n\n**TA-2 — Total Orbital Energy and the Virial Theorem [C→P]**\n\nFrom v² = GM/r, substitute into KE:\n```\nKE = ½mv² = GMm/(2r)\nU = −GMm/r\nE = KE + U = GMm/(2r) − GMm/r = −GMm/(2r)\n```\n\nVirial theorem relationships:\n```\nKE = −½U = GMm/(2r)      (KE is positive, half the magnitude of U)\nE = −KE = ½U              (total energy is negative)\n|E| = ½ |U|\n```\n\nConsequence: boosting to a higher orbit increases r → decreases KE (satellite slows down) → but E increases (becomes less negative). **Paradox**: adding energy causes the satellite to slow down. This is the key counter-intuitive result of orbital mechanics.\n\n**TA-3 — Orbital Manoeuvres: Hohmann Transfer [C→P]**\n\nTo move from circular orbit r₁ to circular orbit r₂ > r₁ efficiently (minimum Δv):\n\n1. **Burn 1** at r₁: increase speed to enter elliptical transfer orbit. Periapsis at r₁, apoapsis at r₂.\n2. Coast along the ellipse.\n3. **Burn 2** at r₂: increase speed again to circularise at r₂.\n\nTransfer orbit semi-major axis: a = (r₁ + r₂)/2\n\nTransfer speeds (using vis-viva equation v² = GM(2/r − 1/a)):\n```\nv_transfer at r₁ = √(GM × (2/r₁ − 2/(r₁+r₂)))\nv_transfer at r₂ = √(GM × (2/r₂ − 2/(r₁+r₂)))\n```\n\nQualitative result: both burns accelerate the satellite. After the second burn, the satellite is at r₂ but moving slower than it was at r₁. This is the essence of the orbital paradox: adding energy reduces speed.\n\n**TA-4 — Geostationary Orbit Derivation [P]**\n\nA geostationary satellite has T = 24 hours = 86 400 s and must orbit above the equator. Find r:\n\n```\nT² = 4π²r³/(GM_E)\n\nr³ = GM_E T² / (4π²)\n   = 3.986 × 10¹⁴ × (86 400)² / (4π²)\n   = 3.986 × 10¹⁴ × 7.465 × 10⁹ / 39.48\n   = 7.534 × 10²²\n\nr = (7.534 × 10²²)^(1/3) = 4.216 × 10⁷ m ≈ 42 157 km from Earth's centre\n\nAltitude above surface = 42 157 − 6 371 = 35 786 km ≈ 35 800 km\n```\n\nOrbital speed: v = √(GM/r) = √(3.986 × 10¹⁴ / 4.216 × 10⁷) ≈ 3070 m/s ≈ 3.1 km/s.\n\n**TA-5 — Binary Star Systems and Reduced Mass [P]**\n\nWhen two masses m₁ and m₂ orbit their common centre of mass (neither is fixed):\n\nBoth orbit with the same angular velocity ω and period T. The orbital radii satisfy:\n```\nm₁r₁ = m₂r₂   (centre of mass condition)\nr₁ + r₂ = d   (total separation)\n```\n\nPeriod formula (using reduced mass):\n```\nT² = 4π²d³ / (G(m₁ + m₂))\n```\n\nThis is the generalised form of Kepler's Third Law — the sum of masses replaces M.\n\nApplication: if two stars of equal mass orbit each other at separation d = 2 AU, T = √(d³/(m₁+m₂)) in appropriate units. Measuring T and d observationally gives the total mass.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 82,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/misconception/MC-HIGHER-ORBIT-FASTER",
+      "kind": "misconception",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "- **Trigger signal:** Student says \"a satellite in a higher orbit moves faster because it has more energy\" or confuses total energy with speed.",
+      "content": "### MC-HIGHER-ORBIT-FASTER\n- **Trigger signal:** Student says \"a satellite in a higher orbit moves faster because it has more energy\" or confuses total energy with speed.\n- **Conflict evidence [P28]:** \"Let's compare two satellites: A at r = R_E (low orbit) and B at r = 4R_E. Orbital speed: v = √(GM/r). For A: v_A = √(GM/R_E). For B: v_B = √(GM/4R_E) = ½v_A. Satellite B is in a higher orbit AND moves at half the speed. It has more total energy (less negative), but that doesn't mean faster — kinetic energy KE = GMm/(2r) actually decreases with altitude.\"\n- **Bridge text [P30]:** \"Energy and speed are different quantities. A higher orbit has more total mechanical energy (less negative) but also more PE and less KE. The net effect is that orbital speed decreases with altitude — v ∝ 1/√r.\"\n- **Replacement text [P31]:** \"Orbital speed v = √(GM/r) — as r increases, v decreases. Higher orbit → slower satellite. Total energy E = −GMm/(2r) → as r increases, E increases (becomes less negative). These are consistent: climbing the gravity well costs energy but reduces the speed needed to maintain a circular orbit.\"\n- **Discrimination pairs [P33]:**\n  - ISS at ~400 km altitude: v ≈ 7670 m/s, T ≈ 92 min\n  - GEO at 35 786 km altitude: v ≈ 3070 m/s, T = 24 h (much slower!)\n- **s6_path:** \"This is counter-intuitive — and every student trips on it. The key: orbital speed is set by gravity at that radius, not by the satellite's total energy. Gravity is weaker higher up, so less centripetal force is needed, so less speed is needed.\"\n\n---",
+      "localKey": "MC-HIGHER-ORBIT-FASTER",
+      "language": "en",
+      "refs": [
+        "MC-HIGHER-ORBIT-FASTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/misconception/MC-ORBITAL-SPEED-DEPENDS-ON-MASS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "- **Trigger signal:** Student includes the satellite mass m in the orbital speed formula or claims a heavier satellite needs more speed to stay in orbit.",
+      "content": "### MC-ORBITAL-SPEED-DEPENDS-ON-MASS\n- **Trigger signal:** Student includes the satellite mass m in the orbital speed formula or claims a heavier satellite needs more speed to stay in orbit.\n- **Conflict evidence [P28]:** \"From the orbital condition: GMm/r² = mv²/r. The satellite mass m appears on both sides and cancels: v² = GM/r. This is exactly analogous to free-fall acceleration (g = GM/r², mass independent) — orbital speed is the gravitational free-fall speed for a circular trajectory. A 1 kg probe and a 10 000 kg space station orbit at the same speed at the same radius.\"\n- **Bridge text [P30]:** \"In free-fall, all objects fall at the same rate regardless of mass (Galileo). Circular orbit is simply continuous free-fall — the object falls toward Earth but keeps missing because of its horizontal speed. So naturally, mass doesn't matter for orbital speed either.\"\n- **Replacement text [P31]:** \"v = √(GM_planet/r) — only the planet's mass M and the orbital radius r determine orbital speed. The satellite's mass m determines the orbital energy (E = −GMm/2r) but not the speed.\"\n- **Discrimination pairs [P33]:**\n  - 10 kg CubeSat at r = 7000 km: v = √(GM_E/7 × 10⁶) ≈ 7540 m/s\n  - 420 000 kg ISS at r = 7000 km: v ≈ 7540 m/s (same!)\n- **s6_path:** \"Mass cancelling in orbital mechanics is one of those beautiful physics results. Write the balance equation and watch m disappear — it's the same trick as in free-fall and escape velocity.\"\n\n---",
+      "localKey": "MC-ORBITAL-SPEED-DEPENDS-ON-MASS",
+      "language": "en",
+      "refs": [
+        "MC-ORBITAL-SPEED-DEPENDS-ON-MASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "Deriving Orbital Speed and Period",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Deriving Orbital Speed and Period\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 84,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "Total Orbital Energy and the Virial Theorem",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Total Orbital Energy and the Virial Theorem\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 110,
+        "endLine": 128
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "Orbital Manoeuvres: Hohmann Transfer",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Orbital Manoeuvres: Hohmann Transfer\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 128,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "Geostationary Orbit Derivation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Geostationary Orbit Derivation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 146,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "Binary Star Systems and Reduced Mass",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Binary Star Systems and Reduced Mass\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-HIGHER-ORBIT-FASTER\",\"MC-ORBITAL-SPEED-DEPENDS-ON-MASS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-HIGHER-ORBIT-FASTER",
+        "MC-ORBITAL-SPEED-DEPENDS-ON-MASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 165,
+        "endLine": 357
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Orbital speed comparison**\n\"Satellite A orbits at r = R_E, satellite B at r = 4R_E. What is the ratio v_A / v_B? What is the ratio T_A / T_B?\"\n\n*Target:* v ∝ 1/√r → v_A/v_B = √(4R_E/R_E) = 2. T ∝ r^(3/2) → T_A/T_B = (R_E/4R_E)^(3/2) = (1/4)^(3/2) = 1/8. So B's period is 8× longer.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 244,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Total energy**\n\"A 500 kg satellite orbits at r = 8 × 10⁶ m. Find its (a) KE, (b) PE, (c) total energy. Verify E = ½U.\"\n\n*Target:* KE = GMm/(2r) = 3.986×10¹⁴×500/(2×8×10⁶) = 1.244×10¹⁰ J; U = −GMm/r = −2.488×10¹⁰ J; E = KE + U = −1.244×10¹⁰ J. Verify: E = ½U = ½(−2.488×10¹⁰) = −1.244×10¹⁰ J ✓.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 244,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Period from T²∝r³**\n\"Mars's moon Phobos orbits at r = 9376 km with T = 7.65 h. Use T²∝r³ to find the orbital radius of Deimos given T_Deimos = 30.3 h.\"\n\n*Target:* r_D³/r_P³ = T_D²/T_P² = (30.3/7.65)² = 15.65; r_D = 9376 × (15.65)^(1/3) = 9376 × 2.50 ≈ 23 440 km.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 244,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Paradox question**\n\"A satellite fires a rocket booster in the direction of motion, increasing its speed by 200 m/s. After several orbits, is the satellite faster or slower than before the burn? Explain.\"\n\n*Target:* The burn raises the orbit (more PE, higher r). The satellite settles into a new circular orbit at higher r where v = √(GM/r) is slower. Final speed < initial speed — counterintuitive but correct. Energy was added; speed decreased.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 244,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: mass of Earth from Moon's orbit**\n\"The Moon orbits Earth at r = 3.84 × 10⁸ m with period T = 27.3 days. Calculate the mass of Earth.\"\n\n*Target:* T² = 4π²r³/(GM_E) → M_E = 4π²r³/(GT²) = 4π² × (3.84×10⁸)³ / (6.674×10⁻¹¹ × (27.3×86400)²) = 4π² × 5.664×10²⁵ / (6.674×10⁻¹¹ × 5.568×10¹²) = 2.235×10²⁷ / 3.715×10² ≈ 6.02×10²⁴ kg ✓.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 244,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "Adaptive Flags",
+      "content": "- **The orbital paradox** (TA-2, MP-4): this is the hardest conceptual result in circular orbital mechanics. Spend explicit time on it — draw the E = KE + U bar diagram before and after the burn. The result (add energy → slow down) is pedagogically important for space mission design intuition.\n- **Hohmann transfer** (TA-3): keep at qualitative level here. Detailed Δv calculations using the vis-viva equation belong in an advanced extension. The key pedagogical payoff is that both burns are prograde (forward) — students initially expect one prograde and one retrograde.\n- **T² ∝ r³ as Kepler's Third Law**: make this connection explicit — TA-1's derivation is the proof of Kepler's Third Law (for circular orbits). The full elliptical proof is covered in phys.mech.keplers-laws.\n- **Binary stars** (TA-5): this is the only topic in this blueprint not about Earth satellites. Alert students to the context switch: M in T² = 4π²r³/GM becomes (m₁ + m₂), not just the planet mass.\n- **GM_E product**: always give students GM_E = 3.986 × 10¹⁴ m³/s² as a single constant rather than G × M_E separately — it avoids 10⁻¹¹ × 10²⁴ rounding errors that dominate student calculation mistakes.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 318,
+        "endLine": 328
+      }
+    },
+    {
+      "assetId": "phys.mech.orbital-mechanics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.orbital-mechanics",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — Newton's cannonball provocation\n  ↓\n[P41] PD-1 (centripetal force) + PD-2 (orbital total energy)\n  ↓ PASS both\n[P06] Anchor: cannonball → continuous free-fall → ISS falls 8.7 m/s\n  ↓\nTA-1: Derive v = √(GM/r) and T² ∝ r³ [C]\n  ↓\nTA-2: Virial theorem; KE, U, E relationships; orbital paradox [C→P]\n  ↓\n[P28] Conflict: \"A higher orbit has more energy — so it must move faster?\" → MC-HIGHER-ORBIT-FASTER\n  ↓\nWE-1: Orbital speed and period (500 km orbit)\n  ↓\n[P51] Check-in MP-1 (speed ratio and period ratio — ratio method)\n  ↓ monitor\nTA-3: Hohmann transfer — qualitative two-burn logic [C→P]\n  ↓\nTA-4: GEO derivation — full numerical calculation [P]\n  ↓\nWE-2 → WE-3 (total energy; GEO period verification)\n  ↓\nTA-5: Binary stars; generalised Kepler III [P]\n  ↓\n[P36] MP-2 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval schedule seed: \"How does orbital speed change as altitude increases?\"\n[P68] Session close\n[P85] Regulation tail\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80% MP-set; re-route if below threshold\n```\n\n**Protocol routing:**\n- S0 (novice): full CPA path; dwell on Newton's cannonball anchor; draw the v vs. r and T vs. r curves explicitly before algebra.\n- S1 (schema without grounding): knows T² ∝ r³ as a formula but not where it comes from; go deep on TA-1 derivation from first principles before any numerical work.\n- S4 (prereq gap): PD-1 fail → circular-motion; PD-2 fail → gravitational-potential.\n- S6 (anxiety): [F] protocol — \"Orbital mechanics is just two equations: v = √(GM/r) and T = 2πr/v. Everything else is algebra from these two.\"\n- S7 (overconfident): open with MP-4 (the orbital paradox — burn forward → slow down) — almost all overconfident students get this wrong on first attempt.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.orbital-mechanics.md",
+        "startLine": 273,
+        "endLine": 318
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

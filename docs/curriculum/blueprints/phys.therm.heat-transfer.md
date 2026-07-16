@@ -187,7 +187,7 @@ T(20) = 20 + 70 × e^(−20 × 0.03365) = 20 + 70 × e^(−0.6730) = 20 + 70 × 
 
 *k = thermal conductivity [W/(m·K)]; larger for metals (more free electrons for energy transport).*
 
-**Turn 6 [P28 conflict — MC-ALL-MECHANISMS-SAME]:** "A thermos flask keeps coffee hot. It has vacuum between walls and silvered surfaces. Why specifically does vacuum help? Why silvering? What would be missing if you only had one of these features?"
+**Turn 6 [P28 conflict — MC-CONDUCTION-CONVECTION-RADIATION-SAME-RATE]:** "A thermos flask keeps coffee hot. It has vacuum between walls and silvered surfaces. Why specifically does vacuum help? Why silvering? What would be missing if you only had one of these features?"
 
 *Vacuum: no conduction or convection. Silvering: reduces radiation (low emissivity). Without vacuum: conduction/convection would dominate. Without silvering: radiation would leak.*
 
@@ -212,7 +212,7 @@ T(20) = 20 + 70 × e^(−20 × 0.03365) = 20 + 70 × e^(−0.6730) = 20 + 70 × 
 → [MC-HEAT-IS-A-SUBSTANCE: P28 conflict (mass of hot iron) → P30 bridge → P31 replacement → P33 pairs]
 → [WE-1: brick wall conduction + insulation comparison]
 → [P51 check-in: Fourier's law terms]
-→ [MC-ALL-MECHANISMS-SAME: P28 conflict (thermos flask) → P30 bridge → P31 replacement → P33 pairs]
+→ [MC-CONDUCTION-CONVECTION-RADIATION-SAME-RATE: P28 conflict (thermos flask) → P30 bridge → P31 replacement → P33 pairs]
 → [WE-2: radiation from human body]
 → [P52 narrow: T⁴ sensitivity of radiation]
 → [WE-3: Newton's law of cooling — coffee problem]

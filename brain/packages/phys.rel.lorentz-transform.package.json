@@ -1,0 +1,404 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.lorentz-transform-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.lorentz-transform",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:022719b08c27598ae9354d59ae0a3e66997af4106aaf4b6c390d88fe5ead5737",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.lorentz-transform.md": "sha256:d61f368d056890af05cc4a779bb94479be27b0c12f8f73b1075db7c9de30eb59"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.rel.lorentz-transform",
+    "name": "Lorentz Transformations",
+    "difficultyRaw": "Expert",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.rel.length-contraction"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.lorentz-transform-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.lorentz-transform (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.lorentz-transform.md": "sha256:d61f368d056890af05cc4a779bb94479be27b0c12f8f73b1075db7c9de30eb59"
+      },
+      "contentHash": "sha256:2d9fa7d538a8bbfc3388fae9e13f4931e4015ab0effa34195c6af404cd206a38",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.lorentz-transform.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.lorentz-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.lorentz-transform\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.lorentz-transform.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.lorentz-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.lorentz-transform\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.lorentz-transform.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.lorentz-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.lorentz-transform\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.lorentz-transform.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md#TA-4 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.lorentz-transform"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.lorentz-transform\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.lorentz-transform/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Lorentz Transformations — core explanation",
+      "content": "**One-sentence definition:** The Lorentz transformations relate the spacetime coordinates (t, x, y, z) of any event as measured in two inertial frames S and S' in relative motion at velocity v: t' = γ(t − vx/c²), x' = γ(x − vt), y' = y, z' = z.\n\n**The core insight:** The Lorentz transformations are the unique linear transformation of spacetime coordinates that (1) keeps the speed of light invariant in all frames, (2) reduces to the Galilean transformation at v << c, and (3) preserves the spacetime interval Δs² = c²Δt² − Δx² − Δy² − Δz². They unify time dilation, length contraction, and relativity of simultaneity into one mathematical structure.\n\n**Conceptual chain:**\n1. Galilean transformation (classical): t' = t, x' = x − vt. Fails because it does not preserve c.\n2. Requirement: the transformation that leaves c²t² − x² invariant must be a hyperbolic rotation in spacetime.\n3. Lorentz transformation: t' = γ(t − vx/c²), x' = γ(x − vt), γ = 1/√(1 − v²/c²).\n4. Inverse: t = γ(t' + vx'/c²), x = γ(x' + vt').\n5. Time dilation emerges: proper clock at rest in S' (x' = const): Δt = γ Δt' (moving clock runs slow).\n6. Length contraction emerges: rod at rest in S' (measured simultaneously in S): L = L₀/γ.\n7. Relativity of simultaneity emerges: events at the same t' in S' are NOT at the same t in S.\n8. Velocity addition: u = (u' + v)/(1 + u'v/c²) — never exceeds c.\n9. Spacetime interval invariance: Δs² = c²Δt² − Δx² = c²Δt'² − Δx'² (invariant under Lorentz boosts).\n\n**Central equations:**\n- Forward boost (S→S', S' moves at +v along x relative to S):\n  - t' = γ(t − vx/c²)\n  - x' = γ(x − vt)\n  - y' = y, z' = z\n- Inverse (S'→S): t = γ(t' + vx'/c²), x = γ(x' + vt')\n- γ = 1/√(1 − v²/c²)\n- Velocity addition: u_x = (u'_x + v)/(1 + u'_x v/c²)\n- Spacetime interval: Δs² = c²Δt² − Δx² − Δy² − Δz² (Lorentz-invariant)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 18,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "The Galilean transformation works for all speeds",
+      "content": "### MC-1: \"The Galilean transformation works for all speeds\"\n- **Probe:** \"A spaceship moves at 0.9c relative to Earth. A light beam is emitted forward from the ship. Use the Galilean velocity addition to find the beam's speed in the Earth frame.\"\n- **Characteristic phrase:** \"u = u' + v = c + 0.9c = 1.9c.\"\n- **Trigger:** Galilean transformation is correct for everyday speeds and students overgeneralize it.\n- **Conflict evidence [P28]:** The speed of light is c in all inertial frames (Einstein's second postulate, confirmed by Michelson-Morley and countless subsequent experiments). 1.9c violates this. The Lorentz velocity addition gives: u = (c + 0.9c)/(1 + c × 0.9c/c²) = 1.9c/1.9 = c. Exactly c in all frames.\n- **Bridge [P30]:** \"The Galilean transformation was not 'wrong' in Newton's era — it was untest-ably accurate for speeds << c. The Lorentz transformation reduces to the Galilean one when v/c → 0 (expand γ ≈ 1, vt >> vx/c² → drop the t' correction). But at relativistic speeds, only the Lorentz transformation preserves the speed of light.\"\n- **Replacement [P31]:** Lorentz transformations apply at all speeds. They reduce to Galilean at v << c. At relativistic speeds, the t' = γ(t − vx/c²) term is essential and cannot be dropped.\n- **Discrimination pairs [P33]:** Newtonian gravity works for most purposes but fails at strong fields (black holes) — general relativity gives the correct answer. Similarly, Galilean transformation works at low speed but fails at high speed — Lorentz gives the correct answer.\n- **S6 repair path:** Check the Galilean transformation's failure: does it preserve c? Under Galilean: if x = ct (light in S), then x' = ct − vt = (c−v)t, t' = t → x'/t' = c−v ≠ c. Fails. Under Lorentz: x' = γ(ct − vt) = γt(c−v), t' = γ(t − vt × c/c²) = γt(1 − v/c). x'/t' = (c−v)/(1−v/c) = c(c−v)/(c−v) = c. Lorentz preserves c.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "The time transformation is just t' = γt",
+      "content": "### MC-2: \"The time transformation is just t' = γt\"\n- **Probe:** \"Two events occur at (t=0, x=0) and (t=0, x=L) in S. Are they simultaneous in S'?\"\n- **Characteristic phrase:** \"Simultaneous means same t, so same t' — simultaneity is absolute.\"\n- **Trigger:** Students learned t' = γΔτ (time dilation) and conflate it with the full Lorentz transformation for t'.\n- **Conflict evidence [P28]:** t' = γ(t − vx/c²). For the two events: event 1 at (0,0) → t'₁ = γ(0 − v×0/c²) = 0. Event 2 at (0,L) → t'₂ = γ(0 − vL/c²) = −γvL/c² ≠ 0. The events are NOT simultaneous in S'.\n- **Bridge [P30]:** \"Time dilation (t' = γΔτ) is the special case of the Lorentz transformation for a clock at rest in S' (x' = const). The full Lorentz transformation t' = γ(t − vx/c²) applies to any event. The spatial term vx/c² is what produces relativity of simultaneity — events at the same t but different x have different t'.\"\n- **Replacement [P31]:** The full time transformation is t' = γ(t − vx/c²). Time dilation is only the special case for a clock at rest in S'. The spatial correction term vx/c² is always present and is responsible for the relativity of simultaneity.\n- **Discrimination pairs [P33]:** t' = γΔτ applies between proper time and coordinate time for one clock. t' = γ(t − vx/c²) applies to a single event's coordinates.\n- **S6 repair path:** Show the train lightning thought experiment: two lightning strikes, simultaneously in S (Δt = 0), at x = 0 and x = L. In S': Δt' = γ(0 − vL/c²) = −γvL/c² ≠ 0. The front strike (x = L) appears earlier in S' (negative Δt').",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Relativistic velocity addition gives u = u' + v",
+      "content": "### MC-3: \"Relativistic velocity addition gives u = u' + v\"\n- **Probe:** \"Two ships approach each other, each at v = 0.8c relative to Earth. What speed does each ship measure the other approaching at?\"\n- **Characteristic phrase:** \"0.8c + 0.8c = 1.6c.\"\n- **Trigger:** Classical intuition: velocities add linearly. This gives superluminal answers for relativistic speeds.\n- **Conflict evidence [P28]:** u = (u' + v)/(1 + u'v/c²). Ship A at v = 0.8c in Earth frame. Ship B approaches at u' = −0.8c in Earth frame. In Ship A's frame: speed of B = (−0.8c + 0.8c)/(1 + (−0.8)(0.8)) = (0)/(1 − 0.64) → wait: set up correctly. Ship A moves at +0.8c (S' = ship A, moving at +0.8c relative to Earth S). Ship B moves at −0.8c in S. u' = (u − v)/(1 − uv/c²) = (−0.8c − 0.8c)/(1 − (−0.8)(0.8)) = −1.6c/1.64 ≈ −0.976c. Never exceeds c.\n- **Bridge [P30]:** \"The velocity addition formula has a denominator (1 + u'v/c²) that is always > 1 when u' and v have the same sign. This denominator prevents the sum from exceeding c. At low speeds, u'v << c² and the denominator ≈ 1, recovering classical addition.\"\n- **Replacement [P31]:** Relativistic velocity addition: u = (u' + v)/(1 + u'v/c²). Always |u| < c when |u'|, |v| < c.\n- **Discrimination pairs [P33]:** Classical: u = u' + v (no denominator). Relativistic: u = (u' + v)/(1 + u'v/c²) (denominator < 1 when u' and v same sign → result larger than classically expected but < c).\n- **S6 repair path:** Verify that light's speed is preserved: u' = c, v = 0.6c: u = (c + 0.6c)/(1 + c×0.6c/c²) = 1.6c/1.6 = c. ✓ The formula correctly gives c for light.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "The Lorentz transformation changes only x and t but leaves energy unchanged",
+      "content": "### MC-4: \"The Lorentz transformation changes only x and t but leaves energy unchanged\"\n- **Probe:** \"A photon has energy E in frame S. Frame S' moves at v relative to S in the direction of photon travel. Does the photon have the same energy E in S'?\"\n- **Characteristic phrase:** \"Energy is a scalar — Lorentz transformation doesn't change it.\"\n- **Trigger:** Students know Lorentz transformation acts on (t, x) but don't realize energy and momentum form a 4-vector (E/c, p_x, p_y, p_z) that transforms the same way.\n- **Conflict evidence [P28]:** The energy of a photon is E = hf. If the source moves at v relative to the observer, the frequency is Doppler shifted: f_obs = f_source √((1−v/c)/(1+v/c)). Therefore E_obs ≠ E_source. Energy is NOT a Lorentz scalar.\n- **Bridge [P30]:** \"Energy is the time-component of the energy-momentum 4-vector (E/c, p). This 4-vector transforms exactly like (ct, x) under Lorentz boosts: E' = γ(E − vp_x). For a photon with p_x = E/c: E' = γ(E − v × E/c) = γE(1 − v/c) = E√((1−v/c)/(1+v/c)). This is the relativistic Doppler formula.\"\n- **Replacement [P31]:** Energy transforms as E' = γ(E − vp_x) — it is the time component of a Lorentz 4-vector, not a scalar. The Lorentz-invariant is E² − (pc)² = (mc²)² = invariant mass squared × c⁴.\n- **Discrimination pairs [P33]:** Lorentz scalars (same in all frames): c, proper time τ, rest mass m, spacetime interval Δs². Lorentz non-scalars (frame-dependent): E, p, t, x, F (force).\n- **S6 repair path:** Compute E' for a photon using the 4-vector Lorentz transformation. Compare to the relativistic Doppler formula. Verify they agree. This prepares students for phys.rel.relativistic-momentum.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "DERIVE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"DERIVE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "SYNTHESIZE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"SYNTHESIZE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "NUMERICAL PRACTICE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"NUMERICAL PRACTICE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "PROBE",
+      "content": "{\"id\":\"TA-4\",\"title\":\"PROBE\",\"primitives\":[],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly applies the Lorentz transformation to individual events, derives time dilation and length contraction from the transform, applies relativistic velocity addition, and verifies spacetime interval invariance. Score ≥ 80%.\n\n**FA-1 — Coordinate transformation:**\n*Q: S' moves at v = 0.8c relative to S (γ = 5/3). An event occurs at t = 10 s, x = 6 × 10⁹ m in S. Find t' and x'. (c = 3 × 10⁸ m/s)*\nExpected: β = 0.8, γ = 5/3. ct = 3 × 10⁹ m. t' = γ(t − vx/c²) = (5/3)(10 − 0.8 × 6×10⁹/(3×10⁸ × c)) → vx/c² = 0.8c × 6×10⁹ m / c² = 0.8 × 6×10⁹/(3×10⁸) s = 16 s. t' = (5/3)(10 − 16) = (5/3)(−6) = −10 s. x' = γ(x − vt) = (5/3)(6×10⁹ − 0.8 × 3×10⁸ × 10) = (5/3)(6×10⁹ − 2.4×10⁹) = (5/3)(3.6×10⁹) = 6×10⁹ m.\nThreshold: Correct t' = −10 s (past in S') and x' = 6×10⁹ m.\n\n**FA-2 — Simultaneity:**\n*Q: Two events occur at (t=0, x=0) and (t=0, x=12 ly) in S. S' moves at v=0.6c (γ=1.25) relative to S. Are these events simultaneous in S'? If not, which occurs first?*\nExpected: t'₁ = γ(0 − 0) = 0. t'₂ = γ(0 − 0.6c × 12 ly/c²) = 1.25 × (−7.2 yr) = −9 yr. Event 2 occurs BEFORE event 1 in S' (t'₂ = −9 yr < 0 = t'₁). Not simultaneous.\nThreshold: Correct computation of t'₂ and correct conclusion about which event occurs first.\n\n**FA-3 — Velocity addition:**\n*Q: A spaceship moves at 0.6c relative to Earth. It launches a probe at 0.8c relative to the spaceship (in the same direction). What is the probe's speed relative to Earth?*\nExpected: u = (0.8c + 0.6c)/(1 + 0.8 × 0.6) = 1.4c/1.48 ≈ 0.946c.\nThreshold: Correct formula application and answer within 0.01c.\n\n**FA-4 — Derive time dilation:**\n*Q: Starting from the Lorentz transformation, derive the time dilation formula Δt = γΔτ for a clock at rest in S'.*\nExpected: Clock at rest in S' has x' = const (say x' = 0). The inverse Lorentz transformation: x = γ(x' + vt'). With x' = 0: x = γvt'. Also: t = γ(t' + 0) = γt'. So Δt = γΔt'. Since Δt' = Δτ (proper time on the clock), Δt = γΔτ.\nThreshold: Correct use of x' = 0 condition and correct derivation.\n\n**Confidence calibration:** After FA-1, students who get t' negative are often uncertain (it seems counterintuitive that an event in the future in S is in the past in S'). Targeted reassurance: \"Negative t' means the event happened before S' clocks were synchronized at origin. Check: is the spacetime interval the same in both frames?\" — grounds the student in the invariant.\n\n**Delayed retrieval (session + 3):** \"Write the Lorentz transformation equations. Derive length contraction from them. (Hint: measure the endpoints of a rod simultaneously in S.)\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 216,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Spacetime diagram: draw two events A and B. Show their coordinates (t, x) in S and (t', x') in S'. The Lorentz transformation rotates the coordinate axes (hyperbolically) — not a rotation by angle θ, but by rapidity φ = tanh⁻¹(v/c).\n- Two lightning strikes at the ends of a moving train: simultaneously in the ground frame (S). In the train frame (S'), the front strike happens first. Same events, same spacetime, different coordinate descriptions.\n- Minkowski diagram setup: ct on vertical axis, x on horizontal. Light cone at 45°. The primed axes (ct', x') are tilted symmetrically toward the light cone as v/c increases.\n\n### Representational (Iconic)\n- Side-by-side table of an event's coordinates in S and S': (t, x, y, z) and (t', x', y', z').\n- Minkowski diagram: draw ct and x axes; tilt ct' and x' axes toward the light cone for v = 0.6c.\n- Velocity addition graph: u vs. u' for fixed v = 0.6c. Show that even u' = 0.9c + v = 0.6c gives u = 0.974c < c.\n- Spacetime interval: show that Δs² is the same in S and S' for a specific pair of events — the invariant is visually the \"true distance\" in Minkowski geometry.\n\n### Abstract (Symbolic)\n- Matrix form: [ct', x'] = γ [1 −β; −β 1] [ct, x] where β = v/c. This is a boost matrix in Minkowski space.\n- Derive time dilation: proper clock at x' = 0 in S'. Set x' = 0 in the inverse: x = γvt. Substituting: t = γt'. (Δt = γΔτ — moving clock runs slow.)\n- Derive length contraction: rod from x' = 0 to x' = L₀. Measure endpoints simultaneously in S (same t): x_front − x_rear = L₀/γ. (L = L₀/γ.)\n- Derive relativity of simultaneity: two events at t' = 0 but x' = L and x' = 0: in S, Δt = γ(0 + v×L/c²) = γvL/c² ≠ 0.\n\n### Transfer (+)\n- E = mc² derivation: relativistic energy-momentum relation E² = (pc)² + (mc²)² derives from the Lorentz-covariant momentum 4-vector.\n- Relativistic Doppler effect: f_obs = f_source √((1 − v/c)/(1 + v/c)) — derived from Lorentz transformation of 4-wavevector.\n- GPS corrections: satellite clocks require both special relativistic (time dilation) and general relativistic corrections for meter-level accuracy — the Lorentz transformation is the SR part.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 47,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Using the Galilean transformation for relativistic problems:** Students write x' = x − vt and t' = t for any motion problem. At v << c this is fine; at relativistic speeds it gives the wrong answer because it doesn't preserve c.\n\n**Mode 2 — Confusing the direction of the boost:** Students confuse whether S' moves at +v or −v relative to S, and consequently get the sign of vt wrong in the transformation. The convention: S' moves at +v in the +x direction relative to S; the transformation is x' = γ(x − vt), t' = γ(t − vx/c²).\n\n**Mode 3 — Forgetting the vx/c² term in t':** The most common error. Students remember t' = γt (time dilation) and write the Lorentz transformation without the spatial term −vx/c². But t' = γ(t − vx/c²) — the time transformation depends on both t AND x. Omitting the vx/c² term gives wrong results for simultaneity.\n\n**Mode 4 — Classical velocity addition for relativistic speeds:** Students add velocities linearly: u = u' + v. This gives superluminal speeds and is wrong at relativistic velocities. The correct formula u = (u' + v)/(1 + u'v/c²) always gives u < c for |u'|, |v| < c.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 73,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"We have two separate formulas — time dilation and length contraction — that both came from Einstein's postulates. Are these just two disconnected results? No. They're components of one unified structure: the Lorentz transformation. Today I want to derive it from scratch, starting with only two requirements: the transformation must be linear, and it must preserve the speed of light. From those two demands, the entire structure of special relativity follows. Let's build it.\"\n\n**At the derivation:**\n\"I need a transformation from (t, x) to (t', x') that maps the light beam x = ct in S to x' = ct' in S'. I'll try t' = α(t − vx/c²) and x' = α(x − vt). Check: substitute x = ct. I get x'/t' = (ct − vt)/(t − vt) = c. Good — light speed preserved. Now I need to find α. The inverse transformation must look the same with v → −v: t = α(t' + vx'/c²), x = α(x' + vt'). Substitute the forward into the inverse. After algebra: identity requires α² (1 − v²/c²) = 1 → α = γ. That's it — the Lorentz transformation falls out of two requirements.\"\n\n**At relativity of simultaneity:**\n\"Here's the surprising thing. Two events are simultaneous in S — same t, different x. Let's transform to S'. Event 1 at (t=0, x=0): t'₁ = γ(0 − 0) = 0. Event 2 at (t=0, x=L): t'₂ = γ(0 − vL/c²) = −γvL/c² < 0. Event 2 is in the past in S'. Simultaneity is not preserved. Two things happening at the same time in one frame do NOT happen at the same time in another frame. This isn't an illusion or a measurement artifact. It's fundamental. The Lorentz transformation tells us that 'at the same time' is frame-dependent.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 203,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.rel.length-contraction (and implicitly phys.rel.time-dilation, phys.rel.simultaneity). Without the prior kinematic results, the Lorentz transformation's derivation has no motivation.\n\n**S3:** Student can apply the forward transform but not the inverse, and cannot derive time dilation or length contraction. Drill: explicitly set x' = 0 in the inverse to get time dilation; set Δt = 0 in the forward to get length contraction. These are the two key special cases.\n\n**S6:** Student omits the vx/c² term in t'. Show FA-1 explicitly: the vx/c² term = 16 s dominates here — omitting it gives a wildly wrong answer. Emphasize: t' = γ(t − vx/c²) always; time dilation t' = γt is only the special case where x = 0.\n\n**S9:** Introduce the 4-vector notation. Define the 4-position X^μ = (ct, x, y, z). Define the Lorentz boost matrix Λ. Show Λ^μ_ν transforms X^μ → X'^μ = Λ^μ_ν X^ν. Introduce the metric tensor η = diag(1, −1, −1, −1). Spacetime interval: Δs² = η_μν ΔX^μ ΔX^ν — invariant because Λ^T η Λ = η. This is the foundation for relativistic electrodynamics and general relativity.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 246,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (Lorentz transform equations, velocity addition formula) + conceptual (spacetime interval invariance, simultaneity is relative, time dilation/length contraction as special cases).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Write the Lorentz transformation equations. What is the inverse?\"\n- Session + 3: \"Starting from the Lorentz transform, derive length contraction in 3 steps.\"\n- Session + 7: \"A particle moves at u' = 0.7c in S'. S' moves at v = 0.5c relative to S. Find u. Compare to classical addition.\"\n\n**Interleaving partners:** phys.rel.time-dilation and phys.rel.length-contraction (both are special cases of the Lorentz transform — revisit them now as derivations, not separate postulates); phys.rel.relativistic-momentum (successor — 4-momentum transforms under Lorentz boosts); phys.rel.simultaneity (conceptual prerequisite — now seen as a consequence of t' = γ(t − vx/c²)).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 258,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Relativistic Doppler effect: using the Lorentz transformation of the 4-wavevector (ω/c, k), derive f_obs = f_source √((1−β)/(1+β)).\n\n**Far transfer:** Electromagnetism: Maxwell's equations are Lorentz-covariant. The Faraday tensor F^μν = [[0, −E_x/c, ...; E_x/c, 0, B_z, ...]] transforms under Lorentz boosts — electric and magnetic fields mix when you change reference frames. This is the deepest unification in classical physics.\n\n**Structural abstraction:** \"Linear transformations that preserve a quadratic form.\" In Euclidean geometry: rotations preserve x² + y². In Minkowski geometry: Lorentz boosts preserve c²t² − x². In general relativity: diffeomorphisms preserve the metric ds² = g_μν dx^μ dx^ν. The structural pattern — transformation group + invariant — is one of the organizing principles of modern physics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 271,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.rel.lorentz-transform/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.rel.lorentz-transform",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.rel.length-contraction is listed, but phys.rel.simultaneity should also be an explicit prerequisite — the Lorentz transformation's most important new prediction (beyond time dilation and length contraction) is the relativity of simultaneity, and students who haven't seen it as a concept will be unprepared.\n- **Unlock readiness:** phys.rel.relativistic-momentum requires the 4-momentum framework, which builds directly on the Lorentz transformation of 4-vectors introduced in S9 extensions. Students are ready after this concept.\n- **Difficulty calibration:** Expert/apply is appropriate. The algebra is manageable, but the conceptual demands (simultaneity, interval invariance, 4-vector structure) are high, and students must have firm foundations in time dilation, length contraction, and simultaneity before tackling the unified Lorentz transformation.\n- **Suggested problem set:** (1) Transform 4 events numerically with v = 0.6c; verify interval invariance for each. (2) Derive both time dilation and length contraction from the Lorentz transform (not from first principles). (3) Three velocity addition problems at 0.5c, 0.8c, 0.99c. (4) Solve the barn-pole paradox using explicit Lorentz transformation of all four key events (pole enters/exits barn in both frames).\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.lorentz-transform.md",
+        "startLine": 281,
+        "endLine": 291
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

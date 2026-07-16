@@ -1,0 +1,403 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.atomic-spectra-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.atomic-spectra",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:737a48f253549e7ece410b6013a2df5cb99f1e64f88a330b5b29df0155982853",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.atomic-spectra.md": "sha256:b902199872b283c473a594a569014f914ebb586c230e0c57885503703f1ca632"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.mod.atomic-spectra",
+    "name": "Atomic Spectra and Energy Levels",
+    "difficultyRaw": "Proficient",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mod.bohr-model"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.atomic-spectra-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.atomic-spectra (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.atomic-spectra.md": "sha256:b902199872b283c473a594a569014f914ebb586c230e0c57885503703f1ca632"
+      },
+      "contentHash": "sha256:8791f70fb6572b559388ec6383ba5d6472b8b3299dc83028e8cffe3e7fdba4b2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-spectra.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-spectra"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-spectra\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-spectra.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-spectra"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-spectra\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-spectra.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-spectra"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-spectra\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-spectra.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-spectra"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-spectra\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.atomic-spectra/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Atomic Spectra and Energy Levels — core explanation",
+      "content": "**One-sentence definition:** Atomic spectra arise when electrons transition between discrete energy levels in atoms, emitting or absorbing photons whose frequencies are exactly determined by the energy difference: ΔE = hf.\n\n**The core insight:** Each element produces a unique spectral fingerprint because its electron energy levels are unique. When an electron drops from level n₂ to n₁, it releases a photon with energy E_photon = E₂ − E₁ = hf. The discreteness of energy levels explains why atomic spectra are lines, not continuous rainbows.\n\n**Conceptual chain:**\n1. White light produces a continuous spectrum — all wavelengths present.\n2. Pass light through a gas of hydrogen → dark absorption lines appear at specific wavelengths (absorption spectrum).\n3. Heat hydrogen gas → bright emission lines at exactly the same wavelengths (emission spectrum).\n4. Bohr model explains why: electrons occupy quantized orbits with energy Eₙ = −13.6/n² eV.\n5. Transitions between levels: photon frequency f = |ΔE|/h; wavelength 1/λ = R_H(1/n₁² − 1/n₂²) (Rydberg formula).\n6. Series named by final level: Lyman (n₁=1, UV), Balmer (n₁=2, visible), Paschen (n₁=3, infrared).\n7. Every element has unique energy levels → unique spectral fingerprint → spectroscopy identifies elements in stars, flames, plasma.\n\n**Central equations:**\n- Photon energy: E = hf = hc/λ\n- Hydrogen energy levels: Eₙ = −13.6/n² eV\n- Transition energy: ΔE = 13.6(1/n₁² − 1/n₂²) eV\n- Rydberg formula: 1/λ = R_H(1/n₁² − 1/n₂²), R_H = 1.097 × 10⁷ m⁻¹\n- Balmer series visible lines: n₂ = 3,4,5,6 → n₁ = 2\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 18,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "The absorption and emission spectra of hydrogen have different wavelengths",
+      "content": "### MC-1: \"The absorption and emission spectra of hydrogen have different wavelengths\"\n- **Probe:** \"Does hydrogen absorb light at 656 nm? Does it emit light at 656 nm?\"\n- **Characteristic phrase:** \"The dark lines and bright lines are at different positions.\"\n- **Trigger:** The visual appearance is so different (dark lines on rainbow vs. bright lines on black) that students assume the wavelengths differ.\n- **Conflict evidence [P28]:** Kirchhoff's laws (1859) state: a gas absorbs and emits at exactly the same wavelengths. The absorption spectrum of the Sun shows dark lines at 656 nm, 486 nm, etc. — the same as hydrogen's emission lines. This is how Fraunhofer lines in the solar spectrum were identified as hydrogen.\n- **Bridge [P30]:** \"A photon of 656 nm is the exact energy for the n=3 → n=2 transition. The atom absorbs that photon to climb up, and emits that photon when it falls down. Same energy difference, same photon energy, same wavelength.\"\n- **Replacement [P31]:** Emission and absorption spectra are complementary: same wavelengths (same energy transitions), opposite appearance (one shows where light is added, the other shows where it is removed).\n- **Discrimination pairs [P33]:** A door can be pushed open or pulled shut — it's the same door. The transition energy is fixed; what changes is whether a photon enters or leaves the system.\n- **S6 repair path:** Show Kirchhoff's experiment: continuous lamp → gas cell → spectrometer → absorption spectrum with dark lines at identical positions to hydrogen emission lines.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "The Balmer series includes all hydrogen spectral lines",
+      "content": "### MC-2: \"The Balmer series includes all hydrogen spectral lines\"\n- **Probe:** \"If hydrogen has UV emission lines, which series are they?\"\n- **Characteristic phrase:** \"The Balmer series is the complete hydrogen spectrum.\"\n- **Trigger:** The Balmer series (visible lines) is the most prominent in NCERT and most textbook treatment of hydrogen spectra.\n- **Conflict evidence [P28]:** The Lyman series (n₁=1) lies in the UV (91–122 nm), completely invisible. The Paschen series (n₁=3) lies in the IR. Hydrogen has infinitely many series; Balmer's visible lines are the ones historically discovered first and still most commonly discussed.\n- **Bridge [P30]:** \"Every time an electron arrives at a different final level, a different series is created. Final level n=1 gives Lyman (UV), n=2 gives Balmer (visible), n=3 gives Paschen (IR). The Balmer series is one subset of the hydrogen spectrum.\"\n- **Replacement [P31]:** Each spectral series corresponds to transitions ending at a specific level. Lyman, Balmer, Paschen, Brackett, Pfund — all are hydrogen.\n- **Discrimination pairs [P33]:** A staircase where people can jump to any floor, not just the second — transitions ending at floor 2 are Balmer, floor 1 are Lyman, floor 3 are Paschen.\n- **S6 repair path:** Draw the full energy level diagram with all series. Calculate one Lyman line (n=2→1: 122 nm UV) and one Paschen line (n=4→3: 1875 nm IR). Compare to Balmer visible lines.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Higher energy means higher quantum number always",
+      "content": "### MC-3: \"Higher energy means higher quantum number always\"\n- **Probe:** \"Is E₃ higher or lower than E₂ in hydrogen?\"\n- **Characteristic phrase:** \"n=3 is lower energy because the number is smaller.\"\n- **Trigger:** In everyday usage \"high number = high energy\" (high voltage, high speed). Students don't process the negative sign in Eₙ = −13.6/n² eV.\n- **Conflict evidence [P28]:** E₁ = −13.6 eV, E₂ = −3.4 eV, E₃ = −1.51 eV. As n increases, Eₙ becomes less negative — closer to zero — meaning higher energy. E∞ = 0 is the highest energy (ionized state). The ground state E₁ = −13.6 eV is the lowest energy.\n- **Bridge [P30]:** \"The negative sign means the electron is bound. The more negative, the more tightly bound — lower energy, more stable. n=1 is the most tightly bound (lowest energy, most negative). n=∞ is free (E = 0).\"\n- **Replacement [P31]:** In hydrogen, Eₙ = −13.6/n² eV. Higher n = less negative = higher energy. E increases toward zero as n → ∞. Ground state (n=1) is the lowest energy.\n- **Discrimination pairs [P33]:** A ball at the bottom of a well has more negative potential energy (more tightly bound) than a ball near the top. \"Higher energy\" means \"less deeply in the well,\" not \"higher quantum number per se\" (though higher n does give higher energy in this specific case).\n- **S6 repair path:** Annotate the energy level diagram with numerical values. Shade the region below zero (bound states) and highlight that increasing n moves the energy level upward (toward zero, i.e., higher energy).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Emission only occurs when an atom is very hot",
+      "content": "### MC-4: \"Emission only occurs when an atom is very hot\"\n- **Probe:** \"Can an atom emit light at room temperature?\"\n- **Characteristic phrase:** \"You need very high temperature to get emission lines.\"\n- **Trigger:** Flame tests and discharge tubes require heat or electrical energy, leading students to associate emission with extreme conditions.\n- **Conflict evidence [P28]:** Any mechanism that raises an electron to a higher level will cause emission when it falls back. Fluorescence (UV light → visible emission at room temperature), phosphorescence, and bioluminescence all involve emission at or near room temperature. Absorption of ambient light followed by emission is common.\n- **Bridge [P30]:** \"Temperature is one way to supply energy to excite electrons, but not the only way. Any energy source — UV photons, electrical discharge, chemical reactions — can excite electrons. Emission follows whenever they de-excite.\"\n- **Replacement [P31]:** Emission occurs whenever an electron transitions from a higher to a lower energy level, regardless of how it was excited. Temperature is not required; any excitation mechanism suffices.\n- **Discrimination pairs [P33]:** A glow-in-the-dark toy emits light at room temperature after being charged by ambient light. Emission does not require continuous heating.\n- **S6 repair path:** Demonstrate fluorescence: shine UV (\"blacklight\") on white paper or fluorescent minerals — bright emission at room temperature.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "EXPLAIN",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "CALCULATE + PROBE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CALCULATE + PROBE\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "TRANSFER",
+      "content": "{\"id\":\"TA-4\",\"title\":\"TRANSFER\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly applies the Rydberg formula, correctly draws the energy level diagram with numerical values, and correctly distinguishes emission from absorption spectra. Score ≥ 80%.\n\n**FA-1 — Identification:**\n*Q: The transition n=5 → n=1 in hydrogen: (a) What series does this belong to? (b) Is it UV, visible, or IR? (c) Is it emission or absorption (when the electron falls from n=5 to n=1)?*\nExpected: (a) Lyman series (n₁ = 1). (b) UV. (c) Emission (electron falls to lower level, releasing a photon).\nThreshold: All three correct.\n\n**FA-2 — Calculation:**\n*Q: Calculate the wavelength of the second line in the Balmer series (n=4 → n=2 transition).*\nExpected: 1/λ = 1.097×10⁷(1/4 − 1/16) = 1.097×10⁷ × 0.1875 = 2.057×10⁶ m⁻¹; λ = 486 nm.\nThreshold: Correct identification of n₁=2, n₂=4 and answer within ±10 nm (476–496 nm).\n\n**FA-3 — Energy level reasoning:**\n*Q: An electron in hydrogen is in the n=4 state. It can drop to n=3, n=2, or n=1. Rank these transitions by the energy of the emitted photon (smallest to largest).*\nExpected: n=4→3 (ΔE = 0.66 eV, IR) < n=4→2 (ΔE = 2.55 eV, visible) < n=4→1 (ΔE = 12.75 eV, UV). Largest energy gap = highest energy photon = shortest wavelength.\nThreshold: Correct ranking with correct reasoning (larger energy gap → higher energy photon → shorter wavelength).\n\n**FA-4 — Absorption vs. emission:**\n*Q: The Fraunhofer D lines (sodium doublet, ~589 nm) appear as dark lines in the solar spectrum. Explain what causes these dark lines.*\nExpected: Sodium atoms in the Sun's cooler outer atmosphere absorb photons of exactly 589 nm as electrons are raised from the ground state to the first excited state. These photons are removed from the continuous solar spectrum, producing dark absorption lines at 589 nm.\nThreshold: Must say \"absorption by sodium atoms\" and invoke the energy transition mechanism.\n\n**Confidence calibration:** After FA-2, student rates confidence before revealing answer. Students who calculate incorrectly but rate confidence >80% receive targeted feedback: re-walk the Rydberg formula step-by-step.\n\n**Delayed retrieval (session + 3):** \"What is the series limit wavelength for the Balmer series? (Hint: what happens as n₂ → ∞?)\" Expected: 1/λ = R_H × (1/4 − 0) = R_H/4; λ = 364.6 nm (UV edge of Balmer series).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 211,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Observe a hydrogen discharge tube alongside a diffraction grating: students see red (Hα, 656 nm), blue-green (Hβ, 486 nm), violet (Hγ, 434 nm) lines — not a continuous rainbow.\n- Compare to white light through the same grating: continuous rainbow.\n- Physical analogy: a guitar string vibrates only at its fundamental and harmonics — not at arbitrary frequencies. Atoms are analogous: only certain energy differences are \"allowed.\"\n\n### Representational (Iconic)\n- Energy level diagram: horizontal lines at E₁ = −13.6 eV, E₂ = −3.4 eV, E₃ = −1.51 eV, E₄ = −0.85 eV, E∞ = 0 (ionization).\n- Draw downward arrows for emission transitions; label each with wavelength.\n- Group arrows by series: Lyman (all go to n=1), Balmer (all go to n=2), Paschen (all go to n=3).\n- Show absorption spectrum (dark lines on rainbow) vs. emission spectrum (bright lines on black) side by side. Emphasize: same wavelengths, complementary appearance.\n\n### Abstract (Symbolic)\n- Rydberg formula derivation from Bohr model: Eₙ = −ke²/2a₀n²; ΔE = hc/λ → 1/λ = R_H(1/n₁² − 1/n₂²).\n- Calculate λ for Hα: n₁=2, n₂=3: 1/λ = 1.097×10⁷(1/4 − 1/9) = 1.097×10⁷ × 5/36 → λ = 656 nm.\n- Ionization energy: energy to remove electron from ground state = 13.6 eV = 2.18 × 10⁻¹⁸ J.\n- Rydberg constant derivation: R_H = m_e e⁴ / (8ε₀²h³c) — connects atomic constants to spectral lines.\n\n### Transfer (+)\n- Stellar spectroscopy: absorption lines in starlight identify elements in stellar atmospheres. Doppler shift of lines reveals star velocity (redshift/blueshift).\n- Flame tests in chemistry: metal ions produce characteristic colors — same physics, different elements.\n- Lasers: stimulated emission of photons between specific atomic levels.\n- Medical imaging: emission spectroscopy used in plasma diagnostics, atomic absorption spectroscopy in blood analysis.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 42,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Confusion of emission and absorption:** Students mix up which spectrum is dark lines and which is bright lines. They see \"absorption\" as physical blocking rather than resonant photon capture. Correct: in absorption, atoms at room temperature absorb photons at exactly the resonant frequency; in emission, excited atoms release photons. Same frequencies, opposite appearance.\n\n**Mode 2 — Rydberg formula confusion:** Students confuse n₁ and n₂. They don't know which is the initial level and which is the final level, leading to sign errors in ΔE and wrong answers for emission vs. absorption. Correct: for emission, n₂ > n₁ (electron falls from higher to lower); for absorption, n₂ > n₁ (electron raised from lower to higher). The Rydberg formula gives 1/λ as positive when n₂ > n₁.\n\n**Mode 3 — Series limit confusion:** Students don't know that as n₂ → ∞, the series converges to a limit (the series limit wavelength corresponds to ionization from level n₁). They cannot identify which transitions are visible.\n\n**Mode 4 — Continuous vs. line spectrum:** Students think heating an element always produces a continuous spectrum. Correct: a solid or liquid heated to incandescence produces a continuous blackbody spectrum (all wavelengths). A gas of atoms produces line emission because the atoms have discrete energy levels rather than continuous bands.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 69,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"I'm going to show you something that was a complete mystery for 50 years. [Turn on hydrogen discharge tube.] That red glow. If you put it through a prism or grating, you don't see a rainbow. You see four specific lines — red, blue-green, and two violet. No others. Why? Why not a continuous glow? Why these four specific colors? Nobody knew until 1913. The answer changed physics forever.\"\n\n**At the energy level diagram:**\n\"Each horizontal line is an allowed energy state. The electron can be at E₁, E₂, E₃ — but nowhere in between. It's like a staircase: you can stand on step 1, step 2, step 3 — but you cannot stand between steps. When the electron jumps from step 3 to step 2, it releases exactly E₃ − E₂ worth of energy — as a photon. That photon has a specific wavelength: 656 nm. Red. That's the Hα line.\"\n\n**At the calculation:**\n\"Watch: n₁ = 2, n₂ = 3. ΔE = 13.6 × (1/4 − 1/9) = 13.6 × 5/36 = 1.89 eV. Convert to joules: 3.02 × 10⁻¹⁹ J. f = E/h = 4.57 × 10¹⁴ Hz. λ = c/f = 656 nm. [Turn to discharge tube.] That red line. We predicted it from quantum mechanics alone. The calculation and the observation agree to four significant figures. This is why physicists trust quantum mechanics — because it works, precisely, every time.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 198,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.mod.bohr-model first — without quantized orbits, atomic spectra make no sense. Do not proceed to spectral calculations without the Bohr energy level formula secure.\n\n**S3:** Student can apply the Rydberg formula but doesn't understand why only those wavelengths appear. Use Explanation C (why lines, not continuous) and Analogy A (the piano). Emphasize: in isolated atoms, only discrete energy differences are allowed.\n\n**S6:** Student confuses Lyman/Balmer/Paschen series. Draw the full energy level diagram with numbered levels and colored arrows per series. Drill: \"What determines which series? The final level. n₁ = 1 → Lyman. n₁ = 2 → Balmer. n₁ = 3 → Paschen.\"\n\n**S9:** Extend to multi-electron atoms — why don't lithium or sodium follow the same Rydberg formula? (Screening effects, electron-electron repulsion). Introduce the concept of quantum defect. Preview X-ray spectra as inner-shell transitions in heavy atoms.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 241,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (Rydberg formula application) + conceptual schema (energy level diagram, series identification).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Draw the hydrogen energy level diagram. Label n=1 to n=4 with energy values. Draw arrows for two Balmer transitions.\"\n- Session + 3: \"State Kirchhoff's spectroscopy laws (emission, absorption, continuous spectra) in one sentence each.\"\n- Session + 7: \"Calculate the shortest wavelength in the Lyman series (n=∞ → n=1). What is this called?\"\n\n**Interleaving partners:** phys.mod.bohr-model (prerequisite — provides energy levels), phys.mod.x-rays (complementary — inner-shell transitions in heavy atoms), phys.mod.radioactivity (successor concept unlock).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 253,
+        "endLine": 266
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Helium and alkali metal spectra — same framework, different energy levels (helium has two electrons, more complex, but still discrete lines). Flame tests in chemistry use the same physics.\n\n**Far transfer:** Stellar astrophysics — absorption spectra of stars identify their atmospheric composition. Doppler shifts of spectral lines measure stellar velocities. Redshift of galaxies reveals cosmic expansion (Hubble's law).\n\n**Structural abstraction:** \"Discrete levels produce discrete signatures.\" This pattern transfers to nuclear energy levels (gamma-ray spectra from nuclear transitions), molecular vibration spectra (IR spectroscopy), and NMR (nuclear spin transitions). The principle — quantized system → discrete spectral lines — is universal in quantum physics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 266,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-spectra/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.atomic-spectra",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.mod.bohr-model is necessary. Students who have not seen the Bohr energy formula Eₙ = −13.6/n² eV cannot use the Rydberg formula meaningfully.\n- **Unlock readiness:** phys.mod.radioactivity is a reasonable next step — transitions to nuclear physics while atomic structure concepts are fresh.\n- **Difficulty calibration:** Proficient/apply is correct. The mathematics is routine (plug-in Rydberg formula) once the n₁/n₂ convention is clear. Conceptual depth (Kirchhoff's laws, series identification, emission vs. absorption) is the discriminating challenge.\n- **Suggested lab:** Any spectroscope lab with multiple discharge tubes. Hydrogen, helium, neon, mercury are standard. Students measure wavelengths, calculate energy gaps, verify against theoretical values.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-spectra.md",
+        "startLine": 276,
+        "endLine": 286
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

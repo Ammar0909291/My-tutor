@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.electric-field-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.electric-field",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c9ba77b56f53cc6efa63bd7548ba880e05f9e55e60b2a6aade0b4951dbc40ca3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.electric-field.md": "sha256:f7246805b3eaae82c28aa68e42c86175fc8878a2e6fd9c69361d8e32d97e8fe5"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.electric-field",
+    "name": "Electric Field",
+    "difficultyRaw": "label: proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.em.coulombs-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.electric-field-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.electric-field (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.electric-field.md": "sha256:f7246805b3eaae82c28aa68e42c86175fc8878a2e6fd9c69361d8e32d97e8fe5"
+      },
+      "contentHash": "sha256:55767ec0479a060d1a28c837693c006a2c591e7fb79f10e9ed31fab64bf73260",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-field.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-field.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-field\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-field.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-field.md#TA-2 (addresses MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE, MC-FIELD-LINES-SHOW-PARTICLE-PATH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-field\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-field.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-field.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-field\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-field.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-field.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-field\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-field.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-field.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-field\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.electric-field/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.electric-field",
+      "title": "Electric Field — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nImagine putting a small positive \"test charge\" at some point in space. It will feel a force — pushed away from nearby positive charges and pulled toward negative ones. The **electric field** at that point is defined as the force per unit charge: E = F/q. This means the field exists independently of whether any test charge is actually there — it is a property of space created by source charges. Electric field lines point away from positive charges and toward negative charges, and their density shows how strong the field is.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**Definition:**\n$$\\vec{E} = \\frac{\\vec{F}}{q_0}$$\n\nwhere q₀ is a small positive test charge and F is the force on it. Units: N/C = V/m.\n\n**Field due to a point charge:**\n$$\\vec{E} = k\\frac{Q}{r^2}\\hat{r}$$\n\nPoints away from Q if Q > 0; toward Q if Q < 0.\n\n**Superposition:** The total electric field due to multiple charges is the vector sum of each individual field:\n$$\\vec{E}_\\text{total} = \\sum_i \\vec{E}_i = k\\sum_i \\frac{q_i}{r_i^2}\\hat{r}_i$$\n\n**Field lines:**\n1. Start on positive charges, end on negative charges (or extend to infinity).\n2. Never cross (field is single-valued at each point).\n3. Density proportional to field strength.\n4. Perpendicular to equipotential surfaces.\n5. For a single positive point charge: radiate outward uniformly.\n\n**Special cases:**\n- Uniform field between parallel plates: E = σ/ε₀ (away from edges)\n- Outside a uniformly charged sphere (radius R): E = kQ/r² for r > R (same as point charge)\n- Inside a uniformly charged conducting sphere: E = 0 (Gauss's law result)\n\n**Force on charge in field:** F = qE (direction depends on sign of q)\n\n### Tier 3 — Formal / Vector\n\n**Field of a continuous charge distribution:**\n$$\\vec{E}(\\vec{r}) = k\\int \\frac{dq}{|\\vec{r}-\\vec{r}'|^2}\\hat{r}_{r-r'}$$\n\nwhere dq = ρ dV (volume), σ dA (surface), or λ dl (line).\n\n**Uniform ring of charge (on axis):**\n$$E_x = \\frac{kQx}{(x^2+R^2)^{3/2}}$$\nMaximum at x = R/√2; vanishes at center and at infinity.\n\n**Infinite line charge (λ C/m):**\n$$E = \\frac{\\lambda}{2\\pi\\varepsilon_0 r}$$\n\n**Infinite plane (σ C/m²):**\n$$E = \\frac{\\sigma}{2\\varepsilon_0}$$\n(independent of distance from the plane)\n\n**Electric field and potential:**\n$$\\vec{E} = -\\nabla V$$\n(Field points from high to low potential — \"downhill.\")\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 29,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-field",
+      "title": "(Single point charge)",
+      "content": "### WE-1 (Single point charge)\n\n**Problem:** A charge Q = +5 nC is at the origin. Find the electric field magnitude and direction at a point P located 0.30 m away along the x-axis.\n\n**Worked solution:**\n\n*Step 1 — Magnitude:*\n$$E = k\\frac{|Q|}{r^2} = (8.99\\times10^9)\\frac{5\\times10^{-9}}{(0.30)^2} = (8.99\\times10^9)\\frac{5\\times10^{-9}}{0.09}$$\n$$E = \\frac{4.495\\times10^1}{0.09} = 499\\text{ N/C} \\approx 500\\text{ N/C}$$\n\n*Step 2 — Direction:*\nQ is positive → field points away from Q → in +x direction at P.\n\n**Answer:** E = 500 N/C in the +x direction.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 88,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-field",
+      "title": "(Superposition — two charges)",
+      "content": "### WE-2 (Superposition — two charges)\n\n**Problem:** q₁ = +3 μC at x = 0 and q₂ = −3 μC at x = 0.40 m (an electric dipole). Find the electric field at the midpoint (x = 0.20 m).\n\n**Worked solution:**\n\n*Step 1 — Field from q₁ at midpoint (r = 0.20 m):*\n$$E_1 = k\\frac{3\\times10^{-6}}{(0.20)^2} = (8.99\\times10^9)\\frac{3\\times10^{-6}}{0.04} = 6.74\\times10^5\\text{ N/C}$$\nDirection: +x (away from positive q₁)\n\n*Step 2 — Field from q₂ at midpoint (r = 0.20 m):*\n$$E_2 = k\\frac{3\\times10^{-6}}{(0.20)^2} = 6.74\\times10^5\\text{ N/C}$$\nDirection: q₂ is negative, midpoint is to its left → field points toward q₂ → +x direction.\n\n*Step 3 — Total field:*\nBoth fields point in +x direction (from + charge toward − charge):\nE_total = 6.74×10⁵ + 6.74×10⁵ = **1.35 × 10⁶ N/C** in +x direction.\n\n**Answer:** E = 1.35 × 10⁶ N/C in the +x direction (from + toward −, along the dipole axis).\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 88,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-field",
+      "title": "(Field → force)",
+      "content": "### WE-3 (Field → force)\n\n**Problem:** An electron (charge = −1.602 × 10⁻¹⁹ C, mass = 9.11 × 10⁻³¹ kg) is placed in a uniform electric field E = 500 N/C pointing in the +x direction. Find the force and acceleration on the electron.\n\n**Worked solution:**\n\n*Step 1 — Force:*\n$$\\vec{F} = q\\vec{E} = (-1.602\\times10^{-19})(500\\hat{x}) = -8.01\\times10^{-17}\\text{ N}\\hat{x}$$\n(negative sign: force is in −x direction — opposite to E, since electron is negative)\n\n*Step 2 — Acceleration:*\n$$\\vec{a} = \\frac{\\vec{F}}{m} = \\frac{-8.01\\times10^{-17}}{9.11\\times10^{-31}}\\hat{x} = -8.79\\times10^{13}\\text{ m/s}^2\\hat{x}$$\n\n**Answer:** Force = 8.01 × 10⁻¹⁷ N in −x direction; a = 8.79 × 10¹³ m/s² in −x direction.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 88,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/misconception/MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-field",
+      "title": "**Trigger signal:** Student says \"there's no electric field unless a charge is present to feel it\" or \"the field only exists when you put a charge there.",
+      "content": "### MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE\n\n**Trigger signal:** Student says \"there's no electric field unless a charge is present to feel it\" or \"the field only exists when you put a charge there.\"\n\n**Conflict evidence [P28]:** \"Consider a parallel-plate capacitor with no test charge between the plates. Remove the battery — the charge on the plates remains, and with it the field. Now insert a tiny test charge: it feels the force that was already there. The test charge reveals the field; it doesn't create it. The field pre-existed, even in 'empty' space. Modern quantum electrodynamics confirms: fields are real — they carry energy and momentum (light is a propagating electric field).\"\n\n**Bridge text [P30]:** \"The test charge is a measuring tool, not a prerequisite for the field's existence. E = F/q_0 is a definition of field in terms of a measurable force, not a statement that the field needs q₀. The source charge Q creates the field; q₀ just probes it.\"\n\n**Replacement text [P31]:** \"The electric field exists in space independently of any test charge. Source charges create the field; a test charge is used to measure the field but is not required for it to exist. E = F/q₀ is the definition (measurement procedure), not the existence condition. Fields carry energy — the field exists even between the plates of a capacitor with nothing in between.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Source charge Q creates the field; test charge q₀ measures it\" | \"The field only exists when a test charge is present\" |\n| \"E = kQ/r² at every point in space around Q\" | \"E = F/q₀ means E needs q₀ to exist\" |\n| \"Electric field lines map the field in empty space\" | \"Field lines show where forces will be — not where field is\" |\n\n**s6_path:** Use gravitational analogy: Earth's gravitational field exists even in space with no objects present. Drop a test ball to measure it, but the field was there before.\n\n---",
+      "localKey": "MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE",
+      "language": "en",
+      "refs": [
+        "MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/misconception/MC-FIELD-LINES-SHOW-PARTICLE-PATH",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-field",
+      "title": "**Trigger signal:** Student says \"a positive charge will travel along the field line\" or sketches a particle trajectory following a curved field line.",
+      "content": "### MC-FIELD-LINES-SHOW-PARTICLE-PATH\n\n**Trigger signal:** Student says \"a positive charge will travel along the field line\" or sketches a particle trajectory following a curved field line.\n\n**Conflict evidence [P28]:** \"A field line shows the direction of force at each instant — not the path of motion. For a charged particle released from rest at a point on a curved field line, the force at that instant is along the field line, but the particle's inertia means it overshoots. The trajectory curves away from the field line. Only for a straight, uniform field does a particle (from rest) follow the field line (rectilinear motion).\"\n\n**Bridge text [P30]:** \"Field lines show the direction of force, not the trajectory. A moving particle at any instant feels a force along the field line, but the subsequent path depends on its velocity vector and all future forces. For a particle moving perpendicular to a uniform field (like a horizontal projectile), the trajectory is parabolic — the field lines are straight, the trajectory curves.\"\n\n**Replacement text [P31]:** \"Electric field lines show the direction of force on a positive test charge at each point in space. They do NOT trace the actual path of a charged particle. A particle's trajectory depends on its initial velocity and the cumulative effect of forces — only a particle released from rest along a straight field line would follow that field line. In curved fields or with non-zero initial velocity, the trajectory diverges from the field lines.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Field lines show force direction at each point\" | \"A positive charge travels along field lines\" |\n| \"Trajectory ≠ field line (depends on initial velocity)\" | \"Field lines are the paths charged particles take\" |\n| \"Field lines are perpendicular to equipotentials\" | \"Field lines show equal-energy paths\" |\n\n**s6_path:** Draw a uniform field between plates; show an electron entering horizontally — it follows a parabolic path, not along the field lines.\n\n---",
+      "localKey": "MC-FIELD-LINES-SHOW-PARTICLE-PATH",
+      "language": "en",
+      "refs": [
+        "MC-FIELD-LINES-SHOW-PARTICLE-PATH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-field",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-field",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE\",\"MC-FIELD-LINES-SHOW-PARTICLE-PATH\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE",
+        "MC-FIELD-LINES-SHOW-PARTICLE-PATH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-field",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-field",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-field",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.electric-field/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.electric-field",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nWhat is the electric field due to a point charge Q at distance r? State the formula and the direction.\n\n**Answer:** E = kQ/r² in magnitude; direction is away from Q if Q > 0, toward Q if Q < 0. (Vector: E = kQ/r² r̂ where r̂ points away from Q.)\n\n---\n\n### AP-2 (Bloom: Understand)\nWhy must the test charge q₀ in the definition E = F/q₀ be small? What happens if q₀ is large?\n\n**Answer:** A large test charge would alter the distribution of the source charges (by attracting or repelling them), changing the very field it is meant to measure. The test charge must be small enough that it does not disturb the source charges — it is a probe, not a perturbation. Mathematically, E = lim(q₀→0) F/q₀.\n\n---\n\n### AP-3 (Bloom: Apply)\nAt what distance from a +10 nC charge does the electric field equal 400 N/C?\n\n**Answer:** E = kQ/r² → r² = kQ/E = (8.99×10⁹)(10×10⁻⁹)/400 = 0.0899/400 = 2.25×10⁻⁴ → r = **0.015 m = 1.5 cm**\n\n---\n\n### AP-4 (Bloom: Analyze)\nTwo charges +2Q and −Q are separated by distance d. At what point along the line connecting them (outside the two charges) is the net electric field zero?\n\n**Answer:** The zero point must be on the side of the weaker charge (−Q), at distance r from −Q:\nField from +2Q: k(2Q)/(d+r)² = pointing toward −Q (positive source, field toward −)\nField from −Q: kQ/r² = pointing toward −Q (negative source, field toward −)\nWait — at a point outside −Q (beyond −Q, away from +2Q):\nField from +2Q: magnitude k(2Q)/(d+r)², direction: toward −Q (rightward if +2Q is left, −Q is right)\nField from −Q: magnitude kQ/r², direction: toward −Q (leftward — toward −Q means leftward from this point)\nFor zero: they must point in opposite directions. At a point to the right of −Q:\nField from +2Q: rightward (away from +2Q) = +\nField from −Q: leftward (toward −Q) = −\nSet magnitudes equal: k(2Q)/(d+r)² = kQ/r² → 2/( d+r)² = 1/r² → √2·r = d+r → r(√2−1) = d → r = d/(√2−1) = d(√2+1) ≈ **2.41d** from the −Q charge (on the far side from +2Q).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-field.md",
+        "startLine": 262,
+        "endLine": 301
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

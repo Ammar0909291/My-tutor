@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.third-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.third-law",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1072791272102c658c2a12b14943f244a1279d6e24d0c07e9acbcae68e5ca916",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.third-law.md": "sha256:29b6e3487f9b3987f9b126e89189520d5e9d11657a40c7ff52a9e7f6de16af44"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.therm.third-law",
+    "name": "Third Law of Thermodynamics",
+    "difficultyRaw": "label: advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.therm.entropy"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.third-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.third-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.third-law.md": "sha256:29b6e3487f9b3987f9b126e89189520d5e9d11657a40c7ff52a9e7f6de16af44"
+      },
+      "contentHash": "sha256:11ad1cd0e734ca208974ba2babcd5eaa3fcb64acbe11a43aa9e1883f22bfb224",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.third-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.third-law.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.third-law\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.third-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.third-law.md#TA-2 (addresses MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE, MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.third-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.third-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.third-law.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.third-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.third-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.third-law.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.third-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.third-law.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.third-law.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.third-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.third-law\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.third-law/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.therm.third-law",
+      "title": "Third Law of Thermodynamics — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nPicture entropy as the number of ways a system can arrange itself. A single perfect crystal at absolute zero has exactly **one** arrangement — every atom locked in its lowest-energy position. No disorder, no choices. That translates to exactly zero entropy. The Third Law of Thermodynamics says: **absolute zero is the lower entropy boundary**, and you cannot actually reach it in a finite number of steps. It is like a floor you can approach but never touch — each step to get closer requires more effort than the last.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\nThe Third Law has two closely related statements:\n\n**Nernst Heat Theorem (1906):** For any isothermal process, ΔS → 0 as T → 0 K. All substances approach the same entropy as T → 0.\n\n**Planck's formulation (1912):** The entropy of a perfect crystalline substance at absolute zero is zero: S(0 K) = 0.\n\n**Unattainability of absolute zero (Fowler-Guggenheim):** It is impossible to reach absolute zero in a finite number of operations.\n\nThese are logically equivalent. The connection:\n- If S(0 K) = 0 for all substances, then to cool a system to 0 K you must remove all its entropy.\n- Each isothermal step removes less and less entropy as T → 0 (since ΔS → 0).\n- You need infinitely many steps → absolute zero is unattainable in finite time.\n\n**Statistical mechanics connection:** Using Boltzmann's formula S = k_B ln Ω:\n- At 0 K (ground state only): Ω = 1 → S = k_B ln 1 = 0\n- The \"perfect crystal\" requirement: any structural disorder, isotope mixing, or orientation disorder creates Ω > 1 even at 0 K → residual entropy S₀ > 0\n\n**Third Law entropy** (absolute entropy, not just ΔS):\n$$S(T) = \\int_0^T \\frac{C_P(T')}{T'}\\, dT'$$\n\nThis converges because C_P → 0 as T → 0 (faster than T^1), so the integral remains finite. Absolute entropies can be measured and tabulated.\n\n### Tier 3 — Formal / Rigorous\n\n**Residual entropy:** Real substances often have Ω > 1 at T = 0 K due to:\n- Nuclear spin degeneracy (independent nuclear spins: Ω = (2I+1)^N — but nuclear spins don't equilibrate at chemical timescales)\n- Orientational disorder: CO crystal at 0 K has Ω = 2^N_A per mole (each CO can point → or ←), giving S₀ = N_A k_B ln 2 = R ln 2 ≈ 5.76 J/(mol·K) — confirmed experimentally.\n- Isotope mixing: random isotope distribution creates configuration entropy that persists at 0 K.\nBy convention, Planck's formulation applies to a **perfect** crystal; residual entropy is noted but often ignored for thermochemical purposes.\n\n**Consequences for heat capacity:**\nDebye's law: C_V ∝ T³ at low T for solids → C_V/T ∝ T² → integral converges at lower limit.\nFermi liquid: C_V = γT for metals at very low T → C_V/T = γ (constant) → still converges.\n\n**Consequence for thermal expansion:**\nThird Law requires that the coefficient of thermal expansion α → 0 as T → 0. (Reason: (∂S/∂P)_T = −(∂V/∂T)_P = −Vα; if S → 0 independently of P as T → 0, then α → 0.)\n\n**Consequence for chemical equilibrium:**\nNernst's theorem enables calculating absolute Gibbs free energy changes: ΔG°(T) = ΔH° − TΔS°, where ΔS° can be computed from absolute (Third Law) entropies from calorimetry.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 28,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.third-law",
+      "title": "(Foundational — absolute entropy calculation)",
+      "content": "### WE-1 (Foundational — absolute entropy calculation)\n\n**Problem:** The molar heat capacity of a solid at low temperature follows C_P = aT³ (Debye law) with a = 0.00120 J/(mol·K⁴). Calculate the absolute molar entropy at 20 K.\n\n**Worked solution:**\n\n*Step 1 — Apply the Third Law entropy integral from 0 to T:*\n$$S(20\\text{ K}) = \\int_0^{20} \\frac{C_P}{T}\\, dT = \\int_0^{20} \\frac{aT^3}{T}\\, dT = \\int_0^{20} aT^2\\, dT$$\n\n*Step 2 — Evaluate:*\n$$S(20) = a \\cdot \\frac{T^3}{3}\\Bigg|_0^{20} = 0.00120 \\times \\frac{(20)^3}{3} = 0.00120 \\times \\frac{8000}{3}$$\n$$S(20) = 0.00120 \\times 2667 = 3.20 \\text{ J/(mol·K)}$$\n\n*Step 3 — Interpret:*\nAt absolute zero, S = 0 (perfect crystal). By 20 K, entropy is 3.20 J/(mol·K). As T increases further, entropy rises with each additional degree of freedom activated.\n\n**Answer:** S(20 K) = 3.20 J/(mol·K)\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 78,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.third-law",
+      "title": "(Conceptual — residual entropy in CO crystal)",
+      "content": "### WE-2 (Conceptual — residual entropy in CO crystal)\n\n**Problem:** Solid CO at 0 K has each molecule equally likely to orient as CO or OC (one bit of disorder per molecule). Estimate the residual molar entropy of CO.\n\n**Worked solution:**\n\n*Step 1 — Count microstates:*\nEach CO molecule has 2 orientations: CO → or ← OC.\nFor N_A molecules: Ω = 2^(N_A)\n\n*Step 2 — Apply Boltzmann:*\n$$S_0 = k_B \\ln \\Omega = k_B \\ln(2^{N_A}) = N_A k_B \\ln 2 = R \\ln 2$$\n\n*Step 3 — Calculate:*\n$$S_0 = (8.314\\text{ J/mol·K})\\ln 2 = 8.314 \\times 0.693 = 5.76\\text{ J/(mol·K)}$$\n\n*Step 4 — Interpret:*\nThis is \"residual entropy\" — entropy that remains even at 0 K because the system is not a perfect crystal. Experimentally measured at ≈ 4.2–5.8 J/(mol·K), consistent with this calculation. Planck's S(0) = 0 applies only to a perfect crystal.\n\n**Answer:** S₀ = R ln 2 ≈ 5.76 J/(mol·K)\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 78,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.third-law",
+      "title": "(Application — unattainability)",
+      "content": "### WE-3 (Application — unattainability)\n\n**Problem:** A cooling process removes ΔS = A·T of entropy per step (where A is a constant) while lowering temperature by ΔT per step. Starting from T = 10 mK, how many steps to reach 0 K?\n\n**Worked solution:**\n\n*Step 1 — Note the pattern:*\nEach step removes ΔS = A·T_current while lowering temperature by ΔT. As T → 0, ΔS → 0 — each step removes less and less entropy.\n\n*Step 2 — Recognize infinite series:*\nTemperature sequence: T_0, T_0 − ΔT, T_0 − 2ΔT, … \nThe entropy to remove after n steps: A·(T_0 − nΔT).\nTotal entropy removed → finite sum even as n → ∞.\n\n*Step 3 — Conclusion:*\nThe remaining entropy (proportional to T) never reaches exactly zero in a finite number of steps. This is the mathematical expression of the unattainability principle: infinitely many steps would be required. No physical cooling process can bridge this gap in finite operations.\n\n**Answer:** Infinite steps required — unattainability of absolute zero confirmed by the convergence structure of the entropy removal process.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 78,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/misconception/MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE",
+      "kind": "misconception",
+      "conceptId": "phys.therm.third-law",
+      "title": "**Trigger signal:** Student says \"if we do enough cooling steps we'll eventually get to 0 K\" or \"third law just says entropy is zero at 0 K, not that we can't get there.",
+      "content": "### MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE\n\n**Trigger signal:** Student says \"if we do enough cooling steps we'll eventually get to 0 K\" or \"third law just says entropy is zero at 0 K, not that we can't get there.\"\n\n**Conflict evidence [P28]:** \"The Nernst formulation and unattainability are logically equivalent. Here's the argument: to cool a system from T to T − δT requires removing entropy ΔS from it. But near 0 K, ΔS → 0 for every possible isothermal process (the Nernst theorem). If you can only remove a vanishingly small amount of entropy per step, and the total entropy remaining also vanishes as T → 0, you face an infinite-step series. Laboratory records: nuclear demagnetization has reached ~100 pK — but never 0 K.\"\n\n**Bridge text [P30]:** \"The Third Law is like a horizon — you can always get closer to 0 K (scientists have cooled systems to billionths of a kelvin), but the final step always recedes. Each cooling technique hits its floor, and a new technique picks up, but none delivers the last step.\"\n\n**Replacement text [P31]:** \"The Third Law forbids reaching absolute zero in a finite number of steps. This is a thermodynamic law equivalent to Nernst's theorem. No finite sequence of operations can bring any system to exactly T = 0 K. This is why all recorded temperatures remain strictly above 0 K, no matter how advanced the technology.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Absolute zero can be approached but never reached in finite steps\" | \"Absolute zero can be reached with enough cooling cycles\" |\n| \"Third Law implies unattainability as a thermodynamic law\" | \"Third Law is just about entropy value at 0 K, not about reachability\" |\n| \"Each step closer to 0 K requires exponentially more effort\" | \"Cooling becomes easier the closer you get to 0 K\" |\n\n**s6_path:** Acknowledge the counterintuitive nature — approaching without reaching is familiar in mathematics (limits) but strange physically. Connect to physical experiments that confirm the law.\n\n---",
+      "localKey": "MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE",
+      "language": "en",
+      "refs": [
+        "MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/misconception/MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES",
+      "kind": "misconception",
+      "conceptId": "phys.therm.third-law",
+      "title": "**Trigger signal:** Student assumes all real substances have S = 0 at 0 K, including glasses, mixtures, and disordered solids.",
+      "content": "### MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES\n\n**Trigger signal:** Student assumes all real substances have S = 0 at 0 K, including glasses, mixtures, and disordered solids.\n\n**Conflict evidence [P28]:** \"CO crystal experiment: at 0 K, CO molecules frozen in random CO/OC orientations contribute S₀ = R ln 2 ≈ 5.76 J/(mol·K) even at 0 K. Calorimetric measurement of S(0→T) gives a value 5.76 J/(mol·K) less than spectroscopic ΔS — the difference is the residual entropy. Glasses have amorphous structure at 0 K: Ω >> 1, S₀ >> 0.\"\n\n**Bridge text [P30]:** \"Planck's Third Law applies specifically to a perfect crystalline substance — every atom in its unique equilibrium position with no isotope mixing or nuclear spin disorder. This is an idealization. Real substances have residual entropy when structural disorder or degeneracy is frozen in at 0 K.\"\n\n**Replacement text [P31]:** \"The Third Law (Planck) states: the entropy of a perfect crystalline substance at absolute zero is exactly zero. Real substances with orientational disorder, isotope mixing, or amorphous structure can have residual entropy S₀ > 0 at 0 K, because their ground state is degenerate (Ω > 1). The 'perfect crystal' qualifier is essential.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Perfect crystal at 0 K: S = 0 (Ω = 1)\" | \"All substances at 0 K have S = 0\" |\n| \"CO crystal has residual entropy R ln 2 ≈ 5.76 J/(mol·K)\" | \"CO at 0 K is a perfect crystal with S = 0\" |\n| \"Glass at 0 K has S₀ > 0 (amorphous structure)\" | \"Only perfect crystals exist at 0 K\" |\n\n**s6_path:** Connect to Boltzmann's formula — S = k_B ln Ω. If Ω > 1, S > 0 regardless of T. The Third Law's \"perfect crystal\" condition ensures Ω = 1 uniquely.\n\n---",
+      "localKey": "MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES",
+      "language": "en",
+      "refs": [
+        "MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.third-law",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 233,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.third-law",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES\",\"MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-THIRD-LAW-SAYS-ABSOLUTE-ZERO-IS-REACHABLE",
+        "MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 233,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.third-law",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 233,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.third-law",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 233,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.third-law",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 233,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.therm.third-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.third-law",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nWhat is the entropy of a perfect crystal at absolute zero?\n\n**Answer:** Zero (S = 0). This follows from Boltzmann's formula S = k_B ln Ω with Ω = 1 for a unique ground state.\n\n---\n\n### AP-2 (Bloom: Understand)\nExplain in terms of microstates why absolute zero cannot be reached in finite steps.\n\n**Answer:** To cool a system, you must reduce its entropy. Near 0 K, the Nernst theorem requires that every isothermal process removes a vanishingly small entropy ΔS → 0. Since the remaining entropy also → 0 as T → 0, each subsequent cooling step removes less entropy than the previous one. Reaching S = 0 (0 K) in finite steps would require at least one step that removes a finite entropy in a single operation at T → 0 — forbidden by Nernst. Hence infinite steps are required.\n\n---\n\n### AP-3 (Bloom: Apply)\nA Debye solid has C_V = αT³ with α = 8.0 × 10⁻⁴ J/(mol·K⁴). Find S at 10 K.\n\n**Answer:** S(10) = ∫₀¹⁰ (αT³/T)dT = α(T³/3)|₀¹⁰ = 8.0×10⁻⁴ × 1000/3 = **0.267 J/(mol·K)**\n\n---\n\n### AP-4 (Bloom: Analyze)\nAn experiment measures S(calorimetry, 0→298 K) = 192.4 J/(mol·K) for N₂ gas, but spectroscopic data gives 193.8 J/(mol·K). Explain the discrepancy using the Third Law.\n\n**Answer:** The 1.4 J/(mol·K) discrepancy is residual entropy. N₂ molecules (like CO) can freeze with two orientations (NN or NN reversed — but because they're symmetric, less than CO). The residual entropy of R ln 2 ≈ 5.76 J/(mol·K) predicted for CO is largely absent for N₂ (symmetric molecule, smaller residual). The small observed discrepancy reflects partial orientational disorder. The calorimetric method misses entropy frozen in below the glass transition — spectroscopic method gives the true total entropy, confirming the Third Law discrepancy is the residual entropy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.third-law.md",
+        "startLine": 265,
+        "endLine": 295
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

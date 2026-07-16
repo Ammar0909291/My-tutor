@@ -1,0 +1,370 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.hydrogen-atom-qm-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.hydrogen-atom-qm",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:27b7191625cc95efd76635c33e377e581b144a00c3a67f756facafa7b6f637b2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md": "sha256:7738da7daeb634259849059eb4dac3853cf6d994865e5c86f1b8b0870c2de623"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.qm.hydrogen-atom-qm",
+    "name": "Quantum Treatment of Hydrogen Atom",
+    "difficultyRaw": "Expert",
+    "bloom": "Apply",
+    "masteryThreshold": null,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.qm.schrodinger-equation",
+      "phys.qm.operators"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.hydrogen-atom-qm-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.hydrogen-atom-qm (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md": "sha256:7738da7daeb634259849059eb4dac3853cf6d994865e5c86f1b8b0870c2de623"
+      },
+      "contentHash": "sha256:e5677581586e480129889f14617fd13101b4902e266e09c5fc381d85e124eba4",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.hydrogen-atom-qm.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.hydrogen-atom-qm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.hydrogen-atom-qm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.hydrogen-atom-qm.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.hydrogen-atom-qm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.hydrogen-atom-qm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.hydrogen-atom-qm.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.hydrogen-atom-qm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.hydrogen-atom-qm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Quantum Treatment of Hydrogen Atom — core explanation",
+      "content": "**Core Claim:** Solving the 3D Schrödinger equation for an electron in a Coulomb potential V = −e²/(4πε₀r) yields exact wave functions ψ_{nlm}(r,θ,φ) = R_{nl}(r)·Y_l^m(θ,φ) and energy levels Eₙ = −13.6 eV/n², where n (principal), l (orbital), and m (magnetic) quantum numbers arise naturally from the mathematics of spherical symmetry — not as postulates.\n\n**Why It Matters:** The hydrogen atom is the only atom with an exact quantum-mechanical solution; it establishes the quantum number system used for all atoms, explains the Bohr model while revealing its limitations, and provides the basis for understanding atomic structure, the periodic table, and spectroscopy.\n\n**Threshold Concept:** The three quantum numbers (n, l, m) are not arbitrary labels — they arise as boundary conditions forcing the wave function to be normalizable. The quantum structure of the atom is the mathematical requirement that ψ → 0 at infinity, nothing more.\n\n**Prerequisite Knowledge Check:**\n- TISE in 3D and separation of variables (phys.qm.schrodinger-equation)\n- Angular momentum operators L̂², L̂_z and their eigenvalues (phys.qm.operators)\n- Spherical harmonics Y_l^m as eigenfunctions of L̂²\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Electrons orbit the nucleus like planets",
+      "content": "### MC-1: Electrons orbit the nucleus like planets\n- **Probe:** \"Where is the electron in the ground state of hydrogen?\"\n- **Characteristic phrase:** \"It orbits at the Bohr radius, like a planet.\"\n- **Trigger:** Bohr model taught first; analogy to solar system.\n- **Conflict evidence [P28]:** If the electron had a definite trajectory, we could simultaneously know its position and momentum precisely — violating ΔxΔp ≥ ℏ/2. Also: measured hydrogen positions scatter across a range consistent with the 1s orbital's spread, not a single radius.\n- **Bridge [P30]:** The Bohr radius a₀ is the most probable radius in the quantum model (peak of r²|R_{10}|²), not a definite orbit. The electron has a probability *distribution* around the nucleus.\n- **Replacement [P31]:** ψ_{1s}(r) = (1/√π a₀³)e^(−r/a₀). The electron is spread out. The probability of finding it at radius r in dr is P(r)dr = r²|R_{10}|²dr — peaked at a₀ but with a spread.\n- **Discrimination pairs [P33]:** Bohr: electron at exactly r = a₀ always. QM 1s: P(r = 0) = 0, P(r = a₀) maximum, P(r → ∞) → 0 but never exactly zero.\n- **S6 repair path:** Plot the radial probability distribution for 1s and show P(r=a₀) is a peak, not a certainty; integrate P(r)dr from 0 to a₀ to show ~32% of probability is inside a₀.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "l can equal n",
+      "content": "### MC-2: l can equal n\n- **Probe:** \"What are the allowed l values for n=3?\"\n- **Characteristic phrase:** \"l = 0, 1, 2, 3.\"\n- **Trigger:** Forgetting the constraint l ≤ n−1.\n- **Conflict evidence [P28]:** If l = n = 3, the radial equation has no normalizable solution — the wavefunction diverges or doesn't normalize. The constraint l ≤ n−1 is a mathematical necessity, not an arbitrary rule.\n- **Bridge [P30]:** The radial equation produces a polynomial of degree n−l−1; for this to terminate (giving a normalizable solution), we need n−l−1 ≥ 0 → l ≤ n−1.\n- **Replacement [P31]:** For n=3: l = 0, 1, 2 only. Subshells: 3s (l=0), 3p (l=1), 3d (l=2).\n- **Discrimination pairs [P33]:** n=1: l=0 only (1s). n=2: l=0,1 (2s, 2p). n=3: l=0,1,2 (3s, 3p, 3d). n=4: l=0,1,2,3 (4s, 4p, 4d, 4f).\n- **S6 repair path:** Have learner count total states for n=3 using the correct constraints and verify sum = n² = 9.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "The orbital shape shows where the electron \"is",
+      "content": "### MC-3: The orbital shape shows where the electron \"is\"\n- **Probe:** \"What does the p_x orbital dumbbell shape mean?\"\n- **Characteristic phrase:** \"The electron is in the two lobes.\"\n- **Trigger:** Visual representation of orbitals as electron locations.\n- **Conflict evidence [P28]:** The dumbbell shape is a 3D surface enclosing 90% of the probability density |ψ|². The electron has nonzero probability everywhere outside the boundary too, and the shape describes the *directional distribution* of finding it.\n- **Bridge [P30]:** The angular part Y_l^m(θ,φ) determines the directional preference; the radial part R_{nl}(r) determines the radial distribution. The orbital surface is a visual summary of the angular distribution at the most probable radius.\n- **Replacement [P31]:** The p orbital dumbbell means: if we look along the x-axis, we're more likely to find the electron in those lobes than along y or z. It's a probability density map, not a container.\n- **Discrimination pairs [P33]:** 1s: spherically symmetric (all directions equally probable). 2p_z: highest probability along z-axis (top and bottom), zero probability in xy-plane (nodal plane).\n- **S6 repair path:** Show |ψ_{2p_z}|² = r²e^(−r/a₀)cos²θ/(32πa₀⁵); the cos²θ factor makes the z-direction favored.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "n=1 has three states (like n=2, l=1 which has three m values",
+      "content": "### MC-4: n=1 has three states (like n=2, l=1 which has three m values)\n- **Probe:** \"How many distinct quantum states does n=2 have (ignoring spin)?\"\n- **Characteristic phrase:** \"Three, one for each p orbital.\"\n- **Trigger:** Counting only the l=1 subshell (m = −1, 0, +1).\n- **Conflict evidence [P28]:** n=2 also has l=0 (the 2s state), giving one more state. Total: l=0 (1 state) + l=1 (3 states) = 4 = n². With spin: 8 = 2n².\n- **Bridge [P30]:** Each allowed l has 2l+1 m values. Total states = Σ_{l=0}^{n-1}(2l+1) = 1+3+5+…+(2n−1) = n².\n- **Replacement [P31]:** n=2: (2,0,0) plus (2,1,−1), (2,1,0), (2,1,+1) = 4 states. n²=4 ✓.\n- **Discrimination pairs [P33]:** n=1: 1 state (1s). n=2: 4 states (2s + 2p×3). n=3: 9 states.\n- **S6 repair path:** Table exercise: list all (n,l,m) triples for n=1,2,3 and verify counts 1, 4, 9.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Plot 1s radial probability distribution; show peak at a₀ is most probable, not definite",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Plot 1s radial probability distribution; show peak at a₀ is most probable, not definite\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 7,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Build (n,l,m) table for n=3 and verify n²=9",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build (n,l,m) table for n=3 and verify n²=9\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 8,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Calculate Balmer Hα wavelength from Eₙ = −13.6/n² eV",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Calculate Balmer Hα wavelength from Eₙ = −13.6/n² eV\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 9,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Write wave function quantum numbers for any state; compute energy; calculate spectral line wavelengths; count degeneracy correctly.\n\n**FA-1:** \"What are the quantum numbers (n,l,m) for the 3d subshell? How many states?\"\n*Expected:* n=3, l=2, m = −2,−1,0,+1,+2 → 5 states (10 with spin).\n*Threshold:* Correct l=2 for d, correct m range, correct count.\n\n**FA-2:** \"Calculate the energy of the n=4 level of hydrogen. What wavelength photon is emitted in the 4→2 transition?\"\n*Expected:* E₄ = −13.6/16 = −0.85 eV. ΔE = −0.85−(−3.4) = 2.55 eV. λ = hc/ΔE = 486 nm (Balmer Hβ, blue-green).\n*Threshold:* Correct energy calculation, correct subtraction (upper minus lower = photon energy), correct wavelength.\n\n**FA-3:** \"Why does the 2s orbital have higher electron density near the nucleus than 2p?\"\n*Expected:* The 2s wavefunction ψ_{200} has l=0, so Y₀⁰ = constant — no angular nodes. R_{20} has a radial node but also a nonzero value at r=0 (for l=0: R_{nl}(0) ≠ 0 when l=0). The 2p function ψ_{21m} has l=1: R_{21} ∝ r·e^(−r/2a₀) → R_{21}(0) = 0. So 2p has zero probability at r=0 but 2s does not.\n*Threshold:* Identifies l=0 allows nonzero ψ(0) while l>0 forces ψ(0)=0.\n\n**FA-4:** \"Total degeneracy of n=4 level (without spin)?\"\n*Expected:* Σ_{l=0}^{3}(2l+1) = 1+3+5+7 = 16 = n² = 16 ✓.\n*Threshold:* Uses correct summation formula or builds the table correctly.\n\n**Confidence calibration:** After FA-3, ask: \"Could you explain this to someone who hasn't studied QM?\" Learners often understand the calculation but can't explain the physics. Request a one-paragraph non-mathematical explanation.\n\n**Delayed retrieval:** Return at day 7: \"Without looking anything up, derive the formula for the Balmer series wavelengths from Eₙ = −13.6/n² eV.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 187,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** Bohr's planetary model: electron in fixed circular orbit, only specific radii allowed. Quantum picture: electron is a 3D wave surrounding the nucleus; the wave function gives the probability of finding the electron. The shape of the probability cloud depends on (n,l,m).\n\n**Representational:**\n- Orbital shapes: s (l=0) spherical; p (l=1) dumbbell; d (l=2) cloverleaf\n- Radial probability: r²|R_{nl}|² — most probable radius for 1s: r = a₀ = 0.529 Å (Bohr radius)\n- Energy ladder: Eₙ = −13.6/n² eV; ionization from ground state requires 13.6 eV\n\n**Abstract:**\n- TISE in spherical: −(ℏ²/2m)∇²ψ − (e²/4πε₀r)ψ = Eψ\n- Separation: ψ = R(r)·Y_l^m(θ,φ)\n- Angular equation → Y_l^m, eigenvalues L̂² = l(l+1)ℏ², L̂_z = mℏ, l = 0,1,…,n−1; m = −l,…,+l\n- Radial equation → associated Laguerre polynomials; quantization condition: n = 1,2,3,…; energy Eₙ = −m_e e⁴/(8ε₀²h²n²) = −13.6/n² eV\n- Degeneracy: for given n, states with all allowed l and m → n² total states (×2 with spin: 2n²)\n- Bohr radius: a₀ = 4πε₀ℏ²/(m_e e²) = 0.529 Å; ⟨r⟩_{1s} = 3a₀/2\n- Selection rules (preview): Δn = anything, Δl = ±1, Δm = 0,±1\n\n**Transfer:** Multi-electron atoms: same quantum numbers n,l,m,m_s per electron (plus Pauli exclusion principle → periodic table). Hydrogen spectral series: Lyman (n→1), Balmer (n→2), Paschen (n→3) from Eₙ formula.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 36,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Why Beginners Fail",
+      "content": "1. **Confusing Bohr orbits with quantum orbitals:** Learners picture the electron following a circular path; quantum mechanics says there is no definite path, only a probability distribution.\n2. **Quantum number constraints:** l runs 0 to n−1, m runs −l to +l. Learners often write l up to n or forget the l-constraint on m, giving wrong degeneracy counts.\n3. **Radial vs. angular probability:** The angular shape (Y_l^m) gives directionality; the radial function R_{nl} gives the distance distribution. Learners conflate them or think the orbital picture is a literal electron path.\n4. **Degeneracy counting:** n² states per n level (ignoring spin). Learners count l values (n possible) but forget each l has 2l+1 m-values. Sum: Σ(l=0 to n-1)(2l+1) = n².\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 58,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"Bohr guessed the energy levels of hydrogen in 1913 — and got the right answer. But he needed magic: 'electrons can only orbit at certain radii, just because.' Quantum mechanics derived the same energy levels from first principles. No magic, just the mathematics of waves in 3D.\"\n\n**Pacing:** Start with spectroscopic data (Balmer formula, observed lines), then show QM predicts it. The experimental triumph motivates the formalism.\n\n**Common impasse language:** \"Three quantum numbers feel like too many? Remember: one equation, one separation constant. You solved one 3D equation by separating into three 1D equations. Three equations → three quantum numbers. It's just coordinate separation — the structure was always there in the Schrödinger equation.\"\n\n**Closing consolidation:** \"The hydrogen solution is the Rosetta Stone of quantum chemistry. Its quantum numbers (n,l,m,m_s) are the same quantum numbers used for every atom, every molecule, and every solid. Learn hydrogen's wave functions and you've learned the language of atomic structure.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 175,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner struggles with complex wave functions or doesn't know what Y_l^m means. Return to phys.qm.operators for angular momentum operators and spherical harmonics.\n\n**S3 — Partial understanding:** Can state Eₙ = −13.6/n² but cannot derive spectral line wavelengths or count degeneracy. Intervention: structured worksheet — compute E for n=1 through 5; calculate all Balmer wavelengths; build (n,l,m) table.\n\n**S6 — Misconception detected:** MC-1 (orbital = definite path). Intervention: plot the 1s radial probability distribution, calculate P(r < a₀) ≈ 32%, show the electron genuinely has distributed probability.\n\n**S9 — Near mastery:** Can compute everything but cannot connect to multi-electron atoms. Intervention: explain how Pauli exclusion + same quantum numbers → periodic table structure; compute electron configuration of carbon (Z=6) from hydrogen quantum numbers.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 213,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (quantum number assignment, energy calculation, spectral lines) + structural (orbital shapes and their quantum number meaning).\n\n**Spaced retrieval schedule:** Day 1 (quantum numbers for 2p and 3d; count states), Day 3 (calculate Hα wavelength; explain orbital shape), Day 7 (derive Balmer formula from Eₙ; explain why 2s penetrates closer to nucleus), Day 21 (connect to periodic table: electron configuration of Na or Fe from hydrogen quantum numbers).\n\n**Interleaving partners:** phys.mod.bohr-model (Bohr gets Eₙ right but orbital angular momentum wrong), phys.qm.operators (L̂² and L̂_z eigenvalues underpin the quantum number structure), phys.qm.spin (spin doubles degeneracy: 2n² total states).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 225,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Multi-electron atoms: same quantum numbers, same orbital shapes, different energies due to electron-electron repulsion and shielding. Hydrogen spectroscopy: predict all series (Lyman, Balmer, Paschen, Brackett) from Eₙ formula.\n\n**Far transfer:** Periodic table: electron configurations follow from the hydrogen quantum number structure + Pauli exclusion. The blocks (s, p, d, f) of the periodic table directly reflect l = 0, 1, 2, 3 subshells.\n\n**Structural abstraction:** Separation of variables in 3D produces quantum numbers as boundary-condition integers. This pattern recurs whenever a 3D quantum problem has spherical symmetry — nuclear shell model, hydrogen-like ions (He⁺, Li²⁺), and (approximately) all atoms. The spherical harmonic Y_l^m appears in any spherically symmetric quantum potential.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 235,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.qm.hydrogen-atom-qm/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.hydrogen-atom-qm",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** Learners need phys.qm.schrodinger-equation (to handle 3D TISE and separation of variables) and phys.qm.operators (to know L̂² and L̂_z eigenvalues). These must be solid before this blueprint.\n\n**Common pacing error:** Jumping to orbital shapes (3D pictures) before establishing the quantum number constraints. Learners need to understand (n,l,m) constraints first, then the shapes follow.\n\n**Assessment gap:** Most curricula test Eₙ = −13.6/n² but rarely test radial probability (why 2s penetrates more than 2p) or exact degeneracy counting with the summation formula.\n\n**Suggested pairing:** Pair with phys.qm.spin to complete the full 2n² degeneracy picture, then move to phys.qm.selection-rules for which transitions are allowed.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.hydrogen-atom-qm.md",
+        "startLine": 245,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

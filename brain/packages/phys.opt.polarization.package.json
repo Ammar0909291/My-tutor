@@ -1,0 +1,431 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.polarization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.polarization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:13385327765f83e40e0416a3550390d1e39b2d1131d49d82ce3e64dffd519158",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.polarization.md": "sha256:a0571f92f1429dc50bcdc1610ab6f254cbd8dd8af0c17f6ab036e03e52c4428f"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.polarization",
+    "name": "\"Polarization of Light\"",
+    "difficultyRaw": "label: advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.opt.wave-optics"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.polarization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.polarization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.polarization.md": "sha256:a0571f92f1429dc50bcdc1610ab6f254cbd8dd8af0c17f6ab036e03e52c4428f"
+      },
+      "contentHash": "sha256:301bf187d12e5feed02d88d56c21d5351be239d0450ba7602000f2af76b51bb9",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.polarization.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.polarization.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.polarization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.polarization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.polarization.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.polarization.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.polarization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.polarization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.polarization.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.polarization.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.polarization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.polarization\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.polarization.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.polarization.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.polarization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.polarization\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.polarization.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.polarization.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.polarization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.polarization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.polarization.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.polarization.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.polarization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.polarization\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.polarization.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.polarization.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.polarization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.polarization\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.polarization/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.polarization",
+      "title": "\"Polarization of Light\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nHold a pair of polarized sunglasses. Look through one lens — the scene dims slightly. Now take a second polarizer and rotate it while looking through both. At one angle the view is nearly as bright as usual; rotate 90° and it goes almost completely dark. This is polarization: ordinary light oscillates in all directions perpendicular to its direction of travel; polarized light oscillates in only ONE direction. The first polarizer selects one direction; the second blocks it when turned perpendicular. Unlike sound waves (longitudinal), light is a transverse wave — polarization is direct evidence of this.\n\n### Level 2 — Developing Understanding\n\n**Types of polarization:**\n\n| Type | Description |\n|------|-------------|\n| Unpolarized | E oscillates in all directions perpendicular to propagation (random phase, random direction) |\n| Linear | E oscillates in one fixed plane |\n| Circular | E vector rotates at constant rate; |E| constant |\n| Elliptical | E vector traces ellipse; general case |\n\n**Methods of producing linearly polarized light:**\n\n1. **Selective absorption (dichroism) — Polaroids:**\n   - Polymer sheets with aligned chains absorb one E-component\n   - Transmission axis: direction of E that passes through\n   - Reduces intensity of unpolarized light by 50% (absorbs one polarization component)\n\n2. **Reflection — Brewster's Law:**\n   - At Brewster's angle θ_B: tan θ_B = n₂/n₁\n   - Reflected light is completely linearly polarized (⊥ to plane of incidence)\n   - Refracted light is partially polarized\n   - (Brewster's Law has its own dedicated blueprint: phys.opt.brewsters-law)\n\n3. **Scattering — Rayleigh scattering:**\n   - Sky light is partially polarized (maximum polarization at 90° from Sun)\n   - Scattered light is polarized perpendicular to the scattering plane\n\n4. **Double refraction (birefringence) — calcite, quartz:**\n   - Anisotropic crystals have different n for two perpendicular polarizations\n   - Splits beam into ordinary ray (o-ray, constant n) and extraordinary ray (e-ray, n depends on angle)\n   - Wave plates (λ/4 and λ/2 plates) use birefringence to change polarization state\n\n**Malus's Law:**\nWhen linearly polarized light of intensity I₀ passes through a polarizer with its transmission axis at angle θ to the polarization direction:\n\n**I = I₀ cos²θ**\n\n- θ = 0°: I = I₀ (full transmission, axes aligned)\n- θ = 90°: I = 0 (complete blocking, crossed polarizers)\n- θ = 45°: I = I₀/2\n\nFor unpolarized light through a single polarizer: I = I₀/2 (independent of orientation — all angles average to ½).\n\n### Level 3 — Proficient Synthesis\n\n**Malus's Law for multiple polarizers:**\nLight through a sequence of polarizers at angles θ₁, θ₂ (relative to the previous polarizer):\nI_final = I_0 × cos²θ₁ × cos²θ₂ × ...\n\nExample: Unpolarized light through three polarizers at 0°, 30°, 90° (final):\nAfter polarizer 1 (0°, from unpolarized): I₁ = I₀/2\nAfter polarizer 2 (30° to polarizer 1): I₂ = I₁ cos²30° = (I₀/2)(3/4) = 3I₀/8\nAfter polarizer 3 (60° to polarizer 2 = 90° from polarizer 1): I₃ = I₂ cos²60° = (3I₀/8)(1/4) = 3I₀/32\n\n**Crossed polarizers with intermediate polarizer:**\nWith only two crossed polarizers: I = 0.\nInsert intermediate polarizer at 45° between them:\nI_final = (I₀/2) × cos²45° × cos²45° = (I₀/2)(1/2)(1/2) = I₀/8 > 0.\nThe intermediate polarizer allows some light to pass — paradoxical but physically real.\n\n**Optical activity:**\nSome materials (sugar solution, quartz along optical axis) rotate the plane of polarization by angle α = [α]cL (specific rotation × concentration × path length). Used in saccharimetry (measuring sugar concentration).\n\n**Polarizing filters in photography:**\nReduces glare from reflections (at Brewster's angle, reflected light is polarized → polarizing filter at right angle blocks it). Darkens sky by blocking polarized scattered light.\n\n**Wave plates:**\n- Quarter-wave plate (λ/4 plate): introduces λ/4 phase difference between o and e rays → converts linear to circular polarization\n- Half-wave plate (λ/2 plate): rotates plane of linear polarization by 2α (where α = angle of plate to input polarization)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 25,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.polarization",
+      "title": ": Malus's Law — Two Polarizers",
+      "content": "### WE-1: Malus's Law — Two Polarizers\n\n**Problem:** Unpolarized light of intensity 80 W/m² passes through two polarizers. The angle between their transmission axes is 60°.\n(a) Find the intensity after the first polarizer.\n(b) Find the intensity after the second polarizer.\n(c) What angle between the axes would give 20 W/m² after the second polarizer?\n\n**Solution:**\n\n**(a) After first polarizer:**\nFor unpolarized light, first polarizer transmits 50%:\nI₁ = I₀/2 = 80/2 = **40 W/m²**\n\n**(b) After second polarizer (Malus's Law):**\nI₂ = I₁ cos²θ = 40 × cos²60° = 40 × (0.5)² = 40 × 0.25 = **10 W/m²**\n\n**(c) Find θ for I₂ = 20 W/m²:**\n20 = 40 × cos²θ\ncos²θ = 0.5\ncos θ = 1/√2 = 0.707\n**θ = 45°**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 104,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.polarization",
+      "title": ": Three Polarizers — Paradox",
+      "content": "### WE-2: Three Polarizers — Paradox\n\n**Problem:** A beam of unpolarized light (I₀ = 100 W/m²) passes through three polarizers:\n- Polarizer 1: transmission axis at 0°\n- Polarizer 2: transmission axis at 45°\n- Polarizer 3: transmission axis at 90°\n(a) Find the intensity after each polarizer.\n(b) What would be the intensity after polarizer 3 if polarizer 2 were removed?\n\n**Solution:**\n\n**(a) With all three polarizers:**\nAfter P₁ (unpolarized → 0°): I₁ = 100/2 = **50 W/m²**\nAfter P₂ (0° → 45°, angle = 45°): I₂ = 50 × cos²45° = 50 × (1/√2)² = 50 × 0.5 = **25 W/m²**\nAfter P₃ (45° → 90°, angle = 45°): I₃ = 25 × cos²45° = 25 × 0.5 = **12.5 W/m²**\n\n**(b) Without P₂ (two crossed polarizers at 0° and 90°):**\nAfter P₁: I₁ = 50 W/m²\nAfter P₃ (angle = 90° from P₁): I = 50 × cos²90° = 50 × 0 = **0 W/m²**\n\n**Paradox resolved:** Adding an intermediate polarizer at 45° allows 12.5 W/m² to pass through two \"crossed\" polarizers that would otherwise block all light. The intermediate polarizer creates a new polarization state that can partially pass the third polarizer. This demonstrates that polarizers are not passive filters — they actively change the polarization state.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 104,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.polarization",
+      "title": ": Partially Polarized Sky Light",
+      "content": "### WE-3: Partially Polarized Sky Light\n\n**Problem:** Skylight at 90° from the Sun is 75% polarized (degree of polarization P = 0.75). This means the intensity can be written as I_total = I_polarized + I_unpolarized, where P = I_polarized / I_total.\n(a) If total intensity is 200 W/m², find I_polarized and I_unpolarized.\n(b) A photographer places a perfect polarizer aligned to block the polarized component. What is the transmitted intensity?\n(c) What is the maximum possible intensity that can be blocked by the polarizer?\n\n**Solution:**\n\n**(a) Components:**\nI_polarized = P × I_total = 0.75 × 200 = **150 W/m²**\nI_unpolarized = (1 − P) × I_total = 0.25 × 200 = **50 W/m²**\n\n**(b) Polarizer blocks polarized component (θ = 90° to polarized component):**\n- Polarized component passes at θ = 90°: I_pol through = 150 × cos²90° = 0\n- Unpolarized component through polarizer: I_unpol through = 50/2 = 25 W/m²\n**Total transmitted = 0 + 25 = 25 W/m²**\n\n**(c) Maximum blocked = I_total − minimum transmitted:**\nMinimum transmission occurs when polarizer is at 90° to the polarized component (as in (b)).\n**Maximum blocked = 200 − 25 = 175 W/m²** (87.5% reduction).\nThe 25 W/m² from the unpolarized component cannot be blocked by a single polarizer.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 104,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.polarization",
+      "title": "MC-POLARIZATION-PROVES-LIGHT-IS-LONGITUDINAL",
+      "content": "### MC-1: MC-POLARIZATION-PROVES-LIGHT-IS-LONGITUDINAL\n\n**trigger_signal:** Student states \"polarization occurs along the direction of travel, so light must be longitudinal like sound\" or confuses the plane of polarization with the propagation direction.\n\n**conflict_evidence [P28]:** Polarization means the E-field oscillates in a specific plane that is PERPENDICULAR to the propagation direction. In a longitudinal wave (like sound), particles oscillate parallel to propagation — there is no \"perpendicular plane\" to restrict. Polarization can only restrict an oscillation that occurs in a plane perpendicular to travel (transverse). Sound cannot be polarized because its oscillation is along the propagation direction. The existence of polarization proves light is TRANSVERSE, not longitudinal.\n\n**bridge_text [P30]:** Think of passing a rope through a fence with vertical slats (polarizer). Wiggle the rope in all directions — only vertical oscillations pass through the slats. Horizontal oscillations are blocked. This works ONLY if the rope oscillates transversely (up-down-left-right), not longitudinally (toward-away from the fence). Similarly, polarizers can select E-field orientations only because E oscillates transversely.\n\n**replacement_text [P31]:** Polarization is conclusive evidence that light is a TRANSVERSE wave. The E-field oscillates in a plane perpendicular to the propagation direction. Polarization restricts which direction in that transverse plane the E-field oscillates. Longitudinal waves (like sound) cannot be polarized because there is only one oscillation direction — along propagation — with no transverse plane to select.\n\n**discrimination_pairs [P33]:**\n- \"Sound can be polarized by a suitable material with aligned structure\" → FALSE: sound is longitudinal, with no transverse oscillation direction — polarization is geometrically impossible.\n- \"The fact that light can be polarized proves it is a transverse wave\" → CORRECT: only transverse waves can exhibit polarization. ✓\n\n**s6_path:** If student fails transverse vs. longitudinal probe → rope-through-fence analogy visual + comparison table (sound: longitudinal, no polarization; light: transverse, can be polarized) before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.polarization",
+      "title": "MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS",
+      "content": "### MC-2: MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS\n\n**trigger_signal:** Student states \"two polarizers at 90° always give zero intensity and no intermediate polarizer can change that\" or \"adding more polarizers can only reduce intensity.\"\n\n**conflict_evidence [P28]:** Perform the three-polarizer experiment (WE-2): P₁ at 0°, P₃ at 90° → crossed → I = 0. Insert P₂ at 45° between them → I = I₀/8 > 0. Adding the intermediate polarizer INCREASES transmitted intensity from zero to I₀/8. This is counterintuitive but physically real — the intermediate polarizer changes the polarization state of the light so that it is no longer 90° misaligned with P₃. Each polarizer actively re-defines the polarization direction, not just filters passively.\n\n**bridge_text [P30]:** Think of it as a two-step process: after P₁, light is polarized at 0°. P₃ blocks 0° light. But P₂ at 45° takes the 0° polarized light and produces 45°-polarized light — a new state that P₃ can partially transmit (cos²45° = 50% of what reaches P₃). The intermediate polarizer re-encodes the polarization, allowing what was previously blocked to now partially pass.\n\n**replacement_text [P31]:** Two crossed polarizers (90°) transmit zero intensity. Adding a third polarizer BETWEEN them at any angle other than 0° or 90° results in non-zero transmission, because the intermediate polarizer changes the polarization state. Maximum transmission with one intermediate polarizer occurs at 45° between the two crossed ones, giving I = I₀/8. More intermediate polarizers at finer angular steps can approach I₀/2 in the limit.\n\n**discrimination_pairs [P33]:**\n- \"Adding more polarizers between two crossed polarizers always reduces transmission\" → FALSE: the first intermediate polarizer increases it from 0 to non-zero (e.g., I₀/8).\n- \"No device can change the polarization state of light\" → FALSE: wave plates, birefringent materials, and even polarizers themselves all change the polarization state.\n\n**s6_path:** If student insists crossed polarizers always give zero → hands-on demonstration (three-polarizer sequence) or step-by-step Malus's Law calculation for WE-2 before mastery gate.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.polarization",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 235,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.polarization",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 239,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.polarization",
+      "title": "Conflict Evidence: MC-1",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Evidence: MC-1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 242,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.polarization",
+      "title": "Replacement: MC-2 — Three-polarizer paradox",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Replacement: MC-2 — Three-polarizer paradox\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 245,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.polarization",
+      "title": "Check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 248,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.polarization",
+      "title": "Diagnostic: sky polarization",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Diagnostic: sky polarization\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 252,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.polarization",
+      "title": "Mastery Probe + P68 + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Probe + P68 + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P41\",\"P51\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 256,
+        "endLine": 329
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.polarization",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** Unpolarized light of intensity 100 W/m² passes through a polarizing filter. (a) What is the transmitted intensity? (b) The transmitted polarized light then passes through a second filter at 30° to the first. Find the final intensity. (c) If the angle were 90°, what would the final intensity be?\n\n**P-2 (Developing — identifies S6):** Polarized light of intensity I₀ passes through three filters at 0°, 45°, and 90° (angles relative to the previous polarizer). (a) Find the intensity after each filter. (b) If instead only the first and third filters are used (no 45° intermediate), what is the final intensity? (c) Why is the result different?\n\n**P-3 (Proficient — identifies S9):** Light passes through a sequence of N polarizers, each rotated by 90°/N from the previous, starting at 0° and ending at 90°. Find the fraction of the initial polarized intensity transmitted for N = 1 (directly crossed), N = 2 (one intermediate at 45°), and N = 4 (three intermediates). Show that as N → ∞, the fraction transmitted → 1.\n\n**P-4 (Mastery gate — confirms S9):** (a) A polarizer at 0° and an analyzer at 90° give zero output from unpolarized light. A half-wave plate (rotates polarization by 2α, where α is the angle between the plate's fast axis and the input polarization) is inserted at angle 22.5°. What is the new output intensity as a fraction of input? (b) Explain the three-polarizer experiment result I₃ = I₀/8 from a wave perspective — what has changed physically after each polarizer? (c) Why can partially polarized light never be completely blocked by a single polarizer? Required: 3/3 at ≥0.80 accuracy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 264,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.opt.polarization",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: C (difficulty 5, accelerated P track; physics + bloom=understand but not Analyse/Evaluate → difficulty ≥ 4 rule → P, BUT domain=physics and this is harder concept → C entry with accelerated P track per Component 0).\n\n**TA-1 [P01 — Session Open]**\n\"Take two polarizing filters. Hold them both in front of a light source and rotate one relative to the other. What do you observe? At 0° they're almost clear; at 90° it goes dark. Now here's the puzzle: if I slip a third polarizing filter between the two crossed ones and rotate it to 45°, the darkness partially lifts — light passes through three polarizers where it couldn't pass through two. How? Write your prediction.\"\n[Diagnose S3/S6 — does student know the ½ factor for unpolarized light?]\n\n**TA-2 [P06 — Concrete Anchor]**\n\"[Display: electric field oscillation diagrams — unpolarized (E rotates randomly), linearly polarized (E always along y), circularly polarized (E rotates uniformly).] A polarizer selects one direction. Malus's Law: I = I₀cos²θ. Key step: for UNPOLARIZED light, the first polarizer always gives I₀/2 regardless of its orientation — because the average of cos²θ over all θ is ½.\" [→ WE-1]\n\n**TA-3 [P28 — Conflict Evidence: MC-1]**\n\"Polarization proves light is transverse. Sound cannot be polarized — try: make a sound wave and try to block it with a 'polarizer' aligned with one direction. It doesn't work because sound oscillates along the travel direction (longitudinal), not perpendicular to it. Light oscillates perpendicular to travel. Only transverse waves can be polarized. This is one of the strongest experimental arguments for the wave nature of light.\" [→ MC-1 discrimination pairs]\n\n**TA-4 [P31 — Replacement: MC-2 — Three-polarizer paradox]**\n\"Crossed polarizers → zero. Now add P₂ at 45° between them. I = 12.5 W/m² from 100 W/m² initial — not zero! Let's trace: P₁ → 50 W/m² (horizontal). P₂ at 45° re-polarizes it at 45° → 50×cos²45° = 25 W/m². P₃ at 90° from P₁ = 45° from P₂ → 25×cos²45° = 12.5 W/m². The middle polarizer changes the polarization STATE — it makes light that was completely blocked by P₃ into light that P₃ can partially transmit. Adding a polarizer can increase transmission from zero.\" [→ WE-2]\n\n**TA-5 [P51 — Check-in]**\n\"Quick check: Unpolarized light (I₀ = 60 W/m²) through a polarizer (any orientation). What exits? [30 W/m²] Now rotate the second polarizer to 30° from the first. What exits? [30×cos²30° = 30×0.75 = 22.5 W/m²] Now to 60°? [30×cos²60° = 30×0.25 = 7.5 W/m²]\"\n[Confirms S3 → S6 transition; catches students who forget the ½ factor]\n\n**TA-6 [P41 — Diagnostic: sky polarization]**\n\"Sky is 75% polarized at 90° from the Sun. Total intensity = 200 W/m². A photographer uses a polarizing filter. What fraction of the sky light can be blocked? What intensity always gets through no matter how the filter is rotated? [→ WE-3]\"\n[Tests whether student understands partially polarized light and why unpolarized component persists]\n\n**TA-7 [P36 — Mastery Probe + P68 + P85 + P91]**\n\"Final probe: (1) Unpolarized 120 W/m² passes through two polarizers at 40°. Find final intensity. (2) Three polarizers: first at 0°, second at 30°, third at 90°. Find intensity after each for I₀ = 200 W/m². (3) Explain in one sentence why polarization proves light is a transverse wave.\n\nClosing thought: Liquid crystal displays (LCDs) — in every phone screen and monitor — work by using an applied electric field to rotate polarized light through liquid crystal molecules, allowing each pixel to switch between transparent and opaque states using two crossed polarizers.\n\nSpaced retrieval: +1 day (Malus's Law and the ½ factor for unpolarized input), +4 days (three-polarizer paradox explanation), +2 weeks (methods of producing polarized light and Brewster's angle concept).\"\n\n[P91 gate: threshold 0.80. Failure → Malus's Law drill with the ½-factor and three-polarizer sequence before re-probe.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 228,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

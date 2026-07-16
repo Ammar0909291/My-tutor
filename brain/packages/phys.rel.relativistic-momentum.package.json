@@ -1,0 +1,503 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.relativistic-momentum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.relativistic-momentum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8ac327c9c50ddc805d2cccf96b4acffc98e101bab470652564f3371e7d123121",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md": "sha256:7d044fb52e9df29ff9e9fce522a7349a6cbad41d05b22f25c4236f7977924c80"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.rel.relativistic-momentum",
+    "name": "Relativistic Momentum and Energy",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": null,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.rel.lorentz-transform"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.relativistic-momentum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.relativistic-momentum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md": "sha256:7d044fb52e9df29ff9e9fce522a7349a6cbad41d05b22f25c4236f7977924c80"
+      },
+      "contentHash": "sha256:3bec1126d711146173e3238f2ef734008e576448ddf10729b9ff35532c39690c",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.relativistic-momentum.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.relativistic-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.relativistic-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.relativistic-momentum.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.relativistic-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.relativistic-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.relativistic-momentum.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.relativistic-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.relativistic-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.relativistic-momentum.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.relativistic-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.relativistic-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.relativistic-momentum.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.relativistic-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.relativistic-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.relativistic-momentum.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.relativistic-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.relativistic-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.relativistic-momentum.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.relativistic-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.relativistic-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.relativistic-momentum/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Relativistic Momentum and Energy — core explanation",
+      "content": "### Core Idea\nAt speeds comparable to c, the classical momentum p = mv fails to be conserved in all reference frames. The correct relativistic momentum is p = γmv, where γ = 1/√(1−v²/c²). Total relativistic energy is E = γmc² = mc² + KE_relativistic. The famous energy-momentum relation E² = (pc)² + (mc²)² unifies these and remains valid even for massless photons (m = 0, E = pc). Together, (E/c, p) forms a Lorentz four-vector.\n\n### Conceptual Ladder\n1. **Recall**: γ = 1/√(1−v²/c²) from Lorentz transformations; γ → ∞ as v → c.\n2. **Understand**: Why classical p = mv fails: it's not conserved when Lorentz-transforming between frames for high-velocity collisions.\n3. **Apply**: Use p = γmv, E = γmc², E² = (pc)² + (mc²)² for calculations involving high-energy particles.\n4. **Extend**: Rest energy mc² is real energy stored in mass; kinetic energy KE = (γ−1)mc²; massless particles (photons) have E = pc.\n\n### Key Formula Set\n- **Relativistic momentum**: p = γmv\n- **Total energy**: E = γmc²\n- **Rest energy**: E₀ = mc²\n- **Kinetic energy**: KE = E − E₀ = (γ−1)mc²\n- **Energy-momentum relation**: E² = (pc)² + (mc²)²\n  (This holds in ALL frames and for ALL particles, including photons)\n- **Four-momentum**: p^μ = (E/c, pₓ, p_y, pᵤ) — transforms as a Lorentz four-vector\n- **Lorentz scalar**: E² − (pc)² = (mc²)² = invariant mass squared\n- **Photon**: m = 0 → E = pc; p = E/c = hf/c = h/λ (consistent with de Broglie)\n- **Low-speed limit**: γ ≈ 1 + v²/2c² → KE ≈ mv²/2 ✓ (classical limit recovered)\n\n### Canonical Examples\n- **Electron accelerated to 0.99c**: γ = 1/√(1−0.99²) ≈ 7.09. KE = (7.09−1)×0.511 MeV = 3.11 MeV. Classical would give KE = mv²/2 = 0.25 MeV — factor 12× too small.\n- **Photon energy**: E = hf; p = E/c = hf/c. Check: E² = (pc)² + 0 → E = pc ✓.\n- **Threshold energy for pair production**: γ + γ → e⁺ + e⁻. Using E² − (pc)² invariant: 2E_γ ≥ 2m_e c² → E_γ ≥ 0.511 MeV each.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 16,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Nothing can travel faster than light because it would need infinite force",
+      "content": "### MC-1: \"Nothing can travel faster than light because it would need infinite force\"\n- **Probe**: \"Why can't a rocket reach c? Is it because we don't have a powerful enough engine?\"\n- **Characteristic phrase**: \"We just don't have enough fuel/thrust yet.\"\n- **Trigger**: Classical thinking: F = ma → with enough force, any speed is achievable.\n- **Conflict evidence**: Relativistic KE = (γ−1)mc² → ∞ as v → c. You would need infinite energy, not just more force. No finite energy source can accelerate a massive particle to c.\n- **Bridge**: It's not about force limits — it's about energy. Each increment of speed costs more energy (γ grows explosively). To go from 0.99c to 0.999c costs more energy than going from 0 to 0.99c.\n- **Replacement**: The energy barrier is infinite — the speed barrier is energetic, not mechanical. Massless particles (photons) naturally travel at c because they have no rest energy to overcome.\n- **Discrimination pairs**: \"Infinite energy needed to reach c → thermodynamic/physical impossibility\" ✓ vs. \"Just need a more powerful rocket\" ✗\n- **S6 repair path**: Calculate energy needed to accelerate an electron from 0 to 0.99c and 0.99c to 0.999c; compare.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "E = mc² means mass can be converted to energy by destroying atoms",
+      "content": "### MC-2: \"E = mc² means mass can be converted to energy by destroying atoms\"\n- **Probe**: \"How does a nuclear reactor convert mass to energy? Does it destroy atoms?\"\n- **Characteristic phrase**: \"The mass is annihilated and becomes pure energy.\"\n- **Trigger**: Popularized \"E = mc²\" descriptions.\n- **Conflict evidence**: In fission, atoms are not destroyed — uranium becomes barium + krypton + neutrons. The mass of products is slightly less than uranium, and Q = Δm·c² accounts for the energy released. No matter is \"annihilated.\"\n- **Bridge**: E = mc² says mass IS energy — it is stored energy, not destroyed when released. The mass decrease Δm corresponds to released binding energy.\n- **Replacement**: E = mc² means rest mass is a form of energy. Nuclear reactions release a fraction of this as kinetic energy/radiation; the vast majority of mass-energy remains in the products.\n- **Discrimination pairs**: \"Small Δm × c² = Q (released energy)\" ✓ vs. \"Entire mass converted to energy\" ✗\n- **S6 repair path**: Compute what fraction of ²³⁸U mass is released in fission: ~0.09% — the rest remains in fission products.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Relativistic mass (γm) is the real mass",
+      "content": "### MC-3: \"Relativistic mass (γm) is the real mass\"\n- **Probe**: \"Does an electron moving at 0.99c have a different mass than one at rest?\"\n- **Characteristic phrase**: \"Moving objects are heavier.\"\n- **Trigger**: Old textbook language: \"mass increases with velocity.\"\n- **Conflict evidence**: In the particle's own rest frame, it has mass m — always. The quantity γm is not an invariant; it depends on the observer's frame. True (invariant) mass = rest mass m. The energy-momentum relation E² − (pc)² = (mc²)² defines the invariant mass unambiguously.\n- **Bridge**: \"Relativistic mass\" was pedagogically useful but creates confusion when used in Newton's law (F = ma becomes ill-defined). Modern physics uses rest mass m exclusively.\n- **Replacement**: Mass m is invariant (Lorentz scalar). The γ factor enters momentum (p = γmv) and energy (E = γmc²) explicitly, without changing m.\n- **Discrimination pairs**: \"Rest mass m invariant; p = γmv, E = γmc²\" ✓ vs. \"Mass γm increases with v\" ✗\n- **S6 repair path**: Show that the four-vector invariant E²/c² − p² = m²c² is frame-independent; confirm with numerical example.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "The energy-momentum relation E² = (pc)² + (mc²)² is only for particles at rest",
+      "content": "### MC-4: \"The energy-momentum relation E² = (pc)² + (mc²)² is only for particles at rest\"\n- **Probe**: \"A proton is moving at 0.9c. Does E² = (pc)² + (mc²)² still apply?\"\n- **Characteristic phrase**: \"That formula is for rest energy only.\"\n- **Trigger**: Confusing E = mc² (rest energy only) with the full E² relation.\n- **Conflict evidence**: E² = (pc)² + (mc²)² holds for all particles in any frame. Proof: E = γmc², p = γmv → (pc)² + (mc²)² = γ²m²v²c² + m²c⁴ = m²c⁴(γ²v²/c² + 1) = m²c⁴γ²(v²/c² + 1/γ²) = m²c⁴γ²(v²/c² + 1 − v²/c²) = m²c⁴γ² = E² ✓.\n- **Bridge**: E = mc² is the special case v = 0 (γ = 1). The full relation is E² = (pc)² + (mc²)², valid for all v.\n- **Replacement**: E² − (pc)² = (mc²)² is a Lorentz invariant — true in all frames for all massive particles.\n- **Discrimination pairs**: \"E² = (pc)² + (mc²)² always (all v, all m ≥ 0)\" ✓ vs. \"Only for v = 0\" ✗\n- **S6 repair path**: Verify the relation algebraically for v = 0.9c proton: compute E, p, then check E² = (pc)² + (0.938)².\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Classical failure",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Classical failure\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 202,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Define p = γmv and E = γmc²",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Define p = γmv and E = γmc²\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Energy-momentum relation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Energy-momentum relation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 204,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Photon limit",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Photon limit\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 205,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Numerical practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Numerical practice\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 206,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Invariant mass",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Invariant mass\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 207,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Address \"relativistic mass\" misconception",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Address \\\"relativistic mass\\\" misconception\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 208,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) compute p = γmv, E = γmc², KE = (γ−1)mc² for any massive particle at given v, (2) apply E² = (pc)² + (mc²)² to find p from E or vice versa, (3) correctly handle photons (m = 0, E = pc), (4) identify and use the Lorentz invariant E² − (pc)².\n\n### Formative Assessment 1 — Momentum and energy\n**Prompt**: \"A proton (rest mass 938 MeV/c²) moves at v = 0.8c. Find (a) γ, (b) p in MeV/c, (c) total energy E in MeV, (d) kinetic energy in MeV.\"\n**Expected answer**: γ = 1/√(1−0.64) = 1/0.6 = 5/3 ≈ 1.667. p = γmv = 1.667 × 938 × 0.8 = 1250 MeV/c. E = γmc² = 1.667 × 938 = 1564 MeV. KE = E − mc² = 1564 − 938 = 626 MeV.\n**Threshold**: γ correct to 3 sig figs; E, p, KE derived correctly.\n\n### Formative Assessment 2 — Energy-momentum relation\n**Prompt**: \"An electron has total energy E = 5 MeV. Find its momentum p using the energy-momentum relation.\"\n**Expected answer**: p = √(E² − (mc²)²)/c = √(25 − 0.261)/c = √24.74/c ≈ 4.97 MeV/c.\n**Threshold**: ±0.05 MeV/c.\n\n### Formative Assessment 3 — Photon momentum\n**Prompt**: \"A gamma-ray photon has energy 1.5 MeV. Find its momentum and wavelength.\"\n**Expected answer**: p = E/c = 1.5 MeV/c. λ = h/p = hc/E = 1240 eV·nm / (1.5×10⁶ eV) = 8.27×10⁻⁴ nm = 0.827 pm.\n**Threshold**: Correct p; wavelength within 5%.\n\n### Formative Assessment 4 — Lorentz invariant\n**Prompt**: \"A pion (m = 135 MeV/c²) decays into two photons: π⁰ → γ + γ. In the pion's rest frame, what is the energy of each photon? Use the invariant mass.\"\n**Expected answer**: In rest frame, pion has E = mc² = 135 MeV, p = 0. By momentum conservation, photons are emitted back-to-back with equal momenta. By energy conservation: 2E_γ = 135 MeV → E_γ = 67.5 MeV each.\n**Threshold**: Correct reasoning from momentum and energy conservation; E_γ = 67.5 MeV.\n\n### Confidence Calibration\nAfter FA1: \"How confident are you (0–100%) that your γ = 5/3 is correct? What's the quick check?\" (1/γ² + v²/c² should equal 1: (0.6)² + (0.8)² = 0.36 + 0.64 = 1 ✓.)\n\n### Delayed Retrieval\nTwo weeks later: Write the energy-momentum relation for (a) a proton, (b) a photon, (c) a neutrino (approximately massless). State the condition under which each reduces to the other's form.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 226,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nPush a shopping cart harder and harder. At low speeds, doubling your force roughly doubles the speed (Newton's law). Now imagine the cart approaching c — no matter how hard you push, it can never reach c. Its momentum p = γmv keeps growing (γ → ∞) even as v barely increases beyond 0.99c. The energy you're inputting goes into increasing γ (and hence KE and p), not into increasing v much. The cart becomes effectively infinitely \"heavy\" — its inertia keeps growing.\n\n### Representational (Diagrams and Symbols)\n- **γ vs. v/c graph**: Plot γ from v=0 (γ=1) to v=0.99c (γ=7.1) to v=0.9999c (γ=70.7). Show the explosive growth near c.\n- **KE comparison table**: Classical KE = mv²/2 vs. relativistic KE = (γ−1)mc² for v = 0.1c, 0.5c, 0.9c, 0.99c. Shows convergence at low v, large divergence at high v.\n- **Energy-momentum diagram**: E vs. p curve E² = (pc)² + (mc²)². Massive particle: hyperbola. Photon: straight line E = pc (slope c). Rest: E = mc², p = 0.\n- **Four-vector diagram**: Spacetime analogy — four-position (ct, x) transforms as Lorentz; four-momentum (E/c, p) transforms the same way.\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Given v, compute γ and then p = γmv and E = γmc².\n2. Use E² = (pc)² + (mc²)² — given E, find p; or given p, find E.\n3. Apply invariant mass: E² − (pc)² = (mc²)² is the same in all frames.\n4. Threshold energy calculations using the invariant in the CM frame.\n5. Show classical limit: Taylor expand γ ≈ 1 + v²/2c² → KE ≈ mv²/2.\n\n### Transfer (Novel Contexts)\n- **Particle accelerators**: LHC protons at 6.5 TeV; rest mass = 938 MeV; γ ≈ 6900. All energy goes into γ, not velocity (v = 0.9999999c).\n- **Cosmic rays**: Ultra-high-energy cosmic rays with E ≈ 10²⁰ eV hitting the atmosphere — relativistic kinematics governs the air-shower physics.\n- **PET scanning**: Positron (e⁺) annihilates with electron (e⁻) → two photons, each E = 0.511 MeV = m_e c², emitted back-to-back (momentum conservation). Requires E = mc² and E = pc simultaneously.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 46,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: Using classical p = mv for high-speed particles\nStudents forget to include γ. The error is invisible at low speeds (γ ≈ 1) but enormous at v = 0.99c (γ ≈ 7).\n\n### Failure Mode 2: Thinking \"mass increases\" relativistically\nSome textbooks use \"relativistic mass\" m_rel = γm. This is an outdated and conceptually misleading framework. Prefer: mass m is invariant (rest mass); momentum p = γmv and energy E = γmc² both depend on γ. The four-vector approach is cleaner: invariant mass squared = E²/c² − p² = m²c².\n\n### Failure Mode 3: Forgetting rest energy in energy conservation\nStudents write KE = mv²/2 for relativistic particles and then add potential energy terms, missing the mc² rest energy entirely. In relativistic problems, use total energy E = γmc² in conservation equations.\n\n### Failure Mode 4: Misapplying E = pc to massive particles\nStudents apply E = pc (valid only for photons, m = 0) to electrons or protons. For massive particles, E² = (pc)² + (mc²)² — there is a constant (mc²)² offset.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 72,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"Classical mechanics says you can reach any speed with enough energy. Let's see how it fails — and what replaces it.\"\n\n**Core explanation**: \"Two formulas: p = γmv and E = γmc². As v → c, γ → ∞, and both p and E → ∞. That's why no finite energy can accelerate a massive particle to c. The energy-momentum relation E² = (pc)² + (mc²)² connects them all — including photons, where m = 0.\"\n\n**Common error interception**: \"When you write E = mc², that's only the rest energy. For a moving particle, E = γmc². Don't drop the γ.\"\n\n**Checkpoint question**: \"A photon has frequency f. What is its momentum?\" (p = E/c = hf/c = h/λ.) \"Does a photon have mass?\" (No — m = 0; it obeys E = pc, not E = γmc².)\n\n**Closing move**: \"Every particle accelerator — from the one that discovered the Higgs boson to the ones that treat cancer — is designed using these exact formulas. This is not abstract theory; it's the engineering manual for high-energy physics.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 212,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"Why does classical p = mv fail?\"\nReturn to a thought experiment: two particles collide in frame S with classical momentum conserved. Lorentz-transform to frame S'. Show that classical p = mv is NOT conserved in S' (numerical example: head-on equal-mass collision; after transformation, momenta don't balance). This motivates the need for p = γmv, which IS conserved in all frames.\n\n### S3 — Can compute γ but not E and p\nDrill: given γ, immediately write E = γmc² (substitute numbers) and p = γmv = (E/c²)v = E×(v/c)/c. Students who memorize E = γmc² and then substitute are more reliable than those who re-derive each time.\n\n### S6 — Cannot use E² = (pc)² + (mc²)²\nThe relation is simpler than it looks: it's just the Pythagorean theorem in energy-momentum space. Draw a right triangle: hypotenuse = E, one leg = pc, other leg = mc². Given any two, find the third. Practice 5 examples with different known quantities.\n\n### S9 — Cannot handle photon (m = 0) case\nE = pc is the photon's version. Students who set m = 0 in E² = (pc)² + (mc²)² get E² = (pc)² → E = pc directly. Drill: photon with λ = 0.5 nm → p = h/λ → E = pc. Check with E = hf = hc/λ → same answer.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 259,
+        "endLine": 275
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nProcedural (γ calculation, formula chains) + conceptual (why classical fails, invariant mass) + structural (four-vector framework connecting spacetime and energy-momentum).\n\n### Spaced Retrieval Schedule\n- Day 1: Compute γ, p, E, KE for proton at 0.95c.\n- Day 3: Apply E² = (pc)² + (mc²)² to find p given E = 2mc².\n- Day 7: Explain in 3 sentences why a massive particle can never reach c.\n- Day 14: Find the energy of each photon in π⁰ → γγ from the pion rest frame.\n- Day 30: Derive E² = (pc)² + (mc²)² from p = γmv and E = γmc² by eliminating γ.\n\n### Interleaving Partners\n- phys.rel.lorentz-transform (γ factor, four-vectors)\n- phys.rel.mass-energy (E = mc² rest energy — direct consequence)\n- phys.mod.nuclear-reactions (relativistic threshold energy calculations)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 275,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Compute momentum, total energy, kinetic energy for any massive particle at a given speed.\n- Apply the energy-momentum relation to find unknowns in a two-body decay or collision.\n- Handle massless and nearly-massless particles (photons, neutrinos).\n\n### Far Transfer\n- **Medical radiation therapy**: Electron linacs produce MeV electrons; beam design requires relativistic kinematics.\n- **Astrophysics**: Relativistic jets from black holes, synchrotron radiation, ultra-relativistic cosmic rays — all governed by these formulas.\n- **Dark matter searches**: Missing energy and momentum in LHC collisions used to detect invisible particles — requires complete relativistic energy-momentum accounting.\n\n### Structural Abstraction\nThe four-vector framework (p^μ = (E/c, p)) is the prototype for all covariant descriptions in special relativity. The pattern — two quantities that separately depend on frame, combined into a four-vector whose magnitude is invariant — generalizes to electromagnetic four-potential, four-current, and eventually to the tensor machinery of general relativity.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 294,
+        "endLine": 311
+      }
+    },
+    {
+      "assetId": "phys.rel.relativistic-momentum/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.rel.relativistic-momentum",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.rel.lorentz-transform provides the γ factor and the four-vector framework needed here. Students who mastered the Lorentz transformations of coordinates can immediately accept the analogous transformation of (E/c, p). The prerequisite is necessary and sufficient.\n\n### Unlock Readiness\nphys.rel.mass-energy (E = mc²) is the direct application of the rest-energy concept introduced here. The blueprint is well-prepared for that follow-on.\n\n### Suggested Flag\nFlag: students who used \"relativistic mass\" (γm) in prior courses will need explicit unlearning of that notation. Build in a misconception-confrontation moment at the start of the session.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.relativistic-momentum.md",
+        "startLine": 311,
+        "endLine": 325
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

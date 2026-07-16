@@ -1,0 +1,355 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.spring-mass-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.spring-mass",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:df12c7f9ea8926df9cc857df9fecbef706c5449456b95d6fcff4535493a26e45",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.spring-mass.md": "sha256:5ed712d9d9640c276c473d212e001a58fd5ec8baf04c7566ccf1644a513efb81"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.spring-mass",
+    "name": "Spring-Mass Oscillator",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.wave.shm"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.spring-mass-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.spring-mass (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.spring-mass.md": "sha256:5ed712d9d9640c276c473d212e001a58fd5ec8baf04c7566ccf1644a513efb81"
+      },
+      "contentHash": "sha256:a3db4c89c29b2bf25e187cf1920e43636075e5733fc50844c5fbe104d0b9f840",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.spring-mass.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.spring-mass.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.spring-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.spring-mass\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.spring-mass.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.spring-mass.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.spring-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.spring-mass\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.spring-mass.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.spring-mass.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.spring-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.spring-mass\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.spring-mass.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.spring-mass.md#TA-4 (addresses MC-VERTICAL-SPRING-DIFFERENT-PERIOD, MC-STRETCHING-SPRING-ADDS-KE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.spring-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.spring-mass\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.spring-mass/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "Spring-Mass Oscillator — Conceptual Development Sequence",
+      "content": "**TA-1 — Vertical Spring-Mass: Equilibrium Analysis [C]**\n\nMass m on spring k. At equilibrium (mass at rest, natural state + extension):\n```\nSpring force up = Weight down\nkδ = mg   →   δ = mg/k\n```\n\nDisplacement y measured from equilibrium (positive downward):\n```\nNet force = −ky   (gravity and static spring force cancel)\na = −(k/m)y      → SHM with ω = √(k/m)\nT = 2π√(m/k)     (same as horizontal)\n```\n\n**TA-2 — Finding k from Static Extension [C→P]**\n\nStatic method for measuring k: hang mass m, measure equilibrium extension δ.\n```\nk = mg/δ\n```\n\nApplications: measuring spring constant of bungee cords; calibrating spring scales; checking consistency with dynamic measurement.\n\nDynamic method for measuring k: time N oscillations, find T = (total time)/N.\n```\nk = 4π²m/T²\n```\n\nBoth methods give the same k — mutual consistency check.\n\n**TA-3 — Two Springs: Series and Parallel (Vertical) [C→P]**\n\nSeries (one on top of other, same mass at bottom):\n```\n1/k_eff = 1/k₁ + 1/k₂     (same force through each; total extension adds)\nT = 2π√(m/k_eff)   (larger T than either alone)\n```\n\nParallel (both connected between ceiling and mass):\n```\nk_eff = k₁ + k₂     (both stretch same amount; forces add)\nT = 2π√(m/k_eff)   (shorter T than either alone)\n```\n\n**TA-4 — Applications and Real Spring-Mass Systems [P]**\n\n**Vehicle suspension**: car body (mass m) on springs (effective k). T = 2π√(m/k) gives the ride frequency. Too soft (small k): car body bounces slowly — nauseating. Too stiff (large k): every bump felt immediately. Engineers choose k to give T ≈ 1–1.5 s (0.7–1 Hz) for comfortable rides. Shock absorbers add damping to prevent sustained oscillation.\n\n**Seismograph**: suspended mass on spring. When ground moves, mass (due to inertia) temporarily stays still while the frame moves. The relative displacement records the ground motion. T of the mass-spring determines which earthquake frequencies are detected.\n\n**Atomic force microscopy (AFM)**: a tiny cantilever (spring k ≈ 1 N/m) with a sharp tip. Tip-sample interaction forces change the effective k slightly → frequency shift of the cantilever oscillation. Measuring frequency maps atomic-scale force variations.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 74,
+        "endLine": 131
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/misconception/MC-VERTICAL-SPRING-DIFFERENT-PERIOD",
+      "kind": "misconception",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "- **Trigger signal:** Student says \"a vertical spring-mass oscillates differently from a horizontal one because gravity changes the equilibrium\" or includes g in the period formula.",
+      "content": "### MC-VERTICAL-SPRING-DIFFERENT-PERIOD\n- **Trigger signal:** Student says \"a vertical spring-mass oscillates differently from a horizontal one because gravity changes the equilibrium\" or includes g in the period formula.\n- **Conflict evidence [P28]:** \"The period of a vertical spring-mass is identical to a horizontal one: T = 2π√(m/k). Here's why: when a mass m hangs vertically on a spring, the equilibrium position is displaced by x_eq = mg/k below the natural length (where spring force balances weight). If we measure displacement from this new equilibrium point (call it y = x − x_eq), Newton's 2nd law gives: ma = −mg + k(x_eq + y) − mg... wait, re-derive carefully: F_net = −k(x_eq+y) + mg = −kx_eq − ky + mg. Since kx_eq = mg: F_net = −ky. So a = −(k/m)y — pure SHM about the new equilibrium with ω = √(k/m). Gravity shifts the equilibrium but does not change ω or T. The period is exactly the same.\"\n- **Bridge text [P30]:** \"Gravity shifts the equilibrium position downward by δ = mg/k, but oscillations about that equilibrium follow the same equation a = −(k/m)y. This is because mg and kδ exactly cancel at equilibrium — the only remaining force is the spring's restoring force −ky about the new equilibrium.\"\n- **Replacement text [P31]:** \"T = 2π√(m/k) for both horizontal and vertical spring-mass systems. Gravity shifts the equilibrium but does not enter the period formula. Always measure displacement from the equilibrium position.\"\n- **Discrimination pairs [P33]:**\n  - Horizontal spring (k=50, m=0.2): T = 2π√(0.2/50) = 0.397 s ✓\n  - Same spring, vertical: T = 2π√(0.2/50) = 0.397 s (identical) ✓\n- **s6_path:** \"If gravity changed the period, a pendulum clock would need recalibration when you move it from the equator to a high altitude — but spring-mass clocks wouldn't. That's actually used in precision timekeeping.\"\n\n---",
+      "localKey": "MC-VERTICAL-SPRING-DIFFERENT-PERIOD",
+      "language": "en",
+      "refs": [
+        "MC-VERTICAL-SPRING-DIFFERENT-PERIOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/misconception/MC-STRETCHING-SPRING-ADDS-KE",
+      "kind": "misconception",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "- **Trigger signal:** Student says \"the spring gives the mass extra kinetic energy because it's stretched further than the equilibrium\" — confusing static stretch with dynamic energy.",
+      "content": "### MC-STRETCHING-SPRING-ADDS-KE\n- **Trigger signal:** Student says \"the spring gives the mass extra kinetic energy because it's stretched further than the equilibrium\" — confusing static stretch with dynamic energy.\n- **Conflict evidence [P28]:** \"In a vertical spring-mass, the spring's stretch at equilibrium (δ = mg/k) represents stored PE = ½kδ². But this PE was invested when you attached the mass — it equals the gravitational PE lost as the mass descended by δ from its natural length position. The total energy of the oscillation comes only from the amplitude of displacement from equilibrium, not from the static stretch. If you displace the mass further by A from equilibrium and release, the oscillation energy is ½kA². The static stretch energy is separate — it's 'already in the system' from setting it up.\"\n- **Bridge text [P30]:** \"Two reference points: (1) spring natural length position — everything is offset by δ = mg/k; (2) equilibrium position (spring stretched by δ) — oscillation energy is ½kA². For calculating T and oscillation energy, always use the equilibrium as reference. The static stretch and oscillation amplitude are independent.\"\n- **Replacement text [P31]:** \"Oscillation energy = ½kA² (A measured from equilibrium, NOT from natural length). Static equilibrium stretch δ = mg/k represents a separate energy already in the system. They don't add for oscillation purposes.\"\n- **Discrimination pairs [P33]:**\n  - Static: mass hangs at equilibrium, stretched δ = mg/k from natural length; PE_spring = ½kδ² = ½(mg)²/k ✓\n  - Dynamic: pulled to A below equilibrium, released; oscillation E = ½kA²; E does not include the static PE ✓\n- **s6_path:** \"The static stretch is like the 'zeroed out' state of the system. Oscillation energy counts only from that zero — how far you pulled it from the resting hang position.\"\n\n---",
+      "localKey": "MC-STRETCHING-SPRING-ADDS-KE",
+      "language": "en",
+      "refs": [
+        "MC-STRETCHING-SPRING-ADDS-KE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "Vertical Spring-Mass: Equilibrium Analysis",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Vertical Spring-Mass: Equilibrium Analysis\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 76,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "Finding k from Static Extension",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Finding k from Static Extension\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 91,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "Two Springs: Series and Parallel (Vertical)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Two Springs: Series and Parallel (Vertical)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 107,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "Applications and Real Spring-Mass Systems",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Applications and Real Spring-Mass Systems\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-STRETCHING-SPRING-ADDS-KE\",\"MC-VERTICAL-SPRING-DIFFERENT-PERIOD\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-VERTICAL-SPRING-DIFFERENT-PERIOD",
+        "MC-STRETCHING-SPRING-ADDS-KE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 121,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Static and dynamic consistency**\n\"A spring-mass (k = 80 N/m) in the vertical orientation has a static extension of 3.68 cm. (a) Find the mass. (b) Find T. (c) If the mass is pulled 5 cm below equilibrium, find v_max.\"\n\n*Target:* (a) m = kδ/g = 80×0.0368/9.8 = 2.944/9.8 = 0.3 kg. (b) T = 2π√(0.3/80) = 2π×0.0612 = 0.385 s. (c) v_max = Aω = 0.05×√(80/0.3) = 0.05×√266.7 = 0.05×16.33 = 0.816 m/s.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 171,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Vertical vs. horizontal comparison**\n\"Two identical spring-mass systems (k = 120 N/m, m = 0.3 kg): one horizontal, one vertical. Both are displaced 5 cm from equilibrium. (a) Are their periods the same? (b) Are their maximum speeds the same? (c) Are their maximum displacements from the spring's natural length the same?\"\n\n*Target:* (a) Yes — T = 2π√(m/k) is the same for both. (b) Yes — v_max = Aω, both have A=5 cm and same ω. (c) No — the horizontal one: max displacement from natural length = A. The vertical one: at maximum downward displacement, spring is stretched by δ+A = mg/k+A; at maximum upward position, spring is stretched by δ−A.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 171,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Series springs**\n\"Three identical springs (k = 60 N/m each) are connected in series to a 0.4 kg mass. Find: (a) k_eff, (b) T, (c) static extension of the series combination.\"\n\n*Target:* (a) 1/k_eff = 3×(1/60) = 1/20 → k_eff = 20 N/m. (b) T = 2π√(0.4/20) = 2π√0.02 = 2π×0.1414 = 0.889 s. (c) δ = mg/k_eff = 0.4×9.8/20 = 0.196 m = 19.6 cm.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 171,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Spring as weighing scale**\n\"A market vendor uses a spring scale (k = 500 N/m). A fish makes the scale oscillate with T = 0.2 s. Find the mass of the fish.\"\n\n*Target:* m = kT²/(4π²) = 500×0.04/(4π²) = 20/39.48 = 0.507 kg ≈ 0.51 kg. (This is how a spring scale works even without timing — at equilibrium δ = mg/k → m = kδ/g. The timing method gives the same result.)",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 171,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: car suspension**\n\"A car body of mass 1200 kg rests on four identical springs (one at each wheel). (a) If the natural frequency of the suspension is 1.0 Hz, find the spring constant of each spring. (b) If the car hits a speed bump and oscillates with A = 3 cm, what is the maximum acceleration of the car body?\"\n\n*Target:* (a) Total mass supported by 4 springs in parallel: k_total = m(2πf)² = 1200×(2π)² = 1200×39.48 = 47 375 N/m. Each spring: k = 47 375/4 = 11 844 N/m ≈ 12 kN/m. (b) a_max = Aω² = 0.03×(2π)² = 0.03×39.48 = 1.18 m/s² ≈ 0.12g. (Comfortable: below 0.2g is generally tolerable for road vehicles.)\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 171,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "Adaptive Flags",
+      "content": "- **Equilibrium as reference**: always clearly label which position is \"x = 0\" (equilibrium) vs. the spring's natural length. The SHM equations reference the equilibrium; the static extension formula references the natural length. Mixing them causes errors in WE-3 and MP-2c.\n- **Four-spring vehicle**: most suspension analysis problems use parallel springs (all four support the same mass), giving k_effective = 4k_per_spring. Students often forget the parallel combination.\n- **Static method pitfall**: k = mg/δ requires knowing g precisely. At high precision, g varies by 0.5% from equator to pole. Dynamic method (k = 4π²m/T²) avoids using g entirely — used in precision experiments.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 237,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.wave.spring-mass/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.wave.spring-mass",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — side-by-side horizontal/vertical spring-mass demo\n  ↓\n[P41] PD-1 (SHM: ω, T, v_max, a_max for given m, k, A)\n  ↓ PASS\n[P06] Anchor: both systems oscillate in sync; spring as weighing device\n  ↓\nTA-1: Vertical equilibrium; kδ=mg; oscillation about equilibrium — same ω [C]\n  ↓\n[P28] Conflict: \"vertical period is different\" → MC-VERTICAL-SPRING-DIFFERENT-PERIOD\n  ↓\nWE-1: Vertical spring — find k from static extension; then T and v_max\n  ↓\n[P51] Check-in MP-1 (static+dynamic consistency check)\n  ↓ monitor\nTA-2: Measuring k — static method k=mg/δ; dynamic method k=4π²m/T² [C→P]\n  ↓\n[P28] Conflict: \"static stretch adds oscillation energy\" → MC-STRETCHING-SPRING-ADDS-KE\n  ↓\nTA-3: Springs in series and parallel (vertical); k_eff; T comparison [C→P]\n  ↓\nWE-2 → WE-3 (series/parallel T; finding mass from T)\n  ↓\nTA-4: Vehicle suspension; seismograph; AFM [P]\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"A 200 g mass on spring (k=80 N/m). Static extension? Period?\"\n[P68]; [P85]; [P89] 1/3/7 days; [P91] 80% gate\n```\n\n**Protocol routing:** S0: full CPA — side-by-side demo before derivation; S1: knows T=2π√(m/k) but inserts g for vertical case → MC-VERTICAL-SPRING-DIFFERENT-PERIOD; S4: PD-1 fail → phys.wave.shm; S6: [F] — \"Two steps: (1) find equilibrium with kδ=mg; (2) oscillate about that equilibrium with T=2π√(m/k). Gravity cancels out of step 2.\"; S7: open with MP-5 (car suspension synthesis — requires working backwards from frequency specification to spring constant per wheel).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.spring-mass.md",
+        "startLine": 200,
+        "endLine": 237
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

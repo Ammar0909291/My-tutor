@@ -1,0 +1,435 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.uncertainty-principle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.uncertainty-principle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c91ba741737ec9ab4bea3b56c460578fa960b243809db60dcb6d5750194987c3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md": "sha256:af2f0e53afc491533f27c0937c702185614ec2f2a199a6916ff8b63747470031"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.qm.uncertainty-principle",
+    "name": "Heisenberg's Uncertainty Principle",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.qm.wave-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.uncertainty-principle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.uncertainty-principle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md": "sha256:af2f0e53afc491533f27c0937c702185614ec2f2a199a6916ff8b63747470031"
+      },
+      "contentHash": "sha256:17f7eee35886d1f399f75116291f9b571e8735581f341c23a59cedf64cf5e8c3",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.uncertainty-principle.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.uncertainty-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.uncertainty-principle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.uncertainty-principle.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.uncertainty-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.uncertainty-principle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.uncertainty-principle.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.uncertainty-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.uncertainty-principle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.uncertainty-principle.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.uncertainty-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.uncertainty-principle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.uncertainty-principle.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.uncertainty-principle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.uncertainty-principle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.uncertainty-principle/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Heisenberg's Uncertainty Principle — core explanation",
+      "content": "### Core Idea\nThe Heisenberg uncertainty principle is not a statement about measurement clumsiness — it is a fundamental feature of wave-like quantum entities. Any quantum state has intrinsic spreads Δx (position uncertainty) and Δp (momentum uncertainty) that satisfy Δx·Δp ≥ ℏ/2. This follows directly from the wave nature of ψ: a localized wave packet requires many Fourier components (many momenta); a definite momentum requires an infinitely spread-out plane wave (completely uncertain position).\n\n### Conceptual Ladder\n1. **Recall**: ψ(x) encodes probability amplitude; Δx = spread of |ψ|².\n2. **Understand**: Fourier duality — narrow wave packets require broad frequency content; Δk · Δx ≥ 1/2 for any wave.\n3. **Apply**: Use Δx·Δp ≥ ℏ/2 to estimate ground-state energies and atomic size.\n4. **Analyze**: Distinguish measurement disturbance (Heisenberg's original microscope argument, outdated) from Robertson's algebraic inequality (the modern version); understand what \"simultaneous knowledge\" means.\n\n### Key Formula Set\n- **Robertson inequality**: Δx·Δp ≥ ℏ/2\n  where Δx = √(⟨x²⟩ − ⟨x⟩²) (standard deviation of position in state ψ)\n  and Δp = √(⟨p²⟩ − ⟨p⟩²) (standard deviation of momentum in state ψ)\n- **Minimum uncertainty state**: Gaussian wave packet (coherent state) saturates the inequality: Δx·Δp = ℏ/2.\n- **Energy-time uncertainty** (different in character): ΔE·Δt ≥ ℏ/2\n  (Δt = lifetime of state; ΔE = natural linewidth of spectral line)\n- **Fourier dual**: Δk·Δx ≥ 1/2 (purely classical wave result, no ℏ involved)\n- **Connection**: p = ℏk → Δp = ℏΔk → ℏ(Δk·Δx) ≥ ℏ/2 → Δx·Δp ≥ ℏ/2\n\n### Canonical Applications\n- **Hydrogen atom ground state radius**: Assume ⟨r⟩ ≈ a, Δp ≈ ℏ/2a. KE ≈ Δp²/2m = ℏ²/8ma². PE = −e²/4πε₀a. Minimize total: a₀ = 4πε₀ℏ²/me² = 0.529 Å (Bohr radius recovered). This shows the atom's size is set by the uncertainty principle.\n- **Zero-point energy**: Particle in box of width L: Δx ≈ L/2, Δp ≥ ℏ/L, KE ≥ ℏ²/(2mL²) — consistent with E₁ = π²ℏ²/(2mL²).\n- **Nuclear confinement**: Proton confined to nucleus (Δx ≈ 1 fm): Δp ≥ ℏ/(2×10⁻¹⁵) ≈ 100 MeV/c → confirms relativistic nuclear physics required.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 16,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Better technology could eliminate uncertainty",
+      "content": "### MC-1: \"Better technology could eliminate uncertainty\"\n- **Probe**: \"If we build a perfect microscope — no vibration, no photon kick — could we measure both x and p exactly?\"\n- **Characteristic phrase**: \"It's just a limitation of current technology.\"\n- **Trigger**: Confusing epistemic limitation (we don't know) with ontological reality (there is nothing to know).\n- **Conflict evidence**: A free particle in a momentum eigenstate (definite p = ℏk) has |ψ|² = constant everywhere — it genuinely has no position. This isn't ignorance; it's the structure of the quantum state.\n- **Bridge**: Think of a pure tone sound wave — it has a definite frequency everywhere in space, but has no \"location.\" This isn't a measurement failure; the wave literally occupies all space.\n- **Replacement**: Uncertainty is intrinsic to quantum states, not a measurement limitation. States with definite p are infinitely extended; states with definite x have completely undefined p.\n- **Discrimination pairs**: \"Δx·Δp ≥ ℏ/2 for any quantum state regardless of technology\" ✓ vs. \"Better tech → smaller Δx·Δp\" ✗\n- **S6 repair path**: Compute Δp for a momentum eigenstate ψ = e^(ikx): Δp = 0, but Δx = ∞. Show students this is a valid state.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "The uncertainty principle applies only during measurement",
+      "content": "### MC-2: \"The uncertainty principle applies only during measurement\"\n- **Probe**: \"A particle is in the ground state of a box with no one measuring it. Does it still have Δx and Δp?\"\n- **Characteristic phrase**: \"If we're not measuring, the particle has definite x and p.\"\n- **Trigger**: Linking uncertainty only to the act of measurement.\n- **Conflict evidence**: ⟨KE⟩ = ⟨p²⟩/2m = π²ℏ²/(2mL²) > 0 in the ground state — the particle has a nonzero momentum spread even when unmeasured. This is needed to maintain normalization (kinetic energy) and cannot go to zero.\n- **Bridge**: The zero-point energy of the box is ℏ²π²/2mL² — even at absolute zero, the particle has kinetic energy. That energy reflects Δp ≠ 0. No measurement required.\n- **Replacement**: Quantum uncertainty is a property of the quantum state, not of the measuring act.\n- **Discrimination pairs**: \"Ground state has Δx·Δp ≥ ℏ/2 always\" ✓ vs. \"Uncertainty only appears during measurement\" ✗\n- **S6 repair path**: Compute ⟨p²⟩ for n=1 infinite well; derive Δp; verify Δx·Δp ≥ ℏ/2.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Uncertainty principle sets the limit on how precisely we know x OR p separately",
+      "content": "### MC-3: \"Uncertainty principle sets the limit on how precisely we know x OR p separately\"\n- **Probe**: \"What does Δx·Δp ≥ ℏ/2 say if I measure only position and don't care about momentum?\"\n- **Characteristic phrase**: \"So we can't know position better than Δx = ℏ/2.\"\n- **Trigger**: Treating each uncertainty as individually bounded.\n- **Conflict evidence**: You can make Δx arbitrarily small by localizing the wave function tightly. But then Δp becomes arbitrarily large. Δx alone has no lower bound; only the product is bounded.\n- **Bridge**: Squeeze a balloon — one dimension narrows, another expands. The volume (product) is conserved. Similarly, you can have tiny Δx but then Δp must compensate.\n- **Replacement**: Δx·Δp ≥ ℏ/2 bounds the product, not the individual uncertainties.\n- **Discrimination pairs**: \"Δx can be made arbitrarily small at the cost of large Δp\" ✓ vs. \"Δx cannot be smaller than ℏ/2\" ✗\n- **S6 repair path**: Show Gaussian wave packet with σ = 10⁻¹² m (tiny): Δx = 10⁻¹² m, Δp = ℏ/(2×10⁻¹²) ≈ 5.3×10⁻²³ kg·m/s. Both finite; product = ℏ/2.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "ΔE·Δt means energy can be 'borrowed' for time Δt",
+      "content": "### MC-4: \"ΔE·Δt means energy can be 'borrowed' for time Δt\"\n- **Probe**: \"Can a virtual particle with energy ΔE exist for time Δt = ℏ/ΔE without violating energy conservation?\"\n- **Characteristic phrase**: \"Virtual particles borrow energy from the vacuum using the uncertainty principle.\"\n- **Trigger**: Popularized physics media description of vacuum fluctuations.\n- **Conflict evidence**: This \"energy borrowing\" story is not supported by rigorous quantum field theory — the actual calculation of Casimir force or Lamb shift doesn't invoke an energy loan metaphor.\n- **Bridge**: ΔE·Δt ≥ ℏ/2 correctly describes the energy-width of spectral lines for decaying states. Virtual particles in Feynman diagrams are an internal perturbation theory bookkeeping device, not real events.\n- **Replacement**: ΔE·Δt ≥ ℏ/2 means: a state with finite lifetime Δt cannot have a perfectly sharp energy — its spectral line has natural width ΔE ≥ ℏ/(2Δt).\n- **Discrimination pairs**: \"Natural linewidth ΔE = ℏ/Δt for a state with lifetime Δt\" ✓ vs. \"Energy borrowed for time Δt from uncertainty\" ✗\n- **S6 repair path**: Calculate linewidth of Na D-line (lifetime 16 ns): ΔE = ℏ/Δt ≈ 4×10⁻²⁶ J = 2.6×10⁻⁷ eV. Compare to photon energy 2.1 eV — shows ΔE/E ~ 10⁻⁷ (very sharp line).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Activate Fourier intuition",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Activate Fourier intuition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 199,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "State the principle",
+      "content": "{\"id\":\"TA-2\",\"title\":\"State the principle\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 200,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Address the measurement misconception",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Address the measurement misconception\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 201,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Application 1",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Application 1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 202,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Application 2",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Application 2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) state Δx·Δp ≥ ℏ/2 with correct physical interpretation, (2) apply it to estimate ground-state energies and sizes, (3) distinguish position-momentum from energy-time uncertainty, (4) refute the \"measurement disturbance\" misconception.\n\n### Formative Assessment 1 — Estimation\n**Prompt**: \"An electron is confined to a region of size 0.1 nm. Estimate its minimum kinetic energy in eV.\"\n**Expected answer**: Δx = 0.1 nm → Δp ≥ ℏ/(2Δx) = 5.27×10⁻²⁵ kg·m/s. KE_min ≈ Δp²/2m = (5.27×10⁻²⁵)²/(2×9.11×10⁻³¹) ≈ 1.5×10⁻¹⁹ J ≈ 0.94 eV.\n**Threshold**: Within factor of 2 (estimates acceptable); must show Δp = ℏ/(2Δx) step.\n\n### Formative Assessment 2 — Conceptual\n**Prompt**: \"A particle is in a state ψ(x) = A e^(ikx) (a plane wave). What are Δp and Δx for this state?\"\n**Expected answer**: Δp = 0 (definite momentum p = ℏk). Δx = ∞ (particle not localized anywhere). Product Δx·Δp = ∞×0 = indeterminate — but the state is consistent with Δx·Δp ≥ ℏ/2 since the product is not less than ℏ/2.\n**Threshold**: Must correctly identify Δp = 0 and Δx = ∞.\n\n### Formative Assessment 3 — Application to atomic size\n**Prompt**: \"Treating the electron in hydrogen as having position uncertainty Δr ≈ a (orbital radius) and using the uncertainty principle, derive an estimate for the Bohr radius a₀.\"\n**Expected answer**: Δp ≈ ℏ/a, KE ≈ ℏ²/2ma², PE ≈ −e²/4πε₀a. Minimize E(a): dE/da = −ℏ²/ma³ + e²/4πε₀a² = 0 → a₀ = 4πε₀ℏ²/me² ≈ 0.529 Å.\n**Threshold**: Must set up energy minimization and reach correct a₀ formula.\n\n### Formative Assessment 4 — Distinguish HUP from measurement disturbance\n**Prompt**: \"A student says: 'The uncertainty principle just means our measurement photons kick the electron and disturb it. With soft enough photons, we could know both x and p.' Is this correct? Explain.\"\n**Expected answer**: No. The Robertson inequality Δx·Δp ≥ ℏ/2 holds for the quantum state itself, independent of measurement. Even for a particle with a known wave function (no measurement), the state has intrinsic Δx and Δp satisfying the inequality. The disturbance picture is a historical interpretation, not the complete truth.\n**Threshold**: Must explicitly refute the measurement-disturbance explanation and provide a positive alternative.\n\n### Confidence Calibration\nAfter FA1: \"How confident are you in your answer: 0–100%? What's the main assumption you made?\" (Target: identifying Δp ≈ ℏ/2Δx as the minimum, not an equality.)\n\n### Delayed Retrieval\nOne week later: Without notes, derive the minimum confinement energy for a proton in a nucleus (Δx = 1 fm). Then state what that tells us about the nuclear force strength.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 221,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nClap your hands once. You know exactly when the clap happened (narrow time pulse) but the sound has a broad range of frequencies (low to high pitch). Play a pure tone (single frequency) — you can identify its pitch precisely, but it never starts or stops (infinite duration). This is the time-frequency trade-off in audio: narrow in time → broad in frequency; narrow in frequency → broad in time. The quantum position-momentum uncertainty is the exact same mathematics, with x replacing t and k replacing ω, and p = ℏk converting wavenumber to momentum.\n\n### Representational (Diagrams and Symbols)\n- **Wave packet diagram**: Gaussian ψ(x) centered at x₀ with width Δx; its Fourier transform ψ̃(k) centered at k₀ with width Δk = 1/(2Δx). Show that making ψ narrower makes ψ̃ broader.\n- **Phase space diagram**: Draw an ellipse in (x,p) space; the minimum area of the ellipse is ℏ/2. Show how squeezing in x stretches in p and vice versa.\n- **Uncertainty product table**: List states with Δx and Δp; compute product; verify ≥ ℏ/2.\n- **Hydrogen atom energy diagram**: Show that the stable ground state is the minimum-energy compromise between KE (wants small a → large Δp → large KE) and PE (wants large a → less negative PE).\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Given a Gaussian ψ(x) with width σ, state Δx = σ and Δp = ℏ/(2σ) — verify Δx·Δp = ℏ/2.\n2. Use uncertainty principle to estimate minimum KE: KE_min ≥ ℏ²/(8mΔx²).\n3. Minimize E(a) = ℏ²/(8ma²) − e²/(4πε₀a) to find a₀ = Bohr radius.\n4. Estimate nuclear proton momentum from Δx = 1 fm.\n\n### Transfer (Novel Contexts)\n- **Natural linewidth**: Excited atom decays in Δt ≈ 10⁻⁸ s → ΔE ≈ ℏ/Δt ≈ 66 meV → Lorentzian lineshape with FWHM = ΔE.\n- **Scanning tunneling microscopy**: Tip localization of electrons in 1D tip geometry — uncertainty principle sets the resolution limit.\n- **Squeezed light**: Quantum optics squeezes amplitude uncertainty below ℏ/2 but enlarges phase uncertainty to compensate — precision measurement applications.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 44,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: \"Uncertainty is just measurement error\"\nStudents believe if we had a better microscope we could know both position and momentum precisely. This is the \"observer disturbance\" interpretation (Heisenberg's 1927 microscope argument), which is historically important but physically wrong as a complete explanation. The modern understanding: even if you know everything possible about a quantum state, the state itself only determines probability distributions, not definite values.\n\n### Failure Mode 2: \"The uncertainties refer to different particles\"\nStudents think Δx means the spread across an ensemble of particles. It does in one sense — but it also applies to a single particle's own state. A particle in the ground state of a box simultaneously has Δx > 0 and Δp > 0 — there is no way to prepare a single quantum particle with definite x and definite p simultaneously.\n\n### Failure Mode 3: Applying energy-time uncertainty incorrectly\nStudents try to use ΔE·Δt ≥ ℏ/2 with Δt = time of a measurement. This is a different inequality from Δx·Δp ≥ ℏ/2. ΔE·Δt here means: a state with lifetime Δt has an energy uncertainty ΔE = ℏ/Δt in its spectral line. It's not about measurement duration.\n\n### Failure Mode 4: Forgetting factor of 2 (using ΔxΔp ≥ ℏ instead of ℏ/2)\nSome textbooks use different definitions of Δ (full width vs. standard deviation). Robertson's inequality with standard deviations gives ℏ/2. Using FWHM or other measures changes the constant. Students must be consistent about which definition is in use.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 69,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"I'm going to show you something that has no classical analogue — a fundamental limit on knowledge that has nothing to do with how good your instruments are.\"\n\n**Core explanation**: \"Δx·Δp ≥ ℏ/2. These are standard deviations — they measure the spread in the wave function, not measurement error. Even if you know the exact wave function, the particle has no definite position and momentum simultaneously.\"\n\n**Common error interception**: \"When I hear 'better technology would fix this' — stop. The uncertainty principle is not about technology. It's about what quantum states ARE. A state with definite p is an infinitely spread-out wave. That's not ignorance; that's physics.\"\n\n**Checkpoint question**: \"If Δx = 1 nm, what's the minimum Δp?\" (ℏ/2 × 10⁹ m⁻¹ ≈ 5.3 × 10⁻²⁶ kg·m/s.) \"Is this the actual momentum spread, or the minimum?\" (Minimum — could be larger.)\n\n**Closing move**: \"The uncertainty principle is why atoms exist at stable sizes, why nuclear physics requires relativistic treatment, and why zero-point energy is real. It's one of the most important single inequalities in all of physics.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 207,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"This doesn't make physical sense\"\nReturn to Fourier intuition with pure audio. A 440 Hz pure tone is a single frequency — but play it for only 1 ms and the sound has many pitches (broadband). The uncertainty is in the signal itself, not in a listener's ability to hear. Δt·Δf ≥ 1/(4π) is the Gabor limit for audio signals. Quantum HUP is the same mathematics with x ↔ t and p = ℏk ↔ ℏω = E.\n\n### S3 — Can state HUP but cannot apply it\nDrill estimation problems: confinement in 1 nm box → minimum momentum; minimum kinetic energy. Use Δp ≈ ℏ/Δx (rough estimate) and KE ≈ Δp²/2m. Start with numbers in SI, convert to eV. Practice 3–4 confinement problems before moving to atomic size derivation.\n\n### S6 — Confuses ΔE·Δt inequality\nClarify: Δx·Δp ≥ ℏ/2 is derived from commutator [x̂, p̂] = iℏ. ΔE·Δt is different — time is not a quantum operator (in non-relativistic QM); Δt is the lifetime of a state, ΔE is the energy width. They are related but through a different argument. Focus: standard HUP = position-momentum pair only.\n\n### S9 — Cannot connect to physical phenomena\nUse three concrete applications: (1) atom size (~1 Å) — uncertainty principle gives a₀; (2) zero-point energy (box) — particle cannot have zero kinetic energy; (3) natural linewidth — spectral lines have finite width because excited states have finite lifetime. Each is a direct, measurable consequence.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 254,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nConceptual (physical meaning of the inequality) + procedural (estimation tool) + corrective (refuting measurement-disturbance misconception).\n\n### Spaced Retrieval Schedule\n- Day 1: State HUP; estimate minimum KE for electron in 0.1 nm box.\n- Day 3: Derive Bohr radius from uncertainty principle.\n- Day 7: Explain zero-point energy in 3 sentences using HUP.\n- Day 14: Refute \"better instruments\" argument in 2 sentences.\n- Day 30: Apply ΔE·Δt to estimate natural linewidth of a given atomic transition.\n\n### Interleaving Partners\n- phys.qm.wave-function (Δx, Δp defined from ψ)\n- phys.qm.schrodinger-equation (zero-point energy emerges from TISE for infinite well)\n- phys.qm.particle-in-box (zero-point energy is the key example)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 270,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Apply Δx·Δp ≥ ℏ/2 to any confinement problem to estimate minimum KE.\n- Estimate atomic/nuclear size orders of magnitude.\n- Calculate natural linewidth from excited-state lifetime.\n\n### Far Transfer\n- **Quantum optics**: Squeezed states — engineer Δx below ℏ/2 at cost of Δp > ℏ/2; used in gravitational wave detectors (LIGO).\n- **Nanotechnology**: Quantum dots — size determines energy levels via confinement; uncertainty principle sets the scaling.\n- **Particle physics**: Nuclear and quark confinement scales derived from HUP applied at femtometer scales.\n\n### Structural Abstraction\nThe uncertainty principle is an instance of the Fourier conjugate relationship between any pair of conjugate variables in wave physics. In quantum mechanics, every conjugate pair (x,p), (t,E), (φ,L_z for angle-angular momentum) has an analogous uncertainty relation. The mathematical structure (commutator → uncertainty) generalizes to spin, field theories, and quantum information (complementary observables in any quantum system).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 289,
+        "endLine": 306
+      }
+    },
+    {
+      "assetId": "phys.qm.uncertainty-principle/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.uncertainty-principle",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.qm.wave-function (Born rule, Δx as spread of |ψ|²) is the only prerequisite. The conceptual jump from \"wave function has spread\" to \"that spread is bounded by ℏ/2 times momentum spread\" is manageable in one session. Adequate.\n\n### Unlock Readiness\nThis is a leaf node — it unlocks nothing directly, but every subsequent QM concept (harmonic oscillator, hydrogen atom, tunneling) uses the uncertainty principle as a qualitative guide and estimation tool. The concept should be flagged as a persistent tool, not a prerequisite gate.\n\n### Suggested Flag\nConsider pairing this blueprint's session with the particle-in-box session (phys.qm.particle-in-box) since zero-point energy provides the most compelling quantitative demonstration of the uncertainty principle's physical reality.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.uncertainty-principle.md",
+        "startLine": 306,
+        "endLine": 320
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

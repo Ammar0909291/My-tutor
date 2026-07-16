@@ -1,0 +1,389 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.relative-motion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.relative-motion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:077c08a547c821ca1c8d106bc332f51fa7a412e0c447ea6e022cf355c1d3d219",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.relative-motion.md": "sha256:c98e39cd8ffebe092271f2b7dfd439516f652cc011e36384d94b690764a30a7c"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.relative-motion",
+    "name": "Relative Motion",
+    "difficultyRaw": "label: proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.kinematics-2d"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.relative-motion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.relative-motion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.relative-motion.md": "sha256:c98e39cd8ffebe092271f2b7dfd439516f652cc011e36384d94b690764a30a7c"
+      },
+      "contentHash": "sha256:a4099d9e7f93279611c9460da0ffe6dc4ab1fa8ff7a217895bc58afbf133b777",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.relative-motion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.relative-motion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.relative-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.relative-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.relative-motion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.relative-motion.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.relative-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.relative-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.relative-motion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.relative-motion.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.relative-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.relative-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.relative-motion.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.relative-motion.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.relative-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.relative-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.relative-motion.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.relative-motion.md#TA-5 (addresses MC-VELOCITY-ABSOLUTE, MC-FRAMES-ADD-SPEEDS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.relative-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.relative-motion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.relative-motion/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "Relative Motion — Conceptual Development Sequence",
+      "content": "**TA-1 — The Galilean Velocity Addition Rule [C]**\n\nIf B moves relative to C at velocity v_B/C, and A moves relative to B at velocity v_A/B, then A's velocity relative to C is:\n```\nv_A/C = v_A/B + v_B/C      (vector addition)\n```\n\nThe subscript cancellation rule: A/B + B/C → A/C (middle labels cancel).\n\nTo find v_B/A (reverse): v_B/A = −v_A/B.\n\n**TA-2 — 1D Relative Motion Examples [C→P]**\n\nExample 1 — same direction:\nA car moves at 80 km/h east. A truck moves at 50 km/h east. Relative velocity of car with respect to truck:\n```\nv_car/truck = v_car/ground − v_truck/ground = 80 − 50 = 30 km/h east\n```\n(The car overtakes the truck at 30 km/h.)\n\nExample 2 — opposite directions:\nThe same car (80 km/h east) meets a bus moving at 60 km/h west. Relative velocity of car with respect to bus:\n```\nv_car/bus = 80 − (−60) = 140 km/h east\n```\n(They approach each other at 140 km/h.)\n\n**TA-3 — 2D Relative Motion: River Crossing [C→P]**\n\nA boat aims perpendicular to a river bank at v_b = 4 m/s (north). River flows at v_r = 3 m/s (east). Velocity of boat relative to ground:\n```\nv_boat/ground = v_boat/water + v_water/ground\nx: v_x = 3 m/s (east)\ny: v_y = 4 m/s (north)\n\n|v| = √(16 + 9) = 5 m/s at θ = arctan(3/4) ≈ 36.9° east of north\n```\n\nTo cross a 100 m wide river:\n```\nt = width / v_y = 100/4 = 25 s\ndrift = v_r × t = 3 × 25 = 75 m east\n```\n\nTo land directly opposite (zero drift): aim upstream at angle φ = arcsin(v_r/v_b) = arcsin(3/4) = 48.6° west of north. Then actual crossing speed = v_b cosφ = 4 × √(1−9/16) = 4 × √7/4 ≈ 2.65 m/s, and t = 100/2.65 = 37.7 s.\n\n**TA-4 — Relative Velocity in 2D: Aircraft and Wind [P]**\n\nAn aircraft wants to fly due north at 500 km/h relative to the ground. A wind blows at 100 km/h due east. What heading (angle west of north) must the aircraft fly, and what airspeed is needed?\n\n```\nv_aircraft/ground = v_aircraft/air + v_air/ground\n\nWe want v_aircraft/ground pointing north.\nv_air/ground = 100 km/h east.\n\nsin θ = 100/v_air → v_air = 500/cosθ\n\nActually: the ground-speed northward component = v_air cosθ = 500 km/h\nThe eastward component: v_air sinθ = 100 km/h\n\ntanθ = 100/500 = 0.2 → θ = 11.3° west of north\nv_air = √(500² + 100²) = √(260000) ≈ 510 km/h\n```\n\n**TA-5 — Relative Acceleration and Non-Inertial Frames (Preview) [P]**\n\nIn an inertial frame (constant velocity), v_A/C = v_A/B + v_B/C applies exactly. If frame B accelerates (non-inertial), a fictitious force appears in B — this is the basis for centrifugal and Coriolis effects (advanced topic). At this level: only use the Galilean addition rule in inertial (non-accelerating) frames.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 72,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/misconception/MC-VELOCITY-ABSOLUTE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "- **Trigger signal:** Student states a velocity without specifying the reference frame (\"the car is going 60 km/h\") and treats it as absolute.",
+      "content": "### MC-VELOCITY-ABSOLUTE\n- **Trigger signal:** Student states a velocity without specifying the reference frame (\"the car is going 60 km/h\") and treats it as absolute.\n- **Conflict evidence [P28]:** \"A passenger on a train moving at 80 km/h east reads a newspaper. Relative to the ground, the newspaper moves at 80 km/h east. Relative to the passenger, the newspaper is stationary. Both statements are correct — velocity has no meaning without specifying relative to what. There is no universal rest frame.\"\n- **Bridge text [P30]:** \"All velocities are measured relative to a chosen reference frame. When we say 'a car moves at 60 km/h' we implicitly mean relative to the Earth's surface. For problems involving two moving objects, we must choose a frame and be explicit about it.\"\n- **Replacement text [P31]:** \"Velocity is always v_A/B (velocity of A relative to B). The Galilean transformation: v_A/C = v_A/B + v_B/C. Choose a reference frame, define all velocities relative to it, and add/subtract as vectors.\"\n- **Discrimination pairs [P33]:**\n  - Bullet fired at 800 m/s from a plane moving at 200 m/s: v_bullet/ground = 1000 m/s (same direction) or 600 m/s (opposite direction) ✓\n  - \"The bullet moves at 800 m/s\" — incomplete (relative to what?) ✗\n- **s6_path:** \"Every time you give a velocity in this topic, ask yourself: relative to what? Once that becomes a habit, relative motion problems become straightforward.\"\n\n---",
+      "localKey": "MC-VELOCITY-ABSOLUTE",
+      "language": "en",
+      "refs": [
+        "MC-VELOCITY-ABSOLUTE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/misconception/MC-FRAMES-ADD-SPEEDS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "- **Trigger signal:** Student always adds magnitudes of velocities regardless of direction (e.g., v_A/C = v_A/B + v_B/C with all magnitudes, ignoring vectors).",
+      "content": "### MC-FRAMES-ADD-SPEEDS\n- **Trigger signal:** Student always adds magnitudes of velocities regardless of direction (e.g., v_A/C = v_A/B + v_B/C with all magnitudes, ignoring vectors).\n- **Conflict evidence [P28]:** \"A boat moves at 5 m/s north relative to water. The river flows at 3 m/s east. The boat's velocity relative to the ground is NOT 5 + 3 = 8 m/s — it is the vector sum: magnitude = √(5² + 3²) = √34 ≈ 5.83 m/s at arctan(3/5) ≈ 31° east of north. Adding speeds (magnitudes) only works when both velocities point in the same direction.\"\n- **Bridge text [P30]:** \"Relative velocities add as vectors, not scalars. Write each velocity as (x-component, y-component), then add components separately. The direction matters as much as the magnitude.\"\n- **Replacement text [P31]:** \"v_A/C = v_A/B + v_B/C (vector addition). Write component equations: v_x(A/C) = v_x(A/B) + v_x(B/C); v_y(A/C) = v_y(A/B) + v_y(B/C). Then combine: |v| = √(vₓ² + v_y²), θ = arctan(v_y/vₓ).\"\n- **Discrimination pairs [P33]:**\n  - Same direction: v_A/C = 5 + 3 = 8 m/s (scalar addition valid only here) ✓\n  - Perpendicular: v_A/C = √(5² + 3²) = 5.83 m/s ✓ (vector, not scalar sum)\n- **s6_path:** \"Speed addition is only valid along a straight line. The moment two velocities have different directions, draw a vector diagram — magnitude of the sum is always ≤ sum of magnitudes.\"\n\n---",
+      "localKey": "MC-FRAMES-ADD-SPEEDS",
+      "language": "en",
+      "refs": [
+        "MC-FRAMES-ADD-SPEEDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "The Galilean Velocity Addition Rule",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Galilean Velocity Addition Rule\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 74,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "1D Relative Motion Examples",
+      "content": "{\"id\":\"TA-2\",\"title\":\"1D Relative Motion Examples\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 85,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "2D Relative Motion: River Crossing",
+      "content": "{\"id\":\"TA-3\",\"title\":\"2D Relative Motion: River Crossing\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 101,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "Relative Velocity in 2D: Aircraft and Wind",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Relative Velocity in 2D: Aircraft and Wind\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 120,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "Relative Acceleration and Non-Inertial Frames (Preview)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Relative Acceleration and Non-Inertial Frames (Preview)\",\"primitives\":[\"P01\",\"P06\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-FRAMES-ADD-SPEEDS\",\"MC-VELOCITY-ABSOLUTE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-VELOCITY-ABSOLUTE",
+        "MC-FRAMES-ADD-SPEEDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 139,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Frame identification**\n\"A passenger on a train moving at 90 km/h north sees a car on a road alongside moving at 30 km/h south (relative to the ground). What is the car's velocity relative to the passenger? What is the passenger's velocity relative to the car?\"\n\n*Target:* v_car/passenger = v_car/ground − v_passenger/ground = −30 − 90 = −120 km/h (i.e., 120 km/h southward). v_passenger/car = +120 km/h northward.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 172,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — 2D vector addition**\n\"A plane flies at 300 km/h north relative to the air. Wind blows at 50 km/h east. What is the plane's velocity relative to the ground (magnitude and direction)?\"\n\n*Target:* |v| = √(300² + 50²) = √(90000 + 2500) = √92500 ≈ 304 km/h; θ = arctan(50/300) ≈ 9.5° east of north.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 172,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Zero drift condition**\n\"A river is 80 m wide and flows at 2 m/s. A motorboat's speed in still water is 5 m/s. To cross straight across (zero drift), what upstream angle must the boat aim?\"\n\n*Target:* sinθ = 2/5 = 0.4 → θ = 23.6° upstream from perpendicular.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 172,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Relative velocity in pursuit**\n\"Car A moves north at 20 m/s. Car B is 500 m north of A and moves north at 15 m/s. At what rate is A closing the gap? How long until A catches B?\"\n\n*Target:* v_A/B = 20 − 15 = 5 m/s northward (closing at 5 m/s); t = 500/5 = 100 s.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 172,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Analysis: minimum crossing time vs. minimum drift path**\n\"A river 200 m wide flows at 3 m/s. A swimmer can do 4 m/s in still water. (a) What heading minimises crossing time? (b) What heading minimises drift? (c) Which takes longer?\"\n\n*Target:* (a) Min time: swim perpendicular, t = 200/4 = 50 s; drift = 3 × 50 = 150 m. (b) Min drift (zero drift): sinθ = 3/4 → θ = 48.6°; crossing speed = 4 cos48.6° ≈ 2.65 m/s; t = 200/2.65 = 75.5 s; drift = 0. (c) Zero-drift path takes longer (75.5 s vs. 50 s). Trade-off: less drift costs more time.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 172,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "Adaptive Flags",
+      "content": "- **Subscript convention**: enforce consistent notation v_A/B from the start. Students who write \"v_car\" without a slash consistently confuse themselves on multi-body problems.\n- **Bloom level — analyze**: problems require students to *decompose* a situation (choose frame, identify which velocities are known, set up the vector equation) before calculating. Spend time on the setup step, not just the arithmetic.\n- **Relative velocity in projectile context**: if a student has just completed projectile-motion, note that a projectile's velocity relative to a moving observer is found the same way — subtract the observer's velocity vector from the projectile's velocity vector.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 236,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.mech.relative-motion/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.relative-motion",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — train and fly provocation\n  ↓\n[P41] PD-1 (2D vector addition)\n  ↓ PASS\n[P06] Anchor: train + fly → frame-dependent velocity\n  ↓\nTA-1: Galilean addition rule; subscript cancellation [C]\n  ↓\nTA-2: 1D examples — same direction and head-on [C→P]\n  ↓\n[P14] Predict: \"Boat aims north, river flows east — which direction does it actually travel?\"\n  ↓\nTA-3: River crossing; drift calculation; zero-drift condition [C→P]\n  ↓\nWE-1 → WE-2 → WE-3 (escalating)\n  ↓\n[P51] Check-in MP-1 (frame identification)\n  ↓ monitor\nTA-4: Aircraft/wind — 2D heading compensation [P]\n  ↓\nTA-5: Non-inertial frames preview (conceptual only) [P]\n  ↓\n[P36] MP-2 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"How do you find velocity of A relative to C if you know A/B and B/C?\"\n[P68] Session close; [P85]; [P89] 1/3/7 days; [P91] 80% gate\n```\n\n**Protocol routing:** S0: full CPA, use physical demo (walk on moving walkway); S1: knows \"add velocities\" but not when to subtract; go deep on MC-VELOCITY-ABSOLUTE with discrimination pairs; S4: PD-1 fail → kinematics-2d; S6: [F] — \"One rule: v_A/C = v_A/B + v_B/C. Draw a vector triangle, label everything\"; S7: open with MP-5 (min time vs. min drift analysis — requires genuine reasoning about trade-offs).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.relative-motion.md",
+        "startLine": 201,
+        "endLine": 236
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

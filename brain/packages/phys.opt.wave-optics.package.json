@@ -1,0 +1,432 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.wave-optics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.wave-optics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7cd63f7c73b16a4e1efdb6b7b62b55a9ff321c9a3b4fe649918ed9f491200c3d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.wave-optics.md": "sha256:afb3a991c3947688c33a5883dffb564bd007ed444537628c95c6dfcd8dea6584"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.wave-optics",
+    "name": "\"Wave Nature of Light — Interference and Coherence\"",
+    "difficultyRaw": "label: proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.opt.nature-of-light",
+      "phys.wave.wave-properties"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.wave-optics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.wave-optics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.wave-optics.md": "sha256:afb3a991c3947688c33a5883dffb564bd007ed444537628c95c6dfcd8dea6584"
+      },
+      "contentHash": "sha256:dd372945f4ec2ad5364324859170a3ff14fbc5a8b80a51d7852eea80d6858f9e",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.wave-optics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.wave-optics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.wave-optics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.wave-optics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.wave-optics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.wave-optics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.wave-optics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.wave-optics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.wave-optics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.wave-optics.md#TA-3 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.wave-optics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.wave-optics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.wave-optics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.wave-optics.md#TA-4 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.wave-optics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.wave-optics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.wave-optics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.wave-optics.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.wave-optics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.wave-optics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.wave-optics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.wave-optics.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.wave-optics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.wave-optics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.wave-optics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.wave-optics.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.wave-optics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.wave-optics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.wave-optics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "\"Wave Nature of Light — Interference and Coherence\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nDrop two pebbles into a pond at the same time, close together. Where their circular ripples meet, the water surface rises higher where crest meets crest (constructive interference), and goes flat where crest meets trough (destructive interference). Light does the same thing. When two coherent light waves meet, they add — but only if the waves stay in step with each other over many cycles. The requirement for \"staying in step\" is called coherence. Most everyday light sources are incoherent (a light bulb's atoms flash randomly) — but a laser or a Young's double slit can produce coherent waves that create stable interference patterns.\n\n### Level 2 — Developing Understanding\n\n**Superposition Principle:** When two waves occupy the same region, the resultant displacement is the algebraic sum of the individual displacements.\n\n**Interference — conditions:**\n\n| Type | Path difference (Δ) | Phase difference (δ) | Result |\n|------|--------------------|-----------------------|--------|\n| Constructive | Δ = mλ (m = 0, ±1, ±2, ...) | δ = 2mπ | Bright fringe; amplitude doubles |\n| Destructive | Δ = (m + ½)λ | δ = (2m+1)π | Dark fringe; amplitude cancels |\n\n**Coherence — required for observable interference:**\n- **Temporal coherence:** the source must emit waves with constant phase relationship over time (monochromatic or narrow bandwidth)\n- **Spatial coherence:** waves from different points of the source must have a fixed phase relationship\n- Coherence length L_c = λ²/Δλ (longer for narrower bandwidth sources)\n- Laser: L_c ~ meters; sunlight: L_c ~ 0.6 μm; white LED: L_c ~ 1 μm\n\n**Huygens' Principle:** Every point on a wavefront acts as a secondary source of spherical wavelets. The new wavefront is the tangent envelope to all secondary wavelets. This principle explains:\n- Refraction (wavelets travel slower in denser medium)\n- Diffraction (wavelets spread around obstacles)\n- Reflection (wavelets from mirror surface reconstruct reflected wavefront)\n\n**Path difference and phase difference:**\nΔ = path difference = optical path difference = difference in distances traveled\nPhase difference δ = (2π/λ) × Δ\n\n**Intensity in interference:**\nI = I₁ + I₂ + 2√(I₁I₂) × cos δ\n\nFor equal intensities I₁ = I₂ = I₀:\n- Constructive (δ = 0): I = 4I₀\n- Destructive (δ = π): I = 0\n- Average: I_avg = 2I₀ (energy conserved; redistributed, not created or destroyed)\n\n### Level 3 — Proficient Synthesis\n\n**Optical path length (OPL):** When light travels through a medium of refractive index n over physical distance d, the OPL = nd. This is the effective distance in terms of vacuum wavelengths:\n- Phase accumulated = (2π/λ₀) × OPL = (2π/λ₀) × nd\n- Path difference in terms of OPL: Δ_OPL = n₂d₂ − n₁d₁\n\n**Phase shift on reflection:**\n- Reflection from a denser medium (going from low-n to high-n): phase shift of π (equivalent to λ/2 path change)\n- Reflection from a less dense medium: no phase shift\n- Example: thin film — ray reflecting off top surface gets π shift; ray reflecting off bottom surface (glass→air) gets no shift\n\n**Thin film interference:**\n- Constructive: 2nt = (m + ½)λ₀ (accounting for one π phase flip at top surface)\n- Destructive: 2nt = mλ₀\n\nWhere n = film's refractive index, t = film thickness, λ₀ = vacuum wavelength.\nThis explains soap bubble colors, anti-reflection coatings (t = λ₀/(4n)), and oil slick iridescence.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 26,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.wave-optics",
+      "title": ": Constructive and Destructive Interference",
+      "content": "### WE-1: Constructive and Destructive Interference\n\n**Problem:** Two coherent light sources S₁ and S₂ emit λ = 600 nm light. A point P is 3.0 m from S₁ and 3.9 m from S₂.\n(a) Find the path difference.\n(b) Determine whether P is a bright or dark fringe.\n(c) What is the order of this fringe?\n\n**Solution:**\n\n**(a) Path difference:**\nΔ = |d₂ − d₁| = |3.9 − 3.0| = **0.9 m = 9×10⁻¹ m**\n\nConvert to wavelengths: Δ/λ = (0.9 m) / (600×10⁻⁹ m) = 1.5×10⁶\n\nHmm — this is a large integer, so both are available. Let's work with smaller values for clarity.\n\nRevised problem: S₁ = 1200 nm, S₂ = 1800 nm, λ = 600 nm.\n\n**(a) Path difference:**\nΔ = 1800 − 1200 = **600 nm**\n\n**(b) Type:**\nΔ/λ = 600/600 = 1.0 (integer) → **Constructive interference (bright fringe)**\n\n**(c) Order:** m = 1 → **1st order bright fringe**\n\nNow dark: if S₂ = 1500 nm:\nΔ = 1500 − 1200 = 300 nm\nΔ/λ = 300/600 = 0.5 = ½ → **Destructive interference (dark fringe, m = 0)**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 86,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.wave-optics",
+      "title": ": Thin Film Interference",
+      "content": "### WE-2: Thin Film Interference\n\n**Problem:** A thin film of soap (n = 1.35) is illuminated by white light. The film has thickness t = 210 nm. Which wavelengths in the visible range (400–700 nm) will be strongly reflected?\n\n**Solution:**\n\nWith one phase reversal (at top surface, air→soap), constructive reflection condition:\n2nt = (m + ½)λ₀\nλ₀ = 2nt / (m + ½) = 2 × 1.35 × 210 / (m + ½) = 567 / (m + ½) nm\n\nFor m = 0: λ₀ = 567 / 0.5 = **1134 nm** (infrared — not visible)\nFor m = 1: λ₀ = 567 / 1.5 = **378 nm** (near UV — barely outside visible range)\nFor m = 0 with destructive (2nt = mλ): λ₀ = 567/1 = **567 nm → green-yellow** is suppressed\n\nActually using constructive for m=0 half-integer approach more carefully:\n\nConstructive: 2nt = (m + ½)λ → λ = 2nt/(m+½):\n- m=0: λ = 567/0.5 = 1134 nm (IR)\n- m=1: λ = 567/1.5 = 378 nm (UV)\n\nDestructive (reflection minimum = transmission maximum):\n2nt = mλ → λ = 567/m:\n- m=1: λ = **567 nm** (green-yellow) — destructive in reflection\n\nThe film appears magenta (red + blue) because green-yellow (567 nm) is suppressed in reflection. Strong reflection occurs at wavelengths slightly off-center where neither maximum nor minimum falls exactly within 400-700 nm range; partial constructive contribution at red and blue ends.\n\n**Key result:** Thin film t = 210 nm with n = 1.35 strongly suppresses green-yellow (~567 nm) in reflection, appearing magenta.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 86,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.wave-optics",
+      "title": ": Coherence and Fringe Visibility",
+      "content": "### WE-3: Coherence and Fringe Visibility\n\n**Problem:** Explain why:\n(a) A sodium lamp (Δλ ≈ 0.6 nm, λ₀ = 589 nm) can produce interference fringes with path differences up to ~0.3 mm, but white light only shows fringes over ~1 μm path differences.\n(b) Why does increasing slit width in Young's experiment (not slit separation) reduce fringe visibility?\n\n**Solution:**\n\n**(a) Coherence length comparison:**\nFor sodium: L_c = λ²/Δλ = (589 nm)²/(0.6 nm) = (589)²/0.6 nm = 347921/0.6 nm ≈ **580,000 nm = 0.58 mm**\n\nFor white light (Δλ ≈ 300 nm, λ̄ ≈ 550 nm): L_c = (550)²/300 ≈ 302500/300 ≈ **1000 nm = 1 μm**\n\nSodium lamp has a coherence length ~0.58 mm — fringes visible for path differences up to ~0.58 mm.\nWhite light has L_c ~1 μm — fringes only visible for path differences less than ~1 μm (central fringe only).\nThis is why white-light interference shows only a few colored fringes near zero path difference.\n\n**(b) Slit width and spatial coherence:**\nWider slits act like multiple point sources spread across the slit width. Each source position produces a fringe pattern shifted slightly. The superposition of shifted patterns washes out contrast. A narrower slit approaches a point source (better spatial coherence). At finite slit width w, visibility drops to zero when w×θ = λ (where θ is angular separation of sources). This is the spatial coherence limit.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 86,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY",
+      "content": "### MC-1: MC-INTERFERENCE-CREATES-OR-DESTROYS-ENERGY\n\n**trigger_signal:** Student states \"dark fringes prove energy is lost\" or \"bright fringes prove energy is created by interference.\"\n\n**conflict_evidence [P28]:** Measure the total power arriving at a screen in two cases: (1) one slit open — uniform illumination at power P. (2) Both slits open — interference pattern with bright fringes at 4I₀ and dark fringes at 0. Total power in case 2: integrate intensity over the whole screen. Mathematically, ∫I dA = ∫4I₀cos²(δ/2) dA. Since average of cos²(δ/2) = 1/2, total = 4I₀ × (1/2) × (screen area) = 2I₀ × (screen area) = double of one-slit power = exactly what two slits provide. Energy is conserved — it is redistributed, not created or destroyed.\n\n**bridge_text [P30]:** Think of interference as a redistribution of energy. The energy that would have landed at the dark fringe positions is instead concentrated at the bright fringe positions. The bright fringes are brighter than 2I₀ (they're 4I₀ with two coherent sources) precisely because the dark fringes are darker than expected — the two effects balance exactly.\n\n**replacement_text [P31]:** Interference conserves energy. Constructive interference concentrates energy (bright region has 4I₀ instead of 2I₀), destructive interference removes it from that location (dark region has 0 instead of 2I₀). The average intensity is 2I₀, exactly what you'd get without interference — but it's redistributed in space. No energy is created or destroyed.\n\n**discrimination_pairs [P33]:**\n- \"If two coherent beams destructively interfere and produce no light, the energy disappears\" → FALSE: energy is redirected to constructive interference regions; no net energy loss.\n- \"Bright fringes are bright because the two waves amplify each other, creating more energy\" → FALSE: they concentrate energy from dark-fringe regions into bright ones; total energy is conserved.\n\n**s6_path:** If student fails energy-conservation probe → assign integrated-intensity calculation (∫4I₀cos²(x)dx over full screen = 2I₀ × screen area) before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "MC-COHERENCE-MEANS-SAME-FREQUENCY",
+      "content": "### MC-2: MC-COHERENCE-MEANS-SAME-FREQUENCY\n\n**trigger_signal:** Student states \"two light bulbs of the same color are coherent\" or \"any two red lasers produce interference fringes.\"\n\n**conflict_evidence [P28]:** Two identical sodium lamps (same 589 nm wavelength) placed next to each other produce NO stable interference fringes on a screen, even though their frequencies are identical. Each lamp consists of billions of atoms emitting independent random phase bursts. Any given instant has a random phase difference between the two beams — the pattern shifts faster than a detector can respond, averaging out to uniform illumination. Same frequency is necessary but NOT sufficient for coherence. Coherence requires a fixed, constant phase relationship over the observation time. This is why the standard Young's experiment uses ONE source and splits it — both \"sources\" are derived from the same atomic emissions.\n\n**bridge_text [P30]:** Frequency tells you the rate of oscillation; phase tells you where in the cycle the oscillation is at a given moment. Two people jumping on a trampoline at the same rate (same frequency) but independently will have random, shifting phase relationships — they don't synchronize. Coherence requires the phase relationship to stay fixed over the relevant time.\n\n**replacement_text [P31]:** Coherence requires both same frequency AND a fixed, stable phase relationship between the two sources. Two independent light sources at the same wavelength are incoherent — their phase difference fluctuates randomly at ~10¹⁵ Hz (too fast to observe). Only sources derived from the same wavefront (like Young's two slits from one source) or produced by stimulated emission (lasers) maintain the constant phase required for observable interference.\n\n**discrimination_pairs [P33]:**\n- \"Two sodium lamps side by side will produce bright and dark fringes on a screen\" → FALSE: both emit 589 nm but are incoherent; phase difference fluctuates randomly, no stable fringes.\n- \"Two paths from a single laser (like a Mach-Zehnder interferometer) will produce stable fringes\" → TRUE: derived from the same coherent source; fixed phase relationship maintained.\n\n**s6_path:** If student fails coherence definition probe → run sodium-lamp thought experiment (why no fringes from two lamps) before mastery gate.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 228,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 232,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Conflict Evidence: MC-2",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Evidence: MC-2\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 235,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Replacement: MC-1",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Replacement: MC-1\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 238,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Pictorial: Huygens' Principle",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Pictorial: Huygens' Principle\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 241,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Pictorial: thin film interference",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pictorial: thin film interference\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 244,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Mastery Probe + P68 + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Probe + P68 + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 247,
+        "endLine": 321
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** Two coherent light sources (λ = 500 nm) are at distances 2000 nm and 3250 nm from point P. Is P a bright or dark fringe? What order?\n\n**P-2 (Developing — identifies S6):** A thin film of oil (n = 1.46) floats on water (n = 1.33). White light is incident from above. (a) Does the oil-air interface produce a phase shift on reflection? (b) Does the oil-water interface? (c) For constructive reflection of λ₀ = 584 nm, find the minimum film thickness.\n\n**P-3 (Proficient — identifies S9):** In a thin-film interference setup, a soap film (n = 1.40) is illuminated at normal incidence. The film shows a dark band where it is nearly zero thickness (black at the top of a vertical film). Explain why a zero-thickness film gives a dark band (destructive reflection), and calculate the minimum thickness for the first bright band if λ₀ = 420 nm.\n\n**P-4 (Mastery gate — confirms S9):** (a) Explain the difference between temporal and spatial coherence, with one physical example of each. (b) An anti-reflection coating (n_c = 1.22) is applied to glass (n_g = 1.52). Determine: the minimum thickness for λ₀ = 550 nm anti-reflection (account for phase shifts at both surfaces), and whether both surfaces produce phase-shifted reflections. (c) Why does energy conservation require bright fringes to be 4I₀ (not 2I₀) when constructive interference occurs? Required: 3/3 at ≥0.80 accuracy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 255,
+        "endLine": 267
+      }
+    },
+    {
+      "assetId": "phys.opt.wave-optics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.opt.wave-optics",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: C (difficulty 4, accelerated P track; physics + bloom=understand but not Analyse).\n\n**TA-1 [P01 — Session Open]**\n\"Hold a soap bubble up to white light. You see shifting colors — but why different colors at different spots? And why do the colors shift as the bubble drains? Today we build the wave model for light that explains this: interference. Prerequisite check: state the condition for constructive wave interference from your wave unit. [Pause] What additional condition must light satisfy that sound doesn't need? Write your answer.\"\n[Diagnose S0/S3 — does student mention coherence or just path difference?]\n\n**TA-2 [P06 — Concrete Anchor]**\n\"[Display: two-source interference diagram — path lengths d₁ and d₂ to point P.] Path difference Δ = |d₂ − d₁|. Constructive: Δ = mλ. Destructive: Δ = (m+½)λ. But only IF the sources are coherent — same phase relationship at all times. Let's apply to point sources first.\" [→ WE-1]\n\n**TA-3 [P28 — Conflict Evidence: MC-2]**\n\"Challenge: Two sodium lamps, same wavelength 589 nm. Point both at the same screen. Do you get fringes? [Student predicts.] Answer: No — you get uniform illumination. Why? Each atom emits in random phase bursts. The phase difference between the two lamps changes ~10¹⁵ times per second. Any detector averages to uniform. Coherence = fixed phase relationship, not just same frequency. Young's slit experiment works because BOTH beams come from the SAME source point — they share the same phase history.\" [→ MC-2 discrimination pairs]\n\n**TA-4 [P31 — Replacement: MC-1]**\n\"Energy in interference. Two coherent beams, each intensity I₀. Bright fringe: 4I₀ (four times one beam!). Dark fringe: 0. Is energy created or destroyed? No: 4I₀ + 0 = 4I₀ average (over two fringe positions), but two incoherent beams give 2I₀ everywhere. The KEY: over the full screen, the average of cos²δ = ½ gives total power = 2 × (power of one beam) = exactly two beams' worth. Energy is redistributed, not created.\" [→ MC-1 energy calculation]\n\n**TA-5 [P06 — Pictorial: Huygens' Principle]**\n\"[Display: Huygens wavelet construction for refraction and diffraction.] Every wavefront point is a secondary source. The new wavefront emerges as the envelope of all secondary wavelets. In a denser medium: wavelets are smaller (v = c/n slower) → wavefront tilts → refraction. Near an edge: wavelets spread into the geometric shadow → diffraction. Huygens is the unifying picture behind all wave optics.\"\n\n**TA-6 [P06 — Pictorial: thin film interference]**\n\"[Display: thin film with two reflected rays — one from top surface, one from bottom surface.] Ray 1: reflects at top (air→film, denser): gets π phase shift (½ wavelength). Ray 2: travels through film, reflects at bottom (film→air, less dense): no phase shift, but travels extra 2t in medium. Net path difference: 2nt (in optical path). Phase shift at top adds ½λ effectively. Constructive reflection: 2nt = (m+½)λ₀. Destructive: 2nt = mλ₀.\" [→ WE-2]\n\n**TA-7 [P36 — Mastery Probe + P68 + P85 + P91]**\n\"Final probe: (1) Two coherent sources are 3.0 m and 3.3 m from a point P; λ = 600 nm. Is P bright or dark? What order? (2) A glass lens (n=1.5) is coated with MgF₂ (n=1.38). For λ₀=550 nm, find the minimum coating thickness for anti-reflection (destructive reflection). (3) Why do two independent sodium lamps not produce interference fringes even though they emit the same wavelength?\n\nClosing thought: The theory of coherence, formalized by Michelson in 1890 and Zernike in 1938, is today the basis of optical coherence tomography — the medical imaging technique that maps retinal layers with micrometer precision without any physical contact.\n\nSpaced retrieval: +1 day (coherence definition and why two lamps fail), +4 days (thin film conditions with phase shift), +2 weeks (energy conservation in interference proof).\"\n\n[P91 gate: threshold 0.80. Failure → thin film phase-shift drill and coherence conceptual re-probe.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.wave-optics.md",
+        "startLine": 221,
+        "endLine": 255
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

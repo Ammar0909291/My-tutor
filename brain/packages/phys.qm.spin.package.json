@@ -1,0 +1,369 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.spin-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.spin",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cba86e8dc2983bad81badbefc5f81b64026144ffc3e68c97299f84cea161cc33",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.spin.md": "sha256:513083b8d9901482814c080682a6572de7a95ac33db0eb8fa452b5e275f54729"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.qm.spin",
+    "name": "Electron Spin and the Stern-Gerlach Experiment",
+    "difficultyRaw": "Expert",
+    "bloom": "Apply",
+    "masteryThreshold": null,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.qm.operators"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.spin-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.spin (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.spin.md": "sha256:513083b8d9901482814c080682a6572de7a95ac33db0eb8fa452b5e275f54729"
+      },
+      "contentHash": "sha256:24c305ad616dea0d45d3b345d5ad97145200ec5f018d7a7c90ef2f8c19da04c2",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.spin.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.spin.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.spin"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.spin\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.spin.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.spin.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.spin"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.spin\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.spin.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.spin.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.spin"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.spin\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.spin/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.spin",
+      "title": "Electron Spin and the Stern-Gerlach Experiment — core explanation",
+      "content": "**Core Claim:** Electrons carry an intrinsic angular momentum called spin with quantum number s = ½; unlike orbital angular momentum, spin has no classical analog, its z-component takes only two values m_s = ±½ (in units of ℏ), and the Stern-Gerlach experiment demonstrates this two-valued nature directly by deflecting a beam of silver atoms into exactly two spots.\n\n**Why It Matters:** Spin is the origin of the Pauli exclusion principle, magnetic resonance (NMR/MRI), fine-structure splitting in atomic spectra, ferromagnetism, and the spin-orbit coupling that drives the shell model magic numbers. Understanding spin is prerequisite to all of quantum chemistry and condensed matter physics.\n\n**Threshold Concept:** Spin is not a ball spinning on its axis — it is a purely quantum-mechanical internal degree of freedom with no classical equivalent. Attempts to picture it mechanically lead to contradictions (the electron's surface would need to move faster than light). Spin is what it is: a half-integer angular momentum that obeys the same algebra as orbital angular momentum but emerges from a different source.\n\n**Prerequisite Knowledge Check:**\n- Quantum operators and observables (phys.qm.operators)\n- Angular momentum: [L_x, L_y] = iℏL_z and its cyclic permutations\n- Eigenvalue equations: Ĥ|φ⟩ = E|φ⟩\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.spin",
+      "title": "Electron spin is literal rotation",
+      "content": "### MC-1: Electron spin is literal rotation\n- **Probe:** \"What is electron spin physically?\"\n- **Characteristic phrase:** \"The electron is spinning on its axis like a top.\"\n- **Trigger:** The word \"spin\" plus analogies to angular momentum in classical physics.\n- **Conflict evidence [P28]:** If the electron (radius ~10⁻¹⁷ m) rotated to give angular momentum ℏ/2, the surface velocity would be ~10¹⁰ m/s — 30× faster than light. Impossible.\n- **Bridge [P30]:** The \"spin\" label is historical. The electron has an intrinsic angular momentum, but it arises from the relativistic Dirac equation, not from spatial rotation.\n- **Replacement [P31]:** Spin is a purely quantum-mechanical internal degree of freedom. It obeys the angular momentum commutation relations but has no classical mechanical origin. Think of it as an additional quantum number characterizing the particle's state.\n- **Discrimination pairs [P33]:** Orbital angular momentum L: arises from spatial motion (p×r), classical limit exists. Spin S: no spatial motion source, no classical limit, persists even in a particle at rest.\n- **S6 repair path:** Show relativistic Dirac equation naturally predicts g = 2 and s = ½ — spin emerges from relativistic quantum mechanics, not rotation.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.spin",
+      "title": "Spin-½ means |S⃗| = ℏ/2",
+      "content": "### MC-2: Spin-½ means |S⃗| = ℏ/2\n- **Probe:** \"What is the magnitude of the electron's spin angular momentum?\"\n- **Characteristic phrase:** \"It's ℏ/2 because spin quantum number is ½.\"\n- **Trigger:** Conflating the quantum number label with the physical magnitude.\n- **Conflict evidence [P28]:** |S⃗|² = s(s+1)ℏ² = (½)(3/2)ℏ² = (3/4)ℏ². So |S⃗| = (√3/2)ℏ ≈ 0.866ℏ, not ℏ/2. If |S⃗| = ℏ/2 = S_z,max, then all angular momentum would be along z with no uncertainty in x,y — violating [Ŝ_x,Ŝ_z] ≠ 0.\n- **Bridge [P30]:** Same as orbital: |L⃗|² = l(l+1)ℏ², so l=1 gives |L⃗| = √2 ℏ, not ℏ. The label \"spin-½\" gives the maximum m_s value, not the magnitude.\n- **Replacement [P31]:** |S⃗| = √(s(s+1))ℏ = (√3/2)ℏ; S_z can take values ±ℏ/2. The total vector is longer than its largest z-projection — angular momentum uncertainty in transverse components.\n- **Discrimination pairs [P33]:** s=½: |S|=(√3/2)ℏ, S_z=±ℏ/2. s=1: |S|=√2 ℏ, S_z=−ℏ, 0, +ℏ.\n- **S6 repair path:** Work through |L⃗|² for l=1,2 using l(l+1)ℏ², establish the pattern before applying to spin.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.spin",
+      "title": "The Stern-Gerlach apparatus creates the two spin states",
+      "content": "### MC-3: The Stern-Gerlach apparatus creates the two spin states\n- **Probe:** \"Why does the Stern-Gerlach experiment produce exactly two spots?\"\n- **Characteristic phrase:** \"The magnetic field separates the atoms into two groups.\"\n- **Trigger:** Thinking the apparatus acts on a pre-defined classical distribution.\n- **Conflict evidence [P28]:** If atoms had random classical orientations entering the field, the deflection force F = μ_z·(dB/dz) would be continuous → continuous smear. The discrete two-spot result requires discrete m_s values — the quantization is intrinsic, not imposed by the apparatus.\n- **Bridge [P30]:** The apparatus measures S_z; it does not create the spin states. A silver atom in superposition (α|↑⟩ + β|↓⟩) exits as |↑⟩ or |↓⟩ upon measurement with probabilities |α|² and |β|².\n- **Replacement [P31]:** S_z is quantized with values ±ℏ/2 by the intrinsic structure of spin-½ particles. The apparatus separates particles according to this pre-existing quantization.\n- **Discrimination pairs [P33]:** Classical: continuous smear expected. Quantum s=½: 2 spots. s=1: 3 spots (m_s = −1, 0, +1). s=3/2: 4 spots.\n- **S6 repair path:** Predict number of spots for s=1 (spin-1 particle like W boson): should get 3. Verify against known experiments with spin-1 particles.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.spin",
+      "title": "Spin states are fixed in space",
+      "content": "### MC-4: Spin states are fixed in space\n- **Probe:** \"If I measure S_z and get +ℏ/2, then immediately measure S_x, what do I get?\"\n- **Characteristic phrase:** \"Still +ℏ/2 because the spin is pointing up.\"\n- **Trigger:** Thinking spin-up means the spin vector is locked along z.\n- **Conflict evidence [P28]:** After measuring S_z = +ℏ/2, the state is |↑_z⟩ = (1/√2)(|↑_x⟩ + |↓_x⟩). Measuring S_x gives ±ℏ/2 each with probability ½. Experimentally confirmed: serial Stern-Gerlach experiments show exactly this random result for the second measurement.\n- **Bridge [P30]:** [Ŝ_x, Ŝ_z] ≠ 0 → S_x and S_z cannot be simultaneously determined. A definite S_z eigenstate is an equal superposition of S_x eigenstates.\n- **Replacement [P31]:** \"Spin-up in z\" means definite S_z = +ℏ/2 but completely uncertain S_x and S_y. The spin vector is not locked along z — the transverse components are in maximum uncertainty.\n- **Discrimination pairs [P33]:** Spin-up |↑_z⟩: S_z = +ℏ/2 (certain), ⟨S_x⟩ = 0, ΔS_x = ℏ/2 (maximal uncertainty). Coherent superposition: ⟨S_x⟩ ≠ 0.\n- **S6 repair path:** Use Pauli matrices to compute ⟨S_x⟩ for state |↑_z⟩: ⟨↑|σ_x|↑⟩ = [1,0][[0,1],[1,0]][1,0]ᵀ = 0.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.spin",
+      "title": "Work through sequential Stern-Gerlach thought experiment",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Work through sequential Stern-Gerlach thought experiment\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 7,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.spin",
+      "title": "Compute",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Compute\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 8,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.spin",
+      "title": "Apply Pauli matrices to find ⟨S_x⟩ for",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Apply Pauli matrices to find ⟨S_x⟩ for\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 9,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.spin",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Explain Stern-Gerlach result, calculate eigenvalues and matrix elements using Pauli matrices, distinguish spin magnitude from z-component.\n\n**FA-1:** \"An electron is in the state |χ⟩ = (√3/2)|↑⟩ + (½i)|↓⟩. What is the probability of measuring S_z = −ℏ/2?\"\n*Expected:* P(↓) = |½i|² = ¼.\n*Threshold:* Correct identification of coefficient and squaring of modulus.\n\n**FA-2:** \"What is the magnitude |S⃗| for a spin-½ particle? Why is it larger than the maximum z-component ℏ/2?\"\n*Expected:* |S⃗| = √(s(s+1))ℏ = (√3/2)ℏ. Larger because S_x and S_y have nonzero uncertainty even when S_z is definite — angular momentum uncertainty requires the total vector to exceed its projection.\n*Threshold:* Correct calculation plus uncertainty-principle explanation.\n\n**FA-3:** \"How many spots would a beam of spin-1 particles (like photons) produce in a Stern-Gerlach experiment?\"\n*Expected:* m_s = −1, 0, +1 → 3 spots. General rule: 2s+1 spots.\n*Threshold:* Applies 2s+1 formula correctly.\n\n**FA-4:** \"Why can't the spin vector point exactly along the z-axis (i.e., have S_z = |S⃗|)?\"\n*Expected:* That would require S_x = S_y = 0, hence ΔS_x = ΔS_y = 0. But [Ŝ_x, Ŝ_z] = −iℏŜ_y ≠ 0 implies S_x and S_z cannot both be simultaneously certain. The angular momentum uncertainty principle prevents the spin from aligning perfectly with any axis.\n*Threshold:* Invokes non-commutativity, not just a qualitative statement.\n\n**Confidence calibration:** After FA-1, ask \"Could you do this if the initial state were given as a column vector?\" Many learners who can work with |↑⟩/|↓⟩ notation struggle with explicit matrix form.\n\n**Delayed retrieval:** Return at day 5: \"Write the Pauli matrix for S_y. Show that |↑_y⟩ = (1/√2)(|↑_z⟩ + i|↓_z⟩) is an eigenstate with eigenvalue +ℏ/2.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 187,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.spin",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** The Stern-Gerlach experiment: silver atoms pass through an inhomogeneous magnetic field. Classically, atoms with randomly oriented magnetic dipoles should form a continuous smear on the detector. Instead: exactly two spots. Two discrete orientations only.\n\n**Representational:**\n- Spin-½ state space: two-dimensional; basis states |↑⟩ = |+½⟩ and |↓⟩ = |−½⟩\n- Spin operators as 2×2 Pauli matrices: Ŝᵢ = (ℏ/2)σᵢ where σ_x = [[0,1],[1,0]], σ_y = [[0,−i],[i,0]], σ_z = [[1,0],[0,−1]]\n- Eigenvalues of Ŝ_z: +ℏ/2 (spin-up) and −ℏ/2 (spin-down)\n- Total spin magnitude: |S⃗|² = s(s+1)ℏ² = (3/4)ℏ² — larger than (ℏ/2)² (cannot know all components simultaneously)\n\n**Abstract:**\n- Angular momentum algebra: [Ŝ_x, Ŝ_y] = iℏŜ_z and cyclic permutations (same as orbital)\n- Ladder operators: Ŝ₊|↓⟩ = ℏ|↑⟩, Ŝ₊|↑⟩ = 0; Ŝ₋|↑⟩ = ℏ|↓⟩, Ŝ₋|↓⟩ = 0\n- General spin state: |χ⟩ = α|↑⟩ + β|↓⟩ with |α|² + |β|² = 1\n- Spin-orbit coupling: Ĥ_SO = λ L⃗·S⃗ splits spectral lines into doublets\n\n**Transfer:** Spin in magnetic field: Ĥ = −γS⃗·B⃗; precession at Larmor frequency ω_L = γB — basis of NMR/MRI. Electron in hydrogen: spin quantum number m_s doubles the degeneracy of each orbital.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 36,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.spin",
+      "title": "Why Beginners Fail",
+      "content": "1. **Mechanical spin picture:** Learners imagine the electron as a tiny charged ball spinning, like the Earth rotating. This leads to expecting continuous spin orientations and incorrect calculations of the magnetic moment magnitude.\n2. **Confusing spin with orbital angular momentum:** Both obey angular momentum algebra, but l is always integer while s = ½ is half-integer. Learners mix up selection rules and degeneracy formulas.\n3. **Two outcomes = two possible values, not random:** Learners think the two spots in Stern-Gerlach appear because the apparatus \"creates\" two groups. The quantum state |χ⟩ = α|↑⟩ + β|↓⟩ exists before measurement; measurement projects to |↑⟩ or |↓⟩ with probabilities |α|² and |β|².\n4. **|S⃗|² magnitude confusion:** Total spin magnitude = √(3/4)ℏ ≈ 0.866ℏ, not ℏ/2. Learners think \"spin-½\" means |S| = ℏ/2 and expect the z-component to equal the magnitude — which would violate the uncertainty relations.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 56,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.spin",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"In 1922, Stern and Gerlach expected a classical smear of silver atoms. They got two spots. That experiment ended classical physics of angular momentum — and nobody had even heard of 'spin' yet. The universe was telling them something new existed.\"\n\n**Pacing:** Anchor the experimental result first (two spots, not a smear). Derive what this forces us to conclude about quantization before introducing the mathematical formalism.\n\n**Common impasse language:** \"I know 'spin' sounds like the electron is rotating. It's not — that picture leads to faster-than-light contradictions. Spin is a purely quantum property: a half-integer angular momentum that has no classical source. Accept it, use the algebra, and you'll be fine.\"\n\n**Closing consolidation:** \"Spin-½ is the simplest quantum system that shows everything strange about quantum mechanics: superposition, measurement collapse, non-commuting observables, and intrinsic quantization with no classical analog. Master spin and you've mastered the conceptual heart of QM.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 175,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.spin",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner is not comfortable with complex-number algebra and modulus-squared for probabilities. Return to phys.qm.operators Section 0 material before tackling spinors.\n\n**S3 — Partial understanding:** Learner knows m_s = ±½ but can't use Pauli matrices. Intervention: structured Pauli-matrix exercise set — verify [σ_x, σ_y] = 2iσ_z, compute σ_z eigenvalues, find eigenstates of σ_x.\n\n**S6 — Misconception detected:** MC-1 (mechanical spin). Intervention: calculate required surface velocity for classical spin model; confront with speed-of-light violation.\n\n**S9 — Near mastery:** Learner can do algebra but struggles to connect spin to spectroscopy (doublet splitting). Intervention: compute sodium D-line splitting from H_SO = λL⃗·S⃗ using j = l±½ energy formula.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 213,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.spin",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual (spin is intrinsic, not mechanical) + procedural (Pauli matrix algebra + probability calculation).\n\n**Spaced retrieval schedule:** Day 1 (Stern-Gerlach result and what it proves), Day 3 (Pauli matrices, eigenvalues, probability calculation), Day 5 (sequential Stern-Gerlach thought experiment), Day 14 (spin in magnetic field, Larmor frequency, NMR connection).\n\n**Interleaving partners:** phys.qm.operators (same angular momentum algebra), phys.qm.hydrogen-atom-qm (spin doubles degeneracy, spin-orbit coupling), phys.qm.pauli-exclusion (spin needed to state the principle).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 225,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.spin",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Hydrogen atom: including spin, the n=2 level has 8 states (not 4) due to m_s = ±½ for each orbital. Fine structure: spin-orbit coupling E = λ⟨L⃗·S⃗⟩ splits levels with same l into j = l±½ doublets.\n\n**Far transfer:** Nuclear magnetic resonance: proton spins precess in B field; RF pulses at Larmor frequency flip spins → MRI imaging. Quantum computing: spin-½ is the physical realization of a qubit — |↑⟩ = |0⟩, |↓⟩ = |1⟩; Pauli matrices are the single-qubit gate operators.\n\n**Structural abstraction:** Spin-½ is the prototypical two-level quantum system. Every two-level system (qubit, two-level atom, ammonia inversion doublet) has the same mathematics as spin-½: a 2D Hilbert space, Pauli matrix observables, and superposition with |α|²+|β|² = 1. Mastering spin-½ is mastering the entire algebra of two-level systems.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 235,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.qm.spin/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.spin",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.qm.operators must be complete (commutation relations, eigenvalue equations, Hermitian operators). The Pauli matrix algebra is clearest when learners already know operator algebra.\n\n**Common pacing error:** Introducing Pauli matrices without first establishing the experimental evidence. Start with Stern-Gerlach data — the algebra should feel like the answer to an empirical puzzle.\n\n**Assessment gap:** Most curricula test m_s = ±½ recognition but rarely test Pauli matrix computation or the sequential Stern-Gerlach measurement consequence.\n\n**Suggested pairing:** Pair with phys.qm.hydrogen-atom-qm for a two-session sequence where hydrogen degeneracy and fine structure are computed including spin contributions.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.spin.md",
+        "startLine": 245,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

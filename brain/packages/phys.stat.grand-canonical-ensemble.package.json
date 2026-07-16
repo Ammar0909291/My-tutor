@@ -1,0 +1,518 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.grand-canonical-ensemble-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.grand-canonical-ensemble",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4681e05b8bcb6cab932291c2d74af189d276f84d4c811e35a223fb64e7a46850",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md": "sha256:fbd44c193d2ef070793154e8913c36ab0af5decb9172a640f97c060462d6877a"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.stat.grand-canonical-ensemble",
+    "name": "Grand Canonical Ensemble",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 9,
+    "prerequisites": [
+      "phys.stat.partition-function"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.grand-canonical-ensemble-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.grand-canonical-ensemble (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md": "sha256:fbd44c193d2ef070793154e8913c36ab0af5decb9172a640f97c060462d6877a"
+      },
+      "contentHash": "sha256:ed37b3cd27cc5db391bba24a2b4d62ab9073617c8b8faf77e3b93da90c24ac0f",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.grand-canonical-ensemble.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.grand-canonical-ensemble"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.grand-canonical-ensemble\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.grand-canonical-ensemble.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.grand-canonical-ensemble"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.grand-canonical-ensemble\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.grand-canonical-ensemble.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.grand-canonical-ensemble"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.grand-canonical-ensemble\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.grand-canonical-ensemble.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md#TA-4 (addresses MC-GCE-MU-IS-ENERGY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.grand-canonical-ensemble"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.grand-canonical-ensemble\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.grand-canonical-ensemble.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.grand-canonical-ensemble"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.grand-canonical-ensemble\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.grand-canonical-ensemble.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.grand-canonical-ensemble"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.grand-canonical-ensemble\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.grand-canonical-ensemble.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.grand-canonical-ensemble"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.grand-canonical-ensemble\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Grand Canonical Ensemble — Core Idea (one sentence)",
+      "content": "The grand canonical ensemble describes a system in contact with both a heat bath (fixed T) and a particle reservoir (fixed μ), with the grand partition function Ξ = Tr[e^{−β(H−μN)}] giving all thermodynamic quantities including the average particle number.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 20,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Grand partition function (general)",
+      "content": "### Example 1 — Grand partition function (general)\nΞ(T,V,μ) = Σ_{N=0}^{∞} z^N Z_N(T,V) where z=e^{βμ}, Z_N = canonical partition function for N particles.\nGrand potential: Ω = −kT ln Ξ.\nAverage particle number: ⟨N⟩ = z ∂(ln Ξ)/∂z = kT ∂(ln Ξ)/∂μ.\nAverage energy: ⟨E⟩ = −∂(ln Ξ)/∂β|_{z,V} + μ⟨N⟩.\nPressure: PV = kT ln Ξ = −Ω.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Ideal classical gas in grand canonical ensemble",
+      "content": "### Example 2 — Ideal classical gas in grand canonical ensemble\nSingle-particle partition function: ξ = V(2πmkT/h²)^{3/2} = V/λ³ (thermal de Broglie).\nGrand partition function: Ξ = Σ_N z^N ξ^N/N! = e^{zξ} (Poisson distribution in N).\n⟨N⟩ = z ∂ ln Ξ/∂z = zξ → μ = kT ln(N/ξ) = kT ln(Nλ³/V) (recovers classical μ).\nGrand potential: Ω = −kT zξ = −PV → P = NkT/V ✓",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Fermi-Dirac and Bose-Einstein from grand canonical",
+      "content": "### Example 3 — Fermi-Dirac and Bose-Einstein from grand canonical\nFor independent quantum particles: Ξ = Π_ε Ξ_ε.\nFermion (each level 0 or 1): Ξ_ε = 1 + ze^{−βε}; ⟨n_ε⟩ = ze^{−βε}/(1+ze^{−βε}) = 1/(e^{β(ε−μ)}+1) [Fermi-Dirac] ✓\nBoson (each level 0,1,2,...): Ξ_ε = 1/(1−ze^{−βε}); ⟨n_ε⟩ = ze^{−βε}/(1−ze^{−βε}) = 1/(e^{β(ε−μ)}−1) [Bose-Einstein] ✓\nBoth derived from grand canonical ensemble with exchange symmetry built into N-counting.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/misconception/MC-GCE-MU-IS-ENERGY",
+      "kind": "misconception",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "\"Chemical potential μ is just another energy.\"",
+      "content": "| MC-GCE-MU-IS-ENERGY | \"Chemical potential μ is just another energy.\" | \"μ is the energy per particle.\" | μ IS the energy cost of adding one particle at fixed T, V, S — but crucially it controls particle NUMBER in equilibrium. Two systems in equilibrium exchange particles until μ₁=μ₂ (just as temperature equalizes heat flow). μ can be negative (bosons at high T, dilute classical gas) — calling it \"an energy\" without this directionality misses its function. |",
+      "localKey": "MC-GCE-MU-IS-ENERGY",
+      "language": "en",
+      "refs": [
+        "MC-GCE-MU-IS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/misconception/MC-GCE-FUGACITY-IS-PROB",
+      "kind": "misconception",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "\"Fugacity z=e^{βμ} is the probability of finding a particle.\"",
+      "content": "| MC-GCE-FUGACITY-IS-PROB | \"Fugacity z=e^{βμ} is the probability of finding a particle.\" | \"High fugacity means more likely to be occupied.\" | Fugacity z controls the thermodynamic weight of states with different N, not occupation probability directly. For bosons, occupation ⟨n⟩=z/(e^{βε}−z); z must satisfy z < e^{βε_min} (z<1 for zero-gap bosons) to keep Ξ convergent — not a probability. |",
+      "localKey": "MC-GCE-FUGACITY-IS-PROB",
+      "language": "en",
+      "refs": [
+        "MC-GCE-FUGACITY-IS-PROB"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-GCE-MU-IS-ENERGY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-GCE-MU-IS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): Write the grand partition function Ξ in terms of the canonical partition functions Z_N. What thermodynamic quantities are fixed in the grand canonical ensemble?  \n*Answer*: Ξ = Σ_{N=0}^{∞} e^{βμN} Z_N(T,V); fixed: T (from reservoir), V (rigid walls), μ (from particle reservoir).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For a single quantum level at energy ε accessible to bosons, compute Ξ_ε and ⟨n_ε⟩.  \n*Answer*: Ξ_ε = Σ_{n=0}^{∞} (ze^{−βε})^n = 1/(1−ze^{−βε}); ⟨n_ε⟩ = z ∂ ln Ξ_ε/∂z = ze^{−βε}/(1−ze^{−βε}) = 1/(e^{β(ε−μ)}−1). Requires ze^{−βε}<1 i.e. μ<ε for all ε.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "MP-3",
+      "content": "**MP-3** (apply): Show that for the classical ideal gas, the Boltzmann distribution ⟨n_ε⟩ ∝ e^{−βε} emerges from the Fermi-Dirac result when e^{β(ε−μ)} ≫ 1.  \n*Answer*: ⟨n_FD⟩ = 1/(e^{β(ε−μ)}+1) ≈ e^{−β(ε−μ)} = e^{βμ}e^{−βε} = ze^{−βε} when z≪1 (dilute limit). Boltzmann distribution recovered with z=e^{βμ}=Nλ³/V≪1.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): Two systems A, B share particles. At equilibrium, what condition holds? How does this follow from maximizing total entropy?  \n*Answer*: μ_A = μ_B. Maximize S_total = S_A + S_B subject to N_A + N_B = const and dS_A/dN_A = dS_B/dN_B → (∂S/∂N)_{T,V} equal → μ_A/T = μ_B/T → μ_A = μ_B.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A student claims \"I can always use the canonical ensemble — just fix N and ignore μ.\" Identify one situation where this fails.  \n*Answer*: Chemical reactions, phase transitions (coexistence), quantum statistics (counting states requires fixed-μ approach for FD/BE), adsorption on a surface in contact with a gas reservoir. For any open system, fixing N is wrong because particle number fluctuates — the canonical partition function Z_N sums over energy at fixed N, but computing ⟨N⟩ requires the grand canonical. Example: BEC — the critical T depends on ⟨N⟩ derived from Ξ, not from Z_N.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student applies μ = E/N (energy per particle) | Flag: \"That's the energy per particle U/N, not chemical potential. μ = (∂G/∂N)_{T,P} = (∂F/∂N)_{T,V}. For ideal gas μ = kT ln(Nλ³/V) which involves entropy and is NOT U/N.\" |\n| Student confused why z<1 required for bosons | \"z=e^{βμ}; if z≥1 and ε_min=0, Ξ=Σ(ze^{−βε})^n diverges for ε=0 level — infinite occupancy, non-physical. The constraint z<1 is the convergence condition for the geometric series.\" |\n| Student asks \"how is grand canonical related to canonical?\" | \"Grand canonical = Σ_N z^N × canonical Z_N. It's a generating function that sums over all N, weighting each by the fugacity z^N. The canonical ensemble is a fixed-N slice.\" |\n| Student unsure when grand canonical is needed | \"Open system (particle exchange), quantum statistics, chemical equilibrium, electrochemistry (electron transfer), adsorption. Canonical works only for closed systems with fixed N.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 99,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What is the canonical partition function Z? What is fixed?\"\nCORE-1 (15 min): TA-1 + TA-2 (reservoir motivation + grand canonical notation)\nCORE-2 (20 min): TA-3 + TA-4 (FD and BE derivation + MC μ diagnostic)\nCORE-3 (20 min): TA-5 (classical gas: Ξ=e^{zξ}, recover PV=NkT)\nDRILL  (10 min): TA-6 (thermodynamic derivatives from ln Ξ)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Chemical potential is the lever for particle number — next session: how μ depends on density, temperature, and phase.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.stat.grand-canonical-ensemble/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.grand-canonical-ensemble",
+      "title": "Known Sticking Points",
+      "content": "1. **Grand potential vs free energy**: Ω = U−TS−μN (not A = U−TS); the extra −μN is because grand canonical has a particle reservoir.\n2. **Negative μ**: Students expect μ to be positive (energy cost); clarify that μ<0 for bosons (adding a particle DECREASES free energy in dilute limit — system \"wants\" more particles at low density).\n3. **Convergence of Ξ for bosons**: Requires ze^{−βε}<1 for ALL levels; if ε_min=0 (photons, phonons), must have z<1 strictly → μ<0 always for such bosons.\n4. **Fluctuations in N**: (δN)² = kT ∂⟨N⟩/∂μ; for ideal gas (δN)²=⟨N⟩ (Poisson) — students often forget that N fluctuates in the grand canonical ensemble.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.grand-canonical-ensemble.md",
+        "startLine": 90,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

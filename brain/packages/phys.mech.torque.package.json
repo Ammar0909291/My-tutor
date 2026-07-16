@@ -1,0 +1,544 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.torque-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.torque",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bf3a87bebe43585e1ef502cda4fbd06ef0a7519f45c5aa6356a31e55167db446",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.torque.md": "sha256:7108a51376fc9183a209d8caf4814d5709e54478f0480b72756ea50839b86e34"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.torque",
+    "name": "Torque",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.angular-kinematics",
+      "phys.mech.free-body-diagram"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.torque-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.torque (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.torque.md": "sha256:7108a51376fc9183a209d8caf4814d5709e54478f0480b72756ea50839b86e34"
+      },
+      "contentHash": "sha256:fa932afc8c7303b7132add984170b5b869ce8fbf803c5cf8f31f947d7ce0a585",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.torque.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.torque.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.torque"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.torque\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.torque.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.torque.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.torque"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.torque\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.torque.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.torque.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.torque"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.torque\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.torque.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.torque.md#TA-4 (addresses MC-TORQUE-IS-FORCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.torque"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.torque\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.torque.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.torque.md#TA-5 (addresses MC-TORQUE-PERPENDICULAR-ONLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.torque"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.torque\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.torque.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.torque.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.torque"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.torque\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.torque.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.torque.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.torque"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.torque\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.torque/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.torque",
+      "title": "Torque — core explanation",
+      "content": "**Core Insight:** Torque is the rotational analog of force. It quantifies how effectively a force\ncauses rotation about an axis. The same force produces more torque when applied further from the\naxis (larger moment arm) or more perpendicularly (sinθ closer to 1). Torque is a vector — its\ndirection (clockwise or anticlockwise) determines the sign in rotational problems.\n\n**Formal Definition:**\nτ = r × F = rF sinθ\n\nwhere r is the distance from the pivot (moment arm, m), F is the applied force (N), and θ is\nthe angle between the position vector r and the force F. Units: N·m.\n\n**Equivalent expression using perpendicular distance:**\nτ = F × d⊥    where d⊥ = r sinθ is the perpendicular distance from the axis to the line of action.\n\n**Sign convention (1D):**\nAnticlockwise (CCW) = positive. Clockwise (CW) = negative. (State convention explicitly in each problem.)\n\n**Net torque and rotation:**\nΣ τ = I α    (Newton's 2nd Law for rotation — covered in rotational dynamics)\nFor equilibrium: Σ τ = 0 (no angular acceleration)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.torque",
+      "title": "Basic",
+      "content": "**Worked Example 1 (Basic):**\nA force of 20 N is applied perpendicular to a wrench 0.3 m from the bolt.\nτ = rF sinθ = 0.3 × 20 × sin90° = 6 N·m.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.torque",
+      "title": "Non-perpendicular force",
+      "content": "**Worked Example 2 (Non-perpendicular force):**\nA 15 N force acts at 30° to a 0.4 m lever arm.\nτ = 0.4 × 15 × sin30° = 0.4 × 15 × 0.5 = 3 N·m.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.torque",
+      "title": "Net torque — two forces",
+      "content": "**Worked Example 3 (Net torque — two forces):**\nA see-saw: 40 N weight at 2 m left (CW); 30 N weight at 3 m right (CCW).\nτ_left = −40×2 = −80 N·m (CW). τ_right = +30×3 = +90 N·m (CCW).\nΣ τ = +10 N·m (net CCW → see-saw rotates CCW).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/misconception/MC-TORQUE-IS-FORCE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.torque",
+      "title": "Priority 1",
+      "content": "### MC-TORQUE-IS-FORCE (Priority 1)\n**Label:** \"Torque is just force — a bigger force always means more torque\"\n\n**Trigger signals:**\n- Ignores r (moment arm) when computing torque\n- Says a force at the hinge produces as much torque as the same force at the door edge\n- Computes τ = F only (omits ×r or ×sinθ)\n\n**Conflict evidence [P28]:**\n\"A door hinge is at the left. You push 10 N at r = 0.8 m from the hinge: τ = 8 N·m.\nNow you push 10 N at r = 0.05 m (right at the hinge): τ = 0.5 N·m.\nSame force. 16× different torque. How can torque equal force when they give such different results?\"\n\n**Bridge [P30]:**\n\"Torque = force × moment arm. The moment arm (distance from pivot to line of action) is the\nmultiplier. That's why door handles are at the edge, not the hinge — maximum moment arm for\nthe same force. Wrenches are long for the same reason.\"\n\n**Replacement [P31]:**\n\"τ = rF sinθ. Both r and F (and the angle) determine torque.\nTo maximise torque: maximise r (push far from hinge) AND make force perpendicular (sinθ = 1).\nA large force at a small r can produce less torque than a small force at a large r.\"\n\n**Discrimination pairs [P33]:**\n- 50 N at r = 0.1 m: τ = 5 N·m vs 10 N at r = 1 m: τ = 10 N·m (smaller force, bigger torque) ✓\n- Same force, θ = 0° (along lever): τ = 0 (no rotation) vs θ = 90°: τ = rF ✓\n\n**s6_path:** Skip the conflict calculation; use only the door analogy: \"push at the edge vs push\nat the hinge — which opens the door more easily?\" Build intuition before formula.\n\n---",
+      "localKey": "MC-TORQUE-IS-FORCE",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-IS-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 3,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/misconception/MC-TORQUE-PERPENDICULAR-ONLY",
+      "kind": "misconception",
+      "conceptId": "phys.mech.torque",
+      "title": "Priority 2",
+      "content": "### MC-TORQUE-PERPENDICULAR-ONLY (Priority 2)\n**Label:** \"Torque only works when the force is perpendicular to the lever arm — sinθ is ignored otherwise\"\n\n**Trigger signals:**\n- Uses τ = rF even when θ ≠ 90°\n- Says \"the sinθ only matters at extreme angles\"\n- Computes torque at θ = 30° as rF (as if sin30° = 1)\n\n**Conflict evidence [P28]:**\n\"A 10 N force acts along a 0.5 m lever at θ = 0° (parallel to the lever arm — pushing straight\ntoward the pivot). τ = rF sinθ = 0.5×10×sin0° = 0. No torque at all.\nIf sinθ didn't matter, you'd expect τ = 5 N·m. Why is the actual torque zero?\"\n\n**Bridge [P30]:**\n\"A force directed through the pivot produces zero torque — it has no 'turning effect.'\nOnly the component of force perpendicular to r causes rotation.\nτ = rF sinθ captures exactly how much of the force is 'perpendicular' — sinθ is not optional.\"\n\n**Replacement [P31]:**\n\"τ = rF sinθ always. For θ = 90°: sinθ = 1 → τ = rF (maximum). For θ = 0° or 180°: sinθ = 0\n→ τ = 0. For angles in between: intermediate torque. Never drop sinθ unless you know θ = 90°.\"\n\n**Discrimination pairs [P33]:**\n- θ = 90°: τ = rF (maximum) ✓\n- θ = 30°: τ = rF × 0.5 (half maximum) ✓\n- θ = 0°: τ = 0 (zero torque — force through pivot) ✓\n\n**s6_path:** Use only θ = 90° and θ = 0° as the two extremes; introduce intermediate angles in\nTA-5 only after these limiting cases are secure.\n\n---",
+      "localKey": "MC-TORQUE-PERPENDICULAR-ONLY",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-PERPENDICULAR-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 35,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.torque",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.torque",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 14,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.torque",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 37,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.torque",
+      "title": "MC-TORQUE-IS-FORCE Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-TORQUE-IS-FORCE Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-TORQUE-IS-FORCE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-IS-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 49,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.torque",
+      "title": "MC-TORQUE-PERPENDICULAR-ONLY Probe + Net Torque",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-TORQUE-PERPENDICULAR-ONLY Probe + Net Torque\",\"primitives\":[\"P10\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-TORQUE-PERPENDICULAR-ONLY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-PERPENDICULAR-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 67,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.torque",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 83,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.torque",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 104,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.torque",
+      "title": "Apply — basic",
+      "content": "**MP-1 (Apply — basic):**\n\"A 40 N force acts perpendicular to a 0.75 m lever arm. Torque?\"\nExpected: τ = 0.75 × 40 = 30 N·m.\n_Discriminates: τ = rF sinθ at θ = 90°._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 268,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.torque",
+      "title": "Apply — non-perpendicular",
+      "content": "**MP-2 (Apply — non-perpendicular):**\n\"A 50 N force acts at 40° to a 0.6 m lever arm. Torque?\"\nExpected: τ = 0.6 × 50 × sin40° = 30 × 0.643 = 19.3 N·m.\n_Discriminates: MC-TORQUE-PERPENDICULAR-ONLY resolution._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-PERPENDICULAR-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 268,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.torque",
+      "title": "Apply — force at pivot direction",
+      "content": "**MP-3 (Apply — force at pivot direction):**\n\"A 30 N force is directed exactly toward the pivot (θ = 0°) at r = 0.8 m. Torque?\"\nExpected: τ = 0.8 × 30 × sin0° = 0.\n_Discriminates: zero-torque case; MC-TORQUE-PERPENDICULAR-ONLY._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-PERPENDICULAR-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 268,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.torque",
+      "title": "Apply — net torque",
+      "content": "**MP-4 (Apply — net torque):**\n\"Horizontal rod, pivot at left end. Force A: 20 N downward at r = 0.5 m (CW).\nForce B: 15 N downward at r = 1.2 m (CW). Force C: 50 N upward at r = 0.8 m (CCW).\nFind Σ τ and direction.\"\nExpected: τ_A = −10, τ_B = −18, τ_C = +40. Σ = +12 N·m (CCW).\n_Discriminates: multi-force net torque with sign convention._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 268,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.torque",
+      "title": "Apply — find r from τ",
+      "content": "**MP-5 (Apply — find r from τ):**\n\"A 24 N force perpendicular to a lever produces 9.6 N·m of torque. Find r.\"\nExpected: r = τ/(F sinθ) = 9.6/24 = 0.4 m.\n_Discriminates: algebraic rearrangement of torque formula._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 268,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.torque",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.angular-kinematics  ──►\n                                    phys.mech.torque\nphys.mech.free-body-diagram   ──►\n```\n\n**PD-1 (Angular kinematics):**\n\"A wheel starts from rest and reaches ω = 6 rad/s in 3 s. Find α.\"\nExpected: α = 2 rad/s².\n\n**PD-2 (Free-body diagram):**\n\"Draw a FBD for a book on a table. Label all forces.\"\nExpected: Weight down; Normal up (minimum acceptable response).\n\nBoth must pass before TA-3. Gap in either → repair before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 63,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.torque",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"τ = ? What does r represent? What are the units?\"\nThreshold: τ = rF sinθ; r = distance from pivot (moment arm); N·m.\n\n**FA-2 (TA-4 exit):** \"10 N at r = 0.8 m vs 10 N at r = 0.05 m. Both perpendicular. Which gives more τ?\"\nExpected: 8 N·m vs 0.5 N·m; first is larger. If equal → MC-TORQUE-IS-FORCE not resolved.\n\n**FA-3 (TA-5 exit):** \"A 20 N force parallel to a 0.4 m lever arm (θ = 0°). τ?\"\nExpected: 0. If student writes 8 → MC-TORQUE-PERPENDICULAR-ONLY not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-IS-FORCE",
+        "MC-TORQUE-PERPENDICULAR-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 301,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.torque",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only θ = 90° (perpendicular) in TA-3 and TA-4.\n- Introduce sinθ in TA-5 using only extreme cases (0° and 90°) before intermediate angles.\n- Defer net torque (multi-force) until TA-5 or 6.\n- Reassure: \"Torque is force multiplied by two things: distance and sine. Start with the distance.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-4 (multi-force net torque) at TA-3.\n- Challenge: \"Design a system where three forces of 10 N each produce zero net torque.\n  State the required positions and angles.\"\n- Spend TA-6 on Problems 3 and 5 (net torque and reverse calculation).\n\n**S4 (Prereq gap):**\n- PD-1 gap (angular kinematics) → repair ω, α, θ analogs before returning.\n- PD-2 gap (FBD) → repair force inventory and diagram conventions before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 316,
+        "endLine": 336
+      }
+    },
+    {
+      "assetId": "phys.mech.torque/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.torque",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → τ = rF sinθ → MC-TORQUE-IS-FORCE repair).\n**Session 2 (≥24 h later):** Retrieval: \"Torque formula? What is the moment arm?\"\n  → TA-5 (MC-TORQUE-PERPENDICULAR-ONLY, net torque) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining torque and equilibrium (preview):\n  \"A 4 m horizontal beam, pivot at left end. A 60 N weight hangs at 3 m. What upward force\n  at 4 m keeps the beam horizontal?\" (Σ τ = 0 → F × 4 = 60 × 3 → F = 45 N.)\n**Pre-moment-of-inertia session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.angular-kinematics (τ → α link via τ = Iα),\nphys.mech.free-body-diagram (force identification before torque calculation).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-IS-FORCE",
+        "MC-TORQUE-PERPENDICULAR-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.torque.md",
+        "startLine": 336,
+        "endLine": 351
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

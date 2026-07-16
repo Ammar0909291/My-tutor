@@ -1,0 +1,344 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.ohms-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.ohms-law",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fc937ab43a4a008e67ad0838be03e1ee394b3c69dbf91b4a6ec0f3b9df4ad071",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.ohms-law.md": "sha256:0b7c1b61a95ecf993d44bfd766f640a39801b50f4ab4f71ab0011f4abdfe1893"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.ohms-law",
+    "name": "Ohm's Law",
+    "difficultyRaw": "label: developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.electric-current",
+      "phys.em.electric-potential"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.ohms-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.ohms-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.ohms-law.md": "sha256:0b7c1b61a95ecf993d44bfd766f640a39801b50f4ab4f71ab0011f4abdfe1893"
+      },
+      "contentHash": "sha256:f10a42965be4cf1d534a3b50af438ce75a6431ff82cb0731884e3864e36390a6",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.ohms-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ohms-law.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ohms-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ohms-law\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ohms-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ohms-law.md#TA-2 (addresses MC-OHMS-LAW-IS-UNIVERSAL, MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ohms-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ohms-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ohms-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ohms-law.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ohms-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ohms-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ohms-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ohms-law.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ohms-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ohms-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ohms-law.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ohms-law.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ohms-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ohms-law\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.ohms-law/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.ohms-law",
+      "title": "Ohm's Law — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nPush water through a narrow pipe — more pressure gives more flow; a narrower pipe resists the flow. Electric circuits work the same way. **Voltage** (pressure) pushes **current** (flow) through a **resistor** (the narrow pipe). Ohm's Law says: double the voltage → double the current. Halve the resistance → double the current. One formula captures it all: **V = IR**. This is the most-used equation in electronics — you need it for every circuit calculation.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**Ohm's Law:**\n$$V = IR \\quad \\text{or} \\quad I = \\frac{V}{R} \\quad \\text{or} \\quad R = \\frac{V}{I}$$\n\nwhere V = potential difference (volts), I = current (amperes), R = resistance (ohms, Ω).\n\n**Ohmic vs. non-ohmic devices:**\nA device is **ohmic** if R = V/I is constant (independent of V and I): metals at constant temperature, most resistors. A device is **non-ohmic** if R varies: diodes (only conduct one way), transistors, filament bulbs (R increases as temperature rises).\n\n**Resistors in combination:**\n- Series: R_eq = R₁ + R₂ + ... (same I; voltages add)\n- Parallel: 1/R_eq = 1/R₁ + 1/R₂ + ... (same V; currents add)\n\n**Physical basis:**\nFrom the Drude model: J = σE, where σ = conductivity (S/m). For a resistor of length L, cross-section A: R = ρL/A, where ρ = 1/σ is resistivity. V = EL, I = JA → V/I = EL/(JA) = (E/J)(L/A) = ρL/A = R. So Ohm's Law V = IR is the macroscopic form of J = σE.\n\n**Temperature dependence:**\nFor metals: R(T) = R₀[1 + α(T − T₀)], where α is the temperature coefficient of resistance (positive for metals — resistance increases with temperature). This is why filament bulbs are non-ohmic: as the filament heats up, R increases.\n\n### Tier 3 — Formal\n\n**Local form of Ohm's Law:**\n$$\\vec{J} = \\sigma\\vec{E}$$\n\nwhere J = current density (A/m²) and σ = electrical conductivity (S/m = Ω⁻¹m⁻¹). This is valid for isotropic ohmic materials.\n\n**Tensor form (anisotropic crystals):** Jᵢ = Σⱼ σᵢⱼ Eⱼ — conductivity is a second-rank tensor.\n\n**Power dissipation (Joule heating):**\n$$P = IV = I^2R = \\frac{V^2}{R}$$\n\nFrom energy considerations: charge dq moves through potential V in time dt; work dW = V dq = V I dt → P = VI.\n\n**Limits of Ohm's Law:** Ohm's Law breaks down at very high fields (dielectric breakdown, E > E_b → ionisation); very low temperatures (superconductors, R → 0 below T_c with no E field needed); quantum regime (contact resistance, quantum Hall effect).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 30,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.ohms-law",
+      "title": "(Basic V = IR)",
+      "content": "### WE-1 (Basic V = IR)\n\n**Problem:** A current of 2.5 A flows through a 40 Ω resistor. Find: (a) the voltage across it, (b) if the voltage is reduced to 60 V, what is the new current?\n\n**Worked solution:**\n\n*(a)* V = IR = (2.5)(40) = **100 V**\n\n*(b)* I = V/R = 60/40 = **1.5 A**\n\n**Answer:** (a) 100 V; (b) 1.5 A\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 74,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.ohms-law",
+      "title": "(Series and parallel combination)",
+      "content": "### WE-2 (Series and parallel combination)\n\n**Problem:** Three resistors: R₁ = 6 Ω, R₂ = 3 Ω, R₃ = 4 Ω. R₁ and R₂ are in parallel; this combination is in series with R₃. Across the whole combination: V = 20 V. Find R_eq, I through R₃, and V across R₁.\n\n**Worked solution:**\n\n*Step 1 — Parallel R₁ and R₂:*\n$$\\frac{1}{R_{12}} = \\frac{1}{6} + \\frac{1}{3} = \\frac{1}{6} + \\frac{2}{6} = \\frac{3}{6} = \\frac{1}{2}$$\nR₁₂ = 2 Ω\n\n*Step 2 — Series with R₃:*\nR_eq = R₁₂ + R₃ = 2 + 4 = 6 Ω\n\n*Step 3 — Total current (through R₃, since it's in series):*\nI = V/R_eq = 20/6 = 3.33 A\n\n*Step 4 — Voltage across parallel combination R₁₂ = V across R₁:*\nV₁₂ = I × R₁₂ = 3.33 × 2 = 6.67 V\n\n**Answer:** R_eq = 6 Ω; I_{R₃} = 3.33 A; V_{R₁} = 6.67 V\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 74,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.ohms-law",
+      "title": "(Ohmic vs. non-ohmic identification)",
+      "content": "### WE-3 (Ohmic vs. non-ohmic identification)\n\n**Problem:** Device A: V = 5 V → I = 0.1 A; V = 10 V → I = 0.2 A; V = 20 V → I = 0.4 A. Device B: V = 5 V → I = 0.05 A; V = 10 V → I = 0.15 A; V = 20 V → I = 0.50 A. Which is ohmic?\n\n**Worked solution:**\n\n*Device A: R = V/I at each point:*\n5/0.1 = 50 Ω; 10/0.2 = 50 Ω; 20/0.4 = 50 Ω → **R constant = 50 Ω → Ohmic ✓**\n\n*Device B: R = V/I at each point:*\n5/0.05 = 100 Ω; 10/0.15 = 66.7 Ω; 20/0.50 = 40 Ω → **R decreasing → Non-ohmic** (could be a thermistor: R decreases as temperature increases)\n\n**Answer:** Device A is ohmic (R = 50 Ω constant). Device B is non-ohmic.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 74,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/misconception/MC-OHMS-LAW-IS-UNIVERSAL",
+      "kind": "misconception",
+      "conceptId": "phys.em.ohms-law",
+      "title": "**Trigger signal:** Student applies V = IR to a diode, LED, or battery and expects linear I-V behavior; or treats Ohm's Law as a fundamental law of nature.",
+      "content": "### MC-OHMS-LAW-IS-UNIVERSAL\n\n**Trigger signal:** Student applies V = IR to a diode, LED, or battery and expects linear I-V behavior; or treats Ohm's Law as a fundamental law of nature.\n\n**Conflict evidence [P28]:** \"Connect a silicon diode to variable voltage and measure I: for V < 0.7 V (forward bias), almost no current. At V = 0.7 V, current surges to milliamps. At V = 1.0 V, current is 10× larger. R = V/I = 0.7/0.001 = 700 Ω, then 1.0/0.01 = 100 Ω, then 1.0/0.1 = 10 Ω — R is not constant. Ohm's Law is a special empirical relationship for ohmic materials, not a universal law of physics.\"\n\n**Bridge text [P30]:** \"Ohm's Law V = IR is a material property of ohmic conductors (metals, many resistors at constant T), not a universal law. Many devices are deliberately non-ohmic: diodes allow current in only one direction (used in rectifiers), transistors have exponential I-V curves (used in amplifiers and logic). Ohm's Law applies when R = V/I is constant.\"\n\n**Replacement text [P31]:** \"Ohm's Law V = IR applies to ohmic materials — materials where R = V/I is constant over a wide range of V and I. Many devices are non-ohmic: diodes, LEDs, transistors, thermistors (R changes with temperature), varistors (R changes with voltage). Ohm's Law is an empirical rule, not a fundamental law — it breaks down when the physical conditions change the conductor's properties.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"V = IR applies to ohmic devices (constant R)\" | \"V = IR applies to all electrical devices\" |\n| \"Diodes are non-ohmic: R changes with voltage\" | \"R = V/I is constant for all materials\" |\n| \"Ohm's Law fails for semiconductors, superconductors\" | \"Ohm's Law is a universal electrical law\" |\n\n**s6_path:** Show I-V graph for (a) a resistor (straight line through origin — ohmic) and (b) a diode (exponential curve — non-ohmic). The slope of the I-V graph is 1/R — constant for ohmic, variable for non-ohmic.\n\n---",
+      "localKey": "MC-OHMS-LAW-IS-UNIVERSAL",
+      "language": "en",
+      "refs": [
+        "MC-OHMS-LAW-IS-UNIVERSAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/misconception/MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE",
+      "kind": "misconception",
+      "conceptId": "phys.em.ohms-law",
+      "title": "**Trigger signal:** Student confuses current (I) and voltage (V), or says \"the current across the resistor is 12 volts\" or \"the voltage through the resistor is 2 amps.",
+      "content": "### MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE\n\n**Trigger signal:** Student confuses current (I) and voltage (V), or says \"the current across the resistor is 12 volts\" or \"the voltage through the resistor is 2 amps.\"\n\n**Conflict evidence [P28]:** \"Current (amperes) is the flow of charge through a device — measured as charge per unit time, Q/t. Voltage (volts) is the energy per unit charge — a potential difference between two points. Current flows through a component; voltage drops across a component. An ammeter (measures I) is connected in series — it must be in the path of current flow. A voltmeter (measures V) is connected in parallel — it measures the potential difference between two nodes.\"\n\n**Bridge text [P30]:** \"Think of the water analogy: current = flow rate of water (litres per second). Voltage = pressure difference (pascals). You measure the flow rate by inserting a flow meter in the pipe (series). You measure pressure difference by connecting to two points (parallel). Never say 'voltage flows' or 'current drops across' — these confuse the two distinct concepts.\"\n\n**Replacement text [P31]:** \"Current (I, amps) flows through components. Voltage (V, volts) appears across components. Use 'through' for current and 'across' for voltage. Ammeter in series (measures I through). Voltmeter in parallel (measures V across). These are distinct physical quantities — current is charge flow rate; voltage is energy per charge. Ohm's Law V = IR relates them but does not make them interchangeable.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"2 A of current flows through the resistor\" | \"2 A of voltage drops across the resistor\" |\n| \"12 V appears across the resistor\" | \"12 V flows through the resistor\" |\n| \"Ammeter in series; voltmeter in parallel\" | \"Use either meter either way for V and I\" |\n\n**s6_path:** Use language explicitly: \"current through, voltage across\" — practice reading a circuit diagram and identifying which quantity each meter measures.\n\n---",
+      "localKey": "MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE",
+      "language": "en",
+      "refs": [
+        "MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ohms-law",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ohms-law",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE\",\"MC-OHMS-LAW-IS-UNIVERSAL\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-OHMS-LAW-IS-UNIVERSAL",
+        "MC-CURRENT-AND-VOLTAGE-ARE-INTERCHANGEABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ohms-law",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ohms-law",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ohms-law",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.ohms-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.ohms-law",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState Ohm's Law and the unit of resistance.\n\n**Answer:** V = IR. Resistance measured in ohms (Ω); 1 Ω = 1 V/A.\n\n---\n\n### AP-2 (Bloom: Understand)\nExplain why a filament bulb is non-ohmic even though its filament is made of metal (tungsten).\n\n**Answer:** Tungsten obeys Ohm's Law at constant temperature (R is constant). However, when current flows, the filament heats to ~2700°C. The resistivity of metals increases with temperature (ρ ∝ T for metals). Therefore R increases significantly as the bulb heats up, making R = V/I non-constant. R_cold ≈ 10 Ω; R_hot ≈ 140 Ω for a 100 W bulb.\n\n---\n\n### AP-3 (Bloom: Apply)\nFour 20 Ω resistors are connected so that two pairs are in series, and the two pairs are in parallel. A 60 V supply is connected. Find: (a) R_eq, (b) total current from supply.\n\n**Answer:**\nEach series pair: R_pair = 20 + 20 = 40 Ω\nTwo pairs in parallel: 1/R_eq = 1/40 + 1/40 = 2/40 → R_eq = **20 Ω**\nI = V/R_eq = 60/20 = **3.0 A**\n\n---\n\n### AP-4 (Bloom: Analyze)\nA student connects a voltmeter across a resistor and reads 8.0 V. The ammeter in series reads 40 mA. Find R. If the voltmeter has internal resistance 10 kΩ, does this affect the reading significantly?\n\n**Answer:**\nR = V/I = 8.0/(40×10⁻³) = **200 Ω**\nVoltmeter in parallel: R_effective = 200 || 10000 = (200×10000)/(200+10000) = 2×10⁶/10200 = 196 Ω. The measured R is 196 Ω instead of 200 Ω — error of 2%. Negligible for most purposes; matters only when R and R_voltmeter are comparable.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ohms-law.md",
+        "startLine": 252,
+        "endLine": 287
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

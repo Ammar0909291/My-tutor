@@ -1,0 +1,435 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.mass-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.mass-energy",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e2296d55002d2ddba44a12162662f5f619ba0cb238945e5e6e7cbdadd66c064e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.mass-energy.md": "sha256:8ec76edbd7b183d98aef2db2f4b631ca58482f9b6a61ff6d98b20e7de451bdb3"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.rel.mass-energy",
+    "name": "Mass-Energy Equivalence: E=mc²",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": null,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.rel.relativistic-momentum"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.mass-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.mass-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.mass-energy.md": "sha256:8ec76edbd7b183d98aef2db2f4b631ca58482f9b6a61ff6d98b20e7de451bdb3"
+      },
+      "contentHash": "sha256:7a17efc6b0a6fff980a1232a7c4551a873bd1d8efa23963ba13dcdac461b84c7",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.mass-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.mass-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.mass-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.mass-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.mass-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.mass-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.mass-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.mass-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.mass-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.mass-energy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.mass-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.mass-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.mass-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.mass-energy.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.mass-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.mass-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.mass-energy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.mass-energy.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.mass-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.mass-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.mass-energy/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Mass-Energy Equivalence: E=mc² — core explanation",
+      "content": "### Core Idea\nE = mc² is the rest-energy relation: a particle at rest has energy E₀ = mc², where m is the rest (invariant) mass and c is the speed of light. This is a consequence of special relativity — specifically, that the rest-mass energy of a system is the Lorentz-invariant quantity E² − (pc)² = (mc²)². Mass is not converted to energy (an outdated framing); rather, rest mass IS a form of stored energy, fully interconvertible with other energy forms. The universality of E₀ = mc² is confirmed in nuclear reactions (Q-value = Δmc²), particle-antiparticle annihilation, and pair production.\n\n### Conceptual Ladder\n1. **Recall**: From phys.rel.relativistic-momentum: E = γmc², p = γmv; E² = (pc)² + (mc²)².\n2. **Understand**: For a particle at rest (v = 0, γ = 1): E₀ = mc². Rest mass is energy.\n3. **Apply**: Calculate rest energy for given masses; apply to nuclear reactions (Q = Δmc²); explain pair production threshold; analyze annihilation.\n4. **Extend**: Binding energy contributes to mass defect; photon (m = 0) has E = pc; mass defect in nuclear physics is quantified by E₀ = mc².\n\n### Key Formula Set\n- **Rest energy**: E₀ = mc²\n  - c = 3×10⁸ m/s; c² = 9×10¹⁶ J/kg\n  - 1 u × c² = 931.5 MeV (conversion used throughout nuclear physics)\n- **Total energy**: E = γmc² = E₀ + KE (KE = kinetic energy = (γ−1)mc²)\n- **Energy-momentum invariant**: E² − (pc)² = (mc²)² (same in all frames)\n- **Pair production threshold**: γ + γ → e⁺ + e⁻; minimum E_γ = m_e c² = 0.511 MeV (each photon)\n- **Pair annihilation**: e⁺ + e⁻ → 2γ; each photon E_γ = m_e c² = 0.511 MeV (in rest frame)\n- **Nuclear Q-value**: Q = Δm × c² = (m_reactants − m_products) × 931.5 MeV/u\n- **Conversion**: 1 kg × c² = 9×10¹⁶ J ≈ 9×10¹⁶/4.2×10⁹ tonnes TNT ≈ 2.1×10⁷ tonnes TNT\n\n### Canonical Examples\n- **Electron rest energy**: m_e = 9.109×10⁻³¹ kg → E₀ = 9.109×10⁻³¹ × (3×10⁸)² = 8.19×10⁻¹⁴ J = 0.511 MeV.\n- **Proton rest energy**: m_p = 1.6726×10⁻²⁷ kg → E₀ = 938.3 MeV.\n- **Nuclear reaction**: ²³⁵U fission: Δm = 0.215 u → Q = 0.215 × 931.5 = 200 MeV. Mass fraction converted = 0.215/235 = 0.091%.\n- **Pair production in PET**: ¹⁸F decays to ¹⁸O + e⁺. Positron annihilates with an electron → two 0.511 MeV photons detected back-to-back by scanner.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 16,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "E = mc² means mass disappears and becomes energy in nuclear reactions",
+      "content": "### MC-1: \"E = mc² means mass disappears and becomes energy in nuclear reactions\"\n- **Probe**: \"In a nuclear reaction releasing 200 MeV, what happened to the mass?\"\n- **Characteristic phrase**: \"The mass was converted to pure energy.\"\n- **Trigger**: Popular science framing; \"mass-to-energy conversion\" language.\n- **Conflict evidence**: The products of a nuclear reaction still have mass. Only 0.09% of the uranium mass \"disappears\" in fission; 99.91% remains as product mass. What happens: some of the rest-mass energy (stored in nuclear binding) is released as kinetic energy of products.\n- **Bridge**: Rest mass IS energy; E₀ = mc². When rest mass decreases, the corresponding energy appears in another form. No \"conversion\" — just redistribution of energy between rest-mass and kinetic forms.\n- **Replacement**: Nuclear reactions release energy because product nucleons are more tightly bound — the binding energy, stored as rest-mass energy (via mass defect), is released as kinetic energy. The total energy (rest + kinetic) is conserved.\n- **Discrimination pairs**: \"Q = Δmc²: mass defect × c² = energy released (energy conserved)\" ✓ vs. \"Mass disappears and becomes energy\" ✗\n- **S6 repair path**: Compute mass of uranium + products in a specific fission. Show total mass-energy is conserved; rest mass decreases by Δm; kinetic energy increases by Q = Δmc².",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "E = mc² applies to all energy, not just rest energy",
+      "content": "### MC-2: \"E = mc² applies to all energy, not just rest energy\"\n- **Probe**: \"A proton moving at 0.8c — what is its 'mass' according to E = mc²?\"\n- **Characteristic phrase**: \"Total energy = mc² so the proton 'weighs' more when moving.\"\n- **Trigger**: Applying E = mc² without recognizing m must be rest mass.\n- **Conflict evidence**: E = mc² is the REST energy. Total energy of moving proton: E = γmc² ≠ mc². The rest mass m is invariant (same in all frames); total energy varies with frame.\n- **Bridge**: E₀ = mc² (subscript 0 for rest). E_total = γmc². Two different quantities. The invariant: E² − (pc)² = (mc²)² = E₀².\n- **Replacement**: E = mc² gives rest energy. For moving particles, E = γmc² ≠ mc² (unless v = 0, γ = 1). The invariant mass m is always the rest mass.\n- **Discrimination pairs**: \"E₀ = mc² (rest energy); E_total = γmc² (total energy)\" ✓ vs. \"E = mc² for all situations\" ✗\n- **S6 repair path**: Compute E₀ and E_total for an electron at v = 0.99c; show E_total >> E₀.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Pair production creates mass from nothing",
+      "content": "### MC-3: \"Pair production creates mass from nothing\"\n- **Probe**: \"In γ → e⁺ + e⁻, where do the particles come from?\"\n- **Characteristic phrase**: \"Energy creates mass — matter appears from nowhere.\"\n- **Trigger**: Poetic description: \"energy creates matter.\"\n- **Conflict evidence**: Energy is conserved: the photon's energy (E_γ ≥ 2m_e c² = 1.022 MeV) is partially converted into the rest-mass energy of the electron-positron pair (2 × 0.511 MeV) and the rest goes to kinetic energy.\n- **Bridge**: Rest-mass energy is one form of energy. Pair production converts photon energy into rest-mass energy + kinetic energy — total energy conserved.\n- **Replacement**: Pair production converts photon energy into rest-mass energy of newly created particles. \"Creating matter\" = converting other energy forms to rest-mass energy. Total energy is conserved throughout.\n- **Discrimination pairs**: \"Pair production: E_γ → 2m_e c² + KE (energy conserved)\" ✓ vs. \"Mass created from nothing\" ✗\n- **S6 repair path**: For threshold pair production: E_γ = 1.022 MeV → 2 × 0.511 MeV at rest. KE = 0 at threshold. Verify energy conservation.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Antiparticles have negative mass or negative energy",
+      "content": "### MC-4: \"Antiparticles have negative mass or negative energy\"\n- **Probe**: \"A positron is the antiparticle of the electron. Does it have negative mass?\"\n- **Characteristic phrase**: \"Antimatter is negative mass — that's why it annihilates matter.\"\n- **Trigger**: Sci-fi misconceptions; confusing Dirac's negative-energy solutions with physical antiparticles.\n- **Conflict evidence**: Positrons have the same mass as electrons (m_positron = m_electron = 0.511 MeV/c²). They have positive energy and positive mass. The \"anti\" refers to opposite charge (Q = +e for positron vs. Q = −e for electron), not negative mass.\n- **Bridge**: The Dirac equation has negative-energy solutions that Dirac reinterpreted as antiparticles — particles with opposite quantum numbers (charge, lepton number) but the same mass.\n- **Replacement**: Antiparticles have the same mass as their particle partners but opposite charge (and other quantum numbers). Annihilation occurs because particle + antiparticle have equal and opposite conserved quantum numbers → total quantum number = 0 → can fully convert to photons.\n- **Discrimination pairs**: \"Positron: m = 0.511 MeV/c², Q = +e (same mass, opposite charge)\" ✓ vs. \"Antiparticle: negative mass\" ✗\n- **S6 repair path**: Look up positron mass in PDG; confirm m_e⁺ = m_e⁻ = 0.511 MeV/c². Also confirm the photon energy in PET: two 511 keV photons (each = 0.511 MeV), confirming each particle contributed mc² to the photon energy.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Review four-vector origin",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Review four-vector origin\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Compute rest energies",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Compute rest energies\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 204,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Pair production and annihilation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Pair production and annihilation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 205,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Nuclear mass defect revisited",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Nuclear mass defect revisited\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 206,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Hot coffee demonstration",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Hot coffee demonstration\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 207,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) calculate rest energy from mass in SI or MeV/c², (2) derive pair production threshold using E₀ = mc², (3) explain annihilation photon energy, (4) connect Q = Δm × 931.5 MeV/u to E₀ = mc², (5) distinguish rest energy from total energy.\n\n### Formative Assessment 1 — Rest energy\n**Prompt**: \"Calculate the rest energy of a neutron (m_n = 1.008665 u) in MeV.\"\n**Expected answer**: E₀ = 1.008665 × 931.5 = 939.6 MeV.\n**Threshold**: Within 0.1 MeV.\n\n### Formative Assessment 2 — Pair production\n**Prompt**: \"A single photon tries to create an electron-positron pair (γ → e⁺ + e⁻) near a heavy nucleus. What is the minimum photon energy?\"\n**Expected answer**: Minimum when both particles are at rest: E_γ_min = 2m_e c² = 2 × 0.511 = 1.022 MeV. (Note: a single photon in vacuum cannot create a pair due to momentum conservation — a nearby nucleus is needed to absorb momentum. The minimum energy for threshold is still 1.022 MeV.)\n**Threshold**: 1.022 MeV; must state 2m_e c².\n\n### Formative Assessment 3 — Annihilation\n**Prompt**: \"A positron moving with KE = 0.5 MeV annihilates with a stationary electron. Calculate the total energy available; explain why the two photons do NOT each have exactly 0.511 MeV.\"\n**Expected answer**: Total energy = KE_positron + m_e⁺c² + m_e⁻c² = 0.5 + 0.511 + 0.511 = 1.522 MeV. Each photon does NOT get 0.511 MeV because the positron was moving — it carried momentum, so the center of mass is not at rest. In the lab frame, one photon gets more energy than the other (Doppler effect). Only if the positron is at rest do both photons get exactly 0.511 MeV.\n**Threshold**: Total energy 1.522 MeV; correct reasoning about moving positron → unequal photon energies.\n\n### Formative Assessment 4 — Nuclear Q revisited\n**Prompt**: \"The proton has mass 1.007276 u and the neutron has mass 1.008665 u. A free neutron decays by beta-minus decay: n → p + e⁻ + ν̄ₑ. Explain using E₀ = mc² why this decay is energetically possible.\"\n**Expected answer**: m_n = 1.008665 u > m_p + m_e = 1.007276 + 0.000549 = 1.007825 u. Δm = 1.008665 − 1.007825 = 0.000840 u > 0. Q = 0.000840 × 931.5 = 0.782 MeV > 0 → exothermic decay → spontaneous. The neutron has more rest-mass energy than the decay products → energy released.\n**Threshold**: Correct Δm; Q = 0.782 MeV; correct conclusion about spontaneity.\n\n### Confidence Calibration\nAfter FA1: \"How confident (0–100%) is your 939.6 MeV correct? Quick check: proton rest energy = 938.3 MeV; neutron should be slightly heavier (it can decay to proton) → 939.6 MeV > 938.3 MeV ✓.\"\n\n### Delayed Retrieval\nTwo weeks later: Without notes, explain using E₀ = mc² why: (a) a photon has energy but no rest mass; (b) pair production requires a minimum photon energy; (c) the sun loses 4.3 million tonnes per second.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 225,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nImagine a compressed spring. At rest, it has potential energy (the spring's coiled state) even though it has no kinetic energy. If you let it uncoil, that potential energy converts to kinetic energy. Now imagine: what if the spring itself became lighter when compressed (because it \"spent\" some of its mass to store the energy)? That's what E = mc² says: stored energy (in any form — chemical bonds, nuclear forces, heat) contributes to an object's mass. A hot cup of coffee is very slightly heavier than the same coffee cold. A compressed spring is very slightly heavier than a relaxed spring. The effect is only measurable at nuclear scales.\n\n### Representational (Diagrams and Symbols)\n- **Energy-mass equivalence diagram**: A before/after diagram for nuclear fission: total mass before > total mass after; the difference Δm → Q = Δmc² (appears as KE of products and photons).\n- **Pair production diagram**: γ → e⁺ + e⁻. Energy before: E_γ = hf. Energy after: 2m_e c² + KE. Threshold when KE = 0: E_γ = 2 × 0.511 = 1.022 MeV.\n- **Annihilation diagram**: e⁺ + e⁻ → 2γ. Momentum conservation: photons emitted back-to-back. Energy each: 0.511 MeV.\n- **PET scan schematic**: Positron emitter in body → annihilation → two γ photons back-to-back → detected by ring of detectors → localize source.\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Compute rest energy E₀ = mc² in Joules and MeV.\n2. Use Q = Δm × 931.5 MeV/u for nuclear reactions.\n3. Determine pair production threshold from E = mc².\n4. Apply conservation of energy-momentum to annihilation: two photons back-to-back in CM frame, each E_γ = m_e c² = 0.511 MeV.\n5. Distinguish rest energy mc² from total energy γmc² from kinetic energy (γ−1)mc².\n\n### Transfer (Novel Contexts)\n- **PET imaging**: ¹⁸F β⁺ decay → positron → annihilation → two 511 keV photons; clinical medicine depends on this direct application of E = mc².\n- **Antihydrogen**: CERN produces antihydrogen atoms (anti-proton + positron); their annihilation with hydrogen gives energy from E = 2mc² per proton-antiproton pair.\n- **Binding energy of atomic nuclei**: The mass defect of ⁴He (Δm = 0.0304 u) is the binding energy (28.3 MeV) expressed as mass — the BE IS the mass defect × c².\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 46,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: \"Mass is converted to energy\"\nStudents say \"mass converts to energy\" as if mass disappears. Better framing: rest mass IS energy; E₀ = mc² expresses this equivalence. In nuclear reactions, some rest-mass energy appears as kinetic energy — but energy is conserved throughout. No \"conversion\" in the sense of one thing becoming another; rather, one form of energy (rest mass) appears as another (kinetic energy/photons).\n\n### Failure Mode 2: Applying E = mc² as if it's total energy\nStudents write \"total energy of a moving proton = mc².\" Wrong: total energy = γmc² for a moving particle. E = mc² is the REST energy only. For a proton at 99% of c: E = γ × 938.3 MeV ≈ 6.7 × 938.3 ≈ 6,285 MeV >> mc² = 938.3 MeV.\n\n### Failure Mode 3: Thinking matter and antimatter annihilation violates energy conservation\nStudents wonder: \"where does the matter go?\" It doesn't go anywhere — its rest-mass energy (2m_e c² for e⁺ + e⁻) appears as photon energy. Total energy is conserved: 2m_e c² = 2E_γ = 2(0.511 MeV).\n\n### Failure Mode 4: Not distinguishing rest mass from relativistic mass\nSome students have encountered \"relativistic mass\" γm. E = mc² with m = rest mass gives rest energy. If students use \"m\" to mean γm, they get E = γ²m_0 c² (wrong). This is a notation trap: E = m_rest × c² is the rest energy; E = γ m_rest c² is total energy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 72,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"We've been using Q = Δm × 931.5 MeV/u for nuclear reactions. Where does that formula come from? From E = mc². That's what we're formalizing today.\"\n\n**Core explanation**: \"At rest, a particle has energy E₀ = mc². This is not kinetic energy — it's energy stored in the particle's existence. When a nuclear reaction releases 200 MeV, that 200 MeV was always there as rest-mass energy; the reaction made it visible as kinetic energy of the products.\"\n\n**Common error interception**: \"E = mc² is the REST energy — for v = 0. For a moving particle, E = γmc². Don't use E = mc² when you should use E = γmc².\"\n\n**Checkpoint question**: \"An electron and positron annihilate from rest. What are the photon energies?\" (Each: 0.511 MeV = m_e c².) \"Why two photons, not one?\" (Momentum conservation: the system has zero total momentum → two photons must be emitted back-to-back with equal and opposite momenta.)\n\n**Closing move**: \"E = mc² is arguably the most famous equation in physics — and now you understand not just what it says, but where it comes from (four-vectors), what it means (rest mass is energy), and how to use it (nuclear Q-values, pair production, PET scans).\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 211,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"I thought E = mc² was just about nuclear weapons\"\nThe formula applies to all energy: heating coffee, compressing a spring, charging a battery, nuclear reactions. The mass change is just too small to measure in everyday contexts (Δm/m ~ 10⁻¹²) but macroscopic in nuclear contexts (Δm/m ~ 10⁻³). The principle is universal; only the measurability differs.\n\n### S3 — Knows E = mc² but cannot apply it\nStudents who can't proceed typically need one worked example end-to-end:\n(a) Identify m in kg or u.\n(b) Compute E₀ = mc² (if in kg) or E₀ = m × 931.5 MeV (if in u).\n(c) Apply to the question (threshold, Q-value, annihilation energy).\nPractice the unit conversions: 1 u → 931.5 MeV; MeV → eV → J.\n\n### S6 — Confuses E = mc² with E = γmc²\nThe remedy is explicit labeling. Teach students to ALWAYS write the subscript: E₀ = mc² (rest energy); E_total = γmc² (total energy); KE = (γ−1)mc² (kinetic energy). Never write \"E = mc²\" for a moving particle without the subscript 0. Drill this 5 times with moving particle examples.\n\n### S9 — Cannot connect to applications\nGive five applications across different domains: (1) PET scan — 511 keV photons from e⁺e⁻ annihilation; (2) nuclear reactor — Q = Δm × 931.5 MeV/u; (3) matter-antimatter drives (science fiction — but the upper limit is E = 2mc² per kg of matter + antimatter = 9×10¹⁶ J/kg); (4) gamma-ray astrophysics — detecting 511 keV line from positron annihilation in the galactic center; (5) elementary particle physics — invariant mass of unstable particles measured via E² − (pc)² = (mc²)².\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 258,
+        "endLine": 278
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nConceptual (rest mass IS energy; E₀ = mc² is not conversion but expression of equivalence) + procedural (rest energy calculation, Q-value from mass defect, pair production threshold) + structural (connection to four-momentum invariant).\n\n### Spaced Retrieval Schedule\n- Day 1: Compute rest energy of proton and neutron in MeV.\n- Day 3: Compute pair production threshold energy; verify 2 × 0.511 = 1.022 MeV.\n- Day 7: Explain why neutron can decay to proton using rest energies.\n- Day 14: Compute Q for a given nuclear reaction using Δm × 931.5 MeV/u.\n- Day 30: Without notes, write E₀ = mc² and explain its derivation from E² = (pc)² + (mc²)² for v = 0.\n\n### Interleaving Partners\n- phys.rel.relativistic-momentum (E² = (pc)² + (mc²)² — the parent formula)\n- phys.mod.binding-energy (mass defect IS rest-mass energy difference)\n- phys.mod.nuclear-reactions (Q = Δmc² — direct application)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 278,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Compute rest energy for any particle given mass in kg or u.\n- Determine pair production threshold.\n- Calculate Q for any nuclear reaction using mass-energy equivalence.\n\n### Far Transfer\n- **Astrophysics**: Neutron star mass ≈ 1.4 M⊙; rest energy ≈ 2.5×10⁴⁷ J >> gravitational binding energy — justifies treating mass as energy source in relativistic astrophysics.\n- **Particle physics**: Invariant mass of unstable particles (W boson at 80.4 GeV/c²) measured via E² − (pc)² = (mc²)².\n- **Cosmology**: Dark energy density ρ_Λ expressed in energy per volume; E = mc² connects matter density to energy density in Friedmann equations.\n\n### Structural Abstraction\nE₀ = mc² is a statement of group theory: the Lorentz group has an invariant for massive particles given by E²/c² − |p|² = m²c². The rest energy is the Lorentz-invariant \"length\" of the four-momentum vector. In quantum field theory, this becomes the mass of the quantum field's propagator; in general relativity, it contributes to the stress-energy tensor T^μν. E = mc² is not a coincidence — it is a fundamental consequence of the symmetry of spacetime.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 297,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "phys.rel.mass-energy/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.rel.mass-energy",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.rel.relativistic-momentum (E = γmc², E² = (pc)² + (mc²)²) is the immediate prerequisite. E = mc² for v = 0 is a trivial special case once students have mastered the full four-vector treatment. The blueprint consolidates applications rather than introducing truly new mathematics.\n\n### Unlock Readiness\nUnlocks phys.rel.spacetime — the concept of spacetime interval and four-vectors in a unified framework. The rest-mass invariant E² − (pc)² = (mc²)² is the prototype for spacetime interval invariance (Δs² = c²Δt² − |Δr|²), making this blueprint the natural bridge.\n\n### Suggested Flag\nConsider consolidating this blueprint with phys.rel.relativistic-momentum into a longer session called \"Energy, Momentum, and Mass in Relativity.\" The conceptual separation is useful for the KG ordering, but pedagogically they are inseparable in the classroom.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.mass-energy.md",
+        "startLine": 314,
+        "endLine": 328
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

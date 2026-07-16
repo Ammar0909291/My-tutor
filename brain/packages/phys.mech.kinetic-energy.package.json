@@ -1,0 +1,543 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.kinetic-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.kinetic-energy",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:daf9cd31ca5c0a583b8f77b0a48e7b9e7cf721ccd55d508c5ec122554e487651",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.kinetic-energy.md": "sha256:f916e461ad040fed89ef4ae94509dbd6724b7ae8e1b0a0588ea36dce9e811cbb"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.kinetic-energy",
+    "name": "Kinetic Energy",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.work"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.kinetic-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.kinetic-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.kinetic-energy.md": "sha256:f916e461ad040fed89ef4ae94509dbd6724b7ae8e1b0a0588ea36dce9e811cbb"
+      },
+      "contentHash": "sha256:758afde4a8612b26a07c73b48062a22b0a92e52a0e36bd1f1852f6fbf6cb6188",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinetic-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinetic-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinetic-energy\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinetic-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinetic-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinetic-energy\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinetic-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinetic-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinetic-energy\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinetic-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md#TA-4 (addresses MC-KE-LINEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinetic-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinetic-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinetic-energy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md#TA-5 (addresses MC-KE-NEGATIVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinetic-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinetic-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinetic-energy.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinetic-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinetic-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinetic-energy.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md#TA-7 (addresses MC-KE-LINEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinetic-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinetic-energy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.kinetic-energy/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Kinetic Energy — core explanation",
+      "content": "**Core Insight:** Kinetic energy is the energy an object possesses because it is moving; it\nequals ½mv², so a small increase in speed produces a large increase in KE (quadratic\nrelationship). KE is always non-negative, and it can be transferred to or from objects through\nWork.\n\n**Formal Definition:**\nKE = ½mv²\n\nwhere m is the object's mass (kg) and v is its speed (m/s). KE has units of joules (J = kg·m²/s²).\n\n**Why the ½:**\nDerived from the Work–Energy relationship: integrate F = ma over displacement ds using\nv dv = a ds → W = m∫v dv = ½mv² − ½mv₀². The ½ is not an approximation; it is exact.\n\n**Key properties:**\n- KE is a scalar (always ≥ 0; direction of motion does not matter).\n- KE depends on speed squared — doubling speed quadruples KE; tripling speed gives 9× KE.\n- KE is additive: a system's total KE is the sum of each object's KE.\n- KE and momentum p = mv are related: KE = p²/(2m).\n- KE changes when net work is done on the object (Work–Energy Theorem: W_net = ΔKE).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 24,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Concrete",
+      "content": "**Worked Example 1 (Concrete):**\nA 2 kg ball rolls at 3 m/s.\nKE = ½ × 2 × 3² = ½ × 2 × 9 = 9 J.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 24,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Speed Doubled",
+      "content": "**Worked Example 2 (Speed Doubled):**\nSame ball now rolls at 6 m/s.\nKE = ½ × 2 × 6² = 36 J → 4× the KE for 2× the speed.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 24,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Find speed from KE",
+      "content": "**Worked Example 3 (Find speed from KE):**\nA 5 kg cart has KE = 40 J. Find v.\n40 = ½ × 5 × v² → v² = 16 → v = 4 m/s.\n\n**Conceptual anchor — rolling ball on table:**\nA ball rolls across a table and gradually slows down. Its KE is being transferred to thermal\nenergy (friction with table and air). KE isn't \"lost\" — it transforms.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 24,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/misconception/MC-KE-LINEAR",
+      "kind": "misconception",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Priority 1",
+      "content": "### MC-KE-LINEAR (Priority 1)\n**Label:** \"KE is proportional to speed, not speed squared\"\n\n**Trigger signals:**\n- Says \"double speed → double KE\"\n- Computes KE = mv instead of ½mv²\n- Surprised that a car at 100 km/h needs 4× the braking distance of one at 50 km/h\n\n**Conflict evidence [P28]:**\n\"You said doubling speed doubles KE. Let's check:\nBall at 2 m/s: KE = ½ × 1 × 2² = 2 J.\nBall at 4 m/s: KE = ½ × 1 × 4² = 8 J.\n8 is not twice 2 — it is four times 2. What does that tell us about the relationship?\"\n\n**Bridge [P30]:**\n\"The formula has v², not v. Squaring means if v grows by a factor k, KE grows by k².\nThat's why high-speed crashes are so much more destructive than low-speed ones —\nthe energy difference is enormous.\"\n\n**Replacement [P31]:**\n\"KE = ½mv². Speed appears squared. Doubling speed → (2v)² = 4v² → KE quadruples.\nTripling speed → KE increases 9×. The relationship is quadratic, not linear.\"\n\n**Discrimination pairs [P33]:**\n- Ball at 3 m/s vs 6 m/s, mass 2 kg: KE = 9 J vs 36 J (4×, not 2×) ✓\n- Car braking distance: v doubles → distance quadruples (same v² relationship) ✓\n\n**s6_path:** Skip P28; use the rolling-ball scene: \"Watch what happens to the ball's\nmotion as it hits the slope at different speeds — notice anything surprising?\"\n\n---",
+      "localKey": "MC-KE-LINEAR",
+      "language": "en",
+      "refs": [
+        "MC-KE-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 3,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/misconception/MC-KE-NEGATIVE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Priority 2",
+      "content": "### MC-KE-NEGATIVE (Priority 2)\n**Label:** \"KE can be negative (e.g., when object moves backward)\"\n\n**Trigger signals:**\n- Assigns negative KE to objects moving in the negative direction\n- Confuses velocity (signed) with speed (unsigned) in KE formula\n- States \"the ball has −4 J of KE going left\"\n\n**Conflict evidence [P28]:**\n\"You said KE is negative when the object moves left. Let's plug in:\nBall moves at v = −3 m/s (leftward). KE = ½ × 1 × (−3)² = ½ × 9 = 4.5 J.\nThe square of −3 is +9. KE comes out positive. What does squaring do to a negative number?\"\n\n**Bridge [P30]:**\n\"Velocity has direction; speed does not. KE uses speed — or equivalently v² — so\nsquaring removes the sign. KE is a measure of how much energy of motion exists,\nnot which way. Energy doesn't have direction; work and displacement do.\"\n\n**Replacement [P31]:**\n\"KE = ½mv² is always ≥ 0 because v² ≥ 0 for any real v, and m > 0.\nOnly ΔKE (change in KE) can be negative — that means the object slowed down.\nNegative KE itself is physically meaningless.\"\n\n**Discrimination pairs [P33]:**\n- v = +5 m/s vs v = −5 m/s, same mass: KE identical (both 12.5 J for m=1 kg) ✓\n- ΔKE = −10 J: object slowed (KE decreased), NOT KE is negative ✓\n\n**s6_path:** Use only the positive-number arithmetic: \"v = −3, v² = 9, ½×1×9 = 4.5 J —\nlet's just check the arithmetic step together.\"\n\n---",
+      "localKey": "MC-KE-NEGATIVE",
+      "language": "en",
+      "refs": [
+        "MC-KE-NEGATIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 35,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 14,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Prerequisite Check + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 35,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "MC-KE-LINEAR Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-KE-LINEAR Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-KE-LINEAR\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-KE-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 50,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "MC-KE-NEGATIVE + Direction Independence",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-KE-NEGATIVE + Direction Independence\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-KE-NEGATIVE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-KE-NEGATIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 68,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 81,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[\"MC-KE-LINEAR\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-KE-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 101,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Apply — basic computation",
+      "content": "**MP-1 (Apply — basic computation):**\n\"A 4 kg object moves at 5 m/s. What is its kinetic energy?\"\nExpected: KE = ½ × 4 × 25 = 50 J.\n_Discriminates: can substitute correctly into ½mv²._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Apply — quadratic ratio",
+      "content": "**MP-2 (Apply — quadratic ratio):**\n\"An object's speed increases from 3 m/s to 9 m/s. By what factor does its KE change?\"\nExpected: (9/3)² = 9. KE increases by a factor of 9.\n_Discriminates: understands v² relationship, not linear._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Apply — reverse",
+      "content": "**MP-3 (Apply — reverse):**\n\"A 2 kg ball has kinetic energy of 36 J. What is its speed?\"\nExpected: v² = 2×36/2 = 36 → v = 6 m/s.\n_Discriminates: algebraic rearrangement of KE formula._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Understand — direction independence",
+      "content": "**MP-4 (Understand — direction independence):**\n\"A 1 kg ball moves at −4 m/s (leftward). A second 1 kg ball moves at +4 m/s (rightward).\nWhich has greater kinetic energy?\"\nExpected: Equal — both have KE = ½ × 1 × 16 = 8 J.\n_Discriminates: MC-KE-NEGATIVE resolution._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-KE-NEGATIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Analyze — multi-body comparison",
+      "content": "**MP-5 (Analyze — multi-body comparison):**\n\"Object A: mass 2 kg, speed 6 m/s. Object B: mass 8 kg, speed 3 m/s.\nWhich has greater KE? By how much?\"\nExpected: KE_A = ½×2×36 = 36 J; KE_B = ½×8×9 = 36 J. Equal.\n_Discriminates: careful computation; does not assume larger mass always wins._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 264,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.work  ──────────────────────►  phys.mech.kinetic-energy\n   (W = Fd cosθ, sign of work)\n   REQUIRED: student can compute work done by a force and interpret sign\n```\n\n**PD-1 (Work):**\n\"A 10 N force pulls a 3 kg box 5 m along the floor (μ_k = 0.2).\nFriction force = μ_k × N = μ_k × mg = 0.2 × 3 × 10 = 6 N.\nW_applied = 10 × 5 × cos0° = 50 J. W_friction = 6 × 5 × cos180° = −30 J.\nW_net = 20 J.\"\n\nIf student cannot compute net work including signs → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 65,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"What happens to KE if v doubles? Write one sentence.\"\nThreshold: Must state \"quadruples\" or \"increases by factor of 4\" or \"v² relationship\".\nIf not → repeat P28 conflict evidence before TA-3.\n\n**FA-2 (TA-4 exit):** \"Ball at 2 m/s, mass 1 kg: KE = 2 J. Ball at 6 m/s, same mass: KE = ?\"\nExpected: 18 J (= ½×1×36). Accept within 5% for arithmetic rounding.\nIf student writes 6 J → MC-KE-LINEAR not resolved → loop back to P33.\n\n**FA-3 (TA-5 exit):** \"A 3 kg object moves at −5 m/s. KE = ?\"\nExpected: 37.5 J. If student writes −37.5 J → MC-KE-NEGATIVE not resolved → repeat P31.\n\n**FA-4 (Session exit):** Administer MP-1 through MP-3. 3/3 correct → advance to TA-7.\nOtherwise → targeted re-teach of failed probe type before closure.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-KE-LINEAR",
+        "MC-KE-NEGATIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 297,
+        "endLine": 315
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Skip collision-scenario probes at TA-4 on first attempt; use simpler marble-vs-ball P06 anchor.\n- Use P05 reassurance: \"KE = ½mv² — just two multiplications. You already know how to do this.\"\n- On P54 trigger: reduce problem to one step (\"What is v²?\") before asking for KE.\n- Never deploy multi-body MP-5 style questions in TA-4 if S6 is flagged.\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (equal-KE trap) at TA-3 before guided practice.\n- If student says \"A has more KE because it's faster\" → deploy conflict evidence immediately.\n- Advance through worked examples faster; spend more time on ratio and reverse problems.\n\n**S4 (Prereq gap — Work):**\n- Detect via PD-1 failure at TA-3.\n- Repair path: deliver a 2-TA mini-session on W = Fd cosθ and sign conventions before returning.\n- Do not proceed past TA-3 with unresolved PD-1.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 315,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.kinetic-energy/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.kinetic-energy",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → Formula → MC-KE-LINEAR repair).\n**Session 2 (≥24 h later):** Retrieval cold-start — \"Define KE. If speed triples, what happens to KE?\"\n  → TA-5 (MC-KE-NEGATIVE) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe:\n  \"A 2 kg object has KE = 18 J and moves left. A 2 kg object has KE = 18 J and moves right.\n  What is each object's speed?\"\n  (Tests both formula inversion and direction independence simultaneously.)\n**Pre-Work–Energy-Theorem session:** Administer all 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.work (W = Fd cosθ) and phys.mech.momentum (p = mv)\nare natural interleaving pairs — ensure student can distinguish KE (scalar, v²) from p (vector, v).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-KE-LINEAR",
+        "MC-KE-NEGATIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md",
+        "startLine": 335,
+        "endLine": 351
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

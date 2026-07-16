@@ -1,0 +1,346 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.solenoid-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.solenoid",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:39a033659aff783dac072fb6d81bbc11019dd7d81a5f8e045e015bb277f68e81",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.solenoid.md": "sha256:8e3e78b9a6375cd6c3b25525c4f47cc1c49e63b33fe3216e0fe7d7c4a82d70f7"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.solenoid",
+    "name": "Solenoid",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.em.amperes-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.solenoid-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.solenoid (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.solenoid.md": "sha256:8e3e78b9a6375cd6c3b25525c4f47cc1c49e63b33fe3216e0fe7d7c4a82d70f7"
+      },
+      "contentHash": "sha256:148be571b23a413a84eac0079243221298f76638b15225e7a9754e32e6bdddc1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.solenoid.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.solenoid.md#TA-1 (addresses MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.solenoid"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.solenoid\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.solenoid.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.solenoid.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.solenoid"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.solenoid\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.solenoid.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.solenoid.md#TA-3 (addresses MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.solenoid"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.solenoid\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.solenoid.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.solenoid.md#TA-4 (addresses MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.solenoid"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.solenoid\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.solenoid/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.solenoid",
+      "title": "Solenoid — Concept Explanation Blocks",
+      "content": "### Block 1-A — Structure and Field\nA **solenoid** is a tightly wound helical coil of wire. For an infinite (or long) solenoid:\n\n> **B = μ₀nI** (inside, uniform)\n> **B = 0** (outside, ideal)\n\nWhere n = N/l = number of turns per unit length.\n\nThe interior field is uniform and parallel to the axis — the most uniform magnetic field achievable without superconducting magnets. The field is independent of the solenoid's radius.\n\nDerivation via Ampere's law (rectangular loop, length L, one side inside, one outside):\n∮B·dl = B_in × L = μ₀ × (nL) × I → B = μ₀nI\n\nFor a **finite solenoid**, the field at the centre is slightly lower than the ideal formula, and at the ends it drops to B/2. The fringe field at the ends falls off roughly as 1/r³.\n\n### Block 1-B — Self-Inductance of a Solenoid\nFrom L = NΦ/I and Φ = μ₀nIA per turn:\n\n> **L = μ₀n²Al = μ₀N²A/l**\n\nWhere A = πr² is the cross-sectional area, l = length.\n\nKey dependencies:\n- L ∝ N² (turns squared — doubling turns quadruples L)\n- L ∝ A (cross-sectional area — fatter solenoid → more flux)\n- L ∝ 1/l (shorter solenoid → higher n → more L per unit length)\n\nEnergy stored: U = ½LI² = ½μ₀n²AlI² = (B²/2μ₀)(Al) = u_B × Volume\n\n### Block 1-C — Solenoid as an Electromagnet\nWith a ferromagnetic core (relative permeability μ_r):\n> **B = μ_r μ₀ nI** (typically μ_r = 1000–10000 for iron cores)\n> **L_core = μ_r × L_air**\n\nA solenoid with an iron core can produce fields 1000–10000× stronger than an air-core solenoid at the same current. This is how electromagnets, transformers, and relay coils work.\n\nApplications:\n- **Relay**: solenoid pulls a lever to switch a circuit\n- **Speaker**: current-carrying voice coil (solenoid) in a permanent magnetic field → force → cone motion\n- **MRI**: superconducting solenoid produces 1–7 T uniform field\n- **Linear motor**: force on current-carrying solenoid in a magnetic field\n\n### Block 1-D — Toroid vs. Solenoid\n| Property | Solenoid | Toroid |\n|----------|----------|--------|\n| Shape | Straight cylinder | Doughnut ring |\n| External field | Small fringe field | B = 0 (field confined) |\n| Interior B | μ₀nI (uniform) | μ₀NI/(2πr) (varies with r) |\n| Self-inductance | μ₀N²A/l | μ₀N²A/(2πR) |\n| Application | Electromagnets, MRI | Transformers, inductors with zero EMI |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 27,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.solenoid",
+      "title": "Field and Force",
+      "content": "### WE-1 — Field and Force\n**Problem:** A solenoid: N = 1000 turns, l = 25 cm, diameter = 3.0 cm, I = 4.0 A. Find: (a) B inside, (b) L, (c) energy stored.\n\n**Solution:**\nn = 1000/0.25 = 4000 turns/m  \nA = π(0.015)² = 7.07×10⁻⁴ m²\n\n(a) B = μ₀nI = 4π×10⁻⁷ × 4000 × 4.0 = **20.1 mT**\n\n(b) L = μ₀n²Al = 4π×10⁻⁷ × (4000)² × 7.07×10⁻⁴ × 0.25  \n= 4π×10⁻⁷ × 1.6×10⁷ × 1.77×10⁻⁴ = **3.56 mH**\n\n(c) U = ½LI² = ½ × 3.56×10⁻³ × (4.0)² = **28.5 mJ**\n\nCheck: u_B = B²/(2μ₀) = (20.1×10⁻³)²/(8π×10⁻⁷) = 4.04×10⁻⁴/(2.51×10⁻⁶) = 161 J/m³  \nU = u_B × Vol = 161 × 7.07×10⁻⁴ × 0.25 = **28.5 mJ** ✓\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 82,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.solenoid",
+      "title": "Iron-Core Solenoid",
+      "content": "### WE-2 — Iron-Core Solenoid\n**Problem:** The solenoid from WE-1 is filled with iron (μ_r = 2000). Find new B, L, and energy at I = 4.0 A.\n\n**Solution:**\nB_core = μ_r × B_air = 2000 × 20.1×10⁻³ = **40.2 T** (enormous — but in practice, iron saturates at ~2T; this formula applies only below saturation)\n\nL_core = μ_r × L_air = 2000 × 3.56×10⁻³ = **7.12 H** (an enormous inductance for a compact coil)\n\nU_core = ½ × 7.12 × 16 = **56.9 J** (much more energy storage, due to amplified B field)\n\nNote: real iron cores saturate at B_sat ≈ 1.5–2.0 T, limiting the current to keep B < B_sat.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 82,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.solenoid",
+      "title": "Solenoid Design Problem",
+      "content": "### WE-3 — Solenoid Design Problem\n**Problem:** Design a solenoid that: (a) produces B = 5.0 mT inside, (b) has L = 1.0 mH, (c) uses I = 2.0 A. Find n, A, and l consistent with these constraints.\n\n**Solution:**\nFrom B = μ₀nI: n = B/(μ₀I) = 5.0×10⁻³/(4π×10⁻⁷ × 2.0) = 5.0×10⁻³/2.51×10⁻⁶ = **1990 turns/m ≈ 2000 turns/m**\n\nFrom L = μ₀n²Al: Al = L/(μ₀n²) = 1.0×10⁻³/(4π×10⁻⁷ × (2000)²) = 10⁻³/(5.03×10⁻³) = **0.199 m³**\n\nWait — Al = 0.199 m³ seems large. Let's check: μ₀n² = 4π×10⁻⁷ × 4×10⁶ = 5.03×10⁻³; Al = L/5.03×10⁻³ = 10⁻³/5.03×10⁻³ = 0.199... that's dimensionless. Recheck: L = μ₀n²Al, so Al = L/(μ₀n²) = 10⁻³/(4π×10⁻⁷×4×10⁶) = 10⁻³/5.03×10⁻³ = 0.199 m² × m? No: [Al] = m² × m = m³? No: A is in m² and l is in m, so Al has units m³. L = μ₀n²Al; [H] = [T·m/A] × [1/m²] × [m²] × [m] = T·m/A × m = Wb/A = H ✓.\n\nAl = 0.199 m³ is the volume — if l = 0.50 m, then A = 0.398 m² (radius ≈ 35 cm) — very large. More practical: l = 0.50 m, A = 4.0 cm² = 4×10⁻⁴ m² → Al = 2×10⁻⁴ m³; L = 5.03×10⁻³ × 2×10⁻⁴ = 1.01×10⁻⁶ H = 1 μH, not 1 mH.\n\nRevised: for L = 1.0 mH with n = 2000, Al must be 0.199 m³. With l = 0.50m: A = 0.398m²—impractical. Better approach for l = 20cm = 0.20m, A = 2.0cm² = 2×10⁻⁴m²:  \nL = μ₀n²Al = 5.03×10⁻³ × 2×10⁻⁴ × 0.20 = 2.01×10⁻⁷ H = 0.2 μH.\n\nTo get L = 1.0 mH at n = 2000: increase l or A. With A = 4 cm² and l = 1.0 m: L = 5.03×10⁻³ × 4×10⁻⁴ × 1.0 = 2.01 μH. Still not 1 mH. The issue: L = 1 mH with I = 2 A requires U = ½×10⁻³×4 = 2 mJ; with B = 5 mT. Let's just solve the design:\n\nGiven B = μ₀nI = 5×10⁻³ T and I = 2A: n = 1990 turns/m ✓.  \nFor L = 1.0 mH: Al = L/(μ₀n²) = 10⁻³/(5.03×10⁻³) = 0.199 m³.  \nChoose l = 20 cm = 0.20 m → A = 0.199/0.20 = 0.995 m²... still large.\n\nThe constraint is: at n=2000 turns/m, to get L=1mH, you need a very large volume. In practice: to get L=1mH with a compact solenoid, use an iron core (μ_r=100) and reduce volume by 100×, or accept that 1mH at 5mT is not simultaneously achievable at I=2A with a small solenoid. This is a good teaching point.\n\nRevised WE-3 for pedagogy: Find n and l separately for practical parameters.\n\n**Revised WE-3:**\n**Problem:** Design a solenoid to produce B = 10 mT at I = 2.0 A, using a 5.0 cm radius, 20 cm long solenoid. Find n, N, and L.\n\nn = B/(μ₀I) = 10×10⁻³/(4π×10⁻⁷×2) = 3980 turns/m ≈ **4000 turns/m**  \nN = n × l = 4000 × 0.20 = **800 turns**  \nA = π(0.05)² = 7.85×10⁻³ m²  \nL = μ₀n²Al = 4π×10⁻⁷ × (4000)² × 7.85×10⁻³ × 0.20  \n= 5.03×10⁻³ × 6.28×10⁻³ = **31.6 mH**  \nU = ½LI² = ½ × 31.6×10⁻³ × 4 = **63.2 mJ**\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 82,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/misconception/MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS",
+      "kind": "misconception",
+      "conceptId": "phys.em.solenoid",
+      "title": "- **trigger_signal:** Student says \"a wider solenoid has a stronger field\" or \"the field varies across the solenoid's cross-section.",
+      "content": "### MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS\n- **trigger_signal:** Student says \"a wider solenoid has a stronger field\" or \"the field varies across the solenoid's cross-section.\"\n- **conflict_evidence [P28]:** \"Ampere's law derivation: B = μ₀nI. The radius R of the solenoid doesn't appear in this formula. Two solenoids — one 2 cm radius, one 20 cm radius — with the same n and I produce identical B fields inside. The field is perfectly uniform inside an infinite solenoid, regardless of how wide it is. What changes with radius is the inductance L = μ₀n²Al (A = πR² appears there), not B.\"\n- **bridge_text [P30]:** \"Think of parallel plate capacitors: E = σ/ε₀ between the plates, independent of the plate area. A larger capacitor plate doesn't give a stronger E — it gives more charge (larger C). Similarly, a wider solenoid doesn't give a stronger B — it gives more flux (larger L), because more area threads more flux at the same B.\"\n- **replacement_text [P31]:** \"B = μ₀nI inside a solenoid: no radius dependence. B depends only on turns per unit length (n) and current (I). Radius affects inductance L = μ₀n²Al (through area A = πR²) and total energy stored, but NOT the field strength.\"\n- **discrimination_pairs [P33]:**\n  - B (field strength): μ₀nI — no radius\n  - L (inductance): μ₀n²Al = μ₀n²πR²l — radius squared\n  - Φ (flux per turn): BA = μ₀nI×πR² — radius squared\n  - U (energy): ½LI² — depends on radius via L\n- **s6_path:** Calculate B and L for two solenoids: same n, I, l; different R. Show B identical, L different.\n\n---",
+      "localKey": "MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS",
+      "language": "en",
+      "refs": [
+        "MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 3,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/misconception/MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY",
+      "kind": "misconception",
+      "conceptId": "phys.em.solenoid",
+      "title": "- **trigger_signal:** Student applies B = 0 outside to real (finite) solenoids or is confused about fringe fields.",
+      "content": "### MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY\n- **trigger_signal:** Student applies B = 0 outside to real (finite) solenoids or is confused about fringe fields.\n- **conflict_evidence [P28]:** \"B = 0 outside is exact only for an infinite solenoid — a mathematical idealisation. Real solenoids have fringe fields that bulge out from the ends and decay rapidly with distance (∝ 1/r³ at large r, like a magnetic dipole). MRI machines require room-sized magnetic shielding precisely because their solenoid fields extend outside. For engineering calculations, treat B ≈ 0 outside if r >> radius and you're not near the ends.\"\n- **bridge_text [P30]:** \"Infinite parallel plates give E = 0 outside exactly (ideal). Real capacitor plates have fringe fields at the edges — you use the ideal formula for most purposes but acknowledge the approximation. Solenoids are the same: B = μ₀nI inside (ideal), B ≈ 0 outside (approximation for regions far from the ends and far from the solenoid surface).\"\n- **replacement_text [P31]:** \"For an infinite solenoid: B = μ₀nI inside, B = 0 outside (exact). For real (finite) solenoids: B ≈ μ₀nI inside (away from ends), B ≈ 0 outside (far from the solenoid), but non-zero fringe fields exist near the ends and outside, decaying as 1/r³ far away.\"\n- **discrimination_pairs [P33]:**\n  - Infinite solenoid: B = 0 outside (exact, mathematical)\n  - Finite solenoid, midpoint: B ≈ μ₀nI (good approximation if l >> r)\n  - At end of solenoid: B ≈ ½μ₀nI (exactly half for semi-infinite)\n  - Far outside: B ≈ 0 but non-zero (dipole fall-off ∝ 1/r³)\n- **s6_path:** Show field line diagram for finite solenoid; fringe field visible at ends; contrast with infinite approximation.\n\n---",
+      "localKey": "MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY",
+      "language": "en",
+      "refs": [
+        "MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.solenoid",
+      "title": "Ampere's law derivation and B = μ₀nI: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Ampere's law derivation and B = μ₀nI: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 257,
+        "endLine": 267
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.solenoid",
+      "title": "Inductance, energy, WE-1: Block 1-B",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Inductance, energy, WE-1: Block 1-B\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 267,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.solenoid",
+      "title": "Iron core: Block 1-C, WE-2",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Iron core: Block 1-C, WE-2\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 269,
+        "endLine": 275
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.solenoid",
+      "title": "WE-3: design problem — finding n, N, L from given B and I",
+      "content": "{\"id\":\"TA-4\",\"title\":\"WE-3: design problem — finding n, N, L from given B and I\",\"primitives\":[\"P36\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[\"MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 275,
+        "endLine": 348
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.solenoid",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** Inside an ideal solenoid, B:\n(a) Increases with distance from the axis **(b) Is uniform (constant everywhere)** (c) Depends on solenoid radius (d) Is zero at the centre\n\n**A2 (Fill-in):** For a solenoid with n turns/m, current I: B = ______. For N turns, length l, area A: L = ______.\n[B = μ₀nI; L = μ₀N²A/l]\n\n**A3 (Short answer):** How does doubling the number of turns (while keeping length and radius fixed) change B and L?\n[n doubles → B = μ₀nI doubles; L = μ₀n²Al ∝ n² → L quadruples]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** A solenoid has B = 8.0 mT inside and L = 2.0 mH at I = 1.5 A. An identical solenoid (same n, l, r) is placed coaxially inside the first and connected in series. Find the combined B and L.\n[B inside is from both solenoids: each contributes μ₀nI; total B = 2×8.0 = 16 mT. L_combined = L₁ + L₂ + 2M where M = mutual inductance (= L₁ for identical coaxial solenoids) = 2+2+2×2 = 8 mH. Alternatively, series aiding: n_eff = 2n, same l, same A: L ∝ n² → L_new = 4×L₁ = 8 mH ✓]\n\n**B2:** A solenoid is filled with a ferrite core (μ_r = 500) replacing air. I = 1.0 A, n = 3000 turns/m, A = 2 cm², l = 10 cm. Find B and L.\n[B = μ_r μ₀nI = 500×4π×10⁻⁷×3000×1 = 500×3.77×10⁻³ = 1.89 T; L = μ_r μ₀n²Al = 500×4π×10⁻⁷×9×10⁶×2×10⁻⁴×0.10 = 500×2.26×10⁻⁴ = 0.113 H]\n\n**B3:** Two solenoids: A (n=1000/m, r=2cm, l=50cm) and B (n=1000/m, r=4cm, l=50cm). Compare B_inside and L for each.\n[B_A = B_B = μ₀×1000×I (same n, I) → fields are equal. L_A = μ₀n²π(0.02)²×0.5 = 4π×10⁻⁷×10⁶×π×4×10⁻⁴×0.5 = 0.789 mH; L_B = 4× L_A = 3.16 mH (radius doubles → area ×4 → L×4).]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** Design a solenoid to store U = 50 mJ at I = 5.0 A with B = 20 mT inside. Find: (a) required L; (b) required n (from B condition); (c) required volume Al; (d) choose practical l and A.\n[(a) L = 2U/I² = 2×0.05/25 = 4.0 mH. (b) n = B/(μ₀I) = 20×10⁻³/(4π×10⁻⁷×5) = 3183 ≈ 3200 turns/m. (c) Al = L/(μ₀n²) = 4×10⁻³/(4π×10⁻⁷×(3200)²) = 4×10⁻³/(1.286×10⁻²) = 0.311 m³... let me recompute: μ₀n² = 4π×10⁻⁷×(3200)² = 4π×10⁻⁷×1.024×10⁷ = 4π×1.024 = 12.87 T/m·A×m = 12.87×10⁻⁰ ... checking units: μ₀ in H/m; n² in 1/m²; μ₀n² in H/m³; L = μ₀n²Al: [H] = [H/m³]×[m²]×[m] = [H] ✓. μ₀n² = 4π×10⁻⁷×(3200)² = 4π×10⁻⁷×1.024×10⁷ = 4π×1.024 ≈ 12.87×10⁻³ × ... Actually: 4π×10⁻⁷×1.024×10⁷ = 4π×1.024 = 12.86. So Al = 4×10⁻³/12.86 = 3.11×10⁻⁴ m³. (d) Choose l=20cm=0.20m → A = 3.11×10⁻⁴/0.20 = 1.56×10⁻³ m² → r=√(A/π)=√(4.96×10⁻⁴)=2.23cm. Practical: r≈2.2cm, l=20cm, N=n×l=640 turns.]\n\n**C2 (Synthesis):** An MRI solenoid produces B = 3.0 T in a 1.0 m bore (diameter) superconducting solenoid of length l = 1.5 m. Find n, N, and energy stored at I = 500 A. Why must it be superconducting?\n[n = B/(μ₀I) = 3.0/(4π×10⁻⁷×500) = 3.0/6.28×10⁻⁴ = 4775 turns/m; N = n×l = 4775×1.5 = 7163 turns. A=π(0.5)²=0.785m²; L=μ₀n²Al=4π×10⁻⁷×4775²×0.785×1.5=4π×10⁻⁷×2.28×10⁷×1.178=33.8H. U=½×33.8×500²=4.22×10⁶J=4.22MJ. Superconducting: resistance R=0 → no I²R heating → current maintained indefinitely with no power input; normal copper at I=500A would dissipate P=I²R→enormous heat → impractical.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 184,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.solenoid",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (field varies with r) | Deploy MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS; show Ampere's law derivation has no r |\n| Probe B1 wrong (series inductance) | Series identical solenoids: n_eff=2n, same l → L∝n²→ L×4; or use L_total=L₁+L₂+2M for coupled inductors |\n| Probe B2 wrong (ferrite core) | Confirm: μ_r multiplies both μ₀nI and μ₀n²Al; factor out μ_r from both formulas |\n| Probe C1 units error | Check: μ₀ in H/m; n² in m⁻²; A in m²; l in m → [H/m × m⁻² × m² × m] = [H] ✓ |\n| Student asks about toroid | Use Block 1-D comparison; toroid: B = μ₀NI/(2πr), varies with r; useful when zero external field needed |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 293,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.em.solenoid/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.solenoid",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we study the solenoid — the most important magnetic device in engineering. MRI machines, transformers, electromagnets, speakers, and relays all use solenoids. You'll derive the field, the inductance, and design your own.\"\n\n[P41 — Diagnostic]\n\"If I wind more turns per metre on a solenoid (keeping length and current fixed), what happens to the field inside?\"\n→ Correct (B increases proportionally): \"Exactly — let's prove it with Ampere's law.\"\n→ Incorrect: \"Good instinct — let's check against Ampere's law.\"\n\n[P06 — Concrete anchor]\n\"A solenoid is like stacking many bar magnets inside each other — all aligned. Each turn adds a small B contribution; hundreds of turns create a strong, uniform field inside. The outside fields of each turn nearly cancel — that's why B ≈ 0 outside.\"\n\n[TA-1 — Ampere's law derivation and B = μ₀nI: Block 1-A]\n\"Rectangular loop: inside side contributes BL; outside contributes 0; two perpendicular sides contribute 0. KVL: BL = μ₀(nL)I → B = μ₀nI.\"\n\n[P28 — Conflict evidence for MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS]\n\"B = μ₀nI: no radius. WE-1 vs. a solenoid with double the radius at same n and I: same B, but L and flux (Φ=BA) are 4× larger. Radius affects inductance and flux, not field strength.\"\n\n[P51 — Check-in]\n\"Two solenoids: n=1000/m, I=2A; one r=1cm, one r=5cm. What is B in each?\"\n[Both: B = 4π×10⁻⁷×1000×2 = 2.51 mT — identical]\n\n[TA-2 — Inductance, energy, WE-1: Block 1-B]\n\n[TA-3 — Iron core: Block 1-C, WE-2]\n\"L_core = μ_r × L_air. A compact solenoid with iron core can have L = H range instead of mH.\"\n\n[P28 — Conflict evidence for MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY]\n\"Infinite solenoid: yes, B=0 outside exact. Real (finite) solenoid: MRI machines need metres of magnetic shielding outside. The fringe field exists — falls off as 1/r³. B≈0 outside is an approximation valid for r >> solenoid radius and far from the ends.\"\n\n[TA-4 — WE-3: design problem — finding n, N, L from given B and I]\n\n[P52 — Narrow]\n\"Two formulas: B = μ₀nI; L = μ₀N²A/l. Everything else derives from these.\"\n\n[P62 — Retrieval seed]\n\"Write from memory: B formula, L formula, dependence of each on n, r, l, core material.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Solenoid: B = μ₀nI (uniform, independent of radius). L = μ₀N²A/l (grows as N²). Iron core multiplies both by μ_r. Fringe fields exist outside real solenoids — ideal formula is an approximation. Applications: relays, speakers, MRI, electromagnets.\"\n\n[P85 — Regulation tail]\n\"Shakiest: why B is independent of radius, the L formula, or the iron core calculation?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the iron-core solenoid problem.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.solenoid.md",
+        "startLine": 239,
+        "endLine": 293
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

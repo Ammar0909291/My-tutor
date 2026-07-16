@@ -1,0 +1,370 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.astro.stellar-evolution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.astro.stellar-evolution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e1fb2087a5fb92d375f1a8d76f55bc2a02177ae1963e21cb15b722e2d0e4a8fd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.astro.stellar-evolution.md": "sha256:32209b406d05f1f4b15f83dec40e90f2250d7e0fddac2e661a1c9fe10814e523"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.astro.stellar-evolution",
+    "name": "Stellar Evolution and End States",
+    "difficultyRaw": "Advanced",
+    "bloom": "Analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.astro.stellar-structure"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.astro.stellar-evolution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.astro.stellar-evolution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.astro.stellar-evolution.md": "sha256:32209b406d05f1f4b15f83dec40e90f2250d7e0fddac2e661a1c9fe10814e523"
+      },
+      "contentHash": "sha256:96c9e5250f736a8fe6ae247fb823c5bc3b1f653b1293d75b769e251327f40477",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-evolution.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-evolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-evolution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-evolution.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-evolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-evolution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-evolution.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-evolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-evolution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.astro.stellar-evolution/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Stellar Evolution and End States — core explanation",
+      "content": "**Core Claim:** When a star exhausts its core hydrogen, it leaves the main sequence and evolves through a sequence of shell burning and core contraction stages determined by its mass — culminating in one of three endpoints: a white dwarf (M < 8 M_sun), a neutron star (8–25 M_sun), or a black hole (M > 25 M_sun), each sustained against gravity by a different physical mechanism or terminated by its failure.\n\n**Why It Matters:** Stellar evolution synthesizes all elements heavier than helium (Big Bang produced only H, He, Li), returns them to the ISM via winds and supernovae, and determines the nature of compact remnants — white dwarfs, neutron stars, and black holes — which are key objects in modern astrophysics (gravitational waves, GRBs, pulsars, X-ray binaries).\n\n**Threshold Concept:** A star's mass at birth is destiny — it determines not just its main-sequence lifetime but the entire future evolutionary path and final endpoint. The mass boundaries are not arbitrary: they correspond to physical thresholds where one support mechanism (nuclear fusion, electron degeneracy, neutron degeneracy) fails and the star must either find a new one or collapse catastrophically.\n\n**Prerequisite Knowledge Check:**\n- Stellar structure, hydrostatic equilibrium, main sequence (phys.astro.stellar-structure)\n- Nuclear fusion reactions and Q-values (phys.mod.nuclear-fusion)\n- Pauli exclusion principle and degeneracy pressure (phys.qm.pauli-exclusion recommended)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "The Sun will explode in a supernova",
+      "content": "### MC-1: The Sun will explode in a supernova\n- **Probe:** \"What will happen to the Sun when it runs out of fuel?\"\n- **Characteristic phrase:** \"It will eventually go supernova.\"\n- **Trigger:** Cultural familiarity with \"supernova\" as the way stars die; conflating star death with stellar explosion.\n- **Conflict evidence [P28]:** The Sun has mass 1 M_sun — well below the ~8 M_sun threshold for core-collapse supernova. The Sun's carbon-oxygen core (after helium burning) will never reach temperatures hot enough to ignite carbon burning. The core will instead be supported by electron degeneracy pressure as a white dwarf. The outer layers will be expelled as a planetary nebula.\n- **Bridge [P30]:** Supernova occurs when the degenerate iron core exceeds the Chandrasekhar mass — requiring a more massive precursor star (typically > 8 M_sun).\n- **Replacement [P31]:** Sun's future: ~5 Gyr on MS remaining → red giant (core He burning) → AGB phase with thermal pulses → planetary nebula ejection → white dwarf cooling for ~10¹⁰ yr. No explosion.\n- **Discrimination pairs [P33]:** Sun (1 M_sun): white dwarf endpoint. Betelgeuse (~ 20 M_sun): Type II supernova endpoint → neutron star or black hole. Different mass → qualitatively different fate.\n- **S6 repair path:** Walk through the Sun's future on the HR diagram step by step; identify each phase and why the carbon core doesn't ignite.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Fusing iron releases energy",
+      "content": "### MC-2: Fusing iron releases energy\n- **Probe:** \"Can a star fuse iron to release energy and halt collapse?\"\n- **Characteristic phrase:** \"Just fuse the iron to make heavier elements.\"\n- **Trigger:** Extrapolating the pattern: H fuses → He, He fuses → C, C fuses → … → Fe should fuse.\n- **Conflict evidence [P28]:** BE/A curve peaks at ⁵⁶Fe (8.79 MeV/nucleon). Fusing Fe → heavier elements requires energy input (BE/A decreases). The iron core is a dead end — no nuclear energy release possible. If you try to fuse Fe, the core temperature drops, pressure drops, gravity wins.\n- **Bridge [P30]:** All previous burning stages (H→He→C→O→Si) released energy because BE/A increased. At ⁵⁶Fe, BE/A is at its maximum — there is nowhere higher to go on the binding energy curve.\n- **Replacement [P31]:** Iron is the \"ash of all ashes.\" An inert iron core grows from silicon burning (28Si + 28Si → 56Ni → 56Co → 56Fe). When the iron core exceeds M_Ch, no energy source can halt collapse — the star implodes.\n- **Discrimination pairs [P33]:** ⁴He fusing to ¹²C: BE/A increases from 7.07 to 7.68 MeV/nucleon → energy released. ⁵⁶Fe fusing to ¹¹²Cd: BE/A decreases from 8.79 to 8.55 MeV/nucleon → energy required, not released.\n- **S6 repair path:** Plot the BE/A curve; mark each stellar burning stage; show why iron is the endpoint.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "White dwarfs are still burning hydrogen",
+      "content": "### MC-3: White dwarfs are still burning hydrogen\n- **Probe:** \"How does a white dwarf produce light?\"\n- **Characteristic phrase:** \"It still has some hydrogen fuel burning slowly.\"\n- **Trigger:** Thinking all luminous objects produce energy by fusion.\n- **Conflict evidence [P28]:** The hottest white dwarfs have T ~ 100,000 K immediately after formation (cooling from planetary nebula). Over billions of years they cool to T < 10,000 K (cool white dwarfs observed in nearby clusters). If they were fusing hydrogen, they would be increasing in temperature or maintaining it — instead they monotonically cool.\n- **Bridge [P30]:** White dwarfs are inert degenerate carbon-oxygen (or oxygen-neon) remnants supported by electron degeneracy pressure. They cool like a brick: no energy generation, just radiating stored thermal energy.\n- **Replacement [P31]:** White dwarf luminosity: L = 4πR²σT⁴ (black body radiation from cooling degenerate remnant). No fusion. The oldest white dwarfs in globular clusters (age ~12 Gyr) have cooled to T ~ 4000 K and are barely luminous.\n- **Discrimination pairs [P33]:** Main sequence star: hydrogen fusion in core. White dwarf: no fusion, cooling. The surface luminosity of both can be similar (at some point during cooling) but the mechanism is completely different.\n- **S6 repair path:** Estimate cooling timescale: white dwarf thermal energy ~kT × N_e ~ 10³² J; luminosity ~10²² W → cooling time ~10¹⁰ s ~ 300 yr at peak, but L decreases as T⁴ → much longer total cooling.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Neutron stars are just very dense white dwarfs",
+      "content": "### MC-4: Neutron stars are just very dense white dwarfs\n- **Probe:** \"What's the difference between a white dwarf and a neutron star?\"\n- **Characteristic phrase:** \"A neutron star is like a white dwarf, just more compressed.\"\n- **Trigger:** Thinking compact objects form a continuous sequence of compression.\n- **Conflict evidence [P28]:** White dwarf: supported by electron degeneracy, composition C/O, density ~10⁶ g/cm³, R~5000 km. Neutron star: protons captured electrons (neutronization: p+e⁻→n+νₑ) during core collapse, composition mostly neutrons + quarks, supported by neutron degeneracy + strong force, density ~10¹⁴ g/cm³ (nuclear density), R~10 km. The densities differ by 10⁸; the support mechanism and composition are qualitatively different.\n- **Bridge [P30]:** When a stellar core exceeds the Chandrasekhar limit, electron degeneracy fails — electrons are captured by protons, converting the white-dwarf-like core into neutronium. A phase transition, not a compression.\n- **Replacement [P31]:** White dwarf (M < 1.44 M_sun): electron degeneracy support, density ~10⁶ g/cm³. Neutron star (1.4–2 M_sun): neutron degeneracy + repulsive nuclear force, density ~10¹⁴ g/cm³, R~10 km. They are qualitatively different objects separated by a core-collapse event.\n- **Discrimination pairs [P33]:** White dwarf: size of Earth, mass of Sun. Neutron star: size of a city, mass of 1.4 Sun. Same mass-range, factor 1000 difference in radius, factor 10⁸ in density.\n- **S6 repair path:** Show why electron degeneracy fails at M_Ch: Fermi momentum → relativistic electrons → pressure no longer grows fast enough to halt gravity (Γ < 4/3 instability for relativistic gas).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Show Sun's HR track ending at white dwarf, not supernova",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Show Sun's HR track ending at white dwarf, not supernova\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 7,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Plot BE/A curve; show Fe is the peak; demonstrate fusing Fe is endothermic",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Plot BE/A curve; show Fe is the peak; demonstrate fusing Fe is endothermic\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 8,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Contrast white dwarf (electron degeneracy, C/O, density 10⁶ g/cm³) vs. neutron star (neutron degeneracy, nuclear density 10¹⁴ g/cm³)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Contrast white dwarf (electron degeneracy, C/O, density 10⁶ g/cm³) vs. neutron star (neutron degeneracy, nuclear density 10¹⁴ g/cm³)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 9,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Correctly predict the endpoint of stars with given masses; explain the iron core crisis; distinguish the three support mechanisms.\n\n**FA-1:** \"A star has initial mass 12 M_sun. Describe its likely endpoint.\"\n*Expected:* 12 M_sun > 8 M_sun → proceeds through all burning stages (H, He, C, Ne, O, Si) → iron core → core-collapse supernova → neutron star (if remnant mass 1.4–2 M_sun below TOV limit, which is expected for 12 M_sun progenitor).\n*Threshold:* Correct identification as core-collapse supernova; correct endpoint as neutron star; qualitative explanation of why.\n\n**FA-2:** \"Why does the iron core of a massive star collapse rather than fuse to release more energy?\"\n*Expected:* ⁵⁶Fe is at the peak of the BE/A curve (8.79 MeV/nucleon). Fusing iron to heavier nuclei would require energy input (BE/A decreases for A > 56). No nuclear energy source remains; without energy generation, radiation pressure falls, gravity overwhelms electron degeneracy pressure (relativistic electrons give Γ = 4/3, insufficient to maintain stability), and the core implodes.\n*Threshold:* Invokes BE/A peak; states fusing Fe is endothermic; mentions electron degeneracy failure.\n\n**FA-3:** \"What determines whether a supernova leaves a neutron star or a black hole?\"\n*Expected:* The mass of the compact remnant after the explosion. If remnant mass < TOV limit (approximately 2–3 M_sun), neutron degeneracy pressure supports it as a neutron star. If remnant mass > TOV limit (or if fallback accretion pushes it over), even neutron degeneracy fails and a black hole forms. More massive progenitors generally leave more massive remnants.\n*Threshold:* Identifies TOV limit as the deciding threshold; distinguishes neutron degeneracy (neutron star) from complete collapse (black hole).\n\n**FA-4:** \"What supports a white dwarf against gravity, and why is there a maximum mass?\"\n*Expected:* Electron degeneracy pressure (Pauli exclusion principle) — electrons are packed into all available states up to the Fermi energy, producing a pressure that does not depend on temperature. Maximum mass (Chandrasekhar limit, 1.44 M_sun) arises because as mass increases, the electrons become relativistic (Fermi momentum → relativistic). Relativistic electron degeneracy pressure increases as ρ^(4/3) rather than ρ^(5/3), and at some mass, it grows too slowly to balance gravity — the white dwarf becomes unstable.\n*Threshold:* Identifies electron degeneracy as support; states M_Ch = 1.44 M_sun; explains relativistic instability qualitatively.\n\n**Confidence calibration:** After FA-1, ask: \"What about a 2 M_sun star? A 0.5 M_sun star? A 50 M_sun star?\" Testing rapid application across the mass range reveals whether the learner has internalized the mass-boundary logic or only memorized the single example.\n\n**Delayed retrieval:** Return at day 5: \"Sketch the HR evolutionary track for a 1 M_sun star from the ZAMS to the endpoint. Label each phase and estimate how long it lasts.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 185,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** A star is burning its fuel. When the core fuel runs out, what happens depends on whether it can ignite a new fuel at a higher temperature (more compression needed) or whether degeneracy pressure can stop the collapse. Like a relay race — each fuel type (H, He, C, Ne, O, Si) is handed off when the previous one exhausts. Massive stars run the full relay; low-mass stars drop the baton after helium.\n\n**Representational:**\n- HR diagram evolution track: horizontal line along main sequence → turns right and up (subgiant branch) → ascends red giant branch → helium flash (low mass) or quiet He ignition (high mass) → horizontal branch → AGB → end state\n- Shell structure of a massive star before core collapse: concentric onion layers: H shell → He shell → C shell → Ne shell → O shell → Si shell → Fe core (inert, no fusion energy)\n- Chandrasekhar mass limit: M_Ch = 1.44 M_sun (maximum white dwarf mass)\n\n**Abstract:**\n- Post-main-sequence: core contracts → T rises → ignites He at ~10⁸ K; triple-alpha process: 3 ⁴He → ¹²C + Q (7.27 MeV)\n- AGB stars: double shell burning (H + He shells) → thermal pulses → mass loss → planetary nebula + white dwarf\n- Massive star: successive burning stages; iron peak at ⁵⁶Fe — no energy gain from further fusion (BE/A maximum); core mass exceeds Chandrasekhar → electron degeneracy fails → core collapse at ~0.25 s → proto-neutron star (neutron degeneracy bounce) → shock wave → Type II supernova\n- Remnants:\n  - White dwarf: supported by electron degeneracy pressure; M < M_Ch = 1.44 M_sun; R ~ Earth's radius; cooling over ~10¹⁰ yr\n  - Neutron star: supported by neutron degeneracy + strong force; M ~ 1.4–2 M_sun; R ~ 10 km; ρ ~ 10¹⁴ g/cm³; Tolman-Oppenheimer-Volkoff (TOV) limit ≈ 2–3 M_sun\n  - Black hole: M > TOV limit; all support fails; Schwarzschild radius R_s = 2GM/c²\n\n**Transfer:** Type Ia supernova: accreting white dwarf reaches M_Ch → explodes entirely (no remnant); standard candle for cosmology (uniform peak luminosity). Pulsars: rotating neutron stars with B ~ 10¹²T; radio beacon. Gravitational wave source: merging neutron stars (GW170817), merging black holes.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 36,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Why Beginners Fail",
+      "content": "1. **Thinking all stars explode:** Only massive stars (M > 8 M_sun) produce core-collapse supernovae. Most stars (like the Sun) end as planetary nebulae + white dwarfs. Learners often think all stars explode.\n2. **Iron fusion liberates energy:** Learners think the iron core could fuse to produce energy. But ⁵⁶Fe is at the peak of the binding-energy-per-nucleon curve — fusing it requires energy input, not releases energy. The star is \"out of fuel\" once it has an iron core.\n3. **White dwarf is a star still fusing:** Learners think white dwarfs still shine by fusion. They don't — they are degenerate carbon-oxygen remnants cooling by radiation (like a dying ember, not a burning fire).\n4. **Neutron stars are just compressed white dwarfs:** Neutron stars require the collapse of a stellar core and neutronization of protons (p + e⁻ → n + νₑ); they are supported by neutron degeneracy and strong-force repulsion, not electron degeneracy. Different physics, different composition, different density by 10⁶.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 58,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"Every atom of iron in your body was forged in a star that died in a supernova. Stellar evolution is not just astrophysics — it is the history of every atom you are made of. Stars live, burn out, and die; and in dying, they scatter the material for planets, oceans, and life.\"\n\n**Pacing:** Anchor with the mass-fate table: M < 8 M_sun → white dwarf; 8–25 M_sun → neutron star; > 25 M_sun → black hole. Then explain the physics behind each boundary. The table provides a framework before the physics is developed.\n\n**Common impasse language:** \"Iron doesn't explode the star — it ends the star. The explosion is powered by the gravitational energy released when the core collapses from Earth-size to city-size in a quarter second: ~3×10⁴⁶ J, 100× the Sun's lifetime output. Only 1% couples to the envelope to power the supernova. 99% leaves as neutrinos — and we detected them from SN1987A.\"\n\n**Closing consolidation:** \"Three endpoints: a cooling coal (white dwarf), a spinning lighthouse (neutron star/pulsar), or a gravitational abyss (black hole). The boundary between them is sharp physics: the Chandrasekhar mass and the TOV limit. Every stellar death is the birth of one of these three objects.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner is unclear on what determines a star's main-sequence position. Return to phys.astro.stellar-structure before evolution.\n\n**S3 — Partial understanding:** Knows the endpoints but cannot explain the transitions between them. Intervention: BE/A curve exercise (Discovery Lesson) — making iron core crisis concrete.\n\n**S6 — Misconception detected:** MC-1 (Sun goes supernova) or MC-2 (iron fusion). Intervention: for MC-1, show HR track ending at white dwarf. For MC-2, point to BE/A peak at Fe and ask what happens to the energy budget.\n\n**S9 — Near mastery:** Understands stellar evolution but struggles with quantitative aspects (Chandrasekhar limit, Schwarzschild radius). Intervention: dimensional estimate of M_Ch from relativistic electron degeneracy (Demo 3); estimate of R_s for a stellar-mass black hole.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 211,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Structural (mass-fate table, onion-layer diagram, HR evolutionary tracks) + conceptual (why each endpoint occurs: degeneracy pressure physics, BE/A curve).\n\n**Spaced retrieval schedule:** Day 1 (three endpoints and mass ranges; why iron core collapses), Day 3 (sketch HR track for Sun and for 20 M_sun star; explain each branch), Day 5 (Chandrasekhar mass and what happens above it), Day 14 (connect to supernovae as element factories; estimate energy budget of Type II SN).\n\n**Interleaving partners:** phys.astro.stellar-structure (main-sequence physics underpins the evolution), phys.mod.binding-energy (BE/A curve is the key to why iron is the endpoint), phys.qm.pauli-exclusion (degeneracy pressure is Pauli in action), phys.astro.black-holes (next step: Schwarzschild radius, event horizons).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 223,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Type Ia supernova as standard candle (accreting WD reaches M_Ch → explosion; used to measure cosmic acceleration). Pulsar properties (spin-down rate → magnetic field → neutron star age). X-ray binaries (neutron star/BH accreting from companion → X-ray luminosity → mass transfer rate).\n\n**Far transfer:** Big Bang nucleosynthesis produced H, He, Li only. All heavier elements are stellar (up to Fe: stellar burning; above Fe: r-process in neutron star mergers/core-collapse; confirmed by GW170817 kilonova). The chemical history of the universe is written in stellar evolution.\n\n**Structural abstraction:** The logic — a system supported by one mechanism, that mechanism failing at a critical mass/energy, triggering collapse or transition to a new support — recurs throughout physics: Jeans mass (gravitational collapse of molecular clouds), Eddington luminosity (radiation pressure vs. gravity), white dwarf cooling models, TOV equation for neutron stars. Understanding the stellar evolution \"cascade of crises\" prepares learners for analogous reasoning in nuclear, condensed matter, and gravitational physics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 233,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-evolution/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.astro.stellar-evolution",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.astro.stellar-structure must be complete — hydrostatic equilibrium, mass-luminosity relation, HR diagram. Without these, the evolutionary track (which follows deviations from MS equilibrium) is not comprehensible. phys.mod.binding-energy (BE/A curve) is implicitly required to explain the iron endpoint.\n\n**Common pacing error:** Spending all time on the dramatic endpoint (supernova) without establishing why the iron core cannot produce energy. The physics of BE/A and its implications must come first.\n\n**Assessment gap:** Curricula frequently test the three endpoints but rarely ask learners to explain: (1) why electron degeneracy becomes relativistic and fails at M_Ch; (2) why fusing iron is endothermic; (3) quantitative cooling timescales for white dwarfs.\n\n**Suggested pairing:** Pair with phys.astro.black-holes (natural next step: Schwarzschild geometry, event horizon, tidal forces) and phys.astro.cosmology (connects to element synthesis history of the universe).\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-evolution.md",
+        "startLine": 243,
+        "endLine": 256
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

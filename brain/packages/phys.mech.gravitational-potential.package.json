@@ -1,0 +1,390 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.gravitational-potential-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.gravitational-potential",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9a49b42802ff4123fa26cdfec27a247df3157c053b21f75c8a91e58f8ec84fec",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.gravitational-potential.md": "sha256:48bee9ca7eef2f8c6f9547cbc5b433efb80b97d833f0124ea1b8319e695d38de"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.gravitational-potential",
+    "name": "Gravitational Potential Energy",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.gravitational-field",
+      "phys.mech.potential-energy"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.gravitational-potential-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.gravitational-potential (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.gravitational-potential.md": "sha256:48bee9ca7eef2f8c6f9547cbc5b433efb80b97d833f0124ea1b8319e695d38de"
+      },
+      "contentHash": "sha256:fa45ec69384237c3380f720bfd21ff5ba1ac678f29c38cc8dfa3050585265639",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-potential.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-potential\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-potential.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-potential\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-potential.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-potential\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-potential.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-potential\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-potential.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md#TA-5 (addresses MC-MGHZERO, MC-POSITIVE-POTENTIAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-potential\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.gravitational-potential/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "Gravitational Potential Energy — Conceptual Development Sequence",
+      "content": "**TA-1 — Derivation of U = −GMm/r [C]**\n\nGravitational PE is defined as the work done by an external agent to bring mass m from infinity to distance r from mass M, with zero kinetic energy change:\n\n```\nW_ext = −W_gravity = −∫[∞→r] F · dr\n```\n\nSince F_gravity = −GMm/r² (toward M, along −r̂), and we integrate against gravity:\n\n```\nU(r) = −W_gravity = −GMm/r\n```\n\nProperties:\n- U(∞) = 0 (reference level: infinity)\n- U(r) < 0 for all finite r (always negative)\n- U increases (becomes less negative) as r increases\n- ΔU = U(r₂) − U(r₁) = GMm(1/r₁ − 1/r₂)\n\n**TA-2 — Connection to Local Formula U = mgh [C→P]**\n\nNear Earth's surface (r ≈ R_E, h = r − R_E ≪ R_E):\n\n```\nΔU = U(R_E + h) − U(R_E)\n   = −GMm/(R_E + h) − (−GMm/R_E)\n   = GMm/R_E × (1 − R_E/(R_E + h))\n   = GMm/R_E × (h/(R_E + h))\n   ≈ GMm × h / R_E²          (since h ≪ R_E)\n   = (GM/R_E²) × mh\n   = g × mh = mgh\n```\n\nThis shows U = mgh is the first-order approximation to U = −GMm/r near the surface. The two are consistent; they differ only in reference level (U = mgh takes the surface as U = 0, while U = −GMm/r takes infinity as U = 0).\n\n**TA-3 — Gravitational Potential (per unit mass) [C→P]**\n\nThe gravitational potential V (not the same as PE) is PE per unit mass:\n\n```\nV = U/m = −GM/r       (units: J/kg)\n```\n\nV is a field quantity — it depends only on position and the source mass M, not on the test mass m. The gravitational field and potential are related:\n\n```\ng = −dV/dr     (field is the negative gradient of potential)\n```\n\nThis mirrors the relationship g = F/m (field = force per unit mass).\n\nEquipotential surfaces: surfaces of constant V are concentric spheres around a point mass. Moving along an equipotential surface requires no work against gravity.\n\n**TA-4 — Energy Conservation with the Exact Formula [P]**\n\nFor problems with large displacements (orbits, escape), use energy conservation with U = −GMm/r:\n\n```\nE_total = KE + U = ½mv² − GMm/r = constant\n```\n\nThree energy regimes:\n- E < 0: bound orbit (object cannot escape)\n- E = 0: parabolic escape trajectory (minimum escape condition)\n- E > 0: hyperbolic trajectory (excess speed beyond escape)\n\nExample: a rocket launched from Earth's surface at speed v. At height r = 2R_E from centre:\n\n```\n½mv₀² − GMm/R_E = ½mv² − GMm/(2R_E)\n```\n\nSolve for v (the speed at 2R_E given launch speed v₀).\n\n**TA-5 — Gravitational Potential Energy Change in Orbits [P]**\n\nFor a satellite moving from orbit r₁ to orbit r₂ > r₁:\n\n```\nΔU = GMm(1/r₁ − 1/r₂) > 0   (PE increases — less negative)\nΔKE = ?\n```\n\nUsing the virial theorem for circular orbits (KE = −½U):\n\n```\nKE = −½ × (−GMm/r) = GMm/(2r)\nTotal energy E = KE + U = GMm/(2r) − GMm/r = −GMm/(2r)\n```\n\nCounter-intuitive result: a satellite in a higher orbit has less kinetic energy (moves slower) but more total mechanical energy (less negative). Boosting to a higher orbit requires energy input.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 89,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/misconception/MC-MGHZERO",
+      "kind": "misconception",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "- **Trigger signal:** Student applies U = mgh at large distances from Earth's surface, uses h measured from the ground, or confuses the two gravitational PE formulas.",
+      "content": "### MC-MGHZERO\n- **Trigger signal:** Student applies U = mgh at large distances from Earth's surface, uses h measured from the ground, or confuses the two gravitational PE formulas.\n- **Conflict evidence [P28]:** \"U = mgh assumes the gravitational field g is constant — this is only valid near Earth's surface (h ≪ R_E ≈ 6370 km). At r = 2R_E from Earth's centre, g is already one-quarter of its surface value. Using U = mgh at r = 3R_E would give U = m × 9.8 × 2 × 6.37 × 10⁶ ≈ 1.25 × 10⁸ m joules, while the correct formula U = −GMm/r gives approximately −3.1 × 10⁷ m joules — not even close in sign. The two formulas are fundamentally different.\"\n- **Bridge text [P30]:** \"U = mgh is a local approximation valid when h ≪ R_E. It uses a flat-Earth assumption and a constant g. The exact formula U = −GMm/r is the universal one, valid everywhere, with zero reference at infinity. Near Earth's surface, U = −GMm/r + const simplifies to U ≈ mgh + const — the two are compatible but the reference level differs.\"\n- **Replacement text [P31]:** \"Use U = mgh only for problems explicitly near Earth's surface (h < few km). For any problem involving orbits, satellites, escape, or distances of hundreds of kilometres or more, use U = −GMm/r, where r is measured from Earth's centre.\"\n- **Discrimination pairs [P33]:**\n  - Lifting a 2 kg book 1.5 m: ΔU = mgh = 2 × 9.8 × 1.5 = 29.4 J ✓ (h ≪ R_E)\n  - Satellite at r = 2R_E: U = −GMm/(2R_E) (use exact formula; h ≫ local scale) ✓\n- **s6_path:** \"Two PE formulas for gravity feels confusing. Here's the rule: if the problem mentions altitude in metres or kilometres with no orbital context, use mgh. If it mentions orbits, satellites, escape — use −GMm/r. You'll never need both in the same problem.\"\n\n---",
+      "localKey": "MC-MGHZERO",
+      "language": "en",
+      "refs": [
+        "MC-MGHZERO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/misconception/MC-POSITIVE-POTENTIAL",
+      "kind": "misconception",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "- **Trigger signal:** Student expects gravitational PE to be positive and gets confused by the negative sign in U = −GMm/r.",
+      "content": "### MC-POSITIVE-POTENTIAL\n- **Trigger signal:** Student expects gravitational PE to be positive and gets confused by the negative sign in U = −GMm/r.\n- **Conflict evidence [P28]:** \"The reference for U = −GMm/r is at r = ∞, where U = 0. As a mass falls toward Earth (r decreases), gravity does positive work, so the system must lose potential energy — it must decrease from 0, going negative. At Earth's surface, U ≈ −62.5 MJ per kilogram — deeply negative. The sign is not arbitrary: it tells us the gravitational bound state requires energy input to escape to U = 0 at infinity.\"\n- **Bridge text [P30]:** \"Think of it like a hole: Earth's gravity digs a potential well below zero. Objects in orbit sit partway up the well (U negative, but less negative than at the surface). An object with total energy E < 0 is trapped in the well; one with E ≥ 0 can escape to infinity.\"\n- **Replacement text [P31]:** \"U = −GMm/r is always negative (for positive masses). It equals zero only at r = ∞. A less negative U means more energy — the object has 'climbed' the potential well. A more negative U means the object is deeper in the well.\"\n- **Discrimination pairs [P33]:**\n  - r = R_E: U = −GMm/R_E (most negative in our context → deepest in well)\n  - r = 2R_E: U = −GMm/(2R_E) (half as negative → higher in the well)\n  - r = ∞: U = 0 (reference level — the object has escaped)\n- **s6_path:** \"Negative PE in gravity is one of those things that feels wrong at first. Remind yourself: the reference is at infinity, not the ground. The deeper you are in Earth's gravity, the more negative your PE.\"\n\n---",
+      "localKey": "MC-POSITIVE-POTENTIAL",
+      "language": "en",
+      "refs": [
+        "MC-POSITIVE-POTENTIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 15,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "Derivation of U = −GMm/r",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Derivation of U = −GMm/r\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 91,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "Connection to Local Formula U = mgh",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Connection to Local Formula U = mgh\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 111,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "Gravitational Potential (per unit mass)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Gravitational Potential (per unit mass)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 127,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "Energy Conservation with the Exact Formula",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Energy Conservation with the Exact Formula\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 145,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "Gravitational Potential Energy Change in Orbits",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Gravitational Potential Energy Change in Orbits\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-MGHZERO\",\"MC-POSITIVE-POTENTIAL\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MGHZERO",
+        "MC-POSITIVE-POTENTIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 166,
+        "endLine": 356
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Sign and reference**\n\"Two satellites, A at r = R_E and B at r = 3R_E. Which has more gravitational PE? Which has more kinetic energy? Which has more total energy?\"\n\n*Target:* PE: B > A (B is less negative); KE: A > B (closer orbit → faster); Total E: B > A (B's total E is less negative, i.e., 'higher').",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 247,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Formula selection**\n\"A 2 kg ball is raised 3 m off the floor in a room. Calculate ΔU using (a) U = mgh, (b) U = −GMm/r. Which is more appropriate? Why?\"\n\n*Target:* (a) ΔU = 2 × 9.8 × 3 = 58.8 J; (b) gives essentially the same answer (h ≪ R_E). mgh is appropriate — the exact formula agrees but is unnecessarily complex for this scale.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 247,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Energy conservation (orbital)**\n\"A satellite is in a circular orbit at radius r = R_E + 500 km ≈ 6870 km. Using E = −GMm/(2r), find its total energy per kg. How does this compare to the PE per kg?\"\n\n*Target:* E/m = −GM/(2r) = −(6.674 × 10⁻¹¹ × 5.97 × 10²⁴)/(2 × 6.87 × 10⁶) ≈ −29.0 MJ/kg; U/m = −GM/r ≈ −58.0 MJ/kg; E = U/2 confirms virial theorem.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 247,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Bound vs. unbound**\n\"A spacecraft at r = 2R_E from Earth's centre has speed v = 6000 m/s. Is it bound to Earth? (Escape speed from 2R_E = √(GM/R_E) ≈ √(6.26 × 10⁷) ≈ 7910 m/s)\"\n\n*Target:* v = 6000 < 7910 m/s → E_total = ½mv² − GMm/(2R_E) < 0 → bound. The spacecraft cannot escape; it will follow a closed (elliptical) orbit.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 247,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: required launch speed**\n\"What minimum speed must a probe be given at Earth's surface to reach altitude h = R_E (i.e., r_final = 2R_E)?\"\n\n*Target:* ½mv₀² − GMm/R_E = 0 − GMm/(2R_E) → v₀ = √(GM/R_E) = √(6.26 × 10⁷) ≈ 7910 m/s (this is also escape speed from 2R_E — the probe just barely reaches 2R_E with v = 0).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 247,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "Adaptive Flags",
+      "content": "- **Negative sign discipline**: the most common error is dropping the negative sign from U = −GMm/r. Insist students write the minus sign explicitly at every step and check: \"Is the PE negative? It must be.\"\n- **Virial theorem** (TA-5): present as a result (E = U/2, KE = −U/2 for circular orbits) rather than derived. The derivation requires circular orbit force balance and is covered in phys.mech.orbital-mechanics. At this stage, the result is sufficient.\n- **ΔU formula**: for energy-conservation problems, the cleanest form is ΔU = GMm(1/r₁ − 1/r₂). Write it this way to avoid double-minus sign errors.\n- **Rubber-sheet analogy limitation**: the rubber-sheet model is spatial (a 2D surface), which means it cannot directly represent the radial 1/r dependence — the well shape in the model is not exactly a 1/r² funnel. Use it for qualitative intuition only; don't over-extend the analogy.\n- **Escape velocity connection** (MP-4, MP-5): these probes foreshadow phys.mech.escape-velocity. Do not derive escape velocity formula here; just use the E = 0 condition conceptually.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 317,
+        "endLine": 327
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-potential/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.gravitational-potential",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — gravitational well rubber-sheet provocation\n  ↓\n[P41] PD-1 (gravitational field formula) + PD-2 (PE concept)\n  ↓ PASS both\n[P06] Anchor: rubber-sheet well visualisation → U is negative, zero at ∞\n  ↓\nTA-1: Derive U = −GMm/r; properties table [C]\n  ↓\nTA-2: Recover U = mgh from exact formula [C→P]\n  ↓\n[P51] Check-in: \"At r = 3R_E, which formula do you use?\" (formula selection)\n  ↓ monitor\nTA-3: Gravitational potential V = U/m; equipotentials [C→P]\n  ↓\nWE-1 → WE-2 → WE-3 (escalating; WE-3 is the MC-MGHZERO head-on)\n  ↓\nTA-4: Energy conservation; E < 0 vs. E ≥ 0 regimes [P]\n  ↓\nTA-5: Orbital PE + virial theorem (E = U/2) [P]\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval schedule seed: \"Does a higher orbit have more or less total energy?\"\n[P68] Session close\n[P85] Regulation tail\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80% MP-set; re-route if below threshold\n```\n\n**Protocol routing:**\n- S0 (novice): full CPA path; extend rubber-sheet anchor with a simulated energy diagram (drawing the potential well curve) before TA-1.\n- S1 (schema without grounding): knows U = mgh but not U = −GMm/r; begin with WE-3 (comparison problem) to create explicit conflict.\n- S4 (prereq gap): PD-1 fail → gravitational-field; PD-2 fail → potential-energy.\n- S6 (anxiety): [F] protocol — \"Gravitational PE is just a tool for tracking energy. The formula looks scarier than mgh but it's the same idea — energy stored against gravity.\"\n- S7 (overconfident): open with MP-1 (compare E/KE/PE across two orbits) — the counter-intuitive result that higher orbits have less KE but more total E catches overconfident students.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-potential.md",
+        "startLine": 276,
+        "endLine": 317
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

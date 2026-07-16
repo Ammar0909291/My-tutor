@@ -1,0 +1,390 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.kinematics-2d-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.kinematics-2d",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ae4afe5fd81ca9a53c302113d719f57903513931c188fa0f65303f7f75c3e765",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.kinematics-2d.md": "sha256:b17207cc51ce5d07947aa8521899a9beee39aa7d1db73e158ec41a020b0fe3a1"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.kinematics-2d",
+    "name": "Kinematics in Two Dimensions",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.kinematics-1d",
+      "phys.meas.vector-addition"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.kinematics-2d-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.kinematics-2d (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.kinematics-2d.md": "sha256:b17207cc51ce5d07947aa8521899a9beee39aa7d1db73e158ec41a020b0fe3a1"
+      },
+      "contentHash": "sha256:325981342a7279dd3c6f17ffb8f21a2636cc70a8e266a1a786f8718937a1f5ee",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-2d.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-2d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-2d\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-2d.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-2d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-2d\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-2d.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-2d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-2d\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-2d.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-2d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-2d\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.kinematics-2d.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md#TA-5 (addresses MC-AXES-COUPLED, MC-TOTAL-VELOCITY-COMPONENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.kinematics-2d"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.kinematics-2d\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.kinematics-2d/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "Kinematics in Two Dimensions — Conceptual Development Sequence",
+      "content": "**TA-1 — Separating the Axes [C]**\n\nIn 2D kinematics, a particle's position is described by (x, y) and its velocity by (vₓ, v_y). The key principle:\n\n> **Independence of motion:** The x-motion and y-motion are independent. Each obeys its own set of 1D SUVAT equations. They are linked only through time t.\n\nFull SUVAT set for 2D:\n\nx-direction:\n```\nvₓ = u_x + aₓ t\nx = u_x t + ½ aₓ t²\nvₓ² = u_x² + 2aₓ x\n```\n\ny-direction:\n```\nv_y = u_y + a_y t\ny = u_y t + ½ a_y t²\nv_y² = u_y² + 2a_y y\n```\n\nCommon case — horizontal launch, gravity downward (a_y = −g, aₓ = 0):\n```\nvₓ = u_x  (constant)\nx = u_x t\n\nv_y = −gt  (if u_y = 0)\ny = −½gt²\n```\n\n**TA-2 — Initial Velocity Decomposition [C→P]**\n\nWhen an initial velocity u is given as magnitude and angle θ above horizontal:\n\n```\nu_x = u cos θ\nu_y = u sin θ\n```\n\nSign convention (standard):\n- Rightward: x positive\n- Upward: y positive\n- Gravity: a_y = −9.8 m/s² (or −g)\n\nRecovering final quantities:\n```\n|v| = √(vₓ² + v_y²)           (speed)\nφ = arctan(v_y / vₓ)           (direction of velocity)\n|r| = √(x² + y²)              (distance from origin)\n```\n\n**TA-3 — Solving 2D Problems: The Five-Step Method [C→P]**\n\n1. **Draw** the trajectory and mark the initial/final points.\n2. **Decompose** initial velocity into u_x and u_y.\n3. **Write** two SUVAT tables (x-column and y-column) with known values filled.\n4. **Solve** for the shared quantity (usually t) from one axis, then use it in the other.\n5. **Reconstruct** the vector (magnitude and direction) if required.\n\n**TA-4 — Relative Motion [P]**\n\nThe velocity of object A as seen from object B:\n\n```\nv_A/B = v_A − v_B   (velocity of A relative to B)\n```\n\nExample: a boat crosses a river. If the boat aims straight across (v_boat perpendicular to bank) and the river flows at v_river parallel to the bank, the actual velocity of the boat is:\n\n```\nv_actual = v_boat + v_river   (vector addition)\n|v_actual| = √(v_boat² + v_river²)\ndrift = v_river × t_crossing\n```\n\nTo cross with zero drift, the boat must angle upstream: sin θ = v_river / v_boat. Only possible if v_boat > v_river.\n\n**TA-5 — Position Vector and Trajectory Equation [P]**\n\nThe position vector at time t:\n```\nr(t) = (u_x t) x̂ + (u_y t + ½a_y t²) ŷ\n```\n\nEliminating t between x and y gives the trajectory equation. For horizontal launch (u_y = 0, a_y = −g):\n```\nx = u_x t  →  t = x / u_x\ny = −½g(x / u_x)²  =  −(g / 2u_x²) x²\n```\n\nThis is a parabola — confirming the shape of all projectile trajectories (in vacuum, uniform gravity). Preview for phys.mech.projectile-motion.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 82,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/misconception/MC-AXES-COUPLED",
+      "kind": "misconception",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "- **Trigger signal:** Student mixes x- and y-components in a single SUVAT equation (e.g., uses vₓ in the y-equation or uses total v instead of vₓ for horizontal time).",
+      "content": "### MC-AXES-COUPLED\n- **Trigger signal:** Student mixes x- and y-components in a single SUVAT equation (e.g., uses vₓ in the y-equation or uses total v instead of vₓ for horizontal time).\n- **Conflict evidence [P28]:** \"Suppose a ball is thrown horizontally at 10 m/s from a cliff. After 2 s, it has moved 20 m horizontally (x = vₓt) and 20 m downward (y = ½gt²). If you had used a single combined equation, you'd need to know the direction — but the horizontal and vertical motions never exchange information: the horizontal velocity never changes the vertical drop, and the vertical acceleration never affects the horizontal travel. They are completely independent.\"\n- **Bridge text [P30]:** \"Think of the motion as two separate 1D problems running simultaneously on two separate tracks. The x-track has constant velocity; the y-track has constant acceleration. They share only one thing: the time elapsed.\"\n- **Replacement text [P31]:** \"Decompose every 2D problem into x- and y-components. Write two independent SUVAT sets. They share t only. Never use a velocity component from one axis in the SUVAT equation of the other.\"\n- **Discrimination pairs [P33]:**\n  - x: vₓ = u_x + aₓt (correct) vs. vₓ = u_x + a_y t (wrong — uses y-acceleration for x-velocity)\n  - y: y = u_y t + ½a_y t² (correct) vs. y = u_y t + ½g × total_v (wrong — mixes speed with acceleration)\n- **s6_path:** \"This is the most common confusion in 2D kinematics — every student trips here. The good news: once you separate the axes, you just do 1D kinematics twice. You already know 1D kinematics.\"\n\n---",
+      "localKey": "MC-AXES-COUPLED",
+      "language": "en",
+      "refs": [
+        "MC-AXES-COUPLED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/misconception/MC-TOTAL-VELOCITY-COMPONENT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "- **Trigger signal:** Student uses the magnitude of the velocity vector |v| in a component equation, or tries to find |v| from one axis alone.",
+      "content": "### MC-TOTAL-VELOCITY-COMPONENT\n- **Trigger signal:** Student uses the magnitude of the velocity vector |v| in a component equation, or tries to find |v| from one axis alone.\n- **Conflict evidence [P28]:** \"A ball has vₓ = 3 m/s and v_y = 4 m/s. The speed (magnitude) is |v| = √(3² + 4²) = 5 m/s. If you tried to use 5 m/s in the x-equation: x = 5 × t — this predicts the ball moves 5 m in 1 s, but it actually moves 3 m horizontally and 4 m vertically in 1 s. The components and the magnitude are different quantities.\"\n- **Bridge text [P30]:** \"The magnitude |v| tells you how fast the particle is moving; the components vₓ and v_y tell you how fast it is moving in each direction. Use components in SUVAT; use magnitude only as a final reporting quantity.\"\n- **Replacement text [P31]:** \"In SUVAT equations, always use the component (vₓ, v_y) that matches the axis. The magnitude |v| = √(vₓ² + v_y²) is computed last, after all component work is done.\"\n- **Discrimination pairs [P33]:**\n  - vₓ = u_x + aₓt (component equation — correct)\n  - |v| = |u| + at (wrong — this would only work if motion is purely 1D)\n- **s6_path:** \"This trips everyone at first. The fix: always write vₓ and v_y as two separate unknowns from the start. Never introduce |v| until the very end.\"\n\n---",
+      "localKey": "MC-TOTAL-VELOCITY-COMPONENT",
+      "language": "en",
+      "refs": [
+        "MC-TOTAL-VELOCITY-COMPONENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "Separating the Axes",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Separating the Axes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 84,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "Initial Velocity Decomposition",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Initial Velocity Decomposition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 115,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "Solving 2D Problems: The Five-Step Method",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Solving 2D Problems: The Five-Step Method\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 136,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "Relative Motion",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Relative Motion\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 144,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "Position Vector and Trajectory Equation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Position Vector and Trajectory Equation\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-AXES-COUPLED\",\"MC-TOTAL-VELOCITY-COMPONENT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-AXES-COUPLED",
+        "MC-TOTAL-VELOCITY-COMPONENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 162,
+        "endLine": 363
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Axis independence check**\n\"A stone is thrown horizontally from a height of 45 m. Simultaneously, a second stone is dropped vertically from the same height. Which hits the ground first? Justify without calculating.\"\n\n*Target:* Both hit simultaneously. Horizontal velocity does not affect vertical free-fall. t = √(2h/g) for both.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 252,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Component decomposition**\n\"A ball is kicked at 25 m/s at 37° above horizontal. Write down u_x, u_y. If it lands at the same height, find the range. (sin 37° = 0.6, cos 37° = 0.8)\"\n\n*Target:* u_x = 20 m/s, u_y = 15 m/s; t = 2u_y/g = 30/9.8 ≈ 3.06 s; R = 20 × 3.06 = 61.2 m.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 252,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Combining axes**\n\"A projectile has vₓ = 8 m/s and v_y = −6 m/s at a particular instant. What is its speed? What angle below horizontal is the velocity?\"\n\n*Target:* |v| = √(64 + 36) = 10 m/s; φ = arctan(6/8) = 36.9° below horizontal.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 252,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Relative motion**\n\"An aircraft flies at 300 m/s east. A crosswind blows at 40 m/s north. What is the actual velocity of the aircraft (magnitude and direction) relative to the ground?\"\n\n*Target:* |v| = √(300² + 40²) = √(90000 + 1600) = √91600 ≈ 302.7 m/s; θ = arctan(40/300) ≈ 7.6° north of east.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 252,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis (time shared between axes)**\n\"A ball is thrown horizontally from a window 19.6 m high and lands 40 m from the base of the building. What was the initial horizontal speed? (g = 9.8 m/s²)\"\n\n*Target:* y-axis: t = √(2×19.6/9.8) = √4 = 2 s; x-axis: u_x = 40/2 = 20 m/s.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 252,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "Adaptive Flags",
+      "content": "- **Sign convention discipline**: insist on explicit sign convention declaration at the start of every problem (up = positive, rightward = positive, gravity = −9.8 m/s²). Inconsistent signs are the #1 arithmetic error in 2D kinematics.\n- **\"t is shared\" rule**: write in a box at top of every two-column SUVAT table: \"t is the same in both columns.\" This eliminates the most common procedural error.\n- **River-crossing geometry** (TA-4): draw the vector triangle for the boat problem explicitly — students who visualise it once rarely confuse the \"across\" component with the \"actual\" speed.\n- **Trajectory equation** (TA-5): preview only at this stage. Full projectile-motion analysis (range formula, optimal angle, etc.) is in phys.mech.projectile-motion. Do not rush into those derivations here.\n- **aₓ ≠ 0 cases**: this blueprint anchors on gravity-only problems (aₓ = 0). If a student brings a problem with non-zero horizontal acceleration (e.g., a motorboat with thrust and drag), acknowledge it and note both axes can have acceleration — SUVAT still applies independently.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 324,
+        "endLine": 334
+      }
+    },
+    {
+      "assetId": "phys.mech.kinematics-2d/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.kinematics-2d",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — twin-coin provocation (simultaneous drop)\n  ↓\n[P41] PD-1 (1D SUVAT) + PD-2 (vector decomposition)\n  ↓ PASS both\n[P06] Anchor: live demo / thought experiment → axes are independent\n  ↓\nTA-1: Independence principle; full 2D SUVAT set [C]\n  ↓\nTA-2: Initial velocity decomposition; sign convention [C→P]\n  ↓\nTA-3: Five-step problem-solving method [C→P]\n  ↓\n[P51] Check-in MP-1 (axis independence — conceptual only)\n  ↓ monitor\nWE-1: Horizontal launch — build the five-step method live\n  ↓\nTA-4: Relative motion; river-crossing geometry [P]\n  ↓\nWE-2 → WE-3 (escalating complexity)\n  ↓\nTA-5: Trajectory equation → parabola (preview projectile-motion) [P]\n  ↓\n[P36] MP-2 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval schedule seed: \"Ball thrown at 30° — which SUVAT axis do you use to find time of flight?\"\n[P68] Session close\n[P85] Regulation tail\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80% MP-set; re-route if below threshold\n```\n\n**Protocol routing:**\n- S0 (novice): full CPA path; run physical demo (or video) before anchor; slow through TA-3 method step-by-step.\n- S1 (schema without grounding): has heard of \"x and y separately\" but mixes components; go deep on MC-AXES-COUPLED with discrimination pairs before WE-1.\n- S4 (prereq gap): PD-1 fail → kinematics-1d; PD-2 fail → vector-addition.\n- S6 (anxiety): [F] protocol — \"We're doing 1D kinematics twice. You've done it before. The only new part is decomposing the initial velocity.\"\n- S7 (overconfident): open with MP-5 (reverse problem — find u_x from landing distance); the reverse direction catches overconfident students who only remember forward substitution.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md",
+        "startLine": 281,
+        "endLine": 324
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

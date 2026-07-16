@@ -1,0 +1,544 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.youngs-experiment-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.youngs-experiment",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:648a7c1c594c9fa3593163a3c7bcafb33a2bd0087fc10e99761750c937cf1035",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.youngs-experiment.md": "sha256:f64193873ce4d3e6c345fbd6be92d1910536ba3518ae72730093a9baf1bc861f"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.youngs-experiment",
+    "name": "Young's Double-Slit Experiment",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.opt.wave-optics",
+      "phys.wave.interference"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.youngs-experiment-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.youngs-experiment (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.youngs-experiment.md": "sha256:f64193873ce4d3e6c345fbd6be92d1910536ba3518ae72730093a9baf1bc861f"
+      },
+      "contentHash": "sha256:dbd40fd59e48b96aca7e5f333d854f964a4b77f37743ed02a1cf5db34843cd8f",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.youngs-experiment.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.youngs-experiment"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.youngs-experiment\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.youngs-experiment.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.youngs-experiment"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.youngs-experiment\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.youngs-experiment.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.youngs-experiment"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.youngs-experiment\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.youngs-experiment.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md#TA-4 (addresses MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.youngs-experiment"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.youngs-experiment\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.youngs-experiment.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md#TA-5 (addresses MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.youngs-experiment"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.youngs-experiment\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.youngs-experiment.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.youngs-experiment"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.youngs-experiment\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.youngs-experiment.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.youngs-experiment"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.youngs-experiment\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.youngs-experiment/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Young's Double-Slit Experiment — core explanation",
+      "content": "**Core Insight:** Young's double-slit experiment proves light has wave character by producing a\nstable interference pattern of alternating bright and dark fringes. Every result follows from one\nquantity — the path difference Δ = yd/D. Mastery means deriving fringe positions from first\nprinciples, computing fringe width β, and predicting how the pattern shifts when any parameter\n(d, D, λ, or an inserted slab) changes.\n\n**Experimental Setup:**\n- Two coherent slits S₁ and S₂, slit separation d\n- Screen at perpendicular distance D (D >> d)\n- Monochromatic light of wavelength λ\n- Point P at height y above screen centre\n- Path lengths r₁ (from S₁) and r₂ (from S₂)\n\n**Path difference at P (small-angle approximation):**\nΔ = r₂ − r₁ ≈ yd/D\n\n**Conditions for fringes:**\n- Bright (constructive): Δ = nλ, where n = 0, ±1, ±2, ...\n- Dark (destructive): Δ = (n + ½)λ, where n = 0, ±1, ±2, ...\n\n**Fringe positions:**\n- Bright: y_n = nλD/d = nβ\n- Dark:   y_n = (n + ½)λD/d = (n + ½)β\n\n**Fringe width β (spacing between successive bright or dark fringes):**\nβ = λD/d\n- Proportional to λ (longer λ → wider fringes)\n- Proportional to D (farther screen → wider fringes)\n- Inversely proportional to d (closer slits → wider fringes)\n- All fringes equally spaced within the small-angle approximation\n\n**Intensity distribution:**\nI = 4I₀ cos²(πΔ/λ) = 4I₀ cos²(πdy/(λD))\n\nwhere I₀ is the single-slit intensity and I_max = 4I₀ at Δ = 0.\n\nSelected values:\n- Δ = 0: I = 4I₀ (central maximum)\n- Δ = λ/2: I = 0 (first dark)\n- Δ = λ/3: I = 4I₀ cos²(π/3) = 4I₀ × (1/2)² = I₀  →  I/I_max = 1/4\n- Δ = 2λ/3: I = 4I₀ cos²(2π/3) = 4I₀ × (1/4) = I₀  →  I/I_max = 1/4\n\n**Effect of changing parameters (independent changes):**\n\n| Parameter changed | Direction | Effect on β |\n|-------------------|-----------|-------------|\n| d doubled         | wider     | β halved    |\n| d halved          | narrower  | β doubled   |\n| D doubled         | farther   | β doubled   |\n| λ red → violet    | shorter λ | β decreased |\n\n**YDSE with a glass slab (refractive index n, thickness t) placed over one slit:**\n- Additional optical path introduced = (n − 1)t\n- Entire fringe pattern shifts toward the covered slit by:\n  y_shift = (n − 1)t × D/d\n- Number of fringes shifted = (n − 1)t / λ\n- Fringe width β is unchanged; only the position of every fringe changes\n- The geometric screen centre is no longer the zeroth-order fringe\n\n**Source shifted by distance S (perpendicular to the axis, source-to-slit distance D_s):**\n- Central bright fringe shifts opposite to the source shift:\n  y₀ = −S × D/D_s (approximately, for small shifts)\n\n**Fringe visibility:**\nV = (I_max − I_min) / (I_max + I_min)\n- Equal slit intensities (I₁ = I₂): I_min = 0, V = 1 (perfect contrast)\n- Incoherent sources: V = 0 (no fringes visible)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 24,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Standard YDSE",
+      "content": "**Worked Example 1 (Standard YDSE):**\nd = 0.5 mm, D = 1.5 m, λ = 600 nm = 600 × 10⁻⁹ m.\n\nβ = λD/d = (600 × 10⁻⁹ × 1.5) / (0.5 × 10⁻³)\n   = 9 × 10⁻⁷ / 5 × 10⁻⁴ = 1.8 × 10⁻³ m = 1.8 mm\n\n3rd bright fringe: y₃ = 3β = 3 × 1.8 = 5.4 mm (from screen centre)\n\n2nd dark fringe (n = 1): y = (1 + ½)β = 1.5 × 1.8 = 2.7 mm\n\nNote: dark fringes fall exactly halfway between adjacent bright fringes. All fringes are\nequally spaced at β = 1.8 mm.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 24,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Slab insertion",
+      "content": "**Worked Example 2 (Slab insertion):**\nSame setup as WE-1. A glass slab of n = 1.5, t = 0.1 mm = 10⁻⁴ m is placed over slit S₁.\n\nAdditional optical path = (n − 1)t = 0.5 × 10⁻⁴ = 5 × 10⁻⁵ m\n\nFringe shift = (n − 1)t × D/d\n             = 5 × 10⁻⁵ × 1.5 / (0.5 × 10⁻³)\n             = 7.5 × 10⁻⁵ / 5 × 10⁻⁴\n             = 0.15 m = 150 mm  (toward S₁ side)\n\nNumber of fringes shifted = (n − 1)t / λ\n                           = 5 × 10⁻⁵ / (600 × 10⁻⁹)\n                           = 83.3 fringes\n\nThe central bright fringe (Δ = 0) moves 150 mm toward the slab side. This large shift\nillustrates that a 0.1 mm glass slab introduces a path difference of 83 wavelengths —\nshowing why optical path, not geometric path, determines fringe positions.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 24,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "White light YDSE",
+      "content": "**Worked Example 3 (White light YDSE):**\nSame d and D. White light: λ_red = 700 nm, λ_violet = 400 nm.\n\nβ_red    = 700 × 10⁻⁹ × 1.5 / (0.5 × 10⁻³) = 2.1 mm\nβ_violet = 400 × 10⁻⁹ × 1.5 / (0.5 × 10⁻³) = 1.2 mm\n\nCoincidence condition: n_red × 700 = n_violet × 400\nn_red / n_violet = 400/700 = 4/7  →  n_red = 4, n_violet = 7 (smallest integers)\n\nPosition: y = 4 × 2.1 = 8.4 mm  =  7 × 1.2 = 8.4 mm ✓\n\nAt y = 8.4 mm, the 4th red and 7th violet fringes overlap. Both wavelengths produce a\nbright fringe at this position, so a magenta/pink fringe appears there. At the screen\ncentre (y = 0), all wavelengths reinforce → white central fringe. Immediately adjacent\nfringes show a spectrum: violet on the inner edge, red on the outer edge.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 24,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/misconception/MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION",
+      "kind": "misconception",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Priority 1",
+      "content": "### MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION (Priority 1)\n**Label:** \"Wider slit separation → wider fringe spacing\"\n\n**Trigger signals:**\n- States that moving the slits further apart makes the fringes wider or more spread out\n- Writes β ∝ d (proportional) instead of β ∝ 1/d (inversely proportional)\n- Draws a diagram with widely spaced slits paired with widely spaced fringes\n- Chooses a larger d when asked how to \"enlarge\" the fringe pattern\n\n**Conflict evidence [P28]:**\n\"Let's compute side by side.\nSetup A: d = 0.5 mm, D = 1 m, λ = 500 nm  →  β = 500×10⁻⁹ × 1 / (0.5×10⁻³) = 1.0 mm.\nSetup B: d = 2 mm (four times larger), same D and λ  →  β = 500×10⁻⁹ × 1 / (2×10⁻³) = 0.25 mm.\nThe wider slit separation gives fringes four times closer together — the opposite of the intuition.\nPhysical reason: at wider d, the path difference yd/D changes four times more rapidly with y.\nThe next bright fringe (Δ = λ) is reached at a y four times smaller.\"\n\n**Bridge [P30]:**\n\"The formula β = λD/d places d in the denominator. Increasing d makes each bright fringe\ncloser to the previous one — the fringes pack in. Think of it this way: path difference\nΔ = yd/D. To reach Δ = λ (the next bright fringe), we need y = λD/d. A larger d means\nthat target y is smaller, so the fringe appears sooner.\"\n\n**Replacement [P31]:**\nβ = λD/d: d in denominator → β decreases as d increases.\nCheck: β × d = λD (a constant for fixed λ and D).\nDoubling d → β halved. Halving d → β doubled.\nTo widen fringes: reduce d, increase D, or increase λ.\n\n**Discrimination pairs [P33]:**\n- d = 0.5 mm → β = 1.0 mm (relatively coarse fringe pattern)\n- d = 2.0 mm → β = 0.25 mm (fine fringe pattern — wider slit separation, finer fringes)\n\n**s6_path:** For anxious students, compute both setups numerically before introducing the\nformula. Let the numbers establish the inverse relationship; only then attach it to β = λD/d.\n\n---",
+      "localKey": "MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION",
+      "language": "en",
+      "refs": [
+        "MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 3,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/misconception/MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER",
+      "kind": "misconception",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Priority 2",
+      "content": "### MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER (Priority 2)\n**Label:** \"The zeroth-order bright fringe is always at the geometric centre of the screen\"\n\n**Trigger signals:**\n- Assumes y = 0 always corresponds to Δ = 0 regardless of what is placed in front of a slit\n- After a slab is inserted, still places the n = 0 fringe at screen centre\n- Confuses \"centre of the screen\" (a geometric point) with \"zero path difference\" (a physical condition)\n- Calculates a fringe shift but then anchors the new pattern incorrectly at y = 0\n\n**Conflict evidence [P28]:**\n\"Before the slab: at y = 0, the geometric paths S₁P and S₂P are equal → Δ = 0 → bright\ncentral fringe sits at screen centre. ✓\nAfter a slab (n = 1.5, t = 0.1 mm) covers S₁: the optical path through S₁ is longer by\n(n − 1)t = 5×10⁻⁵ m. At y = 0, geometric paths are still equal but total optical paths\nare not — the ray via S₁ is 5×10⁻⁵ m longer. Δ ≠ 0 at screen centre.\nThe zero-path-difference point has shifted to the S₁ side of the screen, where the extra\ngeometric path through S₂ exactly compensates the slab's optical extension.\"\n\n**Bridge [P30]:**\n\"The central bright fringe marks the location where total optical path difference = 0, not\nwhere the geometric centre of the screen is. These two coincide only when both slits are\nidentical. Placing anything different in front of one slit — a glass plate, a different\nmedium, even a different length of air — breaks the symmetry. The equal-optical-path\npoint moves, and the entire pattern moves with it.\"\n\n**Replacement [P31]:**\nCentral bright fringe (n = 0) after slab over S₁:\ny₀ = (n − 1)t × D/d  (toward S₁ side)\nEvery other fringe shifts by the same amount. Fringe width β is unchanged.\nAt any screen position y measured from screen centre:\neffective Δ = yd/D − (n − 1)t  [slab in front of S₁ path]\nBright fringes: yd/D = (n − 1)t + nλ  →  same β spacing, entire pattern shifted.\n\n**Discrimination pairs [P33]:**\n- No slab: central fringe at y = 0 (screen centre). ✓\n- Slab over S₁: central fringe at y = +(n−1)tD/d (toward S₁). Screen centre is no longer n = 0. ✓\n- Slab over S₂: central fringe shifts toward S₂ (same formula, other side). ✓\n\n**s6_path:** Introduce slab problems only after FA-2 confirms MC-FRINGE-WIDTH is resolved and\nbright/dark fringe positions (no slab) are secure. Show VIS-3 before any calculation so the\nstudent sees the shift visually before computing it numerically.\n\n---",
+      "localKey": "MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER",
+      "language": "en",
+      "refs": [
+        "MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 41,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 3,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Pictorial Stage: Setup Diagram and Formula Derivation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Pictorial Stage: Setup Diagram and Formula Derivation\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 17,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Prerequisite Checks and Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks and Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 48,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "MC-FRINGE-WIDTH Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-FRINGE-WIDTH Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-FRINGE-WIDTH-INCREASES-WITH-SLIT-SEPARATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 72,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Slab Insertion and MC-CENTRAL-FRINGE Diagnostic",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Slab Insertion and MC-CENTRAL-FRINGE Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\"],\"addresses\":[\"MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 96,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 121,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Closure and Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure and Retrieval Schedule\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 151,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Apply — fringe width and bright fringe position",
+      "content": "**MP-1 (Apply — fringe width and bright fringe position):**\n\"YDSE: d = 0.3 mm, D = 1.5 m, λ = 600 nm. Find β and the position of the 2nd bright fringe.\"\nExpected: β = 600×10⁻⁹ × 1.5 / (0.3×10⁻³) = 9×10⁻⁷ / 3×10⁻⁴ = 3.0×10⁻³ m = 3.0 mm.\ny₂ = 2β = 6.0 mm from screen centre.\n_Discriminates: β formula, nm-to-m unit conversion, y_n = nβ relationship._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 429,
+        "endLine": 481
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Apply — dark fringe positions",
+      "content": "**MP-2 (Apply — dark fringe positions):**\n\"In a YDSE, fringe width β = 2.5 mm. Find the positions of the 1st dark fringe and the\n4th dark fringe (measured from screen centre, on the same side).\"\nExpected:\n1st dark (n = 0): y = (0 + ½) × 2.5 = 1.25 mm.\n4th dark (n = 3): y = (3 + ½) × 2.5 = 8.75 mm.\n_Discriminates: dark fringe indexing (n = 0 gives 1st dark, not n = 1); formula y = (n+½)β._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 429,
+        "endLine": 481
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Apply — effect of parameter changes",
+      "content": "**MP-3 (Apply — effect of parameter changes):**\n\"In a YDSE, initial β = 1.5 mm. Predict the new β after each of the following independent\nchanges: (a) d is tripled. (b) D is halved. (c) λ changes from 600 nm to 400 nm.\"\nExpected: (a) β/3 = 0.5 mm. (b) β/2 = 0.75 mm. (c) β × (400/600) = 1.0 mm.\n_Discriminates: proportionality β ∝ λD/d applied to each variable; MC-FRINGE-WIDTH resolution\nfor part (a)._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-FRINGE-WIDTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 429,
+        "endLine": 481
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Apply — glass slab fringe shift",
+      "content": "**MP-4 (Apply — glass slab fringe shift):**\n\"YDSE: d = 0.5 mm, D = 1 m, λ = 500 nm. A glass slab of n = 1.5, t = 10 μm is placed\nover slit S₁. Find: (a) β, (b) the fringe shift in mm, (c) the direction of shift,\n(d) the number of fringes shifted.\"\nExpected:\n(a) β = 500×10⁻⁹ × 1 / (0.5×10⁻³) = 1.0 mm.\n(b) shift = (1.5−1)(10×10⁻⁶) × 1 / (0.5×10⁻³) = 5×10⁻⁶ / 5×10⁻⁴ = 0.01 m = 10 mm.\n(c) Toward S₁ (the covered slit).\n(d) (n−1)t/λ = 5×10⁻⁶ / 500×10⁻⁹ = 10 fringes.\n_Discriminates: MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER resolution; slab formula; direction of\nshift; fringe count._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 429,
+        "endLine": 481
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Analyze — intensity at a given path difference",
+      "content": "**MP-5 (Analyze — intensity at a given path difference):**\n\"Two coherent slits of equal intensity I₀ each illuminate a screen. At point P, the path\ndifference Δ = 2λ/3. (a) Find I at P as a fraction of I_max. (b) Is P closer to a bright\nfringe or a dark fringe? Show the distances.\"\nExpected:\n(a) I = 4I₀ cos²(π × 2/3) = 4I₀ cos²(2π/3) = 4I₀ × (−0.5)² = 4I₀ × 0.25 = I₀.\n    I/I_max = I₀ / 4I₀ = 1/4.\n(b) Nearest dark fringe: Δ = λ/2, distance from P = 2λ/3 − λ/2 = λ/6.\n    Nearest bright fringe: Δ = λ, distance from P = λ − 2λ/3 = λ/3.\n    Since λ/6 < λ/3, P is closer to the dark fringe.\n_Discriminates: intensity formula; recognising that I = I₀ means 25% of I_max (dim but not zero);\ncomparative fringe proximity reasoning._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 429,
+        "endLine": 481
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.opt.wave-optics   ──►\n                              phys.opt.youngs-experiment  ──►  phys.opt.diffraction\nphys.wave.interference ──►\n```\n\n**PD-1 (phys.opt.wave-optics — coherence):**\n\"What does it mean for two light sources to be coherent? Why is coherence essential for a\nstable interference fringe pattern?\"\nExpected: Coherent sources share the same frequency and maintain a constant phase difference.\nWithout coherence the phase difference fluctuates randomly many times per second → the fringe\npattern shifts faster than the eye can track → time-averaged result is uniform illumination\nwith no visible fringes. In practice, both slits are illuminated from the same primary source.\n\n**PD-2 (phys.wave.interference — conditions):**\n\"State the path-difference conditions for constructive and destructive interference.\"\nExpected: Constructive (bright): Δ = nλ for integer n. Destructive (dark): Δ = (n + ½)λ.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 149,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"State the formula for β and identify which variable appears in the\ndenominator.\"\nThreshold: β = λD/d; d in the denominator.\nIf student writes β ∝ d → MC-FRINGE-WIDTH risk flagged → reinforce before proceeding to TA-3.\n\n**FA-2 (TA-4 exit):** \"d is doubled. What happens to β? Give a one-sentence physical reason.\"\nExpected: β halves. Reason: at wider slit separation, path differences change more rapidly\nwith screen height, so the next fringe is reached at a smaller y.\nIf student says β doubles → MC-FRINGE-WIDTH not resolved → re-run P31 with Setup A/B numbers.\n\n**FA-3 (TA-5 exit):** \"A slab is placed over S₁. Does the central bright fringe move toward\nS₁, toward S₂, or stay at screen centre? Give the one-sentence reason.\"\nExpected: Toward S₁. Reason: the slab adds extra optical path via S₁; the equal-path point\nshifts to the S₁ side to compensate geometrically.\nIf student says \"stays at centre\" → MC-CENTRAL-FRINGE not resolved → re-show VIS-3 and re-run P31.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, and MP-4. 3/3 correct → proceed to TA-7 and\nschedule the P91 mastery probe session.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FRINGE-WIDTH",
+        "MC-CENTRAL-FRINGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 481,
+        "endLine": 504
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Anxiety and Confidence Protocols",
+      "content": "**S0 (Default — fresh start):**\nFull TA-1 through TA-7 sequence.\nPD-1 and PD-2 administered at TA-3 entry; any gaps repaired before proceeding to WE-1.\nAll three worked examples completed within the session.\n\n**S3 (Some prior exposure):**\nSkip P01 preamble in TA-1; begin with P06 framing question.\nAt TA-2, ask the student to recall the path-difference expression before displaying it —\nuse as a retention diagnostic.\nFold TA-3 and TA-4 if WE-1 is answered correctly and fluently (skip slow build-up).\nAt TA-5, present the slab scenario as a predict-then-calculate challenge rather than a\nguided walk-through.\n\n**S6 (Anxiety):**\nIntroduce only β = λD/d at TA-2. Hold the intensity formula (Component 1, bottom) for\nSession 2 after fringe-position skills are secure.\nSession 1 covers WE-1 only; WE-2 (slab) deferred to Session 2 after FA-2 is passed.\nTA-6 problem set: Problems 1–3 in Session 1 only; Problems 4–5 deferred to Session 2.\nFraming script: \"Everything comes from one fact: Δ = yd/D. Bright where Δ = nλ, dark\nwhere Δ = (n+½)λ. Once you have β = λD/d, every fringe position is just a multiple or\nhalf-multiple of β. Three facts, one formula.\"\n\n**S9 (Advanced / pre-mastery):**\nSkip TA-1. Open with TA-3 PD-checks, then immediately present MP-5 (intensity) as the\nopening challenge.\nAt TA-5: after the slab calculation, introduce fringe visibility V = (I_max−I_min)/(I_max+I_min)\nand ask the student to prove that equal-intensity slits give V = 1 and incoherent sources\ngive V = 0.\nChallenge extension at TA-7: \"In white light YDSE, show that the 3rd red (λ = 700 nm) and\n5th violet (λ = 420 nm) fringes coincide exactly. What other pairs of (n_red, n_violet) give\ncoincidences below y = 15 mm for the WE-1 setup?\"\n[Check: 3×700 = 2100 = 5×420 ✓. Position: y = 3×β_red = 3×2.1 = 6.3 mm. Other pairs\nrequire n_red×700 = n_violet×420 → n_red/n_violet = 3/5. Multiples: (3,5), (6,10)... next:\ny = 6×2.1 = 12.6 mm < 15 mm ✓. So two coincidences below 15 mm: 6.3 mm and 12.6 mm.]\nAdminister all five P91 probes in one sitting without scaffolding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 504,
+        "endLine": 544
+      }
+    },
+    {
+      "assetId": "phys.opt.youngs-experiment/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.youngs-experiment",
+      "title": "Spaced Retrieval and Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete anchor → path-difference derivation → fringe formulas\n→ WE-1 guided → MC-FRINGE-WIDTH diagnosis and repair via Setup A/B comparison).\n\n**Session 2 (≥24 h later):**\nRetrieval opener: \"State the formula for β. If d is halved, what happens to β? Why?\"\nHesitation or error → brief P31 refresher before proceeding.\n→ TA-5 (slab insertion, MC-CENTRAL-FRINGE diagnosis and repair, WE-2, WE-3)\n→ TA-6 (independent problem set, all five problems).\n\n**Session 3 (≥72 h later):**\nInterleaved probe:\n\"Setup A: d = 0.5 mm, D = 1 m, λ = 500 nm. Find β and the position of the 5th dark fringe.\nSetup B: Identical to A, but a slab of n = 1.5, t = 10 μm covers S₁. Find the fringe shift\nin mm and the new position of the central bright fringe.\"\n[Setup A: β = 1.0 mm; 5th dark (n = 4): y = 4.5 mm.\n Setup B: shift = 10 mm toward S₁; central fringe at y = +10 mm from screen centre.]\nThis probe forces simultaneous recall of β, dark-fringe indexing, and slab-shift formula.\nIt also probes MC-CENTRAL-FRINGE directly in a calculation context.\n\n**Pre-diffraction session:**\nAll five P91 probes administered cold (no hints, no formula sheet).\nRequire 4/5 (MP-1 through MP-5) before advancing to phys.opt.diffraction.\n\n**Interleaving partners:**\nphys.opt.wave-optics (coherence is the logical precondition for YDSE — retrieve together),\nphys.wave.interference (constructive/destructive conditions are the core logic — the YDSE\nderivation is a direct application),\nphys.opt.diffraction (the single-slit diffraction envelope modulates the YDSE multiple-slit\npattern in real experiments — forward link; YDSE mastery is its prerequisite).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FRINGE-WIDTH",
+        "MC-CENTRAL-FRINGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md",
+        "startLine": 544,
+        "endLine": 578
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

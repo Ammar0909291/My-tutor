@@ -1,0 +1,544 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.collisions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.collisions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2ee0658ea705d3976525b4cf0fae9637d59ffae195b065ccbb50d0d66f09de09",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.collisions.md": "sha256:5701568c9480605ec737ede65e804c477cba2a8b4346d00871c42be3deea2e0e"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.collisions",
+    "name": "Collisions",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.conservation-of-momentum",
+      "phys.mech.kinetic-energy"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.collisions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.collisions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.collisions.md": "sha256:5701568c9480605ec737ede65e804c477cba2a8b4346d00871c42be3deea2e0e"
+      },
+      "contentHash": "sha256:959bce54d587a4ec63deb7e28d6caf01480197398fe48adb0525219db964e3b6",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions.md#TA-4 (addresses MC-ELASTIC-ALWAYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions.md#TA-5 (addresses MC-EQUAL-REBOUND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.collisions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.collisions",
+      "title": "Collisions — core explanation",
+      "content": "**Core Insight:** All collisions conserve momentum (if isolated). They differ in whether kinetic\nenergy is also conserved. Elastic collisions conserve both p and KE; perfectly inelastic lose\nmaximum KE while objects stick together; partially inelastic are everything in between.\nThe classification determines which equations can be used.\n\n**Three collision types:**\n\n| Type | Momentum | KE | Example |\n|------|----------|----|---------|\n| Elastic | Conserved | Conserved | Pool balls, gas molecules |\n| Perfectly inelastic | Conserved | Not conserved (minimum) | Cars locking, clay blob |\n| Partially inelastic | Conserved | Not conserved | Most real collisions |\n\n**Equations:**\n\n*Perfectly inelastic:*\nm₁v₁ᵢ + m₂v₂ᵢ = (m₁+m₂)v_f     (one unknown → solvable directly)\n\n*Elastic (1D, two unknowns → two equations):*\nm₁v₁ᵢ + m₂v₂ᵢ = m₁v₁f + m₂v₂f    (momentum)\n½m₁v₁ᵢ² + ½m₂v₂ᵢ² = ½m₁v₁f² + ½m₂v₂f²   (KE)\n\nSpecial result for elastic collision with equal masses (m₁ = m₂):\nv₁f = v₂ᵢ, v₂f = v₁ᵢ    (velocities exchange — pool ball special case)\n\n**KE lost in perfectly inelastic collision:**\nΔKE = KE_before − KE_after (always negative — energy goes to deformation/heat)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 24,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.collisions",
+      "title": "Perfectly inelastic",
+      "content": "**Worked Example 1 (Perfectly inelastic):**\n3 kg (east 6 m/s) + 5 kg (at rest) → stick.\nv_f = (3×6)/(3+5) = 18/8 = 2.25 m/s east.\nKE_before = ½×3×36 = 54 J. KE_after = ½×8×5.0625 = 20.25 J. KE lost = 33.75 J.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 24,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.collisions",
+      "title": "Elastic, equal mass",
+      "content": "**Worked Example 2 (Elastic, equal mass):**\n2 kg (east 5 m/s) hits 2 kg (at rest).\nv₁f = 0 m/s (1st ball stops). v₂f = 5 m/s east (2nd ball takes all the speed).\nCheck KE: before = ½×2×25 = 25 J; after = ½×2×25 = 25 J. ✓ Conserved.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 24,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.collisions",
+      "title": "Elastic, unequal mass",
+      "content": "**Worked Example 3 (Elastic, unequal mass):**\n4 kg (east 6 m/s) hits 2 kg (at rest).\nSystem: 2 eqs, 2 unknowns. Using combined elastic formulas:\nv₁f = (m₁−m₂)/(m₁+m₂) × v₁ᵢ = (4−2)/6 × 6 = 2 m/s east.\nv₂f = 2m₁/(m₁+m₂) × v₁ᵢ = 8/6 × 6 = 8 m/s east.\nCheck p: 4×2 + 2×8 = 8+16 = 24 = 4×6. ✓\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 24,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/misconception/MC-ELASTIC-ALWAYS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.collisions",
+      "title": "Priority 1",
+      "content": "### MC-ELASTIC-ALWAYS (Priority 1)\n**Label:** \"All collisions are elastic — KE is always conserved\"\n\n**Trigger signals:**\n- Applies the elastic KE equation to a clay-blob or car-crash scenario\n- Says \"energy is conserved so KE must be the same before and after\"\n- Computes v_f using both momentum and energy equations when objects stick (over-constrained)\n\n**Conflict evidence [P28]:**\n\"Two 3 kg clay balls. Ball A: east 6 m/s. Ball B: at rest. They collide and stick.\nUsing momentum: v_f = 18/6 = 3 m/s east. KE_before = 54 J. KE_after = ½×6×9 = 27 J.\nIf KE were conserved, we'd need KE_after = 54 J → v_f = √18 = 4.24 m/s — NOT 3 m/s.\nOnly one equation can be correct. Which one? And where did 27 J go?\"\n\n**Bridge [P30]:**\n\"Conservation of energy (total) holds: the 27 J went into deforming the clay — heat,\nsound, permanent deformation. Kinetic energy alone is not conserved. 'Elastic' is a\nspecial case (bouncy ball, ideal gas). Most macroscopic collisions are inelastic.\"\n\n**Replacement [P31]:**\n\"Elastic: p AND KE conserved → two equations, two unknowns.\nInelastic: p conserved, KE not conserved → use only momentum equation.\nPerfectly inelastic (sticking): same as inelastic, but v₁f = v₂f = v_f → one equation.\"\n\n**Discrimination pairs [P33]:**\n- Pool ball strikes stationary: elastic (very bouncy, minimal deformation) → use both equations ✓\n- Cars locking in crash: perfectly inelastic → momentum only ✓\n\n**s6_path:** Start with perfectly inelastic only (one equation, no KE confusion); introduce elastic\nin TA-5 only after the distinction is clear.\n\n---",
+      "localKey": "MC-ELASTIC-ALWAYS",
+      "language": "en",
+      "refs": [
+        "MC-ELASTIC-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 3,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/misconception/MC-EQUAL-REBOUND",
+      "kind": "misconception",
+      "conceptId": "phys.mech.collisions",
+      "title": "Priority 2",
+      "content": "### MC-EQUAL-REBOUND (Priority 2)\n**Label:** \"In an elastic collision, objects always bounce back with the same speed they came in\"\n\n**Trigger signals:**\n- Claims v₁f = −v₁ᵢ in all elastic collisions regardless of mass\n- Says \"it bounced back at 6 m/s because it hit at 6 m/s\"\n- Confused when the first ball slows (or stops) but doesn't reverse\n\n**Conflict evidence [P28]:**\n\"A 4 kg ball (east 6) elastically hits a 2 kg stationary ball.\nIf v₁f = −6 m/s, check momentum: 4×(−6) + 2×v₂f = 24 → v₂f = 24 m/s.\nCheck KE: ½×4×36 + ½×2×576 = 72+576 = 648 J ≠ 72 J original. KE not conserved.\nUsing the correct formulas: v₁f = 2 m/s east (slows), v₂f = 8 m/s east (fast). Check: p=24✓, KE=72✓.\"\n\n**Bridge [P30]:**\n\"Equal rebound speed is only correct for equal-mass elastic collisions. For unequal masses,\nthe heavier ball barely slows; the lighter ball can receive many times the incoming speed.\nThe specific outcome depends on the mass ratio — you must use the formulas.\"\n\n**Replacement [P31]:**\n\"For equal masses: v₁f = v₂ᵢ and v₂f = v₁ᵢ — velocities exchange.\nFor unequal masses: v₁f = (m₁−m₂)/(m₁+m₂) × v₁ᵢ; v₂f = 2m₁/(m₁+m₂) × v₁ᵢ.\nVerify by checking both momentum AND KE after computing.\"\n\n**Discrimination pairs [P33]:**\n- Equal mass elastic: velocities exchange — 1st stops, 2nd moves at 1st's speed ✓\n- m₁ >> m₂ elastic: heavy ball barely changes; light ball flies off at ≈ 2v₁ᵢ ✓\n- m₁ << m₂ elastic: light ball bounces back at ≈ −v₁ᵢ (nearly equal rebound — exception!) ✓\n\n**s6_path:** Start with the equal-mass case only (clean velocity exchange); defer unequal-mass\nelastic to TA-5 after the student is comfortable with the algebra.\n\n---",
+      "localKey": "MC-EQUAL-REBOUND",
+      "language": "en",
+      "refs": [
+        "MC-EQUAL-REBOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 36,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 14,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 33,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions",
+      "title": "MC-ELASTIC-ALWAYS Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-ELASTIC-ALWAYS Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-ELASTIC-ALWAYS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ELASTIC-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 46,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions",
+      "title": "MC-EQUAL-REBOUND Probe + Elastic Unequal Mass",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-EQUAL-REBOUND Probe + Elastic Unequal Mass\",\"primitives\":[\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-EQUAL-REBOUND\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-EQUAL-REBOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 64,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 79,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 100,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions",
+      "title": "Apply — perfectly inelastic",
+      "content": "**MP-1 (Apply — perfectly inelastic):**\n\"A 4 kg ball (east 10 m/s) collides and sticks with a 6 kg ball at rest. Find v_f and KE lost.\"\nExpected: v_f = 40/10 = 4 m/s east. KE_before = 200 J; KE_after = ½×10×16 = 80 J. KE lost = 120 J.\n_Discriminates: standard perfectly inelastic calculation + energy analysis._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 278,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions",
+      "title": "Apply — elastic equal mass",
+      "content": "**MP-2 (Apply — elastic equal mass):**\n\"A 3 kg ball (east 8 m/s) elastically strikes a stationary 3 kg ball. Find both final velocities.\"\nExpected: v₁f = 0, v₂f = 8 m/s east.\n_Discriminates: MC-EQUAL-REBOUND resolution; equal-mass special case._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-EQUAL-REBOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 278,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions",
+      "title": "Apply — elastic unequal mass",
+      "content": "**MP-3 (Apply — elastic unequal mass):**\n\"A 2 kg ball (east 6 m/s) elastically strikes a stationary 6 kg ball. Find both final velocities.\"\nExpected: v₁f = (2−6)/8 × 6 = −3 m/s (west); v₂f = 4/8 × 6 = 3 m/s east.\n_Discriminates: lighter hitting heavier → lighter bounces back; unequal mass formula._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 278,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions",
+      "title": "Analyze — classify from data",
+      "content": "**MP-4 (Analyze — classify from data):**\n\"Before: 5 kg (east 4 m/s) + 3 kg (at rest). After: 5 kg (east 1 m/s) + 3 kg (east 5 m/s).\nWas this elastic, perfectly inelastic, or partially inelastic? Show evidence.\"\nExpected: p_before=20, p_after=5+15=20 ✓ (momentum conserved). KE_before=40J, KE_after=2.5+37.5=40J ✓ (KE conserved). ELASTIC.\n_Discriminates: working backward from data to classify; checks both conservation laws._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 278,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions",
+      "title": "Analyze — energy loss calculation",
+      "content": "**MP-5 (Analyze — energy loss calculation):**\n\"A 2 kg ball (east 10 m/s) hits a 4 kg ball (at rest). They stick. How much KE is converted\nto other forms? What fraction of the original KE is lost?\"\nExpected: v_f = 20/6 = 10/3 m/s. KE_before = 100 J; KE_after = ½×6×(10/3)² = 100/3 ≈ 33.3 J.\nLost = 66.7 J ≈ 2/3 of original. Fraction: 1 − m₁/(m₁+m₂) = 1 − 2/6 = 2/3.\n_Discriminates: full KE loss analysis including fraction; MC-ELASTIC-ALWAYS resolution._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [
+        "MC-ELASTIC-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 278,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.collisions",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.conservation-of-momentum  ──►\n                                         phys.mech.collisions\nphys.mech.kinetic-energy            ──►\n```\n\n**PD-1 (Conservation of momentum):**\n\"5 kg (east 4 m/s) + 3 kg (at rest) → stick. Find v_f.\"\nExpected: v_f = 20/8 = 2.5 m/s east.\n\n**PD-2 (KE prerequisite):**\n\"A 4 kg object moves at 3 m/s. KE?\"\nExpected: KE = ½×4×9 = 18 J.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 73,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.collisions",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Name the three collision types. Which conserves KE?\"\nThreshold: Elastic, perfectly inelastic, partially inelastic; only elastic conserves KE.\n\n**FA-2 (TA-4 exit):** \"Two cars crash and lock together. Which equation(s) do you use? KE conserved?\"\nExpected: Momentum only (m₁v₁+m₂v₂ = (m₁+m₂)v_f); KE not conserved (inelastic).\nIf student applies elastic equations → MC-ELASTIC-ALWAYS not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"A 6 kg ball (east 5 m/s) elastically hits a stationary 6 kg ball.\nWhat are the final velocities?\" Expected: v₁f = 0, v₂f = 5 m/s east.\nIf student says both bounce → MC-EQUAL-REBOUND not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-4. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ELASTIC-ALWAYS",
+        "MC-EQUAL-REBOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 312,
+        "endLine": 329
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.collisions",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Perfectly inelastic only in TA-3 and TA-4. Elastic deferred to TA-5.\n- Within elastic: equal-mass first (only one special result to remember); unequal mass last.\n- Break elastic into: \"step 1 — is it elastic? step 2 — are masses equal? step 3 — use the formula.\"\n- Reassure: \"Perfectly inelastic is one equation. Elastic adds only one more. Build up gradually.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-4 (backward classification from data) at TA-3.\n- Challenge: \"In an elastic collision between a ball and a wall (wall mass → ∞),\n  show that v₁f = −v₁ᵢ (ball reverses at same speed).\" (Uses unequal mass formula as m₂ → ∞.)\n- Spend TA-6 on Problems 3, 5, and the fraction-of-KE-lost derivation.\n\n**S4 (Prereq gap):**\n- PD-1 gap (Conservation of momentum) → repair Σp_before = Σp_after before returning.\n- PD-2 gap (KE) → repair KE = ½mv² before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 329,
+        "endLine": 349
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.collisions",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete classification → perfectly inelastic → MC-ELASTIC-ALWAYS repair).\n**Session 2 (≥24 h later):** Retrieval: \"Three types of collisions — which equations for each?\"\n  → TA-5 (MC-EQUAL-REBOUND, elastic unequal mass) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe:\n  \"Two collisions: (A) 4 kg east 8 m/s hits 4 kg at rest — elastic.\n   (B) 4 kg east 8 m/s hits 4 kg at rest — they stick.\n   For each: find v_f, total KE after, and KE lost. Compare.\"\n  (Forces simultaneous application of both collision types; highlights the KE difference.)\n**Pre-rotational-cluster session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.conservation-of-momentum (all collisions conserve p),\nphys.mech.kinetic-energy (elastic collisions also conserve KE), phys.mech.impulse (J = Δp during collision).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ELASTIC-ALWAYS",
+        "MC-EQUAL-REBOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions.md",
+        "startLine": 349,
+        "endLine": 366
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

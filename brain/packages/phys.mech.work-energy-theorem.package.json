@@ -1,0 +1,544 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.work-energy-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.work-energy-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:86d128514840398c3f6312ece3e1984211875301b81624f98eb71f568408615c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md": "sha256:449b282ed85a5e8b8844b14513ca4d566d1e9e04acffad4ee16310b6666fc543"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.work-energy-theorem",
+    "name": "Work–Energy Theorem",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.kinetic-energy",
+      "phys.mech.work"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.work-energy-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.work-energy-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md": "sha256:449b282ed85a5e8b8844b14513ca4d566d1e9e04acffad4ee16310b6666fc543"
+      },
+      "contentHash": "sha256:56a0e6fbbe384c29f2b3f2b73bf40048563bbf99820bfe319cf12deb442be6af",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.work-energy-theorem.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.work-energy-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.work-energy-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.work-energy-theorem.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.work-energy-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.work-energy-theorem\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.work-energy-theorem.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.work-energy-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.work-energy-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.work-energy-theorem.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md#TA-4 (addresses MC-PARTIAL-WORK)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.work-energy-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.work-energy-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.work-energy-theorem.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md#TA-5 (addresses MC-WET-ZERO-SPEED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.work-energy-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.work-energy-theorem\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.work-energy-theorem.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.work-energy-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.work-energy-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.work-energy-theorem.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.work-energy-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.work-energy-theorem\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.work-energy-theorem/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Work–Energy Theorem — core explanation",
+      "content": "**Core Insight:** The net work done on an object equals the change in that object's kinetic\nenergy. This bridges force-displacement reasoning with energy reasoning, and is often a\nsimpler path to finding speed than kinematics when force or displacement is known.\n\n**Formal Statement:**\nW_net = ΔKE = KE_f − KE_i = ½mv_f² − ½mv_i²\n\nwhere W_net is the sum of work done by all forces acting on the object.\n\n**Derivation in one step (for reference):**\nFrom Newton's 2nd Law: F_net = ma. Over displacement s: W_net = F_net × s = mas.\nUsing kinematics: v_f² = v_i² + 2as → as = (v_f² − v_i²)/2.\nSubstituting: W_net = m(v_f² − v_i²)/2 = ½mv_f² − ½mv_i² = ΔKE. ✓\n\n**Key properties:**\n- W_net includes ALL forces (applied, friction, gravity, normal — anything that does work).\n- Normal force and centripetal force are always ⊥ to motion → do zero work → don't appear.\n- If W_net > 0: object speeds up (KE increases).\n- If W_net < 0: object slows down (KE decreases).\n- If W_net = 0: constant speed (KE unchanged), even if multiple forces act.\n- Advantage over kinematics: no need to find acceleration when force and displacement are known.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 24,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Accelerating object",
+      "content": "**Worked Example 1 (Accelerating object):**\nA 4 kg box starts at rest. A 20 N force pushes it 5 m horizontally; friction force = 8 N.\nW_applied = 20 × 5 = 100 J; W_friction = −8 × 5 = −40 J.\nW_net = 60 J = ΔKE → ½ × 4 × v_f² − 0 → v_f² = 30 → v_f = 5.48 m/s.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 24,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Object slows",
+      "content": "**Worked Example 2 (Object slows):**\nA 2 kg object moves at 10 m/s. A friction force of 5 N acts over 6 m.\nW_net = −5 × 6 = −30 J. ΔKE = −30 J.\nKE_i = ½ × 2 × 100 = 100 J. KE_f = 70 J. v_f = √(2×70/2) = √70 ≈ 8.37 m/s.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 24,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Find distance from speed change",
+      "content": "**Worked Example 3 (Find distance from speed change):**\nA 3 kg object decelerates from 12 m/s to 6 m/s. Friction force = 18 N. Find distance.\nΔKE = ½×3×36 − ½×3×144 = 54 − 216 = −162 J.\nW_net = −18 × d = −162 → d = 9 m.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 24,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/misconception/MC-PARTIAL-WORK",
+      "kind": "misconception",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Priority 1",
+      "content": "### MC-PARTIAL-WORK (Priority 1)\n**Label:** \"Only the applied/external force counts — friction doesn't contribute to W_net\"\n\n**Trigger signals:**\n- Computes W_net = W_applied only, ignoring friction, gravity components, or other forces\n- Writes \"W = Fd\" using only the push force in a friction scenario\n- Gets correct applied-force work but wrong final speed (off by ignoring friction)\n\n**Conflict evidence [P28]:**\n\"A 5 kg box starts at rest. Applied force = 30 N, friction = 10 N, displacement = 4 m.\nYou wrote W_net = 30×4 = 120 J → v_f = √(2×120/5) = 6.93 m/s.\nBut let's check with kinematics: F_net = 30−10 = 20 N; a = 4 m/s²; v_f² = 2×4×4 = 32;\nv_f = 5.66 m/s. The two answers disagree. Why?\"\n\n**Bridge [P30]:**\n\"W_net is the work done by the NET force. Every force that has a component along displacement\ndoes work — positive (if it aids motion) or negative (if it opposes). Friction opposes, so it\ndoes negative work that reduces ΔKE. Skipping it means you're computing the wrong ΔKE.\"\n\n**Replacement [P31]:**\n\"W_net = ΣW_each_force = W_applied + W_friction + W_gravity + ... \nList every force; compute its work (W = Fd cosθ); sum all. Only forces perpendicular to motion\n(normal force on flat surface; centripetal force) contribute zero and can be omitted.\"\n\n**Discrimination pairs [P33]:**\n- Box on flat surface: W_net = W_applied + W_friction (both nonzero) ✓\n- Box on frictionless flat surface, normal force: W_net = W_applied only (normal ⊥ motion → 0) ✓\n\n**s6_path:** Skip the conflict comparison; use the simpler single-force case (no friction) first;\nadd friction in TA-5 only after the theorem is secure.\n\n---",
+      "localKey": "MC-PARTIAL-WORK",
+      "language": "en",
+      "refs": [
+        "MC-PARTIAL-WORK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 3,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/misconception/MC-WET-ZERO-SPEED",
+      "kind": "misconception",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Priority 2",
+      "content": "### MC-WET-ZERO-SPEED (Priority 2)\n**Label:** \"If W_net = 0, the object must be at rest (speed = 0)\"\n\n**Trigger signals:**\n- Says \"W_net = 0 → v = 0\" for a box moving at constant velocity\n- Thinks ΔKE = 0 means KE = 0\n- Confuses no change in speed with no speed\n\n**Conflict evidence [P28]:**\n\"A box moves at 5 m/s across a surface. Friction = 8 N. Applied force = 8 N. Displacement = 3 m.\nW_applied = +24 J. W_friction = −24 J. W_net = 0.\nΔKE = 0, so KE_f = KE_i. But the box started at 5 m/s, so KE_i = ½mv² > 0.\nWhat is the final speed?\"\n\n**Bridge [P30]:**\n\"ΔKE = 0 means KE did not change — not that KE = 0. If the object was already moving,\nit continues at the same speed. The theorem relates CHANGE in KE to net work, not KE itself.\"\n\n**Replacement [P31]:**\n\"W_net = ΔKE = KE_f − KE_i.\nΔKE = 0 → KE_f = KE_i → constant speed (could be any nonzero speed).\nThe theorem says nothing about the absolute value of KE — only about its change.\"\n\n**Discrimination pairs [P33]:**\n- W_net = 0, v_i = 5 m/s → v_f = 5 m/s (constant speed, not stopped) ✓\n- W_net = −KE_i → KE_f = 0 → object comes to rest (this IS the stop case) ✓\n\n**s6_path:** Use only the rest-to-moving direction (W_net > 0 → object speeds up) initially;\nintroduce constant-speed case only after confidence is established.\n\n---",
+      "localKey": "MC-WET-ZERO-SPEED",
+      "language": "en",
+      "refs": [
+        "MC-WET-ZERO-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 36,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 14,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 35,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "MC-PARTIAL-WORK Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-PARTIAL-WORK Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-PARTIAL-WORK\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PARTIAL-WORK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 50,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "MC-WET-ZERO-SPEED Probe + Non-trivial Applications",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-WET-ZERO-SPEED Probe + Non-trivial Applications\",\"primitives\":[\"P10\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-WET-ZERO-SPEED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-WET-ZERO-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 70,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 83,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 103,
+        "endLine": 118
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Apply — basic, frictionless",
+      "content": "**MP-1 (Apply — basic, frictionless):**\n\"A 2 kg cart at rest is pushed by 16 N over 4 m (frictionless). Find v_f.\"\nExpected: W_net = 64 J; v_f = √(2×64/2) = 8 m/s.\n_Discriminates: basic W_net = ΔKE._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 269,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Apply — with friction",
+      "content": "**MP-2 (Apply — with friction):**\n\"A 4 kg box at rest. Applied 20 N, friction 8 N, displacement 5 m. Find v_f.\"\nExpected: W_net = (20−8)×5 = 60 J; v_f = √(2×60/4) = √30 ≈ 5.48 m/s.\n_Discriminates: MC-PARTIAL-WORK resolution._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-PARTIAL-WORK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 269,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Apply — find distance",
+      "content": "**MP-3 (Apply — find distance):**\n\"A 5 kg object moves at 12 m/s. Friction = 15 N (no applied). Find d to reach 6 m/s.\"\nExpected: ΔKE = ½×5×(36−144) = −270 J; d = 270/15 = 18 m.\n_Discriminates: algebraic rearrangement; deceleration case._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 269,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Understand — W_net = 0",
+      "content": "**MP-4 (Understand — W_net = 0):**\n\"A 3 kg box moves at 7 m/s. Applied = 9 N, friction = 9 N, displacement = 4 m. Find v_f.\"\nExpected: W_net = 0; ΔKE = 0; v_f = 7 m/s.\n_Discriminates: MC-WET-ZERO-SPEED resolution._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-WET-ZERO-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 269,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Apply — normal force",
+      "content": "**MP-5 (Apply — normal force):**\n\"A 2 kg box is pushed along a flat horizontal surface (μ_k = 0.25) by applied force 12 N\nfor 3 m. g = 9.8. The box starts at rest. Find v_f.\"\nExpected: Normal N = mg = 19.6 N; friction = 0.25×19.6 = 4.9 N; W_net = (12−4.9)×3 = 21.3 J;\nv_f = √(2×21.3/2) = √21.3 ≈ 4.62 m/s.\n_Discriminates: must compute friction force from normal force (not just given)._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 269,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.kinetic-energy  ──────────►\n                                       phys.mech.work-energy-theorem\nphys.mech.work           ──────────►\n```\n\n**PD-1 (KE prerequisite):**\n\"A 5 kg cart moves at 6 m/s. What is its KE?\"\nExpected: KE = ½ × 5 × 36 = 90 J.\n\n**PD-2 (Work prerequisite):**\n\"A 15 N force acts over 4 m at θ = 0°. What work is done?\"\nExpected: W = 60 J.\n\nBoth must pass before TA-3. Gap in either → repair that concept first.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 65,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Which forces contribute to W_net? Give an example of a force that does zero work.\"\nThreshold: Must list 'all forces with a component along displacement'; give normal or centripetal as zero-work example.\n\n**FA-2 (TA-4 exit):** \"5 kg box, applied 25 N, friction 5 N, 8 m. KE_i = 0. Find KE_f and v_f.\"\nExpected: W_net = 160 J; v_f = 8 m/s. If student ignores friction → MC-PARTIAL-WORK not resolved.\n\n**FA-3 (TA-5 exit):** \"4 kg, v_i = 6 m/s, applied = friction (both 10 N), displacement 5 m. v_f = ?\"\nExpected: v_f = 6 m/s. If student says 0 → MC-WET-ZERO-SPEED not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\nOtherwise → targeted re-teach of failed probe type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PARTIAL-WORK",
+        "MC-WET-ZERO-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 302,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Begin with frictionless cases only; add friction in TA-5 only.\n- Break every problem into explicit steps: (1) list forces, (2) compute each W, (3) sum → W_net,\n  (4) set equal to ΔKE, (5) solve for unknown.\n- Use g = 10 to simplify arithmetic.\n- Reassure: \"The formula has only two parts: net work and change in KE.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (must derive friction force) at TA-3 before guided practice.\n- Challenge: \"A block is launched up an incline. Applied force is gone once launched. Friction\n  acts downward. Use the theorem to find how far it travels before stopping.\"\n- Advance quickly to distance-finding problems (MP-3 type) in TA-6.\n\n**S4 (Prereq gap):**\n- PD-1 gap (KE) → repair KE = ½mv² concept before TA-3.\n- PD-2 gap (Work) → repair W = Fd cosθ before TA-3.\n- Both gaps → KE repair first (Work builds on KE conceptually in this theorem).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 318,
+        "endLine": 340
+      }
+    },
+    {
+      "assetId": "phys.mech.work-energy-theorem/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.work-energy-theorem",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → theorem formula → MC-PARTIAL-WORK repair).\n**Session 2 (≥24 h later):** Retrieval cold-start: \"State the Work–Energy Theorem. What forces\n  contribute to W_net?\" → TA-5 (MC-WET-ZERO-SPEED) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe:\n  \"A 3 kg box starts at v_i = 5 m/s. It travels 10 m with friction = 2 N and applied = 8 N.\n  Find v_f. Then: what power does the applied force deliver at v_f?\"\n  (Integrates Work–Energy Theorem with Power = Fv.)\n**Pre-conservation-of-energy session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.kinetic-energy, phys.mech.work, phys.mech.friction (friction\nwork), phys.mech.power (P = Fv connects to final speed found via theorem).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PARTIAL-WORK",
+        "MC-WET-ZERO-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md",
+        "startLine": 340,
+        "endLine": 356
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

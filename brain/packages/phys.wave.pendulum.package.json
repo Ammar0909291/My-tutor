@@ -1,0 +1,355 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.pendulum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.pendulum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:63399f768b26edb09de1a05dce8a0ea290a01f551f2a814b69ce23bd985509ef",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.pendulum.md": "sha256:ddfaaf4721ed5773f497670f99076a574ab42b46413cc35378a8cab82d2c6c51"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.pendulum",
+    "name": "The Simple Pendulum",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.wave.shm"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.pendulum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.pendulum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.pendulum.md": "sha256:ddfaaf4721ed5773f497670f99076a574ab42b46413cc35378a8cab82d2c6c51"
+      },
+      "contentHash": "sha256:ada2f8b41e696baa9036566f68664f628f02b63414021894a3e7f71f3731aeae",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.pendulum.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.pendulum.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.pendulum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.pendulum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.pendulum.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.pendulum.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.pendulum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.pendulum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.pendulum.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.pendulum.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.pendulum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.pendulum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.pendulum.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.pendulum.md#TA-4 (addresses MC-PENDULUM-PERIOD-DEPENDS-ON-MASS, MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.pendulum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.pendulum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.pendulum/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.wave.pendulum",
+      "title": "The Simple Pendulum — Conceptual Development Sequence",
+      "content": "**TA-1 — Deriving T from Newton's Law [C]**\n\nA simple pendulum: mass m on a massless string of length L. Displacement along arc = s = Lθ.\n\nRestoring force (tangential, toward equilibrium):\n```\nF_t = −mg sinθ ≈ −mgθ   (small angle: sinθ ≈ θ in radians)\n```\n\nNewton's 2nd along arc:\n```\nma_t = −mgθ\na_t/L = −(g/L)θ   but s = Lθ → a_t = Ls̈/L... \n```\n\nMore carefully: a_t = Lθ̈. So:\n```\nLθ̈ = −gθ   →   θ̈ = −(g/L)θ\n```\n\nThis is SHM with ω² = g/L:\n```\nω = √(g/L)     T = 2π/ω = 2π√(L/g)\n```\n\nNo m; no A. Period depends only on L and g.\n\n**TA-2 — Factors Affecting Pendulum Period [C→P]**\n\nFactors that AFFECT T:\n- Length L: T ∝ √L. Double L → T increases by √2.\n- Gravitational field g: T ∝ 1/√g. Weaker g → longer T (pendulum clock runs slow at high altitude or on Moon).\n\nFactors that do NOT affect T (for small oscillations):\n- Mass m (cancels)\n- Amplitude (small angle only — isotchronous)\n- Air density (in vacuum, T is unchanged)\n\n**TA-3 — Measuring g with a Pendulum [C→P]**\n\nRearranging T = 2π√(L/g):\n```\ng = 4π²L/T²\n```\n\nPractical method:\n1. Measure L accurately (from pivot to centre of mass of bob).\n2. Time N oscillations (N ≥ 10 for precision): T = total time / N.\n3. Compute g = 4π²L/T².\n\nError analysis: fractional error in g = fractional error in L + 2 × fractional error in T. Timing error dominates → time many oscillations to minimise T uncertainty.\n\n**TA-4 — The Conical Pendulum and Pendulum Clock [P]**\n\n**Conical pendulum**: bob moves in a horizontal circle of radius r = L sinθ. The string makes angle θ with the vertical. Vertical: T cosθ = mg; Horizontal: T sinθ = mω²r = mω²L sinθ. Combining: T cosθ = mg and T sinθ/L sinθ = mω² → ω² = g cosθ/L. Period: T_conical = 2π√(L cosθ/g). For small θ: cosθ ≈ 1 → same as simple pendulum.\n\n**Pendulum clock**: escapement mechanism gives the pendulum a small kick each period to counteract air resistance damping; simultaneously the tick-tock advances a gear by one tooth per oscillation. Length is adjusted by a threaded nut at the bottom (raises or lowers bob to change L, and hence T). For T = 2 s (a \"seconds pendulum\" — one tick per second): L = gT²/(4π²) = 9.8×4/39.48 = 0.993 m ≈ 1 m.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 75,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/misconception/MC-PENDULUM-PERIOD-DEPENDS-ON-MASS",
+      "kind": "misconception",
+      "conceptId": "phys.wave.pendulum",
+      "title": "- **Trigger signal:** Student says \"a heavier pendulum bob swings more slowly\" or \"a lighter bob goes faster\" or includes m in the period formula.",
+      "content": "### MC-PENDULUM-PERIOD-DEPENDS-ON-MASS\n- **Trigger signal:** Student says \"a heavier pendulum bob swings more slowly\" or \"a lighter bob goes faster\" or includes m in the period formula.\n- **Conflict evidence [P28]:** \"The period of a simple pendulum is independent of the bob's mass. Galileo demonstrated this by dropping heavy and light balls simultaneously from the Leaning Tower of Pisa — they hit the ground simultaneously (air resistance aside). For a pendulum: the restoring force is F_restoring = −mg sinθ ≈ −mgθ (for small angles). Newton's 2nd: ma_t = −mgθ → a_t = −gθ → ω = √(g/L). The mass m cancels completely. A gold bob and a ping-pong ball on strings of the same length swing in exact synchrony. This is the equivalence principle — inertial mass equals gravitational mass, so mass always cancels from pendulum SHM.\"\n- **Bridge text [P30]:** \"The restoring force (mg sinθ) and the inertia (ma) both contain m — they cancel in a = F/m = −g sinθ → −gθ (small angle). The pendulum is a direct experimental test of the equivalence of inertial and gravitational mass.\"\n- **Replacement text [P31]:** \"T = 2π√(L/g): no mass in the formula. The period depends only on length L and gravitational field g. Heavier bob → larger restoring force AND larger inertia — they cancel exactly.\"\n- **Discrimination pairs [P33]:**\n  - 1 kg bob, L = 1 m: T = 2π√(1/9.8) = 2.007 s ✓\n  - 5 kg bob, L = 1 m: T = 2π√(1/9.8) = 2.007 s (same T) ✓\n  - 1 kg bob, L = 4 m: T = 2π√(4/9.8) = 4.01 s (doubled L → T×√2×2 = ×2) ✓\n- **s6_path:** \"Galileo watched a chandelier swinging at different amplitudes in a cathedral — he timed it against his own pulse and found constant period. He didn't weigh the chandelier. Mass just doesn't matter.\"\n\n---",
+      "localKey": "MC-PENDULUM-PERIOD-DEPENDS-ON-MASS",
+      "language": "en",
+      "refs": [
+        "MC-PENDULUM-PERIOD-DEPENDS-ON-MASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/misconception/MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD",
+      "kind": "misconception",
+      "conceptId": "phys.wave.pendulum",
+      "title": "- **Trigger signal:** Student says \"a pendulum pulled back farther takes longer to swing back\" or includes amplitude in the period formula.",
+      "content": "### MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD\n- **Trigger signal:** Student says \"a pendulum pulled back farther takes longer to swing back\" or includes amplitude in the period formula.\n- **Conflict evidence [P28]:** \"For small oscillations (amplitude ≪ pendulum length, angle θ₀ ≪ ~15°), the period is independent of amplitude: T = 2π√(L/g). This isochronous property (same period regardless of amplitude) is why pendulum clocks work — the mainspring slowly reduces the pendulum swing amplitude, but the clock keeps perfect time. For large amplitudes (θ₀ > 15°), the small-angle approximation breaks down and the period does increase slightly with amplitude. But for typical pendulum clock amplitudes (a few degrees), this correction is negligible.\"\n- **Bridge text [P30]:** \"Small-angle approximation: sinθ ≈ θ (in radians). Valid to about 1% accuracy for θ < 15° ≈ 0.26 rad. At 15°, the sin is 0.259 while the angle is 0.262 — less than 1% error. For θ < 15°, the period is isochronous.\"\n- **Replacement text [P31]:** \"T = 2π√(L/g): valid for small oscillations (θ₀ < ~15°). Period independent of amplitude in this regime. For large amplitudes: T increases by O(θ₀²) correction. Specify 'small angle' when using this formula.\"\n- **Discrimination pairs [P33]:**\n  - θ₀ = 5°: T = 2π√(L/g) accurate to < 0.1% ✓\n  - θ₀ = 30°: T is ~1.7% longer than 2π√(L/g) — small but measurable ✓\n- **s6_path:** \"The isochronous property is what Galileo discovered and why pendulum clocks revolutionised timekeeping. A wider swing still takes the same time — the harder restoring force (larger sinθ) exactly compensates the longer arc.\"\n\n---",
+      "localKey": "MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD",
+      "language": "en",
+      "refs": [
+        "MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.pendulum",
+      "title": "Deriving T from Newton's Law",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Deriving T from Newton's Law\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 77,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.pendulum",
+      "title": "Factors Affecting Pendulum Period",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Factors Affecting Pendulum Period\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 104,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.pendulum",
+      "title": "Measuring g with a Pendulum",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Measuring g with a Pendulum\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 115,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.pendulum",
+      "title": "The Conical Pendulum and Pendulum Clock",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Conical Pendulum and Pendulum Clock\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD\",\"MC-PENDULUM-PERIOD-DEPENDS-ON-MASS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PENDULUM-PERIOD-DEPENDS-ON-MASS",
+        "MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 129,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.pendulum",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Period and length**\n\"Find the length of a pendulum with T = 1.5 s on Earth. If g on Mars = 3.7 m/s², what length would give T = 1.5 s on Mars?\"\n\n*Target:* L_Earth = gT²/(4π²) = 9.8×2.25/39.48 = 0.558 m. L_Mars = 3.7×2.25/39.48 = 0.211 m. (Shorter pendulum needed on Mars because weaker gravity → need shorter L to keep same period.)",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.pendulum",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Mass independence**\n\"Two pendulums of the same length L = 0.5 m: one has a 100 g bob, the other a 500 g bob. (a) Calculate T for each. (b) They are displaced to the same angle. Which returns first?\"\n\n*Target:* (a) Both: T = 2π√(0.5/9.8) = 1.421 s. (b) Neither returns first — they swing in perfect synchrony, always arriving at the same position at the same time.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.pendulum",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Altitude effect**\n\"A pendulum clock keeps perfect time at sea level (g = 9.810 m/s²). At 3000 m altitude, g = 9.790 m/s². (a) How does T change? (b) Does the clock gain or lose time? (c) How much time is gained or lost per day?\"\n\n*Target:* (a) T ∝ 1/√g: T_alt/T_sl = √(9.810/9.790) = √1.00204 = 1.00102. T increases by 0.102%. (b) Period is longer → clock ticks more slowly → clock loses time. (c) In one day (86 400 s): loss = 0.00102×86 400 ≈ 88 s per day ≈ 1.5 minutes per day. (Real altimeters use pendulum drift to measure elevation.)",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.pendulum",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Determining g from pendulum**\n\"A field measurement: 40 swings in 72.3 s with L = 0.822 m. Find g and its fractional uncertainty if ΔL = 0.003 m and ΔT_total = 0.2 s.\"\n\n*Target:* T = 72.3/40 = 1.8075 s. g = 4π²×0.822/(1.8075)² = 32.52/3.267 = 9.954 m/s². Δg/g = ΔL/L + 2ΔT/T_total = 0.003/0.822 + 2×0.2/72.3 = 0.00365 + 0.00553 = 0.00918 ≈ 0.9%. Δg = 0.009×9.95 ≈ 0.09 m/s². So g = 9.95 ± 0.09 m/s².",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.pendulum",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: design a 1-second-tick pendulum for the Moon**\n\"Design a pendulum clock for the Moon (g = 1.62 m/s²) that ticks once per second (T = 2 s). (a) What length is needed? (b) Compare to the ~1 m pendulum on Earth. (c) If you halve the length, what happens to the tick rate?\"\n\n*Target:* (a) L = gT²/(4π²) = 1.62×4/39.48 = 6.48/39.48 = 0.164 m ≈ 16.4 cm. (b) Earth: L ≈ 1.0 m; Moon: L ≈ 0.164 m — 6.1 times shorter (g_Earth/g_Moon = 6.1 → same L gives √6.1 ≈ 2.47× longer T on Moon; to keep same T, shrink L by 6.1). (c) Halving L: T → T/√2 = 2/1.414 = 1.414 s → ticks 2/1.414 = 1.414 times per second — faster than once per second.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.pendulum",
+      "title": "Adaptive Flags",
+      "content": "- **Radian measure**: sinθ ≈ θ is valid only when θ is in radians. Always confirm angle is converted before applying the small-angle approximation. At θ = 15° = 0.262 rad, sinθ = 0.259 — less than 1% error. Beyond 15°, the approximation starts to break down noticeably.\n- **L is measured to the centre of mass**: for a point bob on a massless string: L = string length. For a real bob: L = pivot to centre of mass of bob. Students often measure to the top of the bob. A systematic error in L propagates as a systematic error in g.\n- **Equivalent pendulum**: a physical pendulum (any rigid body swinging) has T = 2π√(I/mgh) where I = moment of inertia about pivot and h = distance from pivot to centre of mass. This is beyond A-level but worth mentioning for enrichment: a metre rule pivoted at one end has an equivalent pendulum length of L_eq = 2L/3.\n- **Altitude and g**: g varies ~0.5% between equator (9.78 m/s²) and poles (9.83 m/s²), and decreases with altitude (g ≈ GM/(R+h)²). Precision pendulum measurements are used in gravimetry.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 251,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "phys.wave.pendulum/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.wave.pendulum",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — classroom pendulum timing; mass change experiment\n  ↓\n[P41] PD-1 (SHM: ω=√(g/L) for pendulum; T from ω)\n  ↓ PASS\n[P06] Anchor: time 20 swings with 0.5 kg and 0.1 kg bob on same string → identical T\n  ↓\nTA-1: Derive T=2π√(L/g) from F=−mgθ and Newton's 2nd; small-angle justification [C]\n  ↓\n[P28] Conflict: \"period depends on mass\" → MC-PENDULUM-PERIOD-DEPENDS-ON-MASS\n  ↓\nWE-1: Compute T for three lengths; see √L proportionality\n  ↓\n[P51] Check-in MP-2 (two bobs on same string — which returns first?)\n  ↓ monitor\n[P28] Conflict: \"larger swing → longer period\" → MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD\n  ↓\nTA-2: Factors affecting T — length and g only; what doesn't affect T [C→P]\n  ↓\nTA-3: Measuring g; timing N oscillations; error analysis [C→P]\n  ↓\nWE-2 → WE-3 (g from timing; pendulum on Moon)\n  ↓\nTA-4: Conical pendulum; pendulum clock mechanism [P]\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Pendulum period formula? What does each symbol represent? Which quantities don't affect T?\"\n[P68]; [P85]; [P89] 1/3/7 days; [P91] 80% gate\n```\n\n**Protocol routing:** S0: full CPA — classroom timing experiment before any formula; S1: knows T=2π√(L/g) but includes mass or amplitude → MC-PENDULUM-PERIOD-DEPENDS-ON-MASS and MC-PENDULUM-AMPLITUDE-CHANGES-PERIOD; S4: PD-1 fail → phys.wave.shm; S6: [F] — \"Two quantities only: L and g. Everything else (mass, bob material, amplitude for small swings) is irrelevant to T.\"; S7: open with MP-5 (design pendulum for Moon — requires rearranging the formula for L, then applying g_Moon, then reasoning about the effect of halving L).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.pendulum.md",
+        "startLine": 214,
+        "endLine": 251
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

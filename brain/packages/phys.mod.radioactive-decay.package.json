@@ -1,0 +1,404 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.radioactive-decay-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.radioactive-decay",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b8766bbcec8d49b5db3b04ad2fbaa41d06ec744342a17e38c3d868fe7b9354db",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.radioactive-decay.md": "sha256:bc28446e4a878ff387ead444503b5710119258ac571f499e739c93a7394aad96"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.mod.radioactive-decay",
+    "name": "Radioactive Decay Law and Half-Life",
+    "difficultyRaw": "Proficient",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mod.radioactivity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.radioactive-decay-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.radioactive-decay (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.radioactive-decay.md": "sha256:bc28446e4a878ff387ead444503b5710119258ac571f499e739c93a7394aad96"
+      },
+      "contentHash": "sha256:74b7bccafa3519c7021cec0dbe8e07d5c9987e771c4bc4b9b9eb474c649bc229",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.radioactive-decay.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radioactive-decay"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radioactive-decay\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radioactive-decay.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radioactive-decay"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radioactive-decay\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radioactive-decay.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md#TA-3 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radioactive-decay"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radioactive-decay\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radioactive-decay.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radioactive-decay"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radioactive-decay\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.radioactive-decay/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Radioactive Decay Law and Half-Life — core explanation",
+      "content": "**One-sentence definition:** Radioactive decay follows the exponential law N(t) = N₀ e^(−λt), where λ is the decay constant; the half-life t₁/₂ = ln 2/λ is the time for half of any sample to decay.\n\n**The core insight:** Each nucleus decays independently with a fixed probability per unit time λ. This is a statistical statement about large ensembles, not a mechanical clock. Because of this independence, the fraction remaining after any equal time interval is always the same — giving exponential decay. Half-lives range from nanoseconds to billions of years, making radioactive decay the basis for dating everything from ancient artifacts to the age of the Earth.\n\n**Conceptual chain:**\n1. Decay probability: in time dt, any single nucleus has probability λ dt of decaying. λ is the decay constant (s⁻¹).\n2. Differential equation: dN/dt = −λN (rate of decay ∝ number of nuclei present).\n3. Solution: N(t) = N₀ e^(−λt) — exponential decay.\n4. Activity: A = −dN/dt = λN = λN₀ e^(−λt) = A₀ e^(−λt) (measured in Becquerel, Bq = 1 decay/s, or Curie, Ci = 3.7 × 10¹⁰ Bq).\n5. Half-life: t₁/₂ = ln 2/λ ≈ 0.693/λ. After n half-lives: N = N₀/2^n.\n6. Mean lifetime: τ = 1/λ; after time τ, N = N₀/e ≈ 0.368 N₀.\n7. Relationship: t₁/₂ = τ ln 2.\n\n**Central equations:**\n- N(t) = N₀ e^(−λt)\n- A(t) = λN(t) = A₀ e^(−λt)\n- t₁/₂ = ln 2 / λ ≈ 0.693/λ\n- τ (mean life) = 1/λ\n- After n half-lives: N = N₀ × (1/2)^n\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 18,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "After two half-lives, none of the sample remains",
+      "content": "### MC-1: \"After two half-lives, none of the sample remains\"\n- **Probe:** \"A sample starts with 1000 nuclei. After 2 half-lives, how many remain?\"\n- **Characteristic phrase:** \"After 2 half-lives, all the material has decayed.\"\n- **Trigger:** Students multiply: 2 half-lives × 50% per half-life = 100% decayed. They apply linear thinking to a multiplicative process.\n- **Conflict evidence [P28]:** After 1 half-life: N = 1000/2 = 500. After 2nd half-life: half of 500 = 250 remain. N = N₀ × (1/2)^n = 1000 × (1/4) = 250 ≠ 0. Exponential decay: each step multiplies the remaining quantity by ½ — you never reach zero.\n- **Bridge [P30]:** \"Each half-life halves whatever is currently present — not the original amount. It's compounding, not subtraction. After 10 half-lives: N = N₀/1024 ≈ 0.1%. After 20 half-lives: N = N₀/10⁶ ≈ 0.0001%. It approaches zero but never reaches it.\"\n- **Replacement [P31]:** N = N₀ × (1/2)^n after n half-lives. Never zero; each half-life multiplies the current N by ½.\n- **Discrimination pairs [P33]:** Linear decay: 50% gone per unit time → all gone after 2 units. Exponential decay: 50% of current amount gone per half-life → 25% remains after 2 half-lives.\n- **S6 repair path:** Run the M&M simulation for 5–6 rounds. Students observe exponentially decreasing, never-zero counts.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "N = N₀ e^(−t₁/₂ × t) is the decay equation",
+      "content": "### MC-2: \"N = N₀ e^(−t₁/₂ × t) is the decay equation\"\n- **Probe:** \"At time t = t₁/₂, what does your equation predict for N?\"\n- **Characteristic phrase:** \"The formula uses the half-life in the exponent.\"\n- **Trigger:** Students confuse λ and t₁/₂ in the exponential formula. They know t₁/₂ is \"the\" characteristic time and put it in the exponent.\n- **Conflict evidence [P28]:** N = N₀ e^(−t₁/₂ × t). At t = t₁/₂: N = N₀ e^(−t₁/₂²). For t₁/₂ = 5730 yr: N = N₀ e^(−5730²) ≈ 0 — catastrophically wrong. The correct formula N = N₀ e^(−λ t) gives N = N₀/2 at t = t₁/₂. The exponent must be λt, a dimensionless number.\n- **Bridge [P30]:** \"The exponent must be dimensionless. λ has units s⁻¹; t has units s; λt is dimensionless. t₁/₂ has units s; t₁/₂ × t has units s² — dimensional disaster. The correct formula is N = N₀ e^(−λt) = N₀ e^(−t ln 2/t₁/₂).\"\n- **Replacement [P31]:** N = N₀ e^(−λt) where λ = ln 2 / t₁/₂. Equivalently: N = N₀ e^(−t ln 2/t₁/₂) = N₀ × (1/2)^(t/t₁/₂).\n- **Discrimination pairs [P33]:** Compound interest: amount = principal × (1 + r)^t — interest rate r, not duration, goes in the exponent. Similarly: λ (rate), not t₁/₂ (duration), goes in the exponential for radioactive decay.\n- **S6 repair path:** Dimensional analysis: \"What are the units of the exponent in e^(−λt)? Must be dimensionless.\" Then derive λ = ln 2/t₁/₂ from the definition of half-life.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "The half-life predicts when a specific nucleus will decay",
+      "content": "### MC-3: \"The half-life predicts when a specific nucleus will decay\"\n- **Probe:** \"You have a single radium-226 nucleus with t₁/₂ = 1600 yr. Will it decay in 1600 years?\"\n- **Characteristic phrase:** \"After 1600 years, the nucleus will have decayed.\"\n- **Trigger:** \"Half-life\" sounds like \"lifetime\" — the time until the nucleus decays.\n- **Conflict evidence [P28]:** A single nucleus decays probabilistically — it may decay in 1 second or in 5000 years. The half-life is a statistical quantity: in any large sample, half the nuclei decay within t₁/₂. A single nucleus has a 50% chance of decaying before t₁/₂ and a 50% chance of surviving past t₁/₂. The distribution of decay times follows an exponential distribution with mean τ = t₁/₂/ln 2 ≈ 1.44 t₁/₂.\n- **Bridge [P30]:** \"Half-life is a population statistic, not an individual prediction. A single nucleus has probability λ dt of decaying in any infinitesimal interval dt — it's random. The half-life tells you that among billions of identical nuclei, half will have decayed by t₁/₂. For one nucleus, it's a coin flip with time.\"\n- **Replacement [P31]:** The half-life is a property of the ensemble, not the individual nucleus. For a single nucleus, the probability it decays before time t is P = 1 − e^(−λt). At t = t₁/₂: P = 1/2. This is the probabilistic meaning of half-life.\n- **Discrimination pairs [P33]:** Average life expectancy of 80 years doesn't mean every person lives to exactly 80. Some die at 20, some at 100. Half-life means 50% of the population survives past that age — same logic.\n- **S6 repair path:** Roll one die repeatedly, removing it when it shows a 6. Ask: \"Did the die 'know' it would survive 5 rolls?\" No — each roll is independent with probability 1/6 of being removed.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Activity and number of nuclei always decrease at the same rate",
+      "content": "### MC-4: \"Activity and number of nuclei always decrease at the same rate\"\n- **Probe:** \"If a sample's half-life is 10 minutes, when does the activity reach half its initial value?\"\n- **Characteristic phrase:** \"Activity decreases faster than the number of nuclei because it's the rate.\"\n- **Trigger:** Students confuse A(t) = λN(t) (activity) with the rate of change dN/dt. Activity is proportional to N — it has the same half-life as N. Some students think the activity halves faster than the number.\n- **Conflict evidence [P28]:** A(t) = λN(t) = λN₀ e^(−λt) = A₀ e^(−λt). Activity and number have the same exponential decay factor e^(−λt) — they have the same half-life. After one half-life: N = N₀/2 and A = A₀/2.\n- **Bridge [P30]:** \"Activity A = λN. Both A and N decline as e^(−λt). They have the same half-life. The constant λ is just a proportionality factor — it doesn't change the exponential decay.\"\n- **Replacement [P31]:** Activity and number of nuclei have the same half-life and the same exponential time dependence. A(t) = A₀ e^(−λt), N(t) = N₀ e^(−λt).\n- **Discrimination pairs [P33]:** If you know N(t) = 1000 e^(−0.1t), then A(t) = 0.1 × 1000 e^(−0.1t) = 100 e^(−0.1t). Both decay with the same time constant 1/λ = 10 s.\n- **S6 repair path:** Plot both N(t) and A(t) = λN(t) on the same axes (different y-scales). Both curves have the same shape and the same half-life — they are proportional.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "EXPLAIN + MOTIVATE",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EXPLAIN + MOTIVATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "DEMONSTRATE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"DEMONSTRATE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "PROBE",
+      "content": "{\"id\":\"TA-3\",\"title\":\"PROBE\",\"primitives\":[],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "APPLY",
+      "content": "{\"id\":\"TA-4\",\"title\":\"APPLY\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly applies N = N₀ e^(−λt), correctly computes t₁/₂ from λ and vice versa, correctly finds age from isotope ratios, and correctly interprets the probabilistic meaning of half-life. Score ≥ 80%.\n\n**FA-1 — Half-life calculation:**\n*Q: A radioactive sample has decay constant λ = 0.0347 min⁻¹. (a) What is the half-life? (b) Starting with 5000 nuclei, how many remain after 40 minutes?*\nExpected: (a) t₁/₂ = ln 2/λ = 0.693/0.0347 ≈ 20 min. (b) N = 5000 e^(−0.0347 × 40) = 5000 e^(−1.388) = 5000 × 0.25 = 1250. (Equivalently: 40 min = 2 half-lives → N = 5000/4 = 1250.)\nThreshold: Correct t₁/₂ and correct N(40 min).\n\n**FA-2 — Activity:**\n*Q: A sample initially has activity A₀ = 4000 dpm. After 3 half-lives, what is the activity?*\nExpected: After n half-lives, A = A₀/2^n = 4000/8 = 500 dpm.\nThreshold: Correct application of A = A₀/2^n.\n\n**FA-3 — Carbon dating:**\n*Q: A wood sample has ¹⁴C activity = 7.65 dpm/g. Fresh wood has 15.3 dpm/g. t₁/₂(¹⁴C) = 5730 yr. How old is the sample?*\nExpected: A/A₀ = 1/2 → one half-life → age = 5730 years.\nThreshold: Correct ratio identification (1/2) and age = one half-life = 5730 years.\n\n**FA-4 — Probabilistic interpretation:**\n*Q: A single radon-222 nucleus has t₁/₂ = 3.82 days. A student says \"this nucleus will definitely decay within 3.82 days.\" What is wrong with this statement? What is correct?*\nExpected: The half-life is a statistical quantity for large ensembles — it tells us that 50% of a large sample will decay in 3.82 days. For a single nucleus, decay is probabilistic: it has a 50% chance of decaying before 3.82 days and 50% chance of surviving past 3.82 days. There is no certainty about when any individual nucleus decays.\nThreshold: Correct distinction between ensemble statistic and individual prediction; invokes probability language.\n\n**Confidence calibration:** After FA-1, students rate confidence. Students who use N = N₀/2^n (half-life method) instead of N = N₀ e^(−λt) receive explicit feedback that both are equivalent, but the exponential form is more general.\n\n**Delayed retrieval (session + 3):** \"State the radioactive decay law. What is the relationship between t₁/₂ and λ? After 5 half-lives, what fraction of the original nuclei remain?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 207,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Dice rolling simulation: roll 60 dice; remove any die showing a 1 (probability 1/6 per roll = λ). Count remaining. Roll again, remove 1s, count. Plot surviving dice vs. number of rolls → exponential curve emerges.\n- M&M analogy: pour M&Ms on table; remove those with M facing up (probability ½ per shake). After 1 shake: ~N₀/2 remain; after 2 shakes: ~N₀/4, etc.\n- Physical demonstration: Geiger counter count rate decreasing over time for a short-lived source.\n\n### Representational (Iconic)\n- N(t) and A(t) vs. t plots: exponential decay from N₀, marking t₁/₂, 2t₁/₂, 3t₁/₂ with N = N₀/2, N₀/4, N₀/8.\n- Semi-log plot: ln N vs. t is a straight line with slope −λ. Students learn to extract λ from the slope.\n- Comparison table: t₁/₂ for various isotopes — ²³⁸U (4.5 Gyr), ¹⁴C (5730 yr), ²²⁶Ra (1600 yr), ⁶⁰Co (5.27 yr), ¹³¹I (8 days), ²¹²Pb (10.6 hr), ²¹²Po (0.3 μs).\n\n### Abstract (Symbolic)\n- Derivation from first principles: if each nucleus has probability λ dt of decaying in time dt, and nuclei are independent, then: dN = −λN dt → dN/N = −λ dt → ln(N/N₀) = −λt → N = N₀ e^(−λt).\n- Half-life derivation: N(t₁/₂) = N₀/2 → e^(−λt₁/₂) = 1/2 → −λt₁/₂ = −ln 2 → t₁/₂ = ln 2/λ.\n- Activity unit conversions: 1 Ci = 3.7 × 10¹⁰ Bq (activity of 1 g of ²²⁶Ra).\n- Carbon dating: age = (1/λ) × ln(N₀/N) = t₁/₂/ln 2 × ln(A₀/A).\n\n### Transfer (+)\n- Carbon-14 dating: organisms absorb ¹⁴C during life (ratio ¹⁴C/¹²C matches atmosphere). After death, ¹⁴C decays with t₁/₂ = 5730 yr. Measuring current ratio → age.\n- ²³⁸U/²⁰⁶Pb dating: t₁/₂ = 4.47 Gyr — used to date rocks and determine Earth's age (4.54 Gyr).\n- Medical applications: ¹³¹I (t₁/₂ = 8 days) for thyroid treatment — activity drops to negligible levels within weeks.\n- Reactor fuel burnup: fission products with various t₁/₂ determine reactor safety timescales.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 42,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Exponential decay as linear:** Students draw or think of the decay as linear (straight line from N₀ to 0) rather than exponential. The key distinction: a linear decay reaches zero; exponential decay never exactly reaches zero.\n\n**Mode 2 — Confusing decay constant and half-life:** Students use λ and t₁/₂ interchangeably, or use the wrong quantity in the exponential: N = N₀ e^(−t₁/₂ × t) instead of N = N₀ e^(−λt). They don't know the relationship λ = ln 2 / t₁/₂.\n\n**Mode 3 — \"After 2 half-lives, the sample is gone\":** Students think that after 2 × t₁/₂, only 2 × 50% = 0% remains. In fact, after each half-life, half of whatever remains decays: after 2t₁/₂, N = N₀/4 (25% remains).\n\n**Mode 4 — Individual nucleus prediction:** Students think the half-life predicts when a specific nucleus will decay (\"this nucleus will decay in exactly t₁/₂ years\"). In fact, t₁/₂ is a statistical statement about large ensembles — any individual nucleus may decay at any time, with probability λ dt in time dt.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 68,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Here's something remarkable about radioactive nuclei: they have no memory. A radium nucleus that has existed for 100 years has exactly the same probability of decaying in the next second as a radium nucleus that was just created. There is no aging, no fatigue, no accumulated damage. Each nucleus at each moment has the same fixed probability λ of decaying per second. This memoryless property — this constancy of λ — is what gives radioactive decay its simple, universal, exponential form.\"\n\n**At the differential equation:**\n\"If the rate of decay is proportional to how many nuclei exist, then dN/dt = −λN. This says: the more nuclei you have, the faster they disappear. Solve it: separate variables, integrate, exponentiate. N = N₀ e^(−λt). The solution is exponential. This isn't surprising in hindsight — any process where 'rate of change ∝ current amount' gives exponential behavior. Bank interest, population growth, RC circuits, drug clearance — same equation, same solution.\"\n\n**At half-life:**\n\"The half-life is the most useful characterization of a decay. It tells you: half the nuclei in any sample will have decayed in this time. It doesn't tell you when any specific nucleus will decay. Half-life is a population statistic, not a death sentence for an individual nucleus. And notice: after each t₁/₂, you have half of what you had before — not half of the original. After 10 half-lives: (1/2)^10 ≈ 0.1% remains. After 20 half-lives: (1/2)^20 ≈ 0.0001% remains. Exponential decay — approaches zero but never reaches it.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 194,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.mod.radioactivity — without knowing what decays (alpha, beta, gamma) and that each nucleus decays independently, the exponential law has no motivation.\n\n**S3:** Student can state the formula but applies it incorrectly (e.g., uses t₁/₂ instead of λ in the exponent). Drill dimensional analysis: exponent must be dimensionless. λt is dimensionless; t₁/₂ × t is not.\n\n**S6:** Student believes exponential decay reaches zero. Run the dice simulation: after 10 rounds with 100 dice, about 100 × (5/6)^10 ≈ 16 dice remain — still some dice survive. Then compute: after 20 half-lives of ¹⁴C, a mole of ¹⁴C has (6 × 10²³)/2^20 ≈ 5 × 10¹⁷ atoms remaining — orders of magnitude above zero.\n\n**S9:** Introduce the Bateman equations for decay chains: parent → daughter → granddaughter, each with its own λ. Show secular equilibrium: when t₁/₂(parent) >> t₁/₂(daughter), the daughter activity equals the parent activity. Application: ²³⁸U → Th → Pa → ... → ²⁰⁶Pb (14-step chain).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 237,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (N = N₀ e^(−λt), t₁/₂ = ln 2/λ, N = N₀/2^n) + conceptual (memoryless property, ensemble vs. individual).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"Write the radioactive decay law and the half-life formula. How many nuclei remain after 3 half-lives?\"\n- Session + 3: \"A nuclide has t₁/₂ = 2 hours. At t = 0, activity = 800 Bq. Find activity at t = 6 hours.\"\n- Session + 7: \"A rock contains 75% ²⁰⁶Pb and 25% ²³⁸U (by number of nuclei). If t₁/₂(²³⁸U) = 4.47 Gyr, approximately how old is the rock?\"\n\n**Interleaving partners:** phys.mod.radioactivity (prerequisite — identifies what decays); phys.mod.nuclear-reactions (successor — provides context for nuclear energy); exponential functions (mathematics — same ODE as RC discharge, population dynamics, pharmacokinetics).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 249,
+        "endLine": 262
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Capacitor discharge through a resistor: V(t) = V₀ e^(−t/RC). Same exponential law with time constant τ = RC instead of 1/λ. Both derive from \"rate ∝ current amount.\"\n\n**Far transfer:** Pharmacokinetics: drug concentration in the body decays exponentially after IV administration (clearance rate ∝ concentration). Biological half-life is analogous to radioactive half-life. Medical dosing schedules are designed around this.\n\n**Structural abstraction:** \"Any memoryless, first-order rate process → exponential decay.\" This is the fundamental principle. The radioactive decay law is an idealized, physically exact example; approximations of this law appear in every field from ecology (species decline) to finance (debt amortization at constant rate).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 262,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactive-decay/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.radioactive-decay",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.mod.radioactivity is necessary — students must know what a decay event is before quantifying the rate. Also requires comfort with exponential functions (mathematics prerequisite should be verified).\n- **Unlock readiness:** phys.mod.nuclear-reactions can follow — students now understand decay kinetics and are ready for nuclear reaction cross-sections and reaction rates.\n- **Difficulty calibration:** Proficient/apply is correct. The mathematics (exponential function, logarithm, simple ODE) is accessible to students who have had calculus or even pre-calculus. The conceptual content (probabilistic interpretation, half-life vs. mean life) requires care.\n- **Suggested lab:** Geiger counter measurement of a Ba-137m source (produced from a Cs-137 generator, t₁/₂ = 2.55 min). Students measure activity every 30 seconds for 15 minutes, plot on semi-log paper, and extract the half-life. Comparing to the accepted value (2.55 min) validates the method.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactive-decay.md",
+        "startLine": 272,
+        "endLine": 282
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

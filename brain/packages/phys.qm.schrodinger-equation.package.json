@@ -1,0 +1,537 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.schrodinger-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.schrodinger-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e114e1456bf58854fab9ecfc0dd1d8b68804a5f409b0631f63b0a39c829b4cf8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md": "sha256:8755df91bd7b20043e165543fbe4caebeac61dd13d6a6c18733fb21a3362b0cf"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "phys.qm.schrodinger-equation",
+    "name": "Time-Dependent Schrödinger Equation",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": null,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.qm.wave-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.schrodinger-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.schrodinger-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md": "sha256:8755df91bd7b20043e165543fbe4caebeac61dd13d6a6c18733fb21a3362b0cf"
+      },
+      "contentHash": "sha256:1af8ed32b2184195b11341baad4265d0f59fcf9cd3083ad4734c272a61782694",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.schrodinger-equation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.schrodinger-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.schrodinger-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.schrodinger-equation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.schrodinger-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.schrodinger-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.schrodinger-equation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.schrodinger-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.schrodinger-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.schrodinger-equation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.schrodinger-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.schrodinger-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.schrodinger-equation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.schrodinger-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.schrodinger-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.schrodinger-equation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.schrodinger-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.schrodinger-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.schrodinger-equation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.schrodinger-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.schrodinger-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.schrodinger-equation.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.schrodinger-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.schrodinger-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.schrodinger-equation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Time-Dependent Schrödinger Equation — core explanation",
+      "content": "### Core Idea\nThe Schrödinger equation is the fundamental equation of non-relativistic quantum mechanics. It tells us how the wave function ψ(x, t) evolves in time, given a Hamiltonian operator Ĥ (the total energy operator). For conservative systems, it separates into a time-independent eigenvalue problem Ĥψ = Eψ, whose solutions are stationary states with definite energy.\n\n### Conceptual Ladder\n1. **Recall**: ψ(x, t) is the wave function; |ψ|² is probability density; normalization ∫|ψ|²dx = 1.\n2. **Understand**: The Schrödinger equation is a wave equation — it has wave-like solutions, but what's waving is probability amplitude, not a physical displacement.\n3. **Apply**: Separate variables to find stationary states; apply boundary conditions; extract energy eigenvalues.\n4. **Extend**: Superpose stationary states to build time-dependent wave packets; interpret collapse under measurement.\n\n### Key Formula Set\n- **Time-dependent Schrödinger equation (TDSE)**:\n  iℏ ∂ψ/∂t = Ĥψ = [−ℏ²/(2m) ∂²/∂x² + V(x)] ψ\n- **Time-independent Schrödinger equation (TISE)** (separation of variables, ψ = φ(x)T(t)):\n  Ĥφ = Eφ — gives energy eigenvalues Eₙ\n  T(t) = e^(−iEₙt/ℏ) — time phase factor\n- **General stationary state**: ψₙ(x,t) = φₙ(x) e^(−iEₙt/ℏ)\n- **General solution** (superposition): ψ(x,t) = Σ cₙ φₙ(x) e^(−iEₙt/ℏ)\n- **Expectation value of energy**: ⟨E⟩ = Σ |cₙ|² Eₙ (probability-weighted average)\n- **Normalization constraint**: Σ |cₙ|² = 1\n\n### Canonical Example\n**Infinite square well** (particle in box preview): V = 0 inside [0, L], V = ∞ outside.\nTISE: −ℏ²/(2m) d²φ/dx² = Eφ → φ(x) = A sin(kx), k = nπ/L\nBoundary conditions force: Eₙ = n²π²ℏ²/(2mL²), n = 1,2,3,...\nGround state energy E₁ = π²ℏ²/(2mL²) ≠ 0 — zero-point energy is a direct consequence.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 16,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "The Schrödinger equation gives the trajectory of the particle",
+      "content": "### MC-1: \"The Schrödinger equation gives the trajectory of the particle\"\n- **Probe**: \"What does solving the Schrödinger equation tell you about where the particle will be next?\"\n- **Characteristic phrase**: \"After solving Schrödinger's equation, I know where the particle is at each time.\"\n- **Trigger**: Classical mechanics habit — equations of motion give x(t).\n- **Conflict evidence**: ψ(x,t) does not give a definite position — it gives |ψ(x,t)|² = probability density. Position is unknowable until measured (and then it collapses).\n- **Bridge**: Newton's equation F = ma → x(t) is the classical trajectory. Schrödinger's equation → ψ(x,t) is the quantum \"trajectory\" of probability amplitude.\n- **Replacement**: The Schrödinger equation governs probability amplitude evolution; it predicts probability distributions, not trajectories.\n- **Discrimination pairs**: \"ψ(x,t) evolves deterministically via TDSE\" ✓ vs. \"particle position x(t) evolves deterministically\" ✗\n- **S6 repair path**: Compute |ψ(x,t)|² for a two-state superposition; show it oscillates — clearly a distribution, not a point.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Stationary states have zero energy",
+      "content": "### MC-2: \"Stationary states have zero energy\"\n- **Probe**: \"The ground state wave function of a particle in a box is constant in time (|ψ|² doesn't change). Does that mean E₁ = 0?\"\n- **Characteristic phrase**: \"If nothing changes in time, the energy must be zero.\"\n- **Trigger**: Associating \"stationary\" with \"no motion\" and therefore \"no energy.\"\n- **Conflict evidence**: E₁ = π²ℏ²/(2mL²) > 0 always. This zero-point energy is confirmed experimentally (liquid helium never freezes at atmospheric pressure because ZPE prevents crystallization).\n- **Bridge**: \"Stationary\" describes |ψ|², not E. Even a rotating wheel has constant |ψ|² for the center of mass while having rotational KE.\n- **Replacement**: Stationary state means ∂|ψ|²/∂t = 0 (probability distribution unchanging); energy of stationary state is the eigenvalue Eₙ, always > 0 in a bound system.\n- **Discrimination pairs**: E₁ = π²ℏ²/(2mL²) > 0 ✓ vs. \"stationary ⟹ E = 0\" ✗\n- **S6 repair path**: Calculate E₁ for electron in 1 nm box numerically: E₁ ≈ 0.376 eV. Clearly non-zero.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Any function can be a solution",
+      "content": "### MC-3: \"Any function can be a solution\"\n- **Probe**: \"If I write ψ = x(L−x) for a particle in [0,L], is this a solution to the TISE?\"\n- **Characteristic phrase**: \"I'll just pick a smooth function that satisfies the boundary conditions.\"\n- **Trigger**: Boundary conditions are necessary but not sufficient; students forget the equation must also be satisfied.\n- **Conflict evidence**: d²/dx² [x(L−x)] = −2 ≠ −k² x(L−x) — the function doesn't satisfy the TISE for any k.\n- **Bridge**: Solutions must simultaneously satisfy BOTH the differential equation AND the boundary conditions.\n- **Replacement**: Valid solutions: satisfy TISE, satisfy boundary conditions, are normalizable. All three required.\n- **Discrimination pairs**: φₙ = sin(nπx/L) satisfies all three ✓ vs. φ = x(L−x) satisfies boundary conditions only ✗\n- **S6 repair path**: Verify sin(nπx/L) satisfies d²φ/dx² = −(nπ/L)²φ explicitly.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "The superposition state has definite energy (E₁ + E₂)/2",
+      "content": "### MC-4: \"The superposition state has definite energy (E₁ + E₂)/2\"\n- **Probe**: \"A particle is in state ψ = (1/√2)φ₁ + (1/√2)φ₂. What energy will you measure?\"\n- **Characteristic phrase**: \"It's a mixture of E₁ and E₂, so the energy is (E₁+E₂)/2.\"\n- **Trigger**: Averaging instead of applying Born rule for individual measurements.\n- **Conflict evidence**: Each measurement gives either E₁ or E₂ (with probability 1/2 each), never the average. ⟨E⟩ = (E₁+E₂)/2 is the statistical mean over many measurements.\n- **Bridge**: Think of a biased coin: each flip is heads or tails, not the average. ⟨outcome⟩ = mean of many flips, not a single-measurement prediction.\n- **Replacement**: Superposition state gives P(E₁) = |c₁|² = 1/2 and P(E₂) = |c₂|² = 1/2. Each individual measurement collapses to one or the other.\n- **Discrimination pairs**: \"Each measurement: E₁ or E₂ with prob 1/2\" ✓ vs. \"Each measurement: (E₁+E₂)/2\" ✗\n- **S6 repair path**: Compute ⟨E⟩ = Σ|cₙ|²Eₙ and verify it gives the mean; contrast with what a single measurement gives.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Wave function recall",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Wave function recall\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 206,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "TDSE introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"TDSE introduction\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 207,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Separation of variables",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Separation of variables\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 208,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "TISE for infinite well",
+      "content": "{\"id\":\"TA-4\",\"title\":\"TISE for infinite well\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 209,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Visualize eigenstates",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Visualize eigenstates\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 210,
+        "endLine": 210
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Superposition state",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Superposition state\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 211,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Born rule for energy measurement",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Born rule for energy measurement\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 212,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Extension preview",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Extension preview\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 213,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) write TDSE and TISE correctly, (2) solve TISE for infinite square well including boundary conditions, (3) compute energy eigenvalues Eₙ, (4) apply Born rule to superposition states, (5) interpret |ψ|² physically.\n\n### Formative Assessment 1 — Separation of variables\n**Prompt**: \"Starting from iℏ∂ψ/∂t = [−ℏ²/(2m)∂²/∂x² + V(x)]ψ, substitute ψ = φ(x)T(t) and show that you get two separate ODEs: one in x (the TISE) and one in t.\"\n**Expected answer**: Divide by φT; left side depends only on t; right side depends only on x; both equal separation constant E. T' = −(iE/ℏ)T → T = e^(−iEt/ℏ); Ĥφ = Eφ.\n**Threshold**: Must show complete separation; must identify separation constant as E.\n\n### Formative Assessment 2 — Eigenvalue problem\n**Prompt**: \"For an infinite square well of width L, find the energy eigenvalues Eₙ and normalized eigenfunctions φₙ(x).\"\n**Expected answer**: Eₙ = n²π²ℏ²/(2mL²); φₙ(x) = √(2/L) sin(nπx/L), n = 1,2,3,...\n**Threshold**: Correct Eₙ formula and normalization constant √(2/L).\n\n### Formative Assessment 3 — Superposition\n**Prompt**: \"A particle in an infinite well is in state ψ = (√3/2)φ₁ + (1/2)φ₂. (a) What are P(E₁) and P(E₂)? (b) Find ⟨E⟩.\"\n**Expected answer**: P(E₁) = |√3/2|² = 3/4; P(E₂) = |1/2|² = 1/4. ⟨E⟩ = (3/4)E₁ + (1/4)E₂ = (3/4)E₁ + (1/4)(4E₁) = (3+1)E₁/4 × ... = (3E₁ + E₂)/4.\n**Threshold**: Correct probabilities (3/4 and 1/4), correct ⟨E⟩ calculation.\n\n### Formative Assessment 4 — Conceptual\n**Prompt**: \"A particle is in the n=2 stationary state. Where is the probability of finding the particle exactly zero? Why?\"\n**Expected answer**: At x = 0, x = L/2, and x = L. The node at x = L/2 is a quantum mechanical effect with no classical analogue — a classically bouncing particle would visit x = L/2. The node arises because the standing wave has a zero crossing at the midpoint.\n**Threshold**: Must identify x = L/2 as the non-trivial node and connect to the wave function's nodal structure.\n\n### Confidence Calibration\nAfter FA2: \"On a scale 0–100%, how confident are you that you correctly normalized the eigenfunction? What would make you more certain?\" (Look for students who can verify normalization by integrating |φₙ|².)\n\n### Delayed Retrieval\nTwo weeks later: Write down TISE for a finite square well; state qualitative differences from infinite well (evanescent tails, fewer bound states for shallow wells). No formula sheet.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 231,
+        "endLine": 264
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nPluck a guitar string. It vibrates in standing wave patterns — fundamental, first overtone, second overtone. Each pattern has a definite frequency (energy). Any complex vibration is a superposition of these modes. Quantum mechanics is analogous: stationary states are the \"pure tones\" of a quantum system; any state is a superposition of them. The Schrödinger equation is the guitar string's wave equation, but for probability amplitudes.\n\n### Representational (Diagrams and Symbols)\n- **Standing wave diagram**: Show φₙ(x) for n = 1, 2, 3 in an infinite well — students see nodal structure increase with n, energy increases with n².\n- **Energy level ladder**: Horizontal lines at Eₙ ∝ n²; well walls on sides.\n- **Probability density plot**: |φₙ|² for n = 1, 2, 3 — show how the probability distributes across nodes.\n- **Complex exponential clock**: e^(−iEt/ℏ) rotates in the complex plane at angular frequency E/ℏ — shows that stationary states \"rotate\" but |ψ|² is constant.\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Substituting ψ = φ(x)T(t) into TDSE and separating variables.\n2. Solving d²φ/dx² = −k²φ for oscillatory solutions.\n3. Applying boundary conditions to quantize k → kₙ = nπ/L.\n4. Computing Eₙ from kₙ.\n5. Writing the general time-dependent state for a two-level superposition.\n6. Computing |ψ(x,t)|² and showing it oscillates in time for superpositions.\n\n### Transfer (Novel Contexts)\n- Different potential wells: harmonic oscillator, hydrogen atom, finite well — same TISE structure, different V(x), different eigenvalues.\n- Tunneling: solving TISE in classically forbidden region (V > E) → exponentially decaying solution rather than oscillatory.\n- Quantum chemistry: molecular orbitals are solutions to the many-body Schrödinger equation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 46,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: Treating ψ as a Real Wave\nStudents from classical wave mechanics expect ψ to be real (like a string displacement). They're confused when solutions involve i. Emphasize: ψ is complex; only |ψ|² is observable. The imaginary unit is not a defect — it's what makes ψ a probability amplitude rather than a probability.\n\n### Failure Mode 2: Forgetting Boundary Conditions\nStudents find φ(x) = A sin(kx) + B cos(kx) and stop. They must apply φ(0) = 0 → B = 0, and φ(L) = 0 → k = nπ/L. Without this step, k is continuous and quantization never appears.\n\n### Failure Mode 3: Confusing Stationary States with \"Not Moving\"\nStudents see |ψₙ|² time-independent and conclude \"the particle is not moving.\" It is not at rest — it has kinetic energy ⟨KE⟩ = ⟨p²⟩/2m ≠ 0. \"Stationary\" means the probability distribution is static, not that dynamics are absent.\n\n### Failure Mode 4: Superposition Probability Arithmetic\nFor ψ = (1/√2)φ₁ + (1/√2)φ₂, students compute probability of measuring E₁ as 1/√2 instead of |1/√2|² = 1/2. Born rule requires squaring the amplitude modulus, not the amplitude itself.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 73,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"The Schrödinger equation is to quantum mechanics what Newton's second law is to classical mechanics — it's the equation that governs everything else.\"\n\n**Core explanation**: \"Write Ĥψ = Eψ. The hat on Ĥ means operator — it acts on ψ by differentiating it. Finding which functions ψ satisfy this equation for which values E is the central calculation of quantum mechanics. The allowed values of E are the energy levels.\"\n\n**Common error interception**: \"Before you claim you have a solution, apply boundary conditions. The equation being satisfied inside the well is not enough — the wave function must also vanish at the walls.\"\n\n**Checkpoint question**: \"If I double the box length, what happens to the ground state energy?\" (Answer: E₁ ∝ 1/L² → decreases by factor 4.) \"What does that tell you about confining particles to smaller spaces?\" (More confinement → higher energy — quantum confinement!)\n\n**Closing move**: \"Every atom, every molecule, every transistor in your phone obeys this equation. Solving it — exactly for hydrogen, approximately for everything else — is what quantum chemistry and materials science do.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 217,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"This all seems arbitrary, why this equation?\"\nReturn to the motivation: de Broglie waves (phys.mod.wave-particle-duality) suggest p = ℏk. Plane wave e^(i(kx−ωt)) has E = ℏω. Substituting into iℏ∂ψ/∂t gives Eψ; substituting −ℏ²∂²/∂x² gives p²ψ. So Ĥ = p̂²/2m + V \"just\" applies the energy formula to the wave, treating p and E as operators. The equation is postulated because it works — its predictions match hydrogen spectrum, tunneling, semiconductor band gaps.\n\n### S3 — Can set up but cannot apply boundary conditions\nReview: boundary conditions encode physical constraints. φ(0) = 0 means the particle cannot penetrate an infinite barrier — classically obvious. φ(L) = 0 same at x = L. These two conditions together restrict k to discrete values. Have student graph sin(kx) for various k and physically show which ones \"fit\" in the box.\n\n### S6 — Confuses operator and eigenvalue\nStudents write Ĥψ = Ĥψ (tautology) instead of Ĥψ = Eψ (eigenvalue equation). Drill: Ĥ is an operator (acts on functions by differentiating); E is a number (the eigenvalue). The equation says: \"Applying Ĥ to φ gives back φ, scaled by the number E.\"\n\n### S9 — Cannot connect to measurement\nReview Born rule: measuring energy always gives an eigenvalue. Probability of getting Eₙ is |⟨φₙ|ψ⟩|² = |cₙ|². After measurement giving Eₙ, state collapses to φₙ. Superposition is a pre-measurement state; eigenvalue is the post-measurement result.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 264,
+        "endLine": 280
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nProcedural (separation of variables, eigenvalue solution) + conceptual (wave function interpretation, superposition) + structural (TISE as the core equation of quantum mechanics).\n\n### Spaced Retrieval Schedule\n- Day 1: Write TDSE from memory; separate variables.\n- Day 3: Solve TISE for infinite well; derive Eₙ.\n- Day 7: Given ψ = c₁φ₁ + c₂φ₂, compute P(E₁), P(E₂), ⟨E⟩.\n- Day 14: Explain qualitatively how TISE for harmonic oscillator differs from infinite well.\n- Day 30: Derive that Eₙ ∝ n² for infinite well from first principles, and state the physical interpretation of zero-point energy.\n\n### Interleaving Partners\n- phys.qm.wave-function (Born rule and normalization — used in every TISE solution)\n- phys.qm.particle-in-box (direct application)\n- phys.qm.uncertainty-principle (zero-point energy connects to ΔxΔp ≥ ℏ/2)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 280,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Solve TISE for any symmetric piecewise-constant potential.\n- Write general superposition state and compute ⟨E⟩.\n- Identify nodes and antinodes of any φₙ.\n\n### Far Transfer\n- **Photonics**: Optical cavities with discrete resonant modes — formally analogous to particle-in-box eigenvalue problems.\n- **Solid-state physics**: Bloch theorem and band theory — electrons in periodic potentials, same TISE with periodic V(x).\n- **Nuclear physics**: Shell model of the nucleus uses TISE with a nuclear potential well.\n\n### Structural Abstraction\nThe eigenvalue problem Ôf = λf appears across all of physics and mathematics (vibration modes, electromagnetic cavities, normal modes of coupled oscillators). Schrödinger's equation is one instance of this universal pattern: operator Ĥ, eigenfunctions φₙ, eigenvalues Eₙ. This structure — and the superposition + measurement rule — generalizes to spin, angular momentum, and every quantum observable.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 299,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "phys.qm.schrodinger-equation/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.schrodinger-equation",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.qm.wave-function ensures students understand ψ, Born rule, and normalization before encountering the TISE. The prerequisite is necessary — students who don't understand ψ will mistake the Schrödinger equation's solutions for classical trajectories.\n\n### Unlock Readiness\nThis blueprint unlocks five major concepts (particle-in-box, harmonic oscillator, hydrogen atom, operators, tunneling) — all are direct applications of the TISE with specific V(x). The framework established here (separation of variables, eigenvalues, superposition) must be solid before any of those can be approached.\n\n### Suggested Flag\nFlag for 10-hour estimate — this is one of the most conceptually demanding blueprints in the QM domain. Consider breaking into two sessions: Session A (TDSE → TISE → separation), Session B (boundary conditions → eigenvalues → superposition → measurement).\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.schrodinger-equation.md",
+        "startLine": 316,
+        "endLine": 330
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

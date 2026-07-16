@@ -1,0 +1,348 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.magnetic-dipole-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.magnetic-dipole",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:89691cc011c05f34c328c3672f23a3abab3325af6968f7a1dcaa58b77f27e3ca",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.magnetic-dipole.md": "sha256:2ee30a6251a229cf92639e559325418a3273cb8dab33bb127b90e8af9bf36a3a"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.magnetic-dipole",
+    "name": "Magnetic Dipole",
+    "difficultyRaw": "label: advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.magnetic-materials"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.magnetic-dipole-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.magnetic-dipole (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.magnetic-dipole.md": "sha256:2ee30a6251a229cf92639e559325418a3273cb8dab33bb127b90e8af9bf36a3a"
+      },
+      "contentHash": "sha256:f653f0c05137fb2a26b84678529c643d1d3b2a5a97261dc06add8a80830da884",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-dipole.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md#TA-1 (addresses MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-dipole\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-dipole.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md#TA-2 (addresses MC-DIPOLE-FIELD-FALLS-OFF-AS-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-dipole\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-dipole.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-dipole\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-dipole.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md#TA-4 (addresses MC-DIPOLE-FIELD-FALLS-OFF-AS-1, MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-dipole\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.magnetic-dipole/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Magnetic Dipole — Concept Explanation Blocks",
+      "content": "### Block 1-A — What Is a Magnetic Dipole?\nA **magnetic dipole** is the fundamental unit of magnetism — a current loop (or spinning charge) with a magnetic dipole moment:\n\n> **m = NIA n̂**\n\nWhere N = number of turns, I = current, A = loop area, **n̂** = normal to loop (right-hand rule).\n\nUnits: A·m²\n\nMagnetic dipoles arise from:\n1. **Current loops**: any closed current path (coil, solenoid)\n2. **Electron spin**: intrinsic quantum property (spin magnetic moment)\n3. **Orbital motion**: electron orbiting nucleus\n4. **Atomic nuclei**: nuclear magnetic moments (basis of NMR/MRI)\n\nUnlike electric dipoles (separable +q and −q), magnetic dipoles cannot be separated into monopoles — cutting a bar magnet always gives two dipoles.\n\n### Block 1-B — Field of a Magnetic Dipole\nFar from a magnetic dipole (r >> loop radius), the field has the same mathematical form as an electric dipole field:\n\n**On the axis** (z-axis, along m):\n> **B_axial = (μ₀/4π)(2m/r³)** = (μ₀/2π)(m/r³)\n\n**On the equatorial plane** (perpendicular to m):\n> **B_equat = −(μ₀/4π)(m/r³)**\n\nThe equatorial field is antiparallel to **m** and half the magnitude of the axial field at the same distance.\n\nGeneral formula (analogous to electric dipole):\n> **B = (μ₀/4π)(1/r³)[3(m·r̂)r̂ − m]**\n\nKey feature: B ∝ 1/r³ (faster fall-off than monopole 1/r²).\n\n### Block 1-C — Energy and Torque in External Field\nIn an external field **B_ext**, a magnetic dipole has:\n\n**Torque**: τ = **m × B** = mB sinθ (tends to align m with B)\n\n**Potential energy**: U = −**m · B** = −mB cosθ\n\n| θ | U | Equilibrium |\n|---|---|-------------|\n| 0° | −mB | Stable (minimum energy) |\n| 90° | 0 | Maximum torque |\n| 180° | +mB | Unstable (maximum energy) |\n\n**Force on dipole in non-uniform field**:\n> F = ∇(m · B) = m (dB/dz) (for m ∥ z-axis)\n\nStern-Gerlach experiment: inhomogeneous field → force on atomic magnetic moments → measures quantisation of angular momentum.\n\n### Block 1-D — Earth as a Magnetic Dipole\nEarth's magnetic field approximates a tilted dipole:\n- Dipole moment: m ≈ 8×10²² A·m²\n- Magnetic north pole (where field lines enter) is near geographic south pole (geographic and magnetic north differ by ~11°)\n- Surface field: ~25–65 μT\n- Dipole field at equator: B ≈ μ₀m/(4πR_E³) ≈ 30 μT (consistent with observation)\n\nApplications: compass navigation, aurora borealis (charged particles spiral along dipole field lines), magnetosphere shielding from solar wind.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 27,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Dipole Moment and Field on Axis",
+      "content": "### WE-1 — Dipole Moment and Field on Axis\n**Problem:** A circular coil: 30 turns, radius 4.0 cm, I = 2.0 A. Find: (a) dipole moment m; (b) B on the axis at r = 20 cm from the centre.\n\n**Solution:**\n(a) m = NIA = 30 × 2.0 × π(0.04)² = 30 × 2.0 × 5.03×10⁻³ = **0.302 A·m²**\n\n(b) r = 0.20 m >> R = 0.04 m → dipole approximation valid  \nB_axial = (μ₀/2π)(m/r³) = (4π×10⁻⁷/(2π)) × (0.302/(0.20)³)  \n= 2×10⁻⁷ × (0.302/8×10⁻³)  \n= 2×10⁻⁷ × 37.75  \n= **7.55×10⁻⁶ T = 7.55 μT**\n\nCheck with exact formula: B = μ₀IR²N/[2(R²+x²)^{3/2}] at x=20cm.  \n(R²+x²) = 0.0016+0.04 = 0.0416 m²; (0.0416)^{3/2} = 0.00849 m³  \nB = 4π×10⁻⁷×2×(0.04)²×30/[2×0.00849] = 4π×10⁻⁷×2×0.0016×30/0.01698  \n= 4π×10⁻⁷×0.096/0.01698 = 4π×10⁻⁷×5.653 = **7.12 μT** (dipole approx overestimates by ~6% since r=5R, not r>>R)\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 91,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Torque and Energy in External Field",
+      "content": "### WE-2 — Torque and Energy in External Field\n**Problem:** A magnetic dipole m = 0.50 A·m² is in B = 0.20 T. Find: (a) maximum torque, (b) U at θ = 0° and θ = 180°, (c) energy required to flip from stable to unstable equilibrium.\n\n**Solution:**\n(a) τ_max = mB = 0.50 × 0.20 = **0.10 N·m** (at θ = 90°)\n\n(b) U(0°) = −mB cos0° = −0.50 × 0.20 × 1 = **−0.10 J** (stable)  \n    U(180°) = −mB cos180° = −0.50 × 0.20 × (−1) = **+0.10 J** (unstable)\n\n(c) ΔU = U(180°) − U(0°) = 0.10 − (−0.10) = **0.20 J**\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 91,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Earth's Dipole Field",
+      "content": "### WE-3 — Earth's Dipole Field\n**Problem:** Estimate B at Earth's equator using dipole approximation: m = 8.0×10²² A·m², R_E = 6.4×10⁶ m.\n\n**Solution:**\nAt equatorial point, r = R_E, and dipole moment is perpendicular to equatorial plane → equatorial field formula:  \nB_equat = (μ₀/4π)(m/r³) = 10⁻⁷ × (8.0×10²²)/(6.4×10⁶)³  \n= 10⁻⁷ × (8.0×10²²)/(2.62×10²⁰)  \n= 10⁻⁷ × 305.3  \n= **3.05×10⁻⁵ T = 30.5 μT**\n\nObserved equatorial field ≈ 25–35 μT → dipole model gives good estimate ✓\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 91,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/misconception/MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES",
+      "kind": "misconception",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "- **trigger_signal:** Student draws a magnetic dipole as two separate \"magnetic charges\" N and S, or asks \"where is the positive magnetic charge?",
+      "content": "### MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES\n- **trigger_signal:** Student draws a magnetic dipole as two separate \"magnetic charges\" N and S, or asks \"where is the positive magnetic charge?\"\n- **conflict_evidence [P28]:** \"Electric dipoles have two separable charges (+q, −q) that can be physically moved apart. Magnetic dipoles cannot. Cut a bar magnet in half: two smaller dipoles, not a monopole. Cut again: still dipoles. Every current loop has both a 'north face' (field exits) and 'south face' (field enters) as inseparable consequences of the same circulating current. Gauss's law for magnetism ∮B·dA = 0 proves no isolated pole can ever be enclosed.\"\n- **bridge_text [P30]:** \"The electric dipole model (two point charges) works because charges are real, separable things. The magnetic dipole model (current loop) works because magnetism comes from circulating currents — the two 'poles' are just the two faces of the same loop. North and south are not things; they are directions of the same field.\"\n- **replacement_text [P31]:** \"A magnetic dipole is a current loop with moment m = NIA n̂. There are no separate magnetic charges. The 'north pole' is the face where B exits (thumb of right-hand rule); 'south' is where B enters. These are descriptions of field geometry, not separate physical objects.\"\n- **discrimination_pairs [P33]:**\n  - Electric dipole: +q and −q can be separated; E field diverges from charges\n  - Magnetic dipole: current loop; cannot be separated; B field forms closed loops; ∮B·dA = 0\n- **s6_path:** Cut-magnet thought experiment; Gauss's law for magnetism derivation; link to Block 1-A.\n\n---",
+      "localKey": "MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES",
+      "language": "en",
+      "refs": [
+        "MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/misconception/MC-DIPOLE-FIELD-FALLS-OFF-AS-1",
+      "kind": "misconception",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "/R-SQUARED",
+      "content": "### MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED\n- **trigger_signal:** Student applies 1/r² for the far field of a dipole, confusing with Coulomb/Biot-Savart element.\n- **conflict_evidence [P28]:** \"WE-1: B_axial = (μ₀/2π)(m/r³) ∝ 1/r³. At r = 20 cm: B = 7.55 μT. If it were 1/r²: B ∝ 1/0.04 = 25 — a factor of 5 different. The dipole falls off faster than a monopole because positive and negative contributions from the two 'poles' partially cancel, leaving a 1/r³ residual. Double the distance: field drops by a factor of 8 (not 4).\"\n- **bridge_text [P30]:** \"The dipole field is the cancellation residual of two nearly equal and opposite monopole fields. As you move far from the dipole, the two contributions look more and more similar, so their difference shrinks faster than either alone. This is why 1/r³ instead of 1/r²: the cancellation adds one extra power of 1/r to the fall-off.\"\n- **replacement_text [P31]:** \"Magnetic dipole far field: B ∝ 1/r³ (both axial and equatorial). Compare: point charge (monopole) E ∝ 1/r²; dipole E ∝ 1/r³; quadrupole ∝ 1/r⁴. Each higher-order multipole falls off one power faster due to cancellation between opposite-sign components.\"\n- **discrimination_pairs [P33]:**\n  - Single current element dB ∝ 1/r² (Biot-Savart)\n  - Infinite wire B ∝ 1/r (integrated monopole)\n  - Magnetic dipole B ∝ 1/r³ (integrated dipole — faster fall-off)\n- **s6_path:** Compute B at r and 2r using WE-1 formula; show 8× reduction for 2× distance (1/r³ confirmed).\n\n---",
+      "localKey": "MC-DIPOLE-FIELD-FALLS-OFF-AS-1",
+      "language": "en",
+      "refs": [
+        "MC-DIPOLE-FIELD-FALLS-OFF-AS-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 15,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Dipole moment definition: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Dipole moment definition: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 239,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Dipole field: Block 1-B, WE-1",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Dipole field: Block 1-B, WE-1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-DIPOLE-FIELD-FALLS-OFF-AS-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-DIPOLE-FIELD-FALLS-OFF-AS-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 249,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Torque, energy, Stern-Gerlach: Block 1-C, WE-2",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Torque, energy, Stern-Gerlach: Block 1-C, WE-2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 255,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Earth as dipole: Block 1-D, WE-3",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Earth as dipole: Block 1-D, WE-3\",\"primitives\":[\"P36\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[\"MC-DIPOLE-FIELD-FALLS-OFF-AS-1\",\"MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-DIPOLE-FIELD-FALLS-OFF-AS-1",
+        "MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 257,
+        "endLine": 330
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** A magnetic dipole's far field falls off as:\n(a) 1/r **(b) 1/r³** (c) 1/r² (d) 1/r⁴\n\n**A2 (Short answer):** Define magnetic dipole moment m. What are its SI units?\n[m = NIA n̂ (for a coil), where N = turns, I = current, A = area; units: A·m²]\n\n**A3 (True/False):** A magnetic dipole can be split into isolated north and south poles.\n[FALSE — ∮B·dA = 0; cutting a dipole gives two smaller dipoles]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** A proton (nuclear magnetic moment μ_p = 1.41×10⁻²⁶ A·m²) is in a 3.0 T MRI field. Find the energy difference between spin-parallel and spin-antiparallel states (ΔU = 2μ_p B). This energy corresponds to what photon frequency? (ΔE = hf, h = 6.63×10⁻³⁴ J·s)\n[ΔU = 2 × 1.41×10⁻²⁶ × 3.0 = 8.46×10⁻²⁶ J; f = ΔE/h = 8.46×10⁻²⁶/6.63×10⁻³⁴ = 1.28×10⁸ Hz = 128 MHz (radio wave — that's the MRI resonance frequency at 3 T) ✓]\n\n**B2:** At what distance r from a magnetic dipole (m = 0.20 A·m²) does the axial field equal 1.0 μT?\n[B = (μ₀/2π)(m/r³); r³ = (μ₀/2π)(m/B) = (2×10⁻⁷ × 0.20)/(1×10⁻⁶) = 0.04 m³; r = (0.04)^{1/3} = 0.342 m]\n\n**B3:** A current loop (m = 2.0 A·m²) is at θ = 60° to B = 0.15 T. Find torque and U. In which direction does the torque rotate m?\n[τ = mB sin60° = 2.0×0.15×0.866 = 0.26 N·m; U = −mB cos60° = −2.0×0.15×0.5 = −0.15 J; torque rotates m toward B (decreasing θ toward 0° — stable equilibrium)]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** Estimate Earth's surface field at the magnetic pole (on axis, r = R_E, m = 8×10²² A·m²). Compare with equatorial estimate from WE-3.\n[B_axial = (μ₀/2π)(m/R_E³) = 2×10⁻⁷ × 8×10²²/(6.4×10⁶)³ = 2×10⁻⁷ × 8×10²²/2.62×10²⁰ = 2×10⁻⁷ × 305.3 = 6.1×10⁻⁵ T = 61 μT. Compare equatorial (WE-3): 30.5 μT. Ratio: 61/30.5 = 2 — axial field is exactly twice equatorial field for a dipole (B_axial = 2B_equat at same r) ✓. Observed polar field ≈ 60–70 μT ✓]\n\n**C2 (Synthesis):** Explain why MRI machines use a strong B field. How does the dipole model of nuclear magnetic moments explain the NMR signal?\n[Proton nuclear moment m_p is a magnetic dipole. In external B: two energy states (m parallel or antiparallel to B); ΔE = 2m_p B. Stronger B → larger ΔE → higher resonance frequency f = ΔE/h (radio frequency, 128 MHz at 3 T). More protons in lower state → larger population difference → stronger signal. Also, stronger B → better spatial resolution (gradient encoding). The dipole precesses around B at the Larmor frequency ω = γB (gyromagnetic ratio γ), giving the NMR signal when tipped by a radiofrequency pulse.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 166,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks 1/r²) | Deploy MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED; compute B at r and 2r; show 8× factor |\n| Probe A3 wrong (says poles can be separated) | Deploy MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES; Gauss's law; cut-magnet argument |\n| Probe B1 wrong (MRI energy) | Walk through: ΔE = 2m_p B; f = ΔE/h; check units carefully |\n| Probe C2 incomplete (misses precession) | Introduce Larmor precession: torque = m×B; analogous to gyroscope; ω = γB |\n| Student asks about spin angular momentum | Link: m = γL (gyromagnetic ratio); Bohr magneton μ_B = eℏ/(2m_e) = 9.27×10⁻²⁴ A·m²; electron spin = ½ → m_s = ±μ_B |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-DIPOLE-FIELD-FALLS-OFF-AS-1",
+        "MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 275,
+        "endLine": 287
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-dipole/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.magnetic-dipole",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we'll see what the most fundamental magnetic object looks like — the building block of all magnets from bar magnets to MRI machines to Earth itself.\"\n\n[P41 — Diagnostic]\n\"What is a bar magnet at the atomic level — what creates its magnetism?\"\n→ Correct (electron spin/orbital magnetic moments): \"Exactly — and each electron is a magnetic dipole.\"\n→ Incorrect: \"Good question. Let's trace magnetism to its source.\"\n\n[P06 — Concrete anchor]\n\"Hold a compass in Earth's field: it aligns. The compass needle is a magnetic dipole; Earth's field is a gigantic dipole field. Today we'll calculate both.\"\n\n[TA-1 — Dipole moment definition: Block 1-A]\n\"m = NIA n̂. Units A·m². Sources: current loops, electron spin, orbital motion.\"\n\n[P28 — Conflict evidence for MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES]\n\"∮B·dA = 0 — no monopoles. Cut a magnet: two dipoles. Cut again: still dipoles. The 'poles' are not separate objects; they're two faces of one circulating current.\"\n\n[P51 — Check-in]\n\"Why can't we isolate a north magnetic pole? What law prevents it?\"\n[Gauss's law for magnetism; ∮B·dA = 0]\n\n[TA-2 — Dipole field: Block 1-B, WE-1]\n\"B_axial = (μ₀/2π)m/r³ ∝ 1/r³. At 5R from loop, dipole formula valid within ~6%.\"\n\n[P28 — Conflict evidence for MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED]\n\"Compare: dB ∝ 1/r² (single element); B_wire ∝ 1/r (integrated wire); B_dipole ∝ 1/r³ (two partial-cancelling contributions). Double the distance: dipole drops 8×. Not 4×.\"\n\n[TA-3 — Torque, energy, Stern-Gerlach: Block 1-C, WE-2]\n\n[TA-4 — Earth as dipole: Block 1-D, WE-3]\n\n[P52 — Narrow]\n\"Two formulas: m = NIA n̂; B_axial = (μ₀/2π)m/r³; B_equat = half that. U = −m·B. τ = m×B.\"\n\n[P62 — Retrieval seed]\n\"Write from memory: dipole moment formula, axial and equatorial fields, energy expression, why 1/r³.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Magnetic dipole: m = NIA n̂; B ∝ 1/r³ (faster than monopole). No isolated poles. Torque aligns with external field. Earth, atomic nuclei, electrons — all magnetic dipoles. MRI exploits nuclear dipole precession in a strong field.\"\n\n[P85 — Regulation tail]\n\"Shakiest: the 1/r³ derivation, the energy formula, or the no-monopoles argument?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the retrieval quiz.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-dipole.md",
+        "startLine": 221,
+        "endLine": 275
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

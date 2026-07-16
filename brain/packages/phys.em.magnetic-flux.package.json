@@ -1,0 +1,308 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.magnetic-flux-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.magnetic-flux",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f7b1213f83873c83a9efe86f065412d4462f11ae29c9bb7834ace0205d156a5b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.magnetic-flux.md": "sha256:4da6ae476f50c2914d47b1a69f90bf50e47fbfde1b084fdb3190cd9e4167fe10"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.em.magnetic-flux",
+    "name": "Magnetic Flux",
+    "difficultyRaw": "label: developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.magnetic-field"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.magnetic-flux-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.magnetic-flux (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.magnetic-flux.md": "sha256:4da6ae476f50c2914d47b1a69f90bf50e47fbfde1b084fdb3190cd9e4167fe10"
+      },
+      "contentHash": "sha256:e9d714fd5cdbd3ae9cc49b814765bbab6a1f0c490c803e02a8ad87175e73e6f1",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-flux.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-flux.md#TA-1 (addresses MC-FLUX-IS-THE-FIELD-STRENGTH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-flux"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-flux\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-flux.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-flux.md#TA-2 (addresses MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-flux"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-flux\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-flux.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-flux.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-flux"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-flux\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.magnetic-flux/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Magnetic Flux — Concept Explanation Blocks",
+      "content": "### Block 1-A — Definition and Geometric Meaning\n**Magnetic flux** Φ_B through a surface S is the total number of magnetic field lines passing through that surface:\n\n> **Φ_B = ∫∫ B · dA = ∫∫ B cos θ dA**\n\nFor a uniform field B over a flat area A with normal **n̂** at angle θ to B:\n\n> **Φ_B = BA cos θ**\n\nUnits: **Weber (Wb)** = T·m² = V·s\n\nPhysical meaning:\n- θ = 0°: surface normal ∥ B → full flux Φ_B = BA (maximum)\n- θ = 90°: surface normal ⊥ B → Φ_B = 0 (field skims surface, no flux through it)\n- θ = 180°: B antiparallel to normal → Φ_B = −BA (negative flux — entering rather than exiting)\n\nSign convention: outward normal defines positive flux; field lines exiting a closed surface → positive.\n\n### Block 1-B — Gauss's Law for Magnetism\nFor any **closed** surface:\n\n> **∮ B · dA = 0**\n\nThis is Gauss's law for magnetism — one of Maxwell's four equations. It states that the total magnetic flux through any closed surface is always zero. Physical interpretation: **magnetic field lines always form closed loops** (no magnetic monopoles). Every field line that enters a closed surface must exit it. Contrast with Gauss's law for electricity: ∮E·dA = Q_enc/ε₀ (non-zero if charges are enclosed).\n\n### Block 1-C — Flux Through Different Orientations\nConsider a circular coil of radius r in a uniform field B:\n\n| Orientation | θ (B to normal) | Φ_B |\n|-------------|-----------------|-----|\n| Coil face ⊥ B | 0° | BA = Bπr² |\n| Coil at 45° | 45° | BA cos45° = Bπr²/√2 |\n| Coil face ∥ B | 90° | 0 |\n| Coil reversed | 180° | −BA |\n\nThis angle-dependence is exactly what Faraday's law needs: **changing flux induces EMF**.\n\n### Block 1-D — Flux Linkage for Multiple Turns\nFor a coil of N turns, **flux linkage** λ:\n\n> **λ = NΦ_B**\n\nUsed in Faraday's law: EMF = −dλ/dt = −N(dΦ_B/dt)\n\nFlux linkage is what matters physically — a 100-turn coil with Φ = 0.01 Wb has the same EMF-producing ability as a 1-turn coil with Φ = 1 Wb, if the rates of change are the same.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 27,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Flux Through a Tilted Coil",
+      "content": "### WE-1 — Flux Through a Tilted Coil\n**Problem:** A rectangular coil 8 cm × 12 cm is placed in B = 0.35 T. Calculate Φ_B when (a) coil face is perpendicular to B (θ = 0°), (b) coil is tilted so normal makes 60° with B, (c) coil face is parallel to B.\n\n**Solution:**\nA = 0.08 × 0.12 = 9.6×10⁻³ m²\n\n(a) Φ_B = BA cos0° = 0.35 × 9.6×10⁻³ × 1 = **3.36×10⁻³ Wb = 3.36 mWb**\n\n(b) Φ_B = BA cos60° = 0.35 × 9.6×10⁻³ × 0.5 = **1.68 mWb**\n\n(c) Φ_B = BA cos90° = 0.35 × 9.6×10⁻³ × 0 = **0**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 77,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Gauss's Law for Magnetism",
+      "content": "### WE-2 — Gauss's Law for Magnetism\n**Problem:** A cube of side 5 cm sits in a uniform field B = 0.20 T pointing in the +x direction. Calculate the flux through each face and show that total flux = 0.\n\n**Solution:**\nA = (0.05)² = 2.5×10⁻³ m²\n\n- Right face (outward normal = +x): Φ = BA = 0.20 × 2.5×10⁻³ = +5.0×10⁻⁴ Wb\n- Left face (outward normal = −x): Φ = B·(−A) = −5.0×10⁻⁴ Wb\n- Top, bottom, front, back faces: outward normal ⊥ B → Φ = 0 for each\n\nTotal Φ = 5.0×10⁻⁴ − 5.0×10⁻⁴ + 0 + 0 + 0 + 0 = **0 Wb** ✓ (Gauss's law for magnetism confirmed)\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 77,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Flux Linkage and Changing Flux",
+      "content": "### WE-3 — Flux Linkage and Changing Flux\n**Problem:** A 200-turn circular coil (radius 4 cm) rotates in B = 0.50 T. It starts with normal ∥ B and rotates to normal ⊥ B in 0.02 s. Find: (a) initial and final Φ_B, (b) change in flux linkage, (c) average induced EMF.\n\n**Solution:**\nA = π(0.04)² = 5.03×10⁻³ m²\n\n(a) Φ_initial = BA cos0° = 0.50 × 5.03×10⁻³ = 2.51×10⁻³ Wb  \n    Φ_final = BA cos90° = 0\n\n(b) Δλ = N × ΔΦ_B = 200 × (0 − 2.51×10⁻³) = **−0.503 Wb** (= −503 mWb)\n\n(c) |EMF| = |Δλ/Δt| = 0.503 / 0.02 = **25.1 V**\n\nThis is Faraday's law in action — a preview of the next concept.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 77,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/misconception/MC-FLUX-IS-THE-FIELD-STRENGTH",
+      "kind": "misconception",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "- **trigger_signal:** Student uses \"flux\" and \"field\" interchangeably, or says \"the flux at a point is 0.5 T.",
+      "content": "### MC-FLUX-IS-THE-FIELD-STRENGTH\n- **trigger_signal:** Student uses \"flux\" and \"field\" interchangeably, or says \"the flux at a point is 0.5 T.\"\n- **conflict_evidence [P28]:** \"Magnetic field B is measured in Tesla and is a property at a point. Magnetic flux Φ_B is measured in Webers = T·m² and requires a surface — it's the integral of B over an area. Same B = 0.5 T gives Φ = 0 if the surface is parallel to B, and Φ = 0.5 × A if perpendicular. Flux depends on B, the area, AND the orientation. They're fundamentally different quantities.\"\n- **bridge_text [P30]:** \"Think of rain as an analogy: the 'field' is how hard it's raining (mm/hour); the 'flux' is how much rain falls in your bucket (litres). Rain rate is a property of the rain; flux depends on how big your bucket is and how you hold it. Tilting your bucket catches less rain even in the same storm.\"\n- **replacement_text [P31]:** \"Magnetic field B: vector at a point, units T. Magnetic flux Φ_B = BA cosθ: scalar for a surface, units Wb = T·m². You need both B AND a surface (area + orientation) to define flux. The field can be non-zero everywhere even if flux through a surface is zero.\"\n- **discrimination_pairs [P33]:**\n  - B = 0.5 T: field strength at a point — no surface needed\n  - Φ = 0.5 Wb: flux through a surface — requires area and orientation\n  - Same B, different θ → different Φ; same B, different A → different Φ\n- **s6_path:** Return to WE-1: compute Φ at three orientations to show Φ varies while B is constant.\n\n---",
+      "localKey": "MC-FLUX-IS-THE-FIELD-STRENGTH",
+      "language": "en",
+      "refs": [
+        "MC-FLUX-IS-THE-FIELD-STRENGTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/misconception/MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO",
+      "kind": "misconception",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "- **trigger_signal:** Student says \"if a magnet is inside a box, flux through the box is non-zero because field lines come from the north pole.",
+      "content": "### MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO\n- **trigger_signal:** Student says \"if a magnet is inside a box, flux through the box is non-zero because field lines come from the north pole.\"\n- **conflict_evidence [P28]:** \"Every field line from the north pole of a magnet inside the box must curve back to the south pole — also inside the box. Count the lines: every line that exits through one part of the box surface must re-enter through another part. Net count: always zero. This is Gauss's law for magnetism: ∮B·dA = 0. We verified it numerically in WE-2 for a uniform field; it holds for any field, even a magnetic dipole.\"\n- **bridge_text [P30]:** \"Compare with Gauss's law for electricity: a positive charge inside a box gives net positive flux — field lines go out and never come back in (they end on negative charges far away). Magnetic 'charges' (monopoles) don't exist. Every field line is a closed loop, so it must exit and re-enter any closed surface the same number of times.\"\n- **replacement_text [P31]:** \"Gauss's law for magnetism: ∮B·dA = 0 always, for any closed surface enclosing any configuration of magnets and currents. This is because there are no magnetic monopoles — every field line closes on itself.\"\n- **discrimination_pairs [P33]:**\n  - ∮E·dA = Q_enc/ε₀: non-zero if charge enclosed (electric monopoles exist)\n  - ∮B·dA = 0: always zero (no magnetic monopoles)\n- **s6_path:** WE-2 revisited: show explicitly that all 6 faces of a cube in uniform B sum to zero. Then argue the same holds for any closed surface by field line continuity.\n\n---",
+      "localKey": "MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO",
+      "language": "en",
+      "refs": [
+        "MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Definition and geometric meaning: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Definition and geometric meaning: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-FLUX-IS-THE-FIELD-STRENGTH\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-FLUX-IS-THE-FIELD-STRENGTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 224,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Gauss's law for magnetism: Block 1-B, WE-2",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Gauss's law for magnetism: Block 1-B, WE-2\",\"primitives\":[\"P28\",\"P52\"],\"addresses\":[\"MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 234,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Flux linkage: Block 1-D, WE-3",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Flux linkage: Block 1-D, WE-3\",\"primitives\":[\"P36\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 243,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** Magnetic flux through a surface is zero when:\n(a) B = 0 **(b) B is parallel to the surface** (c) The surface is small (d) B is uniform\n\n**A2 (Short answer):** State Gauss's law for magnetism and give its physical interpretation.\n[∮B·dA = 0; no magnetic monopoles; every field line is a closed loop]\n\n**A3 (Fill-in):** The SI unit of magnetic flux is the ______, equal to ______ T·m².\n[Weber; 1]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** A circular loop is held horizontally in Earth's magnetic field (B = 5×10⁻⁵ T, dipping 60° below horizontal). Find Φ through the loop if its area is 0.10 m².\n[Normal to horizontal loop is vertical. Angle between B (60° below horizontal = 60° from horizontal = 30° from vertical) and vertical normal = 30°. Φ = BA cos30° = 5×10⁻⁵ × 0.10 × 0.866 = 4.33×10⁻⁶ Wb]\n\n**B2:** Can the flux through an open surface be zero even when B ≠ 0? Give an example.\n[Yes — when B is parallel to the surface (θ=90°). E.g., a vertical flat surface in a horizontal B field: normal is horizontal → perpendicular to B → Φ = 0. WE-1(c) is an example.]\n\n**B3:** A solenoid (500 turns, cross-section 4 cm²) has B = 0.08 T inside. Find the total flux linkage.\n[Φ per turn = BA = 0.08 × 4×10⁻⁴ = 3.2×10⁻⁵ Wb; λ = Nφ = 500 × 3.2×10⁻⁵ = 0.016 Wb = 16 mWb]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** A circular coil of 100 turns and radius 5.0 cm is in a field B = 0.25 T that makes an angle of 40° with the plane of the coil. (a) Find the angle θ between B and the normal to the coil. (b) Find Φ per turn. (c) Find total flux linkage. (d) If B increases to 0.40 T over 0.5 s (angle unchanged), find average induced EMF.\n[(a) θ = 90° − 40° = 50° (angle with plane + angle with normal = 90°). (b) Φ = BA cosθ = 0.25 × π(0.05)² × cos50° = 0.25 × 7.854×10⁻³ × 0.643 = 1.26×10⁻³ Wb. (c) λ = 100 × 1.26×10⁻³ = 0.126 Wb. (d) New Φ = 0.40 × 7.854×10⁻³ × 0.643 = 2.02×10⁻³ Wb; |EMF| = N|ΔΦ/Δt| = 100 × (2.02−1.26)×10⁻³/0.5 = 100 × 1.52×10⁻³ = 0.152 V]\n\n**C2 (Synthesis):** Gauss's law for electricity gives non-zero closed-surface flux when charge is enclosed. Gauss's law for magnetism always gives zero. Explain this asymmetry from first principles.\n[Electric charges (monopoles) exist — field lines start on +q and end on −q; if only +q is enclosed, field lines exit but don't return → net positive flux. No magnetic monopoles exist — magnetic field lines are always closed loops; every line entering a closed surface must exit it → zero net flux. The asymmetry reflects the absence of magnetic monopoles in nature.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 151,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks \"B=0\") | Clarify: Φ=0 even when B≠0, if surface is parallel to B; redo WE-1(c) |\n| Probe B1 angle error (uses 60° instead of 30°) | Clarify: dip angle is from horizontal; angle with vertical normal = 90°−dip from horizontal = 90°−60°=30°; or equivalently, angle with normal = dip angle if normal is vertical |\n| Probe C1(a) angle error | Draw diagram: plane of coil, normal to coil, B direction; angle with plane + angle with normal = 90° |\n| Student asks why ∮E·dA ≠ 0 but ∮B·dA = 0 | Explain monopoles: electric monopoles (+q, −q) exist → net flux if enclosed; no magnetic monopoles → zero always |\n| Student asks what a magnetic monopole would look like | Radial B field (like Coulomb), ∮B·dA = μ₀q_m; Dirac showed monopoles would quantise electric charge; GUT theories predict them; none detected |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 259,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-flux/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.magnetic-flux",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we build the concept that powers generators, transformers, and electric motors: magnetic flux. It's the bridge between magnetic fields and induced voltages — the key ingredient in Faraday's law, which you'll meet next.\"\n\n[P41 — Diagnostic]\n\"If a wire loop is in a magnetic field, does the orientation of the loop matter for how the field 'threads through' it?\"\n→ Correct (yes, angle matters): \"Exactly — let's quantify that.\"\n→ Incorrect: \"Great question. Let's find out.\"\n\n[P06 — Concrete anchor]\n\"Imagine a butterfly net in the wind: if you face the net into the wind (normal ∥ wind), maximum air flows through. Turn it sideways — no air flows through even in the same wind. Magnetic flux is how much of the B field 'threads through' a surface. Φ = BA cosθ.\"\n\n[TA-1 — Definition and geometric meaning: Block 1-A]\n\"Φ_B = BA cosθ. Unit: Wb = T·m². θ is angle between B and the surface normal (not the surface).\"\n\n[P28 — Conflict evidence for MC-FLUX-IS-THE-FIELD-STRENGTH]\n\"WE-1: same B = 0.35 T gives Φ = 3.36 mWb, 1.68 mWb, or 0 — just by rotating the coil. B hasn't changed. Flux changed. They are different quantities.\"\n\n[P51 — Check-in]\n\"What two things (besides B) determine the flux through a surface?\"\n[Area and orientation (angle θ)]\n\n[TA-2 — Gauss's law for magnetism: Block 1-B, WE-2]\n\"∮B·dA = 0 always. Walk through cube calculation. Show all 6 faces sum to zero.\"\n\n[P28 — Conflict evidence for MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO]\n\"Magnet inside a box: every field line that exits through the top must curve back and re-enter through the bottom or sides. Net count is always zero. No monopoles → ∮B·dA = 0.\"\n\n[P52 — Narrow]\n\"Two formulas only: Φ = BA cosθ (open surface, uniform B); ∮B·dA = 0 (closed surface, any B).\"\n\n[TA-3 — Flux linkage: Block 1-D, WE-3]\n\"λ = NΦ; EMF = −Δλ/Δt. Preview of Faraday's law.\"\n\n[P62 — Retrieval seed]\n\"Write from memory: flux formula, unit, when Φ=0, Gauss's law for magnetism, and what flux linkage means.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Magnetic flux Φ = BA cosθ (Wb) measures field lines threading a surface. Gauss's law: ∮B·dA = 0 — no monopoles, lines are closed loops. Flux linkage λ = NΦ. Changing flux → EMF (Faraday, next session).\"\n\n[P85 — Regulation tail]\n\"Shakiest part: the angle convention, or why closed-surface flux is always zero?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the retrieval quiz.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-flux.md",
+        "startLine": 206,
+        "endLine": 259
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

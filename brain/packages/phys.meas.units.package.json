@@ -1,0 +1,937 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.units-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.units",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7190a1ef3dee9441dbf57cbd3d2aafd2a82f8172e98fc39be4d28d4407a8c68f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.units.md": "sha256:bef3990ce3eec4012872a4fd7665b4748288e5988b6822b461fc467753edf823"
+    },
+    "assetCount": 30,
+    "assetCounts": {
+      "core_explanation": 1,
+      "learning_objective": 1,
+      "misconception": 4,
+      "teaching_action_meta": 20,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 20
+  },
+  "concept": {
+    "conceptId": "phys.meas.units",
+    "name": "SI Base Units",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "remember",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.units-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.units (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.units.md": "sha256:bef3990ce3eec4012872a4fd7665b4748288e5988b6822b461fc467753edf823"
+      },
+      "contentHash": "sha256:43a5c416765fd4c0be7cd4e0ebabfb2acb75c5a6447437937131b4344295d945",
+      "ruleCount": 20,
+      "bandCounts": {
+        "3": 20
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-A01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-A04 (addresses MC-1, MC-3, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-B01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-B02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-B03 (addresses MC-1, MC-2, MC-3, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-C01 (addresses MC-1, MC-4, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-C02 (addresses MC-1, MC-4, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-C03 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-C04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-C05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-D02 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-E01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.units.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.units.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.units"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.units\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.units/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.meas.units",
+      "title": "SI Base Units — core idea",
+      "content": "The International System of Units (SI) defines seven base units — each representing a fundamental, independently measurable physical quantity. Every other unit in science is derived from these seven. The base units are: metre (m, length), kilogram (kg, mass), second (s, time), ampere (A, electric current), kelvin (K, thermodynamic temperature), mole (mol, amount of substance), candela (cd, luminous intensity).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 9,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.meas.units/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.units",
+      "title": "Learning Objective",
+      "content": "Given a physical quantity (length, mass, time, electric current, temperature, amount of substance, luminous intensity), the student:\n\n(a) correctly names the SI base unit for that quantity;  \n(b) correctly states the symbol for that unit;  \n(c) correctly classifies a given unit as an SI base unit or not.\n\n**Accuracy threshold:** 70% across all recall items (consistent with bloom=remember + difficulty=foundational).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 36,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.meas.units/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.meas.units",
+      "title": "— Degree Celsius Is the SI Temperature Unit",
+      "content": "### MC-1 — Degree Celsius Is the SI Temperature Unit\n\n**Observable symptom:** Student names °C as the SI base unit for temperature; converts \"0°C = 0 K\"; writes temperature in °C in SI calculations.\n\n**Diagnostic trigger:** DB-2a; TA-A04 classification.\n\n**Root cause:** Celsius is the dominant temperature unit in everyday life in most countries. Kelvin is rarely encountered outside formal physics/chemistry. \"Temperature\" in daily conversation means Celsius.\n\n**Repair chain:** P27 → P07 (scale comparison) → P28 (absolute zero argument) → P29 → P30 (physical meaning of zero) → P31 (install K as base) → P32 (K↔°C conversion practice)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 5,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.units/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.meas.units",
+      "title": "— Mass and Weight Are the Same Quantity",
+      "content": "### MC-2 — Mass and Weight Are the Same Quantity\n\n**Observable symptom:** Student uses kg and N interchangeably; says \"my weight is 70 kg\" without qualification.\n\n**Diagnostic trigger:** Assessment AB-1; or spontaneous statement during session.\n\n*Note: Full repair of MC-2 (mass vs. weight as force) requires phys.meas.scalars-vectors and phys.mech.force — concepts not yet in student's map at this stage. Address only the following: \"kg measures mass, not weight. Weight is a force and has its own unit (the Newton) which is derived.\" Full conceptual repair is deferred to phys.mech.newton-laws blueprint.*\n\n**Repair chain (partial):** P27 → P07 (two columns: mass vs. weight) → P30 (bridge: kg = mass = how much matter; N = weight = gravitational force on that mass) → P31 (install minimal distinction)\n\n**MAMR status:** Independent. Partial repair only at this blueprint level.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.meas.units/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.meas.units",
+      "title": "— Common Units (Litre, Centimetre, Hour) Are SI Base Units",
+      "content": "### MC-3 — Common Units (Litre, Centimetre, Hour) Are SI Base Units\n\n**Observable symptom:** Student classifies L, cm, or hr as SI base units; or states SI has more than 7 base units.\n\n**Diagnostic trigger:** DB-2c; TA-A04 classification.\n\n**Root cause:** These units are used alongside SI units in most school contexts without explicit labelling of their status.\n\n**Repair chain:** P27 → P07 (non-SI conversion table) → P17 (contrast: SI base vs. derived multiples vs. non-SI) → P31 → P33 (discrimination training: sort 10 units into SI base / SI derived / non-SI)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 33,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.meas.units/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.meas.units",
+      "title": "— Gram (Not Kilogram) Is the SI Mass Base Unit",
+      "content": "### MC-4 — Gram (Not Kilogram) Is the SI Mass Base Unit\n\n**Observable symptom:** Student writes \"g\" as the SI base unit for mass; derives \"kg = 1000 g (derived unit).\"\n\n**Diagnostic trigger:** DB-2b; TA-A04 classification.\n\n**Root cause:** Gram is smaller and more intuitive for everyday objects. The \"kilo\" prefix pattern in metric teaching typically positions gram as fundamental and kilogram as derived.\n\n**Repair chain:** P27 → P07 (SI prefix table showing kg as uniquely having prefix in base name) → P28 (historical anomaly argument) → P30 (exception: kg is the defined base despite the prefix) → P31 → P32 (3 examples always using kg, not g, in SI calculations)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 47,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Seven Quantities: Concrete Anchoring",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Seven Quantities: Concrete Anchoring\",\"primitives\":[\"P01\",\"P03\",\"P04\",\"P06\",\"P14\",\"P34\",\"P49\",\"P50\",\"P53\",\"P54\",\"P55\",\"P81\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 12,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Seven Units: Chunked Recall Practice",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Seven Units: Chunked Recall Practice\",\"primitives\":[\"P01\",\"P06\",\"P34\",\"P49\",\"P50\",\"P55\",\"P84\",\"P85\",\"P88\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 55,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "All Seven: Perceptual Reference Chart",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"All Seven: Perceptual Reference Chart\",\"primitives\":[\"P01\",\"P07\",\"P20\",\"P21\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 86,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Non-SI Distinctions: Abstract Consolidation",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Non-SI Distinctions: Abstract Consolidation\",\"primitives\":[\"P01\",\"P08\",\"P18\",\"P41\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 127,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P49\",\"P50\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 159,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Gap Identification and Anchoring",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Gap Identification and Anchoring\",\"primitives\":[\"P02\",\"P07\",\"P23\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 209,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Gap Unit Retrieval Practice",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Gap Unit Retrieval Practice\",\"primitives\":[\"P01\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P88\"],\"addresses\":[]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 235,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 261,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Misconception Surface and Routing",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Surface and Routing\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-4",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 273,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "MC-1 Repair: Kelvin (Not Celsius) is the SI Temperature Unit",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-1 Repair: Kelvin (Not Celsius) is the SI Temperature Unit\",\"primitives\":[\"P01\",\"P07\",\"P27\",\"P28\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-4",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 289,
+        "endLine": 321
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "MC-4 Repair: Kilogram (Not Gram) is the SI Mass Base Unit",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-4 Repair: Kilogram (Not Gram) is the SI Mass Base Unit\",\"primitives\":[\"P01\",\"P07\",\"P27\",\"P28\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 321,
+        "endLine": 353
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "MC-3 Repair: Common Units That Are Not SI Base",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-3 Repair: Common Units That Are Not SI Base\",\"primitives\":[\"P01\",\"P07\",\"P17\",\"P27\",\"P30\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 353,
+        "endLine": 391
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P28\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 391,
+        "endLine": 403
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Safety Frame and Chunked Anchor",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Safety Frame and Chunked Anchor\",\"primitives\":[\"P01\",\"P06\",\"P34\",\"P49\",\"P50\",\"P55\",\"P69\",\"P70\",\"P71\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 403,
+        "endLine": 431
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Chunk 1 Retrieval (Card Removed)",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Chunk 1 Retrieval (Card Removed)\",\"primitives\":[\"P01\",\"P28\",\"P30\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P64\",\"P70\",\"P88\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 431,
+        "endLine": 458
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Chunk 2 Anchor and Retrieval",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Chunk 2 Anchor and Retrieval\",\"primitives\":[\"P01\",\"P06\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P70\",\"P81\",\"P85\",\"P88\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 458,
+        "endLine": 486
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 486,
+        "endLine": 496
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Visual Vocabulary Card and Concrete Matching",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Visual Vocabulary Card and Concrete Matching\",\"primitives\":[\"P01\",\"P03\",\"P06\",\"P07\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 496,
+        "endLine": 523
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Recall with Visual Scaffold",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Recall with Visual Scaffold\",\"primitives\":[\"P01\",\"P07\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P88\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 523,
+        "endLine": 550
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.units",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P77\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 550,
+        "endLine": 556
+      }
+    },
+    {
+      "assetId": "phys.meas.units/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.units",
+      "title": "Assessment Battery",
+      "content": "---\n\n**AB-1 — Free Recall Table**\n\nStudent fills in without reference: all 7 rows of [Quantity | SI Unit | Symbol].\n\nScoring: 1 point per correct row (quantity + unit + symbol all correct). Target: ≥ 5/7 (aligns with 0.70 threshold).\n\n---\n\n**AB-2 — Classification Task**\n\nClassify each as SI base / SI derived / neither: [metre, Celsius, candela, Newton, gram, second, litre, kelvin, watt, mole]\n\nKey: SI base = m, cd, s, K, mol (5); SI derived = Newton, watt (2); neither = Celsius, gram, litre (3). Target: ≥ 7/10.\n\n---\n\n**AB-3 — Symbol-to-Quantity Matching**\n\nMatch symbol to quantity: {m, kg, s, A, K, mol, cd} → {time, length, mass, electric current, luminous intensity, amount of substance, thermodynamic temperature}.\n\nTarget: 7/7.\n\n---\n\n**AB-4 — Non-SI Conversion**\n\n\"Express 3 hours, 250 mL, and 45 cm in SI base units.\"\n\nExpected: 10800 s; 2.5 × 10⁻⁴ m³; 0.45 m. Target: 2/3 (threshold-aligned).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 737,
+        "endLine": 773
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.units",
+      "title": "Student State Matrix",
+      "content": "| State | Entry Condition | Protocol |\n|-------|----------------|----------|\n| S0 | No prior exposure to SI units | Protocol A — full CPA, 5 TAs |\n| S1 | Knows 3–5 units; missing the rarer ones (ampere, mole, candela) | Protocol B — targeted gap-fill, 3 TAs |\n| S2 | Carries identified misconception (MC-1, MC-2, MC-3, and/or MC-4) | Protocol C — MAMR repair, 3–4 TAs |\n| S6 | Correct but low-confidence; needs confidence scaffolding | Protocol D — scaffolded recall, 4 TAs |\n| S9 | Second-language learner; visual processing; vocabulary gaps | Protocol E — visual-anchored, 3 TAs |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 48,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.units",
+      "title": "Diagnostic Battery",
+      "content": "Run DB-1 and DB-2. Stop when a state is confirmed.\n\n---\n\n**DB-1 — Free Recall: All Seven Units**\n\nStimulus: \"Name all seven SI base units. For each, give the quantity it measures and its symbol.\"\n\nResponse taxonomy:\n```\n{ stimulus: \"All 7 correct (any order acceptable)\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"4–6 correct; common errors: missing ampere, mole, candela, or confusing kelvin/celsius\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Fewer than 4 correct or significant confusion\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: null }\n\n{ stimulus: \"No response or 'I don't know SI'\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → run DB-2 to check for active misconceptions → route to Protocol C if any, else MASTERY_CONFIRMED  \nSIGNAL:PARTIAL → S1; route to Protocol B  \nSIGNAL:INCORRECT → run DB-2 for MC check; route to Protocol C if MC flagged, else Protocol A  \nSIGNAL:NO_RESPONSE → S0; route to Protocol A\n\n---\n\n**DB-2 — Misconception Screen**\n\nThree targeted questions; run all three.\n\nDB-2a (MC-1): \"Is the SI base unit for temperature the degree Celsius (°C) or the kelvin (K)?\"  \nDB-2b (MC-2): \"Is the kilogram or the gram the SI base unit of mass?\"  \nDB-2c (MC-3): \"Is the litre an SI base unit?\"\n\nResponse taxonomy per question:\n```\nDB-2a: { stimulus: \"Celsius / °C\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-1\" }\nDB-2a: { stimulus: \"Kelvin / K\", signal: \"SIGNAL:CORRECT\" }\n\nDB-2b: { stimulus: \"gram / g\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-4\" }\nDB-2b: { stimulus: \"kilogram / kg\", signal: \"SIGNAL:CORRECT\" }\n\nDB-2c: { stimulus: \"Yes, litre is SI\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-3\" }\nDB-2c: { stimulus: \"No, litre is not SI base\", signal: \"SIGNAL:CORRECT\" }\n```\n\nAny SIGNAL:INCORRECT → flag corresponding MC → route to Protocol C\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 60,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "phys.meas.units/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.units",
+      "title": "Prerequisite Check",
+      "content": "No prerequisites (requires = []). Skip to Protocol A.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.units.md",
+        "startLine": 116,
+        "endLine": 122
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.kirchhoffs-laws-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.kirchhoffs-laws",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e7b08026f716747cd06132ce861ca4dfe356ac664dd00b8e52d266006b541a3f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md": "sha256:24e23b46723616a03c7c8f05abd29d230ec762f1da6e9f7c87f0e73cca2642cf"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.kirchhoffs-laws",
+    "name": "Kirchhoff's Laws",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.dc-circuits"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.kirchhoffs-laws-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.kirchhoffs-laws (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md": "sha256:24e23b46723616a03c7c8f05abd29d230ec762f1da6e9f7c87f0e73cca2642cf"
+      },
+      "contentHash": "sha256:3671417915c4aded7e0597731bd782e9f5f9a8ebec24152c76c22b9bfea6e2e7",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.kirchhoffs-laws.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.kirchhoffs-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.kirchhoffs-laws\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.kirchhoffs-laws.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md#TA-2 (addresses MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS, MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.kirchhoffs-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.kirchhoffs-laws\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.kirchhoffs-laws.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.kirchhoffs-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.kirchhoffs-laws\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.kirchhoffs-laws.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.kirchhoffs-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.kirchhoffs-laws\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.kirchhoffs-laws.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.kirchhoffs-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.kirchhoffs-laws\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.kirchhoffs-laws/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "Kirchhoff's Laws — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nWhen a circuit has multiple loops and branches that can't be reduced by simple series/parallel rules, you need **Kirchhoff's Laws**. There are two: \n1. **KCL (Current Law):** At any junction, the total current flowing in equals the total current flowing out — charge is conserved.\n2. **KVL (Voltage Law):** Around any closed loop, the voltages must add to zero — energy is conserved.\nThese two laws, applied systematically, can solve any DC circuit, no matter how complex.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**KCL — Kirchhoff's Current Law:**\n$$\\sum_\\text{in} I_k = \\sum_\\text{out} I_k \\quad \\Leftrightarrow \\quad \\sum_k I_k = 0$$\n\nAt any node (junction), charge is conserved — current doesn't pile up. All currents entering a node equal all currents leaving it.\n\n**KVL — Kirchhoff's Voltage Law:**\n$$\\sum_\\text{loop} \\Delta V_k = 0$$\n\nAround any closed loop, the sum of all voltage rises and drops is zero. Energy conservation: a charge returning to its starting point has the same potential as when it left.\n\n**Sign convention for KVL:**\n- Traversing a battery from − to +: voltage rise, +ε.\n- Traversing a battery from + to −: voltage drop, −ε.\n- Traversing a resistor in the direction of assumed current: voltage drop, −IR.\n- Traversing a resistor against the assumed current: voltage rise, +IR.\n\n**Strategy for solving multi-loop circuits:**\n1. Label all branch currents with assumed directions (can be arbitrary — wrong guess gives negative result, which just means reverse direction).\n2. Apply KCL at each independent node.\n3. Apply KVL around each independent loop.\n4. Solve the simultaneous equations.\n\n**Number of equations needed:**\n- Nodes: n − 1 independent KCL equations (for n nodes)\n- Loops: b − (n − 1) independent KVL equations (for b branches)\n- Total equations = b (one per branch current)\n\n**Special cases:**\n- Voltage divider: KVL gives V_out = V_in × R₂/(R₁ + R₂) (same as before, now derived from KVL).\n- Current divider: KCL gives I₁ = I × R₂/(R₁ + R₂) for two parallel branches.\n\n### Tier 3 — Formal (Network Theory)\n\n**Mesh analysis (independent loop currents):**\nDefine one loop current per independent mesh. Write KVL for each mesh. Mutual resistance: when two loops share a branch, the voltage drop uses both currents (I₁ − I₂) or (I₁ + I₂) depending on relative directions. Systematically: [R][I] = [V] in matrix form → solve by Gaussian elimination.\n\n**Node voltage analysis:**\nChoose a reference node (ground). Assign voltage V_k to each other node. Write KCL at each non-reference node in terms of node voltages. [G][V] = [I] in matrix form → solve. More efficient than mesh analysis for many nodes with few voltage sources.\n\n**Superposition (linear circuits):**\nResponse (I or V at any point) = sum of responses with each independent source acting alone (other voltage sources = short circuit; current sources = open circuit).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 29,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "(Two-loop circuit — standard KCL/KVL)",
+      "content": "### WE-1 (Two-loop circuit — standard KCL/KVL)\n\n**Problem:** Circuit: ε₁ = 12 V (internal r₁ = 1 Ω), ε₂ = 6 V (r₂ = 1 Ω), R = 4 Ω. ε₁ and ε₂ share the R branch. Left loop: ε₁ − r₁ − R. Right loop: ε₂ − r₂ − R. Find the current in each branch.\n\n**Worked solution:**\n\n*Step 1 — Label currents:*\nI₁ through ε₁-r₁ branch (assumed clockwise).\nI₂ through ε₂-r₂ branch (assumed clockwise).\nBy KCL: current through R = I₁ + I₂ (both flow down through R if both clockwise in their loops).\n\nWait — let me set up more carefully:\n- Branch 1 (left): ε₁ = 12 V, r₁ = 1 Ω, current I₁ (assumed left to right)\n- Branch 2 (right): ε₂ = 6 V, r₂ = 1 Ω, current I₂ (assumed left to right)\n- Branch 3 (center): R = 4 Ω, current I₃ (assumed downward)\n- Node A (top): I₁ + I₂ = I₃ (KCL)\n- Node B (bottom): I₃ = I₁ + I₂ ✓\n\n*Step 2 — KVL for left loop (clockwise from bottom):*\n+ε₁ − I₁r₁ − I₃R = 0\n12 − I₁(1) − (I₁ + I₂)(4) = 0\n12 − I₁ − 4I₁ − 4I₂ = 0\n12 = 5I₁ + 4I₂ ... (i)\n\n*Step 3 — KVL for right loop (clockwise from bottom):*\n+ε₂ − I₂r₂ − I₃R = 0\n6 − I₂(1) − (I₁ + I₂)(4) = 0\n6 = 4I₁ + 5I₂ ... (ii)\n\n*Step 4 — Solve (i) and (ii):*\nFrom (i): 12 = 5I₁ + 4I₂; from (ii): 6 = 4I₁ + 5I₂\n5×(i): 60 = 25I₁ + 20I₂\n4×(ii): 24 = 16I₁ + 20I₂\nSubtract: 36 = 9I₁ → **I₁ = 4 A**\nFrom (i): 12 = 20 + 4I₂ → I₂ = −2 A\n\nNegative I₂: current in that branch is opposite to assumed direction (flows right to left).\n\n*Step 5 — I₃:* I₃ = I₁ + I₂ = 4 + (−2) = **2 A** through R.\n\n**Answer:** I₁ = 4 A; I₂ = −2 A (reversed); I₃ = 2 A through R.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 84,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "(KCL at a junction)",
+      "content": "### WE-2 (KCL at a junction)\n\n**Problem:** At a junction, four wires meet. Currents: I₁ = 5 A into the junction, I₂ = 2 A into the junction, I₃ = 3 A out of the junction. Find I₄.\n\n**Worked solution:**\n\nKCL: ΣI_in = ΣI_out\n5 + 2 = 3 + I₄\nI₄ = 4 A (leaving the junction)\n\n**Answer:** I₄ = 4 A out of junction.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 84,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "(KVL — single loop with multiple components)",
+      "content": "### WE-3 (KVL — single loop with multiple components)\n\n**Problem:** A loop has: ε = 20 V (rise), R₁ = 3 Ω (carrying I clockwise), R₂ = 7 Ω (carrying I clockwise). Apply KVL to find I.\n\n**Worked solution:**\n\nTraverse clockwise: +ε − IR₁ − IR₂ = 0\n20 − 3I − 7I = 0\n20 = 10I → I = **2.0 A**\n\nVerify: V_R₁ = 6 V; V_R₂ = 14 V; total drop = 20 V = ε ✓\n\n**Answer:** I = 2.0 A\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 84,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/misconception/MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS",
+      "kind": "misconception",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "**Trigger signal:** Student says KVL only works for loops with one battery and one resistor, or is hesitant to apply it to loops containing other branches' currents.",
+      "content": "### MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS\n\n**Trigger signal:** Student says KVL only works for loops with one battery and one resistor, or is hesitant to apply it to loops containing other branches' currents.\n\n**Conflict evidence [P28]:** \"KVL is a statement of energy conservation — it holds for any closed path through any circuit, regardless of complexity. A loop containing 3 batteries and 5 resistors (with shared branches carrying multiple currents) must satisfy KVL. The only requirement: traverse a closed path, track all voltage rises and drops with correct signs, and set the sum to zero. The algebra may be complex, but the law is universally valid.\"\n\n**Bridge text [P30]:** \"KVL is like energy accounting for a charge making a round trip: every joule gained from a battery must be spent on resistors. No matter how complicated the circuit, a charge returning to its starting point has the same energy — net energy change = 0. KVL formalises this into equations.\"\n\n**Replacement text [P31]:** \"KVL applies to every closed loop in any circuit, however complex. It follows from the conservation of energy: the work done around a closed loop is zero for any conservative field. All that changes with complexity is the number of currents and equations. The law itself — ΣΔV = 0 around any loop — never fails.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"KVL: ΣΔV = 0 for any closed path in any circuit\" | \"KVL only works for single-loop circuits\" |\n| \"Complex loops: same law, more simultaneous equations\" | \"Multi-loop circuits need special methods, not KVL\" |\n| \"KVL is energy conservation; always holds for resistive networks\" | \"KVL breaks down when loops share branches\" |\n\n**s6_path:** Apply KVL to a complex loop that shares branches. Show the same sign convention gives a consistent system of equations even when branch currents appear in multiple loop equations.\n\n---",
+      "localKey": "MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS",
+      "language": "en",
+      "refs": [
+        "MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/misconception/MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL",
+      "kind": "misconception",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "**Trigger signal:** Student adds IR (instead of subtracting) when traversing a resistor in the direction of current, leading to sign errors in KVL equations.",
+      "content": "### MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL\n\n**Trigger signal:** Student adds IR (instead of subtracting) when traversing a resistor in the direction of current, leading to sign errors in KVL equations.\n\n**Conflict evidence [P28]:** \"Sign rule: energy is lost (voltage drops) as a charge flows through a resistor in the direction of current. If you traverse the resistor in the direction of assumed current I, you are moving from higher to lower potential → voltage drop → write −IR in KVL. If you traverse against the current direction, you go uphill in potential → write +IR. This follows from the definition of current: it flows from high to low potential.\"\n\n**Bridge text [P30]:** \"Conventional current flows from + to − outside the battery (from high potential to low). So going in the direction of current through a resistor means going downhill in potential — subtract IR. Going against the current → uphill → add IR. Battery: + terminal is high potential; going from − to + (against conventional current through the battery) → going uphill → add ε.\"\n\n**Replacement text [P31]:** \"KVL sign rules for traversal: Resistor in current direction → drop → −IR. Resistor against current direction → rise → +IR. Battery − to + (counter to conventional current inside battery) → rise → +ε. Battery + to − → drop → −ε. Apply these consistently in one traverse direction (clockwise or counter-clockwise, your choice) and the resulting equation is correct.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Traverse resistor in current direction → −IR (voltage drop)\" | \"Traverse resistor in current direction → +IR\" |\n| \"Battery − to + (internal) → +ε (voltage rise)\" | \"Battery − to + → −ε\" |\n| \"Sum of signed terms = 0 (KVL)\" | \"All terms positive in KVL (no drops)\" |\n\n**s6_path:** Draw a single-loop circuit; physically trace the path of a positive test charge, tracking energy gain (battery) and loss (resistor). Connect each step to the KVL sign.\n\n---",
+      "localKey": "MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL",
+      "language": "en",
+      "refs": [
+        "MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 258,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS\",\"MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-KVL-ONLY-APPLIES-TO-SIMPLE-LOOPS",
+        "MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 258,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 258,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 258,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 258,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.kirchhoffs-laws/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.kirchhoffs-laws",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState Kirchhoff's Voltage Law. What does it mean physically?\n\n**Answer:** The algebraic sum of all potential differences (voltage rises and drops) around any closed loop in a circuit is zero: ΣΔV = 0. Physically: a charge completing a closed loop returns to its starting potential — net energy change is zero (energy conservation).\n\n---\n\n### AP-2 (Bloom: Understand)\nWhy does applying KVL to a loop that is a combination of two smaller loops give a dependent (not independent) equation?\n\n**Answer:** The outer loop equation is the algebraic sum of the two inner loop equations. It carries no new information — any circuit variable that satisfies both inner loops automatically satisfies the outer loop. Independent equations require traversing loops that are not linear combinations of previous ones — in practice, use the smallest meshes (window panes) of the circuit as the independent loops.\n\n---\n\n### AP-3 (Bloom: Apply)\nLoop: ε₁ = 8 V (r₁ = 0.5 Ω) and ε₂ = 5 V (r₂ = 0.5 Ω) oppose each other (in series), external R = 10 Ω. Find I and the terminal voltage of each battery.\n\n**Answer:**\nNet EMF = 8 − 5 = 3 V (ε₁ wins if its polarity dominates)\nTotal R = 0.5 + 0.5 + 10 = 11 Ω\nI = 3/11 ≈ **0.273 A**\nV_t(ε₁) = 8 − 0.273 × 0.5 = **7.86 V** (discharging)\nV_t(ε₂) = 5 + 0.273 × 0.5 = **5.14 V** (being charged by ε₁)\n\n---\n\n### AP-4 (Bloom: Analyze)\nA Wheatstone bridge has: P = 100 Ω, Q = 200 Ω, R = 150 Ω, S = ? The galvanometer reads zero (bridge balanced). Find S using the balance condition derived from KVL/KCL.\n\n**Answer:** Balance condition (from KVL/KCL when galvanometer reads zero): P/Q = R/S → 100/200 = 150/S → S = 150 × 200/100 = **300 Ω**\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md",
+        "startLine": 290,
+        "endLine": 325
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

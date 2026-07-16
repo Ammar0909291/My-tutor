@@ -86,7 +86,7 @@ function sectionSpan(ast: BlueprintAST, s: BlueprintSection): BlueprintSourceSpa
  *  (no spine section) the "**Core idea:**" paragraph of the Concept Profile
  *  serves as the core explanation — same fallback blueprintLoader.ts uses. */
 function lowerCoreExplanation(ast: BlueprintAST): AssetNode[] {
-  const spine = firstSection(ast.sections, /concept spine/i)
+  const spine = firstSection(ast.sections, /concept spine|narrative spine/i)
   if (spine) {
     // Worked examples embedded in the spine are lowered separately; keep the
     // explanation asset focused by cutting at the first Worked Example header.
@@ -107,6 +107,21 @@ function lowerCoreExplanation(ast: BlueprintAST): AssetNode[] {
     const m = /\*\*Core idea:\*\*\s*([\s\S]+?)(?=\n\*\*|\n---|\n##|$)/.exec(profile.body)
     if (m) {
       return [makeAsset(ast, 'core_explanation', `${ast.metadata.name || ast.conceptId} — core idea`, m[1].trim(), null, 1, sectionSpan(ast, profile))]
+    }
+  }
+  // Multi-tier explanation section ("Concept Explanation (Multi-Tier)" /
+  // "Concept Explanation Blocks", phys.em.*), the compact expert format's
+  // "Core Idea (one sentence)", the Section-format "Explanation Library",
+  // or the mech-variant "Conceptual Development Sequence".
+  const explanation =
+    firstSection(ast.sections, /concept explanation/i) ??
+    firstSection(ast.sections, /core idea/i) ??
+    firstSection(ast.sections, /explanation library/i) ??
+    firstSection(ast.sections, /conceptual development/i)
+  if (explanation) {
+    const content = sectionText(explanation)
+    if (content) {
+      return [makeAsset(ast, 'core_explanation', `${ast.metadata.name || ast.conceptId} — ${explanation.title}`, content, null, 1, sectionSpan(ast, explanation))]
     }
   }
   return []
@@ -161,7 +176,7 @@ function lowerMisconceptions(ast: BlueprintAST): AssetNode[] {
 function lowerMasteryProbes(ast: BlueprintAST): AssetNode[] {
   const section =
     firstSection(ast.sections, /mastery probe|mastery-probe/i) ??
-    firstSection(ast.sections, /^assessment\b|assessment battery|mastery gate/i)
+    firstSection(ast.sections, /^assessment\b|assessment battery|assessment probes|assessment items|mastery gate|diagnostic probe set/i)
   if (!section) return []
 
   const text = sectionText(section)
@@ -189,7 +204,9 @@ function lowerAdaptiveRules(ast: BlueprintAST): AssetNode[] {
 /** C8: Session-Flow Template. Deliberately narrow — "Teaching Actions
  *  (Session Plan)" sections are owned by the TA path, not double-routed here. */
 function lowerSessionFlow(ast: BlueprintAST): AssetNode[] {
-  const section = firstSection(ast.sections, /session[- ]flow/i)
+  const section =
+    firstSection(ast.sections, /session[- ]flow/i) ??
+    firstSection(ast.sections, /session architecture|session script/i)
   if (!section) return []
   return [makeAsset(ast, 'session_flow', section.title, sectionText(section), null, 1, sectionSpan(ast, section))]
 }

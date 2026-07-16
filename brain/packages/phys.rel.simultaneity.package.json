@@ -1,0 +1,429 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.simultaneity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.simultaneity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:97034673be5b9d9666bfe46e146a0c4d270de23b8e774210774144260e141b8b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.simultaneity.md": "sha256:5c203d86f3cce4d3c96c4ac7b9f15bd6618ccb37145dca924c700d5f18e7bd17"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.rel.simultaneity",
+    "name": "\"Relativity of Simultaneity\"",
+    "difficultyRaw": "label: advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.rel.postulates"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.simultaneity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.simultaneity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.simultaneity.md": "sha256:5c203d86f3cce4d3c96c4ac7b9f15bd6618ccb37145dca924c700d5f18e7bd17"
+      },
+      "contentHash": "sha256:d300831aa1404ce6f91f37dcfe9137cceacc517c1d4c09438f6d6a339fddade5",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.simultaneity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.simultaneity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.simultaneity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.simultaneity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.simultaneity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.simultaneity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.simultaneity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.simultaneity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.simultaneity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.simultaneity.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.simultaneity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.simultaneity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.simultaneity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.simultaneity.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.simultaneity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.simultaneity\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.simultaneity.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.simultaneity.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.simultaneity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.simultaneity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.simultaneity.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.simultaneity.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.simultaneity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.simultaneity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.simultaneity.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.simultaneity.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.simultaneity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.simultaneity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.simultaneity/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "\"Relativity of Simultaneity\" — Concept Explanation (Multi-Level)",
+      "content": "### Level 1 — Concrete Intuition\n\nImagine you're standing in the middle of a long train. Lightning strikes both ends simultaneously — you see both flashes at the same moment. For you, the events were simultaneous. Now watch what happens to a person watching from the platform as the train roars past: the front of the train is rushing toward one lightning bolt and receding from the other. That observer sees the two flashes at different times. Did the strikes happen at the same time? The answer depends on the observer's reference frame. Einstein's insight: \"simultaneous\" is not an absolute fact — it's relative to the observer.\n\n### Level 2 — Developing Understanding\n\n**Einstein's train thought experiment:**\n- Frame S (platform): observer at midpoint of two simultaneity points A and B. Lightning strikes A and B simultaneously in this frame.\n- Frame S' (train): observer in middle of train, moving at velocity v relative to platform.\n- Light from both flashes travels at c toward the train observer.\n- But the train observer is moving toward the front flash and away from the rear flash.\n- The front flash reaches the train observer first → for the train observer, the front flash happened FIRST.\n\n**Relativity of simultaneity:**\nTwo events that are simultaneous in one reference frame are generally NOT simultaneous in another frame moving relative to the first — UNLESS the events are at the same spatial location.\n\n**Mathematical statement:**\nFor two events at positions x₁, x₂ in frame S occurring simultaneously (same t), in frame S' moving at velocity v:\nΔt' = γ(Δt − vΔx/c²)\n\nFor simultaneous events in S: Δt = 0, so Δt' = −γvΔx/c²\n\nIf Δx ≠ 0 → Δt' ≠ 0: the events are NOT simultaneous in S'.\n\n**Leading-clock-lags rule:**\nIn a frame S' moving at velocity v relative to S, a set of clocks synchronized in S appear to be out of synchronization in S'. Clocks ahead (in the direction of motion) appear to lag behind. Leading clocks read earlier times.\n\nΔt' = −vΔx/c² × γ (for events simultaneous in S, separated by Δx in the direction of motion)\n\n**Important caveat:** Simultaneity is relative, but the time ordering of causally connected events is NOT relative — if A causes B, then A before B in every frame (since causality requires signal speed ≤ c).\n\n### Level 3 — Proficient Synthesis\n\n**Spacetime diagram representation:**\n- In a spacetime diagram (ct vs. x), simultaneity lines are horizontal (t = constant) for frame S.\n- For frame S' (moving at v), the line of simultaneity is tilted — points that appear simultaneous in S' lie along lines of slope v/c in the ct-x plane.\n- Events above/below the simultaneity line have their temporal order depending on the frame.\n\n**Derivation from Lorentz transformation:**\nThe Lorentz transformation gives: t' = γ(t − vx/c²)\nFor two events: Δt' = γ(Δt − vΔx/c²)\nAt Δt = 0 (simultaneous in S): Δt' = −γvΔx/c²\nThis is non-zero whenever Δx ≠ 0 and v ≠ 0.\n\n**Relativity of simultaneity and causality:**\nFor space-like separated events (Δx² > c²Δt²): time ordering is frame-dependent (no causal connection possible).\nFor time-like separated events (c²Δt² > Δx²): time ordering is absolute (signal could travel from earlier to later event at speed ≤ c).\nFor light-like separated events (Δx² = c²Δt²): simultaneous in no frame other than the one where Δt = 0 at the boundary.\n\n**The \"leading clocks lag\" mnemonic:**\nIn a train of clocks (all synchronized in the platform frame S) observed from a moving train S': the clock at the front of the platform is \"leading\" (in the direction of platform motion relative to S') and reads an earlier time. Lag by Δt = vΔx/c².\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 25,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.rel.simultaneity",
+      "title": ": Train Thought Experiment — Quantitative",
+      "content": "### WE-1: Train Thought Experiment — Quantitative\n\n**Problem:** A train moves at v = 0.6c relative to a platform. Two lightning bolts strike the ends of the train (separated by L = 1200 m in the platform frame) simultaneously in the platform frame.\n(a) What is the time difference between the two events as measured by an observer on the train?\n(b) Which event does the train observer say happens first?\n\n**Solution:**\n\nγ = 1/√(1 − v²/c²) = 1/√(1 − 0.36) = 1/√0.64 = 1/0.8 = **1.25**\n\n**(a) Time difference in train frame:**\nΔt' = γ(Δt − vΔx/c²)\n\nEvents are simultaneous in platform frame: Δt = 0\nSpatial separation in platform frame: Δx = 1200 m (rear bolt at x=0, front bolt at x=1200 m)\nv = 0.6c = 0.6 × 3×10⁸ = 1.8×10⁸ m/s\n\nΔt' = γ(0 − vΔx/c²) = 1.25 × (−(1.8×10⁸ × 1200)/(3×10⁸)²)\n= 1.25 × (−2.16×10¹¹/9×10¹⁶)\n= 1.25 × (−2.4×10⁻⁶)\n**Δt' = −3.0×10⁻⁶ s = −3.0 μs**\n\n**(b) Which event first?**\nThe negative sign means the front bolt (larger x) happens EARLIER in the train frame.\nThe rear bolt strikes 3.0 μs AFTER the front bolt in the train's frame.\n\nSummary: Events simultaneous in platform frame; front bolt happens first (by 3 μs) in the train frame.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 81,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.rel.simultaneity",
+      "title": ": Synchronized Clocks on a Moving Platform",
+      "content": "### WE-2: Synchronized Clocks on a Moving Platform\n\n**Problem:** Three clocks A, B, C are placed at positions x = 0, 500 m, and 1000 m along a platform, synchronized in the platform frame (all read t = 0 at t = 0 in that frame). A train passes at v = 0.8c.\n(a) What is γ?\n(b) When the train observer passes clock A (which reads t_A = 0), what time does the train observer say clock B and clock C read?\n(c) Which clock reads the latest time according to the train observer?\n\n**Solution:**\n\n**(a) γ:**\nγ = 1/√(1 − 0.64) = 1/√0.36 = 1/0.6 = **5/3 ≈ 1.667**\n\n**(b) Clock readings in train frame:**\nTrain observer's frame S' passes clock A (x=0) when t=0 in S.\nIn S', the time shown on a clock at position x in S (at the moment t=0 in S) is:\nt'_shown = t' of event \"clock at x reads 0\" = γ(t − vx/c²) = γ(0 − vx/c²) = −γvx/c²\n\nFor clock B (x = 500 m):\nt'_B = −(5/3)(0.8c)(500)/c² = −(5/3)(0.8)(500)/(3×10⁸) = −(5/3)(1.33×10⁻⁶) = **−2.22×10⁻⁶ s = −2.22 μs**\n\nFor clock C (x = 1000 m):\nt'_C = −(5/3)(0.8)(1000)/(3×10⁸) = −(5/3)(2.67×10⁻⁶) = **−4.44×10⁻⁶ s = −4.44 μs**\n\n**(c) Which reads latest?**\nClock A reads 0, B reads −2.22 μs, C reads −4.44 μs. Clock A reads the latest (0 > −2.22 > −4.44).\n\n**Leading clocks lag:** C (at x=1000m) is the \"leading\" clock in the direction of train motion → reads the earliest time in the train frame. A (at x=0) reads the latest time. The leading clock lags.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 81,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.rel.simultaneity",
+      "title": ": Causal Order and Simultaneity",
+      "content": "### WE-3: Causal Order and Simultaneity\n\n**Problem:** Two events occur in frame S:\n- Event 1: (x₁, t₁) = (0, 0)\n- Event 2: (x₂, t₂) = (6×10⁸ m, 3 s)\n\n(a) Are the events time-like, space-like, or light-like separated?\n(b) Is the time ordering (Event 1 before Event 2) the same in all frames?\n(c) Can frame S' exist where the events are simultaneous?\n\n**Solution:**\n\n**(a) Interval classification:**\nΔx = 6×10⁸ m, Δt = 3 s\nc×Δt = 3×10⁸ × 3 = 9×10⁸ m\n\nCompare: (cΔt)² vs. (Δx)²\n(9×10⁸)² = 8.1×10¹⁷ m²\n(6×10⁸)² = 3.6×10¹⁷ m²\n\nSince (cΔt)² = 8.1×10¹⁷ > (Δx)² = 3.6×10¹⁷: **Time-like separation**\n\n**(b) Time ordering:**\nFor time-like separated events: a signal could travel from Event 1 to Event 2 at speed v = Δx/Δt = (6×10⁸)/(3) = 2×10⁸ m/s = (2/3)c < c. Causal connection is possible. **Time ordering is absolute** — Event 1 before Event 2 in ALL frames.\n\n**(c) Can they be simultaneous?**\nFor two events to be simultaneous in some frame, they must be space-like separated. Since they are time-like separated, **no frame exists where they are simultaneous**. Making them simultaneous would require Δt' = 0 and using the Lorentz transformation requires |v| > c, which is impossible.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 81,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT",
+      "content": "### MC-1: MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT\n\n**trigger_signal:** Student states \"the platform observer doesn't really see them simultaneously — the light just happens to arrive at the same time because of the geometry\" or \"Einstein's train experiment just shows a light travel delay, not anything fundamental.\"\n\n**conflict_evidence [P28]:** The \"light travel time\" argument applies to all observers equally — it is already accounted for in the relativity of simultaneity analysis. The platform observer who is equidistant from A and B receives the two light pulses at the same time → therefore the events were simultaneous in the platform frame (after accounting for light travel time). The train observer also receives pulses at different times (front first) → after accounting for the fact that both pulses travel at c and equal distances, the train observer concludes the front event happened first. This isn't a perceptual illusion — it's a real physical difference in what \"simultaneous\" means per frame. The mathematical statement Δt' = −γvΔx/c² has no \"travel delay\" correction factor — it IS already the corrected, proper simultaneity definition.\n\n**bridge_text [P30]:** Light travel delay analysis assumes we know when events happened and just need to correct for the delay. Einstein's framework goes deeper: after fully correcting for light travel times, two frames still disagree about simultaneity. The disagreement is not a measurement error or delay artifact — it is a fundamental feature of spacetime. Time-of-observation ≠ time-of-event; both frames are careful about this distinction.\n\n**replacement_text [P31]:** Relativity of simultaneity is NOT a light travel time effect. The standard analysis (platform observer at midpoint, equidistant from A and B) already accounts for equal travel times — yet the platform observer says simultaneous, while the train observer (accounting equally carefully for travel times) says front-first. The disagreement persists after all travel time corrections → it is a genuine physical difference in simultaneity between inertial frames, described quantitatively by Δt' = −γvΔx/c².\n\n**discrimination_pairs [P33]:**\n- \"If we correct for light travel time, both observers would agree on whether the bolts were simultaneous\" → FALSE: even after correcting for travel time, the inertial frames disagree. The Lorentz transformation gives Δt' = −γvΔx/c² ≠ 0 regardless of where the observer is located in the frame.\n- \"The platform observer and train observer genuinely disagree on the order of spatially separated simultaneous events, even after accounting for light travel time\" → TRUE: Δt' = −γvΔx/c² is a fundamental, fully corrected result. ✓\n\n**s6_path:** If student fails \"is this just travel delay\" probe → calculate Δt' for specific numbers, emphasize that the travel-time-corrected result still gives Δt' ≠ 0 before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING",
+      "content": "### MC-2: MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING\n\n**trigger_signal:** Student concludes \"if simultaneity is relative, then causality is also relative — maybe cause and effect can be reversed in some frame\" or \"event A causing event B might look like B causing A to some observer.\"\n\n**conflict_evidence [P28]:** For causally connected events, the signal must travel at speed v_signal ≤ c. If Event 1 causes Event 2, Δx/Δt ≤ c for the causal signal → (cΔt)² ≥ (Δx)² → time-like separated. The Lorentz transformation cannot reverse time ordering for time-like events without requiring |v_observer| > c, which is impossible. WE-3 demonstrates this: time-like separated events have absolute time ordering in all frames. Only space-like separated events (which cannot be causally connected at all) can have their ordering reversed — but those events cannot influence each other anyway, so no causal paradox arises.\n\n**bridge_text [P30]:** \"Relative\" in special relativity doesn't mean \"anything goes.\" The causal structure — which events can influence which — is absolute. Only the temporal ordering of causally disconnected events (space-like separated) is frame-dependent. This is built into the geometry of spacetime: the light cone divides spacetime into the absolute past (time-like past), absolute future (time-like future), and \"elsewhere\" (space-like) where ordering is frame-dependent but no causal link exists anyway.\n\n**replacement_text [P31]:** Causality is preserved in special relativity. The time ordering of causally connected events (time-like separated: |Δx| < c|Δt|) is absolute — the same in every inertial frame. Frame-dependent simultaneity applies only to space-like separated events (|Δx| > c|Δt|), which cannot be causally connected (no signal can bridge that gap at speed ≤ c). Therefore, relativity of simultaneity never implies reversal of cause and effect.\n\n**discrimination_pairs [P33]:**\n- \"If A causes B, then some fast-moving observer might see B before A — cause and effect reversed\" → FALSE: causal events are time-like separated; no inertial observer can see them in reverse order without requiring a speed > c.\n- \"For two space-like separated events, different frames can disagree on their order\" → TRUE — but space-like events cannot be causally connected, so this never creates a causal paradox. ✓\n\n**s6_path:** If student conflates simultaneity-relative with causality-relative → interval classification (space-like vs. time-like) worksheet + WE-3 worked through before mastery gate.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Session Open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Session Open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 229,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Concrete Anchor: train thought experiment",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Concrete Anchor: train thought experiment\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 233,
+        "endLine": 236
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Conflict Evidence: MC-1",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Conflict Evidence: MC-1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 236,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Retrieval Seed",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Retrieval Seed\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 239,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Pictorial: leading clocks lag",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Pictorial: leading clocks lag\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 243,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Diagnostic: causal ordering",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Diagnostic: causal ordering\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 246,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Mastery Probe + P68 + P85 + P91",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Probe + P68 + P85 + P91\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P36\",\"P41\",\"P62\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 249,
+        "endLine": 322
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** In the Einstein train thought experiment, the train moves at v = 0.5c and lightning strikes at both ends simultaneously in the platform frame. Describe qualitatively what the train observer sees. Is this a real physical difference or just a difference in when the light arrives at their eyes? Explain.\n\n**P-2 (Developing — identifies S6):** Two events are simultaneous in frame S, separated by Δx = 2000 m. Frame S' moves at v = 0.75c relative to S. (a) Find γ. (b) Find Δt'. (c) Which event occurs first in S'?\n\n**P-3 (Proficient — identifies S9):** Two clocks at x = 0 and x = 3000 m are synchronized in frame S. Frame S' moves at v = 0.8c. (a) When the S' observer passes x=0 (t=0 in S), what does the clock at x=3000 m read in S? (b) What time does the S' observer assign to the event \"clock at x=3000 m reads t=0 in S\"? (c) Explain the \"leading clocks lag\" rule in terms of this result.\n\n**P-4 (Mastery gate — confirms S9):** (a) Events A at (0, 0) and B at (8×10⁸ m, 4 s) in frame S. Classify the interval. Does any frame exist where A and B are simultaneous? Does any frame reverse their order? Justify with intervals. (b) For two simultaneous events in S at Δx = 1500 m, a frame S' at v = 0.4c measures a time difference of Δt'. Calculate Δt' and explain physically why the event at larger x appears to occur EARLIER in S'. Required: 2/2 at ≥0.80 accuracy for mastery gate.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 257,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "Session Script (TA Sequence)",
+      "content": "> Session cap: 7 TAs. CPA entry: C (difficulty 5, accelerated P track; domain=physics, bloom=analyze → C).\n\n**TA-1 [P01 — Session Open]**\n\"A train moves at 0.6c through a station. Lightning strikes both ends of the station simultaneously (in the station frame). The station master at the midpoint sees both flashes at the same instant. A passenger at the midpoint of the train — where do they see the flashes? Write your prediction, and state whether you think this is 'real' or just a perception effect.\"\n[Diagnose S0/S3 — does student attribute to travel delay or recognize genuine simultaneity difference?]\n\n**TA-2 [P06 — Concrete Anchor: train thought experiment]**\n\"[Display: train thought experiment diagram — two flash origins A and B, station observer equidistant, train observer mid-train, velocity arrow.] Station observer: equidistant, receives both at same time → simultaneous in station frame. Train observer: moving toward front flash, away from rear flash. Both pulses travel at c (Einstein's second postulate — same c in all frames). Front flash arrives first in train frame → NOT simultaneous. This is not perception, it's physics.\" [→ WE-1 quantitative setup]\n\n**TA-3 [P28 — Conflict Evidence: MC-1]**\n\"Travel delay argument tested: does accounting for travel time fix it? Station observer already IS equidistant and concludes simultaneous — after accounting for travel time. Train observer is also equidistant from the flash origins (in their own frame) and accounts equally carefully for travel time. After correction: Δt' = γ(0 − vΔx/c²) = −3 μs ≠ 0. No travel-time correction changes this. It's a genuine result.\" [→ MC-1 discrimination pairs, then WE-1 calculation]\n\n**TA-4 [P62 — Retrieval Seed]**\n\"From memory: state the two postulates of SR. From postulate 2: if c is the same in all frames, and the events at A and B emit pulses that both travel at c, why does the train observer receive them at different times even though (in their frame) they're equidistant? Think through the chain carefully.\"\n[Consolidates postulates → simultaneity connection; identifies students still using Galilean intuition]\n\n**TA-5 [P06 — Pictorial: leading clocks lag]**\n\"[Display: row of synchronized platform clocks, train moving past.] Clocks at x=0, 500m, 1000m all synchronized in platform frame. To the train observer, when they pass x=0 (t=0), the clock at x=500 reads an earlier time, x=1000 reads even earlier. Leading clocks (in direction of motion) lag. By Δt = −γvΔx/c².\" [→ WE-2]\n\n**TA-6 [P41 — Diagnostic: causal ordering]**\n\"Two events: (0, 0) and (6×10⁸ m, 3s). Can some frame reverse their time order? First: classify the separation — time-like, space-like, or light-like? [→ WE-3 setup] For space-like: ordering can vary. For time-like: ordering is absolute. What determines which category?\" [→ WE-3]\n\n**TA-7 [P36 — Mastery Probe + P68 + P85 + P91]**\n\"Final probe: (1) Two flashes occur 1000 m apart simultaneously in frame S. A frame S' moves at 0.5c. Find Δt' and state which flash is first in S'. (2) Three clocks at x=0, 300m, 600m synchronized in S. What do they read in S' (v=0.7c) when S'-observer passes x=0 at t'=0? (3) Can any frame reverse the causal order of two events 100 m apart and 1 μs apart in time?\n\nClosing thought: The relativity of simultaneity is not a curiosity — it is the reason for time dilation and length contraction. Both are consequences of the same Lorentz transformation that gives Δt' = γ(Δt − vΔx/c²). Understanding simultaneity is understanding all of special relativity.\n\nSpaced retrieval: +1 day (train thought experiment and which flash comes first for each observer), +4 days (Δt' formula application), +2 weeks (time-like vs. space-like classification and causal ordering).\"\n\n[P91 gate: threshold 0.80. Failure → MC-1 travel-delay distinction and interval classification before re-probe.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 222,
+        "endLine": 257
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

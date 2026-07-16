@@ -1,0 +1,541 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.euler-lagrange-equation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.euler-lagrange-equation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b2055b523e8fb282ddf8d864af0559ba4ab4f6de49f1801bb97bfe935aac5d0e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md": "sha256:2e3f315ad8549b0a152092b50614ec7f353deaecbe578fafe03777961f2c785f"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.euler-lagrange-equation",
+    "name": "The Euler-Lagrange Equation and Hamilton's Principle",
+    "difficultyRaw": "expert (6)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.mech.generalized-coordinates"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.euler-lagrange-equation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.euler-lagrange-equation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md": "sha256:2e3f315ad8549b0a152092b50614ec7f353deaecbe578fafe03777961f2c785f"
+      },
+      "contentHash": "sha256:95712f4c7d8855f150edc55aa8486e742be591a1ff914711308270507de3193d",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.euler-lagrange-equation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.euler-lagrange-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.euler-lagrange-equation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.euler-lagrange-equation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.euler-lagrange-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.euler-lagrange-equation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.euler-lagrange-equation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.euler-lagrange-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.euler-lagrange-equation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.euler-lagrange-equation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md#TA-4 (addresses MC-LAGRANGIAN-IS-ENERGY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.euler-lagrange-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.euler-lagrange-equation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.euler-lagrange-equation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md#TA-5 (addresses MC-EL-NEEDS-FORCES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.euler-lagrange-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.euler-lagrange-equation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.euler-lagrange-equation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.euler-lagrange-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.euler-lagrange-equation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.euler-lagrange-equation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.euler-lagrange-equation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.euler-lagrange-equation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "The Euler-Lagrange Equation and Hamilton's Principle — core explanation",
+      "content": "**Core Insight:** The Lagrangian L = T − V is a function of generalized coordinates qᵢ,\ngeneralized velocities q̇ᵢ, and time t. Hamilton's Principle states that the actual path\nof a system between two configurations is the one that makes the action S = ∫L dt stationary.\nThis variational principle yields the Euler-Lagrange equations:\n\n    d/dt (∂L/∂q̇ᵢ) − ∂L/∂qᵢ = 0   for each i = 1, …, f\n\nThese are the equations of motion. They replace Newton's F = ma and automatically exclude\nconstraint forces — the key power of the Lagrangian formulation.\n\n**Formal Definitions:**\n\nLagrangian: L(q, q̇, t) = T(q, q̇, t) − V(q, t)\n\nAction: S[q(t)] = ∫[t₁ to t₂] L(q, q̇, t) dt    (functional of the path)\n\nHamilton's Principle (Principle of Stationary Action): δS = 0 ⟺ actual path.\n\nEuler-Lagrange equation: d/dt(∂L/∂q̇ᵢ) − ∂L/∂qᵢ = 0\n\nGeneralized force: Qᵢ = ∂L/∂qᵢ (from potential forces only in conservative systems).\n\nGeneralized momentum: pᵢ = ∂L/∂q̇ᵢ (canonical momentum conjugate to qᵢ).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 26,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Simple pendulum",
+      "content": "**Worked Example 1 (Simple pendulum):**\nSingle pendulum, length L, mass m, angle θ from vertical.\nT = ½m(Lθ̇)² = ½mL²θ̇²\nV = −mgL cosθ (taking pivot as origin, y positive upward)\nL = T − V = ½mL²θ̇² + mgL cosθ\n\n∂L/∂θ̇ = mL²θ̇  →  d/dt(∂L/∂θ̇) = mL²θ̈\n∂L/∂θ = −mgL sinθ\n\nE-L equation: mL²θ̈ − (−mgL sinθ) = 0  →  mL²θ̈ + mgL sinθ = 0\n→  θ̈ + (g/L) sinθ = 0   (standard pendulum equation — no tension ever computed!)",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 26,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Mass on spring",
+      "content": "**Worked Example 2 (Mass on spring):**\n1D spring-mass: x the displacement, mass m, spring constant k.\nT = ½mẋ²,  V = ½kx²,  L = ½mẋ² − ½kx²\n\n∂L/∂ẋ = mẋ  →  d/dt(∂L/∂ẋ) = mẍ\n∂L/∂x = −kx\n\nE-L: mẍ − (−kx) = 0  →  mẍ + kx = 0  ✓  (Newton's 2nd confirmed)",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 26,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Particle in polar coordinates",
+      "content": "**Worked Example 3 (Particle in polar coordinates):**\nFree particle in 2D polar (r, φ). No potential.\nT = ½m(ṙ² + r²φ̇²),  V = 0,  L = ½m(ṙ² + r²φ̇²)\n\nFor r: d/dt(mṙ) − mrφ̇² = 0  →  r̈ − rφ̇² = 0\nFor φ: d/dt(mr²φ̇) − 0 = 0  →  d/dt(mr²φ̇) = 0  (mr²φ̇ = const → angular momentum conserved)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 26,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/misconception/MC-LAGRANGIAN-IS-ENERGY",
+      "kind": "misconception",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Priority 1",
+      "content": "### MC-LAGRANGIAN-IS-ENERGY (Priority 1)\n**Label:** \"The Lagrangian L = T − V is the total energy of the system\"\n\n**Trigger signals:**\n- Calls L \"the energy\" or \"total mechanical energy\"\n- Sets L = T + V\n- Confused when L can be negative (V > T)\n\n**Conflict evidence [P28]:**\n\"Total mechanical energy is E = T + V. But the Lagrangian is L = T − V — the minus sign\nis not a typo. For a spring at maximum stretch (all potential energy): T = 0, V = ½kA² > 0,\nso E = ½kA² but L = −½kA² < 0. If L were the energy, it could not be negative. What is L\nactually?\"\n\n**Bridge [P30]:**\n\"L = T − V is not an energy — it's a mathematical object (a function of q and q̇) whose\ntime-integral gives the action. The E-L equation is derived by requiring the action to be\nstationary — the minus sign in T − V is essential to that derivation and gives the correct\nequations of motion. Think of L as 'the quantity whose integral you minimize' not 'energy.'\"\n\n**Replacement [P31]:**\n\"L = T − V. Write it this way every time. Total energy = T + V = E. Lagrangian = T − V = L.\nThey look similar but play different roles: E is conserved (when ∂L/∂t = 0); L is the\nintegrand of the action.\"\n\n**Discrimination pairs [P33]:**\n- At equilibrium (T=0, V=V₀): E = V₀ > 0, but L = −V₀ < 0 ✓\n- Free particle (V=0): E = T = L (coincidentally equal — not in general) ✓\n\n**s6_path:** \"T − V, not T + V. Write 'L = T − V' at the top of every problem.\"\n\n---",
+      "localKey": "MC-LAGRANGIAN-IS-ENERGY",
+      "language": "en",
+      "refs": [
+        "MC-LAGRANGIAN-IS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 3,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/misconception/MC-EL-NEEDS-FORCES",
+      "kind": "misconception",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Priority 2",
+      "content": "### MC-EL-NEEDS-FORCES (Priority 2)\n**Label:** \"You still need to find the constraint forces to use the Euler-Lagrange equation\"\n\n**Trigger signals:**\n- Tries to add tension or normal force to the E-L equation\n- Says \"but I need the tension to find θ̈ for the pendulum\"\n- Adds a constraint force term to the right-hand side\n\n**Conflict evidence [P28]:**\n\"In the pendulum derivation (Worked Example 1), did the tension T appear anywhere in L?\nL = ½mL²θ̇² + mgL cosθ — only kinetic energy (from θ̇) and gravitational potential (from θ).\nThe tension did no work (perpendicular to motion); the θ coordinate already enforces the\nfixed-length constraint. Where does the tension enter the Euler-Lagrange equation?\"\n\n**Bridge [P30]:**\n\"The tension doesn't enter at all — that's the entire point. By choosing θ as the generalized\ncoordinate, the length constraint x² + y² = L² is automatically satisfied. Constraint forces\ndo no work in the direction of motion along the constraint surface — they cancel out of the\nvariational principle. L contains only the forces derivable from a potential.\"\n\n**Replacement [P31]:**\n\"Write T and V in terms of the generalized coordinates. Constraint forces — normal forces,\ntensions, joint forces — do not appear in L if the constraints are holonomic. Apply the E-L\nequation directly: d/dt(∂L/∂q̇ᵢ) = ∂L/∂qᵢ. The equations of motion appear automatically.\"\n\n**Discrimination pairs [P33]:**\n- Pendulum with Newtonian approach: need T (tension) + θ component of gravity\n- Pendulum with E-L approach: L = ½mL²θ̇² + mgL cosθ, no T anywhere ✓\n\n**s6_path:** \"Write L = T − V using only coordinates and velocities. Stop there.\nApply the formula. No forces needed.\"\n\n---",
+      "localKey": "MC-EL-NEEDS-FORCES",
+      "language": "en",
+      "refs": [
+        "MC-EL-NEEDS-FORCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 36,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 3,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Formula Development",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Formula Development\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 19,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 36,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "MC-LAGRANGIAN-IS-ENERGY Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-LAGRANGIAN-IS-ENERGY Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-LAGRANGIAN-IS-ENERGY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-LAGRANGIAN-IS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 54,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "MC-EL-NEEDS-FORCES Probe + Practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-EL-NEEDS-FORCES Probe + Practice\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-EL-NEEDS-FORCES\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-EL-NEEDS-FORCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 72,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 95,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 121,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Apply — Lagrangian construction",
+      "content": "**MP-1 (Apply — Lagrangian construction):**\n\"A bead (mass m) slides on a frictionless vertical circular wire of radius R.\nUse angle θ from the bottom. Write T(θ, θ̇) and V(θ). Then write L.\"\nExpected: T = ½mR²θ̇², V = mgR(1 − cosθ) (zero at bottom), L = ½mR²θ̇² − mgR(1 − cosθ).\n_Discriminates: T and V in generalized coordinates; V reference choice._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 308,
+        "endLine": 344
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Apply — E-L equation",
+      "content": "**MP-2 (Apply — E-L equation):**\n\"From MP-1's Lagrangian, apply the Euler-Lagrange equation to get the equation of motion.\"\nExpected: d/dt(mR²θ̇) − (−mgR sinθ) = 0 → mR²θ̈ + mgR sinθ = 0 → θ̈ + (g/R) sinθ = 0.\n_Discriminates: full E-L procedure; sign handling._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 308,
+        "endLine": 344
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Apply — canonical momentum",
+      "content": "**MP-3 (Apply — canonical momentum):**\n\"For the bead on a ring (MP-1), what is the canonical momentum p_θ?\"\nExpected: p_θ = ∂L/∂θ̇ = mR²θ̇ (angular momentum about the centre).\n_Discriminates: canonical momentum definition._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 308,
+        "endLine": 344
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Understand — constraint forces absent",
+      "content": "**MP-4 (Understand — constraint forces absent):**\n\"In the bead-on-ring problem, the wire exerts a normal force N on the bead. Where does N\nappear in the Lagrangian L = ½mR²θ̇² − mgR(1 − cosθ)?\"\nExpected: N does not appear — it is a constraint force perpendicular to motion; it does no\nwork along θ; choosing θ as the coordinate automatically satisfies the constraint |r| = R.\n_Discriminates: MC-EL-NEEDS-FORCES resolution._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-EL-NEEDS-FORCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 308,
+        "endLine": 344
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Apply — two-DOF system",
+      "content": "**MP-5 (Apply — two-DOF system):**\n\"Atwood machine (masses m₁ > m₂, one coordinate x = displacement of m₁ downward).\nWrite L and find the acceleration ẍ.\"\nExpected: L = ½(m₁+m₂)ẋ² − (m₂−m₁)gx + const;\nd/dt[(m₁+m₂)ẋ] = (m₁−m₂)g; ẍ = (m₁−m₂)/(m₁+m₂) · g.\n_Discriminates: multi-mass single-DOF; T for system; E-L applied correctly._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 308,
+        "endLine": 344
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.generalized-coordinates  ──►  phys.mech.euler-lagrange-equation\n```\n\n**PD-1 (Generalized coordinates — DOF and kinetic energy in q, q̇):**\n\"A pendulum (length L, angle θ). Write T in terms of θ and θ̇.\"\nExpected: T = ½mL²θ̇².\n\n**PD-2 (Conservative forces — potential energy):**\n\"For the same pendulum (V = 0 at pivot level, V = −mgL cosθ for angle θ from vertical).\nWrite V(θ).\"\nExpected: V = −mgL cosθ.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 82,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"What is L? Write the E-L equation.\"\nThreshold: L = T − V; d/dt(∂L/∂q̇ᵢ) − ∂L/∂qᵢ = 0.\n\n**FA-2 (TA-4 exit):** \"At maximum spring stretch, compare L and E.\"\nExpected: L = T − V = 0 − V < 0; E = T + V = V > 0; L ≠ E.\nIf student writes L = E → MC-LAGRANGIAN-IS-ENERGY not resolved.\n\n**FA-3 (TA-5 exit):** \"Pendulum: where does the tension appear in L?\"\nExpected: Nowhere — L = ½mL²θ̇² + mgL cosθ; tension is a constraint force.\nIf student says \"you need tension\" → MC-EL-NEEDS-FORCES not resolved.\n\n**FA-4 (Session exit):** MP-1 and MP-2. Both correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-LAGRANGIAN-IS-ENERGY",
+        "MC-EL-NEEDS-FORCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 344,
+        "endLine": 361
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Stay on 1-DOF systems: pendulum, incline, spring.\n- Reassure: \"Four steps. Write T. Write V. Subtract. Apply formula.\"\n- Skip polar 2-DOF example (TA-5 practice) if anxiety remains after TA-4.\n- Do not introduce Hamilton's Principle (variational derivation) in first pass.\n\n**S7 (Overconfident) path [Protocol G]:**\n- Challenge with constrained 2-DOF: double pendulum L (four terms including cross-term).\n- Ask for canonical momenta p_θ₁ and p_θ₂ for the double pendulum.\n- Present non-conservative extension: generalized forces Qᵢ when friction is present.\n\n**S4 (Prereq gap):**\n- PD-1 gap (generalized coordinates) → repair DOF counting and coordinate transformations\n  before returning. Cannot do TA-3 until T can be written in q, q̇.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 361,
+        "endLine": 380
+      }
+    },
+    {
+      "assetId": "phys.mech.euler-lagrange-equation/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.euler-lagrange-equation",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → L formula → MC-LAGRANGIAN-IS-ENERGY probe).\n**Session 2 (≥24 h later):** Retrieval: \"Write the E-L equation from memory.\"\n  → TA-5 (MC-EL-NEEDS-FORCES probe) → TA-6 problems 1–3.\n**Session 3 (≥72 h later):** Interleaved probe:\n  \"A double pendulum (lengths L₁, L₂, masses m₁, m₂, angles θ₁, θ₂). Write T.\"\n  [T = ½m₁L₁²θ̇₁² + ½m₂(L₁²θ̇₁² + L₂²θ̇₂² + 2L₁L₂θ̇₁θ̇₂ cos(θ₁−θ₂))]\n  Then write L and identify which coordinates are cyclic (none, in general).\n**Pre-cyclic-coordinates session:** All 5 P91 probes cold; require 4/5.\n\n**Interleaving partners:** phys.mech.generalized-coordinates (prerequisite chain),\nphys.mech.cyclic-coordinates-conservation-laws (next concept),\nphys.mech.conservative-forces (V construction).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-LAGRANGIAN-IS-ENERGY",
+        "MC-EL-NEEDS-FORCES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.euler-lagrange-equation.md",
+        "startLine": 380,
+        "endLine": 397
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

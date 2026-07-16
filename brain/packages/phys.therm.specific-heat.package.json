@@ -1,0 +1,223 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.specific-heat-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.specific-heat",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5090ccdd6a99d3f47edb0bea75ed7517c11934a52a05ed8d2e997dcf02255343",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.specific-heat.md": "sha256:9fe56ff280e81b3298c0a82a3d7c903c3817ec97dc6b0ca2522d801ee6c0871e"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 1,
+      "mastery_probe": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 1
+  },
+  "concept": {
+    "conceptId": "phys.therm.specific-heat",
+    "name": "Specific Heat Capacity",
+    "difficultyRaw": "label: developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.therm.heat-transfer"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.specific-heat-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.specific-heat (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.specific-heat.md": "sha256:9fe56ff280e81b3298c0a82a3d7c903c3817ec97dc6b0ca2522d801ee6c0871e"
+      },
+      "contentHash": "sha256:470b806c47d1a156d6c6299d3ba547b8484d72d3e58ee714f878e7bcd4055628",
+      "ruleCount": 1,
+      "bandCounts": {
+        "3": 1
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.specific-heat.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.specific-heat.md#TA-1 (addresses MC-MORE-HEAT-MEANS-MORE-TEMPERATURE, MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.specific-heat"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.specific-heat\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.specific-heat/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "Specific Heat Capacity — core explanation",
+      "content": "**Hook (S0 novice):** Sand on a beach heats up quickly in the sun and cools rapidly at night — yet the sea next to it barely changes temperature all day. Both receive the same solar energy per unit mass. Sand has a low specific heat capacity; water has an extraordinarily high one. Specific heat capacity is the property that determines how much energy is needed to raise a given mass of material by one degree — and it varies enormously across materials.\n\n**Conceptual arc:**\n1. Definition: specific heat capacity c [J/(kg·K)] = heat required per unit mass per unit temperature rise.\n   Q = mcΔT; therefore c = Q/(mΔT).\n2. Key values: water c = 4186 J/(kg·K) (highest of common liquids — water's \"thermal mass\" buffers climate); iron 450; copper 385; aluminium 900; sand/rock ~800; air 1005 (at constant pressure).\n3. Why water's c is so high: strong intermolecular hydrogen bonds — much energy goes into stretching/breaking these bonds rather than raising kinetic energy (temperature). Microscopic explanation only; no derivation expected at this level.\n4. Molar heat capacity C_mol = c × M (M = molar mass). Dulong-Petit law: for monatomic solids, C_mol ≈ 3R ≈ 25 J/(mol·K) — a prediction of classical statistical mechanics.\n5. Specific heat at constant pressure (c_p) vs. constant volume (c_v): for solids/liquids, c_p ≈ c_v (small volume change). For gases, c_p > c_v; γ = c_p/c_v = ratio of heat capacities.\n6. Temperature change calculation: ΔT = Q/(mc). If the same heat Q is added to different masses or different materials, ΔT differs inversely.\n7. Applications: thermal mass in building design (concrete stores heat, buffers daily temperature swings); water coolant in nuclear reactors; heat sinks for electronics (copper, aluminium).\n\n**Closing synthesis:** Specific heat capacity connects heat (energy transfer) to temperature change (the observable). It is the link between the calorimetric measurement (Q) and the thermodynamic state change (ΔT). Water's anomalously high specific heat — a consequence of hydrogen bonding — has shaped Earth's climate, marine biology, and industrial cooling for millennia.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 28,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heat/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "(Concrete — direct application)",
+      "content": "### WE-1 (Concrete — direct application)\n\n**Scenario:** A 2.0 kg block of copper (c = 385 J/(kg·K)) is heated from 20°C to 120°C by a 500 W electric heater. How long does the heater need to run?\n\n**Step 1 — Heat required.**\nQ = mcΔT = 2.0 × 385 × 100 = 77 000 J = 77 kJ.\n\n**Step 2 — Time at 500 W.**\nP = Q/t → t = Q/P = 77 000 / 500 = 154 s ≈ 2 min 34 s.\n\n**Answer:** 154 seconds.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 46,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heat/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "(Bridging — comparing materials)",
+      "content": "### WE-2 (Bridging — comparing materials)\n\n**Scenario:** 1.0 kg of water and 1.0 kg of iron, both initially at 20°C, each absorb 50 kJ of heat. Find the final temperature of each.\n\n**Water (c = 4186 J/(kg·K)):**\nΔT_water = Q/(mc) = 50 000 / (1.0 × 4186) = 11.9°C → T_f = 31.9°C.\n\n**Iron (c = 450 J/(kg·K)):**\nΔT_iron = 50 000 / (1.0 × 450) = 111.1°C → T_f = 131.1°C.\n\n**Comparison:** The same heat raises iron's temperature ~9× more than water's. This is why iron cookware gets dangerously hot while water in a pot barely warms up; why water is used as a coolant; and why coastal climates are more moderate than inland (sea buffers temperature).\n\n**Answer:** Water → 31.9°C; Iron → 131.1°C.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 46,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heat/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "(Abstract — Dulong-Petit check)",
+      "content": "### WE-3 (Abstract — Dulong-Petit check)\n\n**Apply Dulong-Petit:** Copper has molar mass M = 63.5 g/mol and measured c = 385 J/(kg·K). Verify against the Dulong-Petit prediction.\n\n**C_mol (measured):** c × M = 385 × 0.0635 = 24.4 J/(mol·K).\n\n**Dulong-Petit prediction:** C_mol = 3R = 3 × 8.314 = 24.9 J/(mol·K).\n\n**Agreement:** 24.4 vs. 24.9 — within 2%. The classical equipartition theorem gives each atom 3 vibrational degrees of freedom (each with kT/2 PE + kT/2 KE) → U = 3k_BT per atom = 3RT per mole → C_mol = 3R. ✓\n\n**Limitation:** Dulong-Petit fails for very light elements (diamond, C: measured C_mol ≈ 6 J/(mol·K) at room temperature) and at low T — quantum effects (Einstein/Debye models needed). These limitations are beyond this topic.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 46,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heat/misconception/MC-MORE-HEAT-MEANS-MORE-TEMPERATURE",
+      "kind": "misconception",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "**Trigger signal:** Student says \"I added more heat so the temperature must have risen more — heat and temperature are proportional regardless of material or mass.",
+      "content": "### MC-MORE-HEAT-MEANS-MORE-TEMPERATURE\n\n**Trigger signal:** Student says \"I added more heat so the temperature must have risen more — heat and temperature are proportional regardless of material or mass.\"\n\n**Conflict evidence [P28]:** \"50 kJ to 1 kg water vs. 50 kJ to 1 kg iron (WE-2): same heat, same mass. If heat and temperature change were simply proportional, both should rise the same amount. Do they?\"\n\n*Water: +11.9°C. Iron: +111°C. Same heat, ~9× different temperature rise.*\n\n**Bridge text [P30]:** \"Temperature change depends on THREE things: heat added (Q), mass (m), and specific heat capacity (c). ΔT = Q/(mc). For the same Q and m, a material with high c (water) shows small ΔT; a material with low c (iron) shows large ΔT. The material's ability to 'absorb' heat without changing temperature is encoded in c.\"\n\n**Replacement text [P31]:** \"Heat is the input; temperature change is the output; specific heat capacity is the transfer function connecting them. Doubling Q doubles ΔT for the same material. Doubling c halves ΔT for the same Q and m. Doubling m halves ΔT. All three variables matter — not just Q.\"\n\n**Discrimination pairs [P33]:**\n- \"100 J into 0.1 kg water vs. 100 J into 0.1 kg copper: which heats up more?\" → Copper (c = 385 vs. 4186) — ΔT_copper ≈ 2.6°C; ΔT_water ≈ 0.24°C.\n- \"Same material, same ΔT, double the mass: how much heat needed?\" → Double Q. ΔT = Q/(mc) → Q = mcΔT. Doubling m doubles Q.\n\n**s6_path:** \"Q = mcΔT — three factors control ΔT, not one.\"\n\n---",
+      "localKey": "MC-MORE-HEAT-MEANS-MORE-TEMPERATURE",
+      "language": "en",
+      "refs": [
+        "MC-MORE-HEAT-MEANS-MORE-TEMPERATURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heat/misconception/MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT",
+      "kind": "misconception",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "**Trigger signal:** Student says \"the iron at 131°C has more heat in it than the water at 32°C because it's hotter.",
+      "content": "### MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT\n\n**Trigger signal:** Student says \"the iron at 131°C has more heat in it than the water at 32°C because it's hotter.\"\n\n**Conflict evidence [P28]:** \"Both objects started at 20°C and absorbed exactly 50 kJ. Which has 'more heat' in it — the iron or the water?\"\n\n*Both absorbed 50 kJ — the same amount. The iron is hotter, but not because it has more energy; it has the same energy but a lower capacity to absorb it without rising in temperature.*\n\n**Bridge text [P30]:** \"Temperature measures thermal intensity (heat flow direction); heat content (internal energy) measures total thermal energy stored. High temperature doesn't mean high energy — it means the material has relatively little capacity for more energy (low c) or relatively little mass. A spark has very high temperature but negligible heat content.\"\n\n**Replacement text [P31]:** \"Internal energy U = mcT (rough model — more precisely: U = ∫mc dT). At the same temperature, a larger mass or higher-c material has more internal energy. At the same added energy, a lower-c material rises to a higher temperature. High temperature and high heat content are different things — both relate to U but through different factors.\"\n\n**Discrimination pairs [P33]:**\n- \"A match flame (≈2000°C) vs. a bathtub of warm water (≈40°C): which can melt more ice?\" → Bathtub — vastly more total thermal energy despite lower temperature.\n- \"Two copper blocks: 1 kg at 200°C and 2 kg at 100°C. Which has more internal energy above 20°C?\" → 1 kg: U = 1 × 385 × 180 = 69300 J. 2 kg: U = 2 × 385 × 80 = 61600 J. Hotter block has slightly more — both factors (mass and ΔT above reference) contribute.\n\n**s6_path:** \"Temperature is the 'level'; internal energy is the 'volume'. Same level (T) with different tanks (m, c) means different volumes of stored energy.\"\n\n---",
+      "localKey": "MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT",
+      "language": "en",
+      "refs": [
+        "MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heat/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "Composition step 1",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Composition step 1\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P4\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT\",\"MC-MORE-HEAT-MEANS-MORE-TEMPERATURE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-MORE-HEAT-MEANS-MORE-TEMPERATURE",
+        "MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 193,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heat/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "Diagnostic Probe Set",
+      "content": "**P4-a (prereq: heat concept):** What is the SI unit of heat? Is heat a property of an object?\n*Joule (J). No — heat is energy in transit, not a property stored in an object.*\n\n**P4-b (direct application):** How much heat is needed to raise 0.5 kg of water from 10°C to 90°C? (c_water = 4186 J/(kg·K))\n*Q = 0.5 × 4186 × 80 = 167 440 J ≈ 167 kJ.*\n\n**P4-c (compare materials):** 1 kg copper (c = 385) and 1 kg water (c = 4186), both given 10 kJ. Which reaches higher temperature?\n*ΔT_Cu = 10000/385 ≈ 26°C. ΔT_water = 10000/4186 ≈ 2.4°C. Copper rises ~11× more.*\n\n**P4-d (mass and temperature):** 200 g of iron (c = 450) at 80°C is dropped into 500 g of water (c = 4186) at 20°C. Find the equilibrium temperature (assume no heat loss). \n*Q_lost = Q_gained: 0.2 × 450 × (80 − T) = 0.5 × 4186 × (T − 20). 90(80−T) = 2093(T−20). 7200−90T = 2093T−41860. 49060 = 2183T. T = 22.5°C.*\n\n**P4-e (Dulong-Petit):** Iron (M = 56 g/mol, c = 450 J/(kg·K)). Calculate C_mol and compare to 3R.\n*C_mol = 450 × 0.056 = 25.2 J/(mol·K). 3R = 24.9 J/(mol·K). Agreement within 1.2%.*\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 134,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heat/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.specific-heat",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: beach vs sea daily temperature] → [P06 anchor: sand vs water with 1000 J]\n→ [MC-MORE-HEAT-MEANS-MORE-TEMPERATURE: P28 conflict → P30 bridge (Q=mcΔT) → P31 replacement → P33 pairs]\n→ [WE-1: copper block heating time]\n→ [P51 check-in: effect of doubling c]\n→ [WE-2: water vs iron — 50 kJ comparison]\n→ [MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT: P28 → P30 → P31 → P33]\n→ [P52 narrow: equilibrium mixing — energy balance setup]\n→ [P62 retrieval seed: P4-d mixing problem]\n→ [WE-3: Dulong-Petit verification for copper]\n→ [P36 mastery probe: kettle heating time]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heat.md",
+        "startLine": 193,
+        "endLine": 214
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

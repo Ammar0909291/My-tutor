@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.gauss-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.gauss-law",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:43f900b29d6994710eff0f7b3f4c4099fe174ca0be5d38c6bbaec7db3f2403f5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.gauss-law.md": "sha256:0ec7e4990f9fa98878d6b87309f81639e791d3cb61fc883b67a747bdff6b2606"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.gauss-law",
+    "name": "Gauss's Law",
+    "difficultyRaw": "label: proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.electric-field"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.gauss-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.gauss-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.gauss-law.md": "sha256:0ec7e4990f9fa98878d6b87309f81639e791d3cb61fc883b67a747bdff6b2606"
+      },
+      "contentHash": "sha256:1fd9d44d7812603c8425dcf6535a3c51307708c243c4cbefc59d60d7888c3833",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.gauss-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.gauss-law.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.gauss-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.gauss-law\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.gauss-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.gauss-law.md#TA-2 (addresses MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES, MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.gauss-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.gauss-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.gauss-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.gauss-law.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.gauss-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.gauss-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.gauss-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.gauss-law.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.gauss-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.gauss-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.gauss-law.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.gauss-law.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.gauss-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.gauss-law\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.gauss-law/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.em.gauss-law",
+      "title": "Gauss's Law — Concept Explanation (Multi-Tier)",
+      "content": "### Tier 1 — Concrete / Intuitive (S0)\n\nImagine you are inside a room, and outside the room is a source of light. You count how many light rays pass through the walls — no matter how oddly shaped the room is, the total number of rays escaping through the walls depends only on how much light the source emits, not on the shape of the room. Gauss's Law works the same way for electric field lines: **the total electric flux through any closed surface equals the total charge enclosed divided by ε₀**, regardless of the surface's shape. This lets you calculate electric fields for symmetric charge distributions without summing forces on each tiny patch.\n\n### Tier 2 — Conceptual / Mechanistic (S1)\n\n**Electric flux:**\n$$\\Phi_E = \\int_S \\vec{E}\\cdot d\\vec{A} = \\int_S E\\cos\\theta\\, dA$$\n\nFlux is the \"amount of electric field passing through a surface.\" Units: N·m²/C = V·m.\n\n**Gauss's Law:**\n$$\\oint_S \\vec{E}\\cdot d\\vec{A} = \\frac{Q_\\text{enc}}{\\varepsilon_0}$$\n\nThe surface integral of E over any closed surface (Gaussian surface) equals the total enclosed charge divided by ε₀ = 8.854 × 10⁻¹² C²/(N·m²).\n\n**Strategy for high-symmetry problems:**\n1. Identify the symmetry (spherical, cylindrical, planar).\n2. Choose a Gaussian surface matching that symmetry so E is uniform and parallel to dA everywhere.\n3. Pull E out of the integral: Φ = E × A_surface.\n4. Set equal to Q_enc/ε₀ and solve for E.\n\n**Standard results from Gauss's Law:**\n\n| Geometry | E (outside) | E (inside) |\n|---|---|---|\n| Point charge Q | kQ/r² | — |\n| Uniformly charged sphere (Q, R) | kQ/r² (r > R) | kQr/R³ (r < R, if volume charge) |\n| Conducting sphere | kQ/r² (r > R) | 0 |\n| Infinite line (λ C/m) | λ/(2πε₀r) | — |\n| Infinite plane (σ C/m²) | σ/(2ε₀) | — |\n| Parallel plates | σ/ε₀ (between) | 0 (outside) |\n| Conductor surface | σ/ε₀ (just outside) | 0 |\n\n**Key insight — conductors in electrostatics:**\n- Excess charge on a conductor resides entirely on its outer surface.\n- E = 0 inside any conductor in electrostatic equilibrium (choose Gaussian surface just inside surface: Q_enc = 0, so E = 0).\n- The field just outside a conductor surface is E = σ/ε₀ perpendicular to the surface.\n\n### Tier 3 — Formal (Differential Form)\n\nGauss's Law in differential form (Maxwell's first equation):\n$$\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\varepsilon_0}$$\n\nwhere ρ is the volume charge density. This is exact and local — it relates the divergence of E at a point to the charge density at that point. The integral form follows from the divergence theorem (Gauss's theorem in vector calculus):\n$$\\oint_S \\vec{E}\\cdot d\\vec{A} = \\int_V (\\nabla\\cdot\\vec{E})\\, dV = \\int_V \\frac{\\rho}{\\varepsilon_0}\\, dV = \\frac{Q_\\text{enc}}{\\varepsilon_0}$$\n\n**Why can't we solve for E directly?** Gauss's Law alone (∇·E = ρ/ε₀) does not uniquely determine E — we also need ∇×E = 0 (electrostatics) to remove the curl-freedom. Together with appropriate boundary conditions, the field is fully determined (uniqueness theorem).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 28,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.gauss-law",
+      "title": "(Spherical shell)",
+      "content": "### WE-1 (Spherical shell)\n\n**Problem:** A thin spherical shell of radius R = 0.15 m carries total charge Q = +8 nC. Find E at: (a) r = 0.25 m (outside), (b) r = 0.08 m (inside).\n\n**Worked solution:**\n\n*Step 1 — Choose Gaussian surface: concentric sphere of radius r.*\n\n*(a) Outside (r = 0.25 m):*\nSpherical symmetry → E uniform and radially outward over the Gaussian sphere.\nΦ = E(4πr²) = Q_enc/ε₀ = Q/ε₀\n\n$$E = \\frac{Q}{4\\pi\\varepsilon_0 r^2} = \\frac{kQ}{r^2} = \\frac{(8.99\\times10^9)(8\\times10^{-9})}{(0.25)^2} = \\frac{71.9}{0.0625} = 1150\\text{ N/C}$$\n\nDirection: radially outward.\n\n*(b) Inside (r = 0.08 m):*\nQ_enc = 0 (all charge is on the shell at r = R, which is outside the Gaussian sphere at r < R).\nΦ = E(4πr²) = 0 → **E = 0**\n\n**Answer:** (a) E = 1150 N/C outward; (b) E = 0\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 81,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.gauss-law",
+      "title": "(Infinite line charge)",
+      "content": "### WE-2 (Infinite line charge)\n\n**Problem:** An infinite straight wire carries linear charge density λ = +4 nC/m. Find E at r = 0.05 m from the wire.\n\n**Worked solution:**\n\n*Step 1 — Choose Gaussian surface: coaxial cylinder of radius r, length L.*\n\n*Step 2 — Analyze flux:*\n- Curved surface: E ∥ dA (by symmetry) → contributes E(2πrL)\n- End caps: E ⊥ dA → no flux from end caps\n\n*Step 3 — Q_enc = λL*\n\n*Step 4 — Gauss's Law:*\n$$E(2\\pi r L) = \\frac{\\lambda L}{\\varepsilon_0}$$\n$$E = \\frac{\\lambda}{2\\pi\\varepsilon_0 r} = \\frac{(4\\times10^{-9})}{2\\pi(8.854\\times10^{-12})(0.05)} = \\frac{4\\times10^{-9}}{2.785\\times10^{-12}} = 1436\\text{ N/C}$$\n\n**Answer:** E = 1436 N/C radially outward from the wire\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 81,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.gauss-law",
+      "title": "(Conducting sphere)",
+      "content": "### WE-3 (Conducting sphere)\n\n**Problem:** A solid conducting sphere of radius R = 0.10 m carries charge Q = +6 nC. Find E at: (a) r = 0.20 m, (b) r = 0.05 m (inside the conductor).\n\n**Worked solution:**\n\n*(a) Outside (r = 0.20 m) — identical to point charge:*\n$$E = \\frac{kQ}{r^2} = \\frac{(8.99\\times10^9)(6\\times10^{-9})}{(0.20)^2} = \\frac{53.9}{0.04} = 1348\\text{ N/C}$$\n\n*(b) Inside conductor:*\nIn electrostatic equilibrium, all charge resides on surface → Q_enc (Gaussian surface inside conductor) = 0.\n**E = 0** inside the conductor.\n\n**Answer:** (a) E = 1348 N/C outward; (b) E = 0\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 81,
+        "endLine": 146
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/misconception/MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES",
+      "kind": "misconception",
+      "conceptId": "phys.em.gauss-law",
+      "title": "**Trigger signal:** Student says Gauss's Law only applies to spherical charge distributions, or thinks they must have a spherical Gaussian surface.",
+      "content": "### MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES\n\n**Trigger signal:** Student says Gauss's Law only applies to spherical charge distributions, or thinks they must have a spherical Gaussian surface.\n\n**Conflict evidence [P28]:** \"Gauss's Law ∮E·dA = Q_enc/ε₀ holds for any closed surface, with any shape of charge distribution — it is an exact law of electrostatics. However, it is only useful for calculation (allowing E to be pulled out of the integral) when the problem has sufficient symmetry so that E is uniform and perpendicular to the surface. For arbitrary charge distributions, Gauss's Law is still valid but not useful for finding E directly.\"\n\n**Bridge text [P30]:** \"Gauss's Law is always true — it is a fundamental law like conservation of energy. Its practical power for calculation appears only when the symmetry makes E constant and perpendicular on the chosen Gaussian surface. Three symmetries work: spherical (use sphere), cylindrical (use cylinder), planar (use pillbox). For irregular distributions, use superposition instead.\"\n\n**Replacement text [P31]:** \"Gauss's Law is universal — it holds for any closed surface and any charge distribution. The Gaussian surface can be any shape you choose; it is a mathematical tool. The practical limitation is that E must be constant in magnitude and direction on parts of the surface to pull it out of the integral. This is guaranteed only for spherical, cylindrical, or planar symmetry.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Gauss's Law holds for any closed surface\" | \"Gauss's Law only applies to spherical distributions\" |\n| \"Choose Gaussian surface to match charge symmetry\" | \"Gaussian surface must always be a sphere\" |\n| \"For an irregular charge: Gauss's Law is true but not useful for finding E\" | \"Gauss's Law fails for non-spherical distributions\" |\n\n**s6_path:** Use the light-source analogy: no matter how oddly shaped the room, total rays out = total emitted. Shape of room (surface) doesn't matter for the count; it matters for the calculation strategy.\n\n---",
+      "localKey": "MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES",
+      "language": "en",
+      "refs": [
+        "MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/misconception/MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO",
+      "kind": "misconception",
+      "conceptId": "phys.em.gauss-law",
+      "title": "**Trigger signal:** Student says \"the field inside a conductor is weak but not zero\" or applies E = kQ/r² inside a charged sphere.",
+      "content": "### MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO\n\n**Trigger signal:** Student says \"the field inside a conductor is weak but not zero\" or applies E = kQ/r² inside a charged sphere.\n\n**Conflict evidence [P28]:** \"If E ≠ 0 inside a conductor, free electrons would experience a force and move — but we assumed electrostatic equilibrium (charges at rest). Moving charges contradict the assumption. Therefore, in electrostatic equilibrium, E must be exactly zero everywhere inside a conductor. Experiment confirms: a Faraday cage blocks external fields; electric field inside a hollow conductor is zero even when the outside is highly charged.\"\n\n**Bridge text [P30]:** \"The Faraday cage works because any external field drives electrons to rearrange on the surface until their field exactly cancels the external field inside. This self-adjustment is instantaneous (on a microsecond timescale for metals) and always achieves E = 0 inside. Michael Faraday demonstrated this by sitting in a metal cage during lightning storms.\"\n\n**Replacement text [P31]:** \"In electrostatic equilibrium, the electric field inside any conductor is exactly zero. Proof: a non-zero E would exert forces on free electrons, causing them to move — violating the static assumption. The electrons redistribute on the surface until the internal field is exactly cancelled. E = 0 inside a conductor in electrostatics is exact, not approximate.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"E = 0 exactly inside a conductor in electrostatic equilibrium\" | \"E is reduced but not zero inside a conductor\" |\n| \"Gauss's Law: Gaussian surface inside conductor → Q_enc = 0 → E = 0\" | \"E = kQ/r² applies inside a conducting sphere\" |\n| \"Faraday cage: external fields don't penetrate the conductor\" | \"A Faraday cage only blocks most of the field\" |\n\n**s6_path:** Gauss's Law proof: draw Gaussian surface just inside the conductor surface; Q_enc = 0 (all charge on outside surface); therefore E = 0 by Gauss's Law.\n\n---",
+      "localKey": "MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO",
+      "language": "en",
+      "refs": [
+        "MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.gauss-law",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\",\"P06\",\"P41\",\"P51\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 234,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.gauss-law",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO\",\"MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES",
+        "MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 234,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.gauss-law",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\",\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 234,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.gauss-law",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 234,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.gauss-law",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 234,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.em.gauss-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.gauss-law",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState Gauss's Law and explain what Q_enc means.\n\n**Answer:** ∮E·dA = Q_enc/ε₀. Q_enc is the total electric charge enclosed within the closed Gaussian surface — charges outside the surface contribute zero net flux through the surface.\n\n---\n\n### AP-2 (Bloom: Understand)\nExplain why excess charge on a conductor in electrostatic equilibrium resides only on the outer surface (not in the interior).\n\n**Answer:** If charge existed in the interior, a Gaussian surface just inside the conductor (but surrounding the interior charge) would give Q_enc ≠ 0, requiring E ≠ 0 inside — which contradicts electrostatic equilibrium (E = 0 inside). The only consistent solution is Q_enc = 0 for all Gaussian surfaces inside the conductor → no charge in the interior → all charge on the outer surface.\n\n---\n\n### AP-3 (Bloom: Apply)\nAn infinite sheet of charge has σ = −6.0 μC/m². Find the magnitude and direction of E on both sides.\n\n**Answer:** E = |σ|/(2ε₀) = (6.0×10⁻⁶)/(2×8.854×10⁻¹²) = **3.39 × 10⁵ N/C**. Direction: toward the sheet on both sides (negative σ → field points into the sheet).\n\n---\n\n### AP-4 (Bloom: Analyze)\nA uniformly charged solid sphere (Q total, radius R) has E = kQr/R³ inside. At what internal radius r is E maximum and equal to the external field just at the surface?\n\n**Answer:** At r = R: E_inside = kQR/R³ = kQ/R² = E_outside (at r = R). So the field is continuous at the surface. Inside, E increases linearly with r (maximum at surface); outside, E decreases as 1/r². The maximum E is at r = R: E_max = kQ/R².\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.gauss-law.md",
+        "startLine": 266,
+        "endLine": 296
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

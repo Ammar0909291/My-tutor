@@ -1,0 +1,503 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.free-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.free-energy",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:91c7cc800e2a5c1f3cfff723d9bdbf0d4d31f5cea1e67b788334f6b4deadbe3f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.free-energy.md": "sha256:a118285b1194d76663432d690fed77c17cd0e1f06690bb6b7b20fcfa9b944def"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.stat.free-energy",
+    "name": "Helmholtz and Gibbs Free Energy",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": null,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.stat.partition-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.free-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.free-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.free-energy.md": "sha256:a118285b1194d76663432d690fed77c17cd0e1f06690bb6b7b20fcfa9b944def"
+      },
+      "contentHash": "sha256:ff0aa63047d6f1b0905523f74ee019687a77c9726a1e0fbe7d62b0c83f6a432a",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.free-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.free-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.free-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.free-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.free-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.free-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.free-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.free-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.free-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.free-energy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.free-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.free-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.free-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.free-energy.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.free-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.free-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.free-energy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.free-energy.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.free-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.free-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.free-energy.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.free-energy.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.free-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.free-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.free-energy.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.free-energy.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.free-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.free-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.free-energy/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Helmholtz and Gibbs Free Energy — core explanation",
+      "content": "### Core Idea\nFree energy is the amount of work a thermodynamic system can do beyond what it must give to the environment as heat. Two forms exist: Helmholtz free energy F = U − TS (relevant at constant T, V) and Gibbs free energy G = H − TS = U + PV − TS (relevant at constant T, P). Systems at constant T minimize F (or G), not energy U alone. A process is spontaneous if ΔF < 0 (constant T, V) or ΔG < 0 (constant T, P).\n\n### Conceptual Ladder\n1. **Recall**: Entropy S = k_B ln Ω from statistical mechanics; partition function Z = Σe^(−βEᵢ); F = −k_BT ln Z.\n2. **Understand**: Why equilibrium is not simply minimum U — entropy also drives systems toward disordered states. Free energy balances the two: F = U − TS.\n3. **Apply**: Derive thermodynamic properties from F: P = −(∂F/∂V)_T, S = −(∂F/∂T)_V, U = F + TS.\n4. **Extend**: Use Gibbs free energy G for phase equilibria, chemical equilibria, electrochemistry.\n\n### Key Formula Set\n- **Helmholtz free energy**: F = U − TS\n  - From partition function: F = −k_BT ln Z\n  - Differential: dF = −SdT − PdV (natural variables T, V)\n  - Derivatives: S = −(∂F/∂T)_V, P = −(∂F/∂V)_T, U = F + TS = F − T(∂F/∂T)_V\n- **Gibbs free energy**: G = H − TS = U + PV − TS = F + PV\n  - Differential: dG = −SdT + VdP (natural variables T, P)\n  - Derivatives: S = −(∂G/∂T)_P, V = (∂G/∂P)_T\n  - Chemical potential: μ = (∂G/∂N)_{T,P} — G per particle at constant T, P\n- **Spontaneity criteria**:\n  - Constant T, V: ΔF ≤ 0 (spontaneous); ΔF = 0 (equilibrium)\n  - Constant T, P: ΔG ≤ 0 (spontaneous); ΔG = 0 (equilibrium)\n- **Phase equilibrium**: G_liquid = G_gas at phase boundary (coexistence)\n- **Maxwell relation** (from dF): (∂S/∂V)_T = (∂P/∂T)_V\n\n### Canonical Example\n**Ideal gas Helmholtz free energy**:\nZ = (V/λ³)^N/N! where λ = h/√(2πmk_BT) is the thermal de Broglie wavelength.\nF = −k_BT ln Z = −Nk_BT [ln(V/Nλ³) + 1]\nThen: P = −(∂F/∂V)_T = Nk_BT/V ✓ (ideal gas law recovered)\nS = −(∂F/∂T)_V = Nk_B[ln(V/Nλ³) + 5/2] (Sackur-Tetrode equation)\nU = F + TS = (3/2)Nk_BT ✓\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 16,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Systems always evolve to minimize energy",
+      "content": "### MC-1: \"Systems always evolve to minimize energy\"\n- **Probe**: \"At 100°C, water evaporates spontaneously, yet water vapor has higher energy than liquid water (ΔH_vap > 0). How is this possible?\"\n- **Characteristic phrase**: \"Systems go to lower energy — so the liquid should be favored.\"\n- **Trigger**: Newtonian/mechanical intuition about potential energy minimization.\n- **Conflict evidence**: At 100°C and 1 atm, ΔG_vap = ΔH_vap − TΔS_vap = 0 — exactly at equilibrium. Above 100°C, TΔS_vap > ΔH_vap → ΔG_vap < 0 → evaporation spontaneous. Entropy drives the transition despite energy cost.\n- **Bridge**: Two competing effects: energy (wants low U) and entropy (wants high S, i.e., high disorder). Free energy F = U − TS is their trade-off. At high T, entropy wins.\n- **Replacement**: Equilibrium = minimum free energy (F or G), not minimum U. Entropy can drive endothermic processes spontaneous at high temperature.\n- **Discrimination pairs**: \"ΔG < 0 → spontaneous (combines ΔH and ΔS)\" ✓ vs. \"ΔH < 0 → spontaneous (energy only)\" ✗\n- **S6 repair path**: Compute ΔG = ΔH − TΔS for water evaporation at T = 80°C, 100°C, 120°C. Show sign change at 100°C.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Helmholtz free energy F is the maximum work the system can do",
+      "content": "### MC-2: \"Helmholtz free energy F is the maximum work the system can do\"\n- **Probe**: \"What does 'free energy' mean — is it the total energy that's free for use?\"\n- **Characteristic phrase**: \"Free energy is the energy available to do work.\"\n- **Trigger**: The name \"free energy\" suggests it's freely available energy.\n- **Conflict evidence**: At constant T, V: ΔF = ΔU − TΔS = −W_max (maximum work done BY the system, not including PdV boundary work). So F is the maximum non-expansion work available. At constant T, P: G is the maximum non-PdV work.\n- **Bridge**: \"Free\" means \"available to do useful work above the minimum heat exchanged with the environment.\" The environment takes its TΔS_env share; the rest is free.\n- **Replacement**: F = maximum total work at constant T, V. G = maximum non-PdV work at constant T, P. Both are the extractable useful work, not the total internal energy.\n- **Discrimination pairs**: \"F = maximum work at constant T,V\" ✓ vs. \"F = total available energy\" ✗\n- **S6 repair path**: Work through a Carnot cycle: W_max = Q_H(1 − T_C/T_H) = Q_H − T_C·ΔS. Connect to ΔF = ΔU − T_C·ΔS = −W_max.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.stat.free-energy",
+      "title": "The partition function Z and free energy F are unrelated",
+      "content": "### MC-3: \"The partition function Z and free energy F are unrelated\"\n- **Probe**: \"How do you get pressure from the partition function?\"\n- **Characteristic phrase**: \"I use the equations of state separately; Z is just for entropy.\"\n- **Trigger**: Students learned Z for entropy/heat capacity calculations and never saw the F = −k_BT ln Z bridge.\n- **Conflict evidence**: F = −k_BT ln Z; P = −(∂F/∂V)_T = k_BT(∂ ln Z/∂V)_T. All thermodynamic properties (S, U, P, CV) follow from a single derivative of ln Z.\n- **Bridge**: F is the \"thermodynamic generating function\" — all macroscopic properties are encoded as derivatives of F, just as the Lagrangian generates equations of motion in mechanics.\n- **Replacement**: F = −k_BT ln Z is the master link: once you have Z, you have everything. Every thermodynamic property is a derivative of F (or equivalently, of ln Z).\n- **Discrimination pairs**: \"F = −k_BT ln Z → all properties from derivatives\" ✓ vs. \"Z for entropy only; use separate equations for P, U\" ✗\n- **S6 repair path**: Derive P = Nk_BT/V for ideal gas from F = −k_BT ln Z step by step.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.stat.free-energy",
+      "title": "ΔG < 0 means the reaction proceeds to completion",
+      "content": "### MC-4: \"ΔG < 0 means the reaction proceeds to completion\"\n- **Probe**: \"If ΔG° = −20 kJ/mol for a reaction, will it go to completion?\"\n- **Characteristic phrase**: \"Negative ΔG means the reaction goes all the way to products.\"\n- **Trigger**: Confusing standard Gibbs energy ΔG° with the actual ΔG during the reaction.\n- **Conflict evidence**: ΔG = ΔG° + RT ln Q. As the reaction proceeds, Q increases → ΔG increases. Equilibrium is reached when ΔG = 0 (not when all reactants are consumed). The equilibrium constant K = exp(−ΔG°/RT); for ΔG° = −20 kJ/mol at 298K, K ≈ 3300 — favors products, but small amounts of reactants remain.\n- **Bridge**: ΔG = 0 is the equilibrium condition; ΔG° determines how far the equilibrium lies toward products, not whether the reaction goes to completion.\n- **Replacement**: ΔG < 0 means spontaneous in the forward direction at current conditions; equilibrium is reached at ΔG = 0. ΔG° < 0 means equilibrium favors products (K > 1) but doesn't mean 100% conversion.\n- **Discrimination pairs**: \"ΔG = 0 at equilibrium; ΔG° determines K\" ✓ vs. \"ΔG° < 0 → complete conversion\" ✗\n- **S6 repair path**: Calculate K for ΔG° = −5, −10, −20, −50 kJ/mol. Show even −20 kJ/mol gives K = 3300 (not infinite).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Motivation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 215,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Define F and G",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Define F and G\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 216,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Derive from partition function",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Derive from partition function\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Maxwell relations",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Maxwell relations\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 218,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Gibbs and spontaneity",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Gibbs and spontaneity\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 219,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Phase equilibrium",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Phase equilibrium\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Chemical equilibrium",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Chemical equilibrium\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 221,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) derive thermodynamic properties from F using partial derivatives, (2) state spontaneity criteria using ΔF and ΔG, (3) connect F to the partition function via F = −k_BT ln Z, (4) derive phase equilibrium conditions from G, (5) apply ΔG = ΔG° + RT ln Q.\n\n### Formative Assessment 1 — Derivative chain\n**Prompt**: \"Given that for a monatomic ideal gas, F = −Nk_BT[ln(V/Nλ³) + 1], derive expressions for (a) pressure P and (b) entropy S.\"\n**Expected answer**: P = −(∂F/∂V)_T = Nk_BT/V (ideal gas law). S = −(∂F/∂T)_V = Nk_B[ln(V/Nλ³) + 5/2] (Sackur-Tetrode). Student must perform the derivatives correctly, noting λ ∝ T^(−1/2) for the entropy derivative.\n**Threshold**: Both derivatives correct.\n\n### Formative Assessment 2 — Spontaneity classification\n**Prompt**: \"Classify the following reaction at T = 500 K: ΔH = −80 kJ/mol, ΔS = −120 J/(mol·K). Is it spontaneous? At what temperature does it become non-spontaneous?\"\n**Expected answer**: ΔG = −80000 − 500×(−120) = −80000 + 60000 = −20000 J/mol < 0 → spontaneous at 500 K. ΔG = 0 when T = ΔH/ΔS = −80000/−120 = 667 K. For T > 667 K, ΔG > 0 → not spontaneous.\n**Threshold**: Correct ΔG and transition temperature.\n\n### Formative Assessment 3 — Phase boundary\n**Prompt**: \"Using ΔG = 0 at phase equilibrium, derive the Clausius-Clapeyron equation dP/dT = L/TΔV for a first-order phase transition.\"\n**Expected answer**: At coexistence, G₁ = G₂ → dG₁ = dG₂. Using dG = −SdT + VdP: (V₁−V₂)dP = (S₁−S₂)dT → dP/dT = ΔS/ΔV = L/TΔV (using ΔS = L/T at phase transition temperature T).\n**Threshold**: Must use dG equation for both phases; arrive at L/(TΔV) correctly.\n\n### Formative Assessment 4 — Chemical equilibrium\n**Prompt**: \"At 25°C, the standard Gibbs energy for A → B is ΔG° = −15 kJ/mol. Find the equilibrium constant K and state the ratio [B]/[A] at equilibrium.\"\n**Expected answer**: K = exp(−ΔG°/RT) = exp(15000/(8.314 × 298)) = exp(6.053) ≈ 426. At equilibrium, [B]/[A] = K = 426 (approximately — assuming activity = concentration for ideal solution).\n**Threshold**: K within a factor of 2 (acceptable given rounding of RT = 2.479 kJ/mol).\n\n### Confidence Calibration\nAfter FA1: \"How confident are you (0–100%) that your entropy expression is correct? What's the quick check?\" (Dimensionally: S should be in J/K; k_B × dimensionless = J/K ✓. Verify the sign: as T increases, λ decreases, ln(V/Nλ³) increases, S increases — physical ✓.)\n\n### Delayed Retrieval\nTwo weeks later: Starting from F = −k_BT ln Z (without the specific Z for ideal gas), derive the general formula for the average energy ⟨E⟩ = −∂(ln Z)/∂β. Show it's consistent with U = F + TS using β = 1/k_BT.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 239,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nImagine trying to inflate a balloon in a room. You must do two kinds of work: (1) push air into the balloon against atmospheric pressure (useful work), and (2) create the elastic tension of the balloon skin (stored energy). But the environment also \"helps\" if the temperature is high — thermal fluctuations assist in disordering the arrangement. Free energy = (energy available) − (energy the environment claims as heat). What's left is what you can actually use.\n\nA charged battery has Gibbs free energy stored in its chemical potential difference — that free energy drives electrons through your circuit. When the battery is dead, ΔG = 0 — no more free energy available to do electrical work even though the battery still has internal energy (just disordered heat).\n\n### Representational (Diagrams and Symbols)\n- **Thermodynamic square**: A mnemonic for Maxwell relations. Corners: U, H, F, G. Sides label natural variables; arrows give signs. Students read off dF = −SdT − PdV directly.\n- **F vs. T plot**: As T increases, F = U − TS decreases if ΔS > 0. Show that the solid→liquid transition occurs where ΔF_solid→liquid = 0 (i.e., where F_liquid = F_solid).\n- **G landscape**: Gibbs free energy as a landscape in composition or reaction coordinate; the equilibrium state is the minimum of G.\n- **Phase diagram connection**: On a P-T diagram, each phase boundary is where G₁ = G₂.\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Starting from F = −k_BT ln Z, derive P, S, U from derivatives.\n2. Starting from dG = −SdT + VdP, derive Clausius-Clapeyron: dP/dT = ΔS/ΔV = L/TΔV (slope of phase boundary).\n3. Maxwell relation: (∂S/∂V)_T = (∂P/∂T)_V — use to find entropy change of a non-ideal gas.\n4. Chemical potential μ = (∂G/∂N)_{T,P}: use to find equilibrium condition for two phases or a reaction.\n\n### Transfer (Novel Contexts)\n- **Chemical equilibrium**: ΔG = ΔG° + RT ln Q; at equilibrium, ΔG = 0 → ΔG° = −RT ln K (equilibrium constant).\n- **Electrochemistry**: ΔG = −nFE (cell voltage); spontaneous reaction has ΔG < 0 → E > 0.\n- **Protein folding**: ΔG_fold = ΔH_fold − TΔS_fold; the \"hydrophobic effect\" is an entropy-driven contribution to protein stability.\n- **Semiconductor devices**: Fermi level μ in a semiconductor is the Gibbs free energy per electron — band engineering is free-energy engineering.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 52,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: Thinking equilibrium = minimum energy\nStudents from mechanics expect equilibrium at minimum potential energy. In thermodynamics, the entropy term TS opposes this: a disordered high-S state can be favored even if its energy U is higher, if T is high enough. Equilibrium is minimum F (or G), not minimum U.\n\n### Failure Mode 2: Confusing F and G, and their conditions of validity\nF is relevant at constant T and V. G is relevant at constant T and P. Students apply G to a rigid container (constant V) — wrong. The natural variables must match the physical constraints.\n\n### Failure Mode 3: Sign convention for spontaneity\nΔG < 0 means spontaneous (G decreases). Students sometimes think \"negative G means bad\" because they associated negative with something missing. Drill: ΔG < 0 = spontaneous = the system would proceed without external help.\n\n### Failure Mode 4: Forgetting that F = −k_BT ln Z\nThis direct link between statistical mechanics (Z) and thermodynamics (F) is the bridge concept of statistical thermodynamics. Students who haven't internalized it cannot use the partition function to derive any thermodynamic property.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 80,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"Energy alone doesn't determine which way a system goes. At high temperature, disorder wins. Free energy is what balances both — and it's what you minimize to find equilibrium.\"\n\n**Core explanation**: \"F = U − TS. Two terms pulling in opposite directions. High U is bad (energy wants to be low). High S is good (entropy wants to be high). Temperature T decides the trade-off. At low T, the U term wins. At high T, the TS term wins. Equilibrium is the minimum of F.\"\n\n**Common error interception**: \"When you apply ΔG for spontaneity, check your conditions: is T and P constant? That's Gibbs. Is T and V constant? That's Helmholtz. Wrong choice = wrong prediction.\"\n\n**Checkpoint question**: \"A reaction has ΔH = +10 kJ/mol and ΔS = +50 J/(mol·K). Is it spontaneous at 100°C? At 400°C?\" (At 100°C: ΔG = 10000 − 373 × 50 = 10000 − 18650 = −8650 J < 0 ✓ spontaneous. At 400°C: even more so.)\n\n**Closing move**: \"Free energy is the master concept of chemical and biological thermodynamics. Every equilibrium — phase transitions, chemical reactions, protein folding, battery charging — is a free energy minimum. You now have the tool to quantify all of them.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 225,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"I don't understand why we minimize F, not U\"\nRun the thought experiment: two blocks at different temperatures in thermal contact (isolated system). Energy is conserved (constant U); entropy must increase. The entropy increase drives heat flow until equilibrium. Now add a heat bath (constant T): U can change via heat exchange; total entropy of universe must increase. This leads to minimizing F = U − TS_system (equivalent to maximizing entropy of universe). The F minimum is the condition for maximum total entropy at fixed T.\n\n### S3 — Can define F but cannot derive properties from it\nDrill the chain rule: given F(T,V), students practice computing P = −(∂F/∂V)_T and S = −(∂F/∂T)_V for a specific F. Use F = −Nk_BT ln(V/λ³) as a simple case. Step by step: hold T constant, differentiate with respect to V, negate. Hold V constant, differentiate with respect to T (careful: λ depends on T), negate.\n\n### S6 — Confuses F and G conditions\nDrill the matching: laboratory chemistry is typically constant T and P (open beaker, atmospheric pressure) → use G. A sealed rigid container at constant T → use F. Write the differential for each (dF = −SdT − PdV; dG = −SdT + VdP) and identify which variables are constant in each experiment.\n\n### S9 — Cannot connect to real phenomena\nList 5 familiar processes: (1) ice melts at 0°C — ΔG_melt = 0 at 273 K; (2) batteries die — ΔG of cell reaction → 0; (3) proteins fold — ΔG_fold < 0 in water at physiological T; (4) iron rusts — ΔG_oxidation < 0 in air; (5) gas expands into vacuum — ΔF < 0 (constant T, V). For each, identify which free energy applies and whether ΔF/ΔG is negative (spontaneous).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 272,
+        "endLine": 288
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nConceptual (energy-entropy competition, free energy as the balance) + procedural (derivatives from F, spontaneity criteria, Clausius-Clapeyron) + structural (connection to partition function and statistical mechanics).\n\n### Spaced Retrieval Schedule\n- Day 1: Write F = U − TS and G = H − TS; state which applies at constant T,V vs. T,P.\n- Day 3: Derive P and S from the ideal gas F expression.\n- Day 7: Classify 4 reactions by ΔH and ΔS signs; predict spontaneity at low vs. high T.\n- Day 14: Derive the Clausius-Clapeyron equation from G = G₁ at phase coexistence.\n- Day 30: Given ΔG° for a reaction, compute K and predict equilibrium composition.\n\n### Interleaving Partners\n- phys.stat.partition-function (F = −k_BT ln Z bridge)\n- phys.stat.entropy-statistical (S = k_B ln Ω → the TS term in F)\n- phys.stat.boltzmann-factor (canonical distribution as the microscopic foundation)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 288,
+        "endLine": 307
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Derive any thermodynamic property from F or G using partial derivatives.\n- Apply spontaneity criteria ΔF ≤ 0 or ΔG ≤ 0 to classify processes.\n- Derive phase boundaries using G₁ = G₂.\n\n### Far Transfer\n- **Chemistry**: ΔG = ΔG° + RT ln Q → equilibrium constants, Le Chatelier's principle.\n- **Biophysics**: Free energy of protein folding, membrane formation, DNA hybridization — all governed by ΔG.\n- **Electrochemistry**: ΔG = −nFE links thermodynamics to electrochemical cell voltage.\n- **Materials science**: Phase diagram construction from G calculations (CALPHAD method).\n\n### Structural Abstraction\nFree energy is the thermodynamic generating function: all equilibrium properties derive from its derivatives with respect to natural variables. This structure — a potential function whose minimization gives equilibrium — appears universally: mechanical equilibrium minimizes potential energy, thermodynamic equilibrium minimizes free energy, quantum mechanical ground state minimizes expectation of Ĥ, and in field theory, the vacuum minimizes an effective potential. The mathematical form changes; the variational principle is universal.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 307,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "phys.stat.free-energy/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.stat.free-energy",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.stat.partition-function provides F = −k_BT ln Z, Z = Σe^(−βEᵢ), and ⟨E⟩ = −∂ ln Z/∂β. This is the exact foundation needed here. Students who completed the partition function blueprint can immediately use F = −k_BT ln Z to derive all thermodynamic properties. Prerequisite is necessary and sufficient.\n\n### Unlock Readiness\nThis is a leaf node — it unlocks no further concepts in the physics KG. However, Helmholtz and Gibbs free energies are central tools for chemistry, biology, and materials science. Students completing this blueprint are equipped for cross-domain transfer.\n\n### Suggested Flag\nConsider explicitly connecting this blueprint to chemistry concepts (ΔG°, K, electrochemistry) even though those fall under a different subject domain. The cross-link is valuable for students taking both physics and chemistry.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.free-energy.md",
+        "startLine": 325,
+        "endLine": 339
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

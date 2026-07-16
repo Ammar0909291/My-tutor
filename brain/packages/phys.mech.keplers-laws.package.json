@@ -1,0 +1,389 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.keplers-laws-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.keplers-laws",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fe4f179efa75e1a7fe8474c1c05fa088b3a1497d4a85bf6fb41ee038d97029c2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.keplers-laws.md": "sha256:1b370b813d217c3ce404e161a8ad2a8979095418103df324338c7bfeb6d33395"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.keplers-laws",
+    "name": "Kepler's Laws of Planetary Motion",
+    "difficultyRaw": "label: advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.mech.orbital-mechanics"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.keplers-laws-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.keplers-laws (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.keplers-laws.md": "sha256:1b370b813d217c3ce404e161a8ad2a8979095418103df324338c7bfeb6d33395"
+      },
+      "contentHash": "sha256:80d422ded1ae4f9d284f826403387ad319da0e24fc2035024179cd29226c9ccb",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.keplers-laws.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.keplers-laws.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.keplers-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.keplers-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.keplers-laws.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.keplers-laws.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.keplers-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.keplers-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.keplers-laws.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.keplers-laws.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.keplers-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.keplers-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.keplers-laws.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.keplers-laws.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.keplers-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.keplers-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.keplers-laws.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.keplers-laws.md#TA-5 (addresses MC-KEPLER-CIRCULAR, MC-SPEED-CONSTANT-ELLIPSE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.keplers-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.keplers-laws\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.keplers-laws/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "Kepler's Laws of Planetary Motion — Conceptual Development Sequence",
+      "content": "**TA-1 — The Three Laws: Statement and Geometry [C]**\n\n**Kepler's First Law (K1):** Every planet orbits the Sun in an ellipse with the Sun at one focus.\n\nEllipse geometry:\n```\nSemi-major axis: a   (half the longest diameter)\nSemi-minor axis: b   (half the shortest diameter)\nEccentricity:    e = c/a, where c = √(a² − b²)\nPerihelion:      r_min = a(1 − e)   (closest to Sun)\nAphelion:        r_max = a(1 + e)   (farthest from Sun)\nSum:             r_min + r_max = 2a\n```\n\n**Kepler's Second Law (K2):** The line from the Sun to the planet sweeps equal areas in equal time intervals.\n\nConsequence: the planet moves fastest at perihelion, slowest at aphelion.\n\nAngular momentum form:\n```\nL = m × r × v_⊥ = constant\n```\nwhere v_⊥ is the component of velocity perpendicular to the radius vector.\n\n**Kepler's Third Law (K3):** The square of the orbital period is proportional to the cube of the semi-major axis.\n\n```\nT² = (4π²/GM_sun) × a³\nT² ∝ a³\n```\n\nFor two bodies orbiting the same star: T₁²/T₂² = a₁³/a₂³.\n\n**TA-2 — Kepler's Third Law: Derivation and Application [C→P]**\n\nFor circular orbits (derived in orbital-mechanics): a = r, so:\n```\nT² = 4π²r³/(GM)\n```\n\nFor elliptical orbits (Newton proved): replace r with semi-major axis a:\n```\nT² = 4π²a³/(GM)\n```\n\nEarth as calibration (a = 1 AU, T = 1 year):\n```\nT²/a³ = 4π²/(GM_sun) = 1 (yr²/AU³)\n```\n\nSo for any solar system body: T(yr)² = a(AU)³.\n\n| Planet | a (AU) | T predicted (yr) | T actual (yr) |\n|---|---|---|---|\n| Mercury | 0.387 | 0.387^1.5 = 0.241 | 0.241 ✓ |\n| Venus | 0.723 | 0.723^1.5 = 0.615 | 0.615 ✓ |\n| Mars | 1.524 | 1.524^1.5 = 1.881 | 1.881 ✓ |\n| Jupiter | 5.203 | 5.203^1.5 = 11.87 | 11.86 ✓ |\n\n**TA-3 — Kepler's Second Law and Speed at Perihelion/Aphelion [C→P]**\n\nAt perihelion and aphelion, v is purely perpendicular to r (v_⊥ = v):\n\n```\nL = m r_min v_max = m r_max v_min = constant\n\nv_max/v_min = r_max/r_min = (1 + e)/(1 − e)\n```\n\nEnergy conservation between perihelion and aphelion:\n```\n½mv_max² − GMm/r_min = ½mv_min² − GMm/r_max\n```\n\nBoth constraints together determine v_max and v_min given a and e.\n\nExample — Earth (e = 0.017, a = 1.496 × 10¹¹ m):\n```\nr_min = a(1 − 0.017) = 1.471 × 10¹¹ m (perihelion, January)\nr_max = a(1 + 0.017) = 1.521 × 10¹¹ m (aphelion, July)\n\nv_max/v_min = 1.521/1.471 = 1.034   (3.4% faster at perihelion)\nAverage orbital speed ≈ 29.8 km/s → v_max ≈ 30.3 km/s, v_min ≈ 29.3 km/s\n```\n\n**TA-4 — Vis-Viva Equation [P]**\n\nEnergy conservation for an elliptical orbit (total energy = −GMm/(2a)):\n\n```\n½mv² − GMm/r = −GMm/(2a)\n\nv² = GM(2/r − 1/a)       (vis-viva equation)\n```\n\nThis gives the orbital speed at any point r along the orbit, given semi-major axis a.\n\nSpecial cases:\n- Circular (r = a): v² = GM/r ✓ (matches circular orbit formula)\n- Perihelion (r = r_min): v = v_max\n- Aphelion (r = r_max): v = v_min\n\n**TA-5 — Kepler's Laws and Newton: Unification [P]**\n\nNewton proved that an inverse-square central force F ∝ 1/r² produces exactly Keplerian orbits:\n- F = −GMm/r² → elliptical orbits (K1)\n- Central force → zero torque → constant L (K2)\n- Virial theorem for ellipses → T² ∝ a³ (K3)\n\nConversely, K3 (T² ∝ r³ for circular orbits) implies F ∝ 1/r²:\n```\nT = 2πr/v, v² = Fr/m  →  T² = 4π²r²/v² = 4π²m r/F\nIf T² ∝ r³ then F ∝ r/r³ = 1/r²\n```\n\nThis was one of Newton's routes to the inverse-square law — observational data to force law.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 80,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/misconception/MC-KEPLER-CIRCULAR",
+      "kind": "misconception",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "- **Trigger signal:** Student says \"planets move in circular orbits\" or draws a planet on a perfect circle, or treats the Sun as being at the centre of the orbit.",
+      "content": "### MC-KEPLER-CIRCULAR\n- **Trigger signal:** Student says \"planets move in circular orbits\" or draws a planet on a perfect circle, or treats the Sun as being at the centre of the orbit.\n- **Conflict evidence [P28]:** \"Kepler's First Law states that orbits are ellipses with the Sun at one *focus* — not the centre. Earth's orbit has eccentricity e ≈ 0.017 (nearly circular, but not exactly). Mars has e ≈ 0.093, making its ellipse noticeably elongated. Pluto: e ≈ 0.248 — a strongly elliptical orbit. The Sun is at one focus; the other focus is empty. For a circle, both foci coincide at the centre — but most orbits are measurably elliptical.\"\n- **Bridge text [P30]:** \"The circular orbit studied in phys.mech.orbital-mechanics is the special case of an ellipse with eccentricity e = 0. Kepler's First Law generalises this to e ranging from 0 (circle) to approaching 1 (highly elongated ellipse). The Sun is always at one focus, never the centre.\"\n- **Replacement text [P31]:** \"All planetary orbits are ellipses with the Sun at one focus (Kepler's 1st Law). A circle is a special ellipse (e = 0). Most planetary orbits have small e but are measurably non-circular; comet orbits can have e approaching 1.\"\n- **Discrimination pairs [P33]:**\n  - Circular orbit: Sun at centre, constant r, constant speed ✓ (valid as approximation for most planets)\n  - Elliptical orbit: Sun at one focus, r varies between perihelion r_min and aphelion r_max, speed varies ✓ (physically correct)\n- **s6_path:** \"Textbook diagrams often draw orbits as visually circular — it saves space and is a good approximation for most planets. But physically, all orbits are ellipses. Kepler proved this from Tycho Brahe's data before Newton even wrote F = GMm/r².\"\n\n---",
+      "localKey": "MC-KEPLER-CIRCULAR",
+      "language": "en",
+      "refs": [
+        "MC-KEPLER-CIRCULAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/misconception/MC-SPEED-CONSTANT-ELLIPSE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "- **Trigger signal:** Student assumes constant orbital speed throughout an elliptical orbit, or confuses Kepler's Second Law with constant speed.",
+      "content": "### MC-SPEED-CONSTANT-ELLIPSE\n- **Trigger signal:** Student assumes constant orbital speed throughout an elliptical orbit, or confuses Kepler's Second Law with constant speed.\n- **Conflict evidence [P28]:** \"Kepler's Second Law says a planet sweeps equal areas in equal times — not equal distances in equal times. Near perihelion (closest to Sun), the planet is moving fast and sweeps a wide, short sector. Near aphelion (farthest from Sun), it moves slowly and sweeps a narrow, long sector. Both sectors have equal area — which means the speed near perihelion is greater than the speed near aphelion. For Earth: v_perihelion ≈ 30.3 km/s; v_aphelion ≈ 29.3 km/s. Small difference, but measurable.\"\n- **Bridge text [P30]:** \"Kepler's Second Law is a consequence of conservation of angular momentum. With no tangential torque from a central force, L = mrv_⊥ = constant. When r decreases (near Sun), v must increase to keep L constant. Equal areas = constant L.\"\n- **Replacement text [P31]:** \"Speed in an elliptical orbit varies: fastest at perihelion (r_min, v_max), slowest at aphelion (r_max, v_min). The rule is: r × v_⊥ = constant (angular momentum conservation), not constant speed. Kepler's 2nd Law — equal areas in equal times — is the geometric expression of this.\"\n- **Discrimination pairs [P33]:**\n  - Circular orbit: r = const → v = const ✓ (special case)\n  - Elliptical orbit: r varies → v varies (faster near perihelion, slower near aphelion) ✓\n- **s6_path:** \"This is a subtle one. 'Equal areas' sounds like it should mean equal distances, but it doesn't. Draw two orbital sectors of equal time near perihelion and near aphelion and shade them — the areas are equal, not the arc lengths.\"\n\n---",
+      "localKey": "MC-SPEED-CONSTANT-ELLIPSE",
+      "language": "en",
+      "refs": [
+        "MC-SPEED-CONSTANT-ELLIPSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "The Three Laws: Statement and Geometry",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Three Laws: Statement and Geometry\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 82,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "Kepler's Third Law: Derivation and Application",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Kepler's Third Law: Derivation and Application\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 115,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "Kepler's Second Law and Speed at Perihelion/Aphelion",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Kepler's Second Law and Speed at Perihelion/Aphelion\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 141,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "Vis-Viva Equation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Vis-Viva Equation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 167,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "Kepler's Laws and Newton: Unification",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Kepler's Laws and Newton: Unification\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-KEPLER-CIRCULAR\",\"MC-SPEED-CONSTANT-ELLIPSE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-KEPLER-CIRCULAR",
+        "MC-SPEED-CONSTANT-ELLIPSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 184,
+        "endLine": 368
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — K1 geometry**\n\"A planet has perihelion r_min = 0.8 AU and aphelion r_max = 1.6 AU. Find: (a) semi-major axis, (b) eccentricity, (c) where is the Sun — at the centre or at one focus?\"\n\n*Target:* a = (0.8 + 1.6)/2 = 1.2 AU; c = a − r_min = 0.4 AU; e = c/a = 0.333. Sun at one focus, not the centre.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 257,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — K2 angular momentum**\n\"At perihelion, a planet moves at 35 km/s at r = 0.8 AU from the Sun. What is its speed at aphelion (r = 1.6 AU)?\"\n\n*Target:* L = m r v (perpendicular) = constant → v_aph = v_per × r_per/r_aph = 35 × 0.8/1.6 = 17.5 km/s.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 257,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — K3 period**\n\"Planet X has a period of 8 years. What is its semi-major axis in AU?\"\n\n*Target:* T² = a³ → a³ = 64 → a = 4 AU.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 257,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Vis-viva**\n\"A satellite is in an elliptical orbit around Earth with a = 10 000 km. What is its speed when r = 8000 km? (GM_E = 3.986 × 10¹⁴)\"\n\n*Target:* v² = GM(2/r − 1/a) = 3.986×10¹⁴ × (2/8×10⁶ − 1/10⁷) = 3.986×10¹⁴ × (2.5×10⁻⁷ − 10⁻⁷) = 3.986×10¹⁴ × 1.5×10⁻⁷ = 5.979×10⁷; v ≈ 7732 m/s.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 257,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Analysis: mass from binary orbit**\n\"Two stars orbit their common centre of mass at total separation 4 AU with period 2 years. What is the total mass of the two-star system in units of the Sun's mass?\"\n\n*Target:* T² = 4π²a³/(G(m₁+m₂)). In AU/yr units: T² = a³/(M_total in solar masses) → M_total = a³/T² = 64/4 = 16 M_sun.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 257,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "Adaptive Flags",
+      "content": "- **Ellipse geometry before K1**: students who have never seen ellipse terminology (focus, semi-major axis, eccentricity) need a brief geometry primer before K1 makes sense. The ruler-and-pins demo is concrete and takes 5 minutes.\n- **AU/yr calibration**: the T² = a³ shorthand (in AU/yr) is powerful but hide the GM_sun factor. Always write the full T² = 4π²a³/(GM) first, then substitute Earth's calibration to get the shorthand. Otherwise students misapply to non-solar orbits.\n- **Vis-viva vs. separate KE/PE**: the vis-viva equation is derived from energy conservation. Make this derivation explicit (TA-4) so students see it as a consequence, not a new formula to memorise.\n- **K2 at non-perihelion/aphelion points**: the speed ratio formula v_max/v_min = r_max/r_min applies only at perihelion and aphelion (where v ⊥ r). At arbitrary points, use L = mrv_⊥ or vis-viva with energy conservation. Flag this explicitly.\n- **Bloom level — analyze**: this blueprint operates at the analyze level (bloom 5). The mastery probes (especially MP-5 binary mass) require students to decompose multi-law problems and identify which law applies where — not just substitute into formulas.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 329,
+        "endLine": 339
+      }
+    },
+    {
+      "assetId": "phys.mech.keplers-laws/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.keplers-laws",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — Tycho/Kepler/Newton historical anchor\n  ↓\n[P41] PD-1 (T²∝r³ from circular orbits) + PD-2 (angular momentum conservation)\n  ↓ PASS both\n[P06] Anchor: 40 years of data → ellipses fit exactly → why?\n  ↓\nTA-1: Three laws — statement, geometry, angular momentum form [C]\n  ↓\n[P28] Conflict: \"Planets move in circular orbits\" → MC-KEPLER-CIRCULAR [P28]\n  ↓\nTA-2: K3 derivation; AU/yr calibration; solar system table [C→P]\n  ↓\n[P51] Check-in MP-1 (ellipse geometry — K1)\n  ↓ monitor\nTA-3: K2 and speed variation; perihelion/aphelion speed ratio [C→P]\n  ↓\nWE-1 → WE-2 → WE-3 (escalating; WE-3 = vis-viva reverse problem)\n  ↓\nTA-4: Vis-viva equation; special-case recovery [P]\n  ↓\nTA-5: Newton's unification — K laws from inverse-square force [P]\n  ↓\n[P36] MP-2 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval schedule seed: \"Planet at 4 AU — what is its period?\"\n[P68] Session close\n[P85] Regulation tail\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80% MP-set; re-route if below threshold\n```\n\n**Protocol routing:**\n- S0 (novice): full CPA path; dwell on ellipse geometry with ruler-and-pins physical demo (two pins, string, draw ellipse); label all ellipse parameters before any algebra.\n- S1 (schema without grounding): has memorised \"T² = a³\" but doesn't connect it to Newton; focus on TA-5 unification and MP-5 binary mass calculation.\n- S4 (prereq gap): PD-1 fail → orbital-mechanics; PD-2 fail → review angular momentum conservation.\n- S6 (anxiety): [F] protocol — \"Three laws, three equations: ellipse, area, T²=a³. We take them one at a time.\"\n- S7 (overconfident): open with WE-3 (reverse vis-viva — find a from r and v); students who only know the forward direction struggle with algebraic inversion.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.keplers-laws.md",
+        "startLine": 286,
+        "endLine": 329
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

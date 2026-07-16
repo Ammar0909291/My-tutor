@@ -1,0 +1,389 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.hookes-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.hookes-law",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:09bfcd1e3d4b549eab85c322cf6454cc60fb1a13fc3de9d7b0f6ef15aa42ad60",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.hookes-law.md": "sha256:642c5e56534724f7d8d59bcc548fd030cf5a6a935917f355ad12002bed478ba7"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.hookes-law",
+    "name": "Hooke's Law",
+    "difficultyRaw": "label: developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.newtons-second-law"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.hookes-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.hookes-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.hookes-law.md": "sha256:642c5e56534724f7d8d59bcc548fd030cf5a6a935917f355ad12002bed478ba7"
+      },
+      "contentHash": "sha256:3415ffd9bf945cc1407de9918183e43f5222b14ae86e5bac3ad66a9a3873e8f0",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.hookes-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hookes-law.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hookes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hookes-law\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hookes-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hookes-law.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hookes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hookes-law\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hookes-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hookes-law.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hookes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hookes-law\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hookes-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hookes-law.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hookes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hookes-law\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.hookes-law.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.hookes-law.md#TA-5 (addresses MC-KBIG-MEANS-MORE-EXTENSION, MC-HOOKES-ALWAYS-LINEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.hookes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.hookes-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.hookes-law/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "Hooke's Law — Conceptual Development Sequence",
+      "content": "**TA-1 — Hooke's Law Statement [C]**\n\nFor an elastic body (spring, wire, rubber band — within the elastic limit):\n```\nF = kx\n```\nwhere:\n- F = restoring force (N) — the force the spring exerts, opposing the extension\n- k = spring constant (N/m) — stiffness of the spring\n- x = extension or compression from natural length (m)\n\nSign convention: the restoring force always opposes displacement. If the spring is stretched (x > 0), the restoring force is negative (toward natural length): F_spring = −kx.\n\n**TA-2 — Spring PE and Energy Storage [C→P]**\n\nThe spring stores elastic potential energy:\n```\nU = ½kx²\n```\n\nDerivation: W_spring = ∫₀ˣ F dx = ∫₀ˣ kx dx = ½kx². This is exactly the work done on the spring (which equals PE stored).\n\nEnergy: start from rest at x₀, release. At x = 0 (natural length):\n```\n½kx₀² = ½mv²  →  v = x₀√(k/m)\n```\n\n**TA-3 — Spring Combinations [C→P]**\n\nSprings in series (end-to-end):\n```\n1/k_eff = 1/k₁ + 1/k₂     (softer than either spring alone)\n```\nBoth springs feel the same force; total extension = sum of individual extensions.\n\nSprings in parallel (side by side, same extension):\n```\nk_eff = k₁ + k₂            (stiffer than either spring alone)\n```\nForce is shared; each spring extends the same amount.\n\nMemory aid: in series (like electrical resistors in parallel): effective k < each individual k. In parallel: effective k > each individual k.\n\n**TA-4 — Simple Harmonic Motion Preview [P]**\n\nA mass m on a spring (frictionless): F_net = −kx = ma → a = −(k/m)x.\n\nThis is SHM: acceleration proportional to displacement, directed toward equilibrium.\n\nPeriod: T = 2π√(m/k). Frequency: f = (1/2π)√(k/m).\n\nKey observations (without full SHM derivation):\n- Period increases with mass (heavier → slower)\n- Period decreases with spring constant (stiffer → faster)\n- Period independent of amplitude (within Hooke's Law region)\n\n**TA-5 — Measuring k from Vertical Oscillation [P]**\n\nStatic method: hang mass m, measure extension x at equilibrium → k = mg/x.\n\nDynamic method: measure period T of oscillation → k = 4π²m/T².\n\nBoth methods give the same k — confirmation that Hooke's Law and SHM are consistent.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 76,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/misconception/MC-HOOKES-ALWAYS-LINEAR",
+      "kind": "misconception",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "- **Trigger signal:** Student applies F = kx to any spring or elastic material without checking the limit of proportionality, or assumes springs always follow Hooke's Law.",
+      "content": "### MC-HOOKES-ALWAYS-LINEAR\n- **Trigger signal:** Student applies F = kx to any spring or elastic material without checking the limit of proportionality, or assumes springs always follow Hooke's Law.\n- **Conflict evidence [P28]:** \"Hooke's Law (F = kx) is valid only within the elastic limit — the range of extension where the material returns to its original shape when the force is removed. Stretch a spring too far and it deforms permanently (plastic deformation) — the spring constant k no longer applies. The F-x graph is linear up to the elastic limit, then curves. Hooke's Law is a linear approximation; all real materials have a finite elastic range.\"\n- **Bridge text [P30]:** \"Think of Hooke's Law as a model that works within a restricted domain — the elastic region. Within that region, F ∝ x is an excellent model. Beyond the elastic limit, the model breaks down and we need stress-strain analysis (phys.mech.stress-strain) for the material's full behaviour.\"\n- **Replacement text [P31]:** \"F = kx (Hooke's Law) is valid within the elastic limit only. Beyond it: permanent deformation, yield point, fracture. Always check that the problem states extension is within the elastic limit (or assume it unless told otherwise).\"\n- **Discrimination pairs [P33]:**\n  - Extension x = 2 cm on a calibration spring: F = kx ✓ (within elastic limit)\n  - Same spring stretched to x = 20 cm (past yield): F ≠ kx ✗ (Hooke's Law invalid)\n- **s6_path:** \"This isn't a failure of physics — it's knowing the limits of a model. Hooke's Law is brilliant within its range; outside it, a better model takes over.\"\n\n---",
+      "localKey": "MC-HOOKES-ALWAYS-LINEAR",
+      "language": "en",
+      "refs": [
+        "MC-HOOKES-ALWAYS-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/misconception/MC-KBIG-MEANS-MORE-EXTENSION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "- **Trigger signal:** Student says \"a stiffer spring (bigger k) stretches more for the same force\" or inverts the k relationship.",
+      "content": "### MC-KBIG-MEANS-MORE-EXTENSION\n- **Trigger signal:** Student says \"a stiffer spring (bigger k) stretches more for the same force\" or inverts the k relationship.\n- **Conflict evidence [P28]:** \"F = kx → x = F/k. A larger k means less extension for the same force — a stiff spring (k = 10 000 N/m) stretches only 1 mm under 10 N; a soft spring (k = 100 N/m) stretches 100 mm under the same 10 N. The spring constant k is a measure of stiffness; higher k = harder to stretch.\"\n- **Bridge text [P30]:** \"Units of k: N/m — Newtons per metre. A large k means it takes many Newtons to produce each metre of extension — the spring resists deformation strongly. A small k means the spring stretches easily.\"\n- **Replacement text [P31]:** \"k = F/x: stiffness constant. Large k → stiff → small extension for a given force. Small k → soft → large extension. x = F/k — extension is inversely proportional to k.\"\n- **Discrimination pairs [P33]:**\n  - k = 50 N/m, F = 10 N: x = 0.2 m (soft spring, stretches a lot) ✓\n  - k = 1000 N/m, F = 10 N: x = 0.01 m (stiff spring, barely moves) ✓\n- **s6_path:** \"Think of k as how much the spring 'fights back' per metre of stretch. A higher k = more fight = less stretch. It's x = F/k — k is in the denominator.\"\n\n---",
+      "localKey": "MC-KBIG-MEANS-MORE-EXTENSION",
+      "language": "en",
+      "refs": [
+        "MC-KBIG-MEANS-MORE-EXTENSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "Hooke's Law Statement",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Hooke's Law Statement\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 78,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "Spring PE and Energy Storage",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Spring PE and Energy Storage\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 91,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "Spring Combinations",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Spring Combinations\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 105,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "Simple Harmonic Motion Preview",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Simple Harmonic Motion Preview\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 121,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "Measuring k from Vertical Oscillation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Measuring k from Vertical Oscillation\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-HOOKES-ALWAYS-LINEAR\",\"MC-KBIG-MEANS-MORE-EXTENSION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-KBIG-MEANS-MORE-EXTENSION",
+        "MC-HOOKES-ALWAYS-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 134,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Finding k experimentally**\n\"Data from a hanging-mass experiment: 100 g → 2 cm; 200 g → 4 cm; 300 g → 6 cm; 400 g → 8 cm. What is k? Is Hooke's Law obeyed? How do you know?\"\n\n*Target:* k = F/x = 0.1×9.8/0.02 = 49 N/m (constant across all data points — linear relationship confirmed). Hooke's Law obeyed: F/x = constant.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Series vs parallel intuition**\n\"Two identical springs (k = 100 N/m each). Which configuration stretches more under 20 N: series or parallel? Calculate both extensions.\"\n\n*Target:* Series: k_eff = 50 N/m, x = 0.4 m; Parallel: k_eff = 200 N/m, x = 0.1 m. Series stretches 4× more. Series = softer (less effective k).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Energy conservation**\n\"A 0.2 kg block is placed on a horizontal spring (k = 500 N/m) compressed 10 cm. The surface is frictionless. Find the block's speed after release when the spring reaches natural length.\"\n\n*Target:* ½kx² = ½mv² → v = x√(k/m) = 0.1×√(500/0.2) = 0.1×√2500 = 0.1×50 = 5 m/s.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Elastic limit**\n\"A student applies forces to a spring and records: 5 N → 5 cm; 10 N → 10 cm; 15 N → 16 cm; 20 N → 22 cm. Has the elastic limit been reached? At what force?\"\n\n*Target:* k = 100 N/m for first two points. At 15 N: expected x = 15 cm, actual = 16 cm → deviates from Hooke's Law → elastic limit exceeded between 10 N and 15 N.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — SHM period**\n\"A 0.5 kg mass is attached to a spring with k = 200 N/m and set oscillating. (a) What is the period? (b) If the mass is doubled, how does the period change?\"\n\n*Target:* T = 2π√(m/k) = 2π√(0.5/200) = 2π√0.0025 = 2π×0.05 = 0.314 s. If m doubles: T ∝ √m → T increases by √2 ≈ 1.414 → new T ≈ 0.444 s.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "Adaptive Flags",
+      "content": "- **Sign convention**: the restoring force F_spring = −kx opposes displacement. For a hanging mass at equilibrium, this is an internal detail: the spring pulls up (+kx upward), gravity pulls down (−mg). At equilibrium: kx = mg. The minus sign in F = −kx is for free-body dynamics; for energy, U = +½kx².\n- **Units of k**: N/m. Some textbooks quote k in kN/m for stiff springs. Ensure consistent units before substituting.\n- **SHM in TA-4**: this is a preview, not a full SHM treatment (which belongs in oscillations/waves). Give T = 2π√(m/k) as a result; don't derive from SHM differential equation at this level.\n- **Elastic limit**: the concept of plastic deformation and the yield point belongs primarily in phys.mech.stress-strain. Here, mention the elastic limit exists and the law fails beyond it — stop there.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 248,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "phys.mech.hookes-law/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.mech.hookes-law",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — hanging mass experiment setup\n  ↓\n[P41] PD-1 (Newton's 2nd; equilibrium: spring force = weight)\n  ↓ PASS\n[P06] Anchor: hang masses → plot F vs x → linear → slope = k\n  ↓\nTA-1: F = kx; sign convention; restoring force [C]\n  ↓\nTA-2: Elastic PE = ½kx²; energy release [C→P]\n  ↓\n[P28] Conflict: \"bigger k → more stretch\" → MC-KBIG-MEANS-MORE-EXTENSION\n  ↓\nWE-1: Find k; predict new extension\n  ↓\n[P51] Check-in MP-1 (find k from data; linearity check)\n  ↓ monitor\nTA-3: Series and parallel spring combinations [C→P]\n  ↓\nWE-2 → WE-3 (elastic PE; spring combinations)\n  ↓\nTA-4: SHM preview — T = 2π√(m/k) [P]\n  ↓\nTA-5: Static vs. dynamic measurement of k [P]\n  ↓\n[P36] MP-2 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"A spring k=400 N/m, compressed 5 cm. What is the PE stored?\"\n[P68]; [P85]; [P89] 1/3/7 days; [P91] 80% gate\n```\n\n**Protocol routing:** S0: full CPA — run the experiment (or virtual simulation) before stating the formula; S1: knows F=kx but not the elastic limit → MC-HOOKES-ALWAYS-LINEAR; S4: PD-1 fail → newtons-second-law; S6: [F] — \"One formula, one condition: F=kx within the elastic limit. The rest is applying it\"; S7: open with spring combination WE-3 or MP-2 (intuition vs. calculation mismatch on series/parallel).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.hookes-law.md",
+        "startLine": 211,
+        "endLine": 248
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
