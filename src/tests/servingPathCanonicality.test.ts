@@ -1,21 +1,33 @@
 /**
- * Serving-path canonicality — regression lock for the 2026-07-16
- * architectural-ambiguity resolution (EDUCATIONAL_BRAIN_BIBLE.md §6.3).
+ * Serving-path canonicality — regression lock, updated for the Library
+ * Mode cleanup that made Explanation Memory the ONLY authored-content
+ * serving path in route.ts (EDUCATIONAL_BRAIN_BIBLE.md §6.3).
  *
- * Two authored-content mechanisms sit in the chat-turn pipeline:
+ * History: two authored-content mechanisms used to sit in the chat-turn
+ * pipeline —
  *   - Explanation Memory (`assembleLesson()`, AssetIdentity-backed) — the
  *     canonical serving path; can skip the LLM call entirely for a turn.
  *   - Package Runtime PoC (`buildLessonContextForConcept()`, compiled
  *     Educational Packages) — prompt-context augmentation only; never
- *     skips the LLM; subordinate to Explanation Memory.
+ *     skipped the LLM; was subordinate to Explanation Memory and never
+ *     activated in any environment (ENABLE_PACKAGE_RUNTIME defaulted off).
  *
- * The relationship depends entirely on each system's default activation
- * state. These tests don't exercise route.ts (that needs a live DB) — they
- * lock in the two flag defaults the Bible's canonicality section documents,
- * so a silent default flip can never invalidate the documented architecture
- * without a test failure pointing back here.
+ * Package Runtime's route-level wiring has since been REMOVED (not just
+ * left off-by-default) — a zero-behavior-change cleanup, since the flag
+ * was never on anywhere. Package Runtime's own module, tests, compiler,
+ * and compiled artifacts are untouched; only the route.ts call site that
+ * invoked it was removed. Explanation Memory is now the sole
+ * authored-content serving path in route.ts.
+ *
+ * These tests don't exercise route.ts (that needs a live DB) — they lock
+ * in (a) Explanation Memory's default activation state, and (b) the
+ * source-level fact that route.ts no longer reads ENABLE_PACKAGE_RUNTIME
+ * or calls buildLessonContextForConcept at all, following the same
+ * source-lock precedent used by libraryModeReviewDeduplication.test.ts.
  */
 import { describe, it, expect, afterEach } from 'vitest'
+import fs from 'fs'
+import path from 'path'
 import { isExplanationMemoryEnabled } from '@/lib/teaching/assets'
 
 const ORIGINAL_ENV = { ...process.env }
@@ -24,7 +36,7 @@ afterEach(() => {
   process.env = { ...ORIGINAL_ENV }
 })
 
-describe('serving-path defaults (canonical vs. subordinate)', () => {
+describe('serving-path defaults (Explanation Memory is canonical)', () => {
   it('Explanation Memory is ON by default — the canonical path is live unless explicitly disabled', () => {
     delete process.env.DISABLE_EXPLANATION_MEMORY
     expect(isExplanationMemoryEnabled()).toBe(true)
@@ -41,17 +53,29 @@ describe('serving-path defaults (canonical vs. subordinate)', () => {
     process.env.DISABLE_EXPLANATION_MEMORY = '1'
     expect(isExplanationMemoryEnabled()).toBe(true)
   })
+})
 
-  it('Package Runtime is OFF by default — the subordinate context-augmentation path requires explicit opt-in', () => {
-    delete process.env.ENABLE_PACKAGE_RUNTIME
-    // route.ts's exact gate: `process.env.ENABLE_PACKAGE_RUNTIME === '1'`
-    expect(process.env.ENABLE_PACKAGE_RUNTIME === '1').toBe(false)
+describe('route.ts structural lock: Package Runtime route-level wiring is fully removed', () => {
+  const ROUTE_SOURCE = fs.readFileSync(
+    path.join(process.cwd(), 'src/app/api/learn/chat/route.ts'),
+    'utf-8',
+  )
+
+  it('route.ts no longer reads process.env.ENABLE_PACKAGE_RUNTIME anywhere', () => {
+    expect(ROUTE_SOURCE).not.toContain('process.env.ENABLE_PACKAGE_RUNTIME')
   })
 
-  it('the test environment matches both documented defaults simultaneously (the real coexistence state today)', () => {
-    delete process.env.DISABLE_EXPLANATION_MEMORY
-    delete process.env.ENABLE_PACKAGE_RUNTIME
-    expect(isExplanationMemoryEnabled()).toBe(true)
-    expect(process.env.ENABLE_PACKAGE_RUNTIME === '1').toBe(false)
+  it('route.ts no longer calls buildLessonContextForConcept anywhere (mentions in prose comments are fine)', () => {
+    expect(ROUTE_SOURCE).not.toMatch(/buildLessonContextForConcept\(/)
+    expect(ROUTE_SOURCE).not.toContain("await import('@/lib/curriculum/packageRuntime')")
+  })
+
+  it('the legacy blueprint loader now runs unconditionally (no packageContextInjected gate remains)', () => {
+    expect(ROUTE_SOURCE).not.toContain('packageContextInjected')
+  })
+
+  it('Explanation Memory (assembleLesson) is still called exactly once — the sole serving path', () => {
+    const matches = ROUTE_SOURCE.match(/assembled = await assembleLesson\(/g) ?? []
+    expect(matches).toHaveLength(1)
   })
 })

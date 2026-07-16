@@ -1485,43 +1485,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
         const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptIdForDecide)
         if (conceptNode) {
-          // Package Runtime PoC (flag-gated, additive): when a compiled
-          // Educational Package artifact exists for this concept, the lesson
-          // context comes ENTIRELY from the package — blueprint markdown is
-          // not read on this path (authoring/runtime boundary). Any failure
-          // (no artifact, validation, integrity) falls back to the legacy
-          // blueprint path below, so external behavior is unchanged unless
-          // ENABLE_PACKAGE_RUNTIME=1 AND a valid artifact exists.
-          //
-          // Canonical-path note (see EDUCATIONAL_BRAIN_BIBLE.md §6.3): this
-          // is PROMPT-CONTEXT augmentation only — the LLM is still called
-          // below with this context. It is not a competing content-serving
-          // path against Explanation Memory (`assembleLesson()`, ~140 lines
-          // down): that system decides whether to skip the LLM entirely and
-          // is the canonical authored-content serving path. When it fires
-          // for this turn, the context injected here is simply unused —
-          // by design, not a conflict.
-          let packageContextInjected = false
-          if (process.env.ENABLE_PACKAGE_RUNTIME === '1') {
-            try {
-              const { buildLessonContextForConcept } = await import('@/lib/curriculum/packageRuntime')
-              const lessonCtx = buildLessonContextForConcept(activeConceptIdForDecide)
-              if (lessonCtx) {
-                systemPrompt += lessonCtx.block
-                packageContextInjected = true
-              }
-            } catch {
-              // non-fatal — fall back to the legacy blueprint path
-            }
-          }
+          // Canonical authored-content serving path note (see
+          // EDUCATIONAL_BRAIN_BIBLE.md §6.3): Explanation Memory
+          // (`assembleLesson()`, ~140 lines down) is the canonical serving
+          // path — it decides whether to skip the LLM call entirely for
+          // this turn. The Package Runtime PoC's route-level wiring
+          // (`buildLessonContextForConcept`, flag-gated behind
+          // ENABLE_PACKAGE_RUNTIME) has been removed here: it was
+          // prompt-context augmentation only, never activated in any
+          // environment, and its removal is a zero-behavior-change
+          // cleanup — the legacy blueprint loader below already ran
+          // unconditionally in every real deployment since that flag
+          // defaulted off. Package Runtime's own module, tests, compiler,
+          // and compiled artifacts are untouched; only this now-obsolete
+          // call site was removed.
 
-          // Phase 1C/1D: Blueprint Retrieval + Content Injection (legacy path).
+          // Phase 1C/1D: Blueprint Retrieval + Content Injection.
           // Resolves Teaching Blueprint metadata and injects Concept Spine,
           // Misconception Library, and Explanation Library into the system
           // prompt. Supports all four blueprint formats (Component A,
           // Protocol B, Section C, Spine D). Non-fatal — a missing or
           // unparseable blueprint never blocks the Teaching Engine.
-          if (!packageContextInjected) try {
+          try {
             const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock, loadEBConceptContext } = await import('@/lib/curriculum/blueprintLoader')
             const blueprintResult = loadBlueprint(activeConceptIdForDecide)
             if (blueprintResult.found) {
@@ -2111,9 +2096,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       //
       // Canonical serving path (see EDUCATIONAL_BRAIN_BIBLE.md §6.3): this IS
       // the canonical authored-content serving path — the only one that can
-      // skip the LLM call entirely for a turn. The Package Runtime PoC
-      // (`buildLessonContextForConcept`, ~140 lines up) only ever augments
-      // the LLM's prompt context and never competes with this decision.
+      // skip the LLM call entirely for a turn. It is now also the ONLY
+      // authored-content serving path in this route: the Package Runtime
+      // PoC's route-level wiring (`buildLessonContextForConcept`, ~140 lines
+      // up) was removed as obsolete, never-activated prompt-context
+      // augmentation — it never competed with this decision even before
+      // removal, since it only ever ran before the LLM call, not instead of it.
       // K6 — EOS Runtime: lazy-init brain packs before the LLM call so
       // any compiled Band-3 dispatch rules can influence policy this
       // turn. Idempotent (loads once per process). Off by default via
