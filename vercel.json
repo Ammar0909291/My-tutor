@@ -14,12 +14,17 @@
     "src/app/api/school/assessment/generate/route.ts": { "maxDuration": 30 },
     "src/app/api/school/mock/generate/route.ts":        { "maxDuration": 30 },
     "src/app/api/school/revision/route.ts":             { "maxDuration": 30 },
-    "src/app/api/final-assessment/generate/route.ts":   { "maxDuration": 30 }
+    "src/app/api/final-assessment/generate/route.ts":   { "maxDuration": 30 },
+    "src/app/api/cron/evidence-report/route.ts":        { "maxDuration": 30 }
   },
   "crons": [
     {
       "path": "/api/cron/reminders",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/evidence-report",
+      "schedule": "0 8 * * 1"
     }
   ]
 }

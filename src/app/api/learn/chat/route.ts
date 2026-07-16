@@ -1634,8 +1634,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // input slot for review-due topics). Surfaces snapshot.dueForReview
           // (computed in Phase 2D, previously unused by any consumer) as a
           // secondary instruction the tutor can fold in opportunistically.
+          // Computed unconditionally (both modes) because the Dynamic Lesson
+          // Composer below also consumes it as reviewDueConceptIds — for
+          // School Mode AND Library Mode alike (ADR 09). In practice it is
+          // always empty for Library Mode: snapshot.dueForReview is sourced
+          // from the ReviewSchedule table, written exclusively by
+          // /api/school/practice/submit and /api/school/assessment/submit —
+          // no Library-mode path ever populates it.
           const reviewDue = snapshot.dueForReview.filter((slug) => slug !== conceptNode.id).slice(0, 3)
-          if (reviewDue.length > 0) {
+          // The freestanding prompt advisory (below), however, is School
+          // Mode only (Task 3 fix). Library Mode's own due-review signal is
+          // the Spaced Retrieval Scheduler's session-opening block
+          // (buildOpeningBlock, evidence-derived, wired in
+          // sessionLifecycle.ts) — this legacy ReviewSchedule-based line,
+          // if ever non-empty for a Library session (a shared subjectId
+          // carrying real School Mode ReviewSchedule rows), duplicated that
+          // signal with a separately-computed, possibly contradictory topic
+          // list. School Mode's own behavior is unchanged — this line
+          // already fired unconditionally for School Mode.
+          if (schoolCtx && reviewDue.length > 0) {
             systemPrompt += `\n- Due for spaced-repetition review (weave in a brief touchpoint if a natural opening arises — do not derail the main lesson): ${reviewDue.join(', ')}`
           }
 
