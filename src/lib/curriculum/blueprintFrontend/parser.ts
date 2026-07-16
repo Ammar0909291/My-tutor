@@ -75,16 +75,24 @@ function scalarField(block: string, ...keys: string[]): string | null {
   return null
 }
 
-/** Reads a `key: [a, b, c]` field, tolerating multi-line bracket continuation. */
+/** Reads a `key: [a, b, c]` field (multi-line bracket continuation tolerated)
+ *  or a YAML block list (`key:` followed by `- item` lines — the Concept
+ *  Identity variant, e.g. phys.em.*). */
 function listField(block: string, ...keys: string[]): string[] {
   for (const key of keys) {
-    const re = new RegExp(`^${key}:\\s*\\[([\\s\\S]*?)\\]`, 'm')
-    const raw = re.exec(block)?.[1]
-    if (raw === undefined) continue
-    return raw
-      .split(',')
-      .map((s) => s.trim())
-      .filter((s) => s.length > 0)
+    const bracketRe = new RegExp(`^${key}:\\s*\\[([\\s\\S]*?)\\]`, 'm')
+    const raw = bracketRe.exec(block)?.[1]
+    if (raw !== undefined) {
+      return raw.split(',').map((s) => s.trim()).filter((s) => s.length > 0)
+    }
+    const yamlRe = new RegExp(`^${key}:\\s*\\n((?:\\s+-\\s+.+\\n?)+)`, 'm')
+    const yamlRaw = yamlRe.exec(block)?.[1]
+    if (yamlRaw !== undefined) {
+      return yamlRaw
+        .split('\n')
+        .map((line) => /^\s+-\s+(.+)$/.exec(line)?.[1]?.trim() ?? '')
+        .filter((s) => s.length > 0)
+    }
   }
   return []
 }
@@ -194,7 +202,7 @@ function extractMisconceptions(sections: RawSection[], file: string): BlueprintM
     null
   const haystack = mcSection ? mcSection.body : sections.map((s) => s.body).join('\n')
 
-  const out: BlueprintMisconception[] = []
+  const headerMatches: Array<{ id: string; label: string; index: number }> = []
   const seen = new Set<string>()
   MC_HEADER_RE.lastIndex = 0
   let m: RegExpExecArray | null
@@ -203,8 +211,20 @@ function extractMisconceptions(sections: RawSection[], file: string): BlueprintM
     if (seen.has(id)) continue
     seen.add(id)
     const label = m[2].replace(/^["(]+|[")]+$/g, '').replace(/^:\s*/, '').trim()
-    const startLine = haystack.slice(0, m.index).split('\n').length
-    out.push({ id, label, span: { file, startLine, endLine: startLine } })
+    headerMatches.push({ id, label, index: m.index })
+  }
+
+  const out: BlueprintMisconception[] = []
+  for (let i = 0; i < headerMatches.length; i++) {
+    const cur = headerMatches[i]
+    // Body runs to the next MC header or the next ## section, whichever first.
+    const nextMc = i + 1 < headerMatches.length ? headerMatches[i + 1].index : haystack.length
+    const nextSection = haystack.indexOf('\n## ', cur.index)
+    const end = nextSection !== -1 ? Math.min(nextMc, nextSection) : nextMc
+    const body = haystack.slice(cur.index, end).trim()
+    const startLine = haystack.slice(0, cur.index).split('\n').length
+    const endLine = haystack.slice(0, end).split('\n').length
+    out.push({ id: cur.id, label: cur.label, body, span: { file, startLine, endLine } })
   }
   return out
 }
@@ -250,6 +270,7 @@ export function parseBlueprintMarkdown(file: string, source: string, conceptIdFr
     teachingActions,
     misconceptions,
     sectionsFound: sections.map((s) => s.title),
+    sections: sections.map((s) => ({ title: s.title, body: s.body, startLine: s.startLine })),
     span,
   }
 

@@ -52,7 +52,18 @@ export interface BlueprintMisconception {
   /** e.g. "MC-1", "MC-L-IS-OMEGA" — corpus uses both numeric and slug ids. */
   id: string
   label: string
+  /** Phase 1.5: the full authored block body (probe, bridge, replacement …)
+   *  verbatim — asset lowering preserves it rather than lossily re-parsing. */
+  body: string
   span: BlueprintSourceSpan
+}
+
+/** A raw section as authored (Phase 1.5): kept on the AST so the asset
+ *  lowering layer can work from the AST alone, without re-reading source. */
+export interface BlueprintSection {
+  title: string
+  body: string
+  startLine: number
 }
 
 export interface BlueprintAST {
@@ -63,6 +74,8 @@ export interface BlueprintAST {
   misconceptions: BlueprintMisconception[]
   /** Section titles actually found (for diagnostics / coverage reporting). */
   sectionsFound: string[]
+  /** Phase 1.5: full raw sections (title + body), input to asset lowering. */
+  sections: BlueprintSection[]
   span: BlueprintSourceSpan
 }
 
@@ -99,5 +112,115 @@ export interface DraftCompiledPack {
 export interface BlueprintCompileResult {
   ok: boolean
   draftPack: DraftCompiledPack | null
+  diagnostics: Diagnostic[]
+}
+
+// ═════════════════════════════════════════════════════════════════════════════
+// Phase 1.5 — Knowledge Compilation Layer (AssetAST + Educational Package)
+// ═════════════════════════════════════════════════════════════════════════════
+//
+// The Rule Layer above answers "what should the engine DO"; the Knowledge
+// Layer answers "what does the tutor KNOW about this concept". Asset kinds
+// deliberately align with the existing runtime asset vocabulary
+// (`ExplanationKind`/`ProbeKind` in src/lib/teaching/assets/assetIdentity.ts)
+// so a later phase can ingest these into the AssetIdentity tables without a
+// vocabulary translation step. Nothing here touches CompiledPack — the
+// Educational Package WRAPS the untouched rule pack alongside the assets.
+
+/** Closed set for Phase 1.5 — textual knowledge only. Diagram/animation/
+ *  simulation kinds are deliberately NOT members yet; they arrive via the
+ *  extensionPoints surface below when ADR-12-side work lands. */
+export type AssetKind =
+  | 'core_explanation'
+  | 'worked_example'
+  | 'misconception'
+  | 'teaching_note'
+  | 'teaching_action_meta'
+  | 'mastery_probe'
+  | 'adaptive_rule'
+  | 'session_flow'
+  | 'learning_objective'
+  | 'reference'
+
+export interface AssetNode {
+  /** Deterministic, stable id: `${conceptId}/${kind}/${localKey}` where
+   *  localKey is the authored id (MC-…, MP-…, TA-…) when one exists, else a
+   *  1-based ordinal. Never derived from content hashes or timestamps. */
+  assetId: string
+  kind: AssetKind
+  conceptId: string
+  /** Short human title (authored heading text where available). */
+  title: string
+  /** Verbatim markdown content as authored — lowering preserves, never rewrites. */
+  content: string
+  /** Authored local identifier when one exists (e.g. "MC-L-IS-OMEGA", "MP-3"). */
+  localKey: string | null
+  /** BCP-47; the corpus is English-authored today. */
+  language: string
+  /** Structured cross-references (asset → misconception ids etc.), by authored id. */
+  refs: string[]
+  span: BlueprintSourceSpan
+}
+
+/** The Knowledge-Layer AST: every educational asset lowered from one blueprint. */
+export interface AssetAST {
+  conceptId: string
+  sourceFile: string
+  assets: AssetNode[]
+}
+
+// ── Educational Package — Rule Layer + Knowledge Layer, one artifact ────────
+
+export interface EducationalPackageManifest {
+  packageId: string               // `${conceptId}-package`
+  packageVersion: string          // semver; '0.1.0-draft' in this phase
+  conceptId: string
+  compiler: string                // this front-end's id (rule pack keeps its own)
+  language: string
+  /** sha256 over canonicalized { ruleContentHash, assets } — reuses
+   *  brain-compiler's canonicalJsonHash, no second hashing scheme. */
+  contentHash: string
+  sourceLock: Record<string, string>
+  assetCount: number
+  assetCounts: Partial<Record<AssetKind, number>>
+  ruleCount: number
+}
+
+/** Concept-level metadata carried at package level (not per-asset). */
+export interface EducationalPackageConceptInfo {
+  conceptId: string
+  name: string
+  difficultyRaw: string
+  bloom: string
+  masteryThreshold: number | null
+  estimatedHours: number | null
+  prerequisites: string[]
+  status: string
+}
+
+/** Reserved, empty-by-construction surface for future non-textual assets.
+ *  Kept as explicit named fields (not an open map) so adding a family is a
+ *  visible, reviewed type change — mirrors GUARDABLE_FIELDS discipline. */
+export interface PackageExtensionPoints {
+  diagrams: never[]
+  animations: never[]
+  simulations: never[]
+}
+
+export interface EducationalPackage {
+  status: DraftPackStatus         // DRAFT only in this phase — never ACTIVE
+  manifest: EducationalPackageManifest
+  concept: EducationalPackageConceptInfo
+  /** Rule Layer — the EXISTING CompiledPack, byte-identical to what Phase 1
+   *  produced; asset lowering must not perturb its contentHash. */
+  rulePack: CompiledPack
+  /** Knowledge Layer. */
+  assets: AssetNode[]
+  extensionPoints: PackageExtensionPoints
+}
+
+export interface PackageAssemblyResult {
+  ok: boolean
+  educationalPackage: EducationalPackage | null
   diagnostics: Diagnostic[]
 }
