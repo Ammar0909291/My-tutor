@@ -46,5 +46,3 @@ export function normalizeToCanonicalLevel(raw: string | null | undefined): Curri
   if (v === 'professional' || v === 'expert') return 'advanced'
   return 'beginner'
 }
-
-export const MASTERY_THRESHOLD_FOR_PROGRESSION = 0.8

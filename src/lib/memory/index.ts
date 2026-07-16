@@ -28,5 +28,4 @@ export {
 export {
   updateMemoryFromPractice,
   updateMemoryFromAssessment,
-  updateMemoryFromLesson,
 } from './update-pipeline'

@@ -139,18 +139,3 @@ export async function updateMemoryFromAssessment(
 ): Promise<void> {
   await updateMemoryFromPractice(userId, subjectId, topicUpdates)
 }
-
-/**
- * Call after a lesson session ends or the AI returns a mastery signal.
- * Only updates topics that are known to have a current masteryPct — does NOT
- * write topics that are still NOT_STARTED so as not to create phantom rows.
- */
-export async function updateMemoryFromLesson(
-  userId: string,
-  subjectId: string,
-  topicSlug: string,
-  masteryPct: number,
-): Promise<void> {
-  if (masteryPct <= 0) return   // no signal yet — don't create empty rows
-  await upsertTopicMemory(userId, subjectId, topicSlug, masteryPct, masteryPct >= 70)
-}
