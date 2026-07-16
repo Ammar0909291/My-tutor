@@ -1,15 +1,24 @@
 /**
- * Lightweight error monitoring hook (Sprint EK — DEF-EJ-11).
+ * Error monitoring (Sprint EK, DEF-EJ-11 + restored Sprint AR Sentry path).
  *
- * Provides structured error reporting + in-process failure counters so
- * operational failures (e.g. SMTP outages) are observable instead of silent.
- *
- * - Always logs a structured line to stderr (captured by the platform logger).
+ * Two independent, best-effort channels — neither ever throws or blocks a request:
+ * - Always logs a structured line to stderr (captured by the platform logger)
+ *   and increments an in-process counter, readable via getFailureCounters()
+ *   (used by /api/admin/ops).
  * - Optionally POSTs a redacted payload to MONITORING_WEBHOOK_URL when set
- *   (Sentry/Logtail/Slack-compatible). NEVER includes credentials or secrets —
- *   callers must pass only non-sensitive metadata.
- * - Maintains per-context counters readable via getFailureCounters() for a
- *   future health endpoint.
+ *   (Slack/Logtail/any JSON-accepting endpoint).
+ * - Optionally sends directly to Sentry's store API when SENTRY_DSN is set —
+ *   no @sentry/nextjs SDK dependency, no build-pipeline changes, no client-
+ *   bundle impact (a prior "consolidation" merge on 2026-06-15 replaced this
+ *   path with the webhook-only version above without updating
+ *   docs/DEPLOYMENT.md, which still documents this exact Sentry behavior —
+ *   restored here rather than left as a silently-broken promise). Deduped
+ *   (5 min per route+message) and capped (20 events/min process-wide) so the
+ *   free tier isn't flooded.
+ *
+ * NEVER includes credentials or secrets on any channel — callers must pass
+ * only non-sensitive metadata; redact() strips anything that looks sensitive
+ * regardless.
  */
 
 type Meta = Record<string, string | number | boolean | null | undefined>
@@ -69,6 +78,78 @@ type CaptureErrorOptions = {
   extra?: Record<string, unknown>
 }
 
+// ─── Sentry direct-capture (SENTRY_DSN) ──────────────────────────────────────
+// Independent dedupe/cap state from the counters above — Sentry's free tier
+// (5k events/month) is a tighter budget than the local counters need to respect.
+const SENTRY_DEDUPE_WINDOW_MS = 5 * 60_000
+const SENTRY_MAX_EVENTS_PER_MIN = 20
+const sentryRecentEvents = new Map<string, number>() // dedupe key -> expires-at
+let sentryWindowStart = 0
+let sentryWindowCount = 0
+
+function parseSentryDsn(dsn: string): { protocol: string; publicKey: string; host: string; projectId: string } | null {
+  // DSN format: https://{publicKey}@{host}/{projectId}
+  const m = dsn.match(/^(https?):\/\/([^@]+)@([^/]+)\/(.+)$/)
+  if (!m) return null
+  return { protocol: m[1], publicKey: m[2], host: m[3], projectId: m[4] }
+}
+
+function sentryShouldSend(dedupeKey: string): boolean {
+  const now = Date.now()
+
+  if (now - sentryWindowStart > 60_000) {
+    sentryWindowStart = now
+    sentryWindowCount = 0
+  }
+  if (sentryWindowCount >= SENTRY_MAX_EVENTS_PER_MIN) return false
+
+  const expires = sentryRecentEvents.get(dedupeKey)
+  if (expires && expires > now) return false
+
+  sentryRecentEvents.set(dedupeKey, now + SENTRY_DEDUPE_WINDOW_MS)
+  if (sentryRecentEvents.size > 1000) {
+    for (const [k, exp] of sentryRecentEvents) {
+      if (exp <= now) sentryRecentEvents.delete(k)
+    }
+  }
+  sentryWindowCount += 1
+  return true
+}
+
+function sendToSentry(err: unknown, opts: CaptureErrorOptions): void {
+  const dsn = process.env.SENTRY_DSN
+  if (!dsn) return
+  const parsed = parseSentryDsn(dsn)
+  if (!parsed) return
+
+  const route = opts.route ?? 'unknown'
+  const error = err instanceof Error ? err : new Error(String(err))
+  if (!sentryShouldSend(`${route}:${error.message}`)) return
+
+  const event = {
+    event_id: crypto.randomUUID().replace(/-/g, ''),
+    timestamp: new Date().toISOString(),
+    platform: 'node',
+    level: 'error',
+    logger: route,
+    environment: process.env.NODE_ENV ?? 'development',
+    exception: { values: [{ type: error.name, value: error.message }] },
+    tags: { route, ...opts.tags },
+    extra: { ...redact((opts.extra as Meta) ?? {}), stack: error.stack?.split('\n').slice(0, 20).join('\n') },
+  }
+
+  const url = `${parsed.protocol}://${parsed.host}/api/${parsed.projectId}/store/`
+  // Fire-and-forget; reporting must never affect the request path.
+  void fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Sentry-Auth': `Sentry sentry_version=7, sentry_client=my-tutor/1.0, sentry_key=${parsed.publicKey}`,
+    },
+    body: JSON.stringify(event),
+  }).catch(() => {})
+}
+
 /** Alias used by foundation-branch callers: captureError(err, { route, tags, extra }) */
 export function captureError(err: unknown, opts: CaptureErrorOptions = {}): void {
   const context = opts.route ?? 'unknown'
@@ -81,6 +162,7 @@ export function captureError(err: unknown, opts: CaptureErrorOptions = {}): void
     }
   }
   reportError(context, err, meta)
+  sendToSentry(err, opts)
 }
 
 /** Mask an email for logging: keeps first char + domain (a***@example.com). */

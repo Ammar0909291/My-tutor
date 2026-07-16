@@ -17,6 +17,28 @@ const nextConfig = {
       },
     ],
   },
+  // Baseline security headers (production-readiness gap: none were set
+  // before — Vercel does not add these by default). Deliberately NOT
+  // shipping a Content-Security-Policy here: the app loads Monaco, Three.js/
+  // WebGL, a sandboxed iframe for AI-generated visualizations, and Google
+  // OAuth — a hand-authored CSP for that surface needs dedicated testing
+  // per directive, not a guess baked into a production-readiness pass.
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          // microphone stays enabled for self — the lesson screen's voice
+          // input (getUserMedia/MediaRecorder, src/components/learn/LessonScreen.tsx)
+          // needs it; camera and geolocation are never used anywhere in the app.
+          { key: "Permissions-Policy", value: "camera=(), geolocation=(), microphone=(self)" },
+        ],
+      },
+    ];
+  },
   webpack: (config, { nextRuntime }) => {
     // Next.js always emits a full source map for the Edge runtime bundle
     // (src/middleware.ts) in production, regardless of any experimental

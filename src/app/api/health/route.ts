@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { redis } from '@/lib/redis/client'
+import { missingRequiredEnv } from '@/lib/env'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,6 +12,9 @@ export const dynamic = 'force-dynamic'
  * 200 = app + database reachable. 503 = database unreachable.
  * Redis state is reported but never fails the check — it's optional
  * by design (rate limiting fails open without it).
+ * `config.missing` is purely informational (never affects the status
+ * code) — it surfaces an incomplete deployment (per docs/DEPLOYMENT.md
+ * §1's Required table) from the outside instead of as a later 500.
  */
 export async function GET() {
   let db = false
@@ -37,8 +41,10 @@ export async function GET() {
     }
   }
 
+  const missing = missingRequiredEnv()
+
   return NextResponse.json(
-    { status: db ? 'ok' : 'degraded', db, redis: redisStatus },
+    { status: db ? 'ok' : 'degraded', db, redis: redisStatus, config: { missing } },
     { status: db ? 200 : 503 },
   )
 }
