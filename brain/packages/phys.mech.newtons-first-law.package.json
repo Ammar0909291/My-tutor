@@ -1,0 +1,1257 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.newtons-first-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.newtons-first-law",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:5ac7736b7b996faf5365571776eefda9a575079aece24ec4e536c81583669eb0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.newtons-first-law.md": "sha256:44c8e34b6eb8cca54b7135da374158aee34d8bf69d4601535c2cbbc0534cb7d5"
+    },
+    "assetCount": 39,
+    "assetCounts": {
+      "core_explanation": 1,
+      "learning_objective": 1,
+      "misconception": 4,
+      "teaching_action_meta": 29,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 29
+  },
+  "concept": {
+    "conceptId": "phys.mech.newtons-first-law",
+    "name": "Newton's First Law (Law of Inertia)",
+    "difficultyRaw": "developing (2)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.meas.scalars-vectors",
+      "phys.meas.units"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.newtons-first-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.newtons-first-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.newtons-first-law.md": "sha256:44c8e34b6eb8cca54b7135da374158aee34d8bf69d4601535c2cbbc0534cb7d5"
+      },
+      "contentHash": "sha256:e434f168550ec3265444054b96522b6576cb0148ebbd90ab3b0497b84815edb2",
+      "ruleCount": 29,
+      "bandCounts": {
+        "3": 29
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-A05 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-A06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-A07",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-B01 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-B02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-B03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-B04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-B04 (addresses MC-1, MC-3, MC-2, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-C01 (addresses MC-1, MC-2, MC-4, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-C02 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-C03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-C04 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-C05 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-C06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-C06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-E02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-E04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-E05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-E05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-F01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-F01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-F02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-F02 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-first-law.TA-F03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md#TA-F03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-first-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-first-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.newtons-first-law/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Newton's First Law (Law of Inertia) — core idea",
+      "content": "Newton's First Law (Law of Inertia): An object at rest remains at rest, and an object in motion remains in motion at constant velocity, unless acted upon by a net external force. The law has two implications that students must understand separately: (1) rest is not the natural state — uniform motion is equally natural; (2) the relevant quantity is NET force (vector sum of all forces), not the presence of any single force.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 9,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Learning Objective",
+      "content": "Given a described scenario (object at rest, object in uniform motion, object with changing motion):\n\n(a) the student correctly identifies whether the net force is zero or non-zero;  \n(b) the student correctly applies Newton's First Law to predict whether the object's motion changes;  \n(c) the student correctly explains why friction, not Newton's First Law, causes objects to slow down.\n\n**Accuracy threshold:** 75%.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 38,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "— Objects Need Continuous Force to Maintain Motion (Aristotelian View",
+      "content": "### MC-1 — Objects Need Continuous Force to Maintain Motion (Aristotelian View)\n\n**Observable symptom:** Student says a moving object will stop \"naturally\" without any force; says forces \"run out\" or \"inertia runs out\"; or asks \"what keeps it going?\"\n\n**Diagnostic trigger:** DB-1; TA-A01 P14.\n\n**Root cause:** Everyday experience — every object students have ever observed moving eventually stops (due to friction, air resistance). The friction force is invisible and unattributed; students attribute stopping to motion exhausting itself. Aristotle made exactly this error systematically.\n\n**Repair chain:** P27 (surface belief — \"things need force to keep moving\") → P06 (sliding demo with decreasing friction) → P28 (conflict: astronaut at constant velocity with zero thrust) → P29 → P30 (friction is the force causing stopping; remove friction → motion continues forever) → P31 (install: force required to CHANGE motion, not maintain it) → P32 (3 examples: puck on frictionless ice, satellite, spaceship with engines off)\n\n**MAMR status:** FOUNDATIONAL for MC-3. Must be cleared before MC-3 repair. Rationale: MC-3 (constant velocity requires constant force) is a direct logical extension of MC-1; repairing MC-3 without first repairing MC-1 leads to immediate relapse.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 5,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "— A Stationary Object Has No Forces Acting on It",
+      "content": "### MC-2 — A Stationary Object Has No Forces Acting on It\n\n**Observable symptom:** Student says \"the book is still, so there are no forces\"; draws an empty free body diagram for a stationary object; says equilibrium means \"no forces.\"\n\n**Diagnostic trigger:** DB-2a; TA-A03 P41.\n\n**Root cause:** \"At rest\" is confused with \"nothing happening.\" The internal logic is: if there were forces, the object would move. Since it doesn't move, there must be no forces. This ignores the possibility of forces cancelling.\n\n**Repair chain:** P27 → P07 (force diagram with gravity + normal force for stationary book) → P28 (gravity is real — can you feel it? table sags under load) → P30 (ΣF=0 means balanced forces, not absent forces) → P31 → P32 (3 stationary objects with non-trivial force diagrams)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "— Constant Velocity Requires a Constant Net Force",
+      "content": "### MC-3 — Constant Velocity Requires a Constant Net Force\n\n**Observable symptom:** Student says a car at constant speed must have a \"driving force greater than friction\" — or that the engine provides a net force even at constant velocity.\n\n**Diagnostic trigger:** TA-A05 P41; DB-2c.\n\n**Root cause:** Direct consequence of MC-1. If force is needed to \"maintain\" motion, then constant velocity (maintained motion) requires constant force. This is internally consistent but physically wrong.\n\n**Repair chain:** P27 → P07 (car FBD at constant velocity: engine=friction, ΣF=0) → P28 (conflict with Newton's Second Law preview: if ΣF≠0 at constant v, then a≠0, but constant velocity means a=0 — contradiction) → P30 (engine overcomes friction to maintain ΣF=0, not to provide ΣF) → P31 → P32\n\n**MAMR prerequisite:** MC-1 must be cleared first.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 33,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "— Newton's First Law Only Applies to Objects at Rest",
+      "content": "### MC-4 — Newton's First Law Only Applies to Objects at Rest\n\n**Observable symptom:** Student correctly applies the law to stationary objects but cannot apply it to objects in uniform motion; thinks \"at rest\" is the only relevant case.\n\n**Diagnostic trigger:** DB-2b; TA-A04.\n\n**Root cause:** The \"rest\" case is most salient in school examples (books on tables, boxes on floors). The motion case is described later and students treat the two cases as separate laws or separate concepts.\n\n**Repair chain:** P27 → P07 (satellite in straight-line constant motion) → P28 (no force, yet motion persists — law applies here too) → P30 (both cases = same principle: ΣF=0 → no change, regardless of initial state) → P31 → P42 (two examples: one rest, one motion)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 47,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "The Friction Illusion: Concrete",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Friction Illusion: Concrete\",\"primitives\":[\"P01\",\"P04\",\"P06\",\"P14\",\"P15\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 12,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Galileo's Thought Experiment: Concrete to Perceptual Bridge",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Galileo's Thought Experiment: Concrete to Perceptual Bridge\",\"primitives\":[\"P01\",\"P06\",\"P09\",\"P21\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 52,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Force Diagrams: Balanced and Unbalanced",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Force Diagrams: Balanced and Unbalanced\",\"primitives\":[\"P01\",\"P07\",\"P16\",\"P17\",\"P34\",\"P41\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 82,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Real-World Applications: Perceptual",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Real-World Applications: Perceptual\",\"primitives\":[\"P01\",\"P07\",\"P16\",\"P20\",\"P29\",\"P35\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 115,
+        "endLine": 148
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Formal Statement and Inertia: Abstract",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Formal Statement and Inertia: Abstract\",\"primitives\":[\"P01\",\"P08\",\"P22\",\"P27\",\"P28\",\"P30\",\"P31\",\"P41\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 148,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Application: Free Body Diagrams and Prediction",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Application: Free Body Diagrams and Prediction\",\"primitives\":[\"P01\",\"P08\",\"P34\",\"P47\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 181,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P49\",\"P50\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 211,
+        "endLine": 263
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Application: Net Force Prediction",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Application: Net Force Prediction\",\"primitives\":[\"P02\",\"P07\",\"P34\",\"P35\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 263,
+        "endLine": 290
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Inertia and Mass",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Inertia and Mass\",\"primitives\":[\"P01\",\"P08\",\"P16\",\"P30\",\"P34\",\"P42\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 290,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Friction as the Confounding Factor",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Friction as the Confounding Factor\",\"primitives\":[\"P01\",\"P08\",\"P41\",\"P43\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 318,
+        "endLine": 345
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-B04",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-B04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-B04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 345,
+        "endLine": 357
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Misconception Surface",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Surface\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-4",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 357,
+        "endLine": 370
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "MC-1 Repair: Objects Don't Need Force to Keep Moving",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-1 Repair: Objects Don't Need Force to Keep Moving\",\"primitives\":[\"P01\",\"P06\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 370,
+        "endLine": 403
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "MC-2 Repair: Stationary Objects Can Have Forces Acting",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-2 Repair: Stationary Objects Can Have Forces Acting\",\"primitives\":[\"P01\",\"P07\",\"P27\",\"P28\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 403,
+        "endLine": 435
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "MC-3 Repair: Constant Velocity Needs Zero Net Force",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-3 Repair: Constant Velocity Needs Zero Net Force\",\"primitives\":[\"P01\",\"P07\",\"P27\",\"P28\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 435,
+        "endLine": 469
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "MC-4 Repair: First Law Applies to Moving Objects Too",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"MC-4 Repair: First Law Applies to Moving Objects Too\",\"primitives\":[\"P01\",\"P07\",\"P27\",\"P28\",\"P30\",\"P31\",\"P32\",\"P42\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 469,
+        "endLine": 501
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-C06",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-C06\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 501,
+        "endLine": 513
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Identify the Gap",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Identify the Gap\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 513,
+        "endLine": 525
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Missing Case: Targeted Abstract Input",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Missing Case: Targeted Abstract Input\",\"primitives\":[\"P01\",\"P08\",\"P22\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 525,
+        "endLine": 551
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Unified Application: Both Cases Together",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Unified Application: Both Cases Together\",\"primitives\":[\"P01\",\"P08\",\"P33\",\"P35\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 551,
+        "endLine": 574
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P28\",\"P30\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 574,
+        "endLine": 586
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Safety Frame and Familiar Friction Demo",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Safety Frame and Familiar Friction Demo\",\"primitives\":[\"P01\",\"P06\",\"P14\",\"P34\",\"P49\",\"P50\",\"P55\",\"P69\",\"P70\",\"P71\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 586,
+        "endLine": 605
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Extrapolation (No Friction)",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Extrapolation (No Friction)\",\"primitives\":[\"P01\",\"P06\",\"P14\",\"P28\",\"P30\",\"P34\",\"P49\",\"P50\",\"P53\",\"P54\",\"P55\",\"P70\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 605,
+        "endLine": 633
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Formal Statement with Scaffold",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Formal Statement with Scaffold\",\"primitives\":[\"P01\",\"P07\",\"P08\",\"P30\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P64\",\"P70\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 633,
+        "endLine": 661
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Application Practice",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"Application Practice\",\"primitives\":[\"P01\",\"P08\",\"P34\",\"P47\",\"P49\",\"P50\",\"P53\",\"P55\",\"P70\"],\"addresses\":[]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 661,
+        "endLine": 678
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-E05",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-E05\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 678,
+        "endLine": 688
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-F01",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Visual Vocabulary and Concrete Anchoring",
+      "content": "{\"id\":\"TA-F01\",\"title\":\"Visual Vocabulary and Concrete Anchoring\",\"primitives\":[\"P01\",\"P03\",\"P06\",\"P07\",\"P34\",\"P49\",\"P50\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 688,
+        "endLine": 705
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-F02",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Core Law from Diagrams",
+      "content": "{\"id\":\"TA-F02\",\"title\":\"Core Law from Diagrams\",\"primitives\":[\"P01\",\"P07\",\"P20\",\"P30\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-F02",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 705,
+        "endLine": 731
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_action_meta/TA-F03",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-F03\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-F03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 731,
+        "endLine": 737
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Assessment Battery",
+      "content": "---\n\n**AB-1 — Scenario Classification**\n\nFor each scenario, state: (a) Is ΣF = 0 or ≠ 0? (b) Does Newton's First Law predict the motion will change?\n\n| Scenario | Expected ΣF | Motion changes? |\n|----------|------------|-----------------|\n| Book on table, stationary | 0 | No |\n| Ball decelerating due to friction | ≠ 0 | Yes |\n| Rocket in space, engines off, constant velocity | 0 | No |\n| Car accelerating from traffic lights | ≠ 0 | Yes |\n| Block pushed with force = friction force | 0 | No |\n\nTarget: 4/5.\n\n---\n\n**AB-2 — Free Body Diagram**\n\nDraw the FBD for: (a) a box at rest on a slope (weight downward, normal force perpendicular to slope, friction up the slope); (b) a car at constant 50 km/h (engine force = friction force).\n\nTarget: 2/2 diagrams with correctly labelled arrows and ΣF statement.\n\n---\n\n**AB-3 — Explanation Task**\n\n\"A student says: 'A car moving at constant speed must have a net forward force, otherwise it would stop.' Identify the error and correct it.\"\n\nExpected: the error is assuming force is needed to maintain motion (MC-1/MC-3); correct: at constant velocity, ΣF = 0 (engine force cancels friction). Target: identifies the error + correct explanation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 923,
+        "endLine": 959
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Student State Matrix",
+      "content": "| State | Entry Condition | Protocol |\n|-------|----------------|----------|\n| S0 | No prior exposure to Newton's First Law | Protocol A — full CPA, 7 TAs |\n| S1 | Can state the law; cannot apply it or explain it correctly | Protocol B — application and explanation, 4 TAs |\n| S2 | Carries identified misconception (MC-1, MC-2, MC-3, and/or MC-4) | Protocol C — MAMR repair, 3–5 TAs |\n| S3 | Understands rest case; misapplies law to moving objects (or vice versa) | Protocol D — symmetry extension, 4 TAs |\n| S6 | Correct recall; low confidence | Protocol E — scaffolded CPA, 5 TAs |\n| S9 | Second-language learner; visual dominant | Protocol F — visual-first, 3 TAs |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 50,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Diagnostic Battery",
+      "content": "---\n\n**DB-1 — Aristotelian Belief Screen**\n\nStimulus: \"A ball is rolling across a smooth flat floor with nothing touching it. What happens to it?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"It keeps rolling at constant speed (or forever if no friction)\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"It slows down and stops — things need a force to keep moving\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-1\" }\n\n{ stimulus: \"It slows down — because of friction\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"Don't know\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → run DB-2 → route accordingly  \nSIGNAL:PARTIAL → note as potentially correct (friction is real) — run DB-2 to test understanding of the idealized case  \nSIGNAL:INCORRECT (MC-1) → flag → route to Protocol C  \nSIGNAL:NO_RESPONSE → S0 → Protocol A\n\n---\n\n**DB-2 — Net Force and Rest**\n\nDB-2a (MC-2): \"A book sits still on a table. Are there any forces acting on it?\"  \nDB-2b (MC-4): \"A satellite travels at 7,000 m/s in a straight line with no thrust. What is the net force on it?\" (space context removes friction objection)  \nDB-2c: \"Can an object move at constant velocity if a force is acting on it? Explain.\"\n\n```\nDB-2a: { stimulus: \"No forces\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-2\" }\nDB-2a: { stimulus: \"Gravity down, normal force up — balanced\", signal: \"SIGNAL:CORRECT\" }\n\nDB-2b: { stimulus: \"Non-zero / it needs thrust to maintain speed\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-4\" }\nDB-2b: { stimulus: \"Zero — constant velocity means no acceleration means net force = 0\", signal: \"SIGNAL:CORRECT\" }\n\nDB-2c: { stimulus: \"No — a force always changes motion\", signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-2\" }\nDB-2c: { stimulus: \"Yes — if there is another equal and opposite force (net force = 0)\", signal: \"SIGNAL:CORRECT\" }\n```\n\nFlag all MCs; route to Protocol C for any flagged.  \nAll CORRECT → S1 or above; route to Protocol B.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 63,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-first-law/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-first-law",
+      "title": "Prerequisite Check",
+      "content": "**PRE-1 — Scalar vs Vector** (requires phys.meas.scalars-vectors)\n\nStimulus: \"Is force a scalar or a vector? Why does that matter when adding two forces?\"\n\nExpected: vector; direction matters when summing forces (forces in opposite directions can cancel).\n\nSIGNAL:INCORRECT → prerequisite gap; schedule phys.meas.scalars-vectors first.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-first-law.md",
+        "startLine": 115,
+        "endLine": 127
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

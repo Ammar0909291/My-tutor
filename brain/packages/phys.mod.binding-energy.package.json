@@ -1,0 +1,469 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.binding-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.binding-energy",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:0f77956011c67ad8353f229bddec5fcf47a6c4ef410de45eb07147e3d80994c9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.binding-energy.md": "sha256:b88b1daa5d6d8cb73f5bfcb9acbaeddf8a4d701d59d709824ca7e8fe9bc54f8f"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mod.binding-energy",
+    "name": "Nuclear Binding Energy and Mass Defect",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": null,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.mod.nuclear-reactions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.binding-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.binding-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.binding-energy.md": "sha256:b88b1daa5d6d8cb73f5bfcb9acbaeddf8a4d701d59d709824ca7e8fe9bc54f8f"
+      },
+      "contentHash": "sha256:018b91e9af6b407180fe4ea4f8744226d76668386c693cc665dd42322baccb01",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.binding-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.binding-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.binding-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.binding-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.binding-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.binding-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.binding-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.binding-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.binding-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.binding-energy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.binding-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.binding-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.binding-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.binding-energy.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.binding-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.binding-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.binding-energy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.binding-energy.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.binding-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.binding-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.binding-energy.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.binding-energy.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.binding-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.binding-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.binding-energy/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Nuclear Binding Energy and Mass Defect — core explanation",
+      "content": "### Core Idea\nWhen nucleons bind together into a nucleus, the system loses mass. This mass defect Δm = Z·m_H + N·m_n − M_nucleus is converted to binding energy BE = Δm·c². The binding energy per nucleon (BE/A) peaks near A ≈ 56 (iron), making iron the most stable nucleus. Fission (splitting heavy nuclei) and fusion (combining light nuclei) both move toward this peak and release energy.\n\n### Conceptual Ladder\n1. **Recall**: Q-value = Δm × 931.5 MeV/u (from nuclear reactions blueprint).\n2. **Understand**: Binding energy is the energy needed to completely separate a nucleus into free protons and neutrons.\n3. **Apply**: Calculate mass defect and binding energy for any nucleus; compute BE/A; read and interpret the BE/A curve.\n4. **Extend**: Predict which reactions release energy from the BE/A curve; understand why fission and fusion are both exothermic.\n\n### Key Formula Set\n- **Mass defect**: Δm = Z·m_H + N·m_n − M_A,Z\n  (using atomic masses: m_H = 1.007825 u; m_n = 1.008665 u; M_A,Z from table)\n  N = A − Z (neutron number)\n- **Binding energy**: BE = Δm × 931.5 MeV/u\n- **Binding energy per nucleon**: BE/A\n- **Semi-empirical mass formula (SEMF/Bethe-Weizsäcker)**:\n  BE = a_V·A − a_S·A^(2/3) − a_C·Z(Z−1)/A^(1/3) − a_A·(N−Z)²/A ± a_P/A^(1/2)\n  Coefficients: a_V ≈ 15.8, a_S ≈ 18.3, a_C ≈ 0.714, a_A ≈ 23.2, a_P ≈ 12 (all in MeV)\n- **Peak of BE/A**: occurs near ⁵⁶Fe at ~8.79 MeV/nucleon\n\n### Canonical Example\nHelium-4: Z = 2, N = 2.\nΔm = 2(1.007825) + 2(1.008665) − 4.002602 = 2.015650 + 2.017330 − 4.002602 = 0.030378 u\nBE = 0.030378 × 931.5 = 28.3 MeV\nBE/A = 28.3/4 = 7.07 MeV/nucleon\nCompare: ⁵⁶Fe has BE/A ≈ 8.79 MeV/nucleon (higher — more stable than helium)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 16,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Heavier nuclei are always more stable",
+      "content": "### MC-1: \"Heavier nuclei are always more stable\"\n- **Probe**: \"Uranium-238 is much heavier than iron-56. Is it more stable?\"\n- **Characteristic phrase**: \"More nucleons → more bonds → more stable.\"\n- **Trigger**: Equating size with stability.\n- **Conflict evidence**: U-238 has BE/A ≈ 7.57 MeV/nucleon; ⁵⁶Fe has BE/A ≈ 8.79 MeV/nucleon. Fe is more stable per nucleon. U-238 decays spontaneously with t₁/₂ = 4.5×10⁹ years; ⁵⁶Fe is stable indefinitely.\n- **Bridge**: Stability is measured per nucleon, not total. More nucleons also means more Coulomb repulsion from proton-proton pairs — this destabilizes heavy nuclei.\n- **Replacement**: Maximum BE/A (stability) occurs near A ≈ 56. Both very light and very heavy nuclei have lower BE/A and are less stable per nucleon.\n- **Discrimination pairs**: \"⁵⁶Fe most stable per nucleon (BE/A = 8.79 MeV)\" ✓ vs. \"²³⁸U most stable because it has the most nucleons\" ✗\n- **S6 repair path**: Plot BE/A for H, He, C, Fe, U on the curve; read off values; rank stability.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Nuclear reactions conserve mass",
+      "content": "### MC-2: \"Nuclear reactions conserve mass\"\n- **Probe**: \"After a nuclear reaction, do the reactant atoms and product atoms have the same total mass?\"\n- **Characteristic phrase**: \"Mass is always conserved.\"\n- **Trigger**: Classical mechanics assumption.\n- **Conflict evidence**: DT fusion produces 17.6 MeV of kinetic energy at the cost of Δm = 0.018884 u of mass. This is directly measurable and has been verified.\n- **Bridge**: Energy is conserved (including rest-mass energy = mc²). Mass is NOT separately conserved; it can convert to kinetic energy.\n- **Replacement**: Relativistic energy E = mc² + KE is conserved. Total mass (rest mass) decreases by Q/c² in an exothermic reaction.\n- **Discrimination pairs**: \"Total energy (including mc²) conserved\" ✓ vs. \"Total mass conserved\" ✗\n- **S6 repair path**: Compute Δm for DT fusion; verify Δm × 931.5 = Q = 17.6 MeV.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Binding energy is the energy released during assembly",
+      "content": "### MC-3: \"Binding energy is the energy released during assembly\"\n- **Probe**: \"If I assemble a helium-4 nucleus from 2 protons and 2 neutrons, do I release or absorb 28.3 MeV?\"\n- **Characteristic phrase**: \"Binding energy is the energy you put in to make the nucleus.\"\n- **Trigger**: Misreading \"binding energy\" as energy input needed.\n- **Conflict evidence**: Assembly from free nucleons releases 28.3 MeV — the system falls to a lower energy state. To pull the nucleus back apart requires supplying 28.3 MeV.\n- **Bridge**: Like dropping a ball into a well — it releases energy going down, and you must supply energy to pull it back out. Binding energy = the well depth.\n- **Replacement**: Binding energy = energy released in assembly = energy required to fully dissociate. The bound system is at lower energy than the free-nucleon system.\n- **Discrimination pairs**: \"Assembly releases 28.3 MeV; separation requires 28.3 MeV\" ✓ vs. \"Assembly requires 28.3 MeV\" ✗\n- **S6 repair path**: Write the two reverse equations explicitly: (Z p + N n → nucleus + BE) and (nucleus + BE → Z p + N n).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Fission releases energy because uranium splits into two pieces",
+      "content": "### MC-4: \"Fission releases energy because uranium splits into two pieces\"\n- **Probe**: \"If I split ⁵⁶Fe into two ²⁸Si nuclei, does that release energy?\"\n- **Characteristic phrase**: \"Fission always releases energy.\"\n- **Trigger**: Fission success (uranium) generalized to all nuclei.\n- **Conflict evidence**: BE/A(⁵⁶Fe) = 8.79 MeV/nucleon; BE/A(²⁸Si) ≈ 8.45 MeV/nucleon. Products have lower BE/A → energy must be absorbed, not released. Only fission of nuclei heavier than the BE/A peak releases energy.\n- **Bridge**: Energy is released only when products have higher BE/A than reactants. For A > 56, fission moves toward the peak (uphill in BE/A) → exothermic. For A < 56, fission moves away from the peak → endothermic.\n- **Replacement**: Fission is exothermic only for heavy nuclei (A >> 56). Fusion is exothermic only for light nuclei (A << 56). Both release energy by approaching the BE/A peak.\n- **Discrimination pairs**: \"Fission of ²³⁸U → exothermic (approaches peak)\" ✓ vs. \"Any fission releases energy\" ✗\n- **S6 repair path**: Draw the BE/A curve; mark ²³⁸U, ⁵⁶Fe, ¹H; draw fission/fusion arrows and show which direction is uphill.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Q-value review",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Q-value review\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Define mass defect and BE",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Define mass defect and BE\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 204,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Introduce BE/A",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Introduce BE/A\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 205,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Build and interpret BE/A curve",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Build and interpret BE/A curve\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 206,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Fission vs. fusion energy",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Fission vs. fusion energy\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 207,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "SEMF overview",
+      "content": "{\"id\":\"TA-6\",\"title\":\"SEMF overview\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 208,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) compute Δm and BE for any nucleus given mass tables, (2) compute BE/A, (3) read and interpret the BE/A curve, (4) predict exo/endothermic character of any nuclear reaction from BE/A values.\n\n### Formative Assessment 1 — Calculation\n**Prompt**: \"Calculate the binding energy and BE/A for ¹²C (atomic mass 12.000000 u exactly). Use m_H = 1.007825 u, m_n = 1.008665 u.\"\n**Expected answer**: Δm = 6(1.007825) + 6(1.008665) − 12.000000 = 6.04695 + 6.05199 − 12.000000 = 0.098940 u. BE = 0.098940 × 931.5 = 92.16 MeV. BE/A = 92.16/12 = 7.68 MeV/nucleon.\n**Threshold**: BE within ±0.1 MeV; BE/A within ±0.05 MeV/nucleon.\n\n### Formative Assessment 2 — BE/A interpretation\n**Prompt**: \"⁴He has BE/A = 7.07 MeV/nucleon; ⁵⁶Fe has BE/A = 8.79 MeV/nucleon. Is the reaction 4(¹H) → ⁴He exothermic or endothermic? What about ⁵⁶Fe → 14(⁴He)?\"\n**Expected answer**: 4(¹H) → ⁴He: BE/A increases from 0 to 7.07 → exothermic (energy released). ⁵⁶Fe → 14(⁴He): BE/A decreases from 8.79 to 7.07 → endothermic (energy absorbed).\n**Threshold**: Correct classification with BE/A reasoning for both.\n\n### Formative Assessment 3 — SEMF qualitative\n**Prompt**: \"The SEMF includes a Coulomb repulsion term that decreases BE. Why does this term scale as Z(Z−1)/A^(1/3)?\"\n**Expected answer**: Number of proton-proton pairs ~ Z(Z−1)/2. Coulomb energy per pair ~ e²/(4πε₀r) ~ e²/A^(1/3) (since nuclear radius r ~ A^(1/3)). Total Coulomb energy ~ Z(Z−1)/A^(1/3). This term grows rapidly with Z, destabilizing heavy nuclei.\n**Threshold**: Must identify proton-proton pairs and nuclear radius scaling.\n\n### Formative Assessment 4 — Conceptual synthesis\n**Prompt**: \"Why is iron-56 the most stable nucleus? Give at least two distinct physical reasons.\"\n**Expected answer**: (1) Nuclear surface-to-volume ratio: small nuclei have too many nucleons near the surface (surface tension term dominates); (2) Coulomb repulsion: heavy nuclei have too many proton-proton pairs (Coulomb term dominates). Iron is the optimal compromise between these competing effects, maximizing BE/A.\n**Threshold**: Must invoke at least two SEMF terms; must connect to BE/A maximum.\n\n### Confidence Calibration\nAfter FA1: \"How confident (0–100%) are you that your mass defect has the right sign? What's the quickest check?\" (Δm > 0 always — nucleus lighter than free nucleons.)\n\n### Delayed Retrieval\nTwo weeks later: Given the atomic mass of ⁵⁶Fe (55.934939 u), calculate Δm and BE without looking up the formula. Confirm BE/A ≈ 8.79 MeV/nucleon.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 226,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nImagine assembling 26 protons and 30 neutrons (to make iron-56) from separate particles. Each step releases energy as they bond — like assembling a puzzle whose pieces click into place and release a \"snap energy\" at each connection. The total snap energy is the binding energy. If you tried to pull them apart again, you'd have to supply all that energy back.\n\nNow imagine the reverse: a heavy nucleus (like uranium) breaking into iron-sized pieces — each piece has higher BE/A, so energy is released in the breaking. And two light nuclei (like hydrogen) fusing into helium — helium's BE/A > hydrogen's BE/A, so energy is released in the joining. Both directions toward iron release energy.\n\n### Representational (Diagrams and Symbols)\n- **BE/A curve**: The central diagram of nuclear physics. X-axis: mass number A. Y-axis: BE/A (MeV/nucleon). Curve rises from H (~0), peaks at ⁵⁶Fe (~8.79), falls slowly to U (~7.6). Fission: arrow from U toward Fe (energy released). Fusion: arrow from H toward Fe (energy released).\n- **Mass defect bar chart**: Two bars — \"free nucleon mass\" vs. \"nucleus mass\" — defect is the gap.\n- **SEMF terms diagram**: Show each term (volume, surface, Coulomb, asymmetry, pairing) as a piece of the total BE.\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Compute Δm for any nucleus using tabulated atomic masses.\n2. Convert Δm → BE in MeV.\n3. Compute BE/A.\n4. Compare BE/A values to predict whether a reaction releases or absorbs energy.\n5. Evaluate individual SEMF terms to understand what drives nuclear stability.\n\n### Transfer (Novel Contexts)\n- **Why iron is the endpoint of stellar nucleosynthesis**: Stars fuse elements up the BE/A curve until they reach iron — then fusion becomes endothermic and the star collapses.\n- **Why nuclear weapons work**: Uranium fission releases ~1 MeV/nucleon × 235 nucleons ≈ 200 MeV per fission event. Chemical bonds release ~eV/atom — factor of 10⁸ smaller.\n- **Nuclear medicine**: Specific isotope stability governs decay mode, half-life, and radiation type used in diagnostics and therapy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 47,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: Confusing mass defect direction\nStudents subtract in the wrong order: M_nucleus − (Z·m_H + N·m_n) = negative. Remind them: the nucleus is lighter than its constituent parts (by definition of the mass defect). The defect Δm is always positive: Δm = (sum of free masses) − M_nucleus > 0.\n\n### Failure Mode 2: Thinking higher BE/A always means \"more energy released\"\nStudents apply BE/A comparisons incorrectly, e.g., claiming that fusing ⁵⁶Fe into ⁷⁰Ni releases energy (it doesn't — ⁵⁶Fe is near the peak; BE/A of products < BE/A of Fe). Energy is released only when products have higher BE/A than reactants.\n\n### Failure Mode 3: Forgetting to use atomic masses (electron masses)\nUsing nuclear masses instead of atomic masses, or mixing them mid-calculation. The standard approach: use atomic masses throughout (electron masses cancel for reactions that balance Z, which nuclear reactions always do).\n\n### Failure Mode 4: Misinterpreting \"stable\" as \"low energy\"\nStudents say \"iron has the lowest energy.\" Iron has the highest binding energy per nucleon, meaning its nucleons are the most tightly bound — lowest in energy per nucleon. But iron-56 has more total mass-energy than hydrogen — there is more mass in one iron nucleus than in 56 hydrogen nuclei (before subtracting the binding energy). The BE/A curve tells you about relative stability per nucleon, not absolute mass.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 74,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"Nucleons are lighter inside a nucleus than outside it. The 'missing' mass is the binding energy. Today we're going to weigh that missing mass.\"\n\n**Core explanation**: \"The BE/A curve is the most important graph in nuclear physics. It tells you, for every possible nucleus, how tightly each nucleon is held. The peak is iron. Reactions that move toward iron release energy. That's fission (from the right) and fusion (from the left). Everything points toward iron.\"\n\n**Common error interception**: \"When you subtract masses, make sure free nucleon mass minus nucleus mass is positive. If you're getting negative Δm, you've subtracted in the wrong order.\"\n\n**Checkpoint question**: \"Without calculating, would fusing two ⁵⁶Fe nuclei into ¹¹²Cd release or absorb energy?\" (Absorb — products at A = 112 have lower BE/A than iron.) \"What about splitting ¹¹²Cd into two ⁵⁶Fe?\" (Release — same reason, now the energy direction is favorable.)\n\n**Closing move**: \"Every star lives and dies by this curve. It explains why elements up to iron form in main-sequence stars, why supernovae are needed to make heavier elements, and why uranium is a fuel source. You now understand stellar evolution in one graph.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 212,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"I don't understand why mass becomes energy\"\nAnchor to E = mc² from special relativity — a concept introduced in phys.rel.mass-energy (upcoming). For now: treat it as an empirical fact verified in nuclear physics to extreme precision. The mass defect was first measured in the 1920s using mass spectrometry; the energy release in nuclear reactions confirms E = Δm·c² to better than 0.1%.\n\n### S3 — Can define but cannot compute\nCommon error: using integer mass numbers instead of tabulated atomic masses. Drill: open the nuclide data table, find ¹²C = 12.000000 u (exactly, by definition of the atomic mass unit) vs. ²⁴Mg = 23.985042 u (measured). Show that the deviation from the integer is the mass defect per nucleon.\n\n### S6 — Cannot read BE/A curve correctly\nPractice reading values off the curve for 5 specific nuclei. Ask: \"For each pair of nuclei, which direction on the curve does the reaction go?\" Emphasize: moving UP the curve on either side releases energy; moving DOWN absorbs energy.\n\n### S9 — Cannot connect BE/A to stellar evolution\nWalk through: Stars start with hydrogen (A ≈ 1, BE/A ≈ 0). PP chain: H → He, 4He → ³He → ⁴He → ¹²C → ... Each step releases energy while climbing the BE/A curve. At iron, there's no more uphill — fusion stops. The star collapses, and supernovae provide the energy to forge heavier elements endothermically.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 259,
+        "endLine": 275
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nProcedural (mass defect → BE → BE/A calculation) + structural (BE/A curve shape and peak) + declarative (SEMF terms and physical origins).\n\n### Spaced Retrieval Schedule\n- Day 1: Compute BE/A for ⁴He from scratch.\n- Day 3: Sketch BE/A curve from memory; mark H, Fe, U; draw fission and fusion arrows.\n- Day 7: Explain in 3 sentences why iron is the most stable nucleus.\n- Day 14: Compute SEMF volume and Coulomb terms for ²³⁸U numerically.\n- Day 30: Given two nuclear reactions, use BE/A to predict which is exothermic without calculating Q.\n\n### Interleaving Partners\n- phys.mod.nuclear-reactions (Q-value calculation — same physics, different frame)\n- phys.mod.nuclear-fission (next concept — uses BE/A directly)\n- phys.rel.mass-energy (E = mc² foundation)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 275,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Compute BE/A for any nucleus given mass tables.\n- Predict exo/endothermic character of nuclear reactions from BE/A.\n- Identify which SEMF term dominates in a given mass region.\n\n### Far Transfer\n- **Stellar nucleosynthesis**: Element formation sequence in stars explained entirely by the BE/A curve.\n- **Nuclear engineering**: Fuel enrichment, burnup calculations, and waste management all trace to binding energy considerations.\n- **Particle physics**: Quark binding energy inside protons and neutrons follows the same E = mc² framework — \"chromodynamic binding energy\" contributes ~99% of proton mass.\n\n### Structural Abstraction\nBinding energy = (free component energies) − (bound system energy) is a universal concept: chemical bonds (eV), nuclear bonds (MeV), quark confinement (GeV). The BE/A curve's peak represents the optimal trade-off between attractive and repulsive forces — a pattern that appears in cluster physics, molecular stability, and gravitational collapse.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 294,
+        "endLine": 311
+      }
+    },
+    {
+      "assetId": "phys.mod.binding-energy/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.binding-energy",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.mod.nuclear-reactions provides the Q-value framework (Δm → energy) needed here. Students who completed that blueprint can immediately compute mass defects and binding energies — the prerequisite is necessary and sufficient.\n\n### Unlock Readiness\nThis blueprint directly unlocks phys.mod.nuclear-fission, phys.mod.nuclear-fusion, and phys.mod.nuclear-models — all of which require fluency with the BE/A curve and the meaning of binding energy per nucleon.\n\n### Suggested Flag\nThe SEMF is optional in a first course; the essential content (mass defect, BE, BE/A curve interpretation) can stand alone. Flag SEMF as enrichment for advanced students.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.binding-energy.md",
+        "startLine": 311,
+        "endLine": 325
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

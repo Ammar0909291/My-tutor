@@ -1,0 +1,463 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.refrigerators-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.refrigerators",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:31bba737a9016191b6404510e705aa73870cdc696ebeb2dca5e8acca466b004a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.refrigerators.md": "sha256:166cdc014b106ab4b08eb451402d066b789db11544367c4d16964033265f4da3"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "phys.therm.refrigerators",
+    "name": "Refrigerators and Heat Pumps",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.therm.carnot-cycle"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.refrigerators-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.refrigerators (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.refrigerators.md": "sha256:166cdc014b106ab4b08eb451402d066b789db11544367c4d16964033265f4da3"
+      },
+      "contentHash": "sha256:2a82cb39be4af9d02354de23527e83492a0fb5d188c8e215812cea60b837df7f",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-2 (addresses MC-REFRIGERATOR-CREATES-COLD, MC-COP-CANNOT-EXCEED-ONE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.refrigerators.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.refrigerators.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.refrigerators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.refrigerators\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.refrigerators/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "(Foundational — basic COP calculation)",
+      "content": "### WE-1 (Foundational — basic COP calculation)\n\n**Problem:** A refrigerator removes 150 J of heat from its cold interior for every 50 J of work the compressor performs. Find: (a) Q_H, (b) COP_R.\n\n**Worked solution:**\n\n*Step 1 — First law for a refrigeration cycle:*\n$$Q_H = Q_C + W = 150\\text{ J} + 50\\text{ J} = 200\\text{ J}$$\n\n*Step 2 — COP for refrigerator:*\n$$\\text{COP}_R = \\frac{Q_C}{W} = \\frac{150}{50} = 3.0$$\n\n*Step 3 — Interpret:*\nFor every joule of electricity consumed, the refrigerator removes 3 joules from the cold space and deposits 4 joules (Q_H = Q_C + W) into the kitchen air. This is why kitchens warm up when refrigerator doors are left open — the net effect is heating the room.\n\n**Answer:** Q_H = 200 J; COP_R = 3.0\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 96,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "(Core — Carnot COP and comparison to real device)",
+      "content": "### WE-2 (Core — Carnot COP and comparison to real device)\n\n**Problem:** A refrigerator operates between T_C = 5°C and T_H = 35°C. (a) Find the Carnot COP. (b) The actual COP is 2.4. What is the second-law efficiency?\n\n**Worked solution:**\n\n*Step 1 — Convert temperatures to Kelvin:*\nT_C = 278 K, T_H = 308 K\n\n*Step 2 — Carnot COP for refrigerator:*\n$$\\text{COP}_{R,\\text{Carnot}} = \\frac{T_C}{T_H - T_C} = \\frac{278}{308 - 278} = \\frac{278}{30} = 9.27$$\n\n*Step 3 — Second-law efficiency:*\n$$\\varepsilon_R = \\frac{\\text{COP}_R}{\\text{COP}_{R,\\text{Carnot}}} = \\frac{2.4}{9.27} = 0.259 = 25.9\\%$$\n\n*Step 4 — Interpret:*\nThe real refrigerator achieves about 26% of the theoretical maximum. The gap is due to irreversibilities: non-quasi-static compression, throttling losses, heat conduction across finite temperature gaps, friction in the compressor.\n\n**Answer:** COP_Carnot = 9.27; ε_R = 25.9%\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 96,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "(Advanced — heat pump economics)",
+      "content": "### WE-3 (Advanced — heat pump economics)\n\n**Problem:** A heat pump heats a house by extracting heat from outside air at −10°C and pumping it inside at 22°C. The heat pump requires 2.5 kW of electrical power. (a) Find COP_HP,Carnot. (b) If the actual COP_HP = 3.2, what is the rate of heat delivery to the house?\n\n**Worked solution:**\n\n*Step 1 — Temperatures in Kelvin:*\nT_C = 263 K, T_H = 295 K\n\n*Step 2 — Carnot COP (heat pump):*\n$$\\text{COP}_{HP,\\text{Carnot}} = \\frac{T_H}{T_H - T_C} = \\frac{295}{295 - 263} = \\frac{295}{32} = 9.22$$\n\n*Step 3 — Actual rate of heat delivery:*\n$$\\dot{Q}_H = \\text{COP}_{HP} \\times \\dot{W} = 3.2 \\times 2.5\\text{ kW} = 8.0\\text{ kW}$$\n\n*Step 4 — Compare to electric resistance heater:*\nElectric resistance heating: COP = 1.0 → 2.5 kW of electricity delivers only 2.5 kW of heat.\nHeat pump: 2.5 kW of electricity delivers 8.0 kW of heat → 3.2× more effective.\n\n**Answer:** COP_HP,Carnot = 9.22; Q̇_H = 8.0 kW (heat pump delivers 3.2× more heat than resistance heater)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 96,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/misconception/MC-REFRIGERATOR-CREATES-COLD",
+      "kind": "misconception",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "**Trigger signal:** Student says \"the refrigerator makes cold air\" or \"the refrigerator creates coldness\" or thinks the fridge produces something called \"cold.",
+      "content": "### MC-REFRIGERATOR-CREATES-COLD\n\n**Trigger signal:** Student says \"the refrigerator makes cold air\" or \"the refrigerator creates coldness\" or thinks the fridge produces something called \"cold.\"\n\n**Conflict evidence [P28]:** \"The interior of a fridge at 5°C contains the same molecules as room air at 25°C — they haven't been replaced with 'cold molecules.' What changed is energy: the refrigerator moved thermal energy OUT of the interior. Cold is the absence of thermal energy, not a substance. Measurement: Q_C = 150 J removed from interior; the interior drops in temperature because it lost energy, not because cold was added.\"\n\n**Bridge text [P30]:** \"Heat is what moves — it flows from the cold interior to the hot kitchen via the refrigeration cycle. The interior gets colder because it has LESS thermal energy. 'Cold' is a relative term for low thermal energy, not a substance that enters from somewhere.\"\n\n**Replacement text [P31]:** \"Refrigerators move heat, not cold. The cycle extracts thermal energy Q_C from the cold reservoir (interior) and rejects Q_H = Q_C + W to the hot reservoir (room). The interior cools because it loses thermal energy. There is no 'cold substance' — only heat transfer driven by work input.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Q_C is heat removed from the cold interior\" | \"Q_C is cold added to the interior\" |\n| \"The fridge interior cools because heat is removed\" | \"The fridge interior cools because cold is pumped in\" |\n| \"COP_R = Q_C/W (heat removed per unit work)\" | \"COP_R = cold created per unit work\" |\n\n**s6_path:** Use the energy flow diagram explicitly — show Q_C leaving the interior (arrow out), W entering the compressor, Q_H leaving the condenser coils (arrow to room). Trace energy, not temperature.\n\n---",
+      "localKey": "MC-REFRIGERATOR-CREATES-COLD",
+      "language": "en",
+      "refs": [
+        "MC-REFRIGERATOR-CREATES-COLD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/misconception/MC-COP-CANNOT-EXCEED-ONE",
+      "kind": "misconception",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "**Trigger signal:** Student is confused that COP > 1 is possible and says \"efficiency can't be more than 100%\" or thinks COP > 1 violates thermodynamics.",
+      "content": "### MC-COP-CANNOT-EXCEED-ONE\n\n**Trigger signal:** Student is confused that COP > 1 is possible and says \"efficiency can't be more than 100%\" or thinks COP > 1 violates thermodynamics.\n\n**Conflict evidence [P28]:** \"COP is NOT efficiency in the heat-engine sense. Efficiency η = W_out/Q_H is bounded by 1 because you can't get more work out than heat in. But COP_R = Q_C/W measures something different: how much heat you MOVE per unit work input. You move Q_C AND also bring along the work energy — so Q_H = Q_C + W > W, and COP = Q_C/W can be >> 1 without violating any law. A typical fridge: COP = 3–5. No contradiction.\"\n\n**Bridge text [P30]:** \"Heat engines convert heat to work: efficiency = output/input ≤ 1 makes sense for a conversion process. Refrigerators move heat using work — you're not converting anything, you're transporting. Moving more heat than the work you spend is perfectly legal thermodynamically — the second law only sets the Carnot ceiling, it doesn't prevent COP > 1.\"\n\n**Replacement text [P31]:** \"COP is not the same as thermodynamic efficiency. COP_R = Q_C/W can exceed 1 because Q_C + W = Q_H — you move Q_C of heat with W of work, and the second law simply requires COP ≤ COP_Carnot = T_C/(T_H−T_C). This Carnot limit is often >> 1 for small temperature differences.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"COP_R = Q_C/W can be 3, 5, or higher (legal)\" | \"COP > 1 violates conservation of energy\" |\n| \"Carnot COP sets the maximum, not a value of 1\" | \"The maximum possible COP is 1\" |\n| \"Heat pump COP_HP = COP_R + 1 always > 1\" | \"COP > 1 would be a perpetual motion machine\" |\n\n**s6_path:** Show the energy balance explicitly: Q_H = Q_C + W. Both Q_C and W enter the hot side. You pay W but move Q_C + W worth of heat. COP = Q_C/W > 1 if Q_C > W, which is normal.\n\n---",
+      "localKey": "MC-COP-CANNOT-EXCEED-ONE",
+      "language": "en",
+      "refs": [
+        "MC-COP-CANNOT-EXCEED-ONE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 270,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-COP-CANNOT-EXCEED-ONE\",\"MC-REFRIGERATOR-CREATES-COLD\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-REFRIGERATOR-CREATES-COLD",
+        "MC-COP-CANNOT-EXCEED-ONE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 276,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 281,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 286,
+        "endLine": 286
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 290,
+        "endLine": 290
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 291,
+        "endLine": 291
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-7\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 292,
+        "endLine": 292
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 293,
+        "endLine": 293
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "close",
+      "content": "{\"id\":\"TA-9\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 294,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "phys.therm.refrigerators/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.refrigerators",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState the Clausius statement of the second law and explain how it applies to refrigerators.\n\n**Answer:** \"Heat cannot spontaneously flow from a cold body to a hot body.\" A refrigerator moves heat from cold to hot — but this is not spontaneous; it requires work input W. Remove the compressor (W = 0) and heat would not flow cold → hot. The second law requires W > 0 for any refrigerator, setting COP < ∞.\n\n---\n\n### AP-2 (Bloom: Understand)\nA heat pump and an electric resistance heater both maintain a house at 21°C. The outdoor temperature is 5°C. The heat pump has COP_HP = 3.5. Which device uses less electricity for the same heating output? By what factor?\n\n**Answer:**\nElectric heater: COP = 1.0 (all electricity → heat, 1:1)\nHeat pump: COP_HP = 3.5 (3.5 J heat per J electricity)\nFor the same Q_H: the heat pump uses 1/3.5 = 0.286 as much electricity → uses **3.5× less electricity** than the resistance heater.\n\n---\n\n### AP-3 (Bloom: Apply)\nA Carnot refrigerator operates between −20°C and 30°C. If it removes 5000 J of heat from the cold reservoir, how much work is required?\n\n**Answer:**\nT_C = 253 K, T_H = 303 K\nCOP_Carnot = 253/(303−253) = 253/50 = 5.06\nW = Q_C/COP = 5000/5.06 = **988 J**\n\n---\n\n### AP-4 (Bloom: Analyze)\nA refrigerator runs for 1 hour consuming 0.5 kWh of electricity. In that hour, 1.8 kWh of heat is removed from the cold compartment. (a) Calculate COP_R. (b) Calculate Q_H. (c) Suppose T_C = 270 K and T_H = 300 K. Find the Carnot COP and compare.\n\n**Answer:**\nW = 0.5 kWh, Q_C = 1.8 kWh\n(a) COP_R = 1.8/0.5 = **3.6**\n(b) Q_H = Q_C + W = 1.8 + 0.5 = **2.3 kWh**\n(c) COP_Carnot = 270/(300−270) = 270/30 = **9.0**\nSecond-law efficiency = 3.6/9.0 = 40% — the real refrigerator operates at 40% of the Carnot ideal.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.refrigerators.md",
+        "startLine": 299,
+        "endLine": 340
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

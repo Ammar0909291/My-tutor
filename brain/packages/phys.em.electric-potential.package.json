@@ -1,0 +1,463 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.electric-potential-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.electric-potential",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:6e470f4257e67a0b1a1afbee0ffc455366ce4b3c3c391331a95e416bbbf269f2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.electric-potential.md": "sha256:df7d33147344d5a4a3806a1f59c490043475d46e7f5e6848b3f97865485c2b44"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "phys.em.electric-potential",
+    "name": "Electric Potential",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.gauss-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.electric-potential-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.electric-potential (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.electric-potential.md": "sha256:df7d33147344d5a4a3806a1f59c490043475d46e7f5e6848b3f97865485c2b44"
+      },
+      "contentHash": "sha256:af9d38fde870d1e9dcd3cfa495d33a6be1a2d1fa1a7dd364c290663442ad372e",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-2 (addresses MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD, MC-ELECTRIC-POTENTIAL-IS-A-VECTOR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-potential.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-potential.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-potential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-potential\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.electric-potential/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-potential",
+      "title": "(Potential at a point from multiple charges)",
+      "content": "### WE-1 (Potential at a point from multiple charges)\n\n**Problem:** Two charges: q₁ = +5 nC at origin, q₂ = −3 nC at x = 0.40 m. Find the electric potential at x = 0.20 m (midpoint).\n\n**Worked solution:**\n\n*Step 1 — V from q₁ (r₁ = 0.20 m):*\n$$V_1 = \\frac{kq_1}{r_1} = \\frac{(8.99\\times10^9)(5\\times10^{-9})}{0.20} = \\frac{44.95}{0.20} = 224.75\\text{ V}$$\n\n*Step 2 — V from q₂ (r₂ = 0.20 m):*\n$$V_2 = \\frac{kq_2}{r_2} = \\frac{(8.99\\times10^9)(-3\\times10^{-9})}{0.20} = \\frac{-26.97}{0.20} = -134.85\\text{ V}$$\n\n*Step 3 — Total V (scalar sum):*\nV = V₁ + V₂ = 224.75 − 134.85 = **89.9 V ≈ 90 V**\n\n**Answer:** V = 90 V at the midpoint.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 82,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-potential",
+      "title": "(Work from potential difference)",
+      "content": "### WE-2 (Work from potential difference)\n\n**Problem:** An electron (q = −e = −1.602 × 10⁻¹⁹ C) is accelerated from rest through a potential difference of ΔV = 1000 V (from − plate to + plate). Find its final kinetic energy and speed.\n\n**Worked solution:**\n\n*Step 1 — Work done on electron:*\nW = q ΔV = (−1.602×10⁻¹⁹)(+1000) = −1.602×10⁻¹⁶ J\n\nWait — the electron moves from low to high potential (−→+). V_B − V_A = +1000 V.\nEnergy gained by electron: ΔKE = −qΔV = −(−e)(+1000) = +e×1000 = +1.602×10⁻¹⁶ J ✓\n\n*Step 2 — Final speed (starting from rest):*\n$$\\frac{1}{2}mv^2 = 1.602\\times10^{-16}\\text{ J}$$\n$$v = \\sqrt{\\frac{2\\times1.602\\times10^{-16}}{9.11\\times10^{-31}}} = \\sqrt{3.517\\times10^{14}} = 1.876\\times10^7\\text{ m/s} \\approx 18.8\\text{ Mm/s}$$\n\n(About 6% of the speed of light — relativistic corrections small but present.)\n\n**Answer:** KE = 1.602 × 10⁻¹⁶ J = 1000 eV; v ≈ 1.88 × 10⁷ m/s\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 82,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-potential",
+      "title": "(E from V)",
+      "content": "### WE-3 (E from V)\n\n**Problem:** The electric potential in a region varies as V = 3x² − 5y (in volts, with x and y in meters). Find the electric field E at the point (2, 1).\n\n**Worked solution:**\n\n$$E_x = -\\frac{\\partial V}{\\partial x} = -6x$$\n$$E_y = -\\frac{\\partial V}{\\partial y} = -(-5) = +5\\text{ V/m}$$\n\nAt (2, 1): E_x = −6(2) = −12 V/m; E_y = +5 V/m\n\n$$\\vec{E} = -12\\hat{x} + 5\\hat{y}\\text{ V/m}$$\n$$|E| = \\sqrt{144+25} = \\sqrt{169} = 13\\text{ V/m}$$\n\n**Answer:** E⃗ = (−12x̂ + 5ŷ) V/m; magnitude = 13 V/m.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 82,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/misconception/MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-potential",
+      "title": "**Trigger signal:** Student uses V and E interchangeably, or says \"higher voltage means stronger field everywhere.",
+      "content": "### MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD\n\n**Trigger signal:** Student uses V and E interchangeably, or says \"higher voltage means stronger field everywhere.\"\n\n**Conflict evidence [P28]:** \"Inside a conductor in electrostatics: E = 0 everywhere, but V ≠ 0 (V equals the surface potential, which is nonzero if charged). Two charged conductors can have the same voltage but different E fields (depending on shape and size). Conversely, a region with large E can exist between points at potentials that differ by the same ΔV as a region with small E over a larger distance (ΔV = E × d for uniform field). V and E are related by E = −dV/dx, not equal.\"\n\n**Bridge text [P30]:** \"Voltage (V) is potential energy per charge — a scalar, in joules per coulomb. Electric field (E) is force per charge — a vector, in newtons per coulomb. They are related: E = −dV/dr. A steep voltage slope → strong field; a flat voltage region → weak field. A conductor can be at 1000 V with E = 0 inside — the voltage is like altitude, the field is like slope (steepness).\"\n\n**Replacement text [P31]:** \"V and E are different quantities. V (volts) is electric potential energy per unit charge — a scalar. E (N/C) is force per unit charge — a vector. They are related by E = −∇V: the field points in the direction of decreasing V. Large V does not mean large E — a conductor can have V = 1000 V everywhere inside it with E = 0. The field depends on how V changes in space, not on its absolute value.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"E = −dV/dr (field = negative gradient of potential)\" | \"E = V (field equals voltage)\" |\n| \"Inside conductor: E = 0, V = constant (nonzero)\" | \"V = 0 wherever E = 0\" |\n| \"ΔV = Ed for uniform field; E depends on the gradient\" | \"Higher voltage always means stronger field\" |\n\n**s6_path:** Altitude analogy: a flat plateau at high altitude has no slope (E = 0) but is at high potential (V large). A steep cliff at low altitude has a strong slope (E large) with smaller V.\n\n---",
+      "localKey": "MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD",
+      "language": "en",
+      "refs": [
+        "MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/misconception/MC-ELECTRIC-POTENTIAL-IS-A-VECTOR",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-potential",
+      "title": "**Trigger signal:** Student tries to add potentials as vectors, or draws V with arrows.",
+      "content": "### MC-ELECTRIC-POTENTIAL-IS-A-VECTOR\n\n**Trigger signal:** Student tries to add potentials as vectors, or draws V with arrows.\n\n**Conflict evidence [P28]:** \"V = kQ/r — no direction. V is a scalar (just a number with units, possibly negative). Adding potentials from two charges: V_total = V₁ + V₂ (arithmetic, not vector addition). Compare with E: E is a vector and requires component addition (E_x = ΣE_{x,i}; E_y = ΣE_{y,i}). The scalar nature of V is the main computational advantage — much simpler than vector E calculation, especially for many charges.\"\n\n**Bridge text [P30]:** \"Potential energy is a scalar (like gravitational PE = mgh — no direction). Electric potential is energy per charge, so it is also a scalar. Only the field E (force per charge) is a vector. When multiple charges create fields, you add vectors; when they create potentials, you add numbers.\"\n\n**Replacement text [P31]:** \"Electric potential V is a scalar — it has magnitude (and sign) but no direction. V_total from multiple charges = V₁ + V₂ + V₃ + ... (simple algebraic sum, including signs). This is V's computational advantage over E: superposition of E requires vector addition (components), while superposition of V requires only arithmetic. V is not drawn with arrows — only E and force vectors have directions.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"V = kq₁/r₁ + kq₂/r₂ (scalar sum)\" | \"V is a vector; add V₁ and V₂ with components\" |\n| \"V > 0 near positive charges, V < 0 near negative charges\" | \"V has a direction pointing from high to low\" |\n| \"E has direction (vector); V has no direction (scalar)\" | \"V arrows point from high to low potential\" |\n\n**s6_path:** Contrast: draw E arrows and V contour lines. Arrows need direction; contour lines just have values (numbers). Students can draw \"V = +50 V\" on a contour without any arrow.\n\n---",
+      "localKey": "MC-ELECTRIC-POTENTIAL-IS-A-VECTOR",
+      "language": "en",
+      "refs": [
+        "MC-ELECTRIC-POTENTIAL-IS-A-VECTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 238,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-ELECTRIC-POTENTIAL-IS-A-VECTOR\",\"MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD",
+        "MC-ELECTRIC-POTENTIAL-IS-A-VECTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 244,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 254,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 258,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 259,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-7\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 260,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 261,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-potential",
+      "title": "close",
+      "content": "{\"id\":\"TA-9\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 262,
+        "endLine": 262
+      }
+    },
+    {
+      "assetId": "phys.em.electric-potential/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.electric-potential",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState the relationship between electric field E and electric potential V.\n\n**Answer:** E⃗ = −∇V (the electric field is the negative gradient of the electric potential). In one dimension: E = −dV/dx. The field points in the direction of decreasing V.\n\n---\n\n### AP-2 (Bloom: Understand)\nExplain why the surface of a conductor in electrostatics is an equipotential surface.\n\n**Answer:** Inside a conductor in electrostatic equilibrium, E = 0. Since E = −∇V, we need ∇V = 0 inside — meaning V does not change inside. Therefore V = constant throughout the conductor, including its surface. Any two points on the conductor's surface are at the same potential — it is an equipotential surface.\n\n---\n\n### AP-3 (Bloom: Apply)\nA proton is released from rest at a point where V = +800 V and moves to where V = +300 V. Find its kinetic energy.\n\n**Answer:** The proton (positive charge) moves from high to low potential → electric field does positive work.\nW = q(V_i − V_f) = (1.602×10⁻¹⁹)(800 − 300) = (1.602×10⁻¹⁹)(500) = **8.01 × 10⁻¹⁷ J = 500 eV**\n\n---\n\n### AP-4 (Bloom: Analyze)\nTwo conducting spheres (radii R₁ = 5 cm and R₂ = 15 cm) are connected by a thin wire. Sphere 1 carries initial charge Q₁, sphere 2 carries Q₂. After connection, what is the ratio of surface charge densities σ₁/σ₂?\n\n**Answer:** After connection, they reach the same potential: V₁ = V₂ → kQ₁'/R₁ = kQ₂'/R₂ → Q₁'/Q₂' = R₁/R₂ = 1/3.\nσᵢ = Qᵢ'/(4πRᵢ²). σ₁/σ₂ = (Q₁'/Q₂')(R₂²/R₁²) = (R₁/R₂)(R₂/R₁)² = R₂/R₁ = 15/5 = **3**.\nThe smaller sphere has 3× higher surface charge density — hence higher local field (lightning rods are sharp to concentrate field).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-potential.md",
+        "startLine": 267,
+        "endLine": 300
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

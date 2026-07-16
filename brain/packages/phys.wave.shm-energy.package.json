@@ -1,0 +1,323 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.shm-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.shm-energy",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:d3fa527c4e5cf1f1354164c07b48dc7c3f851bc494c663407ed3436bc690b6cc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.shm-energy.md": "sha256:e2688ad9b08734760abc57ac0a72165b38a3651f4d7330136cb84ed844b5bcd2"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.shm-energy",
+    "name": "Energy in Simple Harmonic Motion",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.wave.shm"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.shm-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.shm-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.shm-energy.md": "sha256:e2688ad9b08734760abc57ac0a72165b38a3651f4d7330136cb84ed844b5bcd2"
+      },
+      "contentHash": "sha256:effddda0ae303a34352acd963b0b275b168cbb89aea5b78c21c44c25dd22d8c4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.shm-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.shm-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.shm-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.shm-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.shm-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.shm-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.shm-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.shm-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.shm-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.shm-energy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.shm-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.shm-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.shm-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.shm-energy.md#TA-4 (addresses MC-SHM-ENERGY-CONSTANT-KE, MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.shm-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.shm-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.shm-energy/misconception/MC-SHM-ENERGY-CONSTANT-KE",
+      "kind": "misconception",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "- **Trigger signal:** Student thinks the kinetic energy of a SHM particle is constant, or says \"the particle moves at constant speed so KE doesn't change.",
+      "content": "### MC-SHM-ENERGY-CONSTANT-KE\n- **Trigger signal:** Student thinks the kinetic energy of a SHM particle is constant, or says \"the particle moves at constant speed so KE doesn't change.\"\n- **Conflict evidence [P28]:** \"Kinetic energy in SHM is NOT constant. KE = ½mv² = ½m(ω√(A²−x²))² = ½mω²(A²−x²). At x=0: KE = ½mω²A² (maximum). At x=±A: KE = 0 (particle momentarily at rest). The particle moves fastest through the centre and is stationary at the extremes — we established this in phys.wave.shm. Since KE = ½mv² and v varies, KE must vary. In a full oscillation, KE varies sinusoidally between 0 and ½mω²A².\"\n- **Bridge text [P30]:** \"Total energy E = KE + PE = ½mω²A² (constant). As KE decreases (particle slowing near amplitude), PE increases (spring stores energy). As KE increases (particle speeding toward equilibrium), PE decreases. The total is always ½mω²A². Energy oscillates between kinetic and potential forms.\"\n- **Replacement text [P31]:** \"KE = ½mω²(A²−x²): zero at x=±A, maximum at x=0. PE = ½mω²x²: maximum at x=±A, zero at x=0. Total E = ½mω²A² = constant (conserved in ideal SHM — no damping).\"\n- **Discrimination pairs [P33]:**\n  - At x = 0: KE = ½mω²A², PE = 0, E = ½mω²A² ✓\n  - At x = A: KE = 0, PE = ½mω²A², E = ½mω²A² ✓\n- **s6_path:** \"Swing on a pendulum: fastest at the bottom (pure KE), stationary at the top (pure PE). Energy swaps back and forth. This is SHM energy exchange.\"\n\n---",
+      "localKey": "MC-SHM-ENERGY-CONSTANT-KE",
+      "language": "en",
+      "refs": [
+        "MC-SHM-ENERGY-CONSTANT-KE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/misconception/MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION",
+      "kind": "misconception",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "- **Trigger signal:** Student calculates different total energies at different positions in a SHM cycle.",
+      "content": "### MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION\n- **Trigger signal:** Student calculates different total energies at different positions in a SHM cycle.\n- **Conflict evidence [P28]:** \"Total mechanical energy in ideal (undamped) SHM is conserved: E_total = KE + PE = ½mω²A² at every position. The positions where students find different totals are calculation errors — usually forgetting to evaluate PE at non-equilibrium positions. At x = 3 cm in a spring-mass with A = 5 cm: KE = ½mω²(25−9) cm² = ½mω²×16 cm²; PE = ½mω²×9 cm²; sum = ½mω²×25 cm² = ½mω²A². It always works out to the same total.\"\n- **Bridge text [P30]:** \"At any position x: KE + PE = ½mω²(A²−x²) + ½mω²x² = ½mω²A². The x² terms cancel. Total energy = ½mω²A² always — independent of position.\"\n- **Replacement text [P31]:** \"E_total = ½mω²A² = ½kA². This is constant throughout the motion (ideal SHM). If you compute KE+PE at any x and get a different answer, recheck your PE calculation.\"\n- **Discrimination pairs [P33]:**\n  - x = 0: E = 0 + ½kA² = ½kA² ✓ (wait — at x=0, PE = ½k×0 = 0; KE = ½kA²) ✓\n  - x = A/2: KE = ½k(A²−A²/4) = ½k×¾A² = ¾(½kA²); PE = ½k(A/2)² = ¼(½kA²×2) = ½kA²/4 = ¼E; sum = ¾E+¼E = E ✓\n- **s6_path:** \"If your total energy changes between positions, your PE formula is wrong. The total is always ½kA².\"\n\n---",
+      "localKey": "MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION",
+      "language": "en",
+      "refs": [
+        "MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "PE and KE in SHM",
+      "content": "{\"id\":\"TA-1\",\"title\":\"PE and KE in SHM\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 76,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "Energy–Position and Energy–Time Graphs",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Energy–Position and Energy–Time Graphs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 97,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "Deriving Velocity from Energy Conservation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Deriving Velocity from Energy Conservation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 109,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "Effect of Amplitude on Energy",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Effect of Amplitude on Energy\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-SHM-ENERGY-CONSTANT-KE\",\"MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SHM-ENERGY-CONSTANT-KE",
+        "MC-SHM-TOTAL-ENERGY-DEPENDS-ON-POSITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 121,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Energy at different positions**\n\"Spring-mass: k=500 N/m, A=6 cm. Find E_total and KE, PE at x=0, 3 cm, 6 cm. Confirm E_total is constant.\"\n\n*Target:* E_total = ½×500×(0.06)² = 0.9 J. At x=0: KE=0.9 J, PE=0. At x=3cm: PE=½×500×(0.03)²=0.225 J, KE=0.675 J; sum=0.9 J ✓. At x=6cm: PE=0.9 J, KE=0; sum=0.9 J ✓.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 177,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Amplitude effect**\n\"A SHM system has E=0.4 J at amplitude A. What is the energy if: (a) A doubles; (b) A is halved; (c) k doubles at the same A?\"\n\n*Target:* (a) A×2: E×4 = 1.6 J. (b) A÷2: E÷4 = 0.1 J. (c) k×2 at same A: E = ½(2k)A² = 2×0.4 = 0.8 J (energy doubles).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 177,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Fraction of energy as KE**\n\"At what displacement x is the KE equal to twice the PE in a SHM system with amplitude A?\"\n\n*Target:* KE = 2PE → E−PE = 2PE → E = 3PE → ½kA² = 3×½kx² → A² = 3x² → x = A/√3 = A√3/3 ≈ 0.577A.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 177,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Energy-time graph**\n\"Sketch KE(t) and PE(t) for one full period of SHM starting from x = A at t = 0. What is the period of the energy oscillations?\"\n\n*Target:* KE(t) = ½mω²A²cos²(ωt): starts at zero, rises to maximum at t=T/4 (x=0), back to zero at T/2, etc. PE(t) = ½mω²A²sin²(ωt): starts at E_total, falls to zero at T/4, back to E_total at T/2. Both oscillate with period T/2 (twice the SHM frequency 2f). Neither is ever negative.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 177,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: find all parameters from energy and position**\n\"A spring-mass oscillator: at x = 4 cm the speed is 1.5 m/s; at x = 8 cm the speed is 0. Find: (a) amplitude; (b) spring constant if m = 0.3 kg; (c) total energy; (d) maximum speed.\"\n\n*Target:* (a) Speed = 0 at x = 8 cm → A = 8 cm = 0.08 m. (b) ω² = (v at 4 cm)² / (A²−(4cm)²) = (1.5)²/(0.0064−0.0016) = 2.25/0.0048 = 468.75 rad²/s². k = mω² = 0.3×468.75 = 140.6 N/m. (c) E = ½kA² = ½×140.6×0.0064 = 0.45 J. (d) v_max = Aω = 0.08×√468.75 = 0.08×21.65 = 1.732 m/s.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 177,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.wave.shm-energy/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.shm-energy",
+      "title": "Adaptive Flags",
+      "content": "- **Consistent units**: A and x must be in metres when using k in N/m. Students often work in cm throughout and get incorrect energies. Enforce metre conversion at the start of every example.\n- **PE formula**: PE = ½kx² = ½mω²x². Both forms are equivalent (since k = mω²). The ½kx² form is usually simpler when k is given; the ½mω²x² form when ω is given.\n- **E_total = ½kA² check**: after every energy calculation, verify KE + PE = ½kA². If it doesn't check out, the error is almost always in the PE evaluation (forgot the ½, used diameter instead of radius, or mixed units).\n- **Energy oscillates at 2ω**: KE and PE each oscillate with angular frequency 2ω (time period T/2, twice the SHM frequency). This is because sin²(ωt) and cos²(ωt) have period π/ω = T/2. This surprises students who expect energy to oscillate at the same frequency as displacement.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm-energy.md",
+        "startLine": 243,
+        "endLine": 252
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

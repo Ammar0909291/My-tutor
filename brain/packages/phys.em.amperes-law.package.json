@@ -1,0 +1,326 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.amperes-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.amperes-law",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:e4a99c4eecf9ae9ebed50c40ce9c9e601244443ea7256db9664c789b3c8e73c2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.amperes-law.md": "sha256:efefce84c1ffe4102764910d92332622004f61c5415af4c5db8a2af511896730"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.amperes-law",
+    "name": "Ampere's Law",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.em.biot-savart"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.amperes-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.amperes-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.amperes-law.md": "sha256:efefce84c1ffe4102764910d92332622004f61c5415af4c5db8a2af511896730"
+      },
+      "contentHash": "sha256:67d4bcd94c5551715a3b875146a611778ae53886a7917ade7c5a29a5bedeee5e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.amperes-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.amperes-law.md#TA-1 (addresses MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.amperes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.amperes-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.amperes-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.amperes-law.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.amperes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.amperes-law\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.amperes-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.amperes-law.md#TA-3 (addresses MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.amperes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.amperes-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.amperes-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.amperes-law.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.amperes-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.amperes-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.amperes-law/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Field Inside and Outside a Wire",
+      "content": "### WE-1 — Field Inside and Outside a Wire\n**Problem:** A solid copper wire of radius a = 2.0 mm carries I = 10 A (uniform current density). Find B at: (a) r = 1.0 mm (inside), (b) r = 2.0 mm (surface), (c) r = 5.0 mm (outside).\n\n**Solution:**\n(a) r = 1.0 mm < a: B = μ₀Ir/(2πa²) = (4π×10⁻⁷ × 10 × 1.0×10⁻³) / (2π × (2.0×10⁻³)²)  \n= (4π×10⁻⁶) / (2π × 4×10⁻⁶) = **0.50×10⁻³ T = 0.50 mT**\n\n(b) r = a = 2.0 mm: B = μ₀I/(2πa) = (4π×10⁻⁷ × 10)/(2π × 2.0×10⁻³) = **1.00 mT** (same from both formulas at boundary ✓)\n\n(c) r = 5.0 mm > a: B = μ₀I/(2πr) = (4π×10⁻⁷ × 10)/(2π × 5.0×10⁻³) = **0.40 mT**  \n(B decreases for r > a, as expected: further from wire → weaker field)\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 81,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Solenoid Field",
+      "content": "### WE-2 — Solenoid Field\n**Problem:** A solenoid has 800 turns, length 40 cm, radius 2 cm, I = 3.0 A. Find B inside and verify the end field is B/2.\n\n**Solution:**\nn = 800/0.40 = 2000 turns/m  \nB_inside = μ₀nI = 4π×10⁻⁷ × 2000 × 3.0 = 4π×10⁻⁷ × 6000 = **7.54×10⁻³ T = 7.54 mT**\n\nAt the end of a finite solenoid (half-infinite): by symmetry, only half the field of the infinite case leaks out:  \nB_end = ½B_inside = **3.77 mT** (result from Biot-Savart integration of semi-infinite solenoid)\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 81,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Displacement Current in Capacitor",
+      "content": "### WE-3 — Displacement Current in Capacitor\n**Problem:** A parallel-plate capacitor (A = 100 cm², d = 1.0 mm) is connected to a source giving dV/dt = 10⁶ V/s. Find: (a) displacement current I_d, (b) B between the plates at r = 3.0 cm from the axis.\n\n**Solution:**\nC = ε₀A/d = 8.85×10⁻¹² × 100×10⁻⁴ / 1.0×10⁻³ = **88.5 pF**\n\n(a) I_d = C × dV/dt = 88.5×10⁻¹² × 10⁶ = **88.5 μA**  \nOr: I_d = ε₀ dΦ_E/dt = ε₀ A × d(E)/dt = ε₀ × A × (1/d) × dV/dt = C × dV/dt ✓\n\n(b) Treat displacement current like a real current (uniformly distributed over area A = 100 cm²):  \nAt r = 3.0 cm: check if r < radius of plates (radius ≈ √(A/π) = √(10⁻²/π) = 5.6 cm), so r = 3.0 cm is inside.  \nFraction of displacement current enclosed: I_d_enc = I_d × (πr²/A) = 88.5×10⁻⁶ × π(0.03)²/10⁻² = 88.5×10⁻⁶ × 0.2827 = 25.0 μA  \nB = μ₀I_d_enc/(2πr) = (4π×10⁻⁷ × 25.0×10⁻⁶)/(2π × 0.03) = **1.67×10⁻¹⁰ T** (extremely small, as expected for a capacitor)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 81,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/misconception/MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY",
+      "kind": "misconception",
+      "conceptId": "phys.em.amperes-law",
+      "title": "- **trigger_signal:** Student says \"B on the Amperian loop is only due to the current inside the loop; outside currents don't matter.",
+      "content": "### MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY\n- **trigger_signal:** Student says \"B on the Amperian loop is only due to the current inside the loop; outside currents don't matter.\"\n- **conflict_evidence [P28]:** \"Ampere's law ∮B·dl = μ₀I_enc is exact — but B in the integrand is the total field from ALL currents, not just enclosed ones. Outside currents contribute to B at every point on the loop. However, because of their geometry, their contributions to the line integral ∮B·dl cancel out around the closed path. The left side (total B integrated) equals the right side (μ₀ × enclosed current only) — but B itself includes all contributions.\"\n- **bridge_text [P30]:** \"Gauss's law analogy: ∮E·dA = Q_enc/ε₀. The E field at every point on the Gaussian surface is from ALL charges (inside and outside). But the surface integral evaluates to only the enclosed charge — outside charges' contributions to the integral cancel by symmetry of a closed surface. Same logic for Ampere: B is total, but ∮B·dl = μ₀I_enc.\"\n- **replacement_text [P31]:** \"B on the Amperian loop = total field from all currents. ∮B·dl = μ₀I_enc because outside currents' contributions to the line integral cancel around a closed loop. Never say 'B is only from enclosed current' — say 'the line integral equals μ₀I_enc.'\"\n- **discrimination_pairs [P33]:**\n  - Wrong: \"B at the loop = μ₀I_enc/(2πr)\" (only valid for infinite wire where B is purely from that wire by symmetry)\n  - Correct: \"B at the loop = total B; but ∮B·dl = μ₀I_enc\"\n  - When multiple currents are present: B is superposition; only I_enc contributes to the integral\n- **s6_path:** Work through a two-wire problem: place the Amperian loop enclosing only wire 1; B is from both wires, but compute ∮B·dl = μ₀I₁ exactly.\n\n---",
+      "localKey": "MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY",
+      "language": "en",
+      "refs": [
+        "MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/misconception/MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES",
+      "kind": "misconception",
+      "conceptId": "phys.em.amperes-law",
+      "title": "- **trigger_signal:** Student tries to use Ampere's law for a short wire, a bent wire, or a single turn of wire, expecting it to give B easily.",
+      "content": "### MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES\n- **trigger_signal:** Student tries to use Ampere's law for a short wire, a bent wire, or a single turn of wire, expecting it to give B easily.\n- **conflict_evidence [P28]:** \"For Ampere's law to give B without a full vector integral, B must be constant in magnitude and parallel to dl around the chosen loop — this requires high symmetry. For a short wire, B is not constant around any loop and is not parallel to any simple closed path. Ampere's law is still true but gives ∮B·dl = μ₀I_enc — an equation for the integral, not B itself. You'd need to evaluate B first (from Biot-Savart) to find the integral. Ampere's law only makes B easy to find when symmetry pins B's direction and magnitude on the loop.\"\n- **bridge_text [P30]:** \"Gauss's law for electricity: always true, but only makes calculating E easy for spherical, cylindrical, or planar symmetry. For an asymmetric charge, ∮E·dA = Q/ε₀ is correct but useless for finding E. Ampere's law is the magnetic analogue: always correct, only computationally powerful with symmetry.\"\n- **replacement_text [P31]:** \"Ampere's law ∮B·dl = μ₀I_enc is always true. It makes finding B easy ONLY when B is constant in magnitude and parallel to dl around the Amperian loop — achieved with cylindrical, planar, or toroidal symmetry. Otherwise, use Biot-Savart.\"\n- **discrimination_pairs [P33]:**\n  - Infinite straight wire: perfect cylindrical symmetry → Ampere's law gives B in one step\n  - Infinite solenoid: translational + cylindrical symmetry → Ampere's law easy\n  - Short wire segment: no symmetry → Ampere's law correct but useless; use Biot-Savart\n  - Single circular loop: no useful symmetry for Ampere → use Biot-Savart result\n- **s6_path:** Ask student to try Ampere's law for a circular loop at an off-axis point — show why no Amperian loop can extract B.\n\n---",
+      "localKey": "MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES",
+      "language": "en",
+      "refs": [
+        "MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 16,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.amperes-law",
+      "title": "The law and when to use it: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The law and when to use it: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 15,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Wire inside and outside: Block 1-B, WE-1",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Wire inside and outside: Block 1-B, WE-1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 24,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Solenoid and toroid: Block 1-B, WE-2",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Solenoid and toroid: Block 1-B, WE-2\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 27,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Displacement current: Block 1-C, WE-3",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Displacement current: Block 1-C, WE-3\",\"primitives\":[\"P36\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 33,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** Inside a long solenoid (n turns/m, current I), B equals:\n**(a) μ₀nI** (b) μ₀NI/(2πR) (c) μ₀I/(2πR) (d) μ₀I/(2R)\n\n**A2 (Short answer):** State Ampere's law and identify when it is most useful for calculating B.\n[∮B·dl = μ₀I_enc; most useful when B is constant and parallel to dl around the Amperian loop — requires high symmetry]\n\n**A3 (Fill-in):** For a solid cylindrical wire of radius a carrying current I, B inside (r < a) is proportional to ______.\n[r (B = μ₀Ir/(2πa²)); linear in r]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** A coaxial cable: inner wire (radius a, current I into page) and outer cylindrical shell (radius b, current I out of page). Find B at: (i) r < a, (ii) a < r < b, (iii) r > b.\n[(i) B = μ₀Ir/(2πa²) (inside inner conductor, I_enc = Ir²/a²). (ii) B = μ₀I/(2πr) (only inner wire enclosed). (iii) I_enc = I−I = 0 → B = 0. This is why coaxial cables have no external magnetic field — they shield their own magnetic field.]\n\n**B2:** A toroid has N = 400 turns, inner radius r₁ = 5 cm, outer radius r₂ = 8 cm, I = 2.0 A. Find B at r = 6.5 cm (midpoint) and outside.\n[Inside: B = μ₀NI/(2πr) = 4π×10⁻⁷×400×2.0/(2π×0.065) = 3.2×10⁻⁴/0.408 = 2.46×10⁻³ T. Outside: B = 0 (I_enc = 0).]\n\n**B3:** Explain why the displacement current resolves the paradox of choosing different surfaces for the same Amperian loop around a charging capacitor wire.\n[Flat surface: I_enc = I (conduction current). Bulging surface through gap: I_enc = 0 (no charges cross) but I_d = ε₀dΦ_E/dt = I (since capacitor voltage rises at dV/dt = I/C → dE/dt = I/(ε₀A)). Both surfaces give I_enc + I_d = I. Modified law is self-consistent.]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** A long solid cylindrical conductor (radius R = 5 mm) carries a non-uniform current density J = J₀(r/R) A/m² (increases toward the surface). Total current I = 10 A. (a) Find J₀. (b) Find B at r = R/2. (c) Find B at r = 2R.\n[(a) I = ∫₀ᴿ J(2πr)dr = ∫₀ᴿ J₀(r/R)2πr dr = 2πJ₀/R × R²/2 × ... = 2πJ₀∫₀ᴿ r²/R dr = 2πJ₀R²/3. So J₀ = 3I/(2πR²) = 3×10/(2π×25×10⁻⁶) = 1.91×10⁵ A/m². (b) I_enc(r=R/2) = 2πJ₀∫₀^{R/2} r²/R dr = 2πJ₀/(3R) × (R/2)³ = 2πJ₀R²/24. I_enc = I/8 = 1.25 A (since I_enc ∝ r³). B = μ₀I_enc/(2πr) = 4π×10⁻⁷×1.25/(2π×0.0025) = 10⁻⁴ T = 0.10 mT. (c) r = 2R: I_enc = I = 10A. B = μ₀I/(2π×2R) = 4π×10⁻⁷×10/(2π×0.01) = 2.0×10⁻⁴ T = 0.20 mT.]\n\n**C2 (Synthesis):** Why was Maxwell's addition of displacement current crucial for the prediction of electromagnetic waves? Explain the self-sustaining cycle.\n[Without I_d, ∮B·dl = μ₀I only — no current in vacuum → B cannot change in vacuum → no waves. With I_d = ε₀dΦ_E/dt: a changing E creates B (Ampere-Maxwell). Faraday's law: a changing B creates E. Combined: changing E → changing B → changing E → ... self-sustaining wave. Wave speed c = 1/√(μ₀ε₀) = 3×10⁸ m/s — Maxwell immediately recognised this as light.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 154,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks toroid formula) | Clarify: solenoid = μ₀nI; toroid = μ₀NI/(2πr); both use Ampere's law but different loops |\n| Probe B1 wrong (r > b region) | Show: Amperian circle encloses I_in + I_out = I − I = 0 → B = 0; this is coaxial cable's advantage |\n| Probe B3 incomplete | Walk through: I_d = C × dV/dt = I (at constant current charging); both surfaces give same ∮B·dl |\n| Probe C1 wrong (non-uniform J) | Integrate J(r) = J₀r/R over circle of radius r: I_enc = ∫₀ʳ J(r')2πr' dr' = 2πJ₀/R × r³/3 |\n| Student asks about magnetic shielding | Coaxial cable: B = 0 outside → no external field; use for high-frequency signal cables, RF equipment |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 264,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "phys.em.amperes-law/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.amperes-law",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Ampere's law is the magnetic analogue of Gauss's law — a powerful shortcut that turns hard integrals into simple algebra, but only when the geometry is symmetric enough. Today we'll learn when to use it and derive the key results that power solenoids and toroidal transformers.\"\n\n[P41 — Diagnostic]\n\"You know B = μ₀I/(2πR) for an infinite wire. Can you derive this from first principles without Biot-Savart? What symmetry would you exploit?\"\n→ Correct (circular symmetry, B constant around a circle): \"Exactly — let's formalise that.\"\n→ Incorrect: \"That intuition about circular symmetry is the key. Let's develop it.\"\n\n[P06 — Concrete anchor]\n\"Gauss's law for electricity: ∮E·dA = Q_enc/ε₀. The surface integral of E gives enclosed charge. Ampere's law: ∮B·dl = μ₀I_enc. The line integral of B gives enclosed current. Same logic, same power, same limitation: only useful when the integrand is forced to be constant by symmetry.\"\n\n[TA-1 — The law and when to use it: Block 1-A]\n\"∮B·dl = μ₀I_enc. Symmetry requirement. Compare with Biot-Savart.\"\n\n[P28 — Conflict evidence for MC-AMPERES-LAW-WORKS-FOR-ALL-GEOMETRIES]\n\"A bent wire or a short wire segment: no circular, planar, or toroidal symmetry. Ampere's law is true (∮B·dl = μ₀I_enc) but useless — you can't extract B because it's not constant around any simple loop. Use Biot-Savart for those. Ampere's law shines only for infinite/long straight wires, solenoids, and toroids.\"\n\n[P51 — Check-in]\n\"Name three geometries where Ampere's law makes B easy to find. What property makes each usable?\"\n\n[TA-2 — Wire inside and outside: Block 1-B, WE-1]\n\"Inside solid wire: B ∝ r (linear). Outside: B ∝ 1/r. Peak at surface.\"\n\n[TA-3 — Solenoid and toroid: Block 1-B, WE-2]\n\"Solenoid: B = μ₀nI inside; 0 outside. Walk Amperian loop through solenoid to show why.\"\n\n[P28 — Conflict evidence for MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY]\n\"B on the loop is from ALL currents. The integral ∮B·dl = μ₀I_enc — outside currents contribute to B everywhere on the loop, but their net contribution to the line integral cancels. Never confuse 'B is from enclosed current' with 'the integral equals μ₀I_enc.'\"\n\n[TA-4 — Displacement current: Block 1-C, WE-3]\n\"∮B·dl = μ₀(I + ε₀dΦ_E/dt). Resolves capacitor paradox. Enables EM waves.\"\n\n[P52 — Narrow]\n\"Three key results: B_wire = μ₀I/(2πr) (outside); B_solenoid = μ₀nI; B_toroid = μ₀NI/(2πr). Displacement current: I_d = ε₀dΦ_E/dt.\"\n\n[P62 — Retrieval seed]\n\"Write from memory: Ampere's law, B inside/outside wire, B solenoid, B toroid, displacement current formula.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Ampere's law ∮B·dl = μ₀I_enc: powerful with symmetry (wire, solenoid, toroid), useless without it. Inside a solid wire: B ∝ r. Outside: B ∝ 1/r. Displacement current completes Maxwell's equations and predicts EM waves.\"\n\n[P85 — Regulation tail]\n\"Shakiest: choosing the Amperian loop, the displacement current argument, or the inside-wire result?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the solid-wire retrieval quiz.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.amperes-law.md",
+        "startLine": 209,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

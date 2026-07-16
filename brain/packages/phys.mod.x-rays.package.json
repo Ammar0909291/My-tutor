@@ -1,0 +1,545 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.x-rays-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.x-rays",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:0e4f24c8430bcdf45a56a71ca3eafc2ac780a470c390cc5ca7e8d2e29ec25b5a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.x-rays.md": "sha256:cabff57401f0a81848b597cecbea9fc8bb1fde6b8440b649c151a79170229e7c"
+    },
+    "assetCount": 23,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 8,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mod.x-rays",
+    "name": "X-Rays and Their Properties",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mod.photons"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.x-rays-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.x-rays (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.x-rays.md": "sha256:cabff57401f0a81848b597cecbea9fc8bb1fde6b8440b649c151a79170229e7c"
+      },
+      "contentHash": "sha256:156602a3d68c85a29259b6599ec8b97859c13e5973e765e133047090d8e7aa05",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.x-rays.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.x-rays.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.x-rays"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.x-rays\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.x-rays.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.x-rays.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.x-rays"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.x-rays\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.x-rays.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.x-rays.md#TA-3 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.x-rays"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.x-rays\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.x-rays.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.x-rays.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.x-rays"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.x-rays\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.x-rays.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.x-rays.md#TA-5 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.x-rays"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.x-rays\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.x-rays.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.x-rays.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.x-rays"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.x-rays\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.x-rays/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.x-rays",
+      "title": "X-Rays and Their Properties — core explanation",
+      "content": "**Core Insight:** X-rays are high-energy electromagnetic radiation (λ ~ 0.01–10 nm, E ~ 0.1–100 keV)\nproduced when high-speed electrons decelerate abruptly on hitting a metal target (bremsstrahlung)\nor when inner-shell electrons are ejected and replaced (characteristic X-rays). They travel at c,\nobey E = hf, and have two key properties: (1) they penetrate soft tissue but are absorbed by bone\nand metal (enabling medical imaging), and (2) their wavelength is comparable to atomic spacings,\nenabling crystal diffraction (Bragg's law: 2d sin θ = nλ).\n\n**Two Production Mechanisms:**  \n1. **Bremsstrahlung (continuous spectrum):** electron decelerates → emits photon of energy up to\n   eV_accelerating (cut-off wavelength λ_min = hc/(eV)).  \n2. **Characteristic X-rays (line spectrum):** incoming electron ejects inner-shell electron →\n   outer-shell electron falls in → emits photon of energy = ΔE between shells (element-specific).\n\n**Bragg's Law (crystallography):** 2d sin θ = nλ where d = crystal plane spacing, θ = glancing\nangle. Used to determine crystal structures and (historically) confirmed de Broglie wavelengths.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 21,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-XRAY-DIFFERENT-FROM-LIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "**Probe:** \"Are X-rays fundamentally different from visible light, or are they the same type of",
+      "content": "",
+      "localKey": "MC-XRAY-DIFFERENT-FROM-LIGHT",
+      "language": "en",
+      "refs": [
+        "MC-XRAY-DIFFERENT-FROM-LIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "**Probe:** \"Are X-rays fundamentally different from visible light, or are they the same type of",
+      "content": "### MC-1: MC-XRAY-DIFFERENT-FROM-LIGHT\n**Probe:** \"Are X-rays fundamentally different from visible light, or are they the same type of\nradiation? Explain.\"  \n**Characteristic phrase:** \"X-rays are not light — they're radiation.\"  \n**Trigger:** Everyday language distinguishes \"X-rays\" from \"light\"; radiation has negative connotations.  \n**Conflict evidence [P28]:** Both X-rays and visible light are electromagnetic waves. Both travel\nat c. Both obey E = hf. Both are quantised as photons. The only difference is frequency/wavelength:\nvisible light λ ~ 400–700 nm; X-rays λ ~ 0.01–10 nm. X-rays are just very high-frequency light.  \n**Bridge [P30]:** \"The EM spectrum is continuous: radio, microwave, infrared, visible, UV, X-rays,\ngamma rays. X-rays are the section with λ ~ 0.01–10 nm. They obey all the same equations as visible\nlight — just with much higher energy per photon.\"  \n**Replacement [P31]:** X-rays are high-frequency EM radiation; same physics as visible light\n(E = hf, travel at c, can diffract); differ only in wavelength/energy range.  \n**Discrimination pairs [P33]:** X-rays vs. visible light: (A) completely different types of\nradiation, (B) same EM wave type — differ only in frequency, (C) X-rays are particles, light\nis a wave. Correct: (B).  \n**S6 repair path:** TA-2 (EM spectrum overview; X-rays placed on the same continuum).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-BRAGG-ANGLE-FROM-NORMAL",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "**Probe:** \"In Bragg diffraction, the angle θ = 30°. Is this measured from the crystal plane",
+      "content": "",
+      "localKey": "MC-BRAGG-ANGLE-FROM-NORMAL",
+      "language": "en",
+      "refs": [
+        "MC-BRAGG-ANGLE-FROM-NORMAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 21,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "**Probe:** \"In Bragg diffraction, the angle θ = 30°. Is this measured from the crystal plane",
+      "content": "### MC-2: MC-BRAGG-ANGLE-FROM-NORMAL\n**Probe:** \"In Bragg diffraction, the angle θ = 30°. Is this measured from the crystal plane\nsurface or from the normal to the crystal plane?\"  \n**Characteristic phrase:** \"θ is the angle of incidence from the normal — like Snell's law.\"  \n**Trigger:** Students carry over the reflection/refraction convention where angles are measured\nfrom the normal.  \n**Conflict evidence [P28]:** In Bragg's law, θ is the glancing angle — measured from the crystal\nplane surface, not its normal. If θ_Bragg = 30°, the angle from the normal is 60°. The formula\n2d sin 30° = 2d × 0.5 = d; using 60° would give 2d × sin 60° = 2d × 0.866 = 1.73d — wrong.  \n**Bridge [P30]:** \"Bragg derived his formula using the glancing angle — the angle the beam makes\nwith the surface of the crystal plane. If the beam just grazes the surface (θ → 0), there is no\npenetration; if it hits perpendicular (θ = 90°), it goes straight in. The glancing angle\nconvention is the opposite of the optics normal-incidence convention.\"  \n**Replacement [P31]:** In 2d sin θ = nλ, θ is the glancing angle (from the crystal plane surface).  \n**Discrimination pairs [P33]:** Bragg angle θ is measured: (A) from the normal to the crystal\nplane, (B) from the crystal plane surface (glancing angle), (C) from the diffracted beam direction.\nCorrect: (B).  \n**S6 repair path:** TA-4 (draw the Bragg geometry explicitly, labelling the glancing angle).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 21,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "**Probe:** \"In a bremsstrahlung spectrum, can the tube produce photons with energy greater than",
+      "content": "",
+      "localKey": "MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE",
+      "language": "en",
+      "refs": [
+        "MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 40,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "**Probe:** \"In a bremsstrahlung spectrum, can the tube produce photons with energy greater than",
+      "content": "### MC-3: MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE\n**Probe:** \"In a bremsstrahlung spectrum, can the tube produce photons with energy greater than\neV (where V is the accelerating voltage)?\"  \n**Characteristic phrase:** \"The tube produces a range of energies including very high ones.\"  \n**Trigger:** Students do not apply energy conservation to the cut-off.  \n**Conflict evidence [P28]:** An electron accelerated through voltage V gains kinetic energy eV.\nIn a single bremsstrahlung event converting all KE to one photon: hf_max = eV → λ_min = hc/(eV).\nNo photon can have more energy than the electron that produced it. Higher-energy photons are\nphysically impossible (violate energy conservation).  \n**Bridge [P30]:** \"The electron carries energy eV into the target. When it produces a photon,\nconservation of energy means the photon can have at most eV. The cut-off wavelength is a\nhard limit — not a peak but a boundary beyond which no photons exist.\"  \n**Replacement [P31]:** Maximum photon energy = eV; minimum wavelength λ_min = hc/(eV). No photons\nabove this energy from a tube operating at voltage V.  \n**Discrimination pairs [P33]:** A 50 kV X-ray tube: photon energy range is (A) any value up to\nand beyond 50 keV, (B) 0 to 50 keV (with hard cut-off at 50 keV), (C) only at 50 keV.\nCorrect: (B).  \n**S6 repair path:** TA-3 (draw the bremsstrahlung spectrum with cut-off; compare to characteristic\nlines).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 40,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "**Probe:** \"How are characteristic X-rays produced? Does the outer shell electron being ejected",
+      "content": "",
+      "localKey": "MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL",
+      "language": "en",
+      "refs": [
+        "MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "**Probe:** \"How are characteristic X-rays produced? Does the outer shell electron being ejected",
+      "content": "### MC-4: MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL\n**Probe:** \"How are characteristic X-rays produced? Does the outer shell electron being ejected\nor an inner shell electron being ejected cause them?\"  \n**Characteristic phrase:** \"The outer electrons are easier to remove — they must produce the X-rays.\"  \n**Trigger:** Students think \"easier to remove\" = \"more likely to produce X-rays.\"  \n**Conflict evidence [P28]:** Characteristic X-rays require the incoming electron to eject an inner-\nshell (K or L) electron. The resulting vacancy is filled by an outer-shell electron falling in, and\nthe energy difference (between outer and inner shells) is emitted as a characteristic X-ray photon.\nInner-shell binding energies are in the keV range → X-ray energies. Outer-shell removal produces\nUV or visible light (valence electron excitation), not X-rays.  \n**Bridge [P30]:** \"The energy of the emitted photon = the energy difference between the shells.\nInner-shell to outer-shell energy gap = keV (X-ray range). Outer-to-outer gap = eV (UV/visible).\nThe large gap requires an inner-shell vacancy — which only a high-energy electron can create.\"  \n**Replacement [P31]:** Characteristic X-rays are produced when an inner-shell electron is ejected\nand an outer-shell electron falls to fill the vacancy, emitting a photon of energy = ΔE(outer−inner).  \n**Discrimination pairs [P33]:** Characteristic X-rays are produced by: (A) outer-shell electron\nremoval, (B) inner-shell electron removal followed by outer→inner transition, (C) electron\ndeceleration. Correct: (B) [and (C) gives bremsstrahlung, not characteristic].  \n**S6 repair path:** TA-5 (atomic energy-level diagram; label K, L, M shells; draw characteristic\nemission arrow).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 60,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.x-rays",
+      "title": "EM Spectrum Placement",
+      "content": "{\"id\":\"TA-2\",\"title\":\"EM Spectrum Placement\",\"primitives\":[\"P14\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Bremsstrahlung and Cut-off",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Bremsstrahlung and Cut-off\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Bragg Diffraction",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Bragg Diffraction\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Characteristic X-rays",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Characteristic X-rays\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 27,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Closure & Self-Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Closure & Self-Assessment\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 34,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.75):**  \nPass criteria:  \n(a) Compute λ_min from tube voltage  \n(b) Apply Bragg's law (with correct angle convention)  \n(c) Explain bremsstrahlung vs. characteristic line production  \n(d) State that X-rays are EM waves obeying E = hf  \nFailure on (a) → TA-3. Failure on (b) → TA-4. Failure on (c) → TA-5.\n\n**Formative Golden Probe (FA-1):**  \n\"An X-ray tube operates at 80 kV. Find the minimum wavelength of emitted X-rays.\"  \nExpected: λ_min = hc/(eV) = 1240 eV·nm / (80,000 eV) = 0.0155 nm.  \nThreshold: Correct answer with correct units.\n\n**Formative Golden Probe (FA-2):**  \n\"X-rays of wavelength 0.154 nm are diffracted from a crystal with d = 0.282 nm. Find the angle\nfor first-order Bragg diffraction.\"  \nExpected: sin θ = λ/(2d) = 0.154/(0.564) = 0.273; θ = 15.8°.  \nThreshold: Correct angle; glancing angle convention used.\n\n**Formative Golden Probe (FA-3):**  \n\"Explain in two sentences why characteristic X-ray wavelengths are independent of the tube\naccelerating voltage (above threshold).\"  \nExpected: Characteristic X-rays come from specific inner-to-outer shell transitions with fixed\nenergy differences determined by atomic structure. The tube voltage only needs to exceed the\nthreshold to eject the inner-shell electron; above that, the photon energy is set by the shell\nenergy gap, not the tube voltage.  \nThreshold: Both sentences physically correct.\n\n**Formative Golden Probe (FA-4):**  \n\"Why can X-rays diffract from crystals but visible light cannot? What property determines this?\"  \nExpected: Diffraction requires the grating spacing to be comparable to the wavelength. Crystal\nplanes are spaced 0.1–0.5 nm apart. X-ray wavelengths (0.01–10 nm) match this scale. Visible\nlight (400–700 nm) is 1000× larger — no diffraction from atomic planes.  \nThreshold: Ratio argument explicitly given; numbers compared.\n\n**Delayed Retrieval (Session + 3 days):**  \n\"State Bragg's law. Compute λ_min for a 100 kV tube. Explain the origin of characteristic X-rays.\"  \nThreshold: All three correct unaided.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 309,
+        "endLine": 352
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nA chest X-ray: the patient's lungs appear dark (X-rays pass through), ribs appear white (X-rays\nabsorbed), any metal implants appear bright white. The same radiation that penetrates tissue\ncannot penetrate bone or metal — the difference in absorption is the imaging mechanism.\n\n**Stage 2 — Representational (R)**  \nDraw the X-ray tube: cathode (hot filament) emits electrons; electrons accelerate through voltage V\nto the anode (tungsten target); electrons decelerate abruptly → bremsstrahlung photons emitted.\nMaximum photon energy = eV. Draw the continuous spectrum with the characteristic lines superimposed.\n\n**Stage 3 — Abstract (A)**  \nCut-off wavelength: λ_min = hc/(eV). Characteristic line energies: ΔE = E_outer − E_inner for\neach element (unique fingerprint). Bragg diffraction: 2d sin θ = nλ. X-ray attenuation in\nmaterial: I = I₀ e^{−μx} where μ = linear attenuation coefficient (tissue vs. bone vs. lead differ\nby orders of magnitude).\n\n**Stage 4 — Transfer (T)**  \nX-ray crystallography (Rosalind Franklin, Watson and Crick — DNA double helix structure 1953);\nXPS (X-ray photoelectron spectroscopy — surface chemical analysis); CT scanners (cross-sectional\nimaging via multiple X-ray projections); X-ray astronomy (Chandra telescope observes hot gas\nin galaxy clusters).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 41,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Why Beginners Fail",
+      "content": "1. **Confusing bremsstrahlung with characteristic X-rays:** Both come from the same tube but have\n   different origins. Bremsstrahlung is a continuous spectrum from electron deceleration;\n   characteristic lines are discrete and element-specific.\n\n2. **Forgetting the cut-off wavelength:** Students expect all photon energies to be possible.\n   The minimum wavelength (maximum photon energy = eV) is a direct consequence of energy conservation\n   and E = hf.\n\n3. **Misapplying Bragg's law (θ is the glancing angle, not the normal incidence angle):** Students\n   confuse the glancing angle θ with the angle of incidence measured from the surface normal.\n   In Bragg's law, θ is measured from the crystal plane surface (not the normal to it).\n\n4. **Treating X-rays as qualitatively different from light:** Students think X-rays are a\n   different type of radiation. X-rays are EM waves — same nature as visible light, just much\n   higher frequency. E = hf applies identically.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 67,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"X-rays and visible light are both EM waves. The only difference: X-rays have\nλ ~ 0.1 nm — a thousand times shorter than visible light. That short wavelength means: (1) energy\nper photon is huge (keV, enough to ionise atoms), and (2) the wavelength matches atomic spacings,\nso crystals diffract X-rays like diffraction gratings diffract light.\"\n\n**Key explanatory moves:**\n- \"Bremsstrahlung: every deceleration event produces one photon, energy ≤ eV. Cut-off at λ_min =\n  hc/(eV): energy conservation prevents photons more energetic than the electron.\"\n- \"Characteristic lines: inner-shell ejection → outer electron falls in → fixed ΔE → characteristic\n  photon. These lines do not shift with tube voltage — they are the atom's fingerprint.\"\n- \"Bragg: the glancing angle θ is from the surface, not the normal. 2d sin θ = nλ: constructive\n  interference when the extra path (2d sin θ) is an integer wavelength.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 292,
+        "endLine": 309
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Recovery Notes",
+      "content": "**S0 (no photons background):** The prerequisite phys.mod.photons is essential — E = hf and\nλ_min = hc/(eV) both require the photon model. Without it, these are memorised formulas.\n\n**S3 (confuses bremsstrahlung with characteristic):** Draw both on the same spectrum graph:\ncontinuous bremsstrahlung background + sharp characteristic line peaks. Ask student to point\nto each and explain its origin before any calculation.\n\n**S6 (Bragg angle confusion):** Draw the Bragg geometry twice — once with the glancing angle\nlabelled, once with the normal-incidence angle labelled. Show that the two angles are\ncomplementary (add to 90°). Have the student verify with sin θ_glancing = cos θ_normal.\n\n**S9 (knows formulas, cannot explain why crystal spacing matters):** Compute λ_visible/d_crystal\nratio. Show it is ~1000. \"Diffraction requires slit width ~ wavelength. For visible light, atomic\nplanes are 1000× too small. For X-rays, the ratio is ~1. That is why X-rays diffract from crystals\nand visible light does not.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 352,
+        "endLine": 372
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Memory & Review",
+      "content": "**Spaced retrieval plan:**\n- Session + 1 day: \"State Bragg's law and λ_min formula. Compute both for a 40 kV tube with\n  d = 0.20 nm crystal at λ = 0.031 nm.\"\n- Session + 4 days: \"Explain bremsstrahlung and characteristic X-rays in two sentences each.\"\n- Session + 8 days: \"A crystal gives a first-order Bragg peak at θ = 20° with X-rays of λ =\n  0.071 nm. Find d.\"\n\n**Interleaving partners:** phys.mod.photons (E = hf foundation), phys.mod.de-broglie (Bragg\nlaw also confirmed electron matter waves), phys.mod.compton-effect (X-rays in Compton scattering\nexperiment).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 372,
+        "endLine": 387
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Bragg diffraction (also used in neutron diffraction, electron diffraction);\nλ_min formula (direct energy conservation application of E = hf)\n\n**Far transfer:** X-ray crystallography (protein structures, drug design); XPS surface analysis;\nCT imaging; X-ray astronomy; synchrotron radiation facilities\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 387,
+        "endLine": 397
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.x-rays",
+      "title": "Curriculum Feedback",
+      "content": "Correct KG positioning. phys.mod.photons prerequisite provides E = hf and the photon model.\nNo unlocks in the KG — terminal node. The Bragg law is also used in phys.mod.de-broglie but\nthere is no cross-link in the KG; a cross-link suggestion: phys.mod.de-broglie.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 397,
+        "endLine": 405
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

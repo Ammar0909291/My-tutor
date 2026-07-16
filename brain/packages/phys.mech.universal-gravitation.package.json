@@ -1,0 +1,543 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.universal-gravitation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.universal-gravitation",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:4bf1382b9c8aaedaa122ffccb2cae566419e6b72dd22dc39ea26d4b713f83982",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.universal-gravitation.md": "sha256:ea9348176bc8b3dd740afb450b5b17a5d728610d3aee16cbaab18cdf10fd7cda"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.universal-gravitation",
+    "name": "Universal Gravitation",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.newtons-second-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.universal-gravitation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.universal-gravitation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.universal-gravitation.md": "sha256:ea9348176bc8b3dd740afb450b5b17a5d728610d3aee16cbaab18cdf10fd7cda"
+      },
+      "contentHash": "sha256:608352447a7a621ebd3eeb3c1300342fe575ed19bbedfe2e4ed92488c464be40",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.universal-gravitation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.universal-gravitation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.universal-gravitation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.universal-gravitation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.universal-gravitation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.universal-gravitation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.universal-gravitation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.universal-gravitation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.universal-gravitation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.universal-gravitation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md#TA-4 (addresses MC-GRAVITY-STOPS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.universal-gravitation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.universal-gravitation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.universal-gravitation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md#TA-5 (addresses MC-INVERSE-LINEAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.universal-gravitation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.universal-gravitation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.universal-gravitation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.universal-gravitation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.universal-gravitation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.universal-gravitation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.universal-gravitation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.universal-gravitation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.universal-gravitation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Universal Gravitation — core explanation",
+      "content": "**Core Insight:** Every pair of masses in the universe attracts every other pair with a force\nproportional to the product of their masses and inversely proportional to the square of their\nseparation. This one law explains the apple falling, the Moon orbiting, and tidal forces.\n\n**Newton's Law of Universal Gravitation:**\nF = Gm₁m₂ / r²\n\nwhere G = 6.674 × 10⁻¹¹ N·m²/kg² (gravitational constant), m₁ and m₂ are the two masses (kg),\nand r is the centre-to-centre distance between them (m). F is in newtons.\n\n**Key properties:**\n- F is always attractive — gravity never repels.\n- F acts along the line joining the two centres (Newton's 3rd: equal magnitudes, opposite directions).\n- F ∝ 1/r²: inverse-square law — doubling r reduces F by a factor of 4.\n- Near Earth's surface: F = mg where g = GM_E/R_E² ≈ 9.8 m/s².\n- The apple pulls the Earth upward with the same force (but Earth barely moves — huge M).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 25,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Basic",
+      "content": "**Worked Example 1 (Basic):**\nTwo 5 kg masses, 0.4 m apart.\nF = 6.674×10⁻¹¹ × 5 × 5 / 0.16 = 6.674×10⁻¹¹ × 156.25 = 1.04×10⁻⁸ N. Very small!",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 25,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Double distance",
+      "content": "**Worked Example 2 (Double distance):**\nSame masses, distance doubles to 0.8 m.\nF = 6.674×10⁻¹¹ × 25 / 0.64 = 2.6×10⁻⁹ N. One quarter of the original. ✓ Inverse square.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 25,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Deriving g at Earth's surface",
+      "content": "**Worked Example 3 (Deriving g at Earth's surface):**\nM_E = 5.97×10²⁴ kg; R_E = 6.37×10⁶ m.\ng = GM_E/R_E² = 6.674×10⁻¹¹ × 5.97×10²⁴ / (6.37×10⁶)² = 9.78 ≈ 9.8 m/s². ✓\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 25,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/misconception/MC-GRAVITY-STOPS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Priority 1",
+      "content": "### MC-GRAVITY-STOPS (Priority 1)\n**Label:** \"Gravity disappears or becomes zero at some altitude — it only works on the ground\"\n\n**Trigger signals:**\n- Says \"astronauts are weightless because there's no gravity in space\"\n- Claims gravity stops at the atmosphere's edge\n- Cannot explain why the Moon stays in orbit (thinks it's a different force)\n\n**Conflict evidence [P28]:**\n\"The ISS orbits at ~400 km altitude. If gravity were zero there:\ng_ISS = GM_E/(R_E + h)² = 9.8 × (6370/(6370+400))² = 9.8 × (6370/6770)² ≈ 8.67 m/s².\nGravity there is 88% of surface gravity — very much present!\nAstronauts feel weightless because they (and the ISS) are in continuous free fall, not because gravity is absent.\"\n\n**Bridge [P30]:**\n\"F = Gm₁m₂/r² never reaches zero — it just keeps getting smaller with distance.\nAt 400 km altitude, g ≈ 8.7 m/s². At the Moon's distance (384 000 km), g ≈ 0.0027 m/s².\nTiny — but it's what keeps the Moon in orbit. Gravity extends infinitely; it never switches off.\"\n\n**Replacement [P31]:**\n\"Gravity extends to infinite range; F = Gm₁m₂/r² → 0 only as r → ∞.\nWeightlessness in orbit is free-fall (everything accelerates at the same rate), not zero gravity.\nThe same law explains the apple, the Moon, and distant galaxies.\"\n\n**Discrimination pairs [P33]:**\n- g at ISS (400 km): 8.67 m/s² (not zero) ✓\n- g at Moon's surface vs Earth's: different because M_moon and R_moon differ ✓\n\n**s6_path:** Use the apple-and-Moon story: \"Newton realised the same force pulling the apple down\nalso holds the Moon in its orbit. Gravity doesn't stop at the sky — it just weakens.\"\n\n---",
+      "localKey": "MC-GRAVITY-STOPS",
+      "language": "en",
+      "refs": [
+        "MC-GRAVITY-STOPS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 3,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/misconception/MC-INVERSE-LINEAR",
+      "kind": "misconception",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Priority 2",
+      "content": "### MC-INVERSE-LINEAR (Priority 2)\n**Label:** \"Doubling the distance halves the gravitational force (inverse-linear, not inverse-square)\"\n\n**Trigger signals:**\n- Says \"if r doubles, F halves\" (wrong: F quarters)\n- Uses F ∝ 1/r instead of 1/r²\n- Confused by the r² denominator\n\n**Conflict evidence [P28]:**\n\"Two masses, r = 1 m: F = GM₁M₂/1 = F₀.\nr = 2 m: F = GM₁M₂/4 = F₀/4 (one quarter, not one half).\nr = 3 m: F = GM₁M₂/9 = F₀/9 (one ninth).\nIf it were inverse-linear, r = 2 → F₀/2, r = 3 → F₀/3. The numbers don't match. Why r²?\"\n\n**Bridge [P30]:**\n\"Gravity spreads over the surface of a sphere. The surface area of a sphere is 4πr².\nAs r doubles, the surface area quadruples — so the same 'amount of gravity' is spread\nover 4× the area. That's why F ∝ 1/r² (the inverse-square law).\"\n\n**Replacement [P31]:**\n\"F = Gm₁m₂/r². The r² in the denominator gives the inverse-square law.\nIf r multiplies by k: F divides by k². Double r → F/4. Triple r → F/9. Half r → 4F.\"\n\n**Discrimination pairs [P33]:**\n- r × 2: F ÷ 4 (not ÷ 2) ✓\n- r × 3: F ÷ 9 (not ÷ 3) ✓\n- r × ½: F × 4 (not × 2) ✓\n\n**s6_path:** Use only the doubling case: \"r doubles → r² quadruples → F quarters.\" Then verify with numbers.\n\n---",
+      "localKey": "MC-INVERSE-LINEAR",
+      "language": "en",
+      "refs": [
+        "MC-INVERSE-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 36,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Prerequisite Check + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 29,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "MC-GRAVITY-STOPS Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-GRAVITY-STOPS Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-GRAVITY-STOPS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-GRAVITY-STOPS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 41,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "MC-INVERSE-LINEAR Probe + Ratio Problems",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-INVERSE-LINEAR Probe + Ratio Problems\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-INVERSE-LINEAR\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-INVERSE-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 59,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 76,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 96,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Apply — basic computation",
+      "content": "**MP-1 (Apply — basic computation):**\n\"Two 10 kg masses are 0.2 m apart. Find F.\"\nExpected: F = 6.674×10⁻¹¹ × 100 / 0.04 = 1.67×10⁻⁷ N.\n_Discriminates: correct substitution into F = Gm₁m₂/r²._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 251,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Apply — inverse-square ratio",
+      "content": "**MP-2 (Apply — inverse-square ratio):**\n\"Force between two masses at distance r is 8×10⁻⁸ N. Distance quadruples. New F?\"\nExpected: F = 8×10⁻⁸/16 = 5×10⁻⁹ N.\n_Discriminates: MC-INVERSE-LINEAR resolution; r×4 → F÷16._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-INVERSE-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 251,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Apply — g on another body",
+      "content": "**MP-3 (Apply — g on another body):**\n\"Moon: M = 7.35×10²² kg, R = 1.74×10⁶ m. Compute g on Moon's surface.\"\nExpected: g = 6.674×10⁻¹¹ × 7.35×10²² / (1.74×10⁶)² ≈ 1.62 m/s².\n_Discriminates: g = GM/R² derivation._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 251,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Understand — gravity in orbit",
+      "content": "**MP-4 (Understand — gravity in orbit):**\n\"An astronaut at the ISS (400 km altitude) feels weightless. Is gravity zero there? Explain.\"\nExpected: No. g_ISS = GM_E/(R_E+h)² ≈ 8.7 m/s². Weightless = free fall, not zero gravity.\n_Discriminates: MC-GRAVITY-STOPS resolution._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-GRAVITY-STOPS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 251,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Apply — find mass from g",
+      "content": "**MP-5 (Apply — find mass from g):**\n\"A planet has g = 12 m/s² at its surface (R = 5×10⁶ m). Find its mass.\"\nExpected: M = gR²/G = 12×25×10¹²/6.674×10⁻¹¹ ≈ 4.49×10²⁴ kg.\n_Discriminates: algebraic rearrangement of g = GM/R²._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 251,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.newtons-second-law  ──────────────►  phys.mech.universal-gravitation\n   (F = ma; understanding that gravity is a force causing acceleration)\n   REQUIRED: student knows that weight W = mg is a gravitational force\n```\n\n**PD-1 (Newton's 2nd Law):**\n\"A 4 kg object has weight 39.2 N. What is g here? What formula are you using?\"\nExpected: g = W/m = 9.8 m/s²; F = mg.\n\nIf student cannot identify gravity as F = mg → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 58,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"F = ? (formula). What is G? Units of G?\"\nThreshold: F = Gm₁m₂/r²; G = 6.674×10⁻¹¹; units N·m²/kg².\n\n**FA-2 (TA-4 exit):** \"At 400 km altitude, is gravity zero? Compute g there vs surface.\"\nExpected: Not zero; g_ISS ≈ 8.7 m/s²; surface 9.8 m/s².\nIf student says zero → MC-GRAVITY-STOPS not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"Distance triples. F changes by factor of ?\"\nExpected: F÷9. If student says F÷3 → MC-INVERSE-LINEAR not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-GRAVITY-STOPS",
+        "MC-INVERSE-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 282,
+        "endLine": 298
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only qualitative ratio reasoning in TA-3 (r doubles → F quarters) before numbers.\n- Defer G-value substitution to TA-5 if the scientific notation causes anxiety.\n- Reassure: \"The formula has two parts: Gm₁m₂ on top, r² on the bottom.\"\n- Use g = GM/R² for Earth (familiar g = 9.8) before introducing large G numbers.\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (find planet mass from g) at TA-3.\n- Challenge: \"At what altitude above Earth's surface does g = 4.9 m/s² (half of surface g)?\n  (r = R_E√2 → h = R_E(√2−1) ≈ 2637 km)\"\n- Spend TA-6 on Problems 4 and 5.\n\n**S4 (Prereq gap — Newton's 2nd Law):**\n- Detect via PD-1 failure at TA-3.\n- Repair: F = mg, weight as gravitational force, then introduce universal law as the full version.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 298,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "phys.mech.universal-gravitation/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.universal-gravitation",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → F = Gm₁m₂/r² → MC-GRAVITY-STOPS repair).\n**Session 2 (≥24 h later):** Retrieval: \"Formula? If r triples, what happens to F?\"\n  → TA-5 (MC-INVERSE-LINEAR, ratio problems) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining universal gravitation and Newton's 2nd:\n  \"A 70 kg astronaut orbits at R = 7000 km from Earth's centre. What is the gravitational force\n  on her? What acceleration does this give her?\"\n  (F = GMm/r² ≈ 604 N; a = F/m ≈ 8.6 m/s² — previews orbital mechanics.)\n**Pre-gravitational-field session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.newtons-second-law (F = ma; gravity as a force),\nphys.mech.gravitational-field (g as a field quantity).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-GRAVITY-STOPS",
+        "MC-INVERSE-LINEAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.universal-gravitation.md",
+        "startLine": 318,
+        "endLine": 334
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

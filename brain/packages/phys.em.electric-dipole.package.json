@@ -1,0 +1,463 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.electric-dipole-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.electric-dipole",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:7d8d83e0c704fc1806a8039e12f60ebe1e21e23beb15095e6e78a5e3af890c67",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.electric-dipole.md": "sha256:a210bdfc55a6ab6418a4b88a3845b116999a376e88d3f9c76cbfdbe0a9543f17"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "phys.em.electric-dipole",
+    "name": "Electric Dipole",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.em.electric-field"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.electric-dipole-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.electric-dipole (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.electric-dipole.md": "sha256:a210bdfc55a6ab6418a4b88a3845b116999a376e88d3f9c76cbfdbe0a9543f17"
+      },
+      "contentHash": "sha256:10a347b976e2d89aac24d6de391d71f2a8375f7a5ad8f3fb6446f92cb4468bd3",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-2 (addresses MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE, MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-dipole.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-dipole.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-dipole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-dipole\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.electric-dipole/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "(Dipole moment and field)",
+      "content": "### WE-1 (Dipole moment and field)\n\n**Problem:** A dipole consists of +2 nC and −2 nC separated by 5.0 cm. (a) Find the dipole moment. (b) Find E on the axial line at 30 cm from the center.\n\n**Worked solution:**\n\n*Step 1 — Dipole moment:*\np = qd = (2×10⁻⁹)(5×10⁻²) = 1.0×10⁻¹⁰ C·m\n\n*Step 2 — Axial field (r = 0.30 m >> d = 0.05 m: far-field OK):*\n$$E_\\text{axial} = \\frac{2kp}{r^3} = \\frac{2(8.99\\times10^9)(1.0\\times10^{-10})}{(0.30)^3} = \\frac{1.798}{0.027} = 66.6\\text{ N/C}$$\n\nDirection: along the dipole axis, in the direction of p (from − to + charge, then continuing outward).\n\n**Answer:** p = 1.0 × 10⁻¹⁰ C·m; E_axial = 66.6 N/C\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 81,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "(Torque on a dipole)",
+      "content": "### WE-2 (Torque on a dipole)\n\n**Problem:** A dipole with p = 3.0 × 10⁻¹⁰ C·m is placed in a uniform electric field E = 5000 N/C. The dipole makes an angle of 30° with the field. Find the torque.\n\n**Worked solution:**\n\n$$\\tau = pE\\sin\\theta = (3.0\\times10^{-10})(5000)\\sin30° = (1.5\\times10^{-6})(0.5) = 7.5\\times10^{-7}\\text{ N·m}$$\n\nDirection: the torque tends to rotate the dipole to align with E (reduce θ toward 0).\n\n**Answer:** τ = 7.5 × 10⁻⁷ N·m (rotating dipole toward alignment)\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 81,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "(Potential energy change)",
+      "content": "### WE-3 (Potential energy change)\n\n**Problem:** A dipole p = 2.0 × 10⁻¹⁰ C·m in field E = 3000 N/C is initially perpendicular to E (θ = 90°). It rotates to align with E (θ = 0°). Find the change in potential energy.\n\n**Worked solution:**\n\n*U = −pEcos θ*\n\nU_initial = −pE cos(90°) = 0\nU_final = −pE cos(0°) = −pE = −(2.0×10⁻¹⁰)(3000) = −6.0×10⁻⁷ J\n\nΔU = U_f − U_i = −6.0×10⁻⁷ − 0 = **−6.0 × 10⁻⁷ J**\n\nThe system loses potential energy (energy released as kinetic or to surroundings) as the dipole aligns — the aligned configuration is stable.\n\n**Answer:** ΔU = −6.0 × 10⁻⁷ J (potential energy decreases; dipole aligns spontaneously if free to rotate)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 81,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/misconception/MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "**Trigger signal:** Student uses E ∝ 1/r² for dipole field, or expects dipole field to be as strong as a net charge at large distances.",
+      "content": "### MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE\n\n**Trigger signal:** Student uses E ∝ 1/r² for dipole field, or expects dipole field to be as strong as a net charge at large distances.\n\n**Conflict evidence [P28]:** \"For a single charge Q, E = kQ/r² — the field falls off as 1/r². For a dipole (net charge = 0), the far-field formula gives E ∝ kp/r³ — one extra power of r in the denominator. At r = 10× the dipole size, the dipole field is 10× weaker than the 1/r² formula would predict. This extra falloff happens because the two opposite charges partially cancel at large distances.\"\n\n**Bridge text [P30]:** \"A dipole's positive and negative ends nearly cancel each other at large distances, because the field from one partially cancels the other. The surviving field is proportional to p/r³ — the farther you go, the more complete the cancellation. This is why the electric field outside a neutral polar molecule is much weaker at large distances than if the charges weren't paired.\"\n\n**Replacement text [P31]:** \"The far-field of an electric dipole falls off as 1/r³, not 1/r². For a monopole (net charge Q): E ∝ Q/r². For a dipole (net charge = 0, moment p = qd): E ∝ p/r³ (axial) and kp/r³ (equatorial). The stronger falloff reflects partial cancellation of the two opposite charges at large distances.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Dipole E ∝ 1/r³ (far field)\" | \"Dipole E ∝ 1/r² (same as point charge)\" |\n| \"Axial: 2kp/r³; equatorial: kp/r³\" | \"E = kQ_net/r² = 0 for dipole (wrong)\" |\n| \"Dipole field vanishes faster at large r than single charge\" | \"Dipole field is same as net charge at large r\" |\n\n**s6_path:** Calculate numerically: at r = 10 cm, compare E from a +2 nC charge vs. a dipole with p = 2nC × 5cm = 10⁻¹⁰ C·m. Show the huge difference.\n\n---",
+      "localKey": "MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE",
+      "language": "en",
+      "refs": [
+        "MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/misconception/MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "**Trigger signal:** Student says the dipole immediately snaps to alignment with E as soon as the field is applied, or doesn't account for oscillation.",
+      "content": "### MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY\n\n**Trigger signal:** Student says the dipole immediately snaps to alignment with E as soon as the field is applied, or doesn't account for oscillation.\n\n**Conflict evidence [P28]:** \"Torque τ = pE sinθ decreases as θ → 0 but never becomes negative until θ < 0 — there's no damping. In the absence of friction or damping, a dipole released at θ = 90° will oscillate through θ = 0 and beyond, like a pendulum — it doesn't stop at alignment. Only with damping (viscosity in a fluid, or radiation) does the dipole eventually settle at θ = 0.\"\n\n**Bridge text [P30]:** \"Torque provides angular acceleration, not instantaneous alignment. If the dipole is released from rest at θ = 90°, it speeds up as θ decreases, overshoots θ = 0, decelerates as torque reverses sign, and oscillates. This is exactly like a pendulum. Thermal environments provide damping — that's why molecular dipoles in a liquid partially align with applied fields, subject to thermal agitation.\"\n\n**Replacement text [P31]:** \"A dipole in a uniform field oscillates about the equilibrium direction (θ = 0) if released from rest at θ ≠ 0, much like a pendulum. Without damping, it never stops at θ = 0. With damping (friction, viscosity, radiation), it spirals toward the aligned position. The torque provides restoring angular acceleration, not instantaneous alignment.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Torque → angular acceleration → oscillation without damping\" | \"Dipole snaps to alignment as soon as field is applied\" |\n| \"Equilibrium at θ = 0 (stable) and θ = 180° (unstable)\" | \"Any torque instantly aligns the dipole\" |\n| \"Thermal energy competes with alignment in real molecules\" | \"Applied field fully aligns all molecular dipoles\" |\n\n**s6_path:** Pendulum analogy: pendulum displaced from vertical oscillates; dipole displaced from E direction oscillates. Damping is needed to settle.\n\n---",
+      "localKey": "MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE\",\"MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE",
+        "MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 226,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 231,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 236,
+        "endLine": 236
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 240,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 241,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-7\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 242,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 243,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "close",
+      "content": "{\"id\":\"TA-9\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 244,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.em.electric-dipole/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.electric-dipole",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nWrite the formula for torque on a dipole in a uniform electric field. When is the torque zero?\n\n**Answer:** τ = pE sinθ. Torque is zero when θ = 0 (stable equilibrium, aligned) or θ = 180° (unstable equilibrium, anti-aligned).\n\n---\n\n### AP-2 (Bloom: Understand)\nWhy does the dipole field fall off as 1/r³ rather than 1/r² at large distances?\n\n**Answer:** At large distances, the fields from the + and − charges (each ∝ 1/r²) nearly cancel because they point in nearly opposite directions and the charges are nearly equidistant from the observation point. The residual (uncanceled) field is proportional to the separation d — the dipole moment p = qd — divided by an extra r, giving an overall 1/r³ dependence. The net charge is zero, so the leading monopole term vanishes; the dipole term (1/r³) dominates.\n\n---\n\n### AP-3 (Bloom: Apply)\nA dipole p = 4.0 × 10⁻¹⁰ C·m is oriented at 45° to a field E = 2.0 × 10⁴ N/C. Find: (a) torque, (b) potential energy.\n\n**Answer:**\n(a) τ = pE sin45° = (4.0×10⁻¹⁰)(2.0×10⁴)(0.707) = **5.66 × 10⁻⁶ N·m**\n(b) U = −pE cos45° = −(4.0×10⁻¹⁰)(2.0×10⁴)(0.707) = **−5.66 × 10⁻⁶ J**\n\n---\n\n### AP-4 (Bloom: Analyze)\nCompare the electric field at distance r on the axial vs. equatorial line for the same dipole. If r = 0.10 m and p = 1.0 × 10⁻¹⁰ C·m, find both and state which is larger and why.\n\n**Answer:**\nE_axial = 2kp/r³ = 2(8.99×10⁹)(10⁻¹⁰)/(10⁻¹)³ = 1.798/10⁻³ = **1798 N/C**\nE_equat = kp/r³ = 899/10⁻³ = **899 N/C**\nAxial is exactly twice the equatorial. On the axis, both charges contribute fields that partially add (they're in the same direction at axial points); on the equatorial line, their fields partially cancel (components along the equatorial direction cancel, only perpendicular components add, giving half).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-dipole.md",
+        "startLine": 249,
+        "endLine": 284
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

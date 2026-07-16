@@ -1,0 +1,614 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.diffraction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.diffraction",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:d5b2534a1968d76c08ca96096c0425db329c097952fc445c2a584945af4cdaaf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.diffraction.md": "sha256:7381c15ea8ca30b7b2682cf5af6cf79d92aa9934542b3e9a09e5593f6c684a5e"
+    },
+    "assetCount": 25,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 8,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "phys.opt.diffraction",
+    "name": "Diffraction of Light",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.opt.youngs-experiment"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.diffraction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.diffraction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.diffraction.md": "sha256:7381c15ea8ca30b7b2682cf5af6cf79d92aa9934542b3e9a09e5593f6c684a5e"
+      },
+      "contentHash": "sha256:ae91992d427a66ad5a68c6b20702b48651fb5174630b9adb2ba38869e21b098a",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.diffraction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.diffraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.diffraction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.diffraction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.diffraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.diffraction\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.diffraction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.diffraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.diffraction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.diffraction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-4 (addresses MC-2, MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.diffraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.diffraction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.diffraction.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-5 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.diffraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.diffraction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.diffraction.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-6 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.diffraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.diffraction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.diffraction.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.diffraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.diffraction\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.diffraction.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.diffraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.diffraction\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.diffraction/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Diffraction of Light — core explanation",
+      "content": "**Core Insight:** Diffraction is the bending and spreading of waves around obstacles or through\napertures when the aperture size is comparable to the wavelength. Every diffraction result follows\nfrom Huygens' principle: each point on a wavefront acts as a new point source. When those secondary\nwavelets superpose, they produce a pattern of maxima and minima determined by path-difference\ngeometry. Mastery means (1) predicting whether diffraction is significant from the ratio a/λ, (2)\nderiving the condition for diffraction minima for a single slit (a sin θ = mλ), (3) explaining\nwhy narrower slits produce wider central maxima, and (4) distinguishing diffraction effects from\ninterference effects.\n\n**The One Equation That Matters:**\nFor a single slit of width a, the mth minimum occurs when:  \n  a sin θ = mλ   (m = ±1, ±2, ±3, …)  \nAngular half-width of central maximum: sin θ₁ = λ/a  \nLinear half-width on screen: y₁ = λD/a\n\n**Why This Is Hard:** Students conflate diffraction with interference. They treat diffraction as\n\"light bending around corners\" (a ray-optics shortcut) rather than a wave-superposition phenomenon.\nThey also invert the slit-width/fringe-width relationship: they expect a narrower slit to give a\nnarrower pattern (analogous to geometric shadows), but a narrower slit actually gives a wider\ncentral maximum.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 24,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "**Probe:** \"A student says: 'Diffraction just means light bends around the edge of an obstacle,",
+      "content": "",
+      "localKey": "MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS",
+      "language": "en",
+      "refs": [
+        "MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "**Probe:** \"A student says: 'Diffraction just means light bends around the edge of an obstacle,",
+      "content": "### MC-1: MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS\n**Probe:** \"A student says: 'Diffraction just means light bends around the edge of an obstacle,\nthe way water bends around a rock.' Is this description correct? What is missing?\"  \n**Characteristic phrase:** \"Light bends around the slit.\"  \n**Trigger:** Everyday language; the word \"bending\" appears in most textbook definitions.  \n**Conflict evidence [P28]:** If diffraction were simple bending, we would see only one bright\nfringe on each side, not the alternating dark-bright pattern. The pattern arises from superposition\nof many secondary wavelets, not from a single bend.  \n**Bridge [P30]:** \"Bending is a consequence, not the cause. The cause is Huygens: every point\nin the slit opening radiates a new wave. Those waves overlap and produce both bright and dark\nregions, including some light inside the geometric shadow.\"  \n**Replacement [P31]:** Diffraction is wave superposition from a distributed aperture; the\nspreading of the beam is a side-effect of that superposition, not a separate bending mechanism.  \n**Discrimination pairs [P33]:** (A) Light always travels in straight lines — false for waves. (B)\nDiffraction is just bending — too simple. (C) Diffraction is superposition of Huygens secondary\nwavelets from across the aperture — correct.  \n**S6 repair path:** TA-3 (Huygens construction) → TA-4 (superposition overlay diagram).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "**Probe:** \"If you halve the slit width, what happens to the width of the central maximum? A",
+      "content": "",
+      "localKey": "MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN",
+      "language": "en",
+      "refs": [
+        "MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 21,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "**Probe:** \"If you halve the slit width, what happens to the width of the central maximum? A",
+      "content": "### MC-2: MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN\n**Probe:** \"If you halve the slit width, what happens to the width of the central maximum? A\nstudent predicts it will also halve. Is this right?\"  \n**Characteristic phrase:** \"Smaller slit, smaller beam.\"  \n**Trigger:** Geometric-shadow analogy; treating the slit like a hole a ball passes through.  \n**Conflict evidence [P28]:** The formula y₁ = λD/a shows y₁ is inversely proportional to a.\nHalving a doubles the central maximum half-width.  \n**Bridge [P30]:** \"Think of it this way: a very wide slit approaches a flat wavefront — parallel\nrays, no diffraction, a narrow geometric image. A very narrow slit barely constrains the wave —\nit must spread out in all directions to obey wave physics. Narrower slit = more spreading.\"  \n**Replacement [P31]:** Angular half-width θ₁ = λ/a — the narrower the slit, the larger the\ndiffraction angle.  \n**Discrimination pairs [P33]:** Slit halved: central maximum (A) halves, (B) doubles, (C) stays\nthe same. Correct: (B).  \n**S6 repair path:** TA-5 (quantitative slit-width variation) → TA-6 (simulation/demonstration).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-DIFFRACTION-SAME-AS-INTERFERENCE",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "**Probe:** \"A student says: 'Diffraction and interference are basically the same thing — both give",
+      "content": "",
+      "localKey": "MC-DIFFRACTION-SAME-AS-INTERFERENCE",
+      "language": "en",
+      "refs": [
+        "MC-DIFFRACTION-SAME-AS-INTERFERENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 37,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "**Probe:** \"A student says: 'Diffraction and interference are basically the same thing — both give",
+      "content": "### MC-3: MC-DIFFRACTION-SAME-AS-INTERFERENCE\n**Probe:** \"A student says: 'Diffraction and interference are basically the same thing — both give\nbright and dark fringes.' Agree or disagree? Explain the key difference.\"  \n**Characteristic phrase:** \"They both make fringes, so they're the same.\"  \n**Trigger:** Surface similarity (alternating bright/dark fringes) without attending to the source\ngeometry.  \n**Conflict evidence [P28]:** Interference (Young's) comes from two (or more) discrete coherent\nsources; fringe spacing is uniform. Diffraction comes from a single extended aperture; the central\nmaximum is twice as wide as secondary maxima, and secondary maxima diminish in intensity.  \n**Bridge [P30]:** \"Both are superposition. The difference is the geometry: interference superimposes\nwaves from separated point sources (like two slits). Diffraction superimposes waves from a\ncontinuum of points distributed across one aperture.\"  \n**Replacement [P31]:** Diffraction = superposition across a single continuous aperture.\nInterference = superposition from multiple discrete sources. In practice, diffraction modulates\nthe envelope of an interference pattern when both are present.  \n**Discrimination pairs [P33]:** Compare double-slit pattern (uniform fringe spacing, equal\nintensities for equal-width slits) vs. single-slit pattern (central max twice as wide, intensity\nfalls off). Which is diffraction? The single-slit pattern.  \n**S6 repair path:** TA-7 (comparison overlay) → re-check using TA-4 probe.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 37,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-DIFFRACTION-ONLY-AT-SLITS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "**Probe:** \"Does diffraction occur when light passes through a large door opening? Why or why",
+      "content": "",
+      "localKey": "MC-DIFFRACTION-ONLY-AT-SLITS",
+      "language": "en",
+      "refs": [
+        "MC-DIFFRACTION-ONLY-AT-SLITS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "**Probe:** \"Does diffraction occur when light passes through a large door opening? Why or why",
+      "content": "### MC-4: MC-DIFFRACTION-ONLY-AT-SLITS\n**Probe:** \"Does diffraction occur when light passes through a large door opening? Why or why\nnot?\"  \n**Characteristic phrase:** \"You need a really small opening for diffraction.\"  \n**Trigger:** Textbook always show narrow-slit setups; students never see diffraction from large\napertures.  \n**Conflict evidence [P28]:** Diffraction always occurs; the condition a/λ ≈ 1 determines whether\neffects are observable. For a 1 m door and λ = 500 nm, a/λ = 2×10⁶ — the central maximum is\n0.5 μrad wide, invisible. But it is there.  \n**Bridge [P30]:** \"Diffraction is universal. Whether you see it depends on the ratio a/λ. A door\ndiffracts light, but the spread is immeasurably small. Narrow the opening to a/λ ≈ 1 and the\npattern becomes visible.\"  \n**Replacement [P31]:** Diffraction occurs for all apertures; significant observable effects require\na ≈ λ.  \n**Discrimination pairs [P33]:** (A) Diffraction requires a slit. (B) Diffraction requires a/λ ≈ 1\nto be observable. (C) Diffraction only happens with laser light. Correct: (B).  \n**S6 repair path:** TA-2 (everyday diffraction examples) → ratio calculation exercise.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 57,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Huygens Construction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Huygens Construction\",\"primitives\":[\"P14\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Paired-Strip Cancellation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Paired-Strip Cancellation\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 15,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.diffraction",
+      "title": "MC-2 Diagnostic",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-2 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-2\",\"MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Quantitative Practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Quantitative Practice\",\"primitives\":[\"P50\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 28,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Diffraction vs. Interference Distinction",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Diffraction vs. Interference Distinction\",\"primitives\":[\"P28\",\"P33\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 34,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Rayleigh Criterion Transfer",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Rayleigh Criterion Transfer\",\"primitives\":[\"P68\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 42,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Closure & Self-Assessment",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Closure & Self-Assessment\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 50,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \nPass criteria — student correctly:  \n(a) States the condition for diffraction minima: a sin θ = mλ  \n(b) Predicts the effect of changing a or λ on the central maximum width (inverse relationship for a, direct for λ)  \n(c) Distinguishes single-slit diffraction from double-slit interference using pattern features  \n(d) Applies the Rayleigh criterion to a new instrument context  \nFailure on (a) or (b) → restart from TA-3. Failure on (c) → return to TA-6. Failure on (d) → extend session to TA-7+.\n\n**Formative Golden Probe (FA-1):**  \n\"A single slit of width 0.2 mm is illuminated with laser light of λ = 600 nm. The screen is 1.5 m\naway. Calculate the half-width of the central maximum. If the slit is narrowed to 0.1 mm, what\nhappens to the half-width?\"  \nExpected: y₁ = λD/a = (600×10⁻⁹ × 1.5) / (0.2×10⁻³) = 4.5 mm. Halving a doubles y₁ to 9 mm.  \nThreshold: Both values correct, ratio correctly predicted.\n\n**Formative Golden Probe (FA-2):**  \n\"In a single-slit experiment the first dark fringe appears at 3° from the centre. The wavelength\nis 500 nm. Find the slit width.\"  \nExpected: a = λ / sin θ = 500×10⁻⁹ / sin 3° = 500×10⁻⁹ / 0.0523 ≈ 9.56 μm.  \nThreshold: Correct application of first-minimum condition; correct use of sin not tan.\n\n**Formative Golden Probe (FA-3):**  \n\"Why does a narrower slit produce a wider central diffraction maximum? Answer using Huygens'\nprinciple — no formulas.\"  \nExpected: A narrower slit contains fewer point sources. The wavelets from these sources overlap\nacross a wider angular range. The condition for destructive interference (first minimum) occurs at\na larger angle because the path difference a sin θ = λ requires a larger θ when a is smaller.  \nThreshold: Huygens explicitly named; inverse relationship explained physically, not just stated.\n\n**Formative Golden Probe (FA-4):**  \n\"A telescope mirror has diameter 0.5 m and observes light at 550 nm. What is its angular\nresolution? A second telescope has diameter 5 m. Compare their abilities to resolve two stars\n0.1 arcsecond apart.\"  \nExpected: θ_min = 1.22 × 550×10⁻⁹ / 0.5 ≈ 1.34 μrad ≈ 0.28 arcsec. Not resolved. For 5 m:\nθ_min ≈ 0.028 arcsec. Resolved (barely).  \nThreshold: Rayleigh formula correctly applied; comparison correctly drawn.\n\n**Confidence Calibration:**  \nAfter each probe, ask: \"How confident were you before you calculated: certain / likely / unsure?\"\nTrack against accuracy. Flag calibration deficit if student is consistently certain but wrong, or\nconsistently unsure but right.\n\n**Delayed Retrieval (Session + 3 days):**  \n\"Without looking at your notes — what is the condition for the first dark fringe in single-slit\ndiffraction? What happens to fringe width if you halve the slit?\"  \nThreshold: Both correct unaided.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 341,
+        "endLine": 392
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nA razor blade held in a beam of light casts a shadow whose edge is fringed — bright bands appear\ninside the geometric shadow. A distant streetlamp seen through a mesh fabric shows a starburst\npattern. These are not optical artifacts; they are the wave nature of light made visible.\n\n**Stage 2 — Representational (R)**  \nDraw a single slit as a gap of width a. Divide the slit into many point sources (Huygens). Rays\nfrom opposite ends of the slit travel to the same screen point P. The path difference between\nthe top-most and bottom-most ray is a sin θ. When this path difference equals mλ, the slit can\nbe divided into pairs of strips that cancel — producing a minimum. The central maximum (θ = 0)\nhas zero path difference, hence maximum constructive superposition.\n\n**Stage 3 — Abstract (A)**  \nIntensity distribution: I(θ) = I₀ (sin β / β)², where β = (πa sin θ)/λ. The central maximum\n(β = 0) has intensity I₀; secondary maxima are at β ≈ ±3π/2, ±5π/2, … with intensities ≈ I₀/22,\nI₀/62, … Angular width of central maximum = 2λ/a; narrowing a doubles this angular width.\n\n**Stage 4 — Transfer (T)**  \nDiffraction limits the resolving power of all optical instruments (Rayleigh criterion:\nθ_min = 1.22λ/D for a circular aperture). A narrow radio-telescope dish has poor angular\nresolution. CD/DVD tracks act as diffraction gratings. X-ray diffraction (Bragg's law) reveals\ncrystal structures. Electron diffraction confirms de Broglie's matter-wave hypothesis.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 49,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Why Beginners Fail",
+      "content": "1. **The geometric-optics habit:** Students have spent years in a world where light \"goes straight.\"\n   Diffraction requires abandoning that habit and accepting that waves explore all paths.\n\n2. **Conflation with interference:** Both involve superposition and fringes, so students merge them\n   mentally. The distinction (single source spread out vs. multiple discrete sources) is abstract\n   until made very explicit.\n\n3. **Inverted slit-width intuition:** Geometric thinking predicts: smaller slit → smaller shadow →\n   narrower pattern. Wave physics predicts the opposite. This counterintuitive reversal must be\n   addressed head-on, not by-passed.\n\n4. **Treating θ as large:** Students apply sin θ ≈ θ (small-angle) uncritically, then get\n   confused when the approximation breaks near the first minimum for very narrow slits. The\n   approximation must always be stated with its validity range.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 76,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Before we write any formula — look at this shadow. [Show D-1.] That bright\nband is inside the shadow. Geometrically, it should be dark. We need a completely different model\nto explain it.\"\n\n**Key explanatory moves:**\n- \"Every point in the slit is a new source. Not just the edges — every single point across the\n  whole width.\"\n- \"A narrower slit gives fewer point sources crowded into a smaller space. They spread out more\n  to find room. That's why the central maximum widens.\"\n- \"The formula a sin θ = λ is just the tipping point — the angle at which the top-half and\n  bottom-half of the slit's wavelets perfectly cancel.\"\n\n**Common recovery phrases:**\n- If student says \"light bends around the slit\": \"It is more accurate to say waves from inside\n  the slit spread in all directions. The edge is not doing the bending — the entire opening is\n  radiating.\"\n- If student inverts the ratio: \"Write the formula: y₁ = λD/a. a is in the denominator. Bigger\n  a → smaller y₁. Smaller a → bigger y₁. The formula is the memory.\"\n- If student confuses with double-slit: \"Ask yourself: how many sources? One continuous aperture\n  = diffraction. Two point sources = interference. The envelope of a double-slit pattern is set\n  by single-slit diffraction — they coexist.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 315,
+        "endLine": 341
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Recovery Notes",
+      "content": "**S0 (no prior knowledge of Huygens):** Start with the water-harbour analogy (Component 6).\nEstablish that all waves spread through gaps before introducing light. Then run TA-1.\n\n**S3 (has Young's interference, struggles with why diffraction is different):** Use TA-6 head-on.\nEmphasize: \"In Young's, we had two separated point sources and superimposed them. Here we have one\ncontinuous aperture and superimpose all its points. Same mathematics, different geometry.\"\n\n**S6 (MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN is dominant):** Do not try to reason past it\nverbally. Run the variable-slit demo (D-2) first. Make the student observe the counterintuitive\nresult before you explain it. Physical experience is more durable than verbal argument for this\nspecific misconception.\n\n**S9 (plateau — can solve problems but cannot explain the physics):** Set the Huygens-only\nexplanation task (FA-3). If they cannot do it, they have a procedural schema without conceptual\nunderstanding. Return to TA-2 and require verbal Huygens explanation before any formula work.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 392,
+        "endLine": 412
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual-procedural hybrid. The formula a sin θ = mλ is procedural; the Huygens\nexplanation is conceptual. Both must be encoded separately or they interfere with each other at\nretrieval.\n\n**Spaced retrieval plan:**\n- Session + 1 day: \"State the condition for the first minimum. What is the effect of halving the\n  wavelength on the diffraction pattern?\" (Procedural check)\n- Session + 4 days: \"Explain using Huygens' principle why a narrow slit produces a wider pattern\n  than a wide slit.\" (Conceptual check)\n- Session + 10 days: \"A telescope uses a circular aperture of diameter D = 2 m. Light of wavelength\n  450 nm enters. Find its angular resolution. A competing telescope has D = 8 m — how much better\n  is its resolution?\" (Transfer check)\n\n**Interleaving partners:** phys.opt.youngs-experiment (interference vs. diffraction contrast),\nphys.wave.interference (superposition mechanics), phys.opt.single-slit (immediate successor),\nphys.opt.diffraction-grating (multi-slit generalization).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 412,
+        "endLine": 433
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Transfer Map",
+      "content": "**Near transfer:**\n- Single-slit diffraction: the immediate quantitative application of the general diffraction result\n- Diffraction grating: d sin θ = mλ generalizes the slit formula to N slits\n- Circular aperture: replaces the factor 1 with 1.22 for circular geometry\n\n**Far transfer:**\n- Optical instruments: Rayleigh criterion limits resolution of all image-forming systems\n- X-ray crystallography: Bragg diffraction uses exactly the same geometry at atomic scales\n- Electron diffraction: Davisson-Germer experiment confirms de Broglie using diffraction\n- Radio astronomy: antenna-array systems use diffraction to achieve directional sensitivity\n- Acoustic diffraction: sound bending around walls, sonar resolution limits\n\n**Structural abstraction:** The wave-aperture ratio (a/λ) as a universal controller of spreading\nappears in antenna theory (beam width = λ/D), acoustic engineering (speaker directivity), and\nmedical ultrasound (transducer resolution). Any system that emits or receives waves through an\naperture obeys the same ratio law.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 433,
+        "endLine": 454
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.opt.diffraction",
+      "title": "Curriculum Feedback",
+      "content": "**Does this concept position correctly in the KG?**  \nYes. Requiring phys.opt.youngs-experiment ensures students have already met interference and\nwave-optics; diffraction is the natural generalization. Unlocking phys.opt.single-slit is correct\n— single-slit is the quantitative specialization.\n\n**Missing prerequisite?**  \nHuygens' principle is used heavily but has no explicit KG node. Students who have not seen it\nformally need the harbour-analogy warmup (Component 6) before TA-2.\n\n**Recommended teaching pair:** phys.opt.diffraction + phys.opt.single-slit should be taught in\nconsecutive sessions with the slit-width demo bridging them. Teaching them in the same session is\nfeasible but exceeds the 6h estimate.\n\n**Asset opportunity:** A live interactive simulation (slit-width slider, wavelength slider,\nreal-time intensity pattern update) would substantially reduce S6-path recovery time. The razor-\nblade shadow demonstration (D-1) is currently the only no-equipment option and works well as an\nanchor.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 454,
+        "endLine": 476
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

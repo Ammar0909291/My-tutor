@@ -1,0 +1,600 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.interference-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.interference",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:e67ef63332f90966853c4af0d56c900937dc537c3203bc66e87746108c121140",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.interference.md": "sha256:0d849fe8484e42400363026f421dab8d7e00c94b4e330a9896a89d41299b4390"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 13,
+      "session_flow": 1
+    },
+    "ruleCount": 13
+  },
+  "concept": {
+    "conceptId": "phys.wave.interference",
+    "name": "Wave Interference",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.wave.superposition"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.interference-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.interference (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.interference.md": "sha256:0d849fe8484e42400363026f421dab8d7e00c94b4e330a9896a89d41299b4390"
+      },
+      "contentHash": "sha256:002be01f9fdee3d20da56e0d9f2789a867ec52996b52b3d61afaf2002675ea80",
+      "ruleCount": 13,
+      "bandCounts": {
+        "3": 13
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-4 (addresses MC-INTERFERENCE-DESTROYS-ENERGY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-7 (addresses MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.interference.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.interference.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.interference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.interference\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.interference/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.wave.interference",
+      "title": "(Concrete — direct application)",
+      "content": "### WE-1 (Concrete — direct application)\n\n**Scenario:** Two loudspeakers separated by d = 2.0 m emit coherent sound at f = 680 Hz. Speed of sound v = 340 m/s. A student stands 5.0 m directly in front of one speaker. Is the sound loud or quiet at this position?\n\n**Step 1 — Find wavelength.**\nλ = v/f = 340/680 = 0.50 m.\n\n**Step 2 — Find path lengths.**\nLet speaker A be at origin, speaker B at (2.0, 0). Student is at (0, 5.0).\n\nd_A = 5.0 m.\nd_B = √(2.0² + 5.0²) = √(4 + 25) = √29 ≈ 5.385 m.\n\n**Step 3 — Path difference.**\nΔd = 5.385 − 5.0 = 0.385 m.\n\n**Step 4 — Compare to λ.**\nΔd/λ = 0.385/0.50 = 0.77 — between ½ and 1, not a whole integer or half-integer exactly. Closest destructive minimum: Δd = 0.5λ = 0.25 m; closest constructive maximum: Δd = λ = 0.50 m.\n\nAt 0.385 m the student is 77% of the way toward λ, closer to the minimum (phase difference ≈ 277°). Intensity is reduced but not zero — partial interference.\n\n**Answer:** The point is not at a clean maximum or minimum; intensity is reduced to about I ≈ I_max × cos²(φ/2) with φ = 2π × 0.77 = 4.84 rad → cos²(2.42) ≈ 0.07. The student hears approximately 7% of the maximum intensity — very quiet.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 47,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.wave.interference",
+      "title": "(Bridging — two-slit geometry)",
+      "content": "### WE-2 (Bridging — two-slit geometry)\n\n**Scenario:** In Young's double-slit experiment: slit separation d = 0.5 mm, screen distance L = 2.0 m, fringe spacing measured as y = 2.6 mm. Find the wavelength of light.\n\n**Formula derivation (small-angle):**\nFor the m-th bright fringe: d sin θ ≈ d(y_m/L) = mλ.\nFringe spacing Δy = λL/d.\n\n**Solve:**\nλ = Δy × d / L = (2.6 × 10⁻³)(0.5 × 10⁻³) / 2.0 = 1.3 × 10⁻⁶ / 2.0 = 6.5 × 10⁻⁷ m = 650 nm.\n\n**Answer:** λ = 650 nm — red light. This is Young's 1801 method of measuring wavelength for the first time in history.\n\n**Conceptual extension:** Closing one slit removes the interference pattern entirely and replaces it with a single broad diffraction envelope. The fringe pattern is the interference term; the envelope is the single-slit diffraction term.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 47,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.wave.interference",
+      "title": "(Abstract — intensity in double-slit)",
+      "content": "### WE-3 (Abstract — intensity in double-slit)\n\n**Derive:** For two coherent sources of equal amplitude A₀, show that fringe intensity follows I(θ) = I_max cos²(φ/2).\n\n**Step 1 — Phase difference from geometry.**\nφ = 2πΔd/λ = 2πd sinθ/λ.\n\n**Step 2 — Add amplitudes.**\nE_total = A₀ sin(ωt) + A₀ sin(ωt + φ).\nUsing sum-to-product: 2A₀ cos(φ/2) sin(ωt + φ/2).\nResultant amplitude: A_res = 2A₀ cos(φ/2).\n\n**Step 3 — Intensity.**\nI ∝ A_res² = 4A₀² cos²(φ/2) = I_max cos²(φ/2), where I_max = 4A₀² (four times single-source intensity at constructive maxima).\n\n**Step 4 — Check energy conservation.**\nAverage of cos²(φ/2) over all angles = ½. Average I = ½ × 4A₀² = 2A₀². Two incoherent sources would give 2A₀². Confirmed: energy is conserved; interference redistributes, not creates or destroys.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 47,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/misconception/MC-INTERFERENCE-DESTROYS-ENERGY",
+      "kind": "misconception",
+      "conceptId": "phys.wave.interference",
+      "title": "**Trigger signal:** Student says \"destructive interference means the waves cancel and the energy disappears.",
+      "content": "### MC-INTERFERENCE-DESTROYS-ENERGY\n\n**Trigger signal:** Student says \"destructive interference means the waves cancel and the energy disappears.\"\n\n**Conflict evidence [P28]:** \"Let me show you a concrete problem. Two 1W speakers pointing at each other in a destructive interference pattern: if the energy vanished, a calorimeter between them would heat nothing and an energy balance would fail. We know energy is conserved in all wave experiments — so what must be happening instead?\"\n\n**Bridge text [P30]:** \"Energy can't be created or destroyed by superposition. Interference doesn't destroy energy — it redistributes it. The points of destructive cancellation are exactly paired with points of constructive doubling.\"\n\n**Replacement text [P31]:** \"Destructive interference moves energy from minima to maxima. In a two-slit pattern, the dark fringes contribute zero energy but the bright fringes (which are 4× as intense as a single source) collect it all. The area-averaged total is exactly what two incoherent sources would give.\"\n\n**Discrimination pairs [P33]:**\n- \"Two waves from coherent sources cancel at a point 50 cm away. At 51 cm they reinforce. Which is louder — the 51 cm point compared to one source alone?\" → 4× as intense (amplitude doubles, I ∝ A²).\n- \"Two incoherent sources: can they produce stable dark fringes?\" → No — incoherent sources have random phase fluctuations, so any null at one instant is filled a microsecond later. Stable fringes require coherence.\n\n**s6_path:** \"Let's think about where the energy goes rather than whether it vanishes — that reframe makes interference conceptually clean and worry-free.\"\n\n---",
+      "localKey": "MC-INTERFERENCE-DESTROYS-ENERGY",
+      "language": "en",
+      "refs": [
+        "MC-INTERFERENCE-DESTROYS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/misconception/MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE",
+      "kind": "misconception",
+      "conceptId": "phys.wave.interference",
+      "title": "**Trigger signal:** Student claims interference only occurs when the two sources have identical amplitudes, or that unequal amplitudes produce \"partial\" interference that isn't real interference.",
+      "content": "### MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE\n\n**Trigger signal:** Student claims interference only occurs when the two sources have identical amplitudes, or that unequal amplitudes produce \"partial\" interference that isn't real interference.\n\n**Conflict evidence [P28]:** \"Consider radio waves from two antennas of different power reaching your receiver. Engineers calculate their interference to avoid dead spots. If unequal amplitudes couldn't interfere, radio engineering would be impossible. What do you think actually happens when A₁ ≠ A₂?\"\n\n**Bridge text [P30]:** \"Superposition principle applies to any two waves — A₁ and A₂ can be different. The resultant amplitude is A_res = √(A₁² + A₂² + 2A₁A₂cosφ). When A₁ = A₂ = A₀ this simplifies to 2A₀|cos(φ/2)|, giving complete cancellation at minima. When A₁ ≠ A₂ the minimum is |A₁ − A₂| > 0 — not zero — but it is still interference.\"\n\n**Replacement text [P31]:** \"Interference occurs whenever two (or more) coherent waves overlap in space. With equal amplitudes, destructive minima reach zero (maximum contrast); with unequal amplitudes, minima are nonzero (reduced contrast). Fringe visibility V = (I_max − I_min)/(I_max + I_min) measures contrast: V = 1 for equal amplitudes, 0 < V < 1 for unequal.\"\n\n**Discrimination pairs [P33]:**\n- \"Speaker A outputs 4W, Speaker B outputs 1W. Is there an interference pattern?\" → Yes — every point has a resultant determined by superposition; there are maxima and minima, just with reduced contrast (V < 1).\n- \"Can a single source interfere with itself?\" → Yes — thin-film interference and Michelson interferometer both split a single source and recombine it; the source interferes with its own phase-shifted copy.\n\n**s6_path:** \"Interference is a general wave behavior — you don't need identical sources to see it, just coherence.\"\n\n---",
+      "localKey": "MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE",
+      "language": "en",
+      "refs": [
+        "MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 209,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "diagnostic: phase-difference recall",
+      "content": "{\"id\":\"TA-2\",\"title\":\"diagnostic: phase-difference recall\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 209,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "anchor: noise-cancelling headphones",
+      "content": "{\"id\":\"TA-3\",\"title\":\"anchor: noise-cancelling headphones\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 209,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": ": P28 conflict → P30 bridge → P31 replacement → P33 pairs",
+      "content": "{\"id\":\"TA-4\",\"title\":\": P28 conflict → P30 bridge → P31 replacement → P33 pairs\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-INTERFERENCE-DESTROYS-ENERGY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-INTERFERENCE-DESTROYS-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 210,
+        "endLine": 210
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 212,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "narrow: Δd = nλ / (n+½)λ rule",
+      "content": "{\"id\":\"TA-6\",\"title\":\"narrow: Δd = nλ / (n+½)λ rule\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 213,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": ": P28 → P30 → P31",
+      "content": "{\"id\":\"TA-7\",\"title\":\": P28 → P30 → P31\",\"primitives\":[\"P28\",\"P30\",\"P31\"],\"addresses\":[\"MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 214,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "retrieval seed: fringe spacing derivation",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval seed: fringe spacing derivation\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 216,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "mastery probe: two-slit problem + fringe spacing explanation",
+      "content": "{\"id\":\"TA-9\",\"title\":\"mastery probe: two-slit problem + fringe spacing explanation\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 218,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-10\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 219,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-11\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-12\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 221,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.interference",
+      "title": "close",
+      "content": "{\"id\":\"TA-13\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 222,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "phys.wave.interference/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.wave.interference",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: phase-difference recall] → [P06 anchor: noise-cancelling headphones]\n→ [MC-INTERFERENCE-DESTROYS-ENERGY: P28 conflict → P30 bridge → P31 replacement → P33 pairs]\n→ [WE-1: path difference calculation for two speakers]\n→ [P51 check-in]\n→ [P52 narrow: Δd = nλ / (n+½)λ rule]\n→ [MC-INTERFERENCE-NEEDS-SAME-AMPLITUDE: P28 → P30 → P31]\n→ [WE-2: Young's experiment wavelength measurement]\n→ [P62 retrieval seed: fringe spacing derivation]\n→ [WE-3: intensity formula derivation]\n→ [P36 mastery probe: two-slit problem + fringe spacing explanation]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.interference.md",
+        "startLine": 206,
+        "endLine": 227
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

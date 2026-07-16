@@ -1,0 +1,362 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.emf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.emf",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:e1040a2627e6072de421b72f577b922f9dde6b72c25379609999540cb1d92399",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.emf.md": "sha256:832fccbaec749fcce87540a15fd6c79055ac77c685afbc1934bb87b57ff3870e"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.em.emf",
+    "name": "Electromotive Force (EMF)",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.dc-circuits"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.emf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.emf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.emf.md": "sha256:832fccbaec749fcce87540a15fd6c79055ac77c685afbc1934bb87b57ff3870e"
+      },
+      "contentHash": "sha256:457affa7d3f1de22b4a11f0070224bab880587e76abfaa30e24124bf974d96cf",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.emf.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.emf.md#TA-1 (addresses MC-EMF-IS-A-FORCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.emf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.emf\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.emf.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.emf.md#TA-2 (addresses MC-TERMINAL-VOLTAGE-EQUALS-EMF)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.emf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.emf\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.emf.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.emf.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.emf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.emf\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.emf.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.emf.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.emf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.emf\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.emf.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.emf.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.emf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.emf\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.emf/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.emf",
+      "title": "Terminal Voltage Under Load",
+      "content": "### WE-1 — Terminal Voltage Under Load\n**Problem:** A battery with ε = 9 V and r = 0.5 Ω drives current through R = 4 Ω. Find: (a) current, (b) terminal voltage, (c) power dissipated internally.\n\n**Solution:**\n(a) Total resistance = R + r = 4.5 Ω  \nI = ε / (R + r) = 9 / 4.5 = **2.0 A**\n\n(b) V_terminal = ε − Ir = 9 − 2.0 × 0.5 = 9 − 1 = **8.0 V**  \nCheck: V_terminal = IR = 2.0 × 4 = 8.0 V ✓\n\n(c) P_internal = I²r = (2.0)² × 0.5 = **2.0 W**  \nP_total = εI = 9 × 2.0 = 18 W; P_ext = 8.0 × 2.0 = 16 W; 16 + 2 = 18 W ✓\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 60,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.em.emf/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.emf",
+      "title": "Finding EMF and Internal Resistance",
+      "content": "### WE-2 — Finding EMF and Internal Resistance\n**Problem:** A battery delivers I₁ = 5 A when R₁ = 1.8 Ω and I₂ = 3 A when R₂ = 3 Ω. Find ε and r.\n\n**Solution:**\nFrom V_terminal = ε − Ir and V_terminal = IR:\n\nLoop 1: ε = I₁(R₁ + r) = 5(1.8 + r) → ε = 9 + 5r  \nLoop 2: ε = I₂(R₂ + r) = 3(3 + r) → ε = 9 + 3r\n\nSetting equal: 9 + 5r = 9 + 3r → 2r = 0 … recalculate with different values.\n\nRevised problem: I₁ = 4 A at R₁ = 2 Ω; I₂ = 2 A at R₂ = 5 Ω.  \nε = 4(2 + r) = 8 + 4r  \nε = 2(5 + r) = 10 + 2r  \n8 + 4r = 10 + 2r → 2r = 2 → **r = 1 Ω**; ε = 8 + 4 = **12 V**  \nCheck: V₁ = 4 × 2 = 8 V; ε − I₁r = 12 − 4 = 8 ✓; V₂ = 2 × 5 = 10 V; 12 − 2 = 10 ✓\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 60,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.em.emf/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.emf",
+      "title": "Maximum Power Transfer",
+      "content": "### WE-3 — Maximum Power Transfer\n**Problem:** Battery has ε = 10 V, r = 2 Ω. Find R_ext for maximum power in R_ext, and compute that maximum power.\n\n**Solution:**\nMaximum power when R_ext = r = **2 Ω**  \nI = ε / (R_ext + r) = 10 / 4 = 2.5 A  \nP_max = I²R_ext = (2.5)² × 2 = **12.5 W**  \nCheck: P_total = εI = 10 × 2.5 = 25 W; P_internal = (2.5)² × 2 = 12.5 W; efficiency = 50% ✓\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 60,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.em.emf/misconception/MC-EMF-IS-A-FORCE",
+      "kind": "misconception",
+      "conceptId": "phys.em.emf",
+      "title": "- **trigger_signal:** Student says \"the battery pushes electrons with a force of 12 volts\" or treats EMF as a Newtonian force.",
+      "content": "### MC-EMF-IS-A-FORCE\n- **trigger_signal:** Student says \"the battery pushes electrons with a force of 12 volts\" or treats EMF as a Newtonian force.\n- **conflict_evidence [P28]:** \"Here's the unit check: force is measured in Newtons (kg·m/s²), but EMF is measured in Volts = Joules/Coulomb. These are completely different physical quantities. EMF is energy per charge, not force.\"\n- **bridge_text [P30]:** \"The name 'electromotive force' is a 200-year-old historical mistake — physicists today know it should be called 'electromotive energy per charge.' Think of EMF as a pump rating: it tells you how much energy the pump gives each litre of water, not how hard it pushes.\"\n- **replacement_text [P31]:** \"EMF (ε) = energy supplied per unit charge = W/q, measured in volts (J/C). It is the energy rating of a source, not a mechanical force.\"\n- **discrimination_pairs [P33]:**\n  - Force (N) vs. EMF (V = J/C): force accelerates objects; EMF is energy per charge\n  - EMF (ε = 12 V) vs. Voltage drop (V = IR): source property vs. circuit consequence\n- **s6_path:** If confusion persists, revisit electric potential (energy per charge definition) before returning to EMF.\n\n---",
+      "localKey": "MC-EMF-IS-A-FORCE",
+      "language": "en",
+      "refs": [
+        "MC-EMF-IS-A-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.em.emf/misconception/MC-TERMINAL-VOLTAGE-EQUALS-EMF",
+      "kind": "misconception",
+      "conceptId": "phys.em.emf",
+      "title": "- **trigger_signal:** Student assumes V_terminal = ε always, or measures battery voltage and calls it EMF without checking load conditions.",
+      "content": "### MC-TERMINAL-VOLTAGE-EQUALS-EMF\n- **trigger_signal:** Student assumes V_terminal = ε always, or measures battery voltage and calls it EMF without checking load conditions.\n- **conflict_evidence [P28]:** \"Let's measure: a 9 V battery in open circuit reads 9.0 V. When connected to a 1 Ω load, it might read only 8.0 V. EMF is 9 V but terminal voltage drops because internal resistance is real. They're only equal when I = 0.\"\n- **bridge_text [P30]:** \"Every real battery is modelled as an ideal EMF source (ε) in series with its internal resistance (r). When no current flows, no voltage is dropped across r, so terminal voltage = ε. But the moment current flows, V_drop = Ir eats into the available voltage.\"\n- **replacement_text [P31]:** \"V_terminal = ε − Ir. Terminal voltage equals EMF only in open circuit (I = 0). Under load, terminal voltage is always less than EMF (for a discharging source).\"\n- **discrimination_pairs [P33]:**\n  - Open circuit (I=0): V_terminal = ε\n  - Under load: V_terminal = ε − Ir < ε\n  - Being charged: V_terminal = ε + Ir > ε\n- **s6_path:** Concrete demonstration: measure battery voltage unloaded vs. loaded; observe voltage sag. Link to WE-1 calculation.\n\n---",
+      "localKey": "MC-TERMINAL-VOLTAGE-EQUALS-EMF",
+      "language": "en",
+      "refs": [
+        "MC-TERMINAL-VOLTAGE-EQUALS-EMF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 15,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.em.emf/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.emf",
+      "title": "EMF definition and unit check: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"EMF definition and unit check: Block 1-A\",\"primitives\":[\"P51\"],\"addresses\":[\"MC-EMF-IS-A-FORCE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-EMF-IS-A-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 15,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "phys.em.emf/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.emf",
+      "title": "Terminal voltage formula: Block 1-B",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Terminal voltage formula: Block 1-B\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-TERMINAL-VOLTAGE-EQUALS-EMF\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-TERMINAL-VOLTAGE-EQUALS-EMF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.em.emf/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.emf",
+      "title": "WE-2: finding ε and r from two measurements",
+      "content": "{\"id\":\"TA-3\",\"title\":\"WE-2: finding ε and r from two measurements\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 28,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.em.emf/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.emf",
+      "title": "Energy bookkeeping: Block 1-C",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Energy bookkeeping: Block 1-C\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 33,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.em.emf/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.emf",
+      "title": "WE-3: maximum power transfer",
+      "content": "{\"id\":\"TA-5\",\"title\":\"WE-3: maximum power transfer\",\"primitives\":[\"P36\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 36,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.em.emf/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.emf",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** A battery with ε = 6 V and r = 0.5 Ω supplies 2 A. The terminal voltage is:\n(a) 6.0 V (b) 5.0 V **(c) 5.0 V** (d) 4.5 V\n→ Correct: V = ε − Ir = 6 − 1 = 5 V [answer: b/c same value, correct answer = 5.0 V]\n\n**A2 (Short answer):** State what EMF measures physically. [Energy supplied per unit charge by a non-electrostatic mechanism; units: J/C = V]\n\n**A3 (True/False):** Terminal voltage is always equal to EMF. [FALSE — equal only in open circuit]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** A battery is being recharged. Is the terminal voltage higher or lower than its EMF? Explain.\n[Higher: V_terminal = ε + Ir; the charging source drives current against the battery's EMF, raising terminal voltage]\n\n**B2:** Two identical batteries (ε = 6 V, r = 1 Ω each) are connected in parallel. A 2 Ω external resistor is connected. Find the terminal voltage.\n[r_total = 0.5 Ω; ε_total = 6 V; I = 6/(2+0.5) = 2.4 A; V_terminal = 2.4 × 2 = 4.8 V or ε − I_per_battery × r = 6 − 1.2 × 1 = 4.8 V ✓]\n\n**B3 (Ranking):** Rank these configurations by terminal voltage for the same battery (ε=9V, r=1Ω): (i) open circuit, (ii) R=4Ω, (iii) R=1Ω, (iv) short circuit.\n[i > ii > iii > iv; V = 9, 7.2, 4.5, 0 V]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** A battery of unknown ε and r is tested: at I=0, V=12V; at I=3A, V=10.5V. Calculate ε and r, then find the current and terminal voltage when R=2Ω is connected.\n[ε=12V (open circuit = EMF); r=(12−10.5)/3=0.5Ω; I=12/(2+0.5)=4.8A; V=4.8×2=9.6V]\n\n**C2 (Error spot):** A student writes: \"Short circuit current = ε/R_ext = 6/0 = undefined — so short circuits are impossible.\" Identify and correct the error.\n[Error: uses R_ext instead of r in denominator; correct: I_sc = ε/r; with r=0.5Ω, I_sc=12A — very large but defined and physically real]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 134,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "phys.em.emf/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.emf",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks ε) | Deploy MC-TERMINAL-VOLTAGE-EQUALS-EMF; redo WE-1 with explicit Ir subtraction |\n| Probe B2 wrong (parallel batteries) | Review parallel source rules (Block 1-D); draw equivalent circuit |\n| Probe C1 wrong on r calculation | Check: r = ΔV / ΔI; open-circuit V = ε; reinforce with numerical substitution |\n| Student asks \"what if r changes with current?\" | Extend: nonlinear r (lead-acid battery sag); flag as advanced enrichment only |\n| Student confuses EMF with voltage across source terminals | Draw circuit diagram explicitly showing ε (ideal source) + r (internal) in series |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-TERMINAL-VOLTAGE-EQUALS-EMF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 242,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.em.emf/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.emf",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we're diagnosing why batteries don't actually deliver their rated voltage. By the end you'll be able to predict what voltage a battery delivers under any load — a skill every electronics engineer uses daily.\"\n\n[P41 — Diagnostic]\n\"Quick check: if a 9V battery is connected to a 10Ω resistor, is the voltage across the resistor exactly 9V? Why or why not?\"\n→ Correct (mentions internal resistance): reinforce, move to formal definition.\n→ Incorrect/unsure: \"Good question to sit with. Let's build the answer.\"\n\n[P06 — Concrete anchor]\n\"Hold a AA battery (1.5V). Now imagine it has a tiny resistor baked inside it — that's the internal resistance. No matter how ideal the chemistry, current flowing through that internal resistance costs voltage. Let's quantify this.\"\n\n[TA-1 — EMF definition and unit check: Block 1-A]\n\"EMF ε = W/q. Unit: J/C = V. Key: it's energy per charge, not force. The word 'force' in the name is a 200-year-old misnomer.\"\n\n[P51 — Check-in]\n\"In your own words: what does EMF measure, and why is it not literally a force?\"\n→ Adjust if student says \"it pushes electrons\" — deploy MC-EMF-IS-A-FORCE bridge.\n\n[TA-2 — Terminal voltage formula: Block 1-B]\n\"V_terminal = ε − Ir. Walk through WE-1 step by step.\"\n\n[P28 — Conflict evidence for MC-TERMINAL-VOLTAGE-EQUALS-EMF]\n\"If V_terminal always equalled ε, your phone battery would never 'die' even at 1% charge — it'd still deliver full voltage. But it doesn't. Why?\"\n\n[TA-3 — WE-2: finding ε and r from two measurements]\n\n[P52 — Narrow]\n\"Two key cases: open circuit (I=0, V=ε) and short circuit (I=ε/r, V=0). These are the extremes. Everything else falls between.\"\n\n[TA-4 — Energy bookkeeping: Block 1-C]\n\"P_total = εI; P_ext = V_terminal × I; P_internal = I²r. These must sum correctly.\"\n\n[TA-5 — WE-3: maximum power transfer]\n\n[P62 — Retrieval seed]\n\"Close notes. Write: the terminal voltage formula, what open-circuit voltage equals, and how to find ε and r experimentally.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"EMF is energy per charge from a source; terminal voltage is what the external circuit actually gets; the gap is Ir, energy wasted inside. Next: Wheatstone bridge uses this exact understanding to measure resistance precisely.\"\n\n[P85 — Regulation tail]\n\"What part of today felt shakiest? Terminal voltage formula, or the energy bookkeeping?\"\n\n[P89 — Retrieval schedule]\n\"Return in 1 day for the quiz at +1 day offset above.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.emf.md",
+        "startLine": 188,
+        "endLine": 242
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

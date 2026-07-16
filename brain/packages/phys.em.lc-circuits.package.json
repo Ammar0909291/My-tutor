@@ -1,0 +1,328 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.lc-circuits-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.lc-circuits",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:b5e8f53cebf3af9a0c674a7a6b0bcd9bf25cb819bdcf4d1ff7e4f8e57ca75b64",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.lc-circuits.md": "sha256:52ccdcae16db4e0bb92450172387a5c88341ac5ab7d6dfe55f6b0e37fa4bad35"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.lc-circuits",
+    "name": "LC Circuits and Electromagnetic Oscillations",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.em.self-inductance",
+      "phys.em.capacitance",
+      "phys.em.ac-basics"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.lc-circuits-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.lc-circuits (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.lc-circuits.md": "sha256:52ccdcae16db4e0bb92450172387a5c88341ac5ab7d6dfe55f6b0e37fa4bad35"
+      },
+      "contentHash": "sha256:de695e7e36aeccf22fcb99f9a9671337a96bb6e5e61743d17f1a59aa85caa0bf",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.lc-circuits.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lc-circuits.md#TA-1 (addresses MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lc-circuits.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lc-circuits.md#TA-2 (addresses MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lc-circuits.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lc-circuits.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lc-circuits\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lc-circuits.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lc-circuits.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.lc-circuits/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "LC Oscillation Period and Maximum Current",
+      "content": "### WE-1 — LC Oscillation Period and Maximum Current\n**Problem:** LC circuit: L = 25 mH, C = 40 μF. Initial charge Q₀ = 5.0 mC, I(0) = 0. Find: (a) ω₀ and f₀, (b) Q(t) and I(t) expressions, (c) I_max, (d) total energy, (e) time for energy to transfer completely to inductor.\n\n**Solution:**\n(a) ω₀ = 1/√(LC) = 1/√(25×10⁻³ × 40×10⁻⁶) = 1/√(10⁻⁶) = **1000 rad/s**  \nf₀ = ω₀/(2π) = 1000/6.283 = **159 Hz**\n\n(b) Q(t) = Q₀ cos(ω₀t) = **5.0×10⁻³ cos(1000t) C**  \n    I(t) = −dQ/dt = Q₀ω₀ sin(ω₀t) = **5.0 sin(1000t) A**\n\n(c) I_max = Q₀ω₀ = 5.0×10⁻³ × 1000 = **5.0 A**\n\n(d) U = Q₀²/(2C) = (5.0×10⁻³)²/(2×40×10⁻⁶) = 25×10⁻⁶/(80×10⁻⁶) = **0.3125 J**  \n    Check: ½LI²_max = ½ × 25×10⁻³ × 25 = 0.3125 J ✓\n\n(e) Energy transfers completely to L when Q = 0, first at t = T/4 = (2π/ω₀)/4 = π/(2×1000) = **1.57 ms**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 82,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "Damped RLC Oscillation",
+      "content": "### WE-2 — Damped RLC Oscillation\n**Problem:** RLC circuit: L = 10 mH, C = 1.0 μF, R = 50 Ω. Determine: (a) ω₀, (b) damping constant γ, (c) whether underdamped, critically damped, or overdamped, (d) damped frequency ω_d.\n\n**Solution:**\n(a) ω₀ = 1/√(LC) = 1/√(10⁻² × 10⁻⁶) = 1/√(10⁻⁸) = **10⁴ rad/s**\n\n(b) γ = R/(2L) = 50/(2×10⁻²) = **2500 rad/s**\n\n(c) Compare γ = 2500 with ω₀ = 10000: γ < ω₀ → **underdamped** (oscillates with decay)  \nCritical R: R_c = 2√(L/C) = 2√(10⁻²/10⁻⁶) = 2√(10⁴) = 200 Ω > 50 Ω ✓\n\n(d) ω_d = √(ω₀² − γ²) = √(10⁸ − 6.25×10⁶) = √(9.375×10⁷) = **9685 rad/s** (≈ 3% below ω₀)\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 82,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "Energy Partitioning",
+      "content": "### WE-3 — Energy Partitioning\n**Problem:** In WE-1: (a) At what time is energy equally split between C and L? (b) What is Q and I at that time?\n\n**Solution:**\nU_C = U_L = U/2 → ½Q²/C = ¼Q₀²/C → Q = Q₀/√2\n\n(a) Q(t) = Q₀ cos(ω₀t) = Q₀/√2 → cos(ω₀t) = 1/√2 → ω₀t = π/4  \nt = π/(4ω₀) = π/(4×1000) = **0.785 ms** (= T/8)\n\n(b) Q = Q₀/√2 = 5.0×10⁻³/1.414 = **3.54 mC**  \n    I = Q₀ω₀ sin(ω₀t) = 5.0 × sin(π/4) = 5.0 × 0.707 = **3.54 A**\n\nVerify: U_C = (3.54×10⁻³)²/(2×40×10⁻⁶) = 0.156 J; U_L = ½×25×10⁻³×(3.54)² = 0.156 J ✓ (equal halves of 0.3125 J)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 82,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/misconception/MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE",
+      "kind": "misconception",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "- **trigger_signal:** Student says \"the LC circuit will eventually stop oscillating on its own, even without any resistance.",
+      "content": "### MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE\n- **trigger_signal:** Student says \"the LC circuit will eventually stop oscillating on its own, even without any resistance.\"\n- **conflict_evidence [P28]:** \"For an ideal LC circuit (R=0), energy conservation is exact: U = ½Q²/C + ½LI² = constant. At every moment, the energy lost by the capacitor equals the energy gained by the inductor and vice versa. No energy leaves the system. The ODE solution Q(t) = Q₀ cos(ω₀t) oscillates forever with constant amplitude. In practice, all real circuits have some R (wire resistance, component loss), which causes exponential decay — but that's the R, not the LC.\"\n- **bridge_text [P30]:** \"An ideal mass-spring system oscillates forever — no friction, no air resistance, perpetual motion is mathematically correct for the ideal case. LC circuit is identical: ideal L and C have no loss mechanism. Real oscillators decay due to unavoidable resistance (equivalent to friction). The ideal model is still useful for calculating ω₀ and initial conditions.\"\n- **replacement_text [P31]:** \"Ideal LC (R=0): Q(t) = Q₀ cos(ω₀t) — oscillates forever, energy conserved. Real LC (R > 0): Q(t) = Q₀ e^{−γt} cos(ω_d t) — decaying oscillation. The decay is due to R, not to LC. Without R, the ideal LC oscillates indefinitely.\"\n- **discrimination_pairs [P33]:**\n  - Ideal LC (R=0): perpetual oscillation, constant amplitude\n  - Underdamped RLC (R small): decaying oscillation, amplitude ~ e^{−γt}\n  - Critically damped RLC: fastest return to equilibrium, no oscillation\n  - Overdamped RLC: slow exponential approach to equilibrium\n- **s6_path:** Plot Q(t) for all four cases on same graph; show ideal case as constant envelope; damped cases with exponential decay envelopes.\n\n---",
+      "localKey": "MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE",
+      "language": "en",
+      "refs": [
+        "MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 3,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/misconception/MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL",
+      "kind": "misconception",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "- **trigger_signal:** Student says \"at the moment when all energy is in the inductor, the capacitor has lost half its energy\" or misapplies energy splitting.",
+      "content": "### MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL\n- **trigger_signal:** Student says \"at the moment when all energy is in the inductor, the capacitor has lost half its energy\" or misapplies energy splitting.\n- **conflict_evidence [P28]:** \"Total energy U = Q₀²/(2C) = ½LI²_max. At the moment of maximum current (I = I_max, Q = 0): U_C = 0, U_L = ½LI²_max = Q₀²/(2C) = U_total. ALL energy is in the inductor — not half. Energy is conserved: whatever the capacitor loses, the inductor gains exactly, and vice versa. The split is 100%/0% alternating, not 50%/50%.\"\n- **bridge_text [P30]:** \"Mass-spring: at maximum compression (max PE), velocity = 0, KE = 0 — all energy is in spring. At equilibrium position (v = max), spring PE = 0 — all energy is kinetic. Energy transfers 100% between the two forms each quarter cycle, not 50%.\"\n- **replacement_text [P31]:** \"Energy in LC circuit: U_C + U_L = U_total (constant). At t = 0: U_C = U_total, U_L = 0. At t = T/4: U_C = 0, U_L = U_total. At t = T/8: U_C = U_L = U_total/2 (equal split only at t = T/8, 3T/8, ...). The 50/50 split is not the typical state — it's a passing moment.\"\n- **discrimination_pairs [P33]:**\n  - t = 0 (Q = Q₀, I = 0): U_C = 100%, U_L = 0%\n  - t = T/8 (Q = Q₀/√2, I = I_max/√2): U_C = 50%, U_L = 50%\n  - t = T/4 (Q = 0, I = I_max): U_C = 0%, U_L = 100%\n  - t = T/2 (Q = −Q₀, I = 0): U_C = 100%, U_L = 0% (cycle repeats)\n- **s6_path:** WE-3: calculate exact time for 50/50 split (T/8); show it's not T/4 or T/2.\n\n---",
+      "localKey": "MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL",
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "ODE and solution: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"ODE and solution: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 15,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "Energy oscillation: Block 1-B, WE-1, WE-3",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Energy oscillation: Block 1-B, WE-1, WE-3\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 25,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "Damped RLC: Block 1-C, WE-2",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Damped RLC: Block 1-C, WE-2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 30,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "Tuning applications: Block 1-D, Probe B3",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Tuning applications: Block 1-D, Probe B3\",\"primitives\":[\"P36\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 32,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** In an LC circuit, the current is maximum when:\n**(a) The capacitor charge is zero** (b) The capacitor is fully charged (c) The energy is equally split (d) t = T/2\n\n**A2 (Short answer):** Write the formula for oscillation frequency of an LC circuit. What mechanical system is the LC circuit analogous to?\n[ω₀ = 1/√(LC); f₀ = 1/(2π√(LC)); analogous to mass-spring (L↔m, C↔1/k)]\n\n**A3 (Fill-in):** In a damped RLC oscillator, the condition for underdamped oscillation is R < ______.\n[2√(L/C)]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** An LC circuit has ω₀ = 2π × 1 MHz. The capacitor is replaced with one of double the capacitance. What is the new frequency?\n[ω₀_new = 1/√(L×2C) = ω₀/√2; f_new = f₀/√2 = 1/√2 MHz ≈ 707 kHz]\n\n**B2:** At t = T/4, all LC circuit energy is in the inductor (U_L = 0.5 J, L = 50 mH). Find I at this moment and the initial charge Q₀ on the capacitor (C = 100 μF).\n[U_L = ½LI² → I = √(2U/L) = √(2×0.5/0.05) = √20 = 4.47 A. Q₀ = I/ω₀ = I×√(LC) = 4.47×√(5×10⁻⁶) = 4.47×2.236×10⁻³ = 10.0 mC.]\n\n**B3:** A radio receives AM signals (f = 540–1600 kHz). Its LC tuner has L = 50 μH. Find the range of C required.\n[C = 1/(ω₀²L) = 1/((2πf)²×50×10⁻⁶). At 540 kHz: C = 1/(2π×540×10³)²×5×10⁻⁵ = 1/(1.152×10¹²) = 1.73 nF. At 1600 kHz: C = 1/(1.006×10¹³) = 0.197 nF. Range: **0.20 nF to 1.74 nF** (adjustable via variable capacitor).]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** RLC circuit: L = 20 mH, C = 5 μF, R = 40 Ω. Initial: Q₀ = 2 mC, I(0) = 0. (a) Find ω₀, γ, classify damping. (b) Find ω_d and period T_d. (c) Find energy after one complete damped oscillation (t = T_d). (d) Find Q_factor.\n[(a) ω₀ = 1/√(10⁻²×5×10⁻⁶) = 1/√(5×10⁻⁸) = 4472 rad/s; γ = R/(2L) = 40/(0.04) = 1000 rad/s; γ<ω₀ → underdamped. (b) ω_d = √(4472²−1000²) = √(2×10⁷−10⁶) = √(1.9×10⁷) = 4359 rad/s; T_d = 2π/ω_d = 1.441 ms. (c) U₀ = Q₀²/(2C) = 4×10⁻⁶/(10⁻⁵) = 0.4 J; after T_d: amplitude decays by e^{−γT_d} = e^{−1000×1.441×10⁻³} = e^{−1.441} = 0.237; energy ∝ amplitude² → U(T_d) = U₀×(0.237)² = 0.4×0.056 = 0.0225 J. (d) Q_factor = ω₀/(2γ) = 4472/2000 = 2.24.]\n\n**C2 (Design):** You want to build an FM radio tuner (88–108 MHz) using a fixed L = 100 nH. Find C range. Evaluate damping: if R = 0.5 Ω, find Q_factor at 100 MHz.\n[ω = 2πf; C = 1/(ω²L). At 88 MHz: C = 1/(2π×88×10⁶)²×10⁻⁷ = 1/(3.063×10¹⁷) = 3.26 pF. At 108 MHz: C = 1/(4.608×10¹⁷) = 2.17 pF. Range: 2.17–3.26 pF. Q_factor = ω₀L/R = 2π×100×10⁶×10⁻⁷/0.5 = 62.8/0.5 = 125.6. High Q (>100) gives sharp frequency selection — essential for FM reception.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 164,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks max charge) | I = dQ/dt; I max when dQ/dt max; Q(t)=cos → dQ/dt=−sin, max when cos=0 → Q=0 |\n| Probe B1 wrong (frequency with new C) | ω₀ = 1/√(LC); C doubles → √(LC) increases by √2 → ω₀ decreases by √2 |\n| Probe C1(c) wrong (energy after T_d) | Energy ∝ Q² ∝ amplitude²; amplitude decays by e^{−γT_d} per period → energy decays by e^{−2γT_d} |\n| Probe C2 wrong (FM range) | C = 1/((2πf)²L); compute for both ends; smaller f → larger C; larger f → smaller C |\n| Student asks about real oscillators | Introduce negative resistance (transistor feedback) to compensate R losses → sustained oscillation; used in crystal oscillators, RF transmitters |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 272,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "phys.em.lc-circuits/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.lc-circuits",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"LC circuits oscillate electrically — charge sloshes back and forth between capacitor and inductor, just like a pendulum swings between potential and kinetic energy. This oscillation is how every radio, oscilloscope, and wireless transmitter selects its frequency.\"\n\n[P41 — Diagnostic]\n\"In a mass-spring system, what oscillates? What provides the restoring force and what provides the inertia? Can you guess the analogues in an LC circuit?\"\n→ Correct: \"Exactly — C provides restoring 'force' (EMF = Q/C), L provides inertia. Same math.\"\n→ Incorrect: \"Great question. The analogy becomes clear once we write the equations.\"\n\n[P06 — Concrete anchor]\n\"Charge a capacitor, then connect it to an inductor. The C discharges into L, building up current. When C reaches zero charge, the inductor drives current back into C (Lenz: inductor opposes current drop). The charge builds up opposite sign. Then it reverses again — perpetual oscillation.\"\n\n[TA-1 — ODE and solution: Block 1-A]\n\"d²Q/dt² = −Q/(LC). Solution: Q(t) = Q₀ cos(ω₀t). ω₀ = 1/√(LC).\"\n\n[P28 — Conflict evidence for MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL]\n\"At t=T/4 (I=I_max, Q=0): U_C=0, U_L=U_total — ALL energy in inductor. Not half. 50/50 only at t=T/8. WE-3 proves this numerically.\"\n\n[P51 — Check-in]\n\"At what instant is the current maximum? At what instant is energy equally split? At what instant is charge zero?\"\n[I_max at Q=0 (t=T/4); 50/50 at t=T/8; Q=0 at t=T/4]\n\n[TA-2 — Energy oscillation: Block 1-B, WE-1, WE-3]\n\n[P28 — Conflict evidence for MC-LC-CIRCUIT-OSCILLATION-STOPS-WITHOUT-RESISTANCE]\n\"Ideal LC: U_total constant always. No dissipation path without R. Oscillates forever in theory. Real circuits decay due to wire resistance and core losses (the R) — not due to C or L.\"\n\n[TA-3 — Damped RLC: Block 1-C, WE-2]\n\n[TA-4 — Tuning applications: Block 1-D, Probe B3]\n\n[P52 — Narrow]\n\"Two formulas: ω₀ = 1/√(LC); Q_factor = ω₀L/R. Energy: U = Q₀²/(2C) = ½LI²_max.\"\n\n[P62 — Retrieval seed]\n\"Write from memory: ω₀ formula, mass-spring analogy, energy conservation, when I is max, condition for underdamping.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"LC circuits: ω₀ = 1/√(LC), mechanical analogue of mass-spring. Energy oscillates 100% between C and L at ω₀. Damped by R: underdamped, critically damped, overdamped. Q_factor measures sharpness of oscillation. Applications: radio tuning, oscillators, filters.\"\n\n[P85 — Regulation tail]\n\"Shakiest: the ODE and solution, the energy at T/4, or the damping classification?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the LC retrieval quiz.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lc-circuits.md",
+        "startLine": 219,
+        "endLine": 272
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

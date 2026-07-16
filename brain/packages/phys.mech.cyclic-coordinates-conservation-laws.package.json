@@ -1,0 +1,538 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.cyclic-coordinates-conservation-laws-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:7be80e1b27ae66766f9948e2d7cd24282c17b73d9ddabbcf8941410a7cc49c10",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md": "sha256:887adffa156e7b56d788481e8ff2b02da44d84208a344f9f31d175b51b93e469"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+    "name": "Cyclic Coordinates and Noether's Theorem",
+    "difficultyRaw": "expert (6)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "phys.mech.euler-lagrange-equation"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.cyclic-coordinates-conservation-laws-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.cyclic-coordinates-conservation-laws (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md": "sha256:887adffa156e7b56d788481e8ff2b02da44d84208a344f9f31d175b51b93e469"
+      },
+      "contentHash": "sha256:671b3af19bd0739090eadaf36ae1a3c0513e8a458203b84024154a2096de19e3",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.cyclic-coordinates-conservation-laws.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.cyclic-coordinates-conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.cyclic-coordinates-conservation-laws\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.cyclic-coordinates-conservation-laws.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.cyclic-coordinates-conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.cyclic-coordinates-conservation-laws\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.cyclic-coordinates-conservation-laws.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.cyclic-coordinates-conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.cyclic-coordinates-conservation-laws\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.cyclic-coordinates-conservation-laws.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md#TA-4 (addresses MC-CYCLIC-MEANS-ZERO)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.cyclic-coordinates-conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.cyclic-coordinates-conservation-laws\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.cyclic-coordinates-conservation-laws.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md#TA-5 (addresses MC-SYMMETRY-IS-SHAPE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.cyclic-coordinates-conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.cyclic-coordinates-conservation-laws\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.cyclic-coordinates-conservation-laws.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.cyclic-coordinates-conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.cyclic-coordinates-conservation-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.cyclic-coordinates-conservation-laws.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.cyclic-coordinates-conservation-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.cyclic-coordinates-conservation-laws\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Cyclic Coordinates and Noether's Theorem — core explanation",
+      "content": "**Core Insight:** A generalized coordinate qᵢ is cyclic (ignorable) if ∂L/∂qᵢ = 0 — the\nLagrangian does not explicitly depend on qᵢ. The Euler-Lagrange equation then gives:\n\n    d/dt(∂L/∂q̇ᵢ) = 0   ⟹   pᵢ = ∂L/∂q̇ᵢ = constant\n\nThe conjugate canonical momentum pᵢ is conserved. Noether's theorem generalizes this:\nevery continuous symmetry of the Lagrangian corresponds to a conserved quantity.\n\n**Key symmetry-conservation pairs:**\n\n| Symmetry | Cyclic coordinate | Conserved quantity |\n|----------|------------------|--------------------|\n| Translational invariance in x | x (no ∂L/∂x) | Linear momentum pₓ = mẋ |\n| Translational invariance in y | y | Linear momentum p_y = mẏ |\n| Rotational invariance (φ) | φ (no ∂L/∂φ) | Angular momentum L_z = mr²φ̇ |\n| Time translation invariance (∂L/∂t = 0) | t (not a q — special case) | Energy E = H |\n\n**Formal Statement (Noether's Theorem):**\nIf L is invariant under a one-parameter continuous transformation q → q + εδq,\nthen J = Σᵢ (∂L/∂q̇ᵢ) δqᵢ is a conserved quantity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Free particle in 2D polar",
+      "content": "**Worked Example 1 (Free particle in 2D polar):**\nL = ½m(ṙ² + r²φ̇²). No explicit φ dependence → φ is cyclic.\np_φ = ∂L/∂φ̇ = mr²φ̇ = angular momentum = constant.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Central force potential",
+      "content": "**Worked Example 2 (Central force potential):**\nV = V(r) (depends only on r, not φ).\nL = ½m(ṙ² + r²φ̇²) − V(r). Again φ cyclic → p_φ = mr²φ̇ = const.\nThis is the origin of Kepler's second law (equal areas in equal times).",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Translational symmetry",
+      "content": "**Worked Example 3 (Translational symmetry):**\nFree particle in 1D: L = ½mẋ². No explicit x → x is cyclic.\np_x = mẋ = const (linear momentum conserved — no force acting).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 25,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/misconception/MC-CYCLIC-MEANS-ZERO",
+      "kind": "misconception",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Priority 1",
+      "content": "### MC-CYCLIC-MEANS-ZERO (Priority 1)\n**Label:** \"A cyclic coordinate means that coordinate is zero or constant\"\n\n**Trigger signals:**\n- Says \"φ is cyclic so φ = 0\" or \"φ = const\"\n- Confuses the coordinate being cyclic with the coordinate being fixed\n- Says \"if φ doesn't appear in L, then nothing in φ is happening\"\n\n**Conflict evidence [P28]:**\n\"For a central-force problem, φ is cyclic. Does this mean the particle doesn't move\nangularly? No — the planet orbits the sun (φ changes all the time). Kepler's second law\nsays the orbit sweeps equal areas in equal times — φ is changing, not constant.\nWhat is cyclic is not φ itself, but its absence from L. Something else is constant — what?\"\n\n**Bridge [P30]:**\n\"'Cyclic coordinate' means ∂L/∂qᵢ = 0 — the Lagrangian is independent of the VALUE of\nqᵢ (it can change freely). The E-L equation then gives d/dt(pᵢ) = 0 → pᵢ is constant.\nThe coordinate changes; its CONJUGATE MOMENTUM is what's constant.\"\n\n**Replacement [P31]:**\n\"Step 1: Check ∂L/∂qᵢ. Step 2: If zero, call qᵢ cyclic. Step 3: pᵢ = ∂L/∂q̇ᵢ = const.\nThe coordinate itself can change freely; the canonical momentum conjugate to it is conserved.\"\n\n**Discrimination pairs [P33]:**\n- Pendulum: θ is NOT cyclic (∂L/∂θ = −mgL sinθ ≠ 0); θ̈ ≠ 0 ✓\n- Free particle in x: x IS cyclic (∂L/∂x = 0); p_x = mẋ = const; but x still changes ✓\n\n**s6_path:** \"Cyclic = absent from L. Absent from L → momentum conserved. The coordinate itself moves.\"\n\n---",
+      "localKey": "MC-CYCLIC-MEANS-ZERO",
+      "language": "en",
+      "refs": [
+        "MC-CYCLIC-MEANS-ZERO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 3,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/misconception/MC-SYMMETRY-IS-SHAPE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Priority 2",
+      "content": "### MC-SYMMETRY-IS-SHAPE (Priority 2)\n**Label:** \"Symmetry means the system looks the same (spherical or cylindrical shape)\"\n\n**Trigger signals:**\n- Identifies symmetry only from visual shape of the system\n- Misses translational symmetry for a free particle (no visible shape)\n- Confuses geometric symmetry with Lagrangian symmetry\n\n**Conflict evidence [P28]:**\n\"A free particle in 1D has no shape at all — it's a point. Yet L = ½mẋ² is independent\nof x (translational symmetry → p_x = const). Meanwhile, a bead threaded on a symmetric-\nlooking ring can have L that depends on φ if there's a bump on the ring — the geometric\nshape looks symmetric but the physics isn't. What actually matters for Noether's theorem?\"\n\n**Bridge [P30]:**\n\"The relevant symmetry is: does L change when you shift the coordinate? If L(q + ε) = L(q)\nfor all ε (infinitesimally), that's a continuous symmetry of the Lagrangian, and by Noether's\ntheorem a conserved quantity exists. Shape is a hint, not the definition.\"\n\n**Replacement [P31]:**\n\"Check: does L change if I shift qᵢ → qᵢ + ε (tiny change)? Equivalently: does ∂L/∂qᵢ = 0?\nIf yes → conservation law. Look at L, not at pictures.\"\n\n**Discrimination pairs [P33]:**\n- Ball in cylindrical bowl with φ-independent V: φ cyclic → L_z conserved ✓\n- Ball in bowl with ridge along one side: V = V(r, φ) → φ NOT cyclic → L_z NOT conserved ✓\n\n**s6_path:** \"Write L. Check if φ or x or θ appears explicitly. If absent: conserved momentum.\"\n\n---",
+      "localKey": "MC-SYMMETRY-IS-SHAPE",
+      "language": "en",
+      "refs": [
+        "MC-SYMMETRY-IS-SHAPE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 34,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 3,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Conceptual Development",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Conceptual Development\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 18,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 33,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "MC-CYCLIC-MEANS-ZERO Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-CYCLIC-MEANS-ZERO Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-CYCLIC-MEANS-ZERO\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-CYCLIC-MEANS-ZERO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 47,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "MC-SYMMETRY-IS-SHAPE Probe + Noether Practice",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-SYMMETRY-IS-SHAPE Probe + Noether Practice\",\"primitives\":[\"P10\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-SYMMETRY-IS-SHAPE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SYMMETRY-IS-SHAPE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 66,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 85,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 112,
+        "endLine": 131
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Analyze — cyclic identification",
+      "content": "**MP-1 (Analyze — cyclic identification):**\n\"L = ½m(ṙ² + r²θ̇² + r²sin²θ φ̇²) (spherical coordinates, no potential).\nWhich coordinates are cyclic? What is conserved for each?\"\nExpected: r — NOT cyclic (kinetic energy depends on ṙ but also ∂L/∂r = mr(θ̇²+sin²θ φ̇²) ≠ 0);\nθ — NOT cyclic (∂L/∂θ = mr²sinθ cosθ φ̇² ≠ 0 in general);\nφ — cyclic (∂L/∂φ = 0) → p_φ = mr²sin²θ φ̇ = L_z = const.\n_Discriminates: careful check of ∂L/∂qᵢ; spherical coordinates._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 276,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Analyze — Noether application",
+      "content": "**MP-2 (Analyze — Noether application):**\n\"L = ½m(ẋ² + ẏ²) − V(x − y). Identify any symmetry and conserved quantity.\"\nExpected: L is invariant under simultaneous translation x → x + ε, y → y + ε (since\nx − y is unchanged). Noether: conserved J = p_x + p_y = m(ẋ + ẏ).\n_Discriminates: non-obvious symmetry; Noether's theorem in action._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 276,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Apply — Kepler second law derivation",
+      "content": "**MP-3 (Apply — Kepler second law derivation):**\n\"A planet (mass m) orbits the sun under V(r) = −GMm/r. Using L = ½m(ṙ² + r²φ̇²) + GMm/r,\nprove that the rate at which area is swept is constant.\"\nExpected: φ cyclic → p_φ = mr²φ̇ = ℓ = const. Area swept dA = ½r² dφ.\ndA/dt = ½r²φ̇ = ℓ/(2m) = const ✓ (Kepler's 2nd law).\n_Discriminates: cyclic → pᵢ constant → physical consequence; Kepler derivation._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 276,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Analyze — energy conservation from Noether",
+      "content": "**MP-4 (Analyze — energy conservation from Noether):**\n\"State the condition on L that implies energy conservation (via Noether's theorem for\ntime translation). Give one example where this holds and one where it fails.\"\nExpected: ∂L/∂t = 0 → H = T + V = const. Holds: pendulum (L has no explicit t).\nFails: particle in a time-varying field V = V(x, t) (L = ½mẋ² − V(x,t) depends on t).\n_Discriminates: time-translation symmetry ↔ energy conservation; conditions._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 276,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Analyze — conservation by inspection",
+      "content": "**MP-5 (Analyze — conservation by inspection):**\n\"A particle moves in 3D under V = α(x² + y²) (α > 0). Without solving the equations of\nmotion, identify all conserved quantities using the Lagrangian approach.\"\nExpected: L = ½m(ẋ² + ẏ² + ż²) − α(x² + y²). z cyclic → p_z = mż = const.\nIn cylindrical (ρ = √(x²+y²), φ): V = αρ² → φ cyclic → L_z = mρ²φ̇ = const.\n∂L/∂t = 0 → E = const.\n_Discriminates: multiple conservation laws; coordinate transformation choice._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 276,
+        "endLine": 318
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.euler-lagrange-equation  ──►  phys.mech.cyclic-coordinates-conservation-laws\n```\n\n**PD-1 (E-L equation — canonical momentum):**\n\"For a particle in polar coordinates with L = ½m(ṙ² + r²φ̇²) − V(r),\nwrite the canonical momenta p_r and p_φ.\"\nExpected: p_r = mṙ; p_φ = mr²φ̇.\n\n**PD-2 (E-L equation — condition for cyclic coordinate):**\n\"What condition on L makes qᵢ a cyclic coordinate? What does the E-L equation give?\"\nExpected: ∂L/∂qᵢ = 0 → cyclic; E-L gives d/dt(pᵢ) = 0 → pᵢ = const.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 63,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Definition of cyclic coordinate? What does it imply?\"\nThreshold: ∂L/∂qᵢ = 0; pᵢ = const.\n\n**FA-2 (TA-4 exit):** \"Planet in central force — φ cyclic. Does φ change? What stays constant?\"\nExpected: φ changes (planet orbits); p_φ = mr²φ̇ stays constant.\nIf student says φ is constant → MC-CYCLIC-MEANS-ZERO not resolved.\n\n**FA-3 (TA-5 exit):** \"L = ½m(ẋ² + ẏ²) − mgy. What is conserved? Why?\"\nExpected: p_x = mẋ (x cyclic); energy E = T + mgy (∂L/∂t = 0); p_y is NOT conserved.\n\n**FA-4 (Session exit):** MP-1 and MP-3. Both correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CYCLIC-MEANS-ZERO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 318,
+        "endLine": 334
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only 1D and 2D Cartesian examples initially (translational symmetry only).\n- Defer Noether's theorem statement; stay with \"cyclic = absent from L → momentum constant.\"\n- Pendulum example last (non-cyclic θ) — after student is confident with cyclic examples.\n\n**S7 (Overconfident) path [Protocol G]:**\n- MP-2 (non-obvious symmetry under x → x+ε, y → y+ε simultaneously).\n- Discuss breaking of symmetry: what happens to momentum if a small V(φ) term is added?\n- Preview: conservation of Runge-Lenz vector in Kepler problem (extra symmetry, harder).\n\n**S4 (Prereq gap):**\n- PD-1 gap (canonical momentum) → return to E-L equation; drill pᵢ = ∂L/∂q̇ᵢ.\n- PD-2 gap (cyclic condition) → return to E-L applied to a free particle in 1D.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 334,
+        "endLine": 352
+      }
+    },
+    {
+      "assetId": "phys.mech.cyclic-coordinates-conservation-laws/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.cyclic-coordinates-conservation-laws",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → Noether framework → MC-CYCLIC probe).\n**Session 2 (≥24 h later):** Retrieval: \"Cyclic coordinate definition? Symmetry → conservation?\"\n  → TA-5 (MC-SYMMETRY probe) → TA-6 problems 1–3.\n**Session 3 (≥72 h later):** Interleaved: \"Kepler problem: identify ALL conserved quantities\n  from symmetry (E, L_z). What additional conserved quantity exists (Runge-Lenz vector)?\n  (Preview only — requires a hidden symmetry.)\"\n**Pre-Hamiltonian session:** All 5 P91 probes cold; require 4/5.\n\n**Interleaving partners:** phys.mech.euler-lagrange-equation (prerequisite),\nphys.mech.conservation-of-angular-momentum (physical consequence),\nphys.mech.hamiltonian (next concept — cyclic q are also cyclic in Hamiltonian formulation).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CYCLIC",
+        "MC-SYMMETRY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.cyclic-coordinates-conservation-laws.md",
+        "startLine": 352,
+        "endLine": 368
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

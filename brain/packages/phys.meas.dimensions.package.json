@@ -1,0 +1,380 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.dimensions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.dimensions",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:c01957374c458b2cdff12255751955b72eb84ec1de46ca764c86074c9d5cd8da",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.dimensions.md": "sha256:6d23546931b2229491515e19668121e79a0d1f20961f5f68710ce33c69cfebf4"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.meas.dimensions",
+    "name": "Dimensional Analysis",
+    "difficultyRaw": "developing (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.meas.units"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.dimensions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.dimensions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.dimensions.md": "sha256:6d23546931b2229491515e19668121e79a0d1f20961f5f68710ce33c69cfebf4"
+      },
+      "contentHash": "sha256:6a1c9b02d9842d7284e552700c999387fad2004d7936a601cfe1e4d2b2d6594a",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.dimensions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.dimensions.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.dimensions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.dimensions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.dimensions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.dimensions.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.dimensions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.dimensions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.dimensions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.dimensions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.dimensions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.dimensions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.dimensions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.dimensions.md#TA-4 (addresses MC-ADD-ACROSS-DIMENSIONS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.dimensions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.dimensions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.dimensions.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.dimensions.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.dimensions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.dimensions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.dimensions.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.dimensions.md#TA-6 (addresses MC-UNITS-ARE-DIMENSIONS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.dimensions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.dimensions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.dimensions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Assigns the dimensional formula ([M], [L], [T] and combinations) to a physical quantity from its definition — e.g. speed = length/time → [L][T]⁻¹; force = mass×acceleration → [M][L][T]⁻² — not by recalling a memorised list.\n2. Uses the **principle of homogeneity** to check an equation: every additive term and both sides must share the same dimensions; declares an equation dimensionally inconsistent when they do not.\n3. Distinguishes a **dimension** (the *type* of quantity — length) from a **unit** (the *scale* used to measure it — m, cm, ft), and states that changing units never changes dimensions.\n\nA student who can recite \"[force] = MLT⁻²\" but cannot check whether `s = ut + ½at²` is dimensionally consistent, or who says metres and feet are \"different dimensions,\" has **NOT** achieved mastery — the memorised formula without the homogeneity reasoning and the dimension/unit distinction fails at every equation-checking and derived-quantity task downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/misconception/MC-UNITS-ARE-DIMENSIONS",
+      "kind": "misconception",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Different units mean different dimensions",
+      "content": "### MC-UNITS-ARE-DIMENSIONS: \"Different units mean different dimensions\"\ntrigger_signal: student claims m and ft (or m/s and km/h) are different dimensions, or that converting units changes the dimensional formula.\nconflict_evidence [P28]: \"This desk edge is 1.5 metres — and also about 5 feet. Same edge. If metres and feet were different *kinds* of quantity, the desk would have to be two different kinds of thing at once. Is it?\"\nbridge_text [P30]: \"The KIND of quantity — length — is the dimension, [L]. The metre and the foot are just two scales for measuring that same kind. Dimension is the type; unit is the scale.\"\nreplacement_text [P31]: \"Changing units never changes dimensions. Convert freely between units; the dimension stays [L] (or whatever the quantity's type is).\"\ndiscrimination_pairs [P33]: [\"metres vs feet: same dimension [L], different unit\", \"m/s vs km/h: same dimension [L][T]⁻¹, different unit\", \"seconds vs metres: DIFFERENT dimension ([T] vs [L])\"]\ns6_path: skip P28; present the desk-in-two-units as a shared observation and go straight to bridge_text (P30).",
+      "localKey": "MC-UNITS-ARE-DIMENSIONS",
+      "language": "en",
+      "refs": [
+        "MC-UNITS-ARE-DIMENSIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/misconception/MC-ADD-ACROSS-DIMENSIONS",
+      "kind": "misconception",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Terms with different dimensions can be added if the numbers work",
+      "content": "### MC-ADD-ACROSS-DIMENSIONS: \"Terms with different dimensions can be added if the numbers work\"\ntrigger_signal: student equates or adds quantities of different dimensions (a length + a time), or thinks a numerical coefficient (½) affects dimensional consistency.\nconflict_evidence [P28]: \"You added a length and a time. What would '3 metres + 5 seconds' physically be — a length? a time? Point to what the answer measures.\"\nbridge_text [P30]: \"Only quantities of the SAME dimension can be added or set equal — like only adding lengths to lengths. A pure number like ½ has no dimension, so it never changes a term's dimension.\"\nreplacement_text [P31]: \"Check homogeneity term by term: every added term and both sides must reduce to the identical [M][L][T] combination; ignore pure numbers.\"\ndiscrimination_pairs [P33]: [\"ut ([L]) + ½at² ([L]): addable, both [L] ✓\", \"x ([L]) + t ([T]): NOT addable ✗\", \"½ (dimensionless) vs a (has dimension): only a counts\"]\ns6_path: skip P28; use the \"what does the answer measure?\" framing gently as a shared puzzle, then P30.",
+      "localKey": "MC-ADD-ACROSS-DIMENSIONS",
+      "language": "en",
+      "refs": [
+        "MC-ADD-ACROSS-DIMENSIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Three Kinds of Thing",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Three Kinds of Thing\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Dimension vs Unit",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Dimension vs Unit\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P17\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Naming Dimensions — Notation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Naming Dimensions — Notation\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P10\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.dimensions",
+      "title": "The Homogeneity Principle",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Homogeneity Principle\",\"primitives\":[\"P02\",\"P14\",\"P15\",\"P21\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-ADD-ACROSS-DIMENSIONS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ADD-ACROSS-DIMENSIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 38,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 49,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-UNITS-ARE-DIMENSIONS\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-UNITS-ARE-DIMENSIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 56,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Do m/s and km/h have the same dimension?\" | CORRECT = yes ([L][T]⁻¹) |\n| P74 (classify) | \"Is ½ dimensionless?\" | CORRECT = yes |\n| P75 (boundary) | \"Can dimensional analysis prove an equation is completely correct?\" | CORRECT = no; only catches dimensional errors |\n| P76 (transfer) | \"Check work = force × distance against energy = ½mv² dimensionally.\" | CORRECT = both [M][L]²[T]⁻² |\n| P77 (generate) | \"Invent a dimensionally inconsistent equation and name the bad term.\" | CORRECT = valid counterexample |\n| P78 (explain) | \"What does homogeneity require, and why does it work without physics?\" | CORRECT = same dimensions per term/side |\n| P79 (predict) | \"Will the dimension of pressure (force/area) contain [M]?\" | CORRECT = yes ([M][L]⁻¹[T]⁻²) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 183,
+        "endLine": 195
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Never met \"dimensions\" as distinct from units | Cannot say what \"type\" of quantity speed is | Protocol A (Concrete) |\n| S1 | \"Just check the units match\" schema | Checks unit strings; fails when units differ but dimensions agree (km/h vs m/s) | Protocol B (Counterexample-first) |\n| S2-UNITS-ARE-DIMENSIONS | Conflates unit with dimension | Says m and ft are different dimensions; thinks converting units changes dimensional formula | Misconception Engine → Protocol C |\n| S3 | Finds dimensions of base quantities; fails derived | OK on length/time; stuck on force, energy, pressure | Protocol C (Guided Questioning) |\n| S4 | Prerequisite gap on units | Cannot express what a unit is | Protocol D → prereq repair |\n| S6 | Anxiety at the symbolic [M][L][T] notation | Freezes at the bracket notation | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you come across the idea that quantities like length, time and mass are different *kinds* of thing — and that we write them as dimensions?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"Speed can be measured in metres per second, or in kilometres per hour. Are those two the same *kind* of quantity, or different kinds? Why?\"\n  \"Same kind — both are length over time\" → S3. Enter Protocol C.\n  \"Same, both speed\" (no reason) → S1. Enter Protocol B.\n  \"Different — different units / different dimensions\" → SIGNAL:MISCONCEPTION:MC-UNITS-ARE-DIMENSIONS. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag → confidence question → route (No→S6/Protocol F, Yes→S0/Protocol A).\n\nDB-3 (confidence calibration):\n\"How confident are you with dimensional analysis — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-UNITS-ARE-DIMENSIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 38,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.meas.dimensions/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.dimensions",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.units`):\n\"Give me an example of a physical quantity and a unit we measure it in.\"\n  Cannot produce a quantity+unit pair → flag PREREQ-GAP-UNITS.\n  In-session minimum repair: one P06 anchor (metre stick, stopwatch, mass) naming quantity↔unit, then resume. If the gap is that units themselves are unclear, suspend and schedule a `phys.meas.units` session (S4 route, Protocol D).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.dimensions.md",
+        "startLine": 57,
+        "endLine": 64
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

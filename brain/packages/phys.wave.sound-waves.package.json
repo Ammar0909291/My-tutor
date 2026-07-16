@@ -1,0 +1,323 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.sound-waves-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.sound-waves",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:6fcad78ef53b145382792a8cfd1393f97340a27ded8bc2a5be2e9ee9da4452ae",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.sound-waves.md": "sha256:959cb7b752bbef0fc657e22827263b4242c1de57743bef14be5351632b26cd98"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.sound-waves",
+    "name": "Sound Waves",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.wave.wave-properties"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.sound-waves-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.sound-waves (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.sound-waves.md": "sha256:959cb7b752bbef0fc657e22827263b4242c1de57743bef14be5351632b26cd98"
+      },
+      "contentHash": "sha256:0eec7188891315f563ec64969f18a198a2e499818f8c0146c6d6b43d263cfdcb",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.sound-waves.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.sound-waves.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.sound-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.sound-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.sound-waves.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.sound-waves.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.sound-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.sound-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.sound-waves.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.sound-waves.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.sound-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.sound-waves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.sound-waves.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.sound-waves.md#TA-4 (addresses MC-SOUND-TRAVELS-IN-VACUUM, MC-PITCH-IS-LOUDNESS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.sound-waves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.sound-waves\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.sound-waves/misconception/MC-SOUND-TRAVELS-IN-VACUUM",
+      "kind": "misconception",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "- **Trigger signal:** Student says \"sound travels through space\" or is surprised that the Moon landing broadcasts required radio (not sound), or cannot explain the \"silent space\" of movies.",
+      "content": "### MC-SOUND-TRAVELS-IN-VACUUM\n- **Trigger signal:** Student says \"sound travels through space\" or is surprised that the Moon landing broadcasts required radio (not sound), or cannot explain the \"silent space\" of movies.\n- **Conflict evidence [P28]:** \"Sound is a mechanical wave — it requires a medium (matter) to propagate. In vacuum, there are no particles to compress and rarefy. The famous 'bell jar' experiment: an electric bell ringing inside a sealed jar becomes inaudible as air is pumped out. Stars explode in complete silence if you are far enough away in vacuum. The NASA Apollo astronauts could hear each other inside the pressurised cabin (air medium) but could not hear sounds outside without radio — there is no sound in the vacuum of space. Movie space battles with sound are physically incorrect.\"\n- **Bridge text [P30]:** \"Sound is a longitudinal pressure wave in a medium. The medium's bulk modulus B and density ρ determine speed: v = √(B/ρ). Vacuum has no B and no ρ — the formula gives 0/0, which has no physical meaning. No medium → no sound.\"\n- **Replacement text [P31]:** \"Sound requires a material medium: gas, liquid, or solid. Speed depends on medium properties: v_air ≈ 343 m/s; v_water ≈ 1480 m/s; v_steel ≈ 5100 m/s. In vacuum: no sound.\"\n- **Discrimination pairs [P33]:**\n  - Bell in sealed jar with air: audible ✓\n  - Same bell with air pumped out: silent ✓\n  - Astronauts in pressurised cabin: can talk to each other ✓\n  - Outside on lunar surface: must use radio — no sound in lunar vacuum ✓\n- **s6_path:** \"The most famous physics demonstration: watch the bell-jar video. The bell keeps ringing — you see the hammer striking — but the sound fades to nothing as the air is removed. No medium, no sound.\"\n\n---",
+      "localKey": "MC-SOUND-TRAVELS-IN-VACUUM",
+      "language": "en",
+      "refs": [
+        "MC-SOUND-TRAVELS-IN-VACUUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 3,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/misconception/MC-PITCH-IS-LOUDNESS",
+      "kind": "misconception",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "- **Trigger signal:** Student confuses pitch (frequency) and loudness (amplitude/intensity), or says \"the higher the note, the louder it is.",
+      "content": "### MC-PITCH-IS-LOUDNESS\n- **Trigger signal:** Student confuses pitch (frequency) and loudness (amplitude/intensity), or says \"the higher the note, the louder it is.\"\n- **Conflict evidence [P28]:** \"Pitch (what we perceive as high or low) corresponds to frequency. Loudness (soft or loud) corresponds to amplitude (and hence intensity). A trumpet playing softly at A4 (440 Hz) and a whisper at A4 (440 Hz) have the same pitch — same frequency — but very different loudness (different amplitude). A bass drum produces a low pitch (low frequency, ~50–100 Hz) at very high loudness (large amplitude). A dog whistle is high pitch (high frequency, >20 kHz) at relatively low loudness. Pitch and loudness are independently controlled by frequency and amplitude.\"\n- **Bridge text [P30]:** \"Frequency → pitch; amplitude → loudness. They are controlled by different physical parameters of the wave. A singer can hold the same note (frequency unchanged = pitch unchanged) while getting louder (amplitude increases = louder). These are the two knobs on a wave: frequency knob changes pitch; amplitude knob changes loudness.\"\n- **Replacement text [P31]:** \"Pitch ↔ frequency f. Loudness ↔ amplitude A (and intensity I ∝ A²). They are independent. A high-pitched sound can be quiet or loud; a low-pitched sound can be quiet or loud.\"\n- **Discrimination pairs [P33]:**\n  - A high note at low volume: high f, small A ✓\n  - A low note at high volume: low f, large A ✓\n- **s6_path:** \"Two independent dials on the wave: frequency (pitch) and amplitude (volume). Turning one doesn't turn the other.\"\n\n---",
+      "localKey": "MC-PITCH-IS-LOUDNESS",
+      "language": "en",
+      "refs": [
+        "MC-PITCH-IS-LOUDNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 17,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "Nature of Sound",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Nature of Sound\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 79,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "Pitch, Loudness, and Timbre",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Pitch, Loudness, and Timbre\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 100,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "Sound Production and Reception",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Sound Production and Reception\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 112,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "Echo, Reverberation, and Acoustic Applications",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Echo, Reverberation, and Acoustic Applications\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PITCH-IS-LOUDNESS\",\"MC-SOUND-TRAVELS-IN-VACUUM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SOUND-TRAVELS-IN-VACUUM",
+        "MC-PITCH-IS-LOUDNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 120,
+        "endLine": 271
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Frequency and perception**\n\"A tuning fork produces A4 = 440 Hz. (a) What is the wavelength in air at 20°C? (b) Is this audible to humans? (c) If a musician plays more softly, what changes — the pitch, the loudness, or both?\"\n\n*Target:* (a) λ = 343/440 = 0.780 m. (b) 440 Hz is within 20 Hz–20 kHz → audible ✓. (c) Only loudness changes (amplitude decreases); pitch (frequency) stays at 440 Hz — the musician is playing the same note, just quieter.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 167,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Vacuum and medium**\n\"An astronaut on the Moon bangs two rocks together. (a) Can another astronaut 2 m away hear it through the Moon's vacuum? (b) Can the astronaut feel it through their spacesuit boots (direct rock-solid contact)? Explain.\"\n\n*Target:* (a) No — sound requires a medium; the Moon has essentially no atmosphere. (b) Yes — vibrations travel through the solid rocks to the boots to the astronaut's body (solid medium). This is why astronauts can sometimes detect moonquakes through their suits even in silence.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 167,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Speed in media**\n\"Thunder is heard 4.5 s after a lightning flash. (a) How far away was the lightning? (b) Repeat for a stormy day at 35°C.\"\n\n*Target:* (a) 20°C: v = 343 m/s → d = 343×4.5 = 1544 m ≈ 1.5 km. (b) 35°C: v = 331+0.6×35 = 352 m/s → d = 352×4.5 = 1584 m ≈ 1.6 km. The rule of thumb \"5 seconds per mile\" assumes ~340 m/s.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 167,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Bat echolocation**\n\"A bat emits a 100 kHz pulse and hears the echo after 5 ms. (a) How far is the insect? (b) What is the minimum insect size detectable? (v_sound = 343 m/s)\"\n\n*Target:* (a) d = 343×0.005/2 = 0.858 m ≈ 86 cm. (b) λ = 343/(100×10³) = 3.43 mm; resolution ≈ λ/2 = 1.7 mm. Insects around 2 mm can just be detected.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 167,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: pitch and loudness independence**\n\"A violinist plays concert A (440 Hz) at pianissimo (very quiet) while a tuba plays concert A (440 Hz) at fortissimo (very loud). (a) Do they have the same pitch? (b) Whose sound wave has larger amplitude? (c) Whose sound wave has higher frequency? (d) What makes them sound different despite the same note?\"\n\n*Target:* (a) Yes — same frequency = same pitch. (b) Tuba — fortissimo means much higher amplitude. (c) Same — both 440 Hz. (d) Timbre: the harmonic content (overtone spectrum) of a tuba and violin differ dramatically — the violin has many high-frequency overtones; the tuba is richer in lower overtones. Same fundamental frequency, same pitch, but completely different timbre.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 167,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.wave.sound-waves/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.sound-waves",
+      "title": "Adaptive Flags",
+      "content": "- **Timbre at this level**: mention only as \"harmonic content\" — don't introduce Fourier analysis. State that real instruments are not pure sine waves; their distinctive sound comes from which overtones are present. Full treatment requires wave superposition.\n- **Threshold of hearing and pain**: introduce the numbers (I₀ = 10⁻¹² W/m²; pain ≈ 1 W/m²) as a range. Full decibel scale (dB) treatment belongs in phys.wave.sound-intensity.\n- **Ear anatomy**: keep brief and functional. Ossicles amplify (~22×) and cochlea does frequency analysis. The full mechano-electrical transduction is biology, not physics.\n- **Resonance**: introduce the concept here (vibrating at natural frequency → maximum amplitude). Full treatment (resonance curves, Q-factor, driven oscillations) belongs in phys.wave.forced-oscillations.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.sound-waves.md",
+        "startLine": 233,
+        "endLine": 242
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

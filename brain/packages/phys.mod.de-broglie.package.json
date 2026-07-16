@@ -1,0 +1,547 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.de-broglie-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.de-broglie",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:17def32d8ab425cc4aeb6e1866a584f4c92703cc36c5f89e3f3fa47e120f73ef",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.de-broglie.md": "sha256:2d6111594ce311ae19091b6c9ab091cdcc34671d00b3bb511c5caaa00d7fd848"
+    },
+    "assetCount": 23,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 8,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mod.de-broglie",
+    "name": "de Broglie Hypothesis — Matter Waves",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mod.photons"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.de-broglie-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.de-broglie (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.de-broglie.md": "sha256:2d6111594ce311ae19091b6c9ab091cdcc34671d00b3bb511c5caaa00d7fd848"
+      },
+      "contentHash": "sha256:9ca8233f459a1885ce94aa742efdd41ccad74363fd8bd3a7045cbed2f8df0aea",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.de-broglie.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.de-broglie.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.de-broglie"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.de-broglie\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.de-broglie.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.de-broglie.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.de-broglie"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.de-broglie\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.de-broglie.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.de-broglie.md#TA-3 (addresses MC-2, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.de-broglie"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.de-broglie\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.de-broglie.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.de-broglie.md#TA-4 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.de-broglie"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.de-broglie\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.de-broglie.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.de-broglie.md#TA-5 (addresses MC-1, MC-MATTER-WAVES-ONLY-THEORETICAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.de-broglie"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.de-broglie\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.de-broglie.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.de-broglie.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.de-broglie"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.de-broglie\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.de-broglie/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "de Broglie Hypothesis — Matter Waves — core explanation",
+      "content": "**Core Insight:** In 1924, Louis de Broglie proposed that just as light (classically a wave) has\nparticle properties (photons), matter (classically particles) should have wave properties. Every\nparticle with momentum p has an associated wavelength:  \n  λ = h/p = h/(mv)  \nThis was confirmed experimentally in 1927 by Davisson and Germer (electron diffraction from\nnickel crystals) and independently by George Thomson. The de Broglie hypothesis is the seed of\nwave mechanics (Schrödinger equation) and the entire framework of quantum mechanics.\n\n**The One Equation:**  \n  λ = h/p = h/(γmv)   (γ = relativistic factor; for non-relativistic speeds: λ = h/(mv))\n\n**The Key Insight About Scale:**  \nA 1 kg ball at 1 m/s: λ = 6.63 × 10⁻³⁴ m — smaller than any known structure, permanently\nundetectable. An electron at 10⁶ m/s: λ ≈ 0.7 nm — the size of an atom, producing observable\ndiffraction. Matter waves are real but only observable when the particle's de Broglie wavelength\nis comparable to the physical scale of the system it is interacting with.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 23,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/misconception/MC-MATTER-WAVES-ONLY-THEORETICAL",
+      "kind": "misconception",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "**Probe:** \"Was de Broglie's hypothesis ever experimentally verified? When and how?\"",
+      "content": "",
+      "localKey": "MC-MATTER-WAVES-ONLY-THEORETICAL",
+      "language": "en",
+      "refs": [
+        "MC-MATTER-WAVES-ONLY-THEORETICAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "**Probe:** \"Was de Broglie's hypothesis ever experimentally verified? When and how?\"",
+      "content": "### MC-1: MC-MATTER-WAVES-ONLY-THEORETICAL\n**Probe:** \"Was de Broglie's hypothesis ever experimentally verified? When and how?\"  \n**Characteristic phrase:** \"It's just a theoretical assumption.\"  \n**Trigger:** Students do not know the experimental history; they treat the hypothesis as a model.  \n**Conflict evidence [P28]:** Davisson and Germer (1927) measured the angular distribution of\nelectrons scattered from a nickel crystal. The diffraction maxima occurred at exactly the angles\npredicted by Bragg's law using λ = h/(mv). George Thomson independently confirmed electron\ndiffraction. The discovery was awarded the 1937 Nobel Prize. Modern electron microscopes image\nat sub-nm resolution using de Broglie waves.  \n**Bridge [P30]:** \"De Broglie proposed in 1924; experimental proof came in 1927 — three years\nlater. The same year as Schrödinger's equation. Matter waves are not an assumption; they are a\nmeasured fact.\"  \n**Replacement [P31]:** The de Broglie hypothesis is experimentally confirmed by electron\ndiffraction (Davisson-Germer 1927), neutron diffraction, and modern atom interferometry.  \n**Discrimination pairs [P33]:** The de Broglie hypothesis is: (A) an unverified theoretical\nassumption, (B) experimentally confirmed by diffraction experiments, (C) a classical analogy\nwith no experimental support. Correct: (B).  \n**S6 repair path:** TA-2 (Davisson-Germer diffraction evidence).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 3,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/misconception/MC-BASEBALL-HAS-NO-WAVE-NATURE",
+      "kind": "misconception",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "**Probe:** \"Does a baseball have a de Broglie wavelength? If yes, why don't we observe baseball",
+      "content": "",
+      "localKey": "MC-BASEBALL-HAS-NO-WAVE-NATURE",
+      "language": "en",
+      "refs": [
+        "MC-BASEBALL-HAS-NO-WAVE-NATURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 22,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "**Probe:** \"Does a baseball have a de Broglie wavelength? If yes, why don't we observe baseball",
+      "content": "### MC-2: MC-BASEBALL-HAS-NO-WAVE-NATURE\n**Probe:** \"Does a baseball have a de Broglie wavelength? If yes, why don't we observe baseball\nwaves?\"  \n**Characteristic phrase:** \"Macroscopic objects don't have wave properties.\"  \n**Trigger:** Small λ → students conclude waves do not apply.  \n**Conflict evidence [P28]:** A 0.145 kg baseball at 40 m/s: λ = 6.626×10⁻³⁴/(0.145 × 40) =\n1.14×10⁻³⁴ m. This is smaller than a quark. No experiment can probe these scales. The baseball\nhas a de Broglie wave; we simply cannot detect it because no physical feature of the experiment\nhas spatial structure at 10⁻³⁴ m scale.  \n**Bridge [P30]:** \"The baseball has a de Broglie wavelength, but it is 10²⁰ times smaller than\na proton. To observe diffraction, you need a slit comparable to the wavelength. There is no\nphysical slit that small. The quantum nature is real but permanently invisible at macroscopic\nscales.\"  \n**Replacement [P31]:** All matter has de Broglie wavelengths; macroscopic objects have\nundetectably small λ but the quantum property is not absent — it is just inaccessible.  \n**Discrimination pairs [P33]:** A baseball's quantum wave nature is: (A) absent (too large to\nhave waves), (B) present but λ is too small to observe, (C) cancelled by decoherence. Correct: (B).  \n**S6 repair path:** TA-3 (scale argument: compute λ for electron, proton, atom, baseball).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 22,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/misconception/MC-DE-BROGLIE-WAVELENGTH-IS-PARTICLE-SIZE",
+      "kind": "misconception",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "**Probe:** \"If an electron has a de Broglie wavelength of 1 nm, does that mean the electron is",
+      "content": "",
+      "localKey": "MC-DE-BROGLIE-WAVELENGTH-IS-PARTICLE-SIZE",
+      "language": "en",
+      "refs": [
+        "MC-DE-BROGLIE-WAVELENGTH-IS-PARTICLE-SIZE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 41,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "**Probe:** \"If an electron has a de Broglie wavelength of 1 nm, does that mean the electron is",
+      "content": "### MC-3: MC-DE-BROGLIE-WAVELENGTH-IS-PARTICLE-SIZE\n**Probe:** \"If an electron has a de Broglie wavelength of 1 nm, does that mean the electron is\n1 nm in size?\"  \n**Characteristic phrase:** \"The wavelength tells you how big the particle is.\"  \n**Trigger:** Confusing the spatial periodicity of the wave function with the physical size of\nthe particle.  \n**Conflict evidence [P28]:** The classical radius of the electron ≈ 2.8 fm = 2.8 × 10⁻¹⁵ m.\nA de Broglie wavelength of 1 nm is 10⁵ times larger. The wavelength is the spatial periodicity\nof the probability amplitude ψ(x) = e^{ipx/ħ}, not the extent of the particle.  \n**Bridge [P30]:** \"The de Broglie wavelength is the spatial period of the wave that describes\nthe probability of finding the particle. It tells you about interference and diffraction — not\nabout the size of the particle. An electron in a double-slit experiment has a wave function\nthat spreads across both slits, but the electron itself is a point-like object.\"  \n**Replacement [P31]:** The de Broglie wavelength is the wavelength of the probability wave, not\nthe physical size of the particle.  \n**Discrimination pairs [P33]:** An electron with λ = 0.5 nm is: (A) 0.5 nm in diameter, (B)\na point particle whose probability wave has spatial period 0.5 nm, (C) spread over a length of\n0.5 nm. Correct: (B).  \n**S6 repair path:** TA-4 (wave function concept: what the wave describes).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 41,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/misconception/MC-FASTER-PARTICLE-LONGER-WAVELENGTH",
+      "kind": "misconception",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "**Probe:** \"An electron is accelerated to a higher speed. What happens to its de Broglie",
+      "content": "",
+      "localKey": "MC-FASTER-PARTICLE-LONGER-WAVELENGTH",
+      "language": "en",
+      "refs": [
+        "MC-FASTER-PARTICLE-LONGER-WAVELENGTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "**Probe:** \"An electron is accelerated to a higher speed. What happens to its de Broglie",
+      "content": "### MC-4: MC-FASTER-PARTICLE-LONGER-WAVELENGTH\n**Probe:** \"An electron is accelerated to a higher speed. What happens to its de Broglie\nwavelength?\"  \n**Characteristic phrase:** \"Faster = more energetic = longer wavelength.\"  \n**Trigger:** Analogy with photons: higher energy photon → longer wavelength (e.g., radio waves\nare longer than X-rays). But for photons, E = hf = hc/λ, so higher energy → shorter λ. For\nmatter, higher speed → higher p → shorter λ.  \n**Conflict evidence [P28]:** λ = h/p. Higher speed → higher p → smaller λ. This is opposite to\neveryday intuition (faster waves are higher frequency, hence shorter wavelength — but the\nparticle-wave duality is not about wave speed; the de Broglie relation connects to momentum,\nnot kinetic energy directly).  \n**Bridge [P30]:** \"Write λ = h/p. p = mv. Faster electron → bigger p → bigger denominator →\nsmaller λ. More energetic electron → shorter de Broglie wavelength → better resolution in an\nelectron microscope. This is why electron microscopes use high-voltage (fast) electrons.\"  \n**Replacement [P31]:** For matter particles: higher speed → higher p → shorter λ. The de Broglie\nwavelength decreases with increasing momentum.  \n**Discrimination pairs [P33]:** Electron accelerated to higher speed: de Broglie wavelength (A)\nincreases, (B) decreases, (C) stays the same. Correct: (B).  \n**S6 repair path:** TA-3 (calculation: λ for slow vs. fast electron).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 61,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Davisson-Germer Historical Confirmation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Davisson-Germer Historical Confirmation\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "de Broglie Relation and Scale Argument",
+      "content": "{\"id\":\"TA-3\",\"title\":\"de Broglie Relation and Scale Argument\",\"primitives\":[\"P14\"],\"addresses\":[\"MC-2\",\"MC-4\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Wave Function Concept",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Wave Function Concept\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 21,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "MC-1 Diagnostic",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-1 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-MATTER-WAVES-ONLY-THEORETICAL\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-MATTER-WAVES-ONLY-THEORETICAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 28,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Closure & Calculation Practice",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Closure & Calculation Practice\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 34,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \nPass criteria — student correctly:  \n(a) States λ = h/p and applies it to electrons, protons, and macroscopic objects  \n(b) Explains why matter waves are observable for electrons but not baseballs  \n(c) Identifies the Davisson-Germer experiment as experimental confirmation  \n(d) Distinguishes the de Broglie wave from the physical size of the particle  \nFailure on (a) → TA-3. Failure on (b) → TA-3 scale argument. Failure on (c) → TA-2.\nFailure on (d) → TA-4.\n\n**Formative Golden Probe (FA-1):**  \n\"Calculate the de Broglie wavelength of an electron accelerated through a potential difference\nof 150 V.\"  \nExpected: E_k = eV = 150 × 1.6×10⁻¹⁹ = 2.4×10⁻¹⁷ J. p = √(2m_e E_k) = √(2 × 9.11×10⁻³¹ ×\n2.4×10⁻¹⁷) = 2.09×10⁻²⁴ kg m/s. λ = h/p = 6.626×10⁻³⁴ / 2.09×10⁻²⁴ = 3.17×10⁻¹⁰ m = 0.317 nm.  \nThreshold: Correct λ with correct intermediate steps.\n\n**Formative Golden Probe (FA-2):**  \n\"A neutron has mass 1.675 × 10⁻²⁷ kg. What speed must it travel at to have a de Broglie\nwavelength of 0.1 nm (useful for crystal diffraction)?\"  \nExpected: p = h/λ = 6.626×10⁻³⁴ / 10⁻¹⁰ = 6.626×10⁻²⁴ kg m/s. v = p/m = 6.626×10⁻²⁴ /\n1.675×10⁻²⁷ = 3956 m/s ≈ 4000 m/s.  \nThreshold: Correct v; check that v << c (confirming non-relativistic approximation valid: v/c ≈ 1.3×10⁻⁵).\n\n**Formative Golden Probe (FA-3):**  \n\"In the Davisson-Germer experiment, electrons were accelerated through 54 V. Calculate their\nde Broglie wavelength and verify that this is comparable to nickel's crystal plane spacing\n(d = 0.0915 nm).\"  \nExpected: λ = h/√(2m_e eV) = 6.626×10⁻³⁴ / √(2 × 9.11×10⁻³¹ × 54 × 1.6×10⁻¹⁹) ≈ 0.167 nm.\nRatio λ/d = 0.167/0.0915 ≈ 1.8 — same order of magnitude, allowing Bragg diffraction.  \nThreshold: Correct λ; ratio to crystal spacing correctly computed and interpreted.\n\n**Formative Golden Probe (FA-4):**  \n\"An electron microscope uses 200 keV electrons. Estimate the de Broglie wavelength\n(use relativistic momentum: p = √((E_k/c)² + 2m_e E_k) with E_k in energy units).\"  \nExpected: E_k = 200 keV = 3.2×10⁻¹⁴ J. m_e c² = 0.511 MeV = 8.19×10⁻¹⁴ J.\np = √((E_k/c)² + 2m_e E_k) = √((3.2×10⁻¹⁴/3×10⁸)² + 2×9.11×10⁻³¹×3.2×10⁻¹⁴) ≈ √(1.14×10⁻⁴⁴ + 5.83×10⁻⁴⁴) = √(6.97×10⁻⁴⁴) = 2.64×10⁻²² kg m/s.\nλ = h/p = 6.626×10⁻³⁴ / 2.64×10⁻²² ≈ 2.5 pm. This is atomic-scale resolution.  \nThreshold: Relativistic momentum used; correct λ order of magnitude (1–5 pm).\n\n**Confidence Calibration:** After FA-4, ask: \"Before computing, did you know the answer would\nbe in the pm range?\" Persistent underestimation of electron wavelength scales is common.\n\n**Delayed Retrieval (Session + 3 days):**  \n\"Without notes: state the de Broglie relation. What does the wave represent? Calculate λ for an\nelectron accelerated through 50 V.\"  \nThreshold: All correct unaided.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 333,
+        "endLine": 384
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nElectrons (clearly particles — they have mass, charge, they are deflected by fields) are fired\nthrough a thin crystal of nickel. On a screen behind the crystal, a diffraction ring pattern\nappears — identical in structure to X-ray diffraction from the same crystal. X-rays are waves.\nIf electrons produce the same pattern, they must also behave as waves.\n\n**Stage 2 — Representational (R)**  \nFor a photon: E = hf = pc → p = h/λ → λ = h/p. By symmetry, de Broglie proposed the same\nrelation for matter: a particle with momentum p = mv has wavelength λ = h/(mv). The wave does not\ntravel \"through\" the particle — the wave is the quantum-mechanical description of the particle's\npropagation probability. High-λ (slow, light particle) → large quantum effects. Low-λ (fast,\nheavy particle) → quantum effects negligible.\n\n**Stage 3 — Abstract (A)**  \nThe de Broglie wavelength appears as the de Broglie wave condition for standing waves in Bohr's\nmodel: nλ = 2πr (n de Broglie wavelengths fit around the circumference of the nth orbit),\ngiving exactly Bohr's quantisation condition mvr = nħ. Later, Schrödinger elevated the de\nBroglie relation to a wave equation; the de Broglie relation ψ ~ e^{ipx/ħ} is the plane-wave\nsolution of the free-particle Schrödinger equation.\n\n**Stage 4 — Transfer (T)**  \nElectron microscopes use de Broglie waves to image at nm resolution (λ_electron << λ_visible).\nNeutron diffraction studies crystal structures. The Heisenberg uncertainty principle (Δx Δp ≥ ħ/2)\nfollows directly from the wave nature of matter — a particle localized in space must have a\nspread of momenta (Fourier uncertainty). Atom interferometry (used in inertial navigation) treats\natoms as waves.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 44,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Why Beginners Fail",
+      "content": "1. **The wavelength is \"too small to matter\" dismissal:** Students compute λ for a macroscopic\n   object (a baseball), get a number smaller than a proton, and conclude \"matter waves don't\n   apply to real objects.\" This misses the point: matter waves are real for all particles, but\n   only observable when λ is comparable to the physical scale of the experiment.\n\n2. **Confusing the de Broglie wavelength with physical size:** Students ask \"how big is the wave?\"\n   The wave is not a spatial extent of the particle — it is the probability amplitude for finding\n   the particle. The wavelength characterises the wave's spatial periodicity, not the particle's size.\n\n3. **Treating de Broglie as purely theoretical:** Davisson-Germer (1927) confirmed the hypothesis\n   experimentally the same year as Schrödinger's equation. Students who see this as \"just a\n   hypothesis\" miss that it was immediately and precisely confirmed.\n\n4. **Applying λ = h/mv incorrectly for relativistic speeds:** For electrons accelerated through\n   high voltages (> 50 kV), the relativistic momentum p = γmv must be used. Using λ = h/(mv)\n   gives the wrong answer.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 75,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Electrons make diffraction patterns. You need waves to make diffraction patterns.\nBut electrons have mass and charge — they are particles. De Broglie's answer in 1924: they are\nboth. Every particle with momentum p has a wavelength λ = h/p. Einstein showed waves can be\nparticles; de Broglie showed particles can be waves.\"\n\n**Key explanatory moves:**\n- \"λ = h/p: larger momentum → smaller wavelength. Faster electron → smaller λ → better\n  microscope resolution. This is why we use high-voltage electrons in electron microscopes.\"\n- \"A baseball also has a de Broglie wavelength: 10⁻³⁴ m. Smaller than a quark. Real, but\n  immeasurable. Quantum mechanics never switches off — it just becomes negligible.\"\n- \"The wave is not the size of the particle — it is the probability wave. The particle clicks\n  at one detector; the wave function spreads across all detectors.\"\n\n**Common recovery phrases:**\n- If student says matter waves are theoretical: \"Davisson and Germer got the Nobel Prize in\n  1937 for measuring electron diffraction. Electron microscopes image atoms today. Matter waves\n  are engineering reality.\"\n- If student expects longer λ for faster particles: \"Write λ = h/p. p goes up when speed goes\n  up. Denominator bigger → λ smaller. Opposite of what you expect from photons — because here\n  we are increasing momentum, not energy-per-photon.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 308,
+        "endLine": 333
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Recovery Notes",
+      "content": "**S0 (no prior photons concept):** The symmetry argument (particles ↔ waves) requires knowing\nthat photons have momentum p = h/λ. The prerequisite phys.mod.photons is essential — without\nit, λ = h/p appears unmotivated.\n\n**S3 (can compute but does not believe matter waves are real):** Run the Davisson-Germer\ncalculation (FA-3). Ask the student to compare the predicted λ with the crystal spacing and\nstate whether diffraction should occur. The quantitative match is the evidence.\n\n**S6 (MC-FASTER-PARTICLE-LONGER-WAVELENGTH dominant):** Write λ = h/p and p = mv side by side.\nCircle the denominator. \"v goes up → p goes up → λ goes down. It is in the denominator. This\nis the only thing you need to remember.\" Then verify with two calculated examples.\n\n**S9 (plateau — knows formula, cannot explain why macroscopic objects don't show wave effects):**\nRequire calculation of λ for a macroscopic object and an estimate of what size slit would be\nneeded to observe diffraction. \"To diffract a baseball (λ ≈ 10⁻³⁴ m), you would need a slit\nof width 10⁻³⁴ m — 10²⁰ times smaller than a proton. There is no such slit. Not impossible —\njust physically unrealisable.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FASTER-PARTICLE-LONGER-WAVELENGTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 384,
+        "endLine": 406
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Declarative (one equation: λ = h/p) + conceptual (wave-particle symmetry, scale\nargument, experimental confirmation). The equation is easy; the scale intuition requires spaced\nreview.\n\n**Spaced retrieval plan:**\n- Session + 1 day: \"State the de Broglie relation. Calculate λ for a proton at 10⁶ m/s.\"\n- Session + 4 days: \"Davisson and Germer confirmed matter waves in what year and how? Why could\n  they use nickel crystal?\" (Historical/conceptual)\n- Session + 9 days: \"An electron microscope achieves 0.05 nm resolution. Estimate the required\n  electron energy (non-relativistic). Why can a visible-light microscope not achieve this?\" \n  (Transfer calculation)\n\n**Interleaving partners:** phys.mod.photons (wave-particle duality for light, the analogy\nbasis), phys.mod.wave-particle-duality (immediate successor — deepens duality concept),\nphys.mod.bohr-model (standing-wave quantisation of Bohr orbits uses λ = h/p).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 406,
+        "endLine": 426
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Transfer Map",
+      "content": "**Near transfer:**\n- phys.mod.wave-particle-duality: generalises to all quantum objects; introduces the uncertainty\n  principle as a consequence of wave nature\n- phys.mod.bohr-model: the standing-wave interpretation of Bohr orbits uses de Broglie's relation\n- phys.qm.wave-function: the Schrödinger equation is the dynamical equation for the de Broglie\n  wave function\n\n**Far transfer:**\n- Electron microscopy: de Broglie wavelength limits resolution; modern TEM reaches 50 pm\n- Neutron diffraction: slow neutrons (λ ≈ 0.1–1 nm) probe crystal structures and magnetic\n  ordering, complementary to X-rays\n- Atom interferometry: cold atoms (μK temperatures, λ ~ nm) used as ultra-precise inertial\n  sensors in navigation and gravitational wave detection research\n- Heisenberg uncertainty principle: Δx Δp ≥ ħ/2 is the Fourier uncertainty relation for the\n  de Broglie wave packet\n- Quantum computing: qubits exploit matter-wave superposition for computation\n\n**Structural abstraction:** λ = h/p is the universal translation between the wave description\n(wavelength λ) and the particle description (momentum p) for any quantum object. Planck's\nconstant h is the conversion factor. All of quantum mechanics is, in one sense, the systematic\napplication of this translation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 426,
+        "endLine": 452
+      }
+    },
+    {
+      "assetId": "phys.mod.de-broglie/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.de-broglie",
+      "title": "Curriculum Feedback",
+      "content": "**Does this concept position correctly in the KG?**  \nYes. Requiring phys.mod.photons provides the symmetry basis (photons have λ = h/p) from which\nde Broglie generalises. Unlocking phys.mod.wave-particle-duality is correct — duality is the\nfull conceptual framework for which this hypothesis is the foundation.\n\n**Missing prerequisite?**  \nA brief node on Bragg diffraction would deepen the Davisson-Germer confirmation, but it is not\nstrictly necessary — the confirmation can be described qualitatively without the full Bragg\nderivation.\n\n**Recommended teaching sequence:** phys.mod.photons → phys.mod.de-broglie → phys.mod.wave-\nparticle-duality → phys.qm.wave-function. These four form the quantum-mechanics entry arc.\n\n**Asset opportunity:** An interactive de Broglie wavelength calculator — input mass and speed,\ndisplay λ, compare with visible light and atom size — would make the scale argument tactile.\nParticularly valuable for the \"baseball has no wave nature\" misconception.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.de-broglie.md",
+        "startLine": 452,
+        "endLine": 473
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

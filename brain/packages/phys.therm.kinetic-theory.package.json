@@ -1,0 +1,634 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.kinetic-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.kinetic-theory",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:0fd29e16fe2dd35adbf64fc8aab28efe435c40955e4c045d1ab231236992edbb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.kinetic-theory.md": "sha256:d30eb7899206d5a0b9e63e70dcebc5a2597db3ae0734606844def7dbd9dc3802"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 14,
+      "session_flow": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "phys.therm.kinetic-theory",
+    "name": "Kinetic Theory of Gases",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.therm.ideal-gas-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.kinetic-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.kinetic-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.kinetic-theory.md": "sha256:d30eb7899206d5a0b9e63e70dcebc5a2597db3ae0734606844def7dbd9dc3802"
+      },
+      "contentHash": "sha256:e281a2cc848614b9441efc472f72d1eac7e98222d6f465597bf54ce0463810c6",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-5 (addresses MC-TEMPERATURE-IS-TOTAL-ENERGY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-7 (addresses MC-ALL-MOLECULES-SAME-SPEED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.kinetic-theory.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.kinetic-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.kinetic-theory\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.kinetic-theory/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "(Concrete — v_rms calculation)",
+      "content": "### WE-1 (Concrete — v_rms calculation)\n\n**Scenario:** Find v_rms for N₂ (M = 28 × 10⁻³ kg/mol) at 300 K and at 1200 K.\n\n**Formula:** v_rms = √(3RT/M).\n\n**At 300 K:**\nv_rms = √(3 × 8.314 × 300 / 0.028) = √(7482.6/0.028) = √(267 236) ≈ 517 m/s.\n\n**At 1200 K:**\nv_rms = √(3 × 8.314 × 1200 / 0.028) = √(1 068 943) ≈ 1034 m/s.\n\n**Ratio:** v_rms(1200)/v_rms(300) = √(1200/300) = √4 = 2. ✓ (v_rms ∝ √T — doubling is from T increasing 4×.)\n\n**Context:** Sound speed in air at 300 K ≈ 343 m/s. N₂ molecules travel at 517 m/s — faster than sound, as expected (sound speed ≈ v_rms/√(γ) for an ideal gas).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 48,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "(Bridging — equipartition and molar heat capacity)",
+      "content": "### WE-2 (Bridging — equipartition and molar heat capacity)\n\n**Derive:** Using equipartition, find C_v (molar heat capacity at constant volume) for:\n(a) monatomic ideal gas (Ar, He), (b) diatomic ideal gas (N₂, O₂).\n\n**(a) Monatomic gas:**\nf = 3 (translational only — atoms have no rotation). U = (3/2)nRT.\nC_v = (1/n)(dU/dT) = (3/2)R = 3/2 × 8.314 = 12.47 J/(mol·K).\n\n**Measured:** He: C_v = 12.47 J/(mol·K); Ar: 12.47 J/(mol·K). ✓ Perfect agreement.\n\n**(b) Diatomic gas (rigid rotor, above ~200 K):**\nf = 5 (3 translational + 2 rotational; vibrational frozen out at room temperature).\nU = (5/2)nRT → C_v = (5/2)R = 20.8 J/(mol·K).\n\n**Measured:** N₂: C_v = 20.8 J/(mol·K); O₂: 20.9 J/(mol·K). ✓\n\n**Note:** γ = C_p/C_v = (C_v + R)/C_v = (5/2 + 1)/(5/2) = 7/5 = 1.40 for diatomic — the value used in adiabatic gas calculations.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 48,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "(Abstract — mean free path)",
+      "content": "### WE-3 (Abstract — mean free path)\n\n**Derive and calculate:** Find the mean free path for N₂ at STP (T = 273 K, P = 10⁵ Pa). Molecular diameter d = 3.7 × 10⁻¹⁰ m.\n\n**Number density:**\nn = N/V = P/(k_BT) = 10⁵ / (1.381 × 10⁻²³ × 273) = 10⁵ / (3.770 × 10⁻²¹) = 2.651 × 10²⁵ m⁻³.\n\n**Mean free path:**\nλ = 1/(√2 πd²n).\nd² = (3.7 × 10⁻¹⁰)² = 1.369 × 10⁻¹⁹ m².\n√2 π d² n = 1.414 × 3.1416 × 1.369 × 10⁻¹⁹ × 2.651 × 10²⁵\n= 1.414 × 3.1416 × 3.628 × 10⁶ = 1.414 × 1.140 × 10⁷ = 1.612 × 10⁷.\nλ = 1 / (1.612 × 10⁷) = 6.20 × 10⁻⁸ m = 62 nm.\n\n**Answer:** λ ≈ 62 nm at STP — a molecule collides about every 62 nm of travel, which at 517 m/s means ~10⁹ collisions per second.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 48,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/misconception/MC-TEMPERATURE-IS-TOTAL-ENERGY",
+      "kind": "misconception",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "**Trigger signal:** Student says \"hotter gas has more total energy\" as if this were the definition of temperature, or confuses average energy per molecule with total energy.",
+      "content": "### MC-TEMPERATURE-IS-TOTAL-ENERGY\n\n**Trigger signal:** Student says \"hotter gas has more total energy\" as if this were the definition of temperature, or confuses average energy per molecule with total energy.\n\n**Conflict evidence [P28]:** \"Two containers: 1 mol monatomic gas at 400 K, and 2 mol of the same gas at 200 K. Which has higher temperature? Which has more total internal energy? Calculate U = (3/2)nRT for each.\"\n\n*U₁ = (3/2)(1)(8.314)(400) = 4988 J. U₂ = (3/2)(2)(8.314)(200) = 4988 J. Equal total energy, but T₁ = 2T₂.*\n\n**Bridge text [P30]:** \"Temperature measures average kinetic energy per molecule: KE_avg = (3/2)k_BT. Total energy is U = N × (3/2)k_BT = (3/2)nRT — it depends on both T and n. Two systems can have the same total energy at different temperatures (if one has more molecules) or the same temperature at different total energies (different n).\"\n\n**Replacement text [P31]:** \"T = (2/3) × KE_avg/k_B — temperature is the per-molecule average, not the total. The total internal energy is U = (3/2)nRT — it scales with both T and n. This is why a large cool system can have more total thermal energy than a small hot one (ocean vs. spark).\"\n\n**Discrimination pairs [P33]:**\n- \"5 mol of gas at 300 K vs. 1 mol at 1500 K: same T? Same U?\" → 1 mol at 1500 K has T = 1500 K; 5 mol at 300 K has T = 300 K. But U₁ = (3/2)(1)(8.314)(1500) = 18 707 J; U₂ = (3/2)(5)(8.314)(300) = 18 707 J. Same U, different T.\n- \"Increasing n at constant T: does U increase?\" → Yes — more molecules, same average energy per molecule → more total energy.\n\n**s6_path:** \"Temperature = per-molecule average. Total energy = per-molecule average × number of molecules.\"\n\n---",
+      "localKey": "MC-TEMPERATURE-IS-TOTAL-ENERGY",
+      "language": "en",
+      "refs": [
+        "MC-TEMPERATURE-IS-TOTAL-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/misconception/MC-ALL-MOLECULES-SAME-SPEED",
+      "kind": "misconception",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "**Trigger signal:** Student treats v_rms as the speed of every molecule, or ignores the Maxwell-Boltzmann distribution.",
+      "content": "### MC-ALL-MOLECULES-SAME-SPEED\n\n**Trigger signal:** Student treats v_rms as the speed of every molecule, or ignores the Maxwell-Boltzmann distribution.\n\n**Conflict evidence [P28]:** \"If all molecules in a gas at 300 K had exactly v_rms = 517 m/s, what would happen to a gas sample over time — would it remain in equilibrium? Why might some molecules escape a liquid surface to become vapour even at T below boiling point?\"\n\n*Evaporation occurs at any temperature because some molecules in the distribution have enough energy to overcome intermolecular forces. If all had the same speed, evaporation would only occur at exactly the boiling point.*\n\n**Bridge text [P30]:** \"The Maxwell-Boltzmann distribution shows that speeds range from 0 to ∞ (continuous distribution). At any temperature, some molecules are very slow (near 0) and some very fast (far tail). The 'most probable' speed v_mp, 'average' speed v_avg, and 'root-mean-square' speed v_rms are all different. The tail of the distribution enables evaporation, reactions, and diffusion at any temperature.\"\n\n**Replacement text [P31]:** \"v_rms is the square root of the average of v². It is NOT the speed of any particular molecule. The distribution: v_mp < v_avg < v_rms (ratio approximately 1 : 1.128 : 1.225). The high-speed tail is physically crucial — it determines reaction rates (Arrhenius), evaporation rates, and stellar nucleosynthesis (protons tunnel through coulomb barrier in the fast tail).\"\n\n**Discrimination pairs [P33]:**\n- \"At 300 K, can any N₂ molecule have speed 5000 m/s (much greater than v_rms = 517 m/s)?\" → Yes — the Maxwell-Boltzmann tail extends to any speed, though the probability is extremely small (∝ exp(−mv²/2k_BT)).\n- \"Why does doubling T increase reaction rates far more than doubling v_rms?\" → Reaction rates depend on the high-speed tail (Boltzmann factor e^(−E_a/k_BT)); doubling T shifts the whole distribution, dramatically increasing the fraction in the fast tail.\n\n**s6_path:** \"v_rms is the statistical average — the distribution has a full spread. The fast tail does most of the interesting physical chemistry.\"\n\n---",
+      "localKey": "MC-ALL-MOLECULES-SAME-SPEED",
+      "language": "en",
+      "refs": [
+        "MC-ALL-MOLECULES-SAME-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 211,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "diagnostic: molecular-level meaning of temperature",
+      "content": "{\"id\":\"TA-2\",\"title\":\"diagnostic: molecular-level meaning of temperature\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 211,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "anchor: pressure derivation from molecule-wall collision",
+      "content": "{\"id\":\"TA-3\",\"title\":\"anchor: pressure derivation from molecule-wall collision\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 211,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "bridge: ½m⟨v²⟩ = (3/2)k_BT — temperature as KE",
+      "content": "{\"id\":\"TA-4\",\"title\":\"bridge: ½m⟨v²⟩ = (3/2)k_BT — temperature as KE\",\"primitives\":[\"P30\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 212,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": ": P28 conflict → P31 replacement → P33 pairs",
+      "content": "{\"id\":\"TA-5\",\"title\":\": P28 conflict → P31 replacement → P33 pairs\",\"primitives\":[\"P28\",\"P31\",\"P33\"],\"addresses\":[\"MC-TEMPERATURE-IS-TOTAL-ENERGY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-TEMPERATURE-IS-TOTAL-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 213,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "check-in: degrees of freedom — monatomic vs diatomic",
+      "content": "{\"id\":\"TA-6\",\"title\":\"check-in: degrees of freedom — monatomic vs diatomic\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 215,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": ": P28 conflict (evaporation below boiling) → P30 bridge → P31 → P33",
+      "content": "{\"id\":\"TA-7\",\"title\":\": P28 conflict (evaporation below boiling) → P30 bridge → P31 → P33\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-ALL-MOLECULES-SAME-SPEED\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-ALL-MOLECULES-SAME-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "narrow: three characteristic speeds and their ordering",
+      "content": "{\"id\":\"TA-8\",\"title\":\"narrow: three characteristic speeds and their ordering\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 218,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "retrieval seed: v_rms ratio He vs N₂",
+      "content": "{\"id\":\"TA-9\",\"title\":\"retrieval seed: v_rms ratio He vs N₂\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 219,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "mastery probe: Ar gas at 500 K — v_rms, KE, U per mole",
+      "content": "{\"id\":\"TA-10\",\"title\":\"mastery probe: Ar gas at 500 K — v_rms, KE, U per mole\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 221,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-11\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 222,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-12\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 223,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-13\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 224,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "close",
+      "content": "{\"id\":\"TA-14\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 225,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.therm.kinetic-theory/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.kinetic-theory",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: molecular-level meaning of temperature] → [P06 anchor: pressure derivation from molecule-wall collision]\n→ [P30 bridge: ½m⟨v²⟩ = (3/2)k_BT — temperature as KE]\n→ [MC-TEMPERATURE-IS-TOTAL-ENERGY: P28 conflict → P31 replacement → P33 pairs]\n→ [WE-1: v_rms for N₂ at 300 K and 1200 K]\n→ [P51 check-in: degrees of freedom — monatomic vs diatomic]\n→ [WE-2: equipartition → C_v derivation for monatomic and diatomic]\n→ [MC-ALL-MOLECULES-SAME-SPEED: P28 conflict (evaporation below boiling) → P30 bridge → P31 → P33]\n→ [P52 narrow: three characteristic speeds and their ordering]\n→ [P62 retrieval seed: v_rms ratio He vs N₂]\n→ [WE-3: mean free path derivation and calculation]\n→ [P36 mastery probe: Ar gas at 500 K — v_rms, KE, U per mole]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.kinetic-theory.md",
+        "startLine": 208,
+        "endLine": 230
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

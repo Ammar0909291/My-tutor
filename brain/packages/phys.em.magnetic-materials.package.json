@@ -1,0 +1,324 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.magnetic-materials-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.magnetic-materials",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:417352b869b299a02d4b04914075543ed4a90be60a6073d267ed27b1cedfce91",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.magnetic-materials.md": "sha256:5fd975d7a6dcb0c8254dea89f437f02cddb23aa966175db42b0e58e8ca7554dc"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.magnetic-materials",
+    "name": "Magnetic Materials",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.em.magnetic-field"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.magnetic-materials-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.magnetic-materials (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.magnetic-materials.md": "sha256:5fd975d7a6dcb0c8254dea89f437f02cddb23aa966175db42b0e58e8ca7554dc"
+      },
+      "contentHash": "sha256:db10d8424bb54e8a0fcc6b410aaf1c6703c0793ca29bcf85bec7dca03c80d16c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-materials.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-materials.md#TA-1 (addresses MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-materials"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-materials\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-materials.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-materials.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-materials"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-materials\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-materials.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-materials.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-materials"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-materials\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.magnetic-materials.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.magnetic-materials.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.magnetic-materials"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.magnetic-materials\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.magnetic-materials/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Classifying Materials",
+      "content": "### WE-1 — Classifying Materials\n**Problem:** Classify the following and give a physical reason: (a) copper, (b) liquid oxygen, (c) iron below 1043 K, (d) iron above 1043 K, (e) bismuth.\n\n**Solution:**\n(a) Copper: **diamagnetic** — all electrons paired; weak induced opposing moment; χ_m ≈ −10⁻⁵\n(b) Liquid O₂: **paramagnetic** — O₂ has unpaired electrons; χ_m > 0 (actually O₂ is attracted to magnets — classic demo)\n(c) Iron < 1043 K: **ferromagnetic** — exchange interaction aligns domains; χ_m up to 10⁵; permanent magnetisation possible\n(d) Iron > 1043 K (Curie temperature): **paramagnetic** — thermal energy disrupts exchange alignment; domains disappear\n(e) Bismuth: **diamagnetic** (strongest common diamagnet); χ_m ≈ −1.7×10⁻⁴\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 85,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Hysteresis Loop Analysis",
+      "content": "### WE-2 — Hysteresis Loop Analysis\n**Problem:** A ferromagnetic core has saturation field B_s = 1.6 T, remanence B_r = 0.8 T, coercive field H_c = 400 A/m. Is this a soft or hard magnetic material? What is it good for?\n\n**Solution:**\nHard vs. soft: **H_c = 400 A/m is moderate-to-low**. Compare: soft material (transformer steel) H_c ~ 10–100 A/m; hard material (NdFeB) H_c ~ 10⁶ A/m. This material is **intermediate** — perhaps suitable for magnetic recording media (needs to retain information but be rewritable).\n\nThe remanence B_r = 0.8 T (half of saturation) indicates moderate permanent magnetisation when H is removed. The area of the hysteresis loop ∝ B_s × H_c ∝ energy loss per cycle.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 85,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Curie Law for Paramagnets",
+      "content": "### WE-3 — Curie Law for Paramagnets\n**Problem:** A paramagnetic material obeys χ_m = C/T with Curie constant C = 0.24 K. Find χ_m at T = 300 K and T = 80 K. Find M if H = 10⁵ A/m at 300 K.\n\n**Solution:**\nχ_m(300K) = 0.24/300 = **8.0×10⁻⁴**  \nχ_m(80K) = 0.24/80 = **3.0×10⁻³** (3.75× larger — colder = more aligned)\n\nM = χ_m × H = 8.0×10⁻⁴ × 10⁵ = **80 A/m** at 300 K  \nB ≈ μ₀M = 4π×10⁻⁷ × 80 = **1.0×10⁻⁴ T** (very weak contribution compared to ferromagnet)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 85,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/misconception/MC-ALL-METALS-ARE-MAGNETIC",
+      "kind": "misconception",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "- **trigger_signal:** Student says \"iron, steel, copper, and aluminium are all magnetic because they're metals.",
+      "content": "### MC-ALL-METALS-ARE-MAGNETIC\n- **trigger_signal:** Student says \"iron, steel, copper, and aluminium are all magnetic because they're metals.\"\n- **conflict_evidence [P28]:** \"Test with a strong magnet: iron filings cling strongly. Aluminium foil — no attraction. Copper coin — no attraction. Gold ring — no attraction. Only iron, nickel, cobalt, and their alloys are ferromagnetic. Most metals (aluminium, copper, gold, silver, lead) are non-magnetic (paramagnetic at most — the attraction is too weak to feel). 'Metal' and 'magnetic' are not synonyms.\"\n- **bridge_text [P30]:** \"Magnetism at the macro level requires ferromagnetism — quantum exchange interaction aligning electron spins in domains. This happens in only a handful of elements. Most metals have paired electron spins → no net atomic moment → no strong magnetism. The key is the electronic structure, not being a metal.\"\n- **replacement_text [P31]:** \"Only Fe, Ni, Co, and some alloys/rare-earth compounds are ferromagnetic (strongly attracted). Most metals are diamagnetic or weakly paramagnetic — not magnetically attracted in any practical sense. Always check: ferromagnet ≠ metal.\"\n- **discrimination_pairs [P33]:**\n  - Iron (Fe): ferromagnetic — strongly attracted\n  - Aluminium (Al): paramagnetic — χ ~ 10⁻⁵, not perceptibly attracted\n  - Copper (Cu): diamagnetic — very slightly repelled\n  - Gold (Au): diamagnetic — not attracted\n- **s6_path:** Demonstration: hold various metal objects near a strong magnet. Only iron/nickel objects are attracted. Discuss why.\n\n---",
+      "localKey": "MC-ALL-METALS-ARE-MAGNETIC",
+      "language": "en",
+      "refs": [
+        "MC-ALL-METALS-ARE-MAGNETIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 3,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/misconception/MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES",
+      "kind": "misconception",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "- **trigger_signal:** Student says \"if you cut a bar magnet in half, you get a north-pole piece and a south-pole piece.",
+      "content": "### MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES\n- **trigger_signal:** Student says \"if you cut a bar magnet in half, you get a north-pole piece and a south-pole piece.\"\n- **conflict_evidence [P28]:** \"∮B·dA = 0 (Gauss's law for magnetism) — there are no magnetic monopoles. Every piece of a cut magnet has its own north AND south pole. Cut again → still two poles each. Down to a single atomic magnet, you still have a dipole (spin up/down). This has been verified to atomic precision; no magnetic monopole has ever been found despite extensive searches.\"\n- **bridge_text [P30]:** \"An electric dipole (+q, −q) can be separated by cutting between the charges — you'd get +q alone and −q alone. A magnetic dipole cannot be separated because magnetism arises from spinning charges (loops of current), not from two distinct 'magnetic charges.' Every loop has both a clockwise and counterclockwise face — north and south are inseparable.\"\n- **replacement_text [P31]:** \"Cutting a magnet always produces two smaller dipole magnets, each with N and S poles. There are no magnetic monopoles. Gauss's law for magnetism: ∮B·dA = 0 — no net 'magnetic charge' enclosed by any surface.\"\n- **discrimination_pairs [P33]:**\n  - Electric dipole: can be separated into +q and −q\n  - Magnetic dipole: cannot be separated; cutting always gives two dipoles\n- **s6_path:** Show physically with two bar magnets; or use simulation showing domain structure — every domain is itself a dipole.\n\n---",
+      "localKey": "MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES",
+      "language": "en",
+      "refs": [
+        "MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 17,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Three classes of magnetic behaviour: Block 1-B",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Three classes of magnetic behaviour: Block 1-B\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 15,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Domains and hysteresis: Block 1-C",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Domains and hysteresis: Block 1-C\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 24,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "WE-2: hysteresis loop analysis for material selection",
+      "content": "{\"id\":\"TA-3\",\"title\":\"WE-2: hysteresis loop analysis for material selection\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 27,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Curie law and WE-3",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Curie law and WE-3\",\"primitives\":[\"P36\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 32,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** Which property is unique to ferromagnetic materials (not diamagnetic or paramagnetic)?\n(a) Non-zero χ_m (b) Temperature dependence **(c) Magnetic domains and hysteresis** (d) Response to external field\n\n**A2 (Short answer):** What happens to a ferromagnet when it is heated above its Curie temperature?\n[Thermal energy disrupts exchange interaction; domains disappear; material becomes paramagnetic]\n\n**A3 (Matching):** Match: (1) diamagnetic, (2) paramagnetic, (3) ferromagnetic — with χ_m < 0 / small positive / very large positive.\n[1→χ<0; 2→small positive; 3→very large positive]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** Why is liquid oxygen attracted to a strong magnet but liquid nitrogen is not?\n[O₂ has two unpaired electrons → paramagnetic; N₂ has all paired electrons → diamagnetic; χ(O₂) > 0; χ(N₂) < 0]\n\n**B2:** A transformer core should be made of soft or hard magnetic material? Why?\n[Soft — low coercive field H_c, low hysteresis loss; core needs to be easily magnetised/demagnetised each AC cycle; hard material would waste energy in hysteresis]\n\n**B3:** The Curie constant of iron is C = 750 K. At what temperature does χ_m = 1 if Curie law applies?\n[χ_m = C/T = 1 → T = 750 K. But note: iron's Curie temperature is 1043 K; above that it's paramagnetic. So at T=750K iron is still ferromagnetic — Curie law applies only in the paramagnetic regime. Valid answer acknowledges this caveat.]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** Explain, with reference to atomic physics, why (a) bismuth is diamagnetic; (b) oxygen is paramagnetic; (c) iron is ferromagnetic; (d) iron above 1043 K is not ferromagnetic.\n[(a) All electrons paired → no permanent moment; applied B induces opposing moment (Lenz). (b) Two unpaired electrons in O₂ → permanent moment; thermal disorder prevents full alignment. (c) Exchange interaction between Fe 3d electrons forces parallel spin alignment within domains; χ_m ~ 10⁵. (d) Thermal energy kT > exchange energy → domain structure collapses → reverts to paramagnetic behaviour.]\n\n**C2 (Application):** A motor designer wants to maximise stored magnetic energy per unit volume in a permanent magnet. Should she choose high B_r or high H_c? What product characterises permanent magnet quality?\n[Maximum energy product = (BH)_max — the area of the largest rectangle that fits inside the second quadrant of the hysteresis loop. High B_r and high H_c both contribute. NdFeB has (BH)_max ≈ 400 kJ/m³ — currently the best permanent magnet material.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 149,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks χ_m sign) | Clarify: all three classes have non-zero χ_m; only ferromagnets have domains |\n| Probe B1 wrong (oxygen) | Explain O₂ electronic structure: two unpaired electrons in π* orbitals (Hund's rule) |\n| Probe B2 wrong (hard for transformer) | Calculate hysteresis loss: area × frequency = watts; high H_c wastes energy each cycle |\n| Probe C1(d) incomplete | Stress: kT > J_exchange (exchange integral) → random orientation → domain collapse |\n| Student asks about ferrimagnetism/antiferromagnetism | Flag as enrichment: antiparallel alignment (MnO) reduces net moment; ferrimagnetism (ferrites): unequal antiparallel sublattices; still magnetically useful |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 254,
+        "endLine": 266
+      }
+    },
+    {
+      "assetId": "phys.em.magnetic-materials/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.magnetic-materials",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we'll answer: why does iron stick to magnets but copper doesn't? By the end you'll classify any material's magnetic behaviour from its electron structure and choose the right magnetic material for engineering applications.\"\n\n[P41 — Diagnostic]\n\"Name three metals. Are they all attracted to a magnet?\"\n→ If student names copper or aluminium as magnetic: deploy MC-ALL-METALS-ARE-MAGNETIC immediately.\n→ If correct: \"Good — what makes iron special compared to copper?\"\n\n[P06 — Concrete anchor]\n\"Every atom is a tiny bar magnet (electron spin). In most materials, these tiny magnets cancel in pairs — net zero. In iron, quantum mechanics forces neighbouring spins to align, creating 'magnetic armies' called domains. A whole domain cooperates like one giant magnet.\"\n\n[TA-1 — Three classes of magnetic behaviour: Block 1-B]\n\"Diamagnetic (χ<0), paramagnetic (χ>0, small), ferromagnetic (χ>>1). Give one example, one mechanism, one magnitude for each.\"\n\n[P28 — Conflict evidence for MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES]\n\"∮B·dA = 0 — no magnetic monopoles. Cut a magnet: both pieces have N and S. Cut again: still N and S. Down to a single electron spin: still a dipole. No experiment has ever found a magnetic monopole in 150 years of searching.\"\n\n[P51 — Check-in]\n\"Classify: (a) copper (b) oxygen gas (c) iron below 770°C. Justify briefly.\"\n\n[TA-2 — Domains and hysteresis: Block 1-C]\n\"Walk through hysteresis loop: saturation → remanence → coercive field. Hard vs. soft materials.\"\n\n[TA-3 — WE-2: hysteresis loop analysis for material selection]\n\n[P52 — Narrow]\n\"Two key contrasts only: soft (low H_c, easy cycling → transformers) vs. hard (high H_c, high B_r → permanent magnets). Everything else is detail.\"\n\n[TA-4 — Curie law and WE-3]\n\n[P62 — Retrieval seed]\n\"Write from memory: three classes, χ_m sign, domain concept, hysteresis key parameters, Curie law.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Magnetic behaviour comes from electron spin structure. Ferromagnetism = domain alignment = hysteresis. χ_m values: diamagnetic < 0; paramagnetic = small positive; ferromagnetic >> 1. Material choice depends on H_c: soft for cycling, hard for permanent.\"\n\n[P85 — Regulation tail]\n\"Clearest point? Shakiest point?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow: domain behaviour question at +1 day.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.magnetic-materials.md",
+        "startLine": 204,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

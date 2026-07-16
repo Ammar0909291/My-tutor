@@ -1,0 +1,363 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.velocity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.velocity",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:031a9bd1504f7a0d1acc32f9e0567eb888607274d8457f83f39fd24c123b1506",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.velocity.md": "sha256:d51c643d9b4db6c144e96c75866d0e236c6cc0b98ff1470cf3b26d3ed3911d71"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 1,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.velocity",
+    "name": "Speed and Velocity",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mech.displacement"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.velocity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.velocity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.velocity.md": "sha256:d51c643d9b4db6c144e96c75866d0e236c6cc0b98ff1470cf3b26d3ed3911d71"
+      },
+      "contentHash": "sha256:49a7116c70a61d429997aebd832850eb63d1d390227c4a303717a1821c3ffaf0",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.velocity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.velocity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.velocity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.velocity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.velocity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.velocity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.velocity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.velocity.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.velocity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.velocity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.velocity.md#TA-4 (addresses MC-SPEED-IS-VELOCITY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.velocity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.velocity.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.velocity.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.velocity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.velocity.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.velocity.md#TA-6 (addresses MC-SPEED-IS-VELOCITY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.velocity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.velocity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.velocity",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Defines **average speed** as total distance ÷ total time (scalar, always ≥ 0) and **average velocity** as total displacement ÷ total time (vector, can be zero or negative).\n2. Distinguishes the two: when motion is not straight or not single-direction, speed and velocity give different results — most sharply on a round trip, where velocity is zero while speed is not.\n3. Calculates average speed and average velocity correctly for simple 1D journeys, using the right formula and correct units.\n\nA student who computes velocity using distance instead of displacement, or who reports a positive velocity for a round trip, has **NOT** achieved mastery — the speed/velocity conflation propagates into every subsequent kinematics, momentum, and energy calculation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/misconception/MC-SPEED-IS-VELOCITY",
+      "kind": "misconception",
+      "conceptId": "phys.mech.velocity",
+      "title": "Speed and velocity are the same calculation",
+      "content": "### MC-SPEED-IS-VELOCITY: \"Speed and velocity are the same calculation\"\ntrigger_signal: student uses the same formula (distance/time) for both, or gives the same non-zero answer for both on a round trip.\nconflict_evidence [P28]: \"You walked 6 m north and 6 m south — total distance 12 m, total time 12 s → speed = 1 m/s. Now, where did you end up? At the start — displacement = 0. If velocity = displacement/time = 0/12 = 0 m/s, how can that be the same as speed = 1 m/s?\"\nbridge_text [P30]: \"Speed and velocity use different numerators. Speed asks 'how much ground did you cover?' — uses distance. Velocity asks 'where did you end up from where you started?' — uses displacement. Same journey, different questions, different answers whenever you don't go in a straight line.\"\nreplacement_text [P31]: \"Average velocity = Δx / Δt; average speed = total distance / Δt. Substitute the correct numerator for the question being asked.\"\ndiscrimination_pairs [P33]: [\"straight 10 m run in 5 s: speed = 2 m/s, velocity = 2 m/s east (equal because no backtracking) ✓\", \"round trip 10 m + 10 m in 10 s: speed = 2 m/s, velocity = 0 (different because Δx = 0) ✓\", \"velocity given as 'distance / time': ✗ — wrong numerator\"]\ns6_path: skip P28; use the shared walk-to-the-wall-and-back activity as a concrete observation — mark the start and end with tape at the same spot — then gently ask \"so where did you finish?\", then P30.",
+      "localKey": "MC-SPEED-IS-VELOCITY",
+      "language": "en",
+      "refs": [
+        "MC-SPEED-IS-VELOCITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.velocity",
+      "title": "Measuring How Fast",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Measuring How Fast\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.velocity",
+      "title": "Direction Changes the Story",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Direction Changes the Story\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.velocity",
+      "title": "The Round Trip Reveals the Difference",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Round Trip Reveals the Difference\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.velocity",
+      "title": "Misconception Probe — Wrong Numerator",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Wrong Numerator\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-SPEED-IS-VELOCITY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SPEED-IS-VELOCITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.velocity",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.velocity",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-SPEED-IS-VELOCITY\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-SPEED-IS-VELOCITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.velocity",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Is average speed a scalar or a vector? Is average velocity a scalar or a vector?\" | CORRECT = scalar; vector |\n| P74 (classify) | \"60 km/h vs 60 km/h northbound — which is a speed and which a velocity?\" | CORRECT = first is speed; second is velocity |\n| P75 (boundary) | \"Can average speed be zero? Can average velocity be zero while speed is not?\" | CORRECT = speed cannot be zero if moved; velocity can be zero (round trip) |\n| P76 (transfer) | \"Train: 80 km east, 30 km west, 2 h — average speed and average velocity?\" | CORRECT = 55 km/h; 25 km/h east |\n| P77 (generate) | \"Construct a journey where average speed = 5 m/s and average velocity = 1 m/s.\" | CORRECT = valid numbers showing unequal distances in each direction |\n| P78 (explain) | \"Why does the velocity formula use displacement instead of distance?\" | CORRECT = velocity is a vector; displacement captures direction and net change |\n| P79 (predict) | \"400 m lap in 50 s — predict whether velocity > speed, = speed, or < speed.\" | CORRECT = velocity < speed (velocity = 0 for a full lap; speed > 0) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 164,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.velocity",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No formal rate formula for motion | Cannot express speed or velocity mathematically | Protocol A (Concrete) |\n| S1 | Uses speed and velocity interchangeably | Cannot state what changes between them | Protocol B (Counterexample-first) |\n| S2-SPEED-IS-VELOCITY | Actively treats the two as identical | Computes both from distance/time; gives the same answer for both on a round trip | Misconception Engine → Protocol C |\n| S3 | Knows they differ; uses wrong numerator | Calculates velocity using distance rather than displacement | Protocol C (Guided Questioning) |\n| S6 | Anxiety at zero-velocity result or negative velocity | Freezes when velocity = 0 or gives a negative value | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 28,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.velocity",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What is the difference between speed and velocity?\"\n  Gives direction/vector distinction (e.g. \"velocity has direction\") → S3. Enter Protocol C.\n  \"Same thing\" / \"velocity is faster\" → S1. Enter Protocol B.\n  Cannot formulate a meaningful distinction → DB-2.\n\nDB-2 (rate formula check):\n\"You walk 6 m north and then 6 m south in 12 s. What is your average speed? What is your average velocity?\"\n  \"Speed = 1 m/s; velocity = 0\" (or 0 m/s) → S3. Enter Protocol C.\n  \"Both = 1 m/s\" → SIGNAL:MISCONCEPTION:MC-SPEED-IS-VELOCITY. Enter Misconception Engine.\n  \"I don't know the formula\" → S0. Enter Protocol A.\n  Pause / discomfort → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with speed and velocity — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SPEED-IS-VELOCITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.velocity/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.velocity",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.displacement`):\n\"What is the difference between distance and displacement? What is displacement for a round trip?\"\n  Cannot state zero displacement for round trip → flag PREREQ-GAP-DISPLACEMENT.\n  In-session minimum repair: one P06 anchor (number line, start = finish → Δx = 0) — then resume. Deep gap → schedule `phys.mech.displacement` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.velocity.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

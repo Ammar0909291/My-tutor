@@ -1,0 +1,460 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.coulombs-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.coulombs-law",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:de1f31ec7fb3c8ceca2132710bfca14af73c21f96c5873263dde323d2e13ba6b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.coulombs-law.md": "sha256:c2d4e41c85cf035c03273bbb252ec58d10c496083155ff52c6a243eb4672b1bf"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "phys.em.coulombs-law",
+    "name": "Coulomb's Law",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.electric-charge"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.coulombs-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.coulombs-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.coulombs-law.md": "sha256:c2d4e41c85cf035c03273bbb252ec58d10c496083155ff52c6a243eb4672b1bf"
+      },
+      "contentHash": "sha256:05325ac40446d6cef9d492b1f39e6a0cff851cdb75eb40efef6a21b6508d55e9",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.coulombs-law.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.coulombs-law.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.coulombs-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.coulombs-law\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.coulombs-law/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "(Direct calculation)",
+      "content": "### WE-1 (Direct calculation)\n\n**Problem:** Two point charges q₁ = +3 μC and q₂ = −5 μC are separated by r = 0.20 m. Find the magnitude and direction of the force on q₁.\n\n**Worked solution:**\n\n*Step 1 — Magnitude:*\n$$F = k\\frac{|q_1||q_2|}{r^2} = (8.99\\times10^9)\\frac{(3\\times10^{-6})(5\\times10^{-6})}{(0.20)^2}$$\n$$F = (8.99\\times10^9)\\frac{15\\times10^{-12}}{0.04} = (8.99\\times10^9)(3.75\\times10^{-10}) = 3.37\\text{ N}$$\n\n*Step 2 — Direction:*\nq₁ is positive, q₂ is negative → opposite signs → attractive force.\nForce on q₁ is directed toward q₂.\n\n**Answer:** F = 3.37 N, attractive (toward q₂)\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 78,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "(Superposition — three charges)",
+      "content": "### WE-2 (Superposition — three charges)\n\n**Problem:** Three charges are collinear: q₁ = +2 μC at x = 0, q₂ = −3 μC at x = 0.30 m, q₃ = +1 μC at x = 0.60 m. Find the net force on q₂.\n\n**Worked solution:**\n\n*Step 1 — Force on q₂ due to q₁ (F₁₂):*\nr₁₂ = 0.30 m; opposite signs → attractive → F₁₂ points toward q₁ (−x direction)\n$$F_{12} = (8.99\\times10^9)\\frac{(2\\times10^{-6})(3\\times10^{-6})}{(0.30)^2} = (8.99\\times10^9)\\frac{6\\times10^{-12}}{0.09} = 0.599\\text{ N}$$\nDirection: −x (toward q₁). F₁₂ = −0.599 N x̂\n\n*Step 2 — Force on q₂ due to q₃ (F₃₂):*\nr₂₃ = 0.30 m; opposite signs → attractive → F₃₂ points toward q₃ (+x direction)\n$$F_{32} = (8.99\\times10^9)\\frac{(3\\times10^{-6})(1\\times10^{-6})}{(0.30)^2} = (8.99\\times10^9)\\frac{3\\times10^{-12}}{0.09} = 0.300\\text{ N}$$\nDirection: +x (toward q₃). F₃₂ = +0.300 N x̂\n\n*Step 3 — Net force:*\nF_net = −0.599 + 0.300 = −0.299 N x̂\n\n**Answer:** F_net = 0.299 N in the −x direction (toward q₁)\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 78,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "(Inverse-square reasoning)",
+      "content": "### WE-3 (Inverse-square reasoning)\n\n**Problem:** Two charges separated by 0.40 m experience a force of 6.0 N. (a) What force do they experience at 0.20 m? (b) At 1.60 m?\n\n**Worked solution:**\n\n*Using inverse-square scaling: F ∝ 1/r²*\n\n(a) r → 0.40/0.20 = 2× closer → F → 6.0 × 2² = **24 N**\n\n(b) r → 1.60/0.40 = 4× farther → F → 6.0 / 4² = 6.0/16 = **0.375 N**\n\n**Answer:** 24 N at 0.20 m; 0.375 N at 1.60 m\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 78,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/misconception/MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE",
+      "kind": "misconception",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "**Trigger signal:** Student substitutes signed charges into the scalar formula and gets a negative force magnitude, or confuses sign of the force with the sign of the charge product.",
+      "content": "### MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE\n\n**Trigger signal:** Student substitutes signed charges into the scalar formula and gets a negative force magnitude, or confuses sign of the force with the sign of the charge product.\n\n**Conflict evidence [P28]:** \"F = k|q₁||q₂|/r² gives the magnitude — always positive. The sign of the force (attractive or repulsive) comes from comparing the signs of q₁ and q₂ separately: same sign → repulsive, opposite sign → attractive. If you substitute signed values, q₁q₂ < 0 gives a 'negative' force magnitude — that's meaningless. Use absolute values for magnitude; reason about attraction/repulsion from charge signs.\"\n\n**Bridge text [P30]:** \"Think of the formula as a recipe in two parts: (1) the magnitude is always k|q₁||q₂|/r² (positive number), (2) the direction is determined by the sign rule: opposite charges attract, like charges repel. In vector form, the signs are handled automatically by including q₁q₂ with the unit vector.\"\n\n**Replacement text [P31]:** \"In the scalar form F = k|q₁||q₂|/r², always use absolute values of the charges. The magnitude of the force is always positive. Determine direction (attractive or repulsive) separately from the signs of q₁ and q₂. In vector form, F⃗ = kq₁q₂/r² r̂₁₂ automatically encodes direction via the sign of q₁q₂.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"F = k|q₁||q₂|/r² = positive magnitude\" | \"F = kq₁q₂/r² can be negative (attractive)\" |\n| \"Opposite charges → attractive (pull toward)\" | \"F < 0 means the force is attractive\" |\n| \"Vector form handles signs via q₁q₂ product in r̂\" | \"Negative force magnitude means attraction\" |\n\n**s6_path:** Clarify that \"negative force\" has meaning only in vector form (component along an axis), not as a standalone magnitude.\n\n---",
+      "localKey": "MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE",
+      "language": "en",
+      "refs": [
+        "MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/misconception/MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE",
+      "kind": "misconception",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "**Trigger signal:** Student says \"if both charges double, the force doubles\" — misapplying linear thinking to a product.",
+      "content": "### MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE\n\n**Trigger signal:** Student says \"if both charges double, the force doubles\" — misapplying linear thinking to a product.\n\n**Conflict evidence [P28]:** \"F = k(2q₁)(2q₂)/r² = k·4q₁q₂/r² = 4F. The force quadruples when both charges double, because the force depends on the product q₁×q₂, not the sum. Each charge independently multiplies the force — so doubling both multiplies by 2×2 = 4, not 2.\"\n\n**Bridge text [P30]:** \"The force is proportional to each charge separately — if you double one charge, force doubles; if you double both, force doubles twice — that's a factor of four. This is why the formula has q₁ × q₂ (a product), not q₁ + q₂ (a sum).\"\n\n**Replacement text [P31]:** \"F ∝ q₁q₂ — it is proportional to the product of both charges. Doubling q₁ alone: F → 2F. Doubling q₂ alone: F → 2F. Doubling both: F → 4F. Tripling one and halving the other: F → (3 × 0.5)F = 1.5F. Always multiply the scale factors for each charge.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Both charges doubled → F × 4\" | \"Both charges doubled → F × 2\" |\n| \"q₁ tripled, q₂ unchanged → F × 3\" | \"q₁ + q₂ determines force magnitude\" |\n| \"F ∝ q₁q₂ (product)\" | \"F ∝ q₁ + q₂ (sum)\" |\n\n**s6_path:** Practice with a table: vary q₁ and q₂ independently, observe the multiplicative effect.\n\n---",
+      "localKey": "MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE",
+      "language": "en",
+      "refs": [
+        "MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 226,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 232,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 237,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 242,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 246,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 247,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-7\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 248,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "close",
+      "content": "{\"id\":\"TA-9\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 250,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "phys.em.coulombs-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.coulombs-law",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState Coulomb's Law in words and write the mathematical formula.\n\n**Answer:** The electrostatic force between two point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance between them. F = k|q₁||q₂|/r², where k = 8.99×10⁹ N·m²/C².\n\n---\n\n### AP-2 (Bloom: Understand)\nCompare Coulomb's Law with Newton's Law of Gravitation: state two similarities and two differences.\n\n**Answer:** Similarities: (1) both are inverse-square laws (F ∝ 1/r²); (2) both have infinite range. Differences: (1) Coulomb force can be attractive or repulsive; gravity is always attractive; (2) the Coulomb constant k ≈ 10⁹ is far larger than G ≈ 10⁻¹¹ — electric forces between subatomic particles are ≈10⁴² times stronger than gravitational forces.\n\n---\n\n### AP-3 (Bloom: Apply)\nA +6 nC charge and a −4 nC charge are 0.30 m apart. Find: (a) the force magnitude, (b) the direction.\n\n**Answer:**\n(a) F = (8.99×10⁹)(6×10⁻⁹)(4×10⁻⁹)/(0.30)² = (8.99×10⁹)(24×10⁻¹⁸)/0.09 = **2.40 × 10⁻⁶ N = 2.40 μN**\n(b) Attractive (opposite charges) — charges pull toward each other.\n\n---\n\n### AP-4 (Bloom: Analyze)\nIf the force between two charges is 12 N when separated by 0.30 m, what separation gives a force of 3 N?\n\n**Answer:** F ∝ 1/r². F₂/F₁ = r₁²/r₂² → 3/12 = (0.30)²/r₂² → r₂² = (0.30)²×4 → r₂ = 0.30×2 = **0.60 m**\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.coulombs-law.md",
+        "startLine": 255,
+        "endLine": 287
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,324 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.wave-speed-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.wave-speed",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:b1186285b5a073d4bc980083828116372d05f8053000965903ec9a6fe832973a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.wave-speed.md": "sha256:3def41ba1796ad8ee4405e4b778adb46fe50bdfe8e0e913fbb601839c27074f1"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.wave-speed",
+    "name": "Wave Speed",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.wave.transverse-waves",
+      "phys.wave.longitudinal-waves"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.wave-speed-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.wave-speed (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.wave-speed.md": "sha256:3def41ba1796ad8ee4405e4b778adb46fe50bdfe8e0e913fbb601839c27074f1"
+      },
+      "contentHash": "sha256:6baac7762a614e5a315aebab42ac5a62df6c36e5d958378c782bf639e6091ea3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.wave-speed.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.wave-speed.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.wave-speed"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.wave-speed\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.wave-speed.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.wave-speed.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.wave-speed"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.wave-speed\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.wave-speed.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.wave-speed.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.wave-speed"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.wave-speed\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.wave-speed.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.wave-speed.md#TA-4 (addresses MC-SPEED-DEPENDS-ON-AMPLITUDE, MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.wave-speed"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.wave-speed\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.wave-speed/misconception/MC-SPEED-DEPENDS-ON-AMPLITUDE",
+      "kind": "misconception",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "- **Trigger signal:** Student says \"a louder sound travels faster\" or \"a bigger wave moves quicker.",
+      "content": "### MC-SPEED-DEPENDS-ON-AMPLITUDE\n- **Trigger signal:** Student says \"a louder sound travels faster\" or \"a bigger wave moves quicker.\"\n- **Conflict evidence [P28]:** \"Wave speed in a given medium is determined by the medium's properties alone — not by amplitude. Sound at 120 dB (pain threshold) and sound at 40 dB (quiet office) both travel at ~343 m/s through the same air. A large ocean swell and a tiny ripple travel at the same phase speed (for the same wavelength in deep water). The medium's elasticity (restoring force per unit displacement) and density (inertia) set the speed: v = √(elastic modulus/density). Amplitude does not appear in this formula. If amplitude affected speed, loud thunder would arrive before quiet thunder — it doesn't.\"\n- **Bridge text [P30]:** \"v = √(T/μ) for a string or v = √(B/ρ) for a fluid — neither contains A. Amplitude only affects energy and intensity (I ∝ A²), not wave speed. Speed and amplitude are independent properties of the wave in a given medium.\"\n- **Replacement text [P31]:** \"Wave speed depends on medium properties (tension, density, bulk modulus, Young's modulus). Amplitude affects energy, NOT speed. In a given medium: v = constant regardless of A.\"\n- **Discrimination pairs [P33]:**\n  - Loud sound (large A) vs. quiet sound (small A) in air: same v = 343 m/s ✓\n  - Same sound in warm air vs. cold air: different v (medium property changes) ✓\n- **s6_path:** \"The medium sets the speed. The source sets the amplitude and frequency. These are two completely separate decisions.\"\n\n---",
+      "localKey": "MC-SPEED-DEPENDS-ON-AMPLITUDE",
+      "language": "en",
+      "refs": [
+        "MC-SPEED-DEPENDS-ON-AMPLITUDE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/misconception/MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY",
+      "kind": "misconception",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "- **Trigger signal:** Student says \"high-frequency waves travel faster\" — or says all high notes arrive before low notes.",
+      "content": "### MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY\n- **Trigger signal:** Student says \"high-frequency waves travel faster\" — or says all high notes arrive before low notes.\n- **Conflict evidence [P28]:** \"In most simple media (non-dispersive), all frequencies of a wave travel at the same speed. Sound in air: the clap of thunder (broadband, all frequencies) arrives coherent — you hear the crack, not a drawn-out rainbow of frequencies. Light in vacuum: radio waves (MHz), visible light (10¹⁴ Hz), and gamma rays (10²² Hz) all travel at exactly c = 3×10⁸ m/s. In a non-dispersive medium: v is the same for all f → v = fλ with different f just means different λ. In a dispersive medium (glass for light, deep water for waves): v does vary with f — but this is the exception, not the rule, and requires specific treatment (dispersion relation).\"\n- **Bridge text [P30]:** \"v = fλ is always true: it's the definition of how a periodic wave propagates. In a non-dispersive medium, v is fixed, so f and λ trade off. In a dispersive medium, v = v(f) — a more complex relationship. At this level, assume non-dispersive unless told otherwise.\"\n- **Replacement text [P31]:** \"Non-dispersive medium (most simple cases): wave speed v is constant, independent of frequency. v = fλ → different f means different λ, not different v. Dispersive medium (glass, deep water, plasma): v varies with f — explicitly stated in problems.\"\n- **Discrimination pairs [P33]:**\n  - Thunder: 20 Hz bass and 2000 Hz treble both arrive together (non-dispersive air) ✓\n  - Light in vacuum: all frequencies travel at c = 3×10⁸ m/s ✓\n  - Light in glass: different colours travel at slightly different speeds (dispersion) — wavelength-dependent ✓\n- **s6_path:** \"In air and in vacuum: all frequencies, same speed. If they travelled at different speeds, thunder would arrive as a musical scale — it doesn't. That's your proof.\"\n\n---",
+      "localKey": "MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY",
+      "language": "en",
+      "refs": [
+        "MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 15,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "Speed Formulae for Different Media",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Speed Formulae for Different Media\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 78,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "Factors Affecting Speed",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Factors Affecting Speed\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 104,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "The v = fλ Relationship Revisited",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The v = fλ Relationship Revisited\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 115,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "Dispersion (Qualitative Introduction)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Dispersion (Qualitative Introduction)\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-SPEED-DEPENDS-ON-AMPLITUDE\",\"MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SPEED-DEPENDS-ON-AMPLITUDE",
+        "MC-WAVE-SPEED-CHANGES-WITH-FREQUENCY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 129,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — String speed and tension**\n\"A string with μ = 5 × 10⁻³ kg/m under tension 80 N. Find v. If tension is doubled, by what factor does v change?\"\n\n*Target:* v = √(80/0.005) = √16000 = 126.5 m/s. Doubling T: v_new = √(2T/μ) = √2 × v_old → v increases by factor √2 ≈ 1.41.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Speed and medium change**\n\"Sound at 500 Hz travels from air (v = 343 m/s) into water (v = 1480 m/s). (a) Does frequency change? (b) What is λ in each? (c) Does wave speed depend on amplitude?\"\n\n*Target:* (a) No — frequency is set by the source. (b) λ_air = 343/500 = 0.686 m; λ_water = 1480/500 = 2.96 m. (c) No — v depends only on medium properties (B, ρ), not on A.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — v = fλ reasoning**\n\"A wave in a medium where v = 300 m/s. Source A emits f = 100 Hz; Source B emits f = 600 Hz. Find λ for each. Draw a schematic of both waves to the same scale.\"\n\n*Target:* λ_A = 300/100 = 3 m; λ_B = 300/600 = 0.5 m. Schematic: both wave trains travel at the same speed; B has 6× more oscillations per metre. Same wave-front speed; different crowding of crests.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Guitar tuning**\n\"A guitar player tunes the bottom E string (82 Hz) by ear. They tighten the string until the frequency doubles to 164 Hz. By what factor has the tension changed?\"\n\n*Target:* f = v/(2L) ∝ √T (since v ∝ √T, L fixed). Doubling f → v doubles → T must quadruple. Tension increases by factor 4.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: thunder and lightning**\n\"During a storm, thunder arrives 3.5 s after the lightning flash. Temperature = 25°C. (a) Find the distance. (b) The next lightning bolt produces a much louder crack — does the sound arrive at the same time (for the same distance) or faster?\"\n\n*Target:* (a) v = 331+0.6×25 = 346 m/s; d = 346×3.5 = 1211 m ≈ 1.2 km. (b) Same time — amplitude does not affect wave speed. Loud and quiet thunder from the same distance arrive simultaneously (v depends on medium temperature, not amplitude).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 182,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-speed/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.wave-speed",
+      "title": "Adaptive Flags",
+      "content": "- **√2 factor for doubled tension**: when T doubles, v → √2 × v and hence f → √2 × f (for fixed L). Students must not double the frequency — it goes up by only √2. Guitar tuning requires quadrupling tension to double frequency — a useful reality check.\n- **Dispersion scope**: the deep-water wave example (WE-3) is the most accessible illustration of dispersion. Do not introduce k, ω, or group velocity formally at A-level — qualitative understanding is the target. Only introduce dispersive media as a named exception to the non-dispersive assumption.\n- **Electromagnetic speed in vacuum**: c = 3×10⁸ m/s is exact by definition in SI (since 1983). In glass or water: v = c/n where n = refractive index. This connects to phys.opt.refraction.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-speed.md",
+        "startLine": 248,
+        "endLine": 256
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,380 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.unit-conversion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.unit-conversion",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:3b2d10517de2a7c20804ed36a2bf042fddc3086605c59b40e70cd3f975b46b16",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.unit-conversion.md": "sha256:22552b35ef6bad18915c8e70c08312d5c3ac80fe04a990b161ff9987102510ff"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.meas.unit-conversion",
+    "name": "Unit Conversion and Prefixes",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "phys.meas.units"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.unit-conversion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.unit-conversion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.unit-conversion.md": "sha256:22552b35ef6bad18915c8e70c08312d5c3ac80fe04a990b161ff9987102510ff"
+      },
+      "contentHash": "sha256:db64c5b7dea3616b63b2b53a7def4810360b5b1fb7ff1c1b2755737ffac5d49b",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.unit-conversion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.unit-conversion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.unit-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.unit-conversion\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.unit-conversion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.unit-conversion.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.unit-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.unit-conversion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.unit-conversion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.unit-conversion.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.unit-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.unit-conversion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.unit-conversion.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.unit-conversion.md#TA-4 (addresses MC-INVERSE-DIRECTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.unit-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.unit-conversion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.unit-conversion.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.unit-conversion.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.unit-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.unit-conversion\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.unit-conversion.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.unit-conversion.md#TA-6 (addresses MC-INVERSE-DIRECTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.unit-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.unit-conversion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.unit-conversion/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Converts a quantity between two units of the same dimension (e.g. 3.2 km → 3200 m; 250 mg → 0.25 g) and states, without prompting, that the **physical quantity is unchanged** — only its description changes.\n2. Correctly chooses the **direction** of the factor: converting to a *smaller* unit yields a *larger* number, and to a *larger* unit a *smaller* number — and can justify why by reasoning about the size of the unit, not by recalling \"move the decimal left/right.\"\n3. Applies SI prefixes (milli, centi, kilo, mega, micro) as multiplicative magnitudes (10⁻³, 10⁻², 10³, 10⁶, 10⁻⁶), including on an unfamiliar prefix when told its power of ten.\n\nA student who can \"move the decimal three places\" mechanically but produces `5 km = 5 m` or cannot say which way to move the decimal for an unfamiliar prefix has **NOT** achieved mastery — the procedure without the size-of-unit reasoning fails at every non-metric, compound, or unfamiliar-prefix conversion downstream (density, unit-consistency checks, dimensional analysis).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/misconception/MC-INVERSE-DIRECTION",
+      "kind": "misconception",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "A bigger unit gives a bigger number",
+      "content": "### MC-INVERSE-DIRECTION: \"A bigger unit gives a bigger number\"\ntrigger_signal: student scales the wrong way — e.g. `2000 m = 2000 km`, or multiplies when converting to a larger unit / divides when converting to a smaller one.\nconflict_evidence [P28]: \"Here's a 1-metre stick and here are 100 centimetre-marks on it. The stick is ONE metre. Count the centimetres — that's a hundred. So the SAME stick is '1' in metres but '100' in centimetres. Did the stick get longer when the number jumped from 1 to 100?\"\nbridge_text [P30]: \"The quantity never changed — only the size of the measuring unit did. A centimetre is a smaller scoop than a metre, so you need MORE of them for the same length. Smaller unit → bigger number; bigger unit → smaller number.\"\nreplacement_text [P31]: \"To convert, ask 'is the new unit smaller or bigger?' Smaller new unit → the number goes up (multiply). Bigger new unit → the number goes down (divide).\"\ndiscrimination_pairs [P33]: [\"3 km → m (bigger→smaller unit, number goes UP ×1000) vs 3 mm → m (smaller→bigger unit, number goes DOWN ÷1000)\", \"250 mg → g (÷1000, smaller number) vs 250 g → mg (×1000, bigger number)\"]\ns6_path: skip P28; go directly to bridge_text via P30, using the same metre-stick object but framed as a shared observation, not a challenge.",
+      "localKey": "MC-INVERSE-DIRECTION",
+      "language": "en",
+      "refs": [
+        "MC-INVERSE-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/misconception/MC-PREFIX-BLIND",
+      "kind": "misconception",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Prefixes are memorised decimal shifts with no size meaning",
+      "content": "### MC-PREFIX-BLIND: \"Prefixes are memorised decimal shifts with no size meaning\"\ntrigger_signal: student converts familiar prefixes by rote (\"kilo = add three zeros\") but cannot place an unfamiliar prefix (mega, micro) or picks the wrong power of ten.\nconflict_evidence [P28]: \"You said 'kilo means add three zeros.' Convert 4 MEGAmetres to metres. If mega is bigger than kilo, is 'add three zeros' enough?\"\nbridge_text [P30]: \"Each prefix is a power of ten that tells you how big the unit is: milli 10⁻³, centi 10⁻², kilo 10³, mega 10⁶, micro 10⁻⁶. Once you know the power, the direction rule (smaller unit → bigger number) tells you which way to move.\"\nreplacement_text [P31]: \"Read the prefix as its power of ten, decide if the new unit is smaller or bigger, then multiply or divide accordingly.\"\ndiscrimination_pairs [P33]: [\"mega (10⁶) vs milli (10⁻³): opposite sides of the base unit\", \"milli (10⁻³) vs micro (10⁻⁶): both small, differ by 10³\"]\ns6_path: skip P28; introduce the prefix ladder (P07) as a reference chart the student keeps, removing recall pressure.",
+      "localKey": "MC-PREFIX-BLIND",
+      "language": "en",
+      "refs": [
+        "MC-PREFIX-BLIND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Concrete Quantity Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Quantity Anchor\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "The Size-of-Unit Insight",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Size-of-Unit Insight\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P17\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Naming the Factor — Notation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Naming the Factor — Notation\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P10\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "SI Prefixes as Magnitudes",
+      "content": "{\"id\":\"TA-4\",\"title\":\"SI Prefixes as Magnitudes\",\"primitives\":[\"P02\",\"P07\",\"P16\",\"P21\",\"P36\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-INVERSE-DIRECTION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-INVERSE-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 38,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P17\",\"P21\",\"P28\",\"P30\",\"P35\",\"P36\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-INVERSE-DIRECTION\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-INVERSE-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 55,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"To convert 4000 mm to metres, do you multiply or divide by 1000?\" | CORRECT = divide (bigger unit → smaller number) |\n| P74 (classify) | \"Milli and kilo — which one makes a SMALLER unit?\" | CORRECT = milli |\n| P75 (boundary) | \"1 'flim' = 1,000,000 metres. Is 5,000,000 m a big or small number of flims?\" | CORRECT = small (5 flims); bigger unit → smaller number |\n| P76 (transfer) | \"A car's speed is 72 km/h. Roughly how many metres does it cover in one second? Reason it out.\" | CORRECT = uses km→m and h→s directions (20 m/s) |\n| P77 (generate) | \"Give me a conversion where the number gets bigger, and one where it gets smaller.\" | CORRECT = both, with correct direction |\n| P78 (explain) | \"Why does the number change when you convert, even though the thing you measured doesn't?\" | CORRECT = cites size of unit / same quantity |\n| P79 (predict) | \"Before computing: convert 3 kg to milligrams — will the number be much bigger or much smaller than 3?\" | CORRECT = much bigger (mg far smaller unit) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 182,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No exposure to prefixes or conversion | Cannot express 1 km in metres in any form | Protocol A (Concrete) |\n| S1 | \"Move the decimal\" schema with no grounding | Converts metric fluently but cannot say *which way* or handle a new prefix | Protocol B (Counterexample-first) |\n| S2-INVERSE-DIRECTION | Believes bigger unit → bigger number | Writes 2000 m = 2000 km, or multiplies when should divide | Misconception Engine → then Protocol C |\n| S3 | Partial — simple metric OK; fails prefixes/compound | Does cm↔m; fails mg↔kg or km/h→m/s | Protocol C (Guided Questioning) |\n| S6 | Anxiety on unit arithmetic | Freezes at \"convert…\"; disengages on decimals | Protocol F (Low Pressure) |\n| S9 | Non-metric (imperial) measurement background | Reasons in miles/pounds; unfamiliar with base-10 prefixes | Protocol A with S9 adaptations |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check — routes S0 before content is tested):\n\"Have you used units like kilometres, grams, or millilitres — and changed a measurement from one unit to another before?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A road is 3 kilometres long. How many metres is that? Tell me how you worked it out.\"\n  \"3000 m\" + cites \"1 km = 1000 m, and a metre is smaller so I need more of them\" → S3. Enter Protocol C.\n  \"3000 m\" (no reason / \"just move the decimal\") → S1. Enter Protocol B.\n  \"3 m\" or \"0.003 m\" or multiplies the wrong way → SIGNAL:MISCONCEPTION:MC-INVERSE-DIRECTION. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag. Ask: \"Are you comfortable with maths and decimals generally?\"\n      No → S6. Enter Protocol F.\n      Yes → S0. Enter Protocol A.\n\nDB-3 (confidence calibration — overlays S6/S7):\n\"How confident are you with converting units — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations to the selected protocol.\n  4–5 + DB-2 showed INVERSE-DIRECTION → add S7 flag. Override to Protocol G (challenge-first): expose the contradiction before any confirmation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-INVERSE-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.meas.unit-conversion/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.unit-conversion",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.units`):\n\"What does it mean to measure something in a unit — say, what is a 'metre'?\"\n  Cannot express that a unit is an agreed reference quantity you count → flag PREREQ-GAP-UNITS.\n  In-session minimum repair: one P06 anchor (a physical metre stick / 1-litre bottle) + one P34 (\"how many of these fit in…\") to re-establish \"measuring = counting agreed units,\" then resume. If the gap is deep (cannot count agreed units at all), suspend this concept and schedule a `phys.meas.units` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.unit-conversion.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

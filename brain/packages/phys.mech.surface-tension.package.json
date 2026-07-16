@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.surface-tension-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.surface-tension",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:7b2e627865bc4b5d93cabcb90af37b8e7a172c52bbe3fa2ad1ca7562ab54bcab",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.surface-tension.md": "sha256:3c0a1d94aad1622a4654fcc6ba7c66c5e5dfb2dc19db625ecee27a9f153392f2"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.surface-tension",
+    "name": "Surface Tension",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.pressure-fluids"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.surface-tension-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.surface-tension (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.surface-tension.md": "sha256:3c0a1d94aad1622a4654fcc6ba7c66c5e5dfb2dc19db625ecee27a9f153392f2"
+      },
+      "contentHash": "sha256:5cc53486fc885e3d4c7747efd37b2ed8b5e2f7d657cb95f3c76bdf651fba4a30",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.surface-tension.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.surface-tension.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.surface-tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.surface-tension\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.surface-tension.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.surface-tension.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.surface-tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.surface-tension\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.surface-tension.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.surface-tension.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.surface-tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.surface-tension\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.surface-tension.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.surface-tension.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.surface-tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.surface-tension\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.surface-tension.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.surface-tension.md#TA-5 (addresses MC-SURFACE-TENSION-IS-PRESSURE, MC-SURFACE-TENSION-ACTS-OUTWARD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.surface-tension"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.surface-tension\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.surface-tension/misconception/MC-SURFACE-TENSION-IS-PRESSURE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "- **Trigger signal:** Student says \"surface tension is the pressure on the surface\" or confuses surface tension (force per unit length, N/m) with pressure (force per unit area, N/m²).",
+      "content": "### MC-SURFACE-TENSION-IS-PRESSURE\n- **Trigger signal:** Student says \"surface tension is the pressure on the surface\" or confuses surface tension (force per unit length, N/m) with pressure (force per unit area, N/m²).\n- **Conflict evidence [P28]:** \"Surface tension γ is defined as the force per unit length acting along a liquid surface (or equivalently, energy per unit area — J/m² = N/m). Pressure is force per unit area (N/m²). They are dimensionally different quantities. A soap bubble has both: surface tension γ creates an excess pressure inside the bubble, given by ΔP = 4γ/r (factor of 4 because the bubble has two surfaces — inner and outer). A spherical water drop has only one surface: ΔP = 2γ/r. The pressure difference is caused by surface tension; the two are related but not the same.\"\n- **Bridge text [P30]:** \"Surface tension γ (N/m) is the inward pull per unit length at the surface — an energy cost to creating new surface. It creates a pressure difference ΔP across a curved interface. The smaller the radius r, the greater the pressure inside: ΔP = 2γ/r (drop) or 4γ/r (bubble). Pressure and surface tension are linked through curvature — the Young-Laplace equation.\"\n- **Replacement text [P31]:** \"Surface tension γ = F/L (N/m) or γ = W/A (J/m²) — not pressure. It generates excess pressure ΔP = 2γ/r (drop) or 4γ/r (bubble). Units: γ in N/m; ΔP in Pa = N/m². They are related through radius of curvature.\"\n- **Discrimination pairs [P33]:**\n  - Water drop radius 1 mm, γ = 0.072 N/m: ΔP = 2×0.072/0.001 = 144 Pa ✓ (not 0.072 N/m²)\n  - Soap bubble same radius: ΔP = 4×0.072/0.001 = 288 Pa (two surfaces) ✓\n- **s6_path:** \"Two different units, two different concepts. γ tells you how hard the surface pulls inward per unit length — that pull then creates a pressure difference through curvature.\"\n\n---",
+      "localKey": "MC-SURFACE-TENSION-IS-PRESSURE",
+      "language": "en",
+      "refs": [
+        "MC-SURFACE-TENSION-IS-PRESSURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/misconception/MC-SURFACE-TENSION-ACTS-OUTWARD",
+      "kind": "misconception",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "- **Trigger signal:** Student says \"surface tension stretches the liquid outward\" or draws surface tension arrows pointing away from the surface.",
+      "content": "### MC-SURFACE-TENSION-ACTS-OUTWARD\n- **Trigger signal:** Student says \"surface tension stretches the liquid outward\" or draws surface tension arrows pointing away from the surface.\n- **Conflict evidence [P28]:** \"Surface tension acts tangentially along the surface — not outward or inward through the bulk. At any line on the surface, each side pulls the other along the surface with force γ per unit length. The net effect for a curved surface is an inward normal force (pressure difference), but the surface tension force itself is along (tangent to) the surface. This is why a needle rests on water: the surface bends downward under the needle's weight, and the upward component of the tangential surface tension force supports the needle. The surface is not stretching outward — it is pulling along itself, and the curvature converts this tangential pull into a net upward force.\"\n- **Bridge text [P30]:** \"Surface tension acts along the surface, like the tension in a stretched membrane or a soap film. At a curved surface, the tangential tension has a component perpendicular to the surface — this is what creates pressure difference ΔP = 2γ/r. For a flat surface: no curvature → no pressure difference. The direction of action is tangential; the effective normal force is a geometric consequence of curvature.\"\n- **Replacement text [P31]:** \"Surface tension acts tangentially along the liquid surface (parallel to it). At curved interfaces, the geometry of the tangential tension produces a net normal (pressure) effect: ΔP = 2γ/r. Surface tension does NOT pull the liquid outward — it pulls along the surface and compresses curved interfaces inward.\"\n- **Discrimination pairs [P33]:**\n  - Flat water surface: γ acts horizontally (tangentially); no net vertical force on bulk liquid ✓\n  - Spherical drop: γ acts along surface (tangentially); inward normal component → excess internal pressure ✓\n- **s6_path:** \"Think of a soap film stretched across a wire frame. The tension is in the film, parallel to its surface. If you curve the frame, the tension develops a component perpendicular to the film — that's the curvature pressure.\"\n\n---",
+      "localKey": "MC-SURFACE-TENSION-ACTS-OUTWARD",
+      "language": "en",
+      "refs": [
+        "MC-SURFACE-TENSION-ACTS-OUTWARD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "Surface Tension Definition",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Surface Tension Definition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 78,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "Excess Pressure in Curved Surfaces",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Excess Pressure in Curved Surfaces\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 92,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "Capillary Rise",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Capillary Rise\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "Contact Angle and Wetting",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Contact Angle and Wetting\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 140,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "Applications and Energy View",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Applications and Energy View\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-SURFACE-TENSION-ACTS-OUTWARD\",\"MC-SURFACE-TENSION-IS-PRESSURE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SURFACE-TENSION-IS-PRESSURE",
+        "MC-SURFACE-TENSION-ACTS-OUTWARD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 152,
+        "endLine": 320
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Excess pressure comparison**\n\"A soap bubble of radius 1 cm and a water drop of radius 1 cm. (a) Which has greater excess pressure inside? (b) Calculate both. (γ_soap = 0.030 N/m; γ_water = 0.072 N/m)\"\n\n*Target:* Bubble: ΔP = 4×0.030/0.01 = 12 Pa. Drop: ΔP = 2×0.072/0.01 = 14.4 Pa. Water drop has greater excess pressure despite smaller γ, because it has only one surface (factor 2 vs. 4) while its γ is much higher.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Capillary rise scaling**\n\"A capillary tube of radius 0.5 mm causes water to rise 3 cm. (a) What rise is expected in a tube of radius 0.1 mm? (b) Will mercury (θ ≈ 140°, γ = 0.485 N/m, ρ = 13 600 kg/m³) rise or fall in a glass tube of radius 0.5 mm? By how much?\"\n\n*Target:* (a) h ∝ 1/r: h₂ = 3×(0.5/0.1) = 15 cm. (b) cos140° = −0.766 → mercury falls: h = 2×0.485×(−0.766)/(13600×9.8×5×10⁻⁴) = −0.743/66.6 = −0.0112 m ≈ −1.1 cm (mercury is depressed ~1.1 cm).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Energy to blow a bubble**\n\"Calculate the minimum work required to blow a soap bubble of radius 2 cm from a flat soap film. γ = 0.025 N/m.\"\n\n*Target:* ΔArea = 4πr² × 2 (two surfaces) = 8π×(0.02)² = 1.005×10⁻² m². W = γ × ΔArea = 0.025 × 1.005×10⁻² = 2.51×10⁻⁴ J ≈ 0.25 mJ.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Alveoli application**\n\"An alveolus (lung air sac) has radius 0.1 mm. Without surfactant, γ ≈ 0.05 N/m. With surfactant, γ ≈ 0.005 N/m. (a) Calculate the excess pressure in each case. (b) Explain why infants born before surfactant production begins (< 28 weeks) suffer respiratory distress.\"\n\n*Target:* Without: ΔP = 2×0.05/10⁻⁴ = 1000 Pa. With: ΔP = 2×0.005/10⁻⁴ = 100 Pa. Without surfactant, the very high internal pressure (1000 Pa) means you must exert enormous effort to re-inflate collapsed alveoli at the end of each breath. The 10× reduction from surfactant makes breathing mechanically feasible. Preterm infants lack this, causing Respiratory Distress Syndrome (RDS) — treated with artificial surfactant instilled into the airways.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: connected bubbles**\n\"Two soap bubbles are connected by a short tube. Bubble A has radius 2 cm; Bubble B has radius 4 cm. What happens when the tube is opened? Explain using the excess pressure formula.\"\n\n*Target:* ΔP_A = 4γ/r_A = 4γ/0.02 = 200γ; ΔP_B = 4γ/0.04 = 100γ. Bubble A has higher internal pressure → air flows from A into B → A shrinks, B grows, until one collapses into the other. Counter-intuitive result: the smaller bubble blows into the larger one. This is the opposite of most students' intuition (which expects the larger to blow into the smaller). Real-world relevance: explains why lung alveoli of different sizes don't simply deflate the small ones into the large — surfactant dynamically reduces γ as alveoli shrink, equalising pressure.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 213,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.mech.surface-tension/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.surface-tension",
+      "title": "Adaptive Flags",
+      "content": "- **Bubble vs. drop factor**: the most common error is applying ΔP = 2γ/r to a soap bubble (which has two surfaces) instead of 4γ/r. Always ask \"how many surfaces does this interface have?\" before writing the formula.\n- **Capillary depression for mercury**: contact angle > 90° gives cos θ < 0 → h < 0 (depression). Mercury is the standard example. Students often try to apply the rise formula and get confused by the sign — remind them that the formula is still correct; the negative sign is the physics.\n- **Surface energy and area change**: to compute work done in creating or expanding a surface, use W = γ × ΔA. For a soap film (two surfaces): ΔA = 2 × geometric area change. For a drop or bubble: ΔA = single geometric area change (drop) or 2× geometric area change (bubble). Do not mix these up.\n- **Temperature dependence**: γ decreases with temperature (molecules have more thermal energy; surface penalty is reduced). Relevant to: hot water cleaning (lower γ → better wetting), cooking oils, and the thermodynamics of condensation. Mention if students ask why warm soapy water cleans better.\n- **Young's equation**: γ_sv = γ_sl + γ_lv cos θ is beyond most A-level syllabuses; include only if the student is curious about the molecular origin of contact angle.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.surface-tension.md",
+        "startLine": 281,
+        "endLine": 291
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

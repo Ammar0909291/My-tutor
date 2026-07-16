@@ -1,0 +1,358 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.collisions-elastic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.collisions-elastic",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:06777a4a04fb28f8c3924381457c4fc3ecd786adc502020fd21651651a648773",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.collisions-elastic.md": "sha256:7a79d966d1efef1c2f66c2478c5d3bcb1133bb3ab3df767773efd5b09497085a"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.collisions-elastic",
+    "name": "Elastic Collisions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.conservation-of-momentum",
+      "phys.mech.kinetic-energy"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.collisions-elastic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.collisions-elastic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.collisions-elastic.md": "sha256:7a79d966d1efef1c2f66c2478c5d3bcb1133bb3ab3df767773efd5b09497085a"
+      },
+      "contentHash": "sha256:2a84dae4376d2d9790541e572506f2acc010e7fc6f87b5f68fda204721aa0aa3",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-elastic.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-elastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-elastic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-elastic.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-elastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-elastic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-elastic.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-elastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-elastic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-elastic.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-elastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-elastic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-elastic.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md#TA-5 (addresses MC-ALL-COLLISIONS-ELASTIC, MC-ELASTIC-EQUAL-MASSES-BOTH-STOP)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-elastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-elastic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.collisions-elastic/misconception/MC-ALL-COLLISIONS-ELASTIC",
+      "kind": "misconception",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "- **Trigger signal:** Student applies KE conservation to all collisions, or assumes a bouncing ball is an elastic collision.",
+      "content": "### MC-ALL-COLLISIONS-ELASTIC\n- **Trigger signal:** Student applies KE conservation to all collisions, or assumes a bouncing ball is an elastic collision.\n- **Conflict evidence [P28]:** \"A billiard ball collision is approximately elastic (hard, rigid spheres). A rubber ball bouncing off a floor loses ~20–30% of KE to heat/deformation — partially inelastic. A clay lump sticking to a wall loses all relative KE — perfectly inelastic. True elastic collisions require no permanent deformation and no heat generation. In practice, atomic and subatomic collisions (e.g., gas molecules, neutron scattering) are elastic; everyday macroscopic collisions are not. Before writing ½m₁v₁² + ½m₂v₂² = ½m₁v₁ₓ² + ½m₂v₂ₓ², check: is KE actually conserved?\"\n- **Bridge text [P30]:** \"The two conditions for an elastic collision are: (1) total momentum conserved, AND (2) total KE conserved. Condition (1) always holds in an isolated system. Condition (2) is an additional requirement that is only true for elastic collisions. Always identify the collision type before choosing equations.\"\n- **Replacement text [P31]:** \"Elastic: use both p-conservation AND KE-conservation. Inelastic: use only p-conservation (KE not conserved; some is lost to heat/deformation). Identify type first — it's stated in the problem or inferred from context (billiard ball = approximately elastic; clay/car crash = inelastic).\"\n- **Discrimination pairs [P33]:**\n  - Steel ball hits steel wall and rebounds at same speed: approximately elastic (KE ≈ conserved) ✓\n  - Ball of clay hits wall and sticks: perfectly inelastic (all KE lost) ✗ (cannot use KE conservation)\n- **s6_path:** \"'Elastic' in physics doesn't mean 'made of rubber' — rubber is actually NOT elastic in this sense. It means KE is conserved. Billiard balls and gas molecules are the classic elastic examples.\"\n\n---",
+      "localKey": "MC-ALL-COLLISIONS-ELASTIC",
+      "language": "en",
+      "refs": [
+        "MC-ALL-COLLISIONS-ELASTIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/misconception/MC-ELASTIC-EQUAL-MASSES-BOTH-STOP",
+      "kind": "misconception",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "- **Trigger signal:** Student says \"in an equal-mass elastic collision, both balls stop\" or confuses the stationary result with a head-on case.",
+      "content": "### MC-ELASTIC-EQUAL-MASSES-BOTH-STOP\n- **Trigger signal:** Student says \"in an equal-mass elastic collision, both balls stop\" or confuses the stationary result with a head-on case.\n- **Conflict evidence [P28]:** \"In a 1D head-on elastic collision between equal masses where ball 2 is initially at rest: v₁f = 0, v₂f = v₁ᵢ — ball 1 stops and ball 2 moves at ball 1's original speed. Not both stop; only ball 1 stops. This is the billiard ball result (the cue ball stops; the target ball moves). If both had stopped, momentum would be zero but initial momentum was m × v₁ᵢ ≠ 0 — impossible.\"\n- **Bridge text [P30]:** \"Use the elastic-collision formulas to verify: v₁f = (m₁−m₂)/(m₁+m₂) × v₁ᵢ. For m₁ = m₂: v₁f = 0. v₂f = 2m₁/(m₁+m₂) × v₁ᵢ = v₁ᵢ. Ball 1 stops; ball 2 moves at ball 1's initial speed — total p and KE both conserved.\"\n- **Replacement text [P31]:** \"Equal-mass 1D elastic (ball 2 initially at rest): velocities exchange. Ball 1 stops; ball 2 takes ball 1's velocity. For unequal masses: v₁f = (m₁−m₂)/(m₁+m₂) × v₁ᵢ; v₂f = 2m₁/(m₁+m₂) × v₁ᵢ.\"\n- **Discrimination pairs [P33]:**\n  - m₁ = m₂, ball 2 at rest: v₁f = 0, v₂f = v₁ᵢ (exchange) ✓\n  - m₁ ≫ m₂ (heavy hits light): v₁f ≈ v₁ᵢ (barely slows), v₂f ≈ 2v₁ᵢ (light ball bounces away fast) ✓\n  - m₁ ≪ m₂ (light hits heavy): v₁f ≈ −v₁ᵢ (bounces back), v₂f ≈ 0 (heavy barely moves) ✓\n- **s6_path:** \"The velocity-exchange result for equal masses is one of the most elegant in mechanics. Try it with Newton's cradle — pull one ball and watch exactly one ball swing out the other side.\"\n\n---",
+      "localKey": "MC-ELASTIC-EQUAL-MASSES-BOTH-STOP",
+      "language": "en",
+      "refs": [
+        "MC-ELASTIC-EQUAL-MASSES-BOTH-STOP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 15,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "Two Conservation Laws for Elastic Collisions",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two Conservation Laws for Elastic Collisions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 82,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "Closed-Form Solutions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Closed-Form Solutions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 93,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "Relative Velocity Reversal",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Relative Velocity Reversal\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 116,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "Coefficient of Restitution",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Coefficient of Restitution\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 127,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "2D Elastic Collisions (Billiard Ball Geometry)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"2D Elastic Collisions (Billiard Ball Geometry)\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ALL-COLLISIONS-ELASTIC\",\"MC-ELASTIC-EQUAL-MASSES-BOTH-STOP\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ALL-COLLISIONS-ELASTIC",
+        "MC-ELASTIC-EQUAL-MASSES-BOTH-STOP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 143,
+        "endLine": 298
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Limiting case: heavy hits light**\n\"A 10 kg block moving at 4 m/s hits a 0.1 kg ball at rest elastically. Predict qualitatively: what happens to each? Then calculate v₁f and v₂f.\"\n\n*Target:* Heavy barely slows; light flies off fast. v₁f ≈ (10−0.1)/(10+0.1)×4 ≈ 3.96 m/s; v₂f ≈ 2×10/10.1×4 ≈ 7.92 m/s ≈ 2×4 m/s ✓.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 194,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Relative velocity check**\n\"In an elastic collision, ball 1 (4 kg, 5 m/s) hits ball 2 (2 kg, −1 m/s). Calculate v₁f and v₂f, then verify using relative velocity reversal.\"\n\n*Target:* v₁f = (4−2)/6×5 + 2×2/6×(−1) = 10/3 − 4/6 = 20/6 − 4/6 = 16/6 ≈ 2.67 m/s; v₂f = 2×4/6×5 + (2−4)/6×(−1) = 40/6 + 2/6 = 42/6 = 7 m/s. Relative velocity check: approach = 5−(−1) = 6 m/s; separation = 7−2.67 = 4.33 — wait let me recalculate: v₁f = (m₁−m₂)u₁/(m₁+m₂) + 2m₂u₂/(m₁+m₂) = (2/6)×5 + (4/6)×(−1) = 10/6 − 4/6 = 6/6 = 1 m/s; v₂f = 2m₁u₁/(m₁+m₂) + (m₂−m₁)u₂/(m₁+m₂) = (8/6)×5 + (−2/6)×(−1) = 40/6 + 2/6 = 42/6 = 7 m/s. Relative velocity: approach = 5−(−1) = 6 m/s; separation = 7−1 = 6 m/s ✓.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 194,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Newton's cradle analysis**\n\"Three identical balls in Newton's cradle, each mass m. Ball 1 moves at v, balls 2 and 3 at rest. Show that both momentum and KE conservation are satisfied only if ball 1 stops and ball 3 moves at v (not all three moving at v/3).\"\n\n*Target:* Option 3: p = mv ✓; KE = ½mv²/3 × 3 = ½mv²/3 ≠ ½mv² ✗. Option 1: p = mv ✓; KE = ½mv² ✓. KE conservation uniquely selects the velocity-exchange result.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 194,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Coefficient of restitution**\n\"Two balls collide. Ball 1 (2 kg, 6 m/s) hits ball 2 (2 kg, 0 m/s). After: ball 1 at 1 m/s, ball 2 at 5 m/s. Find e. Is this elastic? How much KE was lost?\"\n\n*Target:* e = (5−1)/(6−0) = 4/6 ≈ 0.67 (partially inelastic). KE_before = ½×2×36 = 36 J; KE_after = ½×2×1 + ½×2×25 = 1 + 25 = 26 J; ΔKE = 10 J lost.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 194,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — 2D elastic (billiard)**\n\"Ball 1 (mass m, 6 m/s east) hits a stationary ball 2 (mass m) elastically. Ball 1 deflects 30° north of east. (a) Find the speed of ball 1 after. (b) Find ball 2's velocity. (c) What angle does ball 2 make with ball 1's final direction?\"\n\n*Target:* Equal mass 2D elastic → 90° between final paths. Ball 2 deflects 60° south of east (90° − 30°). Momentum conservation: p_x: mv₁f cos30° + mv₂f cos(−60°) = m×6; p_y: mv₁f sin30° − mv₂f sin60° = 0. From p_y: v₁f/v₂f = sin60°/sin30° = √3. From KE: v₁f² + v₂f² = 36. Solving: v₂f = 3 m/s, v₁f = 3√3 ≈ 5.20 m/s. Angle = 90° ✓.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 194,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-elastic/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.collisions-elastic",
+      "title": "Adaptive Flags",
+      "content": "- **Equation-choice discipline**: before any algebra, require students to write: \"Collision type: [elastic / inelastic / perfectly inelastic]. Equations used: [momentum only / momentum + KE].\" This prevents the universal application of KE conservation to all collisions.\n- **WE-2 calculation check**: the relative velocity reversal (TA-3) provides a quick independent check of every elastic collision answer. Always verify: approach speed = separation speed.\n- **2D TA-5**: the 90° result is memorable and exact for equal masses, but does NOT hold for unequal masses. State this boundary explicitly to prevent overgeneralisation.\n- **Connection to collisions blueprint**: this concept is a specialisation of phys.mech.collisions (which introduced all three collision types). Students who have studied that blueprint will have seen the equal-mass elastic case already. Use it as a fast-path anchor for those students.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-elastic.md",
+        "startLine": 260,
+        "endLine": 269
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

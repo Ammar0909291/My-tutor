@@ -1,0 +1,404 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.radioactivity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.radioactivity",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:4c789316020217722d68665b10f1b7253c80431dfbb38ee92cc8716af3b6c384",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.radioactivity.md": "sha256:7b48f2d68e79aeec7d8b2b97f063d0f5c7966c1fb8c91747d48605abcdc03a88"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.mod.radioactivity",
+    "name": "Radioactivity: Alpha, Beta, Gamma Decay",
+    "difficultyRaw": "Proficient",
+    "bloom": "Understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mod.atomic-spectra"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.radioactivity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.radioactivity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.radioactivity.md": "sha256:7b48f2d68e79aeec7d8b2b97f063d0f5c7966c1fb8c91747d48605abcdc03a88"
+      },
+      "contentHash": "sha256:a225f8c2bc23c012c1bc6aaa43d2afcec7bae9f7628d79a9da01af9476143903",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.radioactivity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radioactivity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radioactivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radioactivity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radioactivity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radioactivity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radioactivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radioactivity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radioactivity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radioactivity.md#TA-3 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radioactivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radioactivity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radioactivity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radioactivity.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radioactivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radioactivity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.radioactivity/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Radioactivity: Alpha, Beta, Gamma Decay — core explanation",
+      "content": "**One-sentence definition:** Radioactivity is the spontaneous emission of alpha particles (⁴He nuclei), beta particles (electrons or positrons), or gamma rays (high-energy photons) from unstable atomic nuclei as they seek a more stable configuration.\n\n**The core insight:** Nuclei, like atoms, exist in quantized energy states. An unstable nucleus is one where the strong nuclear force cannot hold the nuclear configuration together indefinitely — it decays to a lower-energy configuration, releasing the energy difference as radiation. The type of radiation reveals the type of nuclear rearrangement occurring.\n\n**Conceptual chain:**\n1. Nuclear stability: determined by the neutron-to-proton ratio. Too many neutrons, too few neutrons, or too large a nucleus → instability.\n2. Alpha decay: nucleus emits a ⁴₂He nucleus. Reduces Z by 2, A by 4. Occurs in very heavy nuclei (A > 200) where electrostatic repulsion between protons destabilizes the nucleus.\n3. Beta-minus decay: neutron → proton + electron + antineutrino. Z increases by 1, A unchanged. Occurs when N/Z too high.\n4. Beta-plus decay: proton → neutron + positron + neutrino. Z decreases by 1, A unchanged. Occurs when N/Z too low.\n5. Gamma decay: nucleus in excited state → ground state + high-energy photon. Z and A unchanged. Often follows alpha or beta decay.\n6. Conservation laws: mass number A (total nucleons), atomic number Z (total charge), energy, momentum, lepton number all conserved in every decay.\n7. Penetrating power: alpha (stopped by paper), beta (stopped by few mm Al), gamma (requires cm of Pb).\n\n**Decay equations (symbolic notation):**\n- Alpha: ᴬ_Z X → ᴬ⁻⁴_{Z-2} Y + ⁴₂He\n- Beta-minus: ᴬ_Z X → ᴬ_{Z+1} Y + e⁻ + ν̄_e\n- Beta-plus: ᴬ_Z X → ᴬ_{Z-1} Y + e⁺ + ν_e\n- Gamma: ᴬ_Z X* → ᴬ_Z X + γ\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 18,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Radioactivity comes from the electrons in the atom",
+      "content": "### MC-1: \"Radioactivity comes from the electrons in the atom\"\n- **Probe:** \"When radium decays by alpha emission, what part of the atom does the alpha particle come from?\"\n- **Characteristic phrase:** \"The electrons jump and release radiation.\"\n- **Trigger:** Students have just learned about atomic spectra (photons emitted by electron transitions). They generalize to radioactivity.\n- **Conflict evidence [P28]:** An alpha particle is ⁴₂He — two protons and two neutrons. These are nuclear particles, not electrons. The nucleus of radium-226 contains 88 protons and 138 neutrons. After alpha decay, the daughter has 86 protons and 136 neutrons. Electron shells rearrange afterward, but they are not the source.\n- **Bridge [P30]:** \"Atomic spectra are electron transitions between shells — energy scale ~1–10 eV. Radioactive decay involves nuclear rearrangements — energy scale ~MeV, one million times larger. The nucleus is the seat of radioactivity.\"\n- **Replacement [P31]:** Radioactive decay is a nuclear process. The nucleus emits alpha particles (nuclear fragments), electrons/positrons (created in the nucleus via weak force), or gamma photons (nuclear excited state to ground state — not electron transitions).\n- **Discrimination pairs [P33]:** Atomic spectra: ΔE ~ eV, electrons, outer structure. Radioactivity: ΔE ~ MeV, nucleons, inner nucleus.\n- **S6 repair path:** Write the decay equation for ²²⁶Ra → ²²²Rn + ⁴He. Show that Z decreases by 2 — the number of protons in the nucleus changes. Electrons don't change the proton count.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Neutrinos don't need to be included in beta decay",
+      "content": "### MC-2: \"Neutrinos don't need to be included in beta decay\"\n- **Probe:** \"Balance the beta-minus decay of ¹⁴C. Is lepton number conserved without the antineutrino?\"\n- **Characteristic phrase:** \"Beta decay: neutron → proton + electron.\"\n- **Trigger:** Many introductory presentations say \"beta-minus decay emits an electron\" without mentioning the antineutrino, since neutrinos are hard to detect.\n- **Conflict evidence [P28]:** The beta spectrum (distribution of electron kinetic energies) is continuous, not discrete. If only n → p + e⁻, the electron would have a fixed energy (by energy-momentum conservation). The observed continuous spectrum requires a third particle sharing the energy: the antineutrino. Pauli proposed the neutrino in 1930 precisely to explain this spectrum.\n- **Bridge [P30]:** \"The continuous beta spectrum was a crisis — energy seemed not to be conserved. Pauli solved it by proposing an invisible third particle (the neutrino) that carries the remaining energy. Without the antineutrino, energy conservation fails.\"\n- **Replacement [P31]:** Beta-minus: n → p + e⁻ + ν̄_e. Beta-plus: p → n + e⁺ + ν_e. The (anti)neutrino always accompanies beta decay; without it, energy, momentum, and lepton number are not conserved.\n- **Discrimination pairs [P33]:** Alpha decay has a discrete energy spectrum (alpha particles all have the same energy from a given decay) — because there are only two products (daughter + alpha). Beta decay has a continuous spectrum — because there are three products (daughter + electron + neutrino).\n- **S6 repair path:** Show alpha spectrum (discrete line) vs. beta spectrum (continuous distribution) on the same plot. Ask: \"What explains the difference in shape?\" Lead to: two-body vs. three-body decay.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Alpha particles are more dangerous than gamma rays because they carry more energy",
+      "content": "### MC-3: \"Alpha particles are more dangerous than gamma rays because they carry more energy\"\n- **Probe:** \"A gamma source and an alpha source with equal activity. Which is more dangerous to (a) hold in your bare hand, (b) accidentally ingest?\"\n- **Characteristic phrase:** \"Alpha is the most energetic, so it's the most harmful.\"\n- **Trigger:** Students confuse ionizing power with penetrating power, and associate energy with danger without considering tissue context.\n- **Conflict evidence [P28]:** (a) Hand: alpha is stopped by dead skin — negligible internal exposure. Gamma penetrates to internal organs. External gamma is more dangerous. (b) Ingested: alpha deposits all its energy in a tiny tissue volume — extreme local ionization density, high relative biological effectiveness (RBE ~ 20 for alpha vs. ~ 1 for gamma). Internal alpha is far more dangerous.\n- **Bridge [P30]:** \"Danger depends on both radiation type and exposure route. Alpha is highly ionizing — it deposits energy densely along a short track, causing clustered DNA damage. But it can't penetrate your skin. Once inside the body, that dense ionization makes it extremely damaging. Context determines danger.\"\n- **Replacement [P31]:** Alpha = high ionizing power, low penetration (stopped by paper/skin). Beta = intermediate. Gamma = low ionizing power, high penetration (requires cm of Pb). External exposure: gamma most dangerous. Internal exposure (ingestion/inhalation): alpha most dangerous.\n- **Discrimination pairs [P33]:** A flamethrower is dangerous if it reaches you (external alpha/gamma comparison) vs. a match in your mouth (internal alpha). Different mechanisms, different dangers.\n- **S6 repair path:** Radiation protection triage: for a spilled alpha source, protective gloves and no ingestion are critical; for an external gamma field, distance + shielding is critical. Different protection strategies for different radiation types.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Beta-plus decay is the same as gamma decay because Z doesn't change",
+      "content": "### MC-4: \"Beta-plus decay is the same as gamma decay because Z doesn't change\"\n- **Probe:** \"In beta-plus decay of ²²Na, does the atomic number change? Compare to gamma decay of ⁶⁰Co*.\"\n- **Characteristic phrase:** \"Positron emission doesn't change the nucleus.\"\n- **Trigger:** Students confuse A unchanged (gamma) with A unchanged and Z unchanged (gamma) vs. A unchanged and Z−1 (beta-plus). The phrase \"nucleus emits a particle\" doesn't specify what kind.\n- **Conflict evidence [P28]:** ²²₁₁Na → ²²₁₀Ne + e⁺ + ν_e: Z changes from 11 (Na) to 10 (Ne) — the element changes! ⁶⁰₂₇Co* → ⁶⁰₂₇Co + γ: Z stays at 27 (still Co) — the element does NOT change, only the nuclear energy state.\n- **Bridge [P30]:** \"Gamma decay: nucleus goes from excited to ground state — same nucleus, different energy. Beta-plus decay: a proton converts to a neutron — the element CHANGES (Z decreases by 1, new element). They both leave A unchanged, but gamma leaves Z unchanged while beta-plus decreases Z by 1.\"\n- **Replacement [P31]:** Gamma: ᴬ_Z X* → ᴬ_Z X + γ (same Z, same A). Beta-plus: ᴬ_Z X → ᴬ_{Z-1} Y + e⁺ + ν_e (Z decreases by 1, new element). The key difference: does the element change?\n- **Discrimination pairs [P33]:** Gamma is like a person changing clothes (same person, different energy state). Beta-plus is like a person becoming a different person (Z changes → different element).\n- **S6 repair path:** Write both equations side by side with element symbols and Z values. Verify element names on both sides using the periodic table.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Deliver Explanation A (nuclear instability narrative) + show the Segré chart with the valley of stability and decay dire",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Deliver Explanation A (nuclear instability narrative) + show the Segré chart with the valley of stability and decay dire\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Demo 1 (cloud chamber video) + Demo 2 (penetration experiment). Students build the penetration/ionization comparison tab",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Demo 1 (cloud chamber video) + Demo 2 (penetration experiment). Students build the penetration/ionization comparison tab\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Use MC-1 probe (\"What part of the atom does the alpha particle come from?\") and MC-2 probe (\"Balance ¹⁴C beta decay with",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Use MC-1 probe (\\\"What part of the atom does the alpha particle come from?\\\") and MC-2 probe (\\\"Balance ¹⁴C beta decay with\",\"primitives\":[],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Carbon-14 dating mechanism (beta-minus decay of ¹⁴C, t₁/₂ = 5730 years). Medical PET scan (beta-plus emitter → positron ",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Carbon-14 dating mechanism (beta-minus decay of ¹⁴C, t₁/₂ = 5730 years). Medical PET scan (beta-plus emitter → positron \",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly writes and balances all four decay types, identifies the decay type given a description, and correctly states penetration and ionization properties. Score ≥ 80%.\n\n**FA-1 — Decay equation completion:**\n*Q: Complete the following decay equations: (a) ²²⁶₈₈Ra → ___ + ⁴₂He. (b) ³²₁₅P → ³²₁₆S + ___ + ___.*\nExpected: (a) ²²²₈₆Rn. (b) e⁻ + ν̄_e (antineutrino required for full credit).\nThreshold: Correct A, Z in (a); correct beta-minus products including antineutrino in (b).\n\n**FA-2 — Decay identification:**\n*Q: A nucleus emits radiation with the following properties: penetrates 3 mm of aluminum but is stopped by 5 cm of lead. No change in A. What type of decay occurred?*\nExpected: Beta decay — beta particles penetrate aluminum but are stopped by lead (not 5 cm exactly, but more than paper). But if A unchanged and also Z unchanged → gamma. If A unchanged and Z changes → beta. Without A/Z info, \"stops in lead\" and \"penetrates aluminum\" → beta or gamma. Answer: gamma if Z unchanged; beta-minus or beta-plus if Z changes. Award credit for any answer that correctly identifies the penetration characteristics as consistent with beta or gamma, and invokes the A/Z change distinction.\nThreshold: Correctly states gamma rays are not stopped by aluminum and penetrate lead (requiring cm of Pb), so the described radiation is more consistent with beta. (Clarify: \"penetrates 3 mm Al but stopped by 5 cm Pb\" — beta is stopped by a few mm of Al; gamma requires cm of Pb. This radiation behaves like gamma. If Z unchanged: gamma. Award if student identifies the contradiction and resolves it.)\n\n**FA-3 — Penetration and biological hazard:**\n*Q: An alpha source and a gamma source both have the same activity (same number of decays per second). A worker is (a) standing 1 m away from each source, (b) accidentally swallows a small amount of each source. For each scenario, which source is more dangerous? Explain.*\nExpected: (a) Gamma — alpha is stopped by air at 1 m, gamma penetrates to the worker's body. (b) Alpha — dense ionization in internal tissues causes extreme cellular damage; high RBE makes it more biologically effective per unit energy deposited internally.\nThreshold: Correct answer for both scenarios with correct reasoning.\n\n**FA-4 — Carbon dating:**\n*Q: ¹⁴C has a half-life of 5730 years. Write the beta-minus decay equation for ¹⁴C. A sample of wood contains ¹/₄ of the ¹⁴C ratio present in living wood. How old is the sample?*\nExpected: ¹⁴₆C → ¹⁴₇N + e⁻ + ν̄_e. Age = 2 × t₁/₂ = 2 × 5730 = 11460 years.\nThreshold: Correct equation (including antineutrino) and correct age calculation.\n\n**Confidence calibration:** After FA-1, student rates confidence before seeing the answer. Students who omit the antineutrino in (b) but are confident they're correct receive targeted feedback: \"What is lepton number? Is it conserved here?\"\n\n**Delayed retrieval (session + 3):** \"State the three types of radioactive decay. For each: what changes in A, what changes in Z, what is emitted.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 217,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Geiger counter beside a radioactive source: audible clicks — each click is one decay event. Irregular timing → random, probabilistic process.\n- Fog chamber (cloud chamber): show alpha tracks (short, thick, straight), beta tracks (longer, curvy, deflected by magnetic field), gamma (invisible, only secondary ionization tracks).\n- Shielding demonstration: paper stops alpha; aluminum plate required for beta; thick lead for gamma.\n\n### Representational (Iconic)\n- Segré chart (N vs. Z): stable nuclei form a \"valley of stability.\" Alpha decay moves a nucleus down-left (−2,−2). Beta-minus moves right (+1,0). Beta-plus moves left (−1,0). Gamma decay stays at same position.\n- Decay sequence diagram: ²³⁸U → series of alpha and beta decays → ²⁰⁶Pb (uranium decay chain).\n- Penetrating power diagram: source → paper → Al sheet → Pb block. Alpha stopped by paper; beta stopped by Al; gamma partially attenuated by Pb.\n\n### Abstract (Symbolic)\n- Write balanced equations for representative decays:\n  - ²²⁶₈₈Ra → ²²²₈₆Rn + ⁴₂He (alpha)\n  - ¹⁴₆C → ¹⁴₇N + e⁻ + ν̄_e (beta-minus, carbon-14 dating)\n  - ²²₁₁Na → ²²₁₀Ne + e⁺ + ν_e (beta-plus)\n  - ⁶⁰₂₇Co* → ⁶⁰₂₇Co + γ (gamma, medical use)\n- Conservation check: verify A, Z, and charge balance in each equation.\n- Q-value: Q = (m_parent − m_daughter − m_products)c² > 0 for spontaneous decay (energy released).\n\n### Transfer (+)\n- Carbon-14 dating: ¹⁴C produced in atmosphere by cosmic rays; decays by beta-minus with t₁/₂ = 5730 years. Ratio of ¹⁴C/¹²C in organism decreases after death — rate gives age.\n- Medical imaging: PET scan uses positron emitters (¹⁸F); annihilation photons at 511 keV detected.\n- Nuclear power: fission of ²³⁵U produces beta and gamma radiation; shielding and coolant design determined by decay products.\n- Smoke detectors: ²⁴¹Am (alpha emitter) ionizes air; smoke particles absorb ions, reducing current → detector triggers.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 41,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Confusing atomic and nuclear processes:** Students think radioactivity involves electrons changing shells (like atomic spectra). Alpha and beta decay involve the nucleus, not the electron shells. The nucleus, not the electrons, determines radioactive behavior.\n\n**Mode 2 — Forgetting lepton/baryon conservation:** Students balance A and Z but don't write the neutrino in beta decay. This leaves the equation unbalanced in lepton number — a conserved quantity. Beta decay produces a (anti)neutrino that carries energy and lepton number.\n\n**Mode 3 — Penetration and ionization confusion:** Students think \"more penetrating = more dangerous.\" In fact, alpha particles are the most ionizing (most dangerous in the body, since dense ionization destroys cells) but the least penetrating (stopped by skin). Gamma is highly penetrating but sparsely ionizing.\n\n**Mode 4 — Confusion of beta-plus with gamma:** Students confuse positron emission (beta-plus) with gamma emission because both involve \"coming out of the nucleus\" without changing A. Gamma changes neither A nor Z (excited nucleus → ground state, same nucleus). Beta-plus changes Z by −1.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 70,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"In 1898, Marie Curie discovered that uranium wasn't the only radioactive element. She found thorium — and then polonium and radium. She noticed that the intensity of radiation was proportional to the amount of uranium present, not to its chemical form. This was a crucial clue: radioactivity is an atomic property, not a chemical one. And since chemistry is all about the electrons, radioactivity must come from somewhere deeper — the nucleus.\"\n\n**At the decay types:**\n\"Three types of nuclear decay, three types of instability. Too heavy → alpha decay: the nucleus ejects a tight, stable subunit (⁴He) and gets smaller. Wrong neutron-to-proton ratio → beta decay: the weak nuclear force converts one type of nucleon to another, emitting an electron (or positron) and a neutrino. Excess energy after a decay → gamma: the nucleus releases that energy as a photon, just like an atom emitting visible light, but with a million times more energy.\"\n\n**At the conservation law check:**\n\"Never write a radioactive decay equation without checking three things: Does A balance? Does Z balance? Does lepton number balance? If any of those fail, your equation is wrong. Nature does not allow non-conservation of any of these quantities. The neutrino was predicted to exist — before it was detected — because beta decay equations violated energy and lepton conservation without it.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 204,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.mod.atomic-spectra as prerequisite — they must understand that atoms have nuclei before nuclear processes make sense. Briefly review nuclear vs. atomic structure.\n\n**S3:** Student can identify decay types but cannot balance equations. Drill the conservation law checklist: A balance → Z balance → lepton balance. Use Demo 3 as a structured procedure.\n\n**S6:** Student systematically confuses alpha (Z−2, A−4), beta-minus (Z+1, A unchanged), and beta-plus (Z−1, A unchanged). Build a summary table (as in the Discovery Lesson synthesis) and have the student fill it in from memory, then compare to the model.\n\n**S9:** Introduce electron capture (p + e⁻ → n + ν_e) as an alternative to beta-plus for neutron-rich-deficient nuclei. Discuss the Geiger-Nuttall law for alpha decay (log of decay constant vs. energy — empirical precursor to quantum tunneling explanation in phys.qm). Preview nuclear binding energy as the driving force for all decays.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 247,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Declarative (decay types, properties, conservation laws) + procedural (balancing decay equations).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"State the three decay types. For each: what is emitted, and how do A and Z change?\"\n- Session + 3: \"Write and balance the alpha decay of ²³⁸U. Write and balance the beta-minus decay of ¹⁴C.\"\n- Session + 7: \"Rank alpha, beta, gamma by: (a) ionizing power, (b) penetrating power. Give one application of each.\"\n\n**Interleaving partners:** phys.mod.atomic-spectra (prerequisite — nuclear context vs. atomic context); phys.mod.radioactive-decay (unlock — quantitative half-life calculation, this concept provides the qualitative foundation); phys.mod.binding-energy (cross-concept — Q-value calculation requires binding energy).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 259,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Nuclear medicine: ¹³¹I (beta-minus + gamma, thyroid treatment), ⁹⁹ᵐTc (gamma, SPECT imaging), ¹⁸F (beta-plus, PET). Each isotope selected for specific decay properties matching clinical need.\n\n**Far transfer:** Cosmological nucleosynthesis: the Big Bang and stellar nucleosynthesis produce unstable isotopes whose beta decays define the composition of the universe. The r-process in neutron star mergers produces neutron-rich nuclei that decay through beta chains to stable heavy elements.\n\n**Structural abstraction:** \"Spontaneous transitions to lower-energy configurations.\" This pattern is universal: excited atoms emit photons (atomic spectra), excited nuclei decay (radioactivity), unstable particles decay (particle physics — muon → electron + neutrinos, pion → muon + neutrino). In all cases: conservation laws, energy release, characteristic timescale.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 272,
+        "endLine": 282
+      }
+    },
+    {
+      "assetId": "phys.mod.radioactivity/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.radioactivity",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.mod.atomic-spectra is appropriate — students need the nuclear model and the concept of quantized energy states. Explicit coverage of nuclear structure (protons, neutrons, nuclear force) may be needed as a mini-review.\n- **Unlock readiness:** phys.mod.radioactive-decay (quantitative half-life and decay constant) can follow immediately — this concept provides the qualitative understanding of what decays, the next concept quantifies how fast.\n- **Difficulty calibration:** Proficient/understand is correct. The mathematics is minimal (A and Z arithmetic). The conceptual demands (three decay types, conservation laws, penetration/ionization properties) require systematic organization but not advanced mathematics.\n- **Suggested lab:** Geiger counter + sealed sources (Ra-226, Sr-90, Co-60) with penetration experiment. Cloud chamber video if equipment unavailable. Carbon dating calculation as quantitative homework.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radioactivity.md",
+        "startLine": 282,
+        "endLine": 292
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

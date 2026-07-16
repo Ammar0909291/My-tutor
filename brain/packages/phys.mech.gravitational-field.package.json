@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.gravitational-field-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.gravitational-field",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:4384a242db9e057aca023218ef590fac21c37086514e89d268015d185390c8fa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.gravitational-field.md": "sha256:c122e4025ca6e38a0c71601691483ab3ab4357a7620afff4fc81725b9d195b62"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.gravitational-field",
+    "name": "Gravitational Field and Field Lines",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.universal-gravitation"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.gravitational-field-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.gravitational-field (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.gravitational-field.md": "sha256:c122e4025ca6e38a0c71601691483ab3ab4357a7620afff4fc81725b9d195b62"
+      },
+      "contentHash": "sha256:d2471805f75251811ea9fafe46f6058273a4d9de5eaf6dca1ca4d952801dd709",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-field.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-field.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-field\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-field.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-field.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-field\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-field.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-field.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-field\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-field.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-field.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-field\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.gravitational-field.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.gravitational-field.md#TA-5 (addresses MC-FIELD-IS-FORCE, MC-FIELD-STOPS-AT-SURFACE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.gravitational-field"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.gravitational-field\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.gravitational-field/misconception/MC-FIELD-IS-FORCE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "- **Trigger signal:** Student says \"the gravitational field at a point is the gravitational force\" or writes g = F (without ÷m).",
+      "content": "### MC-FIELD-IS-FORCE\n- **Trigger signal:** Student says \"the gravitational field at a point is the gravitational force\" or writes g = F (without ÷m).\n- **Conflict evidence [P28]:** \"If the field equals the force, then the field near Earth would be 500 N for a 50 kg person and 1000 N for a 100 kg person — two different fields at the same point. But we measure g = 9.8 m/s² at the surface regardless of mass. The field must be force per unit mass, not force.\"\n- **Bridge text [P30]:** \"A field is a property of space at a location, independent of whatever test mass you place there. We define g = F/m precisely to strip out the mass and get a quantity that describes the space, not the probe.\"\n- **Replacement text [P31]:** \"Gravitational field strength g at a point = gravitational force per unit kilogram placed at that point: g = F/m (N/kg). It equals GM/r² and is the same value regardless of which mass you put there.\"\n- **Discrimination pairs [P33]:**\n  - g = 9.8 m/s² at Earth's surface (field) vs. F = 490 N on a 50 kg mass (force at that field)\n  - g = 1.6 m/s² on the Moon (field) vs. F = 80 N on a 50 kg mass on the Moon (force)\n- **s6_path:** \"No worries — the word 'field' is used loosely in everyday language. In physics it has a precise definition: field = force ÷ mass, so it describes the space, not the object in it.\"\n\n---",
+      "localKey": "MC-FIELD-IS-FORCE",
+      "language": "en",
+      "refs": [
+        "MC-FIELD-IS-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/misconception/MC-FIELD-STOPS-AT-SURFACE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "- **Trigger signal:** Student draws field lines ending at Earth's surface, or states \"g = 9.8 m/s² only at ground level.",
+      "content": "### MC-FIELD-STOPS-AT-SURFACE\n- **Trigger signal:** Student draws field lines ending at Earth's surface, or states \"g = 9.8 m/s² only at ground level.\"\n- **Conflict evidence [P28]:** \"Field lines represent the field in all of space, not just at the surface. At altitude h = 400 km (ISS), r = R_E + 400 km ≈ 6770 km; g = GM/(6770 × 10³)² ≈ 8.67 m/s² — still 88% of surface value. The field extends through all space, diminishing as 1/r².\"\n- **Bridge text [P30]:** \"The inverse-square law g = GM/r² applies for all r > R_Earth. Inside Earth (r < R_Earth) the field also exists but follows a different law (g ∝ r for uniform density). Field lines fill all space; they simply get more spread out (weaker) with distance.\"\n- **Replacement text [P31]:** \"g = GM/r² applies from r = R_Earth outward without limit. Field lines extend to infinity, becoming more spread out as r increases — which is why the field weakens as 1/r².\"\n- **Discrimination pairs [P33]:**\n  - Field at surface: g = 9.8 m/s² (r = R_E)\n  - Field at 2R_E from centre: g = 9.8/4 = 2.45 m/s²\n  - Field at 3R_E from centre: g = 9.8/9 ≈ 1.09 m/s²\n- **s6_path:** \"A lot of diagrams in textbooks only show field lines near Earth, which makes it look like they stop at the surface. They don't — it's just a drawing limitation.\"\n\n---",
+      "localKey": "MC-FIELD-STOPS-AT-SURFACE",
+      "language": "en",
+      "refs": [
+        "MC-FIELD-STOPS-AT-SURFACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 15,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "Defining the Gravitational Field",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Defining the Gravitational Field\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 83,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "Field Strength from Newton's Law",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Field Strength from Newton's Law\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 98,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "Field Lines and Their Rules",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Field Lines and Their Rules\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 119,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "Superposition of Fields",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Superposition of Fields\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 132,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "Field Inside vs. Outside a Sphere",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Field Inside vs. Outside a Sphere\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-FIELD-IS-FORCE\",\"MC-FIELD-STOPS-AT-SURFACE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-FIELD-IS-FORCE",
+        "MC-FIELD-STOPS-AT-SURFACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 150,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Conceptual (field vs. force)**\n\"A 3 kg mass placed at point X experiences a gravitational force of 24 N. What is the gravitational field at X? If a 6 kg mass were placed at X instead, what force would it experience? What is the field at X now?\"\n\n*Target:* g = 8 N/kg; F = 48 N; g still = 8 N/kg.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 216,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Calculation (altitude)**\n\"At what altitude above Earth's surface is the gravitational field exactly one-quarter of its surface value? Express your answer as a multiple of R_E.\"\n\n*Target:* g ∝ 1/r² → quarter value when r = 2R_E → altitude = R_E ≈ 6370 km.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 216,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Field lines (conceptual)**\n\"Between two equal point masses separated by 1 m, describe what happens to the gravitational field at the exact midpoint. At a point slightly to one side of the midpoint — is the field zero? Draw the field line pattern.\"\n\n*Target:* Field = 0 at exact midpoint (symmetric cancellation). Any offset → net field toward nearer mass. Field lines curve; neutral point is unstable equilibrium.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 216,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Shell theorem application**\n\"A uniform hollow spherical shell of mass M and radius R. What is the gravitational field at: (a) r = 2R from the centre? (b) r = 0.5R from the centre (inside the shell)?\"\n\n*Target:* (a) g = GM/(2R)² = GM/4R² (acts as point mass at centre). (b) g = 0 (Shell Theorem: field inside a uniform shell is zero).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 216,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis (field → force → motion)**\n\"A satellite of mass m orbits Earth at radius r. Express its orbital speed v in terms of g(r) (the field at radius r) and r. You may not use G or M_E explicitly.\"\n\n*Target:* Centripetal force = gravitational force: mv²/r = mg(r) → v = √(g(r) × r). This shows orbital speed is determined entirely by the field at that radius.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 216,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.mech.gravitational-field/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.gravitational-field",
+      "title": "Adaptive Flags",
+      "content": "- **Multi-body superposition** (TA-4, WE-3): scaffold with component decomposition before vector sum; confirm signs (toward vs. away).\n- **Shell theorem** (TA-5): result-only delivery at this level; proof via integration is a university topic. State the result clearly, verify with the inside-shell MP-4 probe.\n- **Electric field parallel** (cross_link: phys.elec.electric-field): if student has covered electric fields, use E = F/q analogy explicitly. The structural parallel accelerates understanding.\n- **Unit equivalence** (N/kg ≡ m/s²): mention explicitly; students who have seen kinematics will recognise m/s² as acceleration units, which reinforces the connection g = a_freefall.\n- **WE-3 computational note**: the spacecraft calculation produces g_SC ≈ 10⁻²¹ m/s² — emphasise that this is 21 orders of magnitude smaller than Earth's field, making it physically meaningless. This viscerally demonstrates the test-mass condition.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.gravitational-field.md",
+        "startLine": 286,
+        "endLine": 296
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

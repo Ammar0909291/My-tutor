@@ -1,0 +1,381 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.newtons-second-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.newtons-second-law",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:2ff6ff075b41142518ea261dce0e3254c171e2437d3b8c27523663e7e4bd8227",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.newtons-second-law.md": "sha256:e73102e4890e70ffedb974b2401ed562702bb227e8267531d24953ca91b8717c"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.newtons-second-law",
+    "name": "Newton's Second Law — F=ma",
+    "difficultyRaw": "developing (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.kinematics-1d",
+      "phys.mech.force"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.newtons-second-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.newtons-second-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.newtons-second-law.md": "sha256:e73102e4890e70ffedb974b2401ed562702bb227e8267531d24953ca91b8717c"
+      },
+      "contentHash": "sha256:7ac2a74461b6196d27dac7d05dc82a3db3f8f253c090da01a825983bb375aae9",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-second-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-second-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-second-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-second-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-second-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-second-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-second-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-second-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-second-law\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-second-law.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md#TA-4 (addresses MC-SINGLE-FORCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-second-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-second-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-second-law.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-second-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-second-law\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.newtons-second-law.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md#TA-6 (addresses MC-SINGLE-FORCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.newtons-second-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.newtons-second-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.newtons-second-law/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States Newton's Second Law as **net force = mass × acceleration** (ΣF = ma), and that acceleration is proportional to net force and inversely proportional to mass — both are simultaneous, not sequential.\n2. Applies the law to solve for any one of {ΣF, m, a} given the other two, using the **net** (resultant) force — not any single force — and keeping the vector direction of a aligned with ΣF.\n3. Distinguishes **mass** (the measure of inertia, kg, unchanging) from **weight** (the gravitational force on the mass, W = mg, newtons, location-dependent).\n\nA student who plugs a single force into F = ma while ignoring other forces present, or who uses weight in newtons where mass in kg is required (or treats the two as interchangeable), has **NOT** achieved mastery — the \"net force\" omission and the mass/weight conflation are the two errors that corrupt every dynamics problem downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/misconception/MC-SINGLE-FORCE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "F in F = ma is the applied force, not the net force",
+      "content": "### MC-SINGLE-FORCE: \"F in F = ma is the applied force, not the net force\"\ntrigger_signal: student divides a single named force by mass, ignoring friction, weight, or other forces present.\nconflict_evidence [P28]: \"You pushed the box with 10 N and got a = 5 m/s². But friction of 4 N is pulling backward the whole time. If the box really accelerated at 5 m/s², friction would be doing nothing — yet you can feel it resisting. The box only 'feels' the DIFFERENCE between your push and the friction: 6 N, not 10 N.\"\nbridge_text [P30]: \"F = ma always uses the NET force — the vector sum of every force acting on the object. Find the resultant first (add with direction), THEN divide by mass. A single force alone is only the whole story when it's the only force acting.\"\nreplacement_text [P31]: \"Step 1: list all forces with direction. Step 2: sum them (net force). Step 3: a = ΣF / m. Never skip step 2.\"\ndiscrimination_pairs [P33]: [\"push 10 N, friction 4 N: ΣF = 6 N, a = 6/m ✓\", \"push 10 N, frictionless: ΣF = 10 N, a = 10/m ✓ (single force only because nothing else acts)\", \"push 10 N, friction 4 N, using a = 10/m: ✗ ignores friction\"]\ns6_path: skip P28; draw the two arrows (push and friction) and ask gently \"which one does the box feel — the big one, or the leftover?\" — then P30.",
+      "localKey": "MC-SINGLE-FORCE",
+      "language": "en",
+      "refs": [
+        "MC-SINGLE-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/misconception/MC-MASS-IS-WEIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Mass and weight are the same thing",
+      "content": "### MC-MASS-IS-WEIGHT: \"Mass and weight are the same thing\"\ntrigger_signal: student uses weight in newtons where mass in kg is required, or claims mass changes with location.\nconflict_evidence [P28]: \"You said the astronaut 'weighs less on the Moon, so has less mass there.' But she's made of exactly the same atoms on the Moon as on Earth — nothing was removed. Her MASS (amount of matter, her inertia) is identical. What changed is the Moon's weaker gravity pulling on that same mass — that's her WEIGHT. Weight = mg; mass is just m.\"\nbridge_text [P30]: \"Mass is the amount of matter / inertia — measured in kg, the same everywhere. Weight is the gravitational force on that mass — measured in newtons, W = mg, and it changes where gravity changes. In F = ma, 'm' is always mass in kg, never weight.\"\nreplacement_text [P31]: \"Mass (kg) = inertia, unchanging. Weight (N) = mg, location-dependent. Use mass in F = ma; if given weight, first divide by g to recover mass.\"\ndiscrimination_pairs [P33]: [\"60 kg on Earth and Moon: mass = 60 kg both ✓\", \"weight on Earth = 588 N, on Moon ≈ 96 N ✓ (mg with different g)\", \"using 588 as 'm' in F = ma: ✗ — that's weight in N, not mass in kg\"]\ns6_path: skip P28; use \"same atoms, same matter — did any leave on the way to the Moon?\" as a gentle shared question, then P30.",
+      "localKey": "MC-MASS-IS-WEIGHT",
+      "language": "en",
+      "refs": [
+        "MC-MASS-IS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "More Push, More Acceleration — Heavier, Less",
+      "content": "{\"id\":\"TA-1\",\"title\":\"More Push, More Acceleration — Heavier, Less\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "The Relationship — ΣF = ma",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Relationship — ΣF = ma\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Net Force in Practice — Multiple Forces",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Net Force in Practice — Multiple Forces\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Misconception Probe — Net Force, Not Single Force",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Net Force, Not Single Force\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-SINGLE-FORCE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SINGLE-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-SINGLE-FORCE\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-SINGLE-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Which is 'm' in F = ma: 60 kg or 600 N?\" | CORRECT = 60 kg (mass); 600 N is weight |\n| P74 (classify) | \"Push 12 N, friction 3 N — what force goes into F = ma?\" | CORRECT = net force, 9 N |\n| P75 (boundary) | \"Net force zero but two large forces act — what is a?\" | CORRECT = zero (forces balance) |\n| P76 (transfer) | \"1200 kg car, 3000 N drive, 600 N resistance — a, then t to reach 20 m/s?\" | CORRECT = 2 m/s²; 10 s |\n| P77 (generate) | \"Invent a two-force problem (driving + opposing) and solve for a.\" | CORRECT = valid net-force computation |\n| P78 (explain) | \"Why must F be the net force, and how do mass and weight differ?\" | CORRECT = vector sum; mass = inertia (kg), weight = mg (N) |\n| P79 (predict) | \"6 kg suitcase on Earth vs Moon — does mass change? does weight change?\" | CORRECT = mass no; weight yes |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 178,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No formal F=ma relationship | Cannot relate force, mass, and acceleration | Protocol A (Concrete) |\n| S1 | Memorised \"F = ma\" as a plug-in formula | Uses any single force; never sums forces | Protocol B (Counterexample-first) |\n| S2-SINGLE-FORCE | Uses one applied force, ignores others | Forgets friction/weight; uses F_applied for ΣF | Misconception Engine → Protocol C |\n| S2-MASS-IS-WEIGHT | Conflates mass and weight | Uses weight in newtons as \"m\" in F = ma | Misconception Engine → Protocol C |\n| S3 | Applies F=ma; drops direction or a single force | Correct magnitude; wrong sign or missing force term | Protocol C (Guided Questioning) |\n| S6 | Anxiety at multi-force problems and rearrangement | Freezes when more than one force acts | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"How are force, mass, and acceleration related? Write the relationship if you can.\"\n  States ΣF = ma and mentions net/resultant force → S3. Enter Protocol C.\n  \"F = ma\" but treats F as any single force → S1. Enter Protocol B.\n  Cannot relate the three → DB-2.\n\nDB-2 (misconception probe):\n\"A 2 kg box is pushed with 10 N to the right, while 4 N of friction acts to the left. What is its acceleration?\"\n  \"Net force = 10 − 4 = 6 N; a = 6/2 = 3 m/s² right\" → S3. Enter Protocol C.\n  \"a = 10/2 = 5 m/s²\" (uses only the applied force) → SIGNAL:MISCONCEPTION:MC-SINGLE-FORCE. Enter Misconception Engine.\n  \"I don't know how to combine the forces\" → S0. Enter Protocol A.\n  Pause / distress → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with F = ma problems — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SINGLE-FORCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.newtons-second-law/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.newtons-second-law",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.force`):\n\"What is net force, and how do you find it when several forces act on an object?\"\n  Cannot define net force as the vector sum → flag PREREQ-GAP-FORCE.\n  In-session minimum repair: one P06 anchor (two arrows, opposite directions, subtract to get resultant) — then resume. Deep gap → schedule `phys.mech.force` (S4 route).\n\nPD-2 (for `phys.mech.kinematics-1d`):\n\"If you know an object's acceleration and starting velocity, can you find its velocity later?\"\n  Cannot connect a to motion via v = u + at → flag PREREQ-GAP-KINEMATICS.\n  In-session minimum repair: one P06 anchor recalling v = u + at; then resume. Deep gap → schedule `phys.mech.kinematics-1d` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md",
+        "startLine": 59,
+        "endLine": 71
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

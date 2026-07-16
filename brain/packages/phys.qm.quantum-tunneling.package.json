@@ -1,0 +1,503 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.quantum-tunneling-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.quantum-tunneling",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:199df901307b0d96432ba1f99de60244ae18fc1f7e773bfe45341690d1860a52",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md": "sha256:e902848bc060d1bfe777b0a983e1b3cd0028349d7fb074e867d7d1464d82ebc9"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.quantum-tunneling",
+    "name": "Quantum Tunneling",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.qm.schrodinger-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.quantum-tunneling-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.quantum-tunneling (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md": "sha256:e902848bc060d1bfe777b0a983e1b3cd0028349d7fb074e867d7d1464d82ebc9"
+      },
+      "contentHash": "sha256:c98f6c39bf6e13faf6336d4308402a9259cb11d9f7cde0b79835f17625db7c24",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.quantum-tunneling.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.quantum-tunneling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.quantum-tunneling\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.quantum-tunneling.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.quantum-tunneling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.quantum-tunneling\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.quantum-tunneling.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.quantum-tunneling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.quantum-tunneling\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.quantum-tunneling.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.quantum-tunneling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.quantum-tunneling\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.quantum-tunneling.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.quantum-tunneling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.quantum-tunneling\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.quantum-tunneling.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.quantum-tunneling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.quantum-tunneling\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.quantum-tunneling.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.quantum-tunneling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.quantum-tunneling\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.quantum-tunneling/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Quantum Tunneling — core explanation",
+      "content": "### Core Idea\nWhen a quantum particle encounters a potential barrier V₀ > E (classically forbidden), the wave function decays exponentially inside the barrier (evanescent wave) rather than stopping abruptly. If the barrier is thin enough, the wave function emerges on the other side with reduced amplitude — the particle has tunneled through. The transmission probability T depends exponentially on barrier width d and height (V₀ − E): T ≈ e^(−2κd) where κ = √(2m(V₀−E))/ℏ.\n\n### Conceptual Ladder\n1. **Recall**: TISE solutions are oscillatory (sin/cos) where E > V and evanescent (e^(±κx)) where E < V.\n2. **Understand**: Evanescent wave is non-zero in the barrier → some probability leaks to the right of the barrier.\n3. **Apply**: Calculate transmission coefficient T for a rectangular barrier; estimate T for given barrier parameters.\n4. **Analyze**: Explain exponential sensitivity to barrier parameters; connect to alpha decay half-lives, STM resolution, tunnel diode operation.\n\n### Key Formula Set\n- **Evanescent wave in barrier**: ψ_II = Ce^(−κx) + De^(κx), κ = √(2m(V₀−E))/ℏ\n- **Transmission probability** (rectangular barrier, κd >> 1 approximation):\n  T ≈ 16(E/V₀)(1−E/V₀) e^(−2κd) ≈ e^(−2κd) for thick barrier\n- **Exact result**: T = [1 + (V₀²sinh²(κd))/(4E(V₀−E))]⁻¹\n- **Gamow factor** (alpha decay): Γ ≈ e^(−2G) where G = (1/ℏ)∫√(2m(V(r)−E))dr (integral over classically forbidden region)\n- **Reflection coefficient**: R = 1 − T (probability is conserved: R + T = 1)\n- **Key scaling**: T is exponentially sensitive to κ = √(2m(V₀−E))/ℏ and barrier width d; small changes in d cause large changes in T.\n\n### Canonical Examples\n- **Alpha decay (Gamow)**: ²³⁸U decays by alpha emission through a Coulomb barrier; the exponential dependence of T on barrier width (which changes with energy E_α) explains the enormous range of half-lives (10⁻⁷ s to 10¹⁰ years) observed across alpha emitters — Geiger-Nuttall law.\n- **STM (scanning tunneling microscope)**: Tunneling current I ∝ T ∝ e^(−2κd) between tip and surface. Reducing gap by 0.1 nm changes T (and current) by factor ~10 — gives sub-angstrom vertical resolution.\n- **Tunnel diode**: Quantum tunneling through a thin p-n junction gives negative differential resistance at low bias — exploited in high-frequency oscillators.\n- **Fusion in stars**: Proton-proton fusion in the sun occurs at T ≈ 10⁷ K; classical barrier is too high, but tunneling through the Coulomb barrier enables fusion at stellar temperatures.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 16,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "The particle goes over the barrier using borrowed energy",
+      "content": "### MC-1: \"The particle goes over the barrier using borrowed energy\"\n- **Probe**: \"How does a particle tunnel? Does it temporarily have enough energy to reach the top?\"\n- **Characteristic phrase**: \"The uncertainty principle lets it borrow energy ΔE for time Δt.\"\n- **Trigger**: Pop-science descriptions of tunneling; energy-time uncertainty misapplication.\n- **Conflict evidence**: The transmitted particle has exactly the same energy as the incident particle (energy is conserved throughout). The transmitted particle's energy equals E_incident — not V₀. The wave function inside the barrier is evanescent (decaying), not oscillatory — the particle is NOT at the classical turning point with extra energy.\n- **Bridge**: Think of the evanescent wave: it decays smoothly inside the barrier. No energy spike needed — the amplitude just leaks through, like light leaking through a thin metal film (optical tunneling = frustrated total internal reflection).\n- **Replacement**: Tunneling occurs because ψ ≠ 0 inside the barrier — the wave function has a non-zero tail. The particle never \"goes over\" the top; it appears on the other side with the same energy as before.\n- **Discrimination pairs**: \"Transmitted particle energy = incident particle energy\" ✓ vs. \"Particle borrows energy ΔE = V₀−E for time Δt\" ✗\n- **S6 repair path**: Compute the energy of the transmitted particle (same E as incident); show κ is real in the barrier (evanescent, not oscillatory) — no \"real\" particle can be at position x inside the barrier during classical analysis.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Tunneling violates energy conservation",
+      "content": "### MC-2: \"Tunneling violates energy conservation\"\n- **Probe**: \"If a particle with E = 1 eV tunnels through a barrier of V₀ = 5 eV, where does it get the energy to be inside the barrier?\"\n- **Characteristic phrase**: \"Energy conservation says this shouldn't happen.\"\n- **Trigger**: Classical intuition: inside the barrier KE = E − V₀ < 0 — impossible.\n- **Conflict evidence**: Quantum mechanically, we cannot ask \"what is the particle's KE at x inside the barrier\" because position and energy cannot simultaneously be definite. The particle doesn't \"have\" a KE at a specific position inside the barrier — only probabilities are defined. Energy is conserved in the sense that the total energy E is the same before, during, and after.\n- **Bridge**: The question \"what is the particle's energy at position x inside the barrier?\" is ill-posed in quantum mechanics. The energy eigenstate has energy E everywhere; the classically forbidden region is forbidden only classically, not quantum mechanically.\n- **Replacement**: Energy is conserved: transmitted particle has energy E = incident particle energy. The \"forbidden region\" is forbidden for classical trajectories; quantum mechanics has no trajectories.\n- **Discrimination pairs**: \"Energy conserved: E_transmitted = E_incident\" ✓ vs. \"Tunneling violates energy conservation\" ✗\n- **S6 repair path**: Compute T for V₀ = 5E barrier; verify the transmission formula gives T > 0 even at the same E — no energy is added.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "T depends linearly on barrier thickness",
+      "content": "### MC-3: \"T depends linearly on barrier thickness\"\n- **Probe**: \"If I double the barrier thickness, how does T change?\"\n- **Characteristic phrase**: \"T decreases proportionally with thickness.\"\n- **Trigger**: Intuition from classical barrier penetration (linear attenuation of classical waves like sound in walls).\n- **Conflict evidence**: T ≈ e^(−2κd). Doubling d gives T ≈ e^(−4κd) = (e^(−2κd))² = T²_original — T is squared. For T = 10⁻³, doubling d gives T ≈ 10⁻⁶. This is the exponential sensitivity exploited in STM.\n- **Bridge**: Classical waves attenuate exponentially too (Lambert-Beer law for light, sound in dense media). Quantum tunneling is the same mathematics but applied to probability amplitude.\n- **Replacement**: T ≈ e^(−2κd): exponential in d. Each added thickness d reduces T by the same factor e^(−2κd) — multiplicative, not additive.\n- **Discrimination pairs**: \"T ≈ e^(−2κd): exponential in d (STM exploits this)\" ✓ vs. \"T decreases linearly with d\" ✗\n- **S6 repair path**: Compute T for d = 0.1 nm, 0.2 nm, 0.3 nm with κ = 10 nm⁻¹ typical of STM. Show e^(−2), e^(−4), e^(−6) ratios.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Tunneling is only relevant for electrons (not larger particles",
+      "content": "### MC-4: \"Tunneling is only relevant for electrons (not larger particles)\"\n- **Probe**: \"Can a proton tunnel? What about a carbon atom?\"\n- **Characteristic phrase**: \"Only electrons are small enough to tunnel.\"\n- **Trigger**: Students associate quantum effects with electrons only.\n- **Conflict evidence**: Alpha particles (mass ~7300m_e) tunnel through nuclear Coulomb barriers in alpha decay. Protons tunnel in enzyme reactions and in stellar fusion. Even whole hydrogen atoms can tunnel in surface chemistry (H diffusion on metals).\n- **Bridge**: κ = √(2m(V₀−E))/ℏ — heavier particles have larger κ → smaller T. Tunneling decreases with mass but is never zero. For macroscopic objects, T is so small it's unmeasurable; for light particles (electrons, protons), it's significant.\n- **Replacement**: All particles tunnel; T decreases exponentially with √m × d. Electrons tunnel most easily; protons and alpha particles can tunnel through thin/short barriers with significant probability.\n- **Discrimination pairs**: \"All particles tunnel; T ∝ e^(−2d√(2m(V₀−E))/ℏ) — decreases with mass\" ✓ vs. \"Only electrons tunnel\" ✗\n- **S6 repair path**: Compute T for electron vs. proton through same barrier (V₀−E = 1 eV, d = 0.5 nm). T_electron = e^(−2×0.51×0.5) ≈ e^(−5.1) ≈ 6×10⁻³; T_proton = e^(−2×9.38×0.5) ≈ e^(−93.8) ≈ 10⁻⁴¹. Enormous difference — but T_proton is still > 0.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Classical forbidden region",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Classical forbidden region\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 199,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "TISE in barrier region",
+      "content": "{\"id\":\"TA-2\",\"title\":\"TISE in barrier region\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 200,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Three-region matching",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Three-region matching\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 201,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Transmission coefficient",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Transmission coefficient\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 202,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Exponential sensitivity",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Exponential sensitivity\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Gamow factor",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Gamow factor\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 204,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Applications",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Applications\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 205,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) write evanescent wave function in the barrier, (2) state T ≈ e^(−2κd) and compute T for given parameters, (3) explain why T is exponentially sensitive to d, (4) connect to at least two physical applications (alpha decay, STM, stellar fusion).\n\n### Formative Assessment 1 — Evanescent wave\n**Prompt**: \"An electron (m = 9.11×10⁻³¹ kg) faces a barrier V₀ = 2 eV with E = 1 eV. Compute κ and the decay constant inside the barrier.\"\n**Expected answer**: V₀ − E = 1 eV = 1.6×10⁻¹⁹ J. κ = √(2×9.11×10⁻³¹×1.6×10⁻¹⁹)/(1.055×10⁻³⁴) = 5.12×10⁹ m⁻¹ ≈ 5.1 nm⁻¹.\n**Threshold**: Within 5%.\n\n### Formative Assessment 2 — Transmission probability\n**Prompt**: \"Using κ = 5.1 nm⁻¹ from FA1, compute T for barrier widths d = 0.5 nm and d = 1.0 nm. What is the ratio T(0.5 nm)/T(1.0 nm)?\"\n**Expected answer**: T(0.5) ≈ e^(−2×5.1×0.5) = e^(−5.1) ≈ 6.1×10⁻³. T(1.0) ≈ e^(−10.2) ≈ 3.7×10⁻⁵. Ratio ≈ 165. Check: e^(5.1) ≈ 165 ✓ (doubling d squares the exponent → ratio = e^(5.1)).\n**Threshold**: T values within factor of 2; ratio to the right order of magnitude.\n\n### Formative Assessment 3 — STM application\n**Prompt**: \"An STM has a tip-sample gap of 0.6 nm and a tunneling current I ∝ T ≈ e^(−2κd) with κ = 10 nm⁻¹. If the gap increases by 0.05 nm (half an angstrom), by what factor does the current decrease?\"\n**Expected answer**: ΔT = T'/T = e^(−2×10×0.65)/e^(−2×10×0.6) = e^(−2×10×0.05) = e^(−1) ≈ 0.37. Current decreases to 37% of original — a 63% decrease for a 0.05 nm gap change. This is the basis of sub-angstrom vertical resolution.\n**Threshold**: Factor e^(−1) ≈ 0.37 within 10%.\n\n### Formative Assessment 4 — Alpha decay\n**Prompt**: \"Alpha particle A has E = 5 MeV and alpha particle B has E = 6 MeV. Both face the same Coulomb barrier V₀ = 10 MeV. Estimate the ratio of their Gamow factors κ_A/κ_B and predict which nucleus has a longer half-life.\"\n**Expected answer**: κ_A = √(2m_α×(10−5)MeV)/ℏ = √(2m_α×5MeV)/ℏ; κ_B = √(2m_α×4MeV)/ℏ. Ratio κ_A/κ_B = √(5/4) = √1.25 ≈ 1.118. T_A/T_B ≈ e^(−2κ_A d)/e^(−2κ_B d) = e^(−2d(κ_A − κ_B)) << 1 (A tunnels less). Nucleus A has longer half-life.\n**Threshold**: Correct ratio κ_A/κ_B; correct conclusion about half-life.\n\n### Confidence Calibration\nAfter FA1: \"How confident are you (0–100%) that your κ is in the right range? Quick check: for a 1 eV barrier excess, κ ≈ 5 nm⁻¹ is typical for electrons. Does your answer match this ballpark?\"\n\n### Delayed Retrieval\nTwo weeks later: Without notes, state the formula for T in the thick-barrier limit; explain in one paragraph why STM achieves sub-angstrom resolution using this formula; draw a sketch of ψ(x) across a rectangular barrier.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 223,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nImagine pushing a ball at a hill. Classically: not enough energy to reach the top → ball rolls back. Quantum mechanically: the ball's matter wave extends up into and through the hill. If the hill is thin, part of the wave emerges on the other side. This is NOT the ball going over the top — it genuinely appears on the other side without ever having enough energy to be at the top. The probability of tunneling decreases exponentially as the hill gets wider or taller.\n\nAnother image: dip your finger into a pool of water and hold it near a second pool. No water flows. Now connect the pools with a very thin membrane — some water (probability amplitude) can leak through by quantum tunneling, even though the membrane blocks classical transfer.\n\n### Representational (Diagrams and Symbols)\n- **Wave function diagram**: Three regions: (I) x < 0, oscillatory ψ₁ (incident + reflected wave); (II) 0 < x < d, evanescent ψ₂ decaying in barrier; (III) x > d, oscillatory ψ₃ (transmitted wave, smaller amplitude). The key: ψ₂ ≠ 0 inside the barrier.\n- **Potential energy diagram**: Step-function potential with E below V₀. Draw the classically forbidden region (hatched). Mark the evanescent decay inside and the transmitted wave outside.\n- **T vs. d graph**: Plot T ≈ e^(−2κd) on semilog scale — straight line (exponential in linear scale). Show sensitivity: doubling d squares T's exponent.\n- **STM image**: Real STM image showing individual atoms — explain that the corrugation reflects T exponential sensitivity to tip-sample gap.\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Write solutions in each region (oscillatory/evanescent) using κ and k.\n2. Apply matching conditions at both boundaries: continuity of ψ and dψ/dx.\n3. Solve for transmission amplitude; compute T = |transmitted amplitude|²/|incident amplitude|².\n4. Apply T ≈ e^(−2κd) for thick barriers; estimate T for specific parameters.\n5. Use Gamow factor integral (WKB approximation) for non-rectangular barriers.\n\n### Transfer (Novel Contexts)\n- **Josephson junction**: Superconducting tunneling of Cooper pairs through a thin insulator; exact same mathematics with the wave function replaced by the superconducting order parameter.\n- **Quantum computing (qubits)**: Tunnel junctions in transmon qubits are the nonlinear element that makes Josephson junctions nonlinear oscillators — the operational basis of most superconducting quantum computers.\n- **Enzyme catalysis**: Proton tunneling in enzyme-catalyzed reactions (e.g., alcohol dehydrogenase) contributes to rates above classical predictions — active area of biophysics research.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 44,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: \"The particle has enough energy in the barrier\"\nStudents think the particle temporarily \"borrows\" energy from the uncertainty principle to cross the barrier. This is the quantum mythology of \"energy borrowing.\" The correct picture: the particle doesn't have enough energy — but its wave function extends into the barrier exponentially, and if the barrier is thin, the amplitude re-emerges on the other side. No energy conservation violation occurs; the transmitted particle has the same energy as the incident particle (T is calculated at the same E).\n\n### Failure Mode 2: Forgetting κ depends on (V₀−E), not V₀ alone\nStudents write κ = √(2mV₀)/ℏ. The correct form is κ = √(2m(V₀−E))/ℏ. If E = 0, κ = √(2mV₀)/ℏ — but for a particle with E = V₀/2, κ = √(2m×V₀/2)/ℏ = √(mV₀)/ℏ — different.\n\n### Failure Mode 3: T + R ≠ 1\nStudents compute T and think they're done. They must verify R = 1 − T (probability is conserved). Alternatively, they forget to account for the reflected wave in region I and compute incorrect transmission.\n\n### Failure Mode 4: Applying the thick-barrier approximation T ≈ e^(−2κd) when κd is not >> 1\nThe approximation is excellent for κd >> 1 but gives wrong answers for thin barriers or resonance conditions (where T can approach 1 even for V₀ > E — resonant tunneling).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 72,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"Classical physics says: not enough energy → can't cross the barrier. Let me show you why quantum mechanics disagrees — and why that disagreement powers the STM that reads individual atoms.\"\n\n**Core explanation**: \"Inside the barrier, V > E, so the TISE gives d²ψ/dx² = κ²ψ. The solution is not oscillatory — it's exponential: e^(−κx). That's evanescent. It doesn't go to zero instantly — it decays. If the barrier is thin, some amplitude survives to the other side. Squaring that amplitude gives the tunneling probability T ≈ e^(−2κd).\"\n\n**Common error interception**: \"κ depends on V₀ − E, not V₀ alone. Write κ = √(2m(V₀−E))/ℏ every single time. If you leave out E, your κ is wrong.\"\n\n**Checkpoint question**: \"If I increase the barrier height by 4× (with the same E), how does κ change? How does T change?\" (κ → 2κ; T ≈ e^(−4κd) instead of e^(−2κd) → T² of original value — T decreases dramatically.)\n\n**Closing move**: \"The STM that scanned the first atom was built entirely on quantum tunneling. The nuclear reaction that powers the sun works because of quantum tunneling. The principle — T ≈ e^(−2κd) — is one of the most consequential equations in applied physics.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 209,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"I don't understand why the wave function doesn't just stop at the wall\"\nReturn to TISE: inside the barrier, d²ψ/dx² = κ²ψ with κ² > 0. A function satisfying d²f/dx² = κ²f doesn't go to zero — it either grows (e^(+κx)) or decays (e^(−κx)) exponentially. It can't abruptly stop. The only way ψ = 0 identically inside a finite region is if κ = ∞ (infinite barrier) — that's the infinite well case. For finite barriers, ψ must be continuous (TISE is a second-order ODE with smooth solutions).\n\n### S3 — Can write evanescent solution but cannot compute T\nThe matching conditions at x = 0 and x = d are the source of difficulty. Drill: (1) write ψ_I, ψ_II, ψ_III with correct general forms; (2) write 4 equations (continuity of ψ and ψ' at x = 0 and x = d); (3) use the thick-barrier approximation (D ≈ 0 in ψ_II to simplify). For assessment purposes, the thick-barrier formula T ≈ e^(−2κd) is usually sufficient without the full 4-equation system.\n\n### S6 — Understands T but misses applications\nGive three applications where T controls something measurable: (1) STM current vs. gap; (2) alpha decay half-life vs. E_α; (3) tunnel diode I-V curve. For each, identify d, κ, T in the context. Students should be able to explain qualitatively why an STM can see individual atoms without deriving T from scratch.\n\n### S9 — Cannot connect exponential sensitivity to practical significance\nNumerical demonstration: compute T for d = 1.0, 1.1, 1.2, 1.3 nm with κ = 10 nm⁻¹. Values: e^(−20), e^(−22), e^(−24), e^(−26). Ratio per 0.1 nm: e^(−2) ≈ 0.135. Students see: 13.5% decrease per 0.1 nm → 86.5% of current drops per angstrom of tip retraction. That's why STM works — it reads the surface topography in current changes.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 256,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nConceptual (wave function in classically forbidden region ≠ 0) + procedural (κ calculation, T ≈ e^(−2κd) application) + declarative (applications: STM, alpha decay, stellar fusion).\n\n### Spaced Retrieval Schedule\n- Day 1: Write evanescent solution; compute κ for V₀−E = 2 eV electron.\n- Day 3: Compute T for d = 0.8 nm with κ from Day 1.\n- Day 7: Explain in 3 sentences why STM has sub-angstrom vertical resolution.\n- Day 14: Explain qualitatively why ²³⁸U has much longer half-life than ²¹²Po.\n- Day 30: Write T ≈ e^(−2κd) from memory; list 3 physical systems where quantum tunneling is essential.\n\n### Interleaving Partners\n- phys.qm.schrodinger-equation (evanescent solution is the TISE solution for E < V)\n- phys.mod.radioactivity (alpha decay is the first application encountered)\n- phys.mod.nuclear-reactions (alpha decay Q-value and Gamow factor)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 272,
+        "endLine": 291
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Compute T for a rectangular barrier with any given V₀, E, d, m.\n- Estimate the effect of barrier parameter changes on T.\n- Apply WKB/Gamow factor for non-rectangular barriers (qualitative).\n\n### Far Transfer\n- **Josephson effect**: Tunneling of Cooper pairs through thin insulating layers — fundamental to superconducting quantum computers and SQUID magnetometers.\n- **Enzyme kinetics**: Hydrogen/proton tunneling contributes to enzyme reaction rates significantly below classical predictions.\n- **Solar energy**: Proton-proton fusion in stellar cores powered by Gamow tunneling at T ~ 10⁷ K.\n\n### Structural Abstraction\nQuantum tunneling is the general phenomenon of wave penetration into classically forbidden regions. The exponential decay T ∝ e^(−2∫κ(x)dx} is universal for any wave equation in a region where the squared wave number becomes negative (k² < 0). This appears in: quantum mechanics (particle tunneling), optics (FTIR, evanescent waves), acoustics (sound tunneling through thin barriers), and condensed matter (electron tunneling in semiconductors). The mathematics is identical; only the physical context changes.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 291,
+        "endLine": 308
+      }
+    },
+    {
+      "assetId": "phys.qm.quantum-tunneling/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.quantum-tunneling",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.qm.schrodinger-equation is the only prerequisite — students need to know how to solve the TISE in oscillatory and evanescent regions. The matching condition mathematics is new but follows directly from the ODE framework already established. Prerequisite is necessary and sufficient.\n\n### Unlock Readiness\nLeaf node — no direct KG unlocks. However, quantum tunneling is referenced in nuclear physics (alpha decay), solid-state physics (tunnel junctions), and quantum chemistry (proton transfer). The concept should be flagged as cross-domain.\n\n### Suggested Flag\nConnect explicitly to phys.mod.radioactivity (alpha decay) during teaching. Students who have already studied alpha decay phenomenologically will find that the Gamow factor explanation \"closes the loop\" on a mystery they already encountered — a powerful pedagogical moment.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.quantum-tunneling.md",
+        "startLine": 308,
+        "endLine": 322
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,581 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.time-dilation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.time-dilation",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:4c139bad47fee0d555841e2af03d87248d124e5203d831a2a4ed1293f750fd23",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.time-dilation.md": "sha256:f9cbdbad30eb22782b6d322aa8e4fd6ee362d2b6022d236c906b23fbc0e40238"
+    },
+    "assetCount": 24,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 8,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.rel.time-dilation",
+    "name": "Time Dilation",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.rel.simultaneity"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.time-dilation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.time-dilation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.time-dilation.md": "sha256:f9cbdbad30eb22782b6d322aa8e4fd6ee362d2b6022d236c906b23fbc0e40238"
+      },
+      "contentHash": "sha256:b785184c1390b6a53019997c0efdea41db0779dba2eac48f4664e33e2be145db",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.time-dilation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.time-dilation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.time-dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.time-dilation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.time-dilation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.time-dilation.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.time-dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.time-dilation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.time-dilation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.time-dilation.md#TA-3 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.time-dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.time-dilation\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.time-dilation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.time-dilation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.time-dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.time-dilation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.time-dilation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.time-dilation.md#TA-5 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.time-dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.time-dilation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.time-dilation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.time-dilation.md#TA-6 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.time-dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.time-dilation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.time-dilation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.time-dilation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.time-dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.time-dilation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.time-dilation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Time Dilation — core explanation",
+      "content": "**Core Insight:** A moving clock runs slower than an identical clock at rest. The relationship is:  \n  Δt = γ Δτ   where γ = 1/√(1 − v²/c²) ≥ 1  \nΔτ is the proper time (measured by the clock that stays in the same place — the \"wristwatch\" on\nthe moving object), and Δt is the coordinate time (measured by the stationary observer's clocks).\nγ ≥ 1 always, so Δt ≥ Δτ: the stationary observer always measures a longer time interval than\nthe moving clock shows. Mastery means: (a) deriving the time-dilation formula from the light-clock\nargument, (b) computing Δt and Δτ for given v, (c) computing γ, (d) distinguishing proper time\nfrom coordinate time, (e) applying to muon decay.\n\n**The One Formula:** Δt = γ Δτ,  γ = 1/√(1 − β²),  β = v/c\n\n**Experimental Confirmation:**  \n- Muon lifetime: muons produced in the upper atmosphere (v ≈ 0.998c) have γ ≈ 16. Classical\n  prediction: they decay before reaching sea level. Observed: they reach sea level in numbers\n  explained by dilated lifetime (15.6 μs observed vs. 2.2 μs proper lifetime).  \n- Hafele-Keating experiment (1971): atomic clocks flown around the world gained/lost time\n  consistent with SR predictions.  \n- GPS satellites: atomic clocks corrected for time dilation daily.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 21,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-TIME-DILATION-IS-ILLUSION",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "**Probe:** \"Is time dilation a physical effect or an optical illusion caused by the finite speed",
+      "content": "",
+      "localKey": "MC-TIME-DILATION-IS-ILLUSION",
+      "language": "en",
+      "refs": [
+        "MC-TIME-DILATION-IS-ILLUSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "**Probe:** \"Is time dilation a physical effect or an optical illusion caused by the finite speed",
+      "content": "### MC-1: MC-TIME-DILATION-IS-ILLUSION\n**Probe:** \"Is time dilation a physical effect or an optical illusion caused by the finite speed\nof light making clocks appear to run slow?\"  \n**Characteristic phrase:** \"The clock just looks slow because the light takes longer to reach us.\"  \n**Trigger:** Students think SR effects are perceptual, not real.  \n**Conflict evidence [P28]:** The muon experiment: muons physically survive to sea level in\nnumbers explained by time dilation. This is not a light-travel-time effect — the muons are\nactually present at sea level in statistically measured quantities. Atomic clocks flown around\nthe world (Hafele-Keating) showed a real accumulated time difference. The effect is verified\nby comparing physical clocks after reuniting them.  \n**Bridge [P30]:** \"If it were just an optical illusion, reuniting the clocks would show them\nsynchronized. In Hafele-Keating, the clocks that flew on planes read different times from the\nground clocks. The difference is real — not optical.\"  \n**Replacement [P31]:** Time dilation is a real physical effect: moving clocks genuinely tick\nat a slower rate; the accumulated time difference is measurable when clocks are reunited.  \n**Discrimination pairs [P33]:** Time dilation is: (A) an optical illusion due to light travel time,\n(B) a real physical effect measurable by comparing reunited clocks, (C) only apparent when the\nobserver moves, not real. Correct: (B).  \n**S6 repair path:** TA-2 (muon experiment) → TA-3 (Hafele-Keating evidence).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-PROPER-TIME-IS-LONGER",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "**Probe:** \"A muon travels from the upper atmosphere to sea level. Its proper lifetime is 2.2 μs.",
+      "content": "",
+      "localKey": "MC-PROPER-TIME-IS-LONGER",
+      "language": "en",
+      "refs": [
+        "MC-PROPER-TIME-IS-LONGER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 23,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "**Probe:** \"A muon travels from the upper atmosphere to sea level. Its proper lifetime is 2.2 μs.",
+      "content": "### MC-2: MC-PROPER-TIME-IS-LONGER\n**Probe:** \"A muon travels from the upper atmosphere to sea level. Its proper lifetime is 2.2 μs.\nThe lab measures a lifetime of 35 μs. Which is longer: the proper time or the coordinate time?\"  \n**Characteristic phrase:** \"Proper time is the 'real' time, so it should be longer.\"  \n**Trigger:** Students think \"proper\" = \"more complete\" = longer. The word \"proper\" misleads.  \n**Conflict evidence [P28]:** Δt = γΔτ with γ > 1 → Δt > Δτ. Coordinate time (lab frame: 35 μs)\nis always longer than proper time (muon frame: 2.2 μs). γ = 35/2.2 ≈ 16, consistent with\nv ≈ 0.998c. The moving clock (co-moving with the muon) shows the shorter time.  \n**Bridge [P30]:** \"Proper time just means 'own time' (from the Latin proprius = one's own) — the\ntime on the clock co-moving with the object. Since γ ≥ 1, proper time is always ≤ coordinate\ntime. The moving clock shows less elapsed time.\"  \n**Replacement [P31]:** Proper time Δτ is always ≤ coordinate time Δt (Δt = γΔτ, γ ≥ 1). Proper\ntime is the shorter time.  \n**Discrimination pairs [P33]:** Proper time vs. coordinate time: (A) proper time is longer\n(it's the \"real\" time), (B) coordinate time is longer (Δt = γΔτ, γ ≥ 1), (C) they are always\nequal. Correct: (B).  \n**S6 repair path:** TA-4 (light-clock derivation — the moving clock's period is longer in the\nlab frame).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 23,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "**Probe:** \"A train moves at 100 m/s. Compute γ. What is the fractional change in time: (γ−1)?\"",
+      "content": "",
+      "localKey": "MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG",
+      "language": "en",
+      "refs": [
+        "MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 42,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "**Probe:** \"A train moves at 100 m/s. Compute γ. What is the fractional change in time: (γ−1)?\"",
+      "content": "### MC-3: MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG\n**Probe:** \"A train moves at 100 m/s. Compute γ. What is the fractional change in time: (γ−1)?\"  \n**Characteristic phrase:** \"γ = 1/√(1 − v²/c²) = 1/√(1 − (100)²/(3×10⁸)²).\"  \n**Trigger:** Students use v and c in different units, or forget that β = v/c is dimensionless.  \n**Conflict evidence [P28]:** β = 100/(3×10⁸) = 3.33×10⁻⁷. β² = 1.11×10⁻¹³. γ = 1/√(1 − 10⁻¹³)\n≈ 1 + 5×10⁻¹⁴. Fractional time dilation: (γ − 1) ≈ 5×10⁻¹⁴ — completely negligible. Students\nwho miscompute γ often get nonsensical values (γ < 1 or imaginary).  \n**Bridge [P30]:** \"Always compute β = v/c first: a dimensionless number between 0 and 1. Then\nγ = 1/√(1 − β²). If γ < 1, you made an error. If β > 1, v > c — impossible.\"  \n**Replacement [P31]:** Always compute β = v/c first. γ is always ≥ 1. For everyday speeds,\nβ ≪ 1 and γ ≈ 1. For v → c, γ → ∞.  \n**Discrimination pairs [P33]:** For v = 0.6c: γ = (A) 1.25, (B) 0.8, (C) 1.6. Correct: (A)\n(1/√(1−0.36) = 1/√0.64 = 1/0.8 = 1.25).  \n**S6 repair path:** TA-5 (γ computation drill for β = 0, 0.6, 0.8, 0.9, 0.99, 0.999).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 42,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "**Probe:** \"Is time dilation significant for an aeroplane flying at 900 km/h? For the ISS",
+      "content": "",
+      "localKey": "MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS",
+      "language": "en",
+      "refs": [
+        "MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "**Probe:** \"Is time dilation significant for an aeroplane flying at 900 km/h? For the ISS",
+      "content": "### MC-4: MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS\n**Probe:** \"Is time dilation significant for an aeroplane flying at 900 km/h? For the ISS\norbiting at 7.7 km/s? For a GPS satellite? Compute (γ−1) for each.\"  \n**Characteristic phrase:** \"Time dilation only matters when you're going close to the speed of light.\"  \n**Trigger:** Students believe time dilation is only an exotic high-speed effect.  \n**Conflict evidence [P28]:** GPS satellites orbit at 3.87 km/s. β = 3.87×10³/(3×10⁸) = 1.29×10⁻⁵.\nγ − 1 ≈ β²/2 = 8.3×10⁻¹¹. Clock rate change = 7.2 μs/day (from SR alone) — enough to cause\nGPS position error of 2 km/day. GPS clocks are adjusted. Time dilation is engineered into GPS.  \n**Bridge [P30]:** \"For everyday speeds, γ − 1 is tiny but non-zero. For GPS and atomic clock\nexperiments, the effect is small but measurable and consequential. It is not only exotic — it\nis engineering reality.\"  \n**Replacement [P31]:** Time dilation occurs at all speeds; it becomes significant (>10⁻¹⁰ level)\nat km/s speeds and is engineered into GPS satellite design.  \n**Discrimination pairs [P33]:** Time dilation in GPS satellites is: (A) negligible (too slow),\n(B) significant — ~7 μs/day from SR, corrected in the satellite clocks, (C) not applicable\n(satellites don't obey SR). Correct: (B).  \n**S6 repair path:** TA-6 (GPS calculation).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 57,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 3,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Real-Effect Evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Real-Effect Evidence\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 6,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Proper vs. Coordinate Time",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Proper vs. Coordinate Time\",\"primitives\":[\"P14\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Light-Clock Derivation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Light-Clock Derivation\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 13,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "γ Computation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"γ Computation\",\"primitives\":[\"P50\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 16,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Muon + GPS Applications",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Muon + GPS Applications\",\"primitives\":[\"P50\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 19,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Closure",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \n(a) Compute γ from v/c; (b) compute Δt from γΔτ; (c) identify proper vs. coordinate time;\n(d) apply to muon or GPS scenario. Failure routes: (a)/(b) → TA-4/TA-5; (c) → TA-3; (d) → TA-6.\n\n**FA-1:** Muon at v = 0.995c, Δτ = 2.2 μs. Find γ and Δt.  \nExpected: β = 0.995; γ = 1/√(1−0.990025) = 1/√0.009975 ≈ 10.01; Δt = 10.01 × 2.2 = 22.0 μs.\n\n**FA-2:** GPS satellite at v = 3.87 km/s. Find γ and clock difference per day (SR only).  \nExpected: β = 3.87×10³/3×10⁸ = 1.29×10⁻⁵; γ−1 ≈ β²/2 = 8.32×10⁻¹¹; per day: 8.32×10⁻¹¹ × 86400 s ≈ 7.2 μs.\n\n**FA-3:** A spaceship travels to a star 40 light-years away at v = 0.8c. How much time passes\nfor the crew?  \nExpected: Δt (lab) = 40/0.8 = 50 years. γ = 1/0.6 = 5/3 ≈ 1.667. Δτ = 50/1.667 = 30 years.\n\n**FA-4:** Explain in 2 sentences why time dilation is real and not an illusion.  \nExpected: Physical clocks (atomic clocks, radioactive decay rates, muon lifetimes) genuinely differ\nafter reunification. The Hafele-Keating experiment measured accumulated time differences of\nhundreds of nanoseconds — real, not optical.\n\n**Delayed Retrieval:** \"Without notes: state Δt = γΔτ. Compute γ at β = 0.6. Muon at 0.95c —\nproper life 2.2 μs — does it reach sea level (15 km)?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 280,
+        "endLine": 306
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nMuons created 15 km up in the atmosphere travel at 0.998c. Their proper half-life is 2.2 μs.\nClassical travel time: 15,000/(0.998 × 3×10⁸) ≈ 50 μs — about 23 half-lives. Classical\nprediction: almost none reach sea level. Observed: a substantial fraction reaches sea level.\nThe muon's clock (proper time) runs much slower than our ground clocks (coordinate time).\n\n**Stage 2 — Representational (R)**  \nLight clock: two mirrors, light bouncing vertically, period T₀ = 2L/c in the rest frame.\nWhen the clock moves horizontally at v: in the lab frame, light must travel a diagonal path\nof length 2√(L² + (vT/2)²). Setting this equal to cT: T = T₀/√(1 − v²/c²) = γT₀.\nThe moving clock ticks slower by factor γ.\n\n**Stage 3 — Abstract (A)**  \nγ = 1/√(1 − v²/c²): γ → 1 as v → 0 (Newtonian limit); γ → ∞ as v → c. Time dilation\nis negligible for everyday speeds (v = 300 m/s: γ − 1 ≈ 5 × 10⁻¹³) but significant near c\n(v = 0.999c: γ ≈ 22.4). Proper time: the time measured by a clock that is present at both\nevents (the \"wristwatch\" — co-moving clock). Coordinate time: the time between the two events\nin the stationary frame.\n\n**Stage 4 — Transfer (T)**  \nTime dilation underlies: GPS satellite clock correction (~38 μs/day without correction →\n11 km/day position error); particle accelerator beam lifetime extension; the twin paradox\n(differential ageing from asymmetric acceleration histories); relativistic rockets; muon-catalysed\nfusion; the Lorentz factor γ appearing in all relativistic mechanics (energy, momentum).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 44,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Why Beginners Fail",
+      "content": "1. **Confusing Δt and Δτ:** Students mix up which observer measures which time. Proper time Δτ\n   is always the shorter time (γ ≥ 1). The moving clock shows proper time; the stationary\n   observer measures coordinate time.\n\n2. **Thinking time dilation is an illusion:** \"The clocks appear to run slow but really they're\n   the same.\" No — the muon actually decays at a later time (more decays survive to sea level).\n   Time dilation is physically real, not a perceptual effect.\n\n3. **Applying γ with v in the wrong units:** Students mix m/s and c, getting γ > 1 for any v\n   or impossible numbers. β = v/c must be dimensionless, always ≤ 1.\n\n4. **Twin paradox confusion:** \"Both twins are moving relative to each other, so each should\n   see the other's clock run slow — who actually ages less?\" The resolution (the travelling twin\n   accelerates, breaking symmetry) is beyond this concept's scope but must be flagged.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Muons are created 15 km above us and live for 2.2 microseconds. Classical\nphysics says they decay long before reaching sea level. We detect them in large numbers at sea\nlevel. The discrepancy is exactly explained by time dilation: the muon's own clock runs slow\ncompared to ours. Time is not absolute.\"\n\n**Key explanatory moves:**\n- \"Δt = γΔτ: Δt is what we measure, Δτ is what the muon experiences. γ ≥ 1, so Δt ≥ Δτ.\n  Proper time is always the shorter one.\"\n- \"γ = 1/√(1 − β²). Compute β first. β = v/c. If β > 1, you made an error — nothing moves\n  faster than light. γ must be ≥ 1.\"\n- \"GPS engineers correct for time dilation every day. This is not a theoretical curiosity. It\n  is engineered physics.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 263,
+        "endLine": 280
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Recovery Notes",
+      "content": "**S0:** phys.rel.simultaneity is the prerequisite. Without simultaneity, students have no\nframework for frame-dependent time measurements.\n\n**S3 (real vs. illusion):** Muon experiment is the anchor. \"This is a count of particles, not\nan optical measurement. Counting is not an illusion.\"\n\n**S6 (MC-PROPER-TIME-IS-LONGER):** Write Δt = γΔτ. Circle γ. \"γ ≥ 1. Δt ≥ Δτ. Always.\"\n\n**S9 (computes correctly but cannot distinguish proper from coordinate):** Require the student\nto always label every time quantity: \"whose clock? co-moving or stationary frame?\" before\nwriting any equation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PROPER-TIME-IS-LONGER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 306,
+        "endLine": 322
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Memory & Review",
+      "content": "**Spaced retrieval:**\n- Day +1: Compute γ for v = 0.6c, 0.8c, 0.99c. State which time is proper.\n- Day +4: Muon at 0.998c, Δτ = 2.2 μs — find Δt and lab distance.\n- Day +10: GPS satellite — compute SR time dilation per day; explain why GPS clocks are pre-corrected.\n\n**Interleaving partners:** phys.rel.simultaneity (prerequisite concept), phys.rel.length-contraction\n(twin consequence: moving objects contract), phys.rel.lorentz-transform (full mathematical framework).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 322,
+        "endLine": 334
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** phys.rel.length-contraction (companion effect); phys.rel.lorentz-transform  \n**Far transfer:** Particle physics (beam lifetime); GPS engineering; muon-catalysed fusion;\ntwin paradox; relativistic spacecraft design\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 334,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "Curriculum Feedback",
+      "content": "Correct KG positioning. Requires phys.rel.simultaneity (established before now); unlocks\nphys.rel.length-contraction correctly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 342,
+        "endLine": 349
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

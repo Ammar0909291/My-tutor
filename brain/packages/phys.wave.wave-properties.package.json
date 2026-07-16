@@ -1,0 +1,323 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.wave-properties-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.wave-properties",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:26a2fc9cc2141b49cda7b21cf2eb9307c0870ea69f820afd35ac6a150a279239",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.wave-properties.md": "sha256:4307cc89bd76f9491f931f93ff056baaecbc0b2e903b7b29ac05f67292871826"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.wave-properties",
+    "name": "Wave Properties",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.meas.units"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.wave-properties-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.wave-properties (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.wave-properties.md": "sha256:4307cc89bd76f9491f931f93ff056baaecbc0b2e903b7b29ac05f67292871826"
+      },
+      "contentHash": "sha256:fa51f73220424e37255013a41af344f3e291bd9e779c7eca10a8667b906a148e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.wave-properties.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.wave-properties.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.wave-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.wave-properties\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.wave-properties.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.wave-properties.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.wave-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.wave-properties\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.wave-properties.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.wave-properties.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.wave-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.wave-properties\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.wave-properties.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.wave-properties.md#TA-4 (addresses MC-WAVE-CARRIES-MATTER, MC-HIGHER-FREQUENCY-FASTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.wave-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.wave-properties\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.wave-properties/misconception/MC-WAVE-CARRIES-MATTER",
+      "kind": "misconception",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "- **Trigger signal:** Student says \"waves carry water from one place to another\" or thinks the medium itself travels with the wave.",
+      "content": "### MC-WAVE-CARRIES-MATTER\n- **Trigger signal:** Student says \"waves carry water from one place to another\" or thinks the medium itself travels with the wave.\n- **Conflict evidence [P28]:** \"Watch a duck floating on a pond when a wave passes — it bobs up and down but stays in essentially the same spot. The water molecules oscillate locally; they do not travel with the wave. The wave is a pattern of disturbance that propagates, carrying energy but not matter. A surfer paddling out from shore must fight incoming waves — if waves carried water, a wall of water would knock them back; instead, the surfer mostly bobs. Tsunami waves travel across the Pacific as a pattern of displacement, not a moving mass of water.\"\n- **Bridge text [P30]:** \"The wave speed v = fλ is the speed of the pattern (the disturbance), not the speed of individual medium particles. Individual particles oscillate with amplitude A at their fixed positions. Energy is passed from particle to particle along the wave direction.\"\n- **Replacement text [P31]:** \"A wave is a self-propagating disturbance that transfers energy without net transfer of matter. Medium particles oscillate about their equilibrium positions. The wave pattern moves at speed v = fλ; individual particles move at much slower oscillation speeds.\"\n- **Discrimination pairs [P33]:**\n  - Wave front: moves at speed v = fλ in the direction of propagation ✓\n  - Medium particle: oscillates back-and-forth (transverse) or back-and-forth along (longitudinal) at the same position ✓\n- **s6_path:** \"Imagine a stadium wave: each person only stands and sits at their seat — nobody runs around the stadium — but the wave pattern travels all the way around.\"\n\n---",
+      "localKey": "MC-WAVE-CARRIES-MATTER",
+      "language": "en",
+      "refs": [
+        "MC-WAVE-CARRIES-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/misconception/MC-HIGHER-FREQUENCY-FASTER",
+      "kind": "misconception",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "- **Trigger signal:** Student says \"doubling the frequency makes the wave travel twice as fast\" or equates frequency with wave speed.",
+      "content": "### MC-HIGHER-FREQUENCY-FASTER\n- **Trigger signal:** Student says \"doubling the frequency makes the wave travel twice as fast\" or equates frequency with wave speed.\n- **Conflict evidence [P28]:** \"Wave speed in a given medium depends on the medium's properties — the tension and density of a string, the bulk modulus and density of air, the rigidity of a crystal — not on the wave's frequency. In a string: v = √(T/μ). Doubling the frequency at the same speed halves the wavelength (v = fλ → λ = v/f). Middle C (262 Hz) and the note an octave higher (524 Hz) travel at the same speed of sound (~343 m/s) through the same air. Radio waves (MHz) and gamma rays (10²² Hz) both travel at c = 3×10⁸ m/s in vacuum.\"\n- **Bridge text [P30]:** \"v = fλ is a relationship between the three wave quantities. In a given medium, v is fixed by the medium. So f and λ are inversely proportional to each other — increase one, the other must decrease. Only changing the medium (e.g. from air to water) or the restoring force changes v.\"\n- **Replacement text [P31]:** \"Wave speed v depends on the medium, not on f or λ. v = fλ means that in a fixed medium: higher f → shorter λ; lower f → longer λ. Speed is set by the medium.\"\n- **Discrimination pairs [P33]:**\n  - Sound at 200 Hz in air (20°C): v = 343 m/s, λ = 1.72 m ✓\n  - Sound at 2000 Hz in same air: v = 343 m/s, λ = 0.172 m (same v, shorter λ) ✓\n- **s6_path:** \"Speed is how fast the wave travels. Frequency is how many crests pass per second. They're completely different things — speed is the medium's decision, frequency is the source's decision.\"\n\n---",
+      "localKey": "MC-HIGHER-FREQUENCY-FASTER",
+      "language": "en",
+      "refs": [
+        "MC-HIGHER-FREQUENCY-FASTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "Wave Vocabulary",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Wave Vocabulary\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 77,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "What Waves Transfer",
+      "content": "{\"id\":\"TA-2\",\"title\":\"What Waves Transfer\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 92,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "Wave Types Overview",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Wave Types Overview\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 100,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "Wavefronts and Rays",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Wavefronts and Rays\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-HIGHER-FREQUENCY-FASTER\",\"MC-WAVE-CARRIES-MATTER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-WAVE-CARRIES-MATTER",
+        "MC-HIGHER-FREQUENCY-FASTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 110,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Vocabulary identification**\n\"A water wave has a crest-to-crest distance of 3 m and passes a fixed buoy at a rate of 4 crests per second. Calculate: (a) wavelength, (b) frequency, (c) period, (d) wave speed.\"\n\n*Target:* λ = 3 m; f = 4 Hz; T = 0.25 s; v = fλ = 4×3 = 12 m/s.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 155,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Medium vs. frequency**\n\"A guitar string vibrating at 440 Hz produces a sound that travels at 343 m/s in air and 1480 m/s in water. (a) Find the wavelength in air and in water. (b) Does the frequency change when sound enters water?\"\n\n*Target:* λ_air = 343/440 = 0.780 m; λ_water = 1480/440 = 3.36 m. Frequency stays at 440 Hz — determined by the source, not the medium. Only wavelength changes when speed changes.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 155,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Transverse vs. longitudinal identification**\n\"Classify each as transverse, longitudinal, or both: (a) sound in air, (b) earthquake S-waves (shear), (c) earthquake P-waves (pressure), (d) light, (e) ripples on a water surface.\"\n\n*Target:* (a) longitudinal; (b) transverse; (c) longitudinal; (d) transverse; (e) both (water ripples have transverse + longitudinal components — particles move in circles).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 155,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — In-phase and antiphase**\n\"A wave has wavelength 0.8 m. Two points P and Q are 0.6 m apart along the direction of travel. (a) What is the path difference P to Q in terms of λ? (b) Are P and Q in phase, antiphase, or neither?\"\n\n*Target:* 0.6/0.8 = 0.75λ = ¾λ. Not in phase (not nλ) and not exactly antiphase (not (n+½)λ). Phase difference = 0.75 × 360° = 270° (or equivalently −90°). They are neither in phase nor in antiphase.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 155,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: inverse square**\n\"An alarm emits 0.5 W of sound. The threshold of pain is 1 W/m². (a) At what distance from the alarm does the sound intensity equal the pain threshold? (b) If the alarm's power doubles, by what factor does this 'safe distance' change?\"\n\n*Target:* (a) I = P/(4πr²) → r = √(P/(4πI)) = √(0.5/(4π×1)) = √(0.0398) = 0.199 m ≈ 0.2 m. (b) P doubles → r increases by √2 ≈ 1.41× (safe distance grows by only 41%, not 100%, because of the r² relation).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 155,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.wave.wave-properties/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.wave-properties",
+      "title": "Adaptive Flags",
+      "content": "- **Period vs. frequency**: T = 1/f is a definition, not a derived result. Students confuse T and f. Use units as the check: f in Hz (s⁻¹), T in s (s). \"Frequency is how many; period is how long one takes.\"\n- **Amplitude and energy**: E ∝ A² (not A). Doubling amplitude quadruples energy. This becomes critical in sound intensity, seismology, and light intensity later.\n- **Electromagnetic waves**: mention that EM waves do not require a medium and travel at c in vacuum. Don't derive Maxwell's equations here — just establish the category distinction.\n- **Huygens' principle**: qualitative only at this level. Do not attempt derivation. It is used later in phys.opt.diffraction and phys.wave.interference to explain why waves bend around obstacles.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.wave-properties.md",
+        "startLine": 221,
+        "endLine": 230
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

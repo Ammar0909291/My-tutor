@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.projectile-motion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.projectile-motion",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:a4d947be96492bd758119981359d6d2d54c19fe2dbce0be13b317b2334828617",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.projectile-motion.md": "sha256:c9dc7ae40b47e472ae71838b71fc13d893a596c8d5d9c82c47399a24b8be0879"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.projectile-motion",
+    "name": "Projectile Motion",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.kinematics-2d"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.projectile-motion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.projectile-motion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.projectile-motion.md": "sha256:c9dc7ae40b47e472ae71838b71fc13d893a596c8d5d9c82c47399a24b8be0879"
+      },
+      "contentHash": "sha256:3786eceeab6d70ef7213baeb97dff3db70eeb1ac86bc453095a8823366680070",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.projectile-motion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.projectile-motion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.projectile-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.projectile-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.projectile-motion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.projectile-motion.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.projectile-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.projectile-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.projectile-motion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.projectile-motion.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.projectile-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.projectile-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.projectile-motion.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.projectile-motion.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.projectile-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.projectile-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.projectile-motion.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.projectile-motion.md#TA-5 (addresses MC-MAX-RANGE-90DEG, MC-HEAVIER-FALLS-FASTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.projectile-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.projectile-motion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.projectile-motion/misconception/MC-HEAVIER-FALLS-FASTER",
+      "kind": "misconception",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "- **Trigger signal:** Student says \"a heavier ball reaches the ground first when thrown horizontally\" or expects mass to affect the parabolic trajectory.",
+      "content": "### MC-HEAVIER-FALLS-FASTER\n- **Trigger signal:** Student says \"a heavier ball reaches the ground first when thrown horizontally\" or expects mass to affect the parabolic trajectory.\n- **Conflict evidence [P28]:** \"In the vertical direction, both the gravitational force and the mass appear: F = mg → a = F/m = g. The mass cancels. All projectiles (ignoring air resistance) experience the same downward acceleration g = 9.8 m/s² regardless of mass. A 1 kg ball and a 10 kg ball thrown horizontally at the same speed from the same height land at exactly the same time and same horizontal distance. This was Galileo's original insight from the Leaning Tower of Pisa.\"\n- **Bridge text [P30]:** \"Acceleration due to gravity is g = F_gravity/m = mg/m = g — mass cancels. This is why kinematics (SUVAT) equations for projectile motion contain no mass term at all. The trajectory depends only on initial speed, angle, and g.\"\n- **Replacement text [P31]:** \"Projectile trajectory is mass-independent (no air resistance). A canon ball and a golf ball launched at the same v₀ and θ follow identical parabolas. Mass affects the force (F = mg) but not the acceleration (a = g).\"\n- **Discrimination pairs [P33]:**\n  - 1 kg ball thrown at 20 m/s, 45°: lands at R = v₀² sin2θ/g = 400/9.8 = 40.8 m ✓\n  - 5 kg ball thrown at 20 m/s, 45°: lands at R = 40.8 m (same) ✓\n- **s6_path:** \"Galileo faced the same pushback when he said heavy and light objects fall at the same rate. Try dropping a coin and a piece of paper at the same time — then fold the paper to reduce air resistance and try again. Air resistance is the confounding factor in real life.\"\n\n---",
+      "localKey": "MC-HEAVIER-FALLS-FASTER",
+      "language": "en",
+      "refs": [
+        "MC-HEAVIER-FALLS-FASTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/misconception/MC-MAX-RANGE-90DEG",
+      "kind": "misconception",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "- **Trigger signal:** Student says \"shooting straight up (90°) gives the maximum range\" or confuses maximum height with maximum range.",
+      "content": "### MC-MAX-RANGE-90DEG\n- **Trigger signal:** Student says \"shooting straight up (90°) gives the maximum range\" or confuses maximum height with maximum range.\n- **Conflict evidence [P28]:** \"Range R = v₀² sin 2θ/g. At θ = 90°: sin(180°) = 0 → R = 0 (ball goes straight up and lands on the launch point). At θ = 45°: sin(90°) = 1 → R = v₀²/g (maximum). At θ = 0°: sin(0°) = 0 → R = 0 again (ball skims the ground). The range formula has a maximum at θ = 45°, not 90°.\"\n- **Bridge text [P30]:** \"Maximising range requires optimising the trade-off between horizontal speed and time of flight. A shallow angle gives high horizontal speed but short flight time. A steep angle gives long flight time but low horizontal speed. θ = 45° is the optimal balance.\"\n- **Replacement text [P31]:** \"Maximum range on level ground: θ = 45°, giving R_max = v₀²/g. Complementary angles give equal range: θ and (90° − θ) produce the same R. High-angle path → more height, same range. Low-angle path → less height, same range.\"\n- **Discrimination pairs [P33]:**\n  - θ = 30°: R = v₀² sin60°/g ≈ 0.866 v₀²/g; H = v₀² sin²30°/(2g) = 0.125 v₀²/g\n  - θ = 60°: R = v₀² sin120°/g ≈ 0.866 v₀²/g (same R!); H = v₀² sin²60°/(2g) = 0.375 v₀²/g (3× height)\n- **s6_path:** \"The 45° maximum is one of those results that seems obvious once you see it but isn't. Draw the range formula R = v₀² sin2θ/g and ask: which value of θ makes sin2θ = 1?\"\n\n---",
+      "localKey": "MC-MAX-RANGE-90DEG",
+      "language": "en",
+      "refs": [
+        "MC-MAX-RANGE-90DEG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "Projectile Motion Equations",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Projectile Motion Equations\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 75,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "Key Results: Time of Flight, Range, Maximum Height",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Key Results: Time of Flight, Range, Maximum Height\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 96,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "Trajectory Equation (Parabola)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Trajectory Equation (Parabola)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "Projectile from Height / Non-Level Ground",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Projectile from Height / Non-Level Ground\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 123,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "Speed and Angle at Any Point",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Speed and Angle at Any Point\",\"primitives\":[\"P01\",\"P06\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-HEAVIER-FALLS-FASTER\",\"MC-MAX-RANGE-90DEG\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MAX-RANGE-90DEG",
+        "MC-HEAVIER-FALLS-FASTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 136,
+        "endLine": 303
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Mass independence**\n\"Two balls, A (mass 0.1 kg) and B (mass 2 kg), are thrown horizontally at 10 m/s from the same height. Which lands first? Which travels further? Justify without calculating.\"\n\n*Target:* Both land simultaneously (same t = √(2h/g)); both travel the same range (same u_x and same t). Mass does not appear in either equation.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 196,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Symmetry**\n\"A ball is launched at 30° and lands 40 m away. At what other angle could it be launched at the same speed to travel 40 m?\"\n\n*Target:* Complementary angle: 90° − 30° = 60°. Verify: sin2×30° = sin60°; sin2×60° = sin120° = sin60° ✓.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 196,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Speed at peak**\n\"A ball is launched at 20 m/s at 53° above horizontal. What is its speed at the highest point?\"\n\n*Target:* At peak, v_y = 0; v = vₓ = 20 cos53° = 20 × 0.6 = 12 m/s.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 196,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Non-level ground**\n\"A ball is launched at 20 m/s at 60° from a cliff top 45 m high. Find the horizontal range when it reaches ground level.\"\n\n*Target:* u_x = 10 m/s, u_y = 17.3 m/s. y = 17.3t − 4.9t² = −45 → 4.9t² − 17.3t − 45 = 0; t = (17.3 + √(299 + 882))/9.8 = (17.3 + 34.4)/9.8 = 5.27 s; R = 10 × 5.27 = 52.7 m.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 196,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Trajectory equation**\n\"A ball is launched at 25 m/s at 37° (sin37°=0.6, cos37°=0.8). Write the trajectory equation y(x). What is y at x = 30 m?\"\n\n*Target:* y = x tan37° − gx²/(2v₀²cos²37°) = 0.75x − 9.8x²/(2×625×0.64) = 0.75x − 0.01225x². At x = 30: y = 22.5 − 11.0 = 11.5 m.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 196,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.mech.projectile-motion/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.projectile-motion",
+      "title": "Adaptive Flags",
+      "content": "- **Air resistance caveat**: all results assume vacuum. Real projectiles (sports, bullets) have ranges reduced by air drag. Mention explicitly — especially for sports contexts (soccer, baseball) where students have intuitions based on real experience.\n- **Quadratic in TA-4**: the two-root quadratic always yields one positive and one negative time root; only the positive root is physical. Require students to state this explicitly when solving.\n- **v₀ sin2θ formula range**: the R = v₀² sin2θ/g formula only applies to level ground (same launch and landing height). Always check this condition before applying it.\n- **Landing speed = launch speed**: on level ground, |v_landing| = |v_launch| by energy conservation. This is a useful sanity check after WE-1/WE-2 calculations.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.projectile-motion.md",
+        "startLine": 265,
+        "endLine": 274
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

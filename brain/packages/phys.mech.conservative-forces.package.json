@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.conservative-forces-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.conservative-forces",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:a3b99cdfd59327b7e3603ff7cb9ac339f9f34db28d9498c6374764d6cdd5d305",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.conservative-forces.md": "sha256:84d213c11df190ec121c96d9a7c40c70d63a2a69647b61dc52dd5bd63f5a8687"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.conservative-forces",
+    "name": "Conservative and Non-Conservative Forces",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.conservation-of-energy"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.conservative-forces-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.conservative-forces (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.conservative-forces.md": "sha256:84d213c11df190ec121c96d9a7c40c70d63a2a69647b61dc52dd5bd63f5a8687"
+      },
+      "contentHash": "sha256:0b64cc2a0b8fcdddb2b967484bdb0359bcf1e3546a0d80a83bddca30f9f99f2e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservative-forces.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservative-forces.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservative-forces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservative-forces\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservative-forces.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservative-forces.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservative-forces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservative-forces\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservative-forces.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservative-forces.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservative-forces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservative-forces\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservative-forces.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservative-forces.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservative-forces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservative-forces\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.conservative-forces.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.conservative-forces.md#TA-5 (addresses MC-FRICTION-HAS-PE, MC-PATH-INDEPENDENCE-HARD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.conservative-forces"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.conservative-forces\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.conservative-forces/misconception/MC-PATH-INDEPENDENCE-HARD",
+      "kind": "misconception",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "- **Trigger signal:** Student says \"gravity does more work when you fall a longer path (e.g., along a ramp vs. vertically)\" or confuses path length with work done by a conservative force.",
+      "content": "### MC-PATH-INDEPENDENCE-HARD\n- **Trigger signal:** Student says \"gravity does more work when you fall a longer path (e.g., along a ramp vs. vertically)\" or confuses path length with work done by a conservative force.\n- **Conflict evidence [P28]:** \"A 1 kg block moves from point A (height 2 m) to point B (height 0 m) via two paths: (1) vertical drop of 2 m, (2) frictionless ramp of length 4 m. Path 1: W_gravity = mgh = 1×9.8×2 = 19.6 J. Path 2: force along ramp = mg sinθ, distance = 4 m, θ = 30° → W = mg sinθ × d = 9.8 × 0.5 × 4 = 19.6 J. Same work. The gravitational force is conservative: work depends only on height difference, not path length or shape.\"\n- **Bridge text [P30]:** \"A force is conservative if the work it does depends only on the start and end positions, not on the path taken between them. This is equivalent to saying: the work done around any closed loop is zero. Gravity, spring force, and electric force are conservative. Friction is not — a longer path means more friction work.\"\n- **Replacement text [P31]:** \"For a conservative force: W_A→B = −ΔU = U_A − U_B (path-independent). For a non-conservative force (friction, air drag): W depends on path length and cannot be expressed as ΔU. Mechanical energy is conserved only when all forces are conservative.\"\n- **Discrimination pairs [P33]:**\n  - Gravity: W = mgh regardless of path ✓ (conservative)\n  - Kinetic friction: W = −μmgd (depends on distance d; different paths → different W) ✓ (non-conservative)\n- **s6_path:** \"Path independence feels abstract. Think of it as: gravity doesn't care HOW you got to the ground, only WHERE you started and ended. Friction cares intensely about the path — more sliding = more heat.\"\n\n---",
+      "localKey": "MC-PATH-INDEPENDENCE-HARD",
+      "language": "en",
+      "refs": [
+        "MC-PATH-INDEPENDENCE-HARD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/misconception/MC-FRICTION-HAS-PE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "- **Trigger signal:** Student tries to write \"friction potential energy\" or expects friction work to be stored and recoverable.",
+      "content": "### MC-FRICTION-HAS-PE\n- **Trigger signal:** Student tries to write \"friction potential energy\" or expects friction work to be stored and recoverable.\n- **Conflict evidence [P28]:** \"Friction converts kinetic energy to thermal energy (heat). Once converted, this energy cannot be recovered as kinetic energy by releasing a 'friction PE'. Try sliding a block along a rough floor — the floor warms up slightly. If friction had a PE, you could cool the floor and get the energy back. This is impossible (2nd Law of Thermodynamics). Friction energy is dissipated, not stored.\"\n- **Bridge text [P30]:** \"Potential energy is defined only for conservative forces — forces for which a PE function exists such that F = −dU/dx. Friction has no such function. Non-conservative forces convert mechanical energy to thermal energy, sound, or deformation — none of which are recoverable as KE or PE in a mechanical system.\"\n- **Replacement text [P31]:** \"Only conservative forces have associated PE. Friction, air drag, and tension in a non-ideal string are non-conservative — they dissipate mechanical energy. The work-energy theorem with non-conservative forces: W_nc = ΔKE + ΔPE = ΔE_mech.\"\n- **Discrimination pairs [P33]:**\n  - Gravity: F = −dU/dr (has PE = mgh) ✓\n  - Spring: F = −dU/dx = −kx (has PE = ½kx²) ✓\n  - Friction: F = −μmg (constant opposing motion) — no PE function exists ✓\n- **s6_path:** \"Potential energy is like a rechargeable battery — you put energy in (against the force), and you get it back out when the force acts. Friction is a one-way valve — energy only flows out, never back in.\"\n\n---",
+      "localKey": "MC-FRICTION-HAS-PE",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-HAS-PE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 15,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "Defining Conservative Forces",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Defining Conservative Forces\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 81,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "Work-Energy Theorem Extended",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Work-Energy Theorem Extended\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 94,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "Identifying Conservative vs. Non-Conservative in Problems",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Conservative vs. Non-Conservative in Problems\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "Potential Energy Functions and Force Derivation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Potential Energy Functions and Force Derivation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 123,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "Energy Diagrams and Equilibrium",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Energy Diagrams and Equilibrium\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-FRICTION-HAS-PE\",\"MC-PATH-INDEPENDENCE-HARD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-FRICTION-HAS-PE",
+        "MC-PATH-INDEPENDENCE-HARD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 134,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Classify the force**\n\"Classify each as conservative or non-conservative: (a) gravity, (b) air drag, (c) spring force, (d) normal force, (e) kinetic friction. For each conservative force, name its associated PE.\"\n\n*Target:* (a) conservative (U = mgh); (b) non-conservative; (c) conservative (U = ½kx²); (d) W = 0, not classified; (e) non-conservative.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Path independence proof**\n\"A 5 kg object moves along path 1 (length 10 m) against a 20 N friction force, then along path 2 (length 3 m, same friction). Compare W_friction. Now repeat for gravity: path 1 has height gain 4 m, path 2 also has height gain 4 m. Compare W_gravity.\"\n\n*Target:* Friction: W₁ = −200 J, W₂ = −60 J (different — path-dependent). Gravity: W₁ = W₂ = −5×9.8×4 = −196 J (same — path-independent).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — W_NC applied**\n\"A 4 kg block starts at rest at height 5 m on a ramp. It reaches the bottom with speed 7 m/s. How much energy was lost to friction?\"\n\n*Target:* E_mech_i = mgh = 196 J; E_mech_f = ½mv² = ½×4×49 = 98 J; W_NC = 98 − 196 = −98 J (98 J lost to friction).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Force from PE**\n\"U(x) = 4x³ − 12x (J, with x in m). Find (a) F at x = 1 m, (b) equilibrium positions.\"\n\n*Target:* F = −dU/dx = −(12x² − 12) = 12 − 12x². (a) F(1) = 12 − 12 = 0 (equilibrium). (b) F = 0 → 12x² = 12 → x = ±1 m.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: energy diagram**\n\"A particle has U(x) = x² − 4x + 3 (J). Total energy E = 1 J. (a) Find the equilibrium position. (b) Find the turning points. (c) Is the equilibrium stable?\"\n\n*Target:* (a) F = −dU/dx = −(2x−4) = 0 → x = 2; U(2) = 4−8+3 = −1 J. (b) Turning points: U(x) = E = 1 → x²−4x+3=1 → x²−4x+2=0 → x = 2±√2 ≈ 0.59 m and 3.41 m. (c) d²U/dx² = 2 > 0 → stable minimum.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 185,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.mech.conservative-forces/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.conservative-forces",
+      "title": "Adaptive Flags",
+      "content": "- **Bloom level — analyze**: this is a level-5 concept. Mastery requires students to decompose problems (identify all forces, classify each, write the correct energy equation) before calculating. The decision-tree TA-3 directly supports this decomposition skill.\n- **Normal force W = 0**: the normal force is perpendicular to motion so does zero work — it doesn't belong to either category. State this explicitly to prevent students from trying to find its PE.\n- **Calculus in TA-4/TA-5**: F = −dU/dx requires differentiation. If the student hasn't reached calculus, present TA-4/TA-5 qualitatively (slope of U(x) graph is −F) rather than analytically.\n- **3D gradient**: mention F = −∇U exists but stay in 1D for all calculations at this level.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.conservative-forces.md",
+        "startLine": 251,
+        "endLine": 260
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.astro.cosmology-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.astro.cosmology",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:8cb9471738bb98f427e9ce99ab2983f2e0ddd9694d8675148d78c7c18da3bf1d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.astro.cosmology.md": "sha256:da2fd24d8a47255ab7f7fa6e20492ec326045db808f37c9ddadf4d901a995d3f"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.astro.cosmology",
+    "name": "Big Bang Cosmology",
+    "difficultyRaw": "Advanced",
+    "bloom": "Analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.rel.spacetime",
+      "phys.astro.stellar-structure"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.astro.cosmology-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.astro.cosmology (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.astro.cosmology.md": "sha256:da2fd24d8a47255ab7f7fa6e20492ec326045db808f37c9ddadf4d901a995d3f"
+      },
+      "contentHash": "sha256:36f7f13b4ff84c25738798a3b3e01393b2b7ab3094c4fe2e6ebd8d067ef1c521",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.astro.cosmology.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.cosmology.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.cosmology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.cosmology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.cosmology.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.cosmology.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.cosmology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.cosmology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.cosmology.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.cosmology.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.cosmology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.cosmology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.astro.cosmology/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Big Bang Cosmology — core explanation",
+      "content": "**Core Claim:** The universe began ~13.8 billion years ago in an extremely hot, dense state (the Big Bang), has been expanding ever since (described by the Friedmann equations from GR), and its history is recorded in three independent observations: the Hubble expansion of galaxies (v = H₀d), the Cosmic Microwave Background radiation (T = 2.725 K), and Big Bang nucleosynthesis (H:He ≈ 3:1 by mass).\n\n**Why It Matters:** Cosmology explains the large-scale structure of the universe, the origin of all matter and radiation, and constrains fundamental physics at energies unreachable by any particle accelerator. The standard ΛCDM model (cold dark matter + cosmological constant) is one of the most precisely tested scientific theories.\n\n**Threshold Concept:** The Big Bang is not an explosion in space — it is an expansion of space itself. Every point in the universe was once arbitrarily close to every other point; the universe did not expand from a central location into pre-existing space.\n\n**Prerequisite Knowledge Check:**\n- Special relativity, spacetime intervals, four-vectors (phys.rel.spacetime)\n- Stellar structure, stellar evolution, nucleosynthesis (phys.astro.stellar-structure)\n- Doppler effect (phys.wave.doppler-effect)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.astro.cosmology",
+      "title": "The Big Bang occurred at a specific location in space",
+      "content": "### MC-1: The Big Bang occurred at a specific location in space\n- **Probe:** \"Where did the Big Bang happen?\"\n- **Characteristic phrase:** \"At the center of the universe, wherever that is.\"\n- **Trigger:** Analogizing to a conventional explosion.\n- **Conflict evidence [P28]:** If the Big Bang had a center, galaxies should appear to recede predominantly from that center. Instead, Hubble's law v = H₀d is isotropic — every galaxy recedes with speed proportional to distance, regardless of direction. No preferred center is observed, no matter where in the universe we stand.\n- **Bridge [P30]:** The Big Bang is not matter expanding into pre-existing space; it is space itself that expanded. At t=0, every region of space was infinitely (or extremely) compact. The expansion has no center because space has no center.\n- **Replacement [P31]:** The Big Bang happened everywhere simultaneously. Every point in today's universe was once at the \"starting point\" — the expansion is a property of space itself, described by the scale factor a(t) which applies uniformly to all points.\n- **Discrimination pairs [P33]:** Conventional explosion: center, edge, expansion into existing space. Cosmological expansion: no center, no edge, space itself expanding, Hubble's law from every vantage point.\n- **S6 repair path:** Rubber sheet analogy (dots on expanding sheet) — every dot recedes from every other; no dot is the center.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.astro.cosmology",
+      "title": "The CMB is light from the moment of the Big Bang",
+      "content": "### MC-2: The CMB is light from the moment of the Big Bang\n- **Probe:** \"What is the cosmic microwave background?\"\n- **Characteristic phrase:** \"It's the afterglow of the Big Bang explosion.\"\n- **Trigger:** Popular-science language; literal interpretation of \"Big Bang glow.\"\n- **Conflict evidence [P28]:** The CMB was emitted at z~1100 (t~380,000 years after the Big Bang), when the universe cooled to ~3000 K and protons captured electrons (recombination). Before recombination, the universe was opaque (photons scattered off free electrons); after, transparent. The CMB photons are from this \"last-scattering surface\" — 380,000 years into cosmic history, not t=0.\n- **Bridge [P30]:** The first ~380,000 years are hidden behind the CMB — photons from earlier cannot reach us because the universe was opaque. The CMB is the \"oldest light we can see,\" not light from the singularity.\n- **Replacement [P31]:** CMB = relic radiation from the epoch of recombination (t~380,000 yr). Temperature then: ~3000 K. Redshifted by factor z~1100 to T today = 3000/1100 ≈ 2.73 K. Blackbody spectrum confirmed by COBE 1992 (Nobel Prize 2006).\n- **Discrimination pairs [P33]:** Big Bang itself (t~0): hidden; no photons can escape. CMB (t=380,000 yr): oldest observable radiation, z~1100. Visible universe today: z=0.\n- **S6 repair path:** Walk through the timeline: quark plasma → proton+neutron formation (t~1s) → nucleosynthesis (t~1-3 min) → radiation dominated → recombination (t=380,000 yr) → CMB released.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Cosmological redshift is a Doppler shift",
+      "content": "### MC-3: Cosmological redshift is a Doppler shift\n- **Probe:** \"Why are distant galaxies redshifted?\"\n- **Characteristic phrase:** \"They're moving away from us, so we see a Doppler shift.\"\n- **Trigger:** Correct for local galaxy motions; over-applied to cosmological context.\n- **Conflict evidence [P28]:** Cosmological redshift at z~1 (galaxies receding at roughly the speed of light) would require Doppler formula: z = √((1+β)/(1−β)) − 1 ≈ 1 → β ≈ 0.6c. But the recession \"velocity\" in Hubble's law v = H₀d can exceed c for sufficiently distant objects (d > c/H₀ ~ 14 Gly) — which is allowed in GR for space expansion but not in SR Doppler.\n- **Bridge [P30]:** Cosmological redshift is a stretching of photon wavelength by expanding space: λ_observed/λ_emitted = a(t₀)/a(t_emit) = 1 + z. No photon moves faster than light; the space the photon travels through expands.\n- **Replacement [P31]:** 1 + z = a(t₀)/a(t_emit). For nearby galaxies, z is small and the approximation z ≈ v/c (Hubble's law) works. For high-z, the full GR expansion formula must be used. The CMB (z=1100) is not a Doppler effect — it is 1100× wavelength stretching by 13.8 billion years of expansion.\n- **Discrimination pairs [P33]:** Doppler: source moves relative to medium. Cosmological: no medium; space itself expands; both source and observer carried by expansion.\n- **S6 repair path:** Compute CMB temperature: T_CMB = T_recomb/(1+z) = 3000/1100 ≈ 2.73 K. The (1+z) factor is from expansion, not Doppler.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.astro.cosmology",
+      "title": "The observable universe is 13.8 billion light-years in radius",
+      "content": "### MC-4: The observable universe is 13.8 billion light-years in radius\n- **Probe:** \"How large is the observable universe?\"\n- **Characteristic phrase:** \"13.8 billion light-years — because that's how long light has had to travel.\"\n- **Trigger:** Intuitive: light-travel distance = c × age of universe.\n- **Conflict evidence [P28]:** The light we now receive from the CMB was emitted from regions that were then only ~42 million light-years away. During the 13.8 Gyr that light traveled to us, those regions continued to expand away. They are now ~46 billion light-years away. The observable universe has a comoving radius of ~46 Gly, not 13.8 Gly.\n- **Bridge [P30]:** Light-travel distance ≠ current distance in an expanding universe. The \"lookback\" distance and the \"proper\" current distance are different quantities. The comoving distance accounts for the expansion during transit.\n- **Replacement [P31]:** Observable universe radius: ~46 billion light-years (comoving). Light has only traveled 13.8 billion light-years in travel-time, but the source has receded during transit due to expansion.\n- **Discrimination pairs [P33]:** Static universe: observable radius = c × age = 13.8 Gly. Expanding universe: observable comoving radius ~ 46 Gly > c × age.\n- **S6 repair path:** Analogy: ant walking on a rubber sheet — the sheet stretches as the ant walks; the ant's start point is now farther than the distance walked.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Rubber-sheet/raisin-bread analogy for isotropic expansion, no center",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Rubber-sheet/raisin-bread analogy for isotropic expansion, no center\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 166,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Calculate CMB temperature from z~1100: T = 3000/(1+z) ≈ 2.73 K",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Calculate CMB temperature from z~1100: T = 3000/(1+z) ≈ 2.73 K\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 167,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Show BBN prediction: n/p = 1/7 → 25% He → compare to observation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Show BBN prediction: n/p = 1/7 → 25% He → compare to observation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 168,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Hubble's law and age estimate; CMB origin and temperature; BBN helium abundance; the three evidence pillars for the Big Bang.\n\n**FA-1:** \"A galaxy is observed at redshift z = 0.5. Estimate its recession velocity using v = cz. Is this approximation valid?\"\n*Expected:* v ≈ 0.5c = 1.5×10⁸ m/s. At z=0.5, this approximation overestimates by ~15% (relativistic corrections needed). Valid only for z ≪ 1 (small redshifts).\n*Threshold:* Correct calculation; aware of approximation's limitations.\n\n**FA-2:** \"What is the origin of the cosmic microwave background? Why is it at 2.725 K?\"\n*Expected:* CMB was emitted at z~1100 (t~380,000 yr after Big Bang) when the universe cooled to ~3000 K and became transparent. Since then, the universe expanded by factor 1+z~1100, stretching the photon wavelengths: T today = 3000/1100 ≈ 2.73 K. It is the \"oldest light\" — the surface of last scattering.\n*Threshold:* Correct origin (recombination, not Big Bang); correct temperature calculation with (1+z) factor.\n\n**FA-3:** \"What is the predicted primordial helium mass fraction from BBN, and what does it depend on?\"\n*Expected:* Y_He ≈ 25% by mass. It depends on the neutron-to-proton ratio at freeze-out (n/p ≈ 1/7), which in turn depends on the baryon-to-photon ratio η and the expansion rate at T~1 MeV. The fraction is nearly independent of small changes in η but sensitive to the number of neutrino flavors (3 in the Standard Model) and the neutron lifetime.\n*Threshold:* Correct fraction (~25%); identifies n/p ratio and its origin; knows it's a prediction from first principles.\n\n**FA-4:** \"What are three independent observational pillars supporting the Big Bang model?\"\n*Expected:* (1) Hubble expansion: v = H₀d, confirmed by galaxy redshifts; (2) CMB: 2.725 K blackbody radiation, confirmed by COBE/WMAP/Planck — thermal relic of the hot early universe; (3) BBN: predicted H/He ratio ~3:1 by mass, confirmed in metal-poor systems. (Additional: large-scale structure, light element abundances, BAO.)\n*Threshold:* All three stated with brief physical explanation of each.\n\n**Confidence calibration:** After FA-3, ask: \"Could you explain why the CMB temperature anisotropy ΔT/T ~ 10⁻⁵ is significant?\" Tests whether the learner understands that these tiny fluctuations are the seeds of all cosmic structure — galaxies, clusters, filaments.\n\n**Delayed retrieval:** Return at day 7: \"Estimate the age of the universe from H₀ = 67 km/s/Mpc. Why does the actual age differ from 1/H₀?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 184,
+        "endLine": 210
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** Stretch a rubber sheet with dots painted on it. As the sheet expands, every dot moves away from every other dot — and dots farther apart recede faster (Hubble's law). No dot is the \"center\" — the expansion is uniform everywhere.\n\n**Representational:**\n- Hubble's law: v = H₀d where H₀ = 67.4 km/s/Mpc (Planck 2018)\n- Hubble time: t_H = 1/H₀ ≈ 14.5 Gyr (approximate age of universe)\n- CMB: blackbody spectrum at T = 2.725 K; anisotropies ΔT/T ~ 10⁻⁵ (seeds of structure)\n- Friedmann equation: (ȧ/a)² = 8πGρ/3 − kc²/a² + Λc²/3 (scale factor a(t), density ρ, curvature k, cosmological constant Λ)\n\n**Abstract:**\n- Scale factor a(t): ratio of physical distance to comoving distance; a(t₀) = 1 today; a → 0 as t → 0 (Big Bang)\n- Cosmic energy budget: ordinary matter 5%, dark matter 27%, dark energy 68% (ΛCDM)\n- Timeline: Planck epoch (t < 10⁻⁴³ s), quark epoch (10⁻³⁶ s), nucleosynthesis (t ~ 1–3 min), recombination (t ~ 380,000 yr, CMB released), dark ages (380 kyr–100 Myr), first stars (~200 Myr), reionization, galaxy formation, today (13.8 Gyr)\n- BBN: 4 minutes of neutron-proton fusion produces H (75% by mass), ⁴He (25%), trace D, Li. Precise ratio depends on baryon/photon ratio η = n_b/n_γ.\n- Redshift: z = (λ_observed − λ_emitted)/λ_emitted = a(t₀)/a(t_emit) − 1; CMB: z ~ 1100\n\n**Transfer:** Type Ia supernovae as standard candles → Hubble diagram → accelerated expansion → dark energy. CMB power spectrum → baryon acoustic oscillations → dark matter/dark energy fractions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 36,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Why Beginners Fail",
+      "content": "1. **Big Bang as an explosion in space:** Learners picture an explosion centered at some location in pre-existing empty space. Actually, the Big Bang is an expansion of space itself — there is no center, no edge, no \"outside.\"\n2. **The CMB is the glow of the Big Bang fireball:** The CMB is the relic radiation released when the universe cooled enough for electrons and protons to combine (recombination), making the universe transparent for the first time. It is not the glow of the initial singularity.\n3. **Hubble recession = Doppler shift:** Cosmological redshift is not a Doppler shift — it is a stretching of photon wavelengths by the expanding space the photon traveled through. For nearby galaxies the distinction is small; for high-z objects it matters significantly.\n4. **The universe is 13.8 billion light-years across:** Due to expansion, the observable universe is ~46 billion light-years in radius (comoving), not 13.8 billion. Light emitted 13.8 Gyr ago came from regions that have since receded much farther.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 57,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"13.8 billion years ago, everything you can see, touch, and measure was compressed into a region smaller than an atom — and then it expanded. We have three independent lines of evidence for this: the Hubble expansion of galaxies, the cosmic microwave background, and the abundance of helium. The Big Bang is not a guess — it is one of the best-confirmed theories in all of science.\"\n\n**Pacing:** Lead with the three observational pillars (Hubble, CMB, BBN) before the Friedmann equations. The theory should feel demanded by evidence, not imposed.\n\n**Common impasse language:** \"The Big Bang wasn't an explosion in space — it was an explosion of space. There is no center and no edge. If you run a movie of the universe backward, every point converges to every other point simultaneously. The Big Bang happened everywhere at once.\"\n\n**Closing consolidation:** \"The universe began hot and dense, expanded and cooled, formed hydrogen and helium in the first three minutes, released the CMB at 380,000 years, formed the first stars at ~200 million years, and has been forming galaxies and stars ever since. We live near the middle of the Milky Way, in the middle of cosmic time — the universe is about halfway through the main-sequence lifetime of its typical stars.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 172,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner doesn't know what a redshift is or how Hubble's law works. Review phys.wave.doppler-effect first; then distinguish cosmological redshift from Doppler.\n\n**S3 — Partial understanding:** Can quote Hubble's law and CMB temperature but cannot explain origins or derive BBN fractions. Intervention: walk through BBN calculation (Demo 3) step by step.\n\n**S6 — Misconception detected:** MC-1 (Big Bang at a location) or MC-3 (redshift = Doppler). Intervention: MC-1 → raisin bread analogy; MC-3 → compute what recession velocity would be needed to Doppler-shift z=5 galaxy and show it exceeds c.\n\n**S9 — Near mastery:** Understands Big Bang but not dark energy or the accelerated expansion. Intervention: preview phys.astro.dark-matter/dark-energy — Type Ia SN data (1998 Nobel Prize) showed z vs. distance fainter than expected for decelerating universe → accelerated expansion → Λ > 0.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 210,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Timeline (key epochs and when they occur) + three evidence pillars (Hubble, CMB, BBN) + Friedmann equation structure.\n\n**Spaced retrieval schedule:** Day 1 (three Big Bang evidence pillars; Hubble's law), Day 3 (CMB origin and temperature; BBN He fraction), Day 7 (cosmic timeline: 10⁻⁴³ s to 13.8 Gyr; what happens at each epoch), Day 21 (ΛCDM energy budget: 5/27/68% matter/DM/DE).\n\n**Interleaving partners:** phys.rel.spacetime (Friedmann equation is GR applied to a homogeneous, isotropic universe; the metric is the Robertson-Walker metric, a special case of g_μν), phys.astro.stellar-structure (stars form and synthesize metals within the cosmic timeline), phys.astro.dark-matter (ΛCDM requires 27% dark matter; evidence from CMB + structure formation).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 222,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Age dating of the universe from H₀; CMB as diagnostic of early-universe physics; using SNe Ia as standard candles to measure deceleration/acceleration.\n\n**Far transfer:** Particle physics at early universe energies (t < 10⁻¹⁰ s: electroweak symmetry breaking; t < 10⁻³⁵ s: inflation?). The early universe was the highest-energy physics laboratory that ever existed; cosmological observations constrain particle physics (number of neutrino species from BBN; WIMP dark matter from structure formation).\n\n**Structural abstraction:** The Friedmann equations are the cosmological application of GR — the same formalism used for black holes and gravitational waves. The scale factor a(t) is analogous to a size coordinate; H = ȧ/a is the Hubble parameter describing expansion. The transition from decelerated to accelerated expansion (at z~0.7) encodes the relative contributions of matter (decelerating) and dark energy (accelerating) — directly observable in the Hubble diagram.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 232,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.astro.cosmology/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.astro.cosmology",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.rel.spacetime (four-vectors, Lorentz invariance, metric tensor) is needed to understand the Friedmann equation and why cosmological redshift is not Doppler. phys.astro.stellar-structure provides the stellar context (stars form within the cosmic timeline; BBN precedes stellar nucleosynthesis).\n\n**Common pacing error:** Teaching the Big Bang as a narrative timeline without establishing the three independent evidence pillars. Learners who learn only the story cannot assess its evidential basis.\n\n**Assessment gap:** Most curricula test Hubble's law and the CMB temperature but rarely ask learners to derive the BBN helium fraction, explain the comoving vs. proper distance distinction, or connect the Friedmann equation to GR.\n\n**Suggested pairing:** Pair with phys.astro.dark-matter for the ΛCDM completion: cosmology requires dark matter (27%) to explain structure formation and the CMB power spectrum, and dark energy (68%) to explain the accelerated expansion.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.cosmology.md",
+        "startLine": 242,
+        "endLine": 255
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

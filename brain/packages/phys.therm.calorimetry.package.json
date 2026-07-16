@@ -1,0 +1,634 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.calorimetry-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.calorimetry",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:ac6d35ddc0b0476bc96910c13749bfc32f8f1051dd20844fa4b53648667a03a9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.calorimetry.md": "sha256:b02aa59029d118ee24c9e0ea8cb1952b81bf7a501b378bbf9aab4575dbc310a7"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 14,
+      "session_flow": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "phys.therm.calorimetry",
+    "name": "Calorimetry",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.therm.specific-heat"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.calorimetry-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.calorimetry (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.calorimetry.md": "sha256:b02aa59029d118ee24c9e0ea8cb1952b81bf7a501b378bbf9aab4575dbc310a7"
+      },
+      "contentHash": "sha256:9b884eb0bc24260d52eedf9ea9df49802e8184c4014ff9dacffa8210d6302b8c",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-5 (addresses MC-FINAL-TEMPERATURE-IS-AVERAGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-7 (addresses MC-CALORIMETRY-IGNORES-CALORIMETER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.calorimetry.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.calorimetry.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.calorimetry"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.calorimetry\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.calorimetry/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "(Concrete — hot metal in water)",
+      "content": "### WE-1 (Concrete — hot metal in water)\n\n**Scenario:** A 150 g piece of unknown metal at 95°C is placed in 250 g of water at 20°C in a calorimeter (W_cal = 15 g water equivalent). The final temperature is 26.2°C. Find the specific heat of the metal.\n\n**Energy balance:**\nQ_metal = Q_water + Q_calorimeter\nm_metal × c_metal × (T_metal − T_f) = (m_water + W_cal) × c_water × (T_f − T_water,i).\n\n**Substituting (using c_water = 4.186 J/(g·K) for convenience):**\n0.150 kg × c_metal × (95 − 26.2) = (250 + 15) × 4.186 × (26.2 − 20).\n0.150 × c_metal × 68.8 = 265 × 4.186 × 6.2.\n10.32 × c_metal = 265 × 25.95 = 6876.8 J.\nc_metal = 6876.8 / 10.32 = 666.4 J/(kg·K) ≈ 667 J/(kg·K).\n\n**Identify:** Comparing to a table — c ≈ 667 J/(kg·K) is close to aluminium (900) and iron (450) — this may be a non-pure sample or an alloy. Pure aluminium's c = 900; steel ~470. Could be zinc (c ≈ 388) — not quite. Accept as measured result.\n\n**Answer:** c_metal ≈ 667 J/(kg·K).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 47,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "(Bridging — ice in water)",
+      "content": "### WE-2 (Bridging — ice in water)\n\n**Scenario:** 50 g of ice at 0°C is added to 200 g of water at 60°C in an insulated calorimeter. Find the final temperature. (c_water = 4186 J/(kg·K); L_f = 334 000 J/kg)\n\n**Step 1 — Check if all ice melts.**\nHeat available from cooling water to 0°C: Q_avail = m_water × c × ΔT = 0.2 × 4186 × 60 = 50 232 J.\nHeat needed to melt all ice: Q_melt = m_ice × L_f = 0.05 × 334 000 = 16 700 J.\nSince Q_avail (50 232) > Q_melt (16 700) — all ice melts. ✓\n\n**Step 2 — Energy balance after all ice melts (now 250 g water total).**\nLet T_f be final temperature.\nHeat released by original water cooling from 60°C to T_f = 0.2 × 4186 × (60 − T_f).\nHeat absorbed by melted ice (now at 0°C) warming to T_f = 0.05 × 4186 × T_f.\nHeat to melt ice = 16 700 J (already accounted — goes to phase change).\n\nEnergy balance:\n0.2 × 4186 × (60 − T_f) = 16 700 + 0.05 × 4186 × T_f.\n837.2(60 − T_f) = 16 700 + 209.3T_f.\n50 232 − 837.2T_f = 16 700 + 209.3T_f.\n33 532 = 1046.5T_f.\nT_f = 32.0°C.\n\n**Answer:** T_f = 32.0°C.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 47,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "(Abstract — bomb calorimeter calibration + food)",
+      "content": "### WE-3 (Abstract — bomb calorimeter calibration + food)\n\n**Scenario:** A bomb calorimeter is calibrated by burning 1.000 g of benzoic acid (Q = 26.434 kJ/g), raising temperature by 2.635°C. The same calorimeter then burns 0.750 g of peanut oil, raising temperature by 5.820°C. Find the energy content of peanut oil in kJ/g.\n\n**Step 1 — Calibrate: find C_cal.**\nC_cal = Q / ΔT = (26.434 × 1.000) / 2.635 = 10.03 kJ/°C.\n\n**Step 2 — Peanut oil combustion energy.**\nQ_oil = C_cal × ΔT = 10.03 × 5.820 = 58.37 kJ.\nEnergy per gram = 58.37 / 0.750 = 77.8 kJ/g.\n\n**Convert to dietary kcal/g:** 77.8 kJ/g ÷ 4.186 kJ/kcal = 18.6 kcal/g.\n(Literature value: peanut oil ≈ 37 kJ/g — the fictional data here is illustrative; real peanut oil has 9 kcal/g. The method is correct.)\n\n**Answer:** Energy content = 77.8 kJ/g for this scenario.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 47,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/misconception/MC-CALORIMETRY-IGNORES-CALORIMETER",
+      "kind": "misconception",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "**Trigger signal:** Student sets up the energy balance as Q_hot = Q_water only, forgetting W_cal (calorimeter's heat capacity).",
+      "content": "### MC-CALORIMETRY-IGNORES-CALORIMETER\n\n**Trigger signal:** Student sets up the energy balance as Q_hot = Q_water only, forgetting W_cal (calorimeter's heat capacity).\n\n**Conflict evidence [P28]:** \"Run WE-1 without W_cal: what c_metal do you get? Compare to the answer with W_cal = 15 g.\"\n\n*Without W_cal: Q_water = 250 × 4.186 × 6.2 = 6488.6 J. c_metal = 6488.6/10.32 = 628.7 J/(kg·K) vs. 667 J/(kg·K) with W_cal — 6% error. In precise work (food calorimetry, chemistry), this error is unacceptable.*\n\n**Bridge text [P30]:** \"The calorimeter vessel is a physical object in the system — it also changes temperature and therefore also absorbs heat. Ignoring it underestimates the heat released by the hot object, making c_metal appear lower than it really is.\"\n\n**Replacement text [P31]:** \"Always include W_cal (or the calorimeter heat capacity C_cal in kJ/°C). The complete balance is: Q_hot = Q_water + Q_calorimeter. In a well-calibrated bomb calorimeter, C_cal is measured experimentally from a standard combustion — that's the calibration step (WE-3 step 1).\"\n\n**Discrimination pairs [P33]:**\n- \"W_cal = 50 g (heavy copper calorimeter) instead of 15 g: would ignoring W_cal cause larger or smaller error?\" → Larger — the calorimeter absorbs proportionally more heat.\n- \"An ideal calorimeter has W_cal = 0. What would this require physically?\" → A perfectly insulating container with negligible heat capacity — approximated by polystyrene cups in basic lab work.\n\n**s6_path:** \"The calorimeter is inside the system boundary. Every object inside the boundary that changes temperature must appear in the energy balance.\"\n\n---",
+      "localKey": "MC-CALORIMETRY-IGNORES-CALORIMETER",
+      "language": "en",
+      "refs": [
+        "MC-CALORIMETRY-IGNORES-CALORIMETER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/misconception/MC-FINAL-TEMPERATURE-IS-AVERAGE",
+      "kind": "misconception",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "**Trigger signal:** Student guesses T_f = (T_hot + T_cold)/2 without considering masses or specific heats.",
+      "content": "### MC-FINAL-TEMPERATURE-IS-AVERAGE\n\n**Trigger signal:** Student guesses T_f = (T_hot + T_cold)/2 without considering masses or specific heats.\n\n**Conflict evidence [P28]:** \"WE-2: 50 g ice at 0°C added to 200 g water at 60°C. Simple average: (0 + 60)/2 = 30°C. Our calculation gives 32°C. But more importantly — try: 10 g water at 80°C added to 200 g water at 20°C. Does the average 50°C match conservation of energy?\"\n\n*Q_lost = 0.010 × 4186 × (80 − T_f). Q_gained = 0.200 × 4186 × (T_f − 20). Setting equal: 10(80−T_f) = 200(T_f−20). 800−10T_f = 200T_f−4000. 4800 = 210T_f. T_f = 22.9°C — far from 50°C average. Small mass has little effect on large water bath.*\n\n**Bridge text [P30]:** \"T_f = (T₁ + T₂)/2 is only valid when m₁c₁ = m₂c₂ — equal thermal masses. Otherwise, the final temperature is pulled toward the temperature of the substance with the larger thermal mass (m × c). A large cool bath barely moves when a small hot object is added.\"\n\n**Replacement text [P31]:** \"Use energy conservation: Q_lost = Q_gained → m₁c₁(T₁−T_f) = m₂c₂(T_f−T₂). Solve for T_f algebraically. The weighted average formula: T_f = (m₁c₁T₁ + m₂c₂T₂)/(m₁c₁ + m₂c₂). T_f is a thermal-mass-weighted average — the high-m×c component dominates.\"\n\n**Discrimination pairs [P33]:**\n- \"1 kg copper (c=385) at 200°C mixed with 1 kg water (c=4186) at 20°C: is T_f closer to 200°C or 20°C?\" → Much closer to 20°C — water's thermal mass (4186) >> copper's (385), so water dominates.\n- \"Equal masses of same material: T_f = ?\" → Simple average: T_f = (T₁+T₂)/2. This is the special case where m₁c₁ = m₂c₂.\n\n**s6_path:** \"Energy conservation gives the correct T_f. The simple average is only a shortcut for the special case of equal thermal masses.\"\n\n---",
+      "localKey": "MC-FINAL-TEMPERATURE-IS-AVERAGE",
+      "language": "en",
+      "refs": [
+        "MC-FINAL-TEMPERATURE-IS-AVERAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "diagnostic: food calorie measurement",
+      "content": "{\"id\":\"TA-2\",\"title\":\"diagnostic: food calorie measurement\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "anchor: iron-in-water energy conservation setup",
+      "content": "{\"id\":\"TA-3\",\"title\":\"anchor: iron-in-water energy conservation setup\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "bridge: energy balance equation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"bridge: energy balance equation\",\"primitives\":[\"P30\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 218,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": ": P28 conflict → P31 replacement (thermal-mass-weighted average) → P33 pairs",
+      "content": "{\"id\":\"TA-5\",\"title\":\": P28 conflict → P31 replacement (thermal-mass-weighted average) → P33 pairs\",\"primitives\":[\"P28\",\"P31\",\"P33\"],\"addresses\":[\"MC-FINAL-TEMPERATURE-IS-AVERAGE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-FINAL-TEMPERATURE-IS-AVERAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 219,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "check-in: role of thermal mass in T_f",
+      "content": "{\"id\":\"TA-6\",\"title\":\"check-in: role of thermal mass in T_f\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 221,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": ": P28 conflict → P30 bridge → P31 → P33",
+      "content": "{\"id\":\"TA-7\",\"title\":\": P28 conflict → P30 bridge → P31 → P33\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-CALORIMETRY-IGNORES-CALORIMETER\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-CALORIMETRY-IGNORES-CALORIMETER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 222,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "narrow: phase change term in balance",
+      "content": "{\"id\":\"TA-8\",\"title\":\"narrow: phase change term in balance\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 224,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "retrieval seed: WE-2 from memory",
+      "content": "{\"id\":\"TA-9\",\"title\":\"retrieval seed: WE-2 from memory\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 225,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "mastery probe: steam condensation in water",
+      "content": "{\"id\":\"TA-10\",\"title\":\"mastery probe: steam condensation in water\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 227,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-11\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 228,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-12\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 229,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-13\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "close",
+      "content": "{\"id\":\"TA-14\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 231,
+        "endLine": 231
+      }
+    },
+    {
+      "assetId": "phys.therm.calorimetry/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.calorimetry",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: food calorie measurement] → [P06 anchor: iron-in-water energy conservation setup]\n→ [P30 bridge: energy balance equation]\n→ [MC-FINAL-TEMPERATURE-IS-AVERAGE: P28 conflict → P31 replacement (thermal-mass-weighted average) → P33 pairs]\n→ [WE-1: hot metal in water — find c_metal]\n→ [P51 check-in: role of thermal mass in T_f]\n→ [MC-CALORIMETRY-IGNORES-CALORIMETER: P28 conflict → P30 bridge → P31 → P33]\n→ [WE-2: ice in water — latent heat in energy balance]\n→ [P52 narrow: phase change term in balance]\n→ [P62 retrieval seed: WE-2 from memory]\n→ [WE-3: bomb calorimeter calibration + peanut oil]\n→ [P36 mastery probe: steam condensation in water]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.calorimetry.md",
+        "startLine": 214,
+        "endLine": 236
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

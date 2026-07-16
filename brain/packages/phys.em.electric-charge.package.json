@@ -1,0 +1,463 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.electric-charge-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.electric-charge",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:9ec5142d67e789ad57475fcf314d836045809953f762b4db7c5d8ffa73f5637f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.electric-charge.md": "sha256:9a70c07d032d468361da4917f57f03e4e0e58bd952003f10657c65aa6aa2080b"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "phys.em.electric-charge",
+    "name": "Electric Charge",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.meas.units"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.electric-charge-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.electric-charge (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.electric-charge.md": "sha256:9a70c07d032d468361da4917f57f03e4e0e58bd952003f10657c65aa6aa2080b"
+      },
+      "contentHash": "sha256:6e3cfe048fdb915a3f8c0725e007cb5c5df9c642f38e2066b90c61c0af19163d",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-2 (addresses MC-CHARGE-IS-CREATED-BY-RUBBING, MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-charge.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-charge.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-charge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-charge\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.electric-charge/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-charge",
+      "title": "(Foundational — quantisation)",
+      "content": "### WE-1 (Foundational — quantisation)\n\n**Problem:** A conducting sphere has a charge of −4.80 × 10⁻¹⁸ C. How many excess electrons does it contain?\n\n**Worked solution:**\n\n*Step 1 — Use quantisation Q = ne:*\n$$n = \\frac{|Q|}{e} = \\frac{4.80 \\times 10^{-18}\\text{ C}}{1.602 \\times 10^{-19}\\text{ C/electron}} = 30.0$$\n\n*Step 2 — Interpret sign:*\nNegative charge means excess electrons (not protons). The sphere has 30 excess electrons.\n\n**Answer:** 30 excess electrons\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 75,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-charge",
+      "title": "(Conservation — charge accounting)",
+      "content": "### WE-2 (Conservation — charge accounting)\n\n**Problem:** An electrically neutral rubber rod is rubbed with fur. The rod acquires a charge of −6.4 × 10⁻¹⁸ C. (a) What charge does the fur acquire? (b) How many electrons transferred?\n\n**Worked solution:**\n\n*Step 1 — Conservation of charge:*\nInitial total charge: 0 (both neutral).\nFinal: Q_rod + Q_fur = 0\nQ_fur = −Q_rod = +6.4 × 10⁻¹⁸ C\n\n*Step 2 — Number of electrons transferred:*\n$$n = \\frac{6.4 \\times 10^{-18}}{1.602 \\times 10^{-19}} = 40 \\text{ electrons}$$\n\nElectrons moved FROM fur TO rod (making rod negative, fur positive).\n\n**Answer:** Q_fur = +6.4 × 10⁻¹⁸ C; 40 electrons transferred from fur to rod.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 75,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-charge",
+      "title": "(Induction — conceptual)",
+      "content": "### WE-3 (Induction — conceptual)\n\n**Problem:** A positively charged rod is brought near (but does not touch) an isolated metal sphere resting on an insulating stand. Describe the charge distribution on the sphere, and explain what happens when the sphere is grounded (briefly) while the rod is still nearby.\n\n**Worked solution:**\n\n*Step 1 — Induction without grounding:*\nThe positive rod repels free protons (but protons are fixed) and attracts free electrons. Electrons migrate to the near side → near side becomes negative, far side becomes positive. Net charge of sphere = 0 still.\n\n*Step 2 — While grounded:*\nElectrons flow from ground (Earth) to the far side of the sphere (attracted by the positive rod), neutralising the far-side deficit. Sphere now has net negative charge.\n\n*Step 3 — After grounding removed, then rod removed:*\nExcess electrons spread uniformly over sphere surface. Sphere has net negative charge equal to the electrons that entered from ground. Opposite to the inducing charge (positive rod) — this is induction charging.\n\n**Answer:** Without grounding: redistribution, net Q = 0. With grounding and then removal: sphere becomes net negative (induced charge opposite to rod).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 75,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/misconception/MC-CHARGE-IS-CREATED-BY-RUBBING",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-charge",
+      "title": "**Trigger signal:** Student says \"rubbing creates charge\" or \"friction makes electric charge appear.",
+      "content": "### MC-CHARGE-IS-CREATED-BY-RUBBING\n\n**Trigger signal:** Student says \"rubbing creates charge\" or \"friction makes electric charge appear.\"\n\n**Conflict evidence [P28]:** \"Before rubbing: the rubber rod and the fur are both electrically neutral — they contain equal numbers of protons and electrons. After rubbing: count the charges on both objects together. Rod: −40e. Fur: +40e. Total: 0. The same number of electrons as before, just redistributed. Conservation of charge is absolute — no physical process creates or destroys net charge.\"\n\n**Bridge text [P30]:** \"Rubbing brings surfaces into intimate contact, allowing electrons (which are loosely bound in some materials) to transfer. The total charge of the system is conserved; you are redistributing charge, not creating it. The triboelectric effect describes which material tends to gain vs. lose electrons.\"\n\n**Replacement text [P31]:** \"Rubbing does not create charge. It transfers electrons from one material to another, making one object negative (gained electrons) and the other positive (lost electrons). The total charge of the system (both objects together) remains zero — conservation of charge is a fundamental law.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Rubbing transfers electrons from fur to rod\" | \"Rubbing creates negative charge on the rod\" |\n| \"Q_rod + Q_fur = 0 before and after rubbing\" | \"The rod gains new charge by rubbing\" |\n| \"Total charge of isolated system is conserved\" | \"Friction generates charge from mechanical energy\" |\n\n**s6_path:** Use accounting language: \"charge bookkeeping — every electron that appears somewhere must have come from somewhere.\"\n\n---",
+      "localKey": "MC-CHARGE-IS-CREATED-BY-RUBBING",
+      "language": "en",
+      "refs": [
+        "MC-CHARGE-IS-CREATED-BY-RUBBING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/misconception/MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-charge",
+      "title": "**Trigger signal:** Student says \"positive charge flows in the direction of current\" implies protons are moving, or assumes positive charges physically travel in metals.",
+      "content": "### MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE\n\n**Trigger signal:** Student says \"positive charge flows in the direction of current\" implies protons are moving, or assumes positive charges physically travel in metals.\n\n**Conflict evidence [P28]:** \"In metals, only electrons are free to move — protons are fixed in the crystal lattice. A 'positive' current direction is a historical convention (Benjamin Franklin's choice) that assumes positive carriers. In metals, electrons move in the direction opposite to conventional current. The physical motion is always electrons (or ions in solutions).\"\n\n**Bridge text [P30]:** \"Conventional current flows + → − (outside the battery), and this convention works perfectly for circuit analysis. But the actual charge carriers in metallic conductors are electrons moving in the opposite direction. The convention predates the discovery of the electron — it's a useful fiction for circuit math.\"\n\n**Replacement text [P31]:** \"In metallic conductors, only electrons move. Conventional current direction (positive to negative) is a historical convention — the physical current is electrons flowing the other way. In electrolytes (salt solutions), both positive and negative ions move. Only in semiconductors can 'holes' (absence of electrons) act as positive carriers.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Electrons are the charge carriers in metals\" | \"Protons flow in the direction of conventional current\" |\n| \"Conventional current and electron flow are in opposite directions\" | \"Conventional current correctly shows which particles move\" |\n| \"In electrolytes, positive ions move toward the negative terminal\" | \"Positive charge carriers move in all conductors\" |\n\n**s6_path:** Historical context: Franklin chose the wrong sign, but the convention stuck. The physics is consistent either way — just know which direction actual electrons go.\n\n---",
+      "localKey": "MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE",
+      "language": "en",
+      "refs": [
+        "MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 228,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-CHARGE-IS-CREATED-BY-RUBBING\",\"MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-CHARGE-IS-CREATED-BY-RUBBING",
+        "MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 234,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 239,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 244,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 248,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-7\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 250,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 251,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-charge",
+      "title": "close",
+      "content": "{\"id\":\"TA-9\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 252,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "phys.em.electric-charge/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.electric-charge",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nWhat is the charge on one electron? On one proton? Are these exact negatives of each other?\n\n**Answer:** Electron: −e = −1.602 × 10⁻¹⁹ C. Proton: +e = +1.602 × 10⁻¹⁹ C. Yes, they are equal and opposite to extraordinary precision (experimental bound: |q_e + q_p| < 10⁻²¹ e).\n\n---\n\n### AP-2 (Bloom: Understand)\nExplain why charging by induction produces a charge opposite to the inducing charge, while charging by conduction produces a charge of the same sign.\n\n**Answer:** Induction: the charged object attracts opposite charges to the near side of a conductor. When grounded, opposite charges enter from ground (or same-sign charges leave to ground). After grounding and rod removal, the net charge is opposite to the inducer. Conduction: direct contact allows charge to flow between objects — some of the inducer's charge transfers directly, leaving both with the same sign.\n\n---\n\n### AP-3 (Bloom: Apply)\nThree identical spheres have charges +12 nC, −6 nC, and +3 nC. They are all brought into contact simultaneously, then separated. What is the final charge on each sphere?\n\n**Answer:** Total Q = 12 − 6 + 3 = +9 nC. Divided equally: each sphere = +9/3 = **+3 nC**.\n\n---\n\n### AP-4 (Bloom: Analyze)\nA student claims to have isolated a particle with charge +0.5e. Is this consistent with the Standard Model? Explain using charge quantisation.\n\n**Answer:** Fractional charges (like quarks: +2e/3, −e/3) exist within hadrons but are permanently confined — no free fractional charge has ever been observed. A free particle with charge +0.5e would violate charge quantisation. The claim is inconsistent with established physics and would require extraordinary evidence.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-charge.md",
+        "startLine": 257,
+        "endLine": 287
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,542 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.potential-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.potential-energy",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:9a5b02897cea8b7ee1f1135b3fccfd46036374d22f04e21f5e32185a5195e1ed",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.potential-energy.md": "sha256:9f1b53c5c464544ea3033bdb73f5e19a6ea207ac315636d51a5e2855338d2505"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.potential-energy",
+    "name": "Potential Energy",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.work"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.potential-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.potential-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.potential-energy.md": "sha256:9f1b53c5c464544ea3033bdb73f5e19a6ea207ac315636d51a5e2855338d2505"
+      },
+      "contentHash": "sha256:887356eb3c9ba599303c55b764f64708da7d1b58d9e4b799fd83be7e2b79be5f",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.potential-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.potential-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.potential-energy\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.potential-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.potential-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.potential-energy\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.potential-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.potential-energy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.potential-energy\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.potential-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.potential-energy.md#TA-4 (addresses MC-GPE-ABSOLUTE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.potential-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.potential-energy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.potential-energy.md#TA-5 (addresses MC-HEIGHT-VERTICAL-ONLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.potential-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.potential-energy.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.potential-energy.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.potential-energy\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.potential-energy.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.potential-energy.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.potential-energy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.potential-energy/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Potential Energy — core explanation",
+      "content": "**Core Insight:** Potential energy is stored energy that depends on an object's position or\nconfiguration within a force field. It represents the capacity to do work. The most common\nforms are gravitational PE (GPE = mgh) and elastic PE (EPE = ½kx²). PE is defined relative\nto a chosen reference point — only changes in PE are physically meaningful.\n\n**Gravitational Potential Energy:**\nGPE = mgh\n\nwhere m is mass (kg), g is gravitational field strength (≈ 9.8 m/s² near Earth's surface),\nh is height above the reference level (m). GPE is in joules (J).\n\n**Elastic Potential Energy (preview for Hooke's Law):**\nEPE = ½kx²\n\nwhere k is the spring constant (N/m) and x is the compression or extension from equilibrium (m).\n\n**Key properties:**\n- GPE can be positive (above reference), zero (at reference), or negative (below reference).\n- Only ΔGPE matters in any physical process — choice of reference cancels out.\n- GPE is stored energy: lifting an object does work against gravity, storing that work as GPE.\n- When an object falls, GPE converts to KE (Work–Energy Theorem).\n- GPE is a scalar quantity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 24,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Lifting",
+      "content": "**Worked Example 1 (Lifting):**\nA 3 kg book is lifted 2 m above a table.\nGPE = 3 × 9.8 × 2 = 58.8 J.\nThis equals the work done by the hand against gravity.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 24,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Reference Choice",
+      "content": "**Worked Example 2 (Reference Choice):**\nSame book, 2 m above the table, but the table is 1 m above the floor.\nTaking floor as reference: GPE = 3 × 9.8 × 3 = 88.2 J.\nTaking table as reference: GPE = 3 × 9.8 × 2 = 58.8 J.\nΔGPE from floor to 2 m above table: same in both cases (58.8 J). Reference cancels.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 24,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Spring",
+      "content": "**Worked Example 3 (Spring):**\nA spring with k = 200 N/m is compressed 0.05 m.\nEPE = ½ × 200 × 0.05² = ½ × 200 × 0.0025 = 0.25 J.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 24,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/misconception/MC-GPE-ABSOLUTE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Priority 1",
+      "content": "### MC-GPE-ABSOLUTE (Priority 1)\n**Label:** \"GPE has a fixed, absolute value — the reference level is not a choice\"\n\n**Trigger signals:**\n- Claims the book 2 m above a table \"has\" exactly one GPE value regardless of reference\n- Says \"you can't change where the reference is — it's always the ground\"\n- Confused when two students get different GPE values for the same scenario\n\n**Conflict evidence [P28]:**\n\"Let's calculate GPE for a 1 kg object sitting on a table that is 1 m above the floor,\nand the object is 0 m above the table.\nStudent A uses the floor as reference: GPE = 1×10×1 = 10 J.\nStudent B uses the table as reference: GPE = 1×10×0 = 0 J.\nBoth are correct. How can the same object have two different GPEs?\"\n\n**Bridge [P30]:**\n\"GPE = mgh tells you stored energy relative to a chosen zero. Like temperature in Celsius\nvs Fahrenheit — the numbers differ, but temperature differences are the same. The physics\nonly ever uses ΔGPE: how much did PE change? That answer is the same no matter which\nreference you pick.\"\n\n**Replacement [P31]:**\n\"GPE has no absolute value — it depends on the reference level you choose. The reference\nis arbitrary; it must be stated in any problem. Only ΔGPE is physically meaningful — the\nwork–energy relationship uses ΔGPE, not GPE itself.\"\n\n**Discrimination pairs [P33]:**\n- Same 2 kg object, different reference levels → different GPE, same ΔGPE ✓\n- Pendulum at lowest point = reference: GPE = 0 there, positive at top → valid choice ✓\n\n**s6_path:** Skip P28; use the floor/table comparison as a simple arithmetic demonstration\n(\"just arithmetic — we compute with both and compare the difference\").\n\n---",
+      "localKey": "MC-GPE-ABSOLUTE",
+      "language": "en",
+      "refs": [
+        "MC-GPE-ABSOLUTE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 3,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/misconception/MC-HEIGHT-VERTICAL-ONLY",
+      "kind": "misconception",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Priority 2",
+      "content": "### MC-HEIGHT-VERTICAL-ONLY (Priority 2)\n**Label:** \"h in GPE = mgh means the length of the path, not the vertical rise\"\n\n**Trigger signals:**\n- Uses the incline length (hypotenuse) as h when computing GPE for a block on a slope\n- Says \"it was pushed 5 m up the ramp so h = 5 m\"\n- Computes GPE = mg × (path length along ramp)\n\n**Conflict evidence [P28]:**\n\"A block slides 5 m up a 30° ramp. You wrote GPE = mg × 5.\nLet's check: the block only rose vertically by 5 × sin30° = 2.5 m.\nGravity acts vertically. If we lift the same block straight up 2.5 m, GPE = mg × 2.5.\nBoth should give the same energy stored — which formula is right?\"\n\n**Bridge [P30]:**\n\"Gravity is a vertical force. Work done against gravity = F × vertical displacement = mgh,\nwhere h is the vertical rise only. The path taken — straight up, along a ramp, curved —\ndoes not matter; only the net vertical change in height matters.\"\n\n**Replacement [P31]:**\n\"In GPE = mgh, h is always the vertical height gained (or lost), not the path length.\nOn an incline of angle θ and length L: h = L sinθ. This is why ramps make lifting easier —\nyou push over a longer distance but the vertical rise (and GPE gain) is the same.\"\n\n**Discrimination pairs [P33]:**\n- 5 m ramp at 30° vs lifted 2.5 m straight: same GPE gain ✓\n- 10 m ramp at 30° vs 5 m ramp at 60°: same h = 5 m, same GPE for same mass ✓\n\n**s6_path:** Use a diagram showing vertical rise explicitly; avoid ramp calculation on first\nattempt if anxiety is detected; build to it after the vertical-rise concept is secure.\n\n---",
+      "localKey": "MC-HEIGHT-VERTICAL-ONLY",
+      "language": "en",
+      "refs": [
+        "MC-HEIGHT-VERTICAL-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 38,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 14,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Prerequisite Check + Reference Level",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Reference Level\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 34,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "MC-GPE-ABSOLUTE Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-GPE-ABSOLUTE Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-GPE-ABSOLUTE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-GPE-ABSOLUTE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 50,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "MC-HEIGHT-VERTICAL-ONLY Probe + Elastic PE Intro",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-HEIGHT-VERTICAL-ONLY Probe + Elastic PE Intro\",\"primitives\":[\"P07\",\"P08\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-HEIGHT-VERTICAL-ONLY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-HEIGHT-VERTICAL-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 69,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 85,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 103,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Apply — basic GPE",
+      "content": "**MP-1 (Apply — basic GPE):**\n\"A 5 kg ball is held 3 m above the floor. What is its GPE above the floor? (g = 9.8)\"\nExpected: GPE = 5 × 9.8 × 3 = 147 J.\n_Discriminates: correct substitution into mgh._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 271,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Apply — reference choice",
+      "content": "**MP-2 (Apply — reference choice):**\n\"The same 5 kg ball is 3 m above a table that is 1 m above the floor. What is its\nGPE above the table? What is ΔGPE from floor level to ball's height?\"\nExpected: GPE above table = 147 J; ΔGPE from floor = 5×9.8×4 = 196 J.\n_Discriminates: MC-GPE-ABSOLUTE resolution; ΔGPE understood._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-GPE-ABSOLUTE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 271,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Apply — incline height",
+      "content": "**MP-3 (Apply — incline height):**\n\"A 2 kg block moves 10 m up a 30° ramp. What vertical height did it gain? What GPE did it gain?\"\nExpected: h = 10 sin30° = 5 m; GPE = 2×9.8×5 = 98 J.\n_Discriminates: MC-HEIGHT-VERTICAL-ONLY resolution._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-HEIGHT-VERTICAL-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 271,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Apply — spring",
+      "content": "**MP-4 (Apply — spring):**\n\"A spring (k = 800 N/m) is compressed 0.05 m. What is the elastic PE stored?\"\nExpected: EPE = ½ × 800 × 0.0025 = 1 J.\n_Discriminates: EPE formula ½kx²._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 271,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Analyze — energy transformation",
+      "content": "**MP-5 (Analyze — energy transformation):**\n\"A 1 kg ball has GPE = 40 J at its highest point and KE = 0.\nAt a lower point, it has KE = 25 J. What is its GPE at that lower point?\n(Assume no energy loss to friction.)\"\nExpected: GPE = 40 − 25 = 15 J.\n_Discriminates: preview of conservation of energy; treats GPE and KE as interconvertible._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 271,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.work  ──────────────────────►  phys.mech.potential-energy\n   (W = Fd cosθ; work done against gravity stores as GPE)\n   REQUIRED: student understands that lifting requires work against gravity\n```\n\n**PD-1 (Work against gravity):**\n\"A 2 kg object is lifted 3 m straight up at constant velocity. What is the work done\nby the lifting force? (Lifting force = mg = 19.6 N upward; displacement = 3 m upward;\nW = 19.6 × 3 × cos0° = 58.8 J.)\"\n\nIf student cannot compute work by the lifting agent → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 66,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Complete: GPE = ___. What does h represent?\"\nThreshold: Must write GPE = mgh and state h = vertical height above reference.\nIf not → re-deliver P08 before TA-3.\n\n**FA-2 (TA-4 exit):** \"A 3 kg box is 4 m above the table. Table is 2 m above the floor.\nWhat is GPE above the table? Above the floor?\"\nExpected: 117.6 J; 176.4 J. ΔGPE from table to box: 117.6 J (same).\nIf student claims only one valid answer → MC-GPE-ABSOLUTE not resolved → loop back to P31.\n\n**FA-3 (TA-5 exit):** \"4 kg block, 5 m up a 60° ramp. Vertical rise?\"\nExpected: h = 5 sin60° = 4.33 m. If student writes h = 5 → MC-HEIGHT-VERTICAL-ONLY not resolved.\n\n**FA-4 (Session exit):** Administer MP-1 through MP-3. 3/3 correct → advance to TA-7.\nOtherwise → targeted re-teach of failed probe type.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-GPE-ABSOLUTE",
+        "MC-HEIGHT-VERTICAL-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 305,
+        "endLine": 324
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use the book-on-shelf P06 anchor only; defer ramp problems to TA-5.\n- Reassure: \"GPE = mgh is three multiplications. You can do this.\"\n- Break MP-3 into two steps: \"First find h using h = L sinθ. Then compute GPE.\"\n- No EPE in TA-4 if S6 is flagged; defer spring content to a separate mini-session.\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (energy transformation) at TA-3 — most students at this stage have not seen this.\n- Challenge: \"Why does the reference level not matter physically? Prove it with numbers.\"\n- Advance quickly through GPE; spend extra time on EPE and the reference-independence proof.\n\n**S4 (Prereq gap — Work):**\n- Detect via PD-1 failure at TA-3.\n- Repair: mini-session on W = Fd, W = mgh for vertical lift, before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 324,
+        "endLine": 343
+      }
+    },
+    {
+      "assetId": "phys.mech.potential-energy/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.potential-energy",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → GPE formula → reference level).\n**Session 2 (≥24 h later):** Retrieval: \"GPE formula? What does h mean? Ramp example.\"\n  → TA-5 (MC-HEIGHT-VERTICAL-ONLY) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe mixing KE and GPE:\n  \"A 2 kg ball at rest 10 m high: what is GPE? It falls. At 5 m height, what is KE?\"\n  (Tests KE = ½mv², GPE = mgh, and their complementarity — previewing conservation of energy.)\n**Pre-conservation-of-energy session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.kinetic-energy (KE = ½mv²) and phys.mech.work (W = Fd cosθ)\n— the three concepts form the core energy triangle before conservation of energy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-HEIGHT-VERTICAL-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.potential-energy.md",
+        "startLine": 343,
+        "endLine": 358
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

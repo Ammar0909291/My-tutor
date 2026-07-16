@@ -1,0 +1,370 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.selection-rules-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.selection-rules",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:a51cc17bfc4e6344c330393772d12f1a3749583a04ac1d82ee5f2854d9525306",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.selection-rules.md": "sha256:cb054a820301608dd897d00ab7b274de0b71f5f18fff347d6f044e3579e75e32"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.qm.selection-rules",
+    "name": "Selection Rules and Transition Probabilities",
+    "difficultyRaw": "Expert",
+    "bloom": "Analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.qm.operators",
+      "phys.qm.hydrogen-atom-qm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.selection-rules-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.selection-rules (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.selection-rules.md": "sha256:cb054a820301608dd897d00ab7b274de0b71f5f18fff347d6f044e3579e75e32"
+      },
+      "contentHash": "sha256:19027147768bf17b6eebf68df9f30a2901ab747cac040b9f0845b898910dcc9c",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.selection-rules.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.selection-rules.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.selection-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.selection-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.selection-rules.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.selection-rules.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.selection-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.selection-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.selection-rules.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.selection-rules.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.selection-rules"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.selection-rules\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.selection-rules/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Selection Rules and Transition Probabilities — core explanation",
+      "content": "**Core Claim:** Atomic transitions between states are governed by selection rules — constraints on which quantum numbers can change — arising from conservation laws and symmetry: for electric dipole (E1) transitions, Δl = ±1, Δm = 0, ±1, Δs = 0 (parity change required), while Δn is unrestricted; transitions violating these rules are \"forbidden\" (occur only via weaker multipole processes) with much smaller probabilities.\n\n**Why It Matters:** Selection rules explain why atomic spectra have discrete lines (not a continuum of transitions), why the Lyman-alpha line at 121.6 nm is by far the brightest hydrogen line, why some excited states (metastable states) live for seconds while others decay in nanoseconds, and they underpin all of spectroscopy, laser physics, and astrophysical diagnostics.\n\n**Threshold Concept:** \"Forbidden\" transitions are not impossible — they are just suppressed by factors of (ka)² or (ka)⁴ (where k = photon wavenumber, a = atom size) relative to allowed ones. An atom in a forbidden state eventually decays; the selection rules determine how quickly.\n\n**Prerequisite Knowledge Check:**\n- Quantum operators, angular momentum algebra, parity (phys.qm.operators)\n- Hydrogen atom wave functions ψ_{nlm}, spherical harmonics Y_l^m (phys.qm.hydrogen-atom-qm)\n- Matrix elements: ⟨n'l'm'|r⃗|nlm⟩ = ∫ψ*_{n'l'm'} r⃗ ψ_{nlm} d³r\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Forbidden transitions are impossible",
+      "content": "### MC-1: Forbidden transitions are impossible\n- **Probe:** \"Can the 2s state of hydrogen decay to 1s by photon emission?\"\n- **Characteristic phrase:** \"No — it's forbidden.\"\n- **Trigger:** The word \"forbidden\" implies impossibility.\n- **Conflict evidence [P28]:** The 2s state does decay — via two-photon emission (2s → 1s + γ + γ), with lifetime τ ≈ 0.12 s. In interstellar nebulae, the 2s metastable state is observed spectroscopically. If it were truly impossible, the state would be permanent — but measurements confirm it decays.\n- **Bridge [P30]:** \"Forbidden\" means the E1 (electric dipole) matrix element ⟨1s|r⃗|2s⟩ = 0 (same parity). Decay still occurs via higher-order processes: M1 (magnetic dipole), E2 (electric quadrupole), or two-photon — all much slower than E1.\n- **Replacement [P31]:** \"Forbidden\" = suppressed (by factors of (ka)² or (v/c)² per multipolarity step above E1), not impossible. A forbidden transition is just slow — sometimes by 10⁷× or more.\n- **Discrimination pairs [P33]:** 2p → 1s: E1 allowed, τ ≈ 1.6 ns. 2s → 1s: E1 forbidden (Δl=0), actual decay via 2-photon, τ ≈ 0.12 s. 10⁸× slower.\n- **S6 repair path:** Look up (or estimate) the lifetime ratio between the 2p and 2s hydrogen states. The 2s lifetime being measurable (not infinite) confirms forbidden transitions occur.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Δn = ±1 is a selection rule",
+      "content": "### MC-2: Δn = ±1 is a selection rule\n- **Probe:** \"Is the transition from n=4 to n=2 with Δl = −1 allowed?\"\n- **Characteristic phrase:** \"No — Δn must be ±1.\"\n- **Trigger:** Analogy to Δl = ±1; Bohr model oscillations between adjacent orbits.\n- **Conflict evidence [P28]:** The Balmer Hβ line (n=4 → n=2) is one of the most observed hydrogen spectral lines, corresponding to 4d → 2p (Δl = −1) or 4p → 2s (but that would violate Δl = −1 since 2s has l=0 and 4p has l=1: Δl = −1 ✓ actually this works). Δn = 2 is perfectly fine for E1 transitions.\n- **Bridge [P30]:** The Coulomb potential has no angular momentum dependence — photon absorption/emission doesn't care about the radial quantum number n. Only l and m are constrained by angular momentum and parity conservation.\n- **Replacement [P31]:** Δn: unrestricted (any n' → n is allowed, subject to Δl = ±1 and Δm = 0, ±1). Selection rules apply only to l, m, and s.\n- **Discrimination pairs [P33]:** 4d(l=2) → 2p(l=1): Δn = 2, Δl = −1 ✓ ALLOWED. 4s(l=0) → 2s(l=0): Δn = 2, Δl = 0 — FORBIDDEN.\n- **S6 repair path:** List all allowed transitions from n=4 to n=2 and n=1 — there are many, all satisfying Δl = ±1 regardless of Δn.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Δl = ±1 is because l changes by 1 in emission",
+      "content": "### MC-3: Δl = ±1 is because l changes by 1 in emission\n- **Probe:** \"Why is Δl = ±1 the selection rule?\"\n- **Characteristic phrase:** \"Because the photon removes one unit of angular momentum.\"\n- **Trigger:** Partial understanding — photon carries ℏ, so something must change by 1.\n- **Conflict evidence [P28]:** This reasoning would equally allow Δl = 0 for m = 0 → m = 0 transitions (photon angular momentum along z is 0 for linearly polarized light). But Δl = 0 is still forbidden by parity. The reason for Δl = ±1 is not just angular momentum — it is parity.\n- **Bridge [P30]:** The E1 matrix element ⟨f|r⃗|i⟩ vanishes unless the parity of r⃗ × ψ_i matches the parity of ψ_f. Since parity of Y_l^m is (−1)^l, and r⃗ has odd parity, we need (−1)^{l'} = (−1)^{l+1} → l' = l ± 1 (odd change). Both angular momentum conservation AND parity conservation are required.\n- **Replacement [P31]:** Δl = ±1 arises from: (1) parity conservation: r⃗ is odd parity, so l must change by odd number, and (2) angular momentum conservation: photon carries 1ℏ, so |Δl| = 1. Both constraints together force Δl = exactly ±1.\n- **Discrimination pairs [P33]:** Parity alone would allow Δl = ±1, ±3, ±5… Angular momentum alone would allow Δl = 0, ±1. Together: only Δl = ±1 (for lowest-order E1).\n- **S6 repair path:** Show explicitly that ⟨d|z|d⟩ = ∫Y_2^m * cosθ Y_2^m dΩ = 0 (parity argument: integrand is odd in some reflection → integral vanishes).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Spin-flip transitions are E1 allowed",
+      "content": "### MC-4: Spin-flip transitions are E1 allowed\n- **Probe:** \"In helium, is a transition from the triplet state (S=1) to the singlet state (S=0) allowed at E1?\"\n- **Characteristic phrase:** \"Yes, as long as Δl = ±1.\"\n- **Trigger:** Only knowing the Δl rule, forgetting Δs = 0.\n- **Conflict evidence [P28]:** The singlet-triplet transition in helium (intercombination line) is extremely weak — the metastable triplet 1s2s ³S₁ state lives ≈ 8,000 seconds (more than 2 hours). If E1 were allowed, it would decay in nanoseconds.\n- **Bridge [P30]:** The E1 operator r⃗ acts only on spatial coordinates, not on spin. It cannot change the total spin state: ⟨S'|Ŝ|S⟩ = 0 if S' ≠ S. Thus ΔS = 0 for all E1 transitions.\n- **Replacement [P31]:** E1 selection rules: Δl = ±1, Δm = 0, ±1, Δs = 0, Δn unrestricted. Intercombination lines (ΔS ≠ 0) are forbidden at E1; they appear via spin-orbit coupling perturbations, making them weakly M1 or E2.\n- **Discrimination pairs [P33]:** He singlet 2¹P → 1¹S: Δl=−1, ΔS=0 → E1 allowed (21.2 nm, UV). He triplet 2³S → 1¹S: ΔS=1 → E1 forbidden; τ ≈ 8000 s.\n- **S6 repair path:** Compare lifetimes of singlet vs. triplet excited states in helium; the factor of 10¹² demonstrates the ΔS = 0 rule.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Show parity argument: odd operator × opposite-parity states = even integrand (nonzero)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Show parity argument: odd operator × opposite-parity states = even integrand (nonzero)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 168,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Compare lifetimes of 2p vs 2s hydrogen; explain why 2s lives 10⁷× longer",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Compare lifetimes of 2p vs 2s hydrogen; explain why 2s lives 10⁷× longer\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 169,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Identify which n=3 → n=1 transitions are E1 allowed and which are forbidden",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identify which n=3 → n=1 transitions are E1 allowed and which are forbidden\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 170,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Apply E1 selection rules to predict allowed transitions; explain parity argument; distinguish \"forbidden\" from \"impossible.\"\n\n**FA-1:** \"Is the transition 3d → 1s in hydrogen E1 allowed? State the relevant quantum numbers.\"\n*Expected:* 3d: n=3, l=2. 1s: n=1, l=0. Δl = 0−2 = −2. |Δl| = 2 ≠ 1 → E1 FORBIDDEN (parity violation: both even parity, l=2 and l=0 both have (−1)^l = +1). Transition can occur only via E2 or higher.\n*Threshold:* Correct Δl calculation; correct conclusion; parity explanation.\n\n**FA-2:** \"List all E1-allowed transitions from the n=3 level to n=2 and n=1 in hydrogen.\"\n*Expected:* n=3 sublevels: 3s (l=0), 3p (l=1), 3d (l=2). n=2: 2s (l=0), 2p (l=1). n=1: 1s (l=0).\nAllowed (Δl=±1): 3p→2s (Δl=−1 ✓), 3p→1s (Δl=−1 ✓), 3d→2p (Δl=−1 ✓), 3s→2p (Δl=+1 ✓).\nForbidden: 3s→2s (Δl=0 ✗), 3s→1s (Δl=0 ✗), 3d→2s (Δl=−2 ✗), 3d→1s (Δl=−2 ✗), 3p→2p (Δl=0 ✗).\n*Threshold:* All allowed transitions correctly identified; at least one forbidden correctly excluded with reason.\n\n**FA-3:** \"Why is the metastable 2s state of hydrogen long-lived?\"\n*Expected:* 2s has l=0; the only lower state is 1s (also l=0). Δl = 0 violates the E1 selection rule (parity: both even). M1 and E2 also vanish or are extremely small. The 2s state can only decay by two-photon emission (2nd-order process), giving τ ≈ 0.12 s — 10⁸× longer than the 2p state.\n*Threshold:* Identifies Δl=0 as the violation; names the correct decay mechanism (two-photon); gives order-of-magnitude lifetime comparison.\n\n**FA-4:** \"What is the selection rule for Δm, and what does it correspond to physically?\"\n*Expected:* Δm = 0, ±1. Corresponds to the circular/linear polarization of the emitted photon. A photon with angular momentum +ℏ along z corresponds to left-circular polarization (LCP) and requires Δm = +1. Δm = 0: linearly polarized (π) radiation. Δm = −1: right-circular (σ−). The ±1 comes from the z-component of the photon's angular momentum.\n*Threshold:* States Δm = 0, ±1; connects to photon polarization; explains angular momentum origin.\n\n**Confidence calibration:** After FA-2, ask: \"Can you immediately identify whether a 4f → 2d transition would be allowed?\" (These don't exist in hydrogen, but the exercise tests whether the learner can apply rules to unfamiliar l values: 4f has l=3, 2d has l=2; Δl=−1 ✓ → E1 allowed for these hypothetical states.)\n\n**Delayed retrieval:** Return at day 5: \"Write the four E1 selection rules. Derive the Δl=±1 rule from parity without looking at notes.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 186,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** An atom in an excited state wants to emit a photon and fall to a lower state. Not all transitions are equally likely. Selection rules are the \"allowed\" pathways — like allowed moves in chess. A pawn can only move forward; a bishop diagonally. Similarly, Δl = ±1 is the allowed \"move\" for electric dipole transitions. Moving differently requires a different \"piece\" (quadrupole, etc.) — allowed but far less probable.\n\n**Representational:**\n- Energy level diagram of hydrogen with allowed transitions marked (selection rule arrows Δl = ±1)\n- Lyman series: all n → 1 transitions; must go through p → s (Δl = −1) ✓\n- Lyman alpha (2p → 1s): the dominant transition; τ ≈ 1.6 ns\n- 2s → 1s: Δl = 0 — electric dipole forbidden; decays by two-photon emission in τ ≈ 0.12 s (10⁷ × slower)\n\n**Abstract:**\n- Electric dipole matrix element: ⟨f|r⃗|i⟩ (must be nonzero for transition to occur)\n- Parity selection rule: r⃗ is odd under parity; ⟨f|r⃗|i⟩ ≠ 0 only if ψ_f and ψ_i have opposite parity → Δl = odd → Δl = ±1 (for E1)\n- Angular momentum selection rule: photon carries angular momentum ℏ → |Δl| = 1, |Δm| = 0 or 1\n- Spin selection rule: electric dipole doesn't couple to spin → Δs = 0\n- Transition rate (Fermi's golden rule): Γ_{i→f} = (e²ω³/3πε₀ℏc³)|⟨f|r⃗|i⟩|²\n- Lifetime: τ = 1/ΓTotal; linewidth: Δν = Γ/(2π) (energy-time uncertainty)\n- Forbidden transitions: E2 (quadrupole) ∝ (ka)², M1 (magnetic dipole) ∝ (v/c)², both ≪ E1\n\n**Transfer:** Astrophysics: [O III] 500.7 nm (forbidden electric quadrupole line) — unobservable in lab, dominant in nebulae (low-density → no collisions to deactivate before forbidden decay). Laser physics: population inversion exploits metastable states (forbidden decays) as the upper lasing level. NMR: Δm = ±1 selection rule for spin transitions in magnetic field.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 36,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Why Beginners Fail",
+      "content": "1. **\"Forbidden\" means impossible:** Learners think forbidden transitions literally cannot happen. They do happen — just on timescales 10⁶–10⁸ × slower than allowed E1 transitions.\n2. **Memorizing rules without understanding parity:** Δl = ±1 is remembered but the reason (parity of r⃗ integrand) is not, so learners cannot predict selection rules for unfamiliar operators.\n3. **Confusing Δn and Δl:** Δl = ±1 is required; Δn is unrestricted. Learners sometimes impose Δn = ±1 by analogy.\n4. **Ignoring spin-selection rule Δs = 0:** Learners forget that electric dipole transitions cannot flip spin, making intercombination lines (e.g., singlet ↔ triplet in helium) forbidden at E1.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 59,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"Why does hydrogen emit a bright red line, a blue-green line, and a violet line — but not dozens of other wavelengths? Because most atomic transitions are forbidden. The selection rules are nature's gatekeepers, determining which energy level changes can emit a photon efficiently.\"\n\n**Pacing:** Start with spectroscopic data — the observed hydrogen spectrum has exactly the lines predicted by Δl = ±1. The pattern motivates deriving the rule. Derive parity argument before giving the rule as a theorem.\n\n**Common impasse language:** \"Forbidden doesn't mean can't happen. It means can't happen easily. The 2s state of hydrogen is 'forbidden' from decaying by E1 — but it decays anyway via two-photon emission in 0.12 seconds. In interstellar space, astronomers detect these forbidden lines all the time. 'Forbidden' is a lab-scale statement, not a law of nature.\"\n\n**Closing consolidation:** \"Selection rules are symmetry at work. Parity and angular momentum conservation constrain which transitions happen. When a symmetry is slightly broken — by spin-orbit coupling, for example — previously forbidden transitions become weakly allowed. Every deviation from an ideal selection rule tells you something about broken symmetry.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 174,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner doesn't know what parity means or how to evaluate integrals of odd/even functions. Review parity of wave functions from phys.qm.operators.\n\n**S3 — Partial understanding:** Knows Δl=±1 but cannot explain parity argument or apply to multi-electron atoms. Intervention: systematic table of hydrogen transitions — compute Δl for each, mark allowed/forbidden, verify against observed spectrum.\n\n**S6 — Misconception detected:** MC-1 (forbidden = impossible). Intervention: assign problem set on lifetimes — calculate Γ for 2p→1s and find τ≈1.6 ns; then explain why 2s→1s E1 rate is zero but the state still decays.\n\n**S9 — Near mastery:** Understands E1 rules but cannot apply to more complex situations (multi-photon, higher multipoles). Intervention: show the [O III] nebular forbidden line example and estimate its rate suppression factor (ka)² ~ 10⁻⁵.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 214,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Rule-based (four E1 selection rules) + conceptual (why parity and angular momentum force each rule).\n\n**Spaced retrieval schedule:** Day 1 (state all four E1 rules; identify allowed/forbidden for three specific transitions), Day 3 (derive Δl=±1 from parity argument; explain why 2s lives longer than 2p), Day 7 (apply rules to multi-electron atom: He singlet/triplet), Day 21 (explain astrophysical forbidden lines).\n\n**Interleaving partners:** phys.qm.operators (parity operator, angular momentum), phys.qm.hydrogen-atom-qm (wave function parities, quantum numbers), phys.qm.perturbation-theory (Fermi's golden rule gives the rate; selection rules determine when it vanishes).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 226,
+        "endLine": 236
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Vibrational selection rules (Δv = ±1 for harmonic oscillator IR absorption, with parity argument); rotational selection rules (ΔJ = ±1 for microwave spectroscopy).\n\n**Far transfer:** Astrophysics: forbidden line diagnostics of nebular density and temperature. Laser physics: metastable upper lasing levels (e.g., HeNe laser uses the metastable He triplet state as an energy reservoir). Nuclear gamma-ray selection rules: same angular momentum and parity arguments apply to nuclear transitions.\n\n**Structural abstraction:** Selection rules are always symmetry-based: a matrix element ⟨f|Ô|i⟩ vanishes when the operator Ô and the states |i⟩, |f⟩ have incompatible symmetry properties (parity, angular momentum, time-reversal). This principle — \"matrix element must transform trivially under all symmetry operations to be nonzero\" — is universal in quantum mechanics, particle physics, and condensed matter.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 236,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "phys.qm.selection-rules/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.selection-rules",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.qm.operators (parity, angular momentum operators) and phys.qm.hydrogen-atom-qm (l quantum numbers, wave function parities) are both required. Without these, learners cannot understand why Δl=±1 emerges from the mathematics.\n\n**Common pacing error:** Teaching selection rules as memorized rules without deriving them. Learners who memorize cannot extend the rules to new situations (molecular vibrations, nuclear transitions) or recognize why forbidden transitions have the lifetimes they do.\n\n**Assessment gap:** Standard curricula test rule application (is this transition allowed?) but rarely ask learners to derive the rules, calculate transition rates (Fermi's golden rule), or explain astrophysical forbidden lines.\n\n**Suggested pairing:** Pair with phys.qm.perturbation-theory for a joint session on Fermi's golden rule — PT provides the transition rate framework, selection rules determine which matrix elements vanish. Together they give the complete picture of spectroscopic transitions.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.selection-rules.md",
+        "startLine": 246,
+        "endLine": 259
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

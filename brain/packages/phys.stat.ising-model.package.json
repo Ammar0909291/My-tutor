@@ -1,0 +1,505 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.ising-model-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.ising-model",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:0d4e8d0a4fd75716fb5a6345c7e9d1729b960945887586e942291de48b01f670",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.ising-model.md": "sha256:f882fc5cfb825ddd8c6c045aab8fb985e4afecf4fa70a64ab83860c4c00ab915"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.stat.ising-model",
+    "name": "Ising Model",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.stat.phase-transitions",
+      "phys.stat.fluctuations-correlations"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.ising-model-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.ising-model (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.ising-model.md": "sha256:f882fc5cfb825ddd8c6c045aab8fb985e4afecf4fa70a64ab83860c4c00ab915"
+      },
+      "contentHash": "sha256:3db49435c6f1df7148dccb42668f8377e6cb101a5dd6633fc642514ae579b0a3",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.ising-model.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.ising-model.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.ising-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.ising-model\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.ising-model.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.ising-model.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.ising-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.ising-model\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.ising-model.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.ising-model.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.ising-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.ising-model\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.ising-model.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.ising-model.md#TA-4 (addresses MC-IS-1D-ORDERS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.ising-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.ising-model\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.ising-model.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.ising-model.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.ising-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.ising-model\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.ising-model.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.ising-model.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.ising-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.ising-model\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.ising-model.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.ising-model.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.ising-model"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.ising-model\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.ising-model/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Ising Hamiltonian and partition function setup",
+      "content": "### Example 1 — Ising Hamiltonian and partition function setup\nH = −J Σ_{⟨ij⟩} sᵢsⱼ − h Σᵢ sᵢ (sᵢ=±1; sum over nearest-neighbor pairs).\nJ > 0: ferromagnetic coupling; h: external field.\n1D chain (N spins, periodic boundary): Z = 2^N [cosh(βh) + √(sinh²(βh) + e^{−4βJ})]^N.\nAt h=0: Z = (2cosh(βJ))^N + (2sinh(βJ))^N → dominant term at large N.\nNo phase transition in 1D: correlation length ξ = 1/ln(coth(βJ)) → finite for all T>0.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 34,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.ising-model",
+      "title": "2D Ising: Onsager's exact result",
+      "content": "### Example 2 — 2D Ising: Onsager's exact result\nOnsager (1944) exact solution for 2D square lattice (h=0):\nT_c: sinh(2J/kT_c) = 1 → kT_c = 2J/ln(1+√2) ≈ 2.269J.\nMagnetization (Onsager-Yang): m(T) = [1 − sinh^{−4}(2βJ)]^{1/8} for T < T_c.\nCritical exponent: m ~ (T_c−T)^{1/8} → β_exact = 1/8 ≠ 1/2 (MF).\nHeat capacity: C_V diverges logarithmically at T_c (α=0 logarithmic, NOT power law).\nSignificance: first exactly-solved model with a nontrivial phase transition; confirmed universality.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 34,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Mean-field approximation for the Ising model",
+      "content": "### Example 3 — Mean-field approximation for the Ising model\nReplace Σ_{j∈nn} sⱼ → z⟨s⟩ = zm (z = coordination number, m = ⟨s⟩).\nEffective single-site problem: m = tanh(β(Jzm + h)).\nSelf-consistency: at h=0, m = tanh(βJzm) → nontrivial m≠0 solution for βJz > 1 → T_c^{MF} = zJ/k.\nFor square lattice z=4: T_c^{MF} = 4J/k ≈ 4J/k vs exact 2.27J/k — overestimate by ~76%.\nLesson: mean-field overestimates T_c because it ignores fluctuations that disorder the system.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 34,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/misconception/MC-IS-1D-ORDERS",
+      "kind": "misconception",
+      "conceptId": "phys.stat.ising-model",
+      "title": "\"The 1D Ising model has a ferromagnetic phase transition at finite T.\"",
+      "content": "| MC-IS-1D-ORDERS | \"The 1D Ising model has a ferromagnetic phase transition at finite T.\" | \"In 1D there must be an ordered phase.\" | The 1D Ising model has NO finite-temperature phase transition — the Peierls argument shows domain walls cost only finite energy (2J per wall) but gain entropy kT ln(N), so T>0 always destroys long-range order. Only in 2D+ does the energy cost of a domain wall grow with system size, allowing a true ordered phase. |",
+      "localKey": "MC-IS-1D-ORDERS",
+      "language": "en",
+      "refs": [
+        "MC-IS-1D-ORDERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/misconception/MC-IS-MF-ACCURATE-ANY-D",
+      "kind": "misconception",
+      "conceptId": "phys.stat.ising-model",
+      "title": "\"Mean-field theory gives the correct critical temperature T_c even if exponents are wrong.\"",
+      "content": "| MC-IS-MF-ACCURATE-ANY-D | \"Mean-field theory gives the correct critical temperature T_c even if exponents are wrong.\" | \"T_c MF is approximately right even in 2D.\" | In 2D Ising, T_c(MF) = 2zJ/k (z=4 for square lattice) = 8J/k, but exact T_c (Onsager) = 2J/(k ln(1+√2)) ≈ 2.27J/k — MF overestimates by 77%. Fluctuations that lower T_c are exactly those ignored by MF; the error is systematic, not small. |",
+      "localKey": "MC-IS-MF-ACCURATE-ANY-D",
+      "language": "en",
+      "refs": [
+        "MC-IS-MF-ACCURATE-ANY-D"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 5,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 6,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 7,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-IS-1D-ORDERS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-IS-1D-ORDERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 8,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 10,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 11,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.ising-model",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): Write the Ising Hamiltonian for a ferromagnet in an external field h. What is the coordination number z for a 2D square lattice?  \n*Answer*: H = −JΣ_{⟨ij⟩}sᵢsⱼ − hΣᵢsᵢ; z=4 for 2D square lattice (each site has 4 nearest neighbors).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 74,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.ising-model",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): From the mean-field equation m=tanh(βzJm), find T_c for a 2D triangular lattice (z=6). Compare to exact T_c (known: kT_c ≈ 3.64J for triangular lattice).  \n*Answer*: T_c^{MF} = zJ/k = 6J/k; exact ≈ 3.64J/k; MF overestimates by ~65%.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 74,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.ising-model",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): Explain why the 1D Ising model has no ferromagnetic phase transition using the Peierls domain wall argument.  \n*Answer*: A domain wall between + and − regions costs energy 2J (one broken bond). For a chain of N spins, there are N possible positions for the wall → entropy gain kT ln(N). Free energy change: ΔF = 2J − kT ln(N) < 0 for large N at any T>0. Domain walls proliferate at finite T → no long-range order. In 2D, a domain wall spanning the system costs energy ~ L (perimeter), overwhelming entropy ~ L²; ordered phase survives.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 74,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.ising-model",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): The exact 2D Ising exponents (β=1/8, γ=7/4, ν=1) satisfy the scaling law 2−α=dν with α=0 (logarithmic divergence). Verify this relation.  \n*Answer*: Hyperscaling: 2−α = dν with d=2, ν=1 → 2−α = 2 → α=0. This is consistent with C_V diverging logarithmically (α=0 in the notation where C_V ~ |t|^{−α}, with logarithm as the α→0 limit). Scaling relations are derived from renormalization group and are exact within a universality class.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 74,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.ising-model",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A simulation of the 2D Ising model gives m ~ (T_c−T)^{0.12} near T_c, while theory predicts β=0.125 exactly. Is this a good confirmation?  \n*Answer*: 0.12 is reasonably consistent with 0.125 (4% discrepancy), but evaluation requires: (1) confirming the fit is within the critical region (not crossover); (2) checking finite-size effects (finite system rounds the transition); (3) uncertainty estimate on the exponent fit. A proper finite-size scaling analysis using multiple system sizes L and collapse of data onto a scaling function m·L^{β/ν} vs (T−T_c)L^{1/ν} gives more confidence. The raw number alone is suggestive but not definitive.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 74,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student expects 1D Ising to order at low T | Apply Peierls argument from MC-IS-1D-ORDERS; ask \"how many ways to place one domain wall in a 1D chain?\" → ln(N) entropy; ΔF = 2J − kT ln(N) → student computes the crossover |\n| Student thinks MF T_c is accurate | State exact values side-by-side (2D square: MF=4J/k, exact=2.27J/k; 3D cubic: MF=6J/k, exact≈4.51J/k); point out systematic overestimate |\n| Student confused about spontaneous symmetry breaking | \"At T<T_c with h=0, both ±m are equally valid solutions. The system picks one in the limit L→∞. For a finite system, ⟨m⟩=0 always — SSB is a thermodynamic limit phenomenon.\" |\n| Student asks about 3D Ising exponents | \"3D Ising: β≈0.326, γ≈1.237, ν≈0.630 — different universality class from 2D; no exact solution exists, best values from conformal bootstrap + Monte Carlo. MF exponents exact only for d≥4.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-IS-1D-ORDERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 102,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"Write the Landau free energy for a ferromagnet. What is the order parameter?\"\nCORE-1 (15 min): TA-1 + TA-2 (hydrogen atom analogy + Ising Hamiltonian notation)\nCORE-2 (20 min): TA-3 + TA-4 (mean-field self-consistency + MC 1D Peierls argument)\nCORE-3 (20 min): TA-5 (Onsager exact 2D result: T_c, β=1/8, compare to MF)\nDRILL  (10 min): TA-6 (graphical self-consistency: tanh vs m at three temperatures)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Critical phenomena — the behavior precisely at T_c — and the renormalization group that explains universality and exact exponents: next two sessions.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 113,
+        "endLine": 126
+      }
+    },
+    {
+      "assetId": "phys.stat.ising-model/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.ising-model",
+      "title": "Known Sticking Points",
+      "content": "1. **1D vs 2D phase behavior**: The absence of order in 1D (Mermin-Wagner-like argument) surprises students; emphasize the dimension-dependence of domain wall entropy vs energy.\n2. **Spontaneous symmetry breaking**: At h=0 below T_c, both +m and −m are solutions; the system \"chooses\" one in the thermodynamic limit. In finite systems with periodic boundaries, ⟨s⟩=0 (fluctuations restore symmetry); must take L→∞ before h→0.\n3. **Exact vs mean-field T_c**: 2D Ising exact T_c ≈ 2.27J/k; MF gives 4J/k. This factor-of-2 difference is not \"small\" — emphasize that MF is qualitatively correct but quantitatively wrong for d<4.\n4. **Onsager's solution complexity**: The full Onsager solution is beyond this course; cite the result authoritatively and focus on the physics (spontaneous symmetry breaking, exact exponents, comparison to MF).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.ising-model.md",
+        "startLine": 93,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

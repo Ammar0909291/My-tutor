@@ -1,0 +1,600 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.temperature-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.temperature",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:baf3385f3efffcce4b06eef22bcd5d2e1499a8f9cac1f2d841d02db672853146",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.temperature.md": "sha256:f1c3bc534b97c385ae365a7da5708964ac416fa7180a39fd5c795fcbc879beb5"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 13,
+      "session_flow": 1
+    },
+    "ruleCount": 13
+  },
+  "concept": {
+    "conceptId": "phys.therm.temperature",
+    "name": "Temperature and Temperature Scales",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.meas.units"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.temperature-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.temperature (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.temperature.md": "sha256:f1c3bc534b97c385ae365a7da5708964ac416fa7180a39fd5c795fcbc879beb5"
+      },
+      "contentHash": "sha256:b0a295f37f53dac239391416aff7999b516c7d881307f3f625d3d0c991014e9a",
+      "ruleCount": 13,
+      "bandCounts": {
+        "3": 13
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-4 (addresses MC-TEMPERATURE-IS-HEAT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-6 (addresses MC-CELSIUS-RATIO-VALID)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.temperature.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.temperature.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.temperature"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.temperature\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.temperature/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.temperature",
+      "title": "(Concrete — scale conversion)",
+      "content": "### WE-1 (Concrete — scale conversion)\n\n**Scenario:** Normal body temperature is 98.6°F. Convert to Celsius and Kelvin. Standard room temperature is 20°C — express in Fahrenheit and Kelvin.\n\n**Body temperature:**\n°C: T = (5/9)(98.6 − 32) = (5/9)(66.6) = 37.0°C.\nK: T = 37.0 + 273.15 = 310.15 K ≈ 310 K.\n\n**Room temperature (20°C):**\n°F: T = (9/5)(20) + 32 = 36 + 32 = 68°F.\nK: T = 20 + 273.15 = 293.15 K ≈ 293 K.\n\n**Answer:** Body temp = 37°C = 310 K. Room temp = 68°F = 293 K.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 47,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.temperature",
+      "title": "(Bridging — thermometric property)",
+      "content": "### WE-2 (Bridging — thermometric property)\n\n**Scenario:** A resistance thermometer has resistance R = 100 Ω at 0°C and R = 138.5 Ω at 100°C. Assuming R varies linearly with temperature, find:\n(a) the temperature when R = 120 Ω.\n(b) The resistance at −40°C.\n\n**Linear model:** R(T) = R₀ + (ΔR/ΔT) × T = 100 + (38.5/100) × T = 100 + 0.385T [Ω, T in °C].\n\n**(a) T when R = 120 Ω:**\n120 = 100 + 0.385T → T = 20/0.385 = 51.9°C.\n\n**(b) R at −40°C:**\nR = 100 + 0.385 × (−40) = 100 − 15.4 = 84.6 Ω.\n\n**Answer:** 120 Ω → 51.9°C; at −40°C: R = 84.6 Ω.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 47,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.temperature",
+      "title": "(Abstract — absolute zero from gas thermometer)",
+      "content": "### WE-3 (Abstract — absolute zero from gas thermometer)\n\n**Concept:** A constant-volume gas thermometer gives P = 1.000 × 10⁵ Pa at 0°C and P = 1.366 × 10⁵ Pa at 100°C. Using the linear P–T relationship, extrapolate to find absolute zero (the temperature where P = 0).\n\n**Linear model:** P(T) = P₀ + (ΔP/ΔT) × T.\nΔP/ΔT = (1.366 − 1.000) × 10⁵ / 100 = 366 Pa/°C.\nP = 1.000 × 10⁵ + 366T.\n\n**Extrapolate to P = 0:**\n0 = 1.000 × 10⁵ + 366T → T = −1.000 × 10⁵ / 366 = −273.2°C.\n\n**Answer:** Absolute zero ≈ −273.2°C — in excellent agreement with the accepted −273.15°C. This shows why the Kelvin scale's zero is physically meaningful: it's where gas pressure would vanish.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 47,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/misconception/MC-TEMPERATURE-IS-HEAT",
+      "kind": "misconception",
+      "conceptId": "phys.therm.temperature",
+      "title": "**Trigger signal:** Student says \"the metal spoon is colder than the wooden spoon because it has less heat\" or \"hotter things have more temperature-heat.",
+      "content": "### MC-TEMPERATURE-IS-HEAT\n\n**Trigger signal:** Student says \"the metal spoon is colder than the wooden spoon because it has less heat\" or \"hotter things have more temperature-heat.\"\n\n**Conflict evidence [P28]:** \"Two blocks: 1 kg of iron at 80°C and 10 kg of water at 20°C. Which has more total thermal energy? Which is at higher temperature? Does heat flow from iron to water or water to iron?\"\n\n*Iron: hotter (80°C > 20°C) → heat flows from iron to water. But 10 kg of water contains far more total thermal energy than 1 kg of iron. Temperature ≠ total thermal energy.*\n\n**Bridge text [P30]:** \"Temperature is an intensive property — it doesn't depend on how much material you have. Heat (thermal energy) is an extensive property — it scales with mass. A single match flame has a higher temperature than a warm bath, but contains far less heat. Temperature tells you the direction of heat flow; it doesn't tell you how much energy is stored.\"\n\n**Replacement text [P31]:** \"Temperature = thermal 'pressure' that drives heat flow. Heat = thermal energy transferred. They are related (hotter things generally have more thermal energy per particle) but not identical. Two objects at the same temperature have zero net heat flow between them — that is the operational definition of 'same temperature.'\"\n\n**Discrimination pairs [P33]:**\n- \"A 5 kg block of copper at 50°C and a 5 g copper penny at 50°C: which has more heat?\" → 5 kg block (more mass → more thermal energy). Same temperature though.\n- \"Which direction does heat flow: from 200°C steel nail into 20°C swimming pool?\" → From nail to pool (higher T to lower T), even though pool has vastly more total thermal energy.\n\n**s6_path:** \"Temperature is the 'pressure'; heat is the 'fluid'. Pressure drives flow, but the reservoir can be larger on the low-pressure side.\"\n\n---",
+      "localKey": "MC-TEMPERATURE-IS-HEAT",
+      "language": "en",
+      "refs": [
+        "MC-TEMPERATURE-IS-HEAT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/misconception/MC-CELSIUS-RATIO-VALID",
+      "kind": "misconception",
+      "conceptId": "phys.therm.temperature",
+      "title": "**Trigger signal:** Student treats Celsius ratios as physically meaningful — e.g., \"20°C is twice as hot as 10°C\" or uses Celsius in a gas-law calculation.",
+      "content": "### MC-CELSIUS-RATIO-VALID\n\n**Trigger signal:** Student treats Celsius ratios as physically meaningful — e.g., \"20°C is twice as hot as 10°C\" or uses Celsius in a gas-law calculation.\n\n**Conflict evidence [P28]:** \"Using the ideal gas law: P₁/T₁ = P₂/T₂. If T₁ = 10°C and T₂ = 20°C, is the pressure ratio P₂/P₁ = 2? Calculate using Kelvin and check.\"\n\n*In Kelvin: T₁ = 283 K, T₂ = 293 K. P₂/P₁ = 293/283 = 1.035 — a 3.5% change, not doubling.*\n\n**Bridge text [P30]:** \"The Celsius scale is anchored at 0°C by convention (water's ice point) — not by any physical zero. Absolute zero is at −273.15°C. Ratios of Celsius values have no physical meaning because the zero is arbitrary. Kelvin sets zero at absolute zero, so all ratios T₁/T₂ and differences T₂ − T₁ have thermodynamic meaning.\"\n\n**Replacement text [P31]:** \"For any equation where temperature appears multiplicatively or as a ratio (gas laws, Carnot efficiency η = 1 − T_C/T_H, kinetic energy ∝ T), always convert to Kelvin first. For differences only (thermal expansion ΔT = T₂ − T₁), Celsius is fine because the offset cancels.\"\n\n**Discrimination pairs [P33]:**\n- \"Carnot efficiency: hot reservoir 200°C, cold reservoir 100°C. Is efficiency 50%?\" → No — in Kelvin: T_H = 473 K, T_C = 373 K. η = 1 − 373/473 = 21.1%, not 50%.\n- \"Steel rail expands ΔL = LαΔT as temperature rises from 10°C to 40°C. Can you use ΔT = 30 in Celsius?\" → Yes — ΔT is a difference; Celsius offset cancels.\n\n**s6_path:** \"Rule: differences OK in Celsius; ratios and absolute values → must use Kelvin.\"\n\n---",
+      "localKey": "MC-CELSIUS-RATIO-VALID",
+      "language": "en",
+      "refs": [
+        "MC-CELSIUS-RATIO-VALID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 202,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "diagnostic: metal vs wooden spoon",
+      "content": "{\"id\":\"TA-2\",\"title\":\"diagnostic: metal vs wooden spoon\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 202,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "anchor: heat flow direction = temperature",
+      "content": "{\"id\":\"TA-3\",\"title\":\"anchor: heat flow direction = temperature\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 202,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": ": P28 conflict → P30 bridge → P31 replacement → P33 pairs",
+      "content": "{\"id\":\"TA-4\",\"title\":\": P28 conflict → P30 bridge → P31 replacement → P33 pairs\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-TEMPERATURE-IS-HEAT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-TEMPERATURE-IS-HEAT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 205,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": ": P28 conflict (Carnot trap) → P30 bridge → P31 rule → P33 pairs",
+      "content": "{\"id\":\"TA-6\",\"title\":\": P28 conflict (Carnot trap) → P30 bridge → P31 rule → P33 pairs\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-CELSIUS-RATIO-VALID\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-CELSIUS-RATIO-VALID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 206,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "narrow: when Celsius OK vs. must use Kelvin",
+      "content": "{\"id\":\"TA-7\",\"title\":\"narrow: when Celsius OK vs. must use Kelvin\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 208,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "retrieval seed: conversions −40°C and 77°F",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval seed: conversions −40°C and 77°F\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 210,
+        "endLine": 210
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "mastery probe: Charles's law — doubles volume, find T in °C",
+      "content": "{\"id\":\"TA-9\",\"title\":\"mastery probe: Charles's law — doubles volume, find T in °C\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 211,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-10\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 212,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-11\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 213,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-12\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 214,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.temperature",
+      "title": "close",
+      "content": "{\"id\":\"TA-13\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 215,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "phys.therm.temperature/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.temperature",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: metal vs wooden spoon] → [P06 anchor: heat flow direction = temperature]\n→ [MC-TEMPERATURE-IS-HEAT: P28 conflict → P30 bridge → P31 replacement → P33 pairs]\n→ [WE-1: scale conversions — body and room temperature]\n→ [P51 check-in]\n→ [MC-CELSIUS-RATIO-VALID: P28 conflict (Carnot trap) → P30 bridge → P31 rule → P33 pairs]\n→ [WE-2: resistance thermometer — linear thermometric property]\n→ [P52 narrow: when Celsius OK vs. must use Kelvin]\n→ [WE-3: absolute zero extrapolation from gas thermometer]\n→ [P62 retrieval seed: conversions −40°C and 77°F]\n→ [P36 mastery probe: Charles's law — doubles volume, find T in °C]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.temperature.md",
+        "startLine": 199,
+        "endLine": 220
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

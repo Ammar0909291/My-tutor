@@ -1,0 +1,358 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.circular-motion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.circular-motion",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:fac0ca7908895bec9d3367267f763fb7ec5965e413d6c92ed63b2e04fcb3dd2d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.circular-motion.md": "sha256:e3ce2b0359ad7de8cd7355791ec161da04aaa32373b94831f73505df398ebc87"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.circular-motion",
+    "name": "Uniform Circular Motion",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.kinematics-2d",
+      "phys.mech.newtons-second-law"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.circular-motion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.circular-motion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.circular-motion.md": "sha256:e3ce2b0359ad7de8cd7355791ec161da04aaa32373b94831f73505df398ebc87"
+      },
+      "contentHash": "sha256:cf62fb533d07a8e48f0f606fb327e4a33e055da255074750e476388bb612947f",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.circular-motion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.circular-motion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.circular-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.circular-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.circular-motion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.circular-motion.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.circular-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.circular-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.circular-motion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.circular-motion.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.circular-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.circular-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.circular-motion.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.circular-motion.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.circular-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.circular-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.circular-motion.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.circular-motion.md#TA-5 (addresses MC-CENTRIFUGAL-REAL, MC-CONSTANT-SPEED-NO-ACCELERATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.circular-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.circular-motion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.circular-motion/misconception/MC-CENTRIFUGAL-REAL",
+      "kind": "misconception",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "- **Trigger signal:** Student says \"the centrifugal force pushes the car/ball outward\" or draws a centrifugal arrow pointing away from the centre on a free-body diagram.",
+      "content": "### MC-CENTRIFUGAL-REAL\n- **Trigger signal:** Student says \"the centrifugal force pushes the car/ball outward\" or draws a centrifugal arrow pointing away from the centre on a free-body diagram.\n- **Conflict evidence [P28]:** \"Stand in an inertial reference frame and watch a ball on a string swing in a circle. Cut the string. The ball flies off tangentially — not radially outward. If a centrifugal force existed in the inertial frame, the ball would fly straight out. It doesn't. What you feel 'pushing you outward' in a turning car is your body's inertia resisting the centripetal turn — it's not a force acting on you, it's the absence of the wall pushing you inward. In the inertial frame, there is only one real horizontal force: the centripetal (inward) force.\"\n- **Bridge text [P30]:** \"'Centrifugal force' is a fictitious force that appears in a rotating (non-inertial) reference frame. In an inertial frame, it does not exist. When solving circular-motion problems, always work in the inertial frame and draw only the real inward force (tension, normal force, gravity component, friction) as the centripetal force.\"\n- **Replacement text [P31]:** \"On any free-body diagram for circular motion (inertial frame): draw only the real forces — tension, weight, normal, friction, etc. The net inward component of these real forces equals mv²/r (the centripetal requirement). Never draw a centrifugal arrow.\"\n- **Discrimination pairs [P33]:**\n  - Ball on string in circle: tension T acts inward (centripetal) — no outward force drawn ✓\n  - Same ball: student draws T inward AND F_cf outward — wrong ✗ (net force would be zero; ball would travel in a straight line)\n- **s6_path:** \"The 'centrifugal force' confusion is nearly universal — it comes from our everyday experience in rotating frames. The key: in physics problems, we always use the inertial frame where centrifugal force doesn't exist. Real forces only.\"\n\n---",
+      "localKey": "MC-CENTRIFUGAL-REAL",
+      "language": "en",
+      "refs": [
+        "MC-CENTRIFUGAL-REAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/misconception/MC-CONSTANT-SPEED-NO-ACCELERATION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "- **Trigger signal:** Student says \"the speed is constant in uniform circular motion, so there's no acceleration\" or sets F_net = 0.",
+      "content": "### MC-CONSTANT-SPEED-NO-ACCELERATION\n- **Trigger signal:** Student says \"the speed is constant in uniform circular motion, so there's no acceleration\" or sets F_net = 0.\n- **Conflict evidence [P28]:** \"Acceleration is the rate of change of velocity, not speed. Velocity is a vector — it has direction as well as magnitude. In circular motion, the speed |v| is constant, but the direction of v changes every instant. A change in direction is a change in velocity, which requires acceleration. The acceleration is centripetal — pointing toward the centre — and has magnitude v²/r (or rω²). Newton's 2nd law: F_net = ma = mv²/r ≠ 0.\"\n- **Bridge text [P30]:** \"Think of driving around a roundabout at constant speed. Your speedometer reads steady. But you feel the seat pushing you sideways — that's the centripetal force. Your car is accelerating (changing direction) even though it isn't speeding up or slowing down.\"\n- **Replacement text [P31]:** \"Uniform circular motion: constant speed, but non-zero acceleration. Centripetal acceleration a_c = v²/r = rω², directed toward the centre. The centripetal force F_c = mv²/r is the net force required to maintain the circular path.\"\n- **Discrimination pairs [P33]:**\n  - Constant speed → dv/dt = 0 (tangential acceleration = 0) ✓\n  - Constant speed → no acceleration — WRONG (centripetal acceleration ≠ 0) ✗\n- **s6_path:** \"This is one of the most important conceptual shifts in mechanics. Speed constant does NOT mean velocity constant. Once you see it, you'll never confuse it again.\"\n\n---",
+      "localKey": "MC-CONSTANT-SPEED-NO-ACCELERATION",
+      "language": "en",
+      "refs": [
+        "MC-CONSTANT-SPEED-NO-ACCELERATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "Centripetal Acceleration Derivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Centripetal Acceleration Derivation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 82,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "Centripetal Force is Not a New Force",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Centripetal Force is Not a New Force\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 101,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "Solving Circular Motion Problems: The Three-Step Method",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Solving Circular Motion Problems: The Three-Step Method\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 119,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "Vertical Circles",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Vertical Circles\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 139,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "Conical Pendulum and Banked Curves",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Conical Pendulum and Banked Curves\",\"primitives\":[\"P01\",\"P06\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-CENTRIFUGAL-REAL\",\"MC-CONSTANT-SPEED-NO-ACCELERATION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CENTRIFUGAL-REAL",
+        "MC-CONSTANT-SPEED-NO-ACCELERATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 162,
+        "endLine": 337
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Centrifugal force diagnosis**\n\"Draw the free-body diagram of a car travelling around a flat circular curve. Label every force and identify which provides the centripetal acceleration. Should you include a 'centrifugal force'? Why or why not?\"\n\n*Target:* FBD shows weight (down), normal (up), friction (toward centre). No centrifugal arrow. Centripetal = friction. \"Centrifugal force does not appear in the inertial frame FBD.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Centripetal acceleration**\n\"A satellite orbits Earth at radius 7.0 × 10⁶ m with speed 7550 m/s. Calculate its centripetal acceleration. What provides this centripetal force?\"\n\n*Target:* a_c = v²/r = (7550)² / (7.0 × 10⁶) = 5.70 × 10⁷ / 7.0 × 10⁶ ≈ 8.14 m/s². Centripetal force = gravity (verified: g at 7 × 10⁶ m = GM/r² ≈ 8.14 m/s² ✓).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Banked curve**\n\"A road is banked at 20° and has radius 150 m. What speed allows a car to navigate the curve with zero friction? (tan 20° ≈ 0.364)\"\n\n*Target:* v = √(rg tanθ) = √(150 × 9.8 × 0.364) = √534.7 ≈ 23.1 m/s.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Vertical circle**\n\"A 0.3 kg ball on a 0.8 m string swings in a vertical circle. What is the minimum speed at the top? What is the tension at the bottom at this minimum top speed?\"\n\n*Target:* v_top = √(gr) = √(9.8 × 0.8) = 2.80 m/s; v_bottom² = v_top² + 4gr = 7.84 + 31.36 = 39.2 → v_bottom = 6.26 m/s; T_bottom = m(v_bottom²/r + g) = 0.3 × (49 + 9.8) = 17.6 N.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: period and centripetal force**\n\"A 2 kg mass moves in a horizontal circle of radius 0.5 m with period T = 1.2 s. Find: (a) angular velocity ω, (b) linear speed v, (c) centripetal force.\"\n\n*Target:* ω = 2π/T = 5.24 rad/s; v = rω = 2.62 m/s; F_c = mrω² = 2 × 0.5 × 27.4 = 27.4 N (or mv²/r = 2 × 6.86/0.5 = 27.4 N).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.circular-motion/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.circular-motion",
+      "title": "Adaptive Flags",
+      "content": "- **Centripetal force identification**: the most common problem-setup error is failing to identify which real force plays the centripetal role. Require students to state explicitly: \"The centripetal force is provided by ___\" before writing any equation.\n- **Vertical circle energy conservation**: this blueprint stops at energy-conservation results (v_bottom from v_top). Full derivation using phys.mech.conservation-of-energy is assumed as a tool here. If a student hasn't mastered energy conservation, flag and scaffold.\n- **Banked curve friction cases**: TA-3 covers the ideal (no-friction) banked curve only. The full case with friction (v_min and v_max for banked + friction) is left for extension — it is algebraically intensive and not required for mastery at this level.\n- **Satellite preview**: MP-2 uses orbital context. Students may note that g at 7.0 × 10⁶ m = 8.14 m/s² and the centripetal acceleration matches exactly — this is the core of orbital mechanics (phys.mech.orbital-mechanics). Acknowledge but don't derail into orbital period derivations.\n- **ω vs v distinction**: students who have seen phys.mech.angular-kinematics will have seen ω before. For those who haven't, introduce ω = 2π/T = 2πf explicitly, and verify with v = rω for a concrete example.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.circular-motion.md",
+        "startLine": 298,
+        "endLine": 308
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

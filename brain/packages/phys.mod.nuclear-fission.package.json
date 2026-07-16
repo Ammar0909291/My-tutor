@@ -1,0 +1,469 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.nuclear-fission-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.nuclear-fission",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:cb777173d226acb7a93ccb67823a20fe8f7f2f75d3f649d7f999ed5d30b97551",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.nuclear-fission.md": "sha256:8723fe01eda8aaeb054a1906e2483d01dba21c1f0b0007943a42ae97b1824743"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mod.nuclear-fission",
+    "name": "Nuclear Fission and Chain Reactions",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": null,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.mod.binding-energy"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.nuclear-fission-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.nuclear-fission (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.nuclear-fission.md": "sha256:8723fe01eda8aaeb054a1906e2483d01dba21c1f0b0007943a42ae97b1824743"
+      },
+      "contentHash": "sha256:4cbdf3091cdf4b6a17d0a81d40adf45127e2d7f38f1e2a6ee2e8386c23431bb2",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.nuclear-fission.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nuclear-fission"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nuclear-fission\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nuclear-fission.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nuclear-fission"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nuclear-fission\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nuclear-fission.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nuclear-fission"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nuclear-fission\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nuclear-fission.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nuclear-fission"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nuclear-fission\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nuclear-fission.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nuclear-fission"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nuclear-fission\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nuclear-fission.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nuclear-fission"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nuclear-fission\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.nuclear-fission/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Nuclear Fission and Chain Reactions — core explanation",
+      "content": "### Core Idea\nNuclear fission occurs when a heavy nucleus (typically ²³⁵U or ²³⁹Pu) absorbs a neutron and splits into two medium-mass fragments plus 2–3 neutrons and ~200 MeV of energy. The energy release is explained by the binding energy per nucleon (BE/A) curve: fission products near A ≈ 115 have higher BE/A than uranium, so the system moves to a lower energy state. If the released neutrons initiate further fissions, a self-sustaining chain reaction can occur — the basis of nuclear reactors and weapons.\n\n### Conceptual Ladder\n1. **Recall**: BE/A curve — heavy nuclei have lower BE/A than mid-mass nuclei; fission moves toward the BE/A peak.\n2. **Understand**: Fission Q-value ≈ (BE/A_products − BE/A_reactant) × A ≈ (8.5 − 7.6) × 235 ≈ 200 MeV.\n3. **Apply**: Chain reaction concept: k = multiplication factor; k < 1 (subcritical), k = 1 (critical), k > 1 (supercritical).\n4. **Analyze**: Critical mass, neutron moderation, control rods, reactor safety; compare fission reactor and bomb design.\n\n### Key Formula Set\n- **Typical fission reaction**: ²³⁵U + n → ²³⁶U* → ⁹²Kr + ¹⁴¹Ba + 3n (one example; fission is not unique)\n- **Q-value estimate**: Q ≈ Δ(BE/A) × A_fissioning nucleus ≈ (8.5 − 7.6) × 235 ≈ 200 MeV\n- **Multiplication factor**: k = (neutrons produced in generation n+1)/(neutrons in generation n)\n  - k < 1: subcritical (reaction dies)\n  - k = 1: critical (steady power)\n  - k > 1: supercritical (exponential growth)\n- **Neutron generation growth**: N(t) = N₀ × k^(t/τ), τ ≈ prompt neutron lifetime (~10⁻⁴ s in reactor)\n- **Energy from fission**: ~200 MeV per fission; 1 kg ²³⁵U fully fissioned → ~8.5×10¹³ J (≈ 20 kt TNT equivalent)\n- **Power formula**: P = R × Q, where R = fission rate (fissions/sec), Q = energy per fission\n- **Four-factor formula** (reactor criticality): k_∞ = η × ε × p × f (thermal neutrons: reproduction, fast fission, resonance escape, thermal utilization)\n\n### Canonical Example\n²³⁵U fission:\nBE/A(²³⁵U) ≈ 7.59 MeV/nucleon. Average BE/A of products ≈ 8.40 MeV/nucleon.\nQ ≈ (8.40 − 7.59) × 235 = 0.81 × 235 = 190 MeV per fission.\nEach fission also releases ≈ 7 MeV in prompt gamma rays and ≈ 6 MeV in delayed beta/gamma from fission products.\nTotal: ≈ 200 MeV per fission.\n1 g of ²³⁵U → 2.56×10²¹ atoms / 235 × Nₐ → 2.56×10²¹ × 200 MeV = 5.12×10²³ MeV = 8.2×10¹⁰ J ≈ 82 GJ.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 16,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "A fission reactor can explode like an atomic bomb",
+      "content": "### MC-1: \"A fission reactor can explode like an atomic bomb\"\n- **Probe**: \"If a nuclear reactor loses control, can it explode with nuclear force?\"\n- **Characteristic phrase**: \"Reactors are basically slow nuclear bombs.\"\n- **Trigger**: Media conflation of reactors and weapons; general fear of nuclear technology.\n- **Conflict evidence**: Reactor fuel is ~3% enriched; weapons require ≥90% enriched. Even if reactor k > 1, the geometry and materials prevent the super-prompt-critical condition needed for a nuclear explosion. The Chernobyl accident demonstrated this: runaway power caused a steam explosion and fire, not a nuclear detonation.\n- **Bridge**: A nuclear explosion requires rapid assembly of highly enriched fissile material to prompt-supercritical conditions in microseconds. A reactor's slow chain reaction (millisecond timescales with delayed neutrons) and low enrichment make this impossible.\n- **Replacement**: A reactor can have a runaway power excursion → steam explosion, structural failure, radioactive material release. It cannot detonate as a nuclear weapon.\n- **Discrimination pairs**: \"Reactor safety concern: steam explosion, meltdown\" ✓ vs. \"Reactor can go nuclear\" ✗\n- **S6 repair path**: Compare reactor fuel enrichment (3%) to weapon-grade enrichment (>90%). Calculate k for each. Show reactor k is controlled by delayed neutrons; weapon k must be prompt-critical.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Fission always produces the same fragments",
+      "content": "### MC-2: \"Fission always produces the same fragments\"\n- **Probe**: \"²³⁵U splits into ⁹²Kr + ¹⁴¹Ba. Does it always split this way?\"\n- **Characteristic phrase**: \"That's the fission reaction.\"\n- **Trigger**: Textbooks show one reaction as \"the\" example.\n- **Conflict evidence**: Fission is a quantum event with a broad statistical distribution of products. The yield distribution is bimodal (peaks near A ≈ 95 and A ≈ 139); hundreds of different fragment pairs are possible with varying probabilities. Only the total A and Z (conservation) are fixed for a given incident.\n- **Bridge**: Like rolling dice and splitting the total — many ways to partition 235 into two numbers around 95 and 140.\n- **Replacement**: Fission produces a statistical distribution of fragment pairs. Any specific pair (like Kr + Ba) represents one possible outcome. The fission yield curve shows probabilities for each mass number.\n- **Discrimination pairs**: \"Fission yield distribution: peaks near A = 95 and A = 139\" ✓ vs. \"Always splits into Kr + Ba\" ✗\n- **S6 repair path**: Show a fission yield curve graph; identify the two peaks; note that symmetric fission (A ≈ 118 each) is actually rare.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "All neutrons are prompt and chain reactions are instantaneous",
+      "content": "### MC-3: \"All neutrons are prompt and chain reactions are instantaneous\"\n- **Probe**: \"How fast does a chain reaction proceed?\"\n- **Characteristic phrase**: \"It's instantaneous — all neutrons are released at once.\"\n- **Trigger**: Thinking of the bomb context only (prompt neutrons, microsecond timescale).\n- **Conflict evidence**: ~0.65% of fission neutrons are delayed (released from fission products over milliseconds to minutes). These delayed neutrons allow reactor control — without them, k would have to be held at exactly 1 with mechanical control rods moving in microseconds (impossible). Reactors are designed to be critical only with delayed neutrons, giving operators seconds to respond.\n- **Bridge**: Two timescales: prompt neutrons (10⁻⁷ s, 99.35%) and delayed neutrons (0.1 s to minutes, 0.65%). Reactors operate in the delayed-critical regime; prompt-critical is the weapon regime.\n- **Replacement**: Delayed neutrons are essential to reactor control. The effective neutron generation time in a thermal reactor is ~0.1 s (not 10⁻⁷ s) because of delayed neutrons — this is what makes control rods effective.\n- **Discrimination pairs**: \"Reactor: delayed-critical, k_effective ≈ 1 including delayed neutrons\" ✓ vs. \"All neutrons prompt, chain reaction instantaneous\" ✗\n- **S6 repair path**: Compute neutron generation time with and without delayed neutrons; show the 10⁶× difference in timescale.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Fission energy comes from converting all the mass to energy",
+      "content": "### MC-4: \"Fission energy comes from converting all the mass to energy\"\n- **Probe**: \"In ²³⁵U fission releasing 200 MeV, how much mass is converted?\"\n- **Characteristic phrase**: \"The mass of the uranium atom is converted to energy.\"\n- **Trigger**: Loose application of E = mc².\n- **Conflict evidence**: Δm = 200 MeV / 931.5 MeV/u ≈ 0.215 u. But mass of ²³⁵U = 235 u. Fraction converted = 0.215/235 ≈ 0.09%. The vast majority of the uranium's mass-energy remains in the fission products; only the mass defect difference is released.\n- **Bridge**: E = mc² applies to the mass DIFFERENCE between reactants and products, not the total mass.\n- **Replacement**: Fission converts 0.09% of the uranium mass to kinetic energy of products and radiation. 99.91% of the mass-energy remains in the fission products.\n- **Discrimination pairs**: \"Δm = 0.215 u (0.09% of 235 u) → Q = 200 MeV\" ✓ vs. \"Entire uranium mass converted\" ✗\n- **S6 repair path**: Compute Δm for a specific fission reaction from atomic masses; verify Δm/m_reactant ≈ 0.09%.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "BE/A curve revisit",
+      "content": "{\"id\":\"TA-1\",\"title\":\"BE/A curve revisit\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 198,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Balanced fission equation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Balanced fission equation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 199,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Q-value estimation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Q-value estimation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 200,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Chain reaction mechanics",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Chain reaction mechanics\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 201,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Reactor vs. bomb",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Reactor vs. bomb\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 202,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Energy density",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Energy density\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Assessment",
+      "content": "### Mastery Gate\nStudent can: (1) estimate Q from BE/A values, (2) balance a fission equation, (3) define k and classify reactor conditions, (4) explain the role of delayed neutrons in reactor control, (5) debunk the \"reactor explosion\" misconception.\n\n### Formative Assessment 1 — Q estimation\n**Prompt**: \"Using BE/A(²³⁵U) = 7.59 MeV/nucleon and average BE/A(products) = 8.40 MeV/nucleon, estimate Q for ²³⁵U fission.\"\n**Expected answer**: Q ≈ (8.40 − 7.59) × 235 = 0.81 × 235 = 190 MeV. Accept 180–210 MeV.\n**Threshold**: Within 10% of 190 MeV; must show ΔBE/A × A calculation.\n\n### Formative Assessment 2 — Balancing fission\n**Prompt**: \"Complete the fission reaction: ²³⁵U + ¹n → ⁹⁰Sr + ? + 2¹n.\"\n**Expected answer**: A of unknown: 235 + 1 − 90 − 2 = 144. Z of unknown: 92 − 38 = 54. Unknown: ¹⁴⁴Xe (xenon-144).\n**Threshold**: Correct Z = 54 and A = 144.\n\n### Formative Assessment 3 — Criticality\n**Prompt**: \"A reactor has k = 0.95 initially and a mean neutron generation time of τ = 0.1 s. Starting with N₀ = 10⁶ neutrons, how many neutrons are there after 1 s (10 generations)?\"\n**Expected answer**: N = 10⁶ × (0.95)^10 = 10⁶ × 0.599 ≈ 5.99 × 10⁵.\n**Threshold**: ~6 × 10⁵ (within 5%).\n\n### Formative Assessment 4 — Conceptual (reactor vs. bomb)\n**Prompt**: \"Explain in 3 sentences why a nuclear reactor cannot explode like a nuclear bomb.\"\n**Expected answer**: (1) Reactor fuel is ~3% enriched ²³⁵U, too dilute for the rapid supercritical configuration required for a nuclear explosion. (2) Reactors operate in the delayed-critical regime — controlled by delayed neutrons over milliseconds to seconds, allowing mechanical control. (3) Weapons require prompt-critical geometry assembled in microseconds from ≥90% enriched fissile material — impossible with reactor fuel and design.\n**Threshold**: Must include enrichment difference AND delayed neutron control AND prompt-critical distinction.\n\n### Confidence Calibration\nAfter FA1: \"How confident (0–100%) are you in your Q estimate? What's the main source of uncertainty?\" (BE/A values are averages over the yield distribution; actual Q varies by fission fragment pair.)\n\n### Delayed Retrieval\nTwo weeks later: Without notes, explain the role of delayed neutrons in reactor control; state why their absence would make reactor control impossible; estimate reactor neutron generation time with delayed neutrons.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 221,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Physical Experience)\nImagine a heavy droplet of water vibrating. If the vibration is energetic enough, the droplet pinches in the middle and splits into two smaller droplets plus some ejected water molecules (neutrons). The two smaller droplets are rounder and more compact (higher BE/A) — they release their surface tension energy as the droplet reconfigs into a more stable shape. This is the liquid-drop model of fission: the nucleus behaves like a charged liquid drop, and the vibration triggered by neutron capture drives the split.\n\nThe chain reaction: each split sends out 2-3 \"water molecules\" (neutrons) that can hit other droplets (nuclei) and split them. If enough droplets are present (critical mass), each neutron on average triggers one more split — steady chain reaction.\n\n### Representational (Diagrams and Symbols)\n- **Fission event diagram**: Heavy nucleus absorbs neutron → elongated intermediate state → splits into two fragments + neutrons + gamma rays. Label Q ≈ 200 MeV.\n- **BE/A curve with fission arrow**: Show U (BE/A ≈ 7.6) splitting into two fragments near A ≈ 115 (BE/A ≈ 8.5). Arrow pointing up the curve = energy released.\n- **Chain reaction diagram**: One fission → 2 neutrons → 4 neutrons → 8 → exponential growth (supercritical). One fission → 2 neutrons, one absorbed, one escapes → 1 new fission (critical).\n- **Reactor schematic**: Fuel rods (²³⁵U), moderator (water), control rods (neutron absorbers), coolant, heat exchanger.\n\n### Abstract (Equation Manipulation)\nStudents must practice:\n1. Estimate Q from BE/A values.\n2. Balance a fission equation (conserve Z and A).\n3. Compute energy per gram of ²³⁵U.\n4. Apply k factor: given initial number of neutrons and k, find N after n generations.\n5. Distinguish criticality conditions and connect to reactor control vs. weapon design.\n\n### Transfer (Novel Contexts)\n- **Reactor safety**: Loss-of-coolant accident → temperature rise → Doppler broadening of U-238 resonances → more neutron absorption → k decreases → inherently safe. Physical argument: if k → 1, removing cooling makes U-238 absorb more neutrons, decreasing k below 1.\n- **Nuclear waste**: Fission products have A ≈ 95 and 139; many are far from stability (neutron-rich) → long decay chains → radioactive waste with t₁/₂ ranging from seconds to millennia.\n- **SNAP-23 / SNAP reactors**: Miniature fission reactors for space power (RTG for some missions — though RTGs use decay heat not chain reaction).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 49,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Why Beginners Fail",
+      "content": "### Failure Mode 1: Thinking fission is always the same reaction\nStudents think ²³⁵U always splits into ⁹²Kr + ¹⁴¹Ba. In reality, fission yields a statistical distribution of fragment masses (yield curve peaks around A ≈ 95 and A ≈ 140). The specific fragments vary event by event; the shown reaction is one example.\n\n### Failure Mode 2: Confusing multiplication factor k with number of neutrons per fission\nk ≠ 2 or 3 (average neutrons per fission). k accounts for neutron losses (absorption, leakage, moderation) AND production. For k = 1 in a thermal reactor, each fission's 2.5 average neutrons → ~1.5 lost (absorbed by control rods, U-238, leakage) → ~1 goes to new fission.\n\n### Failure Mode 3: Thinking a fission reactor can explode like a bomb\nA reactor uses ~3% enriched ²³⁵U; a bomb requires ≥90% enriched ²³⁵U. A reactor cannot achieve the rapid supercritical assembly needed for an explosion. The Chernobyl accident involved a steam explosion and graphite fire — not a nuclear explosion. Students must understand the distinction between prompt critical (weapon) and delayed critical (reactor).\n\n### Failure Mode 4: Misidentifying the energy source as \"splitting of chemical bonds\"\nStudents sometimes think fission energy comes from electron cloud rearrangement. Fission energy (~200 MeV) is 10⁷× larger than chemical bond energies (~eV) — it comes from the nuclear strong force via mass defect.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 77,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Voice Teaching",
+      "content": "**Opening move**: \"Uranium fission releases 200 MeV per nucleus. Let's trace exactly where that comes from — and why one gram of uranium equals 2,700 tonnes of coal.\"\n\n**Core explanation**: \"Look at the BE/A curve. Uranium sits at ~7.6 MeV/nucleon. Split it into mid-mass nuclei at ~8.5 MeV/nucleon. The difference — 0.9 MeV/nucleon — times 235 nucleons gives ~210 MeV of energy released. The fragments are more tightly bound; the nuclear glue was stronger. That's where the energy came from.\"\n\n**Common error interception**: \"The multiplication factor k is not the number of neutrons per fission. It's the net number that cause fission after accounting for all losses. In a reactor, those 2.4 neutrons per fission — most are absorbed by other things. k is the fraction that survive to cause the NEXT fission.\"\n\n**Checkpoint question**: \"A reactor has k = 1.001. It's slightly supercritical. Will the power stay constant, grow, or shrink?\" (Grow — exponentially. That's why control rods must be inserted immediately to bring k back to 1.)\n\n**Closing move**: \"Nuclear reactors and weapons are the same physics — chain reactions — but with entirely different engineering: fuel enrichment, neutron speed, geometry, and control mechanisms. The physics is one thing; the engineering choices are what separate a power plant from a bomb.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 207,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Recovery Notes",
+      "content": "### S0 — Block: \"I don't understand what chain reaction means\"\nDraw the simplest case: 1 neutron → fission → 2 neutrons → 2 fissions → 4 neutrons → 4 fissions → 8 neutrons... This is k = 2 (unrealistic but illustrative). For k = 1: each fission produces 1 net neutron → steady production. For k = 0.9: each generation has 90% of the previous → dying chain reaction. Ask: \"What k is needed for a reactor to maintain constant power?\" (k = 1.) \"What must operators do if k rises to 1.01?\" (Insert control rods to absorb neutrons.)\n\n### S3 — Can describe fission but cannot balance equations\nRecall conservation rules: ΣZ_reactants = ΣZ_products; ΣA_reactants = ΣA_products. For ²³⁵U + n: total A = 236, total Z = 92. Fission into two fragments (Z₁ + Z₂ = 92, A₁ + A₂ = 236 − neutrons emitted). Balance Z first to identify elements; then A to get mass numbers.\n\n### S6 — Understands the physics but confused about reactor safety\nFour key safety mechanisms: (1) delayed neutrons (timescale for control); (2) Doppler broadening (negative temperature coefficient in U-238 absorber); (3) void coefficient (water moderator loss reduces moderation → k drops in most designs); (4) control rods (mechanical absorbers). The Chernobyl reactor had a positive void coefficient — a known design flaw (RBMK reactor). Modern reactors (PWR, BWR) have negative feedback coefficients — inherently safer.\n\n### S9 — Cannot connect to energy policy and climate\nNuclear fission produces ~200 MeV per event, zero CO₂ in operation, and ~870 kg of ²³⁵U consumed per GW-year. Nuclear waste is ~30 tonnes of high-level waste per GW-year — compact but highly radioactive. Students should be able to compare this to 3×10⁶ tonnes of CO₂ per GW-year for a coal plant, and make informed arguments about the trade-offs (waste vs. climate).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 254,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Memory and Review",
+      "content": "### Memory Type\nConceptual (why fission releases energy from BE/A curve) + procedural (balancing equations, k factor calculation) + declarative (key facts: Q ≈ 200 MeV, reactor enrichment ~3%, delayed neutrons ~0.65%, control mechanism).\n\n### Spaced Retrieval Schedule\n- Day 1: Estimate Q for ²³⁵U fission using BE/A values.\n- Day 3: Balance a new fission equation (different fragment pair).\n- Day 7: Compute N after 5 generations with k = 1.02 and N₀ = 10⁶.\n- Day 14: Explain in 4 sentences why delayed neutrons make reactor control possible.\n- Day 30: Compare energy per kg from ²³⁵U fission vs. gasoline; explain the difference using nuclear physics.\n\n### Interleaving Partners\n- phys.mod.binding-energy (BE/A curve — foundation of Q-value explanation)\n- phys.mod.nuclear-reactions (Q-value from mass defect — same physics)\n- phys.mod.radioactivity (fission products are radioactive → waste problem)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 270,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Transfer Map",
+      "content": "### Near Transfer\n- Estimate Q for any fission reaction using BE/A values.\n- Balance fission equations and identify fragment pairs.\n- Compute neutron population evolution for given k and τ.\n\n### Far Transfer\n- **Energy policy**: Nuclear reactor capacity factors, CO₂ emissions, waste volumes — using Q value and fission rate calculations.\n- **Weapons physics**: Subcritical → supercritical transition; enrichment requirement; implosion vs. gun-type design (qualitative only).\n- **Medical physics**: Fission-produced isotopes (Mo-99 → Tc-99m) for SPECT imaging — produced in research reactors, demand sensitive to reactor availability.\n\n### Structural Abstraction\nThe chain reaction concept — one event produces multiple triggers for the next event — appears in: epidemic modeling (R₀ = reproduction number, k analog), information virality, avalanche dynamics, and economic multiplier effects. The mathematics of k factors and exponential growth/decay applies directly. Nuclear criticality is the canonical physical example of this universal branching-process mathematics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 289,
+        "endLine": 306
+      }
+    },
+    {
+      "assetId": "phys.mod.nuclear-fission/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.nuclear-fission",
+      "title": "Curriculum Feedback",
+      "content": "### Prerequisite Adequacy\nphys.mod.binding-energy provides the BE/A curve and the conceptual link between mass defect and energy release. Without that foundation, students cannot understand WHY fission releases energy. The prerequisite is necessary and sufficient.\n\n### Unlock Readiness\nLeaf node — no further KG unlocks. However, this blueprint connects deeply to energy policy discussions, nuclear waste, and weapons non-proliferation — cross-domain connections should be flagged.\n\n### Suggested Flag\nConsider teaching phys.mod.nuclear-fission and phys.mod.nuclear-fusion in the same session or consecutive sessions, contrasting the two on the same BE/A diagram. Their educational value is greatly enhanced by comparison.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nuclear-fission.md",
+        "startLine": 306,
+        "endLine": 320
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

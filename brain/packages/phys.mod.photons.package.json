@@ -1,0 +1,547 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.photons-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.photons",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:89ee4298a7244411dd97b81196d2f31f5430d50ff4bcf4e35632817e0d41b557",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.photons.md": "sha256:00218418ebc106b88b48b0839aece1d28f09dfb65cee5652bd5a288ab72798fd"
+    },
+    "assetCount": 23,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 8,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mod.photons",
+    "name": "Photons and Quantization of Light",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mod.photoelectric-effect"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.photons-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.photons (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.photons.md": "sha256:00218418ebc106b88b48b0839aece1d28f09dfb65cee5652bd5a288ab72798fd"
+      },
+      "contentHash": "sha256:033f7e98574cf4f4b069336eaf5769112b9f682ebdf4061b98af057d9aa75451",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.photons.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photons.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photons\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photons.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photons.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photons\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photons.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photons.md#TA-3 (addresses MC-1, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photons\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photons.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photons.md#TA-4 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photons\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photons.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photons.md#TA-5 (addresses MC-2, MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photons\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photons.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photons.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photons"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photons\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.photons/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.photons",
+      "title": "Photons and Quantization of Light — core explanation",
+      "content": "**Core Insight:** Light is quantized into discrete packets called photons. Each photon carries a\nfixed energy E = hf and a fixed momentum p = h/λ. These are not divisible — a photon is the\nsmallest possible unit of electromagnetic radiation at a given frequency. The photon model explains\nthe photoelectric effect (already established), the spectrum of blackbody radiation (Planck's\nprecursor), and the Compton effect (next concept). Mastery means: (a) computing photon energy\nfrom frequency or wavelength, (b) computing photon momentum, (c) counting photons in a beam of\nknown power and frequency, (d) explaining why photons are not \"little balls\" but quantum objects\nwith both wave and particle character.\n\n**The Two Core Equations:**  \n  Energy:   E = hf = hc/λ   (h = 6.626 × 10⁻³⁴ Js)  \n  Momentum: p = h/λ = E/c\n\n**The Key Conceptual Bridge from phys.mod.photoelectric-effect:**  \nIn the photoelectric effect, light came in packets of energy hf and the threshold was φ = hf₀.\nThe photon concept generalises this: every EM field (radio waves, visible light, X-rays, gamma\nrays) is quantized. A 1 kHz radio wave has photons with energy h × 1000 Hz = 6.6 × 10⁻³¹ J —\nso tiny that radio photons are practically undetectable as individuals. A 10¹⁸ Hz gamma ray\nphoton has energy ~4 keV — detectable as an individual event. The photon model spans all EM\nradiation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 23,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/misconception/MC-PHOTONS-ARE-TINY-BALLS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photons",
+      "title": "**Probe:** \"A single photon passes through a double-slit apparatus. After many photons have passed",
+      "content": "",
+      "localKey": "MC-PHOTONS-ARE-TINY-BALLS",
+      "language": "en",
+      "refs": [
+        "MC-PHOTONS-ARE-TINY-BALLS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photons",
+      "title": "**Probe:** \"A single photon passes through a double-slit apparatus. After many photons have passed",
+      "content": "### MC-1: MC-PHOTONS-ARE-TINY-BALLS\n**Probe:** \"A single photon passes through a double-slit apparatus. After many photons have passed\nthrough, an interference pattern builds up. How can each individual photon 'know' about both slits\nto produce this pattern?\"  \n**Characteristic phrase:** \"The photon went through one slit, not both.\"  \n**Trigger:** Classical-particle visualisation.  \n**Conflict evidence [P28]:** Experiments (Aspect et al., Taylor 1909, modern single-photon\ncameras) show that even individual photons, sent one at a time through a double slit with long\nwaits between, build up the interference pattern. No particle model can produce this result —\na ball going through one slit would give a Gaussian distribution centred on that slit.  \n**Bridge [P30]:** \"A photon is not a ball. Its wave function passes through both slits simultaneously.\nThe wave function interferes with itself. When the photon is detected, it appears at a random\nposition, weighted by the interference pattern probability.\"  \n**Replacement [P31]:** A photon is a quantum object described by a wave function; it does not\nfollow a definite trajectory; it is detected as a particle but propagates as a wave.  \n**Discrimination pairs [P33]:** Single photon through double slit: (A) goes through one slit and\nlands randomly, (B) goes through both slits and produces interference, (C) splits in half at\neach slit. Correct: (B) — the photon's wave function goes through both.  \n**S6 repair path:** TA-3 (wave-particle duality introduction) → TA-5 (single-photon double-slit\nevidence).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/misconception/MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photons",
+      "title": "**Probe:** \"Two laser pointers: one red (λ = 700 nm, power 5 mW) and one violet (λ = 400 nm,",
+      "content": "",
+      "localKey": "MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS",
+      "language": "en",
+      "refs": [
+        "MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 24,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photons",
+      "title": "**Probe:** \"Two laser pointers: one red (λ = 700 nm, power 5 mW) and one violet (λ = 400 nm,",
+      "content": "### MC-2: MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS\n**Probe:** \"Two laser pointers: one red (λ = 700 nm, power 5 mW) and one violet (λ = 400 nm,\npower 1 mW). Which has more photons per second? Which photons are more energetic?\"  \n**Characteristic phrase:** \"The brighter one has higher energy photons.\"  \n**Trigger:** Conflating total beam power (photon count × energy) with individual photon energy.  \n**Conflict evidence [P28]:** E_photon(red) = hc/700nm ≈ 2.84 × 10⁻¹⁹ J.\nE_photon(violet) = hc/400nm ≈ 4.97 × 10⁻¹⁹ J.\nN(red) = 5×10⁻³ / 2.84×10⁻¹⁹ ≈ 1.76 × 10¹⁶/s.\nN(violet) = 1×10⁻³ / 4.97×10⁻¹⁹ ≈ 2.0 × 10¹⁵/s.\nRed has more photons/s but each is less energetic.  \n**Bridge [P30]:** \"Photon energy is a property of frequency, not the beam's total power. Bright\nred = many low-energy photons. Dim violet = few high-energy photons. Total power = photon count\n× energy per photon.\"  \n**Replacement [P31]:** Photon energy E = hf depends only on frequency; photon count N = P/(hf)\ndetermines intensity. These are independent quantities.  \n**Discrimination pairs [P33]:** 5 mW red vs. 1 mW violet — which photons are more energetic?\n(A) red (brighter = more energy), (B) violet (higher frequency = more energy per photon),\n(C) same (same type of light). Correct: (B).  \n**S6 repair path:** TA-4 (photon energy/count calculation exercises).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 24,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/misconception/MC-PHOTON-HAS-NO-MOMENTUM",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photons",
+      "title": "**Probe:** \"A photon has no rest mass. Does it have momentum? If yes, how can you calculate it?\"",
+      "content": "",
+      "localKey": "MC-PHOTON-HAS-NO-MOMENTUM",
+      "language": "en",
+      "refs": [
+        "MC-PHOTON-HAS-NO-MOMENTUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 44,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photons",
+      "title": "**Probe:** \"A photon has no rest mass. Does it have momentum? If yes, how can you calculate it?\"",
+      "content": "### MC-3: MC-PHOTON-HAS-NO-MOMENTUM\n**Probe:** \"A photon has no rest mass. Does it have momentum? If yes, how can you calculate it?\"  \n**Characteristic phrase:** \"No mass, no momentum.\"  \n**Trigger:** Newtonian p = mv applied to m = 0.  \n**Conflict evidence [P28]:** Solar sails are pushed by photon momentum — a real engineering\napplication. Laser cooling of atoms uses photon momentum transfer to slow atoms to nanokelvin\ntemperatures. Compton scattering (next concept) directly measures photon momentum transfer to\nelectrons.  \n**Bridge [P30]:** \"Newtonian p = mv applies only to massive particles. Einstein's relativistic\nmechanics gives E² = (pc)² + (mc²)². For a photon, m = 0, so E = pc → p = E/c = hf/c = h/λ.\nThe momentum is real and measurable.\"  \n**Replacement [P31]:** Photon momentum p = h/λ = E/c; derived from relativistic mechanics, not\nNewtonian; confirmed by radiation pressure and Compton scattering.  \n**Discrimination pairs [P33]:** Does a photon have momentum? (A) No — m = 0. (B) Yes — p = h/λ.\n(C) Only if it is absorbed, not if it passes through. Correct: (B).  \n**S6 repair path:** TA-5 (radiation pressure calculation) → Compton effect preview.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 44,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/misconception/MC-QUANTUM-RANDOMNESS-IS-MEASUREMENT-ERROR",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photons",
+      "title": "**Probe:** \"In a very dim light beam, a photon detector clicks at irregular intervals. A student",
+      "content": "",
+      "localKey": "MC-QUANTUM-RANDOMNESS-IS-MEASUREMENT-ERROR",
+      "language": "en",
+      "refs": [
+        "MC-QUANTUM-RANDOMNESS-IS-MEASUREMENT-ERROR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photons",
+      "title": "**Probe:** \"In a very dim light beam, a photon detector clicks at irregular intervals. A student",
+      "content": "### MC-4: MC-QUANTUM-RANDOMNESS-IS-MEASUREMENT-ERROR\n**Probe:** \"In a very dim light beam, a photon detector clicks at irregular intervals. A student\nsays: 'The irregularity is because the detector is not sensitive enough.' Is this correct?\"  \n**Characteristic phrase:** \"A better detector would give regular clicks.\"  \n**Trigger:** Deterministic worldview — if something appears random, it must be due to measurement\nlimitations.  \n**Conflict evidence [P28]:** Modern single-photon detectors have efficiencies >90% and timing\njitter <100 ps. The random arrival intervals persist even at these precisions. The randomness is\nnot detector noise — it is the inherent quantum randomness of photon arrival, governed by Poisson\nstatistics.  \n**Bridge [P30]:** \"The irregularity is not detector noise — it is what quantum mechanics predicts.\nPhotons in a coherent beam arrive at Poisson-distributed random times. A perfect detector would\nstill see random intervals. Quantum mechanics is fundamentally probabilistic, not deterministic.\"  \n**Replacement [P31]:** Photon arrival times in a coherent beam are genuinely random (Poisson\nprocess); this is a property of quantum mechanics, not measurement imperfection.  \n**Discrimination pairs [P33]:** Irregular photon arrival times in a dim beam: (A) detector noise,\n(B) fundamental quantum randomness, (C) thermal fluctuations. Correct: (B) for a coherent source.  \n**S6 repair path:** TA-3 (quantum randomness vs. classical noise discussion).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 61,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photons",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photons",
+      "title": "Energy and Counting",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Energy and Counting\",\"primitives\":[\"P14\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photons",
+      "title": "Wave-Particle Duality Preview",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Wave-Particle Duality Preview\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[\"MC-1\",\"MC-4\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 16,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photons",
+      "title": "Momentum Derivation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Momentum Derivation\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 23,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photons",
+      "title": "MC-2 Diagnostic",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-2 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-2\",\"MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 29,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photons",
+      "title": "Closure & Self-Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Closure & Self-Assessment\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 36,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.photons",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \nPass criteria — student correctly:  \n(a) Computes photon energy from E = hf or E = hc/λ  \n(b) Computes photon momentum from p = h/λ  \n(c) Computes photon count per second from N = P/(hf)  \n(d) Explains why a photon has non-zero momentum despite zero rest mass  \nFailure on (a) → restart from TA-2. Failure on (b) or (d) → TA-4. Failure on (c) → TA-2 or TA-5.\n\n**Formative Golden Probe (FA-1):**  \n\"Find the energy (in eV) and momentum of a photon of wavelength 400 nm.\"  \nExpected: E = hc/λ = 6.626×10⁻³⁴ × 3×10⁸ / 400×10⁻⁹ = 4.97×10⁻¹⁹ J = 3.10 eV.\np = h/λ = 6.626×10⁻³⁴ / 400×10⁻⁹ = 1.66×10⁻²⁷ kg m/s.  \nThreshold: Both correct with units.\n\n**Formative Golden Probe (FA-2):**  \n\"A red laser pointer (λ = 650 nm) has power 3 mW. How many photons does it emit per second?\"  \nExpected: E_photon = hc/λ = 3.06×10⁻¹⁹ J. N = P/E = 3×10⁻³ / 3.06×10⁻¹⁹ ≈ 9.8 × 10¹⁵/s.  \nThreshold: Correct N with correct intermediate energy calculation.\n\n**Formative Golden Probe (FA-3):**  \n\"A laser beam of power 500 mW is directed at a perfect mirror. Calculate the force exerted on\nthe mirror. (For a perfect mirror, F = 2P/c because the photons reverse direction.)\"  \nExpected: F = 2 × 500×10⁻³ / 3×10⁸ = 3.33 × 10⁻⁹ N = 3.33 nN.  \nThreshold: Correct application of impulse formula; factor of 2 for reflection correctly used.\n\n**Formative Golden Probe (FA-4):**  \n\"Explain in one paragraph why a photon has momentum even though it has zero rest mass.\"  \nExpected: The Newtonian formula p = mv requires mass. For massless particles, the relativistic\nrelation E² = (pc)² + (mc²)² reduces to E = pc when m = 0. Therefore p = E/c = hf/c = h/λ.\nThis momentum is physically real: it produces radiation pressure measurable in laser experiments\nand used in solar sails.  \nThreshold: Relativistic derivation explicit; experimental confirmation mentioned.\n\n**Confidence Calibration:** After FA-4, ask: \"How confident were you that momentum could be\nnon-zero for m = 0?\" Persistent low confidence here flags a conceptual gap on relativistic\nmechanics that should be noted for phys.rel sessions.\n\n**Delayed Retrieval (Session + 3 days):**  \n\"Without notes: energy of a photon at λ = 500 nm; momentum of same photon; photon count for\n1 mW at same wavelength.\"  \nThreshold: All three computed correctly unaided.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 337,
+        "endLine": 383
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photons",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nA single-photon detector (Geiger counter for light) placed in a very dim beam clicks at random,\nirregular intervals — not a smooth current. Each click is one photon arriving. The randomness is\nnot measurement error; it is quantum randomness. Between clicks, the detector is silent — no\nhalf-photons or fractional energy deposits.\n\n**Stage 2 — Representational (R)**  \nA monochromatic beam of power P and frequency f consists of N photons per second, where\nN = P/(hf). Each photon carries energy E = hf. A 1 mW green laser (λ = 532 nm) emits\nN = 10⁻³ / (6.626×10⁻³⁴ × 3×10⁸/532×10⁻⁹) ≈ 2.7 × 10¹⁵ photons/second. Individual photons\nare unresolvable in everyday beams, but the quantization is real.\n\n**Stage 3 — Abstract (A)**  \nPhoton energy E = hf: frequency-proportional, frequency-only (not amplitude). Photon momentum\np = h/λ = E/c: photons have momentum despite zero rest mass (consistent with E = pc for\nmassless particles, a consequence of special relativity). The energy-momentum relation for a\nphoton: E² = (pc)² (since m = 0). Photon density and wave intensity are related: I = Nhf/A\n(intensity = photon flux × photon energy / area).\n\n**Stage 4 — Transfer (T)**  \nPhoton momentum provides the mechanism for radiation pressure (solar sails, laser cooling of\natoms, optical tweezers). The concept of photon counting extends to quantum optics, single-photon\ncommunication in quantum cryptography, and astrophysical photon detection (how astronomers\nmeasure stellar luminosities). The photon model also sets up the Compton effect and the de Broglie\nhypothesis (matter waves by analogy).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 48,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photons",
+      "title": "Why Beginners Fail",
+      "content": "1. **Photons as tiny balls:** Students visualise photons as small spherical particles. This leads\n   to contradictions when photons produce interference patterns (single photons through a double\n   slit) — if they are balls, how can one ball go through two slits? The correct model is a\n   quantum object with both wave and particle character, not a classical particle.\n\n2. **Confusing photon energy with photon intensity:** Students conflate the energy of one photon\n   (determined by frequency) with the total energy of the beam (determined by photon count ×\n   energy per photon). A bright red laser has more photons but each photon has less energy than\n   a dim UV source.\n\n3. **Treating momentum = mass × velocity and rejecting p = h/λ:** Students apply the Newtonian\n   formula p = mv. Since m = 0 for photons, they conclude p = 0. The relativistic formula p = E/c\n   must be introduced as the correct framework for massless particles.\n\n4. **Believing quantum randomness is measurement error:** The random arrival of photons in a dim\n   beam is not because the detector is imprecise — it is because the photon arrival time is\n   genuinely probabilistic. This challenges the deterministic worldview.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 78,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photons",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"In the photoelectric effect, we accepted that light comes in packets of energy\nhf. Today we make that model complete: each packet also has momentum h/λ. Light is not just\nenergy waves — it is a stream of quantum objects, each carrying energy and momentum.\"\n\n**Key explanatory moves:**\n- \"E = hf: the energy of one photon. P = N × hf: the energy of N photons per second. These are\n  different quantities. Don't mix them.\"\n- \"p = h/λ: Newtonian p = mv cannot work for m = 0. Relativity fixes it: for massless particles,\n  E = pc, so p = E/c. Light pushes things — solar sails are proof.\"\n- \"One photon going through a double slit: the wave function goes through both slits and interferes.\n  The click of the detector locates it at one point. Wave going in, particle coming out.\"\n\n**Common recovery phrases:**\n- If student says photon momentum is zero: \"Calculate the force a 1 W laser exerts: F = P/c.\n  That force is real and measured. It comes from photon momentum transfer. The formula p = h/λ\n  must be correct.\"\n- If student conflates energy with intensity: \"Write E = hf: that's one photon. Write P = Nhf:\n  that's N photons. Circle the difference. The first depends on colour. The second depends on\n  how many photons per second.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 313,
+        "endLine": 337
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photons",
+      "title": "Recovery Notes",
+      "content": "**S0 (no prior photoelectric effect):** The prerequisite phys.mod.photoelectric-effect must be\nsatisfied — the photon model is introduced there. Do not attempt this concept without it.\n\n**S3 (knows E = hf but not momentum):** The momentum gap is the most common at this level. Use\nthe radiation-pressure argument (D-2, solar sails) before the derivation — make the need for\nmomentum tangible before introducing the equation.\n\n**S6 (MC-PHOTON-HAS-NO-MOMENTUM dominant):** Direct to the Compton effect calculation (next\nconcept). \"The Compton effect measured the momentum change of a photon as it scattered off an\nelectron. The numbers match p = h/λ exactly. The momentum is real.\" This is evidence-first\nrecovery.\n\n**S9 (can compute energy but confuses single-photon energy with total power):** Require the\nstudent to label every quantity they write: \"Is this one photon's energy or the whole beam's\nenergy?\" Explicit labelling prevents silent conflation.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PHOTON-HAS-NO-MOMENTUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 383,
+        "endLine": 403
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photons",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (two formulas E = hf, p = h/λ) + conceptual (why momentum ≠ 0;\nwave-particle duality). The formulas are easy to recall; the concepts need spaced conceptual\nprobes.\n\n**Spaced retrieval plan:**\n- Session + 1 day: \"Energy and momentum of a photon at λ = 600 nm. Explain in one sentence why\n  the photon has momentum.\" (Formula recall + concept check)\n- Session + 4 days: \"A 5 mW blue laser (λ = 450 nm) and a 5 mW red laser (λ = 700 nm) — which\n  has more photons/s? Which photons have more energy? More momentum?\" (Multi-quantity comparison)\n- Session + 9 days: \"A photon of wavelength 200 nm hits an electron at rest and transfers some\n  momentum. Qualitatively, what happens to the photon's frequency after the collision? Why?\"\n  (Compton-effect preview; tests momentum transfer understanding)\n\n**Interleaving partners:** phys.mod.photoelectric-effect (energy model foundation),\nphys.mod.compton-effect (momentum model application), phys.mod.de-broglie (extends momentum\nconcept to matter).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 403,
+        "endLine": 424
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photons",
+      "title": "Transfer Map",
+      "content": "**Near transfer:**\n- phys.mod.compton-effect: directly uses p = h/λ to compute the wavelength shift after photon-\n  electron collision\n- phys.mod.de-broglie: extends p = h/λ to matter particles (λ = h/p for any particle)\n- phys.mod.bohr-model: photon emission/absorption explains atomic spectral lines\n\n**Far transfer:**\n- Solar sail engineering: F = P/c for photon momentum transfer\n- Laser cooling of atoms: photon recoil reduces atomic velocity to nanokelvin temperatures\n- Optical tweezers: focused photon momentum gradient traps and manipulates cells\n- Quantum cryptography: single photon state encoding (BB84 protocol)\n- Astrophysics: radiation pressure in stellar interiors balances gravitational collapse\n\n**Structural abstraction:** E = hf and p = h/λ are the two bridges between the wave description\nof light (frequency f, wavelength λ) and the particle description (energy E, momentum p).\nThese two equations are the translation dictionary between classical wave physics and quantum\nmechanics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 424,
+        "endLine": 446
+      }
+    },
+    {
+      "assetId": "phys.mod.photons/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.photons",
+      "title": "Curriculum Feedback",
+      "content": "**Does this concept position correctly in the KG?**  \nYes. Requiring phys.mod.photoelectric-effect gives the energy-hf foundation. Unlocking\nphys.mod.compton-effect, phys.mod.de-broglie, phys.mod.bohr-model, and phys.mod.x-rays is\ncorrect — all four require the photon as a defined concept.\n\n**Missing prerequisite?**  \nA node for phys.mod.blackbody-radiation (Planck's quantization) would deepen historical context\nfor E = hf, but it is not needed computationally — E = hf can be presented as the photon\nhypothesis without Planck's derivation.\n\n**Recommended teaching sequence:** phys.mod.photoelectric-effect → phys.mod.photons →\nphys.mod.compton-effect. All three form the photon-model core and should be taught within the\nsame week.\n\n**Asset opportunity:** An interactive photon-counter simulation (set beam power and wavelength,\ndisplay N = P/(hf) photons/s, show individual click events with Poisson spacing) would make the\nabstract counting formula experiential. High-priority given how commonly students conflate energy\nwith intensity.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photons.md",
+        "startLine": 446,
+        "endLine": 469
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

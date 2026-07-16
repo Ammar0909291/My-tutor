@@ -1,0 +1,414 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.dielectrics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.dielectrics",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:7949286ef9501dba40a372a5e43d4905d897c5e244992ab407a2d78b880eca18",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.dielectrics.md": "sha256:15224d479dad90cbe700f233524975622cff8cdc7dd0b53ffa714faf6c6a5791"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "worked_example": 2,
+      "misconception": 2,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "phys.em.dielectrics",
+    "name": "Dielectrics",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.capacitance"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.dielectrics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.dielectrics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.dielectrics.md": "sha256:15224d479dad90cbe700f233524975622cff8cdc7dd0b53ffa714faf6c6a5791"
+      },
+      "contentHash": "sha256:391001e22db3b662662983be3010d603b173d2fc18149ae1ee41a2342a9d428f",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.dielectrics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dielectrics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dielectrics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dielectrics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dielectrics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dielectrics.md#TA-2 (addresses MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD, MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dielectrics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dielectrics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dielectrics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dielectrics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dielectrics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dielectrics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dielectrics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dielectrics.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dielectrics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dielectrics\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dielectrics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dielectrics.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dielectrics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dielectrics\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dielectrics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dielectrics.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dielectrics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dielectrics\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dielectrics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dielectrics.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dielectrics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dielectrics\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dielectrics.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dielectrics.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dielectrics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dielectrics\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.dielectrics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.dielectrics",
+      "title": "(Effect of dielectric — fixed charge)",
+      "content": "### WE-1 (Effect of dielectric — fixed charge)\n\n**Problem:** A parallel-plate capacitor (A = 0.02 m², d = 1.0 mm, no dielectric) is charged to Q = 4.0 μC and then disconnected from the battery. A dielectric with κ = 3.5 is inserted. Find the new V, E, and U, and compare with the original values.\n\n**Worked solution:**\n\n*Step 1 — Original C₀:*\nC₀ = ε₀A/d = (8.854×10⁻¹²)(0.02)/(10⁻³) = 1.771×10⁻¹⁰ F = 177.1 pF\n\n*Step 2 — Original V₀, E₀, U₀:*\nV₀ = Q/C₀ = 4×10⁻⁶/1.771×10⁻¹⁰ = 22,588 V ≈ 22.6 kV\nE₀ = V₀/d = 22,588/10⁻³ = 2.259×10⁷ V/m\nU₀ = Q²/(2C₀) = (4×10⁻⁶)²/(2×1.771×10⁻¹⁰) = 16×10⁻¹²/3.542×10⁻¹⁰ = 0.0452 J\n\n*Step 3 — After dielectric (Q fixed):*\nC = κC₀ = 3.5 × 177.1 = 619.9 pF\nV = V₀/κ = 22,588/3.5 = 6454 V ≈ 6.45 kV\nE = E₀/κ = 2.259×10⁷/3.5 = 6.45×10⁶ V/m\nU = U₀/κ = 0.0452/3.5 = 0.0129 J\n\n*Step 4 — Interpret:*\nQ is fixed; C triples (+); V, E, U all drop to 1/κ of original. Energy released = 0.0452 − 0.0129 = 0.0323 J, which is done by the electric field pulling the dielectric into the gap (the dielectric slab is attracted by the fringing field).\n\n**Answer:** V = 6.45 kV; E = 6.45 MV/m; U = 0.0129 J (all reduced by factor κ = 3.5 from original)\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 89,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.dielectrics",
+      "title": "(Effect of dielectric — fixed voltage)",
+      "content": "### WE-2 (Effect of dielectric — fixed voltage)\n\n**Problem:** The capacitor of WE-1 (C₀ = 177.1 pF) is kept connected to a 500 V battery while the κ = 3.5 dielectric is inserted. Find the change in Q and U.\n\n**Worked solution:**\n\n*Step 1 — New C:*\nC = κC₀ = 3.5 × 177.1 = 619.9 pF\n\n*Step 2 — Charge (V = 500 V fixed):*\nQ₀ = C₀V = (177.1×10⁻¹²)(500) = 88.6 nC\nQ = CV = (619.9×10⁻¹²)(500) = 310 nC\n\nΔQ = 310 − 88.6 = **221.4 nC** drawn from the battery.\n\n*Step 3 — Energy:*\nU₀ = ½C₀V² = ½(177.1×10⁻¹²)(500)² = ½(177.1×10⁻¹²)(250000) = 22.1 μJ\nU = ½CV² = ½(619.9×10⁻¹²)(250000) = 77.5 μJ\n\nΔU = 77.5 − 22.1 = **55.4 μJ** increase.\n\n*Step 4 — Energy budget:*\nBattery delivered Q·V_battery = 221.4×10⁻⁹ × 500 = 110.7 μJ.\nCapacitor stored 55.4 μJ. Remaining 55.3 μJ ≈ work done pulling dielectric into field.\n\n**Answer:** Q increases from 88.6 nC to 310 nC; U increases from 22.1 to 77.5 μJ.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 89,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/misconception/MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD",
+      "kind": "misconception",
+      "conceptId": "phys.em.dielectrics",
+      "title": "**Trigger signal:** Student says \"the dielectric has charges so it adds to the field\" or expects E to increase when a dielectric is inserted.",
+      "content": "### MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD\n\n**Trigger signal:** Student says \"the dielectric has charges so it adds to the field\" or expects E to increase when a dielectric is inserted.\n\n**Conflict evidence [P28]:** \"When a dielectric is inserted between charged plates (fixed Q), the bound surface charges of the dielectric oppose the free charges on the plates. If free charge is +σ on the top plate, the dielectric develops −σ_b on its top surface and +σ_b on its bottom surface. The bound charges partially cancel the free charges. Net E = (σ − σ_b)/ε₀ < σ/ε₀ = E₀. The dielectric reduces E, not increases it. This is why V = Ed drops → C = Q/V increases.\"\n\n**Bridge text [P30]:** \"The dielectric's bound charges act like a partial shield — they oppose the external field. Imagine the external field tries to align all the molecular dipoles; each aligned dipole produces its own tiny opposing field. The sum of these opposing fields reduces the net E inside the dielectric. The more polarisable the material (larger κ), the more the field is reduced.\"\n\n**Replacement text [P31]:** \"Inserting a dielectric between capacitor plates (at fixed charge) reduces the electric field E by a factor of κ. The dielectric polarises in response to the external field, producing bound charges that oppose the free charges. The net field inside the dielectric is E = E₀/κ. The reduced field means reduced voltage (V = Ed), which means increased capacitance (C = Q/V = κC₀).\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Dielectric reduces E (at fixed Q) by factor 1/κ\" | \"Dielectric adds to E (more charges present)\" |\n| \"Bound charges oppose free charges → net σ_eff = σ − σ_b\" | \"Dielectric strengthens the field inside\" |\n| \"C increases because V decreases at same Q\" | \"C increases because E increases\" |\n\n**s6_path:** Draw the diagram: plates with +σ and −σ; dielectric with −σ_b on top, +σ_b on bottom. Show opposing fields. Net E < original.\n\n---",
+      "localKey": "MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD",
+      "language": "en",
+      "refs": [
+        "MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/misconception/MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES",
+      "kind": "misconception",
+      "conceptId": "phys.em.dielectrics",
+      "title": "**Trigger signal:** Student uses the same κ value for DC and for optical light, or is surprised that glass has different κ at different frequencies.",
+      "content": "### MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES\n\n**Trigger signal:** Student uses the same κ value for DC and for optical light, or is surprised that glass has different κ at different frequencies.\n\n**Conflict evidence [P28]:** \"Water: κ_static = 80 (dipoles fully align, even slowly rotating dipoles contribute). But water is transparent — at optical frequencies (10¹⁴ Hz), the refractive index n ≈ 1.33, which means κ_optical = n² ≈ 1.77. The slow orientational polarisation of water molecules can't follow 10¹⁴ Hz oscillations. So κ drops from 80 to 1.77 between DC and light frequencies.\"\n\n**Bridge text [P30]:** \"Different polarisation mechanisms respond at different timescales. At low frequencies (DC), all mechanisms contribute: electronic, ionic, and orientational. At microwave frequencies (GHz), molecular orientations can partially follow → microwave heating of food uses the orientational polarisation of water. At optical frequencies, only electronic polarisation is fast enough.\"\n\n**Replacement text [P31]:** \"The dielectric constant κ (relative permittivity) is frequency-dependent. The static κ (DC, measured with no oscillating field) is the largest. As frequency increases, slower polarisation mechanisms drop out: ionic polarisation fails at ≈10¹² Hz, orientational at ≈10⁹ Hz. At optical frequencies, only electronic polarisation survives: κ_optical = n², where n is the optical refractive index. This frequency dependence (dispersion) is responsible for how glass separates colors (prism/rainbow).\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"κ_static ≠ κ_optical (e.g., water: 80 vs 1.77)\" | \"κ is the same at all frequencies\" |\n| \"Orientational polarisation fails at GHz frequencies\" | \"Molecular dipoles follow fields at any frequency\" |\n| \"κ_optical = n² (refractive index squared)\" | \"Static κ applies to light propagation through glass\" |\n\n**s6_path:** Show the frequency-response curve of κ: flat at low f, drops at resonance frequencies for each mechanism, settling to κ_optical at high f.\n\n---",
+      "localKey": "MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES",
+      "language": "en",
+      "refs": [
+        "MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dielectrics",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 239,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dielectrics",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES\",\"MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD",
+        "MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 245,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dielectrics",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 250,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dielectrics",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-4\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 255,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dielectrics",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-5\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 256,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dielectrics",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-6\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 257,
+        "endLine": 257
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dielectrics",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 258,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dielectrics",
+      "title": "close",
+      "content": "{\"id\":\"TA-8\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 259,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "phys.em.dielectrics/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.dielectrics",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nWhat is the dielectric constant κ? What value does it take for vacuum?\n\n**Answer:** κ = C/C₀ = ε/ε₀ (relative permittivity). For vacuum: κ = 1 exactly. For any other material: κ > 1.\n\n---\n\n### AP-2 (Bloom: Understand)\nA capacitor is charged and disconnected from the battery. A dielectric is inserted. Explain why the system's energy decreases, and where the lost energy goes.\n\n**Answer:** At fixed Q, inserting a dielectric reduces E by factor 1/κ (bound charges oppose field), reducing V = Ed, and U = Q²/(2C) = Q²/(2κC₀) < U₀. The missing energy is not lost — it is converted to kinetic energy as the dielectric slab is attracted into the gap by fringing field forces. The electric force pulls the polarisable dielectric into the region of higher field, doing work on the slab.\n\n---\n\n### AP-3 (Bloom: Apply)\nA 50 pF air capacitor is charged to 200 V. The battery is disconnected. Dielectric κ = 4 is inserted. Find new V, E (d = 1.0 mm), and U.\n\n**Answer:**\nQ = C₀V₀ = (50×10⁻¹²)(200) = 10 nC (fixed)\nC = 4×50 = 200 pF\nV = Q/C = 10×10⁻⁹/200×10⁻¹² = **50 V** (reduced by 4)\nE = V/d = 50/10⁻³ = **50,000 V/m** (original: 200,000 V/m, reduced by 4)\nU = Q²/(2C) = (10⁻⁸)²/(2×200×10⁻¹²) = 10⁻¹⁶/4×10⁻¹⁰ = **2.5×10⁻⁷ J = 0.25 μJ** (original: 1 μJ, reduced by 4)\n\n---\n\n### AP-4 (Bloom: Analyze)\nExplain why microwave ovens heat food but not the ceramic plate underneath.\n\n**Answer:** Water in food has a large orientational polarisation: its dipoles follow the oscillating microwave field (2.45 GHz), absorbing energy as the dipoles rotate against friction — this is dielectric heating. Ceramic plates have very few freely-rotating dipoles and very low dielectric loss at 2.45 GHz; they absorb negligible energy from the microwave field and stay cool. This is a direct consequence of the frequency dependence of κ and dielectric loss (Im(κ)).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dielectrics.md",
+        "startLine": 264,
+        "endLine": 299
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

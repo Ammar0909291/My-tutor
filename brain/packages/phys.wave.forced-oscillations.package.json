@@ -1,0 +1,634 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.forced-oscillations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.forced-oscillations",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:8bad3abba353baf57d4776d5bee8f4e75ef37e002811d22de06c7aaeb8fa90d8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.forced-oscillations.md": "sha256:be39e3fa078f838a5a5df223f9c198e57419f5dbacca6c5be83a16dd286f99e6"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 14,
+      "session_flow": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "phys.wave.forced-oscillations",
+    "name": "Forced Oscillations and Resonance",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.wave.damped-oscillations"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.forced-oscillations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.forced-oscillations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.forced-oscillations.md": "sha256:be39e3fa078f838a5a5df223f9c198e57419f5dbacca6c5be83a16dd286f99e6"
+      },
+      "contentHash": "sha256:08a348b1f588ca71dbfa61e6739f677977c1dc7d9966d61780f49ccb1c40a9df",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-5 (addresses MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-8 (addresses MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.forced-oscillations.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.forced-oscillations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.forced-oscillations\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.forced-oscillations/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "(Concrete — resonance amplitude)",
+      "content": "### WE-1 (Concrete — resonance amplitude)\n\n**Scenario:** A spring-mass oscillator has m = 0.5 kg, k = 200 N/m, and b = 2 kg/s. A driving force F₀ = 5 N oscillates at the natural frequency ω₀. Find the steady-state amplitude at resonance.\n\n**Step 1 — Natural frequency.**\nω₀ = √(k/m) = √(200/0.5) = √400 = 20 rad/s.\n\n**Step 2 — Damping rate and Q.**\nγ = b/(2m) = 2/(2 × 0.5) = 2 s⁻¹.\nQ = ω₀/(2γ) = 20/4 = 5.\n\n**Step 3 — Static amplitude (if force were static).**\nA_static = F₀/k = 5/200 = 0.025 m = 2.5 cm.\n\n**Step 4 — Resonance amplitude.**\nA_res = Q × A_static = 5 × 0.025 = 0.125 m = 12.5 cm.\n\n**Interpretation:** At resonance, the amplitude is 5× the static displacement — a 5× amplification due to resonance. For Q = 100 (a high-Q system), the same driving force would give 100× amplification.\n\n**Answer:** A_res = 12.5 cm.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 47,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "(Bridging — frequency response curve)",
+      "content": "### WE-2 (Bridging — frequency response curve)\n\n**Scenario:** For the same oscillator (ω₀ = 20 rad/s, γ = 2 s⁻¹), compute the steady-state amplitude A(ω_d) at three driving frequencies: ω_d = 10, 20, 30 rad/s. F₀/m = 10 m/s².\n\n**Formula:** A(ω_d) = (F₀/m) / √[(ω₀² − ω_d²)² + (2γω_d)²].\n\n**At ω_d = 10 rad/s (below resonance):**\nNumerator: 10.\nDenominator: √[(400 − 100)² + (2×2×10)²] = √[(300)² + (40)²] = √[90000 + 1600] = √91600 ≈ 302.7.\nA = 10/302.7 ≈ 0.033 m = 3.3 cm.\n\n**At ω_d = 20 rad/s (at resonance):**\nDenominator: √[(400 − 400)² + (2×2×20)²] = √[0 + (80)²] = 80.\nA = 10/80 = 0.125 m = 12.5 cm. ✓ (matches WE-1)\n\n**At ω_d = 30 rad/s (above resonance):**\nDenominator: √[(400 − 900)² + (2×2×30)²] = √[(−500)² + (120)²] = √[250000 + 14400] = √264400 ≈ 514.\nA = 10/514 ≈ 0.019 m = 1.9 cm.\n\n**Answer:** Below resonance: 3.3 cm; at resonance: 12.5 cm; above resonance: 1.9 cm. The resonance peak is sharp — amplitude at ω₀ is ~4× the off-resonance values.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 47,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "(Abstract — bandwidth and Q)",
+      "content": "### WE-3 (Abstract — bandwidth and Q)\n\n**Application:** A radio receiver must separately tune stations at 90.0 MHz and 90.5 MHz (0.5 MHz apart). What minimum Q is required so that the half-power bandwidth Δf < 0.5 MHz?\n\n**Half-power bandwidth:** Δf = f₀/Q (in frequency units; the same relation as Δω = ω₀/Q).\n\n**Requirement:** Δf < 0.5 MHz.\nQ > f₀/Δf = 90.0 MHz / 0.5 MHz = 180.\n\n**Answer:** Q > 180. The LC tuning circuit in the radio must have Q > 180 to resolve adjacent stations 0.5 MHz apart at 90 MHz.\n\n**Extension — Tacoma Narrows:** The bridge had a low Q (broad resonance) but the vortex shedding frequency happened to land near the natural frequency. Had engineers added damping (larger γ → larger Δω → lower Q → flatter peak → lower resonance amplitude), the disaster would have been avoided. Modern bridge design engineers damping into the structure deliberately.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 47,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/misconception/MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY",
+      "kind": "misconception",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "**Trigger signal:** Student says \"resonance only happens when the driving frequency exactly equals ω₀ — any slight mismatch and there's no resonance.",
+      "content": "### MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY\n\n**Trigger signal:** Student says \"resonance only happens when the driving frequency exactly equals ω₀ — any slight mismatch and there's no resonance.\"\n\n**Conflict evidence [P28]:** \"Look at the amplitude formula A(ω_d). At ω_d = ω₀ + Δω (slightly off), is A exactly zero? Compute A for ω₀ = 20, ω_d = 21, γ = 2 — is the amplitude much smaller than at resonance?\"\n\n*A(21): √[(400−441)² + (84)²] = √[(41)² + (84)²] = √[1681 + 7056] = √8737 ≈ 93.5. A = 10/93.5 ≈ 0.107 m — still 85% of resonance amplitude! Not zero.*\n\n**Bridge text [P30]:** \"Resonance is a peak, not a spike. Near the resonance frequency, amplitude is large; exactly at resonance, it's maximum. The width of that peak is the bandwidth Δω = 2γ. For low-Q systems (large γ), the peak is broad — the system responds strongly to a wide range of frequencies near ω₀.\"\n\n**Replacement text [P31]:** \"Resonance is a region, not a point. The half-power bandwidth Δω = ω₀/Q tells you how wide. For Q = 5, Δω = 4 rad/s — the amplitude is at least 70% of maximum for any ω_d within ±2 rad/s of ω₀. Only very high-Q systems (Q >> 1) have sharp, point-like resonance.\"\n\n**Discrimination pairs [P33]:**\n- \"Q = 1000 oscillator driven at ω₀ + 0.1ω₀: is amplitude near maximum?\" → Half-power bandwidth = ω₀/1000 — driving at ω₀ + 0.1ω₀ is 100 bandwidths off. Amplitude is tiny.\n- \"Q = 2 oscillator driven 10% off ω₀: significant amplitude?\" → Yes — bandwidth = ω₀/2, so 10% off is well inside the peak.\n\n**s6_path:** \"Think of Q as the 'sharpness knob.' Low Q = broad response that tolerates imprecise driving. High Q = sharp response that requires precise tuning.\"\n\n---",
+      "localKey": "MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY",
+      "language": "en",
+      "refs": [
+        "MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/misconception/MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE",
+      "kind": "misconception",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "**Trigger signal:** Student says \"if you add damping to a forced oscillator, the amplitude always decreases.",
+      "content": "### MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE\n\n**Trigger signal:** Student says \"if you add damping to a forced oscillator, the amplitude always decreases.\"\n\n**Conflict evidence [P28]:** \"Consider a forced oscillator driven far below resonance (ω_d ≪ ω₀). The steady-state amplitude is approximately A ≈ F₀/k — independent of damping. Adding damping changes the resonance peak but barely affects the low-frequency response. Is amplitude always reduced by damping?\"\n\n**Bridge text [P30]:** \"Damping's effect on forced oscillation depends on where you are relative to resonance:\n- At resonance: A_res = QF₀/(mω₀²) — higher damping (lower Q) REDUCES peak amplitude.\n- Far below resonance: A ≈ F₀/k — damping irrelevant, controlled by stiffness.\n- Far above resonance: A ≈ F₀/(mω_d²) — damping irrelevant, controlled by inertia.\nDamping matters most near resonance.\"\n\n**Replacement text [P31]:** \"Damping reshapes the resonance peak: it lowers and broadens it. Below and above resonance (off-peak regions), amplitude is barely affected by changing damping. The statement 'more damping → smaller amplitude' is only reliably true AT resonance, not everywhere.\"\n\n**Discrimination pairs [P33]:**\n- \"Driving at ω_d = 0.1 ω₀ (quasi-static): double the damping coefficient b. By what factor does amplitude change?\" → Amplitude ≈ F₀/k — unchanged (stiffness-controlled region).\n- \"Driving at resonance: double b (γ → 2γ, Q → Q/2). New amplitude?\" → A_res = QF₀/(mω₀²) → halved.\n\n**s6_path:** \"Damping is the resonance-controller, not a universal amplitude-reducer. Its influence peaks at ω_d = ω₀ and fades away from resonance.\"\n\n---",
+      "localKey": "MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE",
+      "language": "en",
+      "refs": [
+        "MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 23,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 216,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "diagnostic: Tacoma Narrows",
+      "content": "{\"id\":\"TA-2\",\"title\":\"diagnostic: Tacoma Narrows\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 216,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "anchor: pushing swing at natural period",
+      "content": "{\"id\":\"TA-3\",\"title\":\"anchor: pushing swing at natural period\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 216,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "bridge: ω_d ≈ ω₀ → amplitude builds",
+      "content": "{\"id\":\"TA-4\",\"title\":\"bridge: ω_d ≈ ω₀ → amplitude builds\",\"primitives\":[\"P30\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": ": P28 conflict → P31 replacement → P33 pairs",
+      "content": "{\"id\":\"TA-5\",\"title\":\": P28 conflict → P31 replacement → P33 pairs\",\"primitives\":[\"P28\",\"P31\",\"P33\"],\"addresses\":[\"MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 218,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-6\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "narrow: three regimes (stiffness / damping / inertia controlled)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"narrow: three regimes (stiffness / damping / inertia controlled)\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 221,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": ": P28 → P30 → P31 → P33",
+      "content": "{\"id\":\"TA-8\",\"title\":\": P28 → P30 → P31 → P33\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE\"]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [
+        "MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 222,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "retrieval seed: A_res = Q × A_static derivation",
+      "content": "{\"id\":\"TA-9\",\"title\":\"retrieval seed: A_res = Q × A_static derivation\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 224,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "mastery probe: full parameter set for new system",
+      "content": "{\"id\":\"TA-10\",\"title\":\"mastery probe: full parameter set for new system\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 226,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-11\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 227,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-12\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 228,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-13\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 229,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "close",
+      "content": "{\"id\":\"TA-14\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.wave.forced-oscillations/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.wave.forced-oscillations",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: Tacoma Narrows] → [P06 anchor: pushing swing at natural period]\n→ [P30 bridge: ω_d ≈ ω₀ → amplitude builds]\n→ [MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY: P28 conflict → P31 replacement → P33 pairs]\n→ [WE-1: resonance amplitude calculation]\n→ [P51 check-in]\n→ [P52 narrow: three regimes (stiffness / damping / inertia controlled)]\n→ [MC-MORE-DAMPING-ALWAYS-SMALLER-AMPLITUDE: P28 → P30 → P31 → P33]\n→ [WE-2: frequency response curve (three frequencies)]\n→ [P62 retrieval seed: A_res = Q × A_static derivation]\n→ [WE-3: radio Q requirement]\n→ [P36 mastery probe: full parameter set for new system]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.forced-oscillations.md",
+        "startLine": 213,
+        "endLine": 235
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

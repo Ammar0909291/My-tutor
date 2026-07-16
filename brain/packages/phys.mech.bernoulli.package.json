@@ -1,0 +1,358 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.bernoulli-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.bernoulli",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:83ae0f96a317605e64d1f1dc5f83f0bba040645899da308c1f018552eb7b9885",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.bernoulli.md": "sha256:4a0533ae67eb076bb912157a4d44862d18641039cfba3a430f2982303615c977"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.bernoulli",
+    "name": "Bernoulli's Principle",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.pressure-fluids",
+      "phys.mech.conservation-of-energy"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.bernoulli-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.bernoulli (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.bernoulli.md": "sha256:4a0533ae67eb076bb912157a4d44862d18641039cfba3a430f2982303615c977"
+      },
+      "contentHash": "sha256:f2a8dbe45bdbe4d7489426c16c05c60935d3afd7b85aa7f4d99c34f220127bc0",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.bernoulli.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.bernoulli.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.bernoulli.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.bernoulli.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.bernoulli.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.bernoulli.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.bernoulli.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.bernoulli.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.bernoulli\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.bernoulli.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.bernoulli.md#TA-5 (addresses MC-BERNOULLI-LIFT-EQUAL-TRANSIT, MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.bernoulli"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.bernoulli\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.bernoulli/misconception/MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY",
+      "kind": "misconception",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "- **Trigger signal:** Student accepts \"fast flow = low pressure\" as a fact without understanding why, or says \"Bernoulli's principle means fast air sucks things up.",
+      "content": "### MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY\n- **Trigger signal:** Student accepts \"fast flow = low pressure\" as a fact without understanding why, or says \"Bernoulli's principle means fast air sucks things up.\"\n- **Conflict evidence [P28]:** \"Bernoulli's equation is an energy conservation statement, not a mysterious suction rule. Derive it: work done on fluid element = change in KE + change in PE. For a steady, incompressible, non-viscous fluid: P + ½ρv² + ρgh = constant. The 'low pressure' at high speed is not a cause — it is a consequence of energy conservation. Where KE (½ρv²) increases, pressure P must decrease to keep the total constant. High-speed air doesn't 'suck' — it simply has less pressure because more of the energy budget is in kinetic form.\"\n- **Bridge text [P30]:** \"Think of the three terms as the energy per unit volume: P is flow work (pressure energy), ½ρv² is kinetic energy density, ρgh is gravitational PE density. Their sum is constant along a streamline — like total mechanical energy for a particle. If v goes up, something else must go down. P is the only other term that can change instantly.\"\n- **Replacement text [P31]:** \"P + ½ρv² + ρgh = const (along a streamline). Fast flow → high KE density → low pressure, by energy conservation — not suction. The pressure gradient, not the high-speed region, is what drives fluid and creates net forces.\"\n- **Discrimination pairs [P33]:**\n  - Constriction in a pipe (venturi): speed increases, pressure decreases ✓ (Bernoulli)\n  - Flat plate in airflow: boundary layer separation, complex pressure distribution ✗ (Bernoulli alone insufficient — viscosity/separation matter)\n- **s6_path:** \"Bernoulli is just energy conservation written for a fluid. You already know energy conservation — this is the same idea in a new costume.\"\n\n---",
+      "localKey": "MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY",
+      "language": "en",
+      "refs": [
+        "MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/misconception/MC-BERNOULLI-LIFT-EQUAL-TRANSIT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "- **Trigger signal:** Student explains aerofoil lift by saying \"air over the top takes longer, so it must go faster to meet air from below on the other side.",
+      "content": "### MC-BERNOULLI-LIFT-EQUAL-TRANSIT\n- **Trigger signal:** Student explains aerofoil lift by saying \"air over the top takes longer, so it must go faster to meet air from below on the other side.\"\n- **Conflict evidence [P28]:** \"The equal-transit-time theory is experimentally false. Air over the top of an aerofoil travels faster AND arrives at the trailing edge before air that went below — there is no rendezvous requirement. Wind-tunnel smoke visualisations show the top-surface air arrives first. The real explanation: aerofoil shape and angle of attack deflect airflow downward (Newton's 3rd law: air pushed down → lift force up), and the curved upper surface accelerates flow (real Kutta–Joukowski circulation, beyond A-level). Bernoulli correctly relates the speed difference to a pressure difference — but the speed difference is not explained by equal transit time.\"\n- **Bridge text [P30]:** \"Bernoulli's equation correctly computes lift once you know the speed difference between upper and lower surfaces: L = (P_bottom − P_top) × A = ½ρ(v_top² − v_bottom²) × A. The error is in explaining why v_top > v_bottom — the answer is aerofoil camber + angle of attack + circulation, not equal transit time.\"\n- **Replacement text [P31]:** \"Lift arises because the aerofoil pushes air downward (Newton III) and because upper-surface curvature + angle of attack create a higher-speed, lower-pressure region on top. Bernoulli relates the speed difference to pressure difference. Equal transit time is false — upper air arrives first.\"\n- **Discrimination pairs [P33]:**\n  - Symmetric aerofoil at zero angle of attack: no lift (v_top = v_bottom, P equal) ✓\n  - Symmetric aerofoil at positive angle of attack: lift (deflects air down; v_top > v_bottom) ✓\n- **s6_path:** \"The equal-transit myth is taught in many textbooks — knowing it is wrong makes you the expert in the room.\"\n\n---",
+      "localKey": "MC-BERNOULLI-LIFT-EQUAL-TRANSIT",
+      "language": "en",
+      "refs": [
+        "MC-BERNOULLI-LIFT-EQUAL-TRANSIT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "Continuity Equation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Continuity Equation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 84,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "Bernoulli's Equation: Derivation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Bernoulli's Equation: Derivation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 97,
+        "endLine": 126
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "Horizontal Flow (ρgh term cancels)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Horizontal Flow (ρgh term cancels)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 126,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "Torricelli's Theorem",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Torricelli's Theorem\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 142,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "Aerofoil Lift (Qualitative) and Pitot Tube",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Aerofoil Lift (Qualitative) and Pitot Tube\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY\",\"MC-BERNOULLI-LIFT-EQUAL-TRANSIT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-BERNOULLI-LIFT-EQUAL-TRANSIT",
+        "MC-BERNOULLI-FAST-LOW-PRESSURE-MYSTERY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 156,
+        "endLine": 335
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Continuity**\n\"Water enters a pipe system at 4 m/s through a pipe of cross-section 50 cm². The pipe splits into two equal branches, each with cross-section 10 cm². Find the speed in each branch.\"\n\n*Target:* Q_in = 4 × 50×10⁻⁴ = 0.02 m³/s. Each branch carries Q/2 = 0.01 m³/s. Speed = 0.01/(10×10⁻⁴) = 10 m/s.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Bernoulli horizontal**\n\"Oil (ρ = 800 kg/m³) flows horizontally. At point A: P = 120 kPa, v = 3 m/s. At point B: v = 9 m/s. Find P at B.\"\n\n*Target:* P_B = P_A + ½ρ(v_A² − v_B²) = 120 000 + ½×800×(9−81) = 120 000 + 400×(−72) = 120 000 − 28 800 = 91 200 Pa = 91.2 kPa.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Height change included**\n\"Water (ρ = 1000 kg/m³) flows through a pipe. At the ground floor (h=0): P = 200 kPa, v = 1 m/s. The pipe rises to a height of 8 m. Speed at the top is 2 m/s. Find pressure at the top.\"\n\n*Target:* P_top = P_bot + ½ρ(v_bot² − v_top²) + ρg(h_bot − h_top) = 200 000 + ½×1000×(1−4) + 1000×9.8×(−8) = 200 000 − 1500 − 78 400 = 120 100 Pa ≈ 120 kPa.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Torricelli / synthesis**\n\"A tank is open to atmosphere. A hole is at depth d₁ = 0.45 m below the surface, and another at depth d₂ = 1.8 m. Compare their efflux speeds and find which jet travels further horizontally if both holes are at the same height h = 1.25 m above the floor.\"\n\n*Target:* v₁ = √(2×9.8×0.45) = √8.82 = 2.97 m/s; v₂ = √(2×9.8×1.8) = √35.28 = 5.94 m/s. Fall time same for both (same height h): t = √(2×1.25/9.8) = 0.505 s. x₁ = 2.97×0.505 = 1.50 m; x₂ = 5.94×0.505 = 3.00 m. Deeper hole → faster jet → further horizontal range.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Critical reasoning: Bernoulli limits**\n\"A student says: 'Bernoulli's principle explains why a curved ball curves in football — the spinning ball drags air on one side, creating higher speed and lower pressure.' Is this a correct application of Bernoulli's principle? What additional physics is needed?\"\n\n*Target:* Partially correct — the Magnus effect does create a speed asymmetry around the spinning ball, which Bernoulli correctly relates to a pressure difference → net force (curve). BUT Bernoulli alone is insufficient: the mechanism by which spin creates the speed asymmetry requires viscosity (boundary layer attachment on one side, separation on the other — the Magnus effect). Bernoulli is the last step of the explanation, not the full explanation. Bernoulli's equation is also strictly for non-viscous flow — using it for viscous phenomena (like the Magnus effect) requires care.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 226,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.mech.bernoulli/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.bernoulli",
+      "title": "Adaptive Flags",
+      "content": "- **Validity conditions**: Bernoulli applies strictly to steady, incompressible, non-viscous, irrotational flow along a streamline. Real fluids violate all four at extremes. Flag this whenever a student over-applies it (turbulent wake, viscous pipe flow, spinning-ball Magnus effect).\n- **ρgh term**: for most horizontal engineering problems (pipes, aerofoils, venturi meters) h is constant → term drops out. For vertical problems (tank outflow, pressure in buildings) it is critical. Always check whether heights differ before dropping the ρgh term.\n- **Continuity before Bernoulli**: in almost every multi-step Bernoulli problem, the student must first apply continuity to find v₂, then apply Bernoulli to find P₂. These two steps are invariably conflated. Train the two-step habit: (1) geometry → continuity → speeds; (2) speeds → Bernoulli → pressures.\n- **Pitot tube sign**: stagnation pressure P_stag > static pressure P_s (kinetic energy has been converted to pressure at the stagnation point). v = √(2ΔP/ρ) where ΔP = P_stag − P_s > 0. Students often reverse the subtraction.\n- **Aerofoil lift magnitude**: computed from ½ρ(v_top²−v_bottom²)×A is a rough estimate — real lift involves circulation, viscosity, and angle of attack. Use it for order-of-magnitude checks, not aircraft certification.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.bernoulli.md",
+        "startLine": 296,
+        "endLine": 306
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

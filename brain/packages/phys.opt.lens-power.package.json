@@ -1,0 +1,433 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.lens-power-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.lens-power",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:f044cae27c38af9802ed7b772c8b04b0ca9149b95db47680934c6de3249ac509",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.lens-power.md": "sha256:f0bd1c46310846e2653deab8bf8d24c866401f4b0233d468d14a194e4e97c9cf"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.lens-power",
+    "name": "\"Lens Power and Optical Instruments Basics\"",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.opt.lenses"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.lens-power-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.lens-power (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.lens-power.md": "sha256:f0bd1c46310846e2653deab8bf8d24c866401f4b0233d468d14a194e4e97c9cf"
+      },
+      "contentHash": "sha256:9f663c82fa4419b81728608316220a913c935c60ceb22607d108ca36f28f3e17",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.lens-power.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.lens-power.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.lens-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.lens-power\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.lens-power.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.lens-power.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.lens-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.lens-power\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.lens-power.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.lens-power.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.lens-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.lens-power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.lens-power.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.lens-power.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.lens-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.lens-power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.lens-power.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.lens-power.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.lens-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.lens-power\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.lens-power.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.lens-power.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.lens-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.lens-power\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.lens-power.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.lens-power.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.lens-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.lens-power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.lens-power/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.lens-power",
+      "title": ": Combined Power",
+      "content": "### WE-1: Combined Power\n\n**Problem:** Two thin lenses are placed in contact: a converging lens with f₁ = 30 cm and a diverging lens with f₂ = −20 cm.\n(a) Find the power of each lens.\n(b) Find the combined power and equivalent focal length.\n(c) Is the combination converging or diverging?\n\n**Solution:**\n\n**(a) Individual powers:**\nP₁ = 1/f₁ = 1/0.30 m = **+3.33 D**\nP₂ = 1/f₂ = 1/(−0.20 m) = **−5.00 D**\n\n**(b) Combined:**\nP_total = P₁ + P₂ = 3.33 + (−5.00) = **−1.67 D**\nf_total = 1/P_total = 1/(−1.67) = **−0.60 m = −60 cm**\n\n**(c) Type:** P_total < 0 → **Diverging combination** (the concave lens dominates).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 95,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.lens-power",
+      "title": ": Corrective Lens for Myopia",
+      "content": "### WE-2: Corrective Lens for Myopia\n\n**Problem:** A myopic person can see clearly only up to 50 cm. They want to see objects at infinity.\n(a) What is the required power of the corrective lens?\n(b) What type of lens is this?\n(c) With this lens, where will an object at 25 cm appear?\n\n**Solution:**\n\n**(a) Corrective power:**\nThe corrective lens must make parallel rays (from ∞) appear to diverge from 50 cm (the person's far point).\nObject at ∞ (u = −∞), image at −50 cm (virtual, at far point; in NC convention v = −0.50 m since it's on the same side as the object = virtual).\n\nUsing lens formula: 1/v − 1/u = 1/f\n1/(−0.50) − 1/(−∞) = 1/f\n−2.00 − 0 = 1/f\n**P = 1/f = −2.00 D**\n\n**(b) Type:** Negative power → **Concave (diverging) lens** ✓\n\n**(c) Object at 25 cm (u = −0.25 m):**\n1/v = 1/f + 1/u = −2.00 + 1/(−0.25) = −2.00 − 4.00 = −6.00\nv = −1/6.00 = **−0.167 m = −16.7 cm**\n\nThe image of the 25 cm object appears at 16.7 cm from the lens (virtual, still within far point) — so the person CAN see this object clearly with the corrective lens.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 95,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.lens-power",
+      "title": ": Simple Magnifier",
+      "content": "### WE-3: Simple Magnifier\n\n**Problem:** A converging lens of focal length f = 5 cm is used as a simple magnifier (reading glass).\n(a) Find the magnification when the image is formed at infinity (relaxed eye).\n(b) Find the magnification when the image is at the near point (D = 25 cm).\n(c) If the lens has n = 1.5 and both surfaces are convex with equal radii R, find R.\n\n**Solution:**\n\n**(a) Image at infinity:**\nm = D/f = 25 cm / 5 cm = **m = 5×**\n\n**(b) Image at near point:**\nm = 1 + D/f = 1 + 25/5 = 1 + 5 = **m = 6×**\n\n**(c) Lensmaker's equation for equal biconvex lens (R₁ = R, R₂ = −R):**\n1/f = (n − 1)[1/R₁ − 1/R₂] = (1.5 − 1)[1/R − 1/(−R)] = 0.5 × [1/R + 1/R] = 0.5 × 2/R = 1/R\nf = R\nR = f = 5 cm\n\n**R = 5 cm** (both surfaces have radius of curvature 5 cm).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 95,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/misconception/MC-POWER-ADDS-FOR-SEPARATED-LENSES",
+      "kind": "misconception",
+      "conceptId": "phys.opt.lens-power",
+      "title": "**trigger_signal:** Student applies P_total = P₁ + P₂ for lenses with a gap between them.",
+      "content": "",
+      "localKey": "MC-POWER-ADDS-FOR-SEPARATED-LENSES",
+      "language": "en",
+      "refs": [
+        "MC-POWER-ADDS-FOR-SEPARATED-LENSES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.lens-power",
+      "title": "**trigger_signal:** Student applies P_total = P₁ + P₂ for lenses with a gap between them.",
+      "content": "### MC-1: MC-POWER-ADDS-FOR-SEPARATED-LENSES\n\n**trigger_signal:** Student applies P_total = P₁ + P₂ for lenses with a gap between them.\n\n**conflict_evidence [P28]:** Two lenses f₁ = f₂ = +10 cm separated by d = 5 cm. Using P_total = P₁ + P₂ = 10 + 10 = 20 D → f = 5 cm. Correct formula: 1/f = 1/10 + 1/10 − 5/(10×10) = 0.1 + 0.1 − 0.05 = 0.15 → f = 6.67 cm. The simple addition gives 5 cm, the correct answer is 6.67 cm — a 33% error. For a telescope eyepiece (5 cm separation of two 20 cm lenses), this error causes completely wrong predictions about image quality. The P₁ + P₂ formula explicitly assumes d = 0 in its derivation.\n\n**bridge_text [P30]:** The combination formula derives from tracing where the ray from the first lens hits the second. When the lenses touch (d = 0), the refracted ray exits lens 1 and immediately enters lens 2 at the same height. When separated, the ray travels to a different height at lens 2, changing the effective power. The d/(f₁f₂) correction term accounts for this height change.\n\n**replacement_text [P31]:** P_total = P₁ + P₂ applies ONLY for thin lenses in contact (d = 0). For separated lenses: 1/f_eff = 1/f₁ + 1/f₂ − d/(f₁f₂), or equivalently P_eff = P₁ + P₂ − d×P₁×P₂. Always check whether the problem specifies lenses \"in contact\" before using P_total = P₁ + P₂.\n\n**discrimination_pairs [P33]:**\n- \"Two lenses with focal lengths 15 cm and 20 cm are 5 cm apart. Equivalent focal length = 1/(1/15 + 1/20 − 5/(15×20)) = 1/(0.0667 + 0.05 − 0.01667) = 1/0.10 = 10 cm.\" → CORRECT application of the separated-lens formula.\n- \"Two lenses in contact: f₁ = +25 cm, f₂ = −50 cm. Combined power = 4 + (−2) = 2 D, f = 50 cm.\" → CORRECT application (lenses in contact).\n\n**s6_path:** If student applies addition for separated lenses → numerical counterexample (calculate both answers, show discrepancy) before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/misconception/MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.lens-power",
+      "title": "**trigger_signal:** Student states \"a −5 D lens is stronger than a +2 D lens\" without distinguishing sign from magnitude.",
+      "content": "",
+      "localKey": "MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS",
+      "language": "en",
+      "refs": [
+        "MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 21,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.lens-power",
+      "title": "**trigger_signal:** Student states \"a −5 D lens is stronger than a +2 D lens\" without distinguishing sign from magnitude.",
+      "content": "### MC-2: MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS\n\n**trigger_signal:** Student states \"a −5 D lens is stronger than a +2 D lens\" without distinguishing sign from magnitude.\n\n**conflict_evidence [P28]:** A −5 D lens has f = −20 cm — it diverges light strongly. A +2 D lens has f = +50 cm — it converges light weakly. Which is \"stronger\"? If \"stronger\" means \"bends light more,\" then |P| = 5 > |P| = 2 → the −5 D lens bends light more. But the nature of the bending is opposite: −5 D diverges, +2 D converges. In corrective optics, a −5 D myopia prescription corrects greater short-sightedness than a −2 D prescription — so the sign matters for the type of correction.\n\n**bridge_text [P30]:** Power has two independent pieces of information: (1) the sign tells the direction of bending (+ = converging, − = diverging); (2) the magnitude tells how much bending. \"Strength\" should specify which property you mean. In a prescription context: −5 D is a \"stronger\" myopia correction than −2 D (more divergence needed). But −5 D and +5 D are equally \"strong\" in bending magnitude, opposite in type.\n\n**replacement_text [P31]:** The sign of P tells the type of lens (converging vs. diverging); the magnitude |P| tells the degree of bending. \"Stronger\" lens usually means larger |P| (shorter focal length). Comparing −5 D and +2 D: −5 D is stronger in |P|, but the type is opposite. In prescriptions, always consider sign AND magnitude: −5 D and −2 D are both myopia corrections, but −5 D corrects more severe myopia.\n\n**discrimination_pairs [P33]:**\n- \"A +3 D lens and a −3 D lens have the same focal length\" → FALSE: f₁ = +33.3 cm, f₂ = −33.3 cm — same magnitude, opposite sign. Equal in |P| (bending amount) but opposite in type (converging vs. diverging).\n- \"A −6 D prescription is more severe myopia than a −3 D prescription\" → TRUE: larger |P| for correction → more defocus to correct → more severe. ✓\n\n**s6_path:** If student confuses sign with magnitude → power table (fill in f for various positive and negative P values) before mastery gate.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.lens-power",
+      "title": "\"An optometrist writes '−2.5 D' on a prescription. What does this number mean — and why is it convenient to use this uni",
+      "content": "{\"id\":\"TA-1\",\"title\":\"\\\"An optometrist writes '−2.5 D' on a prescription. What does this number mean — and why is it convenient to use this uni\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 226,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.lens-power",
+      "title": "\"[Display: P = 1/f table — various f values and corresponding P values.] Convention: f in metres, P in diopters (D). Con",
+      "content": "{\"id\":\"TA-2\",\"title\":\"\\\"[Display: P = 1/f table — various f values and corresponding P values.] Convention: f in metres, P in diopters (D). Con\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 230,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.lens-power",
+      "title": "\"Power addition tested. Lenses at f₁=10 cm and f₂=10 cm, separated by 5 cm. P_total = 10+10 = 20 D → f=5 cm? Actual: 1/f",
+      "content": "{\"id\":\"TA-3\",\"title\":\"\\\"Power addition tested. Lenses at f₁=10 cm and f₂=10 cm, separated by 5 cm. P_total = 10+10 = 20 D → f=5 cm? Actual: 1/f\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 233,
+        "endLine": 236
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.lens-power",
+      "title": "\"Power sign and magnitude: '−5 D is stronger than +2 D.' Let's unpack. |−5| > |+2| → the −5 D lens bends light more. But",
+      "content": "{\"id\":\"TA-4\",\"title\":\"\\\"Power sign and magnitude: '−5 D is stronger than +2 D.' Let's unpack. |−5| > |+2| → the −5 D lens bends light more. But\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 236,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.lens-power",
+      "title": "\"[Display: myopic eye — image forming in front of retina; corrective concave lens shown.] Myopia: far point < ∞ → parall",
+      "content": "{\"id\":\"TA-5\",\"title\":\"\\\"[Display: myopic eye — image forming in front of retina; corrective concave lens shown.] Myopia: far point < ∞ → parall\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 239,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.lens-power",
+      "title": "\"A reading glass has f = 5 cm. When you use it with the image at infinity (relaxed eye) vs. image at 25 cm (maximum acco",
+      "content": "{\"id\":\"TA-6\",\"title\":\"\\\"A reading glass has f = 5 cm. When you use it with the image at infinity (relaxed eye) vs. image at 25 cm (maximum acco\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 242,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.lens-power",
+      "title": "\"Final probe: (1) Two lenses in contact: f₁ = +20 cm, f₂ = −60 cm. Find P_total, f_total, type. (2) A person's far point",
+      "content": "{\"id\":\"TA-7\",\"title\":\"\\\"Final probe: (1) Two lenses in contact: f₁ = +20 cm, f₂ = −60 cm. Find P_total, f_total, type. (2) A person's far point\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P41\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 245,
+        "endLine": 317
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.lens-power",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** (a) Convert: f = +40 cm to diopters; P = −3.5 D to focal length. (b) Two lenses in contact: f₁ = +25 cm, f₂ = −40 cm. Find P_total and f_total. Is the combination converging or diverging?\n\n**P-2 (Developing — identifies S6):** A person with hypermetropia has near point at 100 cm. (a) What power corrective lens is needed to allow reading at 25 cm? (b) With this lens, at what distance can the person see a distant object clearly?\n\n**P-3 (Proficient — identifies S9):** Two lenses are placed 5 cm apart: f₁ = +20 cm, f₂ = +30 cm. (a) Find the effective focal length using the separated-lens formula. (b) Compare to the result if you incorrectly use P₁ + P₂. (c) Find the percentage error in f.\n\n**P-4 (Mastery gate — confirms S9):** (a) A lensmaker creates a plano-convex lens (n = 1.7, one flat face R₂ = ∞, one convex face R₁ = 15 cm). Find f and P. (b) A myopic person (far point = 25 cm) uses a corrective lens. With the correction, what is the new effective far point? (c) If this person uses a magnifier (f = 5 cm, image at ∞) while wearing the corrective lens, find the total magnifying power available. Required: 3/3 at ≥0.80 accuracy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 253,
+        "endLine": 265
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

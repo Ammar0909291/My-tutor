@@ -1,0 +1,545 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.moment-of-inertia-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.moment-of-inertia",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:4cff9fd35e05aa5326d9f4167c98a78116d0f7aeb815088c6861ac97d440ef73",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md": "sha256:f5c46cf1d558ddf490c0245fa8897eb0bacf978b04edc551e8ac8a4d6f65a20c"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.moment-of-inertia",
+    "name": "Moment of Inertia",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.torque"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.moment-of-inertia-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.moment-of-inertia (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md": "sha256:f5c46cf1d558ddf490c0245fa8897eb0bacf978b04edc551e8ac8a4d6f65a20c"
+      },
+      "contentHash": "sha256:1514fe1db2f7eb87dcb27b917db7639e12fc48ec182f3ea39b82dfd33faad423",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.moment-of-inertia.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.moment-of-inertia"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.moment-of-inertia\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.moment-of-inertia.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.moment-of-inertia"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.moment-of-inertia\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.moment-of-inertia.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.moment-of-inertia"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.moment-of-inertia\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.moment-of-inertia.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md#TA-4 (addresses MC-I-IS-MASS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.moment-of-inertia"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.moment-of-inertia\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.moment-of-inertia.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md#TA-5 (addresses MC-I-INDEPENDENT-OF-AXIS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.moment-of-inertia"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.moment-of-inertia\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.moment-of-inertia.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.moment-of-inertia"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.moment-of-inertia\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.moment-of-inertia.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.moment-of-inertia"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.moment-of-inertia\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.moment-of-inertia/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Moment of Inertia — core explanation",
+      "content": "**Core Insight:** Moment of inertia (I) is the rotational analog of mass — it measures an\nobject's resistance to angular acceleration. Crucially, I depends not only on the total mass\nbut also on HOW that mass is distributed relative to the rotation axis: mass far from the axis\ncontributes more (via r²). Two objects of equal mass can have very different I.\n\n**Point mass definition:**\nI = mr²    (one particle at distance r from axis)\n\n**Extended body:**\nI = Σ mᵢrᵢ²    (sum over all particles)\nor I = ∫ r² dm    (continuous distribution)\n\n**Common results (memorise or derive):**\n\n| Shape | Axis | I |\n|-------|------|---|\n| Solid cylinder/disc | Central axis | ½MR² |\n| Hollow cylinder | Central axis | MR² |\n| Solid sphere | Through centre | ²/₅ MR² |\n| Hollow sphere | Through centre | ²/₃ MR² |\n| Thin rod | Through centre | ¹/₁₂ ML² |\n| Thin rod | Through end | ¹/₃ ML² |\n\n**Parallel Axis Theorem:**\nI = I_cm + Md²\n\nwhere I_cm is the moment about the centre of mass, M is total mass, and d is the distance\nbetween the new axis and the CM axis.\n\n**Key properties:**\n- I is a scalar (in 1D rotation problems).\n- I depends on the axis chosen — always specify which axis.\n- Greater I → same torque → smaller α (harder to spin up or slow down).\n- The r² factor means mass at the rim dominates.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 25,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Point masses",
+      "content": "**Worked Example 1 (Point masses):**\nTwo 2 kg masses at r = 0.5 m from an axis (dumbbell).\nI = 2×2×0.5² = 2×2×0.25 = 1 kg·m².",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 25,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Solid disc",
+      "content": "**Worked Example 2 (Solid disc):**\nA solid disc of mass 5 kg, radius 0.4 m.\nI = ½ × 5 × 0.4² = ½ × 5 × 0.16 = 0.4 kg·m².",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 25,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Parallel Axis Theorem",
+      "content": "**Worked Example 3 (Parallel Axis Theorem):**\nA thin rod (M = 3 kg, L = 0.6 m): I_cm = ¹/₁₂ × 3 × 0.36 = 0.09 kg·m².\nI about one end = I_cm + Md² = 0.09 + 3×(0.3)² = 0.09 + 0.27 = 0.36 kg·m².\nCheck: ¹/₃ ML² = ¹/₃ × 3 × 0.36 = 0.36 kg·m². ✓\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 25,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/misconception/MC-I-IS-MASS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Priority 1",
+      "content": "### MC-I-IS-MASS (Priority 1)\n**Label:** \"Moment of inertia depends only on total mass — two objects with the same mass have the same I\"\n\n**Trigger signals:**\n- Says \"heavier object always has larger I\"\n- Computes I = M without the r² factor\n- Claims a hollow cylinder and solid cylinder of equal mass/radius have the same I\n\n**Conflict evidence [P28]:**\n\"A solid cylinder (M = 4 kg, R = 0.3 m): I = ½×4×0.09 = 0.18 kg·m².\nA hollow cylinder (same M = 4 kg, same R = 0.3 m): I = 4×0.09 = 0.36 kg·m².\nSame mass, same radius, same axis — yet I is twice as large for the hollow one. Why?\"\n\n**Bridge [P30]:**\n\"I = Σmr². Each bit of mass is weighted by its distance squared from the axis.\nIn a hollow cylinder, ALL the mass sits at R — maximum r². In a solid disc, mass is spread\nfrom 0 to R — the inner mass (small r) contributes little. So the hollow cylinder has a\nmuch larger I despite equal total mass.\"\n\n**Replacement [P31]:**\n\"I is NOT mass. I = Σmr². Two objects with equal mass but different distributions have\ndifferent I. To compare, you must know both mass AND how it's spread relative to the axis.\"\n\n**Discrimination pairs [P33]:**\n- Solid vs hollow cylinder, equal M and R: I_hollow = 2× I_solid ✓\n- Dumbbell (weights far) vs same mass concentrated at centre: far dumbbell has much larger I ✓\n\n**s6_path:** Use the dumbbell analogy: \"move the weights inward — harder to spin or easier?\"\nBuild the intuition that r² matters before presenting the formula.\n\n---",
+      "localKey": "MC-I-IS-MASS",
+      "language": "en",
+      "refs": [
+        "MC-I-IS-MASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 3,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/misconception/MC-I-INDEPENDENT-OF-AXIS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Priority 2",
+      "content": "### MC-I-INDEPENDENT-OF-AXIS (Priority 2)\n**Label:** \"Moment of inertia is a fixed property of the object — it doesn't change with axis choice\"\n\n**Trigger signals:**\n- Uses I_cm formula for an off-centre axis without adding Md²\n- Says \"the rod has I = ¹/₁₂ ML² no matter where the pivot is\"\n- Confused why a bat is easier to swing from the handle end vs the middle\n\n**Conflict evidence [P28]:**\n\"A 3 kg rod, L = 0.6 m. I through centre: ¹/₁₂ × 3 × 0.36 = 0.09 kg·m².\nI through one end: ¹/₃ × 3 × 0.36 = 0.36 kg·m² — 4 times larger.\nSame rod, different pivot. If I were fixed, both would equal the same number. Why don't they?\"\n\n**Bridge [P30]:**\n\"I depends on which axis you choose. Shifting the axis moves mass farther from the new axis\n(on average), increasing I. The parallel axis theorem gives the exact adjustment: I = I_cm + Md².\"\n\n**Replacement [P31]:**\n\"I is specific to a given axis. Always state: 'I about axis X.' When you shift the axis from\nthe CM to a parallel axis at distance d: I_new = I_cm + Md². The rod's I is 4× larger about\nits end than its centre because d = L/2.\"\n\n**Discrimination pairs [P33]:**\n- Rod about centre (¹/₁₂ ML²) vs end (¹/₃ ML²): factor of 4 difference ✓\n- Parallel Axis Theorem verification: I_end = I_cm + M(L/2)² = ¹/₁₂ML² + ¹/₄ML² = ¹/₃ML² ✓\n\n**s6_path:** Skip the formula derivation; use only the concrete: \"it's harder to swing a bat\nfrom the end vs the middle — the bat's mass is effectively farther away.\"\n\n---",
+      "localKey": "MC-I-INDEPENDENT-OF-AXIS",
+      "language": "en",
+      "refs": [
+        "MC-I-INDEPENDENT-OF-AXIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 35,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 15,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Prerequisite Check + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Check + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 34,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "MC-I-IS-MASS Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-I-IS-MASS Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-I-IS-MASS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-I-IS-MASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 48,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "MC-I-INDEPENDENT-OF-AXIS Probe + Parallel Axis Theorem",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-I-INDEPENDENT-OF-AXIS Probe + Parallel Axis Theorem\",\"primitives\":[\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-I-INDEPENDENT-OF-AXIS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-I-INDEPENDENT-OF-AXIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 66,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 82,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 103,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Apply — point masses",
+      "content": "**MP-1 (Apply — point masses):**\n\"Two 4 kg masses are at r = 0.5 m from a rotation axis. Find I.\"\nExpected: I = 2 × 4 × 0.25 = 2 kg·m².\n_Discriminates: I = Σmr² for point masses._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 276,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Apply — standard shape",
+      "content": "**MP-2 (Apply — standard shape):**\n\"A solid cylinder (M = 10 kg, R = 0.6 m). Find I about its central axis.\"\nExpected: I = ½ × 10 × 0.36 = 1.8 kg·m².\n_Discriminates: ½MR² formula; MC-I-IS-MASS resolution._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-I-IS-MASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 276,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Apply — hollow vs solid comparison",
+      "content": "**MP-3 (Apply — hollow vs solid comparison):**\n\"A hollow cylinder (M = 6 kg, R = 0.4 m) vs a solid cylinder (same M, R).\nFind I for each. Which has greater rotational inertia?\"\nExpected: I_hollow = 6×0.16 = 0.96; I_solid = 0.48. Hollow has 2× greater I.\n_Discriminates: MC-I-IS-MASS; hollow vs solid conceptual distinction._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-I-IS-MASS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 276,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Apply — Parallel Axis Theorem",
+      "content": "**MP-4 (Apply — Parallel Axis Theorem):**\n\"A thin rod (M = 4 kg, L = 1.0 m). I through centre? I through one end?\"\nExpected: I_cm = ¹/₁₂×4×1 = 1/3 kg·m²; I_end = ¹/₃×4×1 = 4/3 kg·m².\n_Discriminates: MC-I-INDEPENDENT-OF-AXIS resolution; axis change._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-I-INDEPENDENT-OF-AXIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 276,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Analyze — axis dependence reasoning",
+      "content": "**MP-5 (Analyze — axis dependence reasoning):**\n\"A flywheel designer wants maximum I for a given mass M and radius R.\nShould the mass be concentrated at the rim or spread uniformly? Explain with I formulas.\"\nExpected: Rim (hollow cylinder) gives I = MR² > ½MR² (solid disc). Rim maximises I\nbecause all mass is at maximum r.\n_Discriminates: conceptual design reasoning from I = Σmr²._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 276,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.torque  ──────────────────────►  phys.mech.moment-of-inertia\n   (τ = rF sinθ; understanding of r as distance from axis)\n   REQUIRED: student can compute torque and understands the role of r\n```\n\n**PD-1 (Torque prerequisite):**\n\"A 30 N force acts perpendicularly at r = 0.4 m from a pivot. τ?\"\nExpected: τ = 12 N·m.\n\nIf student cannot compute torque → prerequisite repair before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 77,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"I = ? What does r represent? Why does r² matter?\"\nThreshold: I = Σmr²; r = distance from rotation axis; r² means far mass contributes much more.\n\n**FA-2 (TA-4 exit):** \"Solid disc I = ½MR². Hollow cylinder I = MR². Same M, R — which is larger?\"\nExpected: Hollow cylinder — I is 2× solid. If student says equal → MC-I-IS-MASS not resolved.\n\n**FA-3 (TA-5 exit):** \"Rod I about centre vs I about end — which is larger? By what factor?\"\nExpected: End is larger; factor of 4 (¹/₃ ML² vs ¹/₁₂ ML²). If student says equal → MC-I-INDEPENDENT-OF-AXIS not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-4. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-I-IS-MASS",
+        "MC-I-INDEPENDENT-OF-AXIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 310,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only point-mass problems in TA-3 and TA-4 (I = Σmr² with 2 masses).\n- Introduce standard shapes (solid disc, cylinder) in TA-5 only.\n- Defer Parallel Axis Theorem to a separate mini-session if anxiety remains.\n- Reassure: \"I = mr². Two numbers multiplied and added. Start simple.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (flywheel design reasoning) at TA-3.\n- Challenge: \"A compound object: a solid disc (M_d, R) with a point mass (m) at the rim.\n  Find total I about the central axis.\" (I = ½M_d R² + mR².)\n- Spend TA-6 on Problems 4 and 5 and compound object calculation.\n\n**S4 (Prereq gap — Torque):**\n- Detect via PD-1 failure at TA-3.\n- Repair: mini-session on τ = rF sinθ before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 325,
+        "endLine": 345
+      }
+    },
+    {
+      "assetId": "phys.mech.moment-of-inertia/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.moment-of-inertia",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → I = Σmr² → MC-I-IS-MASS repair).\n**Session 2 (≥24 h later):** Retrieval: \"I formula? What's different about hollow vs solid?\"\n  → TA-5 (MC-I-INDEPENDENT-OF-AXIS, Parallel Axis Theorem) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining I and τ = Iα:\n  \"A solid disc (M = 4 kg, R = 0.5 m) has I = 0.5 kg·m². Torque = 3 N·m. Find α.\"\n  (α = τ/I = 6 rad/s² — previews rotational dynamics.)\n**Pre-rotational-dynamics session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.torque (τ = Iα link), phys.mech.angular-momentum (L = Iω link).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-I-IS-MASS",
+        "MC-I-INDEPENDENT-OF-AXIS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.moment-of-inertia.md",
+        "startLine": 345,
+        "endLine": 359
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

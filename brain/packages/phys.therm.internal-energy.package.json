@@ -1,0 +1,600 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.internal-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.internal-energy",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:60d31361fa4693d46b6b0a75cc6334831206cbed755b4c3e73dadc3277d11e87",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.internal-energy.md": "sha256:436f1a5a12289b59bd4f2eb37f992e1f89d367de2f9bb77f4d601c19c086e643"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 13,
+      "session_flow": 1
+    },
+    "ruleCount": 13
+  },
+  "concept": {
+    "conceptId": "phys.therm.internal-energy",
+    "name": "Internal Energy",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.therm.kinetic-theory"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.internal-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.internal-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.internal-energy.md": "sha256:436f1a5a12289b59bd4f2eb37f992e1f89d367de2f9bb77f4d601c19c086e643"
+      },
+      "contentHash": "sha256:18eada55d12a453f6b0740314dd1cc47a9d83b0118ad1df200fae547ffc7aaac",
+      "ruleCount": 13,
+      "bandCounts": {
+        "3": 13
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-4 (addresses MC-U-DEPENDS-ON-PATH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-6 (addresses MC-INTERNAL-ENERGY-EQUALS-HEAT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.internal-energy.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.internal-energy.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.internal-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.internal-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.internal-energy/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "(Concrete — ΔU for an ideal gas)",
+      "content": "### WE-1 (Concrete — ΔU for an ideal gas)\n\n**Scenario:** 2.0 mol of monatomic ideal gas is heated from 300 K to 500 K. Find ΔU regardless of the process (constant pressure, constant volume, or any other).\n\n**For monatomic ideal gas:** f = 3, C_v = (3/2)R = 12.47 J/(mol·K).\n\n**ΔU = nC_vΔT = 2.0 × 12.47 × (500 − 300) = 2.0 × 12.47 × 200 = 4988 J ≈ 5.0 kJ.**\n\n**Key point:** This is the SAME ΔU regardless of process — whether heated at constant V, constant P, or any other path — because U depends only on T for an ideal gas.\n\n**Comparison:** If this were a constant-pressure process, Q_P = nC_pΔT = 2.0 × (5/2)(8.314) × 200 = 2.0 × 20.785 × 200 = 8314 J. The extra Q_P − ΔU = 8314 − 4988 = 3326 J went into work (PΔV = nRΔT = 2.0 × 8.314 × 200 = 3326 J). ✓\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 46,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "(Bridging — Joule's experiment)",
+      "content": "### WE-2 (Bridging — Joule's experiment)\n\n**Scenario:** In Joule's paddle-wheel experiment, a 1.5 kg mass falls 2.4 m repeatedly, driving paddles in 0.5 kg of water. The process is repeated until the total mechanical work equals 4000 J. Find the temperature rise of the water, and explain why this demonstrates U is a state function.\n\n**Heat capacity of water:** Q = mcΔT → ΔT = Q/(mc). If ΔU = W = 4000 J and all goes into water:\nΔT = 4000 / (0.5 × 4186) = 4000 / 2093 = 1.91°C.\n\n**State function argument:** Start state: water at T₀. End state: water at T₀ + 1.91°C. This change in U (= 4000 J) was achieved entirely by work (W = 4000 J, Q = 0). If instead we had supplied 4000 J of heat (say via a hot plate) with W = 0, the water would reach exactly the same final state. Same ΔU = 4000 J regardless of path — Q alone, W alone, or any combination summing to 4000 J. This is what \"state function\" means.\n\n**Answer:** ΔT ≈ 1.91°C. U is a state function: ΔU depends only on initial and final states, not on the path.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 46,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "(Abstract — Joule-Thomson and real gas deviation)",
+      "content": "### WE-3 (Abstract — Joule-Thomson and real gas deviation)\n\n**Qualitative analysis:** In the Joule-Thomson expansion, gas passes through a porous plug from high pressure to low pressure in an insulated tube. No work is done on the surroundings (ΔW = 0) and no heat is transferred (Q = 0), so ΔU = 0 by the first law.\n\n**For an ideal gas:** U = f(T) only → ΔU = 0 → ΔT = 0. Ideal gas temperature unchanged on Joule-Thomson expansion.\n\n**For a real gas (below inversion temperature):** U includes intermolecular potential energy (which is negative — molecules attract each other). On expansion, molecules move further apart → intermolecular PE increases (becomes less negative) → kinetic energy must decrease (since total U is fixed) → temperature FALLS. This is the basis of gas liquefaction.\n\n**Inversion temperature:** Above this T, the gas heats on Joule-Thomson expansion (repulsive forces dominate). For N₂: T_inv ≈ 621 K; for H₂: T_inv ≈ 202 K — H₂ must be pre-cooled before Joule-Thomson liquefaction works.\n\n**Conclusion:** The Joule-Thomson effect reveals that internal energy of a real gas depends on intermolecular distance (volume), unlike the ideal gas. The deviation from U = f(T) only is the experimental fingerprint of molecular interactions.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 46,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/misconception/MC-U-DEPENDS-ON-PATH",
+      "kind": "misconception",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "**Trigger signal:** Student says \"the internal energy change is different for different processes — heating at constant pressure gives different ΔU than constant volume.",
+      "content": "### MC-U-DEPENDS-ON-PATH\n\n**Trigger signal:** Student says \"the internal energy change is different for different processes — heating at constant pressure gives different ΔU than constant volume.\"\n\n**Conflict evidence [P28]:** \"Compare: (A) 1 mol ideal monatomic gas heated from 300 K to 500 K at constant volume. (B) Same gas, same T change, at constant pressure. Calculate ΔU for each using ΔU = nC_vΔT.\"\n\n*ΔU_A = 1 × (3/2)(8.314) × 200 = 2494 J. ΔU_B = 1 × (3/2)(8.314) × 200 = 2494 J. Same ΔU — same ΔT means same ΔU regardless of process.*\n\n**Bridge text [P30]:** \"For an ideal gas, U = (f/2)nRT — it depends only on T. Any two processes that start at the same T and end at the same T have identical ΔU. What differs is how Q and W split between them. At constant volume: Q = ΔU (no work). At constant pressure: Q = ΔU + PΔV (more heat needed because some goes to work).\"\n\n**Replacement text [P31]:** \"ΔU is a state function for any system (not just ideal gas). For the same initial and final states, ΔU is always the same — whether you heat, do work, or both. For ideal gases: ΔU = nC_vΔT always — even during non-constant-volume processes. C_v appears because U depends on T only, and C_v is defined via U.\"\n\n**Discrimination pairs [P33]:**\n- \"Ideal gas compressed isothermally (T₁ = T₂): what is ΔU?\" → ΔU = nC_v × 0 = 0. No temperature change → no change in U, regardless of pressure change.\n- \"Same gas heated at constant P vs constant V by the same Q = 500 J: in which process does temperature rise more?\" → Constant V (all Q goes to ΔU → larger ΔT). At constant P, some Q does work (raises volume against atmosphere), leaving less for ΔU.\n\n**s6_path:** \"ΔU depends on where you start and end (state), not the route. For ideal gases: same ΔT → same ΔU, always.\"\n\n---",
+      "localKey": "MC-U-DEPENDS-ON-PATH",
+      "language": "en",
+      "refs": [
+        "MC-U-DEPENDS-ON-PATH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/misconception/MC-INTERNAL-ENERGY-EQUALS-HEAT",
+      "kind": "misconception",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "**Trigger signal:** Student uses Q and U interchangeably — \"the internal energy I added was 500 J\" when they mean \"I added 500 J of heat.",
+      "content": "### MC-INTERNAL-ENERGY-EQUALS-HEAT\n\n**Trigger signal:** Student uses Q and U interchangeably — \"the internal energy I added was 500 J\" when they mean \"I added 500 J of heat.\"\n\n**Conflict evidence [P28]:** \"Joule's paddle-wheel: work input W = 4000 J, heat input Q = 0. Does the water's internal energy change? By how much?\"\n\n*ΔU = W = 4000 J. No heat transferred — yet internal energy increased. If U = Q, this would be impossible.*\n\n**Bridge text [P30]:** \"Internal energy U is what the system HAS — its microscopic energy store. Heat Q and work W are what the system RECEIVES or GIVES (they are transfers). U can change via Q, via W, or via both. U is the account balance; Q and W are the deposits and withdrawals.\"\n\n**Replacement text [P31]:** \"ΔU = Q + W (first law). If Q = 500 J and W = 0: ΔU = 500 J. If Q = 0 and W = 500 J: still ΔU = 500 J. If Q = 800 J and W = −300 J (gas expands, doing 300 J of work on surroundings): ΔU = 500 J. U is the result; Q and W are the two input routes.\"\n\n**Discrimination pairs [P33]:**\n- \"A gas is compressed adiabatically (Q = 0). Does its internal energy change?\" → Yes — W > 0 (work done on gas) → ΔU = W > 0 → T rises.\n- \"An ideal gas expands isothermally: ΔU = 0. Yet Q ≠ 0. What does this tell you about W?\" → ΔU = Q + W = 0 → W = −Q. The gas does work equal to the heat absorbed.\n\n**s6_path:** \"Q and W are the two routes into U. U is the destination. Don't confuse the journey with the destination.\"\n\n---",
+      "localKey": "MC-INTERNAL-ENERGY-EQUALS-HEAT",
+      "language": "en",
+      "refs": [
+        "MC-INTERNAL-ENERGY-EQUALS-HEAT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 193,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "diagnostic: friction warms hands — no heat transfer",
+      "content": "{\"id\":\"TA-2\",\"title\":\"diagnostic: friction warms hands — no heat transfer\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 193,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "anchor: Joule paddle-wheel defines U",
+      "content": "{\"id\":\"TA-3\",\"title\":\"anchor: Joule paddle-wheel defines U\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 193,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": ": P28 conflict (same ΔT → same ΔU) → P30 bridge → P31 replacement → P33 pairs",
+      "content": "{\"id\":\"TA-4\",\"title\":\": P28 conflict (same ΔT → same ΔU) → P30 bridge → P31 replacement → P33 pairs\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-U-DEPENDS-ON-PATH\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-U-DEPENDS-ON-PATH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 194,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "check-in: first law ΔU = Q + W",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in: first law ΔU = Q + W\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 196,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": ": P28 conflict (adiabatic compression) → P30 bridge → P31 → P33",
+      "content": "{\"id\":\"TA-6\",\"title\":\": P28 conflict (adiabatic compression) → P30 bridge → P31 → P33\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-INTERNAL-ENERGY-EQUALS-HEAT\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-INTERNAL-ENERGY-EQUALS-HEAT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 197,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "narrow: state function vs path function classification",
+      "content": "{\"id\":\"TA-7\",\"title\":\"narrow: state function vs path function classification\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 199,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "retrieval seed: P4-c (find Q from ΔU and W)",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval seed: P4-c (find Q from ΔU and W)\",\"primitives\":[\"P4\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 200,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "mastery probe: diatomic gas heated at constant pressure",
+      "content": "{\"id\":\"TA-9\",\"title\":\"mastery probe: diatomic gas heated at constant pressure\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 202,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-10\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-11\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 204,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-12\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 205,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "close",
+      "content": "{\"id\":\"TA-13\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 206,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "phys.therm.internal-energy/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.internal-energy",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: friction warms hands — no heat transfer] → [P06 anchor: Joule paddle-wheel defines U]\n→ [MC-U-DEPENDS-ON-PATH: P28 conflict (same ΔT → same ΔU) → P30 bridge → P31 replacement → P33 pairs]\n→ [WE-1: ΔU for monatomic ideal gas, 300→500 K]\n→ [P51 check-in: first law ΔU = Q + W]\n→ [MC-INTERNAL-ENERGY-EQUALS-HEAT: P28 conflict (adiabatic compression) → P30 bridge → P31 → P33]\n→ [WE-2: Joule experiment — state function demonstration]\n→ [P52 narrow: state function vs path function classification]\n→ [P62 retrieval seed: P4-c (find Q from ΔU and W)]\n→ [WE-3: Joule-Thomson and real gas deviation]\n→ [P36 mastery probe: diatomic gas heated at constant pressure]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.internal-energy.md",
+        "startLine": 190,
+        "endLine": 211
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

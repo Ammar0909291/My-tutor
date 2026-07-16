@@ -1,0 +1,369 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.harmonic-oscillator-qm-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.harmonic-oscillator-qm",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:0b9b74443573e9dd312059076a9e08474071e698983136c8fa3a9ea78a67a618",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md": "sha256:c947e66c26766fb20ab05de2372ee4df41557c1ce8ad414974340c1404090b11"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.qm.harmonic-oscillator-qm",
+    "name": "Quantum Harmonic Oscillator",
+    "difficultyRaw": "Expert",
+    "bloom": "Apply",
+    "masteryThreshold": null,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.qm.schrodinger-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.harmonic-oscillator-qm-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.harmonic-oscillator-qm (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md": "sha256:c947e66c26766fb20ab05de2372ee4df41557c1ce8ad414974340c1404090b11"
+      },
+      "contentHash": "sha256:e1461954ef1769f4607adebc710852e3bab05e61ccdbd6a573a9576de924964f",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.harmonic-oscillator-qm.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.harmonic-oscillator-qm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.harmonic-oscillator-qm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.harmonic-oscillator-qm.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.harmonic-oscillator-qm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.harmonic-oscillator-qm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.harmonic-oscillator-qm.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.harmonic-oscillator-qm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.harmonic-oscillator-qm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Quantum Harmonic Oscillator — core explanation",
+      "content": "**Core Claim:** A quantum particle in a parabolic potential V = ½mω²x² has discrete energy levels Eₙ = (n + ½)ℏω (n = 0, 1, 2, …), possesses non-zero zero-point energy E₀ = ½ℏω even at absolute zero, and is most naturally described using ladder operators â± that raise and lower the energy quantum by ℏω.\n\n**Why It Matters:** The quantum harmonic oscillator is the most important exactly-solvable model in physics: it describes molecular vibrations (IR spectroscopy), phonons in solids, photon modes in quantum field theory, and serves as the local approximation for any smooth potential near a minimum.\n\n**Threshold Concept:** Zero-point energy is not a computational artifact — it is a fundamental consequence of the uncertainty principle: confining a particle to a potential well forces nonzero Δx, which by ΔxΔp ≥ ℏ/2 forces nonzero Δp, and therefore nonzero kinetic energy even in the ground state.\n\n**Prerequisite Knowledge Check:**\n- Time-independent Schrödinger equation (phys.qm.schrodinger-equation)\n- Classical harmonic oscillator: F = −kx, ω = √(k/m), E = ½kA²\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Ground state has zero energy",
+      "content": "### MC-1: Ground state has zero energy\n- **Probe:** \"What is the ground-state energy of the quantum harmonic oscillator?\"\n- **Characteristic phrase:** \"E₀ = 0 because at the lowest state there's no motion.\"\n- **Trigger:** Classical intuition — a spring at rest has E = 0.\n- **Conflict evidence [P28]:** If E₀ = 0, then ⟨p²⟩ = 0 and ⟨x²⟩ = 0 → Δx = Δp = 0, violating ΔxΔp ≥ ℏ/2. Quantum mechanics forbids this.\n- **Bridge [P30]:** Confining a particle to a parabolic well constrains x, which by HUP forces nonzero momentum spread, which forces nonzero kinetic energy.\n- **Replacement [P31]:** E₀ = ½ℏω. This is measurable: liquid helium fails to solidify at 0 K under atmospheric pressure because zero-point vibrational energy keeps atoms in motion.\n- **Discrimination pairs [P33]:** Classical spring at rest: E = 0 ✓. Quantum spring in n=0: E = ½ℏω ✓. Both obey \"lowest state\" but quantum HUP forces a floor.\n- **S6 repair path:** Derive E₀ by minimizing E = Δp²/(2m) + ½mω²Δx², using ΔxΔp = ℏ/2.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Energy levels are not equally spaced (borrowing from particle-in-a-box",
+      "content": "### MC-2: Energy levels are not equally spaced (borrowing from particle-in-a-box)\n- **Probe:** \"Is the gap between E₂ and E₃ the same as between E₀ and E₁?\"\n- **Characteristic phrase:** \"Higher levels should be further apart.\"\n- **Trigger:** Confusion with infinite square well where Eₙ ∝ n².\n- **Conflict evidence [P28]:** Eₙ = (n+½)ℏω → Eₙ₊₁ − Eₙ = ℏω = constant for all n. IR absorption of a diatomic molecule shows a single sharp frequency — one ℏω gap (in the harmonic approximation).\n- **Bridge [P30]:** The square well has steeper walls (infinite at boundary), giving Eₙ ∝ n². Parabolic walls give linear n dependence → equal spacing.\n- **Replacement [P31]:** Δ E = ℏω regardless of n. This is why a vibrating molecule absorbs a single IR frequency: all transitions cost exactly ℏω.\n- **Discrimination pairs [P33]:** Infinite square well: ΔE₁₋₀ = 3π²ℏ²/2mL², ΔE₂₋₁ = 5π²ℏ²/2mL² — unequal. QHO: ΔE = ℏω — equal.\n- **S6 repair path:** Write out first 5 energy levels of both models and compute spacing ratios.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "⟨x⟩ ≠ 0 for excited states",
+      "content": "### MC-3: ⟨x⟩ ≠ 0 for excited states\n- **Probe:** \"Where is the particle most likely to be found in the n=1 state?\"\n- **Characteristic phrase:** \"In the middle — highest probability at x=0.\"\n- **Trigger:** Over-generalizing the Gaussian ground state.\n- **Conflict evidence [P28]:** φ₁(x) ∝ x·e^(−mωx²/2ℏ) → |φ₁|² has a node at x=0. The particle is *least* likely to be at x=0 in n=1. But ⟨x⟩ = 0 still (by symmetry) — the *average* is zero but the *most probable* location is ±x_max.\n- **Bridge [P30]:** Parity: V(x) is even, so |φₙ|² is always even. ⟨x⟩ = 0 always. But the shape of |φₙ|² has n nodes, changing where probability peaks are.\n- **Replacement [P31]:** In n=1 state: probability is highest near the classical turning points ±√(3ℏ/mω), zero at x=0.\n- **Discrimination pairs [P33]:** n=0: probability peaks at x=0. n=1: probability dips to zero at x=0, peaks at ±x₁. n=2: two side peaks and a central peak.\n- **S6 repair path:** Plot |φ₀|², |φ₁|², |φ₂|² side by side and identify nodes.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Ladder operators are just notation",
+      "content": "### MC-4: Ladder operators are just notation\n- **Probe:** \"What does â₊|n⟩ = √(n+1)|n+1⟩ mean physically?\"\n- **Characteristic phrase:** \"It's just an algebraic shorthand, not real.\"\n- **Trigger:** Mathematical abstraction feels disconnected from physics.\n- **Conflict evidence [P28]:** In quantum optics, â₊ is the photon creation operator — applying it literally creates a photon. In phonon physics, â₊ creates a phonon. The \"abstract\" operator has measurable physical content.\n- **Bridge [P30]:** â₊ adds one quantum of energy ℏω to the system. The √(n+1) factor ensures the state remains normalized. This is not notation — it is the mathematical encoding of energy quantization.\n- **Replacement [P31]:** â₊|n⟩ = √(n+1)|n+1⟩ means: after absorbing energy ℏω, the system transitions from level n to level n+1 with amplitude √(n+1) (bosonic enhancement).\n- **Discrimination pairs [P33]:** Purely algebraic: [â₋, â₊] = 1 → eigenvalues are non-negative integers. Physical: transition rate for absorption ∝ n+1; for emission ∝ n. Both from same algebra.\n- **S6 repair path:** Derive ⟨n+1|x|n⟩ = √((n+1)ℏ/2mω) using â± and verify it gives the dipole transition matrix element for vibrational spectroscopy.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Derive E₀ = ½ℏω from uncertainty principle minimization",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Derive E₀ = ½ℏω from uncertainty principle minimization\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 168,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Compare energy-level spacing: QHO vs. infinite square well",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Compare energy-level spacing: QHO vs. infinite square well\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 169,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Apply â₊ to",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Apply â₊ to\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 170,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Derive E₀ = ½ℏω from the ladder operator algebra; explain zero-point energy via uncertainty principle; apply equal-spacing rule to spectroscopy.\n\n**FA-1:** \"What is the energy of the n=3 quantum harmonic oscillator state? What is the energy gap above n=2?\"\n*Expected:* E₃ = (3+½)ℏω = 7/2 ℏω. Gap = ℏω (equal spacing).\n*Threshold:* Correct formula applied; recognizes equal spacing.\n\n**FA-2:** \"A diatomic molecule has vibrational frequency ω = 4×10¹³ rad/s. What photon wavelength does it absorb?\"\n*Expected:* ℏω = (1.055×10⁻³⁴)(4×10¹³) = 4.22×10⁻²¹ J = 0.026 eV. λ = hc/E = 47 μm (far IR).\n*Threshold:* Correct unit conversion; uses Δn = 1 selection rule.\n\n**FA-3:** \"Show that ΔxΔp = (n+½)ℏ for the nth eigenstate of the QHO.\"\n*Expected:* ⟨x²⟩ = (n+½)ℏ/(mω), ⟨p²⟩ = (n+½)mωℏ; (Δx)(Δp) = √(⟨x²⟩·⟨p²⟩) = (n+½)ℏ ≥ ℏ/2.\n*Threshold:* Computes both expectation values and the product correctly.\n\n**FA-4:** \"Why does the ground-state wavefunction have non-zero probability in the classically forbidden region?\"\n*Expected:* The wavefunction is a Gaussian that extends beyond the classical turning point x₀ = √(ℏ/mω). In classical physics, the particle cannot be there (E < V). In quantum mechanics, the wavefunction decays exponentially but never reaches zero — a consequence of tunneling.\n*Threshold:* Identifies classically forbidden region, explains tunneling/exponential decay, connects to quantum vs. classical distinction.\n\n**Confidence calibration:** After FA-3, ask: \"How confident are you? Can you derive ⟨x²⟩ from ladder operators?\" Many learners can quote the result but cannot derive it. Probe requires the derivation.\n\n**Delayed retrieval:** Return at day 7: \"Sketch the wavefunction and probability density for n=0 and n=2. Explain where the probability maxima are and why.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 186,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** A mass on a spring inside a quantum world. Unlike a classical spring which can oscillate with any amplitude (any energy), the quantum spring only accepts energies at evenly spaced rungs: ½ℏω, 3/2ℏω, 5/2ℏω… And it can never be perfectly at rest — the lowest rung is above zero.\n\n**Representational:**\n- Parabola V(x) = ½mω²x² with horizontal energy lines at Eₙ = (n+½)ℏω\n- Wave functions φₙ(x): Gaussian envelope × Hermite polynomial Hₙ(ξ) where ξ = x√(mω/ℏ)\n- φ₀(x) = (mω/πℏ)^(1/4) exp(−mωx²/2ℏ) — pure Gaussian\n- Probability densities |φₙ|²: n nodes, classical turning points at xₙ = ±√((2n+1)ℏ/mω)\n\n**Abstract:**\n- TISE: −(ℏ²/2m)d²φ/dx² + ½mω²x²φ = Eφ\n- Ladder operators: â± = (1/√(2mωℏ))(∓iℏd/dx + mωx)\n  - [â₋, â₊] = 1\n  - â₊|n⟩ = √(n+1)|n+1⟩; â₋|n⟩ = √n|n−1⟩\n  - Ĥ = ℏω(â₊â₋ + ½)\n- Energy: Eₙ = (n + ½)ℏω, n = 0, 1, 2, …\n- ⟨x⟩ = 0, ⟨p⟩ = 0 for all energy eigenstates (symmetric potential)\n- ⟨x²⟩ = (n+½)ℏ/(mω); ⟨p²⟩ = (n+½)mωℏ → ΔxΔp = (n+½)ℏ ≥ ℏ/2 ✓\n\n**Transfer:** CO molecule vibration: ω = √(k/μ) where μ = reduced mass; ℏω ≈ 0.27 eV → IR absorption at ~4.6 μm. Phonons: crystal lattice vibrations quantized → Eₙ = (n+½)ℏω per mode.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 35,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Why Beginners Fail",
+      "content": "1. **Zero-point energy denial:** Learners expect n = 0 gives E = 0. They believe \"ground state = lowest possible = no energy.\" The uncertainty principle argument requires deliberate explanation.\n2. **Confusing n with classical amplitude:** Classical energy E = ½kA² so learners write A = √(2E/k), then expect quantum amplitude to follow same formula. Quantum amplitude is probabilistic — |φₙ|² gives a *distribution*, not a definite turning point.\n3. **Ladder operators seem magical:** â± don't look like \"real\" physical operators. Learners treat them as algebraic tricks without grasping that â₊ physically adds one quantum of vibration energy ℏω.\n4. **Equal spacing is non-obvious:** Learners expect energy spacing to shrink at higher n (like infinite square well where Eₙ ∝ n²). The equal spacing Eₙ₊₁ − Eₙ = ℏω for all n is a special feature of the parabolic potential.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 59,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"The quantum harmonic oscillator never stops moving. Even at absolute zero — no heat, no external energy — it still has energy ½ℏω. This zero-point energy is not a theoretical artifact; it's what keeps liquid helium from freezing at normal pressure. The uncertainty principle demands it.\"\n\n**Pacing:** Establish zero-point energy physically (uncertainty principle argument) before introducing ladder operators. Learners who understand WHY energy is quantized accept the algebra more readily.\n\n**Common impasse language:** \"Ladder operators feel abstract? Think of â₊ as 'add one vibration quantum.' When a CO molecule absorbs an IR photon, â₊ literally acts on the vibrational state — n=0 → n=1 — and the photon disappears.\"\n\n**Closing consolidation:** \"Every smooth potential near a minimum looks like a harmonic oscillator. That's why the QHO appears in atoms, molecules, solids, and quantum fields. Master this model and you've mastered the local approximation for all of quantum physics.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 174,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Revisit TISE solution method (phys.qm.schrodinger-equation) before the QHO. Learner must be comfortable substituting a trial wavefunction and solving for constraints.\n\n**S3 — Partial understanding:** Learner can state Eₙ = (n+½)ℏω but cannot explain equal spacing or zero-point energy. Intervention: work through the uncertainty principle derivation of E₀, then show the ladder algebra produces the same answer.\n\n**S6 — Misconception detected:** MC-1 (E₀ = 0). Intervention: minimize E(Δx) = ℏ²/(8mΔx²) + ½mω²Δx² and show the minimum is ½ℏω.\n\n**S9 — Near mastery:** Learner understands QHO but can't apply it to spectroscopy. Intervention: assign FA-2 style calculation with a real molecular frequency.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 212,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (derive energy levels) + factual (Eₙ = (n+½)ℏω, equal spacing, zero-point energy).\n\n**Spaced retrieval schedule:** Day 1 (state Eₙ, explain E₀), Day 3 (sketch φ₀ and φ₁, apply to IR problem), Day 7 (full derivation of E₀ from ladder operators), Day 21 (connect to phonons or molecular vibration in context).\n\n**Interleaving partners:** phys.qm.schrodinger-equation (TISE method), phys.qm.uncertainty-principle (zero-point energy foundation), phys.qm.operators (ladder operators as observables).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 224,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Molecular vibration spectra (equal spacing → single IR frequency); phonons in solids (lattice vibrations quantized).\n\n**Far transfer:** Quantum field theory (electromagnetic field decomposed into harmonic oscillator modes; photons are quanta of these oscillators — â₊ is the photon creation operator).\n\n**Structural abstraction:** Any system near a stable equilibrium has a locally parabolic potential → QHO is the universal approximation for quantum motion near equilibrium. The ladder operator algebra recurs across quantum optics, condensed matter, and QFT — mastering it here unlocks an entire family of models.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 234,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.qm.harmonic-oscillator-qm/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.harmonic-oscillator-qm",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.qm.schrodinger-equation must be solid before this blueprint. Learners who cannot solve the TISE with a trial wavefunction will not be able to verify the ground-state solution.\n\n**Common pacing error:** Introducing ladder operators before establishing equal spacing and zero-point energy from the wavefunction approach. Algebraic elegance means nothing until the physics is grounded.\n\n**Assessment gap:** Most curricula test Eₙ formula application but rarely test the derivation of ⟨x²⟩ or ΔxΔp using ladder operators.\n\n**Suggested pairing:** Pair with phys.qm.uncertainty-principle for a two-session sequence: HUP motivates zero-point energy → QHO demonstrates it exactly.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.harmonic-oscillator-qm.md",
+        "startLine": 244,
+        "endLine": 257
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

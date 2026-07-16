@@ -1,0 +1,370 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.perturbation-theory-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.perturbation-theory",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:8b2091c1cf257e048e69556f4e855e0ef309c00b55c5d37c6a0540e7acf790d3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.perturbation-theory.md": "sha256:23ba197730cd79e590c32d0f7da5301b5b7df3fa5acd70d58c3672651d03d8f5"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.qm.perturbation-theory",
+    "name": "Time-Independent Perturbation Theory",
+    "difficultyRaw": "Expert",
+    "bloom": "Apply",
+    "masteryThreshold": null,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.qm.operators",
+      "phys.qm.hydrogen-atom-qm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.perturbation-theory-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.perturbation-theory (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.perturbation-theory.md": "sha256:23ba197730cd79e590c32d0f7da5301b5b7df3fa5acd70d58c3672651d03d8f5"
+      },
+      "contentHash": "sha256:b1346ed105ec800c589dd9862fb6e9958cb8e4be8e5d2542f9364d4aba612d7a",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.perturbation-theory.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.perturbation-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.perturbation-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.perturbation-theory.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.perturbation-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.perturbation-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.perturbation-theory.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.perturbation-theory"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.perturbation-theory\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.perturbation-theory/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Time-Independent Perturbation Theory — core explanation",
+      "content": "**Core Claim:** When a quantum system's Hamiltonian Ĥ = Ĥ⁰ + λĤ' consists of a solvable part Ĥ⁰ plus a small perturbation λĤ', the corrected energies and wave functions can be expanded in powers of λ: Eₙ = Eₙ⁰ + λEₙ¹ + λ²Eₙ² + …, where the first-order energy correction is simply the expectation value of the perturbation in the unperturbed state: Eₙ¹ = ⟨φₙ⁰|Ĥ'|φₙ⁰⟩.\n\n**Why It Matters:** Very few quantum systems have exact solutions. Perturbation theory provides accurate corrections for realistic systems — fine structure of hydrogen, Stark and Zeeman effects, crystal field splitting — allowing quantitative predictions where exact solutions are impossible.\n\n**Threshold Concept:** Perturbation theory is a systematic expansion in a small parameter, not an approximation method that \"guesses.\" The first-order correction is exact to first order in λ; higher-order terms improve accuracy; convergence requires the perturbation to be genuinely small compared to the unperturbed level spacings.\n\n**Prerequisite Knowledge Check:**\n- Quantum operators, expectation values, eigenstates (phys.qm.operators)\n- Hydrogen atom wave functions and energy levels (phys.qm.hydrogen-atom-qm)\n- Matrix elements ⟨m|Â|n⟩ in bra-ket notation\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Perturbation theory always works",
+      "content": "### MC-1: Perturbation theory always works\n- **Probe:** \"When does perturbation theory fail?\"\n- **Characteristic phrase:** \"You can always use perturbation theory — just add more terms.\"\n- **Trigger:** Over-confidence in the method; textbooks often present only clean examples.\n- **Conflict evidence [P28]:** Consider H' comparable to (E_n⁰ − E_m⁰). The state correction denominator is small; the correction term ⟨m|H'|n⟩/(E_n⁰−E_m⁰) becomes large. Second-order correction |⟨m|H'|n⟩|²/(E_n⁰−E_m⁰) can exceed the first-order correction. The series diverges.\n- **Bridge [P30]:** Perturbation theory is a power series expansion in λ. It converges only if each successive term is smaller than the previous one — requiring the off-diagonal matrix elements to be much smaller than the level spacings.\n- **Replacement [P31]:** Perturbation theory requires |⟨m|Ĥ'|n⟩| ≪ |E_n⁰ − E_m⁰|. For near-degenerate levels, use degenerate perturbation theory (or variational methods, exact diagonalization).\n- **Discrimination pairs [P33]:** H' ≈ 0.01 × |E_n⁰ − E_m⁰|: perturbation theory converges fast. H' ≈ |E_n⁰ − E_m⁰|: method invalid, use exact solution or variational method.\n- **S6 repair path:** Apply PT to a two-level system where H' is comparable to the level splitting; show correction exceeds unperturbed energy; compare to exact solution.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "First-order energy correction requires summing over all m ≠ n",
+      "content": "### MC-2: First-order energy correction requires summing over all m ≠ n\n- **Probe:** \"Write the formula for the first-order energy correction E_n¹.\"\n- **Characteristic phrase:** \"E_n¹ = Σ_{m≠n} ⟨m|H'|n⟩.\"\n- **Trigger:** Confusing first-order energy with first-order state correction formula.\n- **Conflict evidence [P28]:** The first-order energy correction is only the diagonal matrix element: E_n¹ = ⟨n|H'|n⟩. The sum over m≠n formula is for the first-order state correction. If learner uses the sum formula for energy, they get a completely different (wrong) quantity.\n- **Bridge [P30]:** Derive from the Schrödinger equation: project (Ĥ⁰ + λH')|n⁰ + λ|n¹⟩ = (E_n⁰ + λE_n¹)|n⁰ + λ|n¹⟩ onto ⟨n⁰|. The Ĥ⁰ terms cancel, leaving E_n¹ = ⟨n⁰|H'|n⁰⟩.\n- **Replacement [P31]:** E_n¹ = ⟨φₙ⁰|Ĥ'|φₙ⁰⟩ (diagonal matrix element, no sum). |φₙ¹⟩ = Σ_{m≠n} [⟨φₘ⁰|Ĥ'|φₙ⁰⟩/(Eₙ⁰−Eₘ⁰)]|φₘ⁰⟩ (off-diagonal matrix elements, sum over m≠n).\n- **Discrimination pairs [P33]:** E_n¹: one term, diagonal. |φₙ¹⟩: sum of terms, off-diagonal. E_n²: sum of squared off-diagonal elements divided by energy denominators.\n- **S6 repair path:** Derive E_n¹ step by step from projecting the first-order equation onto ⟨φₙ⁰|.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Non-degenerate perturbation theory works for degenerate levels",
+      "content": "### MC-3: Non-degenerate perturbation theory works for degenerate levels\n- **Probe:** \"The 2p states of hydrogen (l=1, m=−1,0,+1) are degenerate. Can I use E_n¹ = ⟨n|H'|n⟩ for each?\"\n- **Characteristic phrase:** \"Yes, just apply the formula to each m separately.\"\n- **Trigger:** Mechanical application of formula without checking prerequisites.\n- **Conflict evidence [P28]:** The state correction |φₙ¹⟩ for degenerate levels has denominator E_n⁰ − E_m⁰ = 0 for other states in the same degenerate subspace → division by zero. The formula breaks down.\n- **Bridge [P30]:** Within a degenerate subspace, any linear combination of degenerate eigenstates is also an eigenstate. The perturbation selects which linear combinations are the \"correct\" zeroth-order states (those that diagonalize H' within the subspace).\n- **Replacement [P31]:** Degenerate perturbation theory: construct the matrix ⟨m|H'|n⟩ restricted to the degenerate subspace. Diagonalize this matrix. Its eigenvalues are the first-order energy corrections; its eigenvectors are the correct zeroth-order states.\n- **Discrimination pairs [P33]:** Non-degenerate: E_n⁰ ≠ E_m⁰ for m≠n → formula valid. Degenerate: E_n⁰ = E_m⁰ for some m≠n → diagonalize H' in the degenerate subspace first.\n- **S6 repair path:** Work through Stark effect on the n=2 hydrogen level: 4-state degenerate subspace (2s, 2p_m) — diagonalize eEz matrix in this subspace to find level splitting.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Perturbation theory causes transitions",
+      "content": "### MC-4: Perturbation theory causes transitions\n- **Probe:** \"If I apply a constant electric field, does perturbation theory tell me how fast the electron transitions between levels?\"\n- **Characteristic phrase:** \"Yes — the electric field perturbs the system and causes transitions.\"\n- **Trigger:** Conflating time-independent and time-dependent perturbation theory.\n- **Conflict evidence [P28]:** Time-independent perturbation theory assumes H' is constant (switched on at t=−∞). It produces energy eigenvalues and eigenstates of the full time-independent Hamiltonian. Transitions occur only when H' is time-dependent; those rates come from Fermi's golden rule (time-dependent PT).\n- **Bridge [P30]:** A constant perturbation shifts energy levels and mixes stationary states — it doesn't cause transitions. A time-varying perturbation oscillating at the right frequency does cause transitions.\n- **Replacement [P31]:** Time-independent PT → shifted energy levels and mixed stationary states. Time-dependent PT → transition probabilities and rates (Fermi's golden rule). For the Stark effect (constant E field), time-independent PT is correct — it shifts energy levels, not transition rates.\n- **Discrimination pairs [P33]:** Constant magnetic field: time-independent PT → Zeeman splitting of energy levels. Oscillating EM wave: time-dependent PT → stimulated absorption/emission rates.\n- **S6 repair path:** Contrast the physical setup: constant field → use time-independent PT to find new stationary states. Oscillating field → use time-dependent PT (Fermi's golden rule) to find transition rates.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Derive E_n¹ = ⟨n",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Derive E_n¹ = ⟨n\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 167,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Show parity argument kills first-order Stark effect for ground state",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Show parity argument kills first-order Stark effect for ground state\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 168,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Set up degenerate subspace matrix for hydrogen n=2 Stark effect",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Set up degenerate subspace matrix for hydrogen n=2 Stark effect\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 169,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Derive E_n¹; apply it to at least one physical problem; recognize when degenerate perturbation theory is needed.\n\n**FA-1:** \"A particle is in the ground state of an infinite square well (L=1 m). A constant perturbation H' = V₀ is added everywhere inside the well. Find the first-order energy correction.\"\n*Expected:* E_0¹ = ⟨φ_0|H'|φ_0⟩ = V₀⟨φ_0|φ_0⟩ = V₀ (since constant H' → just V₀ times normalization = V₀).\n*Threshold:* Correctly identifies it as expectation value of a constant = the constant itself.\n\n**FA-2:** \"A spin-½ particle in a magnetic field B along z has H⁰ = −γS_z B. A small transverse field adds H' = −γS_x B'. Find the first-order energy correction to the spin-up state.\"\n*Expected:* E_+¹ = ⟨↑|H'|↑⟩ = −γB'⟨↑|S_x|↑⟩. Using S_x = (ℏ/2)σ_x: ⟨↑|σ_x|↑⟩ = [1,0][[0,1],[1,0]][1,0]ᵀ = 0. So E_+¹ = 0.\n*Threshold:* Correctly evaluates matrix element using Pauli matrices; recognizes it vanishes.\n\n**FA-3:** \"For which situations must you use degenerate perturbation theory instead of non-degenerate?\"\n*Expected:* When two or more unperturbed states have the same energy and H' connects them (i.e., has nonzero off-diagonal matrix elements between them in the degenerate subspace). If H' is diagonal in the degenerate subspace, the non-degenerate formula still applies to each state separately.\n*Threshold:* States the degeneracy condition; adds the caveat about off-diagonal matrix elements.\n\n**FA-4:** \"Why is the second-order energy correction E_n² always negative for the ground state?\"\n*Expected:* E_n² = Σ_{m>0}|⟨m|H'|0⟩|²/(E_0⁰−E_m⁰). All excited states have E_m⁰ > E_0⁰, so the denominators E_0⁰−E_m⁰ are all negative. The numerators |...|² are all positive. Sum of (positive/negative) terms → E_0² ≤ 0. The ground state always shifts down at second order.\n*Threshold:* Identifies sign of each denominator; concludes sum is non-positive.\n\n**Confidence calibration:** After FA-2, ask: \"What would the second-order energy correction be for the spin-up state? Would it be zero or nonzero?\" This probes whether the learner understands that first-order vanishing doesn't imply all corrections vanish.\n\n**Delayed retrieval:** Return at day 7: \"State the condition under which perturbation theory converges. Apply it to decide whether PT is valid for the fine-structure corrections to hydrogen (α ≈ 1/137).\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 185,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** You know the exact solution to a simple problem (a ball in a perfect bowl). Now the bowl is slightly tilted. Instead of solving the tilted-bowl problem from scratch, you find how much the tilt shifts the ball's equilibrium — a small correction to the original answer.\n\n**Representational:**\n- Energy level diagram: unperturbed levels E_n⁰ shifted by corrections ΔE_n = E_n¹ + E_n² + …\n- Non-degenerate case: correction is additive and proportional to ⟨Ĥ'⟩\n- Degenerate case: perturbation lifts degeneracy → levels split into distinct sub-levels\n\n**Abstract:**\n- Hamiltonian: Ĥ = Ĥ⁰ + λĤ'\n- Eigenstates/values of Ĥ⁰: Ĥ⁰|φₙ⟩ = Eₙ⁰|φₙ⟩\n- First-order energy correction: Eₙ¹ = ⟨φₙ⁰|Ĥ'|φₙ⁰⟩\n- First-order state correction: |φₙ¹⟩ = Σ_{m≠n} [⟨φₘ⁰|Ĥ'|φₙ⁰⟩/(Eₙ⁰ − Eₘ⁰)] |φₘ⁰⟩\n- Second-order energy correction: Eₙ² = Σ_{m≠n} |⟨φₘ⁰|Ĥ'|φₙ⁰⟩|²/(Eₙ⁰ − Eₘ⁰)\n- Convergence condition: |⟨φₘ⁰|Ĥ'|φₙ⁰⟩| ≪ |Eₙ⁰ − Eₘ⁰| for all m ≠ n\n- Degenerate perturbation theory: diagonalize Ĥ' within the degenerate subspace first\n\n**Transfer:** Hydrogen fine structure: Ĥ' = relativistic + spin-orbit + Darwin term → energy corrections ΔE_{nj} = −(E_n⁰)²/(2m_e c²)[(4n/(j+½)) − 3]. Stark effect: E-field perturbation → linear or quadratic shift depending on degeneracy. Zeeman effect: B-field → splitting of m_l levels.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 36,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Why Beginners Fail",
+      "content": "1. **Forgetting the convergence condition:** Learners apply perturbation theory even when the perturbation is comparable to level spacings, getting nonsensical results (corrections larger than the unperturbed energy).\n2. **Confusing first-order state and first-order energy:** E_n¹ = ⟨n|Ĥ'|n⟩ involves only the diagonal matrix element. The state correction |φₙ¹⟩ involves all off-diagonal matrix elements. Learners mix these up.\n3. **Degenerate perturbation theory omission:** When unperturbed levels are degenerate, first-order non-degenerate formula breaks down (denominator E_n⁰ − E_m⁰ = 0). Learners apply non-degenerate formula regardless.\n4. **Thinking perturbation \"forces\" transitions:** Time-independent perturbation theory shifts energies and mixes states — it does not cause transitions. Transitions require time-dependent perturbation theory.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 58,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"Almost nothing in quantum mechanics can be solved exactly — only the harmonic oscillator, hydrogen atom, and a handful of others. Perturbation theory is the key that unlocks everything else. It says: if you know the solution to a simple problem, and your real problem is just a little different, you can find the answer without starting from scratch.\"\n\n**Pacing:** Derive E_n¹ from first principles before giving applications. The derivation is short (10 minutes) and completely unmysterious — learners should see it is just algebra following from the Schrödinger equation.\n\n**Common impasse language:** \"Does first order always work? No. The correction E_n² has the unperturbed level spacing in the denominator. If two levels are nearly degenerate, that denominator is small → correction is large → first order is not small → the series fails. Always check: is the perturbation small compared to the relevant level spacings?\"\n\n**Closing consolidation:** \"Perturbation theory is everywhere in physics: fine structure, Zeeman and Stark effects, nuclear shell model, molecular spectra, solid-state band gaps. It's the most-used quantum mechanical tool after the harmonic oscillator solution. Learn it well — you will use it constantly.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner cannot evaluate bra-ket inner products or matrix elements. Return to phys.qm.operators before PT.\n\n**S3 — Partial understanding:** Can state E_n¹ = ⟨n|H'|n⟩ but cannot compute it for specific wave functions. Intervention: guided calculation for particle-in-a-box with constant H' (Discovery Lesson).\n\n**S6 — Misconception detected:** MC-3 (applying non-degenerate PT to degenerate hydrogen levels). Intervention: set up the 2×2 matrix for n=2 hydrogen Stark effect; show that non-degenerate formula gives division by zero; then diagonalize the 2×2 matrix correctly.\n\n**S9 — Near mastery:** Can apply first-order PT but struggles with second-order. Intervention: QHO with linear perturbation (Demo 1) — derive second-order correction and verify against exact solution.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 211,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (compute E_n¹, recognize degenerate case) + structural (understand when and why PT applies).\n\n**Spaced retrieval schedule:** Day 1 (state E_n¹ formula; apply to QHO with constant perturbation), Day 3 (compute Zeeman splitting for 2p states), Day 7 (derive E_n¹ from scratch; explain second-order sign for ground state), Day 21 (apply degenerate PT to a two-level problem).\n\n**Interleaving partners:** phys.qm.operators (matrix elements, expectation values, bra-ket algebra), phys.qm.hydrogen-atom-qm (the wave functions on which PT acts), phys.qm.selection-rules (which matrix elements ⟨m|H'|n⟩ vanish by symmetry).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 223,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Fine structure of hydrogen; Stark effect (linear for n=2, quadratic for n=1); Zeeman effect; crystal field splitting of d-orbitals in transition metals.\n\n**Far transfer:** Nuclear shell model corrections; phonon-electron coupling in superconductivity (BCS theory uses perturbative electron-phonon vertex); molecular vibrational anharmonicity corrections.\n\n**Structural abstraction:** Perturbation theory is a universal strategy in physics and mathematics: wherever an exact solution is known and reality deviates slightly, expand in a small parameter. The same logic appears in classical mechanics (perturbation of planetary orbits), statistical mechanics (virial expansion for non-ideal gases), field theory (Feynman diagrams as perturbative expansion in coupling constant).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 233,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.qm.perturbation-theory/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.perturbation-theory",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.qm.operators (eigenvalue equations, expectation values, Hermitian operators) and phys.qm.hydrogen-atom-qm (the canonical wave functions) must both be solid. Without these, learners cannot compute matrix elements ⟨m|H'|n⟩.\n\n**Common pacing error:** Teaching the formula E_n¹ = ⟨n|H'|n⟩ without deriving it. Learners who memorize without deriving typically confuse it with the state correction formula or don't understand why degenerate PT is different.\n\n**Assessment gap:** Most curricula test E_n¹ application but rarely test: (1) when PT fails (MC-1), (2) second-order energy correction for the ground state, or (3) degenerate PT matrix construction.\n\n**Suggested pairing:** Pair with phys.qm.selection-rules — selection rules determine which matrix elements ⟨m|H'|n⟩ vanish by symmetry, making PT calculations much simpler in practice.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.perturbation-theory.md",
+        "startLine": 243,
+        "endLine": 256
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

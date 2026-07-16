@@ -1,0 +1,505 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.identical-particles-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.identical-particles",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:710056d8684bef51b33a9da571a4dbd23d1d6f5c0e68cab76d67628afdcf3e66",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.identical-particles.md": "sha256:d8c26547d557640570a5ca3ef58d3776725cc72cfd2b1b79bcca757e42955354"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.identical-particles",
+    "name": "Identical Particles",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 9,
+    "prerequisites": [
+      "phys.qm.spin",
+      "phys.qm.pauli-exclusion"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.identical-particles-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.identical-particles (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.identical-particles.md": "sha256:d8c26547d557640570a5ca3ef58d3776725cc72cfd2b1b79bcca757e42955354"
+      },
+      "contentHash": "sha256:d35d0701f861c51a692465788fe1205a83d472435c2ab9a01f35a23d11defaf6",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.identical-particles.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.identical-particles.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.identical-particles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.identical-particles\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.identical-particles.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.identical-particles.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.identical-particles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.identical-particles\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.identical-particles.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.identical-particles.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.identical-particles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.identical-particles\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.identical-particles.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.identical-particles.md#TA-4 (addresses MC-IP-EXCHANGE-SPATIAL-ONLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.identical-particles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.identical-particles\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.identical-particles.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.identical-particles.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.identical-particles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.identical-particles\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.identical-particles.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.identical-particles.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.identical-particles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.identical-particles\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.identical-particles.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.identical-particles.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.identical-particles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.identical-particles\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.identical-particles/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Two-boson ground state",
+      "content": "### Example 1 — Two-boson ground state\nTwo non-interacting bosons in a 1D box; single-particle states φₙ(x).\nBoth in n=1 ground state: ψ(x₁,x₂) = φ₁(x₁)φ₁(x₂). Already symmetric: ψ(x₂,x₁) = ψ(x₁,x₂) ✓\nBoth in different states (n=1, n=2): ψ_S = (1/√2)[φ₁(x₁)φ₂(x₂) + φ₂(x₁)φ₁(x₂)].\nEnergy: E = E₁ + E₂; no exclusion principle — both can occupy same state.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 34,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Two-fermion antisymmetric state (Slater determinant)",
+      "content": "### Example 2 — Two-fermion antisymmetric state (Slater determinant)\nTwo electrons in states φ_a, φ_b (space+spin combined):\nψ_A = (1/√2)|φ_a(1) φ_b(1); φ_a(2) φ_b(2)| = (1/√2)[φ_a(1)φ_b(2) − φ_b(1)φ_a(2)].\nIf φ_a = φ_b: ψ_A = 0. Pauli exclusion emerges naturally from antisymmetry.\nPhysical example: helium ground state — spin singlet × symmetric spatial.\nSpace: ψ_S = (1/√2)[φ_1s(r₁)φ_1s(r₂)] (both in 1s); spin: |↑↓⟩−|↓↑⟩)/√2 (singlet, antisymmetric in spin).\nTotal: symmetric-space × antisymmetric-spin = antisymmetric ✓",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 34,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Exchange interaction (ferromagnetic tendency)",
+      "content": "### Example 3 — Exchange interaction (ferromagnetic tendency)\nTwo electrons in states 1, 2 with Coulomb repulsion e²/r₁₂:\nTriplet (antisymmetric spatial): ψ_A = (φ₁φ₂ − φ₂φ₁)/√2 → electrons avoid each other → lower Coulomb energy.\nSinglet (symmetric spatial): ψ_S = (φ₁φ₂ + φ₂φ₁)/√2 → electrons can overlap → higher Coulomb energy.\nExchange energy J = E_singlet − E_triplet = 2⟨φ₁φ₂|e²/r₁₂|φ₂φ₁⟩ > 0.\nHund's first rule: triplet (parallel spins) has lower energy — direct consequence of antisymmetry.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 34,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/misconception/MC-IP-LABEL-MEANINGFUL",
+      "kind": "misconception",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "\"Particle 1 is at position x₁ and particle 2 is at position x₂.\"",
+      "content": "| MC-IP-LABEL-MEANINGFUL | \"Particle 1 is at position x₁ and particle 2 is at position x₂.\" | \"I'll write ψ(x₁,x₂) where particle 1 is the one on the left.\" | There is no observable that distinguishes two identical particles; labels 1 and 2 are bookkeeping devices. The physical state must be symmetric or antisymmetric under exchange so |ψ(x₁,x₂)|² = |ψ(x₂,x₁)|² (identical probability distribution regardless of labeling). |",
+      "localKey": "MC-IP-LABEL-MEANINGFUL",
+      "language": "en",
+      "refs": [
+        "MC-IP-LABEL-MEANINGFUL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/misconception/MC-IP-EXCHANGE-SPATIAL-ONLY",
+      "kind": "misconception",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "\"Symmetrization only applies to the spatial wavefunction.\"",
+      "content": "| MC-IP-EXCHANGE-SPATIAL-ONLY | \"Symmetrization only applies to the spatial wavefunction.\" | \"The spin part handles itself separately.\" | Full wavefunction must be (anti)symmetric in ALL quantum numbers simultaneously — space × spin. For fermions, antisymmetric total wavefunction can arise from antisymmetric-spatial × symmetric-spin (triplet) OR symmetric-spatial × antisymmetric-spin (singlet); the exchange symmetry applies to the combined state. |",
+      "localKey": "MC-IP-EXCHANGE-SPATIAL-ONLY",
+      "language": "en",
+      "refs": [
+        "MC-IP-EXCHANGE-SPATIAL-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 5,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 6,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 7,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-IP-EXCHANGE-SPATIAL-ONLY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-IP-EXCHANGE-SPATIAL-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 8,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 10,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 11,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): State the symmetrization postulate for bosons and fermions. What determines which applies to a given particle?  \n*Answer*: Bosons (integer spin): ψ symmetric under exchange; fermions (half-integer spin): ψ antisymmetric under exchange. The spin-statistics theorem (from relativistic QFT) connects spin to statistics.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): Write the fully antisymmetric two-fermion state for electrons in states |α⟩=|1s↑⟩ and |β⟩=|1s↓⟩.  \n*Answer*: ψ = (1/√2)[|1s↑⟩₁|1s↓⟩₂ − |1s↓⟩₁|1s↑⟩₂] = (1/√2)φ₁s(r₁)φ₁s(r₂)[|↑↓⟩−|↓↑⟩]. Not zero — different spin states allowed.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze-MC): \"The helium singlet and triplet excited states have the same spatial energy in isolation but different total energies due to exchange.\" Explain why the triplet lies LOWER in energy.  \n*Answer*: Triplet has antisymmetric spatial wavefunction → nodes where r₁=r₂ → electrons avoid each other → lower Coulomb repulsion → lower energy. Exchange integral J = E_singlet − E_triplet > 0.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): Three identical bosons occupy single-particle states {φ₁, φ₁, φ₂}. Write the normalized symmetric state.  \n*Answer*: ψ = (1/√3)[φ₁(1)φ₁(2)φ₂(3) + φ₁(1)φ₂(2)φ₁(3) + φ₂(1)φ₁(2)φ₁(3)]. Factor 1/√3 from 3 distinct permutations. (Two particles in same state = no extra 1/√2 for those pair swaps — already accounted in counting.)",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A student argues \"since we can't distinguish particles, the two-particle state φ_a(1)φ_b(2) is fine as a fermion state because we can't tell which is 1 and which is 2.\" Critique this argument.  \n*Answer*: φ_a(1)φ_b(2) is NOT a valid fermion state — it is not antisymmetric (swapping gives φ_a(2)φ_b(1) ≠ −φ_a(1)φ_b(2)). The student is confusing \"unlabeled particles\" with \"valid quantum state.\" The physical indistinguishability REQUIRES antisymmetry; the Slater determinant is the correct two-particle state.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 73,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student writes non-symmetrized product state for fermions | Flag: \"Is ψ(x₁,x₂)=φ_a(x₁)φ_b(x₂) antisymmetric? Swap variables and check sign.\" |\n| Student confuses exchange with spatial swap only | Return to MC-IP-EXCHANGE-SPATIAL-ONLY diagnostic; ask \"what is the TOTAL (space×spin) symmetry?\" |\n| Student asks \"why do bosons/fermions exist?\" | \"The spin-statistics theorem from relativistic QFT — in non-relativistic QM it is a postulate; the deep reason requires Lorentz invariance and causality.\" |\n| Student confused about exchange energy being purely quantum | \"There is no classical exchange energy — it arises entirely from the symmetry constraint on the wavefunction, not from a new force.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-IP-EXCHANGE-SPATIAL-ONLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 101,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"Write the Pauli exclusion principle. Where does it come from?\"\nCORE-1 (15 min): TA-1 + TA-2 (penny thought experiment + exchange operator + spin-statistics)\nCORE-2 (20 min): TA-3 + TA-4 (Slater determinant derivation + MC diagnostic space×spin)\nCORE-3 (20 min): TA-5 (exchange interaction: helium singlet/triplet, Hund's rule derivation)\nDRILL  (10 min): TA-6 (symmetrize/antisymmetrize practice problems)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Grand canonical ensemble counts states with exchange symmetry built in — that's why bosons get Bose-Einstein and fermions get Fermi-Dirac statistics.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 112,
+        "endLine": 125
+      }
+    },
+    {
+      "assetId": "phys.qm.identical-particles/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.identical-particles",
+      "title": "Known Sticking Points",
+      "content": "1. **Permutation factor**: Students often forget the 1/√2 (or 1/√N!) normalization in symmetrized states.\n2. **Space × spin symmetry**: The most common error — treating spatial and spin parts as independent when only their combined symmetry matters.\n3. **Bosons and Pauli**: Students incorrectly apply Pauli exclusion to bosons; clarify it is exclusively a fermion property (antisymmetry zero → prohibition).\n4. **3+ particles**: Slater determinant extends to N particles (N×N); students unsure how to generalize the 2-particle construction.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.identical-particles.md",
+        "startLine": 92,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

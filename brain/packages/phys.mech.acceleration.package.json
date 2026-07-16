@@ -1,0 +1,380 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.acceleration-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.acceleration",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:9cdb99e421cc26a1ccecb554f325891a236da3c327d633f897cc20cf099dcca3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.acceleration.md": "sha256:c9df87d772068395daf90a08654f14e8ec96261d85adb192064db4715af84213"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.acceleration",
+    "name": "Acceleration",
+    "difficultyRaw": "developing (2)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.velocity"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.acceleration-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.acceleration (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.acceleration.md": "sha256:c9df87d772068395daf90a08654f14e8ec96261d85adb192064db4715af84213"
+      },
+      "contentHash": "sha256:a5e838766e7644d3ab5c5bd4c073d4a6ed4347a6ad73b1a4a6a912dfee96f8f4",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.acceleration.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.acceleration.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.acceleration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.acceleration\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.acceleration.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.acceleration.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.acceleration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.acceleration\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.acceleration.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.acceleration.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.acceleration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.acceleration\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.acceleration.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.acceleration.md#TA-4 (addresses MC-ZERO-VELOCITY-ZERO-ACCELERATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.acceleration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.acceleration\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.acceleration.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.acceleration.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.acceleration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.acceleration\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.acceleration.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.acceleration.md#TA-6 (addresses MC-ZERO-VELOCITY-ZERO-ACCELERATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.acceleration"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.acceleration\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.acceleration/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Defines **acceleration** as the rate of change of velocity with time: a = Δv / Δt, and states that it is a vector — it can be negative (opposing the direction of motion).\n2. Explains that acceleration describes **how velocity changes**, not how fast an object moves — a fast object can have zero acceleration (constant velocity) and a momentarily stationary object can have large acceleration (ball at the top of a throw).\n3. Calculates average acceleration from two velocity values and a time interval, including the case where the result is negative (deceleration).\n\nA student who confuses acceleration with speed (\"accelerating means going fast\"), or who insists that a stationary object must have zero acceleration, has **NOT** achieved mastery — these errors propagate into every kinematics equation and Newton's Second Law application downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/misconception/MC-ACCELERATION-IS-SPEED",
+      "kind": "misconception",
+      "conceptId": "phys.mech.acceleration",
+      "title": "A faster object has more acceleration",
+      "content": "### MC-ACCELERATION-IS-SPEED: \"A faster object has more acceleration\"\ntrigger_signal: student reports that a car travelling at 100 km/h \"has more acceleration\" than one at 30 km/h, ignoring whether either velocity is changing.\nconflict_evidence [P28]: \"A racing car cruises at 200 km/h on a straight — no gas, no braking, constant speed. A bicycle starts from rest and reaches 10 km/h in 2 s. Which is accelerating more? Acceleration is Δv/Δt. The car: Δv = 0 → a = 0. The bicycle: Δv = 10 km/h in 2 s → a > 0. The slower object is accelerating; the faster one is not.\"\nbridge_text [P30]: \"Acceleration measures how quickly velocity changes, not how large velocity is. A large velocity with zero change gives zero acceleration. A small velocity changing rapidly gives large acceleration. They are different things.\"\nreplacement_text [P31]: \"a = Δv / Δt. Calculate it. Don't read off the speed and call it acceleration.\"\ndiscrimination_pairs [P33]: [\"car at constant 100 km/h: a = 0 ✓\", \"car accelerating from 0 to 100 km/h in 10 s: a = 2.78 m/s² ✓\", \"reporting a = 100 km/h: ✗ — wrong units and wrong concept\"]\ns6_path: skip P28; use the bicycle-vs-racing-car scenario as a shared gentle puzzle — \"which is changing more?\" — then P30.",
+      "localKey": "MC-ACCELERATION-IS-SPEED",
+      "language": "en",
+      "refs": [
+        "MC-ACCELERATION-IS-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/misconception/MC-ZERO-VELOCITY-ZERO-ACCELERATION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.acceleration",
+      "title": "If an object is momentarily at rest, it has no acceleration",
+      "content": "### MC-ZERO-VELOCITY-ZERO-ACCELERATION: \"If an object is momentarily at rest, it has no acceleration\"\ntrigger_signal: student says the ball at the top of its throw has a = 0 because v = 0, or that a stationary object always has zero acceleration.\nconflict_evidence [P28]: \"At the very top, the ball's velocity is 0. One instant later it is moving downward. One instant before it was moving upward. Velocity went from upward → zero → downward. It changed. If velocity changed, what must be non-zero? Acceleration = Δv/Δt. The Δv is happening — gravity is pulling the ball downward whether the ball is moving or not.\"\nbridge_text [P30]: \"Acceleration depends on whether velocity is changing, not on whether velocity is zero. Gravity doesn't take a break when the ball pauses at the top. The ball at the top has velocity = 0 and acceleration = 9.8 m/s² downward simultaneously.\"\nreplacement_text [P31]: \"Zero velocity and zero acceleration are independent. Check each with its own question: 'is the object moving?' (velocity) and 'is velocity changing?' (acceleration).\"\ndiscrimination_pairs [P33]: [\"ball at top of throw: v = 0, a = 9.8 m/s² down ✓\", \"car at constant speed: v ≠ 0, a = 0 ✓\", \"ball just released from rest: v = 0, a = 9.8 m/s² down ✓ (same situation as the top)\"]\ns6_path: skip P28; use a short slow-motion thought experiment — \"what does the ball do the instant after the top?\" — then P30.",
+      "localKey": "MC-ZERO-VELOCITY-ZERO-ACCELERATION",
+      "language": "en",
+      "refs": [
+        "MC-ZERO-VELOCITY-ZERO-ACCELERATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Velocity Changing — Watching It Happen",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Velocity Changing — Watching It Happen\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.acceleration",
+      "title": "The Rate Formula",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Rate Formula\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Negative Acceleration — Deceleration is Not Special",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Negative Acceleration — Deceleration is Not Special\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Misconception Probe — Zero Velocity Does Not Mean Zero Acceleration",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Zero Velocity Does Not Mean Zero Acceleration\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-ZERO-VELOCITY-ZERO-ACCELERATION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ZERO-VELOCITY-ZERO-ACCELERATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-ZERO-VELOCITY-ZERO-ACCELERATION\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-ZERO-VELOCITY-ZERO-ACCELERATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Acceleration positive, negative, or zero: constant velocity\" | CORRECT = zero |\n| P74 (classify) | \"Acceleration positive, negative, or zero: braking from 20 m/s to rest\" | CORRECT = negative |\n| P75 (boundary) | \"Is deceleration a separate quantity or just negative acceleration?\" | CORRECT = just negative acceleration — same formula |\n| P76 (transfer) | \"Motorcycle: 5 → 35 m/s in 6 s, then 35 → 0 m/s in 3.5 s — acceleration each phase?\" | CORRECT = +5 m/s²; −10 m/s² |\n| P77 (generate) | \"Give (a) high speed, zero acceleration and (b) zero speed, non-zero acceleration.\" | CORRECT = valid real examples |\n| P78 (explain) | \"Why can an object at rest still have a non-zero acceleration?\" | CORRECT = velocity is changing even if momentarily zero |\n| P79 (predict) | \"Car on motorway at constant 80 km/h — predict acceleration before calculating.\" | CORRECT = zero |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No formal definition of acceleration | Uses \"acceleration\" colloquially for speed or effort | Protocol A (Concrete) |\n| S1 | \"Speeding up\" schema only | Cannot extend to slowing down or direction change | Protocol B (Counterexample-first) |\n| S2-ACCELERATION-IS-SPEED | Equates high acceleration with high speed | Says a fast car is \"more accelerated\" | Misconception Engine → Protocol C |\n| S2-ZERO-VELOCITY-ZERO-ACCELERATION | Believes stationary object must have zero acceleration | Says ball at the top of a throw has no acceleration | Misconception Engine → Protocol C |\n| S3 | Can compute a = Δv/Δt; fails negative or zero cases | Drops sign; says deceleration is \"different from acceleration\" | Protocol C (Guided Questioning) |\n| S6 | Anxiety at negative acceleration or the rate formula | Freezes at \"−9.8 m/s²\" or Δv calculation | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What does it mean for an object to accelerate? Give an example.\"\n  \"Velocity changes — could speed up, slow down, or change direction\" → S3. Enter Protocol C.\n  \"Speed up\" only → S1. Enter Protocol B.\n  Cannot give a physics definition → DB-2.\n\nDB-2 (misconception probe):\n\"A ball is thrown straight up. At the very top, its velocity is zero. Does it have an acceleration at that moment? Why?\"\n  \"Yes — still 9.8 m/s² downward; velocity is zero but changing\" → S3. Enter Protocol C.\n  \"No — it's not moving so it can't be accelerating\" → SIGNAL:MISCONCEPTION:MC-ZERO-VELOCITY-ZERO-ACCELERATION. Enter Misconception Engine.\n  \"I don't know what acceleration means mathematically\" → S0. Enter Protocol A.\n  Pause → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with acceleration — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ZERO-VELOCITY-ZERO-ACCELERATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.acceleration/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.acceleration",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.velocity`):\n\"State the formula for average velocity and the difference between speed and velocity.\"\n  Cannot state v_avg = Δx/Δt, or conflates speed with velocity → flag PREREQ-GAP-VELOCITY.\n  In-session minimum repair: one P06 anchor (review Δx/Δt vs. distance/Δt; attach unit m/s + direction) — then resume. Deep gap → schedule `phys.mech.velocity` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.acceleration.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

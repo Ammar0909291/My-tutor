@@ -1,0 +1,434 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.optical-instruments-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.optical-instruments",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:f38481e3587241424b7ec0b8b2093aec068364d73f2b32e61ebfa1b501eeaa78",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.optical-instruments.md": "sha256:31ad2119971f37ea09c7f0eea187a5ab21593276bd253c2b04afa1d52303d85a"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.optical-instruments",
+    "name": "\"Optical Instruments — Microscope, Telescope, Camera\"",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.opt.lens-power",
+      "phys.opt.mirrors"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.optical-instruments-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.optical-instruments (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.optical-instruments.md": "sha256:31ad2119971f37ea09c7f0eea187a5ab21593276bd253c2b04afa1d52303d85a"
+      },
+      "contentHash": "sha256:53d17614bf8ec9b5530d69f9f3929ebaeae0b6c3338a8bf71ea5d8b5b3ab8a50",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.optical-instruments.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.optical-instruments.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.optical-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.optical-instruments\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.optical-instruments.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.optical-instruments.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.optical-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.optical-instruments\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.optical-instruments.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.optical-instruments.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.optical-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.optical-instruments\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.optical-instruments.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.optical-instruments.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.optical-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.optical-instruments\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.optical-instruments.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.optical-instruments.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.optical-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.optical-instruments\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.optical-instruments.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.optical-instruments.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.optical-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.optical-instruments\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.optical-instruments.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.optical-instruments.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.optical-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.optical-instruments\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.optical-instruments/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": ": Compound Microscope",
+      "content": "### WE-1: Compound Microscope\n\n**Problem:** A compound microscope has objective focal length f_o = 0.5 cm and eyepiece focal length f_e = 2.5 cm. The tube length L = 15 cm. A student's eye at the eyepiece sees a final image at infinity.\n(a) Find the magnification of the objective.\n(b) Find the angular magnification of the eyepiece.\n(c) Find the total magnification.\n\n**Solution:**\n\n**(a) Objective magnification:**\nm_o = L/f_o = 15/0.5 = **30×**\n\n(The objective creates a real image 15 cm from its back focal point, which is 30× the object size)\n\n**(b) Eyepiece angular magnification (image at ∞):**\nm_e = D/f_e = 25/2.5 = **10×**\n\n**(c) Total magnification:**\nm_total = m_o × m_e = 30 × 10 = **300×**\n\nThe compound microscope produces an image 300 times larger than the object (inverted).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 99,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": ": Astronomical Telescope",
+      "content": "### WE-2: Astronomical Telescope\n\n**Problem:** An astronomical telescope uses an objective lens of focal length F_o = 100 cm and an eyepiece of focal length f_e = 5 cm.\n(a) Find the magnifying power (normal adjustment — final image at ∞).\n(b) Find the length of the telescope tube.\n(c) If the telescope is used to view the Moon (angular diameter 0.5° from Earth), what is the apparent angular diameter through the telescope?\n\n**Solution:**\n\n**(a) Magnifying power:**\nm = F_o/f_e = 100/5 = **20×** (image inverted)\n\n**(b) Tube length:**\nL_tube = F_o + f_e = 100 + 5 = **105 cm**\n\n**(c) Apparent angular diameter:**\nθ_apparent = m × θ_actual = 20 × 0.5° = **10°**\n\nThe Moon appears to have an angular diameter of 10° through this telescope — comparable to the size of your fist at arm's length.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 99,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": ": Comparing Instruments",
+      "content": "### WE-3: Comparing Instruments\n\n**Problem:** A person with near point D = 25 cm wants to examine a tiny biological sample (object size 0.1 mm).\n(a) With a single magnifier lens f = 5 cm (image at ∞), what is the apparent size of the object?\n(b) With a compound microscope (f_o = 0.5 cm, f_e = 2.5 cm, L = 15 cm, image at ∞), what is the apparent size?\n(c) To observe a star cluster 10° across, what telescope magnification would make it fill a 30° field of view?\n\n**Solution:**\n\n**(a) Single magnifier:**\nm = D/f = 25/5 = 5×\nApparent size = 5 × 0.1 mm = **0.5 mm**\n(Compared to the unaided eye at 25 cm viewing 0.1 mm)\n\n**(b) Compound microscope:**\nm_total = (L/f_o)(D/f_e) = (15/0.5)(25/2.5) = 30 × 10 = 300×\nApparent size = 300 × 0.1 mm = **30 mm = 3 cm**\n(The sample looks 3 cm across — clearly detailed with the microscope)\n\n**(c) Telescope for star cluster:**\nRequired m = θ_apparent/θ_actual = 30°/10° = **3×**\nUse F_o/f_e = 3 → for example, F_o = 60 cm, f_e = 20 cm.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 99,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/misconception/MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "**trigger_signal:** Student states \"the telescope objective magnifies the star\" or \"the objective makes distant objects appear closer.",
+      "content": "",
+      "localKey": "MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS",
+      "language": "en",
+      "refs": [
+        "MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "**trigger_signal:** Student states \"the telescope objective magnifies the star\" or \"the objective makes distant objects appear closer.",
+      "content": "### MC-1: MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS\n\n**trigger_signal:** Student states \"the telescope objective magnifies the star\" or \"the objective makes distant objects appear closer.\"\n\n**conflict_evidence [P28]:** The objective lens of a telescope forms a real image of a distant star — but the image is much smaller than the star. For the Moon (angular diameter 0.5°) with F_o = 100 cm: the intermediate image size = F_o × tan(0.5°) ≈ 100 × 0.0087 = 0.87 cm. The Moon is 3476 km in diameter — so the image is 0.87 cm. The objective has REDUCED the apparent size to fit in the focal plane. The EYEPIECE then magnifies this small intermediate image. The objective's job is not magnification but to bring a large area of sky to a small focused image.\n\n**bridge_text [P30]:** Think of the objective as a collector and focuser: it captures light from a wide field and focuses it to a small, detailed intermediate image. The eyepiece then acts as a magnifier for that small image. Magnification happens in two steps: first, the objective subtends a larger angle (because it's bigger than your eye pupil → more light); second, the eyepiece magnifies the intermediate image.\n\n**replacement_text [P31]:** The telescope objective forms a REAL, DIMINISHED (for distant objects at ∞, image size = F_o × angular size of object) intermediate image at its focal plane. The eyepiece then magnifies this intermediate image with magnification D/f_e. Total angular magnification = F_o/f_e. The objective's primary role is light-gathering and creating an intermediate image, not magnification — that is the eyepiece's role.\n\n**discrimination_pairs [P33]:**\n- \"A telescope with a large objective lens is brighter because it collects more light\" → TRUE: larger aperture → more photons collected → brighter image. ✓\n- \"A telescope's objective magnifies the star — the eyepiece just helps you see it\" → FALSE: objective demagnifies (creates small intermediate image at focal plane); eyepiece magnifies that image.\n\n**s6_path:** If student fails intermediate-image description → ray diagram tracing through objective + eyepiece showing intermediate image position and size before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/misconception/MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW",
+      "kind": "misconception",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "**trigger_signal:** Student treats the eyepiece as \"just a lens to look through\" without contributing to magnification, or states \"the total magnification equals just the objective magnification.",
+      "content": "",
+      "localKey": "MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW",
+      "language": "en",
+      "refs": [
+        "MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 21,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "**trigger_signal:** Student treats the eyepiece as \"just a lens to look through\" without contributing to magnification, or states \"the total magnification equals just the objective magnification.",
+      "content": "### MC-2: MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW\n\n**trigger_signal:** Student treats the eyepiece as \"just a lens to look through\" without contributing to magnification, or states \"the total magnification equals just the objective magnification.\"\n\n**conflict_evidence [P28]:** Remove the eyepiece from a compound microscope and look at the intermediate image projected on a card. It's real and magnified by m_o = L/f_o. Now put the eyepiece back — the image through the eyepiece is magnified by an additional factor D/f_e. Total = m_o × m_e. For f_o = 0.5 cm, f_e = 2.5 cm, L = 15 cm: m_o alone = 30×; total = 300×. The eyepiece provides a 10× factor that is lost without it. In WE-1: m_total = 300 vs. m_o alone = 30.\n\n**bridge_text [P30]:** The eyepiece functions as a simple magnifier — identical to holding a magnifying glass to view a small photograph. The \"photograph\" in this case is the real intermediate image formed by the objective. Just as a magnifying glass multiplies the apparent size of whatever you place at its focus, the eyepiece multiplies the apparent size of the intermediate image by D/f_e.\n\n**replacement_text [P31]:** The eyepiece of a compound microscope provides a genuine angular magnification of D/f_e (for image at ∞), contributing equally to total magnification alongside the objective. Total magnification = m_o × m_e — neither factor is negligible. The eyepiece's job is to act as a simple magnifier viewing the real intermediate image formed by the objective.\n\n**discrimination_pairs [P33]:**\n- \"In a compound microscope, the eyepiece only lets you see the image — the objective does the magnifying\" → FALSE: eyepiece magnification m_e = D/f_e multiplies the total; removing the eyepiece gives 10× less magnification (in WE-1's case).\n- \"Using an eyepiece with shorter focal length gives more magnification\" → TRUE: m_e = D/f_e → smaller f_e → larger m_e. ✓\n\n**s6_path:** If student fails \"how much does the eyepiece magnify\" probe → WE-1 recalculated with eyepiece absent vs. present before mastery gate.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "\"Look through a telescope's objective lens alone (remove eyepiece). What do you see? [A small, real, dim image at the fo",
+      "content": "{\"id\":\"TA-1\",\"title\":\"\\\"Look through a telescope's objective lens alone (remove eyepiece). What do you see? [A small, real, dim image at the fo\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 228,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "\"[Display: two-lens telescope ray diagram — objective at left, intermediate image, eyepiece at right.] Objective: brings",
+      "content": "{\"id\":\"TA-2\",\"title\":\"\\\"[Display: two-lens telescope ray diagram — objective at left, intermediate image, eyepiece at right.] Objective: brings\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 232,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "\"Does the objective magnify distant objects? Calculate: Moon angular diameter 0.5°. F_o = 100 cm. Intermediate image siz",
+      "content": "{\"id\":\"TA-3\",\"title\":\"\\\"Does the objective magnify distant objects? Calculate: Moon angular diameter 0.5°. F_o = 100 cm. Intermediate image siz\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 235,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "\"Microscope eyepiece role: Remove eyepiece — you see m_o = L/f_o = 30× real intermediate image. Reinsert eyepiece — addi",
+      "content": "{\"id\":\"TA-4\",\"title\":\"\\\"Microscope eyepiece role: Remove eyepiece — you see m_o = L/f_o = 30× real intermediate image. Reinsert eyepiece — addi\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 238,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "\"[Display: compound microscope ray diagram — two lenses, real intermediate image, virtual final image.] Object just beyo",
+      "content": "{\"id\":\"TA-5\",\"title\":\"\\\"[Display: compound microscope ray diagram — two lenses, real intermediate image, virtual final image.] Object just beyo\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 241,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "\"Quick verification: for a compound microscope with f_o = 1 cm, f_e = 5 cm, L = 10 cm, D = 25 cm (image at ∞): m_o = 10,",
+      "content": "{\"id\":\"TA-6\",\"title\":\"\\\"Quick verification: for a compound microscope with f_o = 1 cm, f_e = 5 cm, L = 10 cm, D = 25 cm (image at ∞): m_o = 10,\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 244,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "\"Final probe: (1) Compound microscope: f_o = 0.4 cm, f_e = 4 cm, L = 16 cm. Find total magnification. (2) Telescope: F_o",
+      "content": "{\"id\":\"TA-7\",\"title\":\"\\\"Final probe: (1) Compound microscope: f_o = 0.4 cm, f_e = 4 cm, L = 16 cm. Find total magnification. (2) Telescope: F_o\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P51\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 248,
+        "endLine": 321
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** An astronomical telescope has objective focal length 80 cm and eyepiece focal length 4 cm. (a) Find the magnifying power (normal adjustment). (b) Find the tube length. (c) Is the final image erect or inverted?\n\n**P-2 (Developing — identifies S6):** A compound microscope has f_o = 0.8 cm, f_e = 2 cm, L = 14 cm, D = 25 cm. (a) Find m_o and m_e separately. (b) Find total magnification. (c) If you replace the eyepiece with one of f_e = 1 cm, by what factor does total magnification change?\n\n**P-3 (Proficient — identifies S9):** You have two converging lenses: f₁ = 5 cm and f₂ = 25 cm. You want to build either a telescope or a microscope. (a) Which lens serves as the objective for a telescope, and what is the magnifying power? (b) Reconfigure them as a compound microscope with L = 15 cm. What is the total magnification? (c) Explain why the same two lenses give vastly different magnifications in the two configurations.\n\n**P-4 (Mastery gate — confirms S9):** (a) Design a compound microscope to achieve total magnification of 400×. Use D = 25 cm. You must choose f_o and f_e such that f_o < 1 cm, the tube length L = 16 cm, and total m ≥ 400×. Verify your design. (b) A reflecting telescope uses a primary concave mirror (focal length 2 m) and an eyepiece (f_e = 4 cm). Find the magnifying power. What advantage does a reflecting telescope have over a refracting one for very large apertures? Required: 2/2 at ≥0.80 accuracy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 256,
+        "endLine": 268
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

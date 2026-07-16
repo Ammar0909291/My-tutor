@@ -1,0 +1,323 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.doppler-effect-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.doppler-effect",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:6e51104ddaf53ff6cf90f3a1872b6f2c2028bd03ad79b0b5f2fb2698ca0140f0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.doppler-effect.md": "sha256:faabc9a5031beeae0cfbfb15b44b7fb51d33c78b75e66fbcb7994758be95d9e0"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.doppler-effect",
+    "name": "Doppler Effect",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.wave.sound-waves"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.doppler-effect-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.doppler-effect (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.doppler-effect.md": "sha256:faabc9a5031beeae0cfbfb15b44b7fb51d33c78b75e66fbcb7994758be95d9e0"
+      },
+      "contentHash": "sha256:2f379e741aa559dcf854ec67dd749b186d7529777c94ad67758b2d64bcc5ee86",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.doppler-effect.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.doppler-effect.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.doppler-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.doppler-effect\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.doppler-effect.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.doppler-effect.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.doppler-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.doppler-effect\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.doppler-effect.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.doppler-effect.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.doppler-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.doppler-effect\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.doppler-effect.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.doppler-effect.md#TA-4 (addresses MC-DOPPLER-CHANGES-SPEED, MC-DOPPLER-ONLY-FOR-SOUND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.doppler-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.doppler-effect\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.doppler-effect/misconception/MC-DOPPLER-CHANGES-SPEED",
+      "kind": "misconception",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "- **Trigger signal:** Student says \"the sound from an approaching siren moves faster\" or explains the Doppler effect as a change in wave speed.",
+      "content": "### MC-DOPPLER-CHANGES-SPEED\n- **Trigger signal:** Student says \"the sound from an approaching siren moves faster\" or explains the Doppler effect as a change in wave speed.\n- **Conflict evidence [P28]:** \"The speed of sound in air is determined by the medium's properties (temperature, density) — not by the motion of the source. An ambulance siren approaching at 30 m/s still produces sound waves that travel at 343 m/s through the air in front of it. The Doppler effect changes the perceived frequency, not the wave speed. Because the source is moving in the same direction as its emitted waves, the wavefronts in front of the source are compressed (shorter wavelength, hence higher perceived frequency); behind the source they are stretched (longer wavelength, lower perceived frequency). Speed of all wavefronts in the medium: still 343 m/s.\"\n- **Bridge text [P30]:** \"v = fλ: if v stays constant (fixed by medium) and λ decreases (wavefronts compressed in front of source), then f_observed must increase. The Doppler shift is a wavelength shift, which appears as a frequency shift at the observer. Speed unchanged; wavelength and frequency changed.\"\n- **Replacement text [P31]:** \"Doppler effect: source motion compresses/stretches wavefronts → λ changes → perceived f changes. Wave speed in the medium is unchanged. Approaching source: shorter λ, higher f_observed. Receding source: longer λ, lower f_observed.\"\n- **Discrimination pairs [P33]:**\n  - Ambulance siren approaching: sound wave speed = 343 m/s (same as when stationary); perceived pitch is higher ✓\n  - Ambulance receding: same wave speed; perceived pitch is lower ✓\n- **s6_path:** \"The ambulance doesn't push the sound to go faster — the sound is already going 343 m/s in air no matter what. The ambulance just piles up its wavefronts in front, like a boat making a bow wave.\"\n\n---",
+      "localKey": "MC-DOPPLER-CHANGES-SPEED",
+      "language": "en",
+      "refs": [
+        "MC-DOPPLER-CHANGES-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/misconception/MC-DOPPLER-ONLY-FOR-SOUND",
+      "kind": "misconception",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "- **Trigger signal:** Student says \"Doppler effect only works for sound\" or doesn't apply it to light and other waves.",
+      "content": "### MC-DOPPLER-ONLY-FOR-SOUND\n- **Trigger signal:** Student says \"Doppler effect only works for sound\" or doesn't apply it to light and other waves.\n- **Conflict evidence [P28]:** \"The Doppler effect is universal for all waves. For light: galaxies receding from us show red-shifted spectra (wavelengths longer → redder → lower frequency). This is how Edwin Hubble discovered the expansion of the universe in 1929. Police radar guns use the Doppler shift of microwave signals to measure vehicle speed. Medical Doppler ultrasound measures blood flow velocity from the frequency shift of reflected sound. Weather Doppler radar detects wind speed. The Doppler effect applies to sound, light, microwaves, radar, ultrasound — any wave phenomenon.\"\n- **Bridge text [P30]:** \"The Doppler formula f_obs = f_s × (v ± v_obs)/(v ∓ v_s) applies to any wave where source or observer moves. For light at relativistic speeds: the formula is modified (relativistic Doppler), but the physics is the same. For non-relativistic sources and observers: the classical formula works.\"\n- **Replacement text [P31]:** \"Doppler effect: any wave; any frequency range. Sound (ambulance), light (cosmological redshift/blueshift), radar (speed guns), ultrasound (blood flow). The formula changes slightly for EM waves at relativistic speeds, but the qualitative effect is identical.\"\n- **Discrimination pairs [P33]:**\n  - Police radar gun: uses Doppler shift of ~24 GHz microwaves reflected from car ✓\n  - Hubble redshift: distant galaxies' light is red-shifted → recession speed computed from Δλ/λ ✓\n- **s6_path:** \"Doppler is as universal as the concept of waves itself. If something oscillates and that oscillation propagates, and either the source or you are moving, you get a Doppler shift.\"\n\n---",
+      "localKey": "MC-DOPPLER-ONLY-FOR-SOUND",
+      "language": "en",
+      "refs": [
+        "MC-DOPPLER-ONLY-FOR-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "Qualitative Explanation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Qualitative Explanation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 76,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "Doppler Formula",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Doppler Formula\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 88,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "Wavelength Shift and Applications",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Wavelength Shift and Applications\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 108,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "Shock Waves and the Sonic Boom",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Shock Waves and the Sonic Boom\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-DOPPLER-CHANGES-SPEED\",\"MC-DOPPLER-ONLY-FOR-SOUND\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-DOPPLER-CHANGES-SPEED",
+        "MC-DOPPLER-ONLY-FOR-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 122,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Basic formula application**\n\"A stationary observer hears a train whistle (actual f = 500 Hz) as the train approaches at 25 m/s, then recedes at 25 m/s (v_sound = 340 m/s). Find both heard frequencies.\"\n\n*Target:* Approaching: f = 500×340/(340−25) = 500×340/315 = 539.7 Hz. Receding: f = 500×340/365 = 465.8 Hz.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 180,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Find source speed**\n\"A car with a constant horn approaches a stationary observer. The observer hears 540 Hz as it approaches and 460 Hz as it recedes. v_sound = 340 m/s. Find the car's speed and the horn's actual frequency.\"\n\n*Target:* f_approach = f_s×v/(v−v_c); f_recede = f_s×v/(v+v_c). Ratio: 540/460 = (v+v_c)/(v−v_c). 540(v−v_c) = 460(v+v_c); 540v−540v_c = 460v+460v_c; 80v = 1000v_c; v_c = 80×340/1000 = 27.2 m/s. f_s = 460×(340+27.2)/340 = 460×1.08 = 497 Hz ≈ 497 Hz.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 180,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Observer moving**\n\"An observer moves away from a stationary 400 Hz source at 15 m/s. v_sound = 340 m/s. (a) Find f_obs. (b) What speed must the observer move toward the source to hear 425 Hz?\"\n\n*Target:* (a) f_obs = 400×(340−15)/340 = 400×325/340 = 382 Hz. (b) 425 = 400×(340+v_obs)/340 → (340+v_obs) = 425×340/400 = 361.25 → v_obs = 21.25 m/s.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 180,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Mach number**\n\"A jet aircraft travels at 680 m/s. v_sound = 340 m/s. (a) Find the Mach number. (b) Find the half-angle of the Mach cone. (c) How long after the jet passes overhead does a ground observer hear the sonic boom if the jet is flying at 2000 m altitude?\"\n\n*Target:* (a) M = 680/340 = 2. (b) sin θ = 1/M = 0.5 → θ = 30°. (c) The cone angle: half-angle 30° from the axis. When the jet is overhead, the shock wave is at the cone surface. The shock wave hits the ground when it has swept to the observer position. Geometry: observer is 2000 m below; cone angle 30° from axis → ground distance from directly below = 2000/tan(30°) = 2000/0.577 = 3464 m. Time for jet to travel 3464 m at 680 m/s: t = 3464/680 = 5.1 s after the jet passed overhead.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 180,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: redshift and Hubble's law**\n\"A galaxy shows a hydrogen line at 486.1 nm in the lab; in the galaxy's spectrum it appears at 530.0 nm. (a) Calculate the recession speed (use v/c = Δλ/λ). (b) Using Hubble's constant H₀ = 70 km/s/Mpc, estimate the galaxy's distance.\"\n\n*Target:* (a) Δλ = 530.0−486.1 = 43.9 nm; v/c = 43.9/486.1 = 0.0903; v = 0.0903×3×10⁵ = 27 100 km/s ≈ 2.71×10⁴ km/s. (b) d = v/H₀ = 27 100/70 = 387 Mpc ≈ 390 Mpc (about 1.27 billion light-years away).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 180,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.wave.doppler-effect/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.doppler-effect",
+      "title": "Adaptive Flags",
+      "content": "- **Sign convention consistency**: the Doppler formula has many sign-convention variants across textbooks. Commit to one form and apply it consistently. The clearest: write numerator and denominator, then ask \"does this configuration increase or decrease f?\" — if the answer contradicts intuition, flip the sign.\n- **Observer moving vs. source moving**: the formula is not symmetric! f_obs(observer moving toward at speed u) ≠ f_obs(source moving toward at speed u). This is because the wave speed relative to the observer changes when the observer moves but not when the source moves (in the medium's rest frame). This non-symmetry disappears only for v ≪ v_wave (both give approximately the same result for small speeds).\n- **Relativistic Doppler for light**: the classical formula gives errors for v/c > 0.01. For cosmological redshifts, use the relativistic Doppler formula. At A-level: use Δλ/λ = v/c (non-relativistic approximation) for recession speeds. Flag this if students probe astronomical examples.\n- **Double Doppler in radar**: reflected signals experience two Doppler shifts (source→car: car sees shifted frequency; car→observer: observer sees that shifted frequency re-shifted). Result: Δf/f = 2v/c. Students must use the factor of 2.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.doppler-effect.md",
+        "startLine": 246,
+        "endLine": 255
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

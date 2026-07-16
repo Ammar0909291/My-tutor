@@ -1,0 +1,324 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.shm-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.shm",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:a1609dcd4a2aa58cdf51205927bfb0c01a9e92aa98112806c5341c75f3f6ab69",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.shm.md": "sha256:aba55aaca8ee096f3cc92550c4f6aedafed7885a9b4fb7a732f172e47b69d6e6"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.wave.shm",
+    "name": "Simple Harmonic Motion",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.mech.hookes-law",
+      "phys.mech.newtons-second-law"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.shm-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.shm (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.shm.md": "sha256:aba55aaca8ee096f3cc92550c4f6aedafed7885a9b4fb7a732f172e47b69d6e6"
+      },
+      "contentHash": "sha256:34e1d55b8bb1b6305a66a013b1b3625f3fea7722300b530e9f461eae0142556c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.shm.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.shm.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.shm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.shm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.shm.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.shm.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.shm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.shm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.shm.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.shm.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.shm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.shm\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.shm.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.shm.md#TA-4 (addresses MC-PERIOD-DEPENDS-ON-AMPLITUDE, MC-SHM-CONSTANT-VELOCITY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.shm"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.shm\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.shm/misconception/MC-SHM-CONSTANT-VELOCITY",
+      "kind": "misconception",
+      "conceptId": "phys.wave.shm",
+      "title": "- **Trigger signal:** Student draws a constant velocity for the SHM particle or says \"it moves back and forth at the same speed.",
+      "content": "### MC-SHM-CONSTANT-VELOCITY\n- **Trigger signal:** Student draws a constant velocity for the SHM particle or says \"it moves back and forth at the same speed.\"\n- **Conflict evidence [P28]:** \"In SHM, velocity is zero at maximum displacement (the amplitude points) and maximum at the equilibrium position. The particle is momentarily at rest at each extreme, then accelerates back toward the centre, reaching maximum speed at the centre, then decelerates again toward the other extreme. v = Aω cos(ωt): it is sinusoidal — not constant. Watch a pendulum: it swings slowly near the extremes and swiftly past the centre. A spring-mass system: pause at maximum compression/extension, fastest at natural length. This is directly visible and easily confirmed.\"\n- **Bridge text [P30]:** \"v(t) = Aω cos(ωt) and a(t) = −Aω² sin(ωt). Speed is maximum at x = 0; zero at x = ±A. The restoring force F = −kx is zero at x = 0 (no acceleration) and maximum at x = ±A (maximum deceleration/acceleration). Constant force → constant acceleration → definitely not constant velocity.\"\n- **Replacement text [P31]:** \"SHM velocity: v = ω√(A² − x²). At x = 0: v = Aω (maximum). At x = ±A: v = 0 (momentarily at rest). Not constant — sinusoidal variation.\"\n- **Discrimination pairs [P33]:**\n  - At x = 0 (equilibrium): v = Aω (maximum), a = 0 ✓\n  - At x = ±A (amplitude): v = 0, a = ω²A (maximum, directed toward equilibrium) ✓\n- **s6_path:** \"Watch a swinging pendulum — it clearly moves faster through the bottom than at the top. That's SHM speed variation right in front of you.\"\n\n---",
+      "localKey": "MC-SHM-CONSTANT-VELOCITY",
+      "language": "en",
+      "refs": [
+        "MC-SHM-CONSTANT-VELOCITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/misconception/MC-PERIOD-DEPENDS-ON-AMPLITUDE",
+      "kind": "misconception",
+      "conceptId": "phys.wave.shm",
+      "title": "- **Trigger signal:** Student says \"a bigger swing takes longer to return\" or tries to include A in the period formula.",
+      "content": "### MC-PERIOD-DEPENDS-ON-AMPLITUDE\n- **Trigger signal:** Student says \"a bigger swing takes longer to return\" or tries to include A in the period formula.\n- **Conflict evidence [P28]:** \"For true SHM, the period is independent of amplitude — this is the isochronous property and is what made pendulum clocks work. Galileo reportedly observed a swinging chandelier and timed it against his pulse — large swings and small swings had the same period. For a spring-mass system: T = 2π√(m/k). Neither m nor k changes with amplitude, so T is fixed regardless of how far the spring is stretched (within the elastic limit). This was the great discovery — SHM has a constant period, unlike most oscillations.\"\n- **Bridge text [P30]:** \"T = 2π√(m/k): no A in the formula. The restoring force F = −kx is proportional to x — larger displacement means larger restoring force, which means faster return. These two effects exactly cancel, keeping the period constant. The 'harder pull' for a larger swing exactly compensates the 'longer distance' to cover.\"\n- **Replacement text [P31]:** \"Period of SHM is independent of amplitude (isochronous property): T = 2π√(m/k) for spring-mass; T = 2π√(L/g) for simple pendulum. Amplitude only appears in displacement, velocity, and acceleration expressions.\"\n- **Discrimination pairs [P33]:**\n  - Spring-mass with A = 2 cm vs. A = 8 cm: same T = 2π√(m/k) ✓\n  - Same spring, doubled mass: T increases by √2 ✓ (mass appears; amplitude does not)\n- **s6_path:** \"This is why pendulum clocks work — as the spring unwinds and the swing amplitude slowly decreases, the clock keeps perfect time. Period independent of amplitude is a beautiful and useful law.\"\n\n---",
+      "localKey": "MC-PERIOD-DEPENDS-ON-AMPLITUDE",
+      "language": "en",
+      "refs": [
+        "MC-PERIOD-DEPENDS-ON-AMPLITUDE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 15,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.shm",
+      "title": "Definition and Equation of Motion",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Definition and Equation of Motion\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 83,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.shm",
+      "title": "Period, Frequency, Angular Frequency",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Period, Frequency, Angular Frequency\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 104,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.shm",
+      "title": "Velocity and Acceleration in SHM",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Velocity and Acceleration in SHM\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 115,
+        "endLine": 136
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.shm",
+      "title": "Phase Relationships and Phasor Picture",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Phase Relationships and Phasor Picture\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PERIOD-DEPENDS-ON-AMPLITUDE\",\"MC-SHM-CONSTANT-VELOCITY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PERIOD-DEPENDS-ON-AMPLITUDE",
+        "MC-SHM-CONSTANT-VELOCITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 136,
+        "endLine": 297
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Period calculation**\n\"Find the period of SHM for: (a) m = 0.5 kg, k = 200 N/m; (b) m = 2 kg, k = 200 N/m (mass quadrupled); (c) m = 0.5 kg, k = 800 N/m (k quadrupled).\"\n\n*Target:* (a) T = 2π√(0.5/200) = 2π×0.05 = 0.314 s. (b) m×4 → T×2 = 0.628 s. (c) k×4 → T÷2 = 0.157 s. Mass under root → √4 = 2; stiffness under root → √4 = 2 in denominator.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 191,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Amplitude independence**\n\"A spring-mass system (m = 0.3 kg, k = 120 N/m) is set oscillating with A = 5 cm, then with A = 15 cm. (a) Calculate T for each case. (b) Calculate v_max for each case.\"\n\n*Target:* (a) T = 2π√(0.3/120) = 2π×0.05 = 0.314 s — same for both amplitudes (isochronous). (b) v_max = Aω = A×√(k/m) = A×20: for A=0.05: v_max=1.0 m/s; for A=0.15: v_max=3.0 m/s. Period same; v_max scales with A.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 191,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Velocity and acceleration at a point**\n\"SHM: A = 8 cm, f = 3 Hz. Find: (a) ω; (b) v at x = 5 cm; (c) a at x = −6 cm; (d) the displacement when v = ½v_max.\"\n\n*Target:* (a) ω = 2π×3 = 18.85 rad/s. (b) v = 18.85√(0.0064−0.0025) = 18.85√0.0039 = 18.85×0.0624 = 1.18 m/s. (c) a = −ω²x = −(18.85)²×(−0.06) = 355.3×0.06 = 21.3 m/s² (toward equilibrium, +x direction). (d) v = ½Aω → ω√(A²−x²) = ½Aω → A²−x² = A²/4 → x² = 3A²/4 → x = A√3/2 ≈ 6.93 cm.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 191,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Phase reasoning**\n\"A SHM particle starts (t=0) at x=0 moving in the +x direction. Write x(t) and v(t). What is the displacement when the acceleration is +½ of its maximum magnitude?\"\n\n*Target:* Starts at x=0, v>0: x(t) = A sin(ωt); v(t) = Aω cos(ωt). |a|_max = Aω². a = −ω²x; so +½ a_max means a = +½Aω² → −ω²x = +½Aω² → x = −A/2 (displacement is negative — particle is on the negative side, being pulled back toward positive equilibrium). So x = −A/2.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 191,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.shm",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: designing an oscillator**\n\"Design a spring-mass system to oscillate at exactly 1 Hz. (a) If m = 0.5 kg, what must k be? (b) What is the maximum displacement if v_max = 0.3 m/s? (c) What is the maximum acceleration?\"\n\n*Target:* (a) T = 1 s → 1 = 2π√(0.5/k) → √(0.5/k) = 1/(2π) → k = 0.5×(2π)² = 19.74 N/m ≈ 20 N/m. (b) v_max = Aω = A×2π×1 → A = 0.3/(2π) = 0.0477 m ≈ 4.8 cm. (c) a_max = Aω² = 0.0477×(2π)² = 0.0477×39.48 = 1.88 m/s².\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 191,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.wave.shm/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.wave.shm",
+      "title": "Adaptive Flags",
+      "content": "- **Sign convention**: a = −ω²x means acceleration is always opposite to displacement. The minus sign is essential. Students drop it, writing a = +ω²x — which is unstable (runaway) motion, not oscillation. Always check: \"if x is positive (right of equilibrium), a must be negative (toward equilibrium, i.e., left).\"\n- **x(t) = A sin vs. A cos**: the choice depends on initial conditions. Released from x = 0 with maximum velocity → x = A sin(ωt). Released from x = A at rest → x = A cos(ωt). The form doesn't matter for T, v_max, a_max — only for the phase of motion at a specific time.\n- **SHM is an idealisation**: real oscillators are damped (phys.wave.damped-oscillations). Hooke's Law has an elastic limit. SHM is exact only within these limits. This is why the blueprint for phys.mech.hookes-law warns about the elastic limit.\n- **Energy in SHM**: fully treated in phys.wave.shm-energy. Here: mention that KE is maximum at x=0 and zero at x=±A; PE is the reverse — this motivates the energy blueprint.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.shm.md",
+        "startLine": 259,
+        "endLine": 268
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

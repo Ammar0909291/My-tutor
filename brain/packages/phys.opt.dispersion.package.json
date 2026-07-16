@@ -1,0 +1,433 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.dispersion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.dispersion",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:f028f138a3bb1cf20f0adee3f62a427d8e6b88545af1904f0ad8e508e735f5b8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.dispersion.md": "sha256:e9f7311700b1fca3977e76a405d1d468d222e33339aecd4761e562585d7d8560"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.dispersion",
+    "name": "\"Dispersion of Light and Prisms\"",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.opt.refraction"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.dispersion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.dispersion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.dispersion.md": "sha256:e9f7311700b1fca3977e76a405d1d468d222e33339aecd4761e562585d7d8560"
+      },
+      "contentHash": "sha256:b54f2c339455b6886d371fd586d0de5451e034100964d876e4080e3ba168112b",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.dispersion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.dispersion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.dispersion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.dispersion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.dispersion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.dispersion.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.dispersion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.dispersion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.dispersion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.dispersion.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.dispersion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.dispersion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.dispersion.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.dispersion.md#TA-4 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.dispersion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.dispersion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.dispersion.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.dispersion.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.dispersion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.dispersion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.dispersion.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.dispersion.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.dispersion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.dispersion\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.dispersion.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.dispersion.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.dispersion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.dispersion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.dispersion/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.dispersion",
+      "title": ": Minimum Deviation",
+      "content": "### WE-1: Minimum Deviation\n\n**Problem:** A glass prism has apex angle A = 60° and refractive index n = 1.50 (for yellow light). Find:\n(a) The angle of minimum deviation δ_min.\n(b) The angle of incidence at minimum deviation.\n\n**Solution:**\n\n**(a) Minimum deviation formula:**\nn = sin[(A + δ_min)/2] / sin(A/2)\n1.50 = sin[(60° + δ_min)/2] / sin(30°)\n1.50 = sin[(60° + δ_min)/2] / 0.5\nsin[(60° + δ_min)/2] = 1.50 × 0.5 = 0.75\n(60° + δ_min)/2 = arcsin(0.75) = 48.59°\n60° + δ_min = 97.18°\n**δ_min = 37.2°**\n\n**(b) Angle of incidence:**\nAt minimum deviation, i = (A + δ_min)/2 = (60° + 37.2°)/2 = 97.2°/2 = **48.6°**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 92,
+        "endLine": 182
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.dispersion",
+      "title": ": Dispersion by a Thin Prism",
+      "content": "### WE-2: Dispersion by a Thin Prism\n\n**Problem:** A thin glass prism (A = 5°) has n_violet = 1.534 and n_red = 1.514. Find:\n(a) The deviation of violet light.\n(b) The deviation of red light.\n(c) The angular dispersion.\n(d) The dispersive power.\n\n**Solution:**\n\nUsing thin prism formula δ = (n − 1)A:\n\n**(a) Violet:** δ_violet = (1.534 − 1) × 5° = 0.534 × 5° = **2.67°**\n\n**(b) Red:** δ_red = (1.514 − 1) × 5° = 0.514 × 5° = **2.57°**\n\n**(c) Angular dispersion:**\nΔδ = δ_violet − δ_red = 2.67° − 2.57° = **0.10°**\n\n**(d) Mean deviation:**\nδ_mean = (δ_violet + δ_red)/2 = (2.67 + 2.57)/2 = 2.62°\n\nUsing δ_mean = (n_mean − 1)A: n_mean = 1.524\n\nDispersive power:\nω = Δn/(n_mean − 1) = (n_violet − n_red)/(n_mean − 1) = (1.534 − 1.514)/(1.524 − 1)\n= 0.020/0.524\n**ω ≈ 0.038**\n\nThis means ~3.8% dispersion per unit of deviation — typical for crown glass (~0.04).\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 92,
+        "endLine": 182
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.dispersion",
+      "title": ": Achromatic Combination",
+      "content": "### WE-3: Achromatic Combination\n\n**Problem:** Two thin prisms (crown glass A₁ = 5°, ω₁ = 0.04; flint glass A₂, ω₂ = 0.06) are combined to eliminate chromatic dispersion while retaining net deviation. Find:\n(a) The angle A₂ of the flint prism.\n(b) The net deviation of yellow light.\n\n**Solution:**\n\nFor no net dispersion: Δδ₁ = Δδ₂ in magnitude but opposite sign (prisms inverted relative to each other).\n\nAngular dispersion of each: Δδ = ω × δ_mean = ω × (n_mean − 1) × A\n\nFor zero net dispersion: ω₁ × δ₁_mean = ω₂ × δ₂_mean\n(Using δ_mean = (n−1)A for thin prisms, with n_mean ≈ same for first approximation)\n\nω₁(n₁−1)A₁ = ω₂(n₂−1)A₂\n\nFor crown glass: n₁_mean ≈ 1.524; for flint: n₂_mean ≈ 1.620\n\n0.04 × (1.524−1) × 5° = 0.06 × (1.620−1) × A₂\n0.04 × 0.524 × 5 = 0.06 × 0.620 × A₂\n0.1048 = 0.0372 × A₂\n**A₂ ≈ 2.82°**\n\n**(b) Net yellow deviation:**\nδ₁ = (1.524−1) × 5° = 2.62°\nδ₂ = (1.620−1) × 2.82° = 0.620 × 2.82° = 1.75°\nNet deviation = δ₁ − δ₂ = 2.62° − 1.75° = **0.87°** (retained net deviation, zero dispersion)\n\nThe achromatic combination gives a net 0.87° deviation with no color spread.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 92,
+        "endLine": 182
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/misconception/MC-PRISM-CREATES-COLORS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.dispersion",
+      "title": "**trigger_signal:** Student states \"the prism adds color to white light\" or \"the prism changes the frequency of light.",
+      "content": "",
+      "localKey": "MC-PRISM-CREATES-COLORS",
+      "language": "en",
+      "refs": [
+        "MC-PRISM-CREATES-COLORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.dispersion",
+      "title": "**trigger_signal:** Student states \"the prism adds color to white light\" or \"the prism changes the frequency of light.",
+      "content": "### MC-1: MC-PRISM-CREATES-COLORS\n\n**trigger_signal:** Student states \"the prism adds color to white light\" or \"the prism changes the frequency of light.\"\n\n**conflict_evidence [P28]:** Pass white light through a first prism → spectrum appears. Block all colors except one (e.g., red) with a screen → pass that red through a second prism. Only red comes out — no new colors are generated. Newton's experiment (1666) showed this conclusively: the prism separates colors already present in white light; it does not create them. White light is a superposition of all frequencies simultaneously — the prism spatially separates them by differential refraction. If the prism \"created\" colors, a second prism would create yet more colors, not just further deflect the red.\n\n**bridge_text [P30]:** White light is all frequencies mixed equally. Each frequency (color) is a separate wave at a specific frequency that never changes regardless of what medium it passes through. The prism doesn't change the frequencies — it exploits the fact that n is slightly different for each frequency, so Snell's Law bends each color by a slightly different angle, spreading them apart in space.\n\n**replacement_text [P31]:** Dispersion REVEALS colors that are already present in white light — it does not create them. White light is a superposition of all visible frequencies from 400 THz (red) to 750 THz (violet). The prism spatially separates these pre-existing frequencies by exploiting the wavelength-dependence of the refractive index (n_violet > n_red). Frequency — and therefore color — is set by the source and never changes in any passive optical element.\n\n**discrimination_pairs [P33]:**\n- \"A prism turns red laser light into a rainbow\" → FALSE: monochromatic red light (single frequency) is deviated but not dispersed; only a wider spectrum of frequencies is spread.\n- \"White light through a prism shows colors because n depends on wavelength\" → CORRECT: each color's frequency is present in white light and is deflected by a slightly different angle due to different n. ✓\n\n**s6_path:** If student fails \"what does prism add to light\" probe → show Newton's double-prism experiment (separation then recombination) before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/misconception/MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH",
+      "kind": "misconception",
+      "conceptId": "phys.opt.dispersion",
+      "title": "**trigger_signal:** Student reasons \"violet has shorter wavelength so it's smaller so it fits through glass more easily and refracts less.",
+      "content": "",
+      "localKey": "MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH",
+      "language": "en",
+      "refs": [
+        "MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 21,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.dispersion",
+      "title": "**trigger_signal:** Student reasons \"violet has shorter wavelength so it's smaller so it fits through glass more easily and refracts less.",
+      "content": "### MC-2: MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH\n\n**trigger_signal:** Student reasons \"violet has shorter wavelength so it's smaller so it fits through glass more easily and refracts less.\"\n\n**conflict_evidence [P28]:** The refractive index data: n_violet (400 nm) ≈ 1.53 vs. n_red (700 nm) ≈ 1.51. Higher n means MORE refraction (Snell's Law: n sinθ_2 = sinθ_1, so larger n → smaller θ_2 → bends MORE toward normal at entry, MORE away at exit → larger deviation). Violet, with n = 1.53, bends more than red (n = 1.51). The correct rule: higher n → slower speed → MORE bending. Wavelength itself doesn't determine bending — the speed change (n) does.\n\n**bridge_text [P30]:** The \"smaller fits through easier\" analogy breaks down for waves — waves don't need to \"fit through\" a material in the way a small ball fits through a gap. What matters is how much the wave's speed changes. Violet light slows more in glass (v = c/n = c/1.53) than red (v = c/1.51). More slowing → more bending by Snell's Law → more deviation → violet is at the bottom of the rainbow (higher deviation angle from the prism, smaller angle from the sky geometry).\n\n**replacement_text [P31]:** Violet light refracts MORE (not less) in glass. The refractive index for violet is larger (n_violet > n_red), meaning violet travels slower in glass. By Snell's Law, a larger n at the refracting surface produces a larger change in direction. Violet is deviated by the largest angle in a prism; red by the smallest. Memory aid: VIBGYOR — violet is the most deviated color, red the least.\n\n**discrimination_pairs [P33]:**\n- \"Blue light bends less than red in glass because its wavelength is shorter\" → FALSE: n_blue > n_red → blue bends more.\n- \"Violet light appears at the bottom edge of a rainbow (closer to horizon) because it is deviated more\" → TRUE: higher deviation angle in the droplet means the violet ray reaching your eye comes from a lower position in the sky. ✓\n\n**s6_path:** If student states violet refracts less → n-value table comparison drill (confirm n_violet > n_red numerically) + deviation formula check before mastery gate.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.dispersion",
+      "title": "\"Why is violet at the inner edge of a rainbow and red at the outer edge? Most people say 'refraction' but that doesn't t",
+      "content": "{\"id\":\"TA-1\",\"title\":\"\\\"Why is violet at the inner edge of a rainbow and red at the outer edge? Most people say 'refraction' but that doesn't t\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 238,
+        "endLine": 242
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.dispersion",
+      "title": "\"[Display: n vs. λ graph for crown glass — n ranges from 1.51 (red) to 1.53 (violet).] Two key facts: (1) n depends on λ",
+      "content": "{\"id\":\"TA-2\",\"title\":\"\\\"[Display: n vs. λ graph for crown glass — n ranges from 1.51 (red) to 1.53 (violet).] Two key facts: (1) n depends on λ\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 242,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.dispersion",
+      "title": "\"Does a prism create color? Newton's test: split white light with prism #1 → get spectrum. Block all but one color. Pass",
+      "content": "{\"id\":\"TA-3\",\"title\":\"\\\"Does a prism create color? Newton's test: split white light with prism #1 → get spectrum. Block all but one color. Pass\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 245,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.dispersion",
+      "title": "\"Violet or red — which bends more? Check: n_violet = 1.53, n_red = 1.51. At exit from prism (glass→air): n_glass sinθ₂ =",
+      "content": "{\"id\":\"TA-4\",\"title\":\"\\\"Violet or red — which bends more? Check: n_violet = 1.53, n_red = 1.51. At exit from prism (glass→air): n_glass sinθ₂ =\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 248,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.dispersion",
+      "title": "\"[Display: prism diagram at minimum deviation — symmetric ray path, r₁=r₂=A/2.] At minimum deviation, the ray travels sy",
+      "content": "{\"id\":\"TA-5\",\"title\":\"\\\"[Display: prism diagram at minimum deviation — symmetric ray path, r₁=r₂=A/2.] At minimum deviation, the ray travels sy\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 251,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.dispersion",
+      "title": "\"Apply dispersion to a single raindrop. Light enters, hits the back surface and internally reflects, exits at the front.",
+      "content": "{\"id\":\"TA-6\",\"title\":\"\\\"Apply dispersion to a single raindrop. Light enters, hits the back surface and internally reflects, exits at the front.\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 254,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.dispersion",
+      "title": "\"Final probe: (1) A prism (A=45°, n=1.60) — find δ_min. (2) A thin prism (A=8°, n_v=1.538, n_r=1.516) — find δ_violet, δ",
+      "content": "{\"id\":\"TA-7\",\"title\":\"\\\"Final probe: (1) A prism (A=45°, n=1.60) — find δ_min. (2) A thin prism (A=8°, n_v=1.538, n_r=1.516) — find δ_violet, δ\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P41\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 258,
+        "endLine": 331
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.dispersion",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** (a) Why does a glass prism spread white light into colors? (b) For glass with n_violet = 1.535 and n_red = 1.515, which color deviates more and by how much for a 4° thin prism? (c) What is the angular dispersion?\n\n**P-2 (Developing — identifies S6):** A glass prism (A = 60°, n = 1.52 for yellow light) is at minimum deviation. Find (a) δ_min and (b) the angle of incidence at minimum deviation. Confirm that the angle of refraction inside the prism equals A/2.\n\n**P-3 (Proficient — identifies S9):** Calculate the dispersive power for glass with n_D (yellow) = 1.520, n_F (blue) = 1.530, n_C (red) = 1.514, where dispersive power ω = (n_F − n_C)/(n_D − 1). Compare to typical crown glass (ω ≈ 0.04) and state which has more dispersion per unit deviation.\n\n**P-4 (Mastery gate — confirms S9):** (a) A rainbow is observed with its center at the anti-solar point. Red appears at 42° and violet at 40° from this center. Explain why red appears as the OUTER arc (larger angle from center). (b) A secondary rainbow at 51° has colors reversed (red inside, violet outside). Explain this reversal in terms of the number of internal reflections. (c) An achromatic doublet uses crown glass (n₁=1.52, ω₁=0.04) and flint glass (n₂=1.62, ω₂=0.06). If the crown prism has A₁ = 6°, find A₂ to zero the dispersion and find the net deviation. Required: 3/3 at ≥0.80 accuracy.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 266,
+        "endLine": 278
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

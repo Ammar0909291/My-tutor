@@ -1,0 +1,294 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.faradays-law-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.faradays-law",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:3561e26c8ca066a4e6e624e9b70f147bfe70c524cfe57b0a88c915309f22dfe1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.faradays-law.md": "sha256:e5df161ab69257876241fc4f883c31425fb2e7a3fd4c5184038a9d6419a40610"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.em.faradays-law",
+    "name": "Faraday's Law of Electromagnetic Induction",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.em.magnetic-flux"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.faradays-law-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.faradays-law (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.faradays-law.md": "sha256:e5df161ab69257876241fc4f883c31425fb2e7a3fd4c5184038a9d6419a40610"
+      },
+      "contentHash": "sha256:0e1667900e5efcbc6f96ffeef51e97781b9b66711a9ecc382c3168a8ea48987a",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.faradays-law.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.faradays-law.md#TA-1 (addresses MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.faradays-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.faradays-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.faradays-law.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.faradays-law.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.faradays-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.faradays-law\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.faradays-law.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.faradays-law.md#TA-3 (addresses MC-EMF-REQUIRES-A-CONDUCTOR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.faradays-law"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.faradays-law\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.faradays-law/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.faradays-law",
+      "title": "Flux Change from Moving Magnet",
+      "content": "### WE-1 — Flux Change from Moving Magnet\n**Problem:** A 500-turn coil (area 20 cm²) experiences a field change from B = 0.10 T to B = 0.50 T in 0.25 s, with the coil normal parallel to B. Find the induced EMF.\n\n**Solution:**\nΔΦ = (B₂ − B₁) × A = (0.50 − 0.10) × 20×10⁻⁴ = 0.40 × 2.0×10⁻³ = 8.0×10⁻⁴ Wb\n\n|ε| = N|ΔΦ/Δt| = 500 × (8.0×10⁻⁴ / 0.25) = 500 × 3.2×10⁻³ = **1.6 V**\n\nDirection: by Lenz's law, the induced current opposes the increasing flux (increasing B into page → induced current creates B out of page → counterclockwise current when viewed from the field direction).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 82,
+        "endLine": 128
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.faradays-law",
+      "title": "Motional EMF (Rail Problem)",
+      "content": "### WE-2 — Motional EMF (Rail Problem)\n**Problem:** A conducting rod of length L = 0.50 m slides along frictionless rails in B = 0.80 T (perpendicular to the plane of the rails) at v = 3.0 m/s. Rail resistance R = 2.0 Ω. Find: (a) EMF, (b) current, (c) power dissipated, (d) force needed to maintain constant velocity.\n\n**Solution:**\n(a) ε = BLv = 0.80 × 0.50 × 3.0 = **1.2 V**\n\n(b) I = ε/R = 1.2/2.0 = **0.60 A**\n\n(c) P = I²R = (0.60)² × 2.0 = **0.72 W** (or P = εI = 1.2 × 0.60 = 0.72 W ✓)\n\n(d) Force on rod from magnetic field (opposing motion by Lenz): F_mag = BIL = 0.80 × 0.60 × 0.50 = 0.24 N  \nTo maintain constant v: F_applied = 0.24 N (equal and opposite to F_mag)  \nCheck energy: P_mechanical = F × v = 0.24 × 3.0 = 0.72 W = P_electrical ✓\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 82,
+        "endLine": 128
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.faradays-law",
+      "title": "AC Generator",
+      "content": "### WE-3 — AC Generator\n**Problem:** A generator coil: N = 100 turns, A = 0.050 m², rotates at f = 60 Hz in B = 0.30 T. Find: (a) peak EMF, (b) EMF at t = 1/(240) s (i.e., t = T/4), (c) instantaneous EMF when flux is maximum.\n\n**Solution:**\nω = 2πf = 2π × 60 = 376.8 rad/s\n\n(a) ε₀ = NBAω = 100 × 0.30 × 0.050 × 376.8 = **565 V**\n\n(b) ε(t) = ε₀ sin(ωt) = 565 × sin(376.8 × 1/240) = 565 × sin(π/2) = 565 × 1 = **565 V** (peak)  \nNote: at t = T/4, ωt = π/2 → sin = 1 → maximum EMF\n\n(c) Flux is maximum when cosωt = 1 → ωt = 0 → sinωt = 0 → **ε = 0**  \n(Maximum flux occurs when EMF is zero — they are 90° out of phase)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 82,
+        "endLine": 128
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/misconception/MC-EMF-REQUIRES-A-CONDUCTOR",
+      "kind": "misconception",
+      "conceptId": "phys.em.faradays-law",
+      "title": "- **trigger_signal:** Student says \"Faraday's law only works when there's a wire loop; in empty space, there's no EMF.",
+      "content": "### MC-EMF-REQUIRES-A-CONDUCTOR\n- **trigger_signal:** Student says \"Faraday's law only works when there's a wire loop; in empty space, there's no EMF.\"\n- **conflict_evidence [P28]:** \"Faraday's law in its Maxwell form: ∮E·dl = −dΦ_B/dt — this is a statement about the electric field in space, not about wires. A changing B field induces a circulating electric field everywhere in space, whether or not a conductor is present. Place a conductor there and the induced E drives current (EMF). But the E field exists regardless. This is how electromagnetic waves propagate — no conductor involved.\"\n- **bridge_text [P30]:** \"Gravity doesn't require a mass to be present for a gravitational field to exist — Earth's gravity field fills space whether or not an apple is there to fall in it. Similarly, a changing magnetic flux creates an electric field in space whether or not a conductor is present. The conductor (wire) is just a probe that responds to that pre-existing field.\"\n- **replacement_text [P31]:** \"Faraday's law: ∮E·dl = −dΦ_B/dt applies in vacuum and conductors alike. In a conductor, the induced E drives current. In vacuum, the induced E is the electric component of the electromagnetic wave. EMF (energy per charge around the loop) is induced in any path through the changing flux region.\"\n- **discrimination_pairs [P33]:**\n  - Conductor in changing flux: induced E drives current I = ε/R (measurable)\n  - Empty space in changing flux: induced E field exists (produces EM wave component)\n  - No conductor, isolated: no current, but E field still there\n- **s6_path:** Link to Maxwell's equations (phys.em.maxwells-equations); show the full integral form.\n\n---",
+      "localKey": "MC-EMF-REQUIRES-A-CONDUCTOR",
+      "language": "en",
+      "refs": [
+        "MC-EMF-REQUIRES-A-CONDUCTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/misconception/MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM",
+      "kind": "misconception",
+      "conceptId": "phys.em.faradays-law",
+      "title": "- **trigger_signal:** Student says \"the generator produces most voltage when the coil faces the field directly (maximum flux).",
+      "content": "### MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM\n- **trigger_signal:** Student says \"the generator produces most voltage when the coil faces the field directly (maximum flux).\"\n- **conflict_evidence [P28]:** \"ε = −dΦ/dt. When Φ = maximum (coil face perpendicular to B), Φ is at a peak — its rate of change dΦ/dt = 0 at a maximum (derivative of a cosine at its peak is zero). So ε = 0 at maximum flux. Conversely, when Φ = 0 (coil edge-on to B), flux is changing fastest → ε is maximum. Plot Φ(t) = Φ₀cosωt and ε(t) = Φ₀ω sinωt: they are 90° out of phase.\"\n- **bridge_text [P30]:** \"Think of a ball thrown upward: at the top (maximum height), its velocity is zero — it's momentarily stopped. Height is maximum but the rate of change of height is zero. Similarly, flux is maximum when its rate of change is zero — and EMF is the rate of change of flux.\"\n- **replacement_text [P31]:** \"ε = −dΦ/dt. EMF is maximum when dΦ/dt is maximum (Φ changing fastest), which is when Φ = 0 (coil parallel to B). EMF is zero when Φ = maximum (coil perpendicular to B). EMF and flux are 90° out of phase: ε(t) = ε₀ sinωt, Φ(t) = Φ₀ cosωt.\"\n- **discrimination_pairs [P33]:**\n  - Coil perpendicular to B (face-on): Φ = maximum; ε = 0\n  - Coil parallel to B (edge-on): Φ = 0; ε = maximum = NBAω\n  - At 45°: Φ = Φ₀/√2; ε = ε₀/√2\n- **s6_path:** Plot Φ(t) and ε(t) on same time axis for one full rotation; show 90° phase difference visually.\n\n---",
+      "localKey": "MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM",
+      "language": "en",
+      "refs": [
+        "MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 16,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.faradays-law",
+      "title": "The law: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The law: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 15,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.faradays-law",
+      "title": "Motional EMF: Block 1-B, WE-2",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Motional EMF: Block 1-B, WE-2\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 24,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.faradays-law",
+      "title": "AC Generator: Block 1-C, WE-3",
+      "content": "{\"id\":\"TA-3\",\"title\":\"AC Generator: Block 1-C, WE-3\",\"primitives\":[\"P28\",\"P36\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[\"MC-EMF-REQUIRES-A-CONDUCTOR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-EMF-REQUIRES-A-CONDUCTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 27,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.faradays-law",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** In an AC generator, the induced EMF is maximum when:\n(a) The coil is perpendicular to B **(b) The coil is parallel to B** (c) The flux is maximum (d) The coil stops rotating\n\n**A2 (Short answer):** Write Faraday's law for an N-turn coil. What does the negative sign indicate?\n[ε = −N dΦ_B/dt; negative sign: Lenz's law — induced EMF opposes the flux change]\n\n**A3 (Fill-in):** Motional EMF for a rod of length L moving at speed v perpendicular to B is ε = ______.\n[BLv]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** A square loop (side 5 cm) is pulled out of a B = 0.40 T region at v = 2.0 m/s (the loop's side remains inside the field). Find the induced EMF and state Lenz's law direction.\n[ε = BLv = 0.40 × 0.05 × 2.0 = 0.04 V = 40 mV; Lenz: flux decreasing → induced current tries to maintain it → current direction to reinforce original flux]\n\n**B2:** A 200-turn coil rotates at 50 Hz in B = 0.25 T. Area = 80 cm². Find ε₀ and the EMF at t = T/8.\n[ω=2π×50=314 rad/s; ε₀=NBAω=200×0.25×80×10⁻⁴×314=125.6 V; at t=T/8: ωt=π/4; ε=125.6×sin(π/4)=88.8 V]\n\n**B3:** A coil in a region where B = 0.5 sin(100t) T (B perpendicular to coil, area A = 0.02 m², 10 turns). Find the maximum induced EMF.\n[Φ = NBA = 10 × 0.5 sin(100t) × 0.02 = 0.1 sin(100t); ε = −dΦ/dt = −10 cos(100t) V; ε_max = 10 V]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** In WE-2 (motional EMF): (a) If v is doubled, what happens to ε, I, F_applied, and P? (b) If B is halved, what happens to ε, I, F_applied, and P?\n[(a) v doubled: ε doubles (∝v); I doubles (∝v); F_mag=BIL∝v doubles; P=Fv∝v² quadruples. (b) B halved: ε halves (∝B); I halves; F_mag=BIL∝B² quarters; P∝B² quarters.]\n\n**C2 (Design):** A generator must produce ε₀ = 240 V at 50 Hz. Available: N=500 turns, A=100 cm². Find B. Then find ε at t=2ms after the coil starts from θ=0 (coil ∥ B at t=0).\n[ε₀=NBAω → B=ε₀/(NAω)=240/(500×100×10⁻⁴×2π×50)=240/(500×10⁻²×314)=240/1570=0.153 T. At t=2ms: ωt=314×0.002=0.628 rad; ε=240×sin(0.628)=240×0.588=141 V]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 156,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.faradays-law",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks perpendicular) | Deploy MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM; plot Φ(t) and ε(t) together |\n| Probe B1 Lenz direction wrong | Apply Lenz: identify flux direction; state whether increasing/decreasing; find current direction to oppose change |\n| Probe B3 wrong (confuses dB/dt with dΦ/dt) | Φ = NBA = N × A × B(t); dΦ/dt = NA × dB/dt; ε = −N × dΦ/dt = −NA × dB/dt |\n| Probe C1(a) wrong on P scaling | P = Fv = (B²L²v/R)v = B²L²v²/R ∝ v²; also P = ε²/R = (BLv)²/R ∝ v² |\n| Student asks about transformers | Preview: mutual inductance + Faraday on secondary; ε_s/ε_p = N_s/N_p; link to phys.em.mutual-inductance |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 262,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "phys.em.faradays-law/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.faradays-law",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Faraday's law is arguably the most economically important equation in physics — it underlies every generator, transformer, and electric motor ever built. Today we derive it from first principles and apply it to generators, motors, and induction.\"\n\n[P41 — Diagnostic]\n\"A wire loop sits near a magnet. The magnet is stationary. Is there a current in the loop?\"\n→ No (correct): \"Right. Now the magnet moves toward the loop — current appears. Why?\"\n→ Various: \"Great intuition — let's find the pattern.\"\n\n[P06 — Concrete anchor]\n\"Faraday's 1831 experiment: he moved a magnet in and out of a coil and saw a galvanometer deflect. The faster he moved, the bigger the deflection. The key insight: it's not the presence of B that matters — it's the CHANGE of flux. ε = −dΦ/dt.\"\n\n[TA-1 — The law: Block 1-A]\n\"ε = −N dΦ/dt. Three ways to change Φ. Each gives EMF.\"\n\n[P28 — Conflict evidence for MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM]\n\"ε = −dΦ/dt. Maximum rate of change occurs at Φ = 0 (coil edge-on). At Φ maximum: dΦ/dt = 0 → ε = 0. WE-3(c) confirms: when flux is maximum, EMF = 0. Φ and ε are 90° out of phase.\"\n\n[P51 — Check-in]\n\"At what coil orientation is the generator EMF maximum? Minimum? Write Φ(t) and ε(t) for the rotating coil.\"\n\n[TA-2 — Motional EMF: Block 1-B, WE-2]\n\"Force on electrons in moving rod: F=qvB → charge separation → EMF = BLv. Power balance: P_mechanical = P_electrical.\"\n\n[TA-3 — AC Generator: Block 1-C, WE-3]\n\n[P28 — Conflict evidence for MC-EMF-REQUIRES-A-CONDUCTOR]\n\"Maxwell's integral form: ∮E·dl = −dΦ/dt — applies in empty space. EM waves propagate via exactly this mechanism. Faraday's law is more fundamental than just 'wire loops.'\"\n\n[P52 — Narrow]\n\"Two key formulas: ε = −NdΦ/dt (general); ε₀ = NBAω (generator peak). Motional EMF = BLv.\"\n\n[P62 — Retrieval seed]\n\"Write from memory: Faraday's law, what negative sign means, three ways to change flux, generator peak EMF formula, phase relationship of Φ and ε.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Faraday's law: EMF = −N dΦ/dt. Lenz's law gives the direction (negative sign). Three flux-change mechanisms. Generator: ε₀ = NBAω, 90° phase lag behind flux. This law is the foundation of electromagnetic induction — and of Maxwell's equations.\"\n\n[P85 — Regulation tail]\n\"Shakiest: the phase relationship (max EMF ≠ max flux), the motional EMF derivation, or the energy/power check?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the retrieval quiz.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.faradays-law.md",
+        "startLine": 211,
+        "endLine": 262
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,404 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.maxwell-boltzmann-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.maxwell-boltzmann",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:93d4a0695562dafd278dbc4c7caf0b564701da0ef482c763bbbde7d12408e13d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md": "sha256:26b4bf4e9ab4da1208baeac13151385181d7dc5efaf0ee94c6225f4c57328bc4"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.stat.maxwell-boltzmann",
+    "name": "Maxwell-Boltzmann Speed Distribution",
+    "difficultyRaw": "Advanced",
+    "bloom": "Apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.stat.boltzmann-factor"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.maxwell-boltzmann-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.maxwell-boltzmann (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md": "sha256:26b4bf4e9ab4da1208baeac13151385181d7dc5efaf0ee94c6225f4c57328bc4"
+      },
+      "contentHash": "sha256:ec41d1737d2975452dc39f52f4868803e9153f41bfbe72c5db17fc42cd96e4e4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.maxwell-boltzmann.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.maxwell-boltzmann"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.maxwell-boltzmann\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.maxwell-boltzmann.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.maxwell-boltzmann"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.maxwell-boltzmann\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.maxwell-boltzmann.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md#TA-3 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.maxwell-boltzmann"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.maxwell-boltzmann\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.maxwell-boltzmann.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.maxwell-boltzmann"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.maxwell-boltzmann\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Maxwell-Boltzmann Speed Distribution — core explanation",
+      "content": "**One-sentence definition:** The Maxwell-Boltzmann speed distribution gives the probability distribution of molecular speeds in an ideal gas at thermal equilibrium: f(v) = 4π(m/2πk_BT)^(3/2) v² e^(−mv²/2k_BT).\n\n**The core insight:** Not all molecules in a gas move at the same speed — they have a broad distribution determined by temperature. The distribution arises from three competing factors: the Boltzmann factor (higher speeds are exponentially less probable), the density of states (more directions available at higher speeds — the v² factor), and normalization. Temperature shifts the distribution; at higher T, the peak moves to higher speed and the distribution broadens.\n\n**Conceptual chain:**\n1. Kinetic theory: gas molecules move in random directions with a distribution of speeds.\n2. Boltzmann factor: probability of speed v ∝ e^(−mv²/2k_BT) (kinetic energy ½mv²).\n3. Phase space density of states: the number of velocity vectors with speed between v and v+dv is proportional to the surface area of a sphere of radius v → factor v².\n4. Speed distribution: f(v) = 4π n(m/2πk_BT)^(3/2) v² e^(−mv²/2k_BT), normalized so ∫₀^∞ f(v) dv = n (total particle density).\n5. Characteristic speeds:\n   - Most probable speed: v_p = √(2k_BT/m) (peak of f(v))\n   - Mean speed: ⟨v⟩ = √(8k_BT/πm)\n   - RMS speed: v_rms = √(3k_BT/m) = √(3RT/M) (used in kinetic energy ½mv_rms² = 3/2 k_BT)\n6. Temperature dependence: all three speeds scale as √T — doubling T increases speeds by factor √2.\n7. Mass dependence: all speeds scale as 1/√m — heavier molecules move slower at the same T.\n\n**Central equations:**\n- f(v) = 4π(m/2πk_BT)^(3/2) v² e^(−mv²/2k_BT)\n- v_p = √(2k_BT/m)\n- ⟨v⟩ = √(8k_BT/πm)\n- v_rms = √(3k_BT/m)\n- Ordering: v_p < ⟨v⟩ < v_rms (always, for Maxwell-Boltzmann)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 18,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "The most probable speed, mean speed, and RMS speed are the same",
+      "content": "### MC-1: \"The most probable speed, mean speed, and RMS speed are the same\"\n- **Probe:** \"For nitrogen at 300 K, rank v_p, ⟨v⟩, v_rms from smallest to largest.\"\n- **Characteristic phrase:** \"They're all about 400 m/s for nitrogen.\"\n- **Trigger:** All three speeds are computed from similar formulas (√k_BT/m) and give similar numerical values, so students equate them.\n- **Conflict evidence [P28]:** v_p = √(2k_BT/m) ≈ 0.816 v_rms; ⟨v⟩ = √(8/3π) v_rms ≈ 0.921 v_rms. For N₂ (m = 4.65 × 10⁻²⁶ kg) at 300 K: v_p ≈ 422 m/s, ⟨v⟩ ≈ 476 m/s, v_rms ≈ 517 m/s — clearly different, approximately 10–20% apart.\n- **Bridge [P30]:** \"These three speeds characterize three different aspects of the distribution: v_p is where f(v) peaks, ⟨v⟩ is the arithmetic mean of all speeds, v_rms is the square root of the mean squared speed (used in kinetic energy). Because the distribution is skewed right (long high-speed tail), the mean is pulled above the mode, and the RMS is highest because squaring emphasizes the high-speed tail.\"\n- **Replacement [P31]:** Always v_p < ⟨v⟩ < v_rms. The ratios are v_p : ⟨v⟩ : v_rms = √2 : √(8/π) : √3 ≈ 1 : 1.13 : 1.22.\n- **Discrimination pairs [P33]:** Median household income vs. mean income vs. RMS income in a country with a long-tailed wealth distribution — they differ in the same way. The distribution is right-skewed; mean > median > mode for a right-skewed distribution.\n- **S6 repair path:** Compute all three speeds for H₂ and N₂ at 300 K. Verify the ordering v_p < ⟨v⟩ < v_rms numerically. Show why v_rms > ⟨v⟩ using Jensen's inequality: ⟨v²⟩ ≥ ⟨v⟩² (equality only for a delta distribution).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "The speed distribution f(v) ∝ e^(−mv²/2k_BT) is missing the v² factor",
+      "content": "### MC-2: \"The speed distribution f(v) ∝ e^(−mv²/2k_BT) is missing the v² factor\"\n- **Probe:** \"What is f(0) for the Maxwell-Boltzmann distribution? Should it be zero or positive?\"\n- **Characteristic phrase:** \"f(v) is just the Boltzmann factor e^(−mv²/2k_BT).\"\n- **Trigger:** The Boltzmann factor is introduced first, and students apply it directly to speed without considering phase space.\n- **Conflict evidence [P28]:** f(0) = 0 for the Maxwell-Boltzmann distribution — the probability density for speed = 0 is zero. Without the v² factor, f(0) = C × e^0 = C ≠ 0. The v² factor is essential: there is only one way to have speed exactly zero (all velocity components zero), but there are many directions for any nonzero speed.\n- **Bridge [P30]:** \"In 3D, speed v = |v⃗|. The number of velocity vectors with speed between v and v+dv is the volume of a spherical shell: 4πv² dv. This geometric factor v² appears in the speed distribution as the 'density of states.' At low v, very few velocity vectors have that speed (small spherical shell area); at high v, many velocity vectors exist but Boltzmann factor exponentially suppresses them.\"\n- **Replacement [P31]:** f(v) = C × v² × e^(−mv²/2k_BT). The v² factor ensures f(0) = 0 and creates the peak away from zero. Without v², the formula gives the 1D velocity component distribution (which does peak at zero — that is correct for velocity, not speed).\n- **Discrimination pairs [P33]:** 1D velocity distribution: f(v_x) ∝ e^(−mv_x²/2k_BT) — Gaussian, peaks at v_x = 0. 3D speed distribution: f(v) ∝ v² e^(−mv²/2k_BT) — peaks at v_p > 0. Different objects, different physics.\n- **S6 repair path:** Draw f₃D in velocity space (symmetric Gaussian around origin). Transform to spherical coordinates: probability of speed in (v, v+dv) = f₃D × 4πv² dv → the v² geometric factor enters automatically.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "The high-speed tail is negligible — no molecules have very high speed",
+      "content": "### MC-3: \"The high-speed tail is negligible — no molecules have very high speed\"\n- **Probe:** \"What fraction of N₂ molecules at 300 K have speed greater than 3v_rms ≈ 1550 m/s?\"\n- **Characteristic phrase:** \"Essentially zero molecules move faster than 2000 m/s.\"\n- **Trigger:** The exponential decay of f(v) makes students think the tail is effectively zero above a few multiples of v_rms.\n- **Conflict evidence [P28]:** The fraction above 3v_rms is small (~10⁻⁵) but nonzero. In a mole of gas (6 × 10²³ molecules), that's ~6 × 10¹⁸ molecules — an enormous number. The tail drives atmospheric escape, chemical reaction rates, and star formation.\n- **Bridge [P30]:** \"The Maxwell-Boltzmann distribution has an infinite tail. The fraction above any finite speed is always positive. In a macroscopic sample, 'exponentially rare' still means billions of molecules. For processes with exponential activation barriers (chemistry, nuclear fusion), the tail is everything — the rate is controlled entirely by molecules in the tail.\"\n- **Replacement [P31]:** The high-speed tail is thermally thin but physically crucial. Rate processes with energy barrier E_a depend on e^(−E_a/k_BT) — this is the Boltzmann tail fraction at energy E_a. Small changes in T dramatically change this fraction.\n- **Discrimination pairs [P33]:** A lottery with odds of 1 in 10⁷ pays out once per week because millions of tickets are sold. Similarly, rare high-speed molecules drive chemistry because there are Avogadro's number of them.\n- **S6 repair path:** Calculate the escape fraction for H₂ vs. N₂ from Earth's atmosphere (v_escape = 11.2 km/s) using the Maxwell-Boltzmann tail. H₂ has a much larger tail fraction — explains why Earth has almost no H₂ in its atmosphere but retains N₂.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Doubling the temperature doubles the mean speed",
+      "content": "### MC-4: \"Doubling the temperature doubles the mean speed\"\n- **Probe:** \"The temperature of a gas doubles from 300 K to 600 K. By what factor does v_rms change?\"\n- **Characteristic phrase:** \"Hotter gas has twice the speed — temperature and speed are proportional.\"\n- **Trigger:** Temperature and average kinetic energy are proportional (½mv_rms² = 3/2 k_BT). Students confuse energy proportionality with speed proportionality.\n- **Conflict evidence [P28]:** v_rms = √(3k_BT/m). If T doubles: v_rms → √(3k_B × 2T/m) = √2 × v_rms. Speed increases by √2 ≈ 1.41, not 2. Energy doubles (as it should), but speed only increases by √2.\n- **Bridge [P30]:** \"Kinetic energy ∝ v². So KE ∝ T means v² ∝ T, which means v ∝ √T — not v ∝ T. Doubling T doubles the energy but only increases speed by √2.\"\n- **Replacement [P31]:** v_p, ⟨v⟩, v_rms all ∝ √T. To double the speed, you need to increase T by a factor of 4.\n- **Discrimination pairs [P33]:** A car's kinetic energy is ½mv². Doubling speed quadruples the kinetic energy (braking distance is proportional to v²). Conversely, doubling kinetic energy only increases speed by √2.\n- **S6 repair path:** Compute v_rms for N₂ at T = 300, 600, 1200 K. Verify: √(600/300) = √2 ≈ 1.41; √(1200/300) = 2. Ask student to generalize: v ∝ √T.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Explanation A (two competing factors) + Explanation B (derivation sketch from 3D velocity space). Emphasize the role of ",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Explanation A (two competing factors) + Explanation B (derivation sketch from 3D velocity space). Emphasize the role of \",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Demo 1 (PhET simulation) — vary T and mass, observe distribution shift. Demo 2 (numerical calculation of v_p, ⟨v⟩, v_rms",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Demo 1 (PhET simulation) — vary T and mass, observe distribution shift. Demo 2 (numerical calculation of v_p, ⟨v⟩, v_rms\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "MC-1 probe (\"Rank v_p, ⟨v⟩, v_rms\") and MC-2 probe (\"What is f(0)?\"). Resolve both misconceptions before calculation pra",
+      "content": "{\"id\":\"TA-3\",\"title\":\"MC-1 probe (\\\"Rank v_p, ⟨v⟩, v_rms\\\") and MC-2 probe (\\\"What is f(0)?\\\"). Resolve both misconceptions before calculation pra\",\"primitives\":[],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Demo 3 (atmospheric escape). Assign: \"Calculate the ratio of v_rms for H₂ vs. O₂ at 300 K. Why does Earth retain O₂ but ",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Demo 3 (atmospheric escape). Assign: \\\"Calculate the ratio of v_rms for H₂ vs. O₂ at 300 K. Why does Earth retain O₂ but \",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly writes f(v) with all factors, computes v_p from df/dv = 0, computes v_rms from ½mv_rms² = 3/2 k_BT, and correctly identifies f(0) = 0 and the ordering v_p < ⟨v⟩ < v_rms. Score ≥ 80%.\n\n**FA-1 — Formula identification:**\n*Q: Write the Maxwell-Boltzmann speed distribution f(v). Identify each factor and its physical origin. What is f(0)?*\nExpected: f(v) = 4πn(m/2πk_BT)^(3/2) v² e^(−mv²/2k_BT). Factor 1: normalization. Factor 2: v² — density of states in 3D velocity space (number of velocity vectors with speed v). Factor 3: e^(−mv²/2k_BT) — Boltzmann factor, probability of energy ½mv². f(0) = 0 (v² = 0 at v = 0).\nThreshold: Must identify v² as density of states (not arbitrary), and correctly give f(0) = 0.\n\n**FA-2 — Characteristic speed calculation:**\n*Q: Calculate v_p and v_rms for O₂ (M = 32 g/mol) at T = 400 K. R = 8.314 J/mol/K.*\nExpected: v_p = √(2RT/M) = √(2 × 8.314 × 400/0.032) = √(207,850) ≈ 456 m/s. v_rms = √(3RT/M) = √(3 × 8.314 × 400/0.032) = √(311,775) ≈ 558 m/s.\nThreshold: Correct formulas (2RT vs. 3RT), correct arithmetic (±20 m/s).\n\n**FA-3 — Temperature scaling:**\n*Q: Helium (M = 4 g/mol) is at T₁ = 300 K. At what temperature T₂ does its v_rms equal the v_rms of N₂ (M = 28 g/mol) at 300 K?*\nExpected: v_rms = √(3RT/M). For equal v_rms: T_He/M_He = T_N₂/M_N₂ → T_He = T_N₂ × M_He/M_N₂ = 300 × 4/28 ≈ 43 K. Helium must be cooled to ~43 K to have the same rms speed as N₂ at 300 K.\nThreshold: Correct proportionality argument and answer.\n\n**FA-4 — Application to chemical kinetics:**\n*Q: The activation energy for a reaction is E_a = 0.5 eV. Estimate by what factor the fraction of molecules exceeding this energy increases when T rises from 300 K to 600 K. (k_B = 8.62 × 10⁻⁵ eV/K)*\nExpected: Fraction ∝ e^(−E_a/k_BT). At 300 K: βE_a = 0.5/0.02586 ≈ 19.3. At 600 K: βE_a = 0.5/0.05172 ≈ 9.67. Ratio = e^(19.3)/e^(9.67) = e^(9.63) ≈ 15,000. Doubling T increases the reactive fraction by a factor ~15,000.\nThreshold: Correct identification of e^(−E_a/k_BT) as the relevant fraction, correct ratio calculation showing dramatic enhancement.\n\n**Confidence calibration:** After FA-2, students rate confidence. Students who use the correct formula but make an arithmetic error (and are confident they're wrong) receive targeted encouragement; students who use the wrong formula (v_rms = √(2RT/M)) and are confident receive targeted correction of v_p vs. v_rms distinction.\n\n**Delayed retrieval (session + 3):** \"State the Maxwell-Boltzmann speed distribution. What is the most probable speed? Why is v_rms > v_p?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 218,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Ball-pit analogy: pour balls into a tilted box (the Boltzmann factor tilts the \"energy landscape\" against high speed). But there are many more directions to travel at high speed than at low speed (the v² factor). The distribution peaks where these two effects balance.\n- Effusion demonstration: two gases at the same T in connected containers separated by a pinhole. Lighter gas (H₂) effuses faster than heavier gas (N₂) — Graham's law follows from the Maxwell-Boltzmann distribution.\n- Temperature dial: as T increases, the whole distribution shifts right and flattens (broader, peak moves to higher v, but area under curve stays constant = total number of molecules).\n\n### Representational (Iconic)\n- Plot f(v) vs. v for nitrogen at T = 300 K, 600 K, 1200 K: show the shift and broadening.\n- Mark v_p, ⟨v⟩, v_rms on the T = 300 K curve. Show v_p < ⟨v⟩ < v_rms.\n- Compare H₂ and N₂ at the same T = 300 K: H₂ distribution is shifted to much higher speeds (lighter mass).\n- The v² factor: show separately how e^(−mv²/2k_BT) falls with v, how v² rises with v, and how their product creates the peaked f(v) shape.\n\n### Abstract (Symbolic)\n- Derivation sketch: start from Boltzmann factor in 3D velocity space: f₃D(v_x, v_y, v_z) ∝ e^(−m(v_x²+v_y²+v_z²)/2k_BT). Convert to spherical coordinates: f(v) dv = f₃D × 4πv² dv → f(v) = C v² e^(−mv²/2k_BT). Determine C from normalization ∫₀^∞ f(v) dv = n.\n- Find v_p: df/dv = 0 → 2v e^(−mv²/2k_BT) + v² × (−mv/k_BT)e^(−mv²/2k_BT) = 0 → 2 = mv_p²/k_BT → v_p = √(2k_BT/m).\n- Gaussian integrals: ∫₀^∞ v² e^(−αv²) dv = √π/(4α^(3/2)), ∫₀^∞ v³ e^(−αv²) dv = 1/(2α²) — needed for normalization and ⟨v⟩.\n\n### Transfer (+)\n- Atmospheric escape: molecules at the high-speed tail of the Maxwell-Boltzmann distribution can escape Earth's gravity if v > v_escape = 11.2 km/s. H₂ and He escape slowly over geological time; N₂ and O₂ don't (explains atmospheric composition).\n- Chemical reaction rates (Arrhenius): only molecules with kinetic energy > E_activation can react. Fraction with E > E_a ∝ e^(−E_a/k_BT) — the Boltzmann factor tail. Rate ∝ e^(−E_a/k_BT).\n- Stellar nucleosynthesis: nuclear fusion in stellar cores requires collisions at v >> v_p (quantum tunneling assists, but the Maxwell-Boltzmann tail is essential for overcoming the Coulomb barrier).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 45,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — Confusing v_p, ⟨v⟩, v_rms:** Students compute v_rms (from equipartition: ½mv_rms² = 3/2 k_BT) and assume it is the same as the most probable or mean speed. The three quantities differ and play different roles: v_p is the peak of f(v); ⟨v⟩ is the average speed; v_rms gives the average kinetic energy.\n\n**Mode 2 — Forgetting the v² factor:** Students write f(v) ∝ e^(−mv²/2k_BT) without the v² density-of-states factor. This gives the distribution in one dimension, not the 3D speed distribution. The 3D distribution has a peak away from v = 0 precisely because of the v² factor.\n\n**Mode 3 — Misinterpreting the high-speed tail:** Students think \"very few molecules have high speed\" means the probability is zero above some cutoff. The Maxwell-Boltzmann distribution has an infinite tail — there is always a nonzero probability of any speed. The tail is crucial for chemical kinetics and atmospheric escape.\n\n**Mode 4 — Wrong temperature/mass scaling:** Students don't know whether doubling T doubles v_p or increases it by √2. Similarly for mass: students often say \"lighter gas moves twice as fast\" when it should be \"moves √(m₂/m₁) times as fast.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 70,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"Here's a thought experiment. Take a box of air at room temperature. Every molecule has the same temperature — temperature is a property of the whole system. But does every molecule move at the same speed? If they did, what would happen in a collision between two molecules with exactly the same kinetic energy at different angles? The answer is: the speeds would randomize. Temperature equilibrium doesn't mean identical speeds — it means a specific distribution of speeds. Maxwell derived this distribution in 1860. Let's see what he found.\"\n\n**At the v² factor:**\n\"The key insight is that in 3D, there are many more ways to move fast than to move slowly. Not because fast motion is preferred — it costs energy. But because in 3D velocity space, the number of directions increases as the square of the speed. A sphere of radius 2v has four times the surface area of a sphere of radius v. So there are four times as many ways to have speed 2v as speed v. This geometric factor competes with the Boltzmann exponential suppression of high speeds. The distribution peaks where they balance.\"\n\n**At v_p vs. ⟨v⟩ vs. v_rms:**\n\"Three different speeds, three different questions. 'Most common speed?' — that's v_p, the peak. 'Average speed of all molecules?' — that's ⟨v⟩. 'What speed gives the right average kinetic energy?' — that's v_rms. They're all close (within 20% of each other) but not equal. v_rms is highest because squaring the speed before averaging gives extra weight to the high-speed tail — and the Maxwell-Boltzmann tail extends to infinity.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 205,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.stat.boltzmann-factor — the Boltzmann factor e^(−E/k_BT) is the probability weight for kinetic energy ½mv². Without this, the exponential factor in f(v) is unmotivated.\n\n**S3:** Student can apply f(v) but doesn't understand the v² factor. Use the 3D velocity space argument (Demo 2 setup) — draw the velocity sphere and count the number of points on spherical shells of different radii.\n\n**S6:** Student confuses v_p, ⟨v⟩, v_rms. Use the numerical comparison for N₂ (Demo 2) and have the student compute all three from scratch. Require the student to state which formula applies to each and why.\n\n**S9:** Derive the Maxwell-Boltzmann distribution for energy E rather than speed v. Use dN/dE = f(v) × dv/dE = f(v)/|dE/dv| where E = ½mv². Show: dN/dE ∝ E^(1/2) e^(−E/k_BT) — the density of states factor becomes √E for energy. This is the foundation for understanding the density of states in quantum statistical mechanics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 248,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Procedural (characteristic speed formulas, scaling with T and m) + conceptual (v² density of states, three-factor structure of f(v)).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"What is the most probable speed? Write the formula. What is f(0) and why?\"\n- Session + 3: \"Compare v_p, ⟨v⟩, v_rms: write all three formulas and rank them.\"\n- Session + 7: \"By what factor does v_rms change when T is tripled? When mass is quadrupled?\"\n\n**Interleaving partners:** phys.stat.boltzmann-factor (prerequisite — provides the exponential factor); phys.therm.kinetic-theory (related — provides the macroscopic context: pressure, temperature, equipartition); phys.stat.boltzmann-factor applications (reaction rates, atmospheric escape — transfer applications).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 260,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Graham's law of effusion: rate of effusion ∝ ⟨v⟩ ∝ 1/√m. Lighter gases effuse faster — follows directly from the Maxwell-Boltzmann mean speed.\n\n**Far transfer:** Stellar spectral line broadening: thermal motion of atoms causes Doppler shifts in emitted photons. The distribution of Doppler shifts follows the Maxwell-Boltzmann distribution → Gaussian line profile with width ∝ √T. Measuring line widths gives the stellar temperature.\n\n**Structural abstraction:** \"Phase space volume times Boltzmann weight = probability density.\" This pattern generalizes to all of statistical mechanics: the density of states × Boltzmann factor always appears together. In quantum statistics, the density of states is modified (Fermi-Dirac or Bose-Einstein replaces the classical Boltzmann factor), but the structure remains.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 273,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "phys.stat.maxwell-boltzmann/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.stat.maxwell-boltzmann",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.stat.boltzmann-factor is necessary. phys.therm.kinetic-theory is strongly recommended (students need the microscopic model of an ideal gas to contextualize the speed distribution).\n- **Unlock readiness:** No formal unlocks. However, the Maxwell-Boltzmann distribution is a prerequisite for understanding activation energy (chemistry), atmospheric composition, and stellar spectroscopy.\n- **Difficulty calibration:** Advanced/apply is correct. The derivation requires 3D integration and Gaussian integrals (advanced mathematics), but the formulas themselves are straightforward to apply. The conceptual content (three competing factors in f(v), three characteristic speeds) is the main challenge.\n- **Suggested problem set:** (1) Compute v_p, ⟨v⟩, v_rms for H₂, N₂, O₂ at 300 K — tabulate and compare. (2) At what temperature does v_rms of N₂ equal 1000 m/s? (3) By what factor does the fraction of O₂ molecules with E > 1 eV change as T goes from 300 K to 1000 K? (4) Calculate the ratio of effusion rates of He vs. N₂ through a pinhole (Graham's law).\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.maxwell-boltzmann.md",
+        "startLine": 283,
+        "endLine": 293
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

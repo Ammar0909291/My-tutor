@@ -1,0 +1,546 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.equilibrium-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.equilibrium",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:04c5dcb98c1c0123a30f32770df8d85225b1773e047de0fe5ef103fbfe6c521a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.equilibrium.md": "sha256:03be8bb31b3a3e99e1504ec2096f6968bf9005831c3ea06a2a1ba25b3352d6ee"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.equilibrium",
+    "name": "Equilibrium",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.torque",
+      "phys.mech.free-body-diagram"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.equilibrium-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.equilibrium (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.equilibrium.md": "sha256:03be8bb31b3a3e99e1504ec2096f6968bf9005831c3ea06a2a1ba25b3352d6ee"
+      },
+      "contentHash": "sha256:2f301b1c48db230698fdc172c25ab780a3dfc31ffd102386aedad8cf17c841e5",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.equilibrium.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.equilibrium.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.equilibrium"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.equilibrium\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.equilibrium.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.equilibrium.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.equilibrium"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.equilibrium\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.equilibrium.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.equilibrium.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.equilibrium"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.equilibrium\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.equilibrium.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.equilibrium.md#TA-4 (addresses MC-ONE-CONDITION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.equilibrium"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.equilibrium\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.equilibrium.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.equilibrium.md#TA-5 (addresses MC-PIVOT-FIXED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.equilibrium"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.equilibrium\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.equilibrium.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.equilibrium.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.equilibrium"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.equilibrium\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.equilibrium.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.equilibrium.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.equilibrium"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.equilibrium\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.equilibrium/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Equilibrium — core explanation",
+      "content": "**Core Insight:** A body in static equilibrium has zero translational acceleration AND zero\nrotational acceleration. Two independent conditions must hold simultaneously: the net force\nis zero (ΣF = 0) and the net torque is zero (Στ = 0). Critically, the torque condition must\nhold about ANY chosen pivot — this freedom of pivot choice is the key problem-solving tool.\n\n**Conditions for Static Equilibrium:**\nΣF_x = 0    (horizontal net force)\nΣF_y = 0    (vertical net force)\nΣτ = 0      (net torque about ANY pivot — choose wisely)\n\n**Strategy for equilibrium problems:**\n1. Draw a complete FBD (all forces, with point of application for torques).\n2. Choose a pivot at the point of action of an unknown force — eliminates it from the torque equation.\n3. Apply Στ = 0 to find the remaining unknown.\n4. Apply ΣF = 0 to find the force at the pivot.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 25,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Balanced beam",
+      "content": "**Worked Example 1 (Balanced beam):**\nA uniform 4 m beam (weight W = 100 N, acts at centre = 2 m). One end on support; person\n(weight 600 N) stands 1 m from the other end. Find the two support forces R_A (left) and R_B (right).\nTake pivot at A: Στ_A = 0 → R_B×4 − 100×2 − 600×3 = 0 → R_B = (200+1800)/4 = 500 N.\nΣF_y = 0 → R_A + R_B = 700 → R_A = 200 N.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 25,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Ladder against wall",
+      "content": "**Worked Example 2 (Ladder against wall):**\nA uniform 5 m ladder (mass 20 kg), angle 60° to floor. Frictionless wall. Find floor reaction (F_floor)\nand wall reaction (F_wall). Pivot at base: Στ_base = 0 → F_wall × 5 sin60° = 20×9.8×2.5 cos60°.\nF_wall = (20×9.8×2.5 cos60°)/(5 sin60°) = (20×9.8×1.25)/(5×0.866) = 245/4.33 ≈ 56.6 N.\nΣF_x = 0 → F_floor_x = F_wall = 56.6 N. ΣF_y = 0 → F_floor_y = 196 N.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 25,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Pivot choice — eliminating unknowns",
+      "content": "**Worked Example 3 (Pivot choice — eliminating unknowns):**\nA beam with two unknown reaction forces. Taking the pivot at one reaction force makes its torque\nzero — the equation has only one unknown. This is always the optimal pivot choice strategy.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 25,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/misconception/MC-ONE-CONDITION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Priority 1",
+      "content": "### MC-ONE-CONDITION (Priority 1)\n**Label:** \"Equilibrium requires only ΣF = 0 — torque balance is automatic\"\n\n**Trigger signals:**\n- Sets up only force equations without a torque equation\n- Says \"the forces are balanced so it must be in equilibrium\"\n- Gets wrong support forces because one equation is insufficient\n\n**Conflict evidence [P28]:**\n\"A 3 m beam, pivot at left end. Weight 100 N at 2 m (downward). One support force R at 3 m (upward).\nForce balance: R = 100 N. But check torques about left end:\nτ_weight = −100×2 = −200 N·m. τ_R = +100×3 = +300 N·m. Στ = +100 N·m ≠ 0.\nThe forces balance, but the beam rotates. Can it be in equilibrium?\"\n\n**Bridge [P30]:**\n\"Force balance prevents translational acceleration. Torque balance prevents rotational acceleration.\nYou need BOTH to prevent all motion. A balanced force can still cause rotation if the forces don't\nact along the same line. Equilibrium needs two independent conditions: ΣF = 0 AND Στ = 0.\"\n\n**Replacement [P31]:**\n\"Both conditions must hold: ΣF = 0 (all components) AND Στ = 0 (about any axis).\nFor a 2D beam problem: ΣF_x = 0, ΣF_y = 0, and Στ = 0. Three equations. Three unknowns maximum.\"\n\n**Discrimination pairs [P33]:**\n- Two equal forces at same point: ΣF = 0 AND Στ = 0 (equilibrium) ✓\n- Two equal forces at different points, antiparallel: ΣF = 0 but Στ ≠ 0 (a couple — rotates) ✓\n\n**s6_path:** Use only the see-saw problem (intuitive, symmetric) before introducing asymmetric\nbeams. Show that for the see-saw, Στ = 0 is the key condition, not just ΣF.\n\n---",
+      "localKey": "MC-ONE-CONDITION",
+      "language": "en",
+      "refs": [
+        "MC-ONE-CONDITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 3,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/misconception/MC-PIVOT-FIXED",
+      "kind": "misconception",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Priority 2",
+      "content": "### MC-PIVOT-FIXED (Priority 2)\n**Label:** \"The pivot must be at a physical support — you can't choose it freely\"\n\n**Trigger signals:**\n- Always places the pivot at the leftmost support or a physical hinge\n- Doesn't realise that placing the pivot at an unknown force eliminates that unknown\n- Solves problems with unnecessarily complicated simultaneous equations\n\n**Conflict evidence [P28]:**\n\"A 4 m beam with supports at both ends (forces R_A at left, R_B at right). Weight 300 N at 1 m.\nTaking pivot at A: Στ_A = 0 → R_B×4 = 300×1 → R_B = 75 N. One step, one unknown.\nTaking pivot at beam's centre: Στ_centre = 0 → R_B×2 − R_A×2 − 300×1 = 0. Two unknowns — need ΣF too.\nWhich pivot was more efficient? Why?\"\n\n**Bridge [P30]:**\n\"Torque about any point is zero in equilibrium. You get to choose. If you pick the pivot at a\npoint where an unknown force acts, its moment arm is zero — it drops out of the equation.\nThis reduces the equation to one unknown. Picking the pivot at a physical support is just one\noption — not always the best one.\"\n\n**Replacement [P31]:**\n\"Strategy: choose your pivot to eliminate the most troublesome unknown force.\nIf a force acts at a point — put the pivot there. Its moment arm is zero (r = 0 → τ = 0).\nThis is the standard trick for solving equilibrium problems efficiently.\"\n\n**Discrimination pairs [P33]:**\n- Pivot at R_A: equation has only R_B → solve directly ✓\n- Pivot at R_B: equation has only R_A → solve directly ✓\n- Pivot at midpoint: equation has both R_A and R_B → need a second equation ✓\n\n**s6_path:** Show one problem with \"bad pivot\" (lots of algebra) and \"good pivot\" (one step).\nLet the student experience the efficiency difference before explaining the rule.\n\n---",
+      "localKey": "MC-PIVOT-FIXED",
+      "language": "en",
+      "refs": [
+        "MC-PIVOT-FIXED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 35,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 15,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 32,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "MC-ONE-CONDITION Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-ONE-CONDITION Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-ONE-CONDITION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ONE-CONDITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 44,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "MC-PIVOT-FIXED Probe + Ladder Problem",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-PIVOT-FIXED Probe + Ladder Problem\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-PIVOT-FIXED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PIVOT-FIXED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 63,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 79,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 102,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Apply — basic beam",
+      "content": "**MP-1 (Apply — basic beam):**\n\"A 4 m uniform beam (W = 80 N at 2 m). R_A at left, R_B at right. A 120 N weight at 3 m.\nFind R_A and R_B.\"\nExpected: Pivot at A: R_B×4 = 80×2 + 120×3 = 160+360 = 520; R_B = 130 N. R_A = 70 N.\n_Discriminates: both equilibrium conditions; pivot at A to solve._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 269,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Apply — pivot choice",
+      "content": "**MP-2 (Apply — pivot choice):**\n\"For MP-1, take the pivot at R_B instead. Find R_A. Verify it matches.\"\nExpected: R_A×4 = 80×2 + 120×1 = 160+120 = 280; R_A = 70 N. ✓\n_Discriminates: MC-PIVOT-FIXED resolution; arbitrary valid pivot._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-PIVOT-FIXED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 269,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Apply — torque only check",
+      "content": "**MP-3 (Apply — torque only check):**\n\"A 2 m beam. Forces: 100 N up at 0 m; 100 N up at 2 m; 200 N down at 1 m.\nIs it in equilibrium? Check BOTH conditions.\"\nExpected: ΣF = 100+100−200 = 0 ✓. Pivot at left: Στ = 100×2 − 200×1 = 200−200 = 0 ✓. YES.\n_Discriminates: MC-ONE-CONDITION; must check both._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-ONE-CONDITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 269,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Apply — hanging sign",
+      "content": "**MP-4 (Apply — hanging sign):**\n\"A 3 m horizontal rod hinged at wall (left). Uniform mass 8 kg. Wire pulls up at 2 m.\nFind T and hinge reaction. (g = 9.8)\"\nExpected: Pivot at hinge: T×2 = 78.4×1.5 = 117.6; T = 58.8 N. Hinge_y = 78.4−58.8 = 19.6 N.\nHinge_x = 0 (no horizontal forces in this setup).\n_Discriminates: real-world configuration; pivot at hinge to eliminate hinge from torque eq._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 269,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Analyze — identify non-equilibrium",
+      "content": "**MP-5 (Analyze — identify non-equilibrium):**\n\"A 3 m beam. Forces: 300 N down at 1 m; 200 N up at 2 m; 100 N up at 3 m. Is it in equilibrium?\"\nExpected: ΣF = −300+200+100 = 0 ✓. Pivot at left: Στ = −300×1 + 200×2 + 100×3 = −300+400+300 = 400 ≠ 0. NOT in equilibrium.\n_Discriminates: MC-ONE-CONDITION; forces can balance but torque does not._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [
+        "MC-ONE-CONDITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 269,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.torque           ──►\n                                phys.mech.equilibrium\nphys.mech.free-body-diagram ──►\n```\n\n**PD-1 (Torque prerequisite):**\n\"A 60 N force acts perpendicularly at 0.8 m from a pivot. τ?\"\nExpected: 48 N·m.\n\n**PD-2 (FBD prerequisite):**\n\"Draw a FBD for a horizontal beam supported at both ends with a weight hanging from the middle.\nLabel all forces.\"\nExpected: Weight down at centre; two upward support forces at the ends.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 61,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"State the two conditions for static equilibrium.\"\nThreshold: ΣF = 0 (all components) AND Στ = 0 (about any chosen axis).\n\n**FA-2 (TA-4 exit):** \"Forces on a beam balance (ΣF = 0). Is it necessarily in equilibrium?\"\nExpected: No — must also have Στ = 0. If student says yes → MC-ONE-CONDITION not resolved.\n\n**FA-3 (TA-5 exit):** \"A beam has R_A (unknown) at the left and R_B (unknown) at the right.\nWhere should you put the pivot to find R_B in one step?\"\nExpected: At R_A (pivot where one unknown acts → it drops out). If student says \"at the centre\" →\nMC-PIVOT-FIXED not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-3, MP-5. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ONE-CONDITION",
+        "MC-PIVOT-FIXED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 304,
+        "endLine": 321
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only symmetric beams (weight at centre, equal supports) in TA-1 and TA-2.\n- Introduce asymmetry (weight off-centre) in TA-3 only after symmetric cases are secure.\n- Skip the ladder problem in TA-5; substitute a simpler hanging sign.\n- Reassure: \"Two equations: ΣF = 0 and Στ = 0. Start with the torque equation — it usually\n  has only one unknown if you choose the pivot well.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (non-equilibrium detection) at TA-3 before any guided practice.\n- Challenge: \"Design a 5 m beam with a weight of 500 N that is in equilibrium with support\n  forces no greater than 400 N each. Where can the weight be placed?\"\n- Spend TA-6 on Problem 5 (ladder with friction — introduces friction into equilibrium).\n\n**S4 (Prereq gap):**\n- PD-1 gap (Torque) → repair τ = rF sinθ and sign convention.\n- PD-2 gap (FBD) → repair force inventory and labelling before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 321,
+        "endLine": 342
+      }
+    },
+    {
+      "assetId": "phys.mech.equilibrium/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.equilibrium",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → two conditions → MC-ONE-CONDITION repair).\n**Session 2 (≥24 h later):** Retrieval: \"Two conditions for equilibrium? Pivot strategy?\"\n  → TA-5 (MC-PIVOT-FIXED, ladder) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining equilibrium and torque:\n  \"A 6 m uniform ladder (mass 18 kg) leans at 65° against a frictionless wall.\n  A 70 kg person stands 4 m up the ladder. Find the friction force at the base and the\n  normal force at the wall.\" (Requires Στ = 0 about base and ΣF = 0.)\n**Pre-gravitation cluster:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.torque (Στ = 0), phys.mech.free-body-diagram (force identification),\nphys.mech.newtons-second-law (ΣF = 0 as special case of ΣF = ma).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ONE-CONDITION",
+        "MC-PIVOT-FIXED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.equilibrium.md",
+        "startLine": 342,
+        "endLine": 358
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

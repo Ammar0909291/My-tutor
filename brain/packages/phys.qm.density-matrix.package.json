@@ -1,0 +1,503 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.density-matrix-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.density-matrix",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:d3f32016d8b50764c694241789ff2cb36be1f4e1cf1c96bb588474254d69a27f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.density-matrix.md": "sha256:ba6192b33a745403e4b503c3c4762c5d6cd15ffd23a8ea39a16a46247abe7a5e"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.density-matrix",
+    "name": "Density Matrix",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.qm.operators",
+      "phys.qm.spin"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.density-matrix-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.density-matrix (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.density-matrix.md": "sha256:ba6192b33a745403e4b503c3c4762c5d6cd15ffd23a8ea39a16a46247abe7a5e"
+      },
+      "contentHash": "sha256:640dd7b11f9ecd0c19063418d1d0860c27e48b142428c1d2e5fd082c8240c4f0",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.density-matrix.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.density-matrix.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.density-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.density-matrix\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.density-matrix.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.density-matrix.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.density-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.density-matrix\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.density-matrix.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.density-matrix.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.density-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.density-matrix\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.density-matrix.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.density-matrix.md#TA-4 (addresses MC-DM-MIXED-IS-SUPERPOSITION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.density-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.density-matrix\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.density-matrix.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.density-matrix.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.density-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.density-matrix\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.density-matrix.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.density-matrix.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.density-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.density-matrix\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.density-matrix.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.density-matrix.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.density-matrix"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.density-matrix\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.density-matrix/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Pure vs mixed state for spin-1/2",
+      "content": "### Example 1 — Pure vs mixed state for spin-1/2\nPure state |+x⟩ = (|↑⟩+|↓⟩)/√2: ρ = |+x⟩⟨+x| = (1/2)[[1,1],[1,1]]. Tr(ρ²)=1/2(1+1)=1 ✓\n50-50 classical mixture of |↑⟩ and |↓⟩: ρ_mix = (1/2)|↑⟩⟨↑|+(1/2)|↓⟩⟨↓| = (1/2)[[1,0],[0,1]].\nCompare: ⟨σ_x⟩ = Tr(ρσ_x): pure → 1; mixed → 0. Observable difference despite same populations p_↑=p_↓=1/2.\nTr(ρ_mix²) = 1/2 < 1 → mixed ✓",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 34,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Entangled state and partial trace",
+      "content": "### Example 2 — Entangled state and partial trace\nBell state |Φ⁺⟩ = (|↑↑⟩+|↓↓⟩)/√2; full density matrix ρ_{AB} = |Φ⁺⟩⟨Φ⁺|.\nPartial trace over B: ρ_A = Tr_B(ρ_{AB}) = (1/2)(|↑⟩⟨↑|+|↓⟩⟨↓|) = (1/2)I.\nρ_A is maximally mixed — despite the full state being pure (Tr(ρ_{AB}²)=1), subsystem A appears maximally uncertain.\nInterpretation: entanglement causes subsystem mixedness; ρ_A cannot be used to distinguish |Φ⁺⟩ from |Φ⁻⟩ or a 50-50 classical mixture.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 34,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Von Neumann equation and thermal state",
+      "content": "### Example 3 — Von Neumann equation and thermal state\nTime evolution: dρ/dt = (1/iℏ)[H,ρ] (von Neumann equation — density matrix analog of Schrödinger).\nThermal (Gibbs) state: ρ_th = e^{−βH}/Z where Z = Tr(e^{−βH}) (partition function).\nCheck: dρ_th/dt = (1/iℏ)[H,e^{−βH}/Z] = 0 (H commutes with functions of H) → thermal state is stationary ✓\nExpectation: ⟨A⟩ = Tr(ρ_th A) = Tr(Ae^{−βH})/Z — connects quantum density matrix to statistical mechanics.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 34,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/misconception/MC-DM-MIXED-IS-SUPERPOSITION",
+      "kind": "misconception",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "\"A mixed state is a superposition of states — like",
+      "content": "| MC-DM-MIXED-IS-SUPERPOSITION | \"A mixed state is a superposition of states — like |ψ⟩ = Σcₙ|n⟩.\" | \"The density matrix is just a more complicated wavefunction.\" | A superposition is a PURE state with definite relative phases; a mixed state is a CLASSICAL ensemble with probabilities (no phases between terms). ρ = Σpₙ|n⟩⟨n| ≠ |ψ⟩⟨ψ| for |ψ⟩=Σcₙ|n⟩. Key test: ρ² = ρ for pure; Tr(ρ²) < 1 for mixed. |",
+      "localKey": "MC-DM-MIXED-IS-SUPERPOSITION",
+      "language": "en",
+      "refs": [
+        "MC-DM-MIXED-IS-SUPERPOSITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/misconception/MC-DM-PARTIAL-TRACE-LOSES-INFO",
+      "kind": "misconception",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "\"After tracing out the environment, I've lost all the quantum information.\"",
+      "content": "| MC-DM-PARTIAL-TRACE-LOSES-INFO | \"After tracing out the environment, I've lost all the quantum information.\" | \"Partial trace destroys entanglement — the state is now classical.\" | Partial trace gives the reduced density matrix ρ_A = Tr_B(ρ_AB), which retains ALL locally accessible quantum information about subsystem A. ρ_A can still be a mixed quantum state (not classical); quantum coherences WITHIN A are preserved; only correlations WITH B are lost. |",
+      "localKey": "MC-DM-PARTIAL-TRACE-LOSES-INFO",
+      "language": "en",
+      "refs": [
+        "MC-DM-PARTIAL-TRACE-LOSES-INFO"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 5,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 6,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 7,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-DM-MIXED-IS-SUPERPOSITION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-DM-MIXED-IS-SUPERPOSITION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 8,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 10,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 11,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): State three properties that any valid density matrix must satisfy. How do you distinguish a pure state from a mixed state?  \n*Answer*: ρ†=ρ (Hermitian); Tr(ρ)=1 (normalized); ρ≥0 (positive semi-definite). Pure: Tr(ρ²)=1; mixed: Tr(ρ²)<1.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): Write the density matrix for the spin-up state |↑⟩ and for a 50/50 mixture of |↑⟩ and |↓⟩. Compute ⟨σ_z⟩ for each.  \n*Answer*: Pure: ρ=[[1,0],[0,0]]; ⟨σ_z⟩=Tr(ρσ_z)=1. Mixed: ρ=[[1/2,0],[0,1/2]]; ⟨σ_z⟩=0.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "MP-3",
+      "content": "**MP-3** (apply): Compute the reduced density matrix ρ_A for the state |Ψ⟩=(|↑↓⟩−|↓↑⟩)/√2. Is subsystem A in a pure or mixed state?  \n*Answer*: ρ_{AB}=|Ψ⟩⟨Ψ|; Tr_B: ρ_A=(1/2)(|↑⟩⟨↑|+|↓⟩⟨↓|)=(1/2)I; Tr(ρ_A²)=1/2<1 → mixed. Subsystem A is maximally mixed despite the joint state being pure.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze-MC): Alice and Bob each have one qubit of the Bell state |Φ⁺⟩. Bob applies a random unitary to his qubit (unknown to Alice). Does Alice's reduced density matrix change?  \n*Answer*: No — ρ_A = Tr_B(ρ_{AB}) = (1/2)I regardless of what Bob does; local operations on B don't change ρ_A. This is the no-signaling principle: Bob cannot send information to Alice via local quantum operations.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A student says \"the thermal density matrix ρ=e^{−βH}/Z is a mixed state because we don't know which energy eigenstate the system is in.\" Is this interpretation correct?  \n*Answer*: Partially correct but incomplete. The thermal state IS mixed (Tr(ρ²)<1 at T>0), but the reason is thermodynamic equilibrium with an environment — not just ignorance. At T=0, ρ=|E₀⟩⟨E₀| (pure ground state). The density matrix captures both quantum uncertainty AND classical probability; saying \"we don't know\" conflates the two. Quantum coherences (off-diagonal in energy eigenbasis) are genuinely absent in ρ_th, not just hidden.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student writes ρ = |ψ⟩⟨ψ| for a mixed state | Probe: \"What does the mixing probability pₙ represent? Write ρ=Σpₙ|ψₙ⟩⟨ψₙ| and check that Tr(ρ²)<1.\" |\n| Student loses off-diagonal elements in partial trace | \"Partial trace sums only over the B basis: ρ_A = Σᵢ⟨i_B|ρ_{AB}|i_B⟩. Work through Example 2 matrix element by element.\" |\n| Student confused by ρ_A being mixed when ρ_{AB} is pure | \"This is the core physics of entanglement: entanglement with B is the SOURCE of A's mixedness. The more entangled, the more mixed ρ_A is (Schmidt number = rank of ρ_A).\" |\n| Student asks when to use density matrix vs wavefunction | \"Closed, isolated system: either works. Open system, environment interaction, thermal state, or entanglement with inaccessible DOF: density matrix required — wavefunction doesn't exist.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 98,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What is the Pauli exclusion principle for spin? Write ρ for a spin-up electron.\"\nCORE-1 (15 min): TA-1 + TA-2 (open system motivation + density matrix notation and properties)\nCORE-2 (20 min): TA-3 + TA-4 (partial trace derivation + MC pure vs mixed diagnostic)\nCORE-3 (20 min): TA-5 (thermal state: 2-level system, ρ_th, ⟨σ_z⟩ vs temperature)\nDRILL  (10 min): TA-6 (classify ρ matrices, compute Tr(ρ²), partial trace practice)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Statistical mechanics partition function Z=Tr(e^{−βH}) is exactly the trace in the density matrix formula — quantum stat mech is built on density matrices.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 109,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "phys.qm.density-matrix/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.density-matrix",
+      "title": "Known Sticking Points",
+      "content": "1. **Off-diagonal elements**: Students often ignore coherences (off-diagonal ρᵢⱼ); these are the quantum-classical boundary — pure states have them, classical mixtures don't.\n2. **Partial trace mechanics**: Computing Tr_B requires choosing an orthonormal basis for B; result must not depend on basis choice.\n3. **Von Neumann vs Schrödinger**: ρ|ψ⟩=|ψ⟩ only for pure state; von Neumann equation dρ/dt=[H,ρ]/iℏ is more general; for pure state it reduces to Schrödinger.\n4. **Thermal state is not the same as maximum entropy state**: Thermal state maximizes entropy subject to fixed ⟨H⟩=U; maximum-entropy with no constraint gives I/N.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.density-matrix.md",
+        "startLine": 89,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

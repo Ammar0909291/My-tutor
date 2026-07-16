@@ -1,0 +1,382 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.vector-products-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.vector-products",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:69d43a65c8a14e5724339132a2fa1df18ddf5e1d5fc5f73e4b2c42ac6bc1c7cf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.vector-products.md": "sha256:efaa31df93633b361cfcac605a9f5db25bf3bb418832f5e808c22caaefe30dcf"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.meas.vector-products",
+    "name": "Dot and Cross Products",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.meas.vector-addition"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.vector-products-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.vector-products (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.vector-products.md": "sha256:efaa31df93633b361cfcac605a9f5db25bf3bb418832f5e808c22caaefe30dcf"
+      },
+      "contentHash": "sha256:a367d6d8d89f0b620c89138d1a83bcb9198d054d74ebac610fc85304c674a403",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-products.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-products.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-products"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-products\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-products.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-products.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-products"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-products\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-products.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-products.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-products"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-products\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-products.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-products.md#TA-4 (addresses MC-SCALAR-MULTIPLY, MC-DOT-CROSS-CONFUSION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-products"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-products\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-products.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-products.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-products"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-products\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.vector-products.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.vector-products.md#TA-6 (addresses MC-DOT-CROSS-CONFUSION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.vector-products"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.vector-products\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.vector-products/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Computes the **dot product** A·B = |A||B|cos θ, states it is a **scalar**, and interprets it as \"how much of one vector lies along the other\" (maximal when parallel, zero when perpendicular).\n2. Computes the **cross product** magnitude |A×B| = |A||B|sin θ, states it is a **vector perpendicular to both** (direction by the right-hand rule), and interprets its magnitude as the area of the parallelogram they span (zero when parallel, maximal when perpendicular).\n3. **Chooses** the right product for a physical quantity: work = F·d (dot, a scalar) because only the aligned part of force does work; torque = r×F (cross, a vector) because turning depends on the perpendicular part.\n\nA student who \"multiplies the magnitudes\" like scalars, or who cannot say whether a given product yields a scalar or a vector (or when to use which), has **NOT** achieved mastery — the two products encode opposite geometric ideas (alignment vs perpendicularity) and drive every work, torque, flux, and angular-momentum result downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/misconception/MC-SCALAR-MULTIPLY",
+      "kind": "misconception",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Multiplying two vectors just multiplies their magnitudes",
+      "content": "### MC-SCALAR-MULTIPLY: \"Multiplying two vectors just multiplies their magnitudes\"\ntrigger_signal: student gives |A||B| with no cos/sin, no angle, no scalar-vs-vector distinction.\nconflict_evidence [P28]: \"Push hard against a wall that doesn't move — big force, big 'distance' you lean across, yet you do NO work. If work were just force × distance, you'd have done plenty. What's missing from a plain magnitude-multiply?\"\nbridge_text [P30]: \"Vectors carry direction, so their product depends on the angle. The dot product keeps only the ALIGNED part (× cos θ) and gives a scalar; the cross product keeps the PERPENDICULAR part (× sin θ) and gives a vector. Bare |A||B| is neither.\"\nreplacement_text [P31]: \"To multiply vectors, decide alignment (dot, cos, scalar) or perpendicularity (cross, sin, vector) — never just multiply magnitudes.\"\ndiscrimination_pairs [P33]: [\"aligned: A·B = |A||B|, A×B = 0\", \"perpendicular: A·B = 0, |A×B| = |A||B|\", \"60°: A·B = |A||B|(0.5), |A×B| = |A||B|(0.87)\"]\ns6_path: skip P28; use the push-the-wall image as a shared puzzle, then P30.",
+      "localKey": "MC-SCALAR-MULTIPLY",
+      "language": "en",
+      "refs": [
+        "MC-SCALAR-MULTIPLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/misconception/MC-DOT-CROSS-CONFUSION",
+      "kind": "misconception",
+      "conceptId": "phys.meas.vector-products",
+      "title": "The dot and cross products are interchangeable / both give the same kind of thing",
+      "content": "### MC-DOT-CROSS-CONFUSION: \"The dot and cross products are interchangeable / both give the same kind of thing\"\ntrigger_signal: student uses cos for cross (or sin for dot), or calls A×B a scalar / A·B a vector, or picks the wrong one for a physical quantity.\nconflict_evidence [P28]: \"Torque turns things — it has a direction (which way it spins). Work is just an amount of energy — no direction. If both products were the same, why would one physics quantity have a direction and the other not?\"\nbridge_text [P30]: \"Dot → cos → SCALAR, measures alignment, biggest when parallel. Cross → sin → VECTOR (perpendicular, right-hand rule), measures perpendicularity/area, biggest at 90°. They are opposites, and their OUTPUTS differ.\"\nreplacement_text [P31]: \"Match the product to the quantity: a scalar quantity (work, power) uses the dot; a directional/turning quantity (torque, angular momentum) uses the cross.\"\ndiscrimination_pairs [P33]: [\"work = F·d (scalar, dot)\", \"torque = r×F (vector, cross)\", \"dot max at 0°, cross max at 90°\"]\ns6_path: skip P28; place the dot/cross comparison card (P07) side by side and go straight to bridge_text (P30).",
+      "localKey": "MC-DOT-CROSS-CONFUSION",
+      "language": "en",
+      "refs": [
+        "MC-DOT-CROSS-CONFUSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Two Ways to Combine — Alignment vs Turning",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two Ways to Combine — Alignment vs Turning\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P07\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-products",
+      "title": "The Dot Product — Alignment → Scalar",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Dot Product — Alignment → Scalar\",\"primitives\":[\"P02\",\"P07\",\"P08\",\"P10\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-products",
+      "title": "The Cross Product — Perpendicularity → Vector",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Cross Product — Perpendicularity → Vector\",\"primitives\":[\"P02\",\"P07\",\"P08\",\"P13\",\"P16\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 28,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Choosing the Right Product + Misconception Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Choosing the Right Product + Misconception Probe\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-DOT-CROSS-CONFUSION\",\"MC-SCALAR-MULTIPLY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SCALAR-MULTIPLY",
+        "MC-DOT-CROSS-CONFUSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 37,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 44,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P08\",\"P16\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-DOT-CROSS-CONFUSION\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-DOT-CROSS-CONFUSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 51,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Result of a cross product: scalar or vector?\" | CORRECT = vector |\n| P74 (classify) | \"Which product uses cos θ?\" | CORRECT = dot |\n| P75 (boundary) | \"A×B when A ∥ B? A·B when A ⟂ B?\" | CORRECT = 0 and 0 |\n| P76 (transfer) | \"40 N along a handle 30° above ground, moved 5 m forward — work done? Which product?\" | CORRECT = 40·5·cos30 ≈ 173 J, dot |\n| P77 (generate) | \"Two non-zero vectors with zero dot product — what does it mean?\" | CORRECT = perpendicular |\n| P78 (explain) | \"How do dot and cross differ in meaning, output, and when each is largest?\" | CORRECT = full distinction |\n| P79 (predict) | \"Torque is strongest pushing perpendicular — which product, dot or cross?\" | CORRECT = cross |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 182,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S1 | \"Multiply vectors like numbers\" schema | Multiplies magnitudes; ignores angle and scalar/vector outcome | Protocol B (Counterexample-first) |\n| S2-SCALAR-MULTIPLY | Believes vector product = magnitude product | Gives |A||B|, no cos/sin, no direction | Misconception Engine → Protocol C |\n| S2-DOT-CROSS-CONFUSION | Confuses which yields scalar vs vector | Uses cos for cross, or calls A×B a scalar | Misconception Engine → Protocol C |\n| S4 | Prerequisite gap on vector addition/components | Cannot resolve or add vectors | Protocol D → prereq repair |\n| S5 | Wants the formal definitions first | Comfortable abstract; asks for the algebra | Protocol H (Formal-first) |\n| S6 | Anxiety at trig + right-hand rule | Freezes at sin/cos and 3-D direction | Protocol F (Low Pressure) |\n| S7 | Overconfident; conflates the two products | Fast-wrong on scalar/vector distinction | Protocol G (Challenge-first) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 28,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you multiplied two vectors together — and met that there are two different ways to do it, one giving a number and one giving a new vector?\"\n  No → S5 or S0-equivalent → Enter Protocol A (Perceptual bridge).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"You have a 3 N force and a 2 m displacement at 60° to each other. Work done = force · displacement. Compute it, and tell me: is the answer a number or a vector?\"\n  \"3 × 2 × cos60 = 3 J, a scalar — dot product uses cos and gives a number\" → S3/S5. Enter Protocol C or H.\n  \"6\" (magnitudes only, no cos) → SIGNAL:MISCONCEPTION:MC-SCALAR-MULTIPLY. Enter Misconception Engine.\n  \"It's a vector\" / uses sin → SIGNAL:MISCONCEPTION:MC-DOT-CROSS-CONFUSION. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag → confidence question → route (No→S6/F, Yes→Protocol A).\n\nDB-3 (confidence calibration):\n\"How confident are you with dot and cross products — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SCALAR-MULTIPLY",
+        "MC-DOT-CROSS-CONFUSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 40,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.meas.vector-products/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.vector-products",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.vector-addition`):\n\"Resolve a 10 N force at 30° above the horizontal into its horizontal and vertical parts.\"\n  Cannot resolve into components → flag PREREQ-GAP-VECTOR-ADDITION.\n  In-session minimum repair: one P07 (arrow with dropped components) + one P34 re-establishing V cos θ / V sin θ, then resume. Deep gap → schedule `phys.meas.vector-addition` (S4 route, Protocol D).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.vector-products.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

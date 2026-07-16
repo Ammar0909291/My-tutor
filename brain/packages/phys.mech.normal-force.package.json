@@ -1,0 +1,380 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.normal-force-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.normal-force",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:7d27bcb9fbbdf78d029f0aa6af2cc940f80ae439587358b4d9c70ec23ed103d7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.normal-force.md": "sha256:e0af2bdb170dae1735334dfff1fb28f886ba4f3936ec263d0b04fc63f48b2dae"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.normal-force",
+    "name": "Normal Force",
+    "difficultyRaw": "developing (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.free-body-diagram"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.normal-force-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.normal-force (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.normal-force.md": "sha256:e0af2bdb170dae1735334dfff1fb28f886ba4f3936ec263d0b04fc63f48b2dae"
+      },
+      "contentHash": "sha256:a9cacc397059a4d9ca91f65a5bca05cc04d0e612b8748abd219264e577271e07",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.normal-force.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.normal-force.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.normal-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.normal-force\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.normal-force.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.normal-force.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.normal-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.normal-force\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.normal-force.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.normal-force.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.normal-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.normal-force\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.normal-force.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.normal-force.md#TA-4 (addresses MC-NORMAL-EQUALS-WEIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.normal-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.normal-force\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.normal-force.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.normal-force.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.normal-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.normal-force\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.normal-force.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.normal-force.md#TA-6 (addresses MC-NORMAL-EQUALS-WEIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.normal-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.normal-force\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.normal-force/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Identifies the normal force on a free-body diagram as the **perpendicular-to-surface** contact force exerted by the surface on the object — never parallel, never necessarily vertical.\n2. Calculates N by applying the **perpendicular-to-surface equilibrium equation** from the free-body diagram — so N = mg cosθ on an incline, and N ≠ mg when a vertical applied-force component or acceleration is present.\n3. Predicts how N changes when weight, acceleration, or an applied-force vertical component changes — including N = 0 as the **lift-off condition** (the object leaves the surface).\n\nA student who automatically sets N = mg for every problem, or who calls the normal force \"the reaction to gravity\" (conflating Third-Law pairs — the reaction to gravity is the body pulling Earth), has **NOT** achieved mastery — the N = mg default corrupts every incline, elevator, and circular-motion problem downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/misconception/MC-NORMAL-EQUALS-WEIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.normal-force",
+      "title": "The normal force always equals the weight",
+      "content": "### MC-NORMAL-EQUALS-WEIGHT: \"The normal force always equals the weight\"\ntrigger_signal: student sets N = mg on an incline, or ignores the effect of vertical acceleration or applied forces.\nconflict_evidence [P28]: \"On a 50° incline the block is stationary. You said N = mg. But apply Newton's Second Law perpendicular to the slope: N − mg cos50° = 0, so N = mg cos50° = 0.643 mg — noticeably less than mg. If N really equalled mg, there would be a large net force driving the block INTO the slope with nothing to stop it. The block would accelerate into the slope — which doesn't happen.\"\nbridge_text [P30]: \"N equals mg only on a flat horizontal surface with no other vertical forces. In every other case, find N by resolving forces perpendicular to the surface and setting that sum to match the perpendicular acceleration (zero if not accelerating in that direction).\"\nreplacement_text [P31]: \"N = ΣF_perp / resolve from the diagram. Never assume N = mg; derive it each time.\"\ndiscrimination_pairs [P33]: [\"flat floor, no extras: N = mg ✓\", \"30° incline: N = mg cos30° < mg ✓\", \"elevator accelerating up: N = m(g+a) > mg ✓\", \"incline, setting N = mg: ✗\"]\ns6_path: skip P28; tilt a book at 45° with a small toy on it and ask \"is the toy pressing the book as hard as it presses a flat desk?\" as a shared felt observation, then P30.",
+      "localKey": "MC-NORMAL-EQUALS-WEIGHT",
+      "language": "en",
+      "refs": [
+        "MC-NORMAL-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/misconception/MC-NORMAL-IS-REACTION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.normal-force",
+      "title": "The normal force is the Third-Law reaction to the weight",
+      "content": "### MC-NORMAL-IS-REACTION: \"The normal force is the Third-Law reaction to the weight\"\ntrigger_signal: student says N is the reaction to gravity / the reaction to the body's weight.\nconflict_evidence [P28]: \"If N were the reaction to the weight (Earth pulling body down), they'd always be equal and opposite — but we just showed N ≠ mg on a slope. The Third-Law reaction to 'Earth pulls body down' is 'body pulls Earth up' — that acts on the EARTH. The normal force acts on the BODY and comes from the SURFACE. It's a different interaction entirely.\"\nbridge_text [P30]: \"N is the contact force from the surface on the body — part of the surface-body interaction. Its Third-Law partner is the body's push on the surface. Weight is the gravity interaction between Earth and body — a completely separate interaction. They happen to balance on a flat floor (Second Law / equilibrium), but they are not a Third-Law pair.\"\nreplacement_text [P31]: \"Normal force ↔ body's push on surface (Third-Law pair, surface-body interaction). Weight ↔ body pulls Earth upward (Third-Law pair, gravitational interaction). Four forces, two interactions, none of them a pair with each other.\"\ndiscrimination_pairs [P33]: [\"N on body (up) ↔ body presses surface (down): TRUE Third-Law pair ✓\", \"Weight on body (down) ↔ body pulls Earth (up): TRUE Third-Law pair ✓\", \"Weight (down) and N (up) both on body: same-object balance, NOT a pair ✗\"]\ns6_path: skip P28; sort the four forces into two separate interactions as a gentle two-pile activity, then P30.",
+      "localKey": "MC-NORMAL-IS-REACTION",
+      "language": "en",
+      "refs": [
+        "MC-NORMAL-IS-REACTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.normal-force",
+      "title": "The Surface Pushes Back",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Surface Pushes Back\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Always Perpendicular — Finding N from the Diagram",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Always Perpendicular — Finding N from the Diagram\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.normal-force",
+      "title": "When N Changes — Elevator and Applied Force",
+      "content": "{\"id\":\"TA-3\",\"title\":\"When N Changes — Elevator and Applied Force\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Misconception Probe — N ≠ mg on an Incline",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — N ≠ mg on an Incline\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-NORMAL-EQUALS-WEIGHT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-NORMAL-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-NORMAL-EQUALS-WEIGHT\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-NORMAL-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"On a 25° incline, N points: (a) straight up or (b) perpendicular to the slope?\" | CORRECT = perpendicular to slope |\n| P74 (classify) | \"Is N the Third-Law reaction to the weight?\" | CORRECT = no; N pairs with the body's push on the surface |\n| P75 (boundary) | \"What does N = 0 mean physically, and when does it happen?\" | CORRECT = object lifts off / loses contact; when support is removed or a = g downward |\n| P76 (transfer) | \"60 kg person in elevator decelerating at 3 m/s² (was moving up). Find N. (g = 10)\" | CORRECT = N = m(g − a) = 420 N |\n| P77 (generate) | \"Describe a situation where N > mg — explain and calculate.\" | CORRECT = elevator accelerating upward or push downward at angle |\n| P78 (explain) | \"Why is N not always equal to mg? How do you find it correctly?\" | CORRECT = resolve forces perpendicular to surface; N = mg only on flat floor with no extras |\n| P79 (predict) | \"60 kg skier on 80° slope (g = 10) — is N larger or smaller than 600 N?\" | CORRECT = smaller; N = mg cos80° ≈ 104 N |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Never formally identified the normal force | Cannot name what a surface exerts on a resting object | Protocol A (Concrete) |\n| S1 | \"Normal means straight up\" schema | Always draws N upward regardless of surface orientation | Protocol B (Counterexample-first) |\n| S2-NORMAL-EQUALS-WEIGHT | Treats N = mg as a universal rule | Sets N = mg on inclines and in elevators | Misconception Engine → Protocol C |\n| S2-NORMAL-IS-REACTION | Calls N the Third-Law reaction to weight | Confuses a same-surface balance with an action-reaction pair | Misconception Engine → Protocol C |\n| S3 | Correct direction; wrong magnitude in incline or elevator | Draws N perpendicular but miscalculates on a slope | Protocol C (Guided Questioning) |\n| S6 | Anxiety at perpendicular-to-incline direction and N < mg | Freezes at N = mg cosθ | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"A book rests on a slope. What force does the slope exert on the book, and in which direction?\"\n  \"Perpendicular to the slope, away from the surface\" → S3. Enter Protocol C.\n  \"Straight up — the normal force is always upward\" → S1. Enter Protocol B.\n  \"I don't know / I don't know what normal force means\" → DB-2.\n\nDB-2 (misconception probe):\n\"A 5 kg book sits on a flat table. What is the normal force on it? Now put it on a 30° incline — what is N now? (g = 10)\"\n  \"Flat: N = 50 N; incline: N = mg cos30° ≈ 43.3 N (less than weight)\" → S3. Enter Protocol C.\n  \"Both 50 N — it's just the weight both times\" → SIGNAL:MISCONCEPTION:MC-NORMAL-EQUALS-WEIGHT. Enter Misconception Engine.\n  Pause / cannot compute → S0. Enter Protocol A.\n  Distress → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with normal force — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-NORMAL-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.normal-force/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.normal-force",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.free-body-diagram`):\n\"On a free-body diagram of a box on a flat surface, which forces act on the box and in which directions?\"\n  Cannot identify weight down + normal up → flag PREREQ-GAP-FBD.\n  In-session minimum repair: one P06 anchor (draw box, weight down, N perpendicular to surface) — then resume. Deep gap → schedule `phys.mech.free-body-diagram` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.normal-force.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

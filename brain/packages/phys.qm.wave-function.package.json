@@ -1,0 +1,404 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.wave-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.wave-function",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:e4a0ae9cf187e3d3df0ccd7194aab2e555d58fba313235b3c7d145193643141b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.wave-function.md": "sha256:74abe09c9ed904958df3f54e223d2653085ded9ad63ab2af3121ded1659e9904"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.qm.wave-function",
+    "name": "Wave Function and Probability Interpretation",
+    "difficultyRaw": "Advanced",
+    "bloom": "Understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.mod.wave-particle-duality"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.wave-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.wave-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.wave-function.md": "sha256:74abe09c9ed904958df3f54e223d2653085ded9ad63ab2af3121ded1659e9904"
+      },
+      "contentHash": "sha256:c32a54819020a838c263253596812ac3a07ce85efd6a44209105a457d3b68c14",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.wave-function.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wave-function.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wave-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wave-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wave-function.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wave-function.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wave-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wave-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wave-function.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wave-function.md#TA-3 (addresses MC-2, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wave-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wave-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.wave-function.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.wave-function.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.wave-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.wave-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.wave-function/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Wave Function and Probability Interpretation — core explanation",
+      "content": "**One-sentence definition:** The wave function ψ(x,t) is a complex-valued amplitude whose squared modulus |ψ(x,t)|² gives the probability density of finding a particle at position x at time t.\n\n**The core insight:** The wave function is not a physical wave of matter — it is an amplitude for probability. Just as the amplitude of a classical wave determines the wave's intensity, the amplitude of ψ determines the probability density |ψ|². The key departure from classical physics is that ψ can be complex, it superposes (can be in multiple states simultaneously), and measurement collapses it to a single outcome.\n\n**Conceptual chain:**\n1. Wave-particle duality: an electron has wavefunction ψ that spreads through space like a wave.\n2. Probability interpretation (Born rule, 1926): |ψ(x,t)|² dx = probability of finding the particle between x and x+dx.\n3. Normalization: ∫|ψ|² dx = 1 (particle must be found somewhere).\n4. Wavefunction is complex: ψ = A e^(i(kx−ωt)) for a free particle. |ψ|² = |A|² — constant, meaning the particle is equally likely anywhere. This represents a pure momentum state.\n5. Superposition: if ψ₁ and ψ₂ are solutions, so is ψ₁ + ψ₂. This creates interference in |ψ₁ + ψ₂|².\n6. Collapse: measuring position gives a definite outcome (one point x₀). After measurement, ψ collapses to a state sharply peaked at x₀.\n7. Expectation values: ⟨x⟩ = ∫ x |ψ|² dx — the average position over many measurements.\n8. Uncertainty principle connection: a state with definite position (narrow ψ) has broad momentum spread, and vice versa.\n\n**Central equations:**\n- Born rule: P(a ≤ x ≤ b) = ∫_a^b |ψ(x,t)|² dx\n- Normalization: ∫_{−∞}^{∞} |ψ(x,t)|² dx = 1\n- Free particle: ψ(x,t) = A e^(i(kx−ωt)), |ψ|² = |A|²\n- Expectation value: ⟨x⟩ = ∫ x |ψ(x,t)|² dx\n- Gaussian wave packet (localized state): ψ(x) ∝ e^(−x²/4σ²) → |ψ|² ∝ e^(−x²/2σ²) (Gaussian probability density, width σ)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 18,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.qm.wave-function",
+      "title": "The wavefunction is a physical wave in real space",
+      "content": "### MC-1: \"The wavefunction is a physical wave in real space\"\n- **Probe:** \"What physical quantity oscillates in a quantum wavefunction?\"\n- **Characteristic phrase:** \"ψ is like a water wave — it's the electron vibrating.\"\n- **Trigger:** The term \"wave function\" and the analogy to de Broglie waves suggest a physical oscillation.\n- **Conflict evidence [P28]:** ψ is complex-valued: ψ = A e^(i(kx−ωt)} = A(cos(kx−ωt) + i sin(kx−ωt)). No physical observable is complex — complex numbers require two real quantities. ψ itself is not directly observable. Only |ψ|² (which is real and non-negative) corresponds to the probability density observed in experiment.\n- **Bridge [P30]:** \"The wavefunction is a probability amplitude — a mathematical tool for computing probabilities. It's defined in the space of possible configurations (configuration space), not physical 3D space for multi-particle systems. It's not a vibration of matter; it's a prescription for what probabilities to assign to measurement outcomes.\"\n- **Replacement [P31]:** ψ is an abstract complex amplitude. |ψ|² is the physical probability density. Think of ψ as analogous to the 'probability amplitude' in probability theory — real quantities squared give probabilities.\n- **Discrimination pairs [P33]:** Classical wave: amplitude A is real; intensity ∝ A². Quantum wavefunction: amplitude ψ is complex; probability density = |ψ|². The analogy is structural, not physical.\n- **S6 repair path:** Write ψ for a free particle: ψ = e^(i(kx−ωt)). Ask: \"What is |ψ|²?\" = e^(−i(kx−ωt)) × e^(i(kx−ωt)} = 1. \"What does this tell you about where the particle is?\" — equally likely anywhere. \"Is this a 'vibration' of matter?\" — No; the particle has no classical position; ψ = 1 everywhere is a statement about our uncertainty of its location.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.qm.wave-function",
+      "title": "P(x) = |ψ(x)|² is the probability of finding the particle at x",
+      "content": "### MC-2: \"P(x) = |ψ(x)|² is the probability of finding the particle at x\"\n- **Probe:** \"If |ψ(0)|² = 0.5 nm⁻¹, what is the probability of finding the particle exactly at x = 0?\"\n- **Characteristic phrase:** \"The probability at x is |ψ(x)|².\"\n- **Trigger:** Students read \"probability interpretation\" and conclude |ψ(x)|² is a probability, not a density.\n- **Conflict evidence [P28]:** The probability of finding a particle at exactly one point x₀ (a set of measure zero) is always zero in a continuous distribution. P(x = x₀ exactly) = 0. The measurable quantity is P(a ≤ x ≤ b) = ∫_a^b |ψ|² dx. |ψ(x)|² has units of m⁻¹ (in 1D) — it is a density, not a dimensionless probability.\n- **Bridge [P30]:** \"Probability density is to probability as mass density is to mass. A density of 5 kg/m³ doesn't mean there are 5 kg at one point — it means a 2 m³ volume contains 10 kg. Similarly, |ψ(x)|² = 0.5 nm⁻¹ means a 2 nm interval near x contains ~1 total probability (P ≈ 1). To get probability, you must integrate over an interval.\"\n- **Replacement [P31]:** |ψ(x)|² is a probability density (units m⁻¹ in 1D). P(a ≤ x ≤ b) = ∫_a^b |ψ(x)|² dx. P(x = x₀) = 0 for any single point.\n- **Discrimination pairs [P33]:** Water flow rate (liters/second) vs. total flow (liters). Rain rate (mm/hour) vs. total rainfall (mm). A rate/density must be multiplied by an interval/volume to give the total quantity.\n- **S6 repair path:** Give a worked example with a uniform ψ on [0, L]: |ψ|² = 1/L. P(0 ≤ x ≤ L/4) = ∫₀^{L/4} (1/L) dx = 1/4. Emphasize: the density is 1/L throughout, not 1/4.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Measurement reveals the particle's pre-existing position",
+      "content": "### MC-3: \"Measurement reveals the particle's pre-existing position\"\n- **Probe:** \"Before measuring a particle in a superposition of position eigenstates, did it have a definite position?\"\n- **Characteristic phrase:** \"The particle was at x₀ all along; measuring just tells us where it was.\"\n- **Trigger:** Classical intuition: measurement = discovery of pre-existing fact. This is the \"hidden variable\" intuition.\n- **Conflict evidence [P28]:** Bell's theorem (1964) and subsequent experiments (Aspect, 1982) ruled out local hidden variable theories. The interference pattern in the double-slit experiment is incompatible with the particle having a definite which-path before measurement. If the electron had a definite path through slit 1 or slit 2, the pattern would be the sum of two single-slit patterns (no interference). Instead, interference fringes appear — proving the particle genuinely went through both slits simultaneously.\n- **Bridge [P30]:** \"Quantum mechanics is not just classical physics with unknown positions. The interference experiment provides direct experimental proof that the electron did not have a definite path before measurement. Measurement does not merely reveal — it creates the definite outcome from a genuinely indefinite superposition.\"\n- **Replacement [P31]:** Before measurement (in a superposition), observables like position have no definite value. Measurement is a physical interaction that collapses the wavefunction — it creates the outcome. The double-slit experiment proves this: interference means both paths were simultaneously real.\n- **Discrimination pairs [P33]:** Classical: a marble is in box A or B — we don't know which, but it is in one. Quantum: an electron's wavefunction spans both boxes — it is genuinely in both until measured. The interference of wavefunctions (observable experiment) proves the difference.\n- **S6 repair path:** Show the quantum eraser result: erasing which-path information (even after the detection) restores the interference pattern. If the particle had a definite path, erasing our record of it couldn't change the physical outcome. But it does — proving the particle's path was genuinely indeterminate.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.qm.wave-function",
+      "title": "ψ = ψ₁ + ψ₂ means 50% chance of being in ψ₁ and 50% in ψ₂",
+      "content": "### MC-4: \"ψ = ψ₁ + ψ₂ means 50% chance of being in ψ₁ and 50% in ψ₂\"\n- **Probe:** \"A particle is in the state ψ = ψ₁ + ψ₂. If we measure in the {ψ₁, ψ₂} basis, what probability do we get for each outcome? Now compare: could a classical mixture of 50% ψ₁ and 50% ψ₂ produce interference?\"\n- **Characteristic phrase:** \"The superposition means the particle is half in state 1 and half in state 2.\"\n- **Trigger:** The word \"superposition\" suggests something is layered or blended, like mixing paint — classical mixture.\n- **Conflict evidence [P28]:** A classical mixture (50% chance of being in ψ₁, 50% in ψ₂) has probability density: P_classical = (1/2)|ψ₁|² + (1/2)|ψ₂|² — no interference term. A quantum superposition has |ψ₁ + ψ₂|² = |ψ₁|² + |ψ₂|² + 2Re(ψ₁*ψ₂) — the cross term creates interference fringes. The experiment sees fringes → it's a quantum superposition, not a classical mixture.\n- **Bridge [P30]:** \"In a classical mixture, we're ignorant of which state the particle is in. In quantum superposition, the particle is in both states simultaneously — and this is revealed by the interference term 2Re(ψ₁*ψ₂), which is absent in a classical mixture. The difference between quantum superposition and classical mixture is experimentally observable.\"\n- **Replacement [P31]:** ψ = ψ₁ + ψ₂ is a quantum superposition — the particle is in both states simultaneously. |ψ|² = |ψ₁|² + |ψ₂|² + 2Re(ψ₁*ψ₂). The last term (interference) is the experimental signature of quantum superposition, not classical mixture.\n- **Discrimination pairs [P33]:** Add paints: color mixture = classical mixture (colors average). Add sound waves: interference = quantum-like superposition (amplitudes add before squaring → beats, constructive/destructive interference). The key: do you add intensities (classical mixture) or amplitudes (quantum superposition)?\n- **S6 repair path:** Compute |ψ₁ + ψ₂|² at a dark fringe: suppose ψ₁ = A and ψ₂ = −A at some point. Then |ψ₁ + ψ₂|² = 0 — destructive interference, zero probability. But (1/2)|ψ₁|² + (1/2)|ψ₂|² = A² ≠ 0. The classical mixture always gives nonzero probability there; the quantum superposition gives zero. The dark fringe proves it's superposition.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Explanation A (probability amplitude framework) + Born rule as a postulate. Emphasize: ψ is complex, |ψ|² is real and no",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Explanation A (probability amplitude framework) + Born rule as a postulate. Emphasize: ψ is complex, |ψ|² is real and no\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 5,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Demo 1 (single-electron double-slit video) — connect the pattern to |ψ|². Demo 3 (classical vs. quantum probability dens",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Demo 1 (single-electron double-slit video) — connect the pattern to |ψ|². Demo 3 (classical vs. quantum probability dens\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 7,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wave-function",
+      "title": "MC-2 probe (\"If |ψ(0)|² = 0.5 nm⁻¹, what is the probability of finding the particle exactly at x=0?\") and MC-4 probe (\"I",
+      "content": "{\"id\":\"TA-3\",\"title\":\"MC-2 probe (\\\"If |ψ(0)|² = 0.5 nm⁻¹, what is the probability of finding the particle exactly at x=0?\\\") and MC-4 probe (\\\"I\",\"primitives\":[],\"addresses\":[\"MC-2\",\"MC-4\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 9,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Demo 2 (normalization and probability calculation). Students work through a complete problem: given ψ(x) = Ae^(−x²/2σ²),",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Demo 2 (normalization and probability calculation). Students work through a complete problem: given ψ(x) = Ae^(−x²/2σ²),\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Student correctly applies Born rule to calculate probabilities from a given ψ, correctly normalizes ψ, correctly computes ⟨x⟩, and correctly distinguishes probability from probability density. Score ≥ 80%.\n\n**FA-1 — Born rule:**\n*Q: ψ(x) = A for 0 ≤ x ≤ L, ψ = 0 elsewhere (particle in a box, infinite square well ground state approximation). (a) Find A. (b) P(0 ≤ x ≤ L/4). (c) P(x = L/2) exactly.*\nExpected: (a) ∫₀^L |A|² dx = |A|²L = 1 → A = 1/√L. (b) P = ∫₀^{L/4} (1/L) dx = 1/4. (c) P(x = L/2) = 0 — probability density at one point gives zero probability.\nThreshold: Correct A, correct P in (b), must state P = 0 in (c) with reason.\n\n**FA-2 — Normalization of a Gaussian:**\n*Q: ψ(x) = A e^(−x²/2a²). Find A. (Use ∫_{−∞}^∞ e^(−u²) du = √π.)*\nExpected: ∫_{−∞}^∞ |A|² e^(−x²/a²} dx = |A|² a√π = 1 → A = (πa²)^(−1/4).\nThreshold: Correct Gaussian integral application and correct A.\n\n**FA-3 — Expectation value:**\n*Q: For the Gaussian ψ(x) = (πa²)^(−1/4) e^(−x²/2a²}, compute ⟨x⟩. (Hint: the integrand is an odd function.)*\nExpected: ⟨x⟩ = ∫ x |ψ|² dx = ∫ x × (1/a√π) e^(−x²/a²} dx = 0 (odd × even = odd integrand → integral over symmetric limits = 0).\nThreshold: Correct identification of the integrand as odd and ⟨x⟩ = 0.\n\n**FA-4 — Superposition interference:**\n*Q: Two wavefunctions ψ₁ = A (real, constant A) and ψ₂ = A e^(iπ) = −A on the same domain. What is |ψ₁ + ψ₂|²? What is |ψ₁|² + |ψ₂|²? Compare.*\nExpected: ψ₁ + ψ₂ = A − A = 0 → |ψ₁ + ψ₂|² = 0. But |ψ₁|² + |ψ₂|² = A² + A² = 2A². Conclusion: quantum superposition with opposite phase gives complete destructive interference (zero probability at that point), which is impossible for a classical mixture (which gives 2A²). This is the experimental signature of quantum superposition.\nThreshold: Correct computation of both quantities and correct conclusion about destructive interference.\n\n**Confidence calibration:** After FA-1(c), students who answer \"probability = |ψ(L/2)|² = 1/L\" (the density, not the probability) and are confident receive targeted feedback on the density vs. probability distinction, with explicit re-derivation.\n\n**Delayed retrieval (session + 3):** \"State Born's rule. What is the difference between |ψ(x)|² and P(a ≤ x ≤ b)? What happens to ψ after a position measurement?\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 209,
+        "endLine": 239
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "### Concrete (Enactive)\n- Analogy: water wave height → intensity of light. But here: ψ (complex amplitude) → |ψ|² (probability density). The wavefunction is to quantum probability what amplitude is to classical wave intensity.\n- Double-slit experiment: the interference pattern builds up from many single-electron impacts. The pattern is |ψ₁ + ψ₂|² — the wavefunctions from both slits add before squaring. This gives interference fringes (cross terms) that would be absent if we squared first.\n- Position measurement: imagine ψ spread across a room. One measurement gives one click — a specific location. Repeat with identical ψ many times → the histogram of click positions converges to |ψ|².\n\n### Representational (Iconic)\n- Plot of |ψ(x)|² vs. x: a probability density curve (like a bell curve for a Gaussian wave packet). Shade regions to show P(a ≤ x ≤ b) = area under curve.\n- Contrast classical trajectory (a single path) with quantum |ψ(x)|² (spread-out cloud).\n- Wave packet animation: show ψ = Re part (oscillating wave inside an envelope), |ψ|² = smooth probability density envelope.\n- Complex plane diagram: ψ at each point x is a complex number (arrow in the complex plane). |ψ|² = squared magnitude = length² of the arrow.\n\n### Abstract (Symbolic)\n- Born rule: if ψ(x) = (1/a)^(1/2) for 0 ≤ x ≤ a, 0 elsewhere (particle in a box ground state approximation): |ψ|² = 1/a = constant → uniform probability. P(0 ≤ x ≤ a/2) = ½.\n- Normalization check: ∫_{−∞}^∞ |A|² e^(−x²/2σ²) dx = |A|² σ√(2π) = 1 → A = (2πσ²)^(−1/4).\n- Superposition: ψ = ψ₁ + ψ₂ → |ψ|² = |ψ₁|² + |ψ₂|² + 2 Re(ψ₁* ψ₂). The cross term 2 Re(ψ₁* ψ₂) is the interference term — positive in bright fringes, negative in dark fringes. This term is zero if ψ₁ and ψ₂ have definite, different phases (which-path information destroys it).\n- Expectation value for Gaussian: ⟨x⟩ = 0 (by symmetry), ⟨x²⟩ = σ², Δx = σ.\n\n### Transfer (+)\n- Electron microscopy: the electron's wavefunction diffracts through the sample, creating an interference pattern that reveals atomic structure.\n- Quantum chemistry: molecular orbitals are wavefunctions |ψ|² — the electron density cloud visualized in chemistry textbooks.\n- MRI: nuclear spin wavefunctions precess in a magnetic field — the Larmor precession is a quantum mechanical amplitude evolution.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 43,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Why Beginners Fail",
+      "content": "**Mode 1 — \"ψ is a physical wave (like a water wave)\":** Students think ψ represents a physical oscillation of something material. This leads to confusion when ψ is complex (what physical quantity oscillates as a complex number?). Correct: ψ is an abstract mathematical amplitude; only |ψ|² has direct physical meaning as probability density.\n\n**Mode 2 — \"Probability density is the same as probability\":** Students conflate P(x) = |ψ(x)|² (probability density, units of m⁻¹ in 1D) with probability (dimensionless). Probability of finding the particle between x and x+dx is |ψ(x)|² dx (probability density × interval width).\n\n**Mode 3 — \"Measurement reveals the pre-existing position\":** Students think measurement \"discovers\" where the particle already was — as if it had a definite location that we didn't know. Quantum mechanics says: before measurement, the particle has no definite position (in a superposition state). Measurement creates the outcome, not just reveals it.\n\n**Mode 4 — \"Superposition means 50% in state A and 50% in state B\":** Students interpret ψ = ψ₁ + ψ₂ as \"half the particle is in ψ₁ and half is in ψ₂.\" The correct interpretation: the particle is in both states simultaneously with amplitude 1 from each — and the cross terms (interference) prove it's not just a classical mixture.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 69,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Voice Teaching",
+      "content": "**Opening:**\n\"In 1926, Erwin Schrödinger wrote down his wave equation. He thought ψ represented a physical wave — the electron was literally smeared out in space. Max Born immediately disagreed. Born's insight: |ψ|² is the probability density. The electron is not smeared out. The electron is a particle — detected at one definite point in every experiment. But you cannot predict in advance exactly where. |ψ|² tells you the probability distribution over many measurements. This interpretation — Born's rule — is one of the foundational postulates of quantum mechanics. It cannot be derived from something deeper. It is what quantum mechanics tells us about reality.\"\n\n**At the complex amplitude:**\n\"Why is ψ complex? Because complex numbers have magnitude and phase. The magnitude squared |ψ|² gives the probability density. The phase — the angle in the complex plane — determines interference. When two wavefunctions interfere, their phases determine whether the amplitudes add (constructive interference) or cancel (destructive interference). Without the phase, there is no interference. Without interference, there is no quantum mechanics. The complex nature of ψ is not a mathematical trick — it's essential for describing quantum reality.\"\n\n**At wavefunction collapse:**\n\"Before measurement: ψ is spread out, representing a superposition of possible positions. During measurement: a photon bounces off the electron, or a detector clicks. After measurement: ψ collapses to a sharply peaked state at the detected position x₀. This collapse is instantaneous — and it's not described by the Schrödinger equation (which evolves ψ smoothly). The collapse is the mysterious step — it's where the quantum world meets the classical world of measurement. After collapse, if you measure again immediately, you get x₀ again — the collapse is real.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 196,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Recovery Notes",
+      "content": "**S0:** Student needs phys.mod.wave-particle-duality — the wavefunction concept is unmotivated without first understanding that particles exhibit wave behavior. Students must accept the double-slit experiment before ψ makes sense.\n\n**S3:** Student understands ψ qualitatively but cannot compute probabilities or normalization. Drill FA-1 type problems: uniform ψ → simple rectangular probability distribution. Then Gaussian ψ → Gaussian integrals.\n\n**S6:** Student systematically sets |ψ(x₀)|² = P(x = x₀) (density = probability error). Run through FA-1(c) with explicit dimensional analysis: |ψ|² has units m⁻¹ in 1D — cannot be dimensionless probability. Must multiply by Δx to get P.\n\n**S9:** Introduce the complex probability amplitude in full: |ψ⟩ in Dirac notation. Transition amplitudes ⟨φ|ψ⟩ and their interpretation. Preview: the Schrödinger equation iℏ ∂ψ/∂t = Ĥψ evolves ψ deterministically between measurements. Measurement is the non-deterministic step. The measurement problem: what constitutes a measurement? Different interpretations of quantum mechanics (Copenhagen, Many-Worlds, Bohmian).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 239,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual (Born rule interpretation, density vs. probability, superposition vs. mixture) + procedural (normalization, probability calculation, expectation value).\n\n**Spaced retrieval schedule:**\n- Session + 1: \"State Born's rule. What is |ψ(x)|²? How do you calculate P(a ≤ x ≤ b)?\"\n- Session + 3: \"Normalize ψ(x) = Ae^(−|x|/a). Find P(−a ≤ x ≤ a).\"\n- Session + 7: \"What is the difference between a quantum superposition and a classical mixture? How can you tell them apart experimentally?\"\n\n**Interleaving partners:** phys.mod.wave-particle-duality (prerequisite — motivates ψ); phys.qm.schrodinger-equation (successor — equation of motion for ψ); phys.qm.uncertainty-principle (successor — consequence of ψ being a wave: narrow ψ = broad momentum distribution).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 251,
+        "endLine": 264
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Quantum chemistry — molecular orbitals ψ(r⃗) → electron density |ψ|² → bond structure. Visualizing an s or p orbital is the same as plotting |ψ|² for an atomic state.\n\n**Far transfer:** Quantum computing — qubits are in superpositions ψ = α|0⟩ + β|1⟩ with |α|² + |β|² = 1. Measurement collapses to |0⟩ with probability |α|² or |1⟩ with probability |β|². The Born rule is the core of quantum computing measurement theory.\n\n**Structural abstraction:** \"Probability amplitude → Born rule → probability.\" This structure appears in quantum electrodynamics (Feynman path integrals: amplitude for each path → |total amplitude|² = probability), quantum field theory, and quantum information theory.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 264,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "phys.qm.wave-function/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.qm.wave-function",
+      "title": "Curriculum Feedback",
+      "content": "- **Prerequisite adequacy:** phys.mod.wave-particle-duality is necessary — students must accept wave behavior of particles before the wavefunction concept is meaningful. Students who are shaky on the double-slit experiment should revisit phys.mod.wave-particle-duality before this concept.\n- **Unlock readiness:** Both unlocks (phys.qm.schrodinger-equation, phys.qm.uncertainty-principle) are well-prepared by this concept. The Schrödinger equation is the equation of motion for ψ (natural next step). The uncertainty principle is the consequence of ψ being a Fourier wave packet (natural extension).\n- **Difficulty calibration:** Advanced/understand is correct. The mathematics (complex numbers, normalization integrals) is not heavy, but the conceptual content (Born rule as a postulate, collapse, superposition vs. mixture) requires sustained abstract reasoning.\n- **Suggested problem set:** (1) Normalize three different wavefunctions (uniform, Gaussian, exponential). (2) Compute P(a ≤ x ≤ b) for each. (3) Compare |ψ₁ + ψ₂|² with |ψ₁|² + |ψ₂|² for two specific cases (in-phase, out-of-phase). (4) Compute ⟨x⟩ and ⟨x²⟩ for the Gaussian. (5) Interpretation question: explain in two sentences why the particle's position before measurement is genuinely indeterminate, not merely unknown.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.wave-function.md",
+        "startLine": 274,
+        "endLine": 284
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

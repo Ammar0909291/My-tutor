@@ -1,0 +1,463 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.electric-current-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.electric-current",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:f7967f644b578a7a6076cd660d6ed57a7eae0cc8cdeede203b0e4fd727d13638",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.electric-current.md": "sha256:2c81c2f97003a4a51263678837941d6db1937ee919772e76e8649b9ad6c2364d"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "phys.em.electric-current",
+    "name": "Electric Current",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.electric-charge"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.electric-current-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.electric-current (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.electric-current.md": "sha256:2c81c2f97003a4a51263678837941d6db1937ee919772e76e8649b9ad6c2364d"
+      },
+      "contentHash": "sha256:392ac796828d4d681a23d986854271d329bbdde919859dfdb1f75008389b75d7",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-2 (addresses MC-CURRENT-USED-UP-BY-DEVICES, MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electric-current.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electric-current.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electric-current"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electric-current\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.electric-current/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-current",
+      "title": "(Direct definition)",
+      "content": "### WE-1 (Direct definition)\n\n**Problem:** A charge of 30 C passes through a cross-section of a wire in 15 s. Find the current.\n\n**Worked solution:**\n\n$$I = \\frac{Q}{t} = \\frac{30\\text{ C}}{15\\text{ s}} = 2.0\\text{ A}$$\n\n**Answer:** I = 2.0 A\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 77,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-current",
+      "title": "(Drift velocity)",
+      "content": "### WE-2 (Drift velocity)\n\n**Problem:** A copper wire of diameter 2.0 mm carries a current of 5.0 A. The number density of free electrons in copper is n = 8.5 × 10²⁸ m⁻³. Find the drift velocity.\n\n**Worked solution:**\n\n*Step 1 — Cross-sectional area:*\nr = 1.0 × 10⁻³ m; A = πr² = π(1.0 × 10⁻³)² = 3.14 × 10⁻⁶ m²\n\n*Step 2 — Use I = nqv_dA:*\n$$v_d = \\frac{I}{nqA} = \\frac{5.0}{(8.5\\times10^{28})(1.602\\times10^{-19})(3.14\\times10^{-6})}$$\n$$v_d = \\frac{5.0}{4.27\\times10^4} = 1.17\\times10^{-4}\\text{ m/s} \\approx 0.12\\text{ mm/s}$$\n\n*Step 3 — Interpret:*\nElectrons drift at 0.12 mm/s — about 1 cm per 83 seconds. Yet a bulb lights instantly because the electric field (which propagates at ~c) sets all electrons drifting simultaneously.\n\n**Answer:** v_d ≈ 1.2 × 10⁻⁴ m/s (0.12 mm/s)\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 77,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.electric-current",
+      "title": "(Charge accumulation)",
+      "content": "### WE-3 (Charge accumulation)\n\n**Problem:** A current of 3.0 A flows through a wire for 10 minutes. How many electrons pass a cross-section?\n\n**Worked solution:**\n\n*Step 1 — Total charge:*\nQ = I × t = 3.0 A × (10 × 60 s) = 3.0 × 600 = 1800 C\n\n*Step 2 — Number of electrons:*\n$$n = \\frac{Q}{e} = \\frac{1800}{1.602\\times10^{-19}} = 1.12\\times10^{22}\\text{ electrons}$$\n\n**Answer:** ≈ 1.1 × 10²² electrons\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 77,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/misconception/MC-CURRENT-USED-UP-BY-DEVICES",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-current",
+      "title": "**Trigger signal:** Student says \"the bulb uses up the current\" or expects less current to emerge from a device than enters it, or thinks series devices share current (each getting less).",
+      "content": "### MC-CURRENT-USED-UP-BY-DEVICES\n\n**Trigger signal:** Student says \"the bulb uses up the current\" or expects less current to emerge from a device than enters it, or thinks series devices share current (each getting less).\n\n**Conflict evidence [P28]:** \"Measure the current before and after a resistor in a simple circuit: same amperage. In a series circuit with two bulbs, an ammeter reads the same value on either side of each bulb. Charge is conserved — it cannot pile up inside a device under steady state. The bulb converts electrical energy to light and heat, but returns every electron that enters.\"\n\n**Bridge text [P30]:** \"Current is like a flow of marbles through a pipe — the pipe doesn't consume marbles, it just passes them through while resisting the flow. The energy comes from the electric potential (voltage), not from using up charge. More resistance → same current, but greater voltage drop → more energy per coulomb dissipated.\"\n\n**Replacement text [P31]:** \"Current is not consumed by circuit devices. In any series circuit, the same current passes through every element (charge conservation — no accumulation at steady state). What changes across a device is the voltage (potential difference), not the current. The device converts electrical energy (from voltage × charge) into heat, light, or mechanical energy.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Same current enters and leaves a resistor in series\" | \"The resistor uses up some of the current\" |\n| \"Voltage drops across devices; current remains same in series\" | \"Current is shared among series elements\" |\n| \"Energy is carried by voltage × charge, not by current alone\" | \"Current carries the energy and is consumed\" |\n\n**s6_path:** Use water analogy: water flow rate (current) is the same in and out of a pipe constriction; the pressure drop (voltage) drives energy transfer, not the flow rate itself.\n\n---",
+      "localKey": "MC-CURRENT-USED-UP-BY-DEVICES",
+      "language": "en",
+      "refs": [
+        "MC-CURRENT-USED-UP-BY-DEVICES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/misconception/MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS",
+      "kind": "misconception",
+      "conceptId": "phys.em.electric-current",
+      "title": "**Trigger signal:** Student says electrons flow from + terminal to − terminal, or confuses conventional current direction with electron flow direction.",
+      "content": "### MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS\n\n**Trigger signal:** Student says electrons flow from + terminal to − terminal, or confuses conventional current direction with electron flow direction.\n\n**Conflict evidence [P28]:** \"In a copper wire connected to a battery: electrons (negative) are attracted to the + terminal and repelled from the − terminal. So electrons flow from − terminal through the external wire to the + terminal — opposite to conventional current. Conventional current (+ to −) was defined before the electron was discovered; it was an unlucky guess about which charge carrier moves.\"\n\n**Bridge text [P30]:** \"Conventional current goes + → − outside the battery (historically chosen). Electrons go − → + outside the battery (they're attracted to the positive terminal). Both conventions give consistent physics — just track the direction you're using.\"\n\n**Replacement text [P31]:** \"Electrons (negative) flow from the negative terminal, through the external circuit, to the positive terminal. Conventional current flows the opposite way: from + terminal to − terminal. In circuit analysis, always use conventional current direction. The mismatch is purely historical — the physics is the same either way.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Electrons flow from − to + terminal externally\" | \"Electrons flow from + to − terminal\" |\n| \"Conventional current flows + to −\" | \"Conventional current = electron flow direction\" |\n| \"The two directions are opposite by definition\" | \"Conventional current and electron flow are the same\" |\n\n**s6_path:** Draw a simple battery circuit; label electron flow with blue arrows and conventional current with red arrows — show they point in opposite directions.\n\n---",
+      "localKey": "MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS",
+      "language": "en",
+      "refs": [
+        "MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 214,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-CURRENT-USED-UP-BY-DEVICES\",\"MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-CURRENT-USED-UP-BY-DEVICES",
+        "MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 225,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 230,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 234,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 235,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-7\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 236,
+        "endLine": 236
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 237,
+        "endLine": 237
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electric-current",
+      "title": "close",
+      "content": "{\"id\":\"TA-9\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 238,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "phys.em.electric-current/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.electric-current",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState the definition of electric current and give its SI unit.\n\n**Answer:** I = dQ/dt; the rate at which electric charge flows past a point. SI unit: ampere (A) = 1 C/s.\n\n---\n\n### AP-2 (Bloom: Understand)\nWhy is the drift velocity of electrons in a copper wire so small (< 1 mm/s) even when the current is several amperes?\n\n**Answer:** Because the number density of free electrons in copper is enormous (n ≈ 8.5 × 10²⁸ m⁻³). Since I = nqv_dA, even a tiny v_d multiplied by such a large n (and reasonable A) gives several amperes. The electric field that drives the current propagates near the speed of light, so all electrons start drifting simultaneously — the signal is fast even though each carrier moves slowly.\n\n---\n\n### AP-3 (Bloom: Apply)\nA charge of 240 C passes through a wire in 4.0 minutes. (a) Find the current. (b) How many electrons pass per second?\n\n**Answer:**\n(a) I = Q/t = 240/(4×60) = **1.0 A**\n(b) n/s = I/e = 1.0/(1.602×10⁻¹⁹) = **6.24 × 10¹⁸ electrons/second**\n\n---\n\n### AP-4 (Bloom: Analyze)\nTwo wires, A (diameter d) and B (diameter 2d), carry the same current. If they are made of the same material, compare their drift velocities.\n\n**Answer:** I = nqv_dA → v_d = I/(nqA). Same I, n, q; A_B = π(d)² = 4A_A. So v_B = I/(nq·4A_A) = v_A/4. **Wire B's electrons drift at one-quarter the speed of wire A's electrons** (more cross-section → more carriers in parallel → less drift needed per carrier).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electric-current.md",
+        "startLine": 243,
+        "endLine": 275
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

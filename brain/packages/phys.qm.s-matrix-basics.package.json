@@ -1,0 +1,504 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.s-matrix-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.s-matrix-basics",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:0ae52e3ba2d232c71b316db4819bee5238092df211bbeb0cc4a9d53f566283a6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md": "sha256:f729999bdd48af03e8fd3115056658cc215f6893ca9f28691ff9e512563a0ca7"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.s-matrix-basics",
+    "name": "S-Matrix Basics",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.qm.scattering-theory-born-approximation"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.s-matrix-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.s-matrix-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md": "sha256:f729999bdd48af03e8fd3115056658cc215f6893ca9f28691ff9e512563a0ca7"
+      },
+      "contentHash": "sha256:d1aba5808dbd81e2e2f16482a6e2bddabbf3d9de12604b56680e3d843e1826e1",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.s-matrix-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.s-matrix-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.s-matrix-basics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.s-matrix-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.s-matrix-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.s-matrix-basics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.s-matrix-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.s-matrix-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.s-matrix-basics\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.s-matrix-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md#TA-4 (addresses MC-SMAT-S-IS-JUST-T)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.s-matrix-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.s-matrix-basics\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.s-matrix-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.s-matrix-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.s-matrix-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.s-matrix-basics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.s-matrix-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.s-matrix-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.s-matrix-basics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.s-matrix-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.s-matrix-basics\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.s-matrix-basics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "S-matrix for 1D step barrier",
+      "content": "### Example 1 — S-matrix for 1D step barrier\nIncident wave k₁ in region I (x<0), transmitted wave k₂ in region II (x>0).\nReflection amplitude r = (k₁−k₂)/(k₁+k₂); transmission t = 2k₁/(k₁+k₂).\nS-matrix (2×2 in {inc,refl} basis): S = [[r, t'],[t, r']] where t' = 2k₂/(k₁+k₂), r' = (k₂−k₁)/(k₁+k₂).\nUnitarity check: |r|²+(k₂/k₁)|t|²=1 (flux conservation; k₂/k₁ factor from group velocity).\nS†S = 1 ✓ (verify explicitly for E>V₀).",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 34,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Phase shifts and S-matrix elements",
+      "content": "### Example 2 — Phase shifts and S-matrix elements\n3D scattering: partial-wave S-matrix elements Sₗ = e^{2iδₗ}.\n|Sₗ|=1 (elastic scattering, unitarity: each partial wave conserved).\nScattering amplitude: f(θ) = (1/2ik)Σ(2l+1)(Sₗ−1)Pₗ(cosθ) = (1/k)Σ(2l+1)e^{iδₗ}sin(δₗ)Pₗ(cosθ).\nOptical theorem: σ_total = (4π/k²)Σ(2l+1)sin²(δₗ) = (4π/k)Im[f(0)] ✓",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 34,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "S-matrix poles and resonances",
+      "content": "### Example 3 — S-matrix poles and resonances\nFor a resonance at energy E_R with width Γ:\nSₗ(E) ≈ e^{2iδ_bg}·(E−E_R−iΓ/2)/(E−E_R+iΓ/2) (Breit-Wigner form).\nPole at E = E_R − iΓ/2 in the complex E-plane (second Riemann sheet).\nFor bound states (E_B < 0): pole on the positive imaginary-k axis; no width (Γ=0).\nPhysical interpretation: resonance = quasi-bound state that tunnels out with lifetime τ=ℏ/Γ.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 34,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/misconception/MC-SMAT-S-IS-JUST-T",
+      "kind": "misconception",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "\"S-matrix and T-matrix are the same thing.\"",
+      "content": "| MC-SMAT-S-IS-JUST-T | \"S-matrix and T-matrix are the same thing.\" | \"S = T, so I can use them interchangeably.\" | S = 1 + iT (in appropriate conventions); the identity part of S corresponds to no scattering, while T (transition matrix) contains the scattering amplitude. S is unitary (SS†=1); T carries the dynamics. Confusing them leads to wrong optical theorem application and wrong pole structures. |",
+      "localKey": "MC-SMAT-S-IS-JUST-T",
+      "language": "en",
+      "refs": [
+        "MC-SMAT-S-IS-JUST-T"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/misconception/MC-SMAT-UNITARITY-OPTIONAL",
+      "kind": "misconception",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "\"Unitarity is just a nice property — non-unitary approximations still give useful cross-sections.\"",
+      "content": "| MC-SMAT-UNITARITY-OPTIONAL | \"Unitarity is just a nice property — non-unitary approximations still give useful cross-sections.\" | \"My approximate S doesn't need to be unitary.\" | Unitarity S†S=1 IS probability conservation; violating it leads to non-physical predictions (negative probabilities, cross-sections violating optical theorem bounds, or probability creation/destruction). Any approximation that breaks unitarity must be used within its known range of validity. |",
+      "localKey": "MC-SMAT-UNITARITY-OPTIONAL",
+      "language": "en",
+      "refs": [
+        "MC-SMAT-UNITARITY-OPTIONAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 5,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 6,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 7,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-SMAT-S-IS-JUST-T\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SMAT-S-IS-JUST-T"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 8,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 10,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 11,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): Write the relationship between S and T matrices. What does the \"1\" in S=1+iT represent physically?  \n*Answer*: S=1+iT; the identity 1 corresponds to no interaction (particle passes through unscattered); T carries all scattering information.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For a resonance Sₗ(E)=(E−E_R−iΓ/2)/(E−E_R+iΓ/2), compute |Sₗ|² at E=E_R.  \n*Answer*: |Sₗ(E_R)|²=|−iΓ/2/(+iΓ/2)|²=|−1|²=1. Unitarity |Sₗ|=1 is preserved at resonance; the cross-section is large because sin²(δₗ)=1 at resonance (δₗ=π/2), not because |Sₗ|>1.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): Explain why an S-matrix pole at E_B = −|E_B| (real negative energy, imaginary k = iκ) corresponds to a bound state.  \n*Answer*: Bound state wavefunction behaves as e^{−κr}/r for large r (normalizable). This requires the incoming wave coefficient to vanish — no incident flux, yet outgoing waves are present. This is exactly a pole of S: S→∞ signals a state that exists without external driving.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): The optical theorem σ=(4π/k)Im[f(0)] relates total cross-section to forward scattering amplitude. Is this consistent with Born approximation (where f_B is real for real V)?  \n*Answer*: For real V, f_B is real (first Born) → Im[f_B(0)]=0 → optical theorem gives σ=0, contradicting dσ/dΩ=|f_B|²≠0. This shows Born approximation breaks the optical theorem — it's not unitary at second order. Second Born approximation adds an imaginary part that restores unitarity perturbatively.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A model gives S=e^{2iδ} with δ complex: δ = δ_R + iδ_I (δ_I > 0). What is |Sₗ|²? Is this physical for elastic scattering?  \n*Answer*: |Sₗ|² = |e^{2iδ_R}|² · e^{−4δ_I} = e^{−4δ_I} < 1. This violates unitarity — |Sₗ|<1 means probability is absorbed (inelastic channel). For purely elastic scattering this is non-physical; it's appropriate for an optical potential that models inelastic loss.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student conflates S and T | Return to MC-SMAT-S-IS-JUST-T diagnostic; write S=1+iT explicitly; check: does T have the identity part? No. |\n| Student says \"Born breaks unitarity so it's wrong\" | \"Born is right in its domain (weak potential, high energy) and wrong outside it; unitarity is broken at a specific order — second Born restores it. Approximations can break unitarity while still being useful.\" |\n| Student unsure which Riemann sheet | \"First sheet: physical, Im(k)>0 for bound states, k>0 real for scattering. Resonances live on the second sheet reached by analytic continuation through the cut on the real axis.\" |\n| Student asks \"is S-matrix used in practice?\" | \"Yes — S-matrix methods dominate particle physics; EVERY observable in a collider is an S-matrix element squared. In condensed matter, S-matrix describes transport through mesoscopic devices (Landauer formula).\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SMAT-S-IS-JUST-T"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 100,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What is the optical theorem? What does f(0) represent?\"\nCORE-1 (15 min): TA-1 + TA-2 (motivation + S, T notation, unitarity)\nCORE-2 (20 min): TA-3 + TA-4 (prove optical theorem from unitarity + MC S vs T)\nCORE-3 (20 min): TA-5 (phase shifts → S-matrix → cross-section, optical theorem check)\nDRILL  (10 min): TA-6 (Breit-Wigner resonance: peak, width, lifetime)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Density matrix describes mixed states — open quantum systems where scattering is incomplete and coherence is partially lost.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 111,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "phys.qm.s-matrix-basics/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.s-matrix-basics",
+      "title": "Known Sticking Points",
+      "content": "1. **S=1+iT sign conventions**: vary by text; some write S=1−2πiT; always check the convention before using formulas.\n2. **Unitarity vs |f|²≥0**: Both are positivity conditions but different; unitarity constrains the total probability sum, not individual amplitudes.\n3. **Complex vs real poles**: Bound states → real negative E (imaginary k on first sheet); resonances → complex E (second Riemann sheet); students confuse the two sheets.\n4. **Optical theorem for inelastic scattering**: σ_total (not σ_elastic) appears in the optical theorem; σ_elastic ≤ σ_total, with equality only for elastic-only scattering.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.s-matrix-basics.md",
+        "startLine": 91,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

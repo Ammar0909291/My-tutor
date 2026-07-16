@@ -1,0 +1,380 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.displacement-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.displacement",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:88218f6a54904c4bbd6d2303604c5e1db258fc29363de400b23d3764742673b0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.displacement.md": "sha256:61623c72ff24e225fd38a4b35e6ba84b88ee7ccfe22af4cdf09d76dddea74e72"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.displacement",
+    "name": "Displacement and Distance",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "remember",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.meas.units"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.displacement-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.displacement (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.displacement.md": "sha256:61623c72ff24e225fd38a4b35e6ba84b88ee7ccfe22af4cdf09d76dddea74e72"
+      },
+      "contentHash": "sha256:991908ed173300045b6b4aed9797344231b2dbac45fe064f9769f1acc7c73d36",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.displacement.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.displacement.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.displacement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.displacement\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.displacement.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.displacement.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.displacement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.displacement\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.displacement.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.displacement.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.displacement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.displacement\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.displacement.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.displacement.md#TA-4 (addresses MC-DISPLACEMENT-IS-DISTANCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.displacement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.displacement\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.displacement.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.displacement.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.displacement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.displacement\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.displacement.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.displacement.md#TA-6 (addresses MC-DISPLACEMENT-IS-DISTANCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.displacement"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.displacement\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.displacement/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.displacement",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States that **displacement** is the vector change in position — from initial point to final point in a straight line — and that it can be zero, positive, or negative regardless of the path taken.\n2. Distinguishes displacement from **distance**: distance is the total scalar path length (always ≥ 0, no direction); displacement is the straight-line separation from start to finish with direction.\n3. Calculates displacement as Δx = x_final − x_initial (1D) and identifies the direction from context.\n\nA student who reports displacement as the total path length (\"I walked 6 m so displacement = 6 m\"), or who does not recognise that a round trip has zero displacement, has **NOT** achieved mastery — conflating distance with displacement corrupts every velocity, momentum, and kinematics result downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/misconception/MC-DISPLACEMENT-IS-DISTANCE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.displacement",
+      "title": "Displacement equals the total path length",
+      "content": "### MC-DISPLACEMENT-IS-DISTANCE: \"Displacement equals the total path length\"\ntrigger_signal: student sets displacement = total distance travelled, especially on round trips.\nconflict_evidence [P28]: \"You walked 3 m forward and 3 m back. You're at the same spot you started. Displacement asks: where did you end up relative to where you began? The answer is zero. But you walked 6 m — that's the distance. They cannot both be 6 m if one is zero.\"\nbridge_text [P30]: \"Displacement asks one question: where did you end up relative to where you started? Draw one straight arrow from start to finish. Distance asks: how much ground did you cover in total? They measure different things about the same journey.\"\nreplacement_text [P31]: \"Displacement = x_final − x_initial. It is zero whenever you return to the start, regardless of how far you travelled along the way.\"\ndiscrimination_pairs [P33]: [\"round trip 3 m + 3 m: distance = 6 m, displacement = 0 ✓\", \"walk 5 m east only: distance = 5 m, displacement = +5 m east (equal for straight single-direction trips) ✓\", \"walk 5 m east, 2 m west: distance = 7 m, displacement = +3 m east ✗ if set equal to 7 m\"]\ns6_path: skip P28; use the return-to-start walk as a shared concrete observation — point to start and finish tape marks on the same spot — then P30.",
+      "localKey": "MC-DISPLACEMENT-IS-DISTANCE",
+      "language": "en",
+      "refs": [
+        "MC-DISPLACEMENT-IS-DISTANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/misconception/MC-DISPLACEMENT-IS-PATH",
+      "kind": "misconception",
+      "conceptId": "phys.mech.displacement",
+      "title": "Displacement traces the actual route taken",
+      "content": "### MC-DISPLACEMENT-IS-PATH: \"Displacement traces the actual route taken\"\ntrigger_signal: student draws a curved or zigzag arrow to represent displacement instead of a straight line from start to finish.\nconflict_evidence [P28]: \"You drew an arrow following the road. But displacement is just an arrow from where you started to where you finished — a straight line, ignoring the road entirely. If you teleported from the start to the finish, would you follow the road?\"\nbridge_text [P30]: \"Displacement doesn't care about the route. Only: start position → finish position. Draw one straight arrow. The path in between is irrelevant to displacement.\"\nreplacement_text [P31]: \"Displacement = one straight arrow from first position to last position, regardless of how the journey happened.\"\ndiscrimination_pairs [P33]: [\"curved road from A to B: displacement = straight arrow A→B, distance = road length ✓\", \"zigzag path: displacement = straight line from first to last position ✓\"]\ns6_path: skip P28; place two dots (A and B) on paper and ask the student to draw the displacement arrow as a shared activity before raising the path-vs-straight-line contrast.",
+      "localKey": "MC-DISPLACEMENT-IS-PATH",
+      "language": "en",
+      "refs": [
+        "MC-DISPLACEMENT-IS-PATH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.displacement",
+      "title": "Walk the Difference",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Walk the Difference\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.displacement",
+      "title": "Naming the Two Quantities",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Naming the Two Quantities\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.displacement",
+      "title": "Sign and Direction",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Sign and Direction\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.displacement",
+      "title": "Misconception Probe — Round Trip",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Round Trip\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-DISPLACEMENT-IS-DISTANCE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-DISPLACEMENT-IS-DISTANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.displacement",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.displacement",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-DISPLACEMENT-IS-DISTANCE\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-DISPLACEMENT-IS-DISTANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.displacement",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Label: (a) 5 km north (b) total km run in a marathon\" | CORRECT = (a) displacement (b) distance |\n| P74 (classify) | \"Δx = x_f − x_i = −8 m. What type of quantity?\" | CORRECT = displacement (vector; negative = leftward) |\n| P75 (boundary) | \"Can displacement be zero while distance > 0?\" | CORRECT = yes; any complete round trip |\n| P76 (transfer) | \"Train: 120 km east, 80 km west — displacement and distance?\" | CORRECT = +40 km east; 200 km |\n| P77 (generate) | \"Draw a path with distance = 10 m but displacement = +2 m.\" | CORRECT = valid number-line diagram |\n| P78 (explain) | \"Why is displacement a vector but distance a scalar?\" | CORRECT = displacement has direction; distance does not |\n| P79 (predict) | \"Swimmer 50 m out and 50 m back — predict displacement before computing.\" | CORRECT = 0 m |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 172,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.displacement",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Never met displacement as a distinct concept | Uses \"distance\" for everything | Protocol A (Concrete) |\n| S1 | Uses displacement as synonym for distance | Can't name what's different | Protocol B (Counterexample-first) |\n| S2-DISPLACEMENT-IS-DISTANCE | Believes displacement = total path length | Gives 6 m for a 3 m + 3 m round trip | Misconception Engine → Protocol C |\n| S2-DISPLACEMENT-IS-PATH | Believes displacement traces the actual path | Draws a curved arrow along the route | Misconception Engine → Protocol C |\n| S3 | Knows they differ; fails signed/vector cases | Gets magnitude but not direction or sign | Protocol C (Guided Questioning) |\n| S6 | Anxiety at negative values and vector notation | Freezes at \"−3 m\" or arrow diagrams | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.displacement",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"If you walk 3 metres forward and then 3 metres back to where you started, what is the distance you covered? What is the displacement?\"\n  \"Distance = 6 m, displacement = 0\" (or equivalent) → S3. Enter Protocol C.\n  \"Both = 6 m\" → SIGNAL:MISCONCEPTION:MC-DISPLACEMENT-IS-DISTANCE. Enter Misconception Engine.\n  Pause / \"I don't know what displacement is\" → S0. Enter Protocol A (Concrete).\n\nDB-2 (representation test):\n\"What does the word 'displacement' mean to you in physics — how is it different from distance?\"\n  Correctly links to change of position / straight-line arrow → S3. Enter Protocol C.\n  \"Same as distance\" or \"I think they're the same\" → S1. Enter Protocol B.\n  Pause / no answer → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with displacement vs. distance — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-1 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-DISPLACEMENT-IS-DISTANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 39,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.displacement/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.displacement",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.units`):\n\"What unit would you use to report a length or distance measurement?\"\n  Cannot name a unit of length → flag PREREQ-GAP-UNITS.\n  In-session minimum repair: one P06 anchor (ruler, metre marks, name the unit) — then resume. Deep gap → schedule `phys.meas.units` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.displacement.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

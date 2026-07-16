@@ -1,0 +1,504 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.phase-transitions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.phase-transitions",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:8e92b7cb2cf1dc882b9ce3db92c7073aee261c9f039a030f99fc17dc2cff4a01",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.phase-transitions.md": "sha256:7130f223e92d23a8e4881880bc43afca473cbb64448219fca51d7003970de3bc"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.stat.phase-transitions",
+    "name": "Phase Transitions (Landau Mean-Field)",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "phys.stat.free-energy"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.phase-transitions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.phase-transitions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.phase-transitions.md": "sha256:7130f223e92d23a8e4881880bc43afca473cbb64448219fca51d7003970de3bc"
+      },
+      "contentHash": "sha256:a8663f8356b4191f7c814ba331d1566d59d5fce0212cdcb42cec503eba3afa05",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions.md#TA-4 (addresses MC-PT-FIRST-SECOND-TERMINOLOGY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.phase-transitions/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Ehrenfest classification",
+      "content": "### Example 1 — Ehrenfest classification\nFirst-order transition (ice→water at 0°C, 1 atm): ΔS = L/T ≠ 0 (latent heat); ΔV = V_liquid − V_ice ≠ 0; G continuous but ∂G/∂T=−S discontinuous.\nSecond-order transition (paramagnet→ferromagnet at T_c): ⟨M⟩ continuous (→0 as T→T_c); χ=∂⟨M⟩/∂H diverges; C_V diverges; no latent heat.\nLambda transition (superfluid He at T_λ): C_V has logarithmic divergence (not a true discontinuity); technically continuous, but stronger than 2nd-order — example of a universality class distinct from Ising.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Landau free energy expansion",
+      "content": "### Example 2 — Landau free energy expansion\nOrder parameter φ (e.g. magnetization m); symmetry φ→−φ restricts to even powers:\nF(φ,T) = a(T)φ² + bφ⁴ + ... (b > 0 for stability).\nNear T_c: a(T) = a₀(T−T_c) (linear in T−T_c, changes sign at T_c).\nFor T > T_c: a > 0, minimum at φ=0 (disordered phase).\nFor T < T_c: a < 0, minima at φ = ±√(−a/2b) = ±√(a₀(T_c−T)/2b).\nMean-field exponent: m ~ (T_c−T)^{1/2} → β_MF = 1/2.\nWith external field H: F = a(T)φ² + bφ⁴ − Hφ → saddle point → m ~ H^{1/3} at T=T_c → δ_MF = 3.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Susceptibility divergence",
+      "content": "### Example 3 — Susceptibility divergence\nχ = ∂m/∂H|_{H=0}: from saddle point aφ=−Hφ… minimization with H→ ∂²F/∂φ²|_{φ=φ_min}=2a+12bφ².\nT > T_c: φ₀=0 → χ = 1/(2a) = 1/(2a₀(T−T_c)) ~ (T−T_c)^{−1} → γ_MF = 1.\nT < T_c: φ₀²=−a/(2b) → χ = 1/(−4a) = 1/(4a₀(T_c−T)) ~ (T_c−T)^{−1} → γ_MF = 1 (same exponent both sides, amplitude ratio 2:1).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/misconception/MC-PT-FIRST-SECOND-TERMINOLOGY",
+      "kind": "misconception",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "\"Second-order transition means the phase transition happens twice.\"",
+      "content": "| MC-PT-FIRST-SECOND-TERMINOLOGY | \"Second-order transition means the phase transition happens twice.\" | \"Why is it 'second order'?\" | The Ehrenfest classification: first-order = first derivative of G discontinuous (latent heat, density jump); second-order (continuous) = first derivatives continuous but second derivatives (C_P, κ_T, χ) diverge. \"Second order\" refers to which derivative is discontinuous, NOT how many times the transition occurs. |",
+      "localKey": "MC-PT-FIRST-SECOND-TERMINOLOGY",
+      "language": "en",
+      "refs": [
+        "MC-PT-FIRST-SECOND-TERMINOLOGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/misconception/MC-PT-MF-EXACT",
+      "kind": "misconception",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "\"Mean-field theory gives the exact critical exponents.\"",
+      "content": "| MC-PT-MF-EXACT | \"Mean-field theory gives the exact critical exponents.\" | \"β=1/2 is the exact critical exponent for magnetization.\" | Mean-field exponents (β=1/2, γ=1, ν=1/2, η=0) are exact only above the upper critical dimension d_c (d_c=4 for Ising). Below d_c, fluctuations (ignored by mean field) change the exponents — the Ising model in 2D has β=1/8, not 1/2. |",
+      "localKey": "MC-PT-MF-EXACT",
+      "language": "en",
+      "refs": [
+        "MC-PT-MF-EXACT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 5,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 6,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 7,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-PT-FIRST-SECOND-TERMINOLOGY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-PT-FIRST-SECOND-TERMINOLOGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 8,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 10,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 11,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): State the Ehrenfest criterion distinguishing first- and second-order phase transitions. Give one example of each.  \n*Answer*: First-order: first derivative of G (entropy S=−∂G/∂T, volume V=∂G/∂P) is discontinuous; latent heat, coexistence. Examples: water/ice, gas/liquid. Second-order: first derivatives continuous, second derivatives (C_P=−T∂²G/∂T², κ_T=−(1/V)∂²G/∂P²) diverge; no latent heat. Examples: ferromagnet at T_c, superconductor.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For F=a(T)m²+bm⁴ with a=a₀(T−T_c) and b>0, find the equilibrium magnetization m(T) below T_c and identify the critical exponent β.  \n*Answer*: ∂F/∂m=0 → 2am+4bm³=0 → m²=−a/(2b)=a₀(T_c−T)/(2b). m=(a₀/2b)^{1/2}(T_c−T)^{1/2}. β=1/2 (mean-field).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): In the Landau expansion F=aφ²+bφ⁴, what role does the symmetry φ→−φ play? What happens if you add a φ³ term?  \n*Answer*: Symmetry φ→−φ forces F to contain only even powers of φ (the Ising/magnet symmetry m→−m under H→−H). Adding a cubic term breaks this symmetry — the transition becomes first-order (asymmetric minima appear at different temperatures). This is a common mechanism for the mean-field crossover from 2nd to 1st order.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): Mean-field theory predicts β=1/2 for all ferromagnets, but experiments give β≈0.33 for 3D Ising-like magnets. Identify the source of this discrepancy.  \n*Answer*: Mean-field ignores spatial fluctuations of the order parameter — it assumes every spin sees the same average field. Near T_c, fluctuations diverge (ξ→∞) and correlations between spins are long-range — mean-field becomes inaccurate. The Ginzburg criterion: mean-field works when system dimension d > d_c=4; for d=3, fluctuation corrections change β from 1/2 to ≈0.326.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A student fits m(T) data near T_c to a power law and extracts β=0.5. They conclude \"mean-field theory is confirmed.\" Critically evaluate this conclusion.  \n*Answer*: Insufficient — β=0.5 is consistent with mean-field but could also arise from incorrect T_c estimate, insufficient resolution near T_c, or fitting over a range too far from T_c where crossover behavior dominates. A proper critical exponent requires fitting only within the critical region (|T−T_c|/T_c ≪ 1) and confirming multiple exponents satisfy scaling relations (α+2β+γ=2, dν=2−α). Single exponent fitting without this is inconclusive.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student asks \"what is the order parameter for water-ice transition?\" | \"Density difference ρ_liquid − ρ_ice; or alternatively, crystal structure (crystalline vs amorphous). Order parameter must vanish in the disordered phase and be nonzero in ordered phase.\" |\n| Student confused by the sign change in a(T) | \"a₀>0 is a material constant; a=a₀(T−T_c) is positive above T_c (stable φ=0) and negative below T_c (unstable at φ=0, stable at φ≠0). This is the whole mechanism of the transition.\" |\n| Student says \"fluctuations are always small\" | Invoke MC-PT-MF-EXACT; Ginzburg criterion gives explicit condition when fluctuations matter; near T_c: ALWAYS relevant in d<4. |\n| Student asks what happens when b<0 | \"The fourth-order term destabilizes the expansion; must include φ⁶ (with positive coefficient). This gives a first-order transition — the discontinuous jump in φ at T_c is built into the polynomial structure.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PT-MF-EXACT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 99,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"Draw G(T) for two phases at a first-order transition. What is special at the transition temperature?\"\nCORE-1 (15 min): TA-1 + TA-2 (iron/ice motivation + Ehrenfest + order parameter notation)\nCORE-2 (20 min): TA-3 + TA-4 (Landau minimization → β=1/2 + MC Ehrenfest classification)\nCORE-3 (20 min): TA-5 (susceptibility divergence derivation, comparison to 2D Ising exact exponents)\nDRILL  (10 min): TA-6 (b<0 + φ⁶ → first-order; identify minimum structure from F)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"The Ising model makes mean-field predictions concrete and solvable in low dimensions — next session derives exact results.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.phase-transitions",
+      "title": "Known Sticking Points",
+      "content": "1. **Ehrenfest vs modern classification**: Modern terminology says \"discontinuous\" (first-order) and \"continuous\" (second-order/critical), emphasizing the order parameter behavior rather than derivatives.\n2. **b > 0 stability requirement**: Without this, F has no lower bound — remind students this is a necessary constraint on the Landau expansion; if b < 0, must include φ⁶ term.\n3. **Critical exponents vs power law fits**: Critical exponents are asymptotic results valid only near T_c; naive power law fits over extended temperature ranges can give wrong exponents.\n4. **Why do exponents differ from mean-field?**: Fluctuations — Ginzburg criterion gives the crossover scale; below d_c, fluctuations are relevant (renormalization group explains why).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions.md",
+        "startLine": 90,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

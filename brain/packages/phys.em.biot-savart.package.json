@@ -1,0 +1,328 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.biot-savart-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.biot-savart",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:4eeeae1177a91652450ff4dfb31085434570ab0fd781c676eb50c7c7a8cc599e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.biot-savart.md": "sha256:287dd47dfc22eee6077e0ed1f4c0d44d3b0ef4fca974d7ff8439bd077f3d05ef"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.biot-savart",
+    "name": "Biot-Savart Law",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.em.magnetic-force"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.biot-savart-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.biot-savart (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.biot-savart.md": "sha256:287dd47dfc22eee6077e0ed1f4c0d44d3b0ef4fca974d7ff8439bd077f3d05ef"
+      },
+      "contentHash": "sha256:4c3ee115f8698234377edb7d10164565c3387aa9d288ff672d19fb8baabb924a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.biot-savart.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.biot-savart.md#TA-1 (addresses MC-B-FALLS-OFF-AS-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.biot-savart"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.biot-savart\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.biot-savart.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.biot-savart.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.biot-savart"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.biot-savart\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.biot-savart.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.biot-savart.md#TA-3 (addresses MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.biot-savart"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.biot-savart\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.biot-savart.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.biot-savart.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.biot-savart"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.biot-savart\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.biot-savart/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.biot-savart",
+      "title": "Field from a Long Straight Wire",
+      "content": "### WE-1 — Field from a Long Straight Wire\n**Problem:** Two parallel wires, each carrying I = 10 A in opposite directions, are 20 cm apart. Find B midway between them.\n\n**Solution:**\nDistance from each wire to midpoint: R = 0.10 m\n\nB from wire 1: B₁ = μ₀I/(2πR) = (4π×10⁻⁷ × 10)/(2π × 0.10) = **2.0×10⁻⁵ T**  \nDirection (wire 1 current right, midpoint above wire 1): B₁ points upward (out of page for this geometry — use right-hand rule).\n\nB from wire 2 (current left, midpoint below wire 2): same magnitude, also points out of page by right-hand rule.\n\nBoth fields point the same direction (both out of page) — antiparallel currents cause fields to add between the wires:\n**B_total = B₁ + B₂ = 4.0×10⁻⁵ T** (out of page)\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 90,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.biot-savart",
+      "title": "Field at Centre of Circular Loop",
+      "content": "### WE-2 — Field at Centre of Circular Loop\n**Problem:** A circular coil of 40 turns, radius 5.0 cm, carries I = 3.0 A. Find B at the centre.\n\n**Solution:**\nB = N × μ₀I/(2R) = 40 × (4π×10⁻⁷ × 3.0)/(2 × 0.050)  \n= 40 × (12π×10⁻⁷)/(0.10)  \n= 40 × 120π×10⁻⁷ × 10  \n= 40 × 3.77×10⁻⁵  \n**B = 1.51×10⁻³ T = 1.51 mT**\n\nDirection: along the axis, determined by right-hand rule (curl fingers in direction of current → thumb points in B direction).\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 90,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.biot-savart",
+      "title": "On-Axis Field of a Loop",
+      "content": "### WE-3 — On-Axis Field of a Loop\n**Problem:** A circular loop (R = 8.0 cm, I = 5.0 A). Find B on the axis at x = 6.0 cm from centre. Compare with the centre field.\n\n**Solution:**\nB = μ₀IR² / [2(R² + x²)^{3/2}]  \n= (4π×10⁻⁷ × 5.0 × (0.08)²) / [2((0.08)² + (0.06)²)^{3/2}]  \n= (4π×10⁻⁷ × 5.0 × 6.4×10⁻³) / [2(6.4×10⁻³ + 3.6×10⁻³)^{3/2}]  \n= (4π×10⁻⁷ × 3.2×10⁻²) / [2(10⁻²)^{3/2}]  \n= (4.02×10⁻⁸) / [2 × 10⁻³]  \n= **2.01×10⁻⁵ T**\n\nAt centre: B₀ = μ₀I/(2R) = (4π×10⁻⁷ × 5.0)/(2 × 0.08) = **3.93×10⁻⁵ T**\n\nRatio: B(at x)/B₀ = 2.01/3.93 = 0.51 (field drops to ~51% at x=R×0.75)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 90,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/misconception/MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE",
+      "kind": "misconception",
+      "conceptId": "phys.em.biot-savart",
+      "title": "- **trigger_signal:** Student says \"I use dB = μ₀qv×r̂/(4πr²) for any single proton moving through space.",
+      "content": "### MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE\n- **trigger_signal:** Student says \"I use dB = μ₀qv×r̂/(4πr²) for any single proton moving through space.\"\n- **conflict_evidence [P28]:** \"The Biot-Savart law strictly applies to steady currents in conductors, not to isolated moving charges. For a single moving charge q, the field is B = (μ₀/4π)(qv×r̂/r²), which looks the same — but this is derived from the Biot-Savart law by treating q as a current element (I dl = q v). The law itself is about steady current distributions; the single-charge form is a specialisation valid only in the static regime.\"\n- **bridge_text [P30]:** \"Think of the Biot-Savart law as a tool for continuous current distributions — like how Coulomb's law in integral form gives E from a charge distribution. For a single charge, you get the Biot-Savart result as a special case, but the foundational statement requires a current — a flow of many charges in a conductor.\"\n- **replacement_text [P31]:** \"Biot-Savart law: dB = (μ₀/4π)(I dl × r̂)/r² for a current element in a conductor. For a single moving charge: B = (μ₀/4π)(qv × r̂)/r² — this is the B field of a moving charge, derived from Biot-Savart but requiring careful interpretation (valid only for v << c and steady motion).\"\n- **discrimination_pairs [P33]:**\n  - Steady current in wire: Biot-Savart gives exact static B field\n  - Single moving charge: Biot-Savart form valid for v<<c; full treatment needs special relativity\n  - Accelerating charge: emits radiation — neither Biot-Savart nor static B applies\n- **s6_path:** If student needs single-charge field, use B = (μ₀/4π)(qv×r̂/r²) with explicit note on validity regime.\n\n---",
+      "localKey": "MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE",
+      "language": "en",
+      "refs": [
+        "MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/misconception/MC-B-FALLS-OFF-AS-1",
+      "kind": "misconception",
+      "conceptId": "phys.em.biot-savart",
+      "title": "/R-SQUARED-FOR-ALL-GEOMETRIES",
+      "content": "### MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES\n- **trigger_signal:** Student applies 1/r² for all current configurations (wire, loop, solenoid).\n- **conflict_evidence [P28]:** \"1/r² is the fall-off for the field element dB from a single current element. But integrating many elements changes the overall dependence. For an infinite wire: all contributions add constructively → B = μ₀I/(2πR) ∝ 1/R (not 1/R²). For a current loop on-axis far away: B ∝ 1/x³ (dipole). For a solenoid: uniform B inside, 0 outside. Different geometries give completely different distance dependences.\"\n- **bridge_text [P30]:** \"Compare with Coulomb's law: a point charge gives E ∝ 1/r². An infinite line of charge gives E ∝ 1/r. An infinite plane gives E = constant (no r dependence). Same 1/r² element law, completely different integral results. The geometry of the source determines the fall-off.\"\n- **replacement_text [P31]:** \"Fall-off of B depends on geometry: point source (current element): dB ∝ 1/r². Infinite wire: B ∝ 1/r. Far from current loop (magnetic dipole): B ∝ 1/r³. Solenoid interior: B = μ₀nI (constant, no r dependence). Always integrate; never assume 1/r².\"\n- **discrimination_pairs [P33]:**\n  - Single current element: dB ∝ 1/r²\n  - Infinite straight wire: B = μ₀I/(2πR) ∝ 1/R\n  - Magnetic dipole (far field): B ∝ 1/r³\n  - Solenoid interior: B = μ₀nI (uniform)\n- **s6_path:** Walk through the infinite wire integration to show explicitly how 1/r² integrates to 1/r.\n\n---",
+      "localKey": "MC-B-FALLS-OFF-AS-1",
+      "language": "en",
+      "refs": [
+        "MC-B-FALLS-OFF-AS-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 16,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.biot-savart",
+      "title": "The law and its structure: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The law and its structure: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-B-FALLS-OFF-AS-1\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-B-FALLS-OFF-AS-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 15,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.biot-savart",
+      "title": "Standard results: Block 1-B, WE-1",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Standard results: Block 1-B, WE-1\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 25,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.biot-savart",
+      "title": "Circular loop results: Block 1-B, WE-2, WE-3",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Circular loop results: Block 1-B, WE-2, WE-3\",\"primitives\":[\"P28\",\"P52\"],\"addresses\":[\"MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 28,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.biot-savart",
+      "title": "Direction and right-hand rule: Block 1-C, Probe B3",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Direction and right-hand rule: Block 1-C, Probe B3\",\"primitives\":[\"P36\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 37,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.biot-savart",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** For an infinite straight wire carrying current I, the magnetic field at distance R is:\n(a) μ₀I/(4πR²) **(b) μ₀I/(2πR)** (c) μ₀IR/(2π) (d) μ₀I/(2R)\n\n**A2 (Short answer):** What is the direction of the magnetic field at the centre of a circular current loop?\n[Along the axis of the loop; direction given by right-hand rule: curl fingers in direction of current, thumb points along B]\n\n**A3 (Fill-in):** The SI constant μ₀ is called _______ and equals _______ T·m/A.\n[Permeability of free space; 4π×10⁻⁷]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** Two long parallel wires carry currents of 5 A (both in the same direction) and are 10 cm apart. Find B at a point 5 cm from each wire (midpoint). What if the currents are in opposite directions?\n[Same direction: B₁ = B₂ = μ₀×5/(2π×0.05) = 2×10⁻⁵ T; fields point opposite directions at midpoint → B_total = 0. Opposite directions: fields add → B_total = 4×10⁻⁵ T]\n\n**B2:** A circular loop of radius R carries current I. How does the field at the centre change if (a) I doubles, (b) R doubles, (c) the loop is replaced by 3 turns?\n[(a) B doubles (∝I); (b) B halves (∝1/R); (c) B triples (∝N)]\n\n**B3:** What is the direction of dB due to a horizontal current element pointing east, at a field point directly above the element?\n[d**l** = east (+x̂); r̂ from element to point above = +ẑ (up); d**l** × r̂ = x̂ × ẑ = −ŷ (south). dB points south.]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** A square loop of side a = 10 cm carries I = 2.0 A. Find B at the centre. [Hint: each side contributes equally by symmetry; for a finite wire of length a at perpendicular distance a/2, B_wire = (μ₀I/4π) × (2/a) × sin45° × 2 = μ₀I√2/(2πa).]\n[Each side: B_side = μ₀I sinθ / (4π × R) integrated; for finite wire of length L at distance d: B = (μ₀I/4πd)(sinθ₁ + sinθ₂); for a side of square: d = a/2, θ₁=θ₂=45°: B_side = (μ₀I/4π)(1/(a/2))(2×sin45°) = (μ₀I/4π)(2/a)(√2) = μ₀I√2/(4πa). Four sides: B_total = 4 × μ₀I√2/(4πa) = μ₀I√2/(πa) = 4π×10⁻⁷×2×1.414/(π×0.10) = **1.13×10⁻⁵ × 2/0.1** ... = 4√2 × μ₀I/(4πa) ... Let me compute directly: B = 4×(4π×10⁻⁷×2/(4π×0.05))×sin45° = 4×(10⁻⁷×2/0.05)×0.707 = 4×4×10⁻⁶×0.707 = 1.13×10⁻⁵ T]\n\n**C2 (Synthesis):** Explain why Ampere's law is more useful than Biot-Savart for calculating the field of an infinite solenoid, but Biot-Savart is necessary for a short solenoid.\n[Infinite solenoid has translational symmetry: B is uniform inside, zero outside, tangential component = 0. Ampere's law ∮B·dl = μ₀I_enc with rectangular loop gives B = μ₀nI in one step. Short solenoid: no perfect symmetry; the field bulges at the ends; B varies along axis. Must integrate Biot-Savart for each current element; Ampere's law alone cannot handle this geometry without the symmetry assumption.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 168,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.biot-savart",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks 1/r²) | Deploy MC-B-FALLS-OFF-AS-1/R-SQUARED; show integration from −∞ to +∞ step by step |\n| Probe B3 wrong direction | Redo right-hand rule with explicit coordinate axes; compute x̂×ẑ = −ŷ symbolically |\n| Probe B1 wrong (same-direction cancellation) | Draw both wire fields at midpoint; show they point in opposite directions → cancel |\n| Probe C1 square loop | Decompose into 4 finite wires; use finite-wire formula for each side |\n| Student asks how Ampere's law relates | Preview: Ampere's law ∮B·dl = μ₀I_enc is a macroscopic consequence of Biot-Savart; exact same physics, different calculation strategy |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B-FALLS-OFF-AS-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 278,
+        "endLine": 290
+      }
+    },
+    {
+      "assetId": "phys.em.biot-savart/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.biot-savart",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we learn to calculate the magnetic field produced by any current — the fundamental law that underpins MRI machines, electrical motors, and particle physics detectors.\"\n\n[P41 — Diagnostic]\n\"You know a long wire creates a magnetic field. Can you write the formula for B at distance R from a wire carrying current I?\"\n→ Correct (B = μ₀I/(2πR)): \"Good — today we derive this from first principles.\"\n→ Incorrect: \"Let's build it element by element.\"\n\n[P06 — Concrete anchor]\n\"Every tiny piece of wire acts like a tiny magnet. Biot-Savart law tells us how strong each piece's contribution is and in which direction. Then we add all contributions up — like vector gravity from many masses.\"\n\n[TA-1 — The law and its structure: Block 1-A]\n\"dB = (μ₀/4π)(I dl sinθ)/r². Analogy with Coulomb. Cross product gives direction.\"\n\n[P28 — Conflict evidence for MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES]\n\"WE-1 result: B = μ₀I/(2πR) ∝ 1/R for an infinite wire — NOT 1/R². That 1/r² from a single element integrated over an infinite line gives 1/r. The geometry of the source completely changes the fall-off.\"\n\n[P51 — Check-in]\n\"For a point source: dB ∝ ? For an infinite wire: B ∝ ? For a magnetic dipole far away: B ∝ ?\"\n[1/r²; 1/r; 1/r³]\n\n[TA-2 — Standard results: Block 1-B, WE-1]\n\"Infinite wire: B = μ₀I/(2πR). Two-wire calculation with fields adding or cancelling.\"\n\n[TA-3 — Circular loop results: Block 1-B, WE-2, WE-3]\n\"Centre: B = μ₀I/(2R). On-axis: B = μ₀IR²/[2(R²+x²)^{3/2}]. Far field → dipole ∝ 1/x³.\"\n\n[P52 — Narrow]\n\"Three formulas to memorise: Biot-Savart element; B_wire = μ₀I/(2πR); B_loop_centre = μ₀I/(2R).\"\n\n[P28 — Conflict evidence for MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE]\n\"Strictly for steady currents. Single moving charge: B = (μ₀/4π)qv×r̂/r² is valid for v<<c — a useful formula, but derived from and secondary to the fundamental law for currents.\"\n\n[TA-4 — Direction and right-hand rule: Block 1-C, Probe B3]\n\n[P62 — Retrieval seed]\n\"Write from memory: Biot-Savart formula, B for infinite wire, B at loop centre, and why 1/r² is not universal.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Biot-Savart: dB = (μ₀/4π)(I dl × r̂)/r². Integrating over a wire geometry gives different r-dependences. Two key results: B=μ₀I/(2πR) for wire; B=μ₀I/(2R) at loop centre. Next: Ampere's law — a shortcut when symmetry is high.\"\n\n[P85 — Regulation tail]\n\"Shakiest part: the cross-product direction rule, the integration to get 1/r for a wire, or the on-axis loop formula?\"\n\n[P89 — Retrieval schedule]\n\"Return in 1 day for the two-wire probe.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.biot-savart.md",
+        "startLine": 223,
+        "endLine": 278
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

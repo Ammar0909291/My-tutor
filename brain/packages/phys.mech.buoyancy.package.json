@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.buoyancy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.buoyancy",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:33330ade81e45ff3fa526709c1168d0fd4713a7ba7e8b18a36d6b0a602619b8d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.buoyancy.md": "sha256:ae3010e3b7ed1cf308265900c6589d13662f71a8f39c81225750f16bfb33da88"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.buoyancy",
+    "name": "Buoyancy and Archimedes' Principle",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.pressure-fluids"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.buoyancy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.buoyancy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.buoyancy.md": "sha256:ae3010e3b7ed1cf308265900c6589d13662f71a8f39c81225750f16bfb33da88"
+      },
+      "contentHash": "sha256:dab170dbacbab4e1abf6e33071877bcac457e37f0c018a8adb1f3f935d926822",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.buoyancy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.buoyancy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.buoyancy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.buoyancy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.buoyancy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.buoyancy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.buoyancy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.buoyancy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.buoyancy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.buoyancy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.buoyancy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.buoyancy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.buoyancy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.buoyancy.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.buoyancy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.buoyancy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.buoyancy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.buoyancy.md#TA-5 (addresses MC-BUOYANCY-WEIGHT, MC-BUOYANCY-PROPORTIONAL-TO-DEPTH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.buoyancy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.buoyancy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.buoyancy/misconception/MC-BUOYANCY-WEIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "- **Trigger signal:** Student says \"heavier objects sink, lighter objects float\" without reference to density, or believes a 1 kg steel ball sinks because it weighs more than a 1 kg foam ball.",
+      "content": "### MC-BUOYANCY-WEIGHT\n- **Trigger signal:** Student says \"heavier objects sink, lighter objects float\" without reference to density, or believes a 1 kg steel ball sinks because it weighs more than a 1 kg foam ball.\n- **Conflict evidence [P28]:** \"A 1 kg steel ball sinks; a 1000 kg steel ship floats. The ship is 1000× heavier yet it floats. What's different? The ship is hollow — its average density (total mass / total volume including air) is less than water's density. Buoyancy depends on displaced volume (and fluid density), not the object's weight. A 1 kg ball of polystyrene floats because its density is less than water; a 1 kg steel ball sinks because its density exceeds water.\"\n- **Bridge text [P30]:** \"An object floats when its average density < fluid density; sinks when its average density > fluid density. Average density = total mass / total volume (including hollow spaces). Archimedes' principle: buoyant force = weight of fluid displaced = ρ_fluid × V_displaced × g.\"\n- **Replacement text [P31]:** \"Floating/sinking is determined by density comparison, not weight comparison. A ship floats because its average density (total mass including air in hull / total volume) < ρ_water. F_buoy = ρ_fluid × V_submerged × g — depends on fluid density and submerged volume, not the object's weight.\"\n- **Discrimination pairs [P33]:**\n  - Steel ball (7800 kg/m³): ρ > ρ_water → sinks ✓\n  - Steel ship: average density < 1000 kg/m³ (mostly air) → floats ✓\n  - 10 kg wood plank vs. 1 kg steel marble: wood floats (ρ_wood ≈ 600), marble sinks (ρ_steel ≈ 7800) — heavier object floats ✓\n- **s6_path:** \"Ships carrying thousands of tonnes of cargo can float — because density is about shape and hollow space, not just mass. Once you see it as density comparison, everything clicks.\"\n\n---",
+      "localKey": "MC-BUOYANCY-WEIGHT",
+      "language": "en",
+      "refs": [
+        "MC-BUOYANCY-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/misconception/MC-BUOYANCY-PROPORTIONAL-TO-DEPTH",
+      "kind": "misconception",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "- **Trigger signal:** Student says \"an object that sinks deeper experiences more buoyancy\" or expects F_buoy to increase as the object sinks further.",
+      "content": "### MC-BUOYANCY-PROPORTIONAL-TO-DEPTH\n- **Trigger signal:** Student says \"an object that sinks deeper experiences more buoyancy\" or expects F_buoy to increase as the object sinks further.\n- **Conflict evidence [P28]:** \"F_buoy = ρ_fluid × V_submerged × g. For a fully submerged rigid object, V_submerged = V_object (constant, regardless of depth). The pressure on the top face increases with depth; the pressure on the bottom face increases by the same amount; the difference (which gives buoyancy) stays constant. Only if the object compresses (like a gas-filled balloon) does the buoyancy change with depth.\"\n- **Bridge text [P30]:** \"Buoyancy = pressure_bottom × A − pressure_top × A = ρg(h_bottom − h_top)A = ρg × V_object. Once the object is fully submerged, h_bottom − h_top = object height = constant → buoyancy is constant.\"\n- **Replacement text [P31]:** \"F_buoy = ρ_fluid × V_submerged × g. For a rigid, fully submerged object, F_buoy is constant regardless of depth. Depth only matters for compressible objects (balloons, fish swim bladders).\"\n- **Discrimination pairs [P33]:**\n  - Rigid steel cube at 1 m depth: F_buoy = ρ_water × V_cube × g ✓\n  - Same cube at 10 m depth: F_buoy = same ρ_water × V_cube × g (unchanged) ✓\n- **s6_path:** \"Buoyancy is about how much fluid the object displaces — which equals its own volume for rigid objects. Going deeper doesn't make it displace more fluid.\"\n\n---",
+      "localKey": "MC-BUOYANCY-PROPORTIONAL-TO-DEPTH",
+      "language": "en",
+      "refs": [
+        "MC-BUOYANCY-PROPORTIONAL-TO-DEPTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "Archimedes' Principle",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Archimedes' Principle\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 77,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "Floating, Sinking, and Neutral Buoyancy",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Floating, Sinking, and Neutral Buoyancy\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 92,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "Apparent Weight",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Apparent Weight\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 110,
+        "endLine": 128
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "Buoyancy in Gases",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Buoyancy in Gases\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 128,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "Hydrometer and Density Measurement",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Hydrometer and Density Measurement\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-BUOYANCY-PROPORTIONAL-TO-DEPTH\",\"MC-BUOYANCY-WEIGHT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-BUOYANCY-WEIGHT",
+        "MC-BUOYANCY-PROPORTIONAL-TO-DEPTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 142,
+        "endLine": 302
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Float or sink?**\n\"An object has mass 2 kg and volume 2.5 × 10⁻³ m³. Does it float or sink in water? In oil (ρ_oil = 800 kg/m³)?\"\n\n*Target:* ρ_object = 2/2.5×10⁻³ = 800 kg/m³. In water (1000 kg/m³): floats (ρ_obj < ρ_fluid). In oil (800 kg/m³): ρ_obj = ρ_oil → neutral buoyancy. On the water/oil interface, it sits at the boundary.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 198,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Apparent weight**\n\"A 5 kg stone is weighed using a spring balance while submerged in water. The balance reads 31.4 N. What is the stone's density?\"\n\n*Target:* W_actual = 5×9.8 = 49 N; F_buoy = 49 − 31.4 = 17.6 N; V = F_buoy/(ρ_water×g) = 17.6/(1000×9.8) = 1.796×10⁻³ m³; ρ_stone = m/V = 5/1.796×10⁻³ = 2784 kg/m³ (close to granite).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 198,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Iceberg**\n\"Ice density = 917 kg/m³, seawater density = 1025 kg/m³. What fraction of an iceberg is above the surface?\"\n\n*Target:* Fraction submerged = 917/1025 = 0.895 → fraction above = 1 − 0.895 = 10.5% above surface.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 198,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Depth independence**\n\"A 1 kg steel cube (V = 128 cm³ = 1.28 × 10⁻⁴ m³) is at 5 m depth, then lowered to 20 m depth. Compare F_buoy at both depths.\"\n\n*Target:* F_buoy = ρ_water × V × g = 1000 × 1.28×10⁻⁴ × 9.8 = 1.25 N at BOTH depths (rigid body, constant V → constant F_buoy). Depth doesn't matter.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 198,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: ship loading**\n\"A rectangular steel ship hull (L=50 m, W=10 m, originally 1 m deep draft) is loaded with cargo. If the loaded ship has total mass 1,200,000 kg, what is the new draft (depth of hull below waterline)?\"\n\n*Target:* F_buoy = weight → ρ_water × L × W × d × g = Mg; d = M/(ρ_water × L × W) = 1.2×10⁶/(1000×50×10) = 2.4 m.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 198,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "phys.mech.buoyancy/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.buoyancy",
+      "title": "Adaptive Flags",
+      "content": "- **Density of fluid, not object**: the buoyant force formula contains ρ_fluid, not ρ_object. Students repeatedly substitute the wrong density. Always label clearly.\n- **Partial vs. full submersion**: for floating objects, V_displaced < V_object (only the submerged fraction counts). For fully submerged objects, V_displaced = V_object. The calculation is different — confirm which situation applies before substituting.\n- **Apparent weight sign**: if ρ_object < ρ_fluid, apparent weight = negative → object accelerates upward. In practice, for objects that \"float up\" we say F_net = F_buoy − mg upward.\n- **Hydrometer reversal** (TA-5): less dense liquid → sinks lower (more V needed to displace enough fluid weight). This is counter to naive expectation (\"denser liquid → sink more\"). Spend explicit time on this reversal.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.buoyancy.md",
+        "startLine": 264,
+        "endLine": 273
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

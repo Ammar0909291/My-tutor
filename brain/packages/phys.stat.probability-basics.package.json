@@ -1,0 +1,617 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.probability-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.probability-basics",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:ceefc6d64dac4e28a3963e5a3bcddbcbd0efe0e95534fc775284ba5b8435cfcf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.probability-basics.md": "sha256:3ffbc1c4c586d95814817afbc19eea120acc8ce31fbe31d9a9650660de21dfe5"
+    },
+    "assetCount": 25,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 8,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "phys.stat.probability-basics",
+    "name": "Probability Distributions in Physics",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.therm.kinetic-theory",
+      "phys.therm.entropy"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.probability-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.probability-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.probability-basics.md": "sha256:3ffbc1c4c586d95814817afbc19eea120acc8ce31fbe31d9a9650660de21dfe5"
+      },
+      "contentHash": "sha256:23b66ec47b943eb4d42321925130d8d448024172b03ce8b7d9adcf0fed3a091d",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.probability-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.probability-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.probability-basics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.probability-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.probability-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.probability-basics\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.probability-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-3 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.probability-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.probability-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.probability-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.probability-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.probability-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.probability-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-5 (addresses MC-1, MC-2, MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE, MC-ENTROPY-MEANS-DISORDER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.probability-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.probability-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.probability-basics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-6 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.probability-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.probability-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.probability-basics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.probability-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.probability-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.probability-basics.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.probability-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.probability-basics\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.probability-basics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Probability Distributions in Physics — core explanation",
+      "content": "**Core Insight:** Statistical mechanics describes the macroscopic behaviour of matter through\nprobability distributions over microscopic states. Three foundational concepts:  \n1. **Microstates and Macrostates:** A macrostate (e.g., a gas at temperature T) corresponds to\n   an enormous number of indistinguishable microstates.  \n2. **The Fundamental Postulate:** All accessible microstates of an isolated system are equally\n   probable.  \n3. **Entropy as Probability:** The entropy S = k_B ln Ω, where Ω is the number of microstates\n   corresponding to a macrostate. The second law of thermodynamics follows: systems evolve toward\n   the macrostate with the most microstates.\n\nMastery means: (a) computing simple Ω values for small systems, (b) applying S = k_B ln Ω,\n(c) explaining the second law probabilistically, (d) recognising that irreversibility is a\nconsequence of combinatorics, not a fundamental law of microscopic physics.\n\n**The Central Equation:**  \n  S = k_B ln Ω  (Boltzmann, carved on his grave in Vienna)  \nwhere k_B = 1.381 × 10⁻²³ J/K and Ω = number of accessible microstates.\n\n**Why This Is Profound:** Thermodynamics (second law) tells us heat flows from hot to cold and\ntime has a direction. Statistical mechanics explains why: not because it is impossible for heat to\nflow the wrong way, but because the probability of doing so for a macroscopic system is\n10^(10²³) times smaller than the other direction. The arrow of time is a statistical consequence\nof the combinatorics of large numbers, not a microscopic law.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 24,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "**Probe:** \"Is it theoretically possible — even if fantastically unlikely — for all the air",
+      "content": "",
+      "localKey": "MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE",
+      "language": "en",
+      "refs": [
+        "MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "**Probe:** \"Is it theoretically possible — even if fantastically unlikely — for all the air",
+      "content": "### MC-1: MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE\n**Probe:** \"Is it theoretically possible — even if fantastically unlikely — for all the air\nmolecules in this room to spontaneously rush into one corner, leaving you in a vacuum?\"  \n**Characteristic phrase:** \"That's impossible — the second law forbids it.\"  \n**Trigger:** Treating the second law as a fundamental mechanical constraint rather than a\nstatistical statement.  \n**Conflict evidence [P28]:** The second law has no microscopic mechanism that prevents spontaneous\nordering. Each molecule follows Newton's laws, which are time-reversible. A video of gas molecules\ncolliding, reversed, still shows valid collisions. The second law is a probability statement:\nthe ratio Ω(ordered)/Ω(disordered) ≈ 10^(−10²³) for a macroscopic gas.  \n**Bridge [P30]:** \"It is not impossible — it is fantastically improbable. If every atom in the\nuniverse shuffled the molecules once per second since the Big Bang, you would not have a\nsubstantial probability of seeing this occur. 'Fantastically improbable' and 'impossible' are\ndifferent concepts.\"  \n**Replacement [P31]:** The second law holds not because microscopic reversal is forbidden but\nbecause the number of low-entropy microstates is an exponentially small fraction of all microstates.  \n**Discrimination pairs [P33]:** Gas spontaneously ordering into one corner: (A) forbidden by the\nsecond law (impossible), (B) possible but with probability ≈ 10^(−10²³), (C) equally likely as\nany other state. Correct: (B).  \n**S6 repair path:** TA-3 (microstate counting for small systems) → TA-4 (scaling argument).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-ENTROPY-MEANS-DISORDER",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "**Probe:** \"Ice (crystalline, ordered) has lower entropy than liquid water (disordered). Does this",
+      "content": "",
+      "localKey": "MC-ENTROPY-MEANS-DISORDER",
+      "language": "en",
+      "refs": [
+        "MC-ENTROPY-MEANS-DISORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 24,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "**Probe:** \"Ice (crystalline, ordered) has lower entropy than liquid water (disordered). Does this",
+      "content": "### MC-2: MC-ENTROPY-MEANS-DISORDER\n**Probe:** \"Ice (crystalline, ordered) has lower entropy than liquid water (disordered). Does this\nprove that high entropy always means disordered structures?\"  \n**Characteristic phrase:** \"High entropy = messy, low entropy = organised.\"  \n**Trigger:** Pedagogical shortcut from most introductory courses.  \n**Conflict evidence [P28]:** Crystals CAN have higher entropy than liquids in some systems (e.g.,\nhard-sphere colloids, liquid crystal transitions). \"Disorder\" as a concept has no mathematical\ndefinition in thermodynamics. S = k_B ln Ω always works; \"disorder\" sometimes gives the wrong\nprediction.  \n**Bridge [P30]:** \"The disorder heuristic works for most everyday systems and is why it persists.\nBut 'disorder' is a vague human concept. S = k_B ln Ω counts microstates. If ordered arrangements\nhave more microstates (as in some colloid systems), the 'ordered' macrostate has higher entropy.\nUse the formula, not the metaphor.\"  \n**Replacement [P31]:** S = k_B ln Ω is the definition of entropy; it has nothing to do with\n\"disorder\" as a visual concept.  \n**Discrimination pairs [P33]:** Entropy is: (A) a measure of disorder, (B) k_B ln Ω (count of\nmicrostates), (C) a measure of heat content. Correct: (B).  \n**S6 repair path:** TA-2 (direct microstate counting, no disorder language used).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 24,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "**Probe:** \"Why do we assume all accessible microstates are equally probable? Isn't that just an",
+      "content": "",
+      "localKey": "MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF",
+      "language": "en",
+      "refs": [
+        "MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 43,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "**Probe:** \"Why do we assume all accessible microstates are equally probable? Isn't that just an",
+      "content": "### MC-3: MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF\n**Probe:** \"Why do we assume all accessible microstates are equally probable? Isn't that just an\nassumption?\"  \n**Characteristic phrase:** \"You can't just assume equal probability — that needs proof.\"  \n**Trigger:** Students apply \"prove everything from first principles\" heuristic; the postulate feels\narbitrary.  \n**Conflict evidence [P28]:** The fundamental postulate (equal probability of accessible\nmicrostates for an isolated system) cannot be derived from mechanics alone — it is a postulate,\nchosen because: (1) no microscopic mechanism distinguishes microstates, (2) all predictions from\nit match experiment, (3) in ergodic systems, time-averaging equals ensemble averaging (ergodic\nhypothesis provides partial grounding). Its justification is its predictive success.  \n**Bridge [P30]:** \"You are right — it is a postulate. So is Newton's second law. We accept\npostulates when they generate verified predictions. S = k_B ln Ω from this postulate reproduces\nall thermodynamic results. Every prediction we can test has been confirmed. The postulate stands\nbecause nature behaves as if it is true.\"  \n**Replacement [P31]:** The equal-probability postulate is an axiom of statistical mechanics,\njustified by its predictive accuracy, not derived from mechanics.  \n**Discrimination pairs [P33]:** Equal probability of microstates is: (A) provable from Newton's\nlaws, (B) an axiom justified by experimental success, (C) an approximation valid only at high\ntemperatures. Correct: (B).  \n**S6 repair path:** TA-5 (examples where the postulate gives quantitatively correct predictions).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 43,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "**Probe:** \"In the 4-molecule box example, (2,2) distribution has probability 37.5%. Is there a",
+      "content": "",
+      "localKey": "MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS",
+      "language": "en",
+      "refs": [
+        "MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "**Probe:** \"In the 4-molecule box example, (2,2) distribution has probability 37.5%. Is there a",
+      "content": "### MC-4: MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS\n**Probe:** \"In the 4-molecule box example, (2,2) distribution has probability 37.5%. Is there a\nmeaningful chance the gas is in the (4,0) state? What about for 10²³ molecules?\"  \n**Characteristic phrase:** \"There's always some probability — so the gas might be ordered.\"  \n**Trigger:** Small-system intuition carried into large-system reasoning without appreciating the\ncombinatorial explosion.  \n**Conflict evidence [P28]:** For N molecules in a 2-box system: Ω((N/2, N/2)) / Ω(N, 0) =\nC(N, N/2) / 1 = N! / ((N/2)!)². Using Stirling: this ratio ≈ 2^N / √(πN/2). For N = 10²³:\nthis is 2^(10²³) — a number with 10²² digits. The probability of all molecules being in one box\nis 1/2^(10²³) — effectively zero.  \n**Bridge [P30]:** \"37.5% for 4 molecules becomes 1 in 10^(10²²) for a gas. 'Small but\nnonzero' becomes 'never in the lifetime of the universe.' This is why statistical statements\nabout macro-systems are effectively laws.\"  \n**Replacement [P31]:** For macroscopic N, probability fluctuations are proportional to 1/√N\nand peak probabilities are sharply concentrated at the most probable macrostate.  \n**Discrimination pairs [P33]:** For 10²³ molecules, the probability of (all left, none right): (A)\n37.5% (by analogy with 4-molecule case), (B) 1/2^(10²³) ≈ 0, (C) 50% (random walk). Correct: (B).  \n**S6 repair path:** TA-4 (scaling argument: show how probability ratio changes as N increases\nfrom 4 to 10²³).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 65,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 3,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Microstate Counting",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Microstate Counting\",\"primitives\":[\"P14\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 10,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Scaling Argument",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Scaling Argument\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 16,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Boltzmann Entropy Formula",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Boltzmann Entropy Formula\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 25,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "MC-1 & MC-2 Diagnostics",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-1 & MC-2 Diagnostics\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-ENTROPY-MEANS-DISORDER\",\"MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE",
+        "MC-ENTROPY-MEANS-DISORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 32,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Fundamental Postulate Discussion",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Fundamental Postulate Discussion\",\"primitives\":[\"P14\",\"P30\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 38,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Entropy Calculation Practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Entropy Calculation Practice\",\"primitives\":[\"P50\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 44,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Closure & Self-Assessment",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Closure & Self-Assessment\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 50,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.80):**  \nPass criteria — student correctly:  \n(a) States the fundamental postulate of statistical mechanics  \n(b) Counts Ω for a small system (≤ 6 particles) using combinatorics  \n(c) Applies S = k_B ln Ω to compute entropy and entropy changes  \n(d) Explains the second law as a consequence of overwhelmingly higher Ω for high-entropy states  \nFailure on (a) → TA-6. Failure on (b) → TA-2 repeated. Failure on (c) → TA-4/TA-7. Failure\non (d) → TA-3 + TA-5.\n\n**Formative Golden Probe (FA-1):**  \n\"A system of 6 particles can each be in one of two states (up/down). How many microstates\nare there in total? How many microstates correspond to the macrostate with exactly 3 up?\nWhat is the probability of this macrostate? What is its entropy?\"  \nExpected: Total = 2⁶ = 64. Ω(3,3) = C(6,3) = 20. P = 20/64 = 31.25%.\nS = k_B ln 20 = 1.38×10⁻²³ × ln 20 = 1.38×10⁻²³ × 3.0 = 4.14×10⁻²³ J/K.  \nThreshold: All four quantities correct.\n\n**Formative Golden Probe (FA-2):**  \n\"System A has Ω_A = 10¹⁸ and system B has Ω_B = 10¹². They combine to form an isolated system.\n(a) What is the total entropy of the combined system? (b) Which system contributes more to the\nentropy? (c) If the combined system evolves to a macrostate with Ω_combined = 10²⁵, is this\nconsistent with the second law?\"  \nExpected: (a) S_total = k_B(ln 10¹⁸ + ln 10¹²) = k_B ln 10³⁰. (b) A contributes more\n(larger Ω). (c) S increased (Ω went from 10³⁰ to 10²⁵ — wait, 10²⁵ < 10³⁰ — this DECREASES\nentropy and violates the second law for an isolated system).  \nThreshold: (a) and (b) correct; (c) correctly identifies violation.\n\n**Formative Golden Probe (FA-3):**  \n\"Explain without formulas why a gas in one half of a box spontaneously expands to fill the whole\nbox but never spontaneously contracts back.\"  \nExpected: The expanded state has far more microstates (Ω) than the concentrated state. The\nfundamental postulate says all microstates are equally likely. There are so many more spread-out\nmicrostates that the system is overwhelmingly likely to be in a spread-out state.\nThe second law (ΔS ≥ 0) follows from this counting argument.  \nThreshold: Fundamental postulate named; counting/Ω argument explicitly used; no appeal to a\n\"force.\"\n\n**Formative Golden Probe (FA-4):**  \n\"A student says: 'Ice spontaneously freezing from water at room temperature violates the second\nlaw, because ice is more ordered.' Evaluate this claim carefully.\"  \nExpected: Ice does not spontaneously freeze at room temperature — this violates the second law\nfor the system alone. Ice at room temperature would melt, increasing entropy. The claim is\nactually correct that spontaneous freezing at room temperature is forbidden, but wrong to use\n\"disorder\" as the explanation. The correct explanation: Ω(liquid) >> Ω(solid) at room temp,\nso the liquid state has much higher entropy; the system moves toward liquid.  \nThreshold: \"Disorder\" correctly identified as insufficient; Ω argument used correctly.\n\n**Confidence Calibration:** After FA-3, ask: \"How confident were you that you could give a\ncorrect microstate-counting explanation without equations?\" Persistent underconfidence on verbal\nexplanations is common and should be flagged.\n\n**Delayed Retrieval (Session + 4 days):**  \n\"Without notes: state the fundamental postulate. Give one example where the 'entropy = disorder'\nmetaphor could mislead. Compute the entropy of a system with Ω = 10¹⁵.\"  \nThreshold: All three answered correctly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 364,
+        "endLine": 424
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nShuffle a new deck of cards. The probability of restoring the original factory order is 1/52! ≈\n10⁻⁶⁸. You could shuffle for the age of the universe and never restore it. Scale this to a\ngas with 10²³ molecules. The \"wrong direction\" macrostate (all molecules in one corner) has\nvastly fewer microstates than the \"mixed\" state — so mixed is overwhelmingly likely. This is\nentropy: counting arrangements.\n\n**Stage 2 — Representational (R)**  \nTwo boxes, 4 molecules. Possible macrostates: (4,0), (3,1), (2,2), (1,3), (0,4). Count the\nmicrostates:  \n- (4,0): C(4,0) = 1  \n- (3,1): C(4,1) = 4  \n- (2,2): C(4,2) = 6  \n- (1,3): C(4,3) = 4  \n- (0,4): C(4,4) = 1  \nTotal = 16. The (2,2) macrostate has probability 6/16 = 37.5% — far more probable than (4,0)\nwhich has 1/16 = 6.25%. With 10²³ molecules, the probability of (2,2) becomes overwhelming.\n\n**Stage 3 — Abstract (A)**  \nΩ(macrostate) = the number of microstates in that macrostate. S = k_B ln Ω. For the (2,2)\nmacrostate: S = k_B ln 6. For (4,0): S = k_B ln 1 = 0. The (2,2) state has higher entropy.\nThe thermodynamic entropy of the gas is the entropy of the most probable macrostate (which also\napproximates the average, because probability peaks sharply for large N). The second law: ΔS ≥ 0\nfor an isolated system = system evolves toward higher Ω = system evolves toward higher probability.\n\n**Stage 4 — Transfer (T)**  \nThe fundamental postulate + S = k_B ln Ω implies the Maxwell-Boltzmann distribution (next\nconcept), the Boltzmann factor e^{−E/k_BT}, and all thermodynamic equations of state for ideal\ngases. The same framework, applied to quantum particles, gives Fermi-Dirac statistics (electrons)\nand Bose-Einstein statistics (photons, helium-4 atoms) — the foundations of condensed matter\nphysics and quantum optics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 52,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Why Beginners Fail",
+      "content": "1. **Treating the second law as a microscopic law:** Students believe \"heat cannot flow from cold\n   to hot\" is like Newton's laws — absolute, fundamental, mechanical. Learning that it is merely\n   overwhelmingly improbable (not impossible) is conceptually challenging.\n\n2. **Confusing microstate with macrostate:** Students treat the observable properties of the gas\n   (T, P, V) as \"the state\" of the system. They need to accept that one macrostate corresponds\n   to an astronomical number of indistinguishable microscopic configurations.\n\n3. **Entropy as \"disorder\":** The popular \"disorder\" metaphor is misleading — students learn that\n   high entropy = messy and low entropy = organised, but this gives no predictive power. S = k_B\n   ln Ω is quantitative; \"disorder\" is not.\n\n4. **Small-system intuition failure:** The 4-molecule example shows probabilities (6/16 = 37.5%\n   for (2,2)) that feel meaningful. With 10²³ molecules, the same ratio becomes 10^(10²³) to 1.\n   Students do not appreciate the combinatorial explosion and do not understand why macro-systems\n   are deterministic while micro-systems are probabilistic.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 88,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Look at the dye spreading in water. Nobody ever sees it pull back together.\nNot because a force prevents it — there is no 'entropy force' in Newton's laws. The reason is\ncounting. There are 10^(10²³) ways for the dye to be spread out, and one way for it to be\nconcentrated. The spread-out state wins — not by a law, but by an absurdity of numbers.\"\n\n**Key explanatory moves:**\n- \"Macrostate: what you see (T, P, V, colour distribution). Microstate: where exactly each\n  molecule is and how fast it is going. One macrostate = astronomical number of microstates.\"\n- \"S = k_B ln Ω: entropy is just counting. The more ways a macrostate can occur, the higher\n  its entropy. ΔS ≥ 0 means: systems move toward more-ways-to-happen states.\"\n- \"The second law is a statistical law, not a mechanical one. In principle — not in practice —\n  it can be violated. For a macroscopic system, 'in principle' and 'in practice' are separated\n  by a number with 10²² digits.\"\n\n**Common recovery phrases:**\n- If student says the second law is absolute: \"Show me the microscopic force that pushes entropy\n  up. There is none. Newton's laws are time-reversible. The second law emerges from counting.\"\n- If student uses disorder: \"Replace 'disorder' with k_B ln Ω everywhere in your notes. Now\n  re-read them. Does any statement become unclear? If not, you no longer need the word 'disorder.'\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 340,
+        "endLine": 364
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Recovery Notes",
+      "content": "**S0 (no prior entropy/kinetic theory):** Both phys.therm.kinetic-theory and phys.therm.entropy\nmust be prerequisites. Without kinetic theory, the student has no picture of microstates;\nwithout the thermodynamic definition of entropy, the statistical definition has no connection\nto the larger framework.\n\n**S3 (knows entropy but treats it as absolute disorder):** Replace all \"disorder\" language in\nthe session immediately. Use only counting language: \"Ω is large\" / \"Ω is small.\" The disorder\nmetaphor creates cognitive interference here and must be retired before proceeding.\n\n**S6 (MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE dominant):** Run TA-3 (scaling argument) as a\nnumerical exercise. \"Compute the probability of all 6 coins coming up heads: 1/64 ≈ 1.6%.\nPossible. Now compute 10²³ coins: 1/2^(10²³). Not impossible — just with probability zero for\nany practical purpose.\" The quantitative argument, not the philosophical one, resolves this.\n\n**S9 (plateau — can count microstates but cannot connect to the second law):** The connection is:\nmost probable macrostate = highest Ω macrostate = highest S macrostate. Systems drift toward\nhighest-probability states (by the fundamental postulate). Therefore systems drift toward highest\nS states. S increases = second law. Walk the student through each logical step explicitly.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 424,
+        "endLine": 447
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Conceptual + procedural. The formula S = k_B ln Ω is simple to recall. The\nconceptual understanding (why macro-systems are deterministic, why the second law is statistical)\nrequires repeated exposure and explicit articulation.\n\n**Spaced retrieval plan:**\n- Session + 1 day: \"State the fundamental postulate. State S = k_B ln Ω. What does Ω represent?\"\n  (Declarative check)\n- Session + 5 days: \"5-particle two-box system. Compute Ω for macrostate (3,2) and macrostate\n  (5,0). Compute the entropy of each. Which is more likely? By what ratio?\" (Computational check)\n- Session + 10 days: \"Explain why the second law is a statistical, not mechanical, law. Give a\n  thought experiment that illustrates it.\" (Conceptual articulation under pressure)\n\n**Interleaving partners:** phys.therm.entropy (bridge between thermodynamic and statistical\ndefinitions), phys.stat.boltzmann-factor (applies the statistical framework to energy distributions),\nphys.stat.maxwell-boltzmann (the specific probability distribution for molecular speeds).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 447,
+        "endLine": 467
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Transfer Map",
+      "content": "**Near transfer:**\n- phys.stat.boltzmann-factor: the Boltzmann factor e^{−E/kT} is derived from the equal-probability\n  postulate applied to a system in contact with a heat reservoir\n- phys.stat.maxwell-boltzmann: the specific distribution of molecular speeds in an ideal gas\n- phys.stat.partition-function: the normalization sum underlying all quantum statistical distributions\n\n**Far transfer:**\n- Fermi-Dirac statistics: probability distributions for identical fermions (electrons)\n- Bose-Einstein statistics: probability distributions for identical bosons (photons, helium-4)\n- Information theory: Shannon entropy H = −Σ p_i log p_i is the information-theoretic analogue\n  of S = −k_B Σ p_i ln p_i (Gibbs entropy)\n- Evolutionary biology (loosely): natural selection operates on probability distributions over\n  genotypes; the \"entropy\" of the fitness landscape provides a statistical analogy\n- Financial modeling: maximum entropy methods for portfolio distributions\n\n**Structural abstraction:** The Boltzmann framework — count states, assume equal probability,\nderive distributions — is the universal method of statistical inference whenever:\n(a) microscopic states are not individually tracked, and (b) all states are equally likely\na priori. It appears in machine learning (maximum entropy classifiers), signal processing\n(spectral estimation), and quantum field theory (path integrals).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 467,
+        "endLine": 492
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "Curriculum Feedback",
+      "content": "**Does this concept position correctly in the KG?**  \nYes. Requiring phys.therm.kinetic-theory gives the molecular picture of gas; requiring\nphys.therm.entropy gives the thermodynamic entropy definition that the Boltzmann formula\nexplains. Unlocking phys.stat.boltzmann-factor is correct — it is the quantitative application\nof the foundational framework.\n\n**Missing prerequisite?**  \nCombinatorics (C(n,r) formula) is used heavily in this concept but has no explicit KG node.\nA brief combinatorics primer should be included in the session anchor (TA-2) for students who\nhave not seen it.\n\n**Recommended teaching sequence:** phys.therm.entropy → phys.stat.probability-basics →\nphys.stat.boltzmann-factor → phys.stat.maxwell-boltzmann. These form the statistical mechanics\ncore and should be taught consecutively.\n\n**Asset opportunity:** An interactive microstate counter — set N molecules, drag the macrostate\nslider, see Ω update and S = k_B ln Ω update in real time — would make the combinatorial\nexplosion viscerally clear. This is the highest-impact simulation for the statistical mechanics\ntrack.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 492,
+        "endLine": 516
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

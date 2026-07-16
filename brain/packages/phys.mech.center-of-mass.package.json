@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.center-of-mass-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.center-of-mass",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:9ee211c2acc9bbe495e5df0b64b90346cea1adb343f79f10d17bab0c14ef235a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.center-of-mass.md": "sha256:ca22520afca1df9c529c9f1613a51f44f272eeee012c3923d03bfd298cd36a96"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.center-of-mass",
+    "name": "Center of Mass",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.momentum"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.center-of-mass-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.center-of-mass (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.center-of-mass.md": "sha256:ca22520afca1df9c529c9f1613a51f44f272eeee012c3923d03bfd298cd36a96"
+      },
+      "contentHash": "sha256:7d754c5b53117dc048165d182b2f962b1e2bda524aa16a2ea33af661967066bc",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.center-of-mass.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.center-of-mass.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.center-of-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.center-of-mass\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.center-of-mass.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.center-of-mass.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.center-of-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.center-of-mass\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.center-of-mass.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.center-of-mass.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.center-of-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.center-of-mass\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.center-of-mass.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.center-of-mass.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.center-of-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.center-of-mass\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.center-of-mass.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.center-of-mass.md#TA-5 (addresses MC-COM-IS-GEOMETRIC-CENTRE, MC-COM-VELOCITY-SUM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.center-of-mass"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.center-of-mass\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.center-of-mass/misconception/MC-COM-IS-GEOMETRIC-CENTRE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "- **Trigger signal:** Student places the centre of mass at the geometric centre of an object regardless of mass distribution, or assumes CM always lies inside the object.",
+      "content": "### MC-COM-IS-GEOMETRIC-CENTRE\n- **Trigger signal:** Student places the centre of mass at the geometric centre of an object regardless of mass distribution, or assumes CM always lies inside the object.\n- **Conflict evidence [P28]:** \"A dumbbell: 1 kg mass at x = 0, 9 kg mass at x = 1 m. Geometric centre = 0.5 m. CM = (1×0 + 9×1)/(1+9) = 0.9 m — much closer to the 9 kg end. A boomerang, a ring, or a hollow sphere: the CM lies outside the material entirely (inside the hole/empty region). A uniform object's CM = geometric centre, but any mass asymmetry shifts it.\"\n- **Bridge text [P30]:** \"The CM is a mass-weighted average position, not a geometric average. Heavy parts pull the CM toward them. If the mass distribution is uniform (same density everywhere), CM = geometric centre. Otherwise, use x_CM = Σmᵢxᵢ/Σmᵢ.\"\n- **Replacement text [P31]:** \"x_CM = Σmᵢxᵢ / M (1D); r_CM = Σmᵢrᵢ / M (3D). Heavy masses pull the CM closer to them. For uniform objects, CM = geometric centre. For asymmetric objects or composite systems, calculate explicitly.\"\n- **Discrimination pairs [P33]:**\n  - Uniform rod (1 m): CM at 0.5 m (geometric centre = mass centre) ✓\n  - Rod with heavy end: CM shifted toward heavy end ✓\n  - Ring: CM at centre — inside the empty space ✓ (CM outside material)\n- **s6_path:** \"Think of CM as a balance point — the point you would put a finger under to balance the object. For a lopsided object, that point is closer to the heavy side.\"\n\n---",
+      "localKey": "MC-COM-IS-GEOMETRIC-CENTRE",
+      "language": "en",
+      "refs": [
+        "MC-COM-IS-GEOMETRIC-CENTRE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/misconception/MC-COM-VELOCITY-SUM",
+      "kind": "misconception",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "- **Trigger signal:** Student adds velocities of parts to find CM velocity, without weighting by mass, or confuses CM velocity with total speed.",
+      "content": "### MC-COM-VELOCITY-SUM\n- **Trigger signal:** Student adds velocities of parts to find CM velocity, without weighting by mass, or confuses CM velocity with total speed.\n- **Conflict evidence [P28]:** \"System: m₁ = 1 kg at v₁ = 10 m/s; m₂ = 4 kg at v₂ = 2 m/s. Sum of speeds = 12 m/s. CM velocity = (1×10 + 4×2)/(1+4) = 18/5 = 3.6 m/s. Notice: CM velocity = total momentum / total mass = p_total/M. It's not the average or sum of speeds — it's the momentum-weighted average velocity.\"\n- **Bridge text [P30]:** \"CM velocity v_CM = Σmᵢvᵢ/M = p_total/M. This is why the CM theorem is powerful: the CM of an isolated system moves at constant velocity (Newton's 1st Law applied to the whole system), even while individual parts collide and change velocities.\"\n- **Replacement text [P31]:** \"v_CM = p_total/M. In an isolated system, v_CM is constant (no external forces → no change in p_total → no change in v_CM). Individual parts can do anything internally; the CM glides on undisturbed.\"\n- **Discrimination pairs [P33]:**\n  - Two equal masses moving at 4 m/s and 2 m/s: v_CM = 3 m/s (average, valid here because equal mass) ✓\n  - Unequal masses: must use weighted average, not simple average ✓\n- **s6_path:** \"CM velocity is total momentum divided by total mass. Always. This is also why the CM is the natural reference frame for collision problems.\"\n\n---",
+      "localKey": "MC-COM-VELOCITY-SUM",
+      "language": "en",
+      "refs": [
+        "MC-COM-VELOCITY-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "Definition and Formula",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Definition and Formula\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 76,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "CM Velocity and Newton's 2nd Law for Systems",
+      "content": "{\"id\":\"TA-2\",\"title\":\"CM Velocity and Newton's 2nd Law for Systems\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 95,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "Using the CM Frame (Zero-Momentum Frame)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Using the CM Frame (Zero-Momentum Frame)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 107,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "Composite Objects and Missing Pieces",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Composite Objects and Missing Pieces\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 117,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "CM in Collisions: What Stays Fixed",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CM in Collisions: What Stays Fixed\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-COM-IS-GEOMETRIC-CENTRE\",\"MC-COM-VELOCITY-SUM\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-COM-IS-GEOMETRIC-CENTRE",
+        "MC-COM-VELOCITY-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 129,
+        "endLine": 291
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — CM position**\n\"A 3 kg mass is at x = 2 m and a 9 kg mass is at x = 6 m. Find the CM. Verify: is it closer to the 3 kg or 9 kg mass?\"\n\n*Target:* x_CM = (3×2 + 9×6)/12 = (6+54)/12 = 5 m. Closer to 9 kg mass (at x=6) than 3 kg mass (at x=2) ✓.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 188,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — CM velocity**\n\"Two skaters: A (60 kg, 3 m/s north) and B (40 kg, 2 m/s south). Find v_CM.\"\n\n*Target:* p_total = 60×3 − 40×2 = 180−80 = 100 kg·m/s north; v_CM = 100/100 = 1 m/s north.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 188,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — CM theorem (explosion)**\n\"A 5 kg object at rest explodes into two pieces: 2 kg and 3 kg. The 2 kg piece moves at 9 m/s east. Find the 3 kg piece's velocity. Where is the CM after 4 seconds?\"\n\n*Target:* 0 = 2×9 + 3×v₂ → v₂ = −6 m/s (6 m/s west). CM remains at rest (v_CM = 0, no external forces) — stays at the original position forever.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 188,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Composite shape**\n\"An L-shape consists of: rectangle A (2 kg, CM at (1, 2)) and rectangle B (3 kg, CM at (3, 1)). Find the CM of the L-shape.\"\n\n*Target:* x_CM = (2×1 + 3×3)/5 = 11/5 = 2.2 m; y_CM = (2×2 + 3×1)/5 = 7/5 = 1.4 m.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 188,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — CM in collision**\n\"Before a collision: m₁ = 2 kg at 6 m/s; m₂ = 3 kg at −2 m/s. After (partially inelastic): m₁ at 0.8 m/s. Find m₂'s final velocity. Verify that v_CM is unchanged.\"\n\n*Target:* p_total = 2×6 + 3×(−2) = 6 kg·m/s; v_CM_before = 6/5 = 1.2 m/s. Momentum: 6 = 2×0.8 + 3×v₂f → v₂f = (6−1.6)/3 = 1.47 m/s. v_CM_after = (2×0.8 + 3×1.47)/5 = (1.6+4.41)/5 = 6.01/5 ≈ 1.2 m/s ✓.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 188,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.mech.center-of-mass/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.center-of-mass",
+      "title": "Adaptive Flags",
+      "content": "- **2D extension**: always set up x_CM and y_CM as separate independent calculations; never mix components. Students who have seen 2D kinematics should transfer this habit naturally.\n- **CM outside the material**: this surprises many students. Use a ring or boomerang example explicitly — CM at a point in empty space is physically real (the ring balances on your finger at the centre, even with no material there).\n- **CM frame (TA-3)**: brief introduction only. The full centre-of-mass frame technique with frame transformation is an advanced topic (typically university mechanics). Present it as a conceptual tool, not a required calculation method at this level.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.center-of-mass.md",
+        "startLine": 254,
+        "endLine": 262
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

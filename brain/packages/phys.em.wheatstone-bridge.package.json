@@ -1,0 +1,326 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.wheatstone-bridge-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.wheatstone-bridge",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:a614f7c496e1fd316dd9781b98093b87a6c99f6668d510e3d6a3a57be0c73749",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md": "sha256:79822dc5cf425437561d3a90537133900e46a42a263e9fc100bff4e062238b5e"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.wheatstone-bridge",
+    "name": "Wheatstone Bridge",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.em.kirchhoffs-laws"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.wheatstone-bridge-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.wheatstone-bridge (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md": "sha256:79822dc5cf425437561d3a90537133900e46a42a263e9fc100bff4e062238b5e"
+      },
+      "contentHash": "sha256:0d23a1e64910781ff71de13cf96af6b50b6e6400344d224fba7a43741efd36d7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.wheatstone-bridge.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md#TA-1 (addresses MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.wheatstone-bridge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.wheatstone-bridge\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.wheatstone-bridge.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.wheatstone-bridge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.wheatstone-bridge\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.wheatstone-bridge.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.wheatstone-bridge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.wheatstone-bridge\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.wheatstone-bridge.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.wheatstone-bridge"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.wheatstone-bridge\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.wheatstone-bridge/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "Finding Unknown Resistance at Balance",
+      "content": "### WE-1 — Finding Unknown Resistance at Balance\n**Problem:** In a Wheatstone bridge: P = 100 Ω, Q = 10 Ω, R = 47 Ω. The galvanometer reads zero. Find X.\n\n**Solution:**\nBalance condition: P/Q = R/X → X = QR/P  \nX = (10 × 47) / 100 = **4.7 Ω**\n\nVerify: P×X = 100 × 4.7 = 470; Q×R = 10 × 47 = 470 ✓\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 71,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "Metre Bridge Calculation",
+      "content": "### WE-2 — Metre Bridge Calculation\n**Problem:** In a metre bridge, R = 10 Ω. Balance is achieved at l = 60 cm. Find X.\n\n**Solution:**\nX = R × l / (100 − l) = 10 × 60 / (100 − 60) = 600 / 40 = **15 Ω**\n\nVerify: P/Q = 60/40 = 1.5; R/X = 10/15 = 0.667 — not equal? Recheck: P ∝ l = 60, Q ∝ (100−l) = 40; P/Q = 60/40 = 1.5; X = QR/P → wait, the formula is X/R = (100−l)/l. Let me re-derive:\n\nStandard metre bridge: the known R is in the right gap. At balance: R_left/R_right = l/(100−l), where R_left = X (unknown) in left gap.\nX/R = l/(100−l) → X = R × l/(100−l) = 10 × 60/40 = **15 Ω** ✓\n\nCross-check: 15/10 = 1.5; 60/40 = 1.5 ✓\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 71,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "Finding Galvanometer Current (Unbalanced Bridge)",
+      "content": "### WE-3 — Finding Galvanometer Current (Unbalanced Bridge)\n**Problem:** Bridge with P=100Ω, Q=100Ω, R=100Ω, X=110Ω, G=50Ω, ε=5V. Is the bridge balanced? Find the direction of galvanometer deflection.\n\n**Solution:**\nCheck balance: P/Q = 100/100 = 1; R/X = 100/110 = 0.909. Not balanced (P/Q ≠ R/X), so G reads non-zero.\n\nPotential at B (left midpoint): V_B = ε × Q/(P+Q) = 5 × 100/200 = 2.5 V  \nPotential at D (right midpoint): V_D = ε × X/(R+X) = 5 × 110/210 = 2.619 V\n\nV_D > V_B → D is at higher potential → current flows D→G→B (from D through galvanometer to B).\n\nThis shows X > R×Q/P → bridge imbalanced; X needs to decrease (or R increase) to balance.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 71,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/misconception/MC-WHEATSTONE-BRIDGE-MEASURES-EMF",
+      "kind": "misconception",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "- **trigger_signal:** Student thinks the bridge measures the battery voltage, or believes the EMF value matters for the result.",
+      "content": "### MC-WHEATSTONE-BRIDGE-MEASURES-EMF\n- **trigger_signal:** Student thinks the bridge measures the battery voltage, or believes the EMF value matters for the result.\n- **conflict_evidence [P28]:** \"At balance, the galvanometer reads zero — no current flows through it. Look at the balance equation X = QR/P: EMF doesn't appear anywhere. Even if you doubled the battery voltage, the balance point doesn't change. The result is purely about resistance ratios.\"\n- **bridge_text [P30]:** \"The Wheatstone bridge is a null measurement — like balancing a scale. You don't need to know how hard gravity pulls; you just adjust until the two sides are equal. Similarly, you don't need to know ε; you just adjust until the galvanometer reads zero.\"\n- **replacement_text [P31]:** \"The balance condition X = QR/P depends only on resistance ratios, not on EMF or galvanometer resistance. The battery drives current; the null condition is independent of how much.\"\n- **discrimination_pairs [P33]:**\n  - Ohm's law method (V=IR): needs accurate V and I measurements → depends on meter accuracy\n  - Wheatstone bridge: null method → depends only on resistance ratios → much more precise\n- **s6_path:** Return to balance condition derivation (Block 1-A); show algebraically that ε cancels.\n\n---",
+      "localKey": "MC-WHEATSTONE-BRIDGE-MEASURES-EMF",
+      "language": "en",
+      "refs": [
+        "MC-WHEATSTONE-BRIDGE-MEASURES-EMF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/misconception/MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS",
+      "kind": "misconception",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "- **trigger_signal:** Student says \"the bridge balances when P=Q=R=X\" or thinks all four resistors must be equal.",
+      "content": "### MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS\n- **trigger_signal:** Student says \"the bridge balances when P=Q=R=X\" or thinks all four resistors must be equal.\n- **conflict_evidence [P28]:** \"WE-1: P=100Ω, Q=10Ω, R=47Ω, X=4.7Ω — four different values, yet balance condition P/Q=R/X gives 100/10=47/4.7=10. Balance is about ratios, not equality.\"\n- **bridge_text [P30]:** \"Think of it as a proportion: P:Q must equal R:X. That could be 1:1, 10:1, or 100:1 — as long as both arms have the same ratio, the midpoints sit at equal potentials and G reads zero.\"\n- **replacement_text [P31]:** \"Balance condition: P×X = Q×R (cross-multiply of P/Q = R/X). Equal resistors satisfy this (P=Q=R=X → P×X=P²=Q×R=P²), but so do countless other combinations.\"\n- **discrimination_pairs [P33]:**\n  - P=Q=R=X=100Ω: balanced (trivial case)\n  - P=100, Q=10, R=47, X=4.7: balanced (non-trivial; same ratio 10:1)\n  - P=100, Q=10, R=47, X=5: NOT balanced (P/Q=10; R/X=9.4)\n- **s6_path:** Metre bridge demonstration: move jockey to show balance at various positions; calculate P/Q from l/(100−l) each time.\n\n---",
+      "localKey": "MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS",
+      "language": "en",
+      "refs": [
+        "MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 15,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "Circuit structure and balance condition: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Circuit structure and balance condition: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 15,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "Why null method is superior: Block 1-B",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Why null method is superior: Block 1-B\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 24,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "WE-2: metre bridge",
+      "content": "{\"id\":\"TA-3\",\"title\":\"WE-2: metre bridge\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 27,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "WE-3: unbalanced bridge, finding direction of deflection",
+      "content": "{\"id\":\"TA-4\",\"title\":\"WE-3: unbalanced bridge, finding direction of deflection\",\"primitives\":[\"P36\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 32,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** In a balanced Wheatstone bridge, the galvanometer current is:\n(a) Maximum (b) Minimum but non-zero **(c) Zero** (d) Equal to the battery current\n\n**A2 (Fill-in):** The balance condition for a Wheatstone bridge (P, Q, R, X in standard arrangement) is: ______\n[P/Q = R/X, or equivalently PX = QR]\n\n**A3 (Short answer):** Why is the Wheatstone bridge more accurate than directly applying Ohm's law to measure resistance?\n[Null method — result depends on resistance ratios only, not meter readings; EMF and galvanometer sensitivity irrelevant at balance]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** In a metre bridge, if the jockey balances at 40 cm with R = 15 Ω, find X.\n[X = R × l/(100−l) = 15 × 40/60 = 10 Ω]\n\n**B2:** The battery in a balanced Wheatstone bridge is replaced with one of twice the voltage. Does the balance condition change?\n[No — balance condition is independent of EMF; X = QR/P unchanged]\n\n**B3:** A Wheatstone bridge has P=200Ω, Q=100Ω, R=80Ω. Find X for balance. If X increases by 10%, which midpoint (B or D) rises in potential?\n[X = QR/P = 100×80/200 = 40Ω. If X increases to 44Ω: V_D = ε×44/124 increases; V_B = ε×100/300 = ε/3 unchanged. D rises above B.]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** A Wheatstone bridge: P=500Ω, Q=100Ω. A decade resistance box for R is adjusted; balance achieved at R=62Ω. (a) Find X. (b) If R has a ±0.5Ω uncertainty, what is the uncertainty in X?\n[(a) X=QR/P=100×62/500=12.4Ω. (b) ΔX=Q×ΔR/P=100×0.5/500=0.1Ω; X=12.4±0.1Ω]\n\n**C2 (Design):** You want to measure X ≈ 5000 Ω using a bridge. Available fixed resistors: 100Ω, 1kΩ, 10kΩ. Choose P, Q, R to maximise precision. Justify.\n[Set P=10kΩ, Q=1kΩ (ratio 10:1), R=500Ω → X=QR/P=1000×500/10000=50Ω — too low. Try P=1kΩ, Q=10kΩ, R=500Ω → X=10000×500/1000=5000Ω ✓. Use adjustable R near 500Ω for fine null. High sensitivity: balance near midpoint of meter bridge preferred.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 141,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Student can't derive balance condition | Return to KVL; show V_B and V_D explicitly; set equal |\n| Probe B2 wrong (thinks EMF matters) | Deploy MC-WHEATSTONE-BRIDGE-MEASURES-EMF; show ε cancels algebraically |\n| Probe B3 wrong (direction of deflection) | Calculate V_B and V_D numerically; compare |\n| Probe C2 wrong (R choice) | Discuss sensitivity: balance near mid-range of R is most precise; avoid ratio extremes |\n| Asks about AC Wheatstone bridge | Flag as enrichment (Maxwell, Owen bridges for L and C); defer if time-limited |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-WHEATSTONE-BRIDGE-MEASURES-EMF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 246,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.wheatstone-bridge/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.wheatstone-bridge",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we'll learn the most precise method ever devised for measuring resistance — a technique so reliable it's still used in modern sensor systems 180 years after Wheatstone published it.\"\n\n[P41 — Diagnostic]\n\"You know Ohm's law R=V/I. What limits the accuracy of measuring resistance this way?\"\n→ Correct (meter accuracy, voltmeter loading): good — bridge solves exactly this.\n→ Partial: \"Think about how accurate your voltmeter and ammeter need to be.\"\n\n[P06 — Concrete anchor]\n\"A balance scale: you don't need to know gravity's exact value — you just add weights until it levels. Wheatstone bridge is a resistance balance scale. You adjust known resistors until a galvanometer reads zero. At zero, no calibration of the galvanometer or knowledge of battery voltage is needed.\"\n\n[TA-1 — Circuit structure and balance condition: Block 1-A]\n\"Draw the diamond circuit. Derive X = QR/P from V_B = V_D at balance.\"\n\n[P28 — Conflict evidence for MC-BRIDGE-BALANCE-REQUIRES-EQUAL-RESISTORS]\n\"WE-1: P=100, Q=10, R=47, X=4.7. All four are different, yet balance is perfect. The bridge is about ratio, not equality.\"\n\n[P51 — Check-in]\n\"What ratio must hold for balance? Can you express it two ways (fraction and cross-multiply form)?\"\n\n[TA-2 — Why null method is superior: Block 1-B]\n\"The formula X = QR/P has no ε, no galvanometer resistance. Let that sink in — we've eliminated two sources of systematic error.\"\n\n[TA-3 — WE-2: metre bridge]\n\n[P52 — Narrow]\n\"Two key formulas only: X = QR/P (general bridge) and X = R×l/(100−l) (metre bridge). Everything else is derived.\"\n\n[TA-4 — WE-3: unbalanced bridge, finding direction of deflection]\n\n[P62 — Retrieval seed]\n\"Write from memory: balance condition, metre bridge formula, why EMF cancels.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Wheatstone bridge: null method, resistance ratios only, EMF irrelevant at balance. X = QR/P. This principle extends to AC bridges for capacitors and inductors.\"\n\n[P85 — Regulation tail]\n\"Shakiest part: deriving the balance condition, or the metre bridge formula?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the +1 day retrieval quiz.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md",
+        "startLine": 196,
+        "endLine": 246
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

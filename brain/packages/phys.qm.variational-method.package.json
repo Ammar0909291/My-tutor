@@ -1,0 +1,503 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.variational-method-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.variational-method",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:a79a1ac188d65bc3c901c21be5ce5b027c905eaf9be8286628c035252fb7ffd7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.variational-method.md": "sha256:8684db86498c75900ed4c7e1db4d34d5e83ee2543d6c62aaf2cbfe8cb4923535"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.variational-method",
+    "name": "Variational Method",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "phys.qm.hydrogen-atom-qm",
+      "phys.qm.perturbation-theory"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.variational-method-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.variational-method (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.variational-method.md": "sha256:8684db86498c75900ed4c7e1db4d34d5e83ee2543d6c62aaf2cbfe8cb4923535"
+      },
+      "contentHash": "sha256:fcc14dccdfaa991f795ff0c8e28bd136f4bd9508cd4f43048f868bc3f95d4b69",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.variational-method.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.variational-method.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.variational-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.variational-method\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.variational-method.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.variational-method.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.variational-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.variational-method\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.variational-method.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.variational-method.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.variational-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.variational-method\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.variational-method.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.variational-method.md#TA-4 (addresses MC-VAR-EXACT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.variational-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.variational-method\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.variational-method.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.variational-method.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.variational-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.variational-method\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.variational-method.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.variational-method.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.variational-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.variational-method\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.variational-method.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.variational-method.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.variational-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.variational-method\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.variational-method/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Gaussian trial function for hydrogen atom",
+      "content": "### Example 1 — Gaussian trial function for hydrogen atom\nH = −(ℏ²/2m)∇² − e²/(4πε₀r); trial: ψ_α = (2α/π)^(3/4) exp(−αr²) (Gaussian, normalized).\nCompute ⟨T⟩ = 3ℏ²α/(2m), ⟨V⟩ = −e²/(4πε₀)·√(8α/π).\nE(α) = 3ℏ²α/(2m) − e²√(8α/π)/(4πε₀).\nMinimize: dE/dα=0 → α_opt = 8me⁴/(9π·(4πε₀)²ℏ⁴).\nE_min = −(8/3π)·(me⁴/2(4πε₀)²ℏ²) = −0.849·E₁ where E₁ = −13.6 eV.\nResult: E_trial = −11.5 eV > −13.6 eV (true ground state). Upper bound confirmed ✓",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Linear variational method (two basis functions)",
+      "content": "### Example 2 — Linear variational method (two basis functions)\nTrial: ψ = c₁φ₁ + c₂φ₂. Minimize E = ⟨ψ|H|ψ⟩/⟨ψ|ψ⟩.\nSecular equation: det(H−ES) = 0 where Hᵢⱼ = ⟨φᵢ|H|φⱼ⟩, Sᵢⱼ = ⟨φᵢ|φⱼ⟩.\nFor orthonormal basis: det(H−EI) = 0 → eigenvalue problem.\nPhysical example: two-site tight-binding model, H₁₁=H₂₂=ε₀, H₁₂=H₂₁=−t. Energies: E±=ε₀∓t. Bonding and antibonding orbitals emerge from the secular equation.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Linear harmonic oscillator ground state check",
+      "content": "### Example 3 — Linear harmonic oscillator ground state check\nTrue ground state: ψ₀ = (mω/πℏ)^(1/4) exp(−mωx²/2ℏ). Trial: same Gaussian.\nE_trial = ℏω/2 = exact E₀. Shows variational bound is TIGHT when trial function is exact.\nLesson: if you guess the exact eigenstate, variational method gives the exact energy (not just an upper bound).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 34,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/misconception/MC-VAR-EXACT",
+      "kind": "misconception",
+      "conceptId": "phys.qm.variational-method",
+      "title": "\"If my trial function is close to the real ground state, E_trial is close to the exact energy.\"",
+      "content": "| MC-VAR-EXACT | \"If my trial function is close to the real ground state, E_trial is close to the exact energy.\" | \"I got a good wavefunction so my energy is accurate.\" | The variational principle guarantees E_trial ≥ E₀ (upper bound), but the gap can be arbitrarily large even for visually similar wavefunctions if the trial function has wrong symmetry or nodes; accuracy of ψ and accuracy of E are separate questions. |",
+      "localKey": "MC-VAR-EXACT",
+      "language": "en",
+      "refs": [
+        "MC-VAR-EXACT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/misconception/MC-VAR-ANY-STATE",
+      "kind": "misconception",
+      "conceptId": "phys.qm.variational-method",
+      "title": "\"I can use the variational method to find excited states the same way I find the ground state.\"",
+      "content": "| MC-VAR-ANY-STATE | \"I can use the variational method to find excited states the same way I find the ground state.\" | \"Minimize with a different trial function to get E₁.\" | Excited-state variational methods require orthogonality constraints to all lower states; without these, minimization always collapses to the ground state. The simple Rayleigh-Ritz bound E_trial ≥ E₀ applies unconditionally only to the ground state. |",
+      "localKey": "MC-VAR-ANY-STATE",
+      "language": "en",
+      "refs": [
+        "MC-VAR-ANY-STATE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Concrete hook",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete hook\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 5,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 6,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 7,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-VAR-EXACT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-VAR-EXACT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 8,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 10,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 11,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.variational-method",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): State the variational theorem. What does it guarantee about E[ψ] = ⟨ψ|H|ψ⟩ for any normalized trial state ψ?  \n*Answer*: E[ψ] ≥ E₀ (ground state energy), with equality iff ψ = ψ₀.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.variational-method",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For a particle in a box (V=0, 0<x<L), use the trial function ψ=x(L−x) (unnormalized) to estimate the ground state energy. Compare to exact E₀=π²ℏ²/(2mL²).  \n*Answer*: ⟨T⟩/⟨ψ|ψ⟩ = 5ℏ²/(mL²); exact = π²ℏ²/(2mL²) ≈ 4.935ℏ²/(2mL²); ratio ≈ 1.013. Upper bound ✓ accurate to 1.3%.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.variational-method",
+      "title": "MP-3",
+      "content": "**MP-3** (apply-MC): A student minimizes E[ψ_α] over α for an excited-state trial function (one node) and gets a value below the first excited state energy E₁. What went wrong?  \n*Answer*: If ψ_α is not orthogonal to the ground state, the minimization collapses toward E₀, not E₁; the variational bound applies to the ground state always. The student must impose ⟨ψ_α|ψ₀⟩=0 to bound E₁.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.variational-method",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): In the linear variational method with 2 basis functions, the secular equation gives E₋ < E₀ < E₊. What does E₋ represent?  \n*Answer*: E₋ is the lowest eigenvalue of the 2×2 Hamiltonian matrix — the best upper bound on the true ground state energy E₀ achievable within this 2-function basis. Adding more basis functions can only lower E₋ further toward E₀.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.variational-method",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): Two students use different trial functions for the hydrogen ground state and get E_trial = −12.0 eV and −13.0 eV. Which is better and why?  \n*Answer*: −13.0 eV is the better estimate — it is closer to the exact −13.6 eV from below (upper bound); the lower of two upper bounds is always the better approximation.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 71,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student gets E_trial < E₀ | Flag numerical error; variational theorem is absolute — check normalization and Hᵢⱼ integrals |\n| Student applies variational method to excited state without orthogonality constraint | Show concretely that minimizing ⟨ψ|H|ψ⟩ always gives E₀ — plot E[α] for the trial function |\n| Student asks \"how do I choose the trial function?\" | \"Physical intuition: match known limits (r→0, r→∞ behavior); use Gaussian for localized states, power laws for Coulomb potentials; more parameters = better bound but harder optimization\" |\n| Student confused about Rayleigh quotient vs expectation value | When ψ is normalized ⟨ψ|ψ⟩=1, both agree; when unnormalized, must divide — always safer to use the quotient form |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 99,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"What is the ground-state energy of hydrogen? How was it found?\" (perturbation theory connection)\nCORE-1 (15 min): TA-1 + TA-2 (hook + Rayleigh quotient notation)\nCORE-2 (20 min): TA-3 + TA-4 (proof of theorem + MC diagnostic)\nCORE-3 (20 min): TA-5 (hydrogen Gaussian example: compute integrals, minimize, compare)\nDRILL  (10 min): TA-6 (linear variational method steps on 2×2 example)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"The WKB approximation is the variational method's partner for finding wavefunctions where the potential varies slowly — next topic.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 110,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.qm.variational-method/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.variational-method",
+      "title": "Known Sticking Points",
+      "content": "1. **Why only ground state?** Students want to apply the same principle to all levels; clarify that the theorem gives E₀ unconditionally but excited states need orthogonality.\n2. **Normalization in Rayleigh quotient**: When trial function is not normalized, use ⟨ψ|H|ψ⟩/⟨ψ|ψ⟩, not just ⟨ψ|H|ψ⟩ — common arithmetic mistake.\n3. **Tightness of bound**: Students assume better wavefunction → better energy estimate; correct by example where wrong symmetry gives E_trial ≫ E₀ despite visually similar shapes.\n4. **Secular determinant**: Students attempt to solve det(H−ES)=0 directly without noting the generalized eigenvalue structure; for orthonormal basis it reduces to a standard eigenvalue problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.variational-method.md",
+        "startLine": 90,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

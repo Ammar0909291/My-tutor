@@ -1,0 +1,600 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.entropy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.entropy",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:08371f1e1c4a3cb40c674b468421941c34d141e928f50571d4450bc0f1988c27",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.entropy.md": "sha256:c55c00c1cf1b354d6f072cfa6b75948d608344f68be893ef69bae6e807895b8c"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 13,
+      "session_flow": 1
+    },
+    "ruleCount": 13
+  },
+  "concept": {
+    "conceptId": "phys.therm.entropy",
+    "name": "Entropy",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.therm.second-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.entropy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.entropy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.entropy.md": "sha256:c55c00c1cf1b354d6f072cfa6b75948d608344f68be893ef69bae6e807895b8c"
+      },
+      "contentHash": "sha256:f0813de977938a5730c3fa022db1520ddf6c5285887a211dc30de03b90a9a2dc",
+      "ruleCount": 13,
+      "bandCounts": {
+        "3": 13
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-4 (addresses MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-6 (addresses MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.entropy.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.entropy.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.entropy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.entropy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.entropy/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.entropy",
+      "title": "(Concrete — isothermal entropy change)",
+      "content": "### WE-1 (Concrete — isothermal entropy change)\n\n**Scenario:** 500 g of water is heated from 20°C to 80°C at constant pressure. Find ΔS. (c_water = 4186 J/(kg·K))\n\n**Formula:** ΔS = mc ln(T₂/T₁). T₁ = 293 K; T₂ = 353 K.\n\nΔS = 0.5 × 4186 × ln(353/293) = 2093 × ln(1.2048) = 2093 × 0.1862 = 389.7 J/K.\n\n**Interpretation:** The water's entropy increased by 390 J/K — it became \"more disordered\" (water molecules have more thermal energy spread across more microstates). The surroundings (heat source) had ΔS_surr = −Q/T_source. If the heat source was at 100°C = 373 K: ΔS_surr = −Q_absorbed/373.\n\nQ absorbed = mc ΔT = 0.5 × 4186 × 60 = 125 580 J.\nΔS_surr = −125 580/373 = −336.7 J/K.\n\nΔS_universe = 389.7 + (−336.7) = +53 J/K > 0 — irreversible process (finite temperature difference between source and water). ✓\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 47,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.entropy",
+      "title": "(Bridging — entropy and Carnot cycle)",
+      "content": "### WE-2 (Bridging — entropy and Carnot cycle)\n\n**Show** that ΔS_universe = 0 for a Carnot cycle. T_H = 600 K, T_C = 300 K, Q_H = 1000 J.\n\n**Entropy change of hot reservoir:**\nΔS_H = −Q_H/T_H = −1000/600 = −1.667 J/K.\n\n**For Carnot engine:** η = 1 − T_C/T_H = 0.5. W_out = 500 J. Q_C = 500 J.\n\n**Entropy change of cold reservoir:**\nΔS_C = +Q_C/T_C = +500/300 = +1.667 J/K.\n\n**Entropy change of engine (returns to initial state per cycle):**\nΔS_engine = 0.\n\n**Total:** ΔS_universe = ΔS_H + ΔS_C + ΔS_engine = −1.667 + 1.667 + 0 = 0.\n\n**Answer:** ΔS_universe = 0 for Carnot cycle — confirmed reversible. This is the defining characteristic of the Carnot cycle: it operates at maximum efficiency while leaving total entropy unchanged.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 47,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.entropy",
+      "title": "(Abstract — entropy increase in free expansion)",
+      "content": "### WE-3 (Abstract — entropy increase in free expansion)\n\n**Calculate ΔS for 1.0 mol ideal gas expanding freely from V₁ = 1.0 L to V₂ = 3.0 L at T = 300 K.**\n\n**Issue:** Free expansion is irreversible — we can't directly use dS = δQ_rev/T (Q = 0, W = 0). But entropy is a state function — use any reversible path between the same states.\n\n**Reversible path:** Isothermal expansion at 300 K from 1.0 L to 3.0 L.\n\nΔS_system = Q_rev/T = W_by/T (isothermal: Q_rev = W_by) = nRT ln(V₂/V₁)/T = nR ln(V₂/V₁).\nΔS_system = 1.0 × 8.314 × ln(3) = 8.314 × 1.099 = 9.13 J/K.\n\n**Surroundings in actual free expansion:** Q_actual = 0 → ΔS_surr = 0.\n\n**ΔS_universe = 9.13 + 0 = 9.13 J/K > 0 — irreversible, as expected.**\n\n**Comparison to reversible isothermal:** ΔS_system = 9.13 J/K (same — state function). But ΔS_surr = −9.13 J/K (surroundings cool, entropy decreases). ΔS_universe = 0 — reversible. The free expansion \"destroys\" 9.13 J/K of work capacity, permanently.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 47,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/misconception/MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE",
+      "kind": "misconception",
+      "conceptId": "phys.therm.entropy",
+      "title": "**Trigger signal:** Student says \"entropy is just messiness\" or \"entropy of a room increases when you don't tidy it.",
+      "content": "### MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE\n\n**Trigger signal:** Student says \"entropy is just messiness\" or \"entropy of a room increases when you don't tidy it.\"\n\n**Conflict evidence [P28]:** \"A perfectly tidy crystal of NaCl (all atoms in rigid lattice) has less entropy than liquid NaCl at the same temperature. A gas of NaCl at even higher T has even more entropy. Is the 'messiness' the key variable, or is there something more precise?\"\n\n*The crystal's atoms have only a few possible arrangements (low Ω, low S). Liquid NaCl's atoms can be in far more arrangements (higher Ω, higher S). Entropy tracks the number of microstates accessible to the system, not visual disorder.*\n\n**Bridge text [P30]:** \"Entropy is a precisely defined physical quantity: S = k_B ln Ω, where Ω is the number of equivalent microstates. A tidy room can have high entropy (if the air molecules are at high temperature, providing many energy microstates). An 'untidy' room can have low entropy (if everything is cold and nearly motionless). The everyday meaning of 'disorder' is a loose analogy, not the definition.\"\n\n**Replacement text [P31]:** \"Entropy measures spread: spread of energy over degrees of freedom, spread of particles over accessible positions. S = k_B ln Ω. Higher T → more kinetic energy configurations → higher Ω → higher S. Larger V → molecules can be in more positions → higher Ω → higher S. The 'disorder' analogy is useful but imprecise — the precise meaning is statistical.\"\n\n**Discrimination pairs [P33]:**\n- \"1 mol of N₂ at 300 K, V₁ = 1 L vs. V₂ = 10 L. Which has higher entropy?\" → V₂ = 10 L — more positions accessible → higher Ω → higher S. ΔS = nR ln(10/1) = 19.1 J/K.\n- \"1 mol of N₂ at 300 K vs. 1 mol at 600 K, same V. Which has higher entropy?\" → 600 K — more kinetic energy microstates accessible → higher Ω → higher S.\n\n**s6_path:** \"Entropy = microscopic spread (in position and energy), not visual tidiness.\"\n\n---",
+      "localKey": "MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE",
+      "language": "en",
+      "refs": [
+        "MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/misconception/MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM",
+      "kind": "misconception",
+      "conceptId": "phys.therm.entropy",
+      "title": "**Trigger signal:** Student says \"entropy always increases — so my cup of coffee can't cool down (that would decrease its entropy).",
+      "content": "### MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM\n\n**Trigger signal:** Student says \"entropy always increases — so my cup of coffee can't cool down (that would decrease its entropy).\"\n\n**Conflict evidence [P28]:** \"A coffee cup cools from 90°C to 20°C. Calculate ΔS_coffee and ΔS_surroundings. Which decreases? Which increases? What is ΔS_universe?\"\n\n*ΔS_coffee = mc ln(T₂/T₁) = mc ln(293/363) < 0 (coffee cools → S decreases). ΔS_surr = +Q/T_room > 0 (room absorbs heat → S increases). ΔS_universe = ΔS_coffee + ΔS_surr > 0 always.*\n\n**Bridge text [P30]:** \"The second law applies to ΔS_universe (system + surroundings) — not to any single system in isolation. A system's entropy can decrease (ice forming, crystal growing, coffee cooling) if the surroundings' entropy increases by at least as much. 'Entropy always increases' is shorthand for 'total entropy of the universe never decreases.'\"\n\n**Replacement text [P31]:** \"ΔS_universe ≥ 0 (always). ΔS_system can be positive, negative, or zero. Entropy of a subsystem decreasing is fine — as long as surroundings gain at least as much. The second law requires the sum to be non-negative. A refrigerator makes food colder (ΔS_food < 0) while generating heat in the kitchen (ΔS_room > |ΔS_food|) → ΔS_universe > 0.\"\n\n**Discrimination pairs [P33]:**\n- \"Can the entropy of 1 kg of ice decrease as it freezes?\" → Yes — ΔS_ice = −mL_f/T < 0. But freezer's motor generates heat in the room: ΔS_room > |ΔS_ice|.\n- \"A star contracts under gravity, becoming denser and more 'ordered.' Does this violate the second law?\" → No — the star also radiates enormous entropy (photons) into space, more than compensating for its own increased order.\n\n**s6_path:** \"The second law's 'entropy increases' always refers to the universe (system + all surroundings), never to an isolated component.\"\n\n---",
+      "localKey": "MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM",
+      "language": "en",
+      "refs": [
+        "MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 208,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "diagnostic: \"entropy always increases\" — system or universe?",
+      "content": "{\"id\":\"TA-2\",\"title\":\"diagnostic: \\\"entropy always increases\\\" — system or universe?\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 208,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "anchor: dS = δQ_rev/T — isothermal example",
+      "content": "{\"id\":\"TA-3\",\"title\":\"anchor: dS = δQ_rev/T — isothermal example\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 208,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": ": P28 conflict → P30 bridge (S = k_B ln Ω) → P31 → P33",
+      "content": "{\"id\":\"TA-4\",\"title\":\": P28 conflict → P30 bridge (S = k_B ln Ω) → P31 → P33\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 209,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "check-in: state function — use reversible path for irreversible process",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in: state function — use reversible path for irreversible process\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 211,
+        "endLine": 211
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": ": P28 conflict → P30 bridge → P31 → P33",
+      "content": "{\"id\":\"TA-6\",\"title\":\": P28 conflict → P30 bridge → P31 → P33\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 213,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "narrow: ΔS_universe > 0 destroys work capacity",
+      "content": "{\"id\":\"TA-7\",\"title\":\"narrow: ΔS_universe > 0 destroys work capacity\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 214,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "retrieval seed: P4-c constant-volume heating",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval seed: P4-c constant-volume heating\",\"primitives\":[\"P4\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 215,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "mastery probe: water heated, source at 100°C — three ΔS calculations",
+      "content": "{\"id\":\"TA-9\",\"title\":\"mastery probe: water heated, source at 100°C — three ΔS calculations\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-10\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 218,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-11\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 219,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-12\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 220,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.entropy",
+      "title": "close",
+      "content": "{\"id\":\"TA-13\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 221,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.therm.entropy/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.entropy",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: \"entropy always increases\" — system or universe?] → [P06 anchor: dS = δQ_rev/T — isothermal example]\n→ [MC-ENTROPY-IS-DISORDER-IN-EVERYDAY-SENSE: P28 conflict → P30 bridge (S = k_B ln Ω) → P31 → P33]\n→ [WE-1: water heated — ΔS_water and ΔS_universe]\n→ [P51 check-in: state function — use reversible path for irreversible process]\n→ [WE-2: Carnot cycle ΔS_universe = 0]\n→ [MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM: P28 conflict → P30 bridge → P31 → P33]\n→ [P52 narrow: ΔS_universe > 0 destroys work capacity]\n→ [P62 retrieval seed: P4-c constant-volume heating]\n→ [WE-3: free expansion ΔS — using reversible path]\n→ [P36 mastery probe: water heated, source at 100°C — three ΔS calculations]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.entropy.md",
+        "startLine": 205,
+        "endLine": 226
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

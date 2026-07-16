@@ -1,0 +1,328 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.self-inductance-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.self-inductance",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:bff4dfd700c4775f5b65fa12c4c68624c4fa29c0a0ded9a614a405c76b2effcf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.self-inductance.md": "sha256:d28d540407a630e6f25fa6d6d461807523a5506582bf6744d5facdb1ec34bc9a"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "phys.em.self-inductance",
+    "name": "Self-Inductance",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.em.faradays-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.self-inductance-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.self-inductance (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.self-inductance.md": "sha256:d28d540407a630e6f25fa6d6d461807523a5506582bf6744d5facdb1ec34bc9a"
+      },
+      "contentHash": "sha256:350a836c2df9c0f7a3b8922ba4c981a8bae1c245d661e72a4e46c8702b9e0793",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.self-inductance.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.self-inductance.md#TA-1 (addresses MC-INDUCTOR-OPPOSES-CURRENT-FLOW)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.self-inductance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.self-inductance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.self-inductance.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.self-inductance.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.self-inductance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.self-inductance\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.self-inductance.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.self-inductance.md#TA-3 (addresses MC-LARGER-L-MEANS-MORE-ENERGY-AT-ALL-TIMES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.self-inductance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.self-inductance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.self-inductance.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.self-inductance.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.self-inductance"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.self-inductance\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.self-inductance/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Inductance of a Solenoid",
+      "content": "### WE-1 — Inductance of a Solenoid\n**Problem:** A solenoid: N = 600 turns, l = 30 cm, circular cross-section diameter = 4.0 cm. Find L.\n\n**Solution:**\nA = π(0.02)² = 1.257×10⁻³ m²  \nn = 600/0.30 = 2000 turns/m  \nL = μ₀n²Al = 4π×10⁻⁷ × (2000)² × 1.257×10⁻³ × 0.30  \n= 4π×10⁻⁷ × 4×10⁶ × 3.77×10⁻⁴  \n= 4π×10⁻⁷ × 1508  \n= **1.90×10⁻³ H = 1.90 mH**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 91,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Energy and RL Time Constant",
+      "content": "### WE-2 — Energy and RL Time Constant\n**Problem:** An RL circuit: L = 50 mH, R = 10 Ω, ε = 12 V. Find: (a) τ_L, (b) I at t = τ_L, (c) energy stored at steady state, (d) back-EMF at t = 0.\n\n**Solution:**\n(a) τ_L = L/R = 50×10⁻³/10 = **5.0 ms**\n\n(b) I(τ_L) = (ε/R)(1 − e⁻¹) = (12/10)(0.6321) = **0.759 A**\n\n(c) I_∞ = ε/R = 12/10 = 1.2 A  \nU_L = ½LI²_∞ = ½ × 50×10⁻³ × (1.2)² = **36 mJ**\n\n(d) At t=0, I=0, all ε across L:  \nε_L = L(dI/dt)|_{t=0} = L × (ε/L) = **ε = 12 V** (full source voltage appears across L at t=0)  \n[Since I(t) = (ε/R)(1−e^{−t/τ}), dI/dt|_{t=0} = ε/(Lτ_L) × τ_L = ε/L × 1 = 12/0.05 = 240 A/s; ε_L = L×240 = 12 V ✓]\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 91,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Magnetic Field Energy Density",
+      "content": "### WE-3 — Magnetic Field Energy Density\n**Problem:** A solenoid from WE-1 carries I = 2.0 A. Find: (a) B inside, (b) energy stored, (c) energy density.\n\n**Solution:**\n(a) B = μ₀nI = 4π×10⁻⁷ × 2000 × 2.0 = **5.03×10⁻³ T = 5.03 mT**\n\n(b) U_L = ½LI² = ½ × 1.90×10⁻³ × (2.0)² = **3.80×10⁻³ J = 3.80 mJ**\n\n(c) u_B = B²/(2μ₀) = (5.03×10⁻³)²/(2 × 4π×10⁻⁷) = 2.53×10⁻⁵/(8π×10⁻⁷) = **10.0 J/m³**\n\nCheck: Volume = Al = 1.257×10⁻³ × 0.30 = 3.77×10⁻⁴ m³  \nU = u_B × V = 10.0 × 3.77×10⁻⁴ = **3.77 mJ** ≈ 3.80 mJ ✓ (small rounding difference)\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 91,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/misconception/MC-INDUCTOR-OPPOSES-CURRENT-FLOW",
+      "kind": "misconception",
+      "conceptId": "phys.em.self-inductance",
+      "title": "- **trigger_signal:** Student says \"an inductor blocks DC current\" or \"inductors always reduce current.",
+      "content": "### MC-INDUCTOR-OPPOSES-CURRENT-FLOW\n- **trigger_signal:** Student says \"an inductor blocks DC current\" or \"inductors always reduce current.\"\n- **conflict_evidence [P28]:** \"At t→∞ in an RL circuit: dI/dt = 0 → back-EMF = L×0 = 0 → inductor acts as a short circuit. Full steady-state current I = ε/R flows. An ideal inductor (zero resistance) presents zero impedance to DC at steady state. What inductors block is CHANGES in current — not current itself. The back-EMF is proportional to dI/dt, not to I.\"\n- **bridge_text [P30]:** \"Inductors are the electromagnetic analogue of mass: mass doesn't prevent motion — it resists changes in velocity (acceleration). An inductor doesn't prevent current — it resists changes in current (dI/dt). Once current reaches steady state (dI/dt = 0), the inductor has zero back-EMF and full current flows.\"\n- **replacement_text [P31]:** \"ε_L = −L(dI/dt). At DC steady state: dI/dt = 0 → ε_L = 0 → inductor = short circuit. What inductors resist is the CHANGE in current, not steady current. At AC (constantly changing I), inductors do present impedance Z_L = ωL — but that's AC behaviour.\"\n- **discrimination_pairs [P33]:**\n  - t = 0 (switch closes): L acts like open circuit (opposes sudden current change)\n  - t = τ_L: current building, L has partial back-EMF\n  - t >> τ_L (steady state): L acts like short circuit (dI/dt = 0, no back-EMF)\n- **s6_path:** Plot I(t) in RL circuit; show asymptotic approach to ε/R; emphasise that steady-state current is NOT zero.\n\n---",
+      "localKey": "MC-INDUCTOR-OPPOSES-CURRENT-FLOW",
+      "language": "en",
+      "refs": [
+        "MC-INDUCTOR-OPPOSES-CURRENT-FLOW"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/misconception/MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES",
+      "kind": "misconception",
+      "conceptId": "phys.em.self-inductance",
+      "title": "- **trigger_signal:** Student says \"I should always use the largest inductor to store the most energy\" without considering current.",
+      "content": "### MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES\n- **trigger_signal:** Student says \"I should always use the largest inductor to store the most energy\" without considering current.\n- **conflict_evidence [P28]:** \"U_L = ½LI². Energy depends on BOTH L and I. A large L with small I may store less energy than a small L with large I. Example: L=1H, I=0.1A → U=5mJ. L=0.01H, I=10A → U=500mJ — 100× more despite 100× smaller L. For power conversion, high-current low-L inductors often store more energy than high-L low-current designs.\"\n- **bridge_text [P30]:** \"Kinetic energy = ½mv²: more mass doesn't always mean more KE — you need to know the speed too. Similarly, U_L = ½LI² — you need both L and I. The product LI² is what determines stored energy, not L alone.\"\n- **replacement_text [P31]:** \"U_L = ½LI². Maximising energy requires maximising LI² — not just L. At a given voltage and resistance, I = ε/R (not dependent on L), so steady-state energy U = ½L(ε/R)² does increase with L. But in circuits with current sources or large I, smaller L can store more. Always use U = ½LI².\"\n- **discrimination_pairs [P33]:**\n  - L=10mH, I=2A: U = ½×0.01×4 = 20 mJ\n  - L=1mH, I=10A: U = ½×0.001×100 = 50 mJ (smaller L, more energy due to larger I)\n  - L=100mH, I=0.1A: U = ½×0.1×0.01 = 0.5 mJ (large L, tiny energy due to small I)\n- **s6_path:** Compare energy at given current for two L values; then compare at given voltage source (I=ε/R same) for two L values — show the two cases give different conclusions.\n\n---",
+      "localKey": "MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES",
+      "language": "en",
+      "refs": [
+        "MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 16,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Definition and back-EMF: Block 1-A",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Definition and back-EMF: Block 1-A\",\"primitives\":[\"P28\",\"P51\"],\"addresses\":[\"MC-INDUCTOR-OPPOSES-CURRENT-FLOW\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-INDUCTOR-OPPOSES-CURRENT-FLOW"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 14,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Standard geometries and WE-1: Block 1-B",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Standard geometries and WE-1: Block 1-B\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 24,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Energy storage and WE-2, WE-3: Block 1-C",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Energy storage and WE-2, WE-3: Block 1-C\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-LARGER-L-MEANS-MORE-ENERGY-AT-ALL-TIMES\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-LARGER-L-MEANS-MORE-ENERGY-AT-ALL-TIMES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 27,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.self-inductance",
+      "title": "RL circuit: Block 1-D, WE-2",
+      "content": "{\"id\":\"TA-4\",\"title\":\"RL circuit: Block 1-D, WE-2\",\"primitives\":[\"P36\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 33,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Assessment Probes",
+      "content": "### Probe Set A — Factual Recall\n**A1 (MCQ):** At t = 0 (switch just closed, I initially zero), an ideal inductor acts as:\n**(a) Open circuit** (b) Short circuit (c) Resistor of value L (d) Voltage source of value ε\n\n**A2 (Short answer):** Write the formula for back-EMF of an inductor and for energy stored. Give units of L.\n[ε_L = −L dI/dt; U_L = ½LI²; L in Henries (H = Wb/A = V·s/A)]\n\n**A3 (Fill-in):** The time constant of an RL circuit is τ_L = ______, and has units of ______.\n[L/R; seconds]\n\n---\n\n### Probe Set B — Conceptual Transfer\n**B1:** L = 200 mH, R = 40 Ω, ε = 20 V. Find (a) τ_L, (b) final steady-state current, (c) energy stored at steady state, (d) time for current to reach 90% of final value.\n[(a) τ_L = 0.2/40 = 5 ms. (b) I_∞ = 20/40 = 0.5 A. (c) U = ½×0.2×0.25 = 25 mJ. (d) 0.9I_∞ = I_∞(1−e^{−t/τ}) → e^{−t/τ} = 0.1 → t = τ ln10 = 5×2.303 = 11.5 ms]\n\n**B2:** A solenoid has L₁. If the number of turns is doubled (with same core volume), what is the new inductance?\n[L = μ₀n²Al; n doubles → n² quadruples → L₂ = 4L₁]\n\n**B3:** When a current-carrying inductor is suddenly disconnected (circuit opened), a large voltage spike appears. Explain using ε_L = −L dI/dt.\n[Opening the switch forces dI/dt → −∞ (current must drop to zero in very short time Δt → 0). ε_L = −L×(−∞) → very large positive voltage. This spike can destroy transistors/switches. Fix: place a freewheeling diode across the inductor to provide a current path and limit dI/dt.]\n\n---\n\n### Probe Set C — Mastery Gate [P91]\n**C1 (Multi-step):** RL circuit: L = 80 mH, R₁ = 20 Ω (in series with L), R₂ = 60 Ω (in parallel with L after the switch opens). ε = 24 V. Switch was closed for a long time (steady state), then opens. (a) Find I₀ just before switch opens. (b) Find τ_decay through R₁+R₂. (c) Find I at t = 2τ. (d) Find the voltage spike across the switch at t=0⁺.\n[(a) I₀ = ε/R₁ = 24/20 = 1.2 A (steady state; all ε across R₁). (b) After switch opens: L discharges through R₁+R₂ = 80Ω; τ = L/(R₁+R₂) = 80×10⁻³/80 = 1.0 ms. (c) I(2τ) = 1.2×e⁻² = 1.2×0.135 = 0.162 A. (d) V_switch = ε_L + ε = L×dI/dt|₀ + ε; at t=0: dI/dt = −I₀/τ = −1.2/0.001 = −1200 A/s; ε_L = −L×(−1200) = +96V; V_switch = 96 + 24 = 120 V. (Large spike — 5× the supply!)]\n\n**C2 (Design):** You need to store 1.0 J of magnetic energy in an inductor at a current of 10 A. Find the required L. Then design a solenoid to achieve this: choose n, A, and l subject to n×A×l ≤ 500 cm³. Find B inside.\n[L = 2U/I² = 2×1.0/100 = 20 mH. L = μ₀n²Al; n²Al = L/μ₀ = 0.02/(4π×10⁻⁷) = 1.592×10⁴ m⁻¹. Choose: A = 10 cm² = 10⁻³ m², l = 0.50 m → n²×10⁻³×0.5 = 1.592×10⁴ → n² = 3.18×10⁷ → n = 5640 turns/m. n×l = 2820 turns total; volume = A×l = 5×10⁻⁴ m³ = 500 cm³ ✓. B = μ₀nI = 4π×10⁻⁷×5640×10 = 70.8 mT.]\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 166,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Adaptive Branching",
+      "content": "| Signal | Branch |\n|--------|--------|\n| Probe A1 wrong (picks short circuit) | Deploy MC-INDUCTOR-OPPOSES-CURRENT-FLOW; plot I(t) from 0 to 5τ; show I=0 at t=0 |\n| Probe B2 wrong (doubling turns → doubling L) | L ∝ n² (not n); because flux per turn × N turns = N × (μ₀nI×A) × N = μ₀n²AlI |\n| Probe B3 incomplete (voltage spike) | Quantify: if I₀ = 1A, L = 1H, switch opens in Δt = 1μs → dI/dt = −10⁶ A/s → ε_L = 10⁶ V |\n| Probe C1 wrong (Thevenin for decay) | After switch opens: L sees R₁ + R₂ in series (current must flow through both on decay path) |\n| Student asks about RL with AC source | Preview: Z_L = ωL (inductive reactance); link to phys.em.ac-basics |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-INDUCTOR-OPPOSES-CURRENT-FLOW"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 276,
+        "endLine": 288
+      }
+    },
+    {
+      "assetId": "phys.em.self-inductance/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.em.self-inductance",
+      "title": "Session Flow Script",
+      "content": "```\n[P01 — Session open]\n\"Today we meet the inductor — the electromagnetic analogue of mass. Just as mass resists velocity changes, inductors resist current changes. By the end you'll predict current waveforms in RL circuits and design inductors for energy storage.\"\n\n[P41 — Diagnostic]\n\"In an RC circuit, what does the capacitor do at t=0 and at t→∞? Can you guess what an inductor does at those same moments?\"\n→ C at t=0: short; t→∞: open. L should be opposite: t=0: open; t→∞: short. \"Exactly — let's verify.\"\n\n[P06 — Concrete anchor]\n\"A flywheel stores kinetic energy and resists speed changes (inertia). An inductor stores magnetic energy and resists current changes. The 'heavier' the inductor (larger L), the harder it is to change the current — just like a heavier flywheel is harder to spin up or slow down.\"\n\n[TA-1 — Definition and back-EMF: Block 1-A]\n\"L = NΦ/I; ε_L = −L dI/dt. The inductor 'pushes back' against current changes.\"\n\n[P28 — Conflict evidence for MC-INDUCTOR-OPPOSES-CURRENT-FLOW]\n\"At t→∞: dI/dt = 0 → ε_L = 0 → inductor = zero resistance. Full current I = ε/R flows. Inductors resist CHANGES, not current itself. A DC motor with an inductor coil carries steady DC fine — only the transient is slowed.\"\n\n[P51 — Check-in]\n\"At t=0 (switch closes, I=0): what is ε_L? At t→∞: what is ε_L? What does the inductor 'become' in each case?\"\n[t=0: ε_L = ε (full voltage); t→∞: ε_L = 0; open/short circuit respectively]\n\n[TA-2 — Standard geometries and WE-1: Block 1-B]\n\"L = μ₀n²Al for solenoid. N² dependence: doubling turns quadruples inductance.\"\n\n[TA-3 — Energy storage and WE-2, WE-3: Block 1-C]\n\"U = ½LI². Energy density u = B²/(2μ₀). Cross-check: solenoid energy from both formulas.\"\n\n[P28 — Conflict evidence for MC-LARGER-L-MEANS-MORE-ENERGY-AT-ALL-TIMES]\n\"U = ½LI². Compare L=10mH, I=2A → 20mJ vs. L=1mH, I=10A → 50mJ. The current matters as much as L. In power electronics, high-current low-L inductors often store more energy.\"\n\n[TA-4 — RL circuit: Block 1-D, WE-2]\n\"τ_L = L/R. I(t) = (ε/R)(1−e^{−t/τ_L}). Mirror of RC circuit.\"\n\n[P52 — Narrow]\n\"Three formulas: ε_L = −L dI/dt; U_L = ½LI²; τ_L = L/R. L_solenoid = μ₀n²Al.\"\n\n[P62 — Retrieval seed]\n\"Write from memory: inductor formulas, RL time constant, energy formula, t=0 and t→∞ limits, the analogy with mass.\"\n\n[P36 — Mastery probe — Probe C1]\n\n[P68 — Close]\n\"Self-inductance L is the 'magnetic inertia' of a circuit: ε_L = −L dI/dt. Energy U = ½LI² stored in B field. RL time constant τ = L/R. At t=0: open circuit. At t→∞: short circuit. Inductor resists change in current, not current itself.\"\n\n[P85 — Regulation tail]\n\"Shakiest: the direction of back-EMF, the energy formula derivation, or the RL transient?\"\n\n[P89 — Retrieval schedule]\n\"Return tomorrow for the RL circuit retrieval quiz.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.self-inductance.md",
+        "startLine": 221,
+        "endLine": 276
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

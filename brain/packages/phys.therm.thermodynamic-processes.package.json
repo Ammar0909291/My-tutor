@@ -1,0 +1,600 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.thermodynamic-processes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.thermodynamic-processes",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:dc71337b15307f5223b5760a503514e38c9d69c49405cfbd104b6a52629a8e7f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md": "sha256:f0bedfe824e700822c982248502d3b34ecb1ae0fb778de5bef2162e98da0703f"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 13,
+      "session_flow": 1
+    },
+    "ruleCount": 13
+  },
+  "concept": {
+    "conceptId": "phys.therm.thermodynamic-processes",
+    "name": "Thermodynamic Processes",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.therm.first-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.thermodynamic-processes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.thermodynamic-processes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md": "sha256:f0bedfe824e700822c982248502d3b34ecb1ae0fb778de5bef2162e98da0703f"
+      },
+      "contentHash": "sha256:dbf4d0c479027ae888c4ec9e1b1132667e8fe1d3b2ff6b49ab964a588b29f984",
+      "ruleCount": 13,
+      "bandCounts": {
+        "3": 13
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-4 (addresses MC-ADIABATIC-STEEPER-SHALLOWER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-6 (addresses MC-FREE-EXPANSION-COOLS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.thermodynamic-processes.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.thermodynamic-processes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.thermodynamic-processes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.thermodynamic-processes/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "(Concrete — isothermal vs. adiabatic expansion comparison)",
+      "content": "### WE-1 (Concrete — isothermal vs. adiabatic expansion comparison)\n\n**Scenario:** 1.0 mol monatomic ideal gas (γ = 5/3) expands from V₁ = 2.0 L to V₂ = 6.0 L. T₁ = 300 K, P₁ = nRT₁/V₁ = (1)(8.314)(300)/(2 × 10⁻³) = 1.247 × 10⁶ Pa. Compare W_by for isothermal vs adiabatic expansion.\n\n**Isothermal (T = 300 K = const):**\nW_by = nRT ln(V₂/V₁) = 1 × 8.314 × 300 × ln(3) = 2494 × 1.0986 = 2740 J.\nP₂_iso = nRT/V₂ = (1)(8.314)(300)/(6 × 10⁻³) = 4.16 × 10⁵ Pa.\n\n**Adiabatic (Q = 0):**\nPV^γ = const → P₂ = P₁(V₁/V₂)^γ = 1.247 × 10⁶ × (1/3)^(5/3) = 1.247 × 10⁶ × (0.333)^1.667.\n(0.333)^1.667 = e^(1.667 × ln(0.333)) = e^(1.667 × (−1.099)) = e^(−1.832) = 0.1604.\nP₂_ad = 1.247 × 10⁶ × 0.1604 = 2.00 × 10⁵ Pa.\n\nT₂_ad = P₂V₂/(nR) = (2.00 × 10⁵ × 6 × 10⁻³)/(1 × 8.314) = 1200/8.314 = 144.3 K.\nW_by_ad = nC_v(T₁ − T₂) = 1 × (3/2)(8.314) × (300 − 144.3) = 12.47 × 155.7 = 1942 J.\n\n**Comparison:** Isothermal: W_by = 2740 J; Adiabatic: W_by = 1942 J. Isothermal extracts 41% more work — because heat input (from external reservoir) supplements the gas's own internal energy.\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 49,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "(Bridging — adiabatic formula derivation)",
+      "content": "### WE-2 (Bridging — adiabatic formula derivation)\n\n**Derive PV^γ = constant for a quasi-static adiabatic process.**\n\n**Start:** First law for adiabatic: dU = −PdV (no Q).\nFor ideal gas: dU = nC_vdT.\nTherefore: nC_vdT = −PdV.\n\n**Using ideal gas law:** P = nRT/V → dP = nR(dT/V − TdV/V²).\nDividing nC_vdT = −PdV by the ideal gas law P:\nC_v × (dT/T) = −(nR/n) × (dV/V) = −R × (dV/V).\ndT/T = −(R/C_v)(dV/V) = −(γ−1)(dV/V).\n\n**Integrate:**\nln T = −(γ−1) ln V + const → T × V^(γ−1) = const.\nUsing T = PV/(nR): (PV/nR) × V^(γ−1) = const → PV^γ = const. ✓\n\n**Result:** Three adiabatic relations: PV^γ = const; TV^(γ−1) = const; T^γP^(1−γ) = const.\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 49,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "(Abstract — free expansion irreversibility)",
+      "content": "### WE-3 (Abstract — free expansion irreversibility)\n\n**Scenario:** 1.0 mol ideal gas at 300 K expands freely (into vacuum) from V = 1.0 L to V = 3.0 L. (a) Find Q, W_by, ΔU, ΔT. (b) Compare to isothermal expansion over the same volume change.\n\n**(a) Free expansion:**\nNo external pressure → W_by = 0. Insulated container → Q = 0. First law: ΔU = 0. Ideal gas: ΔU = nC_vΔT → ΔT = 0 → T_f = 300 K.\n\n**(b) Comparison to isothermal (WE-1 type):**\nIsothermal expansion 1 → 3 L at 300 K: W_by = nRT ln(3) = 1 × 8.314 × 300 × 1.099 = 2742 J; Q = 2742 J (heat absorbed).\nFree expansion: W_by = 0, Q = 0.\n\n**Same initial and final states (P, V, T all same for ideal gas at same T and V).**\nYet Q and W are completely different. This proves Q and W are path functions, not state functions.\n\n**Irreversibility:** The free expansion cannot be run backward without external energy input — it is irreversible. Even though ΔU = 0 for both processes, the free expansion generates entropy (the gas spreads into larger volume spontaneously; it cannot spontaneously reconcentrate).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 49,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/misconception/MC-ADIABATIC-STEEPER-OR-SHALLOWER",
+      "kind": "misconception",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "**Trigger signal:** Student draws the adiabatic curve flatter than or equal to the isothermal on a P-V diagram.",
+      "content": "### MC-ADIABATIC-STEEPER-OR-SHALLOWER\n\n**Trigger signal:** Student draws the adiabatic curve flatter than or equal to the isothermal on a P-V diagram.\n\n**Conflict evidence [P28]:** \"For the same gas, expand isothermal and adiabatic from V₁ = 2 L. At V₂ = 6 L: isothermal P = P₁/3; adiabatic P = P₁ × (2/6)^(5/3) = P₁ × (1/3)^1.667. Which is lower pressure? Which curve dropped more?\"\n\n*Adiabatic: P₂ = P₁ × 0.1604; Isothermal: P₂ = P₁/3 = P₁ × 0.333. Adiabatic drops lower. Adiabatic curve is STEEPER (falls more rapidly).*\n\n**Bridge text [P30]:** \"Adiabatic is steeper because the gas cools as it expands (no heat input to maintain T), so pressure falls faster than along the constant-T isotherm. Slope of adiabatic on P-V: −γP/V = −(5/3)P/V. Slope of isothermal: −P/V. Since γ > 1, adiabatic is steeper by factor γ.\"\n\n**Replacement text [P31]:** \"On a P-V diagram: isothermal curve = hyperbola (PV = const); adiabatic = steeper hyperbola (PV^γ = const, γ > 1). For any expansion from the same starting point, the adiabatic curve lies BELOW the isothermal — same final V but lower final P and lower final T. Enclosing an engine cycle that includes both: isothermal runs near the top (high P) and adiabatic runs near the bottom (steeper drop).\"\n\n**Discrimination pairs [P33]:**\n- \"Which enclosed area is larger: a cycle bounded above by isothermal or by adiabatic?\" → Bounded above by isothermal (higher P at every V) → larger area → more work.\n- \"Why do Carnot cycles use isothermal + adiabatic segments, not all-isothermal?\" → All-isothermal: no cycle (single path). Adiabatic segments connect the two isothermal temperatures without heat exchange, completing the cycle efficiently.\n\n**s6_path:** \"Remember: adiabatic = steeper. Gas cools in adiabatic expansion, pressure drops faster.\"\n\n---",
+      "localKey": "MC-ADIABATIC-STEEPER-OR-SHALLOWER",
+      "language": "en",
+      "refs": [
+        "MC-ADIABATIC-STEEPER-OR-SHALLOWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/misconception/MC-FREE-EXPANSION-COOLS-GAS",
+      "kind": "misconception",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "**Trigger signal:** Student says \"when gas expands freely into vacuum it cools down — expansion always cools.",
+      "content": "### MC-FREE-EXPANSION-COOLS-GAS\n\n**Trigger signal:** Student says \"when gas expands freely into vacuum it cools down — expansion always cools.\"\n\n**Conflict evidence [P28]:** \"Apply first law to free expansion: no external pressure → W_by = ? Insulated → Q = ? What does ΔU = Q + W give for T?\"\n\n*W_by = 0 (no force); Q = 0 (insulated). ΔU = 0. For ideal gas: ΔU = nC_vΔT → ΔT = 0. Temperature unchanged.*\n\n**Bridge text [P30]:** \"Expansion cools gas when the gas does work against external pressure (W_by > 0 → ΔU decreases → T decreases). In free expansion into vacuum, no work is done (nothing to push against) and no heat is exchanged, so ΔU = 0 and T is unchanged for an ideal gas.\"\n\n**Replacement text [P31]:** \"Rule: expansion against external pressure → gas does positive work → T falls (adiabatic). Free expansion into vacuum → W_by = 0, Q = 0 → ΔU = 0 → T unchanged (ideal gas). Real gases: free expansion can warm or cool depending on intermolecular forces (Joule-Thomson above/below inversion temperature). Adiabatic expansion against a piston always cools.\"\n\n**Discrimination pairs [P33]:**\n- \"Piston compressed adiabatically: does gas heat or cool?\" → Heats — work done ON gas (W_on > 0, Q = 0) → ΔU > 0 → T rises.\n- \"Ideal gas pushed quickly through a small hole into a vacuum (free expansion): temperature after?\" → Same as before. No work, no heat, ΔU = 0.\n\n**s6_path:** \"Expansion cools when there's something to push against. Into vacuum: nothing to push → no work done → T unchanged.\"\n\n---",
+      "localKey": "MC-FREE-EXPANSION-COOLS-GAS",
+      "language": "en",
+      "refs": [
+        "MC-FREE-EXPANSION-COOLS-GAS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 212,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "diagnostic: four processes and their constants",
+      "content": "{\"id\":\"TA-2\",\"title\":\"diagnostic: four processes and their constants\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 212,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "anchor: P-V diagram sketch matching",
+      "content": "{\"id\":\"TA-3\",\"title\":\"anchor: P-V diagram sketch matching\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 212,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": ": P28 conflict → P30 bridge → P31 → P33",
+      "content": "{\"id\":\"TA-4\",\"title\":\": P28 conflict → P30 bridge → P31 → P33\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-ADIABATIC-STEEPER-SHALLOWER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ADIABATIC-STEEPER-SHALLOWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 213,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "check-in: isothermal ΔU=0, Q=W_by reasoning",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in: isothermal ΔU=0, Q=W_by reasoning\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 215,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": ": P28 conflict → P30 bridge → P31 → P33",
+      "content": "{\"id\":\"TA-6\",\"title\":\": P28 conflict → P30 bridge → P31 → P33\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-FREE-EXPANSION-COOLS\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-FREE-EXPANSION-COOLS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 217,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "narrow: adiabatic vs. free expansion physical distinction",
+      "content": "{\"id\":\"TA-7\",\"title\":\"narrow: adiabatic vs. free expansion physical distinction\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 218,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "retrieval seed: P4-b isothermal W_by",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval seed: P4-b isothermal W_by\",\"primitives\":[\"P4\",\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 219,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "mastery probe: adiabatic T₂ + ΔU",
+      "content": "{\"id\":\"TA-9\",\"title\":\"mastery probe: adiabatic T₂ + ΔU\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 221,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-10\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 222,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-11\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 223,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-12\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 224,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "close",
+      "content": "{\"id\":\"TA-13\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 225,
+        "endLine": 225
+      }
+    },
+    {
+      "assetId": "phys.therm.thermodynamic-processes/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.therm.thermodynamic-processes",
+      "title": "Session Flow",
+      "content": "```\n[P01 open] → [P41 diagnostic: four processes and their constants] → [P06 anchor: P-V diagram sketch matching]\n→ [MC-ADIABATIC-STEEPER-SHALLOWER: P28 conflict → P30 bridge → P31 → P33]\n→ [WE-1: isothermal vs adiabatic expansion comparison]\n→ [P51 check-in: isothermal ΔU=0, Q=W_by reasoning]\n→ [WE-2: adiabatic PV^γ = const derivation]\n→ [MC-FREE-EXPANSION-COOLS: P28 conflict → P30 bridge → P31 → P33]\n→ [P52 narrow: adiabatic vs. free expansion physical distinction]\n→ [P62 retrieval seed: P4-b isothermal W_by]\n→ [WE-3: free expansion vs. isothermal — state function proof]\n→ [P36 mastery probe: adiabatic T₂ + ΔU]\n→ [P89 retrieval schedule: Day 1, Day 4, Day 14]\n→ [P91 mastery gate: 80% on P4-a through P4-e]\n→ [P85 regulation tail]\n→ [P68 close]\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.thermodynamic-processes.md",
+        "startLine": 209,
+        "endLine": 230
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

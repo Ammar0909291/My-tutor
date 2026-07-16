@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.pressure-fluids-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.pressure-fluids",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:598bd2509c5a64621b6d5baf5f55834621b1462c7d6c453e3fd9ff13f3eeb5aa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.pressure-fluids.md": "sha256:ac4f6634df2e2aeeead757b41201231a92cf024f4641ae9d1142234e3e66c763"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.pressure-fluids",
+    "name": "Pressure in Fluids",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.newtons-second-law"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.pressure-fluids-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.pressure-fluids (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.pressure-fluids.md": "sha256:ac4f6634df2e2aeeead757b41201231a92cf024f4641ae9d1142234e3e66c763"
+      },
+      "contentHash": "sha256:98fd5c280d1542bebd45dbc98964903603ca61dfc8249d4c42e5025f6c10be09",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.pressure-fluids.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.pressure-fluids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.pressure-fluids\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.pressure-fluids.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.pressure-fluids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.pressure-fluids\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.pressure-fluids.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.pressure-fluids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.pressure-fluids\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.pressure-fluids.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.pressure-fluids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.pressure-fluids\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.pressure-fluids.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md#TA-5 (addresses MC-PRESSURE-DEPENDS-ON-VOLUME, MC-PRESSURE-DIRECTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.pressure-fluids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.pressure-fluids\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.pressure-fluids/misconception/MC-PRESSURE-DIRECTION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "- **Trigger signal:** Student says \"fluid pressure acts downward\" or draws pressure arrows pointing only downward on a submerged object.",
+      "content": "### MC-PRESSURE-DIRECTION\n- **Trigger signal:** Student says \"fluid pressure acts downward\" or draws pressure arrows pointing only downward on a submerged object.\n- **Conflict evidence [P28]:** \"Submerge a hollow ball in water and drill a hole in its side. Water enters from all directions — top, bottom, and all sides — not just from above. Fluid pressure acts in all directions simultaneously. At any point in a fluid, the pressure is the same in all directions (Pascal's principle for static fluids). On the bottom of a container, pressure acts upward on the container wall; on the sides it acts horizontally. 'Pressure acts downward' is only true for the force on a horizontal surface facing up.\"\n- **Bridge text [P30]:** \"Pressure P at a depth d is P = P₀ + ρgd. This gives the magnitude of pressure at that depth — but the pressure acts equally in all directions at that point. The force on any surface = P × A, directed perpendicular to the surface (inward into the fluid).\"\n- **Replacement text [P31]:** \"Pressure P = F/A is a scalar. The force on a surface = P × A, directed perpendicular to and into that surface. Fluid pressure acts in all directions at any given point — horizontal surfaces feel it vertically, vertical surfaces feel it horizontally.\"\n- **Discrimination pairs [P33]:**\n  - Horizontal surface at depth d, facing up: force = ρgdA upward (from water below) ✓\n  - Vertical wall at depth d: force = ρgdA horizontal (toward the wall) ✓\n  - All directions at a point: same scalar pressure P = ρgd ✓\n- **s6_path:** \"Think of a diver at 10 m depth. Their wetsuit is squeezed from all sides equally — top, bottom, sides. That's fluid pressure acting in all directions.\"\n\n---",
+      "localKey": "MC-PRESSURE-DIRECTION",
+      "language": "en",
+      "refs": [
+        "MC-PRESSURE-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/misconception/MC-PRESSURE-DEPENDS-ON-VOLUME",
+      "kind": "misconception",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "- **Trigger signal:** Student says \"a bigger container has more pressure at the bottom\" or thinks pressure at depth h depends on how much fluid is above.",
+      "content": "### MC-PRESSURE-DEPENDS-ON-VOLUME\n- **Trigger signal:** Student says \"a bigger container has more pressure at the bottom\" or thinks pressure at depth h depends on how much fluid is above.\n- **Conflict evidence [P28]:** \"Consider two containers: a wide barrel and a thin tube, both filled to the same height h = 1 m with water. Pressure at the bottom of both is P = ρgh = 1000 × 9.8 × 1 = 9800 Pa. The barrel contains 100× more water — but the pressure at the same depth is identical. Pressure depends only on depth h, density ρ, and g — not on the total volume or the shape of the container.\"\n- **Bridge text [P30]:** \"Each horizontal layer of fluid supports only the weight of fluid directly above it per unit area. The pressure P = ρgh reflects the weight per unit area of a fluid column of height h — shape and volume of the container are irrelevant.\"\n- **Replacement text [P31]:** \"P = P₀ + ρgh: pressure at depth h depends on: (1) atmospheric pressure P₀ at the surface, (2) density ρ of the fluid, (3) gravitational field g, (4) depth h. Container shape and volume do not appear.\"\n- **Discrimination pairs [P33]:**\n  - 1 m depth in a swimming pool: P_gauge = 9800 Pa ✓\n  - 1 m depth in a narrow test tube of water: P_gauge = 9800 Pa (same) ✓\n- **s6_path:** \"The hydraulic paradox — same depth, same pressure, regardless of container shape. Plumbers use this: water pressure at your basement tap depends on the height of the water tower, not how large the tower's tank is.\"\n\n---",
+      "localKey": "MC-PRESSURE-DEPENDS-ON-VOLUME",
+      "language": "en",
+      "refs": [
+        "MC-PRESSURE-DEPENDS-ON-VOLUME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "Pressure Definition",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Pressure Definition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 77,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "Pressure at Depth: Derivation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Pressure at Depth: Derivation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 88,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "Pascal's Principle",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Pascal's Principle\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 104,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "Manometers and Pressure Measurement",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Manometers and Pressure Measurement\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 117,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "Applications: Dams, Blood Pressure, Atmospheric Pressure",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Applications: Dams, Blood Pressure, Atmospheric Pressure\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PRESSURE-DEPENDS-ON-VOLUME\",\"MC-PRESSURE-DIRECTION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PRESSURE-DEPENDS-ON-VOLUME",
+        "MC-PRESSURE-DIRECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 127,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Pressure direction**\n\"Draw a submerged cube at depth 2 m in water. On which faces does water pressure act? In which directions? Calculate the force on the top face (0.1 m × 0.1 m).\"\n\n*Target:* All 6 faces. Top face: P = ρg×2 = 19 600 Pa; F = P×A = 19 600 × 0.01 = 196 N downward. Bottom face: P = ρg×2.1 = 20 580 Pa; F = 205.8 N upward. Difference = 9.8 N = buoyant force.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 179,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Pressure vs. depth**\n\"A barrel (1 m² base area) and a test tube (1 cm² base area) both contain water to height 2 m. Compare P at the base of each.\"\n\n*Target:* Both: P_gauge = ρgh = 1000×9.8×2 = 19 600 Pa. Same pressure regardless of container volume.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 179,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Hydraulic system**\n\"A hydraulic brake system: pedal piston area = 3 cm². Brake caliper piston area = 24 cm². Pedal force = 150 N. Find brake clamping force.\"\n\n*Target:* F_brake = 150 × (24/3) = 150 × 8 = 1200 N.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 179,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Barometer calculation**\n\"Why is the height of mercury in a barometer 760 mm, but the equivalent water barometer would be 10.3 m? Show using P₀ = ρgh.\"\n\n*Target:* h = P₀/(ρg). Mercury: h = 101 325/(13 600×9.8) = 0.760 m. Water: h = 101 325/(1000×9.8) = 10.34 m. Mercury is 13.6× denser, so height is 13.6× shorter.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 179,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: blood pressure at ankle**\n\"Blood pressure at heart level = 120 mmHg systolic. A person stands; their ankle is 1.2 m below heart level. What is blood pressure at the ankle? (ρ_blood = 1060 kg/m³; 1 mmHg = 133 Pa)\"\n\n*Target:* P_heart = 120 × 133 = 15 960 Pa; P_ankle = P_heart + ρgh = 15 960 + 1060×9.8×1.2 = 15 960 + 12 465 = 28 425 Pa ≈ 214 mmHg. This is why swollen ankles occur (high venous pressure at foot level).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 179,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "phys.mech.pressure-fluids/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.pressure-fluids",
+      "title": "Adaptive Flags",
+      "content": "- **Gauge vs. absolute**: always clarify which the problem asks for. Gauge = P − P₀. Most everyday applications use gauge pressure; engineering calculations often need absolute.\n- **Pascal's principle energy conservation**: in the hydraulic press, force is amplified but displacement is reduced proportionally. Total work is conserved (W = F_in × d_in = F_out × d_out). Emphasise: hydraulics amplify force, not energy.\n- **Manometer sign convention**: if the gas arm is lower than the open arm, gas pressure > atmospheric; if higher, gas pressure < atmospheric. Draw a diagram and label before solving.\n- **Blood pressure application** (TA-5, MP-5): this is medically relevant and motivating. The 1.2 m height difference creates ~12 kPa extra pressure at ankle level — enough to cause venous pooling in sedentary people or those with poor venous valves.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md",
+        "startLine": 245,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

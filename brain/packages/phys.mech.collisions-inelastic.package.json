@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.collisions-inelastic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.collisions-inelastic",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:a3faa29a5177c2a9ae49b3881c769098c1c6cb6946362f16cd0fdd71ddfca4e2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md": "sha256:3e60a657174d33f9f04d99fcc7e8fb1098adccd48e020986e51686955af9f961"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "phys.mech.collisions-inelastic",
+    "name": "Inelastic Collisions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.conservation-of-momentum"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.collisions-inelastic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.collisions-inelastic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md": "sha256:3e60a657174d33f9f04d99fcc7e8fb1098adccd48e020986e51686955af9f961"
+      },
+      "contentHash": "sha256:5a1b24008a56124e34117662dda934b15ed5bcf58d2fb6e070d78a07ace05275",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-inelastic.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-inelastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-inelastic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-inelastic.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-inelastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-inelastic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-inelastic.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-inelastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-inelastic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-inelastic.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-inelastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-inelastic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.collisions-inelastic.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md#TA-5 (addresses MC-MOMENTUM-LOST-INELASTIC, MC-PERFECTLY-INELASTIC-ZERO-VELOCITY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.collisions-inelastic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.collisions-inelastic\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.collisions-inelastic/misconception/MC-MOMENTUM-LOST-INELASTIC",
+      "kind": "misconception",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "- **Trigger signal:** Student says \"the car crumples, so momentum is lost in the crash\" or expects a car crash to not conserve momentum.",
+      "content": "### MC-MOMENTUM-LOST-INELASTIC\n- **Trigger signal:** Student says \"the car crumples, so momentum is lost in the crash\" or expects a car crash to not conserve momentum.\n- **Conflict evidence [P28]:** \"Consider two cars: car 1 (1000 kg, 20 m/s east) hits stationary car 2 (1500 kg). Before: p = 1000 × 20 = 20 000 kg·m/s. After sticking: v_f = 20 000/2500 = 8 m/s. After: p = 2500 × 8 = 20 000 kg·m/s. Momentum is exactly conserved even though the cars crumpled severely and lost KE = ½×1000×400 − ½×2500×64 = 200 000 − 80 000 = 120 000 J. Crumpling converts KE to heat/deformation — it does not destroy momentum.\"\n- **Bridge text [P30]:** \"Momentum is conserved in any collision (elastic or inelastic) in an isolated system. What inelastic collisions lose is kinetic energy — not momentum. The two are completely independent quantities.\"\n- **Replacement text [P31]:** \"Momentum is conserved in ALL collisions if the system is isolated (no external net force). KE is conserved only in elastic collisions. Inelastic: p conserved, KE not. Perfectly inelastic (sticking): p conserved, KE loss is maximum.\"\n- **Discrimination pairs [P33]:**\n  - Elastic: p conserved ✓, KE conserved ✓\n  - Inelastic: p conserved ✓, KE lost ✓ (to heat/deformation)\n  - \"Momentum lost in crash\": WRONG — p is always conserved in isolated system ✗\n- **s6_path:** \"Crashes look chaotic, but momentum always balances. The crumple zone converts kinetic energy into deformation energy — it doesn't make momentum disappear.\"\n\n---",
+      "localKey": "MC-MOMENTUM-LOST-INELASTIC",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-LOST-INELASTIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 3,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/misconception/MC-PERFECTLY-INELASTIC-ZERO-VELOCITY",
+      "kind": "misconception",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "- **Trigger signal:** Student assumes objects stick and stop in a perfectly inelastic collision.",
+      "content": "### MC-PERFECTLY-INELASTIC-ZERO-VELOCITY\n- **Trigger signal:** Student assumes objects stick and stop in a perfectly inelastic collision.\n- **Conflict evidence [P28]:** \"Two equal-mass objects: one at rest, one moving at 6 m/s. After sticking: v_f = (m×6 + m×0)/(2m) = 3 m/s. They do NOT stop — they move together at half the initial speed. Only if the two objects have equal and opposite momenta (same mass, same speed, opposite directions) will they stop. In most sticking collisions, the combined object continues moving.\"\n- **Bridge text [P30]:** \"The sticking condition means both objects move at the same final velocity: m₁u₁ + m₂u₂ = (m₁ + m₂)v_f. Solve for v_f — it is usually non-zero. Zero final velocity only when total initial momentum = 0.\"\n- **Replacement text [P31]:** \"Perfectly inelastic: v_f = (m₁u₁ + m₂u₂)/(m₁ + m₂). Objects move together at this velocity — which is zero only when m₁u₁ + m₂u₂ = 0 (equal and opposite momenta).\"\n- **Discrimination pairs [P33]:**\n  - m₁u₁ = m₂u₂ (opposite): v_f = 0 ✓ (stop)\n  - m₁u₁ ≠ m₂u₂ (general case): v_f ≠ 0 ✓ (continue moving)\n- **s6_path:** \"Think of it as momentum averaging: if one object is much heavier, the combined mass moves almost at the heavy object's velocity. The stuck pair rarely stops.\"\n\n---",
+      "localKey": "MC-PERFECTLY-INELASTIC-ZERO-VELOCITY",
+      "language": "en",
+      "refs": [
+        "MC-PERFECTLY-INELASTIC-ZERO-VELOCITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 16,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "Types of Inelastic Collisions",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Types of Inelastic Collisions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 86,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "KE Loss in Inelastic Collisions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"KE Loss in Inelastic Collisions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 99,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "Explosion as Reverse Perfectly Inelastic",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Explosion as Reverse Perfectly Inelastic\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 116,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "Two-Stage Problems",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Two-Stage Problems\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 129,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "Head-On vs. Glancing Collisions",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Head-On vs. Glancing Collisions\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-MOMENTUM-LOST-INELASTIC\",\"MC-PERFECTLY-INELASTIC-ZERO-VELOCITY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MOMENTUM-LOST-INELASTIC",
+        "MC-PERFECTLY-INELASTIC-ZERO-VELOCITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 142,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identify the type**\n\"A clay ball (0.5 kg, 4 m/s) hits a stationary clay block (1.5 kg) and sticks. Is this elastic, partially inelastic, or perfectly inelastic? Find v_f.\"\n\n*Target:* Perfectly inelastic (sticking). v_f = 0.5×4/2.0 = 1 m/s. KE_before = 4 J; KE_after = ½×2×1 = 1 J; ΔKE = 3 J lost.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 190,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — KE loss fraction**\n\"Two equal-mass objects collide and stick. What fraction of the initial KE (only one was moving) is lost?\"\n\n*Target:* v_f = mu/(2m) = u/2; KE_before = ½mu²; KE_after = ½×2m×(u/2)² = ¼mu². Fraction lost = (½mu² − ¼mu²)/½mu² = ½. Always 50% for equal-mass sticking collision with one at rest.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 190,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Explosion**\n\"A 3 kg explosive charge is at rest. It explodes into two fragments: m₁ = 1 kg and m₂ = 2 kg. m₁ flies at 10 m/s east. Find m₂'s velocity.\"\n\n*Target:* Initial p = 0; 1×10 + 2×v₂ = 0 → v₂ = −5 m/s (5 m/s west).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 190,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Two-stage problem**\n\"A 0.05 kg bullet embeds in a 5 kg block sitting on a frictionless surface. After the collision the block (with bullet) hits a spring (k = 200 N/m) and compresses it 0.3 m. Find the bullet's initial speed.\"\n\n*Target:* Spring energy = ½kx² = ½×200×0.09 = 9 J; ½(m+M)v_f² = 9 → v_f² = 18/5.05 → v_f = 1.887 m/s; v_bullet = (m+M)v_f/m = 5.05×1.887/0.05 = 190.6 m/s.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 190,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Synthesis: 2D inelastic**\n\"Car A (1000 kg, 15 m/s north) collides and sticks with car B (1500 kg, 20 m/s east). Find the speed and direction of the wreckage.\"\n\n*Target:* p_x = 1500×20 = 30 000 kg·m/s; p_y = 1000×15 = 15 000 kg·m/s; total mass = 2500 kg; v_fx = 12 m/s; v_fy = 6 m/s; |v_f| = √(144+36) = √180 ≈ 13.4 m/s; φ = arctan(6/12) = 26.6° north of east.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 190,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "phys.mech.collisions-inelastic/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.mech.collisions-inelastic",
+      "title": "Adaptive Flags",
+      "content": "- **Stage identification**: two-stage problems (TA-4) are the primary difficulty. Require students to write \"Stage 1: [collision/explosion], use [momentum]. Stage 2: [swing/slide/spring], use [energy/kinematics]\" before solving.\n- **KE loss direction**: KE can only be lost in a collision, never gained (unless it's an explosion with chemical energy input). If a student's calculation shows KE increasing in an inelastic collision, they have made an error — this is a diagnostic flag.\n- **Explosion sign**: in explosions from rest, the two fragments always have equal and opposite momenta. Students often forget to make the second velocity negative (or westward in 1D). Enforce sign convention.\n- **Elastic vs. inelastic crossover** (cross_link: phys.mech.collisions-elastic): if a student has studied elastic collisions, the explicit contrast is: elastic uses 2 equations (p + KE); inelastic uses 1 (p only). Stating this contrast explicitly at the start of the session prevents cross-contamination.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md",
+        "startLine": 256,
+        "endLine": 265
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

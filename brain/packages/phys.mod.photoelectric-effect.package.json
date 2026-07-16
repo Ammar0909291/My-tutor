@@ -1,0 +1,578 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.photoelectric-effect-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.photoelectric-effect",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:c4bd598ccb4979df2868d38f1c53770afda9bc5a59b23bf2e1a91a350adf6d8c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md": "sha256:e0232f1088c5ca05f7e133ef00499e50e8f3bc5c5def90648ad389ec1f379e22"
+    },
+    "assetCount": 24,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 8,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mod.photoelectric-effect",
+    "name": "Photoelectric Effect",
+    "difficultyRaw": "proficient (4)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "phys.em.electromagnetic-waves"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.photoelectric-effect-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.photoelectric-effect (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md": "sha256:e0232f1088c5ca05f7e133ef00499e50e8f3bc5c5def90648ad389ec1f379e22"
+      },
+      "contentHash": "sha256:0a6224d0743f45da2f82aeb76b0356dac1c01c151ac163cd36189e1fbf98fac6",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.photoelectric-effect.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photoelectric-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photoelectric-effect\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photoelectric-effect.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photoelectric-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photoelectric-effect\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photoelectric-effect.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photoelectric-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photoelectric-effect\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photoelectric-effect.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photoelectric-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photoelectric-effect\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photoelectric-effect.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photoelectric-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photoelectric-effect\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photoelectric-effect.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-6 (addresses MC-1, MC-3, MC-BRIGHTER-LIGHT-FASTER-ELECTRONS, MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photoelectric-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photoelectric-effect\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.photoelectric-effect.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.photoelectric-effect"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.photoelectric-effect\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.photoelectric-effect/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Photoelectric Effect — core explanation",
+      "content": "**Core Insight:** The photoelectric effect is the emission of electrons from a metal surface when\nlight of sufficient frequency strikes it. The classical wave model predicts: (1) any frequency\nshould work given enough intensity; (2) higher intensity should produce faster electrons.\nExperiment shows the opposite: (1) below a threshold frequency ν₀ no electrons are emitted\nregardless of intensity; (2) electron energy depends on frequency, not intensity. Einstein's\nphoton model explains both: light comes in discrete packets (photons) of energy hν. A photon\neither has enough energy to eject an electron or it does not — accumulating dim light does not\nhelp. Mastery means: (a) stating and applying Einstein's photoelectric equation KE_max = hν − φ,\n(b) explaining why the wave model fails on both counts, (c) computing threshold frequency/\nwavelength, and (d) interpreting stopping-potential experiments.\n\n**The One Equation That Matters:**  \n  KE_max = hν − φ  \n  where φ = hν₀ = work function (energy to liberate an electron from the surface)  \n  Stopping potential: eV_s = KE_max = hν − φ\n\n**Why This Is Historically Pivotal:** The photoelectric effect was Einstein's 1905 proof that\nelectromagnetic energy is quantized. It is the experimental entry point into quantum mechanics\nand earned Einstein the 1921 Nobel Prize. Wave theory had been the unquestioned framework for\nlight for a century; this result cracked it.\n\n**Why This Is Conceptually Hard:** Students accept the equation but do not genuinely believe\nthe photon model. They revert to wave thinking when probed. The stopping-potential setup is\nabstract and requires several conceptual layers. The work function is often treated as a magic\nconstant rather than a physical energy barrier.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 24,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-BRIGHTER-LIGHT-FASTER-ELECTRONS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "**Probe:** \"You double the intensity of the light shining on a metal surface (same frequency,",
+      "content": "",
+      "localKey": "MC-BRIGHTER-LIGHT-FASTER-ELECTRONS",
+      "language": "en",
+      "refs": [
+        "MC-BRIGHTER-LIGHT-FASTER-ELECTRONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "**Probe:** \"You double the intensity of the light shining on a metal surface (same frequency,",
+      "content": "### MC-1: MC-BRIGHTER-LIGHT-FASTER-ELECTRONS\n**Probe:** \"You double the intensity of the light shining on a metal surface (same frequency,\nwhich is above threshold). What happens to (a) the number of electrons emitted per second, and\n(b) the maximum kinetic energy of emitted electrons?\"  \n**Characteristic phrase:** \"Brighter light gives faster electrons.\"  \n**Trigger:** Wave-model intuition: more light = more energy = more energetic electrons.  \n**Conflict evidence [P28]:** Experimentally: doubling intensity doubles the photocurrent (more\nelectrons per second) but leaves KE_max unchanged. KE_max depends only on frequency via\nKE_max = hν − φ. A brighter source delivers more photons per second, but each photon still\ncarries energy hν — the same as before.  \n**Bridge [P30]:** \"In the photon model, intensity = number of photons per second. Each photon\ncarries the same energy hν regardless of how many there are. More photons → more electrons\nknocked out, but each electron gets exactly the same energy hν − φ. Intensity changes the\nphotocurrent, not the electron speed.\"  \n**Replacement [P31]:** KE_max depends on frequency (hν − φ) only. Photocurrent depends on\nintensity (photon rate) only.  \n**Discrimination pairs [P33]:** Doubling intensity: (A) doubles KE_max, (B) doubles photocurrent\nonly, (C) does nothing. Correct: (B).  \n**S6 repair path:** TA-3 (wave-model failure evidence) → TA-4 (photon model construction).",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "**Probe:** \"If you shine an extremely bright red lamp (below threshold frequency) on a metal",
+      "content": "",
+      "localKey": "MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY",
+      "language": "en",
+      "refs": [
+        "MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 23,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "**Probe:** \"If you shine an extremely bright red lamp (below threshold frequency) on a metal",
+      "content": "### MC-2: MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY\n**Probe:** \"If you shine an extremely bright red lamp (below threshold frequency) on a metal\nsurface for one hour, will any electrons eventually be emitted?\"  \n**Characteristic phrase:** \"If you leave the light on long enough, it should work.\"  \n**Trigger:** Classical wave model: energy accumulates in the surface until an electron has enough.  \n**Conflict evidence [P28]:** Experimentally: no electrons ever appear below threshold, regardless\nof intensity or exposure time. This was one of the classical model's catastrophic failures —\nit predicted a time delay for emission, but experiments showed instantaneous emission (within\n~10⁻⁹ s even for very dim light above threshold).  \n**Bridge [P30]:** \"In the wave model, energy arrives continuously and accumulates. In the photon\nmodel, energy arrives in discrete packets. A photon of red light carries energy hν_red < φ.\nIt knocks on the door but doesn't have the key. No matter how many of these underpowered photons\nknock, the door stays shut. Photons do not share their energy.\"  \n**Replacement [P31]:** Below threshold frequency: no electron emission ever, no matter how high\nthe intensity or how long the exposure.  \n**Discrimination pairs [P33]:** Below threshold, bright light for 1 hour: (A) eventually emits\nelectrons, (B) emits no electrons, (C) depends on the specific metal. Correct: (B).  \n**S6 repair path:** TA-2 (electroscope demo) → TA-3 (classical vs. photon model table).",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 23,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "**Probe:** \"In a photoelectric experiment, the stopping potential is +2V applied to the collector.",
+      "content": "",
+      "localKey": "MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS",
+      "language": "en",
+      "refs": [
+        "MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 42,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "**Probe:** \"In a photoelectric experiment, the stopping potential is +2V applied to the collector.",
+      "content": "### MC-3: MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS\n**Probe:** \"In a photoelectric experiment, the stopping potential is +2V applied to the collector.\nDoes this accelerate or decelerate the emitted electrons?\"  \n**Characteristic phrase:** \"Positive voltage means electrons speed up toward it.\"  \n**Trigger:** Students apply an incorrect sign convention — they think positive voltage attracts\nelectrons (which is true for acceleration in a vacuum tube) but forget that the stopping potential\nis applied to RETARD electrons, not accelerate them.  \n**Conflict evidence [P28]:** The stopping potential is applied to OPPOSE the motion of electrons\nfrom emitter to collector. A positive potential on the collector means it attracts electrons —\nwait, that is incorrect. The stopping potential is applied to make the collector NEGATIVE relative\nto the emitter, creating a retarding field that slows electrons. The polarity must slow electrons.  \n**Bridge [P30]:** \"The stopping potential V_s is the potential that just barely stops even the\nfastest electron from reaching the collector. The collector is made negative relative to the\nemitter: V_collector = −V_s. The electron (negative charge) moving toward a negative collector\nis repelled. When eV_s = KE_max, the most energetic electron is brought to rest just at the\ncollector.\"  \n**Replacement [P31]:** Stopping potential creates a retarding electric field that decelerates\nemitted electrons; eV_s = KE_max.  \n**Discrimination pairs [P33]:** Stopping potential is: (A) positive on collector to speed up\nelectrons, (B) negative on collector to slow electrons down, (C) applied to the emitter.\nCorrect: (B).  \n**S6 repair path:** TA-6 (stopping-potential circuit diagram drill).",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 42,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "**Probe:** \"Two different metals, sodium and platinum, are illuminated with the same UV source.",
+      "content": "",
+      "localKey": "MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS",
+      "language": "en",
+      "refs": [
+        "MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "**Probe:** \"Two different metals, sodium and platinum, are illuminated with the same UV source.",
+      "content": "### MC-4: MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS\n**Probe:** \"Two different metals, sodium and platinum, are illuminated with the same UV source.\nWill they have the same threshold frequency? Same stopping potential? Explain.\"  \n**Characteristic phrase:** \"The threshold is the same for any metal.\"  \n**Trigger:** Treating φ as a universal constant; not understanding that φ varies by material.  \n**Conflict evidence [P28]:** φ(Na) ≈ 2.3 eV (threshold ~540 nm, visible green); φ(Pt) ≈ 5.7 eV\n(threshold ~220 nm, deep UV). The same UV source may eject electrons from Na but not from Pt.\nThreshold frequency ν₀ = φ/h is material-specific.  \n**Bridge [P30]:** \"The work function is the energy required to free an electron from that metal's\nspecific lattice structure and surface potential. Metals with loosely bound valence electrons\n(alkali metals like Na, K, Cs) have low work functions — visible light can eject their electrons.\nTransition metals (Pt, W) hold electrons tightly — you need UV.\"  \n**Replacement [P31]:** The work function φ is material-specific; ν₀ = φ/h varies by metal.  \n**Discrimination pairs [P33]:** Two metals with different φ values under the same UV source:\n(A) both have the same threshold, (B) different thresholds, (C) work functions don't affect the\nthreshold. Correct: (B).  \n**S6 repair path:** TA-5 (work function table for common metals — Na, K, Zn, Cu, Pt).\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 65,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Concrete Anchor",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Anchor\",\"primitives\":[\"P01\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Electroscope Demonstration",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Electroscope Demonstration\",\"primitives\":[\"P06\",\"P14\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 9,
+        "endLine": 16
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Classical Model Failure Table",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Classical Model Failure Table\",\"primitives\":[\"P14\",\"P28\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 16,
+        "endLine": 22
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Photon Model Construction",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Photon Model Construction\",\"primitives\":[\"P14\",\"P30\",\"P31\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 22,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Work Function Table & Threshold",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Work Function Table & Threshold\",\"primitives\":[\"P50\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 29,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "MC-1 & MC-3 Diagnostic",
+      "content": "{\"id\":\"TA-6\",\"title\":\"MC-1 & MC-3 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-3\",\"MC-BRIGHTER-LIGHT-FASTER-ELECTRONS\",\"MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-BRIGHTER-LIGHT-FASTER-ELECTRONS",
+        "MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Closure & Millikan Graph",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure & Millikan Graph\",\"primitives\":[\"P68\",\"P85\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 43,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Assessment",
+      "content": "**Mastery Gate (threshold 0.85):**  \nPass criteria — student correctly:  \n(a) States and applies KE_max = hν − φ  \n(b) Identifies that KE_max is independent of intensity and depends only on frequency  \n(c) Identifies that photocurrent is proportional to intensity  \n(d) Computes threshold frequency/wavelength from work function  \n(e) Determines stopping potential from KE_max  \nFailure on (a) or (b) → restart from TA-4. Failure on (c) → TA-6. Failure on (d) → TA-5. Failure\non (e) → TA-6.\n\n**Formative Golden Probe (FA-1):**  \n\"Light of frequency 8 × 10¹⁴ Hz strikes a metal with work function 2.0 eV. (a) Find the maximum\nkinetic energy of emitted electrons. (b) Find the stopping potential. (c) Is emission possible?\"  \nExpected: hν = 6.626×10⁻³⁴ × 8×10¹⁴ = 5.3×10⁻¹⁹ J = 3.31 eV. KE_max = 3.31 − 2.0 = 1.31 eV.\nV_s = 1.31 V. Yes, ν > ν₀.  \nThreshold: All three parts correct with correct units.\n\n**Formative Golden Probe (FA-2):**  \n\"The threshold wavelength for a metal is 350 nm. (a) Find the work function in eV. (b) If light\nof wavelength 250 nm strikes the surface, find the stopping potential.\"  \nExpected: φ = hc/λ₀ = (6.626×10⁻³⁴ × 3×10⁸) / (350×10⁻⁹) = 5.68×10⁻¹⁹ J = 3.55 eV.\nFor λ = 250 nm: E = hc/λ = 7.95×10⁻¹⁹ J = 4.97 eV. V_s = 4.97 − 3.55 = 1.42 V.  \nThreshold: Both values correct.\n\n**Formative Golden Probe (FA-3):**  \n\"In Millikan's experiment, the stopping potential for light of frequency 6 × 10¹⁴ Hz is 0.8 V\nand for 10 × 10¹⁴ Hz is 2.46 V. Use these two data points to determine (a) Planck's constant\nand (b) the work function of the metal.\"  \nExpected: slope = ΔV_s/Δν = (2.46 − 0.8)/(10 − 6) × 10⁻¹⁴ = 1.66/4×10⁻¹⁴ = 4.15×10⁻¹⁵ Vs.\nh = e × slope = 1.6×10⁻¹⁹ × 4.15×10⁻¹⁵ = 6.64×10⁻³⁴ Js ≈ 6.63×10⁻³⁴ Js. ✓  \nφ = hν − eV_s = 6.64×10⁻³⁴ × 6×10¹⁴ − 1.6×10⁻¹⁹ × 0.8 = 3.98×10⁻¹⁹ − 1.28×10⁻¹⁹ = 2.70×10⁻¹⁹ J = 1.69 eV.  \nThreshold: Both h and φ computed correctly; Millikan's graph method explicitly used.\n\n**Formative Golden Probe (FA-4):**  \n\"Explain in one paragraph, using the photon model, why (a) tripling the intensity of below-threshold\nlight never produces emission, and (b) even very dim light above threshold produces immediate\nemission.\"  \nExpected: (a) Below threshold: each photon carries energy hν < φ. No single photon can eject an\nelectron. Intensity only counts photons per second — more low-energy photons still cannot clear\nthe barrier. (b) Above threshold: each photon carries hν > φ. Even one photon is sufficient to\neject an electron immediately — no energy accumulation is needed.  \nThreshold: Both phenomena explained by reference to individual photon energy, not intensity.\n\n**Confidence Calibration:** After FA-3 (Millikan graph), ask: \"Before you calculated: were you\ncertain, likely, or unsure?\" Persistent underconfidence on graph-slope calculations is a signal\nof calculator/algebra anxiety that can be addressed separately.\n\n**Delayed Retrieval (Session + 3 days):**  \n\"Without notes: state Einstein's photoelectric equation. What does doubling the frequency do to\nKE_max? What does doubling the intensity do to the photocurrent vs. KE_max?\"  \nThreshold: All answered correctly unaided; intensity/frequency distinction firm.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 359,
+        "endLine": 415
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Four-Stage Mental Model Progression",
+      "content": "**Stage 1 — Concrete (C)**  \nA UV lamp is shone on a negatively charged zinc plate on an electroscope — the electroscope\ndischarges (leaves fall). A red lamp does the same, but the leaves stay put. Filter the UV to\nmake it dimmer — leaves still fall (slower but they fall). This simple setup establishes: colour\n(frequency) matters; brightness (intensity) does not determine if emission occurs.\n\n**Stage 2 — Representational (R)**  \nDraw the metal surface as a potential well of depth φ. An incoming photon of energy hν arrives.\nIf hν > φ, the photon can kick the electron over the barrier; the excess energy becomes kinetic\nenergy: KE = hν − φ. If hν < φ, the photon cannot kick the electron over no matter how many\nphotons arrive in sequence — they do not stack.\n\n**Stage 3 — Abstract (A)**  \nEinstein's equation: KE_max = hν − φ. Stopping potential: eV_s = hν − φ. Threshold: ν₀ = φ/h.\nGraph of V_s vs. ν: straight line, slope = h/e, intercept on ν-axis = ν₀. Millikan's 1916\nmeasurement of this graph gave the first accurate value of h from an independent experiment —\nconfirming Einstein's photon hypothesis.\n\n**Stage 4 — Transfer (T)**  \nPhotoemission underpins: photodiodes (light sensors), photomultiplier tubes (single-photon\ndetectors), photovoltaic cells (solar panels — though band-gap physics is a generalization),\nX-ray photoelectron spectroscopy (XPS — measuring atomic binding energies), and the Compton\neffect (next concept: photon momentum).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 54,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Why Beginners Fail",
+      "content": "1. **Wave-model persistence:** Students hear \"photoelectric effect\" and understand it superficially,\n   but when probed they revert to wave thinking (\"more light = more energy = more electrons or\n   faster electrons\"). The wave model is deeply intuitive and students never fully abandon it\n   without confronting the experimental data directly.\n\n2. **Intensity–frequency conflation:** Students confuse intensity (number of photons per second)\n   with frequency (energy per photon). Bright red light has many low-energy photons. Dim UV has\n   few high-energy photons. Dim UV ejects electrons; bright red does not.\n\n3. **Work function as magic number:** Students treat φ as a given constant without understanding\n   it physically — the energy needed to overcome the electrostatic attraction that binds the\n   electron to the metal lattice. This makes the threshold frequency seem arbitrary.\n\n4. **Stopping-potential setup confusion:** Students confuse the stopping potential (retarding\n   voltage that just prevents even the most energetic electron from reaching the collector) with\n   the accelerating potential that would speed electrons up. The sign convention and the circuit\n   setup are sources of persistent error.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 82,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Voice Teaching",
+      "content": "**Opening move:** \"Here is the paradox: a dim UV lamp knocks electrons off zinc; a bright red\nfloodlight cannot. The wave model says energy is energy — brighter should always win. The experiment\nsays it doesn't. We need a new model for light.\"\n\n**Key explanatory moves:**\n- \"Each photon is a fixed packet of energy hν. Frequency sets the packet size. Intensity counts\n  the packets. More packets do not make bigger packets.\"\n- \"The work function is a real physical barrier — the energy it takes to rip an electron free\n  from the metal's grip. If the photon cannot clear this barrier alone, no amount of waiting helps.\"\n- \"KE_max = hν − φ: everything above the barrier becomes kinetic energy. The stopping potential\n  measures that kinetic energy directly: it is the voltage needed to push back even the fastest\n  electron.\"\n\n**Common recovery phrases:**\n- If student applies wave thinking: \"Draw me the V_s vs. ν graph. If intensity controlled KE,\n  the slope would be zero — the graph would be a horizontal line. Millikan measured a steep\n  slope. The wave model was falsified, not just inconvenient.\"\n- If work function confused: \"It is the depth of the potential well. Different metals hold their\n  electrons differently tightly. Sodium is loose; platinum holds very tight.\"\n- If stopping potential polarity wrong: \"The stopping potential has to push back against the\n  electrons. Electrons are negative. To push them back, the collector is made negative — negative\n  repels negative. The retarding field does work eV_s against the electron's KE.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 332,
+        "endLine": 359
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Recovery Notes",
+      "content": "**S0 (no prior EM waves knowledge):** The prerequisite phys.em.electromagnetic-waves must be\nin place — the photon model is a modification of the EM wave model, and students need to know\nwhat is being replaced. Do not proceed without this prerequisite.\n\n**S3 (knows the formula but applies wave thinking when probed):** This is the dominant failure\nmode. Use the three-failure table (TA-3) explicitly and require students to explain why each\nwave-model prediction is wrong using the photon model before allowing any formula work.\n\n**S6 (MC-BRIGHTER-LIGHT-FASTER-ELECTRONS dominant):** Show the Millikan graph. The straight\nline V_s = (h/e)ν − φ/e has a slope that depends on frequency only — intensity does not appear\nanywhere in the equation. Ask: \"Where in this equation does intensity appear? It doesn't. That\nis experimental proof, not a theoretical claim.\"\n\n**S9 (plateau — knows formula, cannot interpret stopping-potential experiments):** Run the full\nstopping-potential circuit diagram (TA-6) slowly, confirming polarity at each step. Have the\nstudent narrate the electron's journey from emission to being stopped.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-BRIGHTER-LIGHT-FASTER-ELECTRONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 415,
+        "endLine": 436
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Primarily conceptual, with a procedural formula (KE_max = hν − φ) as the\noperational tool. The historical framing (Einstein 1905, Nobel 1921, Millikan's confirmation 1916)\nprovides episodic memory hooks.\n\n**Spaced retrieval plan:**\n- Session + 1 day: \"State Einstein's photoelectric equation. What is the physical meaning of each\n  term? What is the threshold frequency?\" (Formula + meaning check)\n- Session + 4 days: \"A photon has energy 4.5 eV. The work function is 2.8 eV. Find KE_max and\n  the stopping potential. If intensity is doubled, what changes?\" (Quantitative + intensity check)\n- Session + 10 days: \"Millikan's graph of stopping potential vs. frequency has slope 4.1 × 10⁻¹⁵ Vs.\n  How would you extract Planck's constant from this? Relate this to the photoelectric equation.\"\n  (Graph interpretation + conceptual synthesis)\n\n**Interleaving partners:** phys.em.electromagnetic-waves (the wave model that was superseded),\nphys.mod.photons (next concept: quantizing light more deeply), phys.mod.compton-effect (photon\nmomentum, further confirmation of photon model).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 436,
+        "endLine": 457
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Transfer Map",
+      "content": "**Near transfer:**\n- phys.mod.photons: the photon model, introduced here, becomes the permanent quantum of light\n- phys.mod.compton-effect: extends photon model to momentum (p = h/λ)\n- phys.mod.de-broglie: extends the quantization idea to matter waves\n\n**Far transfer:**\n- Photodiodes and CCD sensors: photon-to-electron conversion at each pixel\n- Night-vision technology: photoelectric conversion at the photocathode\n- X-ray photoelectron spectroscopy (XPS): measures atomic binding energies using hν − φ\n- Photosynthesis (loosely): light-driven electron excitation in chlorophyll follows similar\n  threshold-frequency logic at the molecular level\n- Astrophysics: photoionization in stellar atmospheres; the Lyman limit\n\n**Structural abstraction:** The threshold/barrier paradigm — a packet of energy must individually\nexceed a fixed barrier, and packets do not stack — reappears in nuclear activation energies,\nchemical reaction activation barriers (though statistical there), and semiconductor band-gap\nabsorption (minimum photon energy = band-gap energy).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 457,
+        "endLine": 479
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "Curriculum Feedback",
+      "content": "**Does this concept position correctly in the KG?**  \nYes. Requiring phys.em.electromagnetic-waves gives students the wave model that is being\nsuperseded — the confrontation between wave prediction and experiment is the pedagogical engine.\nUnlocking phys.mod.photons is correct: the photon concept established here is deepened there.\n\n**Missing prerequisite?**  \nA node for phys.mod.planck-radiation (Planck's quantization of energy, 1900) would deepen context,\nbut it is not strictly necessary — the photoelectric effect stands independently as the first\nexperimental proof of photon quantization, and Planck's constant h can be introduced here without\nPlanck's cavity derivation.\n\n**Recommended teaching sequence:** phys.em.electromagnetic-waves → phys.mod.photoelectric-effect\n→ phys.mod.photons → phys.mod.compton-effect. These four form the photon-model building arc and\nshould be taught with minimal interruption.\n\n**Asset opportunity:** An interactive V_s vs. ν plotter where students set up two data points\n(as in FA-3) and measure the slope to extract h would transform the Millikan graph from an\nabstract historical fact into a hands-on measurement. This is a high-priority simulation asset.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 479,
+        "endLine": 502
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

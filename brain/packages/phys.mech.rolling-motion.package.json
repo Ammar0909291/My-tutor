@@ -1,0 +1,545 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.rolling-motion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.rolling-motion",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:e2aeaadd6c4eb0c7e809cca2f4cb71e39adc830725e848a9bb12b484db1c8fc9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.rolling-motion.md": "sha256:07fa7d9f37bcd12516fe4a075359d965e61aba0d942184ceff1a5163b900f865"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.rolling-motion",
+    "name": "Rolling Motion",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.angular-kinematics",
+      "phys.mech.kinetic-energy",
+      "phys.mech.conservation-of-angular-momentum"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.rolling-motion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.rolling-motion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.rolling-motion.md": "sha256:07fa7d9f37bcd12516fe4a075359d965e61aba0d942184ceff1a5163b900f865"
+      },
+      "contentHash": "sha256:cbf525fdea5cedeb970b1f17c281e948176abe5868894a27d79646ccd0434762",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.rolling-motion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rolling-motion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rolling-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rolling-motion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rolling-motion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rolling-motion.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rolling-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rolling-motion\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rolling-motion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rolling-motion.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rolling-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rolling-motion\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rolling-motion.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rolling-motion.md#TA-4 (addresses MC-SAME-RACE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rolling-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rolling-motion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rolling-motion.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rolling-motion.md#TA-5 (addresses MC-ROLLING-SAME-AS-SLIDING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rolling-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rolling-motion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rolling-motion.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rolling-motion.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rolling-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rolling-motion\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.rolling-motion.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.rolling-motion.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.rolling-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.rolling-motion\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.rolling-motion/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Rolling Motion — core explanation",
+      "content": "**Core Insight:** A rolling object has two forms of kinetic energy simultaneously: translational\n(½mv²_cm) and rotational (½Iω²). The constraint v_cm = Rω links them for rolling without\nslipping. Because different shapes have different I, they trade energy between these forms\ndifferently — a solid sphere always beats a hollow cylinder down a frictionless ramp regardless\nof mass or radius.\n\n**Rolling constraint (without slipping):**\nv_cm = Rω\na_cm = Rα\n\n**Total kinetic energy of a rolling object:**\nKE_total = ½mv²_cm + ½Iω²\n\nUsing v_cm = Rω and I = βmR² (β = ½ for solid disc, 1 for hollow cylinder, ²/₅ for solid sphere):\nKE_total = ½mv²_cm(1 + β)\n\n**Speed at the bottom of a ramp (height h, frictionless ramp, rolling without slip):**\nEnergy conservation: mgh = ½mv²_cm(1 + β)\nv_cm = √(2gh / (1 + β))\n\n**Ranking by speed at ramp bottom (smallest β wins):**\nSolid sphere (β = 2/5): v ∝ 1/√1.4 → fastest\nSolid cylinder (β = 1/2): v ∝ 1/√1.5\nHollow cylinder (β = 1): v ∝ 1/√2 → slowest\n(All independent of mass and radius — only β matters!)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 27,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Total KE of rolling ball",
+      "content": "**Worked Example 1 (Total KE of rolling ball):**\nA solid sphere (M = 2 kg, R = 0.5 m, I = ²/₅×2×0.25 = 0.2 kg·m²) rolls at v_cm = 4 m/s.\nω = v/R = 4/0.5 = 8 rad/s.\nKE_trans = ½×2×16 = 16 J. KE_rot = ½×0.2×64 = 6.4 J. KE_total = 22.4 J.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 27,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Speed at ramp bottom",
+      "content": "**Worked Example 2 (Speed at ramp bottom):**\nSolid cylinder (β = ½) rolls from h = 2 m. v_cm = √(2×10×2/1.5) = √(40/1.5) = √26.7 ≈ 5.16 m/s.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 27,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Compare sphere vs hollow cylinder",
+      "content": "**Worked Example 3 (Compare sphere vs hollow cylinder):**\nSame h = 2 m.\nSphere (β = 2/5): v = √(2×10×2/1.4) ≈ 5.35 m/s. Wins.\nHollow cylinder (β = 1): v = √(2×10×2/2) = √20 ≈ 4.47 m/s. Loses.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 27,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/misconception/MC-SAME-RACE",
+      "kind": "misconception",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Priority 1",
+      "content": "### MC-SAME-RACE (Priority 1)\n**Label:** \"A heavier or larger object rolls down a ramp faster — mass and radius determine the winner\"\n\n**Trigger signals:**\n- Says \"the heavier ball will reach the bottom first\"\n- Claims radius matters (larger radius → faster)\n- Doesn't know that β (shape factor) is the only determinant\n\n**Conflict evidence [P28]:**\n\"Solid sphere A: 1 kg, R = 0.1 m. Solid sphere B: 100 kg, R = 2 m. Both roll from 3 m height.\nv_cm = √(2gh/(1+β)). For both: β = 2/5, h = 3 m.\nv = √(2×10×3/1.4) = √42.9 ≈ 6.55 m/s — identical for both!\nMass and radius cancelled out completely. What actually determined the speed?\"\n\n**Bridge [P30]:**\n\"v_cm = √(2gh/(1+β)). Neither m nor R appears — they cancelled. Only β (the shape coefficient)\nand h remain. β = I/(mR²) is the ratio of rotational inertia to translational inertia.\nA solid sphere always reaches the bottom before a hollow cylinder, no matter their sizes.\"\n\n**Replacement [P31]:**\n\"For rolling without slipping on a ramp: v_cm = √(2gh/(1+β)).\nβ depends only on shape:\nSolid sphere: β = 2/5 = 0.4 (lowest → fastest).\nSolid cylinder: β = 1/2 = 0.5.\nHollow sphere: β = 2/3 ≈ 0.67.\nHollow cylinder: β = 1 (highest → slowest).\nMass and radius do NOT determine order. Shape does.\"\n\n**Discrimination pairs [P33]:**\n- Solid sphere vs hollow cylinder, same mass and radius: sphere wins every time ✓\n- Two hollow cylinders of different mass: tie — β identical, mass cancels ✓\n\n**s6_path:** Use only the qualitative result first: \"solid shapes beat hollow shapes down a ramp\nbecause less energy goes into spinning.\" Derive the formula only after the qualitative answer is secure.\n\n---",
+      "localKey": "MC-SAME-RACE",
+      "language": "en",
+      "refs": [
+        "MC-SAME-RACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 3,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/misconception/MC-ROLLING-SAME-AS-SLIDING",
+      "kind": "misconception",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Priority 2",
+      "content": "### MC-ROLLING-SAME-AS-SLIDING (Priority 2)\n**Label:** \"Rolling without slipping is the same as sliding — you just use ½mv² for both\"\n\n**Trigger signals:**\n- Uses only ½mv² (ignoring ½Iω²) for a rolling object\n- Says \"the ball is moving so KE = ½mv² — rotation is inside the ball, it doesn't count\"\n- Gets wrong v at bottom of ramp (overcounts energy available for translation)\n\n**Conflict evidence [P28]:**\n\"A solid sphere (m = 2 kg, R = 0.5 m, I = 0.2 kg·m²) rolls at v = 4 m/s.\nYou wrote KE = ½×2×16 = 16 J (sliding formula).\nBut also: ω = 8 rad/s → KE_rot = ½×0.2×64 = 6.4 J.\nTotal = 22.4 J. If we use only 16 J and compute v at ramp bottom,\nwe get a different (wrong) answer. Which is the actual total kinetic energy?\"\n\n**Bridge [P30]:**\n\"Rolling means the object both translates AND rotates simultaneously. Every point of mass\nparticipates in the spinning motion, contributing to ½Iω². That energy is just as real as\nthe translational ½mv². If you drop only ½mv², you're ignoring the rotational energy — the\nsphere can't reach as high up a ramp as you'd calculate.\"\n\n**Replacement [P31]:**\n\"For any rolling object: KE_total = ½mv²_cm + ½Iω².\nUse the rolling constraint: v_cm = Rω to express everything in terms of v_cm.\nNever ignore the rotational term — it's always present when an object rolls.\"\n\n**Discrimination pairs [P33]:**\n- Rolling sphere on level surface: KE_total = ½mv²(1 + 2/5) = 7/10 mv² (not ½mv²) ✓\n- Sliding frictionless block: KE = ½mv² only (no rotation) ✓\n\n**s6_path:** Start with the two separate calculations (KE_trans and KE_rot) and add them;\ndefer the β shortcut formula to a second session.\n\n---",
+      "localKey": "MC-ROLLING-SAME-AS-SLIDING",
+      "language": "en",
+      "refs": [
+        "MC-ROLLING-SAME-AS-SLIDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 40,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 15,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 39,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "MC-SAME-RACE Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-SAME-RACE Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-SAME-RACE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SAME-RACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 51,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "MC-ROLLING-SAME-AS-SLIDING Probe",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-ROLLING-SAME-AS-SLIDING Probe\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-ROLLING-SAME-AS-SLIDING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ROLLING-SAME-AS-SLIDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 69,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 86,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 107,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Apply — rolling KE",
+      "content": "**MP-1 (Apply — rolling KE):**\n\"A solid sphere (m = 3 kg, R = 0.5 m, β = 2/5) rolls at v_cm = 6 m/s. Find KE_total.\"\nExpected: KE = ½×3×36×(1+0.4) = 54×1.4 = 75.6 J.\n_Discriminates: MC-ROLLING-SAME-AS-SLIDING resolution; KE = ½mv²(1+β)._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-ROLLING-SAME-AS-SLIDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 286,
+        "endLine": 319
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Apply — ramp speed",
+      "content": "**MP-2 (Apply — ramp speed):**\n\"A hollow cylinder (β = 1) rolls from h = 4 m. v_cm at bottom? (g = 10)\"\nExpected: v = √(2×10×4/2) = √40 ≈ 6.32 m/s.\n_Discriminates: v_cm = √(2gh/(1+β)) formula._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 286,
+        "endLine": 319
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Analyze — race outcome",
+      "content": "**MP-3 (Analyze — race outcome):**\n\"A solid sphere and a solid cylinder, equal mass and radius, roll down the same ramp.\nWhich wins? Would doubling the mass of the cylinder change the outcome? Explain.\"\nExpected: Sphere wins (β = 0.4 < 0.5). Doubling mass doesn't change outcome — mass cancels.\n_Discriminates: MC-SAME-RACE resolution; mass independence._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [
+        "MC-SAME-RACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 286,
+        "endLine": 319
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Apply — find height from v",
+      "content": "**MP-4 (Apply — find height from v):**\n\"A solid disc (β = 1/2) reaches v_cm = 8 m/s at the bottom of a ramp. Starting height?\"\nExpected: h = v²(1+β)/(2g) = 64×1.5/20 = 4.8 m.\n_Discriminates: energy equation rearrangement._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 286,
+        "endLine": 319
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Analyze — energy partitioning",
+      "content": "**MP-5 (Analyze — energy partitioning):**\n\"A hollow cylinder rolls at v_cm = 5 m/s. What fraction of KE_total is rotational?\"\nExpected: β = 1 → KE_rot/KE_total = β/(1+β) = 1/2 = 50%.\n(For solid sphere: 2/5 ÷ 7/5 = 2/7 ≈ 29%.)\n_Discriminates: energy fraction as function of β; deeper understanding._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 286,
+        "endLine": 319
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.angular-kinematics            ──►\nphys.mech.kinetic-energy                ──►  phys.mech.rolling-motion\nphys.mech.conservation-of-angular-momentum ──► (rotational KE, energy conservation)\n```\n\n**PD-1 (Angular kinematics):**\n\"A disc of radius 0.4 m rolls at v_cm = 3 m/s. What is ω?\"\nExpected: ω = v/R = 7.5 rad/s.\n\n**PD-2 (Rotational KE):**\n\"A disc (I = 0.5 kg·m²) spins at ω = 6 rad/s. KE_rot?\"\nExpected: ½×0.5×36 = 9 J.\n\nBoth must pass before TA-3. Gap in either → repair before continuing.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 70,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"Rolling constraint: v_cm = ? Total KE for rolling = ?\"\nThreshold: v_cm = Rω; KE = ½mv²_cm + ½Iω².\n\n**FA-2 (TA-4 exit):** \"Race: solid sphere vs hollow cylinder, same mass and radius, same ramp.\nWhich wins? Does changing mass change the outcome?\"\nExpected: Sphere wins; changing mass doesn't change outcome (mass cancels).\nIf student says hollow cylinder or says mass matters → MC-SAME-RACE not resolved.\n\n**FA-3 (TA-5 exit):** \"Solid cylinder (m = 4 kg, β = 1/2) rolls at v = 5 m/s. KE_total?\"\nExpected: KE = ½×4×25×(1+0.5) = 75 J. If student writes 50 → MC-ROLLING-SAME-AS-SLIDING not resolved.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SAME-RACE",
+        "MC-ROLLING-SAME-AS-SLIDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 319,
+        "endLine": 336
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only the two-term calculation (KE_trans + KE_rot separately) in TA-3.\n- Introduce the β shortcut only in TA-5 after the two-term approach is secure.\n- Skip the race problem in TA-4 on first pass; just confirm solid sphere wins qualitatively.\n- Reassure: \"Rolling = translating + spinning. Add the two energies. That's all.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (energy fraction) at TA-3 — requires algebraic manipulation.\n- Challenge: \"Derive v_cm = √(2gh/(1+β)) from energy conservation. What assumption did you need?\"\n  (Rolling without slipping, i.e., v_cm = Rω — the key constraint.)\n- Spend TA-6 on Problem 5 (energy fraction) and the derivation.\n\n**S4 (Prereq gap):**\n- PD-1 gap (rolling constraint) → repair v = Rω from angular kinematics.\n- PD-2 gap (rotational KE) → repair ½Iω² from rotational dynamics.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 336,
+        "endLine": 356
+      }
+    },
+    {
+      "assetId": "phys.mech.rolling-motion/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.rolling-motion",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete race → KE_total formula → MC-SAME-RACE repair).\n**Session 2 (≥24 h later):** Retrieval: \"Rolling KE formula? v_cm = ? Which shape wins a ramp race?\"\n  → TA-5 (MC-ROLLING-SAME-AS-SLIDING, ramp speed formula) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe combining rolling motion and conservation of energy:\n  \"A solid sphere rolls without slipping to the top of a hill (h = 3 m) from the bottom\n  with initial v_cm = 10 m/s. Does it make it? (Find h max first.)\"\n  (h_max = v²(1+β)/(2g) = 100×1.4/20 = 7 m > 3 m — yes, it makes it easily.)\n**Pre-equilibrium session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.kinetic-energy (KE_trans), phys.mech.rotational-dynamics\n(KE_rot = ½Iω²), phys.mech.conservation-of-energy (energy partitioning).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SAME-RACE",
+        "MC-ROLLING-SAME-AS-SLIDING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.rolling-motion.md",
+        "startLine": 356,
+        "endLine": 372
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

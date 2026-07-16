@@ -1,0 +1,381 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.force-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.force",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:96af3fdc48bdb65d0c6ab6535f5411f1c9213e415e248c929290cdbacb4988fa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.force.md": "sha256:90e8fbcdba30ce65920227d013b4bcdead3524a5405c2d9f24986950fe46d7d0"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.mech.force",
+    "name": "Force and Interaction",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.meas.scalars-vectors"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.force-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.force (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.force.md": "sha256:90e8fbcdba30ce65920227d013b4bcdead3524a5405c2d9f24986950fe46d7d0"
+      },
+      "contentHash": "sha256:6b12ac530783b805f391744c06d1540653e4029ae059cf2233c622101777dcea",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.force.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.force.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.force\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.force.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.force.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.force\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.force.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.force.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.force\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.force.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.force.md#TA-4 (addresses MC-FORCE-IS-IMPETUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.force\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.force.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.force.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.force\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.force.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.force.md#TA-6 (addresses MC-FORCE-IS-IMPETUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.force\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.force/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.force",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Defines a **force** as a vector quantity arising from an interaction between two objects, whose effect is to change — or tend to change — the state of motion of an object.\n2. Classifies forces as **contact** (friction, tension, normal force, applied force) or **non-contact** (gravity, magnetic, electric) and names both objects in the interaction for any given force.\n3. States that the **net force** is the vector sum of all forces acting on an object, and that a net force of zero does not mean no forces are present.\n\nA student who says \"the moving ball has force in it\" (impetus theory), or who cannot name both objects in a force interaction, has **NOT** achieved mastery — these Aristotelian holdovers directly contradict Newton's Laws and corrupt every subsequent mechanics result.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.force/misconception/MC-FORCE-IS-IMPETUS",
+      "kind": "misconception",
+      "conceptId": "phys.mech.force",
+      "title": "Objects contain or carry force after being pushed",
+      "content": "### MC-FORCE-IS-IMPETUS: \"Objects contain or carry force after being pushed\"\ntrigger_signal: student says \"the ball has force in it from the kick\" or \"force travels with the moving object.\"\nconflict_evidence [P28]: \"Right after you kick the ball and your foot leaves it, is your foot touching the ball? No. Can a force exist between two objects that aren't touching and aren't magnets or gravity? For your kick to still be in the ball, it would have to act across empty space with no physical contact and no field. Where is that force coming from after the foot leaves?\"\nbridge_text [P30]: \"Forces require an ongoing interaction. Once the foot leaves the ball, the kick is over — it's not stored. What keeps the ball moving is not a force but the absence of a force to stop it (Newton's First Law, coming soon). The only horizontal force on a freely rolling ball is zero.\"\nreplacement_text [P31]: \"Force = interaction between two objects, right now. When the interaction ends, the force ends. Objects don't store forces.\"\ndiscrimination_pairs [P33]: [\"foot touching ball: force exists (contact) ✓\", \"ball in air, nothing touching it horizontally: no horizontal force ✓\", \"ball slowing on ground: friction from ground acts on ball ✓ (two objects still interacting)\"]\ns6_path: skip P28; use the foot-leaves-ball moment as a shared gentle question — \"Can the foot push from 1 m away?\" — then P30.",
+      "localKey": "MC-FORCE-IS-IMPETUS",
+      "language": "en",
+      "refs": [
+        "MC-FORCE-IS-IMPETUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.force/misconception/MC-FORCE-CAUSES-MOTION",
+      "kind": "misconception",
+      "conceptId": "phys.mech.force",
+      "title": "A net force is needed to keep an object in motion",
+      "content": "### MC-FORCE-CAUSES-MOTION: \"A net force is needed to keep an object in motion\"\ntrigger_signal: student proposes a mystery \"forward force\" or \"motion force\" to explain why a coasting object keeps moving.\nconflict_evidence [P28]: \"A hockey puck slides across ice with almost no friction. Nothing is touching it horizontally. You just said there must be a forward force — but what two objects does it act between? Point to the second object.\"\nbridge_text [P30]: \"Motion doesn't need force to continue — it only needs force to change (Newton's First Law). A net force of zero means the object continues moving at constant velocity. Needing a force to keep moving is the Aristotelian idea; Newton replaced it.\"\nreplacement_text [P31]: \"Net force changes motion. No net force → motion continues unchanged. Force is never needed just to maintain constant velocity.\"\ndiscrimination_pairs [P33]: [\"coasting puck, no friction: ΣF = 0, constant velocity ✓\", \"car slowing without engine: friction and air resistance decelerate it — those are the forces, not absence of a 'forward force' ✓\"]\ns6_path: skip P28; use \"what two objects?\" as a gentle shared puzzle to surface the gap, then P30.",
+      "localKey": "MC-FORCE-CAUSES-MOTION",
+      "language": "en",
+      "refs": [
+        "MC-FORCE-CAUSES-MOTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.force",
+      "title": "Interactions, Not Things",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Interactions, Not Things\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.force",
+      "title": "Contact vs Non-Contact",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Contact vs Non-Contact\",\"primitives\":[\"P02\",\"P07\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.force",
+      "title": "Force as a Vector — Net Force",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Force as a Vector — Net Force\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 26,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.force",
+      "title": "Misconception Probe — Impetus",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe — Impetus\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-FORCE-IS-IMPETUS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-FORCE-IS-IMPETUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.force",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.force",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-FORCE-IS-IMPETUS\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-FORCE-IS-IMPETUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 50,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.force/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.force",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Contact or non-contact: gravity on the Moon's surface\" | CORRECT = non-contact |\n| P74 (classify) | \"A rope tied to a wall holds a swinging lamp — what force, and which two objects?\" | CORRECT = tension; rope and lamp |\n| P75 (boundary) | \"Can a force exist without two objects involved? Explain.\" | CORRECT = no; force is always an interaction |\n| P76 (transfer) | \"30 N right and 10 N left on a crate — net force?\" | CORRECT = 20 N right |\n| P77 (generate) | \"Describe a situation with ΣF = 0 — name both force pairs.\" | CORRECT = valid balanced-forces example |\n| P78 (explain) | \"What makes net force different from a single force?\" | CORRECT = net force = vector sum; individual forces can be large yet cancel |\n| P79 (predict) | \"Book on a table — predict net force before listing forces.\" | CORRECT = zero (gravity balanced by normal force) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.force",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No formal definition of force | Uses \"force\" loosely as effort or energy | Protocol A (Concrete) |\n| S1 | \"Push or pull\" schema only | Cannot name both objects; can't distinguish contact/non-contact | Protocol B (Counterexample-first) |\n| S2-FORCE-IS-IMPETUS | Believes objects contain or store force | \"The ball has force because it was kicked\" | Misconception Engine → Protocol C |\n| S2-FORCE-CAUSES-MOTION | Believes net force is needed to sustain motion | \"Something must be pushing the coasting car\" | Misconception Engine → Protocol C |\n| S3 | Can define force; fails vector sum or interaction pair | Omits direction on net force; names only one object | Protocol C (Guided Questioning) |\n| S6 | Anxiety at vector arrows and \"net force\" language | Freezes at ΣF notation or arrow addition | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.force",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What is a force? Give an example — and name both objects involved in that force.\"\n  Gives interaction pair + direction (e.g. \"earth pulls the ball downward; ball pulls earth upward\") → S3. Enter Protocol C.\n  \"A push or pull\" without both objects → S1. Enter Protocol B.\n  \"Energy the object has\" / \"the ball has force from being kicked\" → SIGNAL:MISCONCEPTION:MC-FORCE-IS-IMPETUS. Enter Misconception Engine.\n  Pause / cannot define → DB-2.\n\nDB-2 (representation test):\n\"A book sits still on a table. Is there a force on it? If so, where does it come from?\"\n  \"Gravity from Earth pulls it down; table pushes it up — they balance\" → S3. Enter Protocol C.\n  \"No force — it's not moving\" → SIGNAL:MISCONCEPTION:MC-FORCE-CAUSES-MOTION. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with the concept of force — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-1/DB-2 wrong → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FORCE-IS-IMPETUS",
+        "MC-FORCE-CAUSES-MOTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.force/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.force",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.scalars-vectors`):\n\"What is the difference between a scalar quantity and a vector quantity? Give one example of each.\"\n  Cannot distinguish scalar from vector → flag PREREQ-GAP-SCALARS-VECTORS.\n  In-session minimum repair: one P06 anchor (arrow on paper — magnitude AND direction vs. a single number) — then resume. Deep gap → schedule `phys.meas.scalars-vectors` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.force.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

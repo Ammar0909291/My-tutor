@@ -1,0 +1,463 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.dc-circuits-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.dc-circuits",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:3ca85fb34aac3fff557525576e330148c9f43b78bc95ecb2183eadfcca4e04a9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.dc-circuits.md": "sha256:a94dc3080eca40521e608222ea2bbb317ad05a4fcb3c378a4bbcf3bbc27d7f8f"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "phys.em.dc-circuits",
+    "name": "DC Circuits",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.em.ohms-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.dc-circuits-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.dc-circuits (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.dc-circuits.md": "sha256:a94dc3080eca40521e608222ea2bbb317ad05a4fcb3c378a4bbcf3bbc27d7f8f"
+      },
+      "contentHash": "sha256:4626598a3fcce849651c4bbc111f52669ce83416e87e910b91a07c9e2574fb16",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-2 (addresses MC-SAME-CURRENT-IN-PARALLEL-BRANCHES, MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.dc-circuits.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.dc-circuits.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.dc-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.dc-circuits\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.dc-circuits/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "(Series-parallel reduction)",
+      "content": "### WE-1 (Series-parallel reduction)\n\n**Problem:** A 12 V battery connects to the following circuit: R₁ = 4 Ω in series with a parallel combination of R₂ = 6 Ω and R₃ = 3 Ω. Find: (a) R_eq, (b) total current, (c) current through R₂.\n\n**Worked solution:**\n\n*Step 1 — Parallel R₂ || R₃:*\n1/R₂₃ = 1/6 + 1/3 = 1/6 + 2/6 = 3/6 → R₂₃ = 2 Ω\n\n*Step 2 — Series total:*\nR_eq = R₁ + R₂₃ = 4 + 2 = **6 Ω**\n\n*Step 3 — Total current (from battery):*\nI = V/R_eq = 12/6 = **2.0 A**\n\n*Step 4 — Voltage across parallel combination:*\nV₂₃ = I × R₂₃ = 2.0 × 2 = 4 V\n\n*Step 5 — Current through R₂:*\nI₂ = V₂₃/R₂ = 4/6 = **0.667 A**\n\nCheck: I₃ = 4/3 = 1.333 A; I₂ + I₃ = 0.667 + 1.333 = 2.0 A ✓\n\n**Answer:** R_eq = 6 Ω; I_total = 2.0 A; I₂ = 0.667 A\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 78,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "(Voltage divider)",
+      "content": "### WE-2 (Voltage divider)\n\n**Problem:** Two resistors R₁ = 8 kΩ and R₂ = 12 kΩ are connected in series across a 20 V supply. Find the voltage across each resistor (voltage divider formula).\n\n**Worked solution:**\n\nVoltage divider: V_k = V_supply × R_k/R_eq where R_eq = 8 + 12 = 20 kΩ.\n\n$$V_1 = 20 \\times \\frac{8}{20} = \\frac{20 \\times 8}{20} = 8\\text{ V}$$\n$$V_2 = 20 \\times \\frac{12}{20} = 12\\text{ V}$$\n\nCheck: 8 + 12 = 20 V ✓\n\n**Answer:** V₁ = 8 V; V₂ = 12 V\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 78,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "(Internal resistance)",
+      "content": "### WE-3 (Internal resistance)\n\n**Problem:** A battery (ε = 9 V, r = 0.5 Ω) is connected to a 8.5 Ω external resistor. Find: (a) current, (b) terminal voltage, (c) power lost in internal resistance.\n\n**Worked solution:**\n\n*(a)* Total resistance = r + R = 0.5 + 8.5 = 9 Ω\nI = ε/(r + R) = 9/9 = 1.0 A\n\n*(b)* V_terminal = ε − Ir = 9 − (1.0)(0.5) = **8.5 V** (= IR = 1.0 × 8.5 ✓)\n\n*(c)* P_internal = I²r = (1.0)²(0.5) = **0.5 W**\n\n**Answer:** I = 1.0 A; V_terminal = 8.5 V; P_internal = 0.5 W\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 78,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/misconception/MC-SAME-CURRENT-IN-PARALLEL-BRANCHES",
+      "kind": "misconception",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "**Trigger signal:** Student says \"the current splits equally in parallel\" regardless of resistance values, or uses I_total/n for n parallel branches.",
+      "content": "### MC-SAME-CURRENT-IN-PARALLEL-BRANCHES\n\n**Trigger signal:** Student says \"the current splits equally in parallel\" regardless of resistance values, or uses I_total/n for n parallel branches.\n\n**Conflict evidence [P28]:** \"Two resistors in parallel: R₁ = 2 Ω and R₂ = 8 Ω across 10 V. I₁ = 10/2 = 5 A; I₂ = 10/8 = 1.25 A. Not equal — 5 A vs. 1.25 A. Current divides inversely as resistance. The lower-resistance branch gets MORE current (easier path). I₁/I₂ = R₂/R₁ = 8/2 = 4 — the branch with four times less resistance carries four times more current.\"\n\n**Bridge text [P30]:** \"Parallel branches all have the same voltage — that's the defining feature. Current through each branch = V/R, so branches with smaller R carry more current. Think of parallel roads: more lanes (lower R) → more traffic (more I). Equal current only if all branches have equal resistance.\"\n\n**Replacement text [P31]:** \"In parallel branches, the voltage across each branch is the same; the current in each branch is V/Rᵢ and is inversely proportional to the branch resistance. More resistance → less current (not equal current). The total current is the sum: I_total = V/R₁ + V/R₂ + ... The current divider formula for two branches: I₁/I₂ = R₂/R₁.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Parallel: same V; I ∝ 1/R (more R → less I)\" | \"Parallel: current splits equally among branches\" |\n| \"I₁ = V/R₁ (each branch independently)\" | \"I₁ = I₂ = I_total/2 (for two branches)\" |\n| \"Current divider: I₁/I₂ = R₂/R₁\" | \"Equal resistance needed for any current split\" |\n\n**s6_path:** Use water analogy: two parallel pipes — a wide one (low R) carries much more flow than a narrow one (high R) when the pressure difference (V) is the same.\n\n---",
+      "localKey": "MC-SAME-CURRENT-IN-PARALLEL-BRANCHES",
+      "language": "en",
+      "refs": [
+        "MC-SAME-CURRENT-IN-PARALLEL-BRANCHES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/misconception/MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES",
+      "kind": "misconception",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "**Trigger signal:** Student assigns the supply voltage to each series resistor separately (\"each resistor gets the full 12 V\"), not dividing it.",
+      "content": "### MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES\n\n**Trigger signal:** Student assigns the supply voltage to each series resistor separately (\"each resistor gets the full 12 V\"), not dividing it.\n\n**Conflict evidence [P28]:** \"Series circuit: 12 V battery, R₁ = 4 Ω, R₂ = 8 Ω. V₁ = IR₁ = (12/12)(4) = 4 V; V₂ = 8 V. Total: 4 + 8 = 12 V. Each resistor does NOT get 12 V. The voltage is shared (Kirchhoff's voltage law: the sum around any loop = 0). More resistance → more voltage drop. The full 12 V is the total pushed by the battery; it distributes across resistors.\"\n\n**Bridge text [P30]:** \"The battery voltage is the total pressure available for the whole loop. Each resistor 'uses up' some of that pressure proportional to its resistance. Just as a river drops in height (potential) as it flows over rocks — the total height drop equals the sum of individual drops. No more, no less.\"\n\n**Replacement text [P31]:** \"In a series circuit, the supply voltage is divided among the resistors: V_k = I × R_k. Each resistor gets a fraction V_k/V_total = R_k/R_eq of the supply voltage. The sum of all voltage drops equals the supply voltage (Kirchhoff's voltage law). No single resistor gets the full supply voltage (unless all others have zero resistance).\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Series: voltages add to supply (ΣV_k = V_supply)\" | \"Each series resistor gets the full supply voltage\" |\n| \"Voltage divides in proportion to resistance\" | \"All resistors in series are at the same voltage\" |\n| \"More resistance → larger voltage drop\" | \"Voltage is the same across all series elements\" |\n\n**s6_path:** Measure with a voltmeter: connect to two terminals of R₁ → reads 4 V, not 12 V. Connect to R₂ → reads 8 V. Connect to battery terminals → reads 12 V. Physical measurement disproves the misconception.\n\n---",
+      "localKey": "MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES",
+      "language": "en",
+      "refs": [
+        "MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 238,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-SAME-CURRENT-IN-PARALLEL-BRANCHES\",\"MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SAME-CURRENT-IN-PARALLEL-BRANCHES",
+        "MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 244,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 249,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 254,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 258,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 259,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-7\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 260,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 261,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "close",
+      "content": "{\"id\":\"TA-9\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 262,
+        "endLine": 262
+      }
+    },
+    {
+      "assetId": "phys.em.dc-circuits/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.dc-circuits",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState the series and parallel resistance rules. Which gives larger R_eq?\n\n**Answer:** Series: R_eq = ΣRᵢ (always larger than any individual R). Parallel: 1/R_eq = Σ1/Rᵢ (always smaller than the smallest R). Series gives larger R_eq.\n\n---\n\n### AP-2 (Bloom: Understand)\nA 100 W bulb and a 40 W bulb are connected in series across 240 V. Which bulb glows brighter, and why?\n\n**Answer:** Power rating on a bulb gives its resistance: P = V²/R → R = V²/P. At 240 V: R₁₀₀ = 240²/100 = 576 Ω; R₄₀ = 240²/40 = 1440 Ω. In series: same current I through both. P = I²R: the 40 W bulb (higher R) dissipates more power in series. **The 40 W bulb glows brighter** in series (opposite to parallel, where 100 W would be brighter — the rating is for parallel/normal operation).\n\n---\n\n### AP-3 (Bloom: Apply)\nThree 15 Ω resistors are connected to a 9 V battery: two in parallel, and that combination in series with the third. Find R_eq, I, and voltage across the parallel pair.\n\n**Answer:**\nR_parallel = 15/2 = 7.5 Ω; R_eq = 7.5 + 15 = **22.5 Ω**\nI = 9/22.5 = **0.40 A**\nV_parallel = I × 7.5 = 0.40 × 7.5 = **3.0 V** (so V_series = 9 − 3 = 6 V ✓)\n\n---\n\n### AP-4 (Bloom: Analyze)\nA student measures a battery's emf at 12.0 V (open circuit). Under a 10 A load, the terminal voltage drops to 11.0 V. Find internal resistance and power dissipated inside the battery.\n\n**Answer:**\nV_t = ε − Ir → 11.0 = 12.0 − 10r → r = **0.10 Ω**\nP_internal = I²r = 10² × 0.10 = **10 W** (10/120 ≈ 8.3% efficiency loss to internal resistance)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.dc-circuits.md",
+        "startLine": 267,
+        "endLine": 302
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

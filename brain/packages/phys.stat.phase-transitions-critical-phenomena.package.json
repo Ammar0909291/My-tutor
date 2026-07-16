@@ -1,0 +1,504 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.stat.phase-transitions-critical-phenomena-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:5003c2b884e14cc5fc846a1f2f971bb6f4f77d9aadfd2fae8c3d13ef3e02c528",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md": "sha256:67aa14ad9aa441e4cb0661a066f476e55a6f922fcc65be2ca9e492fe8cfde235"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+    "name": "Critical Phenomena and Universality",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "phys.stat.ising-model"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.stat.phase-transitions-critical-phenomena-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.stat.phase-transitions-critical-phenomena (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md": "sha256:67aa14ad9aa441e4cb0661a066f476e55a6f922fcc65be2ca9e492fe8cfde235"
+      },
+      "contentHash": "sha256:2293dfa067e029b0f4f40b3f5b4204f23b747bcbc79fdb7d36074738198802e1",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions-critical-phenomena.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions-critical-phenomena"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions-critical-phenomena\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions-critical-phenomena.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions-critical-phenomena"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions-critical-phenomena\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions-critical-phenomena.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions-critical-phenomena"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions-critical-phenomena\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions-critical-phenomena.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md#TA-4 (addresses MC-CP-UNIV-MEANS-SAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions-critical-phenomena"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions-critical-phenomena\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions-critical-phenomena.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions-critical-phenomena"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions-critical-phenomena\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions-critical-phenomena.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions-critical-phenomena"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions-critical-phenomena\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.stat.phase-transitions-critical-phenomena.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.stat.phase-transitions-critical-phenomena"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.stat.phase-transitions-critical-phenomena\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Critical exponents and scaling relations",
+      "content": "### Example 1 — Critical exponents and scaling relations\nStandard critical exponents for reduced temperature t = (T−T_c)/T_c:\nm ~ (−t)^β (T < T_c, h=0); χ ~ |t|^{−γ}; C_V ~ |t|^{−α}; ξ ~ |t|^{−ν}; G(r,T_c) ~ r^{−(d−2+η)}.\nScaling relations (exact): α + 2β + γ = 2 (Rushbrooke); γ = ν(2−η) (Fisher); α = 2 − dν (hyperscaling).\nUniversality classes (d=3): Ising (β≈0.326, γ≈1.237, ν≈0.630, η≈0.036); XY (β≈0.346, γ≈1.317, ν≈0.671); Heisenberg (β≈0.366, γ≈1.395, ν≈0.707).\nAll different from mean field (β=1/2, γ=1, ν=1/2, η=0) for d<4.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 34,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Real-space RG for 1D Ising (block-spin)",
+      "content": "### Example 2 — Real-space RG for 1D Ising (block-spin)\nKadanoff block-spin: group pairs of spins (s₁,s₂)→S (block spin S=±1).\nEffective coupling: K' = K for 1D; identify fixed points: K=0 (T→∞, trivial) and K=∞ (T=0, ordered).\nNo finite K* → no phase transition in 1D ✓ (consistent with Peierls argument).\nIn 2D, RG flows have a nontrivial fixed point K* > 0 → finite T_c.\nLesson: RG fixed points classify phases and phase transitions.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 34,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Finite-size scaling",
+      "content": "### Example 3 — Finite-size scaling\nAt T=T_c, system size L cuts off divergence: ξ → L for finite systems.\nScaling hypothesis: m(t,L) = L^{−β/ν} f_m(tL^{1/ν}).\nData collapse: plot m·L^{β/ν} vs (T−T_c)·L^{1/ν}; all system sizes L should collapse onto one curve if correct T_c, β, ν.\nApplication: Monte Carlo simulations use finite-size scaling to extract T_c and critical exponents without infinite-system data.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 34,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/misconception/MC-CP-UNIV-MEANS-SAME",
+      "kind": "misconception",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "\"Universality means all phase transitions are the same.\"",
+      "content": "| MC-CP-UNIV-MEANS-SAME | \"Universality means all phase transitions are the same.\" | \"Magnets and fluids must behave identically since they're in the same universality class.\" | Universality means only the critical exponents (β, γ, ν, η...) and scaling functions are the same for systems in the same class (same symmetry and dimension). The microscopic interactions, transition temperature T_c, and amplitude factors differ — only the power-law approach to the critical point is identical. |",
+      "localKey": "MC-CP-UNIV-MEANS-SAME",
+      "language": "en",
+      "refs": [
+        "MC-CP-UNIV-MEANS-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/misconception/MC-CP-RG-IS-TECHNIQUE",
+      "kind": "misconception",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "\"Renormalization group is just a calculational technique.\"",
+      "content": "| MC-CP-RG-IS-TECHNIQUE | \"Renormalization group is just a calculational technique.\" | \"RG is a method for computing exponents.\" | RG is a conceptual framework — a flow in coupling-constant space — that explains WHY universality exists (irrelevant operators flow to zero → universal fixed point), provides non-perturbative insight, and works even when perturbation theory fails. The calculation is a consequence of the concept, not the point. |",
+      "localKey": "MC-CP-RG-IS-TECHNIQUE",
+      "language": "en",
+      "refs": [
+        "MC-CP-RG-IS-TECHNIQUE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 5,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 6,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 7,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-CP-UNIV-MEANS-SAME\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-CP-UNIV-MEANS-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 8,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 10,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 11,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): State the hyperscaling relation. What does it imply about the upper critical dimension d_c for mean-field theory?  \n*Answer*: α = 2 − dν. For mean-field: α=0, ν=1/2 → 0=2−d/2 → d=4 = d_c. Above d_c=4, mean-field exponents are exact (hyperscaling fails for d>d_c because Gaussian fluctuations dominate).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For the 3D Ising universality class (ν=0.630, η=0.036), compute α using hyperscaling and verify Fisher's relation γ=ν(2−η).  \n*Answer*: α = 2 − dν = 2 − 3(0.630) = 2 − 1.890 = 0.110. Fisher: γ = 0.630(2−0.036) = 0.630×1.964 = 1.237 ✓ (matches known γ≈1.237).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): Why do systems with different microscopic Hamiltonians (different J, different lattice) but the same symmetry and dimension share the same critical exponents?  \n*Answer*: Under the RG transformation, all microscopic details flow to the same fixed-point Hamiltonian H* — the infrared (long-wavelength) behavior is controlled by H*, not by the starting Hamiltonian. Only the symmetry group of the order parameter and the spatial dimension d determine which fixed point is reached. Microscopics determine only amplitudes (irrelevant operators), not exponents (relevant/marginal operators at the fixed point).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze): In finite-size scaling, you plot m·L^{β/ν} vs (T−T_c)L^{1/ν} and the curves collapse for L=16,32,64. At L=128, they no longer collapse as well. Interpret this.  \n*Answer*: Finite-size scaling requires L≫ξ(T) outside the critical region and L≪ξ(T) inside; for very large L, if T is far from T_c, ξ<L and the scaling hypothesis breaks down (corrections to scaling become visible). Also, at very large L, logarithmic corrections or other irrelevant operators may be detectable. Check whether corrections are consistent with known correction-to-scaling exponents.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A new material shows power-law scaling near its order-disorder transition with ν=0.50, η=0.0 (within error). Evaluate whether this is consistent with known universality classes.  \n*Answer*: ν=0.50, η=0 matches the mean-field/Gaussian universality class (β=0.5, γ=1). This is consistent with either: (a) the transition is above d_c=4 (less common in 3D materials); or (b) the critical region is very narrow and the experiment is measuring mean-field crossover behavior (not true critical behavior). Distinguishing these requires finite-size scaling and measuring the critical region width via Ginzburg criterion. Should verify hyperscaling: α=2−dν=2−3(0.5)=0.5; check if specific heat diverges as |t|^{−0.5}.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 72,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student says universality means all systems are identical | MC-CP-UNIV-MEANS-SAME: \"Do iron and water have the same T_c? Same specific heat value?\" → No. \"Same critical exponent?\" → Yes. Universality is about the power-law exponent, not the physical values. |\n| Student confused about what RG \"integrates out\" | \"RG integrates out short-wavelength fluctuations (momentum shell between bΛ and Λ for some b>1) and rescales to restore the original cutoff. What's left is an effective Hamiltonian for long-wavelength modes — this is what flows to the fixed point.\" |\n| Student unsure why d_c=4 for Ising | \"Gaussian fluctuations (free field theory) have exactly mean-field exponents; the Ising nonlinearity is IRRELEVANT at the Gaussian fixed point for d>4 (power counting), RELEVANT for d<4 — d=4 is the borderline (marginal). Logarithmic corrections appear exactly at d=4.\" |\n| Student asks \"how is the universality class determined experimentally?\" | \"Measure multiple exponents (α,β,γ,ν) independently and check they satisfy scaling relations AND match a known universality class. A single exponent is insufficient — must verify the full set.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CP-UNIV-MEANS-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 100,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"State the exact 2D Ising exponents β and γ. How do they compare to mean-field?\"\nCORE-1 (15 min): TA-1 + TA-2 (iron vs CO₂ universality hook + exponent notation)\nCORE-2 (20 min): TA-3 + TA-4 (scaling relations derivation + MC universality misconception)\nCORE-3 (20 min): TA-5 (finite-size scaling: data collapse procedure, extract T_c and exponents)\nDRILL  (10 min): TA-6 (scaling relation drill: derive δ=γ/β+1, verify for 3D Ising)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"Monte Carlo simulation makes the Ising model computationally tractable in any dimension — next session you'll learn the Metropolis algorithm.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 111,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "phys.stat.phase-transitions-critical-phenomena/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.stat.phase-transitions-critical-phenomena",
+      "title": "Known Sticking Points",
+      "content": "1. **Scaling relations derived vs postulated**: Scaling relations are derived from the scaling hypothesis or RG — they're not empirical coincidences; all physically realizable exponents satisfy them.\n2. **Universality classes**: Students sometimes think only magnets belong to universality classes; fluid critical points, polymer criticality, and quantum phase transitions all have universality classes.\n3. **RG fixed point concept**: The fixed point Hamiltonian H* may not look like a physically realizable system; it is the mathematical attractor of the RG flow, not necessarily a \"natural\" Hamiltonian.\n4. **Finite-size scaling as a tool**: The method is used practically in all numerical studies; students should know the data-collapse procedure as a diagnostic tool.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.phase-transitions-critical-phenomena.md",
+        "startLine": 91,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,463 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.energy-capacitor-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.energy-capacitor",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:b03529e3843d5ec12c639667039f831bbaae700f179a044924a96d781eda2d8e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.energy-capacitor.md": "sha256:a25e1700c9c80eae511f326b7607085b9434064b980f0ace91f8d99497b62f8f"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "phys.em.energy-capacitor",
+    "name": "Energy Stored in a Capacitor",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.capacitance"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.energy-capacitor-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.energy-capacitor (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.energy-capacitor.md": "sha256:a25e1700c9c80eae511f326b7607085b9434064b980f0ace91f8d99497b62f8f"
+      },
+      "contentHash": "sha256:483eddfd5aa321704a02e86b73589f525ef753bf08f8ff3fc7edc7fee1e013b5",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-2 (addresses MC-ENERGY-STORED-ON-THE-PLATES, MC-CAPACITOR-DISCHARGES-INSTANTLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.energy-capacitor.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.energy-capacitor.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.energy-capacitor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.energy-capacitor\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.energy-capacitor/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "(Three forms of U)",
+      "content": "### WE-1 (Three forms of U)\n\n**Problem:** A 40 μF capacitor is charged to 150 V. Find U using all three formulas.\n\n**Worked solution:**\n\nForm 1: U = ½CV² = ½(40×10⁻⁶)(150)² = ½(40×10⁻⁶)(22500) = **0.45 J**\n\nQ = CV = (40×10⁻⁶)(150) = 6000 μC = 6×10⁻³ C\n\nForm 2: U = Q²/(2C) = (6×10⁻³)²/(2×40×10⁻⁶) = 36×10⁻⁶/8×10⁻⁵ = **0.45 J** ✓\n\nForm 3: U = ½QV = ½(6×10⁻³)(150) = **0.45 J** ✓\n\n**Answer:** U = 0.45 J (all three forms give the same answer).\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 71,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "(Field energy density)",
+      "content": "### WE-2 (Field energy density)\n\n**Problem:** A parallel-plate capacitor has plates of area 50 cm² separated by 2.0 mm, with V = 800 V. Find: (a) E between plates, (b) energy density u_E, (c) total energy U from density, (d) verify with ½CV².\n\n**Worked solution:**\n\n*(a)* E = V/d = 800/(2×10⁻³) = **4×10⁵ V/m**\n\n*(b)* u_E = ½ε₀E² = ½(8.854×10⁻¹²)(4×10⁵)² = ½(8.854×10⁻¹²)(1.6×10¹¹) = **0.708 J/m³**\n\n*(c)* Volume = Ad = (50×10⁻⁴)(2×10⁻³) = 10⁻⁵ m³\nU = u_E × V = (0.708)(10⁻⁵) = **7.08 × 10⁻⁶ J = 7.08 μJ**\n\n*(d)* C = ε₀A/d = (8.854×10⁻¹²)(50×10⁻⁴)/(2×10⁻³) = **22.1 pF**\nU = ½CV² = ½(22.1×10⁻¹²)(800)² = ½(22.1×10⁻¹²)(640000) = **7.07 μJ** ✓\n\n**Answer:** E = 4×10⁵ V/m; u_E = 0.708 J/m³; U = 7.08 μJ\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 71,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "(Energy loss — two capacitors)",
+      "content": "### WE-3 (Energy loss — two capacitors)\n\n**Problem:** A charged 60 μF capacitor (V₀ = 200 V) is connected to an uncharged 40 μF capacitor. Find the final voltage and the fraction of energy lost.\n\n**Worked solution:**\n\n*Step 1 — Charge conservation:*\nQ_initial = C₁V₀ = (60×10⁻⁶)(200) = 12×10⁻³ C\nFinal: Q_total = 12 mC; C_total = 60 + 40 = 100 μF\nV_f = Q_total/C_total = 12×10⁻³/100×10⁻⁶ = **120 V**\n\n*Step 2 — Initial and final energy:*\nU_i = ½C₁V₀² = ½(60×10⁻⁶)(200)² = ½(60×10⁻⁶)(40000) = **1.20 J**\nU_f = ½C_total V_f² = ½(100×10⁻⁶)(120)² = ½(100×10⁻⁶)(14400) = **0.72 J**\n\nEnergy lost: ΔU = 1.20 − 0.72 = 0.48 J\n\nFraction lost = 0.48/1.20 = **40%**\n\n*Step 3 — Interpret:*\nThe lost energy is dissipated as heat in the connecting wires and as electromagnetic radiation (even with superconducting wires, charge redistribution is irreversible for this topology).\n\n**Answer:** V_f = 120 V; 40% of initial energy dissipated.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 71,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/misconception/MC-ENERGY-STORED-ON-THE-PLATES",
+      "kind": "misconception",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "**Trigger signal:** Student says \"energy is stored as charge on the plates\" or \"more charge = more energy stored, regardless of voltage.",
+      "content": "### MC-ENERGY-STORED-ON-THE-PLATES\n\n**Trigger signal:** Student says \"energy is stored as charge on the plates\" or \"more charge = more energy stored, regardless of voltage.\"\n\n**Conflict evidence [P28]:** \"Same charge Q = 10 μC on two capacitors: C₁ = 10 μF (V = 1 V, U = 5×10⁻⁶ J), C₂ = 1 μF (V = 10 V, U = 5×10⁻⁵ J). Same Q, but C₂ stores 10× more energy. The energy is in the electric field (u_E = ½ε₀E²) — larger V → larger E → more energy per unit volume between the plates. Energy is distributed through the field, not sitting on the plates.\"\n\n**Bridge text [P30]:** \"Think of it like a compressed spring: the energy is in the deformation (the field), not in the mass of the spring (the charge). The charge on the plates is like the amount you've compressed the spring — but the energy depends on how hard it's compressed (the voltage, which scales with field strength).\"\n\n**Replacement text [P31]:** \"Energy in a capacitor is stored in the electric field between the plates, with energy density u_E = ½ε₀E². The total energy U = ½CV² = Q²/(2C) — it depends on both Q and V (or equivalently, on E and volume between plates). The same charge Q stores different amounts of energy depending on the capacitance (and hence the field strength). The plates merely establish the boundary conditions for the field.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"Energy stored in E field: U = ½CV² (depends on V²)\" | \"Energy stored in charge: U ∝ Q\" |\n| \"Double Q, double V → U quadruples (U = ½QV)\" | \"Double Q → double U at fixed C\" |\n| \"u_E = ½ε₀E² (field energy density)\" | \"Energy sitting on the plates as charge\" |\n\n**s6_path:** Compare: two capacitors with same Q but different C. Calculate U for each. Show that higher V (=Q/C, smaller C) gives much more energy even with the same Q.\n\n---",
+      "localKey": "MC-ENERGY-STORED-ON-THE-PLATES",
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-STORED-ON-THE-PLATES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/misconception/MC-CAPACITOR-DISCHARGES-INSTANTLY",
+      "kind": "misconception",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "**Trigger signal:** Student treats a capacitor as always having its full voltage or assumes it discharges and recharges instantaneously when connected to a circuit.",
+      "content": "### MC-CAPACITOR-DISCHARGES-INSTANTLY\n\n**Trigger signal:** Student treats a capacitor as always having its full voltage or assumes it discharges and recharges instantaneously when connected to a circuit.\n\n**Conflict evidence [P28]:** \"Connect a 1000 μF capacitor charged to 10 V through a 10 kΩ resistor — an oscilloscope shows the voltage decays exponentially: V(t) = 10e^(−t/τ) with τ = RC = 10. After 10 s, V = 3.7 V; after 50 s, V ≈ 0.007 V. The capacitor does NOT discharge instantly — it follows the RC time constant τ = RC. For τ = 10 s, it takes about 5τ = 50 s to nearly fully discharge.\"\n\n**Bridge text [P30]:** \"A capacitor is like a bucket draining through a tap (resistor). A bigger bucket (larger C) takes longer to drain; a smaller tap opening (larger R) also takes longer. The time constant τ = RC determines how fast energy is released. Only in a short circuit (R = 0) does discharge approach instantaneous — and the energy is all dissipated in a spark.\"\n\n**Replacement text [P31]:** \"Capacitors charge and discharge over a characteristic time τ = RC. The voltage during discharge: V(t) = V₀e^(−t/RC). For large R or large C, discharge is slow; for small R (or short circuit), it's fast. Energy is released gradually, not instantaneously, in any circuit with finite resistance. Only in LC circuits does energy oscillate; in RC circuits it's gradually dissipated.\"\n\n**Discrimination pairs [P33]:**\n| Valid | Invalid |\n|---|---|\n| \"V(t) = V₀e^(−t/RC): exponential decay\" | \"Capacitor discharges instantly\" |\n| \"τ = RC: larger R or C → slower discharge\" | \"Resistance doesn't affect discharge speed\" |\n| \"Energy dissipated over time as P = V²/R = CV²/2τ\" | \"All energy released in first instant\" |\n\n**s6_path:** Compute τ = RC for a given example. Show the exponential curve — \"95% discharged\" means t = 3τ, not t = 0⁺.\n\n---",
+      "localKey": "MC-CAPACITOR-DISCHARGES-INSTANTLY",
+      "language": "en",
+      "refs": [
+        "MC-CAPACITOR-DISCHARGES-INSTANTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 24,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "session-open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"session-open\",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 232,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "conflict-evidence",
+      "content": "{\"id\":\"TA-2\",\"title\":\"conflict-evidence\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-CAPACITOR-DISCHARGES-INSTANTLY\",\"MC-ENERGY-STORED-ON-THE-PLATES\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-STORED-ON-THE-PLATES",
+        "MC-CAPACITOR-DISCHARGES-INSTANTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 238,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "concrete-anchor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"concrete-anchor\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 243,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "mastery-probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"mastery-probe\",\"primitives\":[\"P36\",\"P4\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 248,
+        "endLine": 248
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-5\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 252,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "mastery-gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"mastery-gate\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 253,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "regulation-tail",
+      "content": "{\"id\":\"TA-7\",\"title\":\"regulation-tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 254,
+        "endLine": 254
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "retrieval-schedule",
+      "content": "{\"id\":\"TA-8\",\"title\":\"retrieval-schedule\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 255,
+        "endLine": 255
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "close",
+      "content": "{\"id\":\"TA-9\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 256,
+        "endLine": 256
+      }
+    },
+    {
+      "assetId": "phys.em.energy-capacitor/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.energy-capacitor",
+      "title": "Assessment Items (Mastery Probes)",
+      "content": "### AP-1 (Bloom: Remember)\nState the energy density formula for the electric field and give its units.\n\n**Answer:** u_E = ½ε₀E²; units J/m³. This applies to any electric field, not just between capacitor plates.\n\n---\n\n### AP-2 (Bloom: Understand)\nIf the plate separation of a capacitor is doubled (at fixed charge Q), what happens to C, V, E, and U?\n\n**Answer:**\nC = ε₀A/d → d doubles → C halves.\nV = Q/C → V doubles.\nE = V/d = Q/(ε₀A) → E is unchanged (E depends only on σ = Q/A, not d).\nU = Q²/(2C) → C halves → U doubles.\nThe extra energy comes from the work done pulling the plates apart against the attractive electrostatic force.\n\n---\n\n### AP-3 (Bloom: Apply)\nA defibrillator capacitor stores 200 J at 2500 V. Find C.\n\n**Answer:** U = ½CV² → C = 2U/V² = 2×200/(2500)² = 400/6.25×10⁶ = **6.4 × 10⁻⁵ F = 64 μF**\n\n---\n\n### AP-4 (Bloom: Analyze)\nA 10 μF capacitor (V₀ = 500 V) is connected in parallel to a 40 μF capacitor (V₀ = 100 V). Find V_f and total energy lost.\n\n**Answer:**\nQ₁ = (10×10⁻⁶)(500) = 5×10⁻³ C; Q₂ = (40×10⁻⁶)(100) = 4×10⁻³ C\nQ_total = 9×10⁻³ C; C_total = 50 μF; V_f = 9×10⁻³/50×10⁻⁶ = **180 V**\nU_i = ½(10⁻⁵)(500)² + ½(4×10⁻⁵)(100)² = 1.25 + 0.20 = 1.45 J\nU_f = ½(5×10⁻⁵)(180)² = ½(5×10⁻⁵)(32400) = **0.81 J**\nEnergy lost = 1.45 − 0.81 = **0.64 J** (44% of initial energy)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.energy-capacitor.md",
+        "startLine": 261,
+        "endLine": 301
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

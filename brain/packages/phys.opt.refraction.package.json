@@ -1,0 +1,433 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.refraction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.refraction",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:25d559626286ed534527d7ba45690183c51abfbf8960746076843c84eb30495e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.refraction.md": "sha256:45522db35755f66121443a5252fc422823322ed69e9b3ad7b07179e65852aaa8"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 4,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.refraction",
+    "name": "\"Refraction of Light\"",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.opt.nature-of-light"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.refraction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.refraction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.refraction.md": "sha256:45522db35755f66121443a5252fc422823322ed69e9b3ad7b07179e65852aaa8"
+      },
+      "contentHash": "sha256:46a225c2d6ad7e5dffa34568ad7a3603dc2122194548b9236de20f2a8ca4e8c4",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.refraction.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.refraction.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.refraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.refraction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.refraction.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.refraction.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.refraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.refraction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.refraction.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.refraction.md#TA-3 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.refraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.refraction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.refraction.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.refraction.md#TA-4 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.refraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.refraction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.refraction.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.refraction.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.refraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.refraction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.refraction.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.refraction.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.refraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.refraction\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.refraction.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.refraction.md#TA-7 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.refraction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.refraction\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.refraction/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.refraction",
+      "title": ": Applying Snell's Law",
+      "content": "### WE-1: Applying Snell's Law\n\n**Problem:** A ray of light in air (n₁ = 1.00) strikes a glass surface (n₂ = 1.50) at an angle of incidence of 45°.\n(a) Find the angle of refraction.\n(b) Does the ray bend toward or away from the normal?\n(c) What is the speed of light in the glass?\n\n**Solution:**\n\n**(a) Snell's Law:**\nn₁ sin θ₁ = n₂ sin θ₂\n1.00 × sin 45° = 1.50 × sin θ₂\n0.7071 = 1.50 × sin θ₂\nsin θ₂ = 0.7071 / 1.50 = 0.4714\n**θ₂ = arcsin(0.4714) ≈ 28.1°**\n\n**(b) Direction:** Since n₂ > n₁ (going from less dense to more dense medium), the ray bends **toward the normal** (θ₂ = 28.1° < θ₁ = 45°). ✓\n\n**(c) Speed in glass:**\nn₂ = c/v → v = c/n₂ = (3×10⁸) / 1.50 = **2×10⁸ m/s**\n\n---",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 89,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.refraction",
+      "title": ": Apparent Depth",
+      "content": "### WE-2: Apparent Depth\n\n**Problem:** A fish is 1.5 m below the surface of a pond (n_water = 1.33). A fisherman looks down at it from directly above (normal incidence).\n(a) How deep does the fish appear to be?\n(b) If the fish looks up at the fisherman standing 2.0 m above the surface, how far above does the fisherman appear?\n\n**Solution:**\n\n**(a) Fish appears to fisherman:**\nd' = d × (n_air / n_water) = 1.5 × (1.00 / 1.33) = 1.5 / 1.33 = **1.13 m**\nThe fish appears only 1.13 m deep, not 1.5 m.\n\n**(b) Fisherman appears to fish:**\nThe fisherman is in air (n=1) viewed from water (n=1.33):\nd' = d × (n_water / n_air) = 2.0 × (1.33 / 1.00) = **2.66 m**\nThe fisherman appears farther away (objects in less dense medium appear farther when viewed from denser medium).\n\n---",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 89,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.opt.refraction",
+      "title": ": Lateral Shift Through a Glass Slab",
+      "content": "### WE-3: Lateral Shift Through a Glass Slab\n\n**Problem:** A ray of light strikes a glass slab (n = 1.5, thickness t = 4 cm) at an angle of incidence of 60°. Find:\n(a) The angle of refraction inside the glass.\n(b) The lateral shift of the emergent ray.\n\n**Solution:**\n\n**(a) Angle of refraction:**\nsin θ₁ = 1.5 × sin θ₂\nsin 60° = 1.5 × sin θ₂\n0.8660 = 1.5 × sin θ₂\nsin θ₂ = 0.5774\n**θ₂ = arcsin(0.5774) ≈ 35.3°**\n\n**(b) Lateral shift:**\nd = t × sin(θ₁ − θ₂) / cos θ₂\n= 4 × sin(60° − 35.3°) / cos(35.3°)\n= 4 × sin(24.7°) / cos(35.3°)\n= 4 × 0.4179 / 0.8165\n= 4 × 0.5118\n**d ≈ 2.05 cm**\n\nThe emergent ray is parallel to the incident ray but displaced by 2.05 cm perpendicular to itself.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 89,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/misconception/MC-REFRACTION-CHANGES-FREQUENCY",
+      "kind": "misconception",
+      "conceptId": "phys.opt.refraction",
+      "title": "**trigger_signal:** Student states \"light bends because its frequency changes at the boundary,\" \"red light refracts more than blue because it has lower frequency,\" or \"frequency depends on the medium.",
+      "content": "",
+      "localKey": "MC-REFRACTION-CHANGES-FREQUENCY",
+      "language": "en",
+      "refs": [
+        "MC-REFRACTION-CHANGES-FREQUENCY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 3,
+        "endLine": 3
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.opt.refraction",
+      "title": "**trigger_signal:** Student states \"light bends because its frequency changes at the boundary,\" \"red light refracts more than blue because it has lower frequency,\" or \"frequency depends on the medium.",
+      "content": "### MC-1: MC-REFRACTION-CHANGES-FREQUENCY\n\n**trigger_signal:** Student states \"light bends because its frequency changes at the boundary,\" \"red light refracts more than blue because it has lower frequency,\" or \"frequency depends on the medium.\"\n\n**conflict_evidence [P28]:** At a glass-air boundary, the wave pattern in glass must match the pattern in air at the boundary — if the frequency were different, the wave crests would pile up at the interface (there would be more crests per second leaving the glass than arriving, or vice versa). Physically: every wavecrest that hits the boundary from one side produces exactly one wavecrest on the other side. Frequency is set by the source (the oscillating atoms in the light emitter) and cannot change at a passive boundary. Measurement confirms: a 600 nm (f = 5×10¹⁴ Hz) orange laser beam entering water has f = 5×10¹⁴ Hz in water, but λ_water = λ₀/n = 600/1.33 = 451 nm. Only λ and v change; f is constant.\n\n**bridge_text [P30]:** Think of frequency as the \"rate\" at which wave crests are produced at the source. The speed of the wave changes (the crests travel slower in glass), and the wavelength compresses (crests get closer together), but the rate at which they arrive at a point remains the same — one crest per 1/f seconds, always. Frequency is a property of the source, not the medium.\n\n**replacement_text [P31]:** At any medium boundary, the frequency of light is UNCHANGED. What changes is the wave speed (v = c/n) and the wavelength (λ_medium = λ₀/n). The refractive index relates wave speed and wavelength, not frequency: n = c/v = λ₀/λ_medium. Dispersion (different colors refracting different amounts) occurs because n depends on λ (or equivalently on f), not because f changes.\n\n**discrimination_pairs [P33]:**\n- \"Violet light travels slower in glass than red light because violet has higher frequency\" → PARTLY correct conclusion (violet does travel slower) but wrong mechanism: it's because n_violet > n_red (dispersion), not because the frequency changes. Frequency doesn't change in either case.\n- \"The frequency of light changes at an air-water boundary, which is why the pencil looks bent\" → FALSE: bending is due to wave speed change (n change), not frequency change. Frequency is constant throughout.\n\n**s6_path:** If student fails \"what changes at boundary\" probe → frequency-constant visualization (wavefronts with same temporal spacing, compressed spatial spacing) before mastery gate.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/misconception/MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL",
+      "kind": "misconception",
+      "conceptId": "phys.opt.refraction",
+      "title": "**trigger_signal:** Student states \"light bends away from normal when entering glass because glass is denser,\" inverts the bending rule, or confuses n₁ > n₂ with n₁ < n₂ cases.",
+      "content": "",
+      "localKey": "MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL",
+      "language": "en",
+      "refs": [
+        "MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 21,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.opt.refraction",
+      "title": "**trigger_signal:** Student states \"light bends away from normal when entering glass because glass is denser,\" inverts the bending rule, or confuses n₁ > n₂ with n₁ < n₂ cases.",
+      "content": "### MC-2: MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL\n\n**trigger_signal:** Student states \"light bends away from normal when entering glass because glass is denser,\" inverts the bending rule, or confuses n₁ > n₂ with n₁ < n₂ cases.\n\n**conflict_evidence [P28]:** Apply Snell's Law numerically: n₁ = 1 (air), n₂ = 1.5 (glass), θ₁ = 45°. Calculate: sin θ₂ = (n₁/n₂) sin θ₁ = (1/1.5) × 0.707 = 0.471 → θ₂ = 28°. Since 28° < 45°, the refracted ray is closer to the normal than the incident ray. The wavefront bends toward the normal entering the denser medium. Conceptual reason: the part of the wavefront that enters the glass first slows down while the remaining part is still in air at full speed — this speed difference turns the wavefront toward the normal.\n\n**bridge_text [P30]:** Imagine a line of soldiers marching in a column that hits a muddy patch (slower medium) at an angle. The soldiers who hit the mud first slow down while others are still on dry ground — the column pivots toward the mud (toward the \"normal\" of the mud boundary). Light entering a denser medium is exactly this: part of the wavefront slows, the rest doesn't, and the wave bends toward the normal. Going from dense to less dense = soldiers leaving mud (speeding up) = bends away from normal.\n\n**replacement_text [P31]:** When light travels from a less dense medium (smaller n) to a more dense medium (larger n), it bends TOWARD the normal (θ₂ < θ₁). When going from more dense to less dense (larger n to smaller n), it bends AWAY from the normal (θ₂ > θ₁). Memory aid: n₁ > n₂ → θ₂ > θ₁ (both inequalities point the same way).\n\n**discrimination_pairs [P33]:**\n- \"Light entering water from air bends away from the normal (θ₂ > θ₁) because water is denser\" → FALSE: n_water > n_air → bends TOWARD normal, θ₂ < θ₁.\n- \"Light going from glass to air bends away from the normal\" → TRUE: n_glass > n_air → going from denser to less dense → θ₂ > θ₁ → bends away from normal. ✓\n\n**s6_path:** If student fails the bending-direction probe → run both air→glass and glass→air numerical Snell's Law problems side by side, then discrimination pairs before re-probe.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.refraction",
+      "title": "\"Place a pencil in a glass of water and look at it from the side. It appears bent. But the pencil hasn't changed — what ",
+      "content": "{\"id\":\"TA-1\",\"title\":\"\\\"Place a pencil in a glass of water and look at it from the side. It appears bent. But the pencil hasn't changed — what \",\"primitives\":[\"P01\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 216,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.refraction",
+      "title": "\"[Display: Snell's Law diagram — two media, normal, θ₁ and θ₂ labeled.] The rule: n₁sinθ₁ = n₂sinθ₂. Three things to not",
+      "content": "{\"id\":\"TA-2\",\"title\":\"\\\"[Display: Snell's Law diagram — two media, normal, θ₁ and θ₂ labeled.] The rule: n₁sinθ₁ = n₂sinθ₂. Three things to not\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 220,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.refraction",
+      "title": "\"Common reversal: some students think denser medium → bend away from normal. Let's disprove it. At air→glass: n₁=1, n₂=1",
+      "content": "{\"id\":\"TA-3\",\"title\":\"\\\"Common reversal: some students think denser medium → bend away from normal. Let's disprove it. At air→glass: n₁=1, n₂=1\",\"primitives\":[\"P28\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 223,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.refraction",
+      "title": "\"What changes at the boundary? Many students say frequency. Let's settle it: the wavecrest count at the boundary must ba",
+      "content": "{\"id\":\"TA-4\",\"title\":\"\\\"What changes at the boundary? Many students say frequency. Let's settle it: the wavecrest count at the boundary must ba\",\"primitives\":[\"P31\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 226,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.refraction",
+      "title": "\"[Display: fish-in-water diagram with normal rays and refracted apparent-position rays.] Apparent depth formula: d' = d ",
+      "content": "{\"id\":\"TA-5\",\"title\":\"\\\"[Display: fish-in-water diagram with normal rays and refracted apparent-position rays.] Apparent depth formula: d' = d \",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 229,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.refraction",
+      "title": "\"A glass slab of thickness 4 cm (n=1.5) has a ray entering at 60°. We know the ray emerges parallel — but displaced side",
+      "content": "{\"id\":\"TA-6\",\"title\":\"\\\"A glass slab of thickness 4 cm (n=1.5) has a ray entering at 60°. We know the ray emerges parallel — but displaced side\",\"primitives\":[\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 232,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.refraction",
+      "title": "\"Final probe: (1) Light in glass (n=1.5) hits an air boundary at θ₁=30°. Find θ₂ and state which way the ray bends. (2) ",
+      "content": "{\"id\":\"TA-7\",\"title\":\"\\\"Final probe: (1) Light in glass (n=1.5) hits an air boundary at θ₁=30°. Find θ₂ and state which way the ray bends. (2) \",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P31\",\"P36\",\"P41\",\"P68\",\"P85\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 235,
+        "endLine": 309
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.refraction",
+      "title": "Assessment Probes",
+      "content": "**P-1 (Foundational — identifies S3):** Light travels from air (n=1) into water (n=1.33) at an angle of incidence of 37°. Find the angle of refraction and state whether the ray bends toward or away from the normal. What is the speed of light in water?\n\n**P-2 (Developing — identifies S6):** A coin lies at the bottom of a 2.4 m deep swimming pool (n=1.33). A lifeguard looks directly down at it. (a) How deep does the coin appear? (b) What is the actual speed of light in pool water? (c) Does the wavelength of the light from the coin increase or decrease as it leaves the water? Explain.\n\n**P-3 (Proficient — identifies S9):** A glass slab (n=1.6) is 5 cm thick. A ray hits the top surface at 50°. (a) Find the refraction angle inside the glass. (b) Calculate the lateral shift. (c) Show that the emergent ray is parallel to the incident ray.\n\n**P-4 (Mastery gate — confirms S9):** A light ray passes through three layers: air (n=1) → glass (n=1.5) → water (n=1.33) → air (n=1). The initial angle of incidence is 45°. (a) Find the angle in each medium. (b) What is the final angle in the last air layer? (c) Prove using Snell's Law that the final angle equals the initial angle whenever the first and last media are the same. Required: 3/3 at ≥0.80 accuracy for mastery gate.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 243,
+        "endLine": 255
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

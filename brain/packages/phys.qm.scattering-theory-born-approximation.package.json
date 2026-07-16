@@ -1,0 +1,506 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.qm.scattering-theory-born-approximation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.qm.scattering-theory-born-approximation",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:7cb90767236c756d3bd64784ca7179620ecdfd300e1643bf95cb9c7253f6fb8b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md": "sha256:b5dfa30ccacf85a5c1ab7ae18c332ad2a4185d2115c4a68d363c5eb365801a7c"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1,
+      "teaching_note": 1
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.qm.scattering-theory-born-approximation",
+    "name": "Scattering Theory and Born Approximation",
+    "difficultyRaw": "6 (expert)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 12,
+    "prerequisites": [
+      "phys.qm.operators",
+      "phys.qm.angular-momentum-addition",
+      "phys.mech.hamiltonian"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.qm.scattering-theory-born-approximation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.qm.scattering-theory-born-approximation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md": "sha256:b5dfa30ccacf85a5c1ab7ae18c332ad2a4185d2115c4a68d363c5eb365801a7c"
+      },
+      "contentHash": "sha256:0c2f8388d21d94df56fb2e2bcad3044d22d85a508fbb8a3f8631b9350b4c196a",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.qm.scattering-theory-born-approximation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.scattering-theory-born-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.scattering-theory-born-approximation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.scattering-theory-born-approximation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.scattering-theory-born-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.scattering-theory-born-approximation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.scattering-theory-born-approximation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.scattering-theory-born-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.scattering-theory-born-approximation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.scattering-theory-born-approximation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md#TA-4 (addresses MC-SCAT-CROSS-SECTION-AREA)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.scattering-theory-born-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.scattering-theory-born-approximation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.scattering-theory-born-approximation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.scattering-theory-born-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.scattering-theory-born-approximation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.scattering-theory-born-approximation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.scattering-theory-born-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.scattering-theory-born-approximation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.qm.scattering-theory-born-approximation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.qm.scattering-theory-born-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.qm.scattering-theory-born-approximation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Differential cross-section formalism",
+      "content": "### Example 1 — Differential cross-section formalism\nIncident: ψ_inc = e^{ikz}. Scattered: ψ_sc = f(θ,φ) e^{ikr}/r (asymptotic).\nDifferential cross-section: dσ/dΩ = |f(θ,φ)|².\nTotal cross-section: σ = ∫|f|²dΩ.\nOptical theorem: σ = (4π/k) Im[f(θ=0)] — total cross-section from forward scattering amplitude.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 34,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Born approximation for Yukawa potential",
+      "content": "### Example 2 — Born approximation for Yukawa potential\nV(r) = V₀ e^{−μr}/r; momentum transfer q = 2k sin(θ/2).\nBorn amplitude: f_B(θ) = −(2m/4πℏ²) Ṽ(q) where Ṽ(q) = ∫V(r)e^{iq·r}d³r.\nFor Yukawa: Ṽ(q) = 4πV₀/(μ²+q²).\ndσ/dΩ = (2mV₀/ℏ²)²/(μ²+4k²sin²(θ/2))² (Yukawa Born result).\nCoulomb limit μ→0: dσ/dΩ = (Ze²/4E)²/sin⁴(θ/2) — Rutherford formula recovered ✓",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 34,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Partial wave expansion",
+      "content": "### Example 3 — Partial wave expansion\nf(θ) = (1/k)Σ_{l=0}^{∞} (2l+1) e^{iδ_l} sin(δ_l) P_l(cosθ).\nPhase shifts δ_l parametrize scattering; for hard sphere radius R at low energy kR≪1: δ_0 ≈ −kR → σ → 4πR² (4× geometric — s-wave dominates, geometric argument invalid at low energy).\nTotal cross-section: σ = (4π/k²)Σ(2l+1)sin²(δ_l).\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 34,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/misconception/MC-SCAT-CROSS-SECTION-AREA",
+      "kind": "misconception",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "\"Cross-section is the geometric area of the target.\"",
+      "content": "| MC-SCAT-CROSS-SECTION-AREA | \"Cross-section is the geometric area of the target.\" | \"σ = πR² for a sphere.\" | Cross-section is an effective area — the ratio of scattered flux to incident flux per unit target density. For quantum scatterers, σ depends on the potential strength and energy, not just geometry. A hard sphere has σ=4πR² at low energy (not πR²) due to wave diffraction. |",
+      "localKey": "MC-SCAT-CROSS-SECTION-AREA",
+      "language": "en",
+      "refs": [
+        "MC-SCAT-CROSS-SECTION-AREA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/misconception/MC-BORN-ALWAYS-VALID",
+      "kind": "misconception",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "\"The Born approximation works whenever the potential is weak.\"",
+      "content": "| MC-BORN-ALWAYS-VALID | \"The Born approximation works whenever the potential is weak.\" | \"V is small so Born is fine.\" | Born approximation requires |V̄|/E ≪ 1 AND that the scattering does not significantly deplete the incident wave — both conditions needed. At low energy (kR≪1), Born fails for potentials with bound states even if V is 'small.' Validity: ka≫1 AND V₀/(ℏ²k²/2m)≪1 |",
+      "localKey": "MC-BORN-ALWAYS-VALID",
+      "language": "en",
+      "refs": [
+        "MC-BORN-ALWAYS-VALID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Physical motivation",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical motivation\",\"primitives\":[\"P04\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 5,
+        "endLine": 6
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Build notation",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Build notation\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 6,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Formula derivation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formula derivation\",\"primitives\":[\"P07\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 7,
+        "endLine": 8
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Diagnostic probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Diagnostic probe\",\"primitives\":[\"P08\"],\"addresses\":[\"MC-SCAT-CROSS-SECTION-AREA\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SCAT-CROSS-SECTION-AREA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 8,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Worked example",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Worked example\",\"primitives\":[\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Pattern drill",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Pattern drill\",\"primitives\":[\"P10\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 10,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Independent practice",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Independent practice\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 11,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "MP-1",
+      "content": "**MP-1** (retrieval): State the Born approximation for the scattering amplitude f(θ). What physical condition validates it?  \n*Answer*: f_B(θ) = −(m/2πℏ²)∫e^{−iq·r}V(r)d³r = −(m/2πℏ²)Ṽ(q); valid when V ≪ E (weak potential) AND incident wave not significantly depleted.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "MP-2",
+      "content": "**MP-2** (apply): For a spherical square well V(r)=−V₀ for r<a, 0 otherwise, write the Born approximation for the total cross-section at high energy ka≫1. (Setup only — evaluate the Fourier transform.)  \n*Answer*: Ṽ(q) = −V₀∫₀ᵃ∫e^{iq·r}d³r = −4πV₀(sin(qa)−qa cos(qa))/q³; dσ/dΩ = (mV₀/2πℏ²)²|4π(sin−qa·cos)/q³|²; total σ = ∫dΩ|f_B|².",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "MP-3",
+      "content": "**MP-3** (analyze): The optical theorem states σ = (4π/k)Im[f(0)]. How does this follow from probability conservation?  \n*Answer*: The total probability flux (scattered in all directions) must equal the depletion from the forward beam. Conservation of probability current leads to Im[f(0)] = (k/4π)σ via the optical theorem — it is a non-perturbative result valid beyond Born.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "MP-4",
+      "content": "**MP-4** (analyze-MC): Born approximation for Coulomb gives exact Rutherford formula. Does this mean Born is exact for Coulomb?  \n*Answer*: Not in general — Born is exact for Coulomb differential cross-section (classical and quantum agree due to the 1/r potential's special structure: exact Born amplitude = classical amplitude). For bound states or total cross-section, the Coulomb problem requires exact treatment (infinite-range potential).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "MP-5",
+      "content": "**MP-5** (evaluate): A student applies Born approximation to a potential with a bound state at E=0. The calculation gives a large cross-section σ≫4πa². Is this reliable?  \n*Answer*: No — a bound state at E=0 is the zero-energy resonance condition (s-wave phase shift δ₀→π/2). This signals breakdown of Born approximation regardless of V₀ strength. The exact partial-wave result σ=4π/k²·sin²(δ₀) diverges at resonance; Born misses this physics entirely.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 70,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Adaptive-Teaching Rules",
+      "content": "| Trigger | Response |\n|---------|----------|\n| Student writes σ=πa² for quantum hard sphere | Invoke MC-SCAT-CROSS-SECTION-AREA; compute partial-wave low-energy result: σ=4πa² (s-wave diffraction, not geometrical projection) |\n| Student applies Born to low-energy Coulomb | \"Coulomb Born gives exact dσ/dΩ (special case); total σ diverges for Coulomb — the cross-section being exact doesn't mean the approximation is generally valid at low k\" |\n| Student confused by complex f(θ) | \"f is complex — the imaginary part encodes phase information about whether the wave speeds up or slows down in the potential; only |f|² is directly observable\" |\n| Student asks \"when do I use partial waves vs Born?\" | \"Born: high energy, weak potential, any angle. Partial waves: low energy (few l-values dominate), or near resonances. For Coulomb: both give exact dσ/dΩ, use whichever is more convenient.\" |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SCAT-CROSS-SECTION-AREA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 98,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Session-Flow Template",
+      "content": "```\nOPEN   (5 min) : Retrieval — \"Rutherford experiment: what was the surprising result? What model was it testing?\"\nCORE-1 (15 min): TA-1 + TA-2 (Rutherford motivation + asymptotic wavefunction notation)\nCORE-2 (20 min): TA-3 + TA-4 (Born formula derivation + MC cross-section diagnostic)\nCORE-3 (20 min): TA-5 (Yukawa → Coulomb, full Born calculation, Rutherford formula)\nDRILL  (10 min): TA-6 (partial-wave steps for hard sphere s-wave)\nPROBE  (15 min): TA-7 (MP-1..MP-5)\nCLOSE  (5 min) : \"S-matrix encodes all scattering in one operator — next session we'll see how S-matrix relates to phase shifts and T-matrix.\"\n```\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 109,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "phys.qm.scattering-theory-born-approximation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.qm.scattering-theory-born-approximation",
+      "title": "Known Sticking Points",
+      "content": "1. **Cross-section dimensions**: σ has units of area (m²); dσ/dΩ has units of area per steradian (m²/sr) — students frequently confuse these.\n2. **Momentum transfer q**: |q|=2k sin(θ/2); students sometimes write |q|=|k_f−k_i|=0 (forgetting elastic scattering k_f=k_i in magnitude only).\n3. **Optical theorem**: Students treat it as a formula to memorize; emphasize it is probability conservation — Im[f(0)] encodes how much flux is removed from the forward beam.\n4. **Born validity near resonance**: See MP-5; the approximation breaks down catastrophically near bound states or zero-energy resonances.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.qm.scattering-theory-born-approximation.md",
+        "startLine": 89,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

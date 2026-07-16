@@ -1,0 +1,380 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.significant-figures-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.significant-figures",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:a887c6c49d8ed1f0d90462a9476d16d3e6b5097535104ed91debfec30a612caa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.significant-figures.md": "sha256:13e0cdd10a3ef41d3482708153b70ec3f6356db99e167f0283b89bb2515dabbf"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 6,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 6
+  },
+  "concept": {
+    "conceptId": "phys.meas.significant-figures",
+    "name": "Significant Figures and Precision",
+    "difficultyRaw": "developing (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.meas.errors"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.significant-figures-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.significant-figures (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.significant-figures.md": "sha256:13e0cdd10a3ef41d3482708153b70ec3f6356db99e167f0283b89bb2515dabbf"
+      },
+      "contentHash": "sha256:45cbbefa341614d8b8e16373bb3541e4bc888038f0ff29344a5d7b72b4e5548a",
+      "ruleCount": 6,
+      "bandCounts": {
+        "3": 6
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.significant-figures.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.significant-figures.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.significant-figures\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.significant-figures.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.significant-figures.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.significant-figures\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.significant-figures.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.significant-figures.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.significant-figures\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.significant-figures.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.significant-figures.md#TA-4 (addresses MC-MORE-DIGITS-BETTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.significant-figures\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.significant-figures.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.significant-figures.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.significant-figures\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.significant-figures.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.significant-figures.md#TA-6 (addresses MC-MORE-DIGITS-BETTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.significant-figures"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.significant-figures\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.significant-figures/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Counts the significant figures in a measured value correctly, applying the rules for leading zeros (not significant), captive zeros (significant), and trailing zeros after a decimal (significant) — e.g. 0.00420 has 3 sig figs.\n2. Reports a **calculated** result to no more precision than its **least precise input** (multiplication/division: fewest sig figs; addition/subtraction: fewest decimal places) — and rounds only at the end.\n3. Explains that sig figs communicate the **precision** of a measurement, so writing extra digits from a calculator is **false precision**, not greater accuracy.\n\nA student who copies \"12.41666667\" from a calculator as the answer to a mm-ruler measurement, or who counts the leading zeros in 0.0042 as significant, has **NOT** achieved mastery — false precision misrepresents what was actually measured and corrupts every reported experimental result.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/misconception/MC-MORE-DIGITS-BETTER",
+      "kind": "misconception",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "More digits means a more accurate answer",
+      "content": "### MC-MORE-DIGITS-BETTER: \"More digits means a more accurate answer\"\ntrigger_signal: student reports all calculator digits, or keeps more sig figs than the measurements support.\nconflict_evidence [P28]: \"Your ruler measures to the nearest millimetre. Your calculator says the area is 7.853975 cm². Which of those digits did the ruler actually measure? If it can't see past the millimetre, where did '.853975' come from?\"\nbridge_text [P30]: \"Extra digits from a calculator are not measured — they're arithmetic noise. Significant figures show how precisely you actually measured. Writing more digits claims a precision your instrument never had.\"\nreplacement_text [P31]: \"Report only the digits your measurement supports. A calculation's precision is limited by its least precise input.\"\ndiscrimination_pairs [P33]: [\"2.5 cm (2 sf) × 3.14159 → 7.9 cm² (2 sf), NOT 7.853975\", \"2.50 cm (3 sf) × 3.14159 → 7.85 cm² (3 sf)\"]\ns6_path: skip P28; compare the ruler and the calculator display side by side as a shared observation, then P30.",
+      "localKey": "MC-MORE-DIGITS-BETTER",
+      "language": "en",
+      "refs": [
+        "MC-MORE-DIGITS-BETTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/misconception/MC-RESULT-EXCEEDS-INPUTS",
+      "kind": "misconception",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "A calculated result can be more precise than the data",
+      "content": "### MC-RESULT-EXCEEDS-INPUTS: \"A calculated result can be more precise than the data\"\ntrigger_signal: student reports a result with more sig figs / decimal places than any input measurement.\nconflict_evidence [P28]: \"Both sides of the rectangle were measured to 2 sig figs. If neither measurement is trustworthy past the second figure, how can their product suddenly be trustworthy to five figures?\"\nbridge_text [P30]: \"Precision cannot be created by arithmetic. Multiplying or dividing keeps the fewest sig figs of the inputs; adding or subtracting keeps the fewest decimal places. Round once, at the end.\"\nreplacement_text [P31]: \"A result is only as precise as its least precise measurement — never more.\"\ndiscrimination_pairs [P33]: [\"4.0 × 2.5124 → 10 (2 sf) ✓\", \"reporting 10.0496 ✗\", \"12.11 + 0.3 → 12.4 (1 dp), not 12.41\"]\ns6_path: skip P28; walk the 2-sf × 2-sf → 2-sf rule as a gentle shared rule, then P30.",
+      "localKey": "MC-RESULT-EXCEEDS-INPUTS",
+      "language": "en",
+      "refs": [
+        "MC-RESULT-EXCEEDS-INPUTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "The Last Digit Is a Guess",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Last Digit Is a Guess\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Counting Significant Figures",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Counting Significant Figures\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Precision of a Calculation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Precision of a Calculation\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P10\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 28,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Misconception Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Misconception Probe\",\"primitives\":[\"P02\",\"P36\",\"P41\",\"P49\",\"P54\",\"P55\"],\"addresses\":[\"MC-MORE-DIGITS-BETTER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-MORE-DIGITS-BETTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 37,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 44,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P07\",\"P17\",\"P21\",\"P28\",\"P30\",\"P36\",\"P41\",\"P51\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-MORE-DIGITS-BETTER\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-MORE-DIGITS-BETTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 51,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Sig figs in 0.00420?\" | CORRECT = 3 |\n| P74 (classify) | \"Sig figs in 4002?\" | CORRECT = 4 |\n| P75 (boundary) | \"Sig figs in a counted '3 trials' — and does it limit precision?\" | CORRECT = exact/infinite; doesn't limit |\n| P76 (transfer) | \"100.0 m in 12.1 s — average speed to correct precision?\" | CORRECT = 8.26 m/s (3 sf) |\n| P77 (generate) | \"3-sig-fig number with a zero that counts and one that doesn't.\" | CORRECT = e.g. 0.0205 |\n| P78 (explain) | \"What do sig figs tell you; why can't a result beat its inputs?\" | CORRECT = precision statement |\n| P79 (predict) | \"3.14159 × (2.0 cm) — max sig figs the answer can honestly have?\" | CORRECT = 2 |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 173,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Never met sig figs | Reports whatever digits appear | Protocol A (Concrete) |\n| S1 | \"Round to 2 decimals\" rote rule | Applies a fixed decimal count regardless of the data's precision | Protocol B (Counterexample-first) |\n| S2-MORE-DIGITS-BETTER | Believes more digits = more accurate | Writes all calculator digits as \"the exact answer\" | Misconception Engine → Protocol C |\n| S2-RESULT-EXCEEDS-INPUTS | Thinks a result can be more precise than its data | Reports 5 sig figs from 2-sig-fig measurements | Misconception Engine → Protocol C |\n| S3 | Counts sig figs; mishandles zeros or propagation | OK on simple counts; fails 0.00420 or a division result | Protocol C (Guided Questioning) |\n| S6 | Anxiety at the zero rules | Freezes at which zeros \"count\" | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"When you write down a measured number, have you learned rules about which digits actually 'count' — significant figures?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"You measure a length with a ruler as 2.5 cm and multiply by 3.14159. The calculator shows 7.853975. How many digits should you keep in your answer, and why?\"\n  \"About 2 sig figs — 7.9 — because the 2.5 cm was only known to 2 sig figs\" → S3. Enter Protocol C.\n  \"All of them — 7.853975 is exact\" → SIGNAL:MISCONCEPTION:MC-MORE-DIGITS-BETTER. Enter Misconception Engine.\n  \"Round to 2 decimal places: 7.85\" (fixed decimal rule, no sig-fig reasoning) → S1. Enter Protocol B.\n  Pause / \"I don't know\" → add S6 flag → confidence question → route (No→S6/F, Yes→S0/A).\n\nDB-3 (confidence calibration):\n\"How confident are you with significant figures — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations.\n  4–5 + DB-2 = \"all of them\" → add S7 flag; override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MORE-DIGITS-BETTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 39,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.meas.significant-figures/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.significant-figures",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.errors`):\n\"What does the uncertainty ±0.1 cm on a measurement tell you?\"\n  Cannot connect uncertainty to which digits are trustworthy → flag PREREQ-GAP-ERRORS.\n  In-session minimum repair: one P06 (read a ruler; the last digit is the uncertain one) linking uncertainty → the last significant digit, then resume. Deep gap → schedule `phys.meas.errors` (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.significant-figures.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

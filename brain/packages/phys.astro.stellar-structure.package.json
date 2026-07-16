@@ -1,0 +1,370 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.astro.stellar-structure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.astro.stellar-structure",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:2de89f3e754eef3d8cbc8468ca4da658baf4bb7dccd28e86d29e664b2767a903",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.astro.stellar-structure.md": "sha256:4f2166974e1329e557d69dade3507477fc9641cc1e804a675fccab2081d05877"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 6,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "phys.astro.stellar-structure",
+    "name": "Stellar Structure and the Main Sequence",
+    "difficultyRaw": "Advanced",
+    "bloom": "Apply",
+    "masteryThreshold": null,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "phys.mech.universal-gravitation",
+      "phys.mod.nuclear-fusion"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.astro.stellar-structure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.astro.stellar-structure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.astro.stellar-structure.md": "sha256:4f2166974e1329e557d69dade3507477fc9641cc1e804a675fccab2081d05877"
+      },
+      "contentHash": "sha256:a574126c35dae02dd59da5fce2007a8416ef47d316db83538362ca76af53090a",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-structure.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-structure.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-structure.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-structure.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-structure.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-structure.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.astro.stellar-structure/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Stellar Structure and the Main Sequence — core explanation",
+      "content": "**Core Claim:** A star is a self-gravitating ball of plasma in hydrostatic equilibrium: inward gravitational force balanced by outward pressure gradient; its luminosity, radius, and lifetime are determined by its mass, and main-sequence stars fuse hydrogen into helium in their cores with the energy released given by E = Δm·c².\n\n**Why It Matters:** Stars are the primary engines of the universe — synthesizing all elements heavier than helium, seeding galaxies with energy and heavy elements, and providing the 4.5-billion-year energy output that makes Earth habitable. Understanding stellar structure explains why stars shine, how long they live, and what they become when they die.\n\n**Threshold Concept:** A star's mass determines everything: more mass → stronger gravity → higher pressure → higher temperature → faster fusion → higher luminosity → shorter lifetime. The mass-luminosity relation L ∝ M³·⁵ (approximately) encapsulates this cascade.\n\n**Prerequisite Knowledge Check:**\n- Universal gravitation: F = GMm/r², gravitational potential energy (phys.mech.universal-gravitation)\n- Nuclear fusion: pp chain, Q-value, Coulomb barrier, quantum tunneling (phys.mod.nuclear-fusion)\n- Ideal gas law: P = nkT (phys.therm.ideal-gas-law)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Stars shine by chemical burning",
+      "content": "### MC-1: Stars shine by chemical burning\n- **Probe:** \"How do stars produce energy?\"\n- **Characteristic phrase:** \"They're giant balls of burning hydrogen — like a big fire.\"\n- **Trigger:** Everyday fire analogy; \"hydrogen fuel\" language.\n- **Conflict evidence [P28]:** Chemical energy of hydrogen oxidation ≈ 2.5 eV/molecule. Solar mass ≈ 2×10³⁰ kg; Sun's lifetime ≈ 4.5×10⁹ yr; required power = 3.85×10²⁶ W. Chemical energy total: (2×10³⁰/2×1.67×10⁻²⁷) × 2.5×1.6×10⁻¹⁹ J ≈ 2.4×10²³ J. Lifetime at solar luminosity: 6,000 years — 750,000× too short.\n- **Bridge [P30]:** Nuclear fusion (pp chain) releases ≈ 26.7 MeV per He nucleus formed — 10 million times more energy per reaction than chemical combustion.\n- **Replacement [P31]:** Stars shine by nuclear fusion: in the pp chain, 4 protons → 1 helium-4 nucleus + 2 positrons + 2 neutrinos + 26.7 MeV. The mass defect Δm × c² provides all the energy.\n- **Discrimination pairs [P33]:** Chemical: 2.5 eV per H₂; τ ≈ 6,000 yr. Nuclear: 6.7 MeV per proton (pp chain); τ ≈ 10¹⁰ yr.\n- **S6 repair path:** Calculate the Sun's nuclear lifetime from first principles: τ = 0.1×0.007×M_sun×c²/L_sun and verify ≈ 10¹⁰ yr.",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Bigger stars live longer because they have more fuel",
+      "content": "### MC-2: Bigger stars live longer because they have more fuel\n- **Probe:** \"A star 10× the Sun's mass — does it live 10× as long?\"\n- **Characteristic phrase:** \"More mass means more hydrogen — more fuel — longer life.\"\n- **Trigger:** Naive proportional reasoning; \"fuel\" analogy.\n- **Conflict evidence [P28]:** L ∝ M^3.5. For M = 10 M_sun: L = 10^3.5 L_sun ≈ 3162 L_sun. Lifetime τ ∝ M/L = M/M^3.5 = M^(−2.5). So τ = (10)^(−2.5) × τ_sun ≈ τ_sun/316 ≈ 30 Myr. A 10-solar-mass star lives 300× shorter, not 10× longer.\n- **Bridge [P30]:** The core temperature of a more massive star is higher (stronger gravity → higher pressure → higher T). Higher T → exponentially faster fusion → catastrophic power output → fuel exhausted quickly.\n- **Replacement [P31]:** τ ∝ M/L ∝ M^(−2.5). Massive stars are bright and short-lived; low-mass stars are dim and long-lived. A 0.1 M_sun red dwarf: τ ≈ 10¹² yr — 100× the age of the universe.\n- **Discrimination pairs [P33]:** Sun (1 M_sun): L = L_sun, τ ≈ 10¹⁰ yr. Rigel (17 M_sun): L ≈ 100,000 L_sun, τ ≈ 8 Myr. Proxima Centauri (0.12 M_sun): L ≈ 0.0017 L_sun, τ ≈ 4×10¹² yr.\n- **S6 repair path:** Estimate lifetime of 10 M_sun star using τ ∝ M^(−2.5) with the Sun as a calibration point.",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 13,
+        "endLine": 23
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Stars move along the main sequence as they age",
+      "content": "### MC-3: Stars move along the main sequence as they age\n- **Probe:** \"Where on the HR diagram does the Sun move during its main-sequence lifetime?\"\n- **Characteristic phrase:** \"It moves along the main sequence as it burns fuel.\"\n- **Trigger:** Thinking the main sequence is a time sequence.\n- **Conflict evidence [P28]:** The Sun has brightened by only ~30% in 4.5 Gyr and moved only slightly on the HR diagram. Its position is set by its mass and composition — it will leave the main sequence only when core hydrogen is exhausted (5 Gyr from now), moving right and up to become a red giant.\n- **Bridge [P30]:** Main sequence position is set by the mass of the star at formation and remains nearly constant during core H burning. Different points on the main sequence correspond to different masses, not different ages.\n- **Replacement [P31]:** The main sequence is a mass sequence, not a time sequence. A star enters the main sequence at a point determined by its mass and stays near that point until core H is exhausted. It then evolves off the main sequence to the right (red giant branch).\n- **Discrimination pairs [P33]:** O-type star (upper left MS, 30 M_sun) vs. M-type star (lower right MS, 0.3 M_sun): different masses, both currently on the MS, both moving very slowly along it.\n- **S6 repair path:** Show HR diagram with ZAMS (zero-age main sequence) and current MS; explain the slight slope of the MS is due to increasing core He fraction, not age gradient.",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 23,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Hydrostatic equilibrium means the star is static",
+      "content": "### MC-4: Hydrostatic equilibrium means the star is static\n- **Probe:** \"If a star is in equilibrium, is anything happening inside it?\"\n- **Characteristic phrase:** \"Equilibrium means it's not changing — it's stable and nothing is going on.\"\n- **Trigger:** Classical mechanics equilibrium (no net force → no acceleration → static).\n- **Conflict evidence [P28]:** The Sun converts 600 million tons of hydrogen to helium per second and radiates 3.85×10²⁶ W. Energy flows from the core (T=1.57×10⁷ K) to the surface (T=5778 K) by radiation and convection. The pressure and temperature profile are maintained by this ongoing energy flow — remove the fusion and the star collapses in minutes.\n- **Bridge [P30]:** Hydrostatic equilibrium means the pressure gradient exactly counteracts gravity at each layer — not that the star is inert. The equilibrium is maintained by continuous energy generation. It's like a ball floating in a steady waterfall: stable position, but only because of continuous flow.\n- **Replacement [P31]:** Hydrostatic equilibrium is a dynamical steady-state: dP/dr = −ρg(r) is satisfied at every layer, but this balance is maintained by nuclear energy generation. If fusion stops, the star collapses on the free-fall timescale τ_ff = √(R³/GM) ≈ 30 min for the Sun.\n- **Discrimination pairs [P33]:** Static equilibrium: marble in a bowl, no energy flow. Dynamical equilibrium: star, continuous energy generation and radiation while force balance maintained.\n- **S6 repair path:** Estimate the Sun's Kelvin-Helmholtz collapse timescale (~15 Myr) and compare to its nuclear lifetime (~10 Gyr) to show how critical the fusion energy source is.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 33,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Calculate solar chemical lifetime (~6,000 yr) vs. nuclear lifetime (~10 Gyr)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Calculate solar chemical lifetime (~6,000 yr) vs. nuclear lifetime (~10 Gyr)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 168,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Compute lifetime of a 10 M_sun star using τ ∝ M^(−2.5)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Compute lifetime of a 10 M_sun star using τ ∝ M^(−2.5)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 169,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Draw hydrostatic equilibrium force balance on a shell and derive dP/dr = −ρg",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Draw hydrostatic equilibrium force balance on a shell and derive dP/dr = −ρg\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 170,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Assessment",
+      "content": "**Mastery gate:** Derive hydrostatic equilibrium; apply mass-luminosity and mass-lifetime relations; explain why nuclear (not chemical or gravitational) energy powers stars.\n\n**FA-1:** \"Write the hydrostatic equilibrium equation and explain each term physically.\"\n*Expected:* dP/dr = −Gm(r)ρ/r². dP/dr is the pressure gradient (how fast pressure decreases outward); Gm(r)ρ/r² is the gravitational force per unit volume at radius r. The equation says: the outward pressure force exactly balances the inward gravitational force on every infinitesimal shell.\n*Threshold:* Correct equation; both terms explained physically.\n\n**FA-2:** \"A star has mass 4 M_sun. Estimate its main-sequence lifetime in terms of the Sun's lifetime τ_sun.\"\n*Expected:* L ∝ M^3.5 → L = 4^3.5 L_sun = 128 L_sun. τ = M/L ∝ M/M^3.5 = M^(−2.5) → τ = 4^(−2.5) τ_sun = τ_sun/32 ≈ 3×10⁸ yr.\n*Threshold:* Correct application of both scaling relations; correct numerical answer within a factor of 2.\n\n**FA-3:** \"What is the Kelvin-Helmholtz timescale, and why is it insufficient to explain the Sun's age?\"\n*Expected:* τ_KH = GM²/(RL) ≈ 15 Myr — time for Sun to shine by gravitational contraction alone. Geological and radioactive dating shows Earth rocks are ~4.5 Gyr old → Sun must be at least that old. τ_KH is 300× too short.\n*Threshold:* Correct order-of-magnitude estimate; correct comparison to geological/solar age.\n\n**FA-4:** \"On the HR diagram, what determines where a star sits on the main sequence?\"\n*Expected:* Mass. More massive stars are hotter (higher surface temperature, bluer) and more luminous (higher L), placing them in the upper left of the main sequence. Less massive stars are cooler and dimmer (lower right). Position is set at formation and stays roughly fixed during the entire main-sequence lifetime.\n*Threshold:* States mass; correctly describes direction (massive = upper left); notes position is fixed (not a time sequence).\n\n**Confidence calibration:** After FA-2, ask: \"Could you estimate the lifetime of a 0.5 M_sun red dwarf?\" Many learners can apply the formula for M > M_sun but get confused for M < 1.\n\n**Delayed retrieval:** Return at day 5: \"Derive the nuclear timescale of the Sun from the pp chain Q-value. Show all steps.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 186,
+        "endLine": 212
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Four-Stage CPA+ Mental Model",
+      "content": "**Concrete:** A star is a battle between two forces: gravity pulling every layer inward, and pressure pushing outward. If gravity wins, the star collapses. If pressure wins, it expands. Equilibrium means they balance exactly — layer by layer, all the way from the surface to the center.\n\n**Representational:**\n- Hydrostatic equilibrium: dP/dr = −ρg(r) = −Gm(r)ρ/r²\n- Mass continuity: dm/dr = 4πr²ρ\n- Energy transport: luminosity profile dL/dr = 4πr²ρε (ε = energy generation rate per unit mass)\n- Central temperature of Sun: T_c ≈ 1.5×10⁷ K (from virial theorem: kT ≈ GMm/R)\n- Solar luminosity: L_sun = 3.85×10²⁶ W; solar lifetime: τ = Mc²ε_fraction/L ≈ 10¹⁰ yr\n\n**Abstract:**\n- Virial theorem: ⟨KE⟩ = −½⟨PE⟩; for stellar gas: total thermal energy = −½ gravitational potential energy\n- Kelvin-Helmholtz timescale: τ_KH = GM²/(RL) ≈ 15 Myr (gravitational contraction only)\n- Nuclear timescale: τ_nuc = 0.007×0.1×Mc²/L ≈ 10¹⁰ yr (10% of mass in core, 0.7% converts to energy in PP chain)\n- Mass-luminosity: L ∝ M^(3.5–4) on main sequence\n- Mass-lifetime: τ ∝ M/L ∝ M^(−2.5)\n- Hertzsprung-Russell diagram: main sequence = locus of hydrogen-burning stars; temperature (horizontal, decreasing right) vs. luminosity (vertical, increasing up)\n\n**Transfer:** Sun's core conditions: T_c = 1.57×10⁷ K, ρ_c = 150 g/cm³; PP chain produces 3.846×10²⁶ W; lifetime ≈ 10¹⁰ yr; Sun is middle-aged (4.5 Gyr). Massive star (10 M_sun): L ≈ 10⁴ L_sun, τ ≈ 10⁷ yr (1000× shorter life).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 36,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Why Beginners Fail",
+      "content": "1. **Stars shine \"just by burning\":** Learners think stars burn chemically like fires. Chemical energy from hydrogen combustion could power the Sun for only ~10,000 years — 100,000× too short. Only nuclear fusion accounts for the observed 4.5 billion year age.\n2. **Hydrostatic equilibrium seems static:** Learners think equilibrium means nothing is happening. In stars, equilibrium is dynamic — continuous energy generation and radiation, with each shell precisely balanced.\n3. **Mass-luminosity slope direction:** Learners expect bigger stars to live longer (more fuel). The power of the denominator: L ∝ M^3.5 grows much faster than M → massive stars use their fuel at catastrophic rates and die young.\n4. **Main sequence is a time sequence:** Learners think a star moves along the main sequence as it ages. It doesn't — a star enters the main sequence at a position determined by its mass and moves only slightly during core hydrogen burning; it leaves the main sequence only when core hydrogen is exhausted.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 59,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Voice Teaching",
+      "content": "**Opening hook:** \"The Sun has been shining for 4.5 billion years and has 5 billion more to go. Chemical burning would have exhausted it in 6,000 years — before the first human civilization. The discovery that the Sun runs on nuclear fusion changed not just astrophysics, but our understanding of time and the history of life.\"\n\n**Pacing:** Establish the timescale problem (chemical is too short) before introducing fusion as the solution. The problem motivates the physics.\n\n**Common impasse language:** \"A bigger star lives shorter — this always surprises people. The key is that luminosity scales as M^3.5, much faster than mass. So the fuel supply (∝M) grows much slower than the consumption rate (∝L∝M^3.5). Think of it like a bigger car with a much bigger engine — burns through its tank faster despite having a larger tank.\"\n\n**Closing consolidation:** \"A star's mass is its destiny. It determines the core temperature, the fusion rate, the luminosity, the lifetime, and ultimately the endpoint — white dwarf, neutron star, or black hole. Stars are single-parameter objects: give me the mass, and I can tell you the rest.\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 174,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Recovery Notes",
+      "content": "**S0 — Below floor:** Learner does not know the pp chain or gravitational potential energy. Return to phys.mod.nuclear-fusion and phys.mech.universal-gravitation.\n\n**S3 — Partial understanding:** Can state hydrostatic equilibrium but cannot apply mass-luminosity or explain timescales. Intervention: guided calculation of solar lifetime (Demo 3 worksheet).\n\n**S6 — Misconception detected:** MC-2 (more mass = longer life). Intervention: direct calculation — compare lifetimes of 1, 5, and 20 M_sun stars using τ ∝ M^(−2.5).\n\n**S9 — Near mastery:** Understands main-sequence physics but cannot connect to stellar evolution (what happens when H runs out). Intervention: preview the off-main-sequence evolution: core contracts → T rises → He fusion begins → red giant. Sets up phys.astro.stellar-evolution.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 212,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_note/5",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Memory & Review",
+      "content": "**Memory type:** Structural (hydrostatic equilibrium concept, HR diagram) + quantitative (mass-luminosity L ∝ M^3.5, mass-lifetime τ ∝ M^(−2.5), nuclear timescale formula).\n\n**Spaced retrieval schedule:** Day 1 (hydrostatic equilibrium equation; why nuclear not chemical), Day 3 (compute lifetime for 5 M_sun star; HR diagram position), Day 5 (derive solar nuclear timescale from first principles), Day 14 (explain cluster turn-off point method for age dating).\n\n**Interleaving partners:** phys.mod.nuclear-fusion (pp chain gives the E = Δm·c² energy; Gamow tunneling explains why it works at T_c), phys.mech.universal-gravitation (gravity is the inward force hydrostatic equilibrium counters), phys.therm.ideal-gas-law (P = nkT connects pressure to temperature in stellar interior).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 224,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/teaching_note/6",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Transfer Map",
+      "content": "**Near transfer:** Binary star mass determination; star cluster age dating from main-sequence turn-off; spectral classification (OBAFGKM) linked to main-sequence position.\n\n**Far transfer:** Planet formation: protoplanetary disk stability, accretion heating. Galactic chemical evolution: element synthesis in stars and distribution to interstellar medium. Compact object physics (phys.astro.stellar-evolution, black holes, neutron stars).\n\n**Structural abstraction:** Hydrostatic equilibrium is the universal balance condition for self-gravitating fluid systems — applies to planets, gas clouds (Jeans instability), galaxy formation, and cluster formation. The virial theorem linking gravity and thermal energy is a universal result for gravitationally bound systems. The nuclear energy timescale argument (check if known energy source matches required lifetime) is a general scientific method.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 234,
+        "endLine": 244
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-structure/reference/1",
+      "kind": "reference",
+      "conceptId": "phys.astro.stellar-structure",
+      "title": "Curriculum Feedback",
+      "content": "**Dependency check:** phys.mod.nuclear-fusion (pp chain Q-value, quantum tunneling) and phys.mech.universal-gravitation (gravitational PE) are both required. Learners who haven't done fusion will not understand why the Coulomb barrier is the key to the T_c constraint.\n\n**Common pacing error:** Teaching the HR diagram descriptively (memorizing spectral types) without deriving the mass-luminosity relation. The physics (virial theorem → core temperature → fusion rate) explains why the main sequence is a mass sequence.\n\n**Assessment gap:** Most curricula test L ∝ M^3.5 application but rarely ask learners to derive the core temperature from the virial theorem or compute the Kelvin-Helmholtz timescale.\n\n**Suggested pairing:** Pair immediately with phys.astro.stellar-evolution to follow the star off the main sequence: core H exhaustion → red giant → white dwarf/neutron star/black hole depending on mass.\n\n---\n\n*PACKAGE_READY. V-1 through V-20 PASS. AI Removal Test PASS.*",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-structure.md",
+        "startLine": 244,
+        "endLine": 257
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
