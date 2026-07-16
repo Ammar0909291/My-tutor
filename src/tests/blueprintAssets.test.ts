@@ -6,13 +6,16 @@
  * compatibility with Phase 1 · existing-compiler compatibility.
  *
  * Validation corpus (Phase 1.5 spec: one Physics, one Mathematics, one
- * English): physics = phys.mech.angular-momentum.md; English =
- * eng.phonics.letter-sound-correspondence.md; mathematics = NOT AVAILABLE —
- * no math.* blueprint exists on `main` (the corpus is 195 phys.* + 2 eng.*;
- * math blueprints live on an unmerged branch). phys.stat.boltzmann-factor.md
- * substitutes as the third file, and phys.em.amperes-law.md exercises the
- * fourth corpus variant (YAML identity block, WE-N examples, Adaptive
- * Branching, Session Flow Script) at the asset-lowering layer.
+ * English): physics = phys.mech.angular-momentum.md; mathematics =
+ * math.abst.binary-operation.md (the Tier-1 math corpus, 154 files, landed
+ * on `main` mid-phase via merge bfc1e22 — it is a fifth structural variant:
+ * "## Component N: Title" colon separators, "TA-A01 ·" middot separators,
+ * BLUEPRINT_ID/nested-KG_FIELDS metadata, misconception REGISTRY TABLES
+ * instead of ### MC- headers); English =
+ * eng.phonics.letter-sound-correspondence.md. phys.stat.boltzmann-factor.md
+ * and phys.em.amperes-law.md additionally exercise the other corpus variants
+ * (YAML identity block, WE-N examples, Adaptive Branching, Session Flow
+ * Script) at the asset-lowering layer.
  */
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
@@ -188,10 +191,40 @@ describe('prerequisite metadata (YAML identity-block variant)', () => {
   })
 })
 
+// ── Mathematics corpus variant (landed on main mid-phase) ────────────────────
+
+describe('mathematics variant — math.abst.binary-operation', () => {
+  it('parses colon-separated components, middot TA headers, and nested KG_FIELDS metadata', () => {
+    const { ast } = parsedAst('math.abst.binary-operation')
+    expect(ast.conceptId).toBe('math.abst.binary-operation')       // via BLUEPRINT_ID
+    expect(ast.metadata.prerequisites).toEqual(['math.found.function-set-theoretic']) // nested requires
+    expect(ast.metadata.masteryThreshold).toBe(0.90)               // indented field
+    expect(ast.metadata.status).toContain('PACKAGE_READY')         // uppercase STATUS:
+    expect(ast.teachingActions.length).toBeGreaterThanOrEqual(4)   // TA-A01..TA-A04 (· separator)
+    expect(ast.teachingActions.some((t) => t.id === 'TA-A01')).toBe(true)
+  })
+
+  it('extracts misconceptions from the registry TABLE (no ### MC- headers)', () => {
+    const { ast } = parsedAst('math.abst.binary-operation')
+    expect(ast.misconceptions.map((m) => m.id)).toEqual(['MC-1', 'MC-2', 'MC-3'])
+    expect(ast.misconceptions[0].label).toBe('CLOSURE-VIOLATION')
+    expect(ast.misconceptions[0].body).toContain('|') // verbatim table row
+  })
+
+  it('lowers the Cognitive Map as core_explanation and the registry rows as misconception assets', () => {
+    const { ast } = parsedAst('math.abst.binary-operation')
+    const assets = lowerBlueprintToAssets(ast).assets
+    const exps = byKind(assets, 'core_explanation')
+    expect(exps).toHaveLength(1)
+    expect(exps[0].content).toContain('binary operation')
+    expect(byKind(assets, 'misconception')).toHaveLength(3)
+  })
+})
+
 // ── Educational Package assembly ─────────────────────────────────────────────
 
 describe('Educational Package assembly', () => {
-  const cases = ['phys.mech.angular-momentum', 'phys.stat.boltzmann-factor', 'eng.phonics.letter-sound-correspondence'] as const
+  const cases = ['phys.mech.angular-momentum', 'math.abst.binary-operation', 'eng.phonics.letter-sound-correspondence'] as const
 
   for (const id of cases) {
     it(`assembles a DRAFT Educational Package for ${id} (rule layer + knowledge layer)`, () => {

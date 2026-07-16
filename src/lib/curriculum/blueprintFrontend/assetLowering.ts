@@ -33,7 +33,7 @@ const LANGUAGE_DEFAULT = 'en'
 // Action Sequence is consumed structurally via ast.teachingActions.
 
 const TEACHING_NOTE_TITLE_RE =
-  /voice teaching|recovery note|anxiety|confidence protocol|sticking point|memory.{0,3}(&|and)?.{0,3}review|spaced retrieval|transfer map|why beginners fail|mental model|student state matrix|diagnostic battery|prerequisite (check|dependency)|formative assessment/i
+  /voice teaching|recovery note|anxiety|confidence protocol|sticking point|memory.{0,3}(&|and)?.{0,3}review|spaced retrieval|spaced repetition|scaffolding protocol|transfer map|why beginners fail|mental model|student state matrix|diagnostic battery|prerequisite (check|dependency)|formative assessment/i
 
 function findSections(sections: BlueprintSection[], re: RegExp): BlueprintSection[] {
   return sections.filter((s) => re.test(s.title))
@@ -96,6 +96,11 @@ function lowerCoreExplanation(ast: BlueprintAST): AssetNode[] {
     if (content) {
       return [makeAsset(ast, 'core_explanation', `${ast.metadata.name || ast.conceptId} — core explanation`, content, null, 1, sectionSpan(ast, spine))]
     }
+  }
+  // Math corpus: the Cognitive Map section carries the target understanding.
+  const cognitiveMap = firstSection(ast.sections, /cognitive map/i)
+  if (cognitiveMap) {
+    return [makeAsset(ast, 'core_explanation', `${ast.metadata.name || ast.conceptId} — cognitive map`, sectionText(cognitiveMap), null, 1, sectionSpan(ast, cognitiveMap))]
   }
   const profile = firstSection(ast.sections, /concept (profile|metadata|identity)/i)
   if (profile) {
@@ -196,9 +201,9 @@ function lowerLearningObjectives(ast: BlueprintAST): AssetNode[] {
   return [makeAsset(ast, 'learning_objective', section.title, sectionText(section), null, 1, sectionSpan(ast, section))]
 }
 
-/** References / curriculum-feedback sections, when authored. */
+/** References / curriculum-feedback / cross-blueprint-dependency sections. */
 function lowerReferences(ast: BlueprintAST): AssetNode[] {
-  const section = firstSection(ast.sections, /references|curriculum feedback/i)
+  const section = firstSection(ast.sections, /references|curriculum feedback|cross-blueprint dependencies/i)
   if (!section) return []
   return [makeAsset(ast, 'reference', section.title, sectionText(section), null, 1, sectionSpan(ast, section))]
 }

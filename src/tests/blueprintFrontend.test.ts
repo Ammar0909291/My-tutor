@@ -87,7 +87,7 @@ describe('parser — format-agnostic across the real corpus', () => {
     expect(ta4.primitives).toEqual(expect.arrayContaining(['P14', 'P28', 'P31', 'P33', 'P36']))
   })
 
-  it('parses eng.phonics.letter-sound-correspondence.md (Protocol-format, "## N. Title") — substitutes for mathematics (no math blueprint exists on main yet)', () => {
+  it('parses eng.phonics.letter-sound-correspondence.md (Protocol-format, "## N. Title") — English case; math coverage lives in blueprintAssets.test.ts since the math corpus landed on main', () => {
     const { file, source } = readBlueprint('eng.phonics.letter-sound-correspondence')
     const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'eng.phonics.letter-sound-correspondence')
     expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])

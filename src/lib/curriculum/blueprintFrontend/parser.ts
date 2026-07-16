@@ -35,7 +35,10 @@ interface RawSection {
   startLine: number
 }
 
-const SECTION_HEADER_RE = /^##\s+(?:Component\s+\d+\s+—\s+|Section\s+\d+\s+—\s+|\d+\.\s+)(.+)$/gm
+// Separators observed in the live corpus: "Component N — Title" (phys),
+// "Component N: Title" (math, landed 2026-07-16), "Section N — Title",
+// "N. Title" (protocol format).
+const SECTION_HEADER_RE = /^##\s+(?:Component\s+\d+\s*[—:]\s*|Section\s+\d+\s+—\s+|\d+\.\s+)(.+)$/gm
 
 function splitSections(content: string): RawSection[] {
   const lines = content.split('\n')
@@ -65,10 +68,12 @@ function extractFencedBlock(body: string): string | null {
   return /```(?:yaml|text)?\s*\n([\s\S]*?)```/.exec(body)?.[1] ?? null
 }
 
-/** Reads a scalar `key: value` field from a fenced metadata block. */
+/** Reads a scalar `key: value` field from a fenced metadata block.
+ *  Case-insensitive and indentation-tolerant: the math corpus authors
+ *  `STATUS:` / nested `KG_FIELDS:` children with leading whitespace. */
 function scalarField(block: string, ...keys: string[]): string | null {
   for (const key of keys) {
-    const re = new RegExp(`^${key}:\\s*(.+)$`, 'm')
+    const re = new RegExp(`^\\s*${key}:\\s*(.+)$`, 'mi')
     const v = re.exec(block)?.[1]?.trim()
     if (v) return v
   }
@@ -80,12 +85,12 @@ function scalarField(block: string, ...keys: string[]): string | null {
  *  Identity variant, e.g. phys.em.*). */
 function listField(block: string, ...keys: string[]): string[] {
   for (const key of keys) {
-    const bracketRe = new RegExp(`^${key}:\\s*\\[([\\s\\S]*?)\\]`, 'm')
+    const bracketRe = new RegExp(`^\\s*${key}:\\s*\\[([\\s\\S]*?)\\]`, 'mi')
     const raw = bracketRe.exec(block)?.[1]
     if (raw !== undefined) {
       return raw.split(',').map((s) => s.trim()).filter((s) => s.length > 0)
     }
-    const yamlRe = new RegExp(`^${key}:\\s*\\n((?:\\s+-\\s+.+\\n?)+)`, 'm')
+    const yamlRe = new RegExp(`^\\s*${key}:\\s*\\n((?:\\s+-\\s+.+\\n?)+)`, 'mi')
     const yamlRaw = yamlRe.exec(block)?.[1]
     if (yamlRaw !== undefined) {
       return yamlRaw
@@ -98,7 +103,8 @@ function listField(block: string, ...keys: string[]): string[] {
 }
 
 function extractMetadata(sections: RawSection[], conceptIdFromFilename: string): BlueprintMetadata {
-  const c0 = findSection(sections, /concept (profile|metadata|identity)/i)
+  // The math corpus titles its C0 section just "Metadata".
+  const c0 = findSection(sections, /concept (profile|metadata|identity)|^metadata$/i)
   const block = c0 ? extractFencedBlock(c0.body) : null
 
   if (!block) {
@@ -110,7 +116,7 @@ function extractMetadata(sections: RawSection[], conceptIdFromFilename: string):
     }
   }
 
-  const conceptId = scalarField(block, 'concept_id', 'id') ?? conceptIdFromFilename
+  const conceptId = scalarField(block, 'concept_id', 'BLUEPRINT_ID', 'id') ?? conceptIdFromFilename
   const name = scalarField(block, 'name') ?? ''
   const difficultyRaw = scalarField(block, 'difficulty') ?? ''
   const bloom = scalarField(block, 'bloom') ?? ''
@@ -135,7 +141,8 @@ function extractMetadata(sections: RawSection[], conceptIdFromFilename: string):
 
 // ── C4 Teaching Actions extraction ───────────────────────────────────────────
 
-const TA_HEADER_RE = /^(?:###\s+|\*\*)(TA-[A-Za-z0-9]+)\s*(?:—|-)\s*([^[\n*]+?)(?:\s*\[([^\]]*)\])?\s*\*{0,2}\s*$/gm
+// TA header separators in the corpus: "—" / "-" (phys, eng), "·" (math).
+const TA_HEADER_RE = /^(?:###\s+|\*\*)(TA-[A-Za-z0-9]+)\s*(?:—|-|·)\s*([^[\n*]+?)(?:\s*\[([^\]]*)\])?\s*\*{0,2}\s*$/gm
 
 function extractTeachingActions(sections: RawSection[], file: string): BlueprintTeachingAction[] {
   const taSection =
@@ -225,6 +232,27 @@ function extractMisconceptions(sections: RawSection[], file: string): BlueprintM
     const startLine = haystack.slice(0, cur.index).split('\n').length
     const endLine = haystack.slice(0, end).split('\n').length
     out.push({ id: cur.id, label: cur.label, body, span: { file, startLine, endLine } })
+  }
+  if (out.length > 0) return out
+
+  // Registry-table variant (math corpus): "| MC-1 | NAME | symptom … |" rows
+  // inside the Misconception section, no ### headers. Each row is one MC;
+  // the row itself (verbatim) is the body.
+  if (mcSection) {
+    const rowRe = /^\|\s*(MC-[A-Za-z0-9_-]+)\s*\|\s*([^|]+)\|([^\n]*)$/gm
+    let row: RegExpExecArray | null
+    while ((row = rowRe.exec(mcSection.body)) !== null) {
+      const id = row[1]
+      if (seen.has(id)) continue
+      seen.add(id)
+      const startLine = mcSection.startLine + mcSection.body.slice(0, row.index).split('\n').length - 1
+      out.push({
+        id,
+        label: row[2].replace(/\*/g, '').trim(),
+        body: row[0].trim(),
+        span: { file, startLine, endLine: startLine },
+      })
+    }
   }
   return out
 }
