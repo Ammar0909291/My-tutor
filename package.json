@@ -16,6 +16,7 @@
     "seed": "tsx scripts/seed.ts",
     "seed:eb-physics": "npx tsx scripts/seed-eb-physics.mjs",
     "seed:brain-assets": "tsx scripts/brain/seed-knowledge-assets.ts",
+    "compile:package": "tsx scripts/brain/compile-educational-package.ts",
     "postinstall": "prisma generate && node scripts/copy-dynamic-visual-vendor.mjs",
     "test": "vitest run",
     "e2e:seed": "tsx e2e/seed-test-user.ts",

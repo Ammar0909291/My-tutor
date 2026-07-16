@@ -1,0 +1,544 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.angular-momentum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.angular-momentum",
+    "compiler": "blueprint-frontend@0.2.0-phase1.5",
+    "language": "en",
+    "contentHash": "sha256:7f5645729a28df2308678808fcfe4327c5945423fa9ea5e05e7eb4b7f387bb68",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.angular-momentum.md": "sha256:adb162d71d9726296c3163373b97a2a209983fb9de62523fafbf8092a447d1e3"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 5,
+      "teaching_note": 4
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.angular-momentum",
+    "name": "Angular Momentum",
+    "difficultyRaw": "advanced (5)",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "phys.mech.rotational-dynamics",
+      "phys.mech.momentum"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.angular-momentum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.angular-momentum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.angular-momentum.md": "sha256:adb162d71d9726296c3163373b97a2a209983fb9de62523fafbf8092a447d1e3"
+      },
+      "contentHash": "sha256:af65ec41745f5b9f7b474fac84e26a1ef9df4ebad0859288ba0164ab20391e19",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-momentum.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-momentum.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-momentum\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-momentum.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-momentum.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-momentum\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-momentum.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-momentum.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-momentum\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-momentum.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-momentum.md#TA-4 (addresses MC-L-IS-OMEGA)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-momentum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-momentum.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-momentum.md#TA-5 (addresses MC-TORQUE-CHANGES-SPEED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-momentum\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-momentum.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-momentum.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-momentum\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.angular-momentum.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.angular-momentum.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.angular-momentum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.angular-momentum\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.angular-momentum/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Angular Momentum — core explanation",
+      "content": "**Core Insight:** Angular momentum (L) is the rotational analog of linear momentum (p = mv).\nFor a rotating rigid body: L = Iω. It is a vector (direction along the rotation axis, right-hand\nrule). Net torque is the rate of change of angular momentum: τ_net = dL/dt. This is the most\ngeneral form of Newton's 2nd Law for rotation.\n\n**Formal Definitions:**\nL = Iω       (rigid rotating body about fixed axis)\nL = r × p    (particle; vector cross product)\n\nUnits: kg·m²/s.\n\n**Analog table:**\n\n| Linear | Rotational |\n|--------|-----------|\n| p = mv | L = Iω |\n| F = dp/dt | τ = dL/dt |\n| Impulse J = Δp | Angular impulse = ΔL = τΔt |\n\n**Direction (right-hand rule):**\nCurl the fingers of the right hand in the direction of rotation → thumb points in the direction of L.\n\n**Key properties:**\n- L is a vector: direction + magnitude both matter.\n- For a system of particles: L_total = Σ Lᵢ = Σ Iᵢωᵢ (about a fixed axis).\n- τ_net = ΔL/Δt: a net torque changes L (in magnitude or direction).\n- No net torque → L is constant (Conservation of Angular Momentum — next concept).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 25,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Basic",
+      "content": "**Worked Example 1 (Basic):**\nA solid disc (M = 3 kg, R = 0.5 m, I = 0.375 kg·m²) spins at ω = 8 rad/s.\nL = Iω = 0.375 × 8 = 3 kg·m²/s.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 25,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Angular impulse",
+      "content": "**Worked Example 2 (Angular impulse):**\nA torque of 4 N·m acts for 3 s on a flywheel at rest.\nΔL = τΔt = 4×3 = 12 kg·m²/s.\nIf I = 2 kg·m²: Δω = ΔL/I = 12/2 = 6 rad/s. Final ω = 6 rad/s.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 25,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Particle",
+      "content": "**Worked Example 3 (Particle):**\nA 2 kg particle moves at 5 m/s in a circle of radius 0.8 m.\n|L| = |r × p| = r × mv = 0.8 × 2 × 5 = 8 kg·m²/s.\n\n---",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 25,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/misconception/MC-L-IS-OMEGA",
+      "kind": "misconception",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Priority 1",
+      "content": "### MC-L-IS-OMEGA (Priority 1)\n**Label:** \"Angular momentum is the same as angular velocity — faster spinning means more L\"\n\n**Trigger signals:**\n- Says \"both objects have the same L because they have the same ω\"\n- Equates L = ω without the I factor\n- Confused when a slow-spinning flywheel has more L than a fast-spinning top\n\n**Conflict evidence [P28]:**\n\"Object A: I = 0.1 kg·m², ω = 20 rad/s → L = 0.1×20 = 2 kg·m²/s.\nObject B: I = 5 kg·m², ω = 1 rad/s → L = 5×1 = 5 kg·m²/s.\nB spins 20× slower but has 2.5× more angular momentum. If L = ω, how is this possible?\"\n\n**Bridge [P30]:**\n\"L = Iω — both the 'rotational mass' (I) and the rotation rate (ω) determine angular momentum.\nJust like p = mv (a slow truck can have more momentum than a fast bicycle), a massive flywheel\nspinning slowly can have more L than a small top spinning rapidly.\"\n\n**Replacement [P31]:**\n\"L = Iω. Compute both I and ω; multiply. A larger I 'stores' more angular momentum at the\nsame ω. Comparing L values requires knowing both factors.\"\n\n**Discrimination pairs [P33]:**\n- Large I, small ω vs small I, large ω: can have equal L — just like p = mv ✓\n- Solid disc vs hollow cylinder, same ω: hollow has larger I → larger L ✓\n\n**s6_path:** Use the linear analogy directly: \"just like p = mv, L = Iω. I is like mass.\"\n\n---",
+      "localKey": "MC-L-IS-OMEGA",
+      "language": "en",
+      "refs": [
+        "MC-L-IS-OMEGA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 3,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/misconception/MC-TORQUE-CHANGES-SPEED",
+      "kind": "misconception",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Priority 2",
+      "content": "### MC-TORQUE-CHANGES-SPEED (Priority 2)\n**Label:** \"Torque only changes angular speed — not the direction of the angular momentum vector\"\n\n**Trigger signals:**\n- Says torque can only speed up or slow down rotation, not change rotation axis\n- Confused by gyroscopic precession (top stays up; gravity torque changes L direction)\n- Claims L direction is always fixed regardless of torque\n\n**Conflict evidence [P28]:**\n\"A spinning top has L pointing upward (along its axis). Gravity acts downward through the CM\nbut the contact point is below — this creates a torque that is horizontal (τ = r × F_gravity).\nτ_net = dL/dt: the torque is horizontal, so L changes direction horizontally — the top precesses.\nIf torque only changed |L|, the top would just slow down. But it doesn't — it precesses sideways.\nWhy?\"\n\n**Bridge [P30]:**\n\"L is a vector. τ = dL/dt means torque changes L as a vector — magnitude OR direction or both.\nA torque perpendicular to L changes only the direction (like centripetal force changing v direction\nwithout changing speed). This is gyroscopic precession — a consequence of L being a vector.\"\n\n**Replacement [P31]:**\n\"τ_net = dL/dt. If τ is parallel to L: changes |L| (spins up or slows). If τ is perpendicular\nto L: changes direction of L only (precession). In general: changes both. L is a vector — never\nforget the directional component.\"\n\n**Discrimination pairs [P33]:**\n- τ parallel to L (torque about same axis): |L| changes, direction fixed ✓\n- τ perpendicular to L (gyroscope): direction changes (precession), |L| approximately fixed ✓\n\n**s6_path:** Skip gyroscopic precession entirely in first pass; use only τ parallel to L\n(increasing/decreasing rotation speed). Introduce direction-changing torque only if S6 flag\nis cleared and student explicitly encounters gyroscope problems.\n\n---",
+      "localKey": "MC-TORQUE-CHANGES-SPEED",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-CHANGES-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 33,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Concrete Experience",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Concrete Experience\",\"primitives\":[\"P01\",\"P04\",\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 3,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Modality / Formula Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Modality / Formula Introduction\",\"primitives\":[\"P05\",\"P07\",\"P08\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 15,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Prerequisite Checks + Guided Practice",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Prerequisite Checks + Guided Practice\",\"primitives\":[\"P10\",\"P13\",\"P34\",\"P41\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 31,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "MC-L-IS-OMEGA Diagnostic Probe",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-L-IS-OMEGA Diagnostic Probe\",\"primitives\":[\"P14\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-L-IS-OMEGA\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-L-IS-OMEGA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 42,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "MC-TORQUE-CHANGES-SPEED Probe + Angular Impulse",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-TORQUE-CHANGES-SPEED Probe + Angular Impulse\",\"primitives\":[\"P10\",\"P13\",\"P14\",\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-TORQUE-CHANGES-SPEED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-CHANGES-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 59,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Independent Problem Set",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Independent Problem Set\",\"primitives\":[\"P10\",\"P51\",\"P52\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 76,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Closure + Retrieval Schedule",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Closure + Retrieval Schedule\",\"primitives\":[\"P62\",\"P68\",\"P85\",\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 97,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Apply — basic L",
+      "content": "**MP-1 (Apply — basic L):**\n\"A hollow cylinder (M = 5 kg, R = 0.4 m, I = MR² = 0.8 kg·m²) spins at ω = 10 rad/s. L?\"\nExpected: L = 0.8×10 = 8 kg·m²/s.\n_Discriminates: L = Iω; MC-L-IS-OMEGA resolution._",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-L-IS-OMEGA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 270,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Apply — angular impulse",
+      "content": "**MP-2 (Apply — angular impulse):**\n\"A disc (I = 3 kg·m²) starts at ω = 4 rad/s. Torque 6 N·m acts for 5 s. Final ω?\"\nExpected: ΔL = 30; L_f = 12+30 = 42; ω_f = 42/3 = 14 rad/s.\n_Discriminates: angular impulse τΔt = ΔL; starting from nonzero ω._",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 270,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Apply — find torque from ΔL",
+      "content": "**MP-3 (Apply — find torque from ΔL):**\n\"A flywheel's L changes from 8 to 20 kg·m²/s in 4 s. Average τ?\"\nExpected: τ = 12/4 = 3 N·m.\n_Discriminates: τ = ΔL/Δt._",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 270,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Understand — compare L",
+      "content": "**MP-4 (Understand — compare L):**\n\"Object A: I = 3 kg·m², ω = 4 rad/s. Object B: I = 1 kg·m², ω = 10 rad/s.\nWhich has more angular momentum? By how much?\"\nExpected: L_A = 12, L_B = 10. A has more by 2 kg·m²/s.\n_Discriminates: MC-L-IS-OMEGA resolution; cannot judge by ω alone._",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [
+        "MC-L-IS-OMEGA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 270,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Understand — vector direction",
+      "content": "**MP-5 (Understand — vector direction):**\n\"A disc spins CCW when viewed from above. What direction does L point? If a torque is applied\nthat points downward (CW tendency viewed from above), what happens to L?\"\nExpected: L points upward (right-hand rule: CCW → thumb up). Downward torque reduces |L|\n(L decreases in upward direction — disc slows down). If torque large enough: L reverses.\n_Discriminates: L as vector; directional torque effects._\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 270,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Prerequisite Dependency Map",
+      "content": "```\nphys.mech.rotational-dynamics  ──►\n                                     phys.mech.angular-momentum\nphys.mech.momentum             ──►\n```\n\n**PD-1 (Rotational dynamics prerequisite):**\n\"A disc (I = 2 kg·m²) has τ = 6 N·m. Find α.\"\nExpected: α = 3 rad/s².\n\n**PD-2 (Momentum prerequisite):**\n\"A 3 kg ball moves at 4 m/s east. p?\"\nExpected: 12 kg·m/s east.\n\nBoth must pass before TA-3.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 70,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Formative Assessment Strategy",
+      "content": "**FA-1 (TA-2 exit):** \"L = ? Units? Analog of which linear quantity?\"\nThreshold: L = Iω; kg·m²/s; analog of p = mv.\n\n**FA-2 (TA-4 exit):** \"I = 0.5 kg·m², ω = 12 rad/s. L? vs I = 2 kg·m², ω = 3 rad/s. L?\"\nExpected: both = 6 kg·m²/s. If student says first object has more L → MC-L-IS-OMEGA not resolved.\n\n**FA-3 (TA-5 exit):** \"τ = 5 N·m for 6 s. ΔL?\"\nExpected: ΔL = 30 kg·m²/s. Basic angular impulse check.\n\n**FA-4 (Session exit):** Administer MP-1, MP-2, MP-3. 3/3 correct → advance to TA-7.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-L-IS-OMEGA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 304,
+        "endLine": 319
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Anxiety & Confidence Protocols",
+      "content": "**S6 (Anxiety) path:**\n- Use only L = Iω and angular impulse in TA-3 and TA-4.\n- Skip gyroscopic precession (MC-TORQUE-CHANGES-SPEED) in first pass; mark for review only.\n- Reassure: \"L = Iω. Same structure as p = mv. Two numbers multiplied.\"\n- Build angular impulse from the linear analog: \"just like J = FΔt = Δp, now τΔt = ΔL.\"\n\n**S7 (Overconfident) path [Protocol G]:**\n- Lead with MP-5 (vector direction question) at TA-3.\n- Challenge: \"A spinning bicycle wheel is held by its axle. You try to tilt the axle.\n  What direction does the gyroscopic torque resist in? (Requires cross-product reasoning.)\"\n- Spend TA-6 on Problems 3 and 5 and the vector direction problem.\n\n**S4 (Prereq gap):**\n- PD-1 gap (Rotational dynamics) → repair τ = Iα before returning.\n- PD-2 gap (Momentum) → repair p = mv, vector direction before returning.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-TORQUE-CHANGES-SPEED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 319,
+        "endLine": 339
+      }
+    },
+    {
+      "assetId": "phys.mech.angular-momentum/teaching_note/4",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.angular-momentum",
+      "title": "Spaced Retrieval & Interleaving Plan",
+      "content": "**Session 1:** TA-1 through TA-4 (Concrete → L = Iω → MC-L-IS-OMEGA repair).\n**Session 2 (≥24 h later):** Retrieval: \"L formula? Angular impulse?\"\n  → TA-5 (vector direction, angular impulse practice) → TA-6 (Problem set).\n**Session 3 (≥72 h later):** Interleaved probe:\n  \"A figure skater (I_i = 5 kg·m², ω_i = 3 rad/s) pulls arms in to I_f = 1 kg·m².\n  No external torque. Find ω_f. Has KE changed? (KE = ½Iω² — compute before/after.)\"\n  (Previews conservation of angular momentum + KE change during redistribution.)\n**Pre-conservation-of-angular-momentum session:** All 5 P91 probes cold; require 4/5 before advancing.\n\n**Interleaving partners:** phys.mech.momentum (p = mv analog), phys.mech.rotational-dynamics\n(τ = Iα link), phys.mech.moment-of-inertia (I in L = Iω).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-L-IS-OMEGA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.angular-momentum.md",
+        "startLine": 339,
+        "endLine": 355
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

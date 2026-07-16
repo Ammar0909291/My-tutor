@@ -1446,13 +1446,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
         const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptIdForDecide)
         if (conceptNode) {
-          // Phase 1C/1D: Blueprint Retrieval + Content Injection.
+          // Package Runtime PoC (flag-gated, additive): when a compiled
+          // Educational Package artifact exists for this concept, the lesson
+          // context comes ENTIRELY from the package — blueprint markdown is
+          // not read on this path (authoring/runtime boundary). Any failure
+          // (no artifact, validation, integrity) falls back to the legacy
+          // blueprint path below, so external behavior is unchanged unless
+          // ENABLE_PACKAGE_RUNTIME=1 AND a valid artifact exists.
+          let packageContextInjected = false
+          if (process.env.ENABLE_PACKAGE_RUNTIME === '1') {
+            try {
+              const { buildLessonContextForConcept } = await import('@/lib/curriculum/packageRuntime')
+              const lessonCtx = buildLessonContextForConcept(activeConceptIdForDecide)
+              if (lessonCtx) {
+                systemPrompt += lessonCtx.block
+                packageContextInjected = true
+              }
+            } catch {
+              // non-fatal — fall back to the legacy blueprint path
+            }
+          }
+
+          // Phase 1C/1D: Blueprint Retrieval + Content Injection (legacy path).
           // Resolves Teaching Blueprint metadata and injects Concept Spine,
           // Misconception Library, and Explanation Library into the system
           // prompt. Supports all four blueprint formats (Component A,
           // Protocol B, Section C, Spine D). Non-fatal — a missing or
           // unparseable blueprint never blocks the Teaching Engine.
-          try {
+          if (!packageContextInjected) try {
             const { loadBlueprint, loadBlueprintContent, buildBlueprintContextBlock, loadEBConceptContext } = await import('@/lib/curriculum/blueprintLoader')
             const blueprintResult = loadBlueprint(activeConceptIdForDecide)
             if (blueprintResult.found) {
