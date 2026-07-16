@@ -1066,6 +1066,13 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 
 ## Repository branch policy (2026-07-15, binding, supersedes the prior
 ## KDSUO-as-canonical policy below — kept for history only)
+- **Always work directly on `main` (standing instruction, reaffirmed
+  2026-07-16).** Do not check out, create, or commit to any other branch
+  (including archived ones like `claude/my-tutor-foundation-kdsuo-blpnts`)
+  even temporarily/as a working branch to be merged later — start every
+  session with `git checkout main && git fetch origin main && git reset
+  --hard origin/main` (only if the tree is clean), do all work on `main`,
+  commit on `main`, push to `main`. No feature-branch-then-merge step.
 `main` is now the ONLY active development branch — the single source of
 truth for this repo. On 2026-07-15, `claude/my-tutor-foundation-KDSUO`
 (itself already the union of `main`, `claude/my-tutor-foundation-kdsuo-blpnts`,
