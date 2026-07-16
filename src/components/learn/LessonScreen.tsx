@@ -18,6 +18,11 @@ import { LearnerPositionPanel, LockedTopicDetail } from '@/components/learn/Lear
 import { recordLastLesson } from '@/lib/hooks/useLastLesson'
 import { PracticePanel } from '@/components/learn/PracticePanel'
 import { InsightsPanel } from '@/components/learn/InsightsPanel'
+import { LessonNavigationPanel } from '@/components/learn/LessonNavigationPanel'
+import {
+  computeLessonLockState, findPreviousLesson, findNextLesson,
+  type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
+} from '@/lib/curriculum/lessonNavigation'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
@@ -597,9 +602,9 @@ type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: numb
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 type ActiveTab = 'curriculum' | 'code' | 'chat'
-type CurriculumLesson = { id: string; subjectCode: string; unit: number; unitTitle: string; lesson: number; lessonTitle: string; lessonGoal: string; order: number; topicSlug?: string }
-type CurriculumProgress = { currentLesson: number; completedLessons: number[]; isCompleted?: boolean; completedAt?: string | null; completionPercent?: number }
-type TopicProgressEntry = { status: string; masteryPct: number; revisionCount?: number; lastRevisionAt?: string | null }
+// CurriculumLesson, CurriculumProgress, TopicProgressEntry now live in
+// @/lib/curriculum/lessonNavigation (imported above) — single source of
+// truth shared with the Lesson Navigation Panel, no duplicate type shapes.
 type RevisionTopic = { topicSlug: string; lessonTitle: string } | null
 type SkipWarning = { topicSlug: string; lessonTitle: string; unlocks: { slug: string; title: string }[] } | null
 type PromotionDecision = 'STAY' | 'REVIEW_REQUIRED' | 'PROMOTED'
@@ -1471,20 +1476,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete, userId, subjectSlug])
 
-  // Navigate to a previous lesson for review
-  const navigateToLesson = useCallback(async (lessonOrder: number) => {
-    if (lessonOrder >= curriculumProgress.currentLesson) return
-    const lesson = curriculumLessons.find((l) => l.order === lessonOrder)
-    if (!lesson || !sessionId) return
-    const reviewMsg = teachingLanguage === 'ru'
-      ? `Давай повторим урок ${lessonOrder}: ${lesson.lessonTitle}`
-      : teachingLanguage === 'hi'
-      ? `Lesson ${lessonOrder} repeat karte hain: ${lesson.lessonTitle}`
-      : `Let's review lesson ${lessonOrder}: ${lesson.lessonTitle}`
-    await sendMessage(sessionId, reviewMsg, true)
-  }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, teachingLanguage, sendMessage])
-
-  // Start revision mode for a completed/mastered topic
+  // Start revision mode for a completed/mastered topic — the richer
+  // "previous lesson" restoration: patches TopicProgress to REVISION
+  // (restores/reflects mastery + progress via topicProgressMap), shows the
+  // revision-mode banner (restores lesson context), and re-orients the
+  // SAME conversation thread onto that concept (restores conversation
+  // state) via the Teaching Engine/Explanation Memory/Student Intelligence,
+  // which already read this concept's persisted mastery/misconception
+  // state on every turn — no new lesson state, no per-lesson chat history.
   const startRevision = useCallback(async (lesson: CurriculumLesson) => {
     if (!lesson.topicSlug || !sessionId) return
     fetch('/api/topic-progress', {
@@ -1508,6 +1507,48 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     await sendMessage(sessionId, msg, false)
     setActiveTab('chat')
   }, [subjectSlug, sessionId, teachingLanguage, sendMessage])
+
+  // Navigate to a previous (completed) lesson for review. Delegates to
+  // startRevision — the existing, already-built restoration mechanism —
+  // whenever the lesson is KG-bound (topicSlug present); only legacy
+  // DB-curriculum lessons without a topicSlug (e.g. the original c/cpp/
+  // python/english rows) fall back to a plain review message.
+  const navigateToLesson = useCallback(async (lessonOrder: number) => {
+    if (lessonOrder >= curriculumProgress.currentLesson) return
+    const lesson = curriculumLessons.find((l) => l.order === lessonOrder)
+    if (!lesson || !sessionId) return
+    if (lesson.topicSlug) {
+      await startRevision(lesson)
+      return
+    }
+    const reviewMsg = teachingLanguage === 'ru'
+      ? `Давай повторим урок ${lessonOrder}: ${lesson.lessonTitle}`
+      : teachingLanguage === 'hi'
+      ? `Lesson ${lessonOrder} repeat karte hain: ${lesson.lessonTitle}`
+      : `Let's review lesson ${lessonOrder}: ${lesson.lessonTitle}`
+    await sendMessage(sessionId, reviewMsg, true)
+  }, [curriculumLessons, curriculumProgress.currentLesson, sessionId, teachingLanguage, sendMessage, startRevision])
+
+  // Open the next lesson. Only ever called when canAdvanceToNextLesson()
+  // is true (current lesson completed + next lesson unlocked per
+  // prerequisites) — the Lesson Navigation Panel disables the button
+  // otherwise, so this never skips a locked lesson. StudentProgress.
+  // currentLesson has already advanced server-side the moment the current
+  // lesson was completed (handleLessonComplete's PATCH), and every chat
+  // turn already re-resolves its active concept from that same live
+  // currentLesson value (route.ts) — so this only needs to prompt Tutor
+  // Max to actually start teaching it in the ongoing conversation.
+  const advanceToNextLesson = useCallback(async () => {
+    if (!sessionId) return
+    const next = findNextLesson(curriculumLessons, curriculumProgress)
+    if (!next) return
+    const startMsg = teachingLanguage === 'ru'
+      ? `Продолжим со следующего урока ${next.order}: ${next.lessonTitle}`
+      : teachingLanguage === 'hi'
+      ? `Chalo agla lesson ${next.order} shuru karte hain: ${next.lessonTitle}`
+      : `Let's continue with the next lesson: ${next.lessonTitle}`
+    await sendMessage(sessionId, startMsg, true)
+  }, [curriculumLessons, curriculumProgress, sessionId, teachingLanguage, sendMessage])
 
   // Initiate a skip: check risk then confirm or warn
   const initiateSkip = useCallback(async (lesson: CurriculumLesson) => {
@@ -1929,7 +1970,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // Curriculum derived
   const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? curriculumLessons[0] ?? null
-  const nextLessonData = curriculumLessons.find((l) => l.order === (curriculumProgress.currentLesson + 1)) ?? null
+  const nextLessonData = findNextLesson(curriculumLessons, curriculumProgress)
+  const previousLessonData = findPreviousLesson(curriculumLessons, curriculumProgress)
   const totalLessons = curriculumLessons.length
   const xpProgress = totalLessons > 0 ? Math.round((curriculumProgress.completedLessons.length / totalLessons) * 100) : 0
 
@@ -2583,18 +2625,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                   {expandedUnits.includes(unit.number) && (
                     <div style={{ paddingLeft: 8, paddingBottom: 4 }}>
                       {unit.lessons.map((lesson) => {
-                        const isCompleted = curriculumProgress.completedLessons.includes(lesson.order)
-                        const isCurrent = lesson.order === curriculumProgress.currentLesson
-                        const isPrevious = lesson.order < curriculumProgress.currentLesson
+                        // Shared with the Lesson Navigation Panel (computeLessonLockState) —
+                        // one source of truth for completed/current/mastered/locked, so the
+                        // tree and the panel can never disagree.
                         const topicData = lesson.topicSlug ? topicProgressMap[lesson.topicSlug] : undefined
-                        const isKnownAvailable = !lesson.topicSlug || availableTopicSlugs.includes(lesson.topicSlug)
-                        const isMastered = topicData?.status === 'MASTERED'
-                        const isRevision = topicData?.status === 'REVISION'
-                        const isSkipped = topicData?.status === 'SKIPPED'
-                        // Locked = not completed/mastered/revision/skipped, not current, has unmet prereqs
-                        const isLocked = !isCompleted && !isCurrent && !isMastered && !isRevision && !isSkipped &&
-                          lesson.topicSlug !== undefined && !isKnownAvailable &&
-                          topicData?.status !== 'IN_PROGRESS' && topicData?.status !== 'MASTERED'
+                        const { isCompleted, isCurrent, isPrevious, isMastered, isRevision, isSkipped, isLocked } =
+                          computeLessonLockState(lesson, { progress: curriculumProgress, topicProgressMap, availableTopicSlugs })
                         const isLockExpanded = expandedLockedTopic === lesson.topicSlug
                         const isSkipWarningShown = skipWarning?.topicSlug === lesson.topicSlug
 
@@ -3166,6 +3202,26 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                 )}
               </div>
             </PanelHeader>
+
+            {/* Lesson Navigation Panel — Previous / Current / Next, inside the
+                Tutor Max chat panel. Reuses curriculumLessons/curriculumProgress/
+                topicProgressMap/availableTopicSlugs already fetched above; no new
+                lesson state. */}
+            {totalLessons > 0 && currentLessonData && (
+              <LessonNavigationPanel
+                previousLesson={previousLessonData}
+                currentLesson={currentLessonData}
+                nextLesson={nextLessonData}
+                totalLessons={totalLessons}
+                progress={curriculumProgress}
+                topicProgressMap={topicProgressMap}
+                availableTopicSlugs={availableTopicSlugs}
+                teachingLanguage={teachingLanguage}
+                disabled={isStreaming || !sessionId}
+                onPrevious={() => previousLessonData && navigateToLesson(previousLessonData.order)}
+                onNext={() => advanceToNextLesson()}
+              />
+            )}
 
             {/* Insights Panel (Sprint P) */}
             {insightsOpen && (
