@@ -98,6 +98,95 @@ describe('parser — format-agnostic across the real corpus', () => {
     expect(ast!.teachingActions.length).toBeGreaterThan(0)
     expect(ast!.teachingActions.some((t) => t.id === 'TA-A01')).toBe(true)
   })
+
+  // ── Grammar coverage (Phase 2, 2026-07-16): the remaining corpus
+  // generations discovered by the corpus-wide grammar survey. Each case below
+  // pins one structural family so a future regression can't silently narrow
+  // the parser back to a single subject's format.
+
+  it('parses math.abst.field.md (Component-format, colon separator, registry-TABLE misconceptions, "### Teaching Action A01" headers)', () => {
+    const { file, source } = readBlueprint('math.abst.field')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'math.abst.field')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    expect(ast).not.toBeNull()
+    expect(ast!.metadata.prerequisites.length).toBeGreaterThan(0)
+    expect(ast!.teachingActions.some((t) => /^TA-A\d+$/.test(t.id))).toBe(true)
+    expect(ast!.misconceptions.length).toBeGreaterThan(0)
+  })
+
+  it('parses math.abst.ideal.md (bare unfenced "key: value" C0, no table, no fence)', () => {
+    const { file, source } = readBlueprint('math.abst.ideal')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'math.abst.ideal')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    expect(ast).not.toBeNull()
+    expect(ast!.metadata.name).toBe('Ideal')
+    expect(ast!.metadata.difficultyRaw).toBe('expert')
+    expect(ast!.metadata.prerequisites).toEqual(['math.abst.ring-theory'])
+  })
+
+  it('parses math.alg.factor-theorem.md (unfenced plain key:value C0 with underscore keys — "concept_name" must NOT be stripped to "conceptname")', () => {
+    const { file, source } = readBlueprint('math.alg.factor-theorem')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'math.alg.factor-theorem')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    expect(ast).not.toBeNull()
+    expect(ast!.metadata.name).toBe('Factor Theorem')
+  })
+
+  it('parses phys.mech.canonical-transformations.md (C-shorthand components, padded-key fenced metadata, TA table rows)', () => {
+    const { file, source } = readBlueprint('phys.mech.canonical-transformations')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'phys.mech.canonical-transformations')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    expect(ast).not.toBeNull()
+    expect(ast!.metadata.name).toBe('Canonical Transformations')
+    expect(ast!.metadata.prerequisites).toEqual(['phys.mech.poisson-brackets'])
+    expect(ast!.teachingActions.length).toBeGreaterThan(0)
+    expect(ast!.misconceptions.some((m) => m.id === 'MC-CT-ANY-COORD-CHANGE')).toBe(true)
+  })
+
+  it('parses phys.astro.black-holes.md (Section-format, "| Field | Value |" metadata table, priority-table Teaching Actions with no TA-id tokens at all)', () => {
+    const { file, source } = readBlueprint('phys.astro.black-holes')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'phys.astro.black-holes')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    expect(ast).not.toBeNull()
+    expect(ast!.metadata.name).toBe('Black Holes and Schwarzschild Radius')
+    expect(ast!.metadata.prerequisites).toEqual(['phys.astro.stellar-evolution', 'phys.rel.spacetime'])
+    expect(ast!.teachingActions.length).toBe(3) // 3 priority rows, synthesized TA-1..TA-3 ids
+  })
+
+  it('parses phys.em.electromagnetic-waves.md (yaml-fenced Concept Identity with nested difficulty.label, "**TA-N [P.. — Stage]**" Session Script)', () => {
+    const { file, source } = readBlueprint('phys.em.electromagnetic-waves')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'phys.em.electromagnetic-waves')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    expect(ast).not.toBeNull()
+    expect(ast!.metadata.difficultyRaw).toBe('advanced') // extracted from nested "label:" child
+    expect(ast!.teachingActions.length).toBeGreaterThan(0)
+    expect(ast!.teachingActions.some((t) => t.id === 'TA-3')).toBe(true)
+  })
+
+  it('parses phys.mod.binding-energy.md (Section-format, numbered-list Teaching Actions with bold lead-in, no TA-ids, no table, no brackets)', () => {
+    const { file, source } = readBlueprint('phys.mod.binding-energy')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'phys.mod.binding-energy')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    expect(ast).not.toBeNull()
+    expect(ast!.teachingActions.length).toBe(6)
+  })
+
+  it('parses phys.therm.calorimetry.md (fenced arrow-chained "[P01 open] → [P41 …] → [MC-X: …]" Session Flow, several bracket stages per line)', () => {
+    const { file, source } = readBlueprint('phys.therm.calorimetry')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'phys.therm.calorimetry')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    expect(ast).not.toBeNull()
+    expect(ast!.teachingActions.length).toBeGreaterThan(5)
+  })
+
+  it('resolves a dual-id misconception header ("### MC-1: MC-HIGHER-N-IS-LOWER-ENERGY") under BOTH the short and long spelling', () => {
+    const { file, source } = readBlueprint('phys.mod.bohr-model')
+    const { ast, diagnostics } = parseBlueprintMarkdown(file, source, 'phys.mod.bohr-model')
+    expect(diagnostics.filter((d) => d.severity === 'E')).toEqual([])
+    const ids = ast!.misconceptions.map((m) => m.id)
+    expect(ids).toContain('MC-1')
+    expect(ids).toContain('MC-HIGHER-N-IS-LOWER-ENERGY')
+  })
 })
 
 // ── Semantic validation (runs before lowering) ──────────────────────────────
@@ -143,6 +232,57 @@ describe('semantic validation', () => {
       ],
     }
     const diags = validateBlueprintAst(bad, {})
+    expect(diags.some((d) => d.code === 'BFV04')).toBe(true)
+  })
+
+  // Legacy-notation MC-reference tolerance (Phase 2 grammar survey): the
+  // corpus cites the SAME misconception under a truncated or suffixed
+  // spelling in three distinct ways. These must resolve WITHOUT a BFV04.
+  it('resolves a truncated MC reference ("MC-BRACKET-ZERO" citing defined "MC-BRACKET-ZERO-MEANS-INDEPENDENT")', () => {
+    const withMc = {
+      ...ast!,
+      misconceptions: [{ id: 'MC-BRACKET-ZERO-MEANS-INDEPENDENT', label: 'x', body: 'x', span: ast!.span }],
+      teachingActions: [
+        { id: 'TA-X', title: 't', primitives: [], referencedMisconceptionIds: ['MC-BRACKET-ZERO'], span: ast!.span },
+      ],
+    }
+    const diags = validateBlueprintAst(withMc, {})
+    expect(diags.some((d) => d.code === 'BFV04')).toBe(false)
+  })
+
+  it('resolves a suffixed MC reference ("MC-1-risk" citing defined "MC-1")', () => {
+    const withMc = {
+      ...ast!,
+      misconceptions: [{ id: 'MC-1', label: 'x', body: 'x', span: ast!.span }],
+      teachingActions: [
+        { id: 'TA-X', title: 't', primitives: [], referencedMisconceptionIds: ['MC-1-risk'], span: ast!.span },
+      ],
+    }
+    const diags = validateBlueprintAst(withMc, {})
+    expect(diags.some((d) => d.code === 'BFV04')).toBe(false)
+  })
+
+  it('does NOT let two conceptually-unrelated short ids silently cross-match (MC-1 must not resolve against an unrelated MC-10)', () => {
+    const withMc = {
+      ...ast!,
+      misconceptions: [{ id: 'MC-10', label: 'x', body: 'x', span: ast!.span }],
+      teachingActions: [
+        { id: 'TA-X', title: 't', primitives: [], referencedMisconceptionIds: ['MC-1'], span: ast!.span },
+      ],
+    }
+    const diags = validateBlueprintAst(withMc, {})
+    expect(diags.some((d) => d.code === 'BFV04')).toBe(true)
+  })
+
+  it('still flags a genuine content-level MC mismatch — a paraphrased citation sharing no contiguous token run with any defined id (NOT a format issue; found in the live corpus, e.g. phys.therm.first-law.md)', () => {
+    const withMc = {
+      ...ast!,
+      misconceptions: [{ id: 'MC-ADIABATIC-MEANS-CONSTANT-TEMPERATURE', label: 'x', body: 'x', span: ast!.span }],
+      teachingActions: [
+        { id: 'TA-X', title: 't', primitives: [], referencedMisconceptionIds: ['MC-ADIABATIC-IS-ISOTHERMAL'], span: ast!.span },
+      ],
+    }
+    const diags = validateBlueprintAst(withMc, {})
     expect(diags.some((d) => d.code === 'BFV04')).toBe(true)
   })
 
