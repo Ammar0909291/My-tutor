@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.wave.shm",
     "name": "Simple Harmonic Motion",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

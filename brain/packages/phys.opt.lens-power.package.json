@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.lens-power",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:ef19d7772db3e8cf3dd358ad4b2cb9f4634d480ab1244d2e5bef1d4dfd307dc1",
+    "contentHash": "sha256:c996220cbd572a4f76130d39090bc0319de8849578be864561324c545123ef7c",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.lens-power.md": "sha256:f0bd1c46310846e2653deab8bf8d24c866401f4b0233d468d14a194e4e97c9cf"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.lens-power",
     "name": "\"Lens Power and Optical Instruments Basics\"",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.opt.lens-power/misconception/MC-POWER-ADDS-FOR-SEPARATED-LENSES",
+      "kind": "misconception",
+      "conceptId": "phys.opt.lens-power",
+      "title": "MC-POWER-ADDS-FOR-SEPARATED-LENSES",
+      "content": "### MC-1: MC-POWER-ADDS-FOR-SEPARATED-LENSES\n\n**trigger_signal:** Student applies P_total = P₁ + P₂ for lenses with a gap between them.\n\n**conflict_evidence [P28]:** Two lenses f₁ = f₂ = +10 cm separated by d = 5 cm. Using P_total = P₁ + P₂ = 10 + 10 = 20 D → f = 5 cm. Correct formula: 1/f = 1/10 + 1/10 − 5/(10×10) = 0.1 + 0.1 − 0.05 = 0.15 → f = 6.67 cm. The simple addition gives 5 cm, the correct answer is 6.67 cm — a 33% error. For a telescope eyepiece (5 cm separation of two 20 cm lenses), this error causes completely wrong predictions about image quality. The P₁ + P₂ formula explicitly assumes d = 0 in its derivation.\n\n**bridge_text [P30]:** The combination formula derives from tracing where the ray from the first lens hits the second. When the lenses touch (d = 0), the refracted ray exits lens 1 and immediately enters lens 2 at the same height. When separated, the ray travels to a different height at lens 2, changing the effective power. The d/(f₁f₂) correction term accounts for this height change.\n\n**replacement_text [P31]:** P_total = P₁ + P₂ applies ONLY for thin lenses in contact (d = 0). For separated lenses: 1/f_eff = 1/f₁ + 1/f₂ − d/(f₁f₂), or equivalently P_eff = P₁ + P₂ − d×P₁×P₂. Always check whether the problem specifies lenses \"in contact\" before using P_total = P₁ + P₂.\n\n**discrimination_pairs [P33]:**\n- \"Two lenses with focal lengths 15 cm and 20 cm are 5 cm apart. Equivalent focal length = 1/(1/15 + 1/20 − 5/(15×20)) = 1/(0.0667 + 0.05 − 0.01667) = 1/0.10 = 10 cm.\" → CORRECT application of the separated-lens formula.\n- \"Two lenses in contact: f₁ = +25 cm, f₂ = −50 cm. Combined power = 4 + (−2) = 2 D, f = 50 cm.\" → CORRECT application (lenses in contact).\n\n**s6_path:** If student applies addition for separated lenses → numerical counterexample (calculate both answers, show discrepancy) before mastery gate.\n\n---",
+      "localKey": "MC-POWER-ADDS-FOR-SEPARATED-LENSES",
+      "language": "en",
+      "refs": [
+        "MC-POWER-ADDS-FOR-SEPARATED-LENSES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.lens-power/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.lens-power",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.lens-power/misconception/MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.lens-power",
+      "title": "MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS",
+      "content": "### MC-2: MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS\n\n**trigger_signal:** Student states \"a −5 D lens is stronger than a +2 D lens\" without distinguishing sign from magnitude.\n\n**conflict_evidence [P28]:** A −5 D lens has f = −20 cm — it diverges light strongly. A +2 D lens has f = +50 cm — it converges light weakly. Which is \"stronger\"? If \"stronger\" means \"bends light more,\" then |P| = 5 > |P| = 2 → the −5 D lens bends light more. But the nature of the bending is opposite: −5 D diverges, +2 D converges. In corrective optics, a −5 D myopia prescription corrects greater short-sightedness than a −2 D prescription — so the sign matters for the type of correction.\n\n**bridge_text [P30]:** Power has two independent pieces of information: (1) the sign tells the direction of bending (+ = converging, − = diverging); (2) the magnitude tells how much bending. \"Strength\" should specify which property you mean. In a prescription context: −5 D is a \"stronger\" myopia correction than −2 D (more divergence needed). But −5 D and +5 D are equally \"strong\" in bending magnitude, opposite in type.\n\n**replacement_text [P31]:** The sign of P tells the type of lens (converging vs. diverging); the magnitude |P| tells the degree of bending. \"Stronger\" lens usually means larger |P| (shorter focal length). Comparing −5 D and +2 D: −5 D is stronger in |P|, but the type is opposite. In prescriptions, always consider sign AND magnitude: −5 D and −2 D are both myopia corrections, but −5 D corrects more severe myopia.\n\n**discrimination_pairs [P33]:**\n- \"A +3 D lens and a −3 D lens have the same focal length\" → FALSE: f₁ = +33.3 cm, f₂ = −33.3 cm — same magnitude, opposite sign. Equal in |P| (bending amount) but opposite in type (converging vs. diverging).\n- \"A −6 D prescription is more severe myopia than a −3 D prescription\" → TRUE: larger |P| for correction → more defocus to correct → more severe. ✓\n\n**s6_path:** If student confuses sign with magnitude → power table (fill in f for various positive and negative P values) before mastery gate.\n\n---",
+      "localKey": "MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS",
+      "language": "en",
+      "refs": [
+        "MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.lens-power.md",

@@ -25,7 +25,7 @@
   "concept": {
     "conceptId": "phys.em.magnetic-dipole",
     "name": "Magnetic Dipole",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

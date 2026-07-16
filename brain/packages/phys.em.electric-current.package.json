@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.electric-current",
     "name": "Electric Current",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

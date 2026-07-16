@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.wave.pendulum",
     "name": "The Simple Pendulum",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

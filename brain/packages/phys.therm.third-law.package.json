@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.therm.third-law",
     "name": "Third Law of Thermodynamics",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

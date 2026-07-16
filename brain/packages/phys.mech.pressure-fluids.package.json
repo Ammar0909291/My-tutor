@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.pressure-fluids",
     "name": "Pressure in Fluids",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

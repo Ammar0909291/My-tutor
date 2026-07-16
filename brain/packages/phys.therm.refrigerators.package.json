@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.therm.refrigerators",
     "name": "Refrigerators and Heat Pumps",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.satellites",
     "name": "Artificial Satellites and Geostationary Orbits",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

@@ -74,7 +74,9 @@ function extractFencedBlock(body: string): string | null {
  *  compact expert-physics format pads keys (`concept_id        : value`). */
 function scalarField(block: string, ...keys: string[]): string | null {
   for (const key of keys) {
-    const re = new RegExp(`^\\s*${key}\\s*:\\s*(.+)$`, 'mi')
+    // [ \t]* after the colon (not \s*): a bare "key:" line must yield no
+    // value, not swallow the newline and capture the nested child line.
+    const re = new RegExp(`^\\s*${key}\\s*:[ \\t]*(.+)$`, 'mi')
     const v = re.exec(block)?.[1]?.trim()
     if (v) return v
   }
@@ -126,19 +128,27 @@ function extractMetadata(sections: RawSection[], conceptIdFromFilename: string):
     // Table-form C0 (Section-format corpus): read the same fields from
     // `| Field | Value |` rows before giving up.
     if (c0 && /^\|/m.test(c0.body)) {
-      const masteryStr = tableField(c0.body, 'Mastery Threshold')
-      const hoursStr = tableField(c0.body, 'Estimated Hours', 'Estimated study hours')
+      // Both label conventions appear in table C0s: Title-Case ("Concept ID",
+      // phys.astro) and snake_case ("concept_id", math corpus).
+      const masteryStr = tableField(c0.body, 'Mastery Threshold', 'mastery_threshold')
+      const hoursStr = tableField(c0.body, 'Estimated Hours', 'Estimated study hours', 'estimated_hours')
+      let prereqsRaw = tableField(c0.body, 'Prerequisites', 'prerequisites', 'requires \\(Tier-1\\)', 'requires') ?? ''
+      if (!prereqsRaw) {
+        // math variant: prerequisites live outside the table as a bold
+        // "**prerequisites:** [a, b]" line in the same section.
+        prereqsRaw = listField(c0.body.replace(/\*\*/g, ''), 'prerequisites', 'requires').join(', ')
+      }
       return {
-        conceptId: tableField(c0.body, 'Concept ID') ?? conceptIdFromFilename,
-        name: tableField(c0.body, 'Name', 'Display name') ?? '',
-        difficultyRaw: tableField(c0.body, 'Difficulty') ?? '',
-        bloom: tableField(c0.body, 'Bloom Level', 'Bloom') ?? '',
+        conceptId: tableField(c0.body, 'Concept ID', 'concept_id') ?? conceptIdFromFilename,
+        name: tableField(c0.body, 'Name', 'Display name', 'concept_name', 'name') ?? '',
+        difficultyRaw: tableField(c0.body, 'Difficulty', 'difficulty') ?? '',
+        bloom: tableField(c0.body, 'Bloom Level', 'Bloom', 'bloom') ?? '',
         masteryThreshold: masteryStr ? parseFloat(masteryStr) : null,
         estimatedHours: hoursStr ? parseFloat(hoursStr) : null,
-        prerequisites: (tableField(c0.body, 'Prerequisites') ?? '')
+        prerequisites: prereqsRaw
           .split(',').map((s) => s.trim()).filter((s) => s.length > 0 && s.toLowerCase() !== 'none'),
-        sessionCapRaw: tableField(c0.body, 'Session Cap'),
-        status: tableField(c0.body, 'Status') ?? '',
+        sessionCapRaw: tableField(c0.body, 'Session Cap', 'session_cap', 'session_ta_cap'),
+        status: tableField(c0.body, 'Status', 'status') ?? '',
       }
     }
     // Bullet-form C0: "- **Concept ID**: value" lines (phys.mod/qm/nuc corpus).
@@ -175,8 +185,11 @@ function extractMetadata(sections: RawSection[], conceptIdFromFilename: string):
   }
 
   const conceptId = scalarField(block, 'concept_id', 'BLUEPRINT_ID', 'id') ?? conceptIdFromFilename
-  const name = scalarField(block, 'name', 'display_name') ?? ''
-  const difficultyRaw = scalarField(block, 'difficulty', 'kg_difficulty') ?? ''
+  const name = scalarField(block, 'name', 'display_name', 'concept_name') ?? ''
+  // Nested difficulty ("difficulty:\n  label: advanced" — phys.em yaml C0s)
+  // falls back to the child label when no same-line value exists.
+  const difficultyRaw = scalarField(block, 'difficulty', 'kg_difficulty') ??
+    (/^\s*difficulty\s*:\s*\n\s+label\s*:\s*(.+)$/mi.exec(block)?.[1]?.trim() ?? '')
   const bloom = scalarField(block, 'bloom', 'bloom_target') ?? ''
   const masteryThresholdStr = scalarField(block, 'mastery_threshold')
   const estimatedHoursStr = scalarField(block, 'estimated_hours')
@@ -227,6 +240,12 @@ function extractTeachingActions(sections: RawSection[], file: string): Blueprint
   while ((m = bracketBoldRe.exec(haystack)) !== null) {
     const title = m[2].replace(/^P\d{1,3}\s*(?:—|-|:)?\s*/, '').trim() || m[1]
     headerMatches.push({ id: m[1], title, bracket: m[2], index: m.index })
+  }
+  // Long-form headers: "### Teaching Action A01 — Title" (math corpus) —
+  // canonical id TA-A01, matching how routing prose cites them.
+  const longFormRe = /^###\s+Teaching Action\s+([A-Za-z0-9]+)\s*(?:—|-|·)\s*(.+)$/gm
+  while ((m = longFormRe.exec(haystack)) !== null) {
+    headerMatches.push({ id: `TA-${m[1]}`, title: m[2].trim(), bracket: undefined, index: m.index })
   }
   headerMatches.sort((a, b) => a.index - b.index)
 
@@ -319,9 +338,14 @@ function extractTeachingActions(sections: RawSection[], file: string): Blueprint
     const fence = /```(?:text)?\s*\n([\s\S]*?)```/.exec(grammarSection.body)?.[1]
     if (fence) {
       const out: BlueprintTeachingAction[] = []
-      const stanzas = fence.split(/\n\s*\n/).map((s) => s.trim()).filter((s) => /\[P\d/.test(s))
+      let stanzas = fence.split(/\n\s*\n/).map((s) => s.trim()).filter((s) => /\[P\d/.test(s))
+      // Arrow-chained single-block flows ("[P01 open] → [P41 …] → …" with no
+      // blank-line stanza breaks, phys.therm.*): fall back to one TA per line.
+      if (stanzas.length <= 1) {
+        stanzas = fence.split('\n').map((s) => s.trim()).filter((s) => /\[P\d|\[MC-/.test(s))
+      }
       for (const stanza of stanzas) {
-        const label = /\[P\d{1,3}\s*(?:—|-|:)\s*([^\]\n]+)\]/.exec(stanza)?.[1]?.trim()
+        const label = /\[P\d{1,3}\s*(?:—|-|:|\s)\s*([^\]\n]+)\]/.exec(stanza)?.[1]?.trim()
         out.push({
           id: `TA-${out.length + 1}`,
           title: label ?? `Composition step ${out.length + 1}`,
@@ -446,6 +470,14 @@ function extractMisconceptions(sections: RawSection[], file: string): BlueprintM
     const startLine = haystack.slice(0, cur.index).split('\n').length
     const endLine = haystack.slice(0, end).split('\n').length
     out.push({ id: cur.id, label: cur.label, body, span: { file, startLine, endLine } })
+    // Dual-id headers ("### MC-1: MC-HIGHER-N-IS-LOWER-ENERGY") define BOTH
+    // spellings — routing prose cites either. Emit an alias entry so
+    // downstream reference checks and repair routing resolve both.
+    const slug = /^MC-[A-Za-z0-9_-]+/.exec(cur.label)?.[0]?.replace(/-+$/, '')
+    if (slug && slug !== cur.id && !seen.has(slug)) {
+      seen.add(slug)
+      out.push({ id: slug, label: cur.label, body, span: { file, startLine, endLine } })
+    }
   }
   if (out.length > 0) return out
 

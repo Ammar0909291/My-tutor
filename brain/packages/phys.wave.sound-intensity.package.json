@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.wave.sound-intensity",
     "name": "Sound Intensity",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.energy-capacitor",
     "name": "Energy Stored in a Capacitor",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

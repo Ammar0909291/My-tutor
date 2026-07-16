@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.wave.superposition",
     "name": "Superposition of Waves",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

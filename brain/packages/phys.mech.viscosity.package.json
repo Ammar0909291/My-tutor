@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.viscosity",
     "name": "Viscosity",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

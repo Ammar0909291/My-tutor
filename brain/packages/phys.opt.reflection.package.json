@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.reflection",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:b8599923160dac5b5e1669f7e4ae865ba45e2a7b5f5180930e72d56b30b9aa2f",
+    "contentHash": "sha256:03484c0d84d04b849d619ece45558b118a39b906e22d8991c60d19626f04e545",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.reflection.md": "sha256:3afafd1396f87667b47f06bbfb19f74e06e3699e92571c9ed5b9d0cc950f5aa8"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.reflection",
     "name": "\"Reflection of Light\"",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 2,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.opt.reflection/misconception/MC-REFLECTION-ANGLE-FROM-SURFACE",
+      "kind": "misconception",
+      "conceptId": "phys.opt.reflection",
+      "title": "MC-REFLECTION-ANGLE-FROM-SURFACE",
+      "content": "### MC-1: MC-REFLECTION-ANGLE-FROM-SURFACE\n\n**trigger_signal:** Student writes ∠i = 35° when the ray makes 35° with the mirror, rather than 55° (complement); states \"the angle of reflection equals the angle between the ray and the surface.\"\n\n**conflict_evidence [P28]:** Draw the geometry: if a ray makes 35° with the mirror surface, the normal is perpendicular to the surface (90° from it). The angle between the ray and the normal = 90° − 35° = 55°. If you measure from the surface instead: a ray at 35° to the surface reflects at 35° to the surface — that would be true ONLY if the reflected ray goes straight along the surface (0° to normal), which is impossible. Measuring from the surface gives different numerical predictions than the Law of Reflection and fails to correctly predict where reflected light actually goes.\n\n**bridge_text [P30]:** The normal is the reference, not the surface, because the normal is unique (one perpendicular direction per flat surface point). The surface itself could be tilted at any angle — the angle you make with it depends on which direction you call \"along the surface.\" The normal is unambiguous and always 90° to the surface.\n\n**replacement_text [P31]:** The Law of Reflection states ∠i = ∠r, where BOTH angles are measured from the normal to the surface at the point of incidence. If a ray makes angle α with the surface, the angle of incidence is ∠i = 90° − α. The reflected ray also makes angle (90° − α) with the surface, so both make angle α with the surface — but the law itself is stated in terms of the normal.\n\n**discrimination_pairs [P33]:**\n- \"A ray hitting a mirror at 30° to the surface reflects at 30° to the surface\" → CORRECT numerically, but stated incorrectly — the angle of incidence is 60° (from normal), not 30°.\n- \"A ray at 30° to the normal reflects at 30° to the normal, not 60° to the surface\" → CORRECT — the reflection angle is 30° from the normal = 60° from the surface.\n\n**s6_path:** If student fails angle identification on first probe → draw normal explicitly, label ∠i from normal, redo probe before mastery gate.\n\n---",
+      "localKey": "MC-REFLECTION-ANGLE-FROM-SURFACE",
+      "language": "en",
+      "refs": [
+        "MC-REFLECTION-ANGLE-FROM-SURFACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.reflection/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.reflection",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.reflection.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.reflection/misconception/MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES",
+      "kind": "misconception",
+      "conceptId": "phys.opt.reflection",
+      "title": "MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES",
+      "content": "### MC-2: MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES\n\n**trigger_signal:** Student expects to see a clear image reflected from a white wall or paper; claims \"any smooth-looking surface forms a clear image.\"\n\n**conflict_evidence [P28]:** A white sheet of paper scatters light in all directions — you can see the paper from any angle, but you see no image of yourself in it. A mirror also appears white under some lighting conditions, yet it forms a clear image. The difference is not color but surface roughness at the scale of the wavelength of light (400–700 nm). Paper has surface irregularities ~10–100 μm, which is thousands of wavelengths — each tiny facet reflects by the Law of Reflection, but in a different direction → diffuse scattering. A mirror has surface irregularities < λ/10 (~40 nm) → all facets parallel → all reflections in the same direction → specular.\n\n**bridge_text [P30]:** The Law of Reflection (∠i = ∠r) applies to every tiny patch of every surface. The difference between specular and diffuse is whether all those tiny patches point in the same direction. If yes → all reflected rays are parallel → image. If no → scattered rays → no image but the surface is visible.\n\n**replacement_text [P31]:** Specular reflection requires a surface whose roughness is much smaller than the wavelength of light (< λ/10 ≈ 40–70 nm for visible light). Diffuse reflection occurs when surface irregularities exceed the wavelength. Both obey ∠i = ∠r locally, but only specular reflection produces the macroscopic coherent outgoing beam needed for image formation.\n\n**discrimination_pairs [P33]:**\n- \"A glossy magazine cover reflects images because it doesn't obey the law of reflection\" → FALSE: it obeys the law locally; its surface is smooth enough for specular reflection.\n- \"Diffuse reflection violates the law of reflection\" → FALSE: each micro-facet reflects by the law; the scattered result is because different facets point different ways.\n\n**s6_path:** If student scores < 0.60 on \"which surface reflects images\" probe → surface-roughness comparison diagram (AFM-scale images of mirror vs. paper) before re-probe.\n\n---",
+      "localKey": "MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES",
+      "language": "en",
+      "refs": [
+        "MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.reflection.md",

@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.gravitational-potential",
     "name": "Gravitational Potential Energy",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

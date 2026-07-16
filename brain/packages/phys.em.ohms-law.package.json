@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.ohms-law",
     "name": "Ohm's Law",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

@@ -6,14 +6,14 @@
     "conceptId": "phys.rel.postulates",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:36d78ed17ab8e1a3e23953bb55b38d6babc0e1d00b989620b4ca1ef82e56491b",
+    "contentHash": "sha256:fa3612c590bb7e5a39d462c2830c7d20324abab987b9e21358479dbf9211ef6e",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.rel.postulates.md": "sha256:c4b3d4bd4805b535b66d0ea0968558f0a66e16383795f01c8a4c68589c6bffd2"
     },
-    "assetCount": 19,
+    "assetCount": 23,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 6,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -44,7 +44,7 @@
       "sourceLock": {
         "docs/curriculum/blueprints/phys.rel.postulates.md": "sha256:c4b3d4bd4805b535b66d0ea0968558f0a66e16383795f01c8a4c68589c6bffd2"
       },
-      "contentHash": "sha256:84056997da98c7fdfa4e87a8fbeb7b466a774b58e7b149c44ae4cb7585210ba2",
+      "contentHash": "sha256:e69a76adb1ab5e432280e5fee2f755f8b6c5346e7a469ea1b1703e2301156f9d",
       "ruleCount": 6,
       "bandCounts": {
         "3": 6
@@ -113,7 +113,7 @@
         "band": 3,
         "specificity": 1,
         "mandatory": false,
-        "citation": "docs/curriculum/blueprints/phys.rel.postulates.md#TA-4 (addresses MC-1)",
+        "citation": "docs/curriculum/blueprints/phys.rel.postulates.md#TA-4 (addresses MC-1, MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS)",
         "guardAst": {
           "kind": "eq",
           "field": "currentConceptId",
@@ -201,6 +201,23 @@
       }
     },
     {
+      "assetId": "phys.rel.postulates/misconception/MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS",
+      "kind": "misconception",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS",
+      "content": "### MC-1: MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS\n**Probe:** \"A spaceship moves toward Earth at 0.8c and turns on a headlight. How fast does the\nheadlight beam travel, measured by an observer on Earth?\"  \n**Characteristic phrase:** \"0.8c + c = 1.8c — it should be faster.\"  \n**Trigger:** Galilean velocity addition, which works perfectly for everyday speeds.  \n**Conflict evidence [P28]:** The Michelson-Morley experiment measured the speed of light in two\nperpendicular directions as Earth orbited the Sun at 30 km/s. Expected difference: ~30 km/s.\nMeasured difference: zero. Repeated experiments confirm c = 299,792,458 m/s regardless of source\nor observer motion.  \n**Bridge [P30]:** \"Galilean addition is an approximation that works for speeds ≪ c. At speeds\ncomparable to c, it fails. The speed of light is a fundamental constant — like a cosmic speed\nlimit that does not shift when you yourself are moving.\"  \n**Replacement [P31]:** The light travels at c relative to the Earth observer, regardless of the\nspaceship's speed. Relativistic velocity addition (not taught here) gives a result ≤ c.  \n**Discrimination pairs [P33]:** Spaceship at 0.8c fires light: Earth measures light at (A) 1.8c,\n(B) 0.2c, (C) c. Correct: (C).  \n**S6 repair path:** TA-3 (Michelson-Morley evidence) → TA-4 (Einstein's resolution).",
+      "localKey": "MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS",
+      "language": "en",
+      "refs": [
+        "MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.rel.postulates/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.rel.postulates",
@@ -210,6 +227,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/misconception/MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES",
+      "kind": "misconception",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES",
+      "content": "### MC-2: MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES\n**Probe:** \"A person in a spinning merry-go-round says: 'The laws of physics are the same in my\nframe.' Is this consistent with Einstein's first postulate?\"  \n**Characteristic phrase:** \"All motion is relative, so all frames are equivalent.\"  \n**Trigger:** Conflating \"all motion is relative\" (true) with \"all frames are equivalent\" (false\nwithout the inertial restriction).  \n**Conflict evidence [P28]:** A rotating frame is non-inertial — objects experience centrifugal and\nCoriolis pseudo-forces. Physics in that frame looks different (balls flying outward, Foucault\npendulum precessing). Einstein's P1 explicitly says \"inertial frames.\"  \n**Bridge [P30]:** \"The merry-go-round rider feels pushed outward — that is the centrifugal effect,\nabsent in an inertial frame. Physics is not the same. Postulate 1 applies only where there is no\nnet force needed to explain apparent motions — no pseudo-forces, no acceleration.\"  \n**Replacement [P31]:** P1 applies to inertial (non-accelerating) frames only. Rotating, accelerating,\nand gravitating frames are non-inertial — general relativity handles those.  \n**Discrimination pairs [P33]:** P1 applies to: (A) all frames, (B) inertial frames only, (C) frames\nat rest. Correct: (B).  \n**S6 repair path:** TA-2 (inertial vs. non-inertial frame identification exercise).",
+      "localKey": "MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES",
+      "language": "en",
+      "refs": [
+        "MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
@@ -235,6 +269,23 @@
       }
     },
     {
+      "assetId": "phys.rel.postulates/misconception/MC-SIMULTANEITY-IS-AN-ILLUSION",
+      "kind": "misconception",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-SIMULTANEITY-IS-AN-ILLUSION",
+      "content": "### MC-3: MC-SIMULTANEITY-IS-AN-ILLUSION\n**Probe:** \"In the moving train thought experiment, event A (lightning at the front) and event B\n(lightning at the rear) are simultaneous in the ground frame but not in the train frame. Does\nthis mean one observer is wrong?\"  \n**Characteristic phrase:** \"One of them must be lying.\"  \n**Trigger:** Students expect \"true\" physics to be absolute; frame-dependent results seem like\nerrors.  \n**Conflict evidence [P28]:** Both observers correctly apply the laws of physics in their own frame.\nThe measured arrival times of light signals are different — not due to error or illusion — but\nbecause the propagation distance is genuinely different in each frame, given that c is constant\nin both.  \n**Bridge [P30]:** \"Neither is wrong. Simultaneity is a relationship between events and a frame of\nreference, like 'north' is a relationship between a direction and a map. North on one map is not\nnorth on another rotated map — but both are correct maps. Similarly, simultaneity in S is not the\nsame relation as in S'.\"  \n**Replacement [P31]:** Simultaneity is frame-dependent for spatially separated events. Both\nobservers are correct; they disagree because simultaneity is not absolute.  \n**Discrimination pairs [P33]:** Two spacelike-separated events simultaneous in frame S: in frame S'\nthey are (A) still simultaneous (one frame must be right), (B) not simultaneous (relativity of\nsimultaneity), (C) cannot be determined. Correct: (B).  \n**S6 repair path:** TA-5 (train simultaneity thought experiment, step by step).",
+      "localKey": "MC-SIMULTANEITY-IS-AN-ILLUSION",
+      "language": "en",
+      "refs": [
+        "MC-SIMULTANEITY-IS-AN-ILLUSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 39,
+        "endLine": 61
+      }
+    },
+    {
       "assetId": "phys.rel.postulates/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.rel.postulates",
@@ -244,6 +295,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
+        "startLine": 61,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.rel.postulates/misconception/MC-AETHER-DISPROVED-RELATIVITY-IS-JUST-A-THEORY",
+      "kind": "misconception",
+      "conceptId": "phys.rel.postulates",
+      "title": "MC-AETHER-DISPROVED-RELATIVITY-IS-JUST-A-THEORY",
+      "content": "### MC-4: MC-AETHER-DISPROVED-RELATIVITY-IS-JUST-A-THEORY\n**Probe:** \"The Michelson-Morley experiment 'failed' to detect the aether. Does this prove Einstein\nwas right?\"  \n**Characteristic phrase:** \"It just means they couldn't find the aether yet.\"  \n**Trigger:** Misunderstanding what MM showed and what constitutes scientific evidence.  \n**Conflict evidence [P28]:** MM was replicated many times with increasing precision; subsequent\nexperiments (Kennedy-Thorndike, Ives-Stilwell, modern laser experiments) all confirm c is\nconstant to 1 part in 10¹⁵. Special relativity has been tested in particle accelerators (muon\nlifetimes), GPS satellites, and nuclear reactions. It is one of the most precisely verified\ntheories in physics.  \n**Bridge [P30]:** \"The MM experiment alone does not prove Einstein right — it just eliminated\nthe aether. Einstein's theory predicts specific quantitative values (time dilation factors,\nenergy-momentum relations) that have been verified independently to extraordinary precision.\nThe theory is validated by its predictions, not just by one failure of a competing theory.\"  \n**Replacement [P31]:** Special relativity is validated by quantitative predictions confirmed\nacross many independent experiments; the MM experiment eliminated the aether model but Einstein's\npostulates stand on their own predictive success.  \n**Discrimination pairs [P33]:** The Michelson-Morley experiment: (A) proved special relativity,\n(B) eliminated the aether but special relativity stands on separate experimental tests, (C) was\nlater found to be wrong. Correct: (B).  \n**S6 repair path:** TA-3 (experimental evidence table for special relativity).\n\n---",
+      "localKey": "MC-AETHER-DISPROVED-RELATIVITY-IS-JUST-A-THEORY",
+      "language": "en",
+      "refs": [
+        "MC-AETHER-DISPROVED-RELATIVITY-IS-JUST-A-THEORY"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.rel.postulates.md",
@@ -303,11 +371,12 @@
       "kind": "teaching_action_meta",
       "conceptId": "phys.rel.postulates",
       "title": "MC-1 Diagnostic",
-      "content": "{\"id\":\"TA-4\",\"title\":\"MC-1 Diagnostic\",\"primitives\":[\"P14\",\"P2\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\"]}",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-1 Diagnostic\",\"primitives\":[\"P14\",\"P2\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS\"]}",
       "localKey": "TA-4",
       "language": "en",
       "refs": [
-        "MC-1"
+        "MC-1",
+        "MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.rel.postulates.md",

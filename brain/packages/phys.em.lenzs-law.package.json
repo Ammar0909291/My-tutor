@@ -25,7 +25,7 @@
   "concept": {
     "conceptId": "phys.em.lenzs-law",
     "name": "Lenz's Law",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

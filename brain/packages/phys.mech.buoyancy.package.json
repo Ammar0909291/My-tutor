@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.buoyancy",
     "name": "Buoyancy and Archimedes' Principle",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

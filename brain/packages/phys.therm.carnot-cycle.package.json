@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.therm.carnot-cycle",
     "name": "Carnot Cycle",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "analyze",
     "masteryThreshold": 0.8,
     "estimatedHours": 6,

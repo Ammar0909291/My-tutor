@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.projectile-motion",
     "name": "Projectile Motion",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

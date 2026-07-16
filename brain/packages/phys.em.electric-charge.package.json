@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.electric-charge",
     "name": "Electric Charge",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

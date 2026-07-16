@@ -6,15 +6,15 @@
     "conceptId": "phys.em.maxwells-equations",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:fcf40dfccfe560f46de9ffde23eefab62eb7d47255e7365444d8dde710e26624",
+    "contentHash": "sha256:bd08fd1b650413d35231c536d4a641480e6de7d51d6eb933c86731e0e7ebac35",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.em.maxwells-equations.md": "sha256:8d07ca4ed00719f6048407a312595fbbb131556f1a82924292496ca778ba6fbf"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.em.maxwells-equations",
     "name": "\"Maxwell's Equations and Displacement Current\"",
-    "difficultyRaw": "label: expert",
+    "difficultyRaw": "expert",
     "bloom": "analyze",
     "masteryThreshold": 0.8,
     "estimatedHours": 10,
@@ -266,6 +266,23 @@
       }
     },
     {
+      "assetId": "phys.em.maxwells-equations/misconception/MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT",
+      "kind": "misconception",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT",
+      "content": "### MC-1: MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT\n\n**trigger_signal:** Student treats each equation in isolation, calculates B from Ampere's Law without considering that a changing E might exist, or states \"Faraday's Law only applies to inductors.\"\n\n**conflict_evidence [P28]:** Consider a region of space far from any charges or currents (deep space). Faraday's Law says: if B changes at that point, it creates a circulating E there. Ampere-Maxwell says: that changing E creates a circulating B at a nearby point. Each law drives the other — change in B spawns changing E spawns changing B. The four equations are not independent statements; they're a coupled system. Solving them simultaneously produces the wave equation: ∂²E/∂x² = μ₀ε₀∂²E/∂t². None of the four equations alone can predict an EM wave.\n\n**bridge_text [P30]:** Think of Maxwell's equations like four rules in a conversation between E and B: Gauss sets the starting conditions, Faraday and Ampere-Maxwell are the two listening-and-responding rules (each reacts to the other's changes), and Gauss's B rule ensures the conversation has no dead ends. Remove any one rule and the conversation breaks down — no wave emerges.\n\n**replacement_text [P31]:** Maxwell's four equations are a coupled system: Equations 3 and 4 are dynamically linked (each drives the other in time). The predictive power — including c = 1/√(μ₀ε₀) and the very existence of EM radiation — emerges only from solving all four simultaneously. No single equation predicts electromagnetic waves.\n\n**discrimination_pairs [P33]:**\n- \"Faraday's Law alone describes how inductors work\" → FALSE: it describes how any changing magnetic flux creates circulating electric field, linked to Ampere-Maxwell for wave propagation.\n- \"Maxwell's equations are four independent empirical laws\" → FALSE: they're coupled; two are divergence equations (initial/boundary conditions) and two are curl equations (dynamics) forming one unified field theory.\n\n**s6_path:** If student scores < 0.60 on Faraday/Ampere coupling probe → assign coupling visualization (oscillating E→B→E chain animation) before mastery gate.\n\n---",
+      "localKey": "MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT",
+      "language": "en",
+      "refs": [
+        "MC-MAXWELL-FOUR-EQUATIONS-ARE-INDEPENDENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.em.maxwells-equations/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.em.maxwells-equations",
@@ -275,6 +292,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.em.maxwells-equations/misconception/MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT",
+      "kind": "misconception",
+      "conceptId": "phys.em.maxwells-equations",
+      "title": "MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT",
+      "content": "### MC-2: MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT\n\n**trigger_signal:** Student states \"current flows between capacitor plates,\" describes displacement current as \"electrons jumping across the gap,\" or asks \"which direction do the electrons move in the displacement current?\"\n\n**conflict_evidence [P28]:** A parallel-plate capacitor with a vacuum gap: measuring instruments confirm no charge carriers cross the gap — if they did, the capacitor would be a short circuit and stop charging. Yet if you place an Ampere loop around the gap and measure the B field with a Hall probe, it is exactly what Ampere's Law with I_d = ε₀dΦ_E/dt would predict, the same as for the wire. The B field doesn't care whether its source is moving charges or changing flux — both produce identical circulating B. Displacement current is a source term in Maxwell's equation, not a physical flow.\n\n**bridge_text [P30]:** The name \"displacement current\" is historical — Maxwell named it so because of an older mechanical model of the aether. Don't let the word \"current\" mislead. What it represents is the time rate of change of electric flux: I_d = ε₀dΦ_E/dt. It has the same units as current (amperes) and produces the same B field as a real current, but no charge moves. It is a mathematical term that ensures Ampere's Law is consistent when applied to surfaces that don't intercept any conductor.\n\n**replacement_text [P31]:** Displacement current I_d = ε₀dΦ_E/dt is NOT a flow of charge — it is the rate of change of electric flux in a region of space. No electrons cross the gap. Its effect on the magnetic field is indistinguishable from conduction current, but its physical origin is purely the time-variation of E. This generalization was Maxwell's key insight and the mathematical bridge that makes EM wave propagation possible in vacuum.\n\n**discrimination_pairs [P33]:**\n- \"Between capacitor plates, displacement current means electrons are accelerating across the gap\" → FALSE: no charges cross; I_d = ε₀dΦ_E/dt is a field quantity, not a particle current.\n- \"Displacement current produces no magnetic field because it's not real current\" → FALSE: I_d contributes to ∮B·dl exactly as conduction current does — both are sources of B in Ampere-Maxwell Law.\n\n**s6_path:** If student answers < 0.55 on \"what crosses the capacitor gap\" probe → run discrimination pair drill before re-probing.\n\n---",
+      "localKey": "MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT",
+      "language": "en",
+      "refs": [
+        "MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.em.maxwells-equations.md",

@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.dispersion",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:2acd24259f71af73f3092e782ceccf41deb53d0dee714e35e4f499b1f8c42101",
+    "contentHash": "sha256:137d99ac0363f40ccb1ce50e7045bdf56f3ae584f4904643f7175342d64fc424",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.dispersion.md": "sha256:e9f7311700b1fca3977e76a405d1d468d222e33339aecd4761e562585d7d8560"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.dispersion",
     "name": "\"Dispersion of Light and Prisms\"",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.opt.dispersion/misconception/MC-PRISM-CREATES-COLORS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.dispersion",
+      "title": "MC-PRISM-CREATES-COLORS",
+      "content": "### MC-1: MC-PRISM-CREATES-COLORS\n\n**trigger_signal:** Student states \"the prism adds color to white light\" or \"the prism changes the frequency of light.\"\n\n**conflict_evidence [P28]:** Pass white light through a first prism → spectrum appears. Block all colors except one (e.g., red) with a screen → pass that red through a second prism. Only red comes out — no new colors are generated. Newton's experiment (1666) showed this conclusively: the prism separates colors already present in white light; it does not create them. White light is a superposition of all frequencies simultaneously — the prism spatially separates them by differential refraction. If the prism \"created\" colors, a second prism would create yet more colors, not just further deflect the red.\n\n**bridge_text [P30]:** White light is all frequencies mixed equally. Each frequency (color) is a separate wave at a specific frequency that never changes regardless of what medium it passes through. The prism doesn't change the frequencies — it exploits the fact that n is slightly different for each frequency, so Snell's Law bends each color by a slightly different angle, spreading them apart in space.\n\n**replacement_text [P31]:** Dispersion REVEALS colors that are already present in white light — it does not create them. White light is a superposition of all visible frequencies from 400 THz (red) to 750 THz (violet). The prism spatially separates these pre-existing frequencies by exploiting the wavelength-dependence of the refractive index (n_violet > n_red). Frequency — and therefore color — is set by the source and never changes in any passive optical element.\n\n**discrimination_pairs [P33]:**\n- \"A prism turns red laser light into a rainbow\" → FALSE: monochromatic red light (single frequency) is deviated but not dispersed; only a wider spectrum of frequencies is spread.\n- \"White light through a prism shows colors because n depends on wavelength\" → CORRECT: each color's frequency is present in white light and is deflected by a slightly different angle due to different n. ✓\n\n**s6_path:** If student fails \"what does prism add to light\" probe → show Newton's double-prism experiment (separation then recombination) before mastery gate.\n\n---",
+      "localKey": "MC-PRISM-CREATES-COLORS",
+      "language": "en",
+      "refs": [
+        "MC-PRISM-CREATES-COLORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.dispersion/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.dispersion",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.dispersion/misconception/MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH",
+      "kind": "misconception",
+      "conceptId": "phys.opt.dispersion",
+      "title": "MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH",
+      "content": "### MC-2: MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH\n\n**trigger_signal:** Student reasons \"violet has shorter wavelength so it's smaller so it fits through glass more easily and refracts less.\"\n\n**conflict_evidence [P28]:** The refractive index data: n_violet (400 nm) ≈ 1.53 vs. n_red (700 nm) ≈ 1.51. Higher n means MORE refraction (Snell's Law: n sinθ_2 = sinθ_1, so larger n → smaller θ_2 → bends MORE toward normal at entry, MORE away at exit → larger deviation). Violet, with n = 1.53, bends more than red (n = 1.51). The correct rule: higher n → slower speed → MORE bending. Wavelength itself doesn't determine bending — the speed change (n) does.\n\n**bridge_text [P30]:** The \"smaller fits through easier\" analogy breaks down for waves — waves don't need to \"fit through\" a material in the way a small ball fits through a gap. What matters is how much the wave's speed changes. Violet light slows more in glass (v = c/n = c/1.53) than red (v = c/1.51). More slowing → more bending by Snell's Law → more deviation → violet is at the bottom of the rainbow (higher deviation angle from the prism, smaller angle from the sky geometry).\n\n**replacement_text [P31]:** Violet light refracts MORE (not less) in glass. The refractive index for violet is larger (n_violet > n_red), meaning violet travels slower in glass. By Snell's Law, a larger n at the refracting surface produces a larger change in direction. Violet is deviated by the largest angle in a prism; red by the smallest. Memory aid: VIBGYOR — violet is the most deviated color, red the least.\n\n**discrimination_pairs [P33]:**\n- \"Blue light bends less than red in glass because its wavelength is shorter\" → FALSE: n_blue > n_red → blue bends more.\n- \"Violet light appears at the bottom edge of a rainbow (closer to horizon) because it is deviated more\" → TRUE: higher deviation angle in the droplet means the violet ray reaching your eye comes from a lower position in the sky. ✓\n\n**s6_path:** If student states violet refracts less → n-value table comparison drill (confirm n_violet > n_red numerically) + deviation formula check before mastery gate.\n\n---",
+      "localKey": "MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH",
+      "language": "en",
+      "refs": [
+        "MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.dispersion.md",

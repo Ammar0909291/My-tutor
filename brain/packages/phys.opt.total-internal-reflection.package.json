@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.total-internal-reflection",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:069caa705d2c3ecd182a1eb460aa5262c089b82623b54169e39d3c8171c18df0",
+    "contentHash": "sha256:2f803c8d8a8c0a75795f61ffad34ab0bcaf080a81accd3afa304e9762a9db565",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.total-internal-reflection.md": "sha256:12f014c1dd7fa192af15e23682d82713509075278bfec6e8fb98fbb67856989f"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.total-internal-reflection",
     "name": "\"Total Internal Reflection and Optical Fibres\"",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.opt.total-internal-reflection/misconception/MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER",
+      "kind": "misconception",
+      "conceptId": "phys.opt.total-internal-reflection",
+      "title": "MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER",
+      "content": "### MC-1: MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER\n\n**trigger_signal:** Student attempts to find critical angle for light going from air into glass, or states \"TIR occurs at any large angle of incidence.\"\n\n**conflict_evidence [P28]:** Apply Snell's Law at air→glass: n₁ sinθ₁ = n₂ sinθ₂ → 1.0 × sinθ₁ = 1.5 × sinθ₂ → sinθ₂ = sinθ₁/1.5 ≤ sinθ₁. Since n₂ > n₁, the refracted angle is always smaller than the incident angle — the refracted ray bends toward normal. For total internal reflection to occur, the refracted angle would need to reach 90°, requiring sinθ₁ = 1.5 × sin90° = 1.5 > 1 — impossible. No critical angle exists for light going from a less dense to a more dense medium. TIR requires n₁ > n₂.\n\n**bridge_text [P30]:** Critical angle exists only when n₁ sinθ_c = n₂ × sin90° = n₂ can be satisfied, which requires n₂/n₁ ≤ 1 → n₂ ≤ n₁. If you try to apply this formula for n₁ < n₂, you get sin θ_c = n₂/n₁ > 1 — physically impossible (sin can't exceed 1).\n\n**replacement_text [P31]:** TIR requires TWO conditions: (1) light travels from denser to less dense medium (n₁ > n₂); (2) angle of incidence exceeds the critical angle. Neither condition alone is sufficient. If n₁ < n₂, TIR is impossible regardless of angle; if n₁ > n₂ but θ < θ_c, partial transmission occurs.\n\n**discrimination_pairs [P33]:**\n- \"Light entering glass from air can undergo TIR at steep angles\" → FALSE: n_air < n_glass; TIR is geometrically impossible going from less dense to denser.\n- \"Light in glass hitting an air surface at 50° will TIR if the glass has n = 1.5\" → TRUE: θ_c for glass-air is ~41.8°; 50° > 41.8° → TIR occurs. ✓\n\n**s6_path:** If student fails TIR direction probe → run sin θ_c = n₂/n₁ formula check for both directions; confirm that n₁ < n₂ gives impossible result before re-probe.\n\n---",
+      "localKey": "MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER",
+      "language": "en",
+      "refs": [
+        "MC-TIR-CAN-OCCUR-FROM-LESS-DENSE-TO-DENSER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.total-internal-reflection.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.total-internal-reflection/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.total-internal-reflection",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.total-internal-reflection.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.total-internal-reflection/misconception/MC-TIR-IS-PARTIAL-REFLECTION",
+      "kind": "misconception",
+      "conceptId": "phys.opt.total-internal-reflection",
+      "title": "MC-TIR-IS-PARTIAL-REFLECTION",
+      "content": "### MC-2: MC-TIR-IS-PARTIAL-REFLECTION\n\n**trigger_signal:** Student states \"TIR reflects most of the light but some escapes,\" treats TIR as just very strong partial reflection, or asks \"how much gets through?\"\n\n**conflict_evidence [P28]:** Measure reflectance vs. angle of incidence experimentally (Fresnel equations). Below θ_c: partial reflection, transmission > 0; reflectance increases as θ → θ_c. At exactly θ_c: refracted ray at 90° (along surface) — effectively zero transmitted energy. Above θ_c: transmittance = 0 exactly, reflectance = 1.00 = 100%. This is a threshold phenomenon, not a gradual increase — beyond θ_c, reflectance is exactly 1. Optical fibres rely on this: TIR gives zero power loss at each reflection, so light can travel thousands of km with amplification only every 80 km.\n\n**bridge_text [P30]:** TIR is not \"very strong reflection\" — it is PERFECT reflection. The Fresnel equations (governing partial reflection at angles below θ_c) give transmittance that drops continuously to zero at θ_c, then remains zero for all θ > θ_c. The word \"total\" in TIR means 100% — it is a precise mathematical threshold, not a description of strength.\n\n**replacement_text [P31]:** Above the critical angle, TIR is exactly 100% reflection — no energy is transmitted into the second medium. This makes TIR superior to metallic mirrors (which absorb 5–15%) for applications requiring low loss. The evanescent field in the second medium is real but carries zero net energy flow; it does not represent \"escaping\" light.\n\n**discrimination_pairs [P33]:**\n- \"An optical fibre works by reflecting about 99.9% of light at each bounce\" → FALSE: TIR reflects exactly 100%. Loss in real fibres comes from absorption and scattering in the core material, not from TIR imperfection.\n- \"Beyond the critical angle, some light still gets through, just very faint\" → FALSE: above θ_c, transmittance = 0. There is an evanescent field, but it carries no energy into the second medium.\n\n**s6_path:** If student insists on partial transmission → Fresnel reflectance curve display (shows step to 1.0 at θ_c, not asymptotic approach) + optical fibre loss discussion before mastery gate.\n\n---",
+      "localKey": "MC-TIR-IS-PARTIAL-REFLECTION",
+      "language": "en",
+      "refs": [
+        "MC-TIR-IS-PARTIAL-REFLECTION"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.total-internal-reflection.md",

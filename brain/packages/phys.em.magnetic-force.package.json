@@ -25,7 +25,7 @@
   "concept": {
     "conceptId": "phys.em.magnetic-force",
     "name": "Magnetic Force on Charges and Currents",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

@@ -6,14 +6,14 @@
     "conceptId": "phys.opt.single-slit",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:ae2103f0e6ed9875efc6df1c693f7bbf5f90a412fe3125ef6fd11eb43e0c6d80",
+    "contentHash": "sha256:b76b7705f9041b8107016731923579a33ed0846f7d4d76efad9ed9e46c545e31",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.single-slit.md": "sha256:b3aa6b494351a3ff06ec8749660fb24e56c11194af5466e547d632b7a6144477"
     },
-    "assetCount": 20,
+    "assetCount": 24,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -43,7 +43,7 @@
       "sourceLock": {
         "docs/curriculum/blueprints/phys.opt.single-slit.md": "sha256:b3aa6b494351a3ff06ec8749660fb24e56c11194af5466e547d632b7a6144477"
       },
-      "contentHash": "sha256:6fb333ec9d861e81b3bbec42d0975630f24c7e48d569ab7c50af68a01aa2ec67",
+      "contentHash": "sha256:e9542d7c1e61c7faa0835a1f06148ad90e397423e1eb2739b431a5353052ac92",
       "ruleCount": 7,
       "bandCounts": {
         "3": 7
@@ -131,7 +131,7 @@
         "band": 3,
         "specificity": 1,
         "mandatory": false,
-        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-5 (addresses MC-1, MC-3)",
+        "citation": "docs/curriculum/blueprints/phys.opt.single-slit.md#TA-5 (addresses MC-1, MC-3, MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES, MC-SECONDARIES-EQUAL-BRIGHTNESS)",
         "guardAst": {
           "kind": "eq",
           "field": "currentConceptId",
@@ -219,6 +219,23 @@
       }
     },
     {
+      "assetId": "phys.opt.single-slit/misconception/MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES",
+      "kind": "misconception",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES",
+      "content": "### MC-1: MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES\n**Probe:** \"In a single-slit pattern, compare the width of the central maximum to the width of the\nfirst secondary maximum. Are they equal?\"  \n**Characteristic phrase:** \"They should all be the same width.\"  \n**Trigger:** Analogy to Young's uniform-fringe-spacing pattern.  \n**Conflict evidence [P28]:** Dark fringes at m = ±1 bound the central maximum; it spans 2θ₁.\nDark fringes at m = 1 and m = 2 bound the first secondary maximum; it spans θ₂ − θ₁ = θ₁. The\ncentral maximum is exactly twice as wide.  \n**Bridge [P30]:** \"The central maximum is special: it has zero path difference and no cancellation\npartner. The first dark fringe appears at both sides of it simultaneously. Secondary maxima are\nbounded by two dark fringes, each one m step apart — so they are half as wide.\"  \n**Replacement [P31]:** Central maximum angular width = 2λ/a; secondary maximum angular width = λ/a.  \n**Discrimination pairs [P33]:** Width of central max vs. first secondary max: (A) equal, (B) central\nis twice as wide, (C) secondary is twice as wide. Correct: (B).  \n**S6 repair path:** TA-3 (measured intensity scan) → TA-4 (formula derivation for both widths).",
+      "localKey": "MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES",
+      "language": "en",
+      "refs": [
+        "MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 3,
+        "endLine": 19
+      }
+    },
+    {
       "assetId": "phys.opt.single-slit/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.single-slit",
@@ -228,6 +245,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 19,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/misconception/MC-M",
+      "kind": "misconception",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-M=0-IS-DARK",
+      "content": "### MC-2: MC-M=0-IS-DARK\n**Probe:** \"Using the formula a sin θ = mλ, what is the fringe at m = 0? Is it bright or dark?\"  \n**Characteristic phrase:** \"m = 0 means no path difference — that should be a dark fringe.\"  \n**Trigger:** Misreading the formula; forgetting that the formula gives dark fringes, not all fringes.  \n**Conflict evidence [P28]:** At m = 0, sin θ = 0, θ = 0 — this is the central maximum (brightest\npoint). The formula a sin θ = mλ gives positions of dark fringes; m = 0 happens to give θ = 0, but\nthe physical interpretation is that zero path difference means zero cancellation, hence maximum\nbrightness.  \n**Bridge [P30]:** \"The formula is a dark-fringe formula. Plug in m = 0: you get θ = 0, which is\nthe straight-through direction — the brightest point. Coincidentally that is m = 0, but it is not\na dark fringe. Dark fringes start at m = ±1.\"  \n**Replacement [P31]:** The formula gives dark-fringe positions; m = 0 is excluded because the\ncentral maximum is not dark.  \n**Discrimination pairs [P33]:** At θ = 0: (A) dark fringe (m = 0 rule), (B) central bright maximum,\n(C) secondary maximum. Correct: (B).  \n**S6 repair path:** TA-2 (visual pattern identification) → explicit formula-interpretation drill.",
+      "localKey": "MC-M",
+      "language": "en",
+      "refs": [
+        "MC-M"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
@@ -253,6 +287,23 @@
       }
     },
     {
+      "assetId": "phys.opt.single-slit/misconception/MC-SECONDARIES-EQUAL-BRIGHTNESS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-SECONDARIES-EQUAL-BRIGHTNESS",
+      "content": "### MC-3: MC-SECONDARIES-EQUAL-BRIGHTNESS\n**Probe:** \"After the central maximum, do all secondary maxima have the same brightness? Why or\nwhy not?\"  \n**Characteristic phrase:** \"Yes, they should all be the same brightness.\"  \n**Trigger:** Analogy to Young's equal-intensity fringes.  \n**Conflict evidence [P28]:** The sinc² envelope decays: secondary maxima at α ≈ 3π/2, 5π/2, …\ngive I/I₀ ≈ 4/9π² ≈ 0.045, 4/25π² ≈ 0.016, … Each is roughly 22×, 61× dimmer than the central\nmaximum.  \n**Bridge [P30]:** \"In Young's, each slit contributes equal amplitude regardless of angle —\nuniform fringes. Here, the amplitude from the slit varies with angle because the phasor diagram\nchanges shape. The sinc function tells us how it decays.\"  \n**Replacement [P31]:** Secondary maxima intensities decrease monotonically following the sinc²\nenvelope; they are not equal.  \n**Discrimination pairs [P33]:** First vs. second secondary maximum: (A) same intensity, (B) first\nbrighter, (C) second brighter. Correct: (B).  \n**S6 repair path:** TA-5 (intensity profile measurement or simulation).",
+      "localKey": "MC-SECONDARIES-EQUAL-BRIGHTNESS",
+      "language": "en",
+      "refs": [
+        "MC-SECONDARIES-EQUAL-BRIGHTNESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 36,
+        "endLine": 53
+      }
+    },
+    {
       "assetId": "phys.opt.single-slit/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.opt.single-slit",
@@ -262,6 +313,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
+        "startLine": 53,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "phys.opt.single-slit/misconception/MC-SINGLE-SLIT-FORMULA-SAME-AS-YOUNGS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.single-slit",
+      "title": "MC-SINGLE-SLIT-FORMULA-SAME-AS-YOUNGS",
+      "content": "### MC-4: MC-SINGLE-SLIT-FORMULA-SAME-AS-YOUNGS\n**Probe:** \"In Young's double-slit, d sin θ = mλ gives bright fringes at integer m. In single-slit,\na sin θ = mλ — does integer m give bright or dark fringes?\"  \n**Characteristic phrase:** \"Same formula, same answer — bright fringes.\"  \n**Trigger:** Surface similarity of the two formulas.  \n**Conflict evidence [P28]:** In Young's, d sin θ = mλ → constructive interference → bright.\nIn single-slit, a sin θ = mλ → complete paired cancellation → dark. The formulas look identical\nbut mean opposite things physically.  \n**Bridge [P30]:** \"Both formulas involve a path difference = integer × λ. In Young's, that means\nthe two separate waves arrive in phase — bright. In single-slit, that means the top half and\nbottom half of the aperture completely cancel each other — dark. The geometry determines the\ninterpretation.\"  \n**Replacement [P31]:** In single-slit, integer m gives dark fringes; the formula is a destructive-\ninterference condition, not constructive.  \n**Discrimination pairs [P33]:** a sin θ = mλ → (A) bright, (B) dark, (C) depends on m. Correct: (B).  \n**S6 repair path:** TA-2 (side-by-side Young's vs. single-slit formula table) → TA-4 paired\nderivation.\n\n---",
+      "localKey": "MC-SINGLE-SLIT-FORMULA-SAME-AS-YOUNGS",
+      "language": "en",
+      "refs": [
+        "MC-SINGLE-SLIT-FORMULA-SAME-AS-YOUNGS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",
@@ -336,12 +404,14 @@
       "kind": "teaching_action_meta",
       "conceptId": "phys.opt.single-slit",
       "title": "MC-1 & MC-3 Diagnostic",
-      "content": "{\"id\":\"TA-5\",\"title\":\"MC-1 & MC-3 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-1 & MC-3 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-3\",\"MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES\",\"MC-SECONDARIES-EQUAL-BRIGHTNESS\"]}",
       "localKey": "TA-5",
       "language": "en",
       "refs": [
         "MC-1",
-        "MC-3"
+        "MC-3",
+        "MC-CENTRAL-MAX-SAME-WIDTH-AS-SECONDARIES",
+        "MC-SECONDARIES-EQUAL-BRIGHTNESS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.single-slit.md",

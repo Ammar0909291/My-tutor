@@ -25,7 +25,7 @@
   "concept": {
     "conceptId": "phys.em.magnetic-materials",
     "name": "Magnetic Materials",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

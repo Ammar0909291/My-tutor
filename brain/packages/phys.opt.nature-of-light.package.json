@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.nature-of-light",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:edb8bcfd5cd89089dd382eff5e560ba8fec111ee78a3214eeaa2b29747000517",
+    "contentHash": "sha256:7f55d8f9c71dccd18373e3295fe9eaab141db6d38425d8e20540f551df3bb744",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.nature-of-light.md": "sha256:8f15e5c95b94aeacce46ce7d9efdfd042f782bbee7cf2718d68bc4acb76128fa"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.nature-of-light",
     "name": "\"Nature of Light: Ray and Wave Models\"",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.opt.nature-of-light/misconception/MC-LIGHT-IS-PURELY-A-WAVE",
+      "kind": "misconception",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "MC-LIGHT-IS-PURELY-A-WAVE",
+      "content": "### MC-1: MC-LIGHT-IS-PURELY-A-WAVE\n\n**trigger_signal:** Student states \"light is just an EM wave\" or holds that the wave model fully explains all light phenomena; cannot explain why below the threshold frequency no electrons are ejected regardless of light intensity.\n\n**conflict_evidence [P28]:** Classical wave theory makes a clear prediction: any frequency of light, given sufficient intensity, should eventually deliver enough energy to eject electrons from a metal surface — because a brighter wave carries more energy per unit area per second. Test this prediction directly: shine intense red light (λ = 700 nm, I = 1000 W/m²) on sodium metal (work function φ ≈ 2.3 eV). Zero electrons. Not slow ones, not delayed ones — none, even after minutes. Now switch to dim ultraviolet light (λ = 200 nm) at a tiny fraction of that intensity: electrons appear immediately and copiously. The energy per unit area per second (intensity) is irrelevant. What matters is the frequency of each individual quantum. Classical wave theory has no mechanism to explain a sharp frequency threshold — it predicts that enough brightness always wins. The observation proves it wrong.\n\n**bridge_text [P30]:** Wave-particle duality is not physics failing to decide what light is. It is the fundamental quantum nature of the entity: which behavior appears depends on what the experiment measures. Interference and diffraction probe spatial coherence across many cycles — wave behavior appears. The photoelectric effect probes the transfer of energy from a single quantum to a single electron — particle behavior appears. Both descriptions are simultaneously true. Neither is the \"real\" one.\n\n**replacement_text [P31]:** Light exhibits wave behavior in experiments that probe its spatial extent over many wavelengths (double-slit interference, diffraction, polarization). Light exhibits particle behavior in experiments that probe individual energy-exchange events (photoelectric effect, Compton scattering). The complete description — wave-particle duality — requires both. Either model alone is incomplete.\n\n**discrimination_pairs [P33]:**\n- \"Light passes through two slits and creates an interference pattern → it is a wave\" → TRUE but incomplete: this shows wave behavior; particle model cannot explain fringe spacing\n- \"Light below threshold frequency never ejects electrons regardless of intensity → it must consist of discrete energy quanta\" → TRUE: this is the defining particle evidence\n- \"Shine very bright red light on zinc long enough → eventually electrons will be ejected\" → FALSE: photon energy E = hf_red is fixed and below zinc's work function; more photons cannot change individual photon energy\n- \"Blue light ejects electrons from a metal more energetically than red light of equal intensity\" → TRUE: E_blue = hf_blue > E_red = hf_red; each blue photon has more energy to share with the electron\n\n**s6_path:** If student is anxious at quantum duality → do NOT begin with the conflict. Instead pose a pure observation: \"Here is what happens in the lab — shine UV on zinc and an ammeter deflects. Shine bright red, no deflection. Describe only what you see. What could explain why frequency matters but brightness does not?\" Build the threshold observation before naming duality; the student arrives at the particle picture through curiosity rather than confrontation.\n\n---",
+      "localKey": "MC-LIGHT-IS-PURELY-A-WAVE",
+      "language": "en",
+      "refs": [
+        "MC-LIGHT-IS-PURELY-A-WAVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
       "assetId": "phys.opt.nature-of-light/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.nature-of-light",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",
+        "startLine": 23,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.opt.nature-of-light/misconception/MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY",
+      "kind": "misconception",
+      "conceptId": "phys.opt.nature-of-light",
+      "title": "MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY",
+      "content": "### MC-2: MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY\n\n**trigger_signal:** Student says \"brighter light = higher energy photons,\" claims increasing brightness increases the energy of individual photons, or uses intensity as a proxy for photon energy in threshold calculations.\n\n**conflict_evidence [P28]:** Consider two light sources: Source A emits 10⁶ photons per second of red light (λ = 700 nm, f = 4.3×10¹⁴ Hz); Source B emits 1 photon per second of ultraviolet light (λ = 200 nm, f = 1.5×10¹⁵ Hz). Source A is one million times more intense, yet each of its photons carries E_A = hf_red = 2.84×10⁻¹⁹ J ≈ 1.77 eV, while Source B's single photon carries E_B = hf_UV = 9.93×10⁻¹⁹ J ≈ 6.21 eV. Shine Source A on zinc (φ = 3.5 eV): no electrons — each individual photon is too weak. Shine Source B: one electron ejected per second with KE_max = 6.21 − 3.5 = 2.71 eV. Intensity (brightness) is irrelevant to what each photon can do; only frequency matters.\n\n**bridge_text [P30]:** Intensity and photon energy are two entirely independent quantities. Intensity (W/m²) = (energy per photon) × (photon flux per unit area) = hf × (n/A). A beam can be intense because it has many low-energy photons (high n/A, low f), or it can be dim but carry high-energy photons (low n/A, high f). These properties do not constrain each other.\n\n**replacement_text [P31]:** Photon energy E = hf depends ONLY on frequency (equivalently, on color or wavelength: E = hc/λ). Changing the brightness of a source changes the number of photons emitted per second — it does not change the energy of each individual photon. To change photon energy, change the frequency: use a different color, or a source operating at a different frequency.\n\n**discrimination_pairs [P33]:**\n- \"Double the brightness of a green laser → each photon now has twice the energy\" → FALSE: doubling brightness doubles photon count; each photon still has E = hf_green, unchanged\n- \"Switch from red to blue light at the same total power → each photon has more energy, but fewer photons are emitted per second\" → TRUE: E_blue > E_red; if total power P = N × hf is constant, more energy per photon means fewer photons\n- \"A bright red beam can eject electrons from copper (φ = 4.7 eV) if it is intense enough\" → FALSE: E_red ≈ 1.77 eV < 4.7 eV; no individual photon can overcome the work function regardless of how many are present\n- \"A dim UV beam (few photons/second) ejects fewer electrons than a bright red beam, but each ejected electron has more kinetic energy\" → TRUE: fewer events above threshold (dim UV) but each event imparts KE_max = hf_UV − φ > 0\n\n**s6_path:** If student is anxious at the photon-count distinction → use a simple analogy before formulas: \"A cinema full of children cannot lift a 200 kg barbell — their combined weight is irrelevant because no single child can lift it. One Olympic weightlifter can. The number in the room (intensity) doesn't help if no individual is strong enough (photon energy below threshold).\" Then map: children = low-energy photons, weightlifter = high-energy photon, barbell = work function.\n\n---",
+      "localKey": "MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY",
+      "language": "en",
+      "refs": [
+        "MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.nature-of-light.md",

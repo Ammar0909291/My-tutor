@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.center-of-mass",
     "name": "Center of Mass",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

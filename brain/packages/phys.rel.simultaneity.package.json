@@ -6,15 +6,15 @@
     "conceptId": "phys.rel.simultaneity",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:97034673be5b9d9666bfe46e146a0c4d270de23b8e774210774144260e141b8b",
+    "contentHash": "sha256:4000709236163d43fc33485844c8fb0d6a38e491cda2d145019bdd556d2f051f",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.rel.simultaneity.md": "sha256:5c203d86f3cce4d3c96c4ac7b9f15bd6618ccb37145dca924c700d5f18e7bd17"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.rel.simultaneity",
     "name": "\"Relativity of Simultaneity\"",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "analyze",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.rel.simultaneity/misconception/MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT",
+      "content": "### MC-1: MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT\n\n**trigger_signal:** Student states \"the platform observer doesn't really see them simultaneously — the light just happens to arrive at the same time because of the geometry\" or \"Einstein's train experiment just shows a light travel delay, not anything fundamental.\"\n\n**conflict_evidence [P28]:** The \"light travel time\" argument applies to all observers equally — it is already accounted for in the relativity of simultaneity analysis. The platform observer who is equidistant from A and B receives the two light pulses at the same time → therefore the events were simultaneous in the platform frame (after accounting for light travel time). The train observer also receives pulses at different times (front first) → after accounting for the fact that both pulses travel at c and equal distances, the train observer concludes the front event happened first. This isn't a perceptual illusion — it's a real physical difference in what \"simultaneous\" means per frame. The mathematical statement Δt' = −γvΔx/c² has no \"travel delay\" correction factor — it IS already the corrected, proper simultaneity definition.\n\n**bridge_text [P30]:** Light travel delay analysis assumes we know when events happened and just need to correct for the delay. Einstein's framework goes deeper: after fully correcting for light travel times, two frames still disagree about simultaneity. The disagreement is not a measurement error or delay artifact — it is a fundamental feature of spacetime. Time-of-observation ≠ time-of-event; both frames are careful about this distinction.\n\n**replacement_text [P31]:** Relativity of simultaneity is NOT a light travel time effect. The standard analysis (platform observer at midpoint, equidistant from A and B) already accounts for equal travel times — yet the platform observer says simultaneous, while the train observer (accounting equally carefully for travel times) says front-first. The disagreement persists after all travel time corrections → it is a genuine physical difference in simultaneity between inertial frames, described quantitatively by Δt' = −γvΔx/c².\n\n**discrimination_pairs [P33]:**\n- \"If we correct for light travel time, both observers would agree on whether the bolts were simultaneous\" → FALSE: even after correcting for travel time, the inertial frames disagree. The Lorentz transformation gives Δt' = −γvΔx/c² ≠ 0 regardless of where the observer is located in the frame.\n- \"The platform observer and train observer genuinely disagree on the order of spatially separated simultaneous events, even after accounting for light travel time\" → TRUE: Δt' = −γvΔx/c² is a fundamental, fully corrected result. ✓\n\n**s6_path:** If student fails \"is this just travel delay\" probe → calculate Δt' for specific numbers, emphasize that the travel-time-corrected result still gives Δt' ≠ 0 before mastery gate.\n\n---",
+      "localKey": "MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT",
+      "language": "en",
+      "refs": [
+        "MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.rel.simultaneity/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.rel.simultaneity",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.rel.simultaneity/misconception/MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING",
+      "kind": "misconception",
+      "conceptId": "phys.rel.simultaneity",
+      "title": "MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING",
+      "content": "### MC-2: MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING\n\n**trigger_signal:** Student concludes \"if simultaneity is relative, then causality is also relative — maybe cause and effect can be reversed in some frame\" or \"event A causing event B might look like B causing A to some observer.\"\n\n**conflict_evidence [P28]:** For causally connected events, the signal must travel at speed v_signal ≤ c. If Event 1 causes Event 2, Δx/Δt ≤ c for the causal signal → (cΔt)² ≥ (Δx)² → time-like separated. The Lorentz transformation cannot reverse time ordering for time-like events without requiring |v_observer| > c, which is impossible. WE-3 demonstrates this: time-like separated events have absolute time ordering in all frames. Only space-like separated events (which cannot be causally connected at all) can have their ordering reversed — but those events cannot influence each other anyway, so no causal paradox arises.\n\n**bridge_text [P30]:** \"Relative\" in special relativity doesn't mean \"anything goes.\" The causal structure — which events can influence which — is absolute. Only the temporal ordering of causally disconnected events (space-like separated) is frame-dependent. This is built into the geometry of spacetime: the light cone divides spacetime into the absolute past (time-like past), absolute future (time-like future), and \"elsewhere\" (space-like) where ordering is frame-dependent but no causal link exists anyway.\n\n**replacement_text [P31]:** Causality is preserved in special relativity. The time ordering of causally connected events (time-like separated: |Δx| < c|Δt|) is absolute — the same in every inertial frame. Frame-dependent simultaneity applies only to space-like separated events (|Δx| > c|Δt|), which cannot be causally connected (no signal can bridge that gap at speed ≤ c). Therefore, relativity of simultaneity never implies reversal of cause and effect.\n\n**discrimination_pairs [P33]:**\n- \"If A causes B, then some fast-moving observer might see B before A — cause and effect reversed\" → FALSE: causal events are time-like separated; no inertial observer can see them in reverse order without requiring a speed > c.\n- \"For two space-like separated events, different frames can disagree on their order\" → TRUE — but space-like events cannot be causally connected, so this never creates a causal paradox. ✓\n\n**s6_path:** If student conflates simultaneity-relative with causality-relative → interval classification (space-like vs. time-like) worksheet + WE-3 worked through before mastery gate.\n\n---",
+      "localKey": "MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING",
+      "language": "en",
+      "refs": [
+        "MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.rel.simultaneity.md",

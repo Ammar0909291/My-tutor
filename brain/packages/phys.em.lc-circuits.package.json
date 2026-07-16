@@ -25,7 +25,7 @@
   "concept": {
     "conceptId": "phys.em.lc-circuits",
     "name": "LC Circuits and Electromagnetic Oscillations",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 6,

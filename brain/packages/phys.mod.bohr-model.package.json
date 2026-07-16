@@ -6,14 +6,14 @@
     "conceptId": "phys.mod.bohr-model",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:a0d1a0c98cff60826e87ec915d5721109cec62312b3684f42c2e1e9d3a305531",
+    "contentHash": "sha256:af3e2822bcf02b607c90c22e61ff46b3233ba8fa897653fba12a53c7719b2672",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.mod.bohr-model.md": "sha256:81aeba0b6c96747c14c62606d004aeeafd301f92c0d0020ea7b1ed251f2c4935"
     },
-    "assetCount": 20,
+    "assetCount": 24,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -44,7 +44,7 @@
       "sourceLock": {
         "docs/curriculum/blueprints/phys.mod.bohr-model.md": "sha256:81aeba0b6c96747c14c62606d004aeeafd301f92c0d0020ea7b1ed251f2c4935"
       },
-      "contentHash": "sha256:e3d5d86e250b58c594038b64e48b45eab18ccc866a621de6f26f379e565b0722",
+      "contentHash": "sha256:ebde72984f070ef827d852c2d57c012dcf07393c940bc5be7d9267a2921276bb",
       "ruleCount": 7,
       "bandCounts": {
         "3": 7
@@ -151,7 +151,7 @@
         "band": 3,
         "specificity": 1,
         "mandatory": false,
-        "citation": "docs/curriculum/blueprints/phys.mod.bohr-model.md#TA-6 (addresses MC-3)",
+        "citation": "docs/curriculum/blueprints/phys.mod.bohr-model.md#TA-6 (addresses MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS)",
         "guardAst": {
           "kind": "eq",
           "field": "currentConceptId",
@@ -220,6 +220,23 @@
       }
     },
     {
+      "assetId": "phys.mod.bohr-model/misconception/MC-HIGHER-N-IS-LOWER-ENERGY",
+      "kind": "misconception",
+      "conceptId": "phys.mod.bohr-model",
+      "title": "MC-HIGHER-N-IS-LOWER-ENERGY",
+      "content": "### MC-1: MC-HIGHER-N-IS-LOWER-ENERGY\n**Probe:** \"Which state has higher energy: the n = 1 (ground state) or the n = 3 state? By how\nmany eV?\"  \n**Characteristic phrase:** \"n = 1 is the highest energy because it's the innermost orbit.\"  \n**Trigger:** Mixing spatial distance with energy; \"closer to the nucleus = more tightly held =\nlower energy\" is correct, but students sometimes state the negation (lower n = lower energy in\nabsolute value → more negative → lower energy — this is actually correct! The confusion is about\n\"higher\" vs. \"lower.\")  \n**Conflict evidence [P28]:** E₁ = −13.6 eV; E₃ = −13.6/9 = −1.51 eV. E₃ > E₁ (−1.51 > −13.6).\nHigher n → less negative energy → higher total energy. The ionisation energy from n = 1 is 13.6 eV;\nfrom n = 3 it is only 1.51 eV — it is easier to ionise from a higher orbit.  \n**Bridge [P30]:** \"On the energy-level diagram, higher n is physically higher on the page. Energy\nbecomes less negative — the electron is less tightly bound. At n = ∞, E_∞ = 0 (free electron,\njust barely unbound). n = 1 is at the bottom (E₁ = −13.6 eV) — most tightly bound, lowest\nenergy.\"  \n**Replacement [P31]:** Higher n = higher energy (less negative). Lower n = lower energy (more\nnegative, more tightly bound). n = 1 is ground state = minimum energy.  \n**Discrimination pairs [P33]:** Comparing E₁ and E₃: which is higher? (A) E₁ (closer to nucleus),\n(B) E₃ (less negative = higher), (C) same (circular orbit). Correct: (B).  \n**S6 repair path:** TA-2 (energy-level diagram — draw with energy increasing upward, confirm\nE₃ > E₁).",
+      "localKey": "MC-HIGHER-N-IS-LOWER-ENERGY",
+      "language": "en",
+      "refs": [
+        "MC-HIGHER-N-IS-LOWER-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.bohr-model.md",
+        "startLine": 3,
+        "endLine": 25
+      }
+    },
+    {
       "assetId": "phys.mod.bohr-model/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.mod.bohr-model",
@@ -229,6 +246,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.bohr-model.md",
+        "startLine": 25,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.mod.bohr-model/misconception/MC-EMISSION-AND-ABSORPTION-SAME-PROCESS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.bohr-model",
+      "title": "MC-EMISSION-AND-ABSORPTION-SAME-PROCESS",
+      "content": "### MC-2: MC-EMISSION-AND-ABSORPTION-SAME-PROCESS\n**Probe:** \"Explain the difference between an emission spectrum and an absorption spectrum of\nhydrogen. Why do both show the same wavelengths?\"  \n**Characteristic phrase:** \"They're the same — the atom emits and absorbs the same colours.\"  \n**Trigger:** Students correctly identify that both involve the same energy differences but do not\ndistinguish the two physical processes.  \n**Conflict evidence [P28]:** Emission: hot hydrogen gas; electrons are thermally excited to high\nn, then fall to lower n, emitting photons. Spectrum shows bright lines on dark background.\nAbsorption: continuous white light passes through cool hydrogen; photons matching ΔE are\nabsorbed (electrons jump to higher n). Spectrum shows dark lines on bright background. Same\nwavelengths, opposite visual appearance, opposite direction of electron transition.  \n**Bridge [P30]:** \"Emission: electron falls down the energy-level ladder, gives out a photon.\nAbsorption: electron climbs up the ladder, takes in a photon. The energy is the same either way\n(same two levels), so the photon wavelength is the same. But the direction of the electron\ntransition is opposite.\"  \n**Replacement [P31]:** Emission: n_i > n_f, photon emitted. Absorption: n_i < n_f, photon\nabsorbed. Same spectral lines, opposite electron motion, opposite spectral appearance.  \n**Discrimination pairs [P33]:** A dark absorption line at 486 nm in hydrogen spectrum means:\n(A) electrons are emitting at 486 nm, (B) electrons are absorbing photons of 486 nm and jumping\nto a higher level, (C) the spectrum is missing that wavelength for unknown reasons. Correct: (B).  \n**S6 repair path:** TA-4 (draw both spectra side by side with electron transition arrows).",
+      "localKey": "MC-EMISSION-AND-ABSORPTION-SAME-PROCESS",
+      "language": "en",
+      "refs": [
+        "MC-EMISSION-AND-ABSORPTION-SAME-PROCESS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.bohr-model.md",
@@ -254,6 +288,23 @@
       }
     },
     {
+      "assetId": "phys.mod.bohr-model/misconception/MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.bohr-model",
+      "title": "MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS",
+      "content": "### MC-3: MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS\n**Probe:** \"Can you use E_n = −13.6/n² eV to calculate the energy levels of helium?\"  \n**Characteristic phrase:** \"The same formula works for all atoms.\"  \n**Trigger:** Overgeneralisation of a model that was derived specifically for hydrogen.  \n**Conflict evidence [P28]:** Helium has two electrons. Their mutual repulsion energy cannot be\ncomputed from the single-electron Bohr model. Bohr's formula gives E_He ≈ −54.4/n² eV (using\nZ = 2 for each electron separately), but this ignores the inter-electron repulsion, giving\nwrong values. The actual ground state energy of He is −79 eV, not −109 eV. The Bohr model\nfails for all multi-electron atoms.  \n**Bridge [P30]:** \"The Bohr model was derived assuming one electron orbiting one proton. The\nCoulomb attraction provides the centripetal force. With two electrons, you also need the\nelectron-electron repulsion, which makes the calculation intractable in circular-orbit geometry.\nThe Bohr model is a hydrogen-only model (or hydrogen-like ions: He⁺, Li²⁺).\"  \n**Replacement [P31]:** The Bohr energy formula E_n = −13.6 Z²/n² eV applies to hydrogen-like\n(one-electron) atoms/ions only. For multi-electron atoms, the Schrödinger equation with\nelectron-electron repulsion is required.  \n**Discrimination pairs [P33]:** E_n = −13.6/n² applies to: (A) all atoms, (B) hydrogen only\n(or hydrogen-like ions with Z substituted), (C) any single-electron problem. Correct: (B) — and\n(C) is the refined version: E_n = −13.6 Z²/n² eV for hydrogen-like ions.  \n**S6 repair path:** TA-6 (hydrogen-like ion calculation + explicit statement of model limits).",
+      "localKey": "MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS",
+      "language": "en",
+      "refs": [
+        "MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.bohr-model.md",
+        "startLine": 47,
+        "endLine": 68
+      }
+    },
+    {
       "assetId": "phys.mod.bohr-model/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.mod.bohr-model",
@@ -263,6 +314,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.bohr-model.md",
+        "startLine": 68,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "phys.mod.bohr-model/misconception/MC-BALMER-SERIES-IS-ALL-OF-HYDROGEN-SPECTRUM",
+      "kind": "misconception",
+      "conceptId": "phys.mod.bohr-model",
+      "title": "MC-BALMER-SERIES-IS-ALL-OF-HYDROGEN-SPECTRUM",
+      "content": "### MC-4: MC-BALMER-SERIES-IS-ALL-OF-HYDROGEN-SPECTRUM\n**Probe:** \"The Balmer series for hydrogen is in the visible range. Are there hydrogen spectral\nlines in the ultraviolet? The infrared?\"  \n**Characteristic phrase:** \"Hydrogen spectrum = Balmer series.\"  \n**Trigger:** Most textbooks introduce hydrogen spectra via the Balmer series (visible, easy to\nobserve). Students assume this is the complete spectrum.  \n**Conflict evidence [P28]:** Lyman series (n_f = 1): n_i = 2, 3, 4, … → λ = 122, 103, 97, …\nnm (deep UV, invisible to the naked eye). Paschen series (n_f = 3): n_i = 4, 5, 6, … → λ =\n1875, 1282, 1094, … nm (near infrared). Brackett (n_f = 4), Pfund (n_f = 5): mid-infrared.\nOnly Balmer (n_f = 2) falls in the visible range.  \n**Bridge [P30]:** \"The Balmer series is the visible subset of an infinite set of series. Each\nseries is defined by the final level. n_f = 1: UV (high energy transitions). n_f = 2: visible.\nn_f = 3+: infrared (low energy transitions). The Bohr model predicts all of them from one\nformula.\"  \n**Replacement [P31]:** Hydrogen has spectral series for every final level n_f; Balmer (n_f = 2)\nis the visible series; Lyman (n_f = 1) is UV; Paschen and beyond are IR.  \n**Discrimination pairs [P33]:** The Lyman series of hydrogen lies in: (A) visible light, (B)\nultraviolet, (C) infrared. Correct: (B).  \n**S6 repair path:** TA-5 (energy-level diagram with all three series drawn and wavelength ranges).\n\n---",
+      "localKey": "MC-BALMER-SERIES-IS-ALL-OF-HYDROGEN-SPECTRUM",
+      "language": "en",
+      "refs": [
+        "MC-BALMER-SERIES-IS-ALL-OF-HYDROGEN-SPECTRUM"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.bohr-model.md",
@@ -354,11 +422,11 @@
       "kind": "teaching_action_meta",
       "conceptId": "phys.mod.bohr-model",
       "title": "MC Diagnostics + H-like Ions",
-      "content": "{\"id\":\"TA-6\",\"title\":\"MC Diagnostics + H-like Ions\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-3\"]}",
+      "content": "{\"id\":\"TA-6\",\"title\":\"MC Diagnostics + H-like Ions\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS\"]}",
       "localKey": "TA-6",
       "language": "en",
       "refs": [
-        "MC-3"
+        "MC-BOHR-MODEL-APPLIES-TO-ALL-ATOMS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.bohr-model.md",

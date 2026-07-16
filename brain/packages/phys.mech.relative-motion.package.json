@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.relative-motion",
     "name": "Relative Motion",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "analyze",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

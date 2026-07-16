@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.refraction",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:c1a97fd49a0c4340fcb7bd6b5ad5e57de9cdccf9bb4f3ecde70435cf7401ef7e",
+    "contentHash": "sha256:baf1f9d7ba1d97cc40732958704226027b851cde639fbff48a2ae9c04ede1850",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.refraction.md": "sha256:45522db35755f66121443a5252fc422823322ed69e9b3ad7b07179e65852aaa8"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.refraction",
     "name": "\"Refraction of Light\"",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.opt.refraction/misconception/MC-REFRACTION-CHANGES-FREQUENCY",
+      "kind": "misconception",
+      "conceptId": "phys.opt.refraction",
+      "title": "MC-REFRACTION-CHANGES-FREQUENCY",
+      "content": "### MC-1: MC-REFRACTION-CHANGES-FREQUENCY\n\n**trigger_signal:** Student states \"light bends because its frequency changes at the boundary,\" \"red light refracts more than blue because it has lower frequency,\" or \"frequency depends on the medium.\"\n\n**conflict_evidence [P28]:** At a glass-air boundary, the wave pattern in glass must match the pattern in air at the boundary — if the frequency were different, the wave crests would pile up at the interface (there would be more crests per second leaving the glass than arriving, or vice versa). Physically: every wavecrest that hits the boundary from one side produces exactly one wavecrest on the other side. Frequency is set by the source (the oscillating atoms in the light emitter) and cannot change at a passive boundary. Measurement confirms: a 600 nm (f = 5×10¹⁴ Hz) orange laser beam entering water has f = 5×10¹⁴ Hz in water, but λ_water = λ₀/n = 600/1.33 = 451 nm. Only λ and v change; f is constant.\n\n**bridge_text [P30]:** Think of frequency as the \"rate\" at which wave crests are produced at the source. The speed of the wave changes (the crests travel slower in glass), and the wavelength compresses (crests get closer together), but the rate at which they arrive at a point remains the same — one crest per 1/f seconds, always. Frequency is a property of the source, not the medium.\n\n**replacement_text [P31]:** At any medium boundary, the frequency of light is UNCHANGED. What changes is the wave speed (v = c/n) and the wavelength (λ_medium = λ₀/n). The refractive index relates wave speed and wavelength, not frequency: n = c/v = λ₀/λ_medium. Dispersion (different colors refracting different amounts) occurs because n depends on λ (or equivalently on f), not because f changes.\n\n**discrimination_pairs [P33]:**\n- \"Violet light travels slower in glass than red light because violet has higher frequency\" → PARTLY correct conclusion (violet does travel slower) but wrong mechanism: it's because n_violet > n_red (dispersion), not because the frequency changes. Frequency doesn't change in either case.\n- \"The frequency of light changes at an air-water boundary, which is why the pencil looks bent\" → FALSE: bending is due to wave speed change (n change), not frequency change. Frequency is constant throughout.\n\n**s6_path:** If student fails \"what changes at boundary\" probe → frequency-constant visualization (wavefronts with same temporal spacing, compressed spatial spacing) before mastery gate.\n\n---",
+      "localKey": "MC-REFRACTION-CHANGES-FREQUENCY",
+      "language": "en",
+      "refs": [
+        "MC-REFRACTION-CHANGES-FREQUENCY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.refraction/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.refraction",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.refraction.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.refraction/misconception/MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL",
+      "kind": "misconception",
+      "conceptId": "phys.opt.refraction",
+      "title": "MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL",
+      "content": "### MC-2: MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL\n\n**trigger_signal:** Student states \"light bends away from normal when entering glass because glass is denser,\" inverts the bending rule, or confuses n₁ > n₂ with n₁ < n₂ cases.\n\n**conflict_evidence [P28]:** Apply Snell's Law numerically: n₁ = 1 (air), n₂ = 1.5 (glass), θ₁ = 45°. Calculate: sin θ₂ = (n₁/n₂) sin θ₁ = (1/1.5) × 0.707 = 0.471 → θ₂ = 28°. Since 28° < 45°, the refracted ray is closer to the normal than the incident ray. The wavefront bends toward the normal entering the denser medium. Conceptual reason: the part of the wavefront that enters the glass first slows down while the remaining part is still in air at full speed — this speed difference turns the wavefront toward the normal.\n\n**bridge_text [P30]:** Imagine a line of soldiers marching in a column that hits a muddy patch (slower medium) at an angle. The soldiers who hit the mud first slow down while others are still on dry ground — the column pivots toward the mud (toward the \"normal\" of the mud boundary). Light entering a denser medium is exactly this: part of the wavefront slows, the rest doesn't, and the wave bends toward the normal. Going from dense to less dense = soldiers leaving mud (speeding up) = bends away from normal.\n\n**replacement_text [P31]:** When light travels from a less dense medium (smaller n) to a more dense medium (larger n), it bends TOWARD the normal (θ₂ < θ₁). When going from more dense to less dense (larger n to smaller n), it bends AWAY from the normal (θ₂ > θ₁). Memory aid: n₁ > n₂ → θ₂ > θ₁ (both inequalities point the same way).\n\n**discrimination_pairs [P33]:**\n- \"Light entering water from air bends away from the normal (θ₂ > θ₁) because water is denser\" → FALSE: n_water > n_air → bends TOWARD normal, θ₂ < θ₁.\n- \"Light going from glass to air bends away from the normal\" → TRUE: n_glass > n_air → going from denser to less dense → θ₂ > θ₁ → bends away from normal. ✓\n\n**s6_path:** If student fails the bending-direction probe → run both air→glass and glass→air numerical Snell's Law problems side by side, then discrimination pairs before re-probe.\n\n---",
+      "localKey": "MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL",
+      "language": "en",
+      "refs": [
+        "MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.refraction.md",

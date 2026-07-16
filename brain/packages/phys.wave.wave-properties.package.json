@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.wave.wave-properties",
     "name": "Wave Properties",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.stress-strain",
     "name": "Stress and Strain",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

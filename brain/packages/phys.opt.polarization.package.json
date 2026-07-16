@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.polarization",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:13385327765f83e40e0416a3550390d1e39b2d1131d49d82ce3e64dffd519158",
+    "contentHash": "sha256:bea514a63716c0b890cd0b9dc73d6d312631df3fbb58b7574bb046ae4c24661b",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.polarization.md": "sha256:a0571f92f1429dc50bcdc1610ab6f254cbd8dd8af0c17f6ab036e03e52c4428f"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.polarization",
     "name": "\"Polarization of Light\"",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.opt.polarization/misconception/MC-POLARIZATION-PROVES-LIGHT-IS-LONGITUDINAL",
+      "kind": "misconception",
+      "conceptId": "phys.opt.polarization",
+      "title": "MC-POLARIZATION-PROVES-LIGHT-IS-LONGITUDINAL",
+      "content": "### MC-1: MC-POLARIZATION-PROVES-LIGHT-IS-LONGITUDINAL\n\n**trigger_signal:** Student states \"polarization occurs along the direction of travel, so light must be longitudinal like sound\" or confuses the plane of polarization with the propagation direction.\n\n**conflict_evidence [P28]:** Polarization means the E-field oscillates in a specific plane that is PERPENDICULAR to the propagation direction. In a longitudinal wave (like sound), particles oscillate parallel to propagation — there is no \"perpendicular plane\" to restrict. Polarization can only restrict an oscillation that occurs in a plane perpendicular to travel (transverse). Sound cannot be polarized because its oscillation is along the propagation direction. The existence of polarization proves light is TRANSVERSE, not longitudinal.\n\n**bridge_text [P30]:** Think of passing a rope through a fence with vertical slats (polarizer). Wiggle the rope in all directions — only vertical oscillations pass through the slats. Horizontal oscillations are blocked. This works ONLY if the rope oscillates transversely (up-down-left-right), not longitudinally (toward-away from the fence). Similarly, polarizers can select E-field orientations only because E oscillates transversely.\n\n**replacement_text [P31]:** Polarization is conclusive evidence that light is a TRANSVERSE wave. The E-field oscillates in a plane perpendicular to the propagation direction. Polarization restricts which direction in that transverse plane the E-field oscillates. Longitudinal waves (like sound) cannot be polarized because there is only one oscillation direction — along propagation — with no transverse plane to select.\n\n**discrimination_pairs [P33]:**\n- \"Sound can be polarized by a suitable material with aligned structure\" → FALSE: sound is longitudinal, with no transverse oscillation direction — polarization is geometrically impossible.\n- \"The fact that light can be polarized proves it is a transverse wave\" → CORRECT: only transverse waves can exhibit polarization. ✓\n\n**s6_path:** If student fails transverse vs. longitudinal probe → rope-through-fence analogy visual + comparison table (sound: longitudinal, no polarization; light: transverse, can be polarized) before mastery gate.\n\n---",
+      "localKey": "MC-POLARIZATION-PROVES-LIGHT-IS-LONGITUDINAL",
+      "language": "en",
+      "refs": [
+        "MC-POLARIZATION-PROVES-LIGHT-IS-LONGITUDINAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.polarization/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.polarization",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.polarization.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.polarization/misconception/MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.polarization",
+      "title": "MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS",
+      "content": "### MC-2: MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS\n\n**trigger_signal:** Student states \"two polarizers at 90° always give zero intensity and no intermediate polarizer can change that\" or \"adding more polarizers can only reduce intensity.\"\n\n**conflict_evidence [P28]:** Perform the three-polarizer experiment (WE-2): P₁ at 0°, P₃ at 90° → crossed → I = 0. Insert P₂ at 45° between them → I = I₀/8 > 0. Adding the intermediate polarizer INCREASES transmitted intensity from zero to I₀/8. This is counterintuitive but physically real — the intermediate polarizer changes the polarization state of the light so that it is no longer 90° misaligned with P₃. Each polarizer actively re-defines the polarization direction, not just filters passively.\n\n**bridge_text [P30]:** Think of it as a two-step process: after P₁, light is polarized at 0°. P₃ blocks 0° light. But P₂ at 45° takes the 0° polarized light and produces 45°-polarized light — a new state that P₃ can partially transmit (cos²45° = 50% of what reaches P₃). The intermediate polarizer re-encodes the polarization, allowing what was previously blocked to now partially pass.\n\n**replacement_text [P31]:** Two crossed polarizers (90°) transmit zero intensity. Adding a third polarizer BETWEEN them at any angle other than 0° or 90° results in non-zero transmission, because the intermediate polarizer changes the polarization state. Maximum transmission with one intermediate polarizer occurs at 45° between the two crossed ones, giving I = I₀/8. More intermediate polarizers at finer angular steps can approach I₀/2 in the limit.\n\n**discrimination_pairs [P33]:**\n- \"Adding more polarizers between two crossed polarizers always reduces transmission\" → FALSE: the first intermediate polarizer increases it from 0 to non-zero (e.g., I₀/8).\n- \"No device can change the polarization state of light\" → FALSE: wave plates, birefringent materials, and even polarizers themselves all change the polarization state.\n\n**s6_path:** If student insists crossed polarizers always give zero → hands-on demonstration (three-polarizer sequence) or step-by-step Malus's Law calculation for WE-2 before mastery gate.\n\n---",
+      "localKey": "MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS",
+      "language": "en",
+      "refs": [
+        "MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.polarization.md",

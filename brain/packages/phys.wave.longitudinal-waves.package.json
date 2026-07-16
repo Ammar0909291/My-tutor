@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.wave.longitudinal-waves",
     "name": "Longitudinal Waves",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

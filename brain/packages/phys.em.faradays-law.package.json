@@ -25,7 +25,7 @@
   "concept": {
     "conceptId": "phys.em.faradays-law",
     "name": "Faraday's Law of Electromagnetic Induction",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 6,

@@ -25,7 +25,7 @@
   "concept": {
     "conceptId": "phys.em.solenoid",
     "name": "Solenoid",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

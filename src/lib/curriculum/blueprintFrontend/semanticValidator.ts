@@ -66,10 +66,44 @@ export function validateBlueprintAst(
   }
 
   // BFV04 — broken reference: a TA cites an MC-id this blueprint never defines.
+  //
+  // Legacy-notation tolerance (corpus survey 2026-07-16): the authored corpus
+  // references misconceptions three additional ways, all of which resolve:
+  //   1. Dual-id headers "### MC-3: MC-LONG-SLUG" — a label that is itself an
+  //      MC-id defines BOTH spellings.
+  //   2. Truncated references — "MC-BRACKET-ZERO" citing the defined
+  //      "MC-BRACKET-ZERO-MEANS-INDEPENDENT" (dash-boundary prefix).
+  //   3. Suffixed references — "MC-1-risk" citing the defined "MC-1"
+  //      (dash-boundary extension).
   const definedMcIds = new Set(ast.misconceptions.map((mc) => mc.id))
+  for (const mc of ast.misconceptions) {
+    const labelId = /^(MC-[A-Za-z0-9_-]+)/.exec(mc.label.trim())?.[1]
+    if (labelId) definedMcIds.add(labelId)
+  }
+  // Ordered-token-subsequence resolution: "MC-LARGER-L-MEANS-MORE-ENERGY-AT-
+  // ALL-TIMES" resolves against the defined "MC-LARGER-L-MEANS-MORE-ENERGY-
+  // STORED-AT-ALL-TIMES" (mid-token elision), and truncations/extensions are
+  // subsequences too. Exact single-token ids ("MC-1" vs "MC-10") never
+  // cross-match because token equality is whole-token.
+  const isSubsequence = (needle: string[], hay: string[]): boolean => {
+    let i = 0
+    for (const tok of hay) { if (i < needle.length && needle[i] === tok) i++ }
+    return i === needle.length
+  }
+  const resolvesMcRef = (ref: string): boolean => {
+    if (definedMcIds.has(ref)) return true
+    const refToks = ref.split('-')
+    for (const d of definedMcIds) {
+      const dToks = d.split('-')
+      const short = Math.min(refToks.length, dToks.length)
+      if (short < 2) continue
+      if (isSubsequence(refToks, dToks) || isSubsequence(dToks, refToks)) return true
+    }
+    return false
+  }
   for (const ta of ast.teachingActions) {
     for (const mcId of ta.referencedMisconceptionIds) {
-      if (!definedMcIds.has(mcId)) {
+      if (!resolvesMcRef(mcId)) {
         diags.push({
           code: 'BFV04', severity: 'E',
           message: `${file}: teaching action "${ta.id}" references "${mcId}", which is not defined in the Misconception section (defined: ${[...definedMcIds].join(', ') || 'none'})`,

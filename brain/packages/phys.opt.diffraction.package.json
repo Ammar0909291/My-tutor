@@ -6,14 +6,14 @@
     "conceptId": "phys.opt.diffraction",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:d9158ff7ccb7f98d253aaefa20d3b1e495daf1cf6667068cab0041bbe2603af3",
+    "contentHash": "sha256:e7932b830d5238d9b5dd3681545e7f36a716d38c83a6088d6d5ac27fb3f9cd12",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.diffraction.md": "sha256:7381c15ea8ca30b7b2682cf5af6cf79d92aa9934542b3e9a09e5593f6c684a5e"
     },
-    "assetCount": 21,
+    "assetCount": 25,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 8,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -43,7 +43,7 @@
       "sourceLock": {
         "docs/curriculum/blueprints/phys.opt.diffraction.md": "sha256:7381c15ea8ca30b7b2682cf5af6cf79d92aa9934542b3e9a09e5593f6c684a5e"
       },
-      "contentHash": "sha256:48dec3f97039a95a310a598cf7b50f04d4d4ef22ff40141b4d82806fba3d25fd",
+      "contentHash": "sha256:ae91992d427a66ad5a68c6b20702b48651fb5174630b9adb2ba38869e21b098a",
       "ruleCount": 8,
       "bandCounts": {
         "3": 8
@@ -112,7 +112,7 @@
         "band": 3,
         "specificity": 1,
         "mandatory": false,
-        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-4 (addresses MC-2)",
+        "citation": "docs/curriculum/blueprints/phys.opt.diffraction.md#TA-4 (addresses MC-2, MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN)",
         "guardAst": {
           "kind": "eq",
           "field": "currentConceptId",
@@ -238,6 +238,23 @@
       }
     },
     {
+      "assetId": "phys.opt.diffraction/misconception/MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS",
+      "content": "### MC-1: MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS\n**Probe:** \"A student says: 'Diffraction just means light bends around the edge of an obstacle,\nthe way water bends around a rock.' Is this description correct? What is missing?\"  \n**Characteristic phrase:** \"Light bends around the slit.\"  \n**Trigger:** Everyday language; the word \"bending\" appears in most textbook definitions.  \n**Conflict evidence [P28]:** If diffraction were simple bending, we would see only one bright\nfringe on each side, not the alternating dark-bright pattern. The pattern arises from superposition\nof many secondary wavelets, not from a single bend.  \n**Bridge [P30]:** \"Bending is a consequence, not the cause. The cause is Huygens: every point\nin the slit opening radiates a new wave. Those waves overlap and produce both bright and dark\nregions, including some light inside the geometric shadow.\"  \n**Replacement [P31]:** Diffraction is wave superposition from a distributed aperture; the\nspreading of the beam is a side-effect of that superposition, not a separate bending mechanism.  \n**Discrimination pairs [P33]:** (A) Light always travels in straight lines — false for waves. (B)\nDiffraction is just bending — too simple. (C) Diffraction is superposition of Huygens secondary\nwavelets from across the aperture — correct.  \n**S6 repair path:** TA-3 (Huygens construction) → TA-4 (superposition overlay diagram).",
+      "localKey": "MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS",
+      "language": "en",
+      "refs": [
+        "MC-DIFFRACTION-IS-BENDING-AROUND-CORNERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.diffraction/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.diffraction",
@@ -247,6 +264,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN",
+      "content": "### MC-2: MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN\n**Probe:** \"If you halve the slit width, what happens to the width of the central maximum? A\nstudent predicts it will also halve. Is this right?\"  \n**Characteristic phrase:** \"Smaller slit, smaller beam.\"  \n**Trigger:** Geometric-shadow analogy; treating the slit like a hole a ball passes through.  \n**Conflict evidence [P28]:** The formula y₁ = λD/a shows y₁ is inversely proportional to a.\nHalving a doubles the central maximum half-width.  \n**Bridge [P30]:** \"Think of it this way: a very wide slit approaches a flat wavefront — parallel\nrays, no diffraction, a narrow geometric image. A very narrow slit barely constrains the wave —\nit must spread out in all directions to obey wave physics. Narrower slit = more spreading.\"  \n**Replacement [P31]:** Angular half-width θ₁ = λ/a — the narrower the slit, the larger the\ndiffraction angle.  \n**Discrimination pairs [P33]:** Slit halved: central maximum (A) halves, (B) doubles, (C) stays\nthe same. Correct: (B).  \n**S6 repair path:** TA-5 (quantitative slit-width variation) → TA-6 (simulation/demonstration).",
+      "localKey": "MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN",
+      "language": "en",
+      "refs": [
+        "MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
@@ -272,6 +306,23 @@
       }
     },
     {
+      "assetId": "phys.opt.diffraction/misconception/MC-DIFFRACTION-SAME-AS-INTERFERENCE",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "MC-DIFFRACTION-SAME-AS-INTERFERENCE",
+      "content": "### MC-3: MC-DIFFRACTION-SAME-AS-INTERFERENCE\n**Probe:** \"A student says: 'Diffraction and interference are basically the same thing — both give\nbright and dark fringes.' Agree or disagree? Explain the key difference.\"  \n**Characteristic phrase:** \"They both make fringes, so they're the same.\"  \n**Trigger:** Surface similarity (alternating bright/dark fringes) without attending to the source\ngeometry.  \n**Conflict evidence [P28]:** Interference (Young's) comes from two (or more) discrete coherent\nsources; fringe spacing is uniform. Diffraction comes from a single extended aperture; the central\nmaximum is twice as wide as secondary maxima, and secondary maxima diminish in intensity.  \n**Bridge [P30]:** \"Both are superposition. The difference is the geometry: interference superimposes\nwaves from separated point sources (like two slits). Diffraction superimposes waves from a\ncontinuum of points distributed across one aperture.\"  \n**Replacement [P31]:** Diffraction = superposition across a single continuous aperture.\nInterference = superposition from multiple discrete sources. In practice, diffraction modulates\nthe envelope of an interference pattern when both are present.  \n**Discrimination pairs [P33]:** Compare double-slit pattern (uniform fringe spacing, equal\nintensities for equal-width slits) vs. single-slit pattern (central max twice as wide, intensity\nfalls off). Which is diffraction? The single-slit pattern.  \n**S6 repair path:** TA-7 (comparison overlay) → re-check using TA-4 probe.",
+      "localKey": "MC-DIFFRACTION-SAME-AS-INTERFERENCE",
+      "language": "en",
+      "refs": [
+        "MC-DIFFRACTION-SAME-AS-INTERFERENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 37,
+        "endLine": 57
+      }
+    },
+    {
       "assetId": "phys.opt.diffraction/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.opt.diffraction",
@@ -281,6 +332,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
+        "startLine": 57,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.opt.diffraction/misconception/MC-DIFFRACTION-ONLY-AT-SLITS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.diffraction",
+      "title": "MC-DIFFRACTION-ONLY-AT-SLITS",
+      "content": "### MC-4: MC-DIFFRACTION-ONLY-AT-SLITS\n**Probe:** \"Does diffraction occur when light passes through a large door opening? Why or why\nnot?\"  \n**Characteristic phrase:** \"You need a really small opening for diffraction.\"  \n**Trigger:** Textbook always show narrow-slit setups; students never see diffraction from large\napertures.  \n**Conflict evidence [P28]:** Diffraction always occurs; the condition a/λ ≈ 1 determines whether\neffects are observable. For a 1 m door and λ = 500 nm, a/λ = 2×10⁶ — the central maximum is\n0.5 μrad wide, invisible. But it is there.  \n**Bridge [P30]:** \"Diffraction is universal. Whether you see it depends on the ratio a/λ. A door\ndiffracts light, but the spread is immeasurably small. Narrow the opening to a/λ ≈ 1 and the\npattern becomes visible.\"  \n**Replacement [P31]:** Diffraction occurs for all apertures; significant observable effects require\na ≈ λ.  \n**Discrimination pairs [P33]:** (A) Diffraction requires a slit. (B) Diffraction requires a/λ ≈ 1\nto be observable. (C) Diffraction only happens with laser light. Correct: (B).  \n**S6 repair path:** TA-2 (everyday diffraction examples) → ratio calculation exercise.\n\n---",
+      "localKey": "MC-DIFFRACTION-ONLY-AT-SLITS",
+      "language": "en",
+      "refs": [
+        "MC-DIFFRACTION-ONLY-AT-SLITS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",
@@ -338,11 +406,12 @@
       "kind": "teaching_action_meta",
       "conceptId": "phys.opt.diffraction",
       "title": "MC-2 Diagnostic",
-      "content": "{\"id\":\"TA-4\",\"title\":\"MC-2 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-2\"]}",
+      "content": "{\"id\":\"TA-4\",\"title\":\"MC-2 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-2\",\"MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN\"]}",
       "localKey": "TA-4",
       "language": "en",
       "refs": [
-        "MC-2"
+        "MC-2",
+        "MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.diffraction.md",

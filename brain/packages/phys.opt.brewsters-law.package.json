@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.brewsters-law",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:50aa656ae7e3b35f8a590334dd0f62840494f52fda940fce9f22347932114206",
+    "contentHash": "sha256:c765d2bcdb932d6c84cde51c2d98e676d094e5cc4e332bf03673733c00c153ab",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.brewsters-law.md": "sha256:b294bbc5dfb139bbcd3153785440b9f60155c9d220fe21087e93674e3d81e2c8"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.brewsters-law",
     "name": "\"Brewster's Law and Polarization by Reflection\"",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,
@@ -264,6 +264,23 @@
       }
     },
     {
+      "assetId": "phys.opt.brewsters-law/misconception/MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY",
+      "kind": "misconception",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY",
+      "content": "### MC-1: MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY\n\n**trigger_signal:** Student states \"at Brewster's angle, both reflected AND refracted rays are completely polarized\" or \"the refracted ray becomes pure p-polarized.\"\n\n**conflict_evidence [P28]:** The Fresnel equations show: at Brewster's angle, r_p = 0 (no p-reflection) → reflected ray contains only s-polarization (100% s-polarized). But the refracted ray contains ALL the p-polarized light that wasn't reflected PLUS most of the s-polarized light (most s is transmitted too, just not 100%). The refracted ray is partially polarized — it has more p than s, but is not purely p. Measurement: degree of polarization of refracted ray at θ_B for glass ≈ 0.38 (much less than 100%). Complete polarization of the refracted beam requires a \"pile of plates\" — many surfaces.\n\n**bridge_text [P30]:** At Brewster's angle, r_p = 0 means the p-component has NO reflected ray — ALL p-polarized light goes into the refracted beam. But plenty of s-polarized light also refracts (most of it does). So the refracted beam has a mix: 100% of the p + most of the s. It's richer in p-polarization but not pure p.\n\n**replacement_text [P31]:** At Brewster's angle: the REFLECTED ray is completely s-polarized (100%). The refracted ray is only PARTIALLY polarized — it contains all the p-component but also significant s-component. To produce a completely p-polarized transmitted beam, one needs multiple plates (pile-of-plates polarizer) or a birefringent crystal. Brewster's angle gives complete polarization only for the reflected ray.\n\n**discrimination_pairs [P33]:**\n- \"At Brewster's angle, the refracted ray is completely p-polarized\" → FALSE: it contains s-polarization too (just less than in the reflected ray).\n- \"At Brewster's angle, the reflected ray is completely s-polarized\" → TRUE: r_p = 0 → no p-component in reflected ray. ✓\n\n**s6_path:** If student fails \"which ray is completely polarized\" probe → Fresnel coefficient display (show r_p = 0 but r_s ≠ 0 at θ_B) + comparison of reflected vs. refracted polarization states before mastery gate.\n\n---",
+      "localKey": "MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY",
+      "language": "en",
+      "refs": [
+        "MC-BREWSTERS-ANGLE-COMPLETELY-POLARIZES-REFRACTED-RAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.brewsters-law/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.brewsters-law",
@@ -273,6 +290,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.brewsters-law/misconception/MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.brewsters-law",
+      "title": "MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS",
+      "content": "### MC-2: MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS\n\n**trigger_signal:** Student states \"polarized sunglasses eliminate all reflections from water and glass surfaces.\"\n\n**conflict_evidence [P28]:** Reflections at non-Brewster angles are NOT completely polarized — they are partially polarized or unpolarized. Polarized sunglasses block the horizontal (s-) component, but partial reflections at steep angles (normal incidence) are unpolarized → sunglasses only block half of these. Also, reflections from vertical surfaces (like a window reflecting a building across the street) may have vertically polarized components that sunglasses transmit. WE-2 part (c) showed only 65% of total reflected light is blocked by sunglasses, not 100%.\n\n**bridge_text [P30]:** Polarized sunglasses are optimized for the specific case: horizontal reflective surfaces (roads, water) viewed at angles near Brewster's angle. In that specific geometry, glare is almost completely eliminated. But other reflections (from walls, at very steep angles, from vertical surfaces) involve mixed polarization states and are only partially reduced.\n\n**replacement_text [P31]:** Polarized sunglasses are specifically effective against glare from horizontal surfaces (water, roads) viewed near Brewster's angle — there, reflected light is nearly completely s-polarized (horizontal), which the sunglasses block almost entirely. Reflections at other angles or from non-horizontal surfaces are only partially reduced. The sunglasses block the horizontal E-field component from ALL light — not just reflections — reducing overall intensity by ~50% for unpolarized and ~100% for horizontally polarized glare.\n\n**discrimination_pairs [P33]:**\n- \"Polarized sunglasses completely eliminate all reflected glare in all directions\" → FALSE: effective near Brewster's angle on horizontal surfaces; partial for other geometries.\n- \"Polarized sunglasses are effective at reducing road glare while driving because roads are nearly horizontal\" → TRUE: pavement glare at low sun angles ≈ Brewster angle (53°) → mostly horizontal polarization → sunglasses nearly eliminate it. ✓\n\n**s6_path:** If student thinks polarizers block all reflections → WE-2 (c) calculation showing only 65% blocked before mastery gate.\n\n---",
+      "localKey": "MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS",
+      "language": "en",
+      "refs": [
+        "MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.brewsters-law.md",

@@ -6,14 +6,14 @@
     "conceptId": "phys.mod.x-rays",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:a2c1784fe135de12243f2e3c1f876cb2d02788204be88e49c2d6d6b2fdad18b5",
+    "contentHash": "sha256:fe9b28ad7fb9cde68c76b42dd4fed7c3f51ca1a5edf2b02d5222afc81e323259",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.mod.x-rays.md": "sha256:cabff57401f0a81848b597cecbea9fc8bb1fde6b8440b649c151a79170229e7c"
     },
-    "assetCount": 19,
+    "assetCount": 23,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 6,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -200,6 +200,23 @@
       }
     },
     {
+      "assetId": "phys.mod.x-rays/misconception/MC-XRAY-DIFFERENT-FROM-LIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "MC-XRAY-DIFFERENT-FROM-LIGHT",
+      "content": "### MC-1: MC-XRAY-DIFFERENT-FROM-LIGHT\n**Probe:** \"Are X-rays fundamentally different from visible light, or are they the same type of\nradiation? Explain.\"  \n**Characteristic phrase:** \"X-rays are not light — they're radiation.\"  \n**Trigger:** Everyday language distinguishes \"X-rays\" from \"light\"; radiation has negative connotations.  \n**Conflict evidence [P28]:** Both X-rays and visible light are electromagnetic waves. Both travel\nat c. Both obey E = hf. Both are quantised as photons. The only difference is frequency/wavelength:\nvisible light λ ~ 400–700 nm; X-rays λ ~ 0.01–10 nm. X-rays are just very high-frequency light.  \n**Bridge [P30]:** \"The EM spectrum is continuous: radio, microwave, infrared, visible, UV, X-rays,\ngamma rays. X-rays are the section with λ ~ 0.01–10 nm. They obey all the same equations as visible\nlight — just with much higher energy per photon.\"  \n**Replacement [P31]:** X-rays are high-frequency EM radiation; same physics as visible light\n(E = hf, travel at c, can diffract); differ only in wavelength/energy range.  \n**Discrimination pairs [P33]:** X-rays vs. visible light: (A) completely different types of\nradiation, (B) same EM wave type — differ only in frequency, (C) X-rays are particles, light\nis a wave. Correct: (B).  \n**S6 repair path:** TA-2 (EM spectrum overview; X-rays placed on the same continuum).",
+      "localKey": "MC-XRAY-DIFFERENT-FROM-LIGHT",
+      "language": "en",
+      "refs": [
+        "MC-XRAY-DIFFERENT-FROM-LIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.mod.x-rays/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.mod.x-rays",
@@ -209,6 +226,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 21,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-BRAGG-ANGLE-FROM-NORMAL",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "MC-BRAGG-ANGLE-FROM-NORMAL",
+      "content": "### MC-2: MC-BRAGG-ANGLE-FROM-NORMAL\n**Probe:** \"In Bragg diffraction, the angle θ = 30°. Is this measured from the crystal plane\nsurface or from the normal to the crystal plane?\"  \n**Characteristic phrase:** \"θ is the angle of incidence from the normal — like Snell's law.\"  \n**Trigger:** Students carry over the reflection/refraction convention where angles are measured\nfrom the normal.  \n**Conflict evidence [P28]:** In Bragg's law, θ is the glancing angle — measured from the crystal\nplane surface, not its normal. If θ_Bragg = 30°, the angle from the normal is 60°. The formula\n2d sin 30° = 2d × 0.5 = d; using 60° would give 2d × sin 60° = 2d × 0.866 = 1.73d — wrong.  \n**Bridge [P30]:** \"Bragg derived his formula using the glancing angle — the angle the beam makes\nwith the surface of the crystal plane. If the beam just grazes the surface (θ → 0), there is no\npenetration; if it hits perpendicular (θ = 90°), it goes straight in. The glancing angle\nconvention is the opposite of the optics normal-incidence convention.\"  \n**Replacement [P31]:** In 2d sin θ = nλ, θ is the glancing angle (from the crystal plane surface).  \n**Discrimination pairs [P33]:** Bragg angle θ is measured: (A) from the normal to the crystal\nplane, (B) from the crystal plane surface (glancing angle), (C) from the diffracted beam direction.\nCorrect: (B).  \n**S6 repair path:** TA-4 (draw the Bragg geometry explicitly, labelling the glancing angle).",
+      "localKey": "MC-BRAGG-ANGLE-FROM-NORMAL",
+      "language": "en",
+      "refs": [
+        "MC-BRAGG-ANGLE-FROM-NORMAL"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
@@ -234,6 +268,23 @@
       }
     },
     {
+      "assetId": "phys.mod.x-rays/misconception/MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE",
+      "content": "### MC-3: MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE\n**Probe:** \"In a bremsstrahlung spectrum, can the tube produce photons with energy greater than\neV (where V is the accelerating voltage)?\"  \n**Characteristic phrase:** \"The tube produces a range of energies including very high ones.\"  \n**Trigger:** Students do not apply energy conservation to the cut-off.  \n**Conflict evidence [P28]:** An electron accelerated through voltage V gains kinetic energy eV.\nIn a single bremsstrahlung event converting all KE to one photon: hf_max = eV → λ_min = hc/(eV).\nNo photon can have more energy than the electron that produced it. Higher-energy photons are\nphysically impossible (violate energy conservation).  \n**Bridge [P30]:** \"The electron carries energy eV into the target. When it produces a photon,\nconservation of energy means the photon can have at most eV. The cut-off wavelength is a\nhard limit — not a peak but a boundary beyond which no photons exist.\"  \n**Replacement [P31]:** Maximum photon energy = eV; minimum wavelength λ_min = hc/(eV). No photons\nabove this energy from a tube operating at voltage V.  \n**Discrimination pairs [P33]:** A 50 kV X-ray tube: photon energy range is (A) any value up to\nand beyond 50 keV, (B) 0 to 50 keV (with hard cut-off at 50 keV), (C) only at 50 keV.\nCorrect: (B).  \n**S6 repair path:** TA-3 (draw the bremsstrahlung spectrum with cut-off; compare to characteristic\nlines).",
+      "localKey": "MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE",
+      "language": "en",
+      "refs": [
+        "MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 40,
+        "endLine": 60
+      }
+    },
+    {
       "assetId": "phys.mod.x-rays/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.mod.x-rays",
@@ -243,6 +294,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",
+        "startLine": 60,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "phys.mod.x-rays/misconception/MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL",
+      "kind": "misconception",
+      "conceptId": "phys.mod.x-rays",
+      "title": "MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL",
+      "content": "### MC-4: MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL\n**Probe:** \"How are characteristic X-rays produced? Does the outer shell electron being ejected\nor an inner shell electron being ejected cause them?\"  \n**Characteristic phrase:** \"The outer electrons are easier to remove — they must produce the X-rays.\"  \n**Trigger:** Students think \"easier to remove\" = \"more likely to produce X-rays.\"  \n**Conflict evidence [P28]:** Characteristic X-rays require the incoming electron to eject an inner-\nshell (K or L) electron. The resulting vacancy is filled by an outer-shell electron falling in, and\nthe energy difference (between outer and inner shells) is emitted as a characteristic X-ray photon.\nInner-shell binding energies are in the keV range → X-ray energies. Outer-shell removal produces\nUV or visible light (valence electron excitation), not X-rays.  \n**Bridge [P30]:** \"The energy of the emitted photon = the energy difference between the shells.\nInner-shell to outer-shell energy gap = keV (X-ray range). Outer-to-outer gap = eV (UV/visible).\nThe large gap requires an inner-shell vacancy — which only a high-energy electron can create.\"  \n**Replacement [P31]:** Characteristic X-rays are produced when an inner-shell electron is ejected\nand an outer-shell electron falls to fill the vacancy, emitting a photon of energy = ΔE(outer−inner).  \n**Discrimination pairs [P33]:** Characteristic X-rays are produced by: (A) outer-shell electron\nremoval, (B) inner-shell electron removal followed by outer→inner transition, (C) electron\ndeceleration. Correct: (B) [and (C) gives bremsstrahlung, not characteristic].  \n**S6 repair path:** TA-5 (atomic energy-level diagram; label K, L, M shells; draw characteristic\nemission arrow).\n\n---",
+      "localKey": "MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL",
+      "language": "en",
+      "refs": [
+        "MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.x-rays.md",

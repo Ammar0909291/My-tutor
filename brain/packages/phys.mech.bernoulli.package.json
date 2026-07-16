@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.bernoulli",
     "name": "Bernoulli's Principle",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

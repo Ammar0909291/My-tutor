@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.kirchhoffs-laws",
     "name": "Kirchhoff's Laws",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

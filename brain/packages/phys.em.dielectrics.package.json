@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.dielectrics",
     "name": "Dielectrics",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

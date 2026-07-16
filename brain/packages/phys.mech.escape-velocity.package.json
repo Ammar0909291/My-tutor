@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.escape-velocity",
     "name": "Escape Velocity",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

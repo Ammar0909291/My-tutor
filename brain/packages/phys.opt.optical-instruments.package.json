@@ -6,15 +6,15 @@
     "conceptId": "phys.opt.optical-instruments",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:9bac03e564cb771d56015b99b700e8ea772231382acc21c844345c023f2605d0",
+    "contentHash": "sha256:0216aec320f67116604c4101f407f8a22ff9bc1fa0e732261917238ae7efd5b9",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.opt.optical-instruments.md": "sha256:31ad2119971f37ea09c7f0eea187a5ab21593276bd253c2b04afa1d52303d85a"
     },
-    "assetCount": 15,
+    "assetCount": 17,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
-      "misconception": 2,
+      "misconception": 4,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "session_flow": 1
@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.opt.optical-instruments",
     "name": "\"Optical Instruments — Microscope, Telescope, Camera\"",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,
@@ -265,6 +265,23 @@
       }
     },
     {
+      "assetId": "phys.opt.optical-instruments/misconception/MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS",
+      "kind": "misconception",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS",
+      "content": "### MC-1: MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS\n\n**trigger_signal:** Student states \"the telescope objective magnifies the star\" or \"the objective makes distant objects appear closer.\"\n\n**conflict_evidence [P28]:** The objective lens of a telescope forms a real image of a distant star — but the image is much smaller than the star. For the Moon (angular diameter 0.5°) with F_o = 100 cm: the intermediate image size = F_o × tan(0.5°) ≈ 100 × 0.0087 = 0.87 cm. The Moon is 3476 km in diameter — so the image is 0.87 cm. The objective has REDUCED the apparent size to fit in the focal plane. The EYEPIECE then magnifies this small intermediate image. The objective's job is not magnification but to bring a large area of sky to a small focused image.\n\n**bridge_text [P30]:** Think of the objective as a collector and focuser: it captures light from a wide field and focuses it to a small, detailed intermediate image. The eyepiece then acts as a magnifier for that small image. Magnification happens in two steps: first, the objective subtends a larger angle (because it's bigger than your eye pupil → more light); second, the eyepiece magnifies the intermediate image.\n\n**replacement_text [P31]:** The telescope objective forms a REAL, DIMINISHED (for distant objects at ∞, image size = F_o × angular size of object) intermediate image at its focal plane. The eyepiece then magnifies this intermediate image with magnification D/f_e. Total angular magnification = F_o/f_e. The objective's primary role is light-gathering and creating an intermediate image, not magnification — that is the eyepiece's role.\n\n**discrimination_pairs [P33]:**\n- \"A telescope with a large objective lens is brighter because it collects more light\" → TRUE: larger aperture → more photons collected → brighter image. ✓\n- \"A telescope's objective magnifies the star — the eyepiece just helps you see it\" → FALSE: objective demagnifies (creates small intermediate image at focal plane); eyepiece magnifies that image.\n\n**s6_path:** If student fails intermediate-image description → ray diagram tracing through objective + eyepiece showing intermediate image position and size before mastery gate.\n\n---",
+      "localKey": "MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS",
+      "language": "en",
+      "refs": [
+        "MC-TELESCOPE-OBJECTIVE-ENLARGES-DISTANT-OBJECTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.opt.optical-instruments/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.opt.optical-instruments",
@@ -274,6 +291,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",
+        "startLine": 21,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.opt.optical-instruments/misconception/MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW",
+      "kind": "misconception",
+      "conceptId": "phys.opt.optical-instruments",
+      "title": "MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW",
+      "content": "### MC-2: MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW\n\n**trigger_signal:** Student treats the eyepiece as \"just a lens to look through\" without contributing to magnification, or states \"the total magnification equals just the objective magnification.\"\n\n**conflict_evidence [P28]:** Remove the eyepiece from a compound microscope and look at the intermediate image projected on a card. It's real and magnified by m_o = L/f_o. Now put the eyepiece back — the image through the eyepiece is magnified by an additional factor D/f_e. Total = m_o × m_e. For f_o = 0.5 cm, f_e = 2.5 cm, L = 15 cm: m_o alone = 30×; total = 300×. The eyepiece provides a 10× factor that is lost without it. In WE-1: m_total = 300 vs. m_o alone = 30.\n\n**bridge_text [P30]:** The eyepiece functions as a simple magnifier — identical to holding a magnifying glass to view a small photograph. The \"photograph\" in this case is the real intermediate image formed by the objective. Just as a magnifying glass multiplies the apparent size of whatever you place at its focus, the eyepiece multiplies the apparent size of the intermediate image by D/f_e.\n\n**replacement_text [P31]:** The eyepiece of a compound microscope provides a genuine angular magnification of D/f_e (for image at ∞), contributing equally to total magnification alongside the objective. Total magnification = m_o × m_e — neither factor is negligible. The eyepiece's job is to act as a simple magnifier viewing the real intermediate image formed by the objective.\n\n**discrimination_pairs [P33]:**\n- \"In a compound microscope, the eyepiece only lets you see the image — the objective does the magnifying\" → FALSE: eyepiece magnification m_e = D/f_e multiplies the total; removing the eyepiece gives 10× less magnification (in WE-1's case).\n- \"Using an eyepiece with shorter focal length gives more magnification\" → TRUE: m_e = D/f_e → smaller f_e → larger m_e. ✓\n\n**s6_path:** If student fails \"how much does the eyepiece magnify\" probe → WE-1 recalculated with eyepiece absent vs. present before mastery gate.\n\n---",
+      "localKey": "MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW",
+      "language": "en",
+      "refs": [
+        "MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.opt.optical-instruments.md",

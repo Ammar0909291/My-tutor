@@ -6,14 +6,14 @@
     "conceptId": "phys.rel.time-dilation",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:3d2839c6e4c1b71e693c384edf0b3d239531eb20439e0e01904acfba7f626185",
+    "contentHash": "sha256:7d2e5ef7bb8ab2b87e2c8e64d4a407a053f5c04c08fed84d3e7dc0b318f08ab9",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.rel.time-dilation.md": "sha256:f9cbdbad30eb22782b6d322aa8e4fd6ee362d2b6022d236c906b23fbc0e40238"
     },
-    "assetCount": 20,
+    "assetCount": 24,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -219,6 +219,23 @@
       }
     },
     {
+      "assetId": "phys.rel.time-dilation/misconception/MC-TIME-DILATION-IS-ILLUSION",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "MC-TIME-DILATION-IS-ILLUSION",
+      "content": "### MC-1: MC-TIME-DILATION-IS-ILLUSION\n**Probe:** \"Is time dilation a physical effect or an optical illusion caused by the finite speed\nof light making clocks appear to run slow?\"  \n**Characteristic phrase:** \"The clock just looks slow because the light takes longer to reach us.\"  \n**Trigger:** Students think SR effects are perceptual, not real.  \n**Conflict evidence [P28]:** The muon experiment: muons physically survive to sea level in\nnumbers explained by time dilation. This is not a light-travel-time effect — the muons are\nactually present at sea level in statistically measured quantities. Atomic clocks flown around\nthe world (Hafele-Keating) showed a real accumulated time difference. The effect is verified\nby comparing physical clocks after reuniting them.  \n**Bridge [P30]:** \"If it were just an optical illusion, reuniting the clocks would show them\nsynchronized. In Hafele-Keating, the clocks that flew on planes read different times from the\nground clocks. The difference is real — not optical.\"  \n**Replacement [P31]:** Time dilation is a real physical effect: moving clocks genuinely tick\nat a slower rate; the accumulated time difference is measurable when clocks are reunited.  \n**Discrimination pairs [P33]:** Time dilation is: (A) an optical illusion due to light travel time,\n(B) a real physical effect measurable by comparing reunited clocks, (C) only apparent when the\nobserver moves, not real. Correct: (B).  \n**S6 repair path:** TA-2 (muon experiment) → TA-3 (Hafele-Keating evidence).",
+      "localKey": "MC-TIME-DILATION-IS-ILLUSION",
+      "language": "en",
+      "refs": [
+        "MC-TIME-DILATION-IS-ILLUSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
       "assetId": "phys.rel.time-dilation/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.rel.time-dilation",
@@ -228,6 +245,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 23,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-PROPER-TIME-IS-LONGER",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "MC-PROPER-TIME-IS-LONGER",
+      "content": "### MC-2: MC-PROPER-TIME-IS-LONGER\n**Probe:** \"A muon travels from the upper atmosphere to sea level. Its proper lifetime is 2.2 μs.\nThe lab measures a lifetime of 35 μs. Which is longer: the proper time or the coordinate time?\"  \n**Characteristic phrase:** \"Proper time is the 'real' time, so it should be longer.\"  \n**Trigger:** Students think \"proper\" = \"more complete\" = longer. The word \"proper\" misleads.  \n**Conflict evidence [P28]:** Δt = γΔτ with γ > 1 → Δt > Δτ. Coordinate time (lab frame: 35 μs)\nis always longer than proper time (muon frame: 2.2 μs). γ = 35/2.2 ≈ 16, consistent with\nv ≈ 0.998c. The moving clock (co-moving with the muon) shows the shorter time.  \n**Bridge [P30]:** \"Proper time just means 'own time' (from the Latin proprius = one's own) — the\ntime on the clock co-moving with the object. Since γ ≥ 1, proper time is always ≤ coordinate\ntime. The moving clock shows less elapsed time.\"  \n**Replacement [P31]:** Proper time Δτ is always ≤ coordinate time Δt (Δt = γΔτ, γ ≥ 1). Proper\ntime is the shorter time.  \n**Discrimination pairs [P33]:** Proper time vs. coordinate time: (A) proper time is longer\n(it's the \"real\" time), (B) coordinate time is longer (Δt = γΔτ, γ ≥ 1), (C) they are always\nequal. Correct: (B).  \n**S6 repair path:** TA-4 (light-clock derivation — the moving clock's period is longer in the\nlab frame).",
+      "localKey": "MC-PROPER-TIME-IS-LONGER",
+      "language": "en",
+      "refs": [
+        "MC-PROPER-TIME-IS-LONGER"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
@@ -253,6 +287,23 @@
       }
     },
     {
+      "assetId": "phys.rel.time-dilation/misconception/MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG",
+      "content": "### MC-3: MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG\n**Probe:** \"A train moves at 100 m/s. Compute γ. What is the fractional change in time: (γ−1)?\"  \n**Characteristic phrase:** \"γ = 1/√(1 − v²/c²) = 1/√(1 − (100)²/(3×10⁸)²).\"  \n**Trigger:** Students use v and c in different units, or forget that β = v/c is dimensionless.  \n**Conflict evidence [P28]:** β = 100/(3×10⁸) = 3.33×10⁻⁷. β² = 1.11×10⁻¹³. γ = 1/√(1 − 10⁻¹³)\n≈ 1 + 5×10⁻¹⁴. Fractional time dilation: (γ − 1) ≈ 5×10⁻¹⁴ — completely negligible. Students\nwho miscompute γ often get nonsensical values (γ < 1 or imaginary).  \n**Bridge [P30]:** \"Always compute β = v/c first: a dimensionless number between 0 and 1. Then\nγ = 1/√(1 − β²). If γ < 1, you made an error. If β > 1, v > c — impossible.\"  \n**Replacement [P31]:** Always compute β = v/c first. γ is always ≥ 1. For everyday speeds,\nβ ≪ 1 and γ ≈ 1. For v → c, γ → ∞.  \n**Discrimination pairs [P33]:** For v = 0.6c: γ = (A) 1.25, (B) 0.8, (C) 1.6. Correct: (A)\n(1/√(1−0.36) = 1/√0.64 = 1/0.8 = 1.25).  \n**S6 repair path:** TA-5 (γ computation drill for β = 0, 0.6, 0.8, 0.9, 0.99, 0.999).",
+      "localKey": "MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG",
+      "language": "en",
+      "refs": [
+        "MC-GAMMA-FORMULA-DIMENSIONALLY-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 42,
+        "endLine": 57
+      }
+    },
+    {
       "assetId": "phys.rel.time-dilation/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.rel.time-dilation",
@@ -262,6 +313,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",
+        "startLine": 57,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "phys.rel.time-dilation/misconception/MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS",
+      "kind": "misconception",
+      "conceptId": "phys.rel.time-dilation",
+      "title": "MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS",
+      "content": "### MC-4: MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS\n**Probe:** \"Is time dilation significant for an aeroplane flying at 900 km/h? For the ISS\norbiting at 7.7 km/s? For a GPS satellite? Compute (γ−1) for each.\"  \n**Characteristic phrase:** \"Time dilation only matters when you're going close to the speed of light.\"  \n**Trigger:** Students believe time dilation is only an exotic high-speed effect.  \n**Conflict evidence [P28]:** GPS satellites orbit at 3.87 km/s. β = 3.87×10³/(3×10⁸) = 1.29×10⁻⁵.\nγ − 1 ≈ β²/2 = 8.3×10⁻¹¹. Clock rate change = 7.2 μs/day (from SR alone) — enough to cause\nGPS position error of 2 km/day. GPS clocks are adjusted. Time dilation is engineered into GPS.  \n**Bridge [P30]:** \"For everyday speeds, γ − 1 is tiny but non-zero. For GPS and atomic clock\nexperiments, the effect is small but measurable and consequential. It is not only exotic — it\nis engineering reality.\"  \n**Replacement [P31]:** Time dilation occurs at all speeds; it becomes significant (>10⁻¹⁰ level)\nat km/s speeds and is engineered into GPS satellite design.  \n**Discrimination pairs [P33]:** Time dilation in GPS satellites is: (A) negligible (too slow),\n(B) significant — ~7 μs/day from SR, corrected in the satellite clocks, (C) not applicable\n(satellites don't obey SR). Correct: (B).  \n**S6 repair path:** TA-6 (GPS calculation).\n\n---",
+      "localKey": "MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS",
+      "language": "en",
+      "refs": [
+        "MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.rel.time-dilation.md",

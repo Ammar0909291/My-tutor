@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.gauss-law",
     "name": "Gauss's Law",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

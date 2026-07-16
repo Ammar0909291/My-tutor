@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.collisions-elastic",
     "name": "Elastic Collisions",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

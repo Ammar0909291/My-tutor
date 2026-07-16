@@ -6,14 +6,14 @@
     "conceptId": "phys.stat.boltzmann-factor",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:a5b5aff4051d307a69520c4888a614aa84661f854b6cf5aaf6ef0bbab1eae799",
+    "contentHash": "sha256:1d68111cbfd3f51026717072152a0f17bde3cf61245710822c9a54b9cbabb742",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md": "sha256:778da5e3cc4df35904d4ea9c928363bd199951eb28ef0e00bdcb3cd60eb32bc8"
     },
-    "assetCount": 21,
+    "assetCount": 25,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 8,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -238,6 +238,23 @@
       }
     },
     {
+      "assetId": "phys.stat.boltzmann-factor/misconception/MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z",
+      "kind": "misconception",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z",
+      "content": "### MC-1: MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z\n**Probe:** \"A system has two energy levels, 0 and 0.1 eV. At T = 300 K (k_BT ≈ 0.026 eV).\nWhat is the probability of being in the upper level?\"  \n**Characteristic phrase:** \"P = e^{−0.1/0.026} = 0.021.\"  \n**Trigger:** Students omit the partition function normalisation.  \n**Conflict evidence [P28]:** Without Z: P = e^{−3.85} = 0.021. But P₀ = e⁰ = 1 (also unnormalised).\nP₀ + P_ε = 1.021 ≠ 1. Probabilities must sum to 1. The correct computation: Z = 1 + 0.021 = 1.021.\nP_ε = 0.021/1.021 = 0.0206. P₀ = 1/1.021 = 0.979. Check: 0.0206 + 0.979 ≈ 1 ✓.  \n**Bridge [P30]:** \"The Boltzmann factor e^{−E/k_BT} gives the relative weight, not the probability.\nTo get a probability, divide by the sum of all weights: Z = Σ e^{−E_i/k_BT}. The partition\nfunction Z is the normalisation constant.\"  \n**Replacement [P31]:** P(E_i) = e^{−E_i/k_BT} / Z, where Z = Σ_i e^{−E_i/k_BT}.  \n**Discrimination pairs [P33]:** P(E = 0.1 eV at 300 K) with Z = 1.021: (A) 0.021 (unnormalized),\n(B) 0.0206 (normalised), (C) 0.5. Correct: (B).  \n**S6 repair path:** TA-3 (two-state system — explicit Z computation).",
+      "localKey": "MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z",
+      "language": "en",
+      "refs": [
+        "MC-BOLTZMANN-FACTOR-IS-A-PROBABILITY-WITHOUT-Z"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 3,
+        "endLine": 19
+      }
+    },
+    {
       "assetId": "phys.stat.boltzmann-factor/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.stat.boltzmann-factor",
@@ -247,6 +264,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 19,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/misconception/MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E",
+      "kind": "misconception",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E",
+      "content": "### MC-2: MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E\n**Probe:** \"Does increasing temperature increase or decrease the probability of being in a high-\nenergy state? What does the formula predict?\"  \n**Characteristic phrase:** \"Higher T means the exponent is smaller (less negative), so probability\ndecreases.\"  \n**Trigger:** Students correctly read that −E/k_BT becomes less negative as T increases, but\nincorrectly conclude the probability falls. They forget the partition function also changes.  \n**Conflict evidence [P28]:** At T₁: P_high/P_low = e^{−ΔE/k_BT₁}. At T₂ > T₁: the exponent is\nless negative → P_high/P_low is larger → high-energy states are relatively more probable at\nhigher T. The partition function increases with T, but the ratio P_high/P_low unambiguously\nincreases.  \n**Bridge [P30]:** \"The exponent −E/k_BT becomes less negative at higher T. e^{less negative} is\ncloser to 1 (larger). So the Boltzmann weight of the high-energy state increases relative to the\nlow-energy state. Higher T → more states accessible → high-energy states more populated.\"  \n**Replacement [P31]:** Higher T → larger Boltzmann factor for high-energy states → higher\nrelative probability for high-energy states.  \n**Discrimination pairs [P33]:** Doubling T affects P_high/P_low: (A) decreases (exponent more\nnegative), (B) increases (exponent less negative), (C) no change. Correct: (B).  \n**S6 repair path:** TA-4 (plot P_ε vs. T for two-state system — sigmoid curve going upward).",
+      "localKey": "MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E",
+      "language": "en",
+      "refs": [
+        "MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
@@ -272,6 +306,23 @@
       }
     },
     {
+      "assetId": "phys.stat.boltzmann-factor/misconception/MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA",
+      "kind": "misconception",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA",
+      "content": "### MC-3: MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA\n**Probe:** \"What is the difference between S = k_B ln Ω and P ∝ e^{−E/k_BT}? When do you use each?\"  \n**Characteristic phrase:** \"They're both Boltzmann — same thing.\"  \n**Trigger:** Both involve k_B and Boltzmann's name; students merge them.  \n**Conflict evidence [P28]:** S = k_B ln Ω: applied to an isolated system with fixed energy;\ncounts microstates; gives the entropy of a macrostate. P ∝ e^{−E/k_BT}: applied to a small system\nin contact with a heat reservoir at temperature T; gives the probability of a microstate at\na given energy. These are two different physical situations requiring two different formulas.  \n**Bridge [P30]:** \"S = k_B ln Ω: isolated box, fixed energy, count arrangements. Boltzmann factor:\nsystem touches a reservoir, energy can fluctuate, probability depends on energy and temperature.\nThe bridge between them: the Boltzmann factor is derived from the fundamental postulate by\ncounting reservoir microstates — but the formula itself is for the subsystem, not the whole\nisolated system.\"  \n**Replacement [P31]:** S = k_B ln Ω applies to isolated systems (fixed energy). P = e^{−E/k_BT}/Z\napplies to systems in thermal contact with a reservoir (variable energy, fixed T).  \n**Discrimination pairs [P33]:** For a system in a heat bath at temperature T, which formula gives\nthe probability of a specific microstate? (A) S = k_B ln Ω, (B) P = e^{−E/k_BT}/Z, (C) both\nequally. Correct: (B).  \n**S6 repair path:** TA-5 (side-by-side table: isolated system vs. reservoir system, their\nformulae, when to use each).",
+      "localKey": "MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA",
+      "language": "en",
+      "refs": [
+        "MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 39,
+        "endLine": 60
+      }
+    },
+    {
       "assetId": "phys.stat.boltzmann-factor/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.stat.boltzmann-factor",
@@ -281,6 +332,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",
+        "startLine": 60,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "phys.stat.boltzmann-factor/misconception/MC-BOLTZMANN-FACTOR-LINEAR-IN-T",
+      "kind": "misconception",
+      "conceptId": "phys.stat.boltzmann-factor",
+      "title": "MC-BOLTZMANN-FACTOR-LINEAR-IN-T",
+      "content": "### MC-4: MC-BOLTZMANN-FACTOR-LINEAR-IN-T\n**Probe:** \"Increasing T from 300 K to 600 K — what happens to e^{−E/(k_BT)} for E = 0.5 eV?\nDoes the probability double?\"  \n**Characteristic phrase:** \"Double the T means double the probability.\"  \n**Trigger:** Students apply linear intuition to an exponential function.  \n**Conflict evidence [P28]:** At 300 K: k_BT ≈ 0.026 eV. e^{−0.5/0.026} = e^{−19.2} ≈ 4.5×10⁻⁹.\nAt 600 K: k_BT ≈ 0.052 eV. e^{−0.5/0.052} = e^{−9.6} ≈ 6.8×10⁻⁵. Ratio: 6.8×10⁻⁵/4.5×10⁻⁹\n≈ 15,000. Doubling T increased the probability by a factor of 15,000, not 2. The exponential\namplifies the linear change in T dramatically.  \n**Bridge [P30]:** \"Doubling T halves the exponent magnitude. But e^{−x/2} ≫ e^{−x} by a factor\nof e^{x/2}. For large x (E ≫ k_BT), this factor is enormous. The exponential is the key: it\nturns small changes in T into enormous changes in probability.\"  \n**Replacement [P31]:** The Boltzmann factor is exponential in −E/(k_BT). Doubling T from 300 to\n600 K can increase probability by orders of magnitude, not by factor 2.  \n**Discrimination pairs [P33]:** Doubling T for a high-energy state (E ≫ k_BT): probability\n(A) doubles, (B) increases by a large exponential factor, (C) halves (less negative exponent).\nCorrect: (B).  \n**S6 repair path:** TA-6 (numerical comparison at T and 2T for specific E).\n\n---",
+      "localKey": "MC-BOLTZMANN-FACTOR-LINEAR-IN-T",
+      "language": "en",
+      "refs": [
+        "MC-BOLTZMANN-FACTOR-LINEAR-IN-T"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.stat.boltzmann-factor.md",

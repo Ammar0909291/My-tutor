@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.gravitational-field",
     "name": "Gravitational Field and Field Lines",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "understand",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

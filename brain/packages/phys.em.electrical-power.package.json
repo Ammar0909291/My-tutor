@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.electrical-power",
     "name": "Electrical Power",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

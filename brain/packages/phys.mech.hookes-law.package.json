@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.hookes-law",
     "name": "Hooke's Law",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,

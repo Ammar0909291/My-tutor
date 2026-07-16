@@ -6,14 +6,14 @@
     "conceptId": "phys.mod.compton-effect",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:60c34e9c57b6a514d38ede03b1e65afc2b071733d19eee60198a6cde028a6386",
+    "contentHash": "sha256:76a0b75b31e8c99d4c6006f0c7ecb1850bf8517079f593a0d48f702a4352fdc3",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.mod.compton-effect.md": "sha256:8ff22692ce23ca4ba5500cd2a95c8c54834017ce61048ddc46d34e92677e3174"
     },
-    "assetCount": 20,
+    "assetCount": 24,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -43,7 +43,7 @@
       "sourceLock": {
         "docs/curriculum/blueprints/phys.mod.compton-effect.md": "sha256:8ff22692ce23ca4ba5500cd2a95c8c54834017ce61048ddc46d34e92677e3174"
       },
-      "contentHash": "sha256:45a0e783d7fd5a8d7a126ac06b8689daa90bb811e5ffb4b5c2fac2d3d9a20a08",
+      "contentHash": "sha256:0c44b99aa3fea060c851bd33e79c79a891388e5df58adaf771fe44bd7df0b7e1",
       "ruleCount": 7,
       "bandCounts": {
         "3": 7
@@ -131,7 +131,7 @@
         "band": 3,
         "specificity": 1,
         "mandatory": false,
-        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-5 (addresses MC-1, MC-4)",
+        "citation": "docs/curriculum/blueprints/phys.mod.compton-effect.md#TA-5 (addresses MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH, MC-COMPTON-SHIFT-ZERO-AT)",
         "guardAst": {
           "kind": "eq",
           "field": "currentConceptId",
@@ -219,6 +219,23 @@
       }
     },
     {
+      "assetId": "phys.mod.compton-effect/misconception/MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH",
+      "kind": "misconception",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH",
+      "content": "### MC-1: MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH\n**Probe:** \"Does the Compton wavelength shift depend on the initial wavelength of the X-ray?\nWhy did Compton use X-rays rather than visible light?\"  \n**Characteristic phrase:** \"Shorter wavelength = bigger shift.\"  \n**Trigger:** Confusion between the absolute shift Δλ and the fractional shift Δλ/λ.  \n**Conflict evidence [P28]:** Δλ = λ_C(1 − cos θ): no λ appears in this formula. The absolute\nshift is the same for any initial wavelength at the same scattering angle. However, Δλ/λ is\nmuch larger for X-rays (λ ~ 0.1 nm) than for visible light (λ ~ 500 nm). Δλ_max = 2λ_C ≈\n4.85 pm. For X-rays: fractional shift ≈ 4.85/100 ≈ 5%. For visible light: ≈ 4.85/500,000 ≈\n0.001% — undetectable by 1923 instruments.  \n**Bridge [P30]:** \"The shift Δλ is fixed by h, m_e, c, and θ — all constants plus the scattering\nangle. No λ in the formula. Compton chose X-rays because 5% is detectable; 0.001% is not.\"  \n**Replacement [P31]:** Δλ is independent of initial wavelength; Δλ/λ is smaller for longer\nwavelengths, making detection harder.  \n**Discrimination pairs [P33]:** Compton shift for visible light vs. X-rays at same θ: (A) larger\nfor X-rays (shorter λ), (B) same absolute shift, (C) zero for visible light. Correct: (B).  \n**S6 repair path:** TA-4 (formula inspection: point out λ is absent from Δλ).",
+      "localKey": "MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH",
+      "language": "en",
+      "refs": [
+        "MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 3,
+        "endLine": 21
+      }
+    },
+    {
       "assetId": "phys.mod.compton-effect/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.mod.compton-effect",
@@ -228,6 +245,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 21,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/misconception/MC-WAVE-MODEL-PREDICTS-SAME-RESULT",
+      "kind": "misconception",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC-WAVE-MODEL-PREDICTS-SAME-RESULT",
+      "content": "### MC-2: MC-WAVE-MODEL-PREDICTS-SAME-RESULT\n**Probe:** \"What does the classical wave model predict for the wavelength of X-rays scattered by\nelectrons? How does this differ from the experimental result?\"  \n**Characteristic phrase:** \"The wave model can also explain the shift somehow.\"  \n**Trigger:** Students assume the wave model can be patched to explain any observation.  \n**Conflict evidence [P28]:** In the classical wave model, an incident X-ray oscillates the electron\nwhich then re-radiates at the same frequency (Thomson scattering). The scattered wavelength equals\nthe incident wavelength: Δλ = 0. Compton measured Δλ ≠ 0 for X-rays, exactly matching the\nphoton-momentum formula. Thomson scattering (classical) appears as a separate peak in the\nCompton spectrum at λ = λ₀ (from bound electrons that carry away the whole atom's recoil).  \n**Bridge [P30]:** \"The classical model predicts one peak in the scattered spectrum, at λ₀. Compton\nfound two peaks: one at λ₀ (Thomson, from bound electrons) and one at λ₀ + Δλ (Compton, from\nnearly free electrons). The second peak cannot be explained by wave theory.\"  \n**Replacement [P31]:** Classical Thomson scattering predicts Δλ = 0; Compton scattering produces\nΔλ > 0, inconsistent with the wave model and explained only by photon momentum.  \n**Discrimination pairs [P33]:** Classical wave model prediction for scattered X-ray wavelength:\n(A) increased by Δλ = λ_C(1−cos θ), (B) unchanged (Δλ = 0), (C) decreased. Correct: (B).  \n**S6 repair path:** TA-3 (comparison of wave prediction vs. Compton's experimental spectrum).",
+      "localKey": "MC-WAVE-MODEL-PREDICTS-SAME-RESULT",
+      "language": "en",
+      "refs": [
+        "MC-WAVE-MODEL-PREDICTS-SAME-RESULT"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
@@ -253,6 +287,23 @@
       }
     },
     {
+      "assetId": "phys.mod.compton-effect/misconception/MC-COMPTON-IS-ABSORPTION-AND-REEMISSION",
+      "kind": "misconception",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC-COMPTON-IS-ABSORPTION-AND-REEMISSION",
+      "content": "### MC-3: MC-COMPTON-IS-ABSORPTION-AND-REEMISSION\n**Probe:** \"In Compton scattering, the photon enters the material and a photon exits. Is the\nexiting photon the same as the entering one, or a new photon?\"  \n**Characteristic phrase:** \"The electron absorbs and re-emits a new photon.\"  \n**Trigger:** Analogy to the photoelectric effect (absorption) or fluorescence (absorb-reemit).  \n**Conflict evidence [P28]:** Compton scattering is an elastic collision — energy and momentum are\nconserved in a single interaction, and the photon is not absorbed. The outgoing photon is the\ncontinuation of the same electromagnetic interaction, now with altered energy and direction.\nFluorescence involves absorption into a bound state followed by re-emission, typically with a\ntime delay and isotropic emission. Compton scattering shows angle-dependent wavelength shift,\nnot isotropic — this is a kinematic signature of an elastic collision, not an absorb-reemit process.  \n**Bridge [P30]:** \"In the photoelectric effect, the electron absorbs the photon completely —\nno photon exits. In Compton scattering, the photon bounces off the electron, deflected and\nredshifted, like a ball bouncing off another ball. The photon continues to exist; it is not\nabsorbed.\"  \n**Replacement [P31]:** Compton scattering is an elastic photon-electron collision; the photon\nis not absorbed; the same photon exits with reduced energy (increased wavelength).  \n**Discrimination pairs [P33]:** Compton scattering involves: (A) absorption of photon and re-\nemission of a new photon, (B) elastic scattering — original photon redirected with energy loss,\n(C) photon splitting into two lower-energy photons. Correct: (B).  \n**S6 repair path:** TA-2 (snooker ball elastic collision analogy → comparison with photoelectric\nabsorption).",
+      "localKey": "MC-COMPTON-IS-ABSORPTION-AND-REEMISSION",
+      "language": "en",
+      "refs": [
+        "MC-COMPTON-IS-ABSORPTION-AND-REEMISSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 40,
+        "endLine": 63
+      }
+    },
+    {
       "assetId": "phys.mod.compton-effect/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.mod.compton-effect",
@@ -262,6 +313,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
+        "startLine": 63,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "phys.mod.compton-effect/misconception/MC-COMPTON-SHIFT-ZERO-AT",
+      "kind": "misconception",
+      "conceptId": "phys.mod.compton-effect",
+      "title": "MC-COMPTON-SHIFT-ZERO-AT-θ=0",
+      "content": "### MC-4: MC-COMPTON-SHIFT-ZERO-AT-θ=0\n**Probe:** \"What is the Compton wavelength shift when the photon is scattered at θ = 0° (forward\nscattering)? At θ = 90°? At θ = 180°?\"  \n**Characteristic phrase:** \"At θ = 0 the shift is maximum because the photon is going straight\nthrough.\"  \n**Trigger:** Incorrect physical reasoning about when momentum transfer is maximum.  \n**Conflict evidence [P28]:** Δλ = λ_C(1 − cos θ). At θ = 0: cos 0 = 1, Δλ = 0 (photon goes\nstraight through, no collision, no momentum transfer). At θ = 90°: cos 90° = 0, Δλ = λ_C.\nAt θ = 180°: cos 180° = −1, Δλ = 2λ_C (maximum backscatter, maximum momentum transfer).  \n**Bridge [P30]:** \"Think of the snooker ball: if the moving ball grazes the stationary ball very\nslightly (θ ≈ 0, forward scatter), it barely transfers momentum. If it hits it head-on and\nbounces straight back (θ = 180°, backscatter), it transfers maximum momentum. Same for photons:\nbackscatter = maximum Δλ.\"  \n**Replacement [P31]:** Δλ = 0 for forward scattering (θ = 0); Δλ = 2λ_C for backscattering\n(θ = 180°); Δλ = λ_C for 90° scattering.  \n**Discrimination pairs [P33]:** Maximum Compton shift occurs at θ = (A) 0°, (B) 90°, (C) 180°.\nCorrect: (C).  \n**S6 repair path:** TA-4 (Δλ vs. θ graph from the formula; tabulate for θ = 0, 60, 90, 120, 180).\n\n---",
+      "localKey": "MC-COMPTON-SHIFT-ZERO-AT",
+      "language": "en",
+      "refs": [
+        "MC-COMPTON-SHIFT-ZERO-AT"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",
@@ -334,12 +402,12 @@
       "kind": "teaching_action_meta",
       "conceptId": "phys.mod.compton-effect",
       "title": "MC Diagnostics",
-      "content": "{\"id\":\"TA-5\",\"title\":\"MC Diagnostics\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-4\"]}",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC Diagnostics\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH\",\"MC-COMPTON-SHIFT-ZERO-AT\"]}",
       "localKey": "TA-5",
       "language": "en",
       "refs": [
-        "MC-1",
-        "MC-4"
+        "MC-COMPTON-SHIFT-DEPENDS-ON-INITIAL-WAVELENGTH",
+        "MC-COMPTON-SHIFT-ZERO-AT"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.compton-effect.md",

@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.kinematics-2d",
     "name": "Kinematics in Two Dimensions",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 5,

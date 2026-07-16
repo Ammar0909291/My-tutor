@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.keplers-laws",
     "name": "Kepler's Laws of Planetary Motion",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "analyze",
     "masteryThreshold": 0.8,
     "estimatedHours": 6,

@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.mech.orbital-mechanics",
     "name": "Circular Orbital Mechanics",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 6,

@@ -25,7 +25,7 @@
   "concept": {
     "conceptId": "phys.em.biot-savart",
     "name": "Biot-Savart Law",
-    "difficultyRaw": "label: advanced",
+    "difficultyRaw": "advanced",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 6,

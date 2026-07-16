@@ -6,14 +6,14 @@
     "conceptId": "phys.stat.probability-basics",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:7d7a5671191b4e1dd14f0a67d36b23c5cf25864a2b409bc525ed78fccc667896",
+    "contentHash": "sha256:8462066f181c8573ccf0d7a4acdd4d8dc6ca80bac6d2578ccdc56186f705b547",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.stat.probability-basics.md": "sha256:3ffbc1c4c586d95814817afbc19eea120acc8ce31fbe31d9a9650660de21dfe5"
     },
-    "assetCount": 21,
+    "assetCount": 25,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 8,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -44,7 +44,7 @@
       "sourceLock": {
         "docs/curriculum/blueprints/phys.stat.probability-basics.md": "sha256:3ffbc1c4c586d95814817afbc19eea120acc8ce31fbe31d9a9650660de21dfe5"
       },
-      "contentHash": "sha256:a79067346ced51c63d730e438fd495d6c6845af939d9f8b7940c320e96420b22",
+      "contentHash": "sha256:23b66ec47b943eb4d42321925130d8d448024172b03ce8b7d9adcf0fed3a091d",
       "ruleCount": 8,
       "bandCounts": {
         "3": 8
@@ -132,7 +132,7 @@
         "band": 3,
         "specificity": 1,
         "mandatory": false,
-        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-5 (addresses MC-1, MC-2)",
+        "citation": "docs/curriculum/blueprints/phys.stat.probability-basics.md#TA-5 (addresses MC-1, MC-2, MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE, MC-ENTROPY-MEANS-DISORDER)",
         "guardAst": {
           "kind": "eq",
           "field": "currentConceptId",
@@ -239,6 +239,23 @@
       }
     },
     {
+      "assetId": "phys.stat.probability-basics/misconception/MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE",
+      "content": "### MC-1: MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE\n**Probe:** \"Is it theoretically possible — even if fantastically unlikely — for all the air\nmolecules in this room to spontaneously rush into one corner, leaving you in a vacuum?\"  \n**Characteristic phrase:** \"That's impossible — the second law forbids it.\"  \n**Trigger:** Treating the second law as a fundamental mechanical constraint rather than a\nstatistical statement.  \n**Conflict evidence [P28]:** The second law has no microscopic mechanism that prevents spontaneous\nordering. Each molecule follows Newton's laws, which are time-reversible. A video of gas molecules\ncolliding, reversed, still shows valid collisions. The second law is a probability statement:\nthe ratio Ω(ordered)/Ω(disordered) ≈ 10^(−10²³) for a macroscopic gas.  \n**Bridge [P30]:** \"It is not impossible — it is fantastically improbable. If every atom in the\nuniverse shuffled the molecules once per second since the Big Bang, you would not have a\nsubstantial probability of seeing this occur. 'Fantastically improbable' and 'impossible' are\ndifferent concepts.\"  \n**Replacement [P31]:** The second law holds not because microscopic reversal is forbidden but\nbecause the number of low-entropy microstates is an exponentially small fraction of all microstates.  \n**Discrimination pairs [P33]:** Gas spontaneously ordering into one corner: (A) forbidden by the\nsecond law (impossible), (B) possible but with probability ≈ 10^(−10²³), (C) equally likely as\nany other state. Correct: (B).  \n**S6 repair path:** TA-3 (microstate counting for small systems) → TA-4 (scaling argument).",
+      "localKey": "MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE",
+      "language": "en",
+      "refs": [
+        "MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
       "assetId": "phys.stat.probability-basics/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.stat.probability-basics",
@@ -248,6 +265,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 24,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-ENTROPY-MEANS-DISORDER",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "MC-ENTROPY-MEANS-DISORDER",
+      "content": "### MC-2: MC-ENTROPY-MEANS-DISORDER\n**Probe:** \"Ice (crystalline, ordered) has lower entropy than liquid water (disordered). Does this\nprove that high entropy always means disordered structures?\"  \n**Characteristic phrase:** \"High entropy = messy, low entropy = organised.\"  \n**Trigger:** Pedagogical shortcut from most introductory courses.  \n**Conflict evidence [P28]:** Crystals CAN have higher entropy than liquids in some systems (e.g.,\nhard-sphere colloids, liquid crystal transitions). \"Disorder\" as a concept has no mathematical\ndefinition in thermodynamics. S = k_B ln Ω always works; \"disorder\" sometimes gives the wrong\nprediction.  \n**Bridge [P30]:** \"The disorder heuristic works for most everyday systems and is why it persists.\nBut 'disorder' is a vague human concept. S = k_B ln Ω counts microstates. If ordered arrangements\nhave more microstates (as in some colloid systems), the 'ordered' macrostate has higher entropy.\nUse the formula, not the metaphor.\"  \n**Replacement [P31]:** S = k_B ln Ω is the definition of entropy; it has nothing to do with\n\"disorder\" as a visual concept.  \n**Discrimination pairs [P33]:** Entropy is: (A) a measure of disorder, (B) k_B ln Ω (count of\nmicrostates), (C) a measure of heat content. Correct: (B).  \n**S6 repair path:** TA-2 (direct microstate counting, no disorder language used).",
+      "localKey": "MC-ENTROPY-MEANS-DISORDER",
+      "language": "en",
+      "refs": [
+        "MC-ENTROPY-MEANS-DISORDER"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
@@ -273,6 +307,23 @@
       }
     },
     {
+      "assetId": "phys.stat.probability-basics/misconception/MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF",
+      "content": "### MC-3: MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF\n**Probe:** \"Why do we assume all accessible microstates are equally probable? Isn't that just an\nassumption?\"  \n**Characteristic phrase:** \"You can't just assume equal probability — that needs proof.\"  \n**Trigger:** Students apply \"prove everything from first principles\" heuristic; the postulate feels\narbitrary.  \n**Conflict evidence [P28]:** The fundamental postulate (equal probability of accessible\nmicrostates for an isolated system) cannot be derived from mechanics alone — it is a postulate,\nchosen because: (1) no microscopic mechanism distinguishes microstates, (2) all predictions from\nit match experiment, (3) in ergodic systems, time-averaging equals ensemble averaging (ergodic\nhypothesis provides partial grounding). Its justification is its predictive success.  \n**Bridge [P30]:** \"You are right — it is a postulate. So is Newton's second law. We accept\npostulates when they generate verified predictions. S = k_B ln Ω from this postulate reproduces\nall thermodynamic results. Every prediction we can test has been confirmed. The postulate stands\nbecause nature behaves as if it is true.\"  \n**Replacement [P31]:** The equal-probability postulate is an axiom of statistical mechanics,\njustified by its predictive accuracy, not derived from mechanics.  \n**Discrimination pairs [P33]:** Equal probability of microstates is: (A) provable from Newton's\nlaws, (B) an axiom justified by experimental success, (C) an approximation valid only at high\ntemperatures. Correct: (B).  \n**S6 repair path:** TA-5 (examples where the postulate gives quantitatively correct predictions).",
+      "localKey": "MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF",
+      "language": "en",
+      "refs": [
+        "MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 43,
+        "endLine": 65
+      }
+    },
+    {
       "assetId": "phys.stat.probability-basics/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.stat.probability-basics",
@@ -282,6 +333,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
+        "startLine": 65,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "phys.stat.probability-basics/misconception/MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS",
+      "kind": "misconception",
+      "conceptId": "phys.stat.probability-basics",
+      "title": "MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS",
+      "content": "### MC-4: MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS\n**Probe:** \"In the 4-molecule box example, (2,2) distribution has probability 37.5%. Is there a\nmeaningful chance the gas is in the (4,0) state? What about for 10²³ molecules?\"  \n**Characteristic phrase:** \"There's always some probability — so the gas might be ordered.\"  \n**Trigger:** Small-system intuition carried into large-system reasoning without appreciating the\ncombinatorial explosion.  \n**Conflict evidence [P28]:** For N molecules in a 2-box system: Ω((N/2, N/2)) / Ω(N, 0) =\nC(N, N/2) / 1 = N! / ((N/2)!)². Using Stirling: this ratio ≈ 2^N / √(πN/2). For N = 10²³:\nthis is 2^(10²³) — a number with 10²² digits. The probability of all molecules being in one box\nis 1/2^(10²³) — effectively zero.  \n**Bridge [P30]:** \"37.5% for 4 molecules becomes 1 in 10^(10²²) for a gas. 'Small but\nnonzero' becomes 'never in the lifetime of the universe.' This is why statistical statements\nabout macro-systems are effectively laws.\"  \n**Replacement [P31]:** For macroscopic N, probability fluctuations are proportional to 1/√N\nand peak probabilities are sharply concentrated at the most probable macrostate.  \n**Discrimination pairs [P33]:** For 10²³ molecules, the probability of (all left, none right): (A)\n37.5% (by analogy with 4-molecule case), (B) 1/2^(10²³) ≈ 0, (C) 50% (random walk). Correct: (B).  \n**S6 repair path:** TA-4 (scaling argument: show how probability ratio changes as N increases\nfrom 4 to 10²³).\n\n---",
+      "localKey": "MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS",
+      "language": "en",
+      "refs": [
+        "MC-SMALL-SYSTEM-STATISTICS-APPLY-TO-LARGE-SYSTEMS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",
@@ -356,12 +424,14 @@
       "kind": "teaching_action_meta",
       "conceptId": "phys.stat.probability-basics",
       "title": "MC-1 & MC-2 Diagnostics",
-      "content": "{\"id\":\"TA-5\",\"title\":\"MC-1 & MC-2 Diagnostics\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "content": "{\"id\":\"TA-5\",\"title\":\"MC-1 & MC-2 Diagnostics\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-ENTROPY-MEANS-DISORDER\",\"MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE\"]}",
       "localKey": "TA-5",
       "language": "en",
       "refs": [
         "MC-1",
-        "MC-2"
+        "MC-2",
+        "MC-SECOND-LAW-IS-ABSOLUTELY-IMPOSSIBLE",
+        "MC-ENTROPY-MEANS-DISORDER"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.stat.probability-basics.md",

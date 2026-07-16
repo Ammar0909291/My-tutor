@@ -6,25 +6,25 @@
     "conceptId": "phys.wave.beats",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:670d50d2ee39d412ca274c606528d6fe58291db8b93c49f98a0f62eefebd4057",
+    "contentHash": "sha256:6bf167bcfae93485baf79426099da3f89d5d14f2158494c1a198cf3e920dca6f",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.wave.beats.md": "sha256:bccfc3af3861820d6b74d4b6b824bfe8260917dbce6d01fe781ac56152396341"
     },
-    "assetCount": 9,
+    "assetCount": 20,
     "assetCounts": {
       "core_explanation": 1,
       "worked_example": 3,
       "misconception": 2,
-      "teaching_action_meta": 1,
+      "teaching_action_meta": 12,
       "mastery_probe": 1,
       "session_flow": 1
     },
-    "ruleCount": 1
+    "ruleCount": 12
   },
   "concept": {
     "conceptId": "phys.wave.beats",
     "name": "Beats",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 3,
@@ -43,10 +43,10 @@
       "sourceLock": {
         "docs/curriculum/blueprints/phys.wave.beats.md": "sha256:bccfc3af3861820d6b74d4b6b824bfe8260917dbce6d01fe781ac56152396341"
       },
-      "contentHash": "sha256:7475a4c097f82b5658d61f1690734e17ea97d0af3f9b448d667fbe9f3057bbe5",
-      "ruleCount": 1,
+      "contentHash": "sha256:5bd25ff1afaec270cd13a1be165da2c220d307065cc2ab8feafec5297c2d5bc5",
+      "ruleCount": 12,
       "bandCounts": {
-        "3": 1
+        "3": 12
       }
     },
     "rules": [
@@ -55,7 +55,83 @@
         "band": 3,
         "specificity": 1,
         "mandatory": false,
-        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-1 (addresses MC-BEATS-FREQUENCY-IS-AVERAGE, MC-BEATS-NEED-SAME-AMPLITUDE)",
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-2",
         "guardAst": {
           "kind": "eq",
           "field": "currentConceptId",
@@ -67,6 +143,139 @@
         "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
         "effect": {
           "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-3 (addresses MC-BEATS-FREQUENCY-IS-AVERAGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-6 (addresses MC-BEATS-NEED-SAME-AMPLITUDE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.beats.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.beats.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.beats"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.beats\"",
+        "effect": {
+          "actionClass": "CLOSURE"
         }
       }
     ]
@@ -170,14 +379,180 @@
       "assetId": "phys.wave.beats/teaching_action_meta/TA-1",
       "kind": "teaching_action_meta",
       "conceptId": "phys.wave.beats",
-      "title": "Composition step 1",
-      "content": "{\"id\":\"TA-1\",\"title\":\"Composition step 1\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P4\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-BEATS-FREQUENCY-IS-AVERAGE\",\"MC-BEATS-NEED-SAME-AMPLITUDE\"]}",
+      "title": "open",
+      "content": "{\"id\":\"TA-1\",\"title\":\"open\",\"primitives\":[\"P01\",\"P06\",\"P41\"],\"addresses\":[]}",
       "localKey": "TA-1",
       "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "bridge: one-beat-per-second reasoning",
+      "content": "{\"id\":\"TA-2\",\"title\":\"bridge: one-beat-per-second reasoning\",\"primitives\":[\"P30\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "Composition step 3",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Composition step 3\",\"primitives\":[\"P28\",\"P31\",\"P33\"],\"addresses\":[\"MC-BEATS-FREQUENCY-IS-AVERAGE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
       "refs": [
-        "MC-BEATS-FREQUENCY-IS-AVERAGE",
+        "MC-BEATS-FREQUENCY-IS-AVERAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "check-in",
+      "content": "{\"id\":\"TA-4\",\"title\":\"check-in\",\"primitives\":[\"P51\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "narrow: carrier vs. beat frequency distinction",
+      "content": "{\"id\":\"TA-5\",\"title\":\"narrow: carrier vs. beat frequency distinction\",\"primitives\":[\"P52\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "Composition step 6",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Composition step 6\",\"primitives\":[\"P28\",\"P30\",\"P31\",\"P33\"],\"addresses\":[\"MC-BEATS-NEED-SAME-AMPLITUDE\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
         "MC-BEATS-NEED-SAME-AMPLITUDE"
       ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "retrieval seed: sum-to-product for 500/504 Hz",
+      "content": "{\"id\":\"TA-7\",\"title\":\"retrieval seed: sum-to-product for 500/504 Hz\",\"primitives\":[\"P62\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "mastery probe: tuner direction problem",
+      "content": "{\"id\":\"TA-8\",\"title\":\"mastery probe: tuner direction problem\",\"primitives\":[\"P36\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "retrieval schedule: Day 1, Day 4, Day 14",
+      "content": "{\"id\":\"TA-9\",\"title\":\"retrieval schedule: Day 1, Day 4, Day 14\",\"primitives\":[\"P89\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "mastery gate: 80% on P4-a through P4-e",
+      "content": "{\"id\":\"TA-10\",\"title\":\"mastery gate: 80% on P4-a through P4-e\",\"primitives\":[\"P4\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "regulation tail",
+      "content": "{\"id\":\"TA-11\",\"title\":\"regulation tail\",\"primitives\":[\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.beats.md",
+        "startLine": 203,
+        "endLine": 203
+      }
+    },
+    {
+      "assetId": "phys.wave.beats/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.beats",
+      "title": "close",
+      "content": "{\"id\":\"TA-12\",\"title\":\"close\",\"primitives\":[\"P68\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
       "span": {
         "file": "docs/curriculum/blueprints/phys.wave.beats.md",
         "startLine": 203,

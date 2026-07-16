@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.electric-dipole",
     "name": "Electric Dipole",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

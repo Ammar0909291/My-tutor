@@ -24,7 +24,7 @@
   "concept": {
     "conceptId": "phys.wave.shm-energy",
     "name": "Energy in Simple Harmonic Motion",
-    "difficultyRaw": "label: proficient",
+    "difficultyRaw": "proficient",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

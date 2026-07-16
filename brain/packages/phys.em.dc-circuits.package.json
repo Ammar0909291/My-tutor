@@ -23,7 +23,7 @@
   "concept": {
     "conceptId": "phys.em.dc-circuits",
     "name": "DC Circuits",
-    "difficultyRaw": "label: developing",
+    "difficultyRaw": "developing",
     "bloom": "apply",
     "masteryThreshold": 0.8,
     "estimatedHours": 4,

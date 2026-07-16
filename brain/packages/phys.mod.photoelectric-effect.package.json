@@ -6,14 +6,14 @@
     "conceptId": "phys.mod.photoelectric-effect",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:4adbdc5db11e0e618d1d3686f146bbae76ee10b34485fc8fc0acb285d008f6f1",
+    "contentHash": "sha256:7b93e34f6fa352460150f13af1d77fa33c6d68565b3fef58794559cbb59ab9f1",
     "sourceLock": {
       "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md": "sha256:e0232f1088c5ca05f7e133ef00499e50e8f3bc5c5def90648ad389ec1f379e22"
     },
-    "assetCount": 20,
+    "assetCount": 24,
     "assetCounts": {
       "core_explanation": 1,
-      "misconception": 4,
+      "misconception": 8,
       "teaching_action_meta": 7,
       "mastery_probe": 1,
       "teaching_note": 6,
@@ -43,7 +43,7 @@
       "sourceLock": {
         "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md": "sha256:e0232f1088c5ca05f7e133ef00499e50e8f3bc5c5def90648ad389ec1f379e22"
       },
-      "contentHash": "sha256:5e3acdb6c7f4e65d1cb579f6b6b1fbf4b8368b90ed684287e9ffb1a3818d40fd",
+      "contentHash": "sha256:0a6224d0743f45da2f82aeb76b0356dac1c01c151ac163cd36189e1fbf98fac6",
       "ruleCount": 7,
       "bandCounts": {
         "3": 7
@@ -150,7 +150,7 @@
         "band": 3,
         "specificity": 1,
         "mandatory": false,
-        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-6 (addresses MC-1, MC-3)",
+        "citation": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md#TA-6 (addresses MC-1, MC-3, MC-BRIGHTER-LIGHT-FASTER-ELECTRONS, MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS)",
         "guardAst": {
           "kind": "eq",
           "field": "currentConceptId",
@@ -219,6 +219,23 @@
       }
     },
     {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-BRIGHTER-LIGHT-FASTER-ELECTRONS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "MC-BRIGHTER-LIGHT-FASTER-ELECTRONS",
+      "content": "### MC-1: MC-BRIGHTER-LIGHT-FASTER-ELECTRONS\n**Probe:** \"You double the intensity of the light shining on a metal surface (same frequency,\nwhich is above threshold). What happens to (a) the number of electrons emitted per second, and\n(b) the maximum kinetic energy of emitted electrons?\"  \n**Characteristic phrase:** \"Brighter light gives faster electrons.\"  \n**Trigger:** Wave-model intuition: more light = more energy = more energetic electrons.  \n**Conflict evidence [P28]:** Experimentally: doubling intensity doubles the photocurrent (more\nelectrons per second) but leaves KE_max unchanged. KE_max depends only on frequency via\nKE_max = hν − φ. A brighter source delivers more photons per second, but each photon still\ncarries energy hν — the same as before.  \n**Bridge [P30]:** \"In the photon model, intensity = number of photons per second. Each photon\ncarries the same energy hν regardless of how many there are. More photons → more electrons\nknocked out, but each electron gets exactly the same energy hν − φ. Intensity changes the\nphotocurrent, not the electron speed.\"  \n**Replacement [P31]:** KE_max depends on frequency (hν − φ) only. Photocurrent depends on\nintensity (photon rate) only.  \n**Discrimination pairs [P33]:** Doubling intensity: (A) doubles KE_max, (B) doubles photocurrent\nonly, (C) does nothing. Correct: (B).  \n**S6 repair path:** TA-3 (wave-model failure evidence) → TA-4 (photon model construction).",
+      "localKey": "MC-BRIGHTER-LIGHT-FASTER-ELECTRONS",
+      "language": "en",
+      "refs": [
+        "MC-BRIGHTER-LIGHT-FASTER-ELECTRONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 3,
+        "endLine": 23
+      }
+    },
+    {
       "assetId": "phys.mod.photoelectric-effect/misconception/MC-2",
       "kind": "misconception",
       "conceptId": "phys.mod.photoelectric-effect",
@@ -228,6 +245,23 @@
       "language": "en",
       "refs": [
         "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 23,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY",
+      "content": "### MC-2: MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY\n**Probe:** \"If you shine an extremely bright red lamp (below threshold frequency) on a metal\nsurface for one hour, will any electrons eventually be emitted?\"  \n**Characteristic phrase:** \"If you leave the light on long enough, it should work.\"  \n**Trigger:** Classical wave model: energy accumulates in the surface until an electron has enough.  \n**Conflict evidence [P28]:** Experimentally: no electrons ever appear below threshold, regardless\nof intensity or exposure time. This was one of the classical model's catastrophic failures —\nit predicted a time delay for emission, but experiments showed instantaneous emission (within\n~10⁻⁹ s even for very dim light above threshold).  \n**Bridge [P30]:** \"In the wave model, energy arrives continuously and accumulates. In the photon\nmodel, energy arrives in discrete packets. A photon of red light carries energy hν_red < φ.\nIt knocks on the door but doesn't have the key. No matter how many of these underpowered photons\nknock, the door stays shut. Photons do not share their energy.\"  \n**Replacement [P31]:** Below threshold frequency: no electron emission ever, no matter how high\nthe intensity or how long the exposure.  \n**Discrimination pairs [P33]:** Below threshold, bright light for 1 hour: (A) eventually emits\nelectrons, (B) emits no electrons, (C) depends on the specific metal. Correct: (B).  \n**S6 repair path:** TA-2 (electroscope demo) → TA-3 (classical vs. photon model table).",
+      "localKey": "MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY",
+      "language": "en",
+      "refs": [
+        "MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
@@ -253,6 +287,23 @@
       }
     },
     {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS",
+      "content": "### MC-3: MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS\n**Probe:** \"In a photoelectric experiment, the stopping potential is +2V applied to the collector.\nDoes this accelerate or decelerate the emitted electrons?\"  \n**Characteristic phrase:** \"Positive voltage means electrons speed up toward it.\"  \n**Trigger:** Students apply an incorrect sign convention — they think positive voltage attracts\nelectrons (which is true for acceleration in a vacuum tube) but forget that the stopping potential\nis applied to RETARD electrons, not accelerate them.  \n**Conflict evidence [P28]:** The stopping potential is applied to OPPOSE the motion of electrons\nfrom emitter to collector. A positive potential on the collector means it attracts electrons —\nwait, that is incorrect. The stopping potential is applied to make the collector NEGATIVE relative\nto the emitter, creating a retarding field that slows electrons. The polarity must slow electrons.  \n**Bridge [P30]:** \"The stopping potential V_s is the potential that just barely stops even the\nfastest electron from reaching the collector. The collector is made negative relative to the\nemitter: V_collector = −V_s. The electron (negative charge) moving toward a negative collector\nis repelled. When eV_s = KE_max, the most energetic electron is brought to rest just at the\ncollector.\"  \n**Replacement [P31]:** Stopping potential creates a retarding electric field that decelerates\nemitted electrons; eV_s = KE_max.  \n**Discrimination pairs [P33]:** Stopping potential is: (A) positive on collector to speed up\nelectrons, (B) negative on collector to slow electrons down, (C) applied to the emitter.\nCorrect: (B).  \n**S6 repair path:** TA-6 (stopping-potential circuit diagram drill).",
+      "localKey": "MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS",
+      "language": "en",
+      "refs": [
+        "MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 42,
+        "endLine": 65
+      }
+    },
+    {
       "assetId": "phys.mod.photoelectric-effect/misconception/MC-4",
       "kind": "misconception",
       "conceptId": "phys.mod.photoelectric-effect",
@@ -262,6 +313,23 @@
       "language": "en",
       "refs": [
         "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
+        "startLine": 65,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "phys.mod.photoelectric-effect/misconception/MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.photoelectric-effect",
+      "title": "MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS",
+      "content": "### MC-4: MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS\n**Probe:** \"Two different metals, sodium and platinum, are illuminated with the same UV source.\nWill they have the same threshold frequency? Same stopping potential? Explain.\"  \n**Characteristic phrase:** \"The threshold is the same for any metal.\"  \n**Trigger:** Treating φ as a universal constant; not understanding that φ varies by material.  \n**Conflict evidence [P28]:** φ(Na) ≈ 2.3 eV (threshold ~540 nm, visible green); φ(Pt) ≈ 5.7 eV\n(threshold ~220 nm, deep UV). The same UV source may eject electrons from Na but not from Pt.\nThreshold frequency ν₀ = φ/h is material-specific.  \n**Bridge [P30]:** \"The work function is the energy required to free an electron from that metal's\nspecific lattice structure and surface potential. Metals with loosely bound valence electrons\n(alkali metals like Na, K, Cs) have low work functions — visible light can eject their electrons.\nTransition metals (Pt, W) hold electrons tightly — you need UV.\"  \n**Replacement [P31]:** The work function φ is material-specific; ν₀ = φ/h varies by metal.  \n**Discrimination pairs [P33]:** Two metals with different φ values under the same UV source:\n(A) both have the same threshold, (B) different thresholds, (C) work functions don't affect the\nthreshold. Correct: (B).  \n**S6 repair path:** TA-5 (work function table for common metals — Na, K, Zn, Cu, Pt).\n\n---",
+      "localKey": "MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS",
+      "language": "en",
+      "refs": [
+        "MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
@@ -349,12 +417,14 @@
       "kind": "teaching_action_meta",
       "conceptId": "phys.mod.photoelectric-effect",
       "title": "MC-1 & MC-3 Diagnostic",
-      "content": "{\"id\":\"TA-6\",\"title\":\"MC-1 & MC-3 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "content": "{\"id\":\"TA-6\",\"title\":\"MC-1 & MC-3 Diagnostic\",\"primitives\":[\"P14\",\"P28\",\"P31\",\"P33\",\"P36\"],\"addresses\":[\"MC-1\",\"MC-3\",\"MC-BRIGHTER-LIGHT-FASTER-ELECTRONS\",\"MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS\"]}",
       "localKey": "TA-6",
       "language": "en",
       "refs": [
         "MC-1",
-        "MC-3"
+        "MC-3",
+        "MC-BRIGHTER-LIGHT-FASTER-ELECTRONS",
+        "MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS"
       ],
       "span": {
         "file": "docs/curriculum/blueprints/phys.mod.photoelectric-effect.md",
