@@ -360,8 +360,14 @@ export async function POST(req: Request) {
     // (still parsed/preferred when present), never the sole path to render.
     let availableVisualHoisted: string | null = null
     let forceVisualRenderHoisted = false
-    // CTO iteration (session lifecycle): due-review count hoisted from the
-    // library revision block for the OPENING's review-first enforcement.
+    // Library Mode duplication cleanup: this used to be set from
+    // spacedRevision.ts's per-turn revision block (removed — see the
+    // Library-mode teaching-strategy section below). The session OPENING's
+    // review-first enforcement is fed directly by the Spaced Retrieval
+    // Scheduler instead (its own local variable, computed at session
+    // opening only). This stays declared, always 0 for Library Mode now,
+    // only because the Kernel shadow pipeline still reads it below as an
+    // observation-only field with no effect on the served response.
     let libraryDueRevisionCountHoisted = 0
     let libraryLessonPlanHoisted: import('@/lib/school/adaptive/lessonPlanner').LessonPlan | null = null
     // W2-2 (ADR 09): lesson stage progress — hoisted for post-AI tag-parse + persist.
@@ -1152,11 +1158,25 @@ export async function POST(req: Request) {
               systemPrompt += `\n\nDo not use a [HINT] tag this turn — explain directly and clearly instead, per this strategy's directive.`
             }
 
-            const { getDueRevisions, buildRevisionBlock } = await import('@/lib/school/adaptive/spacedRevision')
-            const dueRevisions = await getDueRevisions(userId, subjectCode, moduleNodeSlugs)
-            const revBlock = buildRevisionBlock(dueRevisions)
-            if (revBlock) systemPrompt += revBlock
-            libraryDueRevisionCountHoisted = dueRevisions.length
+            // Library Mode duplication cleanup: spacedRevision.ts's
+            // getDueRevisions/buildRevisionBlock used to inject its own
+            // "DUE FOR REVIEW" block here on every Library turn, which
+            // could co-fire with sessionLifecycle.ts's session-opening
+            // due-review instruction (fed by the Spaced Retrieval
+            // Scheduler) and produce contradictory prompts on the same
+            // turn (one instructs "Can you tell me what you remember
+            // about [concept]?", the other explicitly forbids that exact
+            // phrasing). Removed — the Spaced Retrieval Scheduler
+            // (spacedRetrievalScheduler.ts, wired at session opening
+            // below) is now the ONLY review system for Library Mode.
+            // School Mode's own spacedRevision.ts call sites (chapter-level
+            // getDueRevisions + advanceRevision) are untouched and remain
+            // fully intact — this removal is scoped to Library Mode only.
+            // libraryDueRevisionCountHoisted therefore stays at its default
+            // (0) for Library Mode turns; it is still read by the Kernel
+            // shadow pipeline below (observation-only, no effect on the
+            // served response) and left in place rather than threading a
+            // second variable through for a non-serving consumer.
 
             // W2-1 (ADR 08 §4a): seed conceptId for Library mode — canonical KG entry concept if
             // no snapshot yet. Resolves moduleSlug → KG domain → cross-domain entry concept ID
@@ -1808,14 +1828,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (boundary) {
             // Spaced Retrieval Scheduler (Claude Recommendation #8, wired in
             // here per the follow-up recommendation): the session OPENING's
-            // due-review count now comes from the real forgetting-curve
+            // due-review count comes from the real forgetting-curve
             // scheduler (scheduleReviews/loadReviewQueue over Student
-            // Intelligence), not the per-turn interval-ladder nudge above
-            // (libraryDueRevisionCountHoisted / spacedRevision.ts, which
-            // stays exactly as-is for its own, separate every-turn purpose).
+            // Intelligence). spacedRevision.ts's Library Mode call site
+            // (the per-turn interval-ladder nudge that used to run above,
+            // in the ADR 02 teaching-strategy section) has since been
+            // removed as duplicated/conflicting responsibility — this
+            // scheduler is now the ONLY review system for Library Mode.
+            // School Mode's spacedRevision.ts call sites are untouched.
             // Fail-safe: a scheduler error never blocks the turn — it just
-            // means no due-review nudge this opening, same as before this
-            // wiring existed.
+            // means no due-review nudge this opening.
             let dueReviewCount = 0
             try {
               const { loadReviewQueue } = await import('@/lib/teaching/retrieval/spacedRetrievalScheduler')
