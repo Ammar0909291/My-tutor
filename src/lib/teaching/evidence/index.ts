@@ -6,6 +6,8 @@
  *                                                     │
  *   loadEvidenceCorpus (read-only) ◀────────────────┘
  *        │ readLessonEvidence          normalized LessonEvidence[]
+ *        │ attachSpineSignals          + workedExampleUsed/decisionProvenance
+ *        │                               (spineSignals.ts, ADR 13 Phase 2 follow-up)
  *        │ computeLearningAnalytics    metrics (subject-agnostic)
  *        │ buildAuthoringFeedback      blueprint/probe/misconception findings
  *        └ buildPackageFeedback        per-Educational-Package summaries
@@ -18,6 +20,7 @@ export * from './evidenceReader'
 export * from './learningAnalytics'
 export * from './authoringFeedback'
 export * from './packageFeedback'
+export * from './spineSignals'
 export {
   loadEvidenceCorpus, artifactPackageIndex, artifactPackageInspector,
   clearEvidencePackageCache,

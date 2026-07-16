@@ -1382,3 +1382,28 @@ Assessment) — not due yet.
   prisma loads + brain/packages inspector). CLI: `npm run evidence:report`
   (stdout or `--out` markdown files). Pure core is DB/fs-free; 33 tests in
   `src/tests/evidenceLoop.test.ts`. Suite 1201 passed/1 skipped, tsc clean.
+- **2026-07-16 — Evidence Loop: worked-example-usage follow-up (parallel-
+  session reconciliation).** A second session, given the same mission
+  concurrently, found one explicit capture target the Evidence Reader above
+  structurally cannot supply: "worked example used" — none of its four
+  table sources (EvidenceEvent/TeachingStrategyEvent/TopicProgress/
+  MistakeRecord) carry it. The signal exists live today only in the EOS M1
+  Evidence Spine's `DecisionRecorded` event (`workedExampleFirst` +
+  `provenance[]`, written every turn by `evidence-spine/turnEmitter.ts`).
+  Per the standing "never create parallel architectures" rule, the second
+  session's own full parallel implementation was discarded in favor of one
+  small additive module, `src/lib/teaching/evidence/spineSignals.ts`:
+  joins `DecisionRecorded` rows onto `LessonEvidence` by shared `turnId`
+  (both writers populate from the same turn-close block in `route.ts`, so
+  this is an exact join, not a new derivation), producing
+  `workedExampleUsed`/`decisionProvenance` fields plus a
+  `computeWorkedExampleEffectiveness` metric mirroring
+  `learningAnalytics.ts`'s existing next-probe-join pattern. Zero changes
+  to `evidenceReader.ts`/`learningAnalytics.ts`/`authoringFeedback.ts`/
+  `packageFeedback.ts` — `LessonWithSpineSignals` is a structural superset
+  of `LessonEvidence`, so every existing function accepts it unmodified.
+  `scripts/brain/evidence-report.ts` updated to attach the signal before
+  computing analytics/feedback and to print the worked-example pass-rate
+  comparison. 11 new tests in `src/tests/spineSignals.test.ts`. Suite 1212
+  passed/1 skipped, tsc clean, build succeeds. No new telemetry, no schema
+  change, no other file touched.
