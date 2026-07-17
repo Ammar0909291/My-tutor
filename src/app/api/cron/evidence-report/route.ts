@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { loadFailureAnalyticsDashboard } from '@/lib/teaching/dashboard/failureAnalyticsDashboard'
+import { captureError } from '@/lib/monitoring'
 
 function isAuthorized(req: Request): boolean {
   const secret = process.env.CRON_SECRET
@@ -41,6 +42,7 @@ export async function GET(req: Request) {
     })
   } catch (err) {
     console.error('[cron/evidence-report]', err)
+    captureError(err, { route: 'api/cron/evidence-report' })
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
   }
 }

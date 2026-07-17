@@ -74,8 +74,42 @@ DATABASE_URL=<prod pooled> DIRECT_URL=<prod direct> \
      (requires `DIRECT_URL` in build-time env)
 4. Deploy; then verify:
    - `GET /api/health` returns `{"status":"ok","db":true,"redis":"ok"}`
+     with an empty `config.missing` array (non-empty means a required
+     env var from section 1 is unset — fix before treating the deploy
+     as healthy, even though the endpoint still returns 200/503 based
+     on DB reachability alone)
    - log in, send one tutor message, open one insights panel
 5. Watch Sentry + Vercel logs for 10 minutes after deploy.
+
+### Knowledge Assets / Explanation Memory seeding (one-time, then as-needed)
+
+`assembleLesson()` (the canonical authored-content serving path — see
+`docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` §6.3) only ever serves
+content that has already been seeded as `ACTIVE` `AssetIdentity` rows.
+This is easy to overlook because the app degrades silently and
+correctly without it (every turn falls back to the LLM) — nothing
+breaks, but no production deployment actually serves authored content
+until this has been run at least once:
+
+```bash
+# Seeds the authored Educational Brain concept entries as ACTIVE
+# AssetIdentity rows (idempotent — existing canonicalSlug rows are
+# skipped, never duplicated or overwritten).
+DATABASE_URL=<prod pooled> DIRECT_URL=<prod direct> \
+  npm run seed:brain-assets
+```
+
+Verify it worked: after seeding, a chat turn on one of the seeded
+concepts (`math.arith.fractions`, `phys.mech.newtons-first-law`,
+`eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness`
+as of this writing) should return `provider: "memory"` in its response
+instead of `"groq"`/`"yandex"`.
+
+Whether this has actually been run against the current production
+database cannot be verified from a read-only repository audit — an
+operator with production database access must confirm it directly
+(query `SELECT count(*) FROM asset_identity WHERE status = 'ACTIVE'`,
+or check the chat response `provider` field live).
 
 ---
 
@@ -129,10 +163,12 @@ branch takes ~10 minutes and proves the runbook works.
 - `GET /api/health` — unauthenticated probe: 200 + `{db, redis}` status,
   503 when the database is unreachable (Redis never fails the check).
 - Sentry reporting via `src/lib/monitoring.ts` (`captureError`) — active
-  when `SENTRY_DSN` is set. Captures: route failures in learn/chat and
-  coach, swallowed AI failures (`generateJSON`/`routeJSON`), and database
-  connection failures that survive all `withRetry` attempts. Deduped
-  (5 min) and capped (20 events/min) so the free tier is not flooded.
+  when `SENTRY_DSN` is set. Captures: route failures in learn/chat, coach,
+  onboarding, teaching-engine, and the school practice/assessment/mock
+  generators; both cron jobs; swallowed AI failures
+  (`generateJSON`/`routeJSON`); and database connection failures that
+  survive all `withRetry` attempts. Deduped (5 min) and capped
+  (20 events/min) so the free tier is not flooded.
 - Global AI budget (`AI_GLOBAL_RPM`) — exhaustion returns a friendly 429
   on chat/coach and degrades to null (skip) for background generation;
   logged as `[ai/budget]` warnings.
@@ -151,5 +187,8 @@ branch takes ~10 minutes and proves the runbook works.
    beyond the actual provider quota.
 4. **Logs**: Vercel free tier retains ~1h. Add a free log drain
    (Axiom/Betterstack) for 30-day retention when real users arrive.
-5. **Cron**: the reminders cron runs daily at 09:00 UTC (`vercel.json`).
-   Vercel → Cron tab shows failures; Sentry will catch exceptions.
+5. **Cron**: two scheduled jobs in `vercel.json` — `/api/cron/reminders`
+   (daily, 09:00 UTC) and `/api/cron/evidence-report` (weekly, Monday
+   08:00 UTC). Both require `CRON_SECRET` (deny all requests when unset)
+   and both report failures via `captureError`. Vercel → Cron tab shows
+   every invocation; Sentry will catch exceptions when `SENTRY_DSN` is set.

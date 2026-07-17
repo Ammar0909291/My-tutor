@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { sendStudyReminder } from '@/lib/notifications/email'
 import { sendTelegramMessage } from '@/lib/notifications/telegram'
+import { captureError } from '@/lib/monitoring'
 
 function isAuthorized(req: Request): boolean {
   const secret = process.env.CRON_SECRET
@@ -52,6 +53,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ success: true, sent })
   } catch (err) {
     console.error('[cron/reminders]', err)
+    captureError(err, { route: 'api/cron/reminders' })
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
   }
 }
