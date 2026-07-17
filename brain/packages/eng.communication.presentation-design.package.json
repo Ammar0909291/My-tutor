@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.presentation-design-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.presentation-design",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ba03bd5541cbf33c3772b787d2d8da4b08bfe03f36e17cb54f7ceb58e070a812",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.presentation-design.md": "sha256:319778c2fb7b0f57c88580ddfe4ff05774da962b8c81a77097209613a36d665c"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.presentation-design",
+    "name": "Presentation Design",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.speaking.presentation-skills",
+      "eng.communication.technical-writing"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.presentation-design-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.presentation-design (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.presentation-design.md": "sha256:319778c2fb7b0f57c88580ddfe4ff05774da962b8c81a77097209613a36d665c"
+      },
+      "contentHash": "sha256:89fd5466f7fc1e1fa09515bea39f2844ed4e03d8be8477753dfc3223fa52d9ff",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.presentation-design.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.presentation-design.md#TA-1 (addresses MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.presentation-design"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.presentation-design\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.presentation-design.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.presentation-design.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.presentation-design"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.presentation-design\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.presentation-design.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.presentation-design.md#TA-3 (addresses MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.presentation-design"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.presentation-design\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.presentation-design.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.presentation-design.md#TA-4 (addresses MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY, MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.presentation-design"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.presentation-design\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.presentation-design/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "Presentation Design — Conceptual Development Sequence",
+      "content": "### TA-1 — Slides Support Speech, They Don't Duplicate It (MC-A)\n\nUsing the book-while-storytelling anchor, teach that a slide's job is to reinforce, not replace,\nspoken content. Student practice: given a text-heavy slide duplicating a full spoken script, reduce\nit to a short phrase plus a supporting visual.\n\n### TA-2 — One Main Idea Per Slide\n\nExtend TA-1: teach that each slide should carry exactly one main idea, since multiple competing ideas\non one slide re-creates the same divided-attention problem as full-sentence text. Student practice:\ngiven a slide crowded with three unrelated points, split it into three single-idea slides.\n\n### TA-3 — Choosing Visuals That Clarify, Not Decorate (MC-B)\n\nUsing the unrelated-painting anchor, teach evaluating a candidate visual by whether it clarifies the\nspecific spoken point. Student practice: given a slide with a decorative, unrelated image, replace it\nwith a visual (or no visual) that actually clarifies the point.\n\n### TA-4 — Full Application: Designing a Short Slide Set\n\nGive the student a short spoken presentation script (3-4 points). They must design one slide per\nmain idea (TA-2), reducing text to key phrases that support rather than duplicate the speech (TA-1),\nand select or reject visual elements based on whether each one clarifies its point (TA-3) — the full\nsynthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 137,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/misconception/MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY",
+      "kind": "misconception",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "**Trigger signal:** Student designs slides packed with full sentences or paragraphs duplicating",
+      "content": "### MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY\n\n**Trigger signal:** Student designs slides packed with full sentences or paragraphs duplicating\neverything the speaker plans to say, rather than a small number of key words, phrases, or visuals\nthat support the spoken content — creating a slide that competes with the speaker for the audience's\nattention rather than reinforcing what is being said aloud.\n\n**Conflict evidence [P28]:** Show the student two slides on the same topic: one dense with full\nsentences duplicating the entire spoken script, and one with a single short phrase and one supporting\nimage. Ask: \"If you are reading the dense slide, are you also listening to the speaker at the same\ntime? Which slide lets the audience do both — read and listen — without choosing one over the\nother?\"\n\n**Bridge text [P30]:** \"Putting your full script on a slide is like handing someone a book to read\nat the exact moment you're trying to tell them a story out loud — they have to choose between reading\nyour slide and listening to you, and usually the slide wins, so your spoken words go unheard. A\nstrong slide supports the spoken word instead of duplicating it, so the audience can do both at\nonce.\"\n\n**Replacement text [P31]:** \"Never put your full spoken script on a slide. Reduce each slide to the\nfew key words, phrases, or visuals that support what you'll say aloud — the slide's job is to\nreinforce your speech, not replace the audience's need to listen to it.\"\n\n**Discrimination pairs [P33]:**\n1. A slide containing three full sentences duplicating the entire spoken explanation (competes with\n   the speaker, forces a reading-vs-listening choice) vs. a slide with one short phrase and one\n   supporting diagram (reinforces the spoken explanation without competing for attention).\n2. A student whose slides could be read silently and fully understood with the speaker absent\n   (misconception — the slide has become the presentation) vs. a student whose slides only make full\n   sense alongside the spoken explanation (correct — the slide supports, the speech carries the\n   content).\n\n**s6_path:** If the student continues to write full sentences on slides after the bridge, have them\ntake one of their own text-heavy slides and reduce it to no more than five words or one short phrase\nplus a visual, then explain aloud, unaided by the slide, everything the original sentences said.",
+      "localKey": "MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/misconception/MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL",
+      "kind": "misconception",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "**Trigger signal:** Student adds visual elements (clip art, unrelated stock images, decorative",
+      "content": "### MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL\n\n**Trigger signal:** Student adds visual elements (clip art, unrelated stock images, decorative\nborders, animations) chosen for visual appeal or a sense of \"professionalism\" rather than because\nthey clarify or reinforce the specific spoken point on that slide, cluttering slides with visuals\nthat add no meaning and can distract from the actual content.\n\n**Conflict evidence [P28]:** Show the student two slides making the same single point: one with a\ndecorative, thematically unrelated stock image chosen only \"to look professional,\" and one with a\nsimple diagram that directly illustrates the relationship being described aloud. Ask: \"Does the\nstock image help the audience understand the specific point being made? Does the diagram?\"\n\n**Bridge text [P30]:** \"Adding a decorative image because a slide 'needs something' is like hanging\nan unrelated painting on a whiteboard you're using to explain a math problem — it might look nicer,\nbut it does nothing to help anyone understand the problem, and it can even distract from the diagram\nthat actually would help. Every visual element on a slide should be chosen because it clarifies the\nspecific point being made, not merely to fill space or look polished.\"\n\n**Replacement text [P31]:** \"Before adding any visual to a slide, ask: does this specific image,\nchart, or diagram help the audience understand the point I'm making right now, or is it just there to\nfill space or look nice? Only keep visuals that clarify — cut anything purely decorative.\"\n\n**Discrimination pairs [P33]:**\n1. An unrelated stock photo added \"to look professional\" that has no connection to the point being\n   made (decorative, adds no meaning) vs. a simple diagram directly illustrating the relationship\n   described aloud (clarifying, directly supports understanding).\n2. A student who selects visuals based on appearance or a sense of obligation to fill the slide\n   (misconception) vs. a student who selects visuals based on whether they clarify the specific\n   spoken point (correct discipline).\n\n**s6_path:** If the student continues to add purely decorative visuals after the bridge, have them\nreview a slide deck (their own or a provided one) and, for each visual element, state specifically\nwhat point it clarifies — removing any visual for which they cannot state a clear answer.",
+      "localKey": "MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 39,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "Slides Support Speech, They Don't Duplicate It (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Slides Support Speech, They Don't Duplicate It (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 141,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "One Main Idea Per Slide",
+      "content": "{\"id\":\"TA-2\",\"title\":\"One Main Idea Per Slide\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "Choosing Visuals That Clarify, Not Decorate (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Choosing Visuals That Clarify, Not Decorate (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 153,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "Full Application: Designing a Short Slide Set",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Designing a Short Slide Set\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY\",\"MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-SLIDE-CONTAINS-THE-FULL-TEXT-OF-WHAT-THE-SPEAKER-WILL-SAY",
+        "MC-B-EVERY-SLIDE-NEEDS-DECORATIVE-VISUAL-ELEMENTS-TO-LOOK-PROFESSIONAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 159,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reducing a Text-Heavy Slide to Supporting Text**\nGiven a slide duplicating a full spoken script, reduce it to a short phrase or key words that\nsupport rather than replace the speech.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 181,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Splitting a Multi-Idea Slide**\nGiven a slide crowded with three unrelated points, split it into three single-idea slides.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 181,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying a Decorative vs. Clarifying Visual**\nGiven two candidate visuals for the same slide, identify which is purely decorative and which\nclarifies the specific point.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 181,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Justifying or Rejecting a Visual Element**\nGiven a slide with one visual element, state specifically what point it clarifies, or explain why it\nshould be removed.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 181,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Slide Set Design**\nGiven a new short spoken script (3-4 points), design a one-idea-per-slide set with minimal\nsupporting text and only clarifying visuals.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 181,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly reduces text on provided slides (MP-1) but reverts to dense, full-sentence\n  slides when designing their own original set (MP-5), provide a mandatory word-count cap per slide\n  as scaffolding until the habit is automatic.\n- If the student's text reduction is strong (MP-1, MP-2) but their visual choices (MP-3, MP-4) remain\n  decorative rather than clarifying, require an explicit written justification (\"this visual clarifies\n  ___\") for every visual element before it's allowed onto a slide.\n- If the student struggles to split multi-idea slides at all, provide a starter template (one slide\n  per bullet point in their spoken outline) as scaffolding before free slide design.\n- Students with strong performance in `eng.communication.technical-writing`'s concision work should\n  transfer readily to slide text reduction, since both require distilling content to its essential\n  meaning — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 238,
+        "endLine": 252
+      }
+    },
+    {
+      "assetId": "eng.communication.presentation-design/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.presentation-design",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: presentation delivery check] --> [PD-2: technical writing check]\n   |                       |                                    |\n   | (gap found)           |                                    | (pass both)\n   v                        v                                    v\n[Route to prerequisite]                                [Component 3: Book-While-Storytelling /\n                                                         Unrelated-Painting Anchor]\n                                                                    |\n                                                                    v\n                                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                    |\n                                                                    v\n                                      [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                    |\n                                                                    v\n                                      [MP-1 through MP-5 mastery probe set]\n                                                                    |\n                                      (pass >= 0.75) -----+----- (fail)\n                                             |                      |\n                                             v                      v\n                        [No further unlocks —  [S6 remediation: text-reduction drills /\n                         terminal in current      decorative-vs-clarifying visual sorting]\n                         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either routes back to the\nrelevant prerequisite. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1/TA-2 (text-heavy, multi-idea slides) and MC-B during TA-3 (decorative visual choices) — these\nare largely independent and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2\nfailures indicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-slide-set example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.presentation-design.md",
+        "startLine": 202,
+        "endLine": 238
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
