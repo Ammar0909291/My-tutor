@@ -6126,6 +6126,172 @@ const TRIG_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.wave.doppler-effect ────────────────────────────────────────────────
+const DOP = 'phys.wave.doppler-effect'
+const DOP_SRC = 'docs/curriculum/blueprints/phys.wave.doppler-effect.md'
+
+const DOP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DOP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'An approaching siren sounds higher-pitched — but its sound is ' +
+      'NOT travelling faster. Wave speed is the medium\u2019s property: ' +
+      'sound moves at ~343 m/s through the air whether the ambulance ' +
+      'is parked or racing at 30 m/s. What the motion changes is the ' +
+      'SPACING of the wavefronts: moving toward you, the source ' +
+      'chases its own waves and piles the crests closer together in ' +
+      'front (like a boat\u2019s bow wave) — shorter wavelength — while ' +
+      'stretching them out behind. With v fixed and \u03bb compressed, ' +
+      'v = f\u03bb forces the observed frequency UP in front and DOWN ' +
+      'behind. The Doppler effect is a wavelength shift heard as a ' +
+      'pitch shift — the speed never budges.',
+    targetedMisconceptions: [`${DOP}:MC-DOPPLER-CHANGES-SPEED`],
+    source: `${DOP_SRC} — MC-DOPPLER-CHANGES-SPEED (P28 medium-sets-speed + s6 bow-wave anchor + P30 v = f\u03bb argument)`,
+  },
+  {
+    conceptId: DOP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The Doppler effect is not a sound trick — it works for EVERY ' +
+      'wave, and half of modern measurement is built on that fact. ' +
+      'Light: galaxies receding from us arrive red-shifted ' +
+      '(wavelengths stretched) — Hubble read the expansion of the ' +
+      'universe straight off those shifts in 1929. Microwaves: a ' +
+      'police radar gun clocks your car from the frequency shift of ' +
+      'its reflected ~24 GHz beam. Ultrasound: Doppler scans measure ' +
+      'blood-flow speed from shifts in reflected sound. Weather ' +
+      'radar reads wind the same way. If something oscillates, the ' +
+      'oscillation propagates, and the source or observer moves — ' +
+      'there is a Doppler shift. (For light near light-speed the ' +
+      'formula gains relativistic corrections, but the effect is the ' +
+      'same physics.)',
+    targetedMisconceptions: [`${DOP}:MC-DOPPLER-ONLY-FOR-SOUND`],
+    source: `${DOP_SRC} — MC-DOPPLER-ONLY-FOR-SOUND (P28 redshift/radar/ultrasound catalogue + s6 universality rule)`,
+  },
+]
+
+const DOP_PROBES: SeedProbe[] = [
+  {
+    conceptId: DOP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An ambulance approaches you at 30 m/s with its siren on. How fast does its sound travel through the air toward you?',
+    choices: [
+      { text: '~343 m/s — wave speed is set by the medium; the motion compresses wavelengths, raising the PITCH, not the speed', isCorrect: true },
+      { text: '~373 m/s — the ambulance\u2019s speed adds to the sound\u2019s speed', isCorrect: false, misconceptionId: `${DOP}:MC-DOPPLER-CHANGES-SPEED` },
+    ],
+    correctValue: '343 m/s',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DOP}:MC-DOPPLER-CHANGES-SPEED`],
+    source: `${DOP_SRC} — P33 approaching-siren pair as probe`,
+  },
+  {
+    conceptId: DOP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does the Doppler effect apply to light?',
+    choices: [
+      { text: 'Yes — receding galaxies are red-shifted (how Hubble found cosmic expansion); radar guns and Doppler ultrasound use the same physics', isCorrect: true },
+      { text: 'No — the Doppler effect is specific to sound waves', isCorrect: false, misconceptionId: `${DOP}:MC-DOPPLER-ONLY-FOR-SOUND` },
+    ],
+    correctValue: 'yes — all waves',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DOP}:MC-DOPPLER-ONLY-FOR-SOUND`],
+    source: `${DOP_SRC} — MC-DOPPLER-ONLY-FOR-SOUND probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.wave.standing-waves ────────────────────────────────────────────────
+const STW = 'phys.wave.standing-waves'
+const STW_SRC = 'docs/curriculum/blueprints/phys.wave.standing-waves.md'
+
+const STW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a standing wave, what exactly is \u201cstanding\u201d? The PATTERN — ' +
+      'never the medium. Watch a guitar string in slow motion: the ' +
+      'nodes are pinned, truly motionless forever, but every other ' +
+      'point vibrates up and down in place, and the antinodes swing ' +
+      'hardest, oscillating between +2A and \u22122A. The equation splits ' +
+      'the two roles cleanly: y = 2A sin(kx) \u00b7 cos(\u03c9t) — the sin(kx) ' +
+      'factor is the frozen spatial envelope (where nodes and ' +
+      'antinodes LIVE), the cos(\u03c9t) factor is the vigorous ' +
+      'oscillation everyone inside the envelope performs. At an ' +
+      'antinode: y = 2A at t = 0, zero a quarter-period later, \u22122A ' +
+      'at half a period — anything but at rest. \u201cStanding\u201d means the ' +
+      'nodal pattern doesn\u2019t TRAVEL, unlike an ordinary wave; the ' +
+      'medium is as busy as ever.',
+    targetedMisconceptions: [`${STW}:MC-STANDING-WAVE-IS-STATIONARY`],
+    source: `${STW_SRC} — MC-STANDING-WAVE-IS-STATIONARY (P28 antinode time-trace + P30 pattern-vs-medium split)`,
+  },
+  {
+    conceptId: STW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'One formula does NOT fit all pipes — the ends decide. Rule ' +
+      'pair: an OPEN end forces an ANTINODE (air free to move); a ' +
+      'CLOSED end forces a NODE (air pinned). A pipe open at both ' +
+      'ends fits antinode-to-antinode patterns: all harmonics, f_n = ' +
+      'nv/2L, n = 1, 2, 3\u2026 A pipe closed at ONE end must fit a node ' +
+      'at the bottom AND an antinode at the top — only quarter-wave ' +
+      'patterns \u03bb = 4L, 4L/3, 4L/5\u2026 survive: f = v/4L and ONLY the ' +
+      'odd multiples (no second harmonic exists — blow across a test ' +
+      'tube and measure: the even resonances simply aren\u2019t there). ' +
+      'Same length, different fundamentals too: open-open 50 cm pipe ' +
+      '\u2192 340 Hz; close one end \u2192 170 Hz. Draw the end conditions ' +
+      'first; the allowed harmonics follow automatically.',
+    targetedMisconceptions: [`${STW}:MC-ALL-PIPES-SAME-HARMONICS`],
+    source: `${STW_SRC} — MC-ALL-PIPES-SAME-HARMONICS (P30 boundary-condition filter + s6 open\u2194antinode/closed\u2194node rules + P33 50 cm pipe pair)`,
+  },
+]
+
+const STW_PROBES: SeedProbe[] = [
+  {
+    conceptId: STW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a standing wave on a string, which points of the medium never move?',
+    choices: [
+      { text: 'Only the nodes — every other point oscillates in place, antinodes with maximum amplitude', isCorrect: true },
+      { text: 'All of them — a standing wave means the medium is at rest', isCorrect: false, misconceptionId: `${STW}:MC-STANDING-WAVE-IS-STATIONARY` },
+      { text: 'The antinodes — they are where the pattern stands still', isCorrect: false, misconceptionId: `${STW}:MC-STANDING-WAVE-IS-STATIONARY` },
+    ],
+    correctValue: 'only the nodes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${STW}:MC-STANDING-WAVE-IS-STATIONARY`],
+    source: `${STW_SRC} — P33 zero-velocity discrimination as probe`,
+  },
+  {
+    conceptId: STW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A pipe closed at one end has fundamental 170 Hz. What is its next resonant frequency?',
+    choices: [
+      { text: '510 Hz — a closed-end pipe supports only odd harmonics (3 \u00d7 170)', isCorrect: true },
+      { text: '340 Hz — the second harmonic is always double the fundamental', isCorrect: false, misconceptionId: `${STW}:MC-ALL-PIPES-SAME-HARMONICS` },
+    ],
+    correctValue: '510 Hz',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STW}:MC-ALL-PIPES-SAME-HARMONICS`],
+    source: `${STW_SRC} — P33 closed-pipe pair as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -6199,6 +6365,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...PHOT_EXPLANATIONS,
   ...RTT_EXPLANATIONS,
   ...TRIG_EXPLANATIONS,
+  ...DOP_EXPLANATIONS,
+  ...STW_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -6272,4 +6440,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...PHOT_PROBES,
   ...RTT_PROBES,
   ...TRIG_PROBES,
+  ...DOP_PROBES,
+  ...STW_PROBES,
 ]
