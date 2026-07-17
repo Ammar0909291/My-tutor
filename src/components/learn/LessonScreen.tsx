@@ -914,7 +914,28 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     let cancelled = false
     ;(async () => {
       try {
-        const histRes = await fetch(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`)
+        // Fire history fetch and session creation in parallel — they are
+        // independent: history populates the UI, session provides the id
+        // for subsequent sends. Sequential order was the original root
+        // cause of the "Loading your lesson..." delay for returning users.
+        const sessionBody = JSON.stringify({
+          subjectSlug,
+          memoryContext: memoryContext ?? undefined,
+          userId: userId ?? undefined,
+          schoolChapterId: schoolChapterId ?? undefined,
+        })
+        const [histRes, sessionRes] = await Promise.all([
+          fetch(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`),
+          fetch('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: sessionBody }),
+        ])
+        if (cancelled) return
+
+        // Session id — non-fatal if missing, send path retries.
+        try {
+          const sessionData = await sessionRes.json()
+          if (!cancelled && sessionData?.success && sessionData.data?.id) setSessionId(sessionData.data.id)
+        } catch { /* non-fatal */ }
+
         const hist = await histRes.json()
         if (cancelled) return
         if (!hist?.success) return
@@ -936,25 +957,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (restored.length === 0) return
         setMessages(restored)
         setLessonStarted(true) // skip the "Start Lesson" welcome screen
-        // Acquire a sessionId so subsequent sends can dispatch. Resume path
-        // returns an existing ACTIVE session when one is available; otherwise
-        // a new session is created (WhatsApp semantics: the conversation is
-        // permanent, sessions are just per-day containers).
-        try {
-          const res = await fetch('/api/sessions', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              subjectSlug,
-              memoryContext: memoryContext ?? undefined,
-              userId: userId ?? undefined,
-              schoolChapterId: schoolChapterId ?? undefined,
-            }),
-          })
-          const data = await res.json()
-          if (cancelled) return
-          if (data?.success && data.data?.id) setSessionId(data.data.id)
-        } catch { /* non-fatal — send path will retry session creation */ }
         // Prevent startLesson() from firing a duplicate opening prompt if
         // the (now hidden) button were somehow triggered.
         initializedRef.current = true

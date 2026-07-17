@@ -172,7 +172,9 @@ export default async function LearnPage({ searchParams }: { searchParams?: { sub
     take: 3,
     include: {
       messages: {
-        orderBy: { createdAt: 'asc' },
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+        select: { role: true, content: true, createdAt: true },
       },
     },
   })) : []
