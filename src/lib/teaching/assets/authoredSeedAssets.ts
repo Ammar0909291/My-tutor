@@ -808,6 +808,273 @@ const MOM_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── math.arith.addition ─────────────────────────────────────────────────────
+const ADD = 'math.arith.addition'
+const ADD_SRC = 'docs/curriculum/blueprints/math.arith.addition.md'
+
+const ADD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ADD,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    // Intuitive: addition as combining groups (blueprint TA-A01 concrete opening)
+    content:
+      'Addition is putting groups together and counting what you get. You ' +
+      'have 4 marbles, a friend gives you 3 more — push the two piles into ' +
+      'one pile and count: 7. And here\'s a secret that makes adding ' +
+      'easier forever: it doesn\'t matter which pile you start with. ' +
+      '4 + 3 and 3 + 4 make exactly the same big pile — try it with your ' +
+      'hands and see. Adding zero is easy too: someone gives you zero ' +
+      'marbles, your pile just... stays the same. 5 + 0 = 5.',
+    targetedMisconceptions: [`${ADD}:MC-2`, `${ADD}:MC-3`],
+    source: `${ADD_SRC} — Component 4 TA-A01 (Concrete Opening: Combining Groups) + TA-A03/TA-A04 (commutativity, zero identity)`,
+  },
+  {
+    conceptId: ADD,
+    subjectSlug: 'mathematics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.ELEMENTARY,
+    // Worked example: column addition with carrying — MC-1's territory
+    content:
+      "Let's add 47 + 35 in columns, and watch what happens when a column " +
+      'overflows. Ones column first: 7 + 5 = 12. But a single column can ' +
+      'only hold ONE digit — and 12 is really "1 ten and 2 ones". So the 2 ' +
+      'stays in the ones place, and the 1 ten moves house: it CARRIES into ' +
+      'the tens column, where the tens live. Now the tens: 4 + 3 = 7, plus ' +
+      'the carried 1 makes 8. Answer: 82. The carry isn\'t a trick — it\'s ' +
+      'just "ten ones equals one ten" being enforced. (Writing 712 by ' +
+      'jamming the whole 12 into the ones place is the classic slip: it ' +
+      'treats each column as its own separate sum and forgets the columns ' +
+      'share one number system.)',
+    targetedMisconceptions: [`${ADD}:MC-1`],
+    source: `${ADD_SRC} — Component 4 TA-A02 (Worked Example Pair: Column Addition with Carrying) + Component 2 MC-1 surface pattern (47+35→712)`,
+  },
+  {
+    conceptId: ADD,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    // Repair: zero annihilates (over-generalized from multiplication)
+    content:
+      'Quick check: what is 6 + 0? If "0" is whispering "the answer is 0" ' +
+      'to you, that rule belongs to a different operation — MULTIPLYING by ' +
+      'zero gives zero, because six groups of nothing is nothing. But ' +
+      'ADDING zero means adding nothing to what you already have: you have ' +
+      '6 sweets, nobody gives you any more, you still have 6. Zero is ' +
+      "addition's do-nothing number: a + 0 is always just a. Test the " +
+      'difference on 5: 5 + 0 = 5 (still five sweets), but 5 × 0 = 0 (five ' +
+      'bags with nothing inside). Same zero, two completely different jobs.',
+    targetedMisconceptions: [`${ADD}:MC-3`],
+    source: `${ADD_SRC} — Component 5 TA-B03 (Repair: ZERO-ANNIHILATES) + Component 2 MC-3 root cause (overgeneralised a×0=0)`,
+  },
+]
+
+const ADD_PROBES: SeedProbe[] = [
+  {
+    conceptId: ADD,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is 38 + 26?',
+    choices: [
+      { text: '64', isCorrect: true },
+      { text: '514', isCorrect: false, misconceptionId: `${ADD}:MC-1` },
+      { text: '54', isCorrect: false },
+    ],
+    correctValue: '64',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ADD}:MC-1`],
+    source: `${ADD_SRC} — Component 2 MC-1 surface pattern (jam-the-column error 8+6→514), fresh numbers, distractor-mapped`,
+  },
+]
+
+// ─── math.alg.equation ───────────────────────────────────────────────────────
+const EQN = 'math.alg.equation'
+const EQN_SRC = 'docs/curriculum/blueprints/math.alg.equation.md'
+
+const EQN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EQN,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: the = sign turns math into a claim; balance-scale image
+    content:
+      'An equation is not a calculation waiting to happen — it\'s a CLAIM. ' +
+      'The equals sign says: "whatever is on my left weighs exactly the ' +
+      'same as whatever is on my right." Picture an old balance scale: ' +
+      '2x + 3 = 7 claims that a mystery weight doubled, plus 3, balances ' +
+      'against 7. Solving the equation means finding the mystery value ' +
+      'that makes the claim TRUE — here x = 2, because 2·2 + 3 really is ' +
+      "7. That's the whole difference from an expression like 2x + 3 " +
+      'alone: an expression is just a recipe you can evaluate; an equation ' +
+      'is a statement that can be true or false, and your job is to find ' +
+      'what makes it true.',
+    targetedMisconceptions: [`${EQN}:MC-1`],
+    source: `${EQN_SRC} — Component 1 Cognitive Map + Component 2 MC-1 (EQUATION-IS-EXPRESSION), balance-scale framing from Protocol A`,
+  },
+  {
+    conceptId: EQN,
+    subjectSlug: 'mathematics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.MIDDLE,
+    // Worked example: solve fully, marking the "simplified ≠ solved" checkpoint
+    content:
+      'Solve 2x + 3 = 7, and notice where most people stop too early. ' +
+      'Step 1 — keep the balance: subtract 3 from BOTH sides: 2x = 4. ' +
+      'Pause here, because this is the trap: 2x = 4 is tidier, but it ' +
+      "still isn't an answer — it says 'twice the mystery number is 4', " +
+      'and the question was "what is x?" Step 2 — divide both sides by 2: ' +
+      'x = 2. THAT is solved: x standing alone, with its value exposed. ' +
+      'Step 3 — always check the claim: 2(2) + 3 = 7 ✓. The rule of ' +
+      'thumb: you\'re done when the variable is alone on one side, not ' +
+      'when the equation merely looks simpler.',
+    targetedMisconceptions: [`${EQN}:MC-2`],
+    source: `${EQN_SRC} — Component 5 TA-B02 (SOLVING-MEANS-SIMPLIFYING repair) rendered as a worked example with the stop-early checkpoint`,
+  },
+  {
+    conceptId: EQN,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Deeper: the three solution regimes (unique / none / all)
+    content:
+      'Because an equation is a claim, it can relate to truth three ' +
+      'different ways — and only one of them is the familiar case. ' +
+      'x + 3 = 7 is true for exactly ONE value (x = 4): a unique solution. ' +
+      'x + 1 = x is true for NO value at all — subtract x from both sides ' +
+      'and you get 1 = 0, an impossibility; the claim is simply false ' +
+      'always. And x + 3 = x + 3 is true for EVERY value — it\'s an ' +
+      "identity; the claim can't fail. All three are legitimate outcomes, " +
+      'and the algebra itself tells you which regime you\'re in: solving ' +
+      'ends with the variable pinned (unique), with a contradiction like ' +
+      '1 = 0 (none), or with something trivially true like 0 = 0 (all ' +
+      'values). Expecting exactly one solution every time is a habit, not ' +
+      'a law.',
+    targetedMisconceptions: [`${EQN}:MC-3`],
+    source: `${EQN_SRC} — Component 2 MC-3 (SOLUTION-IS-UNIQUE-ALWAYS) + Component 5 TA-B03, taught as the three-regimes framework`,
+  },
+]
+
+const EQN_PROBES: SeedProbe[] = [
+  {
+    conceptId: EQN,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You are solving 3x + 2 = 14 and reach the line 3x = 12. Are you done?',
+    choices: [
+      { text: 'Not yet — divide by 3 to get x = 4; solved means x alone', isCorrect: true },
+      { text: 'Yes — the equation is now simplified', isCorrect: false, misconceptionId: `${EQN}:MC-2` },
+      { text: 'Yes — 3x = 12 is the solution', isCorrect: false, misconceptionId: `${EQN}:MC-2` },
+    ],
+    correctValue: 'not yet; x = 4',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EQN}:MC-2`],
+    source: `${EQN_SRC} — Component 2 MC-2 trigger signature with fresh numbers, distractor-mapped`,
+  },
+  {
+    conceptId: EQN,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How many solutions does the equation x + 5 = x have?',
+    choices: [
+      { text: 'None — subtracting x leaves 5 = 0, which is never true', isCorrect: true },
+      { text: 'Exactly one — every equation has one solution', isCorrect: false, misconceptionId: `${EQN}:MC-3` },
+      { text: 'x = 5', isCorrect: false, misconceptionId: `${EQN}:MC-1` },
+    ],
+    correctValue: 'none',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EQN}:MC-3`],
+    source: `${EQN_SRC} — Component 2 MC-3 trigger (x+1=x variant), distractor-mapped incl. an MC-1 evaluate-the-expression distractor`,
+  },
+]
+
+// ─── math.found.set ──────────────────────────────────────────────────────────
+const SET = 'math.found.set'
+const SET_SRC = 'docs/curriculum/blueprints/math.found.set.md'
+
+const SET_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SET,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: membership is the ONLY thing a set knows
+    content:
+      'A set is the simplest container in mathematics: it only knows one ' +
+      'thing about anything — in, or out. Not first-or-last, not ' +
+      'how-many-times: just membership. That\'s why {1, 2, 3} and ' +
+      '{3, 2, 1} are the SAME set — asking "is 2 in there?" gets the same ' +
+      'yes either way, and order was never recorded. It\'s also why ' +
+      '{1, 2, 1} is just {1, 2} with two elements: a set can\'t contain ' +
+      'the same thing "twice" — either 1 is in, or it isn\'t; there\'s no ' +
+      'counter. If you\'re picturing a list or an array, swap the picture ' +
+      'for a club-membership register: the register cares who\'s a member, ' +
+      'never in what order they joined or how many membership cards they ' +
+      'printed.',
+    targetedMisconceptions: [`${SET}:MC-1`],
+    source: `${SET_SRC} — Component 3 TA-A01 (Set as Sorted Collection) + Component 2 MC-1 (order/repetition, list overgeneralisation)`,
+  },
+  {
+    conceptId: SET,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // The well-definedness test + empty set as a real object
+    content:
+      'Two refinements turn the set idea from casual to precise. First, ' +
+      'the membership test must be a genuine YES/NO question. "The set of ' +
+      'all even numbers" qualifies — hand me any number, I can answer. ' +
+      '"The set of tall people" does NOT — is 175 cm tall? There\'s no ' +
+      'fact of the matter, so no set. Mathematical sets require ' +
+      'well-defined membership, not vibes. Second, the empty set ∅ is a ' +
+      'real, respectable object: the set whose membership test always ' +
+      'answers NO — like a club with a rulebook but zero members; the club ' +
+      'still exists. And watch the notation trap: {∅} is NOT empty — it\'s ' +
+      'a box containing one thing (an empty box), so |{∅}| = 1 while ' +
+      '|∅| = 0. The container and the contents are different levels.',
+    targetedMisconceptions: [`${SET}:MC-2`, `${SET}:MC-3`],
+    source: `${SET_SRC} — Component 2 MC-2 (YES/NO membership criterion) + MC-3 (∅ vs {∅} counting exercise), rendered as teaching text`,
+  },
+]
+
+const SET_PROBES: SeedProbe[] = [
+  {
+    conceptId: SET,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'How many elements does the set {a, b, a, c, b} have?',
+    choices: [
+      { text: '3 — a set only records which things are members: {a, b, c}', isCorrect: true },
+      { text: '5 — count every symbol written', isCorrect: false, misconceptionId: `${SET}:MC-1` },
+    ],
+    correctValue: '3',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SET}:MC-1`],
+    source: `${SET_SRC} — Component 2 MC-1 trigger ({1,2,1} claim) with fresh symbols, distractor-mapped`,
+  },
+  {
+    conceptId: SET,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the cardinality (number of elements) of {∅}?',
+    choices: [
+      { text: '1 — it contains one element, which happens to be the empty set', isCorrect: true },
+      { text: '0 — it is the empty set', isCorrect: false, misconceptionId: `${SET}:MC-3` },
+    ],
+    correctValue: '1',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SET}:MC-3`],
+    source: `${SET_SRC} — Component 2 MC-3 (|{∅}| = 0 error), distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -818,6 +1085,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...N2_EXPLANATIONS,
   ...N3_EXPLANATIONS,
   ...MOM_EXPLANATIONS,
+  ...ADD_EXPLANATIONS,
+  ...EQN_EXPLANATIONS,
+  ...SET_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -828,4 +1098,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...N2_PROBES,
   ...N3_PROBES,
   ...MOM_PROBES,
+  ...ADD_PROBES,
+  ...EQN_PROBES,
+  ...SET_PROBES,
 ]
