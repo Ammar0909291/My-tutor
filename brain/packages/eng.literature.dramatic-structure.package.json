@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.dramatic-structure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.dramatic-structure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8662e3d63fb01d032a405eb09899a1fc2a3d9cd519398cd056b1b5669e0d870a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.dramatic-structure.md": "sha256:3ec32e324cf79f16ae8ae9b63577f2a0610d2d582313ddaf364e22f07b73e69d"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.dramatic-structure",
+    "name": "Dramatic Structure",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.drama-basics",
+      "eng.literature.plot-structure"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.dramatic-structure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.dramatic-structure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.dramatic-structure.md": "sha256:3ec32e324cf79f16ae8ae9b63577f2a0610d2d582313ddaf364e22f07b73e69d"
+      },
+      "contentHash": "sha256:ba143b24bc846fea1868d5e9c8c0f822682887c19349f9306f076a7f3ddbbdd8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.dramatic-structure.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.dramatic-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.dramatic-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.dramatic-structure.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md#TA-2 (addresses MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.dramatic-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.dramatic-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.dramatic-structure.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md#TA-3 (addresses MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.dramatic-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.dramatic-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.dramatic-structure.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md#TA-4 (addresses MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION, MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.dramatic-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.dramatic-structure\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.dramatic-structure/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "Dramatic Structure — Conceptual Development Sequence",
+      "content": "### TA-1 — Act and Scene Divisions Within a Play's Structure\n\nIntroduce the basic organizational function of acts and scenes in structuring a play's overall plot\nprogression. Student practice: given a play's act/scene outline, identify where the major plot\nprogression points (rising action, climax, falling action) fall within that structure.\n\n### TA-2 — Act Breaks and the Live, Shared Pause (MC-A)\n\nUsing the concert-intermission anchor, teach that act breaks are often deliberately placed to exploit\nthe live, shared nature of theatrical performance. Student practice: given an act's ending tension\nlevel, explain what effect placing a real intermission at that specific point creates.\n\n### TA-3 — Differentiating Scene Functions Within the Dramatic Arc (MC-B)\n\nUsing the concert-setlist anchor, teach students to identify a scene's SPECIFIC structural function\n(context-establishing, escalating, tension-releasing, climactic) rather than applying one generic\nlabel. Student practice: given four scenes from across a play's structure, assign each a specific\nfunction label with textual justification.\n\n### TA-4 — Full Application: Analyzing a Play's Complete Dramatic Structure\n\nGive the student a new play's act/scene outline with brief scene summaries. They must identify the\nmajor plot progression within the act structure (TA-1), explain the function of at least one act\nbreak in relation to live performance (TA-2), and assign specific structural functions to at least\nthree different scenes (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 157,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/misconception/MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION",
+      "kind": "misconception",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "**Trigger signal:** Student treats a play's act and scene divisions as arbitrary organizational",
+      "content": "### MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION\n\n**Trigger signal:** Student treats a play's act and scene divisions as arbitrary organizational\nmarkers equivalent to a novel's chapter breaks, with no special function tied to the play's live,\nperformed nature, failing to recognize that act breaks in particular are often deliberately placed at\nmoments of heightened tension specifically because they correspond to a real, shared pause in the\naudience's live experience (an intermission), a function a novel's silent, self-paced chapter breaks\ndon't share in the same way.\n\n**Conflict evidence [P28]:** Show the student a play's act-ending moment, placed at a point of\nmaximum tension or an unresolved cliffhanger, right before an intermission, alongside a novel's\nchapter ending that similarly builds tension but is read at the reader's own individual pace with no\nshared, simultaneous pause. Ask: \"Does the play's act break create the SAME kind of pause as a novel's\nchapter break? What's different about an intermission — a real, shared pause where the ENTIRE\naudience simultaneously stops and waits — compared to an individual reader choosing when to put a book\ndown?\"\n\n**Bridge text [P30]:** \"Assuming act breaks are just like chapter breaks is like assuming a live\nconcert's intermission serves the same function as a listener pausing their own music playlist — but\nthe concert's intermission is a SHARED, SIMULTANEOUS pause experienced collectively by the whole\naudience at once, timed deliberately by the performers, while a playlist pause is an individual,\nself-timed choice with no collective experience involved. A play's act break similarly creates a real,\nshared collective pause that a novel's chapter break, read individually and at each reader's own pace,\ndoesn't replicate in the same way.\"\n\n**Replacement text [P31]:** \"When analyzing a play's act and scene structure, don't treat it as\nequivalent to a novel's chapter divisions. Ask: how does this specific act break use the live,\nSHARED nature of theatrical performance — the fact that the whole audience pauses together — to build\nor release tension in a way unique to the dramatic form?\"\n\n**Discrimination pairs [P33]:**\n1. Treating a play's act break as functionally identical to a novel's chapter break (missing the\n   live, shared-pause distinction) vs. recognizing that the act break's placement at a moment of\n   heightened tension specifically exploits the shared, simultaneous nature of a live audience's\n   collective pause (correct, form-specific understanding).\n2. A student who cannot explain why an act break is placed at a specific dramatic moment beyond \"that's\n   where the writer decided to divide it\" (missing functional understanding) vs. a student who\n   explains the act break's placement in terms of building tension toward a genuine, shared audience\n   pause (correct, deeper understanding).\n\n**s6_path:** If the student continues to treat act breaks as arbitrary after the bridge, have them\nidentify the specific tension level at the end of a given act and explain what effect placing an actual\naudience intermission at that exact point creates that a mid-scene stopping point would not.",
+      "localKey": "MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION",
+      "language": "en",
+      "refs": [
+        "MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 3,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/misconception/MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION",
+      "kind": "misconception",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "**Trigger signal:** Student assumes every scene within a play's structure functions identically —",
+      "content": "### MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION\n\n**Trigger signal:** Student assumes every scene within a play's structure functions identically —\nbuilding tension in the same generic way — failing to recognize that different scenes serve\nDIFFERENT specific structural functions within the overall dramatic arc (some scenes primarily\nestablish character or context, some escalate conflict, some provide a brief tension-release before\nbuilding again, some deliver the climactic confrontation), and analyzing a scene's specific\ncontribution requires identifying its particular function, not applying one generic \"tension-building\"\nlabel to every scene indiscriminately.\n\n**Conflict evidence [P28]:** Show the student two scenes from the same play: an early scene primarily\nestablishing character relationships and context with relatively low tension, and a later scene\ndelivering the climactic confrontation with maximum tension. Ask: \"Do both of these scenes serve the\nSAME structural function within the play's overall dramatic arc? What specific job does each one do\nthat the other doesn't?\"\n\n**Bridge text [P30]:** \"Assuming every scene builds tension identically is like assuming every song on\na concert's setlist should be equally loud and intense — but a well-structured setlist deliberately\nvaries: some songs establish mood, some build energy, some provide a breather before the next\nbuild, and one is the climactic finale. A play's scenes similarly serve different, deliberately varied\nstructural functions across the whole dramatic arc, not one uniform tension-building job.\"\n\n**Replacement text [P31]:** \"When analyzing a specific scene's contribution to dramatic structure,\ndon't assume every scene 'builds tension' the same generic way. Ask: what SPECIFIC function does this\nparticular scene serve — establishing context, escalating conflict, providing release before the next\nbuild, or delivering climactic resolution?\"\n\n**Discrimination pairs [P33]:**\n1. Labeling every scene in a play as simply \"building tension\" with no further distinction (generic,\n   undifferentiated analysis) vs. identifying that an early scene establishes character context while\n   a later scene escalates conflict and another delivers climactic resolution (specific, function-\n   differentiated analysis).\n2. A student who cannot explain what makes a specific scene's structural role different from another\n   scene in the same play (missing functional differentiation) vs. a student who names the specific,\n   distinct function each scene serves within the overall arc (correct, differentiated understanding).\n\n**s6_path:** If the student continues to apply one generic \"tension\" label to every scene after the\nbridge, give them four scenes from across a play's structure and have them assign each a specific\nstructural function label (context-establishing, escalating, tension-releasing, climactic), justifying\neach classification with textual evidence.",
+      "localKey": "MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION",
+      "language": "en",
+      "refs": [
+        "MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 47,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "Act and Scene Divisions Within a Play's Structure",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Act and Scene Divisions Within a Play's Structure\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 161,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "Act Breaks and the Live, Shared Pause (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Act Breaks and the Live, Shared Pause (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 167,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "Differentiating Scene Functions Within the Dramatic Arc (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Differentiating Scene Functions Within the Dramatic Arc (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 173,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "Full Application: Analyzing a Play's Complete Dramatic Structure",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing a Play's Complete Dramatic Structure\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION\",\"MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-ACTS-AND-SCENES-ARE-JUST-ARBITRARY-DIVISIONS-LIKE-CHAPTERS-IN-A-NOVEL-WITH-NO-SPECIAL-FUNCTION",
+        "MC-B-DRAMATIC-TENSION-BUILDS-AND-RESOLVES-IN-EXACTLY-THE-SAME-WAY-ACROSS-EVERY-SCENE-WITH-NO-VARIATION-IN-FUNCTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 180,
+        "endLine": 311
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Mapping Plot Progression onto Act Structure**\nGiven a play's act/scene outline, identify where the rising action, climax, and falling action fall\nwithin that structure.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Explaining an Act Break's Live-Performance Function**\nGiven an act's ending tension level, explain what effect placing a real intermission at that specific\npoint creates for a live audience.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Assigning Specific Scene Functions**\nGiven three scenes from across a play's structure, assign each a specific structural function\n(context-establishing, escalating, tension-releasing, climactic) with textual justification.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Act Breaks from Chapter Breaks**\nExplain, in the student's own words, why a play's act break serves a different function than a\nnovel's chapter break, citing the shared, simultaneous nature of live performance.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Dramatic Structure Analysis**\nGiven a new play outline with brief scene summaries, map the plot progression onto the act structure,\nexplain an act break's live-performance function, and assign specific structural functions to multiple\nscenes.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "Adaptive Flags",
+      "content": "- If the student has personal experience attending live theater, connect this concept explicitly to\n  that experience — recalling the actual feeling of an intermission after a tense act-ending moment\n  can ground the abstract live-performance-function argument concretely.\n- If the student masters plot-mapping and act-break analysis (MP-1, MP-2) but struggles specifically\n  with scene-function differentiation (MP-3), provide additional contrasting scene pairs (clearly\n  different functions) before attempting a full play's varied scene set.\n- If the student's scene-function labels remain accurate but the textual justification is thin\n  (\"this scene builds tension because it feels tense\"), push for specific textual evidence — what\n  particular dialogue, stage direction, or plot event signals this specific function.\n- Students with strong performance in `eng.speaking.storytelling-orally` should transfer well to this\n  concept's attention to live, real-time audience experience — draw this cross-link connection\n  explicitly if that concept has been completed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 265,
+        "endLine": 280
+      }
+    },
+    {
+      "assetId": "eng.literature.dramatic-structure/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.dramatic-structure",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: drama basics check] --> [PD-2: plot structure check]\n   |                                                |\n   | (gap found)                                    | (pass)\n   v                                                 v\n[Route to prerequisite concept]      [Component 3: Concert-Intermission / Concert-Setlist\n                                       Anchor]\n                                                     |\n                                                     v\n                                  [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                     |\n                                                     v\n                            [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                     |\n                                                     v\n                            [MP-1 through MP-5 mastery probe set]\n                                                     |\n                            (pass >= 0.75) -----+----- (fail)\n                                   |                      |\n                                   v                      v\n                [No further unlocks —  [S6 remediation: intermission-effect /\n                 terminal in current      four-scene-function-labeling drills]\n                 curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-2 (treating act breaks as arbitrary) and MC-B during TA-3 (generic scene-function labeling) — these\nare largely independent and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1\nfailure indicates the basic plot-mapping step (TA-1) needs review, distinct from either misconception;\nMP-2/MP-4 failures indicate residual MC-A; MP-3 failure alone indicates residual MC-B; MP-5 failure\nwith MP-1 through MP-4 passing indicates an integration gap — provide one more guided full-structure\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.dramatic-structure.md",
+        "startLine": 228,
+        "endLine": 265
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

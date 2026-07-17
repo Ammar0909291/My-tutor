@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.translation-studies-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.translation-studies-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6bb0df788d979541a7a6072ce6d6aa959f2d33890c881e4c53bbb15023698b9d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md": "sha256:2e1c83858be1413d9c0631083d80771689fe5ee34a0fe36bcd9777241e0d8939"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.translation-studies-intro",
+    "name": "Introduction to Translation Studies",
+    "difficultyRaw": "research",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.linguistics.bilingualism-and-multilingualism",
+      "eng.linguistics.semantics-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.translation-studies-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.translation-studies-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md": "sha256:2e1c83858be1413d9c0631083d80771689fe5ee34a0fe36bcd9777241e0d8939"
+      },
+      "contentHash": "sha256:6eb6209668d0961000a0910ca6a7ea33a6acfeb0f9edcad1571507b0af821f40",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.translation-studies-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md#TA-1 (addresses MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.translation-studies-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.translation-studies-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.translation-studies-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.translation-studies-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.translation-studies-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.translation-studies-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md#TA-3 (addresses MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.translation-studies-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.translation-studies-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.translation-studies-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md#TA-4 (addresses MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER, MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.translation-studies-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.translation-studies-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "Introduction to Translation Studies — Conceptual Development Sequence",
+      "content": "### TA-1 — Translation as Meaning-Transfer, Not Word Substitution (MC-A)\n\nUsing the recipe-conversion anchor, teach that translation requires conveying meaning and natural\nexpression, not literal word matching. Student practice: given three idiomatic expressions, attempt a\nliteral word-for-word translation (noting its failure) and then a meaning-focused translation.\n\n### TA-2 — Identifying Specific Translation Trade-offs\n\nIntroduce common translation trade-offs: literal meaning vs. rhythm/rhyme, wordplay vs. literal\ncontent, formality vs. naturalness. Student practice: given two translations of the same passage,\nidentify the specific trade-off each one navigates.\n\n### TA-3 — Multiple Legitimate Translations Can Coexist (MC-B)\n\nUsing the novel-to-film anchor, teach that different translation choices can be equally legitimate,\nreflecting different priorities. Student practice: given two published translations of the same\npassage making different trade-off choices, explain why both can be considered legitimate rather than\none simply \"correct.\"\n\n### TA-4 — Full Application: Producing and Evaluating Original Translation Choices\n\nGive the student a new short passage containing a genuine translation dilemma (a pun, an idiom, or a\nculturally specific reference). They must produce two different translations of it, each prioritizing\na different element (TA-2), and explain what was gained and lost in each choice, confirming neither is\nsimply \"wrong\" (TA-1, TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 155,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/misconception/MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "**Trigger signal:** Student assumes that a \"good\" or \"accurate\" translation should replace each word",
+      "content": "### MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER\n\n**Trigger signal:** Student assumes that a \"good\" or \"accurate\" translation should replace each word\nin the source language with its closest word-for-word equivalent in the target language, failing to\nrecognize that this approach frequently produces awkward, unnatural, or even misleading results,\nsince languages rarely have perfectly matching vocabulary, idiom, grammatical structure, or cultural\nconnotation for every word and phrase.\n\n**Conflict evidence [P28]:** Show the student a word-for-word literal substitution of an idiomatic\nexpression from one language into English (producing an awkward, confusing, or nonsensical result)\nalongside a more natural, meaning-focused translation of the same expression that captures the\nintended sense even though it doesn't match word-for-word. Ask: \"Which version actually conveys the\noriginal meaning more accurately to an English reader — the literal word-for-word version, or the\nmeaning-focused version?\"\n\n**Bridge text [P30]:** \"Assuming translation should be word-for-word substitution is like assuming\nthe best way to convert a recipe from metric to imperial measurements is to substitute each unit's\nnumber directly without recalculating the actual proportions — the resulting recipe might use\n'correct-looking' individual numbers, but the actual proportions (the real MEANING of the recipe)\nwould be wrong. Good translation requires recalculating for MEANING and natural expression in the\ntarget language, not swapping words one-for-one.\"\n\n**Replacement text [P31]:** \"Never assume word-for-word substitution produces an accurate translation.\nAlways ask: does this rendering convey the SAME MEANING and effect to a target-language reader that the\noriginal conveyed to a source-language reader, even if that requires departing from a literal,\nword-by-word match?\"\n\n**Discrimination pairs [P33]:**\n1. A literal, word-for-word translation of an idiom that produces a confusing or nonsensical result in\n   the target language (mechanical substitution, meaning lost) vs. a meaning-focused translation that\n   captures the intended sense using natural target-language phrasing, even if the words don't match\n   one-to-one (accurate, meaning-preserving translation).\n2. A student who judges a translation's quality by how closely each word matches the original\n   (misconception) vs. a student who judges a translation's quality by whether the overall meaning and\n   effect are accurately conveyed (correct, meaning-focused evaluation).\n\n**s6_path:** If the student continues to expect word-for-word matching after the bridge, give them\nthree more idiomatic or culturally-specific expressions and have them first attempt a literal\nword-for-word translation (noting where it fails to convey the intended meaning), then construct a\nmeaning-focused translation instead.",
+      "localKey": "MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/misconception/MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "**Trigger signal:** Student assumes that for any given source passage, there exists exactly one",
+      "content": "### MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG\n\n**Trigger signal:** Student assumes that for any given source passage, there exists exactly one\n\"correct\" translation, and any other rendering must be simply wrong, failing to recognize that\ntranslation frequently involves genuine, defensible trade-offs (literal meaning versus rhythm, a pun\nversus its literal content, formality level versus naturalness) where different translators can make\ndifferent, EQUALLY LEGITIMATE choices depending on which priority they emphasize, with no single\n\"correct\" answer existing independent of those priorities.\n\n**Conflict evidence [P28]:** Show the student two different, published translations of the same\nsource passage (e.g., a poem or a passage containing wordplay), each making a different defensible\nchoice (one prioritizing preserving the original's rhyme and rhythm at some cost to exact literal\nmeaning, one prioritizing exact literal meaning at some cost to rhythm). Ask: \"Is one of these\ntranslations simply 'wrong' and the other 'right,' or are both legitimate responses to a genuine\ntrade-off, reflecting different priorities?\"\n\n**Bridge text [P30]:** \"Assuming there's exactly one correct translation is like assuming there's\nexactly one correct way to adapt a novel into a film — a filmmaker prioritizing faithfulness to every\nplot detail makes different (and equally defensible) choices than one prioritizing capturing the\nnovel's emotional tone even if that means changing some details. Translation similarly involves real\ntrade-offs (literal meaning vs. rhythm, wordplay vs. literal content) where different translators can\nmake different, legitimate choices — there is rarely one single 'correct' translation, independent of\nwhich priority is emphasized.\"\n\n**Replacement text [P31]:** \"When comparing two different translations of the same passage, don't\nassume one must be 'correct' and the other 'wrong.' Ask instead: what specific trade-off is each\ntranslation navigating, and what priority does each choice reflect? Different, defensible choices can\ncoexist.\"\n\n**Discrimination pairs [P33]:**\n1. Two translations of a poem, one prioritizing rhyme/rhythm at some cost to exact literal meaning,\n   one prioritizing exact literal meaning at some cost to rhythm (both legitimate, reflecting\n   different priorities) vs. assuming one of these must simply be the \"correct\" translation and the\n   other an error.\n2. A student who insists a specific translation is \"wrong\" simply because it differs from another\n   published version (rigid, single-correct-answer assumption) vs. a student who evaluates each\n   translation's specific trade-off choices on their own terms (correct, pluralistic understanding).\n\n**s6_path:** If the student continues to seek one \"correct\" translation after the bridge, give them a\npassage containing a genuine translation dilemma (e.g., a pun that cannot be preserved along with its\nliteral meaning) and have them produce two different translations themselves, each prioritizing a\ndifferent element, articulating what was gained and lost in each choice.",
+      "localKey": "MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG",
+      "language": "en",
+      "refs": [
+        "MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 44,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "Translation as Meaning-Transfer, Not Word Substitution (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Translation as Meaning-Transfer, Not Word Substitution (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 159,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "Identifying Specific Translation Trade-offs",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Specific Translation Trade-offs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 165,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "Multiple Legitimate Translations Can Coexist (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Multiple Legitimate Translations Can Coexist (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 171,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "Full Application: Producing and Evaluating Original Translation Choices",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Producing and Evaluating Original Translation Choices\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER\",\"MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-GOOD-TRANSLATION-IS-A-MECHANICAL-WORD-FOR-WORD-SUBSTITUTION-FROM-ONE-LANGUAGE-TO-ANOTHER",
+        "MC-B-THERE-IS-ALWAYS-EXACTLY-ONE-CORRECT-TRANSLATION-FOR-A-GIVEN-PASSAGE-AND-ALL-OTHERS-ARE-WRONG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 178,
+        "endLine": 312
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Detecting Word-for-Word Translation Failure**\nGiven an idiomatic expression, attempt a literal word-for-word translation, identify why it fails to\nconvey the intended meaning, and construct a meaning-focused alternative.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying a Specific Trade-off**\nGiven two translations of the same passage, identify the specific trade-off each one navigates\n(literal meaning vs. rhythm, wordplay vs. literal content, formality vs. naturalness).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Explaining Why Multiple Translations Can Be Legitimate**\nGiven two different, defensible translations of the same passage, explain why neither should be\nconsidered simply \"wrong,\" identifying the different priority each reflects.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Producing Two Trade-off-Driven Translations**\nGiven a passage containing a genuine translation dilemma, produce two different translations, each\nprioritizing a different element.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Translation Analysis**\nGiven a new passage containing a genuine translation dilemma, produce two translations prioritizing\ndifferent elements and explain the trade-off in each, confirming both are legitimate.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student is bilingual or multilingual, invite them to bring in a real example from their own\n  languages where a word-for-word translation fails or where a genuine trade-off exists — personal,\n  concrete examples ground this concept's abstract principles powerfully.\n- If the student masters trade-off identification in provided examples (MP-2) but struggles to\n  generate original trade-off-driven translations themselves (MP-4), provide one more fully-guided\n  production example before independent work.\n- If the student overcorrects into believing \"any translation goes\" with no quality standards at all,\n  clarify that legitimate trade-offs still require the translation to genuinely convey meaning and\n  effect — the pluralism is about which defensible priority is emphasized, not an absence of any\n  standard.\n- Students studying a second language formally should be encouraged to notice translation\n  trade-offs directly in their own language-learning materials or media consumption, connecting this\n  concept's abstract principles to ongoing, concrete language experience.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 265,
+        "endLine": 281
+      }
+    },
+    {
+      "assetId": "eng.linguistics.translation-studies-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.translation-studies-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: bilingualism check] --> [PD-2: semantics check]\n   |                                              |\n   | (gap found)                                  | (pass)\n   v                                               v\n[Route to prerequisite concept]      [Component 3: Recipe-Unit-Conversion / Novel-to-\n                                       Film-Adaptation Anchor]\n                                                   |\n                                                   v\n                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                   |\n                                                   v\n                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                   |\n                                                   v\n                          [MP-1 through MP-5 mastery probe set]\n                                                   |\n                          (pass >= 0.70) -----+----- (fail)\n                                 |                      |\n                                 v                      v\n        [No further unlocks —  [S6 remediation: literal-attempt-fails-then-\n         terminal in current      meaning-succeeds / two-translations drills]\n         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (expecting literal matching) and MC-B during TA-3 (seeking one correct translation) — MC-A\ngenerally needs resolving first since accepting that translation requires meaning-focused\ninterpretation is the foundation for recognizing that different interpretive priorities can produce\ndifferent, legitimate results. If either fires, branch to the relevant s6_path drill before resuming.\nAt the mastery probe stage (S9), route by failure: MP-1 failure indicates residual MC-A; MP-2 failure\nalone indicates the trade-off-identification mechanics (TA-2) need review, distinct from either\nmisconception; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.translation-studies-intro.md",
+        "startLine": 227,
+        "endLine": 265
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

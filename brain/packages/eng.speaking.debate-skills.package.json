@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.debate-skills-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.debate-skills",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f40f6efd9e495f5ac70733b6aa9d0979ae829fd54f3b7b85fd89dac6db9e5e12",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.debate-skills.md": "sha256:116a4b92ae4285a94c9b94b0cd00688b940da4a73ead448795f045a8fd028c4a"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.speaking.debate-skills",
+    "name": "Debate Skills",
+    "difficultyRaw": "advanced",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.speaking.discussion-skills",
+      "eng.speaking.presentation-skills"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.debate-skills-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.debate-skills (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.debate-skills.md": "sha256:116a4b92ae4285a94c9b94b0cd00688b940da4a73ead448795f045a8fd028c4a"
+      },
+      "contentHash": "sha256:0c76f52d74bc284f64e1e1d2f747cc8cf5d125b6a093dae1fcf6004265cec51b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.debate-skills.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.debate-skills.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.debate-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.debate-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.debate-skills.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.debate-skills.md#TA-2 (addresses MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.debate-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.debate-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.debate-skills.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.debate-skills.md#TA-3 (addresses MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.debate-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.debate-skills\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.debate-skills.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.debate-skills.md#TA-4 (addresses MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS, MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.debate-skills"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.debate-skills\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.debate-skills/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "Debate Skills — Conceptual Development Sequence",
+      "content": "### TA-1 — Constructing a Clear Opening Argument for a Structured Format\n\nTeach students to build a well-supported opening argument suited to a debate format's specific\nconstraints (time limit, defined role). Student practice: given a debate topic and format constraints,\nconstruct a brief opening argument.\n\n### TA-2 — Active Listening and Direct Engagement in Rebuttal (MC-A)\n\nUsing the tennis-swinging anchor, teach students to construct rebuttals that directly engage with the\nopponent's specific, actual argument. Student practice: given a recorded or transcribed opposing\nargument, construct a rebuttal that begins by accurately restating the specific point before\nresponding to it.\n\n### TA-3 — Forceful Argumentation Without Personal Hostility (MC-B)\n\nUsing the boxing-ring anchor, teach students to be direct and forceful while maintaining respectful,\nargument-focused language. Student practice: given three rebuttal drafts (some hostile, some\nunder-forceful, one correctly forceful-and-respectful), identify and revise any hostile or\nunder-forceful examples.\n\n### TA-4 — Full Application: Conducting a Structured Debate Exchange\n\nGive the student a debate scenario with an assigned position and a partner's (or provided) opposing\nargument. They must construct an opening argument (TA-1), listen to and directly rebut the specific\nopposing points (TA-2), and maintain forceful but respectful language throughout (TA-3) — the full\nsynthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 153,
+        "endLine": 182
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/misconception/MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "**Trigger signal:** Student prepares a fixed script of arguments and points before a debate and",
+      "content": "### MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS\n\n**Trigger signal:** Student prepares a fixed script of arguments and points before a debate and\ndelivers them regardless of what the opponent actually argues during the debate, failing to actively\nLISTEN to the opponent's specific case and directly engage with it — producing a rebuttal that\naddresses points the opponent never actually made, or ignores points they specifically did make,\nbecause the student is following a pre-planned script rather than responding to the live exchange.\n\n**Conflict evidence [P28]:** Show the student a debate transcript where one speaker's \"rebuttal\"\nclearly ignores the specific points the opponent just made, instead delivering pre-planned remarks\nthat don't actually engage with what was said, alongside a rebuttal that directly quotes and responds\nto the opponent's SPECIFIC argument. Ask: \"Does the first rebuttal actually respond to what the\nopponent said, or does it sound like it would be delivered the same way regardless of the opponent's\nactual case? Which rebuttal would a judge find more persuasive?\"\n\n**Bridge text [P30]:** \"Delivering a fixed script regardless of what the opponent says is like a\ntennis player swinging at the exact same spot every time regardless of where the ball actually lands —\ntechnically executing a shot, but completely disconnected from the actual, live exchange happening in\nfront of them. A debate rebuttal has to directly respond to the SPECIFIC argument the opponent just\nmade, requiring active, in-the-moment listening, not a pre-planned script executed regardless of the\nopponent's actual case.\"\n\n**Replacement text [P31]:** \"During a debate, actively listen to your opponent's SPECIFIC argument as\nthey make it, and construct your rebuttal to directly engage with what they ACTUALLY said — not a\npre-planned response that would work regardless of their actual case. Preparation should inform your\nflexibility, not replace your listening.\"\n\n**Discrimination pairs [P33]:**\n1. A rebuttal that addresses a point the opponent never actually made, following a pre-planned script\n   (disconnected from the live exchange) vs. a rebuttal that directly quotes and responds to the\n   opponent's specific argument just made (engaged, responsive rebuttal).\n2. A student who prepares only fixed remarks and delivers them regardless of the opposing argument\n   (misconception) vs. a student who prepares flexible content but actively adapts their specific\n   rebuttal based on what the opponent actually argues (correct, responsive practice).\n\n**s6_path:** If the student continues to deliver pre-planned rebuttals regardless of the opponent's\nactual case after the bridge, have them practice with a partner: the partner delivers an argument, and\nthe student must construct a rebuttal that begins by accurately restating the SPECIFIC point just made\nbefore responding to it, making the direct engagement structurally required.",
+      "localKey": "MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS",
+      "language": "en",
+      "refs": [
+        "MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 3,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/misconception/MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "**Trigger signal:** Student conflates being FORCEFUL and directly challenging in argumentation",
+      "content": "### MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE\n\n**Trigger signal:** Student conflates being FORCEFUL and directly challenging in argumentation\n(firmly disagreeing with and directly refuting an opponent's specific claims) with being personally\ndisrespectful or hostile toward the opponent, either avoiding direct, forceful engagement out of fear\nof seeming rude, or conversely becoming genuinely personally hostile when trying to argue forcefully —\nfailing to recognize that forceful, direct argumentative disagreement and personal respect are fully\ncompatible and both expected in a well-conducted debate.\n\n**Conflict evidence [P28]:** Show the student two debate rebuttals disagreeing forcefully with the\nsame opposing argument: one that directly and firmly refutes the argument's reasoning while\nmaintaining respectful, professional language (\"The evidence my opponent cites doesn't actually support\ntheir conclusion, because...\"), and one that becomes personally hostile or dismissive toward the\nopponent as a person (\"My opponent clearly doesn't understand basic logic...\"). Ask: \"Is the first\nversion forceful and direct? Is it personally disrespectful? Can you be firmly, directly disagreeing\nwith an argument WITHOUT being hostile toward the person making it?\"\n\n**Bridge text [P30]:** \"Confusing forceful argumentation with personal hostility is like confusing a\nskilled boxer's powerful, direct punches (within the rules, aimed at winning the match) with an\nunsportsmanlike attack outside the ring — both involve real force and directness, but one operates\nwithin respectful, professional bounds targeting the ARGUMENT, while the other targets the PERSON. A\ndebate rewards forceful, direct engagement with an opponent's REASONING, while personal hostility\ntoward the opponent themselves is neither necessary nor appropriate.\"\n\n**Replacement text [P31]:** \"Be as forceful and direct as needed in challenging your opponent's\nARGUMENT and REASONING — this is expected and rewarded in debate. But always keep your language\ntargeted at the argument, not the person, maintaining respectful, professional tone even during firm\ndisagreement.\"\n\n**Discrimination pairs [P33]:**\n1. \"The evidence my opponent cites doesn't actually support their conclusion, because...\" (forceful,\n   direct, targeting the argument, respectful) vs. \"My opponent clearly doesn't understand basic\n   logic.\" (personally dismissive, targeting the person, disrespectful).\n2. A student who softens or avoids directly challenging a flawed argument out of fear of seeming rude\n   (under-forceful, missing legitimate argumentative opportunities) vs. a student who firmly and\n   directly refutes the argument's specific flaws while maintaining respectful language throughout\n   (correct, both forceful and respectful).\n\n**s6_path:** If the student continues to conflate forcefulness with hostility (in either direction)\nafter the bridge, have them take three example rebuttals varying in both forcefulness and\npersonal-hostility level, and independently rate each on both dimensions separately, confirming that\nhigh forcefulness and low hostility can coexist.",
+      "localKey": "MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE",
+      "language": "en",
+      "refs": [
+        "MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 43,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "Constructing a Clear Opening Argument for a Structured Format",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Constructing a Clear Opening Argument for a Structured Format\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 157,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "Active Listening and Direct Engagement in Rebuttal (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Active Listening and Direct Engagement in Rebuttal (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 163,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "Forceful Argumentation Without Personal Hostility (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Forceful Argumentation Without Personal Hostility (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 170,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "Full Application: Conducting a Structured Debate Exchange",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Conducting a Structured Debate Exchange\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS\",\"MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-WINNING-A-DEBATE-MEANS-DELIVERING-YOUR-PREPARED-ARGUMENTS-REGARDLESS-OF-WHAT-THE-OPPONENT-ACTUALLY-SAYS",
+        "MC-B-BEING-FORCEFUL-OR-DIRECTLY-CHALLENGING-AN-OPPONENTS-ARGUMENT-MEANS-BEING-DISRESPECTFUL-OR-HOSTILE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 177,
+        "endLine": 305
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Constructing a Structured Opening Argument**\nGiven a debate topic and time constraint, construct a brief, well-supported opening argument.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Restating Before Rebutting**\nGiven an opposing argument, accurately restate its specific point before constructing a rebuttal to\nit.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Detecting Disconnected Rebuttals**\nGiven a rebuttal that ignores or misrepresents the opponent's actual argument, identify the\ndisconnection and revise the rebuttal to directly engage with what was actually said.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Forcefulness from Hostility**\nGiven three rebuttal drafts varying in forcefulness and personal-hostility level, rate each on both\ndimensions separately and identify which is correctly forceful-yet-respectful.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Debate Exchange**\nGiven a new debate topic and opposing argument, construct an opening argument, a direct and engaged\nrebuttal, and maintain forceful-but-respectful language throughout.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated rebuttal-construction and tone-calibration (MP-2, MP-4) but reverts\n  to scripted or hostile responses under the real-time pressure of a live debate exchange (MP-5),\n  provide additional practice specifically under time pressure, since the skills may be secure in\n  untimed analysis but fragile under live performance conditions.\n- If the student is naturally conflict-avoidant and consistently under-forceful even after correction,\n  provide explicit reassurance and modeling that firm, direct argumentative disagreement is expected\n  and valued in this format, distinct from their personal communication style in other contexts.\n- If the student is naturally combative and slips into personal hostility even after correction,\n  provide a concrete self-check habit (before speaking, silently confirm the response targets the\n  argument's content, not the opponent's character) as an ongoing practice tool.\n- Students with strong performance in `eng.listening.critical-listening` should transfer the\n  evaluative-listening skills readily to this concept's active-engagement requirement — draw this\n  cross-link connection explicitly if that concept has been completed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 258,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "eng.speaking.debate-skills/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.debate-skills",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: discussion skills check] --> [PD-2: presentation skills check]\n   |                                                     |\n   | (gap found)                                         | (pass)\n   v                                                      v\n[Route to prerequisite concept]           [Component 3: Tennis-Fixed-Spot / In-Ring-vs-\n                                            Outside-Ring Anchor]\n                                                          |\n                                                          v\n                                       [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                          |\n                                                          v\n                                 [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                          |\n                                                          v\n                                 [MP-1 through MP-5 mastery probe set]\n                                                          |\n                                 (pass >= 0.75) -----+----- (fail)\n                                        |                      |\n                                        v                      v\n                [No further unlocks —  [S6 remediation: restate-before-respond /\n                 terminal in current      rate-both-dimensions drills]\n                 curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-2 (scripted, disconnected rebuttals) and MC-B during TA-3 (either avoiding forceful engagement or\nbecoming hostile) — these are largely independent and often need separate, explicit correction. If\neither fires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9),\nroute by failure: MP-1 failure indicates the basic opening-argument construction (TA-1) needs review,\ndistinct from either misconception; MP-2/MP-3 failures indicate residual MC-A; MP-4 failure alone\nindicates residual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap at\nfull-exchange scale — provide one more guided debate exchange before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.debate-skills.md",
+        "startLine": 221,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
