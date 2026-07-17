@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.narrative-writing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.narrative-writing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a50fea91ecd32bf4b40743170d4517d904cce929a48db2024f2bb8510ade40dc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.narrative-writing.md": "sha256:d7d40fcf27d2b0c18235755b1c846e35c9545bd39151432ccedb0f05d2cd48c9"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.narrative-writing",
+    "name": "Narrative Writing",
+    "difficultyRaw": "proficient",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.writing.transitions-and-cohesion"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.narrative-writing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.narrative-writing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.narrative-writing.md": "sha256:d7d40fcf27d2b0c18235755b1c846e35c9545bd39151432ccedb0f05d2cd48c9"
+      },
+      "contentHash": "sha256:6bb4c930c43be302fa22f743ae2d522527f6c21f6b7257a16bebccf56d0260c1",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.narrative-writing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.narrative-writing.md#TA-1 (addresses MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.narrative-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.narrative-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.narrative-writing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.narrative-writing.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.narrative-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.narrative-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.narrative-writing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.narrative-writing.md#TA-3 (addresses MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.narrative-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.narrative-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.narrative-writing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.narrative-writing.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.narrative-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.narrative-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.narrative-writing.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.narrative-writing.md#TA-5 (addresses MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER, MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.narrative-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.narrative-writing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.narrative-writing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "Narrative Writing — Conceptual Development Sequence",
+      "content": "### TA-1: Slow-Down vs. Summarize Sorting\nPresent a sequence of story events and have the student identify which moments deserve slow, developed scene-treatment (zoom in) and which can be quickly summarized (zoom out), justifying each choice by its importance to the story. Directly counters MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER.\n\n### TA-2: Developing a Scene with Sensory Detail\nTeach the student to develop a chosen key moment using sensory details (sight, sound, smell, touch) and specific, concrete language rather than vague generalities.\n\n### TA-3: Rendering Dialogue Instead of Summarizing\nUsing the discrimination pairs from MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD, present a summarized conversation and have the student rewrite it as actual rendered dialogue, revealing character voice and emotional texture.\n\n### TA-4: Combining Summary and Scene in One Narrative\nStudent writes a short narrative combining both summarized time (moving quickly through less important stretches) and one fully-developed scene (with sensory detail and dialogue), applying the zoom-lens principle across a complete short piece.\n\n### TA-5: Composing a Full Original Narrative\nStudent writes a complete original narrative on an assigned or chosen topic, deliberately using selective scene development, sensory detail, and rendered dialogue at the key moment(s) — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": ": Slow-Down vs. Summarize Application (Scaffolded)",
+      "content": "### WE-1: Slow-Down vs. Summarize Application (Scaffolded)\n**Event sequence:** A student trains for a competition over several months, then competes in the final event.\n**Walkthrough:** Identify the months of training as summarizable (\"Over the next three months, I practiced every day after school\") and the competition itself as the key scene deserving full development (sensory detail, internal feeling, possibly dialogue).",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": ": Sensory Scene Development (Guided)",
+      "content": "### WE-2: Sensory Scene Development (Guided)\n**Bare moment:** \"I was nervous before the race.\"\n**Walkthrough:** Develop with sensory detail: \"My hands trembled as I gripped the starting blocks, the roar of the crowd blurring into a single wave of sound, my heart hammering against my ribs like it wanted out.\"",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": ": Summary-to-Dialogue Conversion (Independent)",
+      "content": "### WE-3: Summary-to-Dialogue Conversion (Independent)\n**Summarized conversation:** \"My coach told me to trust my training and just run my race.\"\n**Walkthrough:** Student converts to rendered dialogue: \"'Forget everyone else,' my coach said, crouching down to my eye level. 'Run YOUR race. You've done the work.' I nodded, not trusting my voice.\"",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/misconception/MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER",
+      "kind": "misconception",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "- **Trigger signal:** Student writes a narrative as a flat chronological list of events (\"First this happened, then this happened, then this happened...\") without developing any single moment with sensory detail, character interiority, or dramatic pacing — treating narrative writing as a report of events rather than an experience the reader lives through.",
+      "content": "### MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER\n- **Trigger signal:** Student writes a narrative as a flat chronological list of events (\"First this happened, then this happened, then this happened...\") without developing any single moment with sensory detail, character interiority, or dramatic pacing — treating narrative writing as a report of events rather than an experience the reader lives through.\n- **Conflict evidence [P28]:** Present a flat event-list narrative (\"I woke up. I ate breakfast. I walked to school. I saw my friend. We talked. Class started.\") alongside a narrative that slows down and develops ONE moment vividly (\"The smell of burnt toast hung in the kitchen as I fumbled with my shoelaces, already fifteen minutes behind and dreading the look on my teacher's face.\") Ask which one actually makes the reader feel present in a specific moment versus which one just reports facts in sequence.\n- **Bridge text [P30]:** \"Listing everything that happened, in order, produces a report, not a narrative. Good narrative writing SLOWS DOWN on the moments that matter most — developing them with sensory detail, character feeling, and specific dialogue or action — while moving quickly or skipping entirely over less important stretches of time. Not every moment deserves equal narrative real estate.\"\n- **Replacement text [P31]:** \"Instead of listing every event equally, identify the 1-2 moments that matter most to your story and slow down there: add sensory details, character thoughts/feelings, specific dialogue. Compress or skip less important time (a simple 'the next morning' can jump past hours) so your narrative energy goes where it counts.\"\n- **Discrimination pairs [P33]:** (a) Uniform chronological listing (narrative = reporting every event in the order it happened, with equal attention to each) vs. (b) Selective scene development (narrative = slowing down to vividly develop the moments that matter most while compressing or skipping less important time).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's slow-down-vs-summarize sort before continuing.",
+      "localKey": "MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/misconception/MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD",
+      "kind": "misconception",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "- **Trigger signal:** Student summarizes character conversations in narration (\"We talked about the game and I told her I was nervous\") rather than rendering key exchanges as actual dialogue, missing dialogue's power to reveal character voice, create immediacy, and show (rather than tell) emotional dynamics between characters.",
+      "content": "### MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD\n- **Trigger signal:** Student summarizes character conversations in narration (\"We talked about the game and I told her I was nervous\") rather than rendering key exchanges as actual dialogue, missing dialogue's power to reveal character voice, create immediacy, and show (rather than tell) emotional dynamics between characters.\n- **Conflict evidence [P28]:** Present \"I told my sister I was scared, and she reassured me.\" (summarized, tells the reader what happened but shows nothing of how) alongside \"'I don't think I can do this,' I whispered. My sister grabbed my hand. 'You've practiced for months. You've got this.'\" (actual dialogue, revealing both characters' voices and the specific emotional exchange). Ask which version lets the reader experience the moment versus which just reports its outcome.\n- **Bridge text [P30]:** \"Summarizing dialogue tells the reader THAT a conversation happened and what its gist was, but actual dialogue lets the reader experience HOW it happened — the specific words, the character voices, the emotional texture of the exchange. For key emotional or plot-critical moments, rendering the actual dialogue is far more powerful than summarizing it away.\"\n- **Replacement text [P31]:** \"For moments where a conversation reveals something important about character or advances the plot, write the actual dialogue instead of summarizing it. Ask: would rendering this exchange word-for-word let the reader experience something a summary would flatten out?\"\n- **Discrimination pairs [P33]:** (a) Dialogue-as-optional-decoration (conversations can always be summarized in narration without losing anything important) vs. (b) Dialogue-as-revealing-device (rendering key exchanges as actual dialogue reveals character voice and creates immediacy that summary cannot replicate).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's zoom-lens framing before continuing to TA-3.",
+      "localKey": "MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD",
+      "language": "en",
+      "refs": [
+        "MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "Slow-Down vs. Summarize Sorting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Slow-Down vs. Summarize Sorting\",\"primitives\":[],\"addresses\":[\"MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "Developing a Scene with Sensory Detail",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Developing a Scene with Sensory Detail\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "Rendering Dialogue Instead of Summarizing",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Rendering Dialogue Instead of Summarizing\",\"primitives\":[],\"addresses\":[\"MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "Combining Summary and Scene in One Narrative",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Combining Summary and Scene in One Narrative\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "Composing a Full Original Narrative",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Composing a Full Original Narrative\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER\",\"MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER",
+        "MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Select scenes for development vs. summary**\nGiven a sequence of story events, student correctly identifies which moments deserve full scene development and which should be summarized, with justification. *(Directly targets MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Convert summarized dialogue to rendered dialogue**\nGiven a summarized conversation, student rewrites it as actual rendered dialogue revealing character voice. *(Directly targets MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Develop a scene with sensory detail**\nGiven a bare narrative moment, student develops it with specific sensory details.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Combine summary and scene**\nStudent writes a short passage combining summarized time and one fully-developed scene.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Compose a full original narrative**\nStudent writes a complete original narrative using selective scene development, sensory detail, and rendered dialogue.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "Adaptive Flags",
+      "content": "- If the student lists events uniformly without slowing down anywhere, weight remediation toward MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER's bridge text and re-run TA-1's slow-down-vs-summarize sort before returning to composition.\n- If the student summarizes key conversations instead of rendering dialogue, weight remediation toward MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD's bridge text and TA-3's dialogue-conversion practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.writing.the-writing-process`, `eng.writing.creative-writing-forms`) — do not certify mastery without TA-5's full original narrative, since both downstream concepts assume the student can already independently compose a complete, well-paced narrative.\n- Reuse the \"camera zoom lens\" framing explicitly when introducing `eng.writing.creative-writing-forms` — that concept extends selective scene development to other creative forms beyond straightforward narrative.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER",
+        "MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.writing.narrative-writing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.narrative-writing",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Transitions-and-Cohesion Readiness Check]\n        |\n        v\n[Concrete Anchor: The Camera Zoom Lens]\n        |\n        v\n[TA-1: Slow-Down vs. Summarize Sorting]\n        |\n        v\n[TA-2: Developing a Scene with Sensory Detail]\n        |\n        v\n[TA-3: Rendering Dialogue Instead of Summarizing]\n        |\n        v\n[TA-4: Combining Summary and Scene in One Narrative]\n        |\n        v\n[TA-5: Composing a Full Original Narrative]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — narrative writing needs cohesive connective tissue to move between developed scenes and summarized time, so weak cohesion undermines the pacing this concept teaches. During instruction (S1), watch for both misconception patterns: uniform event-listing (MC-A-GOOD-NARRATIVE-JUST-LISTS-EVERYTHING-THAT-HAPPENED-IN-ORDER) and summarizing away dialogue (MC-DIALOGUE-IS-JUST-DECORATION-AND-CAN-BE-SUMMARIZED-INSTEAD) both flatten the narrative into a report rather than an experience — redirect both to the Camera Zoom Lens anchor. If the student lists events uniformly or summarizes key conversations during TA-1/TA-3 (S6), drop back to the Concrete Anchor's zoom demonstration before returning to composition. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who develops sensory scenes well (MP-3) but still lists events uniformly or summarizes key dialogue has not learned the selective pacing judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.narrative-writing.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

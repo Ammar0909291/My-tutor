@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.drama-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.drama-basics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:48e10f1baaf914709e59e2a50e149d6ec51f3e26215a6b6e87575df7c89cf8e3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.drama-basics.md": "sha256:cecea9294d78e38cca78dfbadf8486ba669eeeeb7812531c69b91c1ad78c7ac1"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.drama-basics",
+    "name": "Drama Basics",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.narrative-elements"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.drama-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.drama-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.drama-basics.md": "sha256:cecea9294d78e38cca78dfbadf8486ba669eeeeb7812531c69b91c1ad78c7ac1"
+      },
+      "contentHash": "sha256:87dd97306adc42085d2c2de007d747dde7b9c5dd81bc752c0cb74fc203a4f291",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.drama-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.drama-basics.md#TA-1 (addresses MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.drama-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.drama-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.drama-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.drama-basics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.drama-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.drama-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.drama-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.drama-basics.md#TA-3 (addresses MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.drama-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.drama-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.drama-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.drama-basics.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.drama-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.drama-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.drama-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.drama-basics.md#TA-5 (addresses MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY, MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.drama-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.drama-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.drama-basics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "Drama Basics — Conceptual Development Sequence",
+      "content": "### TA-1: The Stage-Direction-Removal Test\nPresent a dramatic excerpt with its stage directions, then the same excerpt with stage directions removed, and have the student identify exactly what information is lost (tone, action, emotional state) — directly countering MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY.\n\n### TA-2: Identifying Acts, Scenes, and Basic Play Structure\nTeach the structural units of drama (acts as major divisions, scenes as smaller divisions within acts) and have the student identify act/scene boundaries in a sample play excerpt, distinguishing this from prose chapter structure.\n\n### TA-3: How Drama Conveys Information Without a Narrator\nUsing the discrimination pairs from MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED, present a prose passage with narrated inner thought and have the student identify how a playwright would need to convey the same information (through dialogue, a soliloquy, or a stage direction) without a narrator's voice available.\n\n### TA-4: Dialogue as the Primary Information Channel\nTeach that character traits, relationships, and plot developments in drama must emerge entirely through what characters say and do (plus stage directions), and have the student infer a character trait purely from dialogue and stage directions in a sample excerpt, with no narrated help.\n\n### TA-5: Analyzing a Novel Dramatic Excerpt\nStudent analyzes a new, unscaffolded dramatic excerpt: identifies act/scene structure, explains what 2 specific stage directions convey that dialogue alone wouldn't, and infers a character trait using only dialogue/stage-direction evidence — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.drama-basics",
+      "title": ": Stage-Direction-Removal Test (Scaffolded)",
+      "content": "### WE-1: Stage-Direction-Removal Test (Scaffolded)\n**With stage direction:** \"You always do this. [She laughs, but her eyes are wet.]\" **Without:** \"You always do this.\"\n**Walkthrough:** Without the stage direction, the line reads as simple frustration or anger; with it, the reader understands a complex mix of humor and suppressed hurt — information entirely lost without the stage direction, since no narrator exists to supply it otherwise.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.drama-basics",
+      "title": ": Act/Scene Structure Identification (Guided)",
+      "content": "### WE-2: Act/Scene Structure Identification (Guided)\n**Excerpt structure:** \"ACT ONE, SCENE ONE\" heading, followed by dialogue, then \"ACT ONE, SCENE TWO\" with a new setting note.\n**Walkthrough:** Identify Act One as the major structural division and the two scenes within it as smaller units, likely representing different times or locations, distinct from how prose would use chapter breaks.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.drama-basics",
+      "title": ": Inferring Character Trait from Dialogue Alone (Independent)",
+      "content": "### WE-3: Inferring Character Trait from Dialogue Alone (Independent)\n**Excerpt:** A character speaks in short, clipped sentences, frequently interrupts others, and a stage direction notes \"[checks watch repeatedly].\"\n**Walkthrough:** Student infers the character is impatient or anxious, using only the dialogue pattern and stage direction as evidence — no narrator statement like \"he was impatient\" is available, so the inference must come entirely from these dramatic-genre-specific channels.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/misconception/MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY",
+      "kind": "misconception",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "- **Trigger signal:** Student treats stage directions (bracketed or italicized instructions like \"[exits, slamming the door]\" or \"[whispers]\") as skippable decorative details similar to descriptive passages in prose fiction, rather than recognizing them as essential functional instructions that convey information a prose narrator would otherwise provide through narration — since drama has no narrator to describe action, tone, or setting directly to the reader/audience.",
+      "content": "### MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY\n- **Trigger signal:** Student treats stage directions (bracketed or italicized instructions like \"[exits, slamming the door]\" or \"[whispers]\") as skippable decorative details similar to descriptive passages in prose fiction, rather than recognizing them as essential functional instructions that convey information a prose narrator would otherwise provide through narration — since drama has no narrator to describe action, tone, or setting directly to the reader/audience.\n- **Conflict evidence [P28]:** Present a line of dialogue with its stage direction removed: \"Get out.\" versus the same line with its stage direction: \"Get out. [She says this calmly, almost gently, then turns away.]\" Ask the student how differently they'd interpret the character's emotional state and intention with versus without the stage direction, given that drama has no narrator to otherwise tell the reader/audience how the line is delivered.\n- **Bridge text [P30]:** \"In prose fiction, a narrator can tell you a character spoke 'gently' or 'furiously' — drama has no narrator at all. Stage directions are the ONLY way a playwright can convey tone, emotion, movement, and setting information directly to the reader or performers; they're not optional decoration, they're doing essential narrative work that has nowhere else to go in this genre.\"\n- **Replacement text [P31]:** \"Read every stage direction as carrying information that would otherwise be lost — since drama has no narrator, a stage direction is often the only place emotional tone, physical action, or important context gets conveyed. Never skip past them as if they were optional.\"\n- **Discrimination pairs [P33]:** (a) Stage-directions-as-decoration (bracketed instructions are skippable extra detail, like descriptive flourishes in prose) vs. (b) Stage-directions-as-essential-narration-substitute (stage directions carry tone/action/setting information that has no other channel in drama, since there is no narrator).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's stage-direction-removal test before continuing.",
+      "localKey": "MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY",
+      "language": "en",
+      "refs": [
+        "MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/misconception/MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED",
+      "kind": "misconception",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "- **Trigger signal:** Student treats drama as structurally identical to prose fiction, just formatted differently (dialogue without quotation marks, character names before lines), missing the genuinely distinct features that define drama as a genre meant for live performance: acts/scenes as structural divisions, the complete absence of a narrator's voice, and the fact that everything the audience learns must come through what characters say and do, or through stage directions — nothing can be internally narrated the way prose can access a character's private thoughts directly.",
+      "content": "### MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED\n- **Trigger signal:** Student treats drama as structurally identical to prose fiction, just formatted differently (dialogue without quotation marks, character names before lines), missing the genuinely distinct features that define drama as a genre meant for live performance: acts/scenes as structural divisions, the complete absence of a narrator's voice, and the fact that everything the audience learns must come through what characters say and do, or through stage directions — nothing can be internally narrated the way prose can access a character's private thoughts directly.\n- **Conflict evidence [P28]:** Present a prose passage that directly narrates a character's private inner thought (\"She wondered if she'd ever forgive him.\") and ask the student how a playwright would need to convey that same private thought in drama, given that there's no narrator to state it directly — the playwright must find some other means (a soliloquy, a facial expression noted in stage directions, a confiding line to another character) since inner thoughts can't simply be narrated.\n- **Bridge text [P30]:** \"Drama isn't prose with the quotation marks stripped out — it's a genuinely different genre built around live performance, structured in acts and scenes, with absolutely no narrator's voice available. Everything the audience learns has to come through dialogue, action, or stage directions; private inner thoughts that prose can simply narrate directly have to be handled through devices unique to drama, like a soliloquy or an aside.\"\n- **Replacement text [P31]:** \"When analyzing drama, remember it has no narrator at all — every piece of information (including a character's private thoughts) has to be conveyed through what's said, done, or noted in stage directions. Look for act/scene divisions as the genre's own structural units, distinct from prose chapters.\"\n- **Discrimination pairs [P33]:** (a) Drama-as-reformatted-prose (drama is structurally the same as prose fiction, just with dialogue formatting changed) vs. (b) Drama-as-distinct-performance-genre (drama has genuinely distinct structural features — acts/scenes, complete absence of narration, dialogue/action/stage-directions as the only information channels).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's no-narrator-booth framing before continuing to TA-4.",
+      "localKey": "MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED",
+      "language": "en",
+      "refs": [
+        "MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "The Stage-Direction-Removal Test",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Stage-Direction-Removal Test\",\"primitives\":[],\"addresses\":[\"MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "Identifying Acts, Scenes, and Basic Play Structure",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Acts, Scenes, and Basic Play Structure\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "How Drama Conveys Information Without a Narrator",
+      "content": "{\"id\":\"TA-3\",\"title\":\"How Drama Conveys Information Without a Narrator\",\"primitives\":[],\"addresses\":[\"MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "Dialogue as the Primary Information Channel",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Dialogue as the Primary Information Channel\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "Analyzing a Novel Dramatic Excerpt",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Analyzing a Novel Dramatic Excerpt\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED\",\"MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY",
+        "MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identify information lost without stage directions**\nGiven a dramatic excerpt with and without its stage directions, student identifies the specific tone/action/emotional information lost when directions are removed. *(Directly targets MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identify a narrator-substitute device**\nGiven a scenario requiring a character's private thought to be conveyed in drama, student identifies an appropriate device (soliloquy, aside, revealing dialogue, or stage direction) a playwright could use, given the absence of narration. *(Directly targets MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identify act/scene structure**\nGiven a play excerpt, student correctly identifies act and scene boundaries.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Infer character trait from dialogue/stage directions only**\nGiven a dramatic excerpt, student infers a character trait using only dialogue and stage-direction evidence, with no narrated help.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full novel-excerpt dramatic analysis**\nGiven a novel dramatic excerpt, student identifies act/scene structure, explains what specific stage directions convey, and infers a character trait from dramatic-genre-specific evidence.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "Adaptive Flags",
+      "content": "- If the student skips or undervalues stage directions, weight remediation toward MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY's bridge text and re-run TA-1's removal test before returning to independent analysis.\n- If the student expects narrated inner thought or treats drama as prose with formatting changes, weight remediation toward MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED's bridge text and TA-3's narrator-substitute practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.literature.dramatic-structure`, `eng.literature.literary-genres-overview`) — do not certify mastery without TA-5's full novel-excerpt analysis, since dramatic structure specifically builds on the act/scene and no-narrator foundations established here.\n- Reuse the \"no-narrator booth\" framing explicitly when introducing `eng.literature.dramatic-structure` — that concept examines how the five-stage plot arc (from `eng.literature.plot-structure`) manifests specifically within drama's act/scene divisions and narrator-less toolkit.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY",
+        "MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.literature.drama-basics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.drama-basics",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Narrative-Elements Readiness Check]\n        |\n        v\n[Concrete Anchor: The No-Narrator Booth]\n        |\n        v\n[TA-1: The Stage-Direction-Removal Test]\n        |\n        v\n[TA-2: Identifying Acts, Scenes, and Basic Play Structure]\n        |\n        v\n[TA-3: How Drama Conveys Information Without a Narrator]\n        |\n        v\n[TA-4: Dialogue as the Primary Information Channel]\n        |\n        v\n[TA-5: Analyzing a Novel Dramatic Excerpt]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — drama analysis applies the same plot/character/setting/conflict identification skill from narrative elements to a genuinely different genre toolkit, so weak foundational identification undermines the genre-specific application. During instruction (S1), watch for both misconception patterns: treating stage directions as skippable (MC-STAGE-DIRECTIONS-ARE-JUST-OPTIONAL-EXTRA-DETAILS-LIKE-DESCRIPTIONS-IN-A-STORY) and treating drama as reformatted prose (MC-A-PLAY-IS-JUST-A-STORY-WRITTEN-WITH-QUOTATION-MARKS-REMOVED) both stem from failing to recognize drama's complete absence of a narrator — redirect both to the No-Narrator Booth anchor. If the student skips stage directions or expects narrated inner thought during TA-1/TA-3 (S6), drop back to the Concrete Anchor's booth-comparison demonstration before returning to independent analysis. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who identifies act/scene structure correctly (MP-3) but skips stage directions or expects narration has not yet learned the genre-defining judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.drama-basics.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

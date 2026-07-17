@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.expository-writing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.expository-writing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9a711a107fccddfeffa360d66bda742112a8974f30d562412a02881abb96ff4e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.expository-writing.md": "sha256:12b0405f8840882025e38e24b869eb49173bff072ffd426bcab008102d60c86b"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.expository-writing",
+    "name": "Expository Writing",
+    "difficultyRaw": "proficient",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.writing.transitions-and-cohesion"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.expository-writing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.expository-writing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.expository-writing.md": "sha256:12b0405f8840882025e38e24b869eb49173bff072ffd426bcab008102d60c86b"
+      },
+      "contentHash": "sha256:433f0ed1499492da40deed66cacf75eee9b0e1e0172bb1744ec9f26634d3e33c",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.expository-writing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.expository-writing.md#TA-1 (addresses MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.expository-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.expository-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.expository-writing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.expository-writing.md#TA-2 (addresses MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.expository-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.expository-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.expository-writing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.expository-writing.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.expository-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.expository-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.expository-writing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.expository-writing.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.expository-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.expository-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.expository-writing.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.expository-writing.md#TA-5 (addresses MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC, MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.expository-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.expository-writing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.expository-writing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "Expository Writing — Conceptual Development Sequence",
+      "content": "### TA-1: Opinion vs. Fact Sorting\nPresent 6 sentences, half opinion/value-judgment framing and half objective factual/explanatory content, and have the student sort each, identifying what makes the opinion sentences inappropriate for expository writing. Directly counters MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC.\n\n### TA-2: Definitions That Actually Clarify\nUsing the discrimination pairs from MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC, present bare definitions of complex topics and have the student add a concrete example, analogy, or elaboration that makes the definition genuinely clarifying for an unfamiliar reader.\n\n### TA-3: Organizational Patterns for Explanation\nTeach common expository organizational patterns (definition, process/sequence, cause-effect, compare-contrast, problem-solution — echoing text structure) and have the student identify the most appropriate pattern for explaining 3 different sample topics.\n\n### TA-4: Using Evidence and Examples Objectively\nStudent practices supporting an explanatory claim with a specific fact, statistic, or example, keeping the framing objective/explanatory rather than persuasive.\n\n### TA-5: Composing a Full Original Expository Piece\nStudent writes a complete original expository piece explaining an assigned or chosen topic, using an appropriate organizational pattern, objective explanatory framing, and definitions elaborated with examples — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.expository-writing",
+      "title": ": Opinion vs. Fact Identification (Scaffolded)",
+      "content": "### WE-1: Opinion vs. Fact Identification (Scaffolded)\n**Sentences:** \"Recycling is honestly one of the best things humans have ever done for the planet.\" (opinion) / \"Recycling reduces the amount of waste sent to landfills by processing materials for reuse.\" (fact/explanation).\n**Walkthrough:** Identify the first as opinion-laden (value judgment \"one of the best things\") and the second as objective explanation, confirming only the second belongs in pure expository writing.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.expository-writing",
+      "title": ": Definition Plus Elaboration (Guided)",
+      "content": "### WE-2: Definition Plus Elaboration (Guided)\n**Bare definition:** \"Inflation is a general increase in prices and fall in the purchasing value of money.\"\n**Walkthrough:** Add elaboration: \"For example, if a loaf of bread cost $2 last year and costs $2.20 this year with no change in quality, that 10% increase reflects inflation — the same amount of money now buys less.\"",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.expository-writing",
+      "title": ": Full Expository Composition (Independent)",
+      "content": "### WE-3: Full Expository Composition (Independent)\n**Topic:** Explain how vaccines work.\n**Walkthrough:** Student selects a process/sequence organizational pattern, defines key terms (antigen, immune response) with elaborating examples, and maintains objective, explanatory framing throughout without inserting opinions about vaccination policy.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/misconception/MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC",
+      "kind": "misconception",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "- **Trigger signal:** Student writes expository content as if it were persuasive/opinion writing, inserting personal opinions, value judgments, or \"I think\" framing, rather than explaining, informing, or clarifying a topic through objective facts, definitions, and examples — confusing \"writing about a topic\" with \"arguing a position on a topic.",
+      "content": "### MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC\n- **Trigger signal:** Student writes expository content as if it were persuasive/opinion writing, inserting personal opinions, value judgments, or \"I think\" framing, rather than explaining, informing, or clarifying a topic through objective facts, definitions, and examples — confusing \"writing about a topic\" with \"arguing a position on a topic.\"\n- **Conflict evidence [P28]:** Present \"I think photosynthesis is one of the most amazing processes in nature and everyone should appreciate it more.\" (opinion/persuasive framing) alongside \"Photosynthesis is the process by which plants convert sunlight, water, and carbon dioxide into glucose and oxygen.\" (expository — explains the process objectively using facts and definitions). Ask which one is explaining the topic versus expressing a personal viewpoint about it.\n- **Bridge text [P30]:** \"Expository writing's job is to explain, inform, or clarify — not to argue a position or share a personal opinion. Save your opinions and value judgments for persuasive writing. In expository writing, focus on facts, definitions, processes, and examples that help a reader UNDERSTAND the topic, not FEEL a certain way about it.\"\n- **Replacement text [P31]:** \"Before writing a sentence, check: am I explaining/defining/clarifying something factual, or am I expressing an opinion or value judgment? Expository writing should stick to the first — objective explanation — and save opinion for persuasive writing instead.\"\n- **Discrimination pairs [P33]:** (a) Expository-as-opinion-sharing (expository writing includes personal opinions and value judgments about the topic) vs. (b) Expository-as-objective-explanation (expository writing explains, informs, or clarifies using facts, definitions, and examples, without personal opinion or persuasive framing).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's opinion-vs-fact sort before continuing.",
+      "localKey": "MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC",
+      "language": "en",
+      "refs": [
+        "MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/misconception/MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC",
+      "kind": "misconception",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "- **Trigger signal:** Student provides only a bare definition or single fact when explaining a complex topic, without using examples, analogies, or elaboration to actually help the reader understand HOW or WHY something works — mistaking a technically-correct but under-explained statement for genuine clarification.",
+      "content": "### MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC\n- **Trigger signal:** Student provides only a bare definition or single fact when explaining a complex topic, without using examples, analogies, or elaboration to actually help the reader understand HOW or WHY something works — mistaking a technically-correct but under-explained statement for genuine clarification.\n- **Conflict evidence [P28]:** Present \"Osmosis is the movement of water across a semi-permeable membrane.\" (bare definition, technically correct but unclear to someone unfamiliar with the concept) alongside the same definition followed by a concrete example (\"For instance, when you soak a wilted celery stalk in water, water moves into the celery's cells through osmosis, making it firm again.\") Ask which explanation actually helps a reader who's never heard of osmosis understand it.\n- **Bridge text [P30]:** \"A bare, technically-correct definition often isn't enough to actually help a reader understand a complex idea — it just restates the concept in formal language without connecting it to anything the reader can picture or relate to. Good expository writing follows a definition with a concrete example, analogy, or further elaboration that makes the abstract idea tangible.\"\n- **Replacement text [P31]:** \"After stating a definition or fact, ask: would someone unfamiliar with this topic actually understand it from this definition alone, or do they need a concrete example, analogy, or further explanation to make it click? Add that elaboration whenever the bare definition would leave a reader confused.\"\n- **Discrimination pairs [P33]:** (a) Definition-sufficiency (a correct, formal definition or fact alone adequately explains a complex topic) vs. (b) Definition-plus-elaboration requirement (a definition needs a concrete example, analogy, or further elaboration to genuinely clarify a complex topic for an unfamiliar reader).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's translator-lens framing before continuing to TA-3.",
+      "localKey": "MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC",
+      "language": "en",
+      "refs": [
+        "MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "Opinion vs. Fact Sorting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Opinion vs. Fact Sorting\",\"primitives\":[],\"addresses\":[\"MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "Definitions That Actually Clarify",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Definitions That Actually Clarify\",\"primitives\":[],\"addresses\":[\"MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "Organizational Patterns for Explanation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Organizational Patterns for Explanation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "Using Evidence and Examples Objectively",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Using Evidence and Examples Objectively\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "Composing a Full Original Expository Piece",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Composing a Full Original Expository Piece\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC\",\"MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC",
+        "MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reject opinion-laden expository writing**\nGiven a passage mixing opinion and fact, student identifies the opinion-laden sentences and revises them into objective explanatory statements. *(Directly targets MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Elaborate a bare definition**\nGiven a bare technical definition, student adds a concrete example or analogy that would clarify it for an unfamiliar reader. *(Directly targets MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Select an appropriate organizational pattern**\nGiven a topic, student selects and justifies an appropriate expository organizational pattern.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Support a claim with objective evidence**\nGiven an explanatory claim, student supports it with a specific fact or example while maintaining objective framing.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Compose a full original expository piece**\nStudent writes a complete original expository piece on an assigned topic, using appropriate organization, objective framing, and elaborated definitions.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "Adaptive Flags",
+      "content": "- If the student inserts opinions or value judgments, weight remediation toward MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC's bridge text and re-run TA-1's opinion-vs-fact sort before returning to composition.\n- If the student leaves definitions bare and under-elaborated, weight remediation toward MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC's bridge text and TA-2's elaboration practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.writing.the-writing-process`, `eng.writing.essay-structure`) — do not certify mastery without TA-5's full original composition, since essay structure assumes the student can already produce sustained, well-organized objective explanatory content.\n- Reuse the \"expert translator\" framing explicitly when introducing `eng.communication.technical-writing` — that concept extends the same faithful-explanation-without-opinion discipline to specialized technical/professional contexts.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC",
+        "MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.writing.expository-writing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.expository-writing",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Transitions-and-Cohesion Readiness Check]\n        |\n        v\n[Concrete Anchor: The Expert Translator]\n        |\n        v\n[TA-1: Opinion vs. Fact Sorting]\n        |\n        v\n[TA-2: Definitions That Actually Clarify]\n        |\n        v\n[TA-3: Organizational Patterns for Explanation]\n        |\n        v\n[TA-4: Using Evidence and Examples Objectively]\n        |\n        v\n[TA-5: Composing a Full Original Expository Piece]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — expository writing relies heavily on cause-effect and example transitions to connect explanatory ideas, so weak transition selection undermines clarity. During instruction (S1), watch for both misconception patterns: inserting opinions (MC-EXPOSITORY-WRITING-MEANS-STATING-YOUR-OPINION-ABOUT-THE-TOPIC) and leaving definitions under-elaborated (MC-A-DEFINITION-OR-FACT-ALONE-IS-ENOUGH-TO-EXPLAIN-A-COMPLEX-TOPIC) both fail to serve expository writing's core explanatory purpose — redirect both to the Expert Translator anchor. If the student inserts opinion framing or leaves a definition bare during TA-1/TA-2 (S6), drop back to the Concrete Anchor's translator demonstration before returning to composition. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who selects organizational patterns well (MP-3) but still inserts opinions or leaves definitions bare has not learned the core explanatory discipline this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.expository-writing.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
