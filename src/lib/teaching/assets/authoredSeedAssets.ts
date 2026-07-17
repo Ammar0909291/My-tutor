@@ -1358,6 +1358,212 @@ const SUB_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── math.arith.division ─────────────────────────────────────────────────────
+const DIV = 'math.arith.division'
+const DIV_SRC = 'docs/curriculum/blueprints/math.arith.division.md'
+
+const DIV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DIV,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    // Intuitive: sharing — and why the roles can't swap
+    content:
+      'Division is fair sharing. 12 ÷ 4 asks: share 12 biscuits among 4 ' +
+      'friends — how many does each friend get? Three each. And notice the ' +
+      'two numbers have completely different JOBS: one is the pile, one is ' +
+      'the people. Swap them and the story changes utterly — 4 ÷ 12 shares ' +
+      'just 4 biscuits among 12 friends: now each gets only a piece of a ' +
+      'biscuit, nowhere near 3. Adding and multiplying let you swap ' +
+      "numbers freely; dividing never does. Before you divide, always ask: " +
+      "what's being shared, and who's sharing it?",
+    targetedMisconceptions: [`${DIV}:MC-1`],
+    source: `${DIV_SRC} — Component 4 concrete opening (sharing model) + Component 2 MC-1 (DIVISION-COMMUTATIVE, 12÷4 = 4÷12)`,
+  },
+  {
+    conceptId: DIV,
+    subjectSlug: 'mathematics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.ELEMENTARY,
+    // Worked example: remainder as part of the answer
+    content:
+      'Share 13 sweets among 4 children. Deal them out like cards: one ' +
+      'each (4 gone), two each (8 gone), three each (12 gone). One sweet ' +
+      'remains — not enough for another full round. The complete answer is ' +
+      '"3 each, remainder 1", written 13 ÷ 4 = 3 r 1. The remainder isn\'t ' +
+      'a mistake or something to hide — it\'s the honest leftover, part of ' +
+      'the answer. Check it the multiplication way: 4 × 3 = 12, plus the ' +
+      'leftover 1, rebuilds 13 ✓. Dropping the remainder ("13 ÷ 4 = 3") ' +
+      'fails that check: 4 × 3 = 12, and a sweet has vanished. Every ' +
+      'division answer must rebuild the pile: divisor × quotient + ' +
+      'remainder = what you started with.',
+    targetedMisconceptions: [`${DIV}:MC-3`],
+    source: `${DIV_SRC} — Component 2 MC-3 (REMAINDER-IGNORED) + Component 4 dealing-out model, with the rebuild check as the verifier`,
+  },
+  {
+    conceptId: DIV,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    // Repair: division by zero — via the inverse definition (blueprint's own argument)
+    content:
+      'Why is dividing by zero forbidden, rather than just zero or "the ' +
+      'number itself"? Because every division is secretly a multiplication ' +
+      'question: 12 ÷ 4 = 3 exactly because 3 × 4 = 12. So 7 ÷ 0 asks: ' +
+      '"what number times 0 gives 7?" Try anything — 5 × 0 = 0, ' +
+      '100 × 0 = 0, a million × 0 = 0. Every candidate gives 0, never 7. ' +
+      'There is NO answer, so mathematics says: undefined. And 0 ÷ 0 fails ' +
+      'the opposite way: EVERY number times 0 gives 0, so every number ' +
+      '"works" — no single answer can be chosen. Not zero, not the ' +
+      'number, not infinity: division by zero has no defined value because ' +
+      'the multiplication question behind it has no (unique) solution.',
+    targetedMisconceptions: [`${DIV}:MC-2`],
+    source: `${DIV_SRC} — Component 2 MC-2 (DIVISION-BY-ZERO-DEFINED) + the blueprint's inverse-definition argument (a÷b=c requires c×b=a)`,
+  },
+]
+
+const DIV_PROBES: SeedProbe[] = [
+  {
+    conceptId: DIV,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is 17 ÷ 5?',
+    choices: [
+      { text: '3 remainder 2 — five threes are 15, and 2 are left over', isCorrect: true },
+      { text: '3 — the leftover doesn\'t count', isCorrect: false, misconceptionId: `${DIV}:MC-3` },
+    ],
+    correctValue: '3 r 2',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${DIV}:MC-3`],
+    source: `${DIV_SRC} — Component 2 MC-3 with fresh numbers, distractor-mapped`,
+  },
+  {
+    conceptId: DIV,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What is 9 ÷ 0?',
+    choices: [
+      { text: 'Undefined — no number times 0 can ever give 9', isCorrect: true },
+      { text: '0', isCorrect: false, misconceptionId: `${DIV}:MC-2` },
+      { text: '9', isCorrect: false, misconceptionId: `${DIV}:MC-2` },
+    ],
+    correctValue: 'undefined',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DIV}:MC-2`],
+    source: `${DIV_SRC} — Component 2 MC-2 both surface patterns as distractors`,
+  },
+]
+
+// ─── phys.mech.kinematics-1d ─────────────────────────────────────────────────
+const KIN = 'phys.mech.kinematics-1d'
+const KIN_SRC = 'docs/curriculum/blueprints/phys.mech.kinematics-1d.md'
+
+const KIN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KIN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Intuitive: the SUVAT contract — five quantities, one condition
+    content:
+      'One-dimensional kinematics is a bookkeeping system for five ' +
+      'quantities: displacement (s), initial velocity (u), final velocity ' +
+      '(v), acceleration (a), and time (t) — the "SUVAT" family. The ' +
+      'equations linking them (v = u + at, s = ut + ½at², v² = u² + 2as) ' +
+      'come with ONE non-negotiable condition in their contract: the ' +
+      'acceleration must be CONSTANT for the whole interval — same value ' +
+      'at every instant. A dropped stone qualifies (a = g throughout). A ' +
+      'car in city traffic — accelerate, brake, idle — does not: no single ' +
+      '"a" describes that trip, and forcing one into the equations gives ' +
+      'an answer that\'s confidently wrong. First question, every problem: ' +
+      'is the acceleration the same the whole time? Only then pick an ' +
+      'equation.',
+    targetedMisconceptions: [`${KIN}:MC-APPLIES-ALWAYS`],
+    source: `${KIN_SRC} — §5 Protocol Library + §6 MC-APPLIES-ALWAYS (traffic-light conflict evidence P28, taught as the contract condition)`,
+  },
+  {
+    conceptId: KIN,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    // Worked example: ball up and back — s is displacement, sign discipline
+    content:
+      'A ball is thrown straight up at 20 m/s and caught at the same ' +
+      'height. Total flight time? Use v = u + at with sign discipline: ' +
+      'take UP as positive, so u = +20 m/s, a = −9.8 m/s² (gravity acts ' +
+      'downward the whole flight). At the catch, the ball is back where it ' +
+      'started — s = 0, because s is DISPLACEMENT, final minus initial ' +
+      'position, not the 40+ metres of path it travelled. From ' +
+      's = ut + ½at²: 0 = 20t − 4.9t², so t(20 − 4.9t) = 0 → t = 0 (the ' +
+      'throw) or t ≈ 4.1 s (the catch). Notice how much work the signs ' +
+      'did: gravity stayed −9.8 even while the ball rose, and s = 0 ' +
+      'encoded "came back" without any special cases.',
+    targetedMisconceptions: [`${KIN}:MC-DISPLACEMENT-CONFUSION`],
+    source: `${KIN_SRC} — §6 MC-DISPLACEMENT-CONFUSION (up-and-back conflict evidence P28) expanded into a full signed SUVAT solution`,
+  },
+  {
+    conceptId: KIN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles: where the equations come from (area under v-t)
+    content:
+      'The kinematic equations aren\'t axioms to memorize — they\'re three ' +
+      'readings of one picture: the velocity-time graph under constant ' +
+      'acceleration, which is simply a straight line. Its slope is a, so ' +
+      'v = u + at is just "start at u, climb at rate a". Displacement is ' +
+      'the AREA under the line — a trapezium: average height × width = ' +
+      '½(u + v)t, and substituting v = u + at turns that into ' +
+      's = ut + ½at². Eliminate t between the two and you get ' +
+      'v² = u² + 2as for problems where time is unknown. Seeing them as ' +
+      'one straight line explains the constant-a restriction perfectly: ' +
+      'curve the line (varying a) and the slope and area formulas for ' +
+      'straight lines simply stop describing it — that\'s when you ' +
+      'integrate instead.',
+    targetedMisconceptions: [`${KIN}:MC-APPLIES-ALWAYS`],
+    source: `${KIN_SRC} — §6 bridge text (area under v-t graph) expanded into the full derivation-from-one-picture treatment`,
+  },
+]
+
+const KIN_PROBES: SeedProbe[] = [
+  {
+    conceptId: KIN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A ball is thrown up 15 m and caught at the same height. In the kinematic equations, what is s for the whole flight?',
+    choices: [
+      { text: '0 — s is displacement, and the ball ended where it began', isCorrect: true },
+      { text: '30 m — it travelled 15 m up and 15 m down', isCorrect: false, misconceptionId: `${KIN}:MC-DISPLACEMENT-CONFUSION` },
+      { text: '15 m — the height it reached', isCorrect: false },
+    ],
+    correctValue: '0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KIN}:MC-DISPLACEMENT-CONFUSION`],
+    source: `${KIN_SRC} — §6 discrimination pair 1, distractor-mapped`,
+  },
+  {
+    conceptId: KIN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For which journey can you safely use v = u + at with a single value of a?',
+    choices: [
+      { text: 'A stone falling freely from a cliff', isCorrect: true },
+      { text: 'A car driving through stop-and-go city traffic', isCorrect: false, misconceptionId: `${KIN}:MC-APPLIES-ALWAYS` },
+      { text: 'A driver braking harder and harder to a stop', isCorrect: false, misconceptionId: `${KIN}:MC-APPLIES-ALWAYS` },
+    ],
+    correctValue: 'the freely falling stone',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${KIN}:MC-APPLIES-ALWAYS`],
+    source: `${KIN_SRC} — §6 discrimination pairs (P33), distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -1374,6 +1580,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SV_EXPLANATIONS,
   ...MUL_EXPLANATIONS,
   ...SUB_EXPLANATIONS,
+  ...DIV_EXPLANATIONS,
+  ...KIN_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -1390,4 +1598,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SV_PROBES,
   ...MUL_PROBES,
   ...SUB_PROBES,
+  ...DIV_PROBES,
+  ...KIN_PROBES,
 ]
