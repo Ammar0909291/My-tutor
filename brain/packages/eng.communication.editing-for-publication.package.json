@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.editing-for-publication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.editing-for-publication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f03186e347764682506c882a4b9e7e5efa44908d8b9a07675f7ac134df8b674a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.editing-for-publication.md": "sha256:56b69bd7055b02633c7ee01019ff7ef624535f3fe70e405d647ce2f41c73d085"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.editing-for-publication",
+    "name": "Editing for Publication",
+    "difficultyRaw": "expert",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.communication.research-methodology-writing",
+      "eng.communication.academic-writing-advanced"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.editing-for-publication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.editing-for-publication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.editing-for-publication.md": "sha256:56b69bd7055b02633c7ee01019ff7ef624535f3fe70e405d647ce2f41c73d085"
+      },
+      "contentHash": "sha256:8eb54b480ac0663b7e43e9412ebbe39dcc252975ca63dee8787f6e75f7eea995",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.editing-for-publication.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md#TA-1 (addresses MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.editing-for-publication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.editing-for-publication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.editing-for-publication.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md#TA-2 (addresses MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.editing-for-publication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.editing-for-publication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.editing-for-publication.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.editing-for-publication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.editing-for-publication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.editing-for-publication.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md#TA-4 (addresses MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT, MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.editing-for-publication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.editing-for-publication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.editing-for-publication/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "Editing for Publication — Conceptual Development Sequence",
+      "content": "### TA-1 — Proofreading as a Distinct Reading Mode (MC-A)\n\nUsing the windshield-crack anchor, teach that proofreading requires a dedicated reading pass distinct\nfrom content-focused reading. Student practice: given a passage already \"content-reviewed,\" attempt a\ndedicated proofreading pass (e.g., reading backward or aloud) and identify surface errors missed by\nthe content read.\n\n### TA-2 — Formatting Compliance as a Separate, Real Quality Dimension (MC-B)\n\nUsing the job-interview anchor, teach that formatting compliance is genuinely evaluated separately\nfrom content quality. Student practice: given a piece of writing and a set of target-publication\nformatting requirements, identify specific discrepancies between the two.\n\n### TA-3 — Systematic Proofreading Techniques\n\nTeach specific techniques for effective proofreading (reading backward sentence-by-sentence, reading\naloud, checking one specific error type at a time across the whole document rather than all types at\nonce). Student practice: apply at least two different proofreading techniques to the same passage and\ncompare which errors each technique catches.\n\n### TA-4 — Full Application: Preparing a Piece for Publication Submission\n\nGive the student a finished draft and a target publication's specific formatting requirements. They\nmust perform a dedicated proofreading pass (TA-1, TA-3) and check/correct formatting compliance\n(TA-2) — the full synthesis task, treating both as necessary, separate final steps.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 162,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/misconception/MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT",
+      "kind": "misconception",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "**Trigger signal:** Student assumes that having already carefully read through a piece of writing to",
+      "content": "### MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT\n\n**Trigger signal:** Student assumes that having already carefully read through a piece of writing to\ncheck its CONTENT and reasoning (during drafting or revision) also effectively serves as\nproofreading for surface errors (spelling, punctuation, formatting), failing to recognize that\nproofreading requires a genuinely different reading MODE — reading specifically to notice surface\nerrors rather than following meaning, since a reader focused on meaning naturally reads past small\nsurface errors without registering them, exactly because their attention is on content, not form.\n\n**Conflict evidence [P28]:** Show the student a passage they've just carefully read for content\n(confirming it makes good logical sense) and ask them to immediately identify any spelling or\npunctuation errors in it without re-reading — most students will have missed several despite just\nhaving \"carefully read\" the passage. Ask: \"You just read this passage carefully. Did you notice these\nspecific errors on your first read? Why might reading for MEANING actually make you less likely to\nnotice surface errors, not more?\"\n\n**Bridge text [P30]:** \"Assuming a content-focused read also catches surface errors is like assuming\na driver focused intently on navigating traffic and watching the road ahead will also automatically\nnotice a small crack in their windshield — both are valid uses of attention, but they compete for the\nsame limited resource, and focusing hard on one (content/navigation) genuinely reduces the chance of\nnoticing the other (surface errors/windshield crack) simultaneously. Proofreading requires a\nDELIBERATE, separate reading pass specifically focused on surface form, not a byproduct of a\ncontent-focused read.\"\n\n**Replacement text [P31]:** \"Never assume a content-focused revision pass also catches surface\nerrors. Always do a SEPARATE, dedicated proofreading pass specifically focused on spelling,\npunctuation, and formatting — reading slowly, sometimes even backward or aloud, specifically to\ninterrupt the automatic tendency to read for meaning instead of form.\"\n\n**Discrimination pairs [P33]:**\n1. A writer who reads their essay once for logical flow and assumes this also caught all typos\n   (conflating content-review with proofreading) vs. a writer who does a separate, dedicated\n   proofreading pass specifically looking for surface errors after content revision is complete\n   (correctly distinguishing the two reading modes).\n2. A student surprised to find errors in a passage they just \"carefully read\" (missing the\n   competing-attention insight) vs. a student who expects this outcome and builds in a dedicated\n   proofreading step for exactly this reason (correct, informed practice).\n\n**s6_path:** If the student continues to conflate content-review with proofreading after the bridge,\nhave them practice a specific proofreading technique (reading a passage backward, sentence by\nsentence, or reading it aloud slowly) on a passage they've already content-reviewed, confirming this\ndifferent reading mode catches errors the content-focused read missed.",
+      "localKey": "MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT",
+      "language": "en",
+      "refs": [
+        "MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 3,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/misconception/MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR",
+      "kind": "misconception",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "**Trigger signal:** Student assumes that sufficiently strong CONTENT and reasoning will outweigh or",
+      "content": "### MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR\n\n**Trigger signal:** Student assumes that sufficiently strong CONTENT and reasoning will outweigh or\ncompensate for surface errors and formatting non-compliance in the eyes of a reader or editor,\nfailing to recognize that professional publication contexts genuinely evaluate formatting compliance\nand surface polish as a SEPARATE, real quality dimension — a piece with excellent content can still\nbe rejected, delayed, or perceived less favorably if it fails to meet a specific publication's\nformatting requirements or contains persistent surface errors, since these signal a lack of\nprofessional care independent of the underlying content quality.\n\n**Conflict evidence [P28]:** Present the student with a scenario describing two submissions to the\nsame publication with genuinely comparable, strong content: one meeting all the publication's specific\nformatting requirements (correct citation style, required heading structure, within word limits) and\nfree of surface errors, and one with the same strong content but failing several formatting\nrequirements and containing multiple surface errors. Ask: \"Does the editor's evaluation of these two\nsubmissions depend ONLY on content quality, or does the formatting/surface-error difference\ngenuinely affect how the submissions are received, independent of the content itself?\"\n\n**Bridge text [P30]:** \"Assuming strong content alone will overcome formatting and surface issues is\nlike assuming a brilliant job candidate's excellent qualifications will fully compensate for showing\nup in wrinkled, inappropriate clothing to an interview — the content of their qualifications and the\nsurface presentation are genuinely SEPARATE evaluation dimensions in the interviewer's mind, and\nfailing one can still hurt the overall impression and outcome, regardless of how strong the other is.\nPublication editors and readers similarly evaluate content and surface/formatting compliance as\ndistinct dimensions, both of which matter.\"\n\n**Replacement text [P31]:** \"Never assume strong content alone is sufficient for publication\nreadiness. Treat formatting compliance (following the specific target publication's exact\nrequirements) and surface-error-free proofreading as a SEPARATE, equally necessary quality dimension,\nworth dedicated final attention regardless of how strong the underlying content is.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming a submission with excellent content but poor formatting compliance and multiple surface\n   errors will be evaluated purely on its content merits (misconception) vs. recognizing that\n   formatting and surface polish are genuinely evaluated as a separate quality dimension that can\n   affect the outcome regardless of content strength (correct understanding).\n2. A student who deprioritizes final formatting/proofreading because \"the ideas are what really\n   matter\" (misconception) vs. a student who treats final formatting/proofreading as a necessary,\n   dedicated final stage precisely because content strength doesn't automatically compensate for it\n   (correct, professional practice).\n\n**s6_path:** If the student continues to deprioritize formatting/surface polish after the bridge,\nhave them research (or be shown) a real publication's specific submission guidelines and identify at\nleast three concrete, checkable formatting requirements, reinforcing that these are genuine,\nindependently-evaluated criteria, not optional extras.",
+      "localKey": "MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR",
+      "language": "en",
+      "refs": [
+        "MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 46,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "Proofreading as a Distinct Reading Mode (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Proofreading as a Distinct Reading Mode (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 166,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "Formatting Compliance as a Separate, Real Quality Dimension (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Formatting Compliance as a Separate, Real Quality Dimension (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 173,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "Systematic Proofreading Techniques",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Systematic Proofreading Techniques\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 179,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "Full Application: Preparing a Piece for Publication Submission",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Preparing a Piece for Publication Submission\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT\",\"MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-IF-YOUVE-ALREADY-CAREFULLY-READ-THROUGH-A-PIECE-FOR-CONTENT-YOUVE-ALSO-EFFECTIVELY-PROOFREAD-IT",
+        "MC-B-IF-THE-CONTENT-IS-STRONG-ENOUGH-FORMATTING-AND-SURFACE-ERRORS-WONT-REALLY-MATTER-TO-A-READER-OR-EDITOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 186,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinguishing Proofreading from Content Review**\nExplain, in the student's own words, why a content-focused reading pass does not reliably catch\nsurface errors, and why a separate proofreading pass is necessary.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 210,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Applying a Dedicated Proofreading Technique**\nGiven a passage already content-reviewed, apply a dedicated proofreading technique (backward reading,\nreading aloud) and identify at least two surface errors.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 210,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Checking Formatting Compliance**\nGiven a piece of writing and a target publication's specific formatting requirements, identify at\nleast two discrepancies between the two.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 210,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining Why Content Strength Doesn't Compensate**\nExplain why a piece with strong content can still be poorly received or rejected due to surface\nerrors or formatting non-compliance.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 210,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Publication Preparation**\nGiven a new finished draft and target formatting requirements, perform a dedicated proofreading pass\nand correct all formatting compliance issues identified.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 210,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters proofreading technique on provided passages (MP-2) but doesn't apply it to\n  their own writing in practice, connect this concept explicitly to their own upcoming writing\n  submissions, making the dedicated final-pass habit a required step, not just a demonstrated skill.\n- If the student's formatting-compliance checks (MP-3) miss requirements because they only skim the\n  guidelines rather than checking systematically point-by-point, provide a structured checklist\n  approach (list every requirement, check each individually) as scaffolding.\n- If the student becomes anxious that any remaining imperfection means their writing \"isn't ready,\"\n  clarify that this concept teaches a systematic FINAL process, not an expectation of achieving\n  literally zero errors on the first attempt — the dedicated proofreading pass is precisely the tool\n  for catching what earlier passes missed.\n- Students preparing genuine work for actual submission (a real publication, a contest, an\n  application) should be encouraged to apply this concept's full process directly to that real\n  document, since the stakes and target-specific requirements become concrete and motivating in a way\n  practice examples cannot fully replicate.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 268,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "eng.communication.editing-for-publication/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.editing-for-publication",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: research methodology check] --> [PD-2: academic writing advanced check]\n   |                                                          |\n   | (gap found)                                              | (pass)\n   v                                                           v\n[Route to prerequisite concept]           [Component 3: Windshield-Crack / Wrinkled-Clothing-\n                                            Interview Anchor]\n                                                              |\n                                                              v\n                                          [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                              |\n                                                              v\n                                    [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                              |\n                                                              v\n                                    [MP-1 through MP-5 mastery probe set]\n                                                              |\n                                    (pass >= 0.70) -----+----- (fail)\n                                           |                      |\n                                           v                      v\n                  [No further unlocks —  [S6 remediation: backward-reading-practice /\n                   terminal in current      formatting-checklist drills]\n                   curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (conflating content review with proofreading) and MC-B during TA-2 (deprioritizing formatting) —\nthese are largely independent and often need separate, explicit correction. If either fires, branch\nto the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure:\nMP-1/MP-2 failures indicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure\nwith MP-1 through MP-4 passing indicates an integration gap — provide one more guided full-preparation\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.editing-for-publication.md",
+        "startLine": 232,
+        "endLine": 268
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

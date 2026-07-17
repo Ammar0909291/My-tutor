@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.comparative-literature-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.comparative-literature-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fc4e530137a6f7ed028fcc6e34b23d0645813afcb5ca44cb5ff1d268fde9bbc7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md": "sha256:9018f1e462e35f7eeb49e8f125131b27bde0922616f32072bb465aee2dfc978e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.comparative-literature-intro",
+    "name": "Introduction to Comparative Literature",
+    "difficultyRaw": "research",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.literature.literary-criticism-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.comparative-literature-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.comparative-literature-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md": "sha256:9018f1e462e35f7eeb49e8f125131b27bde0922616f32072bb465aee2dfc978e"
+      },
+      "contentHash": "sha256:f5d6e01de9cde017ea54f18090322d3ea09fd702783cd9b2d9533cf0199435b3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.comparative-literature-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md#TA-1 (addresses MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.comparative-literature-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.comparative-literature-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.comparative-literature-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md#TA-2 (addresses MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.comparative-literature-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.comparative-literature-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.comparative-literature-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.comparative-literature-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.comparative-literature-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.comparative-literature-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md#TA-4 (addresses MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER, MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.comparative-literature-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.comparative-literature-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.comparative-literature-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "Introduction to Comparative Literature — Conceptual Development Sequence",
+      "content": "### TA-1 — Direct Influence vs. Independent Convergent Development (MC-A)\n\nUsing the isolated-island anchor, teach students to check for documented historical contact before\nassuming direct influence explains a cross-traditional similarity. Student practice: given three\npairs of traditions sharing a literary pattern, evaluate the likelihood of documented contact versus\nindependent development for each.\n\n### TA-2 — Holding Similarity and Difference Together (MC-B)\n\nUsing the spice-flattening anchor, teach students to identify genuine cultural differences alongside\nidentified similarities. Student practice: given two works sharing a theme, identify at least one\ngenuine, culturally-rooted difference in how each work treats that shared theme.\n\n### TA-3 — Translation as an Interpretive Act\n\nIntroduce the risk of assuming a translated work reads identically to its original — translation\ninvolves interpretive choices (word connotation, rhythm, cultural reference) that can shape what a\ncomparative reader experiences. Student practice: given two different translations of the same\noriginal passage, identify at least one meaningful difference in interpretive choice between them.\n\n### TA-4 — Full Application: A Genuine Cross-Traditional Comparison\n\nGive the student descriptions of two works from different traditions sharing an apparent similarity.\nThey must evaluate whether the similarity likely reflects direct influence or convergent development\n(TA-1), identify a genuine, culturally-rooted difference (TA-2), and note any translation-related\ncaveat if relevant (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 156,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/misconception/MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER",
+      "kind": "misconception",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "**Trigger signal:** Student, upon finding a genuine similarity (a shared theme, motif, or structural",
+      "content": "### MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER\n\n**Trigger signal:** Student, upon finding a genuine similarity (a shared theme, motif, or structural\npattern) between works from two different literary traditions, automatically assumes this must reflect\nDIRECT cultural influence or borrowing from one tradition to the other, failing to recognize that\nsimilar literary patterns can also arise INDEPENDENTLY through convergent development — different\ncultures, with no direct contact, sometimes arrive at similar literary solutions to universal human\nconcerns (loss, coming of age, conflict between duty and desire) simply because these are shared\naspects of the human experience, not because one tradition borrowed from the other.\n\n**Conflict evidence [P28]:** Present the student with two literary traditions from historical periods\nand regions with NO documented direct contact, both containing a similar narrative pattern (e.g., a\nhero's journey structure, or a coming-of-age motif). Ask: \"Given that these two traditions had no\ndocumented historical contact, could this shared pattern have arisen through direct one-tradition-\ninfluencing-the-other borrowing? What ELSE might explain the similarity?\"\n\n**Bridge text [P30]:** \"Assuming any similarity must mean direct influence is like assuming that\nbecause two isolated island populations both independently developed similar tools for catching fish\nin shallow water, one population must have taught the other — but similar environmental challenges\n(shallow water fishing) can produce similar, independently-developed solutions with no contact at all.\nSimilarly, shared human concerns (loss, growing up, duty versus desire) can produce similar literary\npatterns across traditions with no documented contact, through independent convergent development, not\nnecessarily direct borrowing.\"\n\n**Replacement text [P31]:** \"When you find a similarity between works from different traditions, ask:\nis there documented historical contact or evidence of direct influence between these traditions? If\nnot, consider that the similarity might reflect independent, convergent development around a shared\nhuman concern, rather than assuming direct borrowing by default.\"\n\n**Discrimination pairs [P33]:**\n1. A shared narrative pattern between two traditions with documented trade, colonization, or\n   translation contact (plausible direct influence) vs. the same pattern appearing in two traditions\n   with no documented contact at all (more likely independent, convergent development around a shared\n   human concern).\n2. A student who assumes any cross-cultural literary similarity must mean one culture copied the\n   other (misconception) vs. a student who considers documented historical contact as evidence before\n   concluding direct influence, and considers convergent development as a genuine alternative\n   explanation (correct, more careful reasoning).\n\n**s6_path:** If the student continues to assume direct influence by default after the bridge, give\nthem two more pairs of traditions (one with documented contact, one without) sharing a similar literary\npattern, and have them research or reason through which explanation (direct influence or convergent\ndevelopment) is better supported by the available historical evidence in each case.",
+      "localKey": "MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 3,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/misconception/MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM",
+      "kind": "misconception",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "**Trigger signal:** Student, in the process of identifying genuine similarities between works from",
+      "content": "### MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM\n\n**Trigger signal:** Student, in the process of identifying genuine similarities between works from\ndifferent traditions for comparative purposes, downplays, ignores, or flattens out genuine, meaningful\nDIFFERENCES shaped by each work's distinct cultural and historical context, treating comparison as a\nsearch for sameness rather than recognizing that meaningful comparison requires holding BOTH genuine\nsimilarities AND genuine, culturally-rooted differences in view simultaneously.\n\n**Conflict evidence [P28]:** Show the student two works sharing a genuine common theme (e.g., family\nduty) but treating that duty very differently based on their distinct cultural contexts (one framing\nduty as an individual moral choice, one framing it as an inseparable extension of collective family\nidentity with different social and religious underpinnings). Ask: \"Is it accurate to say these two\nworks 'have the same theme,' full stop? What would be lost by ignoring how differently each culture's\nspecific context shapes what that shared theme actually MEANS in each work?\"\n\n**Bridge text [P30]:** \"Flattening out real cultural differences in the search for similarity is like\nnoting that two dishes from different culinary traditions both 'use spice' and concluding they're\n'basically the same food' — technically true at a very general level, but this ignores everything that\nactually makes each dish distinct and meaningful within its own culinary tradition. Genuine comparative\nliterature holds BOTH the real similarity (both works address family duty) AND the real, culturally-\nspecific differences (what duty means, how it's enacted, what tensions it creates) in view at once.\"\n\n**Replacement text [P31]:** \"When comparing works across traditions, don't stop at identifying a\nshared theme or pattern. Always also ask: how does each work's distinct cultural and historical\ncontext shape what that shared element actually MEANS or how it FUNCTIONS differently in each case?\nBoth the similarity and the difference are part of a genuine comparison.\"\n\n**Discrimination pairs [P33]:**\n1. \"Both works are about family duty, so they're essentially the same.\" (flattening real cultural\n   differences in the pursuit of similarity) vs. \"Both works explore family duty, but Work A frames it\n   as an individual moral choice while Work B frames it as an inseparable extension of collective\n   identity, reflecting their distinct cultural contexts.\" (holding similarity and difference together).\n2. A student whose comparative analysis stops at \"they're similar because...\" with no attention to\n   meaningful difference (incomplete, flattened comparison) vs. a student whose analysis addresses\n   both what's shared and what's genuinely different and why (complete, genuine comparison).\n\n**s6_path:** If the student continues to flatten differences after the bridge, have them take a\ncomparison they've already identified a similarity for and explicitly articulate at least one specific,\nculturally-rooted difference in how each work treats that shared element, before considering the\ncomparison complete.",
+      "localKey": "MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM",
+      "language": "en",
+      "refs": [
+        "MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 47,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "Direct Influence vs. Independent Convergent Development (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Direct Influence vs. Independent Convergent Development (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 160,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "Holding Similarity and Difference Together (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Holding Similarity and Difference Together (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 167,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "Translation as an Interpretive Act",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Translation as an Interpretive Act\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 173,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "Full Application: A Genuine Cross-Traditional Comparison",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: A Genuine Cross-Traditional Comparison\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER\",\"MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-SIMILARITY-BETWEEN-WORKS-FROM-DIFFERENT-TRADITIONS-MEANS-ONE-DIRECTLY-INFLUENCED-THE-OTHER",
+        "MC-B-COMPARING-LITERATURE-ACROSS-CULTURES-MEANS-IGNORING-OR-FLATTENING-OUT-THE-REAL-DIFFERENCES-BETWEEN-THEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 180,
+        "endLine": 320
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Evaluating Influence vs. Convergent Development**\nGiven two traditions sharing a literary pattern, with information about their historical contact (or\nlack thereof), evaluate whether direct influence or independent convergent development is more\nplausible.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 209,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying a Genuine Cultural Difference**\nGiven two works sharing a theme, identify at least one genuine, culturally-rooted difference in how\neach treats that shared theme.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 209,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Recognizing Translation as Interpretive**\nGiven two different translations of the same original passage, identify at least one meaningful\ndifference in interpretive choice between them.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 209,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Avoiding the Flattening Trap**\nGiven a comparative analysis that stops at \"these works are similar because...\", identify what genuine\ncultural difference is missing from the analysis and add it.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 209,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Cross-Traditional Comparison**\nGiven descriptions of two new works from different traditions sharing an apparent similarity, evaluate\nthe likely origin of the similarity, identify a genuine cultural difference, and note translation\nconsiderations if relevant.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 209,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student has personal, lived experience with more than one cultural or literary tradition,\n  invite them to bring this experience directly into the comparative work — personal, culturally\n  grounded insight can substantially deepen the analysis beyond what abstract examples alone provide.\n- If the student masters influence-versus-convergence reasoning (MP-1) but their cultural-difference\n  identification (MP-2, MP-4) remains superficial (naming a difference without explaining its cultural\n  roots), push for the \"why\" — what specific aspect of each tradition's history, values, or context\n  produces this particular difference.\n- If the student becomes overly cautious about ever claiming a genuine cross-traditional similarity\n  (fearing any comparison risks \"flattening\" or cultural insensitivity), clarify that genuine,\n  well-reasoned comparison — holding both similarity and difference — is the goal, not avoidance of\n  comparison altogether.\n- Students with strong performance in `eng.reading.reading-across-genres` should transfer well to this\n  concept's comparative reasoning skills, since both require holding multiple texts' distinct\n  characteristics in view simultaneously rather than collapsing them into one undifferentiated\n  category.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 271,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "eng.literature.comparative-literature-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.comparative-literature-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: literary criticism intro check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.literary-criticism-intro]  [Component 3: Isolated-Island-Fishing-\n                                                       Tools / Spice-Flattening Anchor]\n                                                                  |\n                                                                  v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                  |\n                                                                  v\n                                     [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                  |\n                                                                  v\n                                     [MP-1 through MP-5 mastery probe set]\n                                                                  |\n                                     (pass >= 0.70) -----+----- (fail)\n                                            |                      |\n                                            v                      v\n                    [No further unlocks —  [S6 remediation: contact-evidence-check /\n                     terminal in current      name-the-difference drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (assuming direct influence\nby default) and MC-B during TA-2 (flattening differences) — these are largely independent and often\nneed separate, explicit correction, since a student can correctly reason about influence-versus-\nconvergence while still flattening cultural differences, or vice versa. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2/MP-4 failures indicate residual MC-B; MP-3 failure alone indicates the\ntranslation-awareness extension (TA-3) needs review, distinct from either misconception; MP-5 failure\nwith MP-1 through MP-4 passing indicates an integration gap — provide one more guided full-comparison\nexample before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.comparative-literature-intro.md",
+        "startLine": 233,
+        "endLine": 271
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
