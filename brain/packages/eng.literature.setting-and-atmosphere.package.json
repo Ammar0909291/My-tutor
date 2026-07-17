@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.setting-and-atmosphere-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.setting-and-atmosphere",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:be9d68b19da9646db5c0c5d077827d8f76eb759f47325750379861b6b7aa3fad",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md": "sha256:21ad84de0bd1d50d98da5784d1fee10a7c345a8cc5fad858509ef438a7740d1f"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.setting-and-atmosphere",
+    "name": "Setting and Atmosphere",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.literature.narrative-elements"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.setting-and-atmosphere-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.setting-and-atmosphere (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md": "sha256:21ad84de0bd1d50d98da5784d1fee10a7c345a8cc5fad858509ef438a7740d1f"
+      },
+      "contentHash": "sha256:3ce54308c326d49790dc14150485467172c35a9501678d213f36bbea850e02e5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.setting-and-atmosphere.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.setting-and-atmosphere"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.setting-and-atmosphere\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.setting-and-atmosphere.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md#TA-2 (addresses MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.setting-and-atmosphere"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.setting-and-atmosphere\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.setting-and-atmosphere.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md#TA-3 (addresses MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.setting-and-atmosphere"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.setting-and-atmosphere\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.setting-and-atmosphere.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md#TA-4 (addresses MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT, MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.setting-and-atmosphere"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.setting-and-atmosphere\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "Setting and Atmosphere — Conceptual Development Sequence",
+      "content": "### TA-1 — Distinguishing Setting from Atmosphere\n\nIntroduce the basic distinction: setting is the literal time and place; atmosphere is the emotional\nmood the description evokes. Student practice: given three passages, identify the literal setting and\nthe atmosphere separately for each.\n\n### TA-2 — Descriptive Details Create Atmosphere (MC-A)\n\nUsing the lighting-and-music anchor, teach students to identify the SPECIFIC descriptive details\nresponsible for a passage's atmosphere. Student practice: given two descriptions of the same literal\nsetting with different atmospheres, identify the specific details creating each mood.\n\n### TA-3 — No Setting Type Has One Fixed Atmosphere (MC-B)\n\nUsing the same-kitchen anchor, teach students that a given setting TYPE can support contrasting\natmospheres depending on descriptive choices. Student practice: given two contrasting descriptions of\nthe same setting type (e.g., two beach descriptions, one peaceful, one ominous), identify the specific\ndetails responsible for each different mood.\n\n### TA-4 — Full Application: Analyzing Setting and Atmosphere in a New Passage\n\nGive the student a new short passage. They must identify the literal setting and the atmosphere\nseparately (TA-1), cite the specific descriptive details creating that atmosphere (TA-2), and explain\nthat the same setting type could support a different atmosphere with different descriptive choices\n(TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 137,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/misconception/MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT",
+      "kind": "misconception",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "**Trigger signal:** Student treats setting description as purely factual, neutral background",
+      "content": "### MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT\n\n**Trigger signal:** Student treats setting description as purely factual, neutral background\ninformation (establishing merely \"where and when\" a story happens) with no consideration of the\nemotional mood the specific descriptive choices create, missing that HOW a setting is described\n(word choice, selected details) actively shapes the reader's emotional experience of the scene.\n\n**Conflict evidence [P28]:** Show the student two descriptions of the identical literal setting (an\nold house) using different descriptive details: one emphasizing \"creaking floorboards, dust-covered\nfurniture, and shadows in every corner\" (creating an eerie, unsettling atmosphere) and one emphasizing\n\"warm sunlight through lace curtains, the smell of fresh bread, and a well-worn but cozy armchair\"\n(creating a nostalgic, comforting atmosphere). Ask: \"Is this the SAME literal setting (an old house) in\nboth descriptions? Does each description create the SAME emotional feeling in the reader?\"\n\n**Bridge text [P30]:** \"Treating setting as neutral background information is like assuming a\ndirector's choice of lighting and music for a scene has no effect on the audience's emotional\nexperience, as long as the scene's literal location is the same — but the SAME room, lit and scored\ndifferently, can feel completely different (menacing versus cozy) to a viewer. A setting's specific\ndescriptive details work the same way: the writer's choices actively create atmosphere, not just\nneutral factual information.\"\n\n**Replacement text [P31]:** \"When reading a setting description, don't just note the literal time and\nplace. Ask: what specific descriptive details has the writer chosen to include, and what emotional\nmood (atmosphere) do those specific choices create for the reader?\"\n\n**Discrimination pairs [P33]:**\n1. \"Creaking floorboards, dust-covered furniture, and shadows in every corner.\" (the same literal\n   setting — an old house — described to create an eerie atmosphere) vs. \"Warm sunlight through lace\n   curtains, the smell of fresh bread, and a well-worn but cozy armchair.\" (the same literal setting,\n   described to create a nostalgic, comforting atmosphere).\n2. A student who notes only \"the story takes place in an old house\" with no attention to the\n   emotional mood created (treating setting as neutral) vs. a student who identifies the specific\n   details AND the resulting atmosphere (correct, deeper reading).\n\n**s6_path:** If the student continues to treat setting as neutral after the bridge, have them rewrite\na neutral setting description (e.g., \"the story takes place in a forest\") twice — once to create an\neerie atmosphere, once to create a peaceful atmosphere — using specific descriptive details for each,\nmaking the constructive, deliberate nature of atmosphere concrete through their own writing.",
+      "localKey": "MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT",
+      "language": "en",
+      "refs": [
+        "MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/misconception/MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE",
+      "kind": "misconception",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "**Trigger signal:** Student assumes a specific type of setting (a forest, a graveyard, a beach) has",
+      "content": "### MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE\n\n**Trigger signal:** Student assumes a specific type of setting (a forest, a graveyard, a beach) has\none FIXED, automatic atmosphere it always creates, regardless of the specific descriptive choices made\nabout it — e.g., assuming \"a forest\" must always feel peaceful, or \"a graveyard\" must always feel eerie,\nwithout recognizing that the SAME type of location can be described to evoke very different\natmospheres depending on the writer's specific descriptive choices.\n\n**Conflict evidence [P28]:** Show the student two descriptions of a forest setting: one emphasizing\n\"twisted, gnarled branches blocking the moonlight, and an unsettling silence\" (an eerie atmosphere)\nand one emphasizing \"dappled sunlight filtering through vibrant green leaves, birdsong echoing through\nthe trees\" (a peaceful, cheerful atmosphere). Ask: \"Is 'a forest' automatically eerie or automatically\npeaceful? What actually determines the atmosphere in each specific case?\"\n\n**Bridge text [P30]:** \"Assuming a specific setting type always creates one fixed atmosphere is like\nassuming a specific room in a house (say, a kitchen) must always feel the same emotionally, regardless\nof who's using it or how it's decorated — but the SAME kitchen can feel warm and inviting for a family\ngathering or cold and clinical in a crime scene, depending entirely on the specific details emphasized.\nNo setting TYPE has one automatic, fixed atmosphere — the specific descriptive choices always determine\nit.\"\n\n**Replacement text [P31]:** \"Never assume a setting type (forest, graveyard, city street) has one\nautomatic, fixed atmosphere. Always check the SPECIFIC descriptive details used in THIS particular\npassage to determine the atmosphere actually being created here, since the same setting type can\nsupport very different atmospheres.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming any forest setting must automatically feel peaceful or automatically feel eerie\n   regardless of description (fixed, type-based assumption) vs. checking the specific descriptive\n   details in each particular passage to determine the actual atmosphere created (correct, detail-\n   focused reading).\n2. A student who predicts a graveyard scene's atmosphere before even reading the specific description\n   (assuming a fixed type-based mood) vs. a student who reads the actual descriptive details before\n   concluding what atmosphere is being created (correct, evidence-based approach).\n\n**s6_path:** If the student continues to assume fixed setting-type atmospheres after the bridge, give\nthem two more setting types (e.g., a city street, a beach) each described twice to create contrasting\natmospheres, having them identify the specific details responsible for each contrasting mood.",
+      "localKey": "MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE",
+      "language": "en",
+      "refs": [
+        "MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 42,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "Distinguishing Setting from Atmosphere",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Distinguishing Setting from Atmosphere\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 141,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "Descriptive Details Create Atmosphere (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Descriptive Details Create Atmosphere (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "No Setting Type Has One Fixed Atmosphere (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"No Setting Type Has One Fixed Atmosphere (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 153,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "Full Application: Analyzing Setting and Atmosphere in a New Passage",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing Setting and Atmosphere in a New Passage\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT\",\"MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-SETTING-IS-JUST-NEUTRAL-BACKGROUND-INFORMATION-WITH-NO-EMOTIONAL-EFFECT",
+        "MC-B-A-SPECIFIC-SETTING-CAN-ONLY-EVER-CREATE-ONE-FIXED-ATMOSPHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 160,
+        "endLine": 292
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinguishing Setting from Atmosphere**\nGiven two passages, identify the literal setting and the atmosphere separately for each.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Citing Atmosphere-Creating Details**\nGiven a passage, cite at least two specific descriptive details (words or images) responsible for its\natmosphere.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Recognizing Setting-Type Flexibility**\nGiven two contrasting descriptions of the same setting type, identify the specific details responsible\nfor each different atmosphere.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Rewriting for a Different Atmosphere**\nGiven a neutral setting description, rewrite it using specific new details to create a stated,\ndifferent atmosphere.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Setting and Atmosphere Analysis**\nGiven a new short passage, identify the setting and atmosphere separately, cite the specific creating\ndetails, and explain that the same setting type could support a different atmosphere with different\ndescriptive choices.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters analysis of others' writing (MP-1 through MP-3) but struggles to\n  deliberately create a specific atmosphere in their own writing (MP-4), treat this as a production gap\n  and provide additional guided rewriting practice before independent creation.\n- If the student's atmosphere descriptions rely on stating the mood directly (\"it felt scary\") rather\n  than showing it through specific sensory/descriptive details, connect this concept explicitly to\n  `eng.literature.imagery`'s sensory-detail skills if that concept has been completed.\n- If the student conflates atmosphere with plot events (assuming a scary EVENT, not the setting\n  description itself, creates the atmosphere), clarify that atmosphere specifically refers to the mood\n  created THROUGH THE SETTING'S DESCRIPTION, distinct from (though it can complement) what actually\n  happens in the scene.\n- Students with strong visual/artistic interests may find this concept especially intuitive, since it\n  parallels choices a visual artist or filmmaker makes about lighting, color palette, and composition\n  to create mood — draw this parallel explicitly if relevant to the student's interests.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 245,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "eng.literature.setting-and-atmosphere/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.setting-and-atmosphere",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: narrative elements check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.narrative-elements]  [Component 3: Lighting-and-Music / Same-\n                                                Kitchen Anchor]\n                                                           |\n                                                           v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: two-atmospheres-one-\n                     terminal in current      setting-rewrite drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (treating setting as\nneutral) and MC-B during TA-3 (assuming fixed setting-type atmosphere) — MC-A generally needs\nresolving first since a student who doesn't yet see setting as atmosphere-creating has nothing to\ngeneralize into the \"no fixed type\" principle. If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the basic\ndistinction (TA-1) needs review, distinct from either misconception; MP-2 failure alone indicates\nresidual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.setting-and-atmosphere.md",
+        "startLine": 208,
+        "endLine": 245
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

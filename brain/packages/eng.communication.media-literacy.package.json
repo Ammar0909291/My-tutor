@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.media-literacy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.media-literacy",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eeb08b6d4b80e1d57aeb7122d9afaa2d7c5cf3a0bf755718271e9c462dc39a85",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.media-literacy.md": "sha256:aab0e256a839b31440ed7765ba638f8e52e505f6a3d28cda3f8450650a7fe0d5"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.media-literacy",
+    "name": "Media Literacy",
+    "difficultyRaw": "advanced",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.reading.evaluating-sources"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.media-literacy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.media-literacy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.media-literacy.md": "sha256:aab0e256a839b31440ed7765ba638f8e52e505f6a3d28cda3f8450650a7fe0d5"
+      },
+      "contentHash": "sha256:d0f65d5068c41e6e2e39868468632c27360437d0c624bd25812c4ce6e7e493c7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.media-literacy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.media-literacy.md#TA-1 (addresses MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.media-literacy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.media-literacy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.media-literacy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.media-literacy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.media-literacy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.media-literacy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.media-literacy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.media-literacy.md#TA-3 (addresses MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.media-literacy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.media-literacy\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.media-literacy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.media-literacy.md#TA-4 (addresses MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED, MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.media-literacy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.media-literacy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.media-literacy/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "Media Literacy — Conceptual Development Sequence",
+      "content": "### TA-1 — Media Is Constructed Through Deliberate Choices (MC-A)\n\nUsing the photograph-framing anchor, teach students to identify specific production choices (framing,\nword choice, selection) in media messages. Student practice: given two different framings of the same\nevent, identify the specific choices that shape each impression differently.\n\n### TA-2 — Identifying a Media Message's Purpose and Incentive Model\n\nTeach students to identify the likely purpose (inform, persuade, entertain, generate engagement/\nrevenue) behind a media message and how that purpose can shape content. Student practice: given four\nmedia examples, identify the likely primary purpose of each and one way that purpose shapes the\ncontent.\n\n### TA-3 — Separating Trustworthiness from Emotional Tone or Presentation Style (MC-B)\n\nUsing the website-design anchor, teach students to evaluate trustworthiness based on accuracy and\nsourcing, independent of emotional tone or production polish. Student practice: given four media\nexamples varying in emotional tone and accuracy independently, evaluate each on accuracy/sourcing\ngrounds alone.\n\n### TA-4 — Full Application: Evaluating a New Media Message\n\nGive the student a new media message (a news segment, an article, or a social media post\ndescription). They must identify the specific production choices shaping it (TA-1), the likely\npurpose/incentive behind it (TA-2), and evaluate its trustworthiness based on accuracy and sourcing\nrather than tone (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 145,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/misconception/MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED",
+      "kind": "misconception",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "**Trigger signal:** Student treats media coverage (a news report, a documentary segment, a social",
+      "content": "### MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED\n\n**Trigger signal:** Student treats media coverage (a news report, a documentary segment, a social\nmedia post) as a neutral, direct window onto reality, failing to recognize that EVERY media message\ninvolves deliberate PRODUCTION CHOICES — what footage or facts to include, how to frame the story,\nwhich quotes to select, what headline to use — that shape what the audience actually experiences,\neven when the underlying facts reported are accurate.\n\n**Conflict evidence [P28]:** Show the student two headlines describing the identical underlying event\n(e.g., a protest) with different framing choices (\"Protesters Clash with Police\" vs. \"Community Members\nDemand Accountability\"), both technically accurate but emphasizing different aspects. Ask: \"Do these\ntwo headlines describe the same actual event? Do they create the same overall impression in a reader\nwho only sees the headline?\"\n\n**Bridge text [P30]:** \"Assuming media coverage simply shows what happened, with no constructed\nchoices, is like assuming a photograph taken from a specific angle, with a specific framing, shows the\n'whole' unedited reality — but the photographer's choice of angle, what's included in the frame, and\nwhat's cropped out are all deliberate decisions that shape what the viewer sees, even if nothing in the\nphoto itself is technically 'faked.' Media coverage similarly involves constructed choices — framing,\nselection, emphasis — at every stage, even when reporting genuinely accurate facts.\"\n\n**Replacement text [P31]:** \"When evaluating any media message, ask: what SPECIFIC choices (framing,\nword choice, what's included or left out) were made in producing this? Even accurate, fact-based\ncoverage involves deliberate construction, not a neutral, unmediated view of reality.\"\n\n**Discrimination pairs [P33]:**\n1. \"Protesters Clash with Police\" (a framing choice emphasizing conflict) vs. \"Community Members\n   Demand Accountability\" (a framing choice emphasizing the protesters' cause) — both describing the\n   same underlying event with different constructed emphasis.\n2. A student who treats a news report as simply \"the facts, no interpretation involved\"\n   (misconception) vs. a student who identifies specific framing and selection choices even within an\n   accurate, fact-based report (correct, media-literate understanding).\n\n**s6_path:** If the student continues to view media as unconstructed after the bridge, have them find\ntwo different headlines or framings of the same real event and identify the SPECIFIC word choices or\nemphasis differences that shape the reader's impression differently.",
+      "localKey": "MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED",
+      "language": "en",
+      "refs": [
+        "MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 3,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/misconception/MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT",
+      "kind": "misconception",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "**Trigger signal:** Student assumes that media content which is emotionally engaging, dramatic, or",
+      "content": "### MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT\n\n**Trigger signal:** Student assumes that media content which is emotionally engaging, dramatic, or\nattention-grabbing must automatically be less trustworthy or more manipulative than plain,\nunemotional content, and conversely that plain, dry, unemotional presentation is automatically more\ntrustworthy — failing to recognize that trustworthiness depends on the ACCURACY, sourcing, and\ntransparency of the underlying content, not on its emotional tone or presentation style, which are\nseparate questions.\n\n**Conflict evidence [P28]:** Show the student two media pieces on the same well-documented, accurate\ntopic: one presented with an emotionally engaging, well-produced narrative style (real, well-sourced\nhuman stories illustrating an accurate statistic), and one presented in a dry, plain, seemingly\n\"neutral\" style that actually contains inaccurate, poorly sourced claims. Ask: \"Does the emotionally\nengaging piece's style make it automatically less trustworthy than the plain piece? Which piece\nactually contains more accurate, well-sourced information?\"\n\n**Bridge text [P30]:** \"Assuming emotional or dramatic presentation is automatically untrustworthy,\nwhile plain presentation is automatically trustworthy, is like assuming a well-designed, professional-\nlooking website must be legitimate while a plain, text-only one must be a scam — but design polish (or\nits absence) is a separate question from whether the underlying information is actually accurate.\nTrustworthiness depends on sourcing, accuracy, and transparency — not directly on emotional tone or\npresentation style, which can vary independently in either direction.\"\n\n**Replacement text [P31]:** \"Don't judge a media message's trustworthiness by its emotional tone or\npresentation style. Instead, ask: is the underlying information accurately sourced and transparent\nabout its evidence? Both dramatic, emotionally engaging content and plain, dry content can be\naccurate or inaccurate — check the substance, not the style.\"\n\n**Discrimination pairs [P33]:**\n1. An emotionally engaging, well-produced piece built on accurate, well-sourced facts (trustworthy\n   despite dramatic presentation) vs. a plain, dry-sounding piece containing inaccurate or poorly\n   sourced claims (untrustworthy despite unemotional presentation).\n2. A student who assumes \"if it's trying to make me feel something, it must be manipulative\"\n   (over-generalized skepticism of emotional content) vs. a student who evaluates emotional and plain\n   content by the same accuracy/sourcing standard, regardless of tone (correct, substance-focused\n   evaluation).\n\n**s6_path:** If the student continues to judge trustworthiness by tone after the bridge, give them\ntwo more media pieces (one emotionally engaging and accurate, one plain and inaccurate) and have them\nevaluate BOTH using only accuracy/sourcing criteria, explicitly setting aside the emotional tone as\nirrelevant to the trustworthiness judgment.",
+      "localKey": "MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT",
+      "language": "en",
+      "refs": [
+        "MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 40,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "Media Is Constructed Through Deliberate Choices (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Media Is Constructed Through Deliberate Choices (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 149,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "Identifying a Media Message's Purpose and Incentive Model",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying a Media Message's Purpose and Incentive Model\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 155,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "Separating Trustworthiness from Emotional Tone or Presentation Style (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Separating Trustworthiness from Emotional Tone or Presentation Style (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 162,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "Full Application: Evaluating a New Media Message",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Evaluating a New Media Message\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED\",\"MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-NEWS-AND-MEDIA-COVERAGE-SIMPLY-SHOWS-WHAT-HAPPENED-WITH-NO-CONSTRUCTED-CHOICES-INVOLVED",
+        "MC-B-EMOTIONALLY-ENGAGING-OR-ATTENTION-GRABBING-CONTENT-IS-AUTOMATICALLY-LESS-TRUSTWORTHY-THAN-PLAIN-CONTENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 169,
+        "endLine": 303
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Constructed Production Choices**\nGiven two different framings of the same event, identify the specific production choices (word\nchoice, emphasis, selection) that shape each impression.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 196,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Purpose and Incentive Model**\nGiven three media examples, identify the likely primary purpose (inform, persuade, entertain,\ngenerate engagement/revenue) behind each.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 196,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Separating Tone from Trustworthiness**\nGiven two media examples with different emotional tones but the same actual accuracy level, evaluate\nboth using accuracy/sourcing criteria alone, explaining why tone alone doesn't determine\ntrustworthiness.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 196,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detecting Tone-Based Misjudgment**\nGiven a plain-toned but inaccurate media example and a dramatic but accurate one, correctly identify\nwhich is actually more trustworthy based on substance, not tone.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 196,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Media Message Evaluation**\nGiven a new media message, identify its production choices, likely purpose, and evaluate its\ntrustworthiness based on accuracy and sourcing rather than tone.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 196,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated construction-analysis and tone/trustworthiness separation (MP-1,\n  MP-3) but struggles to integrate all three steps on genuinely current, real media examples (MP-5),\n  provide a structured checklist (what choices were made? what's the likely purpose? is the\n  underlying content accurate regardless of tone?) as scaffolding for real-world application.\n- If the student becomes globally distrustful of all media after this concept (a common\n  overcorrection), recalibrate by emphasizing that constructed choices and purpose don't automatically\n  mean a message is FALSE — many well-produced, purpose-driven media messages are also accurate; the\n  goal is informed evaluation, not blanket cynicism.\n- If the student's purpose-identification (MP-2) defaults to assuming all media has purely negative\n  or manipulative incentives, broaden the discussion to include legitimate informational and public-\n  service purposes alongside commercial/persuasive ones.\n- Students with active social media use should be encouraged to apply this concept's framework\n  directly to content they encounter regularly, since social media specifically blends personal,\n  commercial, and engagement-driven purposes in ways that reward explicit, deliberate analysis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 255,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "eng.communication.media-literacy/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.media-literacy",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: evaluating sources check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.reading.evaluating-sources]  [Component 3: Photograph-Framing / Website-\n                                             Design-Polish Anchor]\n                                                       |\n                                                       v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                       |\n                                                       v\n                              [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                       |\n                                                       v\n                              [MP-1 through MP-5 mastery probe set]\n                                                       |\n                              (pass >= 0.75) -----+----- (fail)\n                                     |                      |\n                                     v                      v\n                [No further unlocks —  [S6 remediation: find-the-two-framings /\n                 terminal in current      substance-not-tone drills]\n                 curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (treating media as\nunconstructed) and MC-B during TA-3 (judging by tone) — these are largely independent and often need\nseparate, explicit correction. If either fires, branch to the relevant s6_path drill before resuming.\nAt the mastery probe stage (S9), route by failure: MP-1 failure indicates residual MC-A; MP-2 failure\nalone indicates the purpose-identification step (TA-2) needs review, distinct from either\nmisconception; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-evaluation example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.media-literacy.md",
+        "startLine": 219,
+        "endLine": 255
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

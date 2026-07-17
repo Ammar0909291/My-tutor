@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.language-families-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.language-families",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b53fb86c6d152830fef37768fe20bd9e0cd8ee2d84a7d56838a8de51dc3404b9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.language-families.md": "sha256:3f16f641ea3ccead5eb781854a28616ce3046773aaed1c3b4b9e6a17b37c51ef"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.language-families",
+    "name": "Language Families",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.linguistics.historical-linguistics-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.language-families-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.language-families (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.language-families.md": "sha256:3f16f641ea3ccead5eb781854a28616ce3046773aaed1c3b4b9e6a17b37c51ef"
+      },
+      "contentHash": "sha256:10e27f5519117b9259d75b0024dcee1ab4baf8613a7b4f7f290dcaab65257f47",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.language-families.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.language-families.md#TA-1 (addresses MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.language-families"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.language-families\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.language-families.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.language-families.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.language-families"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.language-families\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.language-families.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.language-families.md#TA-3 (addresses MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.language-families"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.language-families\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.language-families.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.language-families.md#TA-4 (addresses MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED, MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.language-families"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.language-families\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.language-families/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "Language Families — Conceptual Development Sequence",
+      "content": "### TA-1 — The Comparative Method: Systematic Sound Correspondences (MC-A)\n\nUsing the coincidental-surname anchor, teach that genuine language family relationships require\nsystematic, regular sound correspondences across many words, not a single similar-sounding match.\nStudent practice: given two datasets of word pairs (one showing systematic correspondence, one showing\nonly isolated coincidental similarity), distinguish which supports a genuine family relationship claim.\n\n### TA-2 — Borrowing vs. Genuine Cognates\n\nExtend TA-1 by teaching the distinction between borrowed words (adopted from an unrelated or distantly\nrelated language, often for cultural/technological reasons) and genuine cognates (descended from a\nshared ancestor, following systematic correspondence patterns). Student practice: given four word\npairs, identify which are more likely borrowings versus genuine cognates based on the presence or\nabsence of a systematic correspondence pattern.\n\n### TA-3 — Writing Systems and Geography Are Independent of Genealogy (MC-B)\n\nUsing the shared-currency anchor, teach that writing systems and geographic proximity don't indicate\ngenealogical relationship. Student practice: given three scenarios (shared script but different\nfamilies; different scripts but same family; neighboring but unrelated languages), correctly classify\neach.\n\n### TA-4 — Full Application: Evaluating a Language Family Claim\n\nGive the student a new dataset with word-pair correspondences, information about writing systems, and\ngeographic information for two languages. They must evaluate whether the evidence supports a genuine\nfamily relationship, correctly disregarding writing system and geography as irrelevant evidence and\ncorrectly weighing the sound-correspondence data (TA-1, TA-2, TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 149,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/misconception/MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "**Trigger signal:** Student assumes that any two languages sharing a similar-sounding word for the",
+      "content": "### MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED\n\n**Trigger signal:** Student assumes that any two languages sharing a similar-sounding word for the\nsame concept must be genealogically related (part of the same language family), failing to recognize\nthat similar-sounding words can arise from BORROWING (one language adopting a word from another,\nunrelated language) or pure COINCIDENCE, and that genuine genealogical relationship requires\nSYSTEMATIC, regular sound correspondences across MANY words, established through the comparative\nmethod, not a single similar-sounding pair.\n\n**Conflict evidence [P28]:** Present the student with a well-known example of two genuinely unrelated\nlanguages that happen to share a similar-sounding word for a basic concept purely by coincidence,\nalongside an example of a systematic set of regular sound correspondences across dozens of words\nbetween two languages known to be genuinely related (e.g., a regular pattern where a specific\nconsonant in one language consistently corresponds to a different, specific consonant in the related\nlanguage, across many word pairs). Ask: \"Does one single similar-sounding word pair prove a genuine\nfamily relationship? What does the systematic correspondence pattern across many words suggest that a\nsingle coincidental match doesn't?\"\n\n**Bridge text [P30]:** \"Assuming any similar-sounding word proves a language relationship is like\nassuming two unrelated people who happen to share a rare surname must be related — a single\ncoincidental match proves nothing on its own. Genuine family relationship, like genuine genealogical\ndescent, requires a systematic pattern of evidence (in linguistics, REGULAR sound correspondences\nacross dozens or hundreds of words), not a single similar-looking match.\"\n\n**Replacement text [P31]:** \"Before concluding two languages are related, look for a SYSTEMATIC,\nREGULAR pattern of sound correspondence across MANY words (the comparative method), not just one or\ntwo similar-sounding words. A single similar word could be coincidence or borrowing, not genuine\nshared ancestry.\"\n\n**Discrimination pairs [P33]:**\n1. Two unrelated languages happening to share one similar-sounding word for a common concept by pure\n   coincidence (no systematic pattern, not evidence of a family relationship) vs. two genuinely\n   related languages showing a systematic, regular sound correspondence across dozens of words\n   (genuine evidence of shared ancestry).\n2. A student who concludes two languages are related after finding one similar word (over-hasty\n   conclusion) vs. a student who requires systematic correspondence evidence across many words before\n   concluding a genuine family relationship (correct, rigorous methodology).\n\n**s6_path:** If the student continues to over-conclude relationship from single word matches after the\nbridge, give them a dataset of ten word pairs from two languages, only some of which show a genuinely\nsystematic correspondence pattern, and have them identify which specific pairs support (or don't\nsupport) a genuine family relationship claim.",
+      "localKey": "MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 3,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/misconception/MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "**Trigger signal:** Student assumes that languages sharing a writing system (e.g., both using the Latin",
+      "content": "### MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY\n\n**Trigger signal:** Student assumes that languages sharing a writing system (e.g., both using the Latin\nalphabet, or both using Arabic script) or located in the same geographic region must automatically\nbelong to the same genealogical language family, failing to recognize that writing systems and\ngeographic proximity are historically and culturally contingent facts SEPARATE from genealogical\ndescent — languages from entirely different, unrelated families can share a writing system (often\nthrough cultural contact or colonization) or be geographically neighboring without being related.\n\n**Conflict evidence [P28]:** Present the student with two examples of genuinely unrelated languages\n(from different, well-established language families) that nonetheless share the same writing system,\nalongside an example of two genuinely related languages (same family) that use entirely different\nwriting systems. Ask: \"Does sharing a writing system tell us anything about genealogical descent? Does\nbeing unrelated (different families) prevent two languages from using the same script?\"\n\n**Bridge text [P30]:** \"Assuming shared writing system or geography means shared language family is\nlike assuming two countries that both use the same currency must be part of the same political\nfederation — currency adoption (like writing-system adoption) is a separate, historically contingent\nchoice, not proof of the deeper genealogical/political relationship. Writing systems spread through\ncultural contact, trade, religion, and colonization, completely independent of genealogical language\nrelationships.\"\n\n**Replacement text [P31]:** \"Never infer a genealogical language family relationship from a shared\nwriting system or geographic proximity alone. These are separate, historically contingent facts.\nGenuine family relationship requires the systematic sound-correspondence evidence from the\ncomparative method, regardless of what script is used or where the languages are spoken today.\"\n\n**Discrimination pairs [P33]:**\n1. Two languages from entirely different, unrelated families that happen to share a writing system\n   due to historical cultural contact (no genealogical relationship despite the shared script) vs. two\n   languages that ARE genealogically related (same family) but use entirely different writing systems\n   today (genealogical relationship despite different scripts).\n2. A student assuming two neighboring countries' languages must be related just because they're\n   geographically close (misconception) vs. a student recognizing that geographic proximity alone\n   doesn't establish genealogical relationship, which requires actual comparative evidence (correct\n   understanding).\n\n**s6_path:** If the student continues to conflate writing system/geography with genealogical\nrelationship after the bridge, have them research (or be shown) one specific real-world example of\ngenuinely unrelated languages sharing a script, and one example of genuinely related languages using\ndifferent scripts, articulating why script/geography and genealogy are independent facts.",
+      "localKey": "MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY",
+      "language": "en",
+      "refs": [
+        "MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 46,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "The Comparative Method: Systematic Sound Correspondences (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Comparative Method: Systematic Sound Correspondences (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 153,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "Borrowing vs. Genuine Cognates",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Borrowing vs. Genuine Cognates\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 160,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "Writing Systems and Geography Are Independent of Genealogy (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Writing Systems and Geography Are Independent of Genealogy (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 168,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "Full Application: Evaluating a Language Family Claim",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Evaluating a Language Family Claim\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED\",\"MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-TWO-LANGUAGES-WITH-SIMILAR-SOUNDING-WORDS-MUST-BE-RELATED",
+        "MC-B-LANGUAGES-USING-THE-SAME-WRITING-SYSTEM-OR-LOCATED-IN-THE-SAME-REGION-ARE-AUTOMATICALLY-IN-THE-SAME-LANGUAGE-FAMILY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 175,
+        "endLine": 307
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Systematic Correspondence**\nGiven two sets of word pairs, identify which set shows a systematic, regular sound correspondence\npattern supporting a genuine family relationship claim.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 201,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Distinguishing Cognates from Borrowings**\nGiven three word pairs, identify which are more likely genuine cognates (systematic correspondence)\nversus borrowings (isolated similarity with no systematic pattern).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 201,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Writing System and Geography as Irrelevant Evidence**\nGiven a scenario describing two languages' writing systems and geographic locations, explain why\nneither fact alone indicates genealogical relationship.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 201,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Classifying Language Pair Scenarios**\nGiven three scenarios (shared script/different families; different scripts/same family; neighboring/\nunrelated), correctly classify each based on the actual genealogical relationship rather than surface\nfeatures.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 201,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Language Family Evaluation**\nGiven a new dataset with word-pair correspondences, writing system, and geographic information,\nevaluate whether the evidence supports a genuine language family relationship.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 201,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "Adaptive Flags",
+      "content": "- If the student is multilingual and speaks languages from different families or the same family,\n  leverage this directly as a concrete, personally-relevant example for exploring real correspondence\n  patterns (or their absence) between their own languages.\n- If the student masters the comparative-method reasoning (MP-1, MP-2) in the abstract but struggles\n  to apply it to genuinely unfamiliar language data (MP-5), provide one more fully-worked example with\n  languages entirely new to the student before independent evaluation.\n- If the student overcorrects into skepticism about ALL language relationships, doubting even\n  well-established families with abundant systematic evidence, clarify that the skepticism should be\n  proportional to the evidence — well-documented families like Indo-European rest on extensive,\n  rigorously verified correspondence data, not single coincidental matches.\n- Students with an interest in etymology (from `eng.vocab.etymology`) may enjoy tracing specific words'\n  cognates across a documented language family as a motivating, concrete extension of this concept's\n  abstract principles.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 260,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "eng.linguistics.language-families/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.language-families",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: historical linguistics check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.linguistics.historical-linguistics-intro]  [Component 3: Coincidental-Surname /\n                                                            Shared-Currency Anchor]\n                                                                      |\n                                                                      v\n                                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                      |\n                                                                      v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                      |\n                                                                      v\n                                        [MP-1 through MP-5 mastery probe set]\n                                                                      |\n                                        (pass >= 0.70) -----+----- (fail)\n                                               |                      |\n                                               v                      v\n                        [No further unlocks —  [S6 remediation: correspondence-vs-\n                         terminal in current      coincidence / script-is-separate drills]\n                         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (over-concluding from\nsingle matches) and MC-B during TA-3 (conflating script/geography with genealogy) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2 failures\nindicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through\nMP-4 passing indicates an integration gap — provide one more guided full-evaluation example before\nre-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.language-families.md",
+        "startLine": 224,
+        "endLine": 260
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
