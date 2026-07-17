@@ -6,8 +6,9 @@ import {
   Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X,
   BookOpen, Dumbbell, BarChart3, Library as LibraryIcon, User, Settings as SettingsIcon,
   Bookmark, MoreVertical, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
-  Network, ListChecks,
+  Network, ListChecks, LogOut,
 } from 'lucide-react'
+import { signOut } from 'next-auth/react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
@@ -772,6 +773,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   useEffect(() => { messagesLenRef.current = messages.length }, [messages.length])
   const historyScrolledRef = useRef(false)
   const [subjectMenuOpen, setSubjectMenuOpen] = useState(false)
+  // BUGFIX: the top-right avatar previously had no click handler, dropdown
+  // state, or menu at all — a purely decorative div, hence "not
+  // responsive/unreliable". Wired using the exact same dropdown convention
+  // already established in this file (subjectMenuOpen/speedMenuOpen/
+  // langMenuOpen: click-toggle button + fixed click-outside overlay +
+  // absolute-positioned panel + Escape-key handling above).
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false)
   const [maximizedPanel, setMaximizedPanel] = useState<ActiveTab | null>(null)
 
   // Voice
@@ -853,6 +861,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       setLangMenuOpen(false)
       setSpeedMenuOpen(false)
       setMoreMenuOpen(false)
+      setProfileMenuOpen(false)
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
@@ -2496,12 +2505,57 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             )}
           </div>
           <ThemeToggle />
-          <div style={{
-            width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
-            background: UI.indigo, color: '#fff', fontSize: 12.5, fontWeight: 800,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }} title={displayName ?? 'Student'}>
-            {(displayName ?? 'S').trim().charAt(0).toUpperCase()}
+          <div style={{ position: 'relative', flexShrink: 0 }}>
+            <button
+              type="button"
+              onClick={() => setProfileMenuOpen((v) => !v)}
+              title={displayName ?? 'Student'}
+              aria-label={displayName ?? 'Student'}
+              aria-haspopup="menu"
+              aria-expanded={profileMenuOpen}
+              style={{
+                width: 30, height: 30, borderRadius: '50%', flexShrink: 0, cursor: 'pointer',
+                background: UI.indigo, color: '#fff', fontSize: 12.5, fontWeight: 800,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: profileMenuOpen ? '2px solid var(--text-primary)' : 'none',
+                padding: 0,
+              }}>
+              {(displayName ?? 'S').trim().charAt(0).toUpperCase()}
+            </button>
+            {profileMenuOpen && (
+              <>
+                <div onClick={() => setProfileMenuOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 40 }} />
+                <div role="menu" style={{
+                  position: 'absolute', top: 'calc(100% + 6px)', right: 0, width: 'max-content', minWidth: 170, maxWidth: 'calc(100vw - 32px)', zIndex: 50,
+                  background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 12,
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.4)', overflow: 'hidden', display: 'flex', flexDirection: 'column',
+                }}>
+                  <div style={{ padding: '8px 12px', borderBottom: '1px solid var(--border-subtle)', fontSize: 12.5, fontWeight: 700, color: 'var(--text-primary)' }}>
+                    {displayName ?? 'Student'}
+                  </div>
+                  <Link href="/settings" role="menuitem" onClick={() => setProfileMenuOpen(false)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px',
+                      fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', textDecoration: 'none',
+                    }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'var(--bg-hover)' }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'transparent' }}>
+                    <SettingsIcon size={14} /> {t('dash_settings')}
+                  </Link>
+                  <button type="button" role="menuitem"
+                    onClick={() => { setProfileMenuOpen(false); signOut({ callbackUrl: '/' }) }}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', width: '100%',
+                      fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent',
+                      border: 'none', cursor: 'pointer', textAlign: 'left',
+                    }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg-hover)' }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent' }}>
+                    <LogOut size={14} /> {t('dash_signout')}
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </header>

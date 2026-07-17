@@ -5,7 +5,7 @@ import { useSession, signOut } from 'next-auth/react'
 import { ArrowRight, Check, ChevronDown, LogOut, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
-import { useCountry, useTheme, type Country } from '@/components/Providers'
+import { useTheme } from '@/components/Providers'
 import { CandyPage, Card, CandyButton, Pill, EagleMascot, ProgressRing, useConfetti } from '@/components/ui/candy'
 import styles from './homepage.module.css'
 
@@ -22,12 +22,12 @@ const JOURNEY_STEPS = [
 const JOURNEY_COLORS = ['var(--purple)', 'var(--blue)', 'var(--green)', 'var(--orange)', 'var(--pink)', 'var(--yellow-d)', 'var(--purple-d)']
 
 const LEVEL_LADDER = [
-  { name: 'Novice', icon: '🌱' },
-  { name: 'Student', icon: '📖' },
-  { name: 'Practitioner', icon: '⚡' },
-  { name: 'Expert', icon: '🚀' },
-  { name: 'Master', icon: '🏆' },
-]
+  { name: 'Novice', nameKey: 'level_novice', icon: '🌱' },
+  { name: 'Student', nameKey: 'level_student', icon: '📖' },
+  { name: 'Practitioner', nameKey: 'level_practitioner', icon: '⚡' },
+  { name: 'Expert', nameKey: 'level_expert', icon: '🚀' },
+  { name: 'Master', nameKey: 'level_master', icon: '🏆' },
+] as const
 
 const STEPS = ['how1', 'how2', 'how3', 'how4'] as const
 
@@ -50,8 +50,7 @@ const AVATAR_COLORS = ['var(--orange)', 'var(--blue)', 'var(--green)', 'var(--ye
 const FEAT_ICON_BG = ['var(--purple)', 'var(--blue)', 'var(--green)']
 
 export default function HomePage() {
-  const { t, lang: _lang, setLang } = useLanguage()
-  const { country, setCountry } = useCountry()
+  const { t } = useLanguage()
   const { theme, toggleTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
@@ -75,13 +74,6 @@ export default function HomePage() {
   const userName = session?.user?.name ?? session?.user?.email ?? 'Student'
   // Where content CTAs (pricing, subject cards) should send the user
   const ctaHref = isAuthed ? '/dashboard' : '/auth/signup'
-
-  function handleCountrySelect(c: Country) {
-    setCountry(c)
-    if (c === 'ru') setLang('ru')
-    else if (c === 'in') setLang('hi')
-    else setLang('en')
-  }
 
   return (
     <CandyPage suppressHydrationWarning className={styles.homepage}>
@@ -111,28 +103,12 @@ export default function HomePage() {
             <a href="#features" className={styles.navLink}>{t('nav_features')}</a>
             <a href="#how"      className={styles.navLink}>{t('nav_how')}</a>
             <a href="#pricing"  className={styles.navLink}>{t('nav_pricing')}</a>
-            <a href="#faq"      className={styles.navLink}>FAQ</a>
+            <a href="#faq"      className={styles.navLink}>{t('nav_faq')}</a>
           </div>
 
           <div className={styles.navRight}>
-            {/* Country pills */}
-            <div className={styles.countryPills}>
-              {([
-                { key: 'ru' as Country, flag: '🇷🇺', label: 'RU', color: 'var(--orange)' },
-                { key: 'in' as Country, flag: '🇮🇳', label: 'IN', color: 'var(--green)' },
-                { key: 'global' as Country, flag: '🌍', label: 'GL', color: 'var(--blue)' },
-              ]).map(({ key, flag, label, color }) => (
-                <button key={key} onClick={() => handleCountrySelect(key)} className={styles.countryPill} style={{
-                  borderColor: country === key ? color : undefined,
-                  background: country === key ? `color-mix(in srgb, ${color} 16%, transparent)` : undefined,
-                  color: country === key ? color : undefined,
-                }}>
-                  {flag} {label}
-                </button>
-              ))}
-            </div>
             <LanguageToggle />
-            <button onClick={toggleTheme} title={(mounted ? theme : 'dark') === 'dark' ? 'Switch to light' : 'Switch to dark'} className={styles.themeBtn}>
+            <button onClick={toggleTheme} title={(mounted ? theme : 'dark') === 'dark' ? t('theme_switch_light') : t('theme_switch_dark')} className={styles.themeBtn}>
               {(mounted ? theme : 'dark') === 'dark' ? '☀️' : '🌙'}
             </button>
             {isGuest && (
@@ -165,7 +141,7 @@ export default function HomePage() {
             {(['nav_features','nav_how','nav_pricing'] as const).map((k, i) => (
               <a key={k} href={['#features','#how','#pricing'][i]} onClick={() => setMobileOpen(false)} className={styles.mobileLink}>{t(k)}</a>
             ))}
-            <a href="#faq" onClick={() => setMobileOpen(false)} className={styles.mobileLink}>FAQ</a>
+            <a href="#faq" onClick={() => setMobileOpen(false)} className={styles.mobileLink}>{t('nav_faq')}</a>
             {isGuest && (
               <div style={{ display: 'flex', gap: 8, paddingTop: 8 }}>
                 <Link href="/auth/login"  className={styles.btnGhost} style={{ flex: 1, justifyContent: 'center' }}>{t('cta_login')}</Link>
@@ -245,7 +221,7 @@ export default function HomePage() {
                   <div className={styles.mockDot} style={{ background: 'var(--red)' }} />
                   <div className={styles.mockDot} style={{ background: 'var(--yellow)' }} />
                   <div className={styles.mockDot} style={{ background: 'var(--green)' }} />
-                  <span className={styles.mockFile}>lesson.py</span>
+                  <span className={styles.mockFile}>{t('mockup_filename')}</span>
                 </div>
                 <div className={styles.mockCode}>
                   <div><span style={{ color: 'var(--blue)' }}>def </span><span style={{ color: 'var(--green)' }}>hello</span><span style={{ color: '#C9D1D9' }}>():</span></div>
@@ -365,7 +341,7 @@ export default function HomePage() {
                 {i > 0 && <div className={styles.ladderConnector} />}
                 <div className={styles.ladderStep}>
                   <div className={styles.ladderDot} style={{ background: i === 0 ? 'var(--purple)' : undefined }} />
-                  <span className={styles.ladderStepName}>{lvl.icon} {lvl.name}</span>
+                  <span className={styles.ladderStepName}>{lvl.icon} {t(lvl.nameKey)}</span>
                 </div>
               </div>
             ))}
@@ -424,7 +400,7 @@ export default function HomePage() {
                 <span className={styles.subjStrip} style={{ background: s.accent }} />
                 <div className={styles.subjIcon} style={{ color: s.accent }}>{s.icon}</div>
                 <p className={styles.subjName}>
-                  {s.slug === 'english' ? 'English' : s.slug === 'mathematics' ? 'Mathematics' : 'Physics'}
+                  {s.slug === 'english' ? t('subj_english_label') : s.slug === 'mathematics' ? t('subj_math_label') : t('subj_physics_label')}
                 </p>
                 <p className={styles.subjDesc}>{t(s.desc_key)}</p>
                 <span className={styles.subjLink} style={{ color: s.accent }}>{t('subj_start')}</span>
@@ -501,7 +477,7 @@ export default function HomePage() {
           <div className={styles.footerLinks}>
             <a href="#features">{t('nav_features')}</a>
             <a href="#pricing">{t('nav_pricing')}</a>
-            <a href="#faq">FAQ</a>
+            <a href="#faq">{t('nav_faq')}</a>
             {isAuthed
               ? <Link href="/dashboard">{t('nav_dashboard')}</Link>
               : <Link href="/auth/login">{t('cta_login')}</Link>}
