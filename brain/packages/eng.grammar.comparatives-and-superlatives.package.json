@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.comparatives-and-superlatives-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.comparatives-and-superlatives",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d8f06db6351b3c53ccc0b3696b010617791f5c951a72afa1536c868eb7666ef2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md": "sha256:08cf1113d8cfc0bd118394ba122a61f67839467d51198caecfd9e1d9c1db1dc0"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.comparatives-and-superlatives",
+    "name": "Comparatives and Superlatives",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.grammar.adjectives",
+      "eng.grammar.adverbs"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.comparatives-and-superlatives-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.comparatives-and-superlatives (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md": "sha256:08cf1113d8cfc0bd118394ba122a61f67839467d51198caecfd9e1d9c1db1dc0"
+      },
+      "contentHash": "sha256:de45967939ef6bd5bbe261362e8b97cdb065fcf5038b6615e7297115c94b3b71",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comparatives-and-superlatives.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comparatives-and-superlatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comparatives-and-superlatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comparatives-and-superlatives.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md#TA-2 (addresses MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comparatives-and-superlatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comparatives-and-superlatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comparatives-and-superlatives.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md#TA-3 (addresses MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comparatives-and-superlatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comparatives-and-superlatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.comparatives-and-superlatives.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md#TA-4 (addresses MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST, MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.comparatives-and-superlatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.comparatives-and-superlatives\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "Comparatives and Superlatives — Conceptual Development Sequence",
+      "content": "**TA-1 — Short Word Comparatives/Superlatives (-er/-est) [C]**\n\nPresent short adjectives (tall, fast, big — with attention to spelling changes: big→bigger, happy→happier); student produces comparative and superlative forms.\n\n**TA-2 — Long Word Comparatives/Superlatives (more/most) [C]**\n\nPresent longer adjectives (beautiful, difficult, interesting); student produces comparative and superlative forms using \"more/most,\" directly targeting MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST.\n\n**TA-3 — Irregular Comparatives/Superlatives [C→P]**\n\nPresent the fixed irregular set (good/better/best, bad/worse/worst, far/farther-further/farthest-furthest, little/less/least, much-many/more/most); student produces correct irregular forms, directly targeting MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES.\n\n**TA-4 — Using Comparatives/Superlatives in Context (Two vs. Three+ Items) [P]**\n\nPresent scenarios comparing exactly two items (requiring comparative + \"than\") vs. three or more items (requiring superlative + \"the\"); student selects and produces the correct form based on the number of items being compared.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 74,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/misconception/MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "- **Trigger signal:** Student applies only one comparison strategy universally — either always adding \"-er/-est\" (producing errors like \"beautifuler,\" \"difficultest\") or always using \"more/most\" (producing errors like \"more tall,\" \"most fast\") — rather than applying the correct rule based on the adjective/adverb's SYLLABLE LENGTH (short words: -er/-est; longer words, typically 3+ syllables or certain 2-syllable patterns: more/most).",
+      "content": "### MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST\n- **Trigger signal:** Student applies only one comparison strategy universally — either always adding \"-er/-est\" (producing errors like \"beautifuler,\" \"difficultest\") or always using \"more/most\" (producing errors like \"more tall,\" \"most fast\") — rather than applying the correct rule based on the adjective/adverb's SYLLABLE LENGTH (short words: -er/-est; longer words, typically 3+ syllables or certain 2-syllable patterns: more/most).\n- **Conflict evidence [P28]:** \"You said 'beautifuler.' Let's count the syllables in 'beautiful': beau-ti-ful — three syllables. Do longer, multi-syllable words like this usually take '-er,' or do they usually use 'more' instead?\"\n- **Bridge text [P30]:** \"Short adjectives/adverbs (usually 1 syllable, and many common 2-syllable ones) take '-er/-est' (tall→taller→tallest, happy→happier→happiest). Longer adjectives/adverbs (usually 3+ syllables, and some 2-syllable ones ending in patterns like '-ful,' '-ous,' '-ing') take 'more/most' instead (beautiful→more beautiful→most beautiful). The choice depends on syllable length and specific word patterns, not personal preference or a single universal rule.\"\n- **Replacement text [P31]:** \"Check the syllable count and ending pattern of the adjective/adverb before choosing '-er/-est' or 'more/most' — don't apply one strategy to every word.\"\n- **Discrimination pairs [P33]:**\n  - \"tall → taller → tallest\" (short, 1 syllable, takes -er/-est) vs. \"beautiful → more beautiful → most beautiful\" (3 syllables, takes more/most).\n  - \"happy → happier → happiest\" (2 syllables ending in -y, takes -er/-est with a spelling change) vs. \"careful → more careful → most careful\" (2 syllables ending in -ful, takes more/most).\n- **s6_path:** \"It's a reasonable instinct to want one consistent rule for all comparisons — but English genuinely splits this by word length/pattern, and checking syllable count is a reliable, learnable test.\"",
+      "localKey": "MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST",
+      "language": "en",
+      "refs": [
+        "MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/misconception/MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "- **Trigger signal:** Student \"corrects\" genuinely irregular comparative/superlative forms (good→better→best, bad→worse→worst, far→farther/further→farthest/furthest) back to the regular pattern, producing errors like \"gooder,\" \"goodest,\" \"badder,\" \"baddest,\" not recognizing these as a small, fixed set of true exceptions that must be memorized rather than derived from the regular rule.",
+      "content": "### MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES\n- **Trigger signal:** Student \"corrects\" genuinely irregular comparative/superlative forms (good→better→best, bad→worse→worst, far→farther/further→farthest/furthest) back to the regular pattern, producing errors like \"gooder,\" \"goodest,\" \"badder,\" \"baddest,\" not recognizing these as a small, fixed set of true exceptions that must be memorized rather than derived from the regular rule.\n- **Conflict evidence [P28]:** \"You said 'gooder' instead of 'better.' Is 'gooder' actually a word fluent English speakers use, or is there a special, different word used instead?\"\n- **Bridge text [P30]:** \"A small set of very common adjectives/adverbs have IRREGULAR comparative and superlative forms that don't follow either the '-er/-est' or 'more/most' pattern: good→better→best, bad→worse→worst, far→farther/further→farthest/furthest, little→less→least, much/many→more→most. These must be memorized directly as a fixed, learnable list, since they can't be derived from the regular rules.\"\n- **Replacement text [P31]:** \"For a small set of very common words (good, bad, far, little, much/many), use the memorized irregular forms rather than applying the regular -er/-est or more/most rule.\"\n- **Discrimination pairs [P33]:**\n  - \"good → better → best\" (irregular, memorized) vs. attempting \"gooder/goodest\" (incorrect, regular pattern misapplied).\n  - \"bad → worse → worst\" (irregular) vs. attempting \"badder/baddest\" (incorrect).\n- **s6_path:** \"Since regular rules work for the vast majority of words, it's very natural to expect them to apply everywhere — but a handful of extremely common, frequently-used words are genuine, learnable exceptions worth memorizing directly.\"\n\n---",
+      "localKey": "MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES",
+      "language": "en",
+      "refs": [
+        "MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "Short Word Comparatives/Superlatives (-er/-est)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Short Word Comparatives/Superlatives (-er/-est)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "Long Word Comparatives/Superlatives (more/most)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Long Word Comparatives/Superlatives (more/most)\",\"primitives\":[],\"addresses\":[\"MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "Irregular Comparatives/Superlatives",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Irregular Comparatives/Superlatives\",\"primitives\":[],\"addresses\":[\"MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "Using Comparatives/Superlatives in Context (Two vs. Three+ Items)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Using Comparatives/Superlatives in Context (Two vs. Three+ Items)\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST\",\"MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST",
+        "MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 88,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Short word, novel example**\n\"Fill in: 'This box is ___ than that one' (using 'big').\"\n*Target:* \"bigger\" (with correct spelling — doubled consonant).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Long word, novel example**\n\"Fill in: 'This is the ___ movie I've seen' (using 'exciting,' superlative for many movies compared).\"\n*Target:* \"most exciting.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Irregular form, novel example**\n\"Fill in: 'Of all the options, this is the ___' (using 'bad,' superlative).\"\n*Target:* \"worst\" — not \"baddest.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Two vs. three+ items**\n\"If comparing just two apples, do you say 'the reddest apple' or 'the redder apple'? What about comparing five apples?\"\n*Target:* two apples — \"the redder apple\" (comparative); five apples — \"the reddest apple\" (superlative).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the comparison system**\n\"In your own words: how do you decide between '-er/-est' and 'more/most,' and are there any words that don't follow either rule?\"\n*Target:* states or demonstrates that short words typically take -er/-est while longer words take more/most (based on syllable count/pattern), and that a small set of common words (good, bad, far, little, much/many) have irregular forms that must be memorized.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 116,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "Adaptive Flags",
+      "content": "- **Syllable-count check is the reliable decision rule**: teach this explicitly as a concrete, checkable test rather than expecting intuition to develop unprompted.\n- **Irregular forms are a small, fixed, memorizable list**: treat good/bad/far/little/much-many as a named exception set worth direct memorization, not a source of ongoing confusion to work around.\n- **Comparative requires \"than\"; superlative requires \"the\"**: reinforce these companion-word patterns explicitly (TA-4) as part of correct usage, not just the adjective/adverb form itself.\n- **Lower session_cap (4 TAs) reflects the concept's genuine scope**: comparatives-and-superlatives is a smaller, single-hour concept per the KG's `estimated_hours: 1` — the TA sequence is proportionally shorter, consistent with the established convention for concise concepts.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 178,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "eng.grammar.comparatives-and-superlatives/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.comparatives-and-superlatives",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — height-line comparison warm-up (two objects, then three)\n  ↓\n[P41] PD-1 (adjective readiness)\n  ↓ PASS\n[P41] PD-2 (adverb readiness)\n  ↓ PASS\n[P06] Anchor: height-line comparison (short-word -er/-est vs. long-word more/most)\n  ↓\nTA-1: Short word comparatives/superlatives (-er/-est) [C]\n  ↓\nTA-2: Long word comparatives/superlatives (more/most) [C]\n  ↓\n[P28] Conflict: one strategy applied universally → MC-ALWAYS-ADD-ER-EST-OR-ALWAYS-USE-MORE-MOST (if triggered)\n  ↓\nTA-3: Irregular comparatives/superlatives [C→P]\n  ↓\n[P28] Conflict: irregular forms \"corrected\" to regular pattern → MC-IRREGULAR-COMPARATIVES-ARE-JUST-MISTAKES (if triggered)\n  ↓\nTA-4: Using comparatives/superlatives in context (two vs. three+ items) [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, compare two things and three things using the correct comparative and superlative forms.\"\n[P68] Session close\n[P85] Regulation tail — praise checking syllable length and irregular-list membership over guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on adjectives/adverbs, new to comparison forms): dwell on TA-1's short-word pattern before introducing the more/most rule for longer words. S1 (already compares fluently in speech but errs on irregular forms in writing/formal contexts): focus on TA-3's irregular set, since these are common, persistent error sources even for fluent speakers. S6 (frustrated by needing to check syllable count before every comparison): validate that this is a quick, learnable check, and that with practice it becomes automatic. S9 (L1 has a single universal comparison strategy, e.g. many languages use one particle/word for all comparisons regardless of adjective length): expect the -er/-est vs. more/most split, and especially the irregular forms, to be a persistent transfer challenge requiring dedicated, explicit practice.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.comparatives-and-superlatives.md",
+        "startLine": 140,
+        "endLine": 178
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
