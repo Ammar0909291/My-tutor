@@ -1,8 +1,12 @@
 # My Tutor — Project Memory
 
-## Reporting preference (ALWAYS follow)
+## Reporting preference (ALWAYS follow — updated 2026-07-17)
 - After EVERY prompt/task — including non-coding tasks (audits, Q&A, memory updates) — ALWAYS
   produce a **detailed report** at the end of the turn.
+- ALWAYS include **git info** in that report: branch worked on, commit hash(es) created this turn,
+  push status (pushed to `main` / nothing to push / push failed + why), and current `git status`
+  state (clean vs. pending changes) — even when the task was non-coding, state explicitly that no
+  git changes were made rather than omitting the section.
 - ALWAYS include **running instructions for the local computer** (install, env setup,
   `npx prisma db push`, `npm run dev`, `npm run build`, type-check) in that report when the task
   touched code; otherwise still close with a report summarizing what was done.
