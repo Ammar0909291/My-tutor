@@ -3490,6 +3490,256 @@ const FEQ_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── eng.grammar.nouns ───────────────────────────────────────────────────────
+const NOUN = 'eng.grammar.nouns'
+const NOUN_SRC = 'docs/curriculum/blueprints/eng.grammar.nouns.md'
+
+const NOUN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NOUN,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A noun names something — but \u201csomething\u201d is bigger than \u201ca ' +
+      'thing you can hold.\u201d Can you touch happiness? Freedom? ' +
+      'Courage? No — yet they are all nouns, because grammatically ' +
+      'they behave exactly like table or book: they take articles ' +
+      '(\u201ca feeling of freedom\u201d), they can be the subject of a ' +
+      'sentence (\u201cHonesty matters\u201d), they fill the same slots ' +
+      '(\u201cI have a book\u201d / \u201cI have knowledge\u201d). So the full ' +
+      'definition: a noun names a person, a place, a thing, OR an ' +
+      'idea. Concrete nouns name what your senses can find; abstract ' +
+      'nouns name qualities, states, and concepts — just as real a ' +
+      'category, only invisible.',
+    targetedMisconceptions: [`${NOUN}:MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS`],
+    source: `${NOUN_SRC} — MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS (P28 touch-happiness conflict + P33 book/knowledge slot pairs)`,
+  },
+  {
+    conceptId: NOUN,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cAn information\u201d? \u201cMany furnitures\u201d? The countable/uncountable ' +
+      'split feels random, but there is a learnable pattern under it. ' +
+      'Countable nouns name things you can count as separate units: ' +
+      'one chair, two chairs; one fact, several facts. Uncountable ' +
+      'nouns name what English treats as a mass or a category — ' +
+      'substances (water, rice), abstractions (information, advice), ' +
+      'whole collections (furniture, luggage). Test any noun: can you ' +
+      'naturally say \u201cone \u2026, two \u2026s\u201d? \u201cOne chair, two chairs\u201d ' +
+      'works; \u201cone furniture, two furnitures\u201d does not — furniture is ' +
+      'measured, not counted: \u201csome furniture,\u201d \u201ca piece of ' +
+      'furniture,\u201d \u201cmuch information.\u201d A few words must be learned ' +
+      'individually, but the substance/abstraction/collection pattern ' +
+      'carries you most of the way.',
+    targetedMisconceptions: [`${NOUN}:MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY`],
+    source: `${NOUN_SRC} — MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY (P28 count-test conflict + P30 mass-pattern bridge)`,
+  },
+]
+
+const NOUN_PROBES: SeedProbe[] = [
+  {
+    conceptId: NOUN,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which of these is a noun?',
+    choices: [
+      { text: 'All of them — \u201ctable\u201d is a concrete noun and \u201chappiness\u201d and \u201cfreedom\u201d are abstract nouns', isCorrect: true },
+      { text: 'Only \u201ctable\u201d — nouns are things you can touch', isCorrect: false, misconceptionId: `${NOUN}:MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS` },
+      { text: 'None — \u201chappiness\u201d and \u201cfreedom\u201d are feelings, not words that name things', isCorrect: false, misconceptionId: `${NOUN}:MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS` },
+    ],
+    correctValue: 'all — concrete and abstract',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${NOUN}:MC-NOUNS-ARE-ONLY-PHYSICAL-THINGS`],
+    source: `${NOUN_SRC} — abstract-noun recognition probe, distractor-mapped`,
+  },
+  {
+    conceptId: NOUN,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which sentence is correct?',
+    choices: [
+      { text: '\u201cShe gave me a piece of advice\u201d — advice is uncountable, so it is measured, not counted', isCorrect: true },
+      { text: '\u201cShe gave me an advice\u201d — advice is a noun, so it takes a/an like any other', isCorrect: false, misconceptionId: `${NOUN}:MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY` },
+    ],
+    correctValue: 'a piece of advice',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NOUN}:MC-COUNTABLE-VS-UNCOUNTABLE-IS-ARBITRARY`],
+    source: `${NOUN_SRC} — uncountable-noun usage probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.articles-and-determiners ────────────────────────────────────
+const ART = 'eng.grammar.articles-and-determiners'
+const ART_SRC = 'docs/curriculum/blueprints/eng.grammar.articles-and-determiners.md'
+
+const ART_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ART,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'The a/an rule is about SOUND, not spelling. Say the next word ' +
+      'aloud: if it STARTS with a vowel sound, use \u201can\u201d; consonant ' +
+      'sound, use \u201ca.\u201d Spelling misleads exactly where learners trip: ' +
+      '\u201cuniversity\u201d is spelled with a u but is pronounced ' +
+      '\u201cYOO-niversity\u201d — a consonant /j/ sound — so it is \u201ca ' +
+      'university.\u201d \u201cHour\u201d is spelled with an h, but the h is silent ' +
+      'and the word opens with a vowel sound — so \u201can hour.\u201d Compare: ' +
+      '\u201can umbrella\u201d (true vowel sound) but \u201ca university\u201d; \u201ca ' +
+      'horse\u201d (spoken h) but \u201can hour.\u201d The letter-check shortcut ' +
+      'works most of the time — the ear-check works every time. Learn ' +
+      'the handful of divergers by ear: university, European, hour, ' +
+      'honest.',
+    targetedMisconceptions: [`${ART}:MC-A-AN-DEPENDS-ON-SPELLING-NOT-SOUND`],
+    source: `${ART_SRC} — MC-A-AN-DEPENDS-ON-SPELLING-NOT-SOUND (P28 say-it-aloud conflict + P33 university/umbrella, hour/horse pairs)`,
+  },
+  {
+    conceptId: ART,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'When do you need \u201cthe\u201d? Run one test: can your listener ' +
+      'already identify exactly WHICH one you mean? If yes — because ' +
+      'you mentioned it before, the context singles it out, or it is ' +
+      'one of a kind — use \u201cthe.\u201d If you are introducing something ' +
+      'new or speaking generally, use \u201ca/an\u201d (or no article for ' +
+      'plurals and uncountables). Watch the switch happen in two ' +
+      'sentences: \u201cI saw A dog in the park. THE dog was friendly.\u201d ' +
+      'First mention: your listener doesn\u2019t know which dog — \u201ca.\u201d ' +
+      'Second mention: now you both know — \u201cthe.\u201d One-of-a-kind ' +
+      'things are always identifiable, so it is always \u201cthe sun,\u201d ' +
+      '\u201cthe moon.\u201d Not a habit of always or never — a fresh ' +
+      'identifiability test each time, and it is completely learnable ' +
+      'even if your first language has no articles.',
+    targetedMisconceptions: [`${ART}:MC-THE-IS-ALWAYS-NEEDED-OR-NEVER-NEEDED`],
+    source: `${ART_SRC} — MC-THE-IS-ALWAYS-NEEDED-OR-NEVER-NEEDED (P30 identifiability test + P33 a-dog/the-dog switch)`,
+  },
+]
+
+const ART_PROBES: SeedProbe[] = [
+  {
+    conceptId: ART,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which phrase is correct?',
+    choices: [
+      { text: '\u201cA university\u201d and \u201can hour\u201d — the choice follows the starting SOUND, not the first letter', isCorrect: true },
+      { text: '\u201cAn university\u201d and \u201ca hour\u201d — u is a vowel and h is a consonant', isCorrect: false, misconceptionId: `${ART}:MC-A-AN-DEPENDS-ON-SPELLING-NOT-SOUND` },
+      { text: '\u201cAn university\u201d and \u201can hour\u201d — both start with special words', isCorrect: false, misconceptionId: `${ART}:MC-A-AN-DEPENDS-ON-SPELLING-NOT-SOUND` },
+    ],
+    correctValue: 'a university, an hour',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ART}:MC-A-AN-DEPENDS-ON-SPELLING-NOT-SOUND`],
+    source: `${ART_SRC} — P33 discrimination pairs as probe, distractor-mapped`,
+  },
+  {
+    conceptId: ART,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You are telling a friend about a dog you saw for the first time. Which is the natural first sentence?',
+    choices: [
+      { text: '\u201cI saw a dog in the park\u201d — first mention, the listener can\u2019t yet identify which dog', isCorrect: true },
+      { text: '\u201cI saw the dog in the park\u201d — dogs always take \u201cthe\u201d', isCorrect: false, misconceptionId: `${ART}:MC-THE-IS-ALWAYS-NEEDED-OR-NEVER-NEEDED` },
+    ],
+    correctValue: 'a dog',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ART}:MC-THE-IS-ALWAYS-NEEDED-OR-NEVER-NEEDED`],
+    source: `${ART_SRC} — P28 first-mention scenario as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.present-tenses ──────────────────────────────────────────────
+const PRES = 'eng.grammar.present-tenses'
+const PRES_SRC = 'docs/curriculum/blueprints/eng.grammar.present-tenses.md'
+
+const PRES_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRES,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Surprise: the \u201csimple present\u201d is usually NOT about right now. ' +
+      '\u201cI eat dinner\u201d does not describe this moment — it describes a ' +
+      'HABIT (something you do regularly). For an action in progress ' +
+      'at this second, English uses the present continuous: \u201cI am ' +
+      'eating dinner.\u201d The split: simple present = habits, routines, ' +
+      'and general truths (\u201cI walk to school every day,\u201d \u201cwater ' +
+      'boils at 100\u00b0C,\u201d \u201cthe sun rises in the east\u201d); present ' +
+      'continuous (am/is/are + -ing) = happening now (\u201cLook, the sun ' +
+      'is rising!\u201d). Quick test before you speak: is this something ' +
+      'that happens REGULARLY, or something happening AS I SPEAK? ' +
+      'Regular \u2192 simple. Right now \u2192 continuous.',
+    targetedMisconceptions: [`${PRES}:MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW`],
+    source: `${PRES_SRC} — MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW (P30 habit-vs-in-progress split + P33 breakfast/sunrise pairs)`,
+  },
+  {
+    conceptId: PRES,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cI have visited Paris\u201d and \u201cI visited Paris\u201d — same thing? ' +
+      'Try adding a date: \u201cI visited Paris in 2019\u201d sounds fine; \u201cI ' +
+      'have visited Paris in 2019\u201d sounds broken. That broken ' +
+      'sentence exposes the real difference. The simple past pins an ' +
+      'action to a SPECIFIC, finished time — it lives entirely back ' +
+      'then. The present perfect (have/has + past participle) ' +
+      'deliberately gives NO specific time, because its job is to ' +
+      'connect the past to NOW: \u201cI have visited Paris\u201d = it is part ' +
+      'of my experience as I stand here; \u201cShe has lost her keys\u201d = ' +
+      'they are still missing now. That is why the present perfect ' +
+      'refuses time stamps like \u201cyesterday\u201d or \u201cin 2019\u201d — the ' +
+      'moment you name the time, you have left \u201cnow\u201d and the simple ' +
+      'past takes over.',
+    targetedMisconceptions: [`${PRES}:MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE`],
+    source: `${PRES_SRC} — MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE (P28 add-in-2019 conflict as the centrepiece + P33 keys pair)`,
+  },
+]
+
+const PRES_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRES,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'You are on the phone, eating as you talk. Which is correct for what is happening right now?',
+    choices: [
+      { text: '\u201cI am eating dinner\u201d — present continuous for an action in progress', isCorrect: true },
+      { text: '\u201cI eat dinner\u201d — present tense means happening in the present', isCorrect: false, misconceptionId: `${PRES}:MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW` },
+      { text: '\u201cI ate dinner\u201d — eating started in the past', isCorrect: false },
+    ],
+    correctValue: 'I am eating dinner',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PRES}:MC-SIMPLE-PRESENT-MEANS-HAPPENING-RIGHT-NOW`],
+    source: `${PRES_SRC} — P28 eating-now scenario as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRES,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which sentence is correct?',
+    choices: [
+      { text: '\u201cI visited Paris in 2019\u201d — a specific past time takes the simple past', isCorrect: true },
+      { text: '\u201cI have visited Paris in 2019\u201d — present perfect and simple past are interchangeable', isCorrect: false, misconceptionId: `${PRES}:MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE` },
+    ],
+    correctValue: 'I visited Paris in 2019',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PRES}:MC-PRESENT-PERFECT-IS-JUST-PAST-TENSE`],
+    source: `${PRES_SRC} — P28 time-marker conflict as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -3531,6 +3781,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...QUAD_EXPLANATIONS,
   ...EXP_EXPLANATIONS,
   ...FEQ_EXPLANATIONS,
+  ...NOUN_EXPLANATIONS,
+  ...ART_EXPLANATIONS,
+  ...PRES_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -3572,4 +3825,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...QUAD_PROBES,
   ...EXP_PROBES,
   ...FEQ_PROBES,
+  ...NOUN_PROBES,
+  ...ART_PROBES,
+  ...PRES_PROBES,
 ]
