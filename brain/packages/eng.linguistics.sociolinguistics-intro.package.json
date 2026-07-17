@@ -1,0 +1,396 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.sociolinguistics-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.sociolinguistics-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:98d2e7524eaf8f5d202b04d0835187aa67406f67d967f6cbc518e1c936b77223",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md": "sha256:3c681eab3e3b0a1789b286aa3e07ad21ca60e71739c4a631e97b8e0eb0428bfc"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.sociolinguistics-intro",
+    "name": "Introduction to Sociolinguistics",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonetics.accents-and-dialects",
+      "eng.linguistics.pragmatics-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.sociolinguistics-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.sociolinguistics-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md": "sha256:3c681eab3e3b0a1789b286aa3e07ad21ca60e71739c4a631e97b8e0eb0428bfc"
+      },
+      "contentHash": "sha256:0022a192f0b6b635e5caf9210fdc00759a2ed8717d2414c9f4be02e98ebcf1ba",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.sociolinguistics-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md#TA-1 (addresses MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.sociolinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.sociolinguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.sociolinguistics-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md#TA-2 (addresses MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.sociolinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.sociolinguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.sociolinguistics-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.sociolinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.sociolinguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.sociolinguistics-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.sociolinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.sociolinguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.sociolinguistics-intro.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md#TA-5 (addresses MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS, MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.sociolinguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.sociolinguistics-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "Introduction to Sociolinguistics — Conceptual Development Sequence",
+      "content": "### TA-1 — Social Factors Beyond Geography (MC-A)\n\nUsing the home-decoration anchor, teach that class, gender, age, and identity produce systematic\nlanguage variation independent of region. Student practice: given three documented variation\npatterns, identify which social factor (not geography) likely explains each.\n\n### TA-2 — Code-Switching as Skilled Competence (MC-B)\n\nUsing the bilingual-musician anchor, teach that code-switching demonstrates full competence in\nmultiple varieties plus contextual judgment. Student practice: given three code-switching examples,\nidentify the specific social cue (audience, topic, setting) that likely triggered each switch.\n\n### TA-3 — Register-Shifting Within One Language\n\nExtend TA-2 to register-shifting (formality adjustment within one language) as an analogous skilled\nsocial competency. Student practice: given a speaker's utterances in three different social contexts,\nidentify the register-shifting pattern and the social factor driving each shift.\n\n### TA-4 — Language Variation and Identity/Group-Belonging\n\nIntroduce the idea that language variation choices often serve identity and group-belonging\nfunctions (signaling membership in a social group), not merely communicative efficiency. Student\npractice: given an example of a speaker deliberately using an in-group linguistic feature, explain\nwhat identity or belonging function it likely serves beyond simple communication.\n\n### TA-5 — Full Application: Analyzing Social Language Variation\n\nGive the student a new language sample or scenario involving code-switching or register-shifting. They\nmust identify the social factor(s) at play (TA-1), analyze the switching/shifting pattern as skilled\ncompetence (TA-2, TA-3), and explain any identity/group-belonging function served (TA-4) — the full\nsynthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 151,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/misconception/MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "**Trigger signal:** Student, having learned from Accents and Dialects that regional variation is",
+      "content": "### MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS\n\n**Trigger signal:** Student, having learned from Accents and Dialects that regional variation is\nsystematic, assumes ALL systematic language variation is purely regional/geographic, failing to\nrecognize that social factors like class, gender, age, and identity ALSO produce systematic,\ndocumented patterns of variation independent of geography — e.g., assuming two speakers from the\nsame city must speak identically, missing that social class or age cohort can produce systematic\ndifferences even within one location.\n\n**Conflict evidence [P28]:** Show the student documented sociolinguistic research (e.g., studies\nshowing that speakers from different social classes within the SAME city systematically use certain\ngrammatical features at different rates) and ask: \"These speakers are from the same geographic\nregion. Does that mean their language use should be identical? What does this data suggest is driving\nthe systematic difference, if not geography?\"\n\n**Bridge text [P30]:** \"Assuming all systematic variation is regional is like assuming all systematic\ndifferences in how people decorate their homes come only from which city they live in, ignoring that\nage, social class, and personal identity ALSO produce real, patterned differences even among\nneighbors in the same city. Sociolinguistics studies how SOCIAL factors — not just geography —\nsystematically shape language variation.\"\n\n**Replacement text [P31]:** \"When you observe systematic language variation, don't assume geography\nis the only possible explanation. Ask: could social class, age, gender, or group identity also be\ndriving this pattern, even among speakers from the same region?\"\n\n**Discrimination pairs [P33]:**\n1. Assuming two speakers from the same city must speak identically because they share a region\n   (geography-only assumption) vs. recognizing that documented social-class-based variation can\n   exist systematically within one city (social-factor-aware understanding).\n2. A student who can only explain language variation in terms of \"where someone is from\"\n   (misconception) vs. a student who can name at least one non-geographic social factor\n   (class, age, gender, identity) that also produces systematic variation (correct, broader\n   understanding).\n\n**s6_path:** If the student continues to attribute all variation to geography after the bridge, show\nthem three pairs of speech samples from the SAME region but differing in one social factor (e.g.,\nage cohort), and have them identify what specific feature differs and hypothesize what social factor\n(not geography) might explain it.",
+      "localKey": "MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS",
+      "language": "en",
+      "refs": [
+        "MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/misconception/MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "**Trigger signal:** Student interprets a speaker alternating between languages/dialects",
+      "content": "### MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY\n\n**Trigger signal:** Student interprets a speaker alternating between languages/dialects\n(code-switching) or shifting formality levels (register-shifting) depending on social context as\nevidence of confusion, incomplete language mastery, or \"not really knowing\" either variety properly —\nfailing to recognize that skilled code-switching and register-shifting actually require full\ncompetence in BOTH varieties plus the additional social skill of choosing the right one for the\nright context.\n\n**Conflict evidence [P28]:** Show the student a bilingual speaker who fluidly switches between two\nlanguages mid-conversation depending on topic or audience, alongside a monolingual speaker who uses\nonly one consistent register regardless of context (speaking to a boss exactly as casually as to a\nclose friend). Ask: \"Which speaker is actually demonstrating MORE linguistic and social skill — the\none who can only do one thing regardless of context, or the one who can flexibly and appropriately\nshift based on the situation?\"\n\n**Bridge text [P30]:** \"Assuming code-switching means a speaker doesn't fully know either variety is\nlike assuming a bilingual musician who can play both jazz and classical, switching fluidly depending on\nthe venue, must not really know either style properly — but the ability to competently choose and\nexecute the RIGHT style for the RIGHT context is itself an additional, impressive skill layered on top\nof full competence in both. Code-switching requires MORE linguistic skill, not less.\"\n\n**Replacement text [P31]:** \"When you observe a speaker code-switching or shifting register, don't\nassume it reflects confusion or incomplete knowledge. Recognize it as an ADDITIONAL social-linguistic\nskill: full competence in multiple varieties, plus the judgment to select the appropriate one for\neach specific context.\"\n\n**Discrimination pairs [P33]:**\n1. A bilingual speaker fluidly code-switching based on topic and audience, demonstrating full\n   competence in both languages plus contextual judgment (skilled) vs. a speaker who genuinely\n   struggles with basic vocabulary in one language and mixes languages out of necessity rather than\n   choice (a different phenomenon — incomplete acquisition, not skilled code-switching).\n2. A student assuming code-switching reflects \"not knowing\" a language properly (misconception) vs.\n   a student recognizing code-switching as a sophisticated, deliberate social-linguistic competency\n   (correct understanding).\n\n**s6_path:** If the student continues to view code-switching as a deficiency after the bridge, have\nthem identify the SPECIFIC social cues (audience, topic, setting) that seem to trigger a switch in a\ngiven example, demonstrating that the switching follows a systematic, purposeful pattern rather than\nbeing random or confused.",
+      "localKey": "MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY",
+      "language": "en",
+      "refs": [
+        "MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 42,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "Social Factors Beyond Geography (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Social Factors Beyond Geography (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 155,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "Code-Switching as Skilled Competence (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Code-Switching as Skilled Competence (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 161,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "Register-Shifting Within One Language",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Register-Shifting Within One Language\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 167,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "Language Variation and Identity/Group-Belonging",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Language Variation and Identity/Group-Belonging\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 173,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "Full Application: Analyzing Social Language Variation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Analyzing Social Language Variation\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS\",\"MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-LANGUAGE-VARIATION-IS-ONLY-ABOUT-GEOGRAPHIC-REGION-NOT-SOCIAL-FACTORS",
+        "MC-B-CODE-SWITCHING-AND-REGISTER-SHIFTING-MEAN-A-SPEAKER-DOESNT-FULLY-KNOW-EITHER-VARIETY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 180,
+        "endLine": 311
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Non-Geographic Social Factors**\nGiven three documented language variation patterns, identify which social factor (class, age,\ngender, identity) likely explains each, distinct from geography.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Analyzing Code-Switching Triggers**\nGiven a code-switching example, identify the specific social cue that likely triggered the switch and\nexplain why this demonstrates skill rather than confusion.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Analyzing Register-Shifting**\nGiven a speaker's utterances across two different social contexts, identify the register-shifting\npattern and the social factor driving it.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identifying Identity/Belonging Functions**\nGiven an example of deliberate in-group language use, explain what identity or group-belonging\nfunction it likely serves beyond pure communication.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Social Variation Analysis**\nGiven a new scenario involving language variation, identify the social factor(s), analyze the\npattern as skilled competence, and explain any identity/belonging function.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 205,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student is themselves multilingual or code-switches/register-shifts regularly, connect this\n  concept directly and validatingly to their own experience — this is a natural point for personal\n  relevance, and can strengthen retention significantly if handled with genuine interest.\n- If the student conflates code-switching (a skilled bilingual phenomenon) with genuine language\n  mixing due to incomplete acquisition in a language learner still developing proficiency, clarify\n  the distinction explicitly using the discrimination pair from MC-B — not every instance of\n  switching languages is the sophisticated phenomenon this concept describes.\n- If the student's identity/belonging analysis (MP-4) remains superficial (\"it makes them feel\n  included\"), push for more specific reasoning about what particular linguistic feature signals\n  membership and why that specific choice (not just any choice) carries that signal.\n- Given this concept's expert-level difficulty and two prerequisites, students with only shallow\n  mastery of either accents/dialects or pragmatics may need brief re-grounding before the synthesis\n  work of TA-4/TA-5 will land meaningfully.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 264,
+        "endLine": 280
+      }
+    },
+    {
+      "assetId": "eng.linguistics.sociolinguistics-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.sociolinguistics-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: accents/dialects check] --> [PD-2: pragmatics check]\n   |                                                    |\n   | (gap found)                                        | (pass)\n   v                                                     v\n[Route to prerequisite concept]         [Component 3: Home-Decoration / Bilingual-Musician Anchor]\n                                                         |\n                                                         v\n                                     [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                         |\n                                                         v\n                               [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                         |\n                                                         v\n                               [MP-1 through MP-5 mastery probe set]\n                                                         |\n                               (pass >= 0.70) -----+----- (fail)\n                                      |                      |\n                                      v                      v\n        [Unlock: applied-linguistics-intro,  [S6 remediation: identify-the-factor /\n         dialectology, cross-cultural-          identify-the-trigger drills]\n         communication]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (before social factors beyond geography are established) and MC-B during TA-2 (code-switching\njudgment) — MC-A generally needs resolving first since the subsequent TAs build directly on\nrecognizing social (not just regional) factors. If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates residual\nMC-A; MP-2/MP-3 failures indicate residual MC-B; MP-4 failure alone indicates the identity/belonging\nextension (TA-4) needs review, distinct from either misconception; MP-5 failure with MP-1 through\nMP-4 passing indicates an integration gap — provide one more guided full-analysis example before\nre-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.sociolinguistics-intro.md",
+        "startLine": 227,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

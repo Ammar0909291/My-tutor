@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.logical-fallacies-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.logical-fallacies",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0667515abf42550a850dd6a5974165cb48383589cda10b11d5029ac47c078b28",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.logical-fallacies.md": "sha256:d78342377140be4a8acc2a46ffb86deea9b07d661d62e0c35f620aa68f4b3097"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.composition.logical-fallacies",
+    "name": "Logical Fallacies",
+    "difficultyRaw": "advanced",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.composition.argumentation-basics"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.logical-fallacies-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.logical-fallacies (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.logical-fallacies.md": "sha256:d78342377140be4a8acc2a46ffb86deea9b07d661d62e0c35f620aa68f4b3097"
+      },
+      "contentHash": "sha256:388d6a35d02e938b3156db1c7a6019d3977f2dbafa5072bdf1bb154c6bc5ca04",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.logical-fallacies.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md#TA-1 (addresses MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.logical-fallacies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.logical-fallacies\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.logical-fallacies.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.logical-fallacies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.logical-fallacies\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.logical-fallacies.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.logical-fallacies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.logical-fallacies\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.logical-fallacies.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md#TA-4 (addresses MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS, MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.logical-fallacies"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.logical-fallacies\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.logical-fallacies/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "Logical Fallacies — Conceptual Development Sequence",
+      "content": "### TA-1 — Ad Hominem: Genuine vs. Legitimate Credibility Concerns (MC-B)\n\nUsing the relevant-witness anchor, teach the distinction between genuine ad hominem (irrelevant\npersonal attack) and legitimate credibility challenges (relevant bias/expertise concerns). Student\npractice: given six example criticisms, sort into \"genuine ad hominem\" and \"legitimate credibility\nconcern.\"\n\n### TA-2 — Straw Man: Misrepresenting the Opposition\n\nIntroduce straw man as a distinct fallacy: misrepresenting an opponent's argument as weaker or more\nextreme than it actually is, to make it easier to attack. Student practice: given three pairs of\noriginal arguments and their misrepresented \"straw man\" versions, identify what specifically was\ndistorted in each straw man.\n\n### TA-3 — False Dilemma: Artificially Limited Options\n\nIntroduce false dilemma as presenting only two options when more genuinely exist. Student practice:\ngiven three false-dilemma statements, identify at least one additional option the argument ignores.\n\n### TA-4 — Reasoning vs. Conclusion: A Fallacy Doesn't Depend on Whether You Agree (MC-A)\n\nUsing the lottery-ticket anchor, teach that fallacy identification is independent of agreement with\nthe conclusion. Student practice: given a fallacious argument for a conclusion the student is likely\nto personally hold, identify the specific fallacy present regardless of agreement.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 145,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/misconception/MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS",
+      "kind": "misconception",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "**Trigger signal:** Student assumes that if an argument's final conclusion happens to be true, or is",
+      "content": "### MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS\n\n**Trigger signal:** Student assumes that if an argument's final conclusion happens to be true, or is\none the student personally agrees with, the argument's REASONING must also be sound, failing to\nrecognize that a fallacy is specifically about a broken logical connection between premises and\nconclusion — a conclusion can be true while the argument offered for it is still fallacious (a\n\"broken bridge that happens to lead somewhere real, but not because the bridge actually holds\").\n\n**Conflict evidence [P28]:** Show the student an argument with a true, agreeable conclusion (e.g.,\n\"Exercise is good for you\") supported by a clearly fallacious reasoning path (e.g., an ad hominem\nattack on someone who questions a specific exercise claim: \"You can't trust anything they say about\nexercise, they're out of shape themselves\"). Ask: \"Is the CONCLUSION (exercise is good) true? Is the\nREASONING used to support it (attacking the person's fitness rather than addressing their actual\npoint) still a broken, fallacious argument, even though the conclusion happens to be true?\"\n\n**Bridge text [P30]:** \"Assuming a true conclusion means the argument for it must be sound is like\nassuming a lottery ticket that happened to win must have been a smart financial decision — the OUTCOME\nbeing good doesn't mean the REASONING that led to a choice was valid. A fallacious argument can\n'accidentally' arrive at a true conclusion through broken reasoning, the same way someone can\naccidentally end up in the right place after a wrong turn — the destination being correct doesn't\nretroactively make the wrong turn a good navigation decision.\"\n\n**Replacement text [P31]:** \"Evaluate an argument's REASONING (does each step actually follow\nlogically from the last?) as a SEPARATE question from whether you agree with or believe the\nconclusion. A true or agreeable conclusion doesn't automatically mean the argument supporting it was\nvalid — check the reasoning independently.\"\n\n**Discrimination pairs [P33]:**\n1. \"Exercise is good for you because that person who disagrees is out of shape.\" (true conclusion,\n   but the reasoning is a fallacious ad hominem attack, not actual evidence about exercise) vs.\n   \"Exercise is good for you because multiple studies show it reduces cardiovascular disease risk.\"\n   (true conclusion supported by valid reasoning).\n2. A student who defends a fallacious argument because they happen to agree with its conclusion\n   (misconception) vs. a student who can identify the fallacy in an argument while still agreeing\n   that its conclusion happens to be true (correct, reasoning-focused evaluation).\n\n**s6_path:** If the student continues to excuse fallacies in arguments with agreeable conclusions\nafter the bridge, give them a fallacious argument for a conclusion they personally hold, and have them\nidentify the specific fallacy present, demonstrating that fallacy-detection is independent of\nagreement with the conclusion.",
+      "localKey": "MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS",
+      "language": "en",
+      "refs": [
+        "MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/misconception/MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY",
+      "kind": "misconception",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "**Trigger signal:** Student over-applies the ad hominem label to any criticism of a person made",
+      "content": "### MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY\n\n**Trigger signal:** Student over-applies the ad hominem label to any criticism of a person made\nduring an argument, even when that criticism is directly and legitimately RELEVANT to evaluating their\nclaim (e.g., pointing out that a source lacks relevant expertise or has an undisclosed financial\nconflict of interest on the specific topic) — failing to distinguish a genuine ad hominem (attacking\nirrelevant personal characteristics instead of addressing the argument) from a legitimate credibility\nchallenge (raising a relevant concern about the source's reliability on this specific claim).\n\n**Conflict evidence [P28]:** Show the student two criticisms of a person making a claim about a new\nmedical treatment's safety: one that attacks an irrelevant personal characteristic (\"Don't trust them,\nthey're not even friendly\") and one that raises a relevant, legitimate concern (\"This person receives\nfunding directly from the company selling the treatment, which is a relevant conflict of interest for\nevaluating their safety claims\"). Ask: \"Are both of these attacking the person instead of the\nargument in the same way? Is the second one actually irrelevant to evaluating the claim, or is it a\nlegitimate reason for caution?\"\n\n**Bridge text [P30]:** \"Not every mention of a person's characteristics while evaluating their claim\nis a fallacy — it's like the difference between dismissing a witness's testimony because 'they wear\nugly shoes' (genuinely irrelevant to their reliability) versus noting that 'this witness has a\nfinancial stake in the case's outcome' (a legitimate, RELEVANT reason to weigh their testimony more\ncautiously). A true ad hominem attacks something irrelevant to the argument's actual merit; a\nlegitimate credibility challenge raises something genuinely relevant to trustworthiness on this\nspecific claim.\"\n\n**Replacement text [P31]:** \"Before labeling a personal criticism as ad hominem, ask: is this\ncharacteristic actually IRRELEVANT to evaluating the claim (a true ad hominem), or is it a genuinely\nrelevant concern about expertise, bias, or conflict of interest on THIS SPECIFIC topic (a legitimate\ncredibility challenge, not a fallacy)?\"\n\n**Discrimination pairs [P33]:**\n1. \"Don't trust them, they're not even friendly.\" (irrelevant personal characteristic, genuine ad\n   hominem) vs. \"This person has an undisclosed financial conflict of interest relevant to this\n   specific claim.\" (relevant credibility concern, not a fallacy).\n2. A student who labels any mention of a source's potential bias as automatically \"ad hominem\"\n   (over-application) vs. a student who distinguishes a relevant, legitimate bias concern from an\n   irrelevant personal attack (correct, nuanced application).\n\n**s6_path:** If the student continues to over-apply the ad hominem label after the bridge, give them\nfive example criticisms of people making claims and have them sort each into \"relevant credibility\nconcern\" and \"irrelevant personal attack (genuine ad hominem),\" justifying each classification.",
+      "localKey": "MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 44,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "Ad Hominem: Genuine vs. Legitimate Credibility Concerns (MC-B)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Ad Hominem: Genuine vs. Legitimate Credibility Concerns (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 149,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "Straw Man: Misrepresenting the Opposition",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Straw Man: Misrepresenting the Opposition\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 156,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "False Dilemma: Artificially Limited Options",
+      "content": "{\"id\":\"TA-3\",\"title\":\"False Dilemma: Artificially Limited Options\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 163,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "Reasoning vs. Conclusion: A Fallacy Doesn't Depend on Whether You Agree (MC-A)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Reasoning vs. Conclusion: A Fallacy Doesn't Depend on Whether You Agree (MC-A)\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS\",\"MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-IF-AN-ARGUMENTS-CONCLUSION-IS-TRUE-OR-AGREEABLE-THE-ARGUMENT-CANT-BE-FALLACIOUS",
+        "MC-B-EVERY-STRONG-DISAGREEMENT-OR-CRITICISM-OF-A-PERSON-IS-AN-AD-HOMINEM-FALLACY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 168,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinguishing Ad Hominem from Legitimate Credibility Concerns**\nGiven four example criticisms of a person making a claim, sort into \"genuine ad hominem\" and\n\"legitimate credibility concern,\" justifying each classification.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Straw Man**\nGiven an original argument and a distorted \"straw man\" restatement of it, identify specifically what\nwas misrepresented.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying False Dilemma**\nGiven a false-dilemma statement, identify at least one additional, genuinely available option the\nargument ignores.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Fallacy Identification Independent of Agreement**\nGiven a fallacious argument supporting a conclusion the student is likely to personally agree with,\nidentify the specific fallacy present.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Fallacy Identification**\nGiven a new argument containing at least two fallacies and one legitimate (non-fallacious) point,\nidentify each fallacy by name and correctly distinguish the legitimate point from a fallacy.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters fallacy identification on neutral topics (MP-1 through MP-4) but struggles\n  specifically when the fallacious argument supports a position the student holds strongly (MP-5),\n  this is expected and mirrors the affective challenge seen in `eng.composition.rhetorical-analysis`\n  and `eng.composition.counterargument-and-rebuttal` — provide additional practice specifically with\n  emotionally invested topics.\n- If the student begins over-applying fallacy labels to ANY criticism or disagreement in everyday\n  discourse (a common overcorrection once these concepts feel powerful and new), recalibrate by\n  returning to the \"is this actually irrelevant, or genuinely relevant?\" test for ad hominem\n  specifically, and by confirming a straw man genuinely distorts the original rather than just\n  disagreeing with it.\n- If the student can identify fallacies in others' arguments but continues to commit them in their\n  own argumentative writing (a transfer gap from analysis to production), have them review a recent\n  piece of their own argumentative writing specifically checking for these three fallacy types.\n- Students who enjoy this concept's \"gotcha\" appeal may become overly combative in applying it\n  socially — gently reinforce that the goal is more honest, rigorous reasoning (including in one's\n  own arguments), not simply winning debates by finding fault in others.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 254,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "eng.composition.logical-fallacies/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.logical-fallacies",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: argumentation basics check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.composition.argumentation-basics]  [Component 3: Lottery-Ticket / Relevant-Witness Anchor]\n                                                             |\n                                                             v\n                                          [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                             |\n                                                             v\n                                    [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                             |\n                                                             v\n                                    [MP-1 through MP-5 mastery probe set]\n                                                             |\n                                    (pass >= 0.75) -----+----- (fail)\n                                           |                      |\n                                           v                      v\n                          [No further unlocks —  [S6 remediation: sort-relevant-vs-\n                           terminal in current      irrelevant / agree-anyway-identify\n                           curriculum sequence]      drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-B typically surfaces during TA-1 (over-applying the ad\nhominem label) and MC-A during TA-4 (excusing fallacies in agreeable arguments) — MC-B is addressed\nfirst in this sequence since it's the most immediately confusable distinction, while MC-A is more\nnaturally reinforced once several fallacy types are already familiar. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1\nfailure indicates residual MC-B; MP-2/MP-3 failures indicate the straw-man/false-dilemma mechanics\n(TA-2/TA-3) need review, distinct from either misconception; MP-4 failure alone indicates residual\nMC-A; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one more\nguided full-identification example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.logical-fallacies.md",
+        "startLine": 217,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

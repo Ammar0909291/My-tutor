@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.discourse-analysis-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.discourse-analysis-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e7df690ebca03aab12ad3383fb02a6f648764dacc224514ecb1fbc42a24ba07e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md": "sha256:2b797b233619bdf39a07e20cea612ab62ad5e20f7c6ae308f3f73f5eb63c4c43"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.discourse-analysis-intro",
+    "name": "Introduction to Discourse Analysis",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.linguistics.pragmatics-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.discourse-analysis-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.discourse-analysis-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md": "sha256:2b797b233619bdf39a07e20cea612ab62ad5e20f7c6ae308f3f73f5eb63c4c43"
+      },
+      "contentHash": "sha256:7ca5cf5801aa511a6810944f58c49c27a36dd5f8b33030808b0677cf71702e41",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.discourse-analysis-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.discourse-analysis-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.discourse-analysis-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.discourse-analysis-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md#TA-2 (addresses MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.discourse-analysis-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.discourse-analysis-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.discourse-analysis-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md#TA-3 (addresses MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.discourse-analysis-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.discourse-analysis-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.discourse-analysis-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.discourse-analysis-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.discourse-analysis-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.discourse-analysis-intro.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md#TA-5 (addresses MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT, MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.discourse-analysis-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.discourse-analysis-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "Introduction to Discourse Analysis — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying Cohesive Devices\n\nIntroduce cohesive devices: pronoun reference, conjunctions, lexical repetition, and synonymy used to\nlink sentences. Student practice: given a short text, identify all cohesive devices used and what\neach one links back to.\n\n### TA-2 — Cohesion vs. Coherence (MC-A)\n\nUsing the bolted-bridge anchor, teach the distinction between cohesion (surface linking devices) and\ncoherence (actual logical sense). Student practice: given two passages (one cohesive but incoherent,\none coherent with minimal cohesive devices), evaluate each separately on both dimensions.\n\n### TA-3 — Turn-Taking Structure in Conversation (MC-B)\n\nUsing the busy-intersection anchor, teach that conversational turn-taking follows identifiable\ncompletion signals. Student practice: given a transcribed short conversation, mark each turn change\nand identify the signal (if any) that preceded it.\n\n### TA-4 — Topic Management Across a Conversation\n\nExtend TA-3 to topic shifts: how speakers signal moving from one topic to another (explicit\ntransition phrases, questions redirecting the conversation). Student practice: given a longer\ntranscribed conversation, identify where topic shifts occur and what signaled each shift.\n\n### TA-5 — Full Application: Analyzing an Extended Text or Conversation\n\nGive the student a new short text or transcribed conversation. They must identify cohesive devices\nand evaluate overall coherence separately (TA-1, TA-2), and, if analyzing a conversation, identify\nturn-taking signals and topic management (TA-3, TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 146,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/misconception/MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "**Trigger signal:** Student assumes that a text or conversation full of surface-level cohesive",
+      "content": "### MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT\n\n**Trigger signal:** Student assumes that a text or conversation full of surface-level cohesive\ndevices (pronouns, conjunctions, transition words) must automatically make logical sense, failing to\nrecognize that COHESION (linking devices) and COHERENCE (actual logical sense) are separate\nproperties — a text can be dense with pronouns and conjunctions while still failing to cohere\nlogically (e.g., pronouns with unclear or shifting referents, or conjunctions connecting ideas that\ndon't actually follow from each other).\n\n**Conflict evidence [P28]:** Show the student a short passage packed with cohesive devices (multiple\npronouns, \"therefore,\" \"however,\" \"in addition\") that nonetheless fails to make logical sense (the\npronouns' referents are unclear or the logical connections signaled by \"therefore\" don't actually\nhold), alongside a shorter passage with fewer explicit cohesive devices that nonetheless makes clear,\ncoherent sense. Ask: \"Does having more linking words automatically mean the passage makes more sense?\nWhich passage is actually easier to follow?\"\n\n**Bridge text [P30]:** \"Assuming lots of cohesive devices guarantee coherence is like assuming a\nbridge with many visible bolts and connectors must automatically be structurally sound — but if those\nbolts don't actually connect to anything solid, or connect the wrong pieces together, the bridge can\nstill collapse despite looking well-fastened. Cohesion (the visible linking devices) is necessary but\nnot sufficient for coherence (the text actually making sense) — you need to check both separately.\"\n\n**Replacement text [P31]:** \"Don't judge a text's coherence just by counting how many pronouns,\nconjunctions, or transition words it uses. Ask separately: do the pronouns clearly point back to\nsomething specific? Do the logical connections signaled by words like 'therefore' or 'however'\nactually hold up? Cohesion and coherence are different questions.\"\n\n**Discrimination pairs [P33]:**\n1. A passage dense with pronouns and conjunctions where the pronoun referents are unclear and the\n   logical connections don't actually follow (high cohesion, low coherence) vs. a clearer, shorter\n   passage with fewer explicit devices but a genuinely logical, easy-to-follow structure (adequate\n   cohesion, high coherence).\n2. A student who assumes more transition words automatically improve a text's clarity (misconception)\n   vs. a student who checks whether the transitions actually signal a genuine, valid logical\n   relationship between the connected ideas (correct, coherence-focused understanding).\n\n**s6_path:** If the student continues to conflate cohesion with coherence after the bridge, have them\ntake a densely cohesive but incoherent passage and trace every pronoun back to its intended referent,\nidentifying where the reference breaks down or becomes ambiguous — making the cohesion/coherence gap\nconcrete.",
+      "localKey": "MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT",
+      "language": "en",
+      "refs": [
+        "MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/misconception/MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "**Trigger signal:** Student assumes that conversational turn-taking (who speaks when, how topics",
+      "content": "### MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE\n\n**Trigger signal:** Student assumes that conversational turn-taking (who speaks when, how topics\nshift) happens haphazardly with no systematic structure, failing to recognize that discourse analysts\nhave identified real, describable patterns in how speakers signal turn completion, negotiate\noverlaps, and manage topic shifts — these patterns are systematic and analyzable, not random social\nchaos.\n\n**Conflict evidence [P28]:** Show the student a transcribed conversation and point out specific\nsignals a speaker uses to indicate they're finishing their turn (a falling intonation pattern, a\nspecific phrase like \"so yeah,\" a pause at a grammatically complete point) that reliably prompt the\nnext speaker to begin. Ask: \"Does this handoff between speakers happen at completely random,\nunpredictable moments, or does it consistently happen at specific, signaled points?\"\n\n**Bridge text [P30]:** \"Assuming turn-taking is random chaos is like assuming traffic flows through a\nbusy intersection with no underlying system just because there's no single person directing every\ncar — but traffic lights, right-of-way conventions, and driver signals actually create a real,\nfunctioning system beneath the apparent chaos. Conversational turn-taking similarly follows real,\nidentifiable patterns (completion signals, appropriate pause points) that speakers use and respond to\nsystematically, even without consciously thinking about it.\"\n\n**Replacement text [P31]:** \"When analyzing a conversation, look for the SPECIFIC signals a speaker\nuses to indicate they're finishing a turn (falling intonation, a closing phrase, reaching a\ngrammatically complete point) and how the next speaker responds to those signals — this reveals a\nreal, systematic structure underlying what might look like unstructured chat.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming two speakers' turn-taking in a conversation is pure luck or chaos (misconception) vs.\n   identifying the specific completion signal (a falling pitch, a specific phrase, a grammatical\n   completion point) that prompted the turn to pass to the other speaker (correct, structure-aware\n   analysis).\n2. A student unable to explain why one speaker's interruption \"worked\" (was accepted) while another\n   speaker's interruption at a different point caused friction (missing the structural pattern) vs. a\n   student who identifies that the accepted interruption came at a natural turn-completion point while\n   the friction-causing one didn't (correct structural analysis).\n\n**s6_path:** If the student continues to view turn-taking as random after the bridge, give them a\ntranscribed conversation and have them mark every point where a turn changes speakers, then identify\nwhat specific signal (if any) preceded each change, testing whether a systematic pattern emerges\nacross multiple instances.",
+      "localKey": "MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE",
+      "language": "en",
+      "refs": [
+        "MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 44,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "Identifying Cohesive Devices",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Cohesive Devices\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "Cohesion vs. Coherence (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Cohesion vs. Coherence (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 156,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "Turn-Taking Structure in Conversation (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Turn-Taking Structure in Conversation (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 162,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "Topic Management Across a Conversation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Topic Management Across a Conversation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 168,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "Full Application: Analyzing an Extended Text or Conversation",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Analyzing an Extended Text or Conversation\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT\",\"MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-A-TEXT-WITH-LOTS-OF-COHESIVE-DEVICES-LIKE-PRONOUNS-AND-CONJUNCTIONS-IS-AUTOMATICALLY-COHERENT",
+        "MC-B-CONVERSATIONAL-TURN-TAKING-JUST-HAPPENS-RANDOMLY-WITH-NO-UNDERLYING-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 174,
+        "endLine": 303
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Cohesive Devices**\nGiven a short text, identify at least three cohesive devices (pronoun reference, conjunctions,\nlexical repetition) and what each links back to.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Separating Cohesion from Coherence**\nGiven a passage that is cohesive but not fully coherent, identify the specific point where coherence\nbreaks down despite the presence of linking devices.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Turn-Taking Signals**\nGiven a transcribed conversation, mark each turn change and identify the specific signal that\npreceded it.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identifying Topic Shifts**\nGiven a longer transcribed conversation, identify where topic shifts occur and what signaled each\nshift.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Discourse Analysis**\nGiven a new text or conversation, identify cohesive devices, evaluate coherence separately, and (if a\nconversation) identify turn-taking and topic-management structure.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 197,
+        "endLine": 219
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters written-text cohesion/coherence analysis (MP-1, MP-2) but struggles\n  specifically with spoken conversation analysis (MP-3, MP-4), this may reflect less prior exposure to\n  transcribed spoken language — provide additional transcript examples with clear audio or intonation\n  notation before independent analysis.\n- If the student's coherence judgments (MP-2) are based on personal preference or writing style\n  rather than genuine logical connection, redirect to the specific test: does the logical\n  relationship signaled by each connector actually hold, checked independently of style preference.\n- If the student conflates topic shifts with simple digressions or interruptions, clarify that\n  legitimate topic management (TA-4) is typically signaled explicitly and cooperatively, distinct\n  from an unsignaled, disruptive change of subject.\n- Students with strong performance in `eng.linguistics.pragmatics-intro`'s cooperative-principle work\n  should transfer that reasoning readily to TA-3/TA-4's conversational-structure analysis; if this\n  transfer doesn't occur, revisit whether the cooperative principle was genuinely internalized as a\n  systematic, predictable mechanism rather than a one-off example.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 255,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "eng.linguistics.discourse-analysis-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.discourse-analysis-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: pragmatics check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.linguistics.pragmatics-intro]  [Component 3: Bolted-Bridge / Busy-Intersection Anchor]\n                                                         |\n                                                         v\n                                     [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                         |\n                                                         v\n                                [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                         |\n                                                         v\n                                [MP-1 through MP-5 mastery probe set]\n                                                         |\n                                (pass >= 0.70) -----+----- (fail)\n                                       |                      |\n                                       v                      v\n                [Unlock: corpus-linguistics-intro,   [S6 remediation: trace-the-pronoun /\n                 discourse-markers-advanced]           mark-the-turn-change drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (assuming device\ndensity equals coherence) and MC-B during TA-3 (viewing turn-taking as random) — these are largely\nindependent and often need separate, explicit correction, since one concerns written-text analysis and\nthe other concerns spoken conversation analysis. If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the basic\ndevice-identification step (TA-1) needs review, distinct from either misconception; MP-2 failure alone\nindicates residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through\nMP-4 passing indicates an integration gap — provide one more guided full-analysis example before\nre-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.discourse-analysis-intro.md",
+        "startLine": 219,
+        "endLine": 255
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
