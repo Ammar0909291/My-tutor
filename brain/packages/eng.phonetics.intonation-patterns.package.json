@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.intonation-patterns-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.intonation-patterns",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:263492d2094666e3cb07d6a1c79abb9995373f9bb5994e273b6a38c75c7d2610",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md": "sha256:8aafeb4dbe6aefc622d6998c570b1c0061068e0713358f2b4687daafee5bfb9c"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.intonation-patterns",
+    "name": "Intonation Patterns",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonetics.sentence-stress"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.intonation-patterns-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.intonation-patterns (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md": "sha256:8aafeb4dbe6aefc622d6998c570b1c0061068e0713358f2b4687daafee5bfb9c"
+      },
+      "contentHash": "sha256:cbef78a4d78033d441b33cd773a16262334853ea19f02eaf1575d27b1b2105ce",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.intonation-patterns.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.intonation-patterns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.intonation-patterns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.intonation-patterns.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md#TA-2 (addresses MC-ALL-QUESTIONS-RISE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.intonation-patterns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.intonation-patterns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.intonation-patterns.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md#TA-3 (addresses MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.intonation-patterns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.intonation-patterns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.intonation-patterns.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.intonation-patterns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.intonation-patterns\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.intonation-patterns.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md#TA-5 (addresses MC-ALL-QUESTIONS-RISE, MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.intonation-patterns"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.intonation-patterns\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.intonation-patterns/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "Intonation Patterns — Conceptual Development Sequence",
+      "content": "**TA-1 — Falling Intonation for Statements and Wh-Questions [C]**\n\nPresent statements and wh-questions; student produces falling intonation for both, using the pitch-line drawing technique, establishing the \"falling is the neutral default\" baseline before introducing the rising exception.\n\n**TA-2 — Rising Intonation for Yes/No Questions [C]**\n\nPresent yes/no questions; student produces rising intonation, directly contrasting with the wh-questions from TA-1 to build the yes/no-vs-wh distinction, targeting MC-ALL-QUESTIONS-RISE.\n\n**TA-3 — Minimal-Pair Intonation Contrasts (Same Words, Different Meaning) [C→P]**\n\nPresent identical word sequences said with different intonation to convey different meanings (statement vs. surprised-question; plain vs. sarcastic; certain vs. uncertain/listing-continuation); student produces and identifies the meaning difference, directly targeting MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL.\n\n**TA-4 — List Intonation [P]**\n\nIntroduce the \"listing\" pattern — rising intonation on each item except the last in a list (e.g., \"I need eggs↗, milk↗, and bread↘\"), a common and distinct pattern from single-sentence statement/question intonation.\n\n**TA-5 — Producing Appropriate Intonation in Extended Speech [P]**\n\nStudent reads or produces a short multi-sentence passage (mixing statements, both question types, and a list), applying the correct intonation pattern to each element in context.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/misconception/MC-ALL-QUESTIONS-RISE",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "- **Trigger signal:** Student applies rising intonation to every question uniformly, including wh-questions (who, what, where, when, why, how), which in neutral, unmarked English typically FALL rather than rise — producing unnatural-sounding wh-questions (e.g., \"WHERE did you go?\" with an unnatural rise at the end).",
+      "content": "### MC-ALL-QUESTIONS-RISE\n- **Trigger signal:** Student applies rising intonation to every question uniformly, including wh-questions (who, what, where, when, why, how), which in neutral, unmarked English typically FALL rather than rise — producing unnatural-sounding wh-questions (e.g., \"WHERE did you go?\" with an unnatural rise at the end).\n- **Conflict evidence [P28]:** \"Say 'Are you coming?' — does your pitch rise or fall at the end? Now say 'Where are you going?' — does it rise the same way, or does it actually fall?\"\n- **Bridge text [P30]:** \"Not all questions use rising intonation. Yes/no questions (answerable with yes or no) typically RISE at the end. But wh-questions (who, what, where, when, why, how) typically FALL, just like statements do, in neutral/unmarked speech — the question is signaled by the wh-word and word order, not by a pitch rise.\"\n- **Replacement text [P31]:** \"Before choosing rising or falling intonation for a question, check whether it's a yes/no question (rise) or a wh-question (fall, in the neutral case).\"\n- **Discrimination pairs [P33]:**\n  - \"Are you coming?\" (yes/no question, rises) vs. \"Where are you going?\" (wh-question, falls).\n  - \"Did she call?\" (yes/no, rises) vs. \"Who called?\" (wh-question, falls).\n- **s6_path:** \"It's a very common assumption that 'question = rising pitch' since that pattern is taught early and applies to yes/no questions — but wh-questions are a genuinely different, equally common category that behaves oppositely in neutral speech.\"",
+      "localKey": "MC-ALL-QUESTIONS-RISE",
+      "language": "en",
+      "refs": [
+        "MC-ALL-QUESTIONS-RISE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/misconception/MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "- **Trigger signal:** Student treats intonation as optional stylistic flourish rather than meaning-bearing, missing that identical word sequences can convey different meanings/functions purely through intonation change (e.g., \"You're leaving.\" said with falling intonation = a statement; said with rising intonation = a genuine question/surprised confirmation-check, despite zero change in words or word order).",
+      "content": "### MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL\n- **Trigger signal:** Student treats intonation as optional stylistic flourish rather than meaning-bearing, missing that identical word sequences can convey different meanings/functions purely through intonation change (e.g., \"You're leaving.\" said with falling intonation = a statement; said with rising intonation = a genuine question/surprised confirmation-check, despite zero change in words or word order).\n- **Conflict evidence [P28]:** \"Say 'You're leaving' with your voice falling at the end. Now say the exact same words, but with your voice rising at the end, like you're surprised or checking. Do these mean the same thing, or something different, even though the words didn't change at all?\"\n- **Bridge text [P30]:** \"Intonation isn't just decoration — it can be the ONLY signal distinguishing a statement from a question, or expressing sarcasm, surprise, certainty versus doubt, and more, even when the words themselves are identical. Getting intonation wrong can genuinely change what you communicate, not just how it sounds.\"\n- **Replacement text [P31]:** \"Treat intonation as carrying real meaning — check what pitch pattern is needed to convey the intended function (statement, question, surprise, doubt), not just an optional vocal style.\"\n- **Discrimination pairs [P33]:**\n  - \"You're leaving.\" (falling — a statement of fact) vs. \"You're leaving?\" (rising — surprised question/confirmation-check) — identical words, different meaning via intonation alone.\n  - \"I said yes.\" (falling — plain statement) vs. \"I said YES.\" with a sharp rise-fall for emphatic correction (contrastive emphasis) — same words, different communicative force.\n- **s6_path:** \"It's easy to think of intonation as just 'how expressive you sound' rather than something that changes MEANING — but this concept exists specifically because English uses pitch to distinguish real differences in what's being communicated, sometimes with zero change in the actual words.\"\n\n---",
+      "localKey": "MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL",
+      "language": "en",
+      "refs": [
+        "MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "Falling Intonation for Statements and Wh-Questions",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Falling Intonation for Statements and Wh-Questions\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "Rising Intonation for Yes/No Questions",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Rising Intonation for Yes/No Questions\",\"primitives\":[],\"addresses\":[\"MC-ALL-QUESTIONS-RISE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ALL-QUESTIONS-RISE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "Minimal-Pair Intonation Contrasts (Same Words, Different Meaning)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Minimal-Pair Intonation Contrasts (Same Words, Different Meaning)\",\"primitives\":[],\"addresses\":[\"MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "List Intonation",
+      "content": "{\"id\":\"TA-4\",\"title\":\"List Intonation\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "Producing Appropriate Intonation in Extended Speech",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Producing Appropriate Intonation in Extended Speech\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ALL-QUESTIONS-RISE\",\"MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ALL-QUESTIONS-RISE",
+        "MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Falling pattern, novel wh-question**\n\"Say 'Why did you leave?' Does your voice rise or fall at the end?\"\n*Target:* falls — correctly applies the wh-question default.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Rising pattern, novel yes/no question**\n\"Say 'Have you eaten?' Does your voice rise or fall at the end?\"\n*Target:* rises — correctly applies the yes/no-question default.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Meaning shift via intonation, novel example**\n\"Say 'She's a teacher.' as a statement, then as a surprised question. What's different?\"\n*Target:* falling for the statement, rising for the surprised question, correctly explaining that the words are identical but the meaning/function differs.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — List intonation**\n\"Say a list: 'I need pens, paper, and glue.' Show the pitch pattern for each item.\"\n*Target:* rising on \"pens\" and \"paper,\" falling on the final item \"glue.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain intonation's role**\n\"In your own words: why does intonation matter, beyond just sounding expressive?\"\n*Target:* states or demonstrates that intonation can be the ONLY signal distinguishing meanings/functions (statement vs. question, certainty vs. surprise) even when words are identical, and that different question types have different default patterns (wh-questions typically fall, yes/no questions typically rise).\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "Adaptive Flags",
+      "content": "- **Wh-question falling intonation is the single most counter-intuitive pattern**: because \"questions rise\" is an oversimplified rule commonly taught early, budget dedicated, repeated contrastive practice (TA-1 vs. TA-2) specifically for this distinction.\n- **Intonation is meaning-bearing, not stylistic**: every practice task should include at least one minimal-pair example (TA-3) showing that identical words can carry different meanings via intonation alone — this is the core conceptual anchor for treating the skill as substantive, not decorative.\n- **Visual pitch-line tracing as the standing scaffold**: reuse the Component 3 drawing technique whenever a new intonation pattern is introduced, since pitch is otherwise a purely auditory, hard-to-self-monitor phenomenon.\n- **L1-specific intonation/tone transfer**: for S9 learners, anticipate and directly address whatever specific transfer pattern is most relevant to their L1 background (lexical tone conflation, all-questions-rise defaults, or other L1-specific intonation conventions) rather than treating all intonation errors as generically difficult.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.intonation-patterns/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.intonation-patterns",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — pitch-line drawing warm-up (statement vs. yes/no question)\n  ↓\n[P41] PD-1 (sentence-stress readiness)\n  ↓ PASS\n[P06] Anchor: pitch-line drawing (trace the contour while speaking)\n  ↓\nTA-1: Falling intonation for statements and wh-questions [C]\n  ↓\nTA-2: Rising intonation for yes/no questions [C]\n  ↓\n[P28] Conflict: rising applied to all questions including wh-questions → MC-ALL-QUESTIONS-RISE (if triggered)\n  ↓\nTA-3: Minimal-pair intonation contrasts (same words, different meaning) [C→P]\n  ↓\n[P28] Conflict: intonation treated as non-meaningful decoration → MC-INTONATION-IS-DECORATIVE-NOT-MEANINGFUL (if triggered)\n  ↓\nTA-4: List intonation [P]\n  ↓\nTA-5: Producing appropriate intonation in extended speech [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, say one sentence two ways with different intonation and explain the meaning difference.\"\n[P68] Session close\n[P85] Regulation tail — praise noticing meaning shifts carried by pitch alone\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on sentence stress, new to intonation specifically): dwell on TA-1's falling-pattern baseline (statements + wh-questions) before introducing the rising yes/no-question contrast. S1 (already produces natural yes/no rising intonation but over-applies it to wh-questions): focus directly on TA-2's contrastive practice, since this is the classic overgeneralization pattern. S6 (frustrated that intonation \"rules\" feel subtle/hard to hear in one's own speech): use the visual pitch-line drawing technique extensively as a concrete scaffold, and validate that self-monitoring pitch is a genuinely harder skill than self-monitoring word choice. S9 (L1 uses lexical tone rather than intonation, e.g. Mandarin, Vietnamese, or has substantially different intonation defaults, e.g. some Indian English varieties' question-marking conventions): explicitly distinguish English sentence-level intonation (meaning shifts across a whole utterance) from L1 lexical tone (meaning tied to individual syllables) if relevant, and allow extra explicit contrastive practice for wh-question falling intonation, which is often the most counter-intuitive pattern for learners whose L1 or English variety marks all questions with a rise.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.intonation-patterns.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
