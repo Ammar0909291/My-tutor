@@ -1094,7 +1094,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [subjectSlug])
 
   // Detect lesson completion
-  const handleLessonComplete = useCallback(async (lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string }) => {
+  const handleLessonComplete = useCallback(async (lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }, mastered = true) => {
     try {
       const res = await fetch('/api/curriculum/progress', {
         method: 'PATCH',
@@ -1102,17 +1102,31 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         body: JSON.stringify({
           subjectCode: subjectSlug, completedLesson: lessonOrder, totalLessons: curriculumLessons.length || undefined,
           lessonTitle: lesson?.lessonTitle, lessonGoal: lesson?.lessonGoal,
+          mastered, topicSlug: lesson?.topicSlug,
         }),
       })
       const data = await res.json()
       if (data.success) {
         setCurriculumProgress(data.progress)
-        setXpCelebration(true)
-        fireConfetti()
-        setTimeout(() => setXpCelebration(false), 3000)
+        // P0-4 fix: only celebrate a genuine completion — "Skip Anyway" is a
+        // recorded knowledge gap, not an achievement.
+        if (mastered) {
+          setXpCelebration(true)
+          fireConfetti()
+          setTimeout(() => setXpCelebration(false), 3000)
+        }
       }
     } catch { /* ignore */ }
   }, [subjectSlug, curriculumLessons.length])
+
+  // P0-4 fix: "Skip Anyway" used to call handleLessonComplete directly —
+  // indistinguishable from a genuine mastery-verified completion (no gap
+  // recorded, and the chat session kept re-teaching the skipped concept
+  // because its own concept pointer was never cleared). mastered=false
+  // tells the server this was an explicit skip, not evidence of learning.
+  const handleSkipAnyway = useCallback((lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }) => {
+    handleLessonComplete(lessonOrder, lesson, false)
+  }, [handleLessonComplete])
 
   const handleLessonRestart = useCallback(async (lessonOrder: number, topicSlug?: string) => {
     try {
@@ -2549,7 +2563,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                       {teachingLanguage === 'ru' ? '📚 Продолжить обучение' : '📚 Continue Learning'}
                     </button>
                     <button
-                      onClick={() => { setSkipConfirm(false); handleLessonComplete(currentLessonData.order, currentLessonData) }}
+                      onClick={() => { setSkipConfirm(false); handleSkipAnyway(currentLessonData.order, currentLessonData) }}
                       style={{
                         width: '100%', padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',
                         background: 'transparent', color: 'var(--text-dim)', border: '1px solid var(--border-subtle)',
@@ -3544,7 +3558,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
                     <button
                       onClick={() => {
                         setMasteryState((s) => s ? { ...s, gatePending: false } : s)
-                        handleLessonComplete(currentLessonData.order, currentLessonData)
+                        handleSkipAnyway(currentLessonData.order, currentLessonData)
                       }}
                       style={{
                         padding: '7px 14px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',

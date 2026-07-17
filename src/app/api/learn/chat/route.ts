@@ -348,6 +348,13 @@ export async function POST(req: Request) {
     let prereqGapHoisted: import('@/lib/school/adaptive/prerequisiteRecovery').PrerequisiteGap | null = null
     // W2-1 (ADR 08 §4a): Library-mode concept tracking — hoisted for post-AI persist.
     let libraryConceptNodeIdHoisted: string | null = null
+    // P0-1/P0-2 fix: School Mode's own forced-visual-render decision
+    // (mirrors the Library-only variables declared below for the same
+    // purpose) — declared here, ahead of use, since the detection runs
+    // inside the decide()/conceptNode block further up the request.
+    let schoolLearnerRequestHoisted: import('@/lib/teaching/masteryGate').LearnerRequest | null = null
+    let schoolAvailableVisualHoisted: import('@/lib/school/visuals/visualTypes').VisualType | null = null
+    let schoolForceVisualRenderHoisted = false
     // Visualization Registry Phase 2: server-authoritative visual attachment.
     // availableVisualHoisted is the registry/detectVisual match computed
     // pre-LLM; forceVisualRenderHoisted is set true only for an explicit
@@ -1524,6 +1531,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // non-fatal — blueprint context is purely additive
           }
 
+          // P0-1/P0-2 fix: School Mode's own forced-visual-render decision.
+          // Same registry-first lookup and server-authoritative force-render
+          // Library already has (visualRegistry.ts's shouldForceVisualRender/
+          // resolveResponseVisual) — an explicit "show me a diagram" request
+          // uses the existing renderer asset when one is registered for this
+          // concept; the LLM only falls back to a text description as a last
+          // resort, and is told explicitly not to claim a visual was shown
+          // when none exists.
+          if (schoolCtx) {
+            try {
+              const { detectLearnerRequest, buildLearnerRequestBlock } = await import('@/lib/teaching/masteryGate')
+              const { getConceptVisualType, shouldForceVisualRender } = await import('@/lib/teaching/visualRegistry')
+              const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
+              schoolLearnerRequestHoisted = detectLearnerRequest(message)
+              const registryVisual = getConceptVisualType(activeConceptIdForDecide)
+              schoolAvailableVisualHoisted = registryVisual ?? detectVisual({
+                subjectSlug: subjectCode,
+                chapterTitle: schoolCtx.chapter.title,
+                lessonTitle: lessonCtx?.lessonTitle,
+              })
+              schoolForceVisualRenderHoisted = shouldForceVisualRender(schoolLearnerRequestHoisted, schoolAvailableVisualHoisted)
+              if (schoolLearnerRequestHoisted) {
+                systemPrompt += buildLearnerRequestBlock(schoolLearnerRequestHoisted, schoolAvailableVisualHoisted)
+              }
+            } catch {
+              // non-fatal — mirrors the Library path's error handling
+            }
+          }
+
           const { readLearnerMemoryFromPreload, toTeachingSnapshot } = await import('@/lib/memory')
           const memory = await readLearnerMemoryFromPreload(
             userId,
@@ -2225,6 +2261,37 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           responseVisual = parsed.visual
           cleanText = parsed.cleanText
         } catch { /* non-fatal */ }
+        // P0-1/P0-2 fix: server-authoritative attachment, same as Library
+        // (visualRegistry.ts resolveResponseVisual) — an explicit diagram
+        // request with a known registered visual renders it regardless of
+        // whether the LLM emitted the VISUAL:<type> tag itself. The LLM's
+        // own tag is honored when present; this only fills the gap when the
+        // model described the diagram in prose instead of rendering it.
+        try {
+          const { resolveResponseVisual } = await import('@/lib/teaching/visualRegistry')
+          responseVisual = resolveResponseVisual(
+            responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
+            schoolForceVisualRenderHoisted,
+            schoolAvailableVisualHoisted,
+          )
+        } catch { /* non-fatal */ }
+        // P0-3 fix: School Mode has no server-side mastery-evidence gate
+        // (that machine only runs for Library — see the mastery-gate block
+        // below). Without it, "Next"/"Got it"/"Continue" could trigger the
+        // LLM to emit [LESSON_COMPLETE], which reaches the client ungated
+        // and completes the lesson on acknowledgement alone — the exact bug
+        // masteryGate.ts already fixed for Library. This is the narrow,
+        // deterministic part of that fix applied to School Mode: a bare
+        // acknowledgement can never itself authorize completion, regardless
+        // of what the model emitted.
+        if (/\[LESSON_COMPLETE\]/i.test(cleanText)) {
+          try {
+            const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
+            if (isBareAcknowledgement(message)) {
+              cleanText = cleanText.replace(/\s*\[LESSON_COMPLETE\]\s*/gi, ' ').trim()
+            }
+          } catch { /* non-fatal */ }
+        }
 
         // Sprint CH: extract and strip the [WE:...] worked-example progress tag
         if (workedExampleActive || snapshotWorkedExample) {

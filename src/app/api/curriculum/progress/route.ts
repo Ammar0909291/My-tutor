@@ -14,6 +14,15 @@ const schema = z.object({
   totalLessons: z.number().int().positive().optional(),
   lessonTitle: z.string().optional(),
   lessonGoal: z.string().optional(),
+  // P0-4 fix: "Skip Anyway" and a genuine mastery-verified completion used
+  // to hit this endpoint identically — no knowledge gap was recorded, and
+  // (more importantly) the chat session kept teaching the skipped concept
+  // forever, because contextSnapshot.currentConceptNodeId always outranks
+  // StudentProgress.currentLesson when a Library turn resolves its active
+  // concept (route.ts:1149). mastered=false marks the gap explicitly and
+  // clears that stale pointer so the next chat turn re-resolves fresh.
+  mastered: z.boolean().optional().default(true),
+  topicSlug: z.string().optional(),
 })
 
 const resetSchema = z.object({
@@ -92,7 +101,7 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectCode, completedLesson, totalLessons: clientTotalLessons, lessonTitle, lessonGoal } = schema.parse(body)
+    const { subjectCode, completedLesson, totalLessons: clientTotalLessons, lessonTitle, lessonGoal, mastered, topicSlug } = schema.parse(body)
 
     // MED-7: derive totalLessons from the server-authoritative catalog.
     // subjectCode format for School Mode: "boardId:subjectSlug:grade"
@@ -104,7 +113,8 @@ export async function PATCH(req: Request) {
     const catalogChapters = (boardId && subjectSlug && !isNaN(grade))
       ? getSchoolChapters(boardId, subjectSlug, grade)
       : []
-    const totalLessons = catalogChapters.length > 0 ? catalogChapters.length : (clientTotalLessons ?? undefined)
+    const isSchoolMode = catalogChapters.length > 0
+    const totalLessons = isSchoolMode ? catalogChapters.length : (clientTotalLessons ?? undefined)
 
     const existing = await prisma.studentProgress.findUnique({
       where: { userId_subjectCode: { userId: session.user.id, subjectCode } },
@@ -202,6 +212,65 @@ export async function PATCH(req: Request) {
           }
         } catch (err) {
           console.error('[curriculum/progress] flashcard generation failed', err)
+        }
+      }
+    }
+
+    // P0-4 fix: "Skip Anyway" — record the gap for real, and unstick the
+    // chat session it left behind. Previously this endpoint treated a skip
+    // exactly like a genuine mastery-verified completion: same PATCH, same
+    // fields, no distinction anywhere. Two consequences: (1) no knowledge
+    // gap was ever recorded, so nothing downstream (revision, review
+    // reminders) knew this lesson wasn't actually learned; (2) the chat
+    // session's own concept pointer (contextSnapshot.currentConceptNodeId)
+    // was left pointing at the skipped concept — and that pointer always
+    // wins when a Library turn resolves its active concept (route.ts's
+    // `snapshotCurrentConceptId ?? resolveLibraryEntryConceptId(...)`), so
+    // the next chat message kept teaching the same unmastered concept and
+    // the mastery gate kept blocking it — "skip" never actually skipped.
+    if (!mastered && isNewCompletion) {
+      if (topicSlug) {
+        // Reuses the existing topic-progress lifecycle (TopicStatus.SKIPPED
+        // already exists for exactly this — see /api/topic-progress's
+        // 'skip' action) rather than inventing a second gap representation.
+        await prisma.topicProgress.upsert({
+          where: { userId_subjectSlug_topicSlug: { userId: session.user.id, subjectSlug: subjectCode, topicSlug } },
+          create: { userId: session.user.id, subjectSlug: subjectCode, topicSlug, status: 'SKIPPED' },
+          update: { status: 'SKIPPED' },
+        }).catch((err) => console.error('[curriculum/progress] skip topic-progress write failed', err))
+      }
+
+      if (!isSchoolMode) {
+        // Library Mode only (School's session/concept model is untouched by
+        // this fix — see route.ts's `if (!schoolCtx)` scoping throughout).
+        // Clear the stale concept pointer on the learner's most recent
+        // active session for this subject so the next turn re-resolves the
+        // entry concept for the NEW currentLesson instead of re-teaching
+        // the one just skipped.
+        try {
+          const subjectRow = await prisma.subject.findUnique({ where: { slug: subjectCode } })
+          if (subjectRow) {
+            const activeSession = await prisma.learnSession.findFirst({
+              where: { userId: session.user.id, subjectId: subjectRow.id },
+              orderBy: { updatedAt: 'desc' },
+            })
+            if (activeSession) {
+              const snap = (activeSession.contextSnapshot ?? {}) as Record<string, unknown>
+              await prisma.learnSession.update({
+                where: { id: activeSession.id },
+                data: {
+                  contextSnapshot: {
+                    ...snap,
+                    currentConceptNodeId: null,
+                    nextConceptNodeId: null,
+                    conversationState: null,
+                  },
+                },
+              })
+            }
+          }
+        } catch (err) {
+          console.error('[curriculum/progress] skip session-pointer reset failed', err)
         }
       }
     }
