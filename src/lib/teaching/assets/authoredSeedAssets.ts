@@ -1564,6 +1564,271 @@ const KIN_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── math.found.logic ────────────────────────────────────────────────────────
+const LOGIC = 'math.found.logic'
+const LOGIC_SRC = 'docs/curriculum/blueprints/math.found.logic.md'
+
+const LOGIC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LOGIC,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: IF-THEN as a promise — when is the promise BROKEN?
+    content:
+      'An IF-THEN statement is a promise, and it\'s only FALSE when the ' +
+      'promise is broken. "IF it rains, THEN I\'ll drive you to school." ' +
+      'When is that a lie? Only one case: it rained AND I didn\'t drive ' +
+      'you. Now the sneaky cases — suppose it never rained. Did I break ' +
+      'the promise? No! I promised nothing about sunny days. Whether I ' +
+      'drove you anyway or not, the promise stands unbroken — so the ' +
+      'statement counts as TRUE whenever the IF-part doesn\'t happen. ' +
+      'That feels strange at first, but it\'s just this: a promise about ' +
+      'rainy days can only be tested on rainy days. IF P THEN Q is false ' +
+      'in exactly one situation — P true, Q false — and true in all ' +
+      'three others.',
+    targetedMisconceptions: [`${LOGIC}:MC-1`],
+    source: `${LOGIC_SRC} — Component 6 MC-1 (false-when-P-false, truth-table rows 3-4) via the promise framing from the Protocol Library`,
+  },
+  {
+    conceptId: LOGIC,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: converse confusion (P→Q vs Q→P)
+    content:
+      'Here\'s the most seductive wrong move in logic: from "IF it\'s a ' +
+      'dog, THEN it\'s an animal", concluding "IF it\'s an animal, THEN ' +
+      'it\'s a dog." Swapping the two halves gives the CONVERSE — a ' +
+      'genuinely different statement that can be false while the original ' +
+      'is true (a cat is an animal; it is stubbornly not a dog). The ' +
+      'arrow of an IF-THEN points one way only: P → Q says every P is a ' +
+      'Q, but says nothing about whether every Q is a P. Whenever you\'re ' +
+      'tempted to flip, run a quick zoo test: find a Q that isn\'t a P ' +
+      '(an animal that isn\'t a dog), and the converse dies while the ' +
+      'original lives on. What IS always equivalent is the CONTRAPOSITIVE ' +
+      '— "IF not-Q, THEN not-P" ("if it\'s not an animal, it\'s not a ' +
+      'dog") — flip AND negate, and truth survives.',
+    targetedMisconceptions: [`${LOGIC}:MC-2`],
+    source: `${LOGIC_SRC} — Component 6 MC-2 (converse confusion) + Protocol C repair, with the contrapositive contrast`,
+  },
+  {
+    conceptId: LOGIC,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Deeper: examples vs proof — the asymmetry of evidence
+    content:
+      'In mathematics, examples and counterexamples have wildly unequal ' +
+      'power — and the asymmetry runs OPPOSITE to everyday life. To prove ' +
+      'a universal claim ("every even number greater than 2 is a sum of ' +
+      'two primes") true, a million confirming examples prove NOTHING ' +
+      'final: the million-and-first could still fail; the claim covers ' +
+      'infinitely many cases and you checked finitely many. But to prove ' +
+      'it FALSE, one single counterexample is total, instant victory. ' +
+      'One broken case kills a universal claim forever. So the honest ' +
+      'division of labour is: examples are for EXPLORING and building ' +
+      'confidence; proofs (arguments covering every case at once) are for ' +
+      'establishing truth; counterexamples are for demolition. "I found ' +
+      'one where it works" is the start of an investigation — never the ' +
+      'end of one.',
+    targetedMisconceptions: [`${LOGIC}:MC-3`],
+    source: `${LOGIC_SRC} — Component 6 MC-3 (single example proves true) via the asymmetry-of-evidence treatment`,
+  },
+]
+
+const LOGIC_PROBES: SeedProbe[] = [
+  {
+    conceptId: LOGIC,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: '"IF a number is divisible by 4, THEN it is even." Which conclusion is valid?',
+    choices: [
+      { text: 'A number NOT even is certainly not divisible by 4 (contrapositive)', isCorrect: true },
+      { text: 'An even number is certainly divisible by 4 (converse)', isCorrect: false, misconceptionId: `${LOGIC}:MC-2` },
+      { text: 'The statement is false for the number 3, since 3 is not divisible by 4', isCorrect: false, misconceptionId: `${LOGIC}:MC-1` },
+    ],
+    correctValue: 'the contrapositive',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LOGIC}:MC-1`, `${LOGIC}:MC-2`],
+    source: `${LOGIC_SRC} — Component 6 MC-1/MC-2 as one dual-mapped item (6 is even but not divisible by 4 kills the converse)`,
+  },
+  {
+    conceptId: LOGIC,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student checks that n² + n + 41 is prime for n = 1, 2, 3, … 10 and declares the formula "always gives primes." What is the status of that claim?',
+    choices: [
+      { text: 'Unproven — ten examples cannot establish a claim about all numbers (and indeed n = 41 fails)', isCorrect: true },
+      { text: 'Proven — ten checks with no failures is convincing evidence', isCorrect: false, misconceptionId: `${LOGIC}:MC-3` },
+    ],
+    correctValue: 'unproven',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LOGIC}:MC-3`],
+    source: `${LOGIC_SRC} — Component 6 MC-3, Euler's classic polynomial as the trap`,
+  },
+]
+
+// ─── math.alg.expression ─────────────────────────────────────────────────────
+const EXPR = 'math.alg.expression'
+const EXPR_SRC = 'docs/curriculum/blueprints/math.alg.expression.md'
+
+const EXPR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EXPR,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: expression = machine/recipe, not a question to solve
+    content:
+      'An expression like 3x + 2 is a MACHINE, not a question. Feed it a ' +
+      'number, it hands one back: feed in x = 4, out comes 3·4 + 2 = 14; ' +
+      'feed in x = 10, out comes 32. Nothing here needs "solving" — ' +
+      "there's no equals sign, so no claim is being made and no mystery " +
+      'value is hiding. The x is a SLOT, not a secret: it stands ready to ' +
+      'hold any number you choose. Only when someone bolts on an equals ' +
+      'sign — 3x + 2 = 14 — does it become an equation, a claim that\'s ' +
+      'true for some inputs and false for others, and only THEN does ' +
+      '"find x" mean anything. Expression: a recipe you evaluate. ' +
+      'Equation: a claim you satisfy.',
+    targetedMisconceptions: [`${EXPR}:MC-1`, `${EXPR}:MC-2`],
+    source: `${EXPR_SRC} — Component 2 MC-1 (EXPRESSION-IS-EQUATION) + MC-2 (VARIABLE-IS-FIXED), machine/slot framing from Protocol A`,
+  },
+  {
+    conceptId: EXPR,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    // Repair: unlike terms combined (3x + 2y = 5xy; 3x + 2 = 5x)
+    content:
+      'Why isn\'t 3x + 2y just 5xy? Give the letters jobs: x = the price ' +
+      'of an apple, y = the price of a banana. Then 3x + 2y is the cost ' +
+      'of 3 apples and 2 bananas. Can you shorten that to "5 apple-' +
+      'bananas"? There\'s no such fruit — the two costs stay separate ' +
+      'until you know actual prices. Same with 3x + 2: three apples plus ' +
+      '2 rupees isn\'t 5 of anything. The rule underneath: only LIKE ' +
+      'terms — same letter, same power — can be combined, because ' +
+      '3x + 2x really is 5 of the same thing (5 apples: 5x). Test any ' +
+      'simplification by substituting a number: at x = 2, y = 3, the ' +
+      'original 3x + 2y = 12, but 5xy = 30. Different numbers, so the ' +
+      '"simplification" was actually a different expression.',
+    targetedMisconceptions: [`${EXPR}:MC-3`],
+    source: `${EXPR_SRC} — Component 2 MC-3 (UNLIKE-TERMS-COMBINED) + TA-B03 repair, with the substitution check as verifier`,
+  },
+]
+
+const EXPR_PROBES: SeedProbe[] = [
+  {
+    conceptId: EXPR,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Simplify 4x + 3, if possible.',
+    choices: [
+      { text: 'It is already as simple as it gets — 4x and 3 are unlike terms', isCorrect: true },
+      { text: '7x', isCorrect: false, misconceptionId: `${EXPR}:MC-3` },
+      { text: 'x = −3/4', isCorrect: false, misconceptionId: `${EXPR}:MC-1` },
+    ],
+    correctValue: 'already simplified',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EXPR}:MC-1`, `${EXPR}:MC-3`],
+    source: `${EXPR_SRC} — Component 2 MC-1/MC-3 as one dual-mapped item (solve-the-expression distractor + unlike-terms distractor)`,
+  },
+]
+
+// ─── phys.mech.kinematics-2d ─────────────────────────────────────────────────
+const KIN2 = 'phys.mech.kinematics-2d'
+const KIN2_SRC = 'docs/curriculum/blueprints/phys.mech.kinematics-2d.md'
+
+const KIN2_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KIN2,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Intuitive: two independent 1D movies sharing a clock
+    content:
+      'Two-dimensional motion sounds like a new subject; it\'s actually ' +
+      'the old one, run twice at once. Picture the classic demo: one ball ' +
+      'DROPPED from a table edge exactly as an identical ball is fired ' +
+      'HORIZONTALLY from the same height. They hit the floor at the same ' +
+      'instant, every time. The horizontal firing bought the second ball ' +
+      'sideways travel — but not one extra millisecond of hang time, ' +
+      'because horizontal motion and vertical motion never talk to each ' +
+      'other. Gravity works the y-axis; nothing works the x-axis; each ' +
+      'axis runs its own independent 1D story. The ONLY thing the two ' +
+      'stories share is the clock. So every 2D problem is: split into x ' +
+      'and y, solve two 1D problems you already know how to do, and let ' +
+      'the shared time t stitch them back together.',
+    targetedMisconceptions: [`${KIN2}:MC-AXES-COUPLED`],
+    source: `${KIN2_SRC} — MC-AXES-COUPLED (independence conflict evidence P28 + two-tracks bridge P30, taught via the drop-vs-fire demo)`,
+  },
+  {
+    conceptId: KIN2,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    // Worked example: horizontal launch, full decomposition discipline
+    content:
+      'A ball is thrown horizontally at 10 m/s from a 20 m cliff. Where ' +
+      'and how fast does it land? Split the axes and keep them apart. ' +
+      'Y-AXIS (finds the time): u_y = 0 (thrown horizontally), a_y = ' +
+      '9.8 m/s² down, y = 20 m. From y = ½gt²: 20 = 4.9t² → t = 2.02 s. ' +
+      'X-AXIS (uses that time): constant vₓ = 10 m/s, so range x = ' +
+      '10 × 2.02 = 20.2 m. Landing velocity: vₓ is still 10 (nothing ' +
+      'touched it); v_y = gt = 19.8 m/s; only NOW combine them — ' +
+      '|v| = √(10² + 19.8²) ≈ 22.2 m/s. Notice the discipline: the 10 m/s ' +
+      'never entered a y-equation, gravity never entered an x-equation, ' +
+      'and the magnitude |v| appeared only at the very end, as a report — ' +
+      'never inside the component algebra.',
+    targetedMisconceptions: [`${KIN2}:MC-AXES-COUPLED`, `${KIN2}:MC-TOTAL-VELOCITY-COMPONENT`],
+    source: `${KIN2_SRC} — MC-AXES-COUPLED conflict scenario (cliff launch) expanded to a full solution + MC-TOTAL-VELOCITY-COMPONENT replacement rule (magnitude last)`,
+  },
+  {
+    conceptId: KIN2,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: using |v| inside component equations
+    content:
+      'A ball moves with vₓ = 3 m/s and v_y = 4 m/s. Its speed is ' +
+      '√(3² + 4²) = 5 m/s — and that 5 is precisely the number you must ' +
+      'NOT use inside the axis equations. Try it: x = 5t predicts 5 m of ' +
+      'horizontal travel in one second. Reality: the ball moves 3 m ' +
+      'horizontally (and 4 m vertically) in that second. The 5 m/s is ' +
+      'real — it\'s the diagonal, how fast the ball moves along its ' +
+      'slanted path — but each AXIS only sees its own shadow of that ' +
+      'motion: the x-axis sees 3, the y-axis sees 4. Components live in ' +
+      'the equations; the magnitude is bookkeeping you do at the end, ' +
+      'via Pythagoras, for the final answer. Write vₓ and v_y as separate ' +
+      'quantities from the first line and |v| can never sneak in.',
+    targetedMisconceptions: [`${KIN2}:MC-TOTAL-VELOCITY-COMPONENT`],
+    source: `${KIN2_SRC} — MC-TOTAL-VELOCITY-COMPONENT (3-4-5 conflict evidence P28 + shadow framing of bridge P30)`,
+  },
+]
+
+const KIN2_PROBES: SeedProbe[] = [
+  {
+    conceptId: KIN2,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Ball A is dropped from a table at the same instant ball B is fired horizontally from the same height. Which lands first?',
+    choices: [
+      { text: 'Both land together — horizontal motion cannot affect the vertical fall', isCorrect: true },
+      { text: 'Ball A — ball B\'s speed keeps it in the air longer', isCorrect: false, misconceptionId: `${KIN2}:MC-AXES-COUPLED` },
+      { text: 'Ball B — its extra velocity drives it down faster', isCorrect: false, misconceptionId: `${KIN2}:MC-AXES-COUPLED` },
+    ],
+    correctValue: 'both together',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KIN2}:MC-AXES-COUPLED`],
+    source: `${KIN2_SRC} — MC-AXES-COUPLED independence, drop-vs-fire demo as the probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -1582,6 +1847,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...SUB_EXPLANATIONS,
   ...DIV_EXPLANATIONS,
   ...KIN_EXPLANATIONS,
+  ...LOGIC_EXPLANATIONS,
+  ...EXPR_EXPLANATIONS,
+  ...KIN2_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -1600,4 +1868,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...SUB_PROBES,
   ...DIV_PROBES,
   ...KIN_PROBES,
+  ...LOGIC_PROBES,
+  ...EXPR_PROBES,
+  ...KIN2_PROBES,
 ]
