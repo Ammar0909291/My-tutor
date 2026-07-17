@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.roots-and-origins-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.roots-and-origins",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:55037c9bdd3ab0869e55e2c5c2e737f14c6e612279d5bf08283a6cbcfa89bb23",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md": "sha256:8e337cf1ab6071ca2e1bccc45339383f56b592967d19bd0676c8886d39a3b8f7"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.roots-and-origins",
+    "name": "Greek and Latin Roots",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.vocab.prefixes",
+      "eng.vocab.suffixes"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.roots-and-origins-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.roots-and-origins (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md": "sha256:8e337cf1ab6071ca2e1bccc45339383f56b592967d19bd0676c8886d39a3b8f7"
+      },
+      "contentHash": "sha256:fafa09e324581bdd8af876af598e6e690ad42f558d44dc4ea1790ddd9ea37e61",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.roots-and-origins.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.roots-and-origins"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.roots-and-origins\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.roots-and-origins.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md#TA-2 (addresses MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.roots-and-origins"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.roots-and-origins\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.roots-and-origins.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.roots-and-origins"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.roots-and-origins\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.roots-and-origins.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md#TA-4 (addresses MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.roots-and-origins"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.roots-and-origins\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.roots-and-origins.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md#TA-5 (addresses MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD, MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.roots-and-origins"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.roots-and-origins\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.roots-and-origins/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "Greek and Latin Roots — Conceptual Development Sequence",
+      "content": "### TA-1: Identifying Common Roots in Word Families\nPresent 4 root families (bio=life, tele=far/distant, scrib/script=write, photo=light) with 3-4 example words each. Student sorts words into their correct root family and states the root's core meaning.\n\n### TA-2: Root Meaning as a Starting Clue\nUsing the discrimination pairs from MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD, present word pairs from the same root family where one word's meaning stays close to the literal root and another has drifted (e.g., \"telephone\" = far + sound, still fairly literal, vs. \"television\" = far + seeing, now used for content watched on any screen, not just distant broadcast). Student explains both as legitimately connected to the root, just with different degrees of literalness.\n\n### TA-3: The Context-Check Step\nTeach the explicit two-step process: (1) use the root to form an initial hypothesis about a new word's meaning; (2) check that hypothesis against how the word is actually used in its sentence, adjusting if the literal root meaning doesn't perfectly fit. Student practices this two-step process on 3 unfamiliar root-based words in context.\n\n### TA-4: The Coincidence Test\nUsing the discrimination pairs from MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT, present pairs of words where one is a genuine root match and one is a coincidental letter overlap (e.g., real: \"telephone\"/\"telegraph\" both true \"tele\" words; coincidence: \"cat\" appearing in \"category,\" which actually derives from Greek \"kata,\" not any relation to cats). Student applies the meaning-verification test to distinguish real root connections from coincidental letter patterns.\n\n### TA-5: Decoding Novel Academic Vocabulary\nPresent 4 unfamiliar academic/scientific words built from the roots studied (e.g., \"biodiversity,\" \"telepathy,\" \"photosynthesis,\" \"manuscript\") that the student has not been explicitly taught, and have the student apply the full process (root identification → initial hypothesis → context check → coincidence check if uncertain) to construct a reasonable definition for each — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": ": Root Family Sorting (Scaffolded)",
+      "content": "### WE-1: Root Family Sorting (Scaffolded)\n**Words:** \"biology,\" \"biography,\" \"telephone,\" \"television,\" \"photograph,\" \"photosynthesis\"\n**Walkthrough:** Sort into \"bio\" (life: biology, biography), \"tele\" (far: telephone, television), \"photo\" (light: photograph, photosynthesis). For each, state how the root's core meaning contributes: biology = study of life, telephone = far sound, photograph = light-writing (an image captured by light).",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": ": Literal vs. Drifted Meaning (Guided)",
+      "content": "### WE-2: Literal vs. Drifted Meaning (Guided)\n**Words:** \"manuscript\" (manu=hand + script=write — still literally meaning a hand-written document, even now often used for any pre-publication document, typed or not) and \"manufacture\" (manu=hand + fact=make — now means any large-scale production, rarely by hand at all).\n**Walkthrough:** Confirm both are legitimate uses of the \"manu\" root; \"manuscript\" stays closer to literal, \"manufacture\" has drifted significantly, but both are traceable to the same root meaning as a starting clue, not a fixed rule.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": ": Real Root vs. Coincidence (Independent)",
+      "content": "### WE-3: Real Root vs. Coincidence (Independent)\n**Word pair:** \"telegraph\" (tele=far + graph=write — a real, verifiable root match: sending writing/messages over a distance) vs. \"category\" (superficially seems to start with \"cat,\" but derives from Greek \"kata\" meaning \"down/against,\" with no relationship to the root \"cat\" meaning anything).\n**Walkthrough:** Student applies the meaning-verification test: does \"far\" + \"write\" explain \"telegraph\"? Yes — confirmed real root. Does any known root meaning for \"cat\" explain \"category\"? No — confirmed coincidental letter overlap, not a shared root.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/misconception/MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "- **Trigger signal:** Student assumes a Greek or Latin root contributes an identical, rigid dictionary-style meaning in every word it appears in, and becomes confused or forces a wrong definition when a word's overall meaning has drifted from a literal reading of its root (e.g., insisting \"manufacture\" must mean \"made by hand\" in modern usage just because \"manu\" = hand, even though factories now manufacture with machines).",
+      "content": "### MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD\n- **Trigger signal:** Student assumes a Greek or Latin root contributes an identical, rigid dictionary-style meaning in every word it appears in, and becomes confused or forces a wrong definition when a word's overall meaning has drifted from a literal reading of its root (e.g., insisting \"manufacture\" must mean \"made by hand\" in modern usage just because \"manu\" = hand, even though factories now manufacture with machines).\n- **Conflict evidence [P28]:** Present \"manufacture\" (root \"manu\" = hand) and ask the student to define it using only the root's literal meaning. Then ask: are most modern manufactured products actually made by hand? Compare with \"manuscript\" (still literally hand-written historically) to show the root's contribution can stay literal in one word and become a looser historical echo in another.\n- **Bridge text [P30]:** \"A root gives you a strong starting clue, not a locked-in exact definition. Word meanings drift over centuries of use — 'manufacture' used to mean exactly 'made by hand,' but now it just means 'made/produced,' even by machines. The root explains WHERE the word came from and gives you a helpful starting guess, not necessarily the word's meaning today.\"\n- **Replacement text [P31]:** \"Use the root to make an educated FIRST guess at a word's meaning, then check that guess against how the word is actually used in its sentence. If the literal root meaning doesn't quite fit, the word has probably drifted in meaning over time — that's normal, not a sign you found the wrong root.\"\n- **Discrimination pairs [P33]:** (a) Root-as-fixed-definition (the root's literal meaning IS the word's current meaning, unchangeably) vs. (b) Root-as-starting-clue (the root gives a strong initial hypothesis about meaning, which may match exactly or may have drifted through historical usage — context confirms or adjusts the guess).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-3's context-check step before continuing.",
+      "localKey": "MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD",
+      "language": "en",
+      "refs": [
+        "MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/misconception/MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "- **Trigger signal:** Student spots a familiar letter sequence inside a word and assumes it's the known root, even when it's a coincidental spelling overlap unrelated to that root's actual origin (e.g., seeing \"ben\" in \"benefit\" and assuming it must relate to a name, or misreading \"capital\" as containing the root \"cap-\" meaning \"head\" when in a specific context it might instead be a coincidental overlap with an unrelated word part).",
+      "content": "### MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT\n- **Trigger signal:** Student spots a familiar letter sequence inside a word and assumes it's the known root, even when it's a coincidental spelling overlap unrelated to that root's actual origin (e.g., seeing \"ben\" in \"benefit\" and assuming it must relate to a name, or misreading \"capital\" as containing the root \"cap-\" meaning \"head\" when in a specific context it might instead be a coincidental overlap with an unrelated word part).\n- **Conflict evidence [P28]:** Present \"capital\" (from Latin \"caput,\" head — as in \"capital\" = the \"head\" city, or \"capital\" letters at the \"head\" of a sentence) alongside \"caterpillar\" (which superficially contains letters resembling \"cat\" but has no etymological relationship to cats at all — it derives from an unrelated Old French word). Ask the student to check whether the root's MEANING actually fits the word's real meaning, not just whether the letters visually match.\n- **Bridge text [P30]:** \"Spotting familiar letters is a good first step, but letters can overlap by pure coincidence — English has thousands of words, and small letter sequences repeat by chance sometimes. Before trusting a root match, check whether the root's actual MEANING helps explain the word's real meaning. If it doesn't fit at all, the letters were probably a coincidence, not a true shared root.\"\n- **Replacement text [P31]:** \"When you spot what looks like a familiar root, test it: does the root's meaning actually help explain what the word means? If yes, you likely found a real root connection. If the meanings have nothing to do with each other, the letter overlap is probably just coincidental spelling, not a shared origin.\"\n- **Discrimination pairs [P33]:** (a) Letter-pattern-matching (any visual letter overlap with a known root counts as that root) vs. (b) Meaning-verified root identification (a root match must be confirmed by checking that the root's meaning genuinely contributes to the word's actual meaning, ruling out coincidental spelling overlaps).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's DNA-test framing before continuing to TA-4.",
+      "localKey": "MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "Identifying Common Roots in Word Families",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Common Roots in Word Families\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "Root Meaning as a Starting Clue",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Root Meaning as a Starting Clue\",\"primitives\":[],\"addresses\":[\"MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "The Context-Check Step",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Context-Check Step\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "The Coincidence Test",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Coincidence Test\",\"primitives\":[],\"addresses\":[\"MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "Decoding Novel Academic Vocabulary",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Decoding Novel Academic Vocabulary\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD\",\"MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD",
+        "MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Recognize meaning drift**\nGiven a word whose meaning has drifted from its root's literal sense, student explains the drift while still correctly identifying the root's contribution as a starting clue, not a rigid rule. *(Directly targets MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Reject a coincidental letter match**\nGiven a word with a coincidental letter overlap resembling a known root (with no real meaning connection), student correctly identifies it as coincidental, not a true root match, using the meaning-verification test. *(Directly targets MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Root family sorting**\nGiven 6 unlabeled words from 3 different root families, student correctly sorts each and states the root meaning.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Context-check application**\nGiven a novel word in a sentence, student forms an initial root-based hypothesis, then checks and adjusts it against the sentence context.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Novel academic vocabulary decoding**\nGiven an unfamiliar academic word built from a studied root, student constructs a reasonable definition using the full identification-hypothesis-context-check process.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "Adaptive Flags",
+      "content": "- If the student forces literal root meanings onto drifted words, weight remediation toward MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD's bridge text and re-run TA-2/TA-3 with more drifted-meaning examples before returning to novel decoding.\n- If the student accepts coincidental letter overlaps as true root matches, weight remediation toward MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT's bridge text and TA-4's coincidence-test practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.vocab.word-formation-processes`, `eng.vocab.etymology`) — do not certify mastery without TA-5's novel-word decoding, since both downstream concepts assume the student can apply root knowledge productively to unfamiliar vocabulary, not just recognize previously-taught word lists.\n- Reuse the \"word DNA test\" framing explicitly when introducing `eng.vocab.etymology` — that concept traces word history in much greater depth, and the coincidence-vs-real-relationship distinction established here is the same discipline etymological research requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD",
+        "MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.vocab.roots-and-origins/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.roots-and-origins",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Prefix/Suffix Readiness Check]\n        |\n        v\n[Concrete Anchor: The Word DNA Test]\n        |\n        v\n[TA-1: Identifying Common Roots in Word Families]\n        |\n        v\n[TA-2: Root Meaning as a Starting Clue]\n        |\n        v\n[TA-3: The Context-Check Step]\n        |\n        v\n[TA-4: The Coincidence Test]\n        |\n        v\n[TA-5: Decoding Novel Academic Vocabulary]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — root identification is an extension of the same word-decomposition skill used for prefixes and suffixes, applied to a word's central meaning-bearing part. During instruction (S1), watch for both misconception patterns: treating a root's meaning as rigidly fixed (MC-A-ROOT-ALWAYS-KEEPS-THE-EXACT-SAME-MEANING-IN-EVERY-WORD) and treating any letter overlap as a true root match (MC-IF-A-WORD-LOOKS-LIKE-IT-HAS-A-ROOT-IT-MUST-BE-THAT-ROOT) are both failures to apply the context-check/meaning-verification step, and both should be redirected to the Word DNA Test anchor rather than corrected in isolation. If the student forces an ill-fitting literal definition or accepts a coincidental match during TA-3/TA-4 (S6), drop back to the Concrete Anchor's family-tree and DNA-test framing before returning to independent practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who sorts known root families correctly (MP-3) but cannot handle drifted meaning or reject a coincidence has not yet learned the judgment this concept actually requires for novel vocabulary.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.roots-and-origins.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

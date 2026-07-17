@@ -1,0 +1,444 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.collocations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.collocations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b1c39f253b7ab8413c811a13b4f5f92284f5b7253dabaaf34aff5cffbe18646b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.collocations.md": "sha256:6d1c5c1e09ab2d04dd0c2e804d4651c5c0f8f96eef25327e80bbfffdc4499556"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.collocations",
+    "name": "Collocations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.connotation-denotation"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.collocations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.collocations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.collocations.md": "sha256:6d1c5c1e09ab2d04dd0c2e804d4651c5c0f8f96eef25327e80bbfffdc4499556"
+      },
+      "contentHash": "sha256:c1d9568d90bf41cd6554a45325b8ccb0956bee2b7ff02d719872b01079211df6",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.collocations.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.collocations.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.collocations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.collocations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.collocations.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.collocations.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.collocations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.collocations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.collocations.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.collocations.md#TA-3 (addresses MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.collocations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.collocations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.collocations.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.collocations.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.collocations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.collocations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.collocations.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.collocations.md#TA-5 (addresses MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE, MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.collocations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.collocations\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.collocations/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.collocations",
+      "title": "Collocations — Conceptual Development Sequence",
+      "content": "### TA-1: Verb + Noun Collocation Exposure\nPresent common verb+noun collocations in groups (make: a decision, a mistake, an effort; do: a favor, homework, damage; take: a photo, a break, a risk; have: a shower, a look, a chat) and have the student practice matching, noticing that near-synonym verbs don't cross-substitute freely.\n\n### TA-2: Adjective + Noun Collocations\nExtend to adjective+noun pairs (heavy rain/traffic, strong coffee/opinion, deep sleep/thought) and have the student identify why a near-synonym substitution sounds \"off\" even when technically understandable (e.g., \"powerful rain\" is understandable but not the conventional pairing).\n\n### TA-3: Collocation vs. Idiom Transparency Test\nUsing the discrimination pairs from MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS, present pairs of phrases (one collocation, one idiom) and have the student apply the transparency test: can you derive the meaning from the individual words? Sort each phrase into \"collocation\" or \"idiom.\"\n\n### TA-4: Detecting an \"Off\" Collocation in Writing\nPresent short passages containing one unconventional word pairing (e.g., \"I did a mistake\" instead of \"made a mistake\") and have the student identify and correct it, explaining why the substituted word doesn't fit even though its dictionary meaning is close.\n\n### TA-5: Building a Personal Collocation Bank\nStudent selects 5 new words (nouns or verbs) and researches/generates 2-3 correct collocational pairings for each (using provided reference material or context clues from sample sentences), building an original small collocation reference set — the generative capstone that models real vocabulary-learning practice.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.collocations",
+      "title": ": Verb+Noun Matching (Scaffolded)",
+      "content": "### WE-1: Verb+Noun Matching (Scaffolded)\n**Pairs to match:** make/a decision, do/homework, take/a photo, have/a conversation.\n**Walkthrough:** Confirm each verb only correctly pairs with its matched noun phrase, even though \"make,\" \"do,\" \"take,\" and \"have\" all can loosely mean \"to perform\" in different contexts — the specific pairing is learned, not derived.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.collocations",
+      "title": ": Collocation vs. Idiom Sort (Guided)",
+      "content": "### WE-2: Collocation vs. Idiom Sort (Guided)\n**Phrases:** \"heavy traffic\" (collocation — literally means traffic that is heavy/intense) / \"hit the books\" (idiom — doesn't literally involve hitting anything; means to study) / \"strong coffee\" (collocation — literally means coffee that is strong) / \"spill the beans\" (idiom — doesn't literally involve beans; means to reveal a secret).\n**Walkthrough:** Apply the transparency test to each: \"heavy traffic\" and \"strong coffee\" pass (meaning derivable from individual words); \"hit the books\" and \"spill the beans\" fail (meaning is hidden, non-literal).",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.vocab.collocations",
+      "title": ": Detecting and Correcting an Off Collocation (Independent)",
+      "content": "### WE-3: Detecting and Correcting an Off Collocation (Independent)\n**Passage with error:** \"She made a big effort to do her best on the exam, but she still made a mistake and did a bad grade.\"\n**Walkthrough:** Student identifies \"did a bad grade\" as the unconventional pairing (conventional English says \"got a bad grade\" or \"received a bad grade\") and corrects it, while confirming \"made a big effort,\" \"do her best,\" and \"made a mistake\" are all correct conventional pairings.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/misconception/MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.collocations",
+      "title": "- **Trigger signal:** Student substitutes any dictionary synonym into a fixed collocation and assumes the result is equally correct, since the substituted word means roughly the same thing (e.g., saying \"do a decision\" instead of \"make a decision,\" or \"strong tea\" replaced with \"powerful tea,\" reasoning that \"powerful\" and \"strong\" are synonyms so the swap should work fine).",
+      "content": "### MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE\n- **Trigger signal:** Student substitutes any dictionary synonym into a fixed collocation and assumes the result is equally correct, since the substituted word means roughly the same thing (e.g., saying \"do a decision\" instead of \"make a decision,\" or \"strong tea\" replaced with \"powerful tea,\" reasoning that \"powerful\" and \"strong\" are synonyms so the swap should work fine).\n- **Conflict evidence [P28]:** Present \"make a decision\" / \"do a decision\" and ask a native-speaker-intuition question: which one do English speakers actually say? Confirm \"make\" is correct even though \"do\" is a perfectly good verb and even shares some meaning overlap with \"make\" in other contexts (e.g., \"do a favor\" — where \"do\" IS correct, showing the pattern isn't about \"do\" being wrong in general, just wrong with \"decision\").\n- **Bridge text [P30]:** \"Synonyms match at the level of dictionary meaning, but collocations are about which specific words HABITUALLY pair together in real usage — a pattern built from how millions of speakers have actually talked, not from logical meaning-matching. 'Make' and 'do' can both mean roughly 'to perform an action,' but English speakers only pair 'make' with 'decision,' not 'do,' for no logical reason other than that's the pattern that stuck.\"\n- **Replacement text [P31]:** \"Don't assume a synonym swap works in a collocation just because the meanings are close. Collocations have to be learned as fixed pairings — through reading, listening, and exposure — not derived logically from synonym lists. When in doubt, notice which pairing you've actually heard or read before.\"\n- **Discrimination pairs [P33]:** (a) Synonym-substitution logic (any word with a similar dictionary meaning can replace another in a set phrase) vs. (b) Fixed-pairing convention (collocations are specific word combinations that native usage has settled on, which must be learned as pairs rather than derived from synonym logic).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's paired-list exposure task before continuing.",
+      "localKey": "MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/misconception/MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.collocations",
+      "title": "- **Trigger signal:** Student conflates collocations (literal, transparent word pairings like \"heavy rain\" or \"make a decision,\" where the combined meaning is exactly what the individual words suggest) with idioms (non-literal expressions like \"it's raining cats and dogs,\" where the combined meaning cannot be derived from the individual words at all) — treating both as the same category of \"weird fixed phrases to memorize.",
+      "content": "### MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS\n- **Trigger signal:** Student conflates collocations (literal, transparent word pairings like \"heavy rain\" or \"make a decision,\" where the combined meaning is exactly what the individual words suggest) with idioms (non-literal expressions like \"it's raining cats and dogs,\" where the combined meaning cannot be derived from the individual words at all) — treating both as the same category of \"weird fixed phrases to memorize.\"\n- **Conflict evidence [P28]:** Present \"heavy rain\" (collocation: literally means rain that is heavy/intense — the words mean exactly what they say, just habitually paired) alongside \"it's raining cats and dogs\" (idiom: doesn't literally involve animals falling from the sky at all — the phrase's meaning is entirely non-literal). Ask the student what \"heavy rain\" literally means versus what \"raining cats and dogs\" literally means.\n- **Bridge text [P30]:** \"Both collocations and idioms are 'fixed' word combinations, but they work completely differently. A collocation's meaning is fully transparent — you can understand 'heavy rain' by understanding each word normally, it's just that English happens to pair 'heavy' with 'rain' rather than, say, 'strong rain.' An idiom's meaning is hidden — you cannot figure out 'raining cats and dogs' from the individual words at all; you just have to know the whole expression.\"\n- **Replacement text [P31]:** \"Ask: can I understand this phrase's meaning just by understanding each word normally? If yes, it's a collocation — a habitual pairing with a transparent, literal meaning. If the combined meaning is a total surprise that the individual words don't predict, it's an idiom instead.\"\n- **Discrimination pairs [P33]:** (a) Collocation-idiom conflation (any memorized fixed phrase counts as the same category) vs. (b) Transparency-based distinction (collocations are literal/transparent habitual pairings; idioms are non-literal expressions whose meaning can't be derived from their individual words — a meaningfully different linguistic category).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's transparent-vs-locked-box framing before continuing to TA-3.",
+      "localKey": "MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS",
+      "language": "en",
+      "refs": [
+        "MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.collocations",
+      "title": "Verb + Noun Collocation Exposure",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Verb + Noun Collocation Exposure\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.collocations",
+      "title": "Adjective + Noun Collocations",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Adjective + Noun Collocations\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.collocations",
+      "title": "Collocation vs. Idiom Transparency Test",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Collocation vs. Idiom Transparency Test\",\"primitives\":[],\"addresses\":[\"MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.collocations",
+      "title": "Detecting an \"Off\" Collocation in Writing",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Detecting an \\\"Off\\\" Collocation in Writing\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.collocations",
+      "title": "Building a Personal Collocation Bank",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Building a Personal Collocation Bank\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS\",\"MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE",
+        "MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.collocations",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reject an incorrect synonym substitution**\nGiven a sentence with a synonym incorrectly substituted into a fixed collocation (e.g., \"do a decision\"), student identifies the error and supplies the correct conventional pairing. *(Directly targets MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.collocations",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Distinguish collocation from idiom**\nGiven 4 phrases (2 collocations, 2 idioms), student correctly sorts each using the transparency test and explains the distinguishing criterion. *(Directly targets MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.collocations",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Verb+noun collocation matching**\nGiven 4 verbs (make, do, take, have) and 8 noun phrases, student correctly matches each noun phrase to its one correct verb.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.collocations",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detect and correct an off collocation in context**\nGiven a short passage with one unconventional word pairing, student identifies and corrects it, explaining why the substitution sounds wrong despite being understandable.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.collocations",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Build an original collocation set**\nGiven 3 new nouns, student generates a correct verb or adjective collocation for each, using provided context sentences to verify the pairing.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.collocations",
+      "title": "Adaptive Flags",
+      "content": "- If the student substitutes synonyms into fixed pairings, weight remediation toward MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE's bridge text and re-run TA-1's verb+noun exposure practice with a narrower, more repetitive pairing set.\n- If the student conflates collocations with idioms, weight remediation toward MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS's bridge text and TA-3's transparency-test practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.vocab.idioms`, `eng.vocab.phrasal-verbs`) plus a cross-link to `eng.linguistics.corpus-linguistics-intro` — do not certify mastery without TA-3's collocation/idiom distinction, since `eng.vocab.idioms` depends on the student already understanding what makes a phrase NON-collocational (i.e., non-transparent) in the first place.\n- Reuse the \"puzzle-piece, not meaning-match\" framing explicitly when introducing `eng.vocab.phrasal-verbs` — phrasal verb particles (\"give up,\" \"look into\") are collocational pairings of a similar fixed, usage-based, non-logically-derivable kind.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE",
+        "MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.vocab.collocations/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.collocations",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Connotation-Denotation Check]\n        |\n        v\n[Concrete Anchor: The Puzzle-Piece Pairing Board]\n        |\n        v\n[TA-1: Verb + Noun Collocation Exposure]\n        |\n        v\n[TA-2: Adjective + Noun Collocations]\n        |\n        v\n[TA-3: Collocation vs. Idiom Transparency Test]\n        |\n        v\n[TA-4: Detecting an \"Off\" Collocation in Writing]\n        |\n        v\n[TA-5: Building a Personal Collocation Bank]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — collocational judgment is a specific application of the same fine-grained word-choice sensitivity built in connotation-denotation work, now applied to which words habitually co-occur rather than which carry which emotional shading. During instruction (S1), watch for both misconception patterns: synonym-substitution logic (MC-IF-A-SYNONYM-FITS-THE-DEFINITION-IT-FITS-THE-PHRASE) and collocation-idiom conflation (MC-COLLOCATIONS-ARE-JUST-A-FANCY-NAME-FOR-IDIOMS) both stem from treating fixed phrases as governed by meaning-logic rather than usage convention — redirect both to the Puzzle-Piece Pairing Board's shape-not-meaning framing. If the student defaults to synonym logic during TA-1/TA-2 (S6), drop back to the Concrete Anchor and re-run with a very small, clear pairing set before returning to broader practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who matches known collocations correctly (MP-3) but still substitutes synonyms freely or confuses collocations with idioms has not yet internalized the usage-convention principle this concept is built on.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.collocations.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

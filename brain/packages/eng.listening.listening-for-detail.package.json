@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.listening.listening-for-detail-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.listening.listening-for-detail",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d91ad7488a6206b462cb297a1bb5cbf34cf6f8913c516bd3b0ac6be0f5186f5a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.listening.listening-for-detail.md": "sha256:f0920328c4578877a4859bda314c833772c285a289cdae840c30ba9ce070094b"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.listening.listening-for-detail",
+    "name": "Listening for Detail",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.listening.listening-for-gist"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.listening.listening-for-detail-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.listening.listening-for-detail (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.listening.listening-for-detail.md": "sha256:f0920328c4578877a4859bda314c833772c285a289cdae840c30ba9ce070094b"
+      },
+      "contentHash": "sha256:56926a378da2e349ca49e2670a79379086ebec5a4ca4e7e4388350e3dd9ae929",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-detail.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md#TA-1 (addresses MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-detail"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-detail\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-detail.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-detail"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-detail\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-detail.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md#TA-3 (addresses MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-detail"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-detail\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-detail.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-detail"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-detail\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.listening-for-detail.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md#TA-5 (addresses MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD, MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.listening-for-detail"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.listening-for-detail\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.listening.listening-for-detail/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "Listening for Detail — Conceptual Development Sequence",
+      "content": "### TA-1: Target-First Listening\nBefore playing any passage, have the student write down or state exactly what detail(s) they are listening for. Then play the passage and have them report only that detail, ignoring the goal of retaining anything else. Directly counters MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD.\n\n### TA-2: Recognizing Detail-Type Signal Words\nTeach common signal phrases that flag an upcoming detail: names (\"this is,\" \"my name is,\" \"ask for\"), times (\"at,\" \"starting,\" \"by\"), numbers/quantities (\"costs,\" \"a total of,\" \"for\"), locations (\"located at,\" \"near,\" \"on the corner of\"). Student practices flagging the moment a signal phrase appears in a passage.\n\n### TA-3: Multiple Independent Details in One Passage\nPresent passages with 2-3 separate requested details (as in the Concrete Anchor) and have the student track each independently, reporting whatever subset they caught confidently rather than treating a miss as total failure. Directly counters MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED.\n\n### TA-4: Using Context to Recover a Missed Detail\nWhen a repeat listen is available (as it often is in real life — asking someone to repeat, replaying a recording), teach the student to use surrounding context (what came just before/after the missed detail) to make an informed guess or know exactly where to focus attention on the second listen.\n\n### TA-5: Distractor Details and Precision\nPresent passages containing distractor information that resembles the target but isn't quite it (e.g., two times are mentioned — one for the store opening, one for a sale ending — and the student must catch the specific one asked for). Student practices distinguishing the precise requested detail from similar-sounding nearby information — the generative/precision capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": ": Single Target Detail (Scaffolded)",
+      "content": "### WE-1: Single Target Detail (Scaffolded)\n**Passage:** \"Welcome to Riverside Library. Our new hours start Monday: we'll be open until 8 PM on weekdays.\"\n**Target:** What time does the library close on weekdays now?\n**Walkthrough:** Student listens only for the closing time, ignoring the rest, and reports \"8 PM,\" using the signal phrase \"open until\" as the cue.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 72,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": ": Multiple Independent Details (Guided)",
+      "content": "### WE-2: Multiple Independent Details (Guided)\n**Passage:** \"Your appointment with Dr. Chen is confirmed for Thursday at 3:15 PM, in Suite 204 on the second floor.\"\n**Targets:** (1) day, (2) time, (3) room number.\n**Walkthrough:** Student tracks all three signal phrases (\"Thursday,\" \"3:15 PM,\" \"Suite 204\") independently, reporting each one caught even if, hypothetically, one were missed — reinforcing that each is a separate success.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 72,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": ": Distractor Detail Precision (Independent)",
+      "content": "### WE-3: Distractor Detail Precision (Independent)\n**Passage:** \"The flight to Chicago was originally scheduled for 6:45, but due to weather, it's now departing at 7:20 from Gate 14.\"\n**Target:** What time does the flight actually depart now?\n**Walkthrough:** Student must correctly identify \"7:20\" as the actual departure time, not \"6:45\" (the distractor — the original, now-superseded time), using the signal words \"originally\" and \"now\" to distinguish them.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 72,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/misconception/MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "- **Trigger signal:** Student attempts to mentally transcribe every single word of an audio passage in real time, gets overwhelmed and loses the thread the moment a word or phrase is missed, rather than listening selectively for the specific pieces of information actually needed.",
+      "content": "### MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD\n- **Trigger signal:** Student attempts to mentally transcribe every single word of an audio passage in real time, gets overwhelmed and loses the thread the moment a word or phrase is missed, rather than listening selectively for the specific pieces of information actually needed.\n- **Conflict evidence [P28]:** Play a short audio passage (or read one aloud) containing one target detail (e.g., a specific time: \"The museum tour starts at 2:30, right after the gift shop reopens from lunch, near the east entrance\"). Ask two students to listen: one is told \"catch every word,\" the other is told \"just find out what time the tour starts.\" Compare which student answers the actual question correctly and with less stress.\n- **Bridge text [P30]:** \"Trying to catch every single word is like trying to catch every raindrop in a storm — you'll miss things and feel overwhelmed. Listening for detail means knowing what specific piece of information you need BEFORE you listen, then letting everything else pass by while you wait for that one piece to arrive.\"\n- **Replacement text [P31]:** \"Before you listen, decide exactly what you're listening for — a time, a name, a number, a location. Let the rest of the speech flow past you; you don't need to hold onto all of it. Your job is to catch the one or two specific details you were asked to find, not transcribe the whole thing.\"\n- **Discrimination pairs [P33]:** (a) Total-capture listening (attempting to retain every word equally) vs. (b) Targeted-detail listening (identifying the needed information type in advance and selectively attending only to that, letting surrounding speech pass without effort to retain it).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's target-first practice before continuing.",
+      "localKey": "MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD",
+      "language": "en",
+      "refs": [
+        "MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/misconception/MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED",
+      "kind": "misconception",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "- **Trigger signal:** Student treats missing a single requested detail as total failure and gives up on answering any other question about the same passage, rather than recognizing that detail-listening tasks typically ask for multiple independent pieces of information, each recoverable separately.",
+      "content": "### MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED\n- **Trigger signal:** Student treats missing a single requested detail as total failure and gives up on answering any other question about the same passage, rather than recognizing that detail-listening tasks typically ask for multiple independent pieces of information, each recoverable separately.\n- **Conflict evidence [P28]:** Present a short passage with 3 separate requested details (a name, a time, a location) where the student catches 2 of 3. Ask whether they should report the 2 they caught or refuse to answer anything because they missed one.\n- **Bridge text [P30]:** \"Each detail you're asked for is usually a separate catch, like separate items on a shopping list — missing one item doesn't mean you failed to find any of them. Report what you did catch confidently, and use context or a second listening pass (if allowed) for the one you missed, rather than throwing out everything.\"\n- **Replacement text [P31]:** \"Treat each requested detail as its own independent task. If you miss one, that doesn't erase what you caught for the others — answer what you know, and if a repeat listen or context clue is available, use it just for the missing piece.\"\n- **Discrimination pairs [P33]:** (a) All-or-nothing listening (missing any one detail invalidates the whole task) vs. (b) Independent-detail listening (each requested detail is caught or missed separately; partial success on a multi-detail task is real, valid success).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's shopping-list framing before continuing to TA-4.",
+      "localKey": "MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED",
+      "language": "en",
+      "refs": [
+        "MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "Target-First Listening",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Target-First Listening\",\"primitives\":[],\"addresses\":[\"MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "Recognizing Detail-Type Signal Words",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Recognizing Detail-Type Signal Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "Multiple Independent Details in One Passage",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Multiple Independent Details in One Passage\",\"primitives\":[],\"addresses\":[\"MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "Using Context to Recover a Missed Detail",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Using Context to Recover a Missed Detail\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "Distractor Details and Precision",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Distractor Details and Precision\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED\",\"MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD",
+        "MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 71,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Target-first single detail**\nGiven a passage and one specific detail to listen for, student correctly reports it without attempting to retain unrelated information. *(Directly targets MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Partial success reporting**\nGiven a passage with 3 requested details where the student is likely to catch only 2, student reports the 2 caught confidently rather than refusing to answer or reporting nothing. *(Directly targets MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Signal word recognition**\nGiven a passage, student identifies the signal phrases that flag each of 3 detail types (name, time, location) as they occur.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distractor precision**\nGiven a passage with a distractor detail resembling the target, student correctly identifies the actual requested detail and explains what distinguished it from the distractor.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Multi-detail passage with context recovery**\nGiven a longer passage with 4 requested details, student reports all caught details and, for any missed one, explains how surrounding context would help recover it on a second listen.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "Adaptive Flags",
+      "content": "- If the student attempts total-word capture and reports feeling overwhelmed, weight remediation toward MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD's bridge text and re-run TA-1 with a single, very simple target detail before adding complexity.\n- If the student refuses to answer after missing one detail in a multi-detail task, weight remediation toward MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED's bridge text and TA-3's independent-tracking practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.listening.following-instructions`, `eng.listening.note-taking-while-listening`) — do not certify mastery without TA-5's distractor-precision practice, since both downstream concepts require picking the correct specific detail out of similar surrounding information under real-time pressure.\n- Reuse the \"shopping list\" targeted-listening framing explicitly when introducing `eng.listening.following-instructions` — that concept extends the same target-first, independent-item tracking to sequences of action steps rather than isolated facts.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD",
+        "MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 138,
+        "endLine": 145
+      }
+    },
+    {
+      "assetId": "eng.listening.listening-for-detail/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.listening.listening-for-detail",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Listening-for-Gist Check]\n        |\n        v\n[Concrete Anchor: The Shopping List Listener]\n        |\n        v\n[TA-1: Target-First Listening]\n        |\n        v\n[TA-2: Detail-Type Signal Words]\n        |\n        v\n[TA-3: Multiple Independent Details]\n        |\n        v\n[TA-4: Using Context to Recover a Missed Detail]\n        |\n        v\n[TA-5: Distractor Details and Precision]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — detail-listening is a targeted sharpening of general listening comprehension, so a student who cannot follow gist will struggle to isolate specific details within a passage they don't understand overall. During instruction (S1), watch for both misconception patterns: attempting total-word capture (MC-LISTENING-FOR-DETAIL-MEANS-TRYING-TO-CATCH-EVERY-WORD) and treating any miss as total failure (MC-IF-YOU-MISS-ONE-DETAIL-THE-WHOLE-LISTENING-TASK-FAILED) both stem from an all-or-nothing mindset about listening, and both should be redirected to the Shopping List anchor's targeted, independent-detail framing. If the student freezes or reports nothing after missing one detail during TA-3 (S6), drop back to the Concrete Anchor's flip-card demonstration and re-run TA-1 with a single, very clear target before returning to multi-detail passages. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who can recognize signal words (MP-3) but panics on a partial miss has not yet internalized the resilience this concept requires for real-world listening tasks.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.listening-for-detail.md",
+        "startLine": 106,
+        "endLine": 138
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
