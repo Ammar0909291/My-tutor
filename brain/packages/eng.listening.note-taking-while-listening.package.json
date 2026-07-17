@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.listening.note-taking-while-listening-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.listening.note-taking-while-listening",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:aef8f7e5e401a535b15ea0654b57bd86d7c17362a1e093f636733925a3ee3097",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md": "sha256:8425fd4430e29c03facd5fb4aa94da555f3969d040123b3a22f2d4c3fd7fe3c2"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.listening.note-taking-while-listening",
+    "name": "Note-Taking While Listening",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.listening.listening-for-detail"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.listening.note-taking-while-listening-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.listening.note-taking-while-listening (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md": "sha256:8425fd4430e29c03facd5fb4aa94da555f3969d040123b3a22f2d4c3fd7fe3c2"
+      },
+      "contentHash": "sha256:a8cc6597f091a5f0dd6259fc22e655d18880979cf71d1b60ff804b747ce61bef",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.listening.note-taking-while-listening.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md#TA-1 (addresses MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.note-taking-while-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.note-taking-while-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.note-taking-while-listening.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.note-taking-while-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.note-taking-while-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.note-taking-while-listening.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md#TA-3 (addresses MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.note-taking-while-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.note-taking-while-listening\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.note-taking-while-listening.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md#TA-4 (addresses MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD, MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.note-taking-while-listening"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.note-taking-while-listening\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.listening.note-taking-while-listening/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "Note-Taking While Listening — Conceptual Development Sequence",
+      "content": "### TA-1 — Using Abbreviations and Symbols Instead of Full Sentences (MC-A)\n\nUsing the faucet-and-cup anchor and the timed-comparison test, teach a basic symbol/abbreviation\ntoolkit (arrows for cause-effect, plus/minus for increase/decrease, numbers for sequence, common word\nshortenings). Student practice: given five full sentences, convert each into brief abbreviated notes.\n\n### TA-2 — Listening for Structural Signal Words\n\nTeach students to identify a speaker's sequence words, contrast words, and emphasis words as they\noccur. Student practice: given a transcript of a short spoken passage, underline all structural signal\nwords.\n\n### TA-3 — Marking Structure Visually in Notes (MC-B)\n\nUsing the hallway-photograph anchor, teach students to translate identified structural signal words\ninto quick visual marks (numbers, arrows, stars) within their notes. Student practice: given the\nsignal-word-marked transcript from TA-2, create abbreviated notes that visually preserve the\nstructure.\n\n### TA-4 — Full Real-Time Note-Taking Practice\n\nGive the student a short, previously-unheard spoken passage (audio or read aloud at natural pace).\nThey must take abbreviated notes (TA-1) that also capture structural relationships (TA-2, TA-3) in\nreal time, without pausing the audio — the full synthesis task under genuine time pressure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 140,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/misconception/MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "**Trigger signal:** Student attempts to write down spoken content nearly word-for-word, believing more",
+      "content": "### MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD\n\n**Trigger signal:** Student attempts to write down spoken content nearly word-for-word, believing more\ncomplete, verbatim notes are automatically better notes, which causes them to fall behind and miss\nsubsequent information while still writing down what was just said.\n\n**Conflict evidence [P28]:** Play (or describe) a short spoken passage and show two note-taking\nattempts: one that tries to write full sentences verbatim (and as a result, stops partway through and\nmisses the final two points made), and one that uses brief abbreviated notes (symbols, short phrases)\nand successfully captures all the points made, including the final ones. Ask: \"Which set of notes\nactually captured MORE of what was said?\"\n\n**Bridge text [P30]:** \"Trying to write every word down while listening is like trying to catch every\nsingle drop from a fast-flowing faucet with your bare hands — you'll catch a lot of individual\ndrops perfectly, but you'll definitely miss others while your hands are still full. Using a cup (brief,\nabbreviated notes) instead lets you keep catching drops continuously, even if each individual catch\nis less 'complete.'\"\n\n**Replacement text [P31]:** \"Never try to write full sentences while listening. Use short phrases,\nabbreviations, and symbols (arrows for cause-effect, plus signs for 'and,' numbers for lists) that\ncapture the KEY IDEA quickly, so you're ready to catch the next point rather than still writing the\nlast one.\"\n\n**Discrimination pairs [P33]:**\n1. Notes attempting full sentences that trail off mid-thought, missing the speaker's final two points\n   (verbatim attempt, causes information loss) vs. brief phrase-and-symbol notes that capture all\n   points made, including the final ones (abbreviated, complete coverage).\n2. A student who writes \"the economy grew by three percent last year due to increased consumer\n   spending\" in full (slow, verbatim) vs. a student who writes \"econ ↑3% ← consumer spend\" (fast,\n   abbreviated, captures the same key information).\n\n**s6_path:** If the student continues attempting verbatim notes after the bridge, have them practice\nwith a stopwatch: time how long it takes to write a sentence in full versus writing the same\ninformation using symbols and abbreviations, making the speed difference concrete and undeniable.",
+      "localKey": "MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 3,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/misconception/MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE",
+      "kind": "misconception",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "**Trigger signal:** Student writes down individual facts or details as they hear them, in a",
+      "content": "### MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE\n\n**Trigger signal:** Student writes down individual facts or details as they hear them, in a\ndisorganized list with no attention to the speaker's own structural signals (sequence words,\ncontrast words, emphasis markers), producing notes that are hard to use afterward because they don't\nreflect how the ideas actually related to each other in the original speech.\n\n**Conflict evidence [P28]:** Play (or describe) a short spoken passage that uses clear structural\nsignal words (\"First... however... but the most important factor is...\") and show two note-taking\nattempts: one that lists facts with no attention to these signals (a flat, unordered list), and one\nthat uses the signal words to organize the notes with visual structure (numbering, an \"but\" arrow\nshowing contrast, a star or underline for the emphasized point). Ask: \"Which set of notes would help\nyou reconstruct the speaker's actual argument afterward?\"\n\n**Bridge text [P30]:** \"Writing down facts with no attention to structure is like taking photos of\nevery room in a house without ever taking a photo of the hallway that connects them — you'll have\nindividual snapshots, but you won't be able to reconstruct how to get from one room to another. A\nspeaker's structural signal words (first, however, most importantly) ARE the hallway — capturing\nthem in your notes (even briefly, with an arrow or a star) preserves the relationships between the\nfacts, not just the facts themselves.\"\n\n**Replacement text [P31]:** \"As you take notes, listen specifically for the speaker's own structural\nsignal words — sequence words (first, next, finally), contrast words (however, but, on the other\nhand), and emphasis words (most importantly, the key point is) — and use a quick visual mark (a\nnumber, an arrow, a star) to capture that structure in your notes, not just the individual facts.\"\n\n**Discrimination pairs [P33]:**\n1. A flat list of facts with no visual structure, hard to reconstruct afterward (structure-blind\n   notes) vs. notes using numbers for sequence, an arrow for a \"however\" contrast, and a star for the\n   emphasized point (structure-aware notes).\n2. A student who ignores the word \"however\" entirely and just writes the fact that follows it (losing\n   the contrast relationship) vs. a student who marks that \"however\" signaled a contrast with an\n   arrow or the word \"BUT\" in their notes (preserving the relationship).\n\n**s6_path:** If the student continues to take structure-blind notes after the bridge, have them\nlisten to a short passage once specifically to identify ONLY the structural signal words (not the\nfacts themselves), marking each one, before attempting to take full notes on a second listen —\nisolating the structure-detection skill before combining it with fact-capturing.",
+      "localKey": "MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE",
+      "language": "en",
+      "refs": [
+        "MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 38,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "Using Abbreviations and Symbols Instead of Full Sentences (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Using Abbreviations and Symbols Instead of Full Sentences (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 144,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "Listening for Structural Signal Words",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Listening for Structural Signal Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "Marking Structure Visually in Notes (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Marking Structure Visually in Notes (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 156,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "Full Real-Time Note-Taking Practice",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Real-Time Note-Taking Practice\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD\",\"MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-GOOD-NOTES-MEANS-WRITING-DOWN-AS-MUCH-AS-POSSIBLE-WORD-FOR-WORD",
+        "MC-B-NOTE-TAKING-IS-JUST-WRITING-DOWN-RANDOM-FACTS-AS-THEY-COME-UP-WITH-NO-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 163,
+        "endLine": 295
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Abbreviating Effectively**\nGiven five full sentences, convert each into brief abbreviated notes using symbols and shortened\nforms, completing the task within a time limit that would not permit full-sentence writing.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Structural Signal Words**\nGiven a transcript of a short spoken passage, identify all sequence, contrast, and emphasis signal\nwords used by the speaker.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Translating Structure into Visual Marks**\nGiven a passage with identified structural signal words, create notes that translate each signal word\ninto an appropriate visual mark (number, arrow, star).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Combined Abbreviation and Structure**\nGiven a short passage (transcript, self-paced), take complete notes that are both abbreviated (not\nfull sentences) and structurally marked (visually reflecting sequence/contrast/emphasis).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Real-Time Note-Taking**\nGiven a new spoken passage played or read once at natural pace, take abbreviated, structurally-marked\nnotes in real time without pausing, capturing all key points and their relationships.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 184,
+        "endLine": 206
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "Adaptive Flags",
+      "content": "- If the student performs well on self-paced note-taking (MP-4) but breaks down specifically under\n  real-time audio pressure (MP-5), this is a speed/automaticity gap, not a conceptual one — provide\n  additional real-time practice at a gradually increasing pace rather than re-teaching the underlying\n  skills.\n- If the student's abbreviations become so compressed that even they cannot reconstruct the meaning\n  afterward, recalibrate: abbreviation should trade off completeness for speed, but notes must remain\n  legible and meaningful to the note-taker after the fact — test this by having the student\n  reconstruct a summary from their own notes a few minutes later.\n- If the student struggles specifically with distinguishing subtle structural signal words (e.g.,\n  \"although\" and \"while\" both signal contrast but are easy to miss) from ordinary connecting words,\n  provide a explicit reference list of common signal words grouped by function (sequence, contrast,\n  emphasis) to consult during early practice.\n- Students with strong working-memory capacity may be tempted to skip note-taking and rely on memory\n  alone, performing adequately on short passages but failing on longer ones — extend practice\n  passages in length specifically for these students to demonstrate the real value of notes as\n  passages grow beyond comfortable memory capacity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 245,
+        "endLine": 264
+      }
+    },
+    {
+      "assetId": "eng.listening.note-taking-while-listening/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.listening.note-taking-while-listening",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: listening for detail check] --> [PD-2: abbreviation awareness check]\n   |                                                        |\n   | (gap found)                                            | (pass)\n   v                                                         v\n[Route to eng.listening.listening-for-detail]     [Component 3: Faucet-and-Cup / Hallway Anchor]\n                                                              |\n                                                              v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                              |\n                                                              v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                              |\n                                                              v\n                                        [MP-1 through MP-5 mastery probe set]\n                                                              |\n                                        (pass >= 0.75) -----+----- (fail)\n                                               |                      |\n                                               v                      v\n                       [Unlock: listening-comprehension-strategies]  [S6 remediation: timed-\n                                                                       comparison / signal-word-\n                                                                       only-listen drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a detail-listening gap routes back\nto that prerequisite, an abbreviation-awareness gap gets a brief primer. During Component 4 (S1,\nactive instruction), MC-A typically surfaces during TA-1 (attempting full sentences) and MC-B during\nTA-2/TA-3 (ignoring structural signals in favor of isolated facts) — these are largely independent\nskills and can be addressed in either order, though TA-1's speed issue often needs resolving first\nsince a student still struggling to write quickly has little attention left over for structural\nmarking. If either fires, branch to the relevant s6_path drill before resuming. At the mastery probe\nstage (S9), route by failure: MP-1 failure indicates residual MC-A; MP-2 failure alone indicates a\nsignal-word recognition gap (TA-2), distinct from either misconception; MP-3 failure alone indicates\nresidual MC-B; MP-4 failure with MP-1 through MP-3 passing indicates an integration gap under\nself-paced conditions; MP-5 failure alone (with MP-4 passing) indicates the real-time speed pressure\nspecifically — provide one more guided real-time example at a slightly slower pace before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.note-taking-while-listening.md",
+        "startLine": 206,
+        "endLine": 245
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.sentence-combining-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.sentence-combining",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:311caa381b880324abd505707ce8263a938bb5f00ecde84255da13c8859367bc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.sentence-combining.md": "sha256:c8662729ebc0907644d76003435f3c6624aec95a658bb7bca1ee9b6cb6ab3ad8"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.sentence-combining",
+    "name": "Sentence Combining",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.complex-sentences"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.sentence-combining-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.sentence-combining (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.sentence-combining.md": "sha256:c8662729ebc0907644d76003435f3c6624aec95a658bb7bca1ee9b6cb6ab3ad8"
+      },
+      "contentHash": "sha256:2159700b66ea81f0842a8ee0bd20a69f68150156235b244e3417c1b820673587",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-combining.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-combining"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-combining\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-combining.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md#TA-2 (addresses MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-combining"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-combining\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-combining.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md#TA-3 (addresses MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-combining"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-combining\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.sentence-combining.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md#TA-4 (addresses MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM, MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.sentence-combining"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.sentence-combining\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.sentence-combining/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "Sentence Combining — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying the Relationship Between Sentences Before Combining\n\nTeach students to name the relationship between two short sentences (cause-effect, time sequence,\ncontrast, condition, or genuine parallelism) as a required first step before combining. Student\npractice: given six sentence pairs, identify the relationship in each.\n\n### TA-2 — Selecting the Right Connector for the Relationship (MC-A)\n\nUsing the connector-cable anchor, teach students to match connector choice (coordinating conjunction,\nsubordinating conjunction, relative pronoun) to the identified relationship. Student practice: given\nsix sentence pairs with identified relationships, combine each using an appropriately matched\nconnector.\n\n### TA-3 — Recognizing When Short Sentences Should Stay Short (MC-B)\n\nUsing the seasoning anchor and the read-aloud test, teach students to identify deliberate short\nsentences serving rhythm or emphasis that should be protected from combining. Student practice: given\na passage mixing choppy, unintentional short sentences with deliberately emphatic ones, mark which\nshould be combined and which should be protected.\n\n### TA-4 — Full Passage Revision for Sentence Variety\n\nGive the student a full paragraph of uniformly short, choppy sentences with no deliberate rhythmic\npurpose anywhere. They must identify relationships (TA-1), select appropriate connectors (TA-2), and\ncombine selectively to create varied, flowing sentence structure — the full synthesis task, in a\ncontext where every sentence genuinely benefits from combining (no protected sentences), to isolate\nthe combining skill before adding the protection judgment back in a mixed passage.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 146,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/misconception/MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "**Trigger signal:** Student combines every set of short sentences using only the coordinating",
+      "content": "### MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM\n\n**Trigger signal:** Student combines every set of short sentences using only the coordinating\nconjunction \"and,\" regardless of whether the ideas are genuinely equal/parallel or whether one idea\nis actually more important, causal, or conditional relative to the other — e.g., combining \"It\nstarted raining. We went inside.\" into \"It started raining and we went inside,\" which fails to show\nthe actual cause-effect relationship between the two ideas.\n\n**Conflict evidence [P28]:** Show the student the same two short sentences (\"It started raining. We\nwent inside.\") combined two ways: with \"and\" (\"It started raining and we went inside\") and with a\nsubordinating conjunction showing the causal relationship (\"Because it started raining, we went\ninside\" or \"When it started raining, we went inside\"). Ask: \"Does 'and' show WHY we went inside, or\ndoes it just list two things that happened? Which version actually shows the relationship between\nthese two events?\"\n\n**Bridge text [P30]:** \"Using 'and' for everything is like using a single connector cable for every\nkind of device, regardless of whether it needs power, data, or audio — it might physically connect\nthe two things, but it doesn't carry the right KIND of connection. Different relationships between\nideas — cause and effect, time sequence, contrast, condition — need different connecting words, not\njust 'and' every time.\"\n\n**Replacement text [P31]:** \"Before combining two sentences with 'and,' ask: is there actually a\ncause-effect, time, contrast, or conditional relationship between these ideas that 'and' would hide?\nIf so, choose a subordinating conjunction (because, when, although, if) or another connector that\nactually shows that specific relationship.\"\n\n**Discrimination pairs [P33]:**\n1. \"It started raining and we went inside.\" (uses 'and,' hides the cause-effect relationship) vs.\n   \"Because it started raining, we went inside.\" (subordinating conjunction, makes the causal\n   relationship explicit).\n2. Two genuinely parallel, equally-weighted ideas (\"She plays soccer and she plays basketball\" —\n   'and' is appropriate here since both activities are equally emphasized) vs. two ideas where one\n   is clearly conditional on the other (\"If she practices enough, she'll make the team\" — 'and' would\n   be inappropriate and misleading here).\n\n**s6_path:** If the student continues to default to \"and\" after the bridge, have them explicitly\nname the relationship between the two original sentences first (cause-effect? time? contrast?\ncondition? genuinely equal/parallel?) before choosing any connector — forcing the relationship\nidentification to precede the mechanical combining step.",
+      "localKey": "MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM",
+      "language": "en",
+      "refs": [
+        "MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 3,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/misconception/MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "**Trigger signal:** Student believes that combining is always an improvement and that longer,",
+      "content": "### MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES\n\n**Trigger signal:** Student believes that combining is always an improvement and that longer,\nmore complex sentences are inherently superior to shorter ones, over-combining every short sentence\nin a passage regardless of whether some short sentences are serving a deliberate rhythmic or emphatic\npurpose (e.g., a short, punchy sentence for dramatic effect) that combining would destroy.\n\n**Conflict evidence [P28]:** Show the student a short, punchy sentence used for deliberate emphasis\nat a dramatic moment in a passage (e.g., \"She opened the door. Nothing. The room was empty.\")\nalongside a \"combined\" version that merges these into one long sentence (\"When she opened the door,\nthere was nothing, and the room was empty.\") Ask: \"Which version creates more tension and emphasis at\nthis moment? Does combining always make writing better here?\"\n\n**Bridge text [P30]:** \"Combining every sentence is like adding seasoning to every single bite of a\nmeal regardless of whether that bite already tastes exactly right — sometimes a short, plain\nsentence is doing precisely the job it needs to do (creating a pause, building tension, delivering a\npunch), and combining it away removes that effect rather than improving it. Sentence variety —\nmixing short and combined sentences deliberately — is usually stronger than uniformly long sentences\nthroughout.\"\n\n**Replacement text [P31]:** \"Before combining a short sentence, ask: is this shortness serving a\ndeliberate purpose (emphasis, pacing, tension), or is it just choppy and unintentional? Only combine\nwhen the combining genuinely improves flow or clarity — deliberate short sentences should often stay\nshort.\"\n\n**Discrimination pairs [P33]:**\n1. \"She opened the door. Nothing. The room was empty.\" (deliberate short sentences building tension —\n   combining would weaken the effect) vs. \"I woke up. I brushed my teeth. I ate breakfast. I left for\n   school.\" (choppy, unintentional shortness with no rhythmic purpose — combining would genuinely\n   improve flow).\n2. A student combining every sentence in a suspenseful passage uniformly into long sentences\n   (over-combining, destroying intentional pacing) vs. a student combining only the genuinely choppy,\n   unintentional short sentences while preserving a deliberately short one for emphasis (selective,\n   purposeful combining).\n\n**s6_path:** If the student continues to over-combine after the bridge, have them read the original\nshort-sentence passage aloud and identify, based on how it SOUNDS, whether any short sentence is\ncreating a deliberate pause or punch — if so, that sentence should be flagged as \"protected\" from\ncombining before any combining begins.",
+      "localKey": "MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES",
+      "language": "en",
+      "refs": [
+        "MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 43,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "Identifying the Relationship Between Sentences Before Combining",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Relationship Between Sentences Before Combining\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "Selecting the Right Connector for the Relationship (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Selecting the Right Connector for the Relationship (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 156,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "Recognizing When Short Sentences Should Stay Short (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Recognizing When Short Sentences Should Stay Short (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 163,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "Full Passage Revision for Sentence Variety",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Passage Revision for Sentence Variety\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM\",\"MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-COMBINING-SENTENCES-JUST-MEANS-ADDING-AND-BETWEEN-THEM",
+        "MC-B-A-LONGER-COMBINED-SENTENCE-IS-ALWAYS-BETTER-THAN-SEVERAL-SHORT-ONES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 170,
+        "endLine": 304
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Sentence Relationships**\nGiven four sentence pairs, identify the relationship (cause-effect, time, contrast, condition, or\nparallelism) between each pair.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Selecting a Matched Connector**\nGiven four sentence pairs with identified relationships, combine each using a connector that\naccurately reflects the specific relationship, not a default \"and.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Detecting Deliberate Short Sentences**\nGiven a short passage mixing choppy and deliberately emphatic short sentences, identify which\nsentence(s) should be protected from combining and explain why.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Selective Passage Revision**\nGiven a passage with both combinable and protected sentences, revise it by combining only the\nappropriate sentences while preserving the deliberate short one(s).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Independent Combining**\nGiven a new paragraph of uniformly choppy sentences, combine them into varied, flowing sentence\nstructure using relationship-matched connectors.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 196,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated relationship-identification and connector-matching (MP-1, MP-2)\n  but reverts to \"and\" under the added complexity of full-passage revision (MP-5), this is expected —\n  provide a structured checklist (name the relationship, then select the connector) as scaffolding\n  during passage-level work before removing it.\n- If the student becomes reluctant to use ANY short sentences after learning MC-B, fearing they'll be\n  seen as \"choppy,\" clarify that deliberate short sentences are a legitimate stylistic tool, not a\n  flaw to be eliminated — connect this explicitly to the emphasis effect demonstrated in the anchor.\n- If the student's combined sentences are grammatically correct but create run-on-feeling,\n  overloaded sentences (combining too MANY ideas into one sentence rather than choosing selectively),\n  address this as a distinct \"over-combining within one sentence\" issue, separate from the \"combining\n  too many separate sentences uniformly\" issue addressed by MC-B.\n- Students with strong intuitive prose rhythm (e.g., from creative writing experience) may already\n  informally practice the short-sentence-protection instinct from TA-3 — confirm this transfers to\n  explicit articulation (being able to explain WHY a sentence should stay short) rather than assuming\n  intuition alone satisfies the mastery probes.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 255,
+        "endLine": 273
+      }
+    },
+    {
+      "assetId": "eng.grammar.sentence-combining/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.sentence-combining",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: complex sentences check] --> [PD-2: relationship recognition check]\n   |                                                      |\n   | (gap found)                                          | (pass)\n   v                                                       v\n[Route to eng.grammar.complex-sentences]        [Component 3: Connector-Cable/Seasoning Anchor]\n                                                           |\n                                                           v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                       [Unlock: what-is-linguistics]  [S6 remediation: name-the-relationship\n                                                        / read-aloud-protection drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a complex-sentence gap routes back\nto that prerequisite, a relationship-recognition gap gets a brief primer. During Component 4 (S1,\nactive instruction), MC-A typically surfaces during TA-1/TA-2 (defaulting to \"and\") and MC-B during\nTA-3 (over-combining deliberate short sentences) — these are largely independent and often appear in\nsequence as the student first learns to combine at all (risking MC-A) and then, once comfortable\ncombining, over-applies it (risking MC-B). If either fires, branch to the relevant s6_path drill\nbefore resuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates the\nrelationship-identification step (TA-1) needs review; MP-2 failure alone indicates residual MC-A;\nMP-3 failure alone indicates residual MC-B; MP-4 failure with MP-1 through MP-3 passing indicates an\nintegration gap (combining the two judgments); MP-5 failure alone indicates a transfer gap at full\npassage scale — provide one more guided passage revision before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.sentence-combining.md",
+        "startLine": 218,
+        "endLine": 255
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

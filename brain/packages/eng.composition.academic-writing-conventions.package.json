@@ -1,0 +1,395 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.academic-writing-conventions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.academic-writing-conventions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bf01cae4f53c6ce8c3eaf4b191b4d425266ba434712635a4c2596e19d79f722a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md": "sha256:c0a034b25e887f23efdefa09a9fc053e79c55e08098d3544e27701d648a687d9"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.composition.academic-writing-conventions",
+    "name": "Academic Writing Conventions",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.composition.research-paper-writing"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.academic-writing-conventions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.academic-writing-conventions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md": "sha256:c0a034b25e887f23efdefa09a9fc053e79c55e08098d3544e27701d648a687d9"
+      },
+      "contentHash": "sha256:c500da7f197cdf9c811be22a180d79d7583680751f41ed3ab0ad53a033c23835",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.academic-writing-conventions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md#TA-1 (addresses MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.academic-writing-conventions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.academic-writing-conventions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.academic-writing-conventions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.academic-writing-conventions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.academic-writing-conventions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.academic-writing-conventions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md#TA-3 (addresses MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.academic-writing-conventions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.academic-writing-conventions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.academic-writing-conventions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.academic-writing-conventions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.academic-writing-conventions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.academic-writing-conventions.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md#TA-5 (addresses MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL, MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.academic-writing-conventions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.academic-writing-conventions\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.academic-writing-conventions/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "Academic Writing Conventions — Conceptual Development Sequence",
+      "content": "### TA-1 — Objectivity as Evidence-Grounded Argument, Not No Argument (MC-A)\n\nUsing the judge's-verdict framing, teach that academic objectivity requires a clear claim grounded in\nevidence, not the absence of a claim. Student practice: given three \"balanced\" but claim-less\npassages, identify the implicit position and rewrite each with an explicit, evidence-grounded thesis.\n\n### TA-2 — Recognizing Evidence Strength\n\nTeach students to assess how strong a piece of evidence actually is (well-replicated vs. single-study\nvs. contested/theoretical) as a distinct, prior step to choosing hedging language. Student practice:\ngiven four source claims, rank them by evidence strength.\n\n### TA-3 — Calibrating Hedging Language to Evidence Strength (MC-B)\n\nUsing the volume-dial anchor, teach a graduated set of hedging phrases matched to evidence strength\nlevels. Student practice: given the four ranked claims from TA-2, assign appropriately calibrated\nhedging language to each.\n\n### TA-4 — Avoiding Casual Register in Academic Prose\n\nTeach recognition of overly casual diction, contractions, first-person overuse, and informal\ntransitions that don't fit academic register, alongside appropriate alternatives. Student practice:\ngiven a casually-written paragraph, revise it toward academic register while preserving the original\nclaim and appropriately calibrated hedging.\n\n### TA-5 — Full Application: Objective, Calibrated, Formally-Registered Prose\n\nGive the student a set of source materials with varying evidence strength and a casually-drafted\nparagraph. They must revise it into fully academic prose: an explicit, evidence-grounded claim (TA-1),\ncalibrated hedging (TA-2, TA-3), and formal register (TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 155,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/misconception/MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL",
+      "kind": "misconception",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "**Trigger signal:** Student believes \"being objective\" in academic writing means avoiding taking any",
+      "content": "### MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL\n\n**Trigger signal:** Student believes \"being objective\" in academic writing means avoiding taking any\nclear position or making any argument at all, producing flat, purely descriptive writing with no\nactual claim or thesis — e.g., writing \"There are many different views on climate policy\" instead of\ntaking and defending a specific, evidence-based position.\n\n**Conflict evidence [P28]:** Show the student two academic-style paragraphs on the same topic: one\nthat avoids any claim entirely (\"There are different perspectives on renewable energy policy\"), and\none that takes a clear, evidence-grounded position using appropriately objective, hedged language\n(\"The evidence suggests that subsidy-based renewable energy policies produce faster short-term\nadoption than carbon-tax-based approaches, though long-term effects remain less certain\"). Ask:\n\"Which one is actually making an academic ARGUMENT, and which one is just avoiding having a\nposition?\"\n\n**Bridge text [P30]:** \"Academic objectivity doesn't mean having no opinion — it means having an\nopinion that is grounded in evidence and expressed with appropriate confidence, rather than personal\nassertion or overstatement. A judge in a courtroom reaches a clear verdict — they don't refuse to\ndecide just to seem 'neutral' — but they base that verdict transparently on the evidence presented,\nnot personal feelings. Academic writing works the same way: take a position, but ground it in\nevidence and express it with appropriate certainty.\"\n\n**Replacement text [P31]:** \"Academic objectivity means: (1) having a clear, specific claim, (2)\ngrounding that claim in evidence rather than personal assertion, and (3) expressing your confidence\nin the claim honestly, based on how strong the evidence actually is. It does NOT mean avoiding having\na position.\"\n\n**Discrimination pairs [P33]:**\n1. \"There are many views on this topic.\" (no claim at all, avoids taking a position) vs. \"The\n   evidence suggests that X is more effective than Y for this specific population, though further\n   research on long-term effects is needed.\" (a clear, evidence-grounded, appropriately hedged\n   claim).\n2. A student who believes academic writing forbids arguing for any position (over-correction into\n   flatness) vs. a student who understands academic writing requires a clear position, expressed\n   with evidence-appropriate confidence, not personal certainty (correct understanding).\n\n**s6_path:** If the student continues avoiding any clear claim after the bridge, have them identify\nthe actual thesis buried in their overly-neutral draft (there is usually an implicit position even in\n\"balanced\" writing) and make it explicit, then add appropriate hedging language to match its evidence\nstrength rather than removing the claim altogether.",
+      "localKey": "MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL",
+      "language": "en",
+      "refs": [
+        "MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/misconception/MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING",
+      "kind": "misconception",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "**Trigger signal:** Student either omits hedging language entirely (stating every claim with absolute",
+      "content": "### MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING\n\n**Trigger signal:** Student either omits hedging language entirely (stating every claim with absolute\ncertainty regardless of evidence strength) or, once taught to hedge, over-hedges every single\nstatement uniformly regardless of how strong the underlying evidence actually is — treating hedging\nas a blanket softening habit rather than a precise tool for matching language to actual evidence\nstrength.\n\n**Conflict evidence [P28]:** Show the student three claims with genuinely different evidence\nstrength behind them (a well-replicated scientific finding, a single preliminary study, and a\nwidely-debated theoretical claim), each written with IDENTICAL uniform hedging (\"It may possibly be\nthe case that X could potentially occur\"). Ask: \"Does this uniform hedging accurately represent that\nthese three claims have very different amounts of supporting evidence?\" Then show the same three\nclaims with hedging calibrated to their actual evidence strength (a confident statement for the\nwell-replicated finding, moderate hedging for the preliminary study, strong hedging for the debated\ntheory).\n\n**Bridge text [P30]:** \"Hedging language is like a volume dial, not a mute button — it should be set\nto match how loud (confident) the evidence actually allows you to be, not turned down uniformly on\nevery single statement regardless of how strong the evidence is. A well-established, heavily-\nreplicated finding deserves confident language; a single preliminary study deserves more caution;\nthese should sound different, not identically vague.\"\n\n**Replacement text [P31]:** \"Before hedging a claim, ask: how strong is the actual evidence behind\nthis specific statement? Match your hedging language precisely — confident language ('demonstrates,'\n'establishes') for strong, well-supported evidence; moderate hedging ('suggests,' 'indicates') for\nreasonably solid but less conclusive evidence; strong hedging ('may,' 'a preliminary study found')\nfor weak or contested evidence. Uniform hedging on everything hides real differences in evidence\nstrength from your reader.\"\n\n**Discrimination pairs [P33]:**\n1. Identical hedging phrases used for both a well-replicated finding and a single preliminary study\n   (uniform, evidence-blind hedging) vs. confident language for the well-replicated finding and\n   cautious language for the preliminary study (calibrated, evidence-sensitive hedging).\n2. A claim stated with total certainty despite weak, contested evidence (no hedging where hedging is\n   needed) vs. the same claim hedged appropriately to reflect its actual uncertainty (correctly\n   calibrated).\n\n**s6_path:** If the student continues to hedge uniformly (or not at all) after the bridge, have them\nrank three source claims by actual evidence strength first (strongest to weakest, based on the type\nand amount of supporting evidence), and only then assign hedging language to each — forcing the\nevidence assessment to happen before the language choice, not simultaneously or ignored.",
+      "localKey": "MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING",
+      "language": "en",
+      "refs": [
+        "MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 44,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "Objectivity as Evidence-Grounded Argument, Not No Argument (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Objectivity as Evidence-Grounded Argument, Not No Argument (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 159,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "Recognizing Evidence Strength",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Recognizing Evidence Strength\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 165,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "Calibrating Hedging Language to Evidence Strength (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Calibrating Hedging Language to Evidence Strength (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 171,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "Avoiding Casual Register in Academic Prose",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Avoiding Casual Register in Academic Prose\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 177,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "Full Application: Objective, Calibrated, Formally-Registered Prose",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Objective, Calibrated, Formally-Registered Prose\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL\",\"MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-ACADEMIC-OBJECTIVITY-MEANS-HAVING-NO-OPINION-OR-ARGUMENT-AT-ALL",
+        "MC-B-HEDGING-LANGUAGE-MEANS-BEING-VAGUE-OR-WEAK-ABOUT-EVERYTHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 184,
+        "endLine": 314
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying the Implicit Claim in \"Balanced\" Writing**\nGiven a claim-avoiding, falsely neutral passage, identify the implicit position and rewrite it as an\nexplicit, evidence-grounded claim.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 208,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Ranking Evidence Strength**\nGiven four source claims, rank them from strongest to weakest evidence support, justifying the\nranking.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 208,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Calibrating Hedging Language**\nGiven the four ranked claims, assign hedging language appropriately calibrated to each one's evidence\nstrength, avoiding uniform hedging.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 208,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Revising Casual Register**\nGiven a casually-written academic paragraph, revise it toward formal academic register while\npreserving its claim and appropriate hedging.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 208,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Academic Revision**\nGiven a casual draft and source materials of varying evidence strength, produce a fully revised\nacademic paragraph with an explicit claim, calibrated hedging, and formal register.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 208,
+        "endLine": 230
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "Adaptive Flags",
+      "content": "- If the student can rank evidence strength and assign hedging correctly in isolation (MP-2, MP-3)\n  but reverts to uniform hedging under the combined cognitive load of MP-5, this is expected at first\n  — provide a structured checklist (claim, then evidence-rank, then hedge, then register) as\n  scaffolding before removing it.\n- If the student overcorrects after MC-A into overstated, unhedged confidence (swinging from \"no\n  claim\" to \"absolute claim\" without calibration), address this explicitly as a distinct step — having\n  a claim and calibrating its confidence are two separate skills that must both be present.\n- If the student's revisions toward formal register (TA-4) strip out genuinely useful hedging or\n  claim language along with the casual phrasing, clarify that formality and hedging/claim strength are\n  independent dimensions — one can be perfectly hedged and still sound casual, or vice versa.\n- Students who have strong evidence-evaluation instincts from `eng.composition.rhetorical-analysis`\n  should transfer that skill readily to TA-2; if this transfer doesn't occur, revisit whether that\n  prerequisite skill was genuinely internalized or only surface-level.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 267,
+        "endLine": 283
+      }
+    },
+    {
+      "assetId": "eng.composition.academic-writing-conventions/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.academic-writing-conventions",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: research paper writing check] --> [PD-2: register awareness check]\n   |                                                          |\n   | (gap found)                                              | (pass)\n   v                                                           v\n[Route to eng.composition.research-paper-writing]  [Component 3: Judge's-Verdict/Volume-Dial Anchor]\n                                                               |\n                                                               v\n                                          [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                               |\n                                                               v\n                                     [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                               |\n                                                               v\n                                     [MP-1 through MP-5 mastery probe set]\n                                                               |\n                                     (pass >= 0.70) -----+----- (fail)\n                                            |                      |\n                                            v                      v\n                 [Unlock: plagiarism-and-citation-ethics,  [S6 remediation: implicit-claim /\n                  editing-for-style,                        evidence-ranking-first drills]\n                  academic-writing-advanced]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a research-writing gap routes back\nto that prerequisite, a register gap gets a brief primer. During Component 4 (S1, active instruction),\nMC-A typically surfaces during TA-1 (avoiding any clear claim) and MC-B during TA-3 (uniform or absent\nhedging) — MC-A often needs resolving first since a student with no clear claim has nothing yet to\ncalibrate hedging around. If either fires, branch to the relevant s6_path drill before resuming. At\nthe mastery probe stage (S9), route by failure: MP-1 failure indicates residual MC-A; MP-2 failure\nalone indicates the evidence-ranking step (TA-2) needs review, distinct from either misconception;\nMP-3 failure alone indicates residual MC-B; MP-4 failure alone indicates the register-specific\nextension (TA-4); MP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide\none more fully-guided revision example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.academic-writing-conventions.md",
+        "startLine": 230,
+        "endLine": 267
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
