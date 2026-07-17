@@ -1,0 +1,395 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.academic-writing-advanced-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.academic-writing-advanced",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f4ee9eac9aa2b218ff2820ff80c0ef00416ef0961a1c2a44b4f241745baa31ac",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md": "sha256:02b611352b07e13050a89efa70273b2a067f2005ec7069f3b23089593a4614bc"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.communication.academic-writing-advanced",
+    "name": "Advanced Academic Writing",
+    "difficultyRaw": "expert",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.composition.academic-writing-conventions"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.academic-writing-advanced-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.academic-writing-advanced (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md": "sha256:02b611352b07e13050a89efa70273b2a067f2005ec7069f3b23089593a4614bc"
+      },
+      "contentHash": "sha256:22f930ae8f5bf7c5641e219e78bc88b80f082deb3307ac0422bf892b6de63812",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.academic-writing-advanced.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md#TA-1 (addresses MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.academic-writing-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.academic-writing-advanced\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.academic-writing-advanced.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md#TA-2 (addresses MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.academic-writing-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.academic-writing-advanced\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.academic-writing-advanced.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.academic-writing-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.academic-writing-advanced\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.academic-writing-advanced.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.academic-writing-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.academic-writing-advanced\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.academic-writing-advanced.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md#TA-5 (addresses MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID, MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.academic-writing-advanced"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.academic-writing-advanced\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.academic-writing-advanced/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "Advanced Academic Writing — Conceptual Development Sequence",
+      "content": "### TA-1 — Situating an Argument Within Existing Perspectives (MC-A)\n\nUsing the group-conversation anchor and the \"while X has argued... this paper...\" template, teach\nstudents to explicitly acknowledge existing scholarly positions before stating their own claim.\nStudent practice: given three research questions with brief existing-position summaries, draft an\nopening sentence situating an original claim relative to each.\n\n### TA-2 — Distinguishing Genuine Depth from Padding (MC-B)\n\nUsing the empty-gift-box anchor and the one-sentence-summary test, teach students to identify padded\nversus genuinely substantive content. Student practice: given three paragraphs (some padded, some\nsubstantive), identify which sentences in each add genuine new content versus restated filler.\n\n### TA-3 — Maintaining Consistent Terminology and Signposting Across Sections\n\nTeach techniques for maintaining precision across an extended piece: consistent key-term usage\n(not switching between synonyms for a technical concept), and explicit signposting (\"as established\nin the previous section,\" \"this raises a further complication\") to guide the reader through a longer\nargument's structure. Student practice: given a multi-section outline with inconsistent terminology\nand no signposting, revise for consistency and add appropriate signposts.\n\n### TA-4 — Recognizing and Cutting Padding in Extended Drafts\n\nGive the student a longer, padded draft (multiple paragraphs). They must apply the one-sentence-\nsummary test to each paragraph, identify padded sentences, and revise the draft to be more concise\nwhile preserving (or where possible, adding) genuine analytical content.\n\n### TA-5 — Full Application: Situated, Concise, Well-Signposted Advanced Prose\n\nGive the student a research question, brief existing-position summaries, and a padded draft\naddressing it. They must revise the draft to situate the argument within existing perspectives\n(TA-1), cut padding while preserving genuine depth (TA-2, TA-4), and add consistent terminology and\nsignposting across sections (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 148,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/misconception/MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID",
+      "kind": "misconception",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "**Trigger signal:** Student writes an argument as if it exists in a vacuum, with no acknowledgment of",
+      "content": "### MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID\n\n**Trigger signal:** Student writes an argument as if it exists in a vacuum, with no acknowledgment of\nhow their position relates to existing scholarly conversation on the topic (building on it,\ncomplicating it, or synthesizing competing views) — treating their own analysis as the first and\nonly consideration of the question, when the assignment or context implies awareness of broader\ndiscourse is expected.\n\n**Conflict evidence [P28]:** Show the student two opening paragraphs for the same research question:\none that launches directly into the student's own claim with no acknowledgment of existing\nperspectives (\"This paper argues that X is the primary cause of Y\"), and one that first briefly\nsituates the claim relative to existing scholarly positions (\"While prior research has emphasized A\nas the primary driver of Y, this paper argues that X plays a more significant, previously\nunderexamined role\"). Ask: \"Which version shows awareness that this is part of an ongoing\nconversation, rather than the first time anyone has thought about this question?\"\n\n**Bridge text [P30]:** \"Writing as if no one has considered your question before is like walking\ninto the middle of an ongoing group discussion and starting your own separate conversation as if you\nwere the only person in the room — it ignores the context everyone else is already building on.\nAdvanced academic writing briefly acknowledges what's already been said (building on it, complicating\nit, or filling a gap in it) before adding your own contribution — it doesn't pretend the\nconversation started with you.\"\n\n**Replacement text [P31]:** \"Before stating your own claim, briefly situate it: does it build on an\nexisting view, challenge one, or synthesize a disagreement between two? A sentence like 'while X\nhas argued A, this paper contends B' shows you're contributing to a conversation, not starting one\nfrom nothing.\"\n\n**Discrimination pairs [P33]:**\n1. \"This paper argues that social media negatively affects wellbeing.\" (no acknowledgment of existing\n   perspectives, written as if in a vacuum) vs. \"While much existing research has focused on social\n   media's effects on mental health broadly, this paper narrows the focus specifically to its effect\n   on adolescent sleep patterns, an underexamined mechanism.\" (situated within existing conversation).\n2. A student unaware that their \"original\" argument closely echoes a well-known existing position\n   (having skipped situating their work relative to it) vs. a student who explicitly acknowledges an\n   existing position and clarifies exactly how their argument extends or differs from it.\n\n**s6_path:** If the student continues writing in a vacuum after the bridge, have them write one\nsentence using the explicit template \"While [existing view] has emphasized ___, this paper\n[extends/challenges/synthesizes] that by arguing ___\" as a required opening move before drafting the\nrest of their argument.",
+      "localKey": "MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID",
+      "language": "en",
+      "refs": [
+        "MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 3,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/misconception/MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED",
+      "kind": "misconception",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "**Trigger signal:** Student inflates their writing with restated content, unnecessarily complex",
+      "content": "### MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED\n\n**Trigger signal:** Student inflates their writing with restated content, unnecessarily complex\nsentence structures, or vague elaboration in an attempt to seem more sophisticated or to meet a\nlength expectation, mistaking length and syntactic complexity for genuine analytical depth — a\nfailure mode sometimes called \"padding.\"\n\n**Conflict evidence [P28]:** Show the student two paragraphs making the same analytical point: one\npadded with restated content and needlessly complex sentence structures that don't add new\ninformation, and one that is more concise but adds a genuinely new layer of analysis (an additional\npiece of evidence, a nuance, an implication) in roughly the same space the padded version wasted.\nAsk: \"Which paragraph actually says more, even though one is shorter?\"\n\n**Bridge text [P30]:** \"Padding a piece of writing to seem sophisticated is like adding empty\npackaging around a small gift to make the box look bigger — it might look more impressive from the\noutside, but opening it reveals there's no more actual content inside. True sophistication comes\nfrom adding genuine analytical depth — a new angle, a complicating nuance, additional evidence — not\nfrom making existing content sound more complicated or take up more space.\"\n\n**Replacement text [P31]:** \"Before adding a sentence, ask: does this add a genuinely NEW idea,\npiece of evidence, or nuance, or is it restating something already said in more complicated words? If\nit's the latter, cut it — real depth comes from new content, not inflated phrasing.\"\n\n**Discrimination pairs [P33]:**\n1. A paragraph restating the same point three times in increasingly complex sentence structures with\n   no new information added (padding) vs. a paragraph of similar length that introduces three\n   genuinely distinct supporting points (real depth).\n2. A student adding a long, syntactically complex sentence that says the same thing as a simpler one\n   before it (padding disguised as sophistication) vs. a student adding a sentence that introduces a\n   genuinely new consideration or complication (real analytical addition).\n\n**s6_path:** If the student continues to pad after the bridge, have them summarize their own\nparagraph in one plain sentence, then check whether every other sentence in the paragraph actually\nadds something beyond that one-sentence summary — any sentence that doesn't should be cut or\nrevised to add genuine new content.",
+      "localKey": "MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED",
+      "language": "en",
+      "refs": [
+        "MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 45,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "Situating an Argument Within Existing Perspectives (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Situating an Argument Within Existing Perspectives (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 152,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "Distinguishing Genuine Depth from Padding (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Distinguishing Genuine Depth from Padding (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 159,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "Maintaining Consistent Terminology and Signposting Across Sections",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Maintaining Consistent Terminology and Signposting Across Sections\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 165,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "Recognizing and Cutting Padding in Extended Drafts",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Recognizing and Cutting Padding in Extended Drafts\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 173,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "Full Application: Situated, Concise, Well-Signposted Advanced Prose",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Situated, Concise, Well-Signposted Advanced Prose\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID\",\"MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-ADVANCED-ACADEMIC-WRITING-MEANS-IGNORING-WHAT-OTHERS-HAVE-ALREADY-SAID",
+        "MC-B-A-LONGER-MORE-COMPLEX-SOUNDING-PIECE-IS-AUTOMATICALLY-MORE-SOPHISTICATED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 179,
+        "endLine": 311
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Situating an Argument**\nGiven a research question and a brief existing-position summary, draft an opening sentence that\nexplicitly situates an original claim relative to that existing position.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 204,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Detecting Padding**\nGiven a paragraph, apply the one-sentence-summary test and identify which sentences are padding\n(restated content) and which add genuine new depth.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 204,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Consistent Terminology and Signposting**\nGiven a multi-section outline with inconsistent terminology and no signposting, revise for\nterminological consistency and add at least two appropriate signposting phrases.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 204,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Revising a Padded Draft**\nGiven a padded paragraph, revise it to remove filler while preserving or adding genuine analytical\ncontent, demonstrating a net gain in substance despite reduced length.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 204,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Advanced Revision**\nGiven a new research question, existing-position summary, and padded draft, produce a fully revised\npiece that situates the argument, removes padding, and maintains consistent terminology and\nsignposting.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 204,
+        "endLine": 227
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters situating and padding-detection in short passages (MP-1, MP-2) but reverts\n  under the added complexity of full-piece revision (MP-5), provide a structured checklist (situate\n  first, then check each paragraph against the summary test, then add signposting) as scaffolding.\n- If the student overcorrects after MC-B into overly terse, underdeveloped writing (cutting\n  genuinely useful elaboration along with padding), clarify that the target is genuine depth per\n  sentence, not simply minimum length — some elaboration is warranted when it adds real nuance.\n- If the student's situating moves (TA-1) are mechanically correct but generic (using the template\n  without genuine engagement with the existing position), push for specificity — the situating\n  sentence should name what's actually different about the new claim, not just gesture at \"building\n  on prior work.\"\n- Students moving into this concept from strong performance in `eng.composition.rhetorical-analysis`\n  should transfer their synthesis skills readily to TA-1; if this transfer doesn't occur, revisit\n  whether that prerequisite's cataloguing-and-synthesizing skill was genuinely internalized.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 264,
+        "endLine": 280
+      }
+    },
+    {
+      "assetId": "eng.communication.academic-writing-advanced/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.academic-writing-advanced",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: academic conventions check] --> [PD-2: scholarly-context awareness check]\n   |                                                          |\n   | (gap found)                                              | (pass)\n   v                                                           v\n[Route to academic-writing-conventions]           [Component 3: Group-Conversation/Gift-Box Anchor]\n                                                              |\n                                                              v\n                                          [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                              |\n                                                              v\n                                    [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                              |\n                                                              v\n                                    [MP-1 through MP-5 mastery probe set]\n                                                              |\n                                    (pass >= 0.75) -----+----- (fail)\n                                           |                      |\n                                           v                      v\n                    [Unlock: research-methodology-writing,  [S6 remediation: situating-\n                     technical-writing, business-writing,     template / one-sentence-\n                     editing-for-publication]                  summary drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a conventions gap routes back to\nthat prerequisite, a scholarly-context gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-A typically surfaces during TA-1 and MC-B during TA-2/TA-4 — these are largely\nindependent failure modes, though a student compensating for weak situating (MC-A) sometimes pads\ntheir writing to seem more substantial (MC-B), so watch for this compensatory pattern. If either\nfires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route\nby failure: MP-1 failure indicates residual MC-A; MP-2/MP-4 failures indicate residual MC-B; MP-3\nfailure alone indicates the signposting/terminology extension (TA-3), distinct from either\nmisconception; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap at extended-\npiece scale — provide one more fully-guided revision example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.academic-writing-advanced.md",
+        "startLine": 227,
+        "endLine": 264
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

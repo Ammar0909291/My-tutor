@@ -1,0 +1,362 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.what-is-linguistics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.what-is-linguistics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:053829594ea8ffd51ec0ba38495eaa477e688a39b220fede314eaca005fa1992",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md": "sha256:f38e276c9a12f2b0737b2d21889e867a7be62cd615210bfebf1f8a7e0fb34db3"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.what-is-linguistics",
+    "name": "What Is Linguistics?",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.sentence-combining",
+      "eng.phonetics.prosody"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.what-is-linguistics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.what-is-linguistics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md": "sha256:f38e276c9a12f2b0737b2d21889e867a7be62cd615210bfebf1f8a7e0fb34db3"
+      },
+      "contentHash": "sha256:fd393a397c8f4b78aeaa51729aee715346a6745d589946087cc4106cfd2b0770",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.what-is-linguistics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md#TA-1 (addresses MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.what-is-linguistics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.what-is-linguistics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.what-is-linguistics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.what-is-linguistics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.what-is-linguistics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.what-is-linguistics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md#TA-3 (addresses MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.what-is-linguistics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.what-is-linguistics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.what-is-linguistics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md#TA-4 (addresses MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES, MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.what-is-linguistics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.what-is-linguistics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "What Is Linguistics? — Conceptual Development Sequence",
+      "content": "### TA-1 — Descriptive vs. Prescriptive: Linguistics as a Science (MC-A)\n\nUsing the biologist anchor, teach the core distinction between descriptive linguistics and\nprescriptive grammar. Student practice: given six activities, sort into \"descriptive linguistics\" and\n\"prescriptive grammar.\"\n\n### TA-2 — Language Variation as Legitimate Data, Not Error\n\nExtend TA-1 by teaching that dialects, registers, and language change are treated by linguists as\nlegitimate, interesting data rather than \"incorrect\" deviations. Student practice: given three\nexamples of language variation (a regional dialect feature, a historical sound change, a teen\nslang term), explain why a linguist would study each with the same rigor as \"standard\" forms.\n\n### TA-3 — The Major Subfields of Linguistics (MC-B)\n\nUsing the medical-specialties anchor, introduce the major subfields (phonetics/phonology, morphology,\nsyntax, semantics, sociolinguistics) with a brief description and example question for each. Student\npractice: given eight research questions, sort each into its correct subfield.\n\n### TA-4 — Full Application: Analyzing a Language Phenomenon Through a Linguistic Lens\n\nGive the student a real, observable language phenomenon (e.g., how a slang term spreads and changes\nmeaning, or why a language learner makes a specific systematic \"error\"). They must explain it using a\ndescriptive, non-judgmental lens (TA-1, TA-2) and correctly identify which subfield(s) the\nphenomenon belongs to (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 145,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/misconception/MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "**Trigger signal:** Student believes linguistics is fundamentally about teaching or enforcing",
+      "content": "### MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES\n\n**Trigger signal:** Student believes linguistics is fundamentally about teaching or enforcing\n\"correct\" grammar rules (prescriptive grammar), rather than recognizing it as a descriptive science\nthat studies and explains how language actually works and varies, including \"non-standard\" forms —\ne.g., assuming a linguist's job is to correct people's grammar mistakes.\n\n**Conflict evidence [P28]:** Show the student a linguist's actual research question (e.g., studying\nwhy a specific regional dialect consistently uses a particular grammatical construction, and what\nthat construction reveals about language change over time) alongside a prescriptive grammar rule from\na style guide (\"never split an infinitive\"). Ask: \"Is the linguist's research question trying to\ncorrect the dialect's speakers, or trying to understand and document how their language actually\nworks?\"\n\n**Bridge text [P30]:** \"Linguistics is like biology, not like a rulebook for how animals 'should'\nbehave — a biologist studying wolf behavior doesn't judge wolves for not behaving like domestic\ndogs; they document and explain the behavior that actually occurs. Linguistics studies language the\nsame way: describing and explaining how people actually use language, including 'non-standard'\ndialects and forms, rather than judging or correcting it.\"\n\n**Replacement text [P31]:** \"Ask: is this activity DESCRIBING how language actually works and varies\n(linguistics), or PRESCRIBING how language should be used according to a style convention\n(prescriptive grammar, which is a separate, much narrower activity)? Linguistics as a science is\nalmost entirely the former.\"\n\n**Discrimination pairs [P33]:**\n1. A linguist documenting and explaining a grammatical pattern in a regional dialect, treating it as\n   legitimate data (descriptive) vs. a style guide insisting a specific construction is \"incorrect\"\n   and should be avoided in formal writing (prescriptive).\n2. A student assuming linguists correct people's \"bad grammar\" (misconception) vs. a student\n   recognizing that a linguist studying \"bad grammar\" is actually documenting how that construction\n   is used, by whom, and why, without judgment (correct understanding).\n\n**s6_path:** If the student continues conflating linguistics with prescriptive grammar after the\nbridge, have them identify, for three example activities (writing a style guide, studying how\nchildren acquire their first language, correcting a friend's \"incorrect\" sentence), which are\ngenuinely linguistic (descriptive/scientific) and which are prescriptive.",
+      "localKey": "MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES",
+      "language": "en",
+      "refs": [
+        "MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 3,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/misconception/MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "**Trigger signal:** Student believes linguistics is a single, narrow subject focused only on",
+      "content": "### MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR\n\n**Trigger signal:** Student believes linguistics is a single, narrow subject focused only on\ngrammar rules, unaware that it comprises multiple distinct subfields studying different aspects of\nlanguage (sounds, word structure, sentence structure, meaning, social variation, historical change) —\ne.g., being surprised that linguistics includes the study of how children acquire language or how\nlanguages change over centuries.\n\n**Conflict evidence [P28]:** Show the student a list of genuinely different linguistic research\nquestions: \"Why do babies universally babble certain sounds before others?\" (phonetics/acquisition),\n\"Why does English form plurals differently for 'cat' and 'ox'?\" (morphology), \"Why is 'colorless\ngreen ideas sleep furiously' grammatical but meaningless?\" (syntax/semantics), \"Why do teenagers in\none city develop a distinct vocabulary from adults?\" (sociolinguistics). Ask: \"Are these all the same\nkind of question, or are they studying genuinely different aspects of language?\"\n\n**Bridge text [P30]:** \"Assuming linguistics is just 'grammar rules' is like assuming medicine is\njust one single subject about broken bones — medicine actually branches into distinct fields\n(cardiology, neurology, immunology) that each study a different body system. Linguistics branches\nthe same way: phonetics/phonology studies sounds, morphology studies word structure, syntax studies\nsentence structure, semantics studies meaning, and sociolinguistics studies how social factors shape\nlanguage use — each a genuinely distinct area of study.\"\n\n**Replacement text [P31]:** \"When you encounter a linguistics topic, ask which subfield it belongs\nto: is this about SOUNDS (phonetics/phonology), WORD STRUCTURE (morphology), SENTENCE STRUCTURE\n(syntax), MEANING (semantics), or SOCIAL VARIATION (sociolinguistics)? Recognizing these distinct\nbranches shows linguistics is a broad scientific discipline, not one narrow topic.\"\n\n**Discrimination pairs [P33]:**\n1. A student who thinks all linguistics questions are really \"grammar rule\" questions (narrow view)\n   vs. a student who can correctly sort four different linguistic questions into four different\n   subfields (broad, accurate view).\n2. Surprise that a \"linguistics course\" includes a unit on how children learn language or how\n   languages change over centuries (narrow expectation) vs. recognizing these as expected, central\n   topics within the broader discipline (accurate expectation).\n\n**s6_path:** If the student continues treating linguistics as a single narrow topic after the\nbridge, have them sort eight genuinely distinct linguistic research questions into the five major\nsubfields, reinforcing the breadth of the discipline through direct categorization practice.",
+      "localKey": "MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR",
+      "language": "en",
+      "refs": [
+        "MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 41,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "Descriptive vs. Prescriptive: Linguistics as a Science (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Descriptive vs. Prescriptive: Linguistics as a Science (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 149,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "Language Variation as Legitimate Data, Not Error",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Language Variation as Legitimate Data, Not Error\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 155,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "The Major Subfields of Linguistics (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Major Subfields of Linguistics (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 162,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "Full Application: Analyzing a Language Phenomenon Through a Linguistic Lens",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing a Language Phenomenon Through a Linguistic Lens\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES\",\"MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-LINGUISTICS-IS-THE-STUDY-OF-CORRECT-GRAMMAR-RULES",
+        "MC-B-LINGUISTICS-IS-JUST-ONE-SINGLE-SUBJECT-ABOUT-GRAMMAR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 168,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Descriptive vs. Prescriptive Sorting**\nGiven six activities or statements, sort into \"descriptive linguistics\" and \"prescriptive grammar,\"\njustifying each classification.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 194,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Explaining Variation Without Judgment**\nGiven an example of language variation (a dialect feature, slang, or historical change), explain why\na linguist would study it as legitimate data rather than treating it as an error.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 194,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Subfield Identification**\nGiven six linguistic research questions, sort each into its correct subfield (phonetics/phonology,\nmorphology, syntax, semantics, or sociolinguistics).",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 194,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Distinguishing Subfields on a Shared Topic**\nGiven one broad topic (e.g., a new slang word), identify at least two different subfields that could\neach study a different aspect of it, and briefly describe what each subfield's angle would be.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 194,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Descriptive Analysis**\nGiven a new, real language phenomenon, explain it using a descriptive (non-judgmental) framing and\ncorrectly identify its relevant subfield(s).",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 194,
+        "endLine": 216
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters the descriptive/prescriptive distinction and subfield identification in\n  isolation (MP-1 through MP-4) but struggles to apply both simultaneously to a novel phenomenon\n  (MP-5), provide a structured checklist (describe without judgment, then identify subfield(s)) as\n  scaffolding before removing it.\n- If the student has strong prior exposure to prescriptive grammar instruction (e.g., from formal\n  grammar drills in earlier concepts), expect more initial resistance to MC-A's reframe — this is a\n  genuine paradigm shift from \"rules to follow\" to \"phenomena to study,\" not just new content, and may\n  need more repeated exposure to settle.\n  settle.\n- If the student conflates \"descriptive, non-judgmental\" with \"anything goes, no communication\n  standards exist,\" clarify that linguistics describing variation neutrally doesn't mean formal\n  writing/speaking contexts lack real communicative expectations — these are two separate questions\n  (what IS versus what's expected in a given context), paralleling the accents-and-dialects concept's\n  prestige-versus-correctness distinction.\n- Students who found `eng.phonetics.accents-and-dialects` engaging (if previously taught) often\n  transfer well to this concept's non-judgmental stance on variation — this is a natural connection\n  point to draw on explicitly if the student completed that concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 250,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "eng.linguistics.what-is-linguistics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.what-is-linguistics",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: sentence combining check] --> [PD-2: prosody check]\n   |                                                       |\n   | (gap found)                                           | (pass)\n   v                                                        v\n[Route to prerequisite concept]              [Component 3: Biologist/Medical-Specialties Anchor]\n                                                           |\n                                                           v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [Unlock: phonology-intro,          [S6 remediation: descriptive-vs-\n                     morphology-intro]                  prescriptive sort / subfield-sort drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1/TA-2 (judging variation as \"wrong\") and MC-B during TA-3 (narrow view of the discipline) — these\nare largely independent and often need separate correction even after one is resolved. If either\nfires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by\nfailure: MP-1/MP-2 failures indicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5\nfailure with MP-1 through MP-4 passing indicates an integration gap — provide one more guided\nfull-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.what-is-linguistics.md",
+        "startLine": 216,
+        "endLine": 250
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
