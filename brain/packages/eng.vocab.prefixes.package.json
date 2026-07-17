@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.prefixes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.prefixes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:066800d3d15bd70ac73696f40ee74bdf614b3e731b5a19bda6cfa3fed57ea20a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.prefixes.md": "sha256:e80926704db9d8c0c0cf148e6c9ff6460b6017b256e1d8c88de5584a6cd714b0"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.prefixes",
+    "name": "Prefixes",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.vocab.word-families"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.prefixes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.prefixes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.prefixes.md": "sha256:e80926704db9d8c0c0cf148e6c9ff6460b6017b256e1d8c88de5584a6cd714b0"
+      },
+      "contentHash": "sha256:3dde103fa665518fed5bd1f14b1d30040a2292a1a5797dc399d8779ad827ba54",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.prefixes.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.prefixes.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.prefixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.prefixes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.prefixes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.prefixes.md#TA-2 (addresses MC-PREFIXES-ONLY-NEGATE-MEANING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.prefixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.prefixes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.prefixes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.prefixes.md#TA-3 (addresses MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.prefixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.prefixes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.prefixes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.prefixes.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.prefixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.prefixes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.prefixes.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.prefixes.md#TA-5 (addresses MC-PREFIXES-ONLY-NEGATE-MEANING, MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.prefixes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.prefixes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.prefixes/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "Prefixes — Conceptual Development Sequence",
+      "content": "**TA-1 — Negation Prefixes [C]**\n\nPresent base words with negation prefixes (unhappy, disagree, impossible, nonfiction); student identifies the prefix, the base word, and the resulting meaning change.\n\n**TA-2 — Non-Negation Prefix Categories (Location, Time, Number, Degree) [C]**\n\nPresent words with prefixes from other categories (submarine, prehistoric, bicycle, overcook); student identifies the prefix's meaning category, directly targeting MC-PREFIXES-ONLY-NEGATE-MEANING.\n\n**TA-3 — Checking for a Genuine Base Word [C→P]**\n\nPresent a mixed set of words with prefix-like letter sequences, some true (redo, unhappy) and some false (relax, uncle, prefer — where \"pre-\" doesn't clearly modify a recognizable base \"fer\"); student checks for a real base word before confirming prefix status, directly targeting MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING.\n\n**TA-4 — Using Prefix Knowledge to Infer Meaning [P]**\n\nGiven an unfamiliar word containing a known prefix and a recognizable base word (e.g., \"unbreakable,\" \"international\"), student infers the meaning by combining the prefix's category meaning with the base word's meaning.\n\n**TA-5 — Generating Words with a Given Prefix [P]**\n\nGiven a prefix (e.g., \"re-\"), student generates several genuine words using it correctly (redo, rewrite, replay, reopen), reinforcing productive use of the pattern.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/misconception/MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "- **Trigger signal:** Student assumes a given prefix always contributes exactly the same meaning in every word, missing that some prefixes are polysemous (have multiple distinct meanings) or that the same letter sequence can sometimes NOT be a true prefix at all (e.g., assumes \"re-\" always means \"again\" — correct for \"redo,\" \"rewrite\" — but incorrectly applies this to \"relax\" or \"result,\" where \"re-\" is not a meaningful prefix at all, just a coincidental initial letter sequence).",
+      "content": "### MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING\n- **Trigger signal:** Student assumes a given prefix always contributes exactly the same meaning in every word, missing that some prefixes are polysemous (have multiple distinct meanings) or that the same letter sequence can sometimes NOT be a true prefix at all (e.g., assumes \"re-\" always means \"again\" — correct for \"redo,\" \"rewrite\" — but incorrectly applies this to \"relax\" or \"result,\" where \"re-\" is not a meaningful prefix at all, just a coincidental initial letter sequence).\n- **Conflict evidence [P28]:** \"You said 're-' always means 'again.' Does 'relax' mean to 'lax again'? Is there even a word 'lax' that 'relax' is built from?\"\n- **Bridge text [P30]:** \"Most prefixes DO reliably contribute a consistent meaning (re- = again, un- = not, pre- = before) — but this only applies when the rest of the word is a genuine, recognizable base word. In words like 'relax' or 'result,' the letters 're-' at the start are NOT functioning as the meaningful prefix 're-' at all, because there's no base word like 'lax' or 'sult' being modified. Always check whether removing the suspected prefix leaves a real, meaningful base word.\"\n- **Replacement text [P31]:** \"Before assuming a prefix contributes its usual meaning, check whether removing it leaves a genuine, recognizable base word — if not, it's probably not functioning as that prefix at all.\"\n- **Discrimination pairs [P33]:**\n  - \"redo\" (re- + \"do,\" a real base word, meaning \"do again\" — true prefix use) vs. \"relax\" (no real base word \"lax\" being modified — \"re-\" here is not a meaningful prefix).\n  - \"unhappy\" (un- + \"happy,\" a real base word, meaning \"not happy\") vs. \"uncle\" (no base word \"cle\" — \"un-\" here is not a meaningful prefix).\n- **s6_path:** \"It's a very reasonable pattern to expect once you notice how reliably 're-' or 'un-' work in many words — but always checking for a genuine base word underneath protects you from over-applying the pattern to words where it doesn't actually function that way.\"",
+      "localKey": "MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING",
+      "language": "en",
+      "refs": [
+        "MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/misconception/MC-PREFIXES-ONLY-NEGATE-MEANING",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "- **Trigger signal:** Student assumes all (or most) prefixes work like negation prefixes (un-, non-, dis-, in-/im-), reversing or negating the base word's meaning, missing that many prefixes add other kinds of meaning entirely — location/direction (sub-, super-, inter-, trans-), time/order (pre-, post-, re-), number (bi-, tri-, multi-), or degree (over-, under-).",
+      "content": "### MC-PREFIXES-ONLY-NEGATE-MEANING\n- **Trigger signal:** Student assumes all (or most) prefixes work like negation prefixes (un-, non-, dis-, in-/im-), reversing or negating the base word's meaning, missing that many prefixes add other kinds of meaning entirely — location/direction (sub-, super-, inter-, trans-), time/order (pre-, post-, re-), number (bi-, tri-, multi-), or degree (over-, under-).\n- **Conflict evidence [P28]:** \"You said prefixes make a word mean the opposite. Does 'submarine' mean 'not a marine'? What does 'sub-' actually add here?\"\n- **Bridge text [P30]:** \"Negation prefixes (un-, non-, dis-, in-/im-) are one common category, but prefixes also express location (sub- = under, super- = above, inter- = between), time (pre- = before, post- = after), number (bi- = two, tri- = three), and degree (over- = too much, under- = too little) — negation is just one of several distinct meaning categories.\"\n- **Replacement text [P31]:** \"Check what CATEGORY of meaning a prefix adds — negation is common, but also consider location, time, number, and degree before assuming negation.\"\n- **Discrimination pairs [P33]:**\n  - \"unhappy\" (negation: un- = not) vs. \"submarine\" (location: sub- = under).\n  - \"disagree\" (negation: dis- = not/opposite) vs. \"prehistoric\" (time: pre- = before).\n- **s6_path:** \"Negation prefixes are often taught first and are very memorable, which makes them feel like the main pattern — but prefixes covering location, time, number, and degree are just as common and important to recognize.\"\n\n---",
+      "localKey": "MC-PREFIXES-ONLY-NEGATE-MEANING",
+      "language": "en",
+      "refs": [
+        "MC-PREFIXES-ONLY-NEGATE-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "Negation Prefixes",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Negation Prefixes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "Non-Negation Prefix Categories (Location, Time, Number, Degree)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Non-Negation Prefix Categories (Location, Time, Number, Degree)\",\"primitives\":[],\"addresses\":[\"MC-PREFIXES-ONLY-NEGATE-MEANING\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-PREFIXES-ONLY-NEGATE-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "Checking for a Genuine Base Word",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Checking for a Genuine Base Word\",\"primitives\":[],\"addresses\":[\"MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "Using Prefix Knowledge to Infer Meaning",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Using Prefix Knowledge to Infer Meaning\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "Generating Words with a Given Prefix",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Generating Words with a Given Prefix\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING\",\"MC-PREFIXES-ONLY-NEGATE-MEANING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PREFIXES-ONLY-NEGATE-MEANING",
+        "MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Negation prefix, novel word**\n\"What does 'dis-' mean in 'disagree'?\"\n*Target:* \"not\" or \"opposite of\" — negation.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Non-negation prefix, novel word**\n\"What does 'tri-' mean in 'triangle'? What category is this?\"\n*Target:* \"three\" — number category, not negation.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Genuine base word check, novel example**\n\"Is 'pre-' a meaningful prefix in 'prevent'? Is there a recognizable base word 'vent' with a related meaning here?\"\n*Target:* correctly reasons that \"prevent\" doesn't clearly decompose into \"pre-\" + a transparent base word \"vent\" in modern English (this is a Latin-derived word where the historical roots aren't transparent to most learners) — recognizing the limits of prefix analysis for such words.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Inferring meaning from a known prefix + base**\n\"What might 'unbreakable' mean, using the prefix 'un-' and the base word 'breakable'?\"\n*Target:* \"not able to be broken\" — correctly combines negation with the base word's meaning.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain prefixes and their categories**\n\"In your own words: do all prefixes make a word negative, and how do you check if a prefix is really working as a prefix?\"\n*Target:* states or demonstrates that prefixes cover multiple meaning categories (negation, location, time, number, degree — not just negation), and that a genuine prefix requires a recognizable base word underneath it.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "Adaptive Flags",
+      "content": "- **Base-word check is the essential discipline, not an afterthought**: always require verification that a genuine base word exists before confirming prefix status — this directly counters over-application of prefix patterns to coincidental letter sequences.\n- **Multiple meaning categories, not just negation**: explicitly teach location, time, number, and degree prefixes alongside negation from early instruction, since negation prefixes' memorability shouldn't crowd out the other equally common categories.\n- **Productive generation reinforces active vocabulary use**: TA-5's word-generation task builds active, productive skill beyond passive recognition — prioritize this alongside receptive identification tasks, paralleling the word-families concept's approach.\n- **Morphological-system transfer for L1s without prefix-based word formation**: for S9 learners whose L1 doesn't build words via prefixation, provide more foundational scaffolding on the very concept of \"meaningful word-building pieces\" before assuming the pattern-recognition skill transfers readily.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.vocab.prefixes/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.prefixes",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — prefix building blocks warm-up (attach un- to happy)\n  ↓\n[P41] PD-1 (word-families readiness)\n  ↓ PASS\n[P06] Anchor: prefix building blocks (real attachment vs. trick word like \"uncle\")\n  ↓\nTA-1: Negation prefixes [C]\n  ↓\nTA-2: Non-negation prefix categories (location, time, number, degree) [C]\n  ↓\n[P28] Conflict: prefixes assumed to only negate → MC-PREFIXES-ONLY-NEGATE-MEANING (if triggered)\n  ↓\nTA-3: Checking for a genuine base word [C→P]\n  ↓\n[P28] Conflict: prefix assumed to always carry fixed meaning → MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING (if triggered)\n  ↓\nTA-4: Using prefix knowledge to infer meaning [P]\n  ↓\nTA-5: Generating words with a given prefix [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one word with a prefix and identify its meaning category.\"\n[P68] Session close\n[P85] Regulation tail — praise checking for a genuine base word over assuming a fixed prefix meaning\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word families, new to prefixes specifically): dwell on TA-1's negation prefixes with clear, unambiguous examples before introducing other categories. S1 (already recognizes some prefixes intuitively): use TA-2/TA-3 to build explicit category-awareness and the base-word-check skill for an already-present pattern-recognition ability. S6 (frustrated by \"trick\" words that look like they have a prefix but don't): validate that this check is a genuine, valuable skill precisely because English has many such words, and that noticing the difference protects against overconfident misanalysis. S9 (L1 has a very different morphological system with no prefix-based word formation, e.g. an isolating or root-and-pattern language): expect this concept's underlying assumption (words built by adding meaningful pieces to a base) to require more foundational scaffolding, since the very idea of prefixation may not have a direct L1 parallel.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.prefixes.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

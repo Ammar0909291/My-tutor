@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.word-order-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.word-order",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:64224bd6a14b6f07a3fdcf97b467207f9100b1c0d5f7ff25e2a1532bb54ef852",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.word-order.md": "sha256:fc9bf969f6f4ff8faa3d3721306f240b4b27a58a728dcd8362767d8e563e7088"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.word-order",
+    "name": "Basic Word Order",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.subject-and-predicate"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.word-order-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.word-order (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.word-order.md": "sha256:fc9bf969f6f4ff8faa3d3721306f240b4b27a58a728dcd8362767d8e563e7088"
+      },
+      "contentHash": "sha256:d4d39f4dcca010629e3d35711a2cf66e1afdc17d853b13c5ef2d39083154e0ab",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-order.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-order.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-order.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-order.md#TA-2 (addresses MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-order.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-order.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-order.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-order.md#TA-4 (addresses MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.word-order.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.word-order.md#TA-5 (addresses MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES, MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.word-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.word-order\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.word-order/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.word-order",
+      "title": "Basic Word Order — Conceptual Development Sequence",
+      "content": "**TA-1 — Basic SVO Order in Simple Sentences [C]**\n\nPresent simple sentences; student identifies the Subject-Verb-Object order and confirms each noun's role (doer vs. receiver) based on position.\n\n**TA-2 — Scrambled Order Meaning-Change Demonstration [C]**\n\nUsing the Component 3 train-car technique, student scrambles a sentence's word order and identifies how the meaning changes (or becomes nonsensical/reversed), directly targeting MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES.\n\n**TA-3 — Adjective Placement (Before the Noun) [C→P]**\n\nPresent sentences requiring adjective placement; student correctly places adjectives before the noun they modify.\n\n**TA-4 — Adverb Placement (After Verb+Object) [P]**\n\nPresent sentences requiring manner/degree adverb placement; student correctly places adverbs after the verb+object rather than splitting them, directly targeting MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE.\n\n**TA-5 — Correcting Scrambled or Misordered Sentences [P]**\n\nPresent sentences with incorrect word order (scrambled SVO, misplaced adjectives/adverbs); student identifies the error and corrects it to standard English order.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/misconception/MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.word-order",
+      "title": "- **Trigger signal:** Student assumes English word order is as flexible as some other languages (where grammatical case markers, not position, indicate roles, allowing scrambled order), producing sentences with subject/verb/object in non-standard positions that a fluent English speaker would find confusing or ungrammatical (e.g., \"The ball threw the boy\" when meaning \"the boy threw the ball\" — in English, word ORDER, not word endings, signals who did what to whom).",
+      "content": "### MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES\n- **Trigger signal:** Student assumes English word order is as flexible as some other languages (where grammatical case markers, not position, indicate roles, allowing scrambled order), producing sentences with subject/verb/object in non-standard positions that a fluent English speaker would find confusing or ungrammatical (e.g., \"The ball threw the boy\" when meaning \"the boy threw the ball\" — in English, word ORDER, not word endings, signals who did what to whom).\n- **Conflict evidence [P28]:** \"You said 'The ball threw the boy' to mean the boy did the throwing. In English, does the FIRST noun before the verb tell us who's doing the action, regardless of what makes logical sense? Who does 'the ball threw the boy' actually say did the throwing?\"\n- **Bridge text [P30]:** \"English relies heavily on WORD ORDER (Subject-Verb-Object, or SVO) to signal grammatical roles, unlike languages that use case endings to mark roles regardless of position. In English, the noun BEFORE the verb is understood as the subject/doer, and the noun AFTER the verb is understood as the object/receiver — scrambling this order changes (or destroys) the meaning, even if logic suggests otherwise.\"\n- **Replacement text [P31]:** \"In English, always place the doer (subject) before the verb and the receiver (object) after the verb — word order itself carries the grammatical meaning, unlike languages using case endings.\"\n- **Discrimination pairs [P33]:**\n  - \"The boy threw the ball\" (correct SVO — boy is the subject/doer, ball is the object/receiver) vs. \"The ball threw the boy\" (grammatically implies the ball did the throwing, which is nonsensical, but that's what the WORD ORDER says).\n  - \"The dog bit the cat\" vs. \"The cat bit the dog\" — same words, reversed order, completely different (and equally grammatical) meaning.\n- **s6_path:** \"If your first language uses word endings rather than position to show who did what, it's very reasonable to expect similar flexibility in English — but English relies on strict SVO order specifically because it lacks those case-marking endings, making word order the primary signal.\"",
+      "localKey": "MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES",
+      "language": "en",
+      "refs": [
+        "MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/misconception/MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.word-order",
+      "title": "- **Trigger signal:** Student places adjectives and adverbs in positions that violate English's specific ordering conventions (e.g., placing an adjective after the noun by default, as in some Romance languages — \"the house red\" instead of \"the red house\" — or placing an adverb between a verb and its direct object, which sounds unnatural in English — \"I like very much chocolate\" instead of \"I like chocolate very much\").",
+      "content": "### MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE\n- **Trigger signal:** Student places adjectives and adverbs in positions that violate English's specific ordering conventions (e.g., placing an adjective after the noun by default, as in some Romance languages — \"the house red\" instead of \"the red house\" — or placing an adverb between a verb and its direct object, which sounds unnatural in English — \"I like very much chocolate\" instead of \"I like chocolate very much\").\n- **Conflict evidence [P28]:** \"You said 'I like very much chocolate.' Does 'very much' usually go right between the verb and its object in natural English, or does it typically go at the end, after the object?\"\n- **Bridge text [P30]:** \"English has specific conventional positions for adjectives (typically before the noun: 'the red house') and adverbs (often after the verb+object, or in other specific positions depending on adverb type — manner adverbs like 'very much,' 'quickly' typically follow the object rather than splitting the verb from its object: 'I like chocolate very much,' not 'I like very much chocolate').\"\n- **Replacement text [P31]:** \"Place adjectives before the noun they describe, and place manner/degree adverbs after the verb+object (not between them) unless following a specific alternate pattern you've confirmed is natural.\"\n- **Discrimination pairs [P33]:**\n  - \"the red house\" (adjective before noun — correct English order) vs. \"the house red\" (adjective after noun — not standard English order, though correct in some other languages).\n  - \"I like chocolate very much\" (adverb after the object) vs. \"I like very much chocolate\" (adverb incorrectly splitting verb and object).\n- **s6_path:** \"If your first language places descriptive words differently, expecting the same flexibility in English is very natural — but English has specific, learnable conventional positions worth practicing directly, since word order errors here are among the most noticeable in learner English.\"\n\n---",
+      "localKey": "MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE",
+      "language": "en",
+      "refs": [
+        "MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-order",
+      "title": "Basic SVO Order in Simple Sentences",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Basic SVO Order in Simple Sentences\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-order",
+      "title": "Scrambled Order Meaning-Change Demonstration",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Scrambled Order Meaning-Change Demonstration\",\"primitives\":[],\"addresses\":[\"MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-order",
+      "title": "Adjective Placement (Before the Noun)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Adjective Placement (Before the Noun)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-order",
+      "title": "Adverb Placement (After Verb+Object)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Adverb Placement (After Verb+Object)\",\"primitives\":[],\"addresses\":[\"MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.word-order",
+      "title": "Correcting Scrambled or Misordered Sentences",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Correcting Scrambled or Misordered Sentences\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE\",\"MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES",
+        "MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-order",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — SVO identification, novel sentence**\n\"In 'The teacher praised the student,' who is doing the praising?\"\n*Target:* \"the teacher\" — identified by its position before the verb.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-order",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Scrambled meaning, novel example**\n\"Does 'The student praised the teacher' mean the same as 'The teacher praised the student'?\"\n*Target:* no — the roles reverse completely based on word order.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-order",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Adjective placement, novel sentence**\n\"Correct this if needed: 'I bought a car new.'\"\n*Target:* \"I bought a new car\" — adjective \"new\" moves before the noun \"car.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-order",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Adverb placement, novel sentence**\n\"Correct this if needed: 'He finished quickly his homework.'\"\n*Target:* \"He finished his homework quickly\" — adverb moves after the object.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.word-order",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain English word order**\n\"In your own words: why does word order matter so much in English, and where do adjectives/adverbs typically go?\"\n*Target:* states or demonstrates that English relies on Subject-Verb-Object order to signal grammatical roles (since it lacks case-marking endings), and that adjectives typically go before the noun while manner/degree adverbs typically go after the verb+object.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.word-order",
+      "title": "Adaptive Flags",
+      "content": "- **SVO order is THE core grammatical signal in English**: this concept's central lesson — that word order (not case-marking) carries grammatical role information — must be demonstrated concretely (Component 3's train cars) rather than just stated.\n- **Adjective/adverb placement rules are genuine, learnable conventions**: teach specific positions (adjectives before nouns; manner/degree adverbs after verb+object) as concrete, checkable rules, not vague stylistic preferences.\n- **Scrambled-order demonstration builds durable intuition**: TA-2's meaning-reversal exercise is a particularly memorable, high-value technique for making the SVO-dependency concrete and should be revisited whenever word-order confusion resurfaces.\n- **Case-marking-L1 transfer deserves the most substantial dedicated practice in this blueprint**: for S9 learners from flexible-word-order L1 backgrounds, treat this concept as needing significantly more practice time than the standard session suggests, since SVO rigidity is one of the most persistent, well-documented L2 English challenges.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.word-order/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.word-order",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — word-order train cars warm-up (correct order)\n  ↓\n[P41] PD-1 (subject-and-predicate readiness)\n  ↓ PASS\n[P06] Anchor: word-order train cars (correct order vs. scrambled meaning-flip)\n  ↓\nTA-1: Basic SVO order in simple sentences [C]\n  ↓\nTA-2: Scrambled order meaning-change demonstration [C]\n  ↓\n[P28] Conflict: word order assumed flexible → MC-WORD-ORDER-IS-FLEXIBLE-LIKE-OTHER-LANGUAGES (if triggered)\n  ↓\nTA-3: Adjective placement (before the noun) [C→P]\n  ↓\nTA-4: Adverb placement (after verb+object) [P]\n  ↓\n[P28] Conflict: adjectives/adverbs placed freely → MC-ADJECTIVES-AND-ADVERBS-CAN-GO-ANYWHERE (if triggered)\n  ↓\nTA-5: Correcting scrambled or misordered sentences [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, write one sentence and check its SVO order, adjective placement, and adverb placement.\"\n[P68] Session close\n[P85] Regulation tail — praise checking word order and placement rules over relying on L1 intuition\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on subject-and-predicate, new to word-order rules specifically): dwell on TA-1's basic SVO pattern before introducing adjective/adverb placement nuances. S1 (already produces correct SVO order intuitively but places adjectives/adverbs inconsistently): focus on TA-3/TA-4, since these placement rules are often less intuitive even for otherwise fluent speakers. S6 (frustrated that English \"should\" allow more flexibility): validate that this rigidity is a genuine, structural feature of English (compensating for the lack of case-marking) rather than an arbitrary restriction. S9 (L1 has flexible word order due to case-marking morphology, e.g. Russian, Turkish, Japanese, Korean, Latin, or has different default adjective/adverb positions, e.g. French/Spanish postnominal adjectives): expect this concept to be one of the most significant, well-documented structural transfer challenges — dedicate substantial, explicit, repeated practice specifically to SVO rigidity and the adjective/adverb positioning rules, since these are common, persistent error sources across proficiency levels for learners from case-marking or different-word-order L1 backgrounds.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.word-order.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
