@@ -1,0 +1,396 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.syntax-theory-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.syntax-theory-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4f5fa0769d3556d74277090c0f5829cd05b85c1fb93dade6f9660415c7f7abf2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md": "sha256:249de75989a43722a139f514abe14d609b470315423415e4c70ac8c132e86764"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.syntax-theory-intro",
+    "name": "Introduction to Syntactic Theory",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.linguistics.morphology-intro",
+      "eng.grammar.clauses"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.syntax-theory-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.syntax-theory-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md": "sha256:249de75989a43722a139f514abe14d609b470315423415e4c70ac8c132e86764"
+      },
+      "contentHash": "sha256:0ae65b0a96ab564a8a8cade023149371b8e1405e55241fdc129a2c27b10a722e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.syntax-theory-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md#TA-1 (addresses MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.syntax-theory-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.syntax-theory-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.syntax-theory-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.syntax-theory-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.syntax-theory-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.syntax-theory-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.syntax-theory-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.syntax-theory-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.syntax-theory-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md#TA-4 (addresses MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.syntax-theory-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.syntax-theory-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.syntax-theory-intro.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md#TA-5 (addresses MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING, MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.syntax-theory-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.syntax-theory-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "Introduction to Syntactic Theory — Conceptual Development Sequence",
+      "content": "### TA-1 — Syntax as Unconscious, Internalized Knowledge (MC-A)\n\nUsing the walking-balance anchor, teach the distinction between deep, automatic syntactic knowledge\nand explicit, taught prescriptive rules. Student practice: given six rules or observations about\nsentences, sort into \"deep, unconscious syntactic knowledge\" and \"explicit, taught prescriptive\nconvention.\"\n\n### TA-2 — Phrases as Building Blocks\n\nTeach that sentences are built from PHRASES (noun phrases, verb phrases), not just individual words\nstrung together — introduce basic phrase-structure grouping. Student practice: given four sentences,\ngroup the words into their constituent phrases.\n\n### TA-3 — Word Order and Structural Well-Formedness\n\nTeach that syntactic well-formedness depends on following the language's specific word-order and\nagreement patterns. Student practice: given three scrambled word sets, arrange each into the only (or\nmost natural) grammatically well-formed order.\n\n### TA-4 — Syntax vs. Semantics: Structure vs. Meaning (MC-B)\n\nUsing the bridge-to-nowhere anchor and the \"Colorless green ideas\" example, teach the distinction\nbetween grammatical well-formedness and meaningfulness. Student practice: given four sentences (mixing\ngrammatical-and-meaningful, grammatical-but-nonsensical, and ungrammatical examples), classify each\nalong both dimensions separately.\n\n### TA-5 — Full Application: Analyzing Sentence Structure and Distinguishing It From Meaning\n\nGive the student a new sentence set including at least one grammatical-but-nonsensical example. They\nmust identify phrase structure (TA-2), confirm word-order well-formedness (TA-3), and explicitly\nevaluate syntax and semantics as separate questions (TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 153,
+        "endLine": 187
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/misconception/MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "**Trigger signal:** Student conflates linguistic syntax (the formal study of a speaker's internalized",
+      "content": "### MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY\n\n**Trigger signal:** Student conflates linguistic syntax (the formal study of a speaker's internalized\nstructural knowledge, which every fluent speaker has regardless of formal education) with\nprescriptive school-grammar rules (explicit writing conventions like \"don't split infinitives\" that\nmust be taught and learned) — e.g., assuming a linguist studying syntax is checking whether sentences\nfollow the same rules as a writing style guide.\n\n**Conflict evidence [P28]:** Show the student a sentence a young child (with no formal grammar\ninstruction) would never produce, even though nothing explicitly \"taught\" them not to (e.g., a child\nwould say \"the big red ball\" but essentially never \"the ball big red,\" even without ever being taught\nadjective ordering rules explicitly). Ask: \"If no one taught this child a rule about adjective order,\nhow does the child 'know' not to produce the second version? Is this the same kind of knowledge as a\nstyle guide rule someone has to be explicitly taught?\"\n\n**Bridge text [P30]:** \"School grammar rules (like 'don't end a sentence with a preposition') are\nlike traffic laws — explicit, taught rules that could in principle be different, and that not\neveryone follows. Syntax, as linguists study it, is more like the automatic, unconscious balance and\ncoordination your body uses to walk — nobody explicitly taught you the muscle sequence, yet you do it\ncorrectly and consistently, and even without formal training. Linguistic syntax researches this deep,\nunconscious structural knowledge every fluent speaker has, not the explicit writing rules taught in\nschool.\"\n\n**Replacement text [P31]:** \"Ask: is this rule something a speaker had to be explicitly TAUGHT and\ncould consciously violate while still being understood (like a style guide convention), or is it part\nof the deep, automatic structural knowledge every fluent speaker has without ever being taught it\ndirectly (like never confusing subject and object)? Linguistic syntax studies the second kind of\nknowledge.\"\n\n**Discrimination pairs [P33]:**\n1. \"Don't split an infinitive\" (an explicitly taught, debatable style convention — prescriptive school\n   grammar) vs. the automatic, untaught knowledge that \"the ball big red\" sounds wrong to any fluent\n   English speaker, even a young child (deep, unconscious syntactic knowledge).\n2. A student assuming a linguist studying syntax is correcting \"bad grammar\" the way an English\n   teacher grading an essay would (misconception) vs. a student recognizing the linguist is\n   documenting the automatic structural patterns every fluent speaker (including non-writers,\n   young children, and speakers of \"non-standard\" dialects) already has (correct understanding).\n\n**s6_path:** If the student continues conflating linguistic syntax with school grammar after the\nbridge, have them generate three sentence orderings that \"just sound wrong\" to them even though no\none ever explicitly taught them a rule against that specific ordering, demonstrating their own\ninternalized structural knowledge directly.",
+      "localKey": "MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY",
+      "language": "en",
+      "refs": [
+        "MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 3,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/misconception/MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "**Trigger signal:** Student assumes that a sentence following correct structural rules must",
+      "content": "### MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING\n\n**Trigger signal:** Student assumes that a sentence following correct structural rules must\nautomatically also be meaningful, failing to recognize that syntax (structural well-formedness) and\nsemantics (meaning) are related but genuinely separate levels of linguistic analysis — e.g., rejecting\na structurally perfect but nonsensical sentence as \"not grammatical\" when it is, in fact, perfectly\ngrammatical, just meaningless.\n\n**Conflict evidence [P28]:** Show the student the classic linguistic example \"Colorless green ideas\nsleep furiously\" alongside a genuinely ungrammatical string of the same words in scrambled order\n(\"Furiously sleep ideas green colorless\"). Ask: \"Is the first sentence grammatically well-formed —\ndoes it follow English sentence structure rules (subject-verb agreement, word order, phrase\nstructure)? Does it make logical sense? Are these actually the same question?\"\n\n**Bridge text [P30]:** \"Assuming grammatical correctness and meaningfulness are the same thing is\nlike assuming a beautifully, structurally sound bridge must automatically lead somewhere useful — but\na bridge can be engineered perfectly (structurally sound) while still leading nowhere meaningful (to\nan empty field, say). Syntax is the structural engineering of a sentence; semantics (meaning) is a\nseparate question about where that structure actually 'leads.' A sentence can be perfectly engineered\n(grammatical) while going nowhere sensible (meaningless).\"\n\n**Replacement text [P31]:** \"When evaluating a sentence, ask two SEPARATE questions: (1) Does it\nfollow the structural rules of English sentence formation (syntax)? (2) Does it make logical sense\n(semantics)? A sentence can pass the first test and fail the second — these are not the same\nquestion.\"\n\n**Discrimination pairs [P33]:**\n1. \"Colorless green ideas sleep furiously.\" (grammatically well-formed — correct word order, subject-\n   verb agreement — but semantically nonsensical, since ideas can't be colorless, green, or sleep) vs.\n   \"Furiously sleep ideas green colorless.\" (both ungrammatical AND nonsensical — violates basic word\n   order rules).\n2. A student calling the first sentence \"not grammatical\" because it doesn't make sense\n   (conflating syntax and semantics) vs. a student correctly identifying it as grammatically\n   well-formed but semantically odd (correctly separating the two levels).\n\n**s6_path:** If the student continues conflating the two after the bridge, have them construct their\nown sentence that is grammatically correct (following standard word order and agreement rules) but\ndeliberately nonsensical, then explain separately why it passes the structural test and fails the\nmeaning test.",
+      "localKey": "MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING",
+      "language": "en",
+      "refs": [
+        "MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 46,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "Syntax as Unconscious, Internalized Knowledge (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Syntax as Unconscious, Internalized Knowledge (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 157,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "Phrases as Building Blocks",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Phrases as Building Blocks\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 164,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "Word Order and Structural Well-Formedness",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Word Order and Structural Well-Formedness\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 170,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "Syntax vs. Semantics: Structure vs. Meaning (MC-B)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Syntax vs. Semantics: Structure vs. Meaning (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 176,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "Full Application: Analyzing Sentence Structure and Distinguishing It From Meaning",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Analyzing Sentence Structure and Distinguishing It From Meaning\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY\",\"MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-B-A-GRAMMATICALLY-CORRECT-SENTENCE-MUST-ALSO-MAKE-SENSE-SYNTAX-AND-MEANING-ARE-THE-SAME-THING",
+        "MC-A-SYNTAX-IS-JUST-SCHOOL-GRAMMAR-RULES-FOR-WRITING-CORRECTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 183,
+        "endLine": 315
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Distinguishing Deep Syntax from Taught Convention**\nGiven four rules or observations about sentences, sort into \"deep, unconscious syntactic knowledge\"\nand \"explicit, taught prescriptive convention,\" justifying each classification.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 209,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Phrase Structure**\nGiven two sentences, group the words into their constituent noun phrases and verb phrases.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 209,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Confirming Word-Order Well-Formedness**\nGiven two scrambled word sets, arrange each into a grammatically well-formed English sentence order.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 209,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Separating Syntax from Semantics**\nGiven three sentences (grammatical-and-meaningful, grammatical-but-nonsensical, ungrammatical),\nclassify each along both the syntactic and semantic dimensions separately.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 209,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Structural Analysis**\nGiven a new sentence, identify its phrase structure, confirm its word-order well-formedness, and\nevaluate its meaningfulness as a separate question from its grammaticality.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 209,
+        "endLine": 229
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters phrase-structure identification (MP-2) but struggles specifically with the\n  syntax/semantics separation (MP-4), this is a conceptual distinction issue, not a mechanical one —\n  return to the bridge-to-nowhere anchor with a new concrete example rather than more phrase-structure\n  drilling.\n- If the student has strong prior exposure to prescriptive grammar instruction, expect more initial\n  resistance to MC-A's reframe — this parallels the same paradigm shift required in\n  `eng.linguistics.what-is-linguistics`, and connecting explicitly back to that concept (if completed)\n  should ease the transition.\n- If the student enjoys the \"grammatical but nonsensical\" sentence type and starts generating creative\n  examples independently, encourage this as a strong sign of genuine conceptual grasp — invented\n  examples are strong transfer evidence for MP-4/MP-5-level understanding.\n- Students who found `eng.grammar.clauses` mechanically straightforward but rote should be watched\n  for surface-level phrase-identification without genuine structural understanding — the mastery\n  probes' emphasis on explaining WHY a grouping is a phrase (not just producing correct groupings) is\n  the primary check against this.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 266,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "eng.linguistics.syntax-theory-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.syntax-theory-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: morphology check] --> [PD-2: clauses check]\n   |                                             |\n   | (gap found)                                 | (pass)\n   v                                              v\n[Route to prerequisite concept]      [Component 3: Walking-Balance / Bridge-to-Nowhere Anchor]\n                                                  |\n                                                  v\n                               [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                  |\n                                                  v\n                            [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                  |\n                                                  v\n                            [MP-1 through MP-5 mastery probe set]\n                                                  |\n                            (pass >= 0.75) -----+----- (fail)\n                                   |                      |\n                                   v                      v\n          [Unlock: semantics-intro, language-acquisition-  [S6 remediation: generate-your-\n           intro, computational-linguistics-intro]           own-untaught-rule / cover-the-\n                                                               claim-style separation drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (before the deep/taught distinction is settled) and MC-B during TA-4 (once structural analysis is\nunderway and meaning naturally enters the discussion) — MC-A generally needs resolving first since\nframing syntax correctly as a descriptive science affects how the entire sequence is approached. If\neither fires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9),\nroute by failure: MP-1 failure indicates residual MC-A; MP-2/MP-3 failures indicate the phrase-\nstructure and word-order mechanics (TA-2/TA-3) need review, distinct from either misconception; MP-4\nfailure alone indicates residual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an\nintegration gap — provide one more guided full-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.syntax-theory-intro.md",
+        "startLine": 229,
+        "endLine": 266
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

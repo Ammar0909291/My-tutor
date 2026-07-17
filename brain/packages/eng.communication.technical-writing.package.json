@@ -1,0 +1,361 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.technical-writing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.technical-writing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3045ea744bd771f8e2935edf71fc8d52913ba03481073995b942b637ebd01724",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.technical-writing.md": "sha256:4dd0ecdf2d4cbdcba3c7fa7317f96844424591a9252a1c25cc31e1e64fba177c"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.technical-writing",
+    "name": "Technical Writing",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.communication.academic-writing-advanced"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.technical-writing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.technical-writing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.technical-writing.md": "sha256:4dd0ecdf2d4cbdcba3c7fa7317f96844424591a9252a1c25cc31e1e64fba177c"
+      },
+      "contentHash": "sha256:4a0aa909b8a30b5685f108bc7142fbac0a6a2dd76e98ab7c0738410fadd5a8a3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.technical-writing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.technical-writing.md#TA-1 (addresses MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.technical-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.technical-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.technical-writing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.technical-writing.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.technical-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.technical-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.technical-writing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.technical-writing.md#TA-3 (addresses MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.technical-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.technical-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.technical-writing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.technical-writing.md#TA-4 (addresses MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING, MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.technical-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.technical-writing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.technical-writing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "Technical Writing — Conceptual Development Sequence",
+      "content": "### TA-1 — Consistent Terminology (MC-A)\n\nUsing the three-named-intersection anchor, teach the principle of rigid terminological consistency in\ntechnical writing. Student practice: given a draft using three different terms for one component,\nidentify the inconsistency and standardize to one term throughout.\n\n### TA-2 — Step-by-Step Clarity for a Zero-Knowledge Reader\n\nTeach writing instructions assuming absolutely no prior knowledge, breaking complex actions into\ndiscrete, sequential steps. Student practice: given a multi-step process described in one dense\nparagraph, break it into clear, numbered steps.\n\n### TA-3 — Anticipating Reader Confusion and Error Points (MC-B)\n\nUsing the hiking-trail-fork anchor, teach students to identify likely points of confusion or error in\ntheir own instructions and add guidance for them. Student practice: given a set of happy-path-only\ninstructions, identify at least one likely error point and write guidance addressing it.\n\n### TA-4 — Full Application: Writing a Complete Technical Document\n\nGive the student a process to document (e.g., a multi-step procedure) with no draft provided. They\nmust write consistent-terminology, step-by-step instructions (TA-1, TA-2) that also anticipate and\naddress at least one likely error point (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 148,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/misconception/MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING",
+      "kind": "misconception",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "**Trigger signal:** Student, applying a general writing principle of varying vocabulary to avoid",
+      "content": "### MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING\n\n**Trigger signal:** Student, applying a general writing principle of varying vocabulary to avoid\nrepetitive language, switches between synonyms for the same technical term across a document (e.g.,\ncalling the same component \"the switch,\" then \"the toggle,\" then \"the control\" in different steps),\nbelieving this makes the writing more sophisticated, when it actually creates dangerous ambiguity\nabout whether these refer to the same or different things.\n\n**Conflict evidence [P28]:** Show the student a set of instructions using three different terms for\nthe same physical component across different steps (\"press the switch,\" later \"flip the toggle,\" even\nlater \"adjust the control\") alongside a version using the SAME term consistently throughout (\"press\nthe switch\" every time). Ask: \"If you were following these instructions and had never seen this\ndevice before, would you know 'the toggle' and 'the control' refer to the same thing as 'the switch,'\nor would you reasonably wonder if there are three different parts?\"\n\n**Bridge text [P30]:** \"Varying your vocabulary in a personal essay makes it more interesting to\nread — but doing the same thing in technical instructions is like a map that calls the same\nintersection three different names on three different signs. A reader following the map has no way of\nknowing these all refer to the same place; they'll reasonably think they've made a wrong turn.\nTechnical writing needs the OPPOSITE of vocabulary variety: rigid, boring, unwavering consistency for\nevery named part, tool, or step.\"\n\n**Replacement text [P31]:** \"In technical writing, once you name something (a component, a setting, a\nstep), use that EXACT SAME term every single time you refer to it again, throughout the entire\ndocument. Resist the instinct to vary vocabulary — consistency, not variety, is the goal here.\"\n\n**Discrimination pairs [P33]:**\n1. \"Press the switch. ... Flip the toggle. ... Adjust the control.\" (varied vocabulary for what\n   should be the same term, creating dangerous ambiguity) vs. \"Press the switch. ... Press the switch\n   again. ... Release the switch.\" (rigidly consistent terminology, unambiguous).\n2. A student praised for \"sophisticated vocabulary variety\" in a personal essay, then applying the\n   same instinct to a technical manual (misapplied general writing principle) vs. a student\n   recognizing that technical writing's goals (clarity, safety, unambiguous execution) require the\n   opposite approach from literary variety (correctly calibrated register).\n\n**s6_path:** If the student continues varying terminology after the bridge, have them read through\ntheir own draft and highlight, in one color, every unique physical component or concept mentioned, and\nin a second color, every DIFFERENT WORD used to refer to it — any component with more than one\nhighlighted term needs to be standardized to a single term throughout.",
+      "localKey": "MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING",
+      "language": "en",
+      "refs": [
+        "MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 3,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/misconception/MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT",
+      "kind": "misconception",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "**Trigger signal:** Student writes instructions that only describe the ideal, successful sequence of",
+      "content": "### MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT\n\n**Trigger signal:** Student writes instructions that only describe the ideal, successful sequence of\nsteps (the \"happy path\"), without anticipating or addressing common points of confusion, likely\nmistakes, or error conditions a real reader might encounter — leaving the reader stranded with no\nguidance the moment something doesn't go exactly as described.\n\n**Conflict evidence [P28]:** Show the student a set of assembly instructions that only describe the\nsuccessful sequence with no guidance for common errors (e.g., \"insert part A into slot B\") alongside a\nversion that also anticipates a likely point of confusion (\"insert part A into slot B; if it doesn't\nslide in easily, check that the arrow on part A is facing up — inserting it upside down is a common\nmistake\"). Ask: \"If you accidentally tried to insert part A upside down, would the first version help\nyou at all? What about the second?\"\n\n**Bridge text [P30]:** \"Writing instructions that only describe the happy path is like a hiking trail\nguide that only describes the correct route with zero mention of the fork in the trail where most\nhikers accidentally go the wrong way — the guide might be perfectly accurate for someone who never\nmakes that turn, but it fails exactly the readers who need help most. Good technical writing\nanticipates the SPECIFIC points where readers are likely to go wrong and addresses them directly, not\njust the ideal sequence.\"\n\n**Replacement text [P31]:** \"After drafting your instructions, ask: at which specific steps is a\nreader likely to make a mistake, get confused, or encounter an unexpected result? Add a brief note\naddressing at least the most likely point of confusion — don't just describe what happens when\neverything goes perfectly.\"\n\n**Discrimination pairs [P33]:**\n1. \"Insert part A into slot B.\" (happy-path only, no anticipation of the common upside-down mistake)\n   vs. \"Insert part A into slot B; if it doesn't slide in easily, check that the arrow is facing up.\"\n   (anticipates and addresses a likely error point).\n2. A student who writes clear, accurate instructions for the ideal sequence but never considers what\n   could go wrong (happy-path-only writing) vs. a student who identifies at least one likely failure\n   point and writes guidance for it directly into the instructions (anticipatory, robust technical\n   writing).\n\n**s6_path:** If the student continues writing happy-path-only instructions after the bridge, have\nthem literally attempt to follow their own instructions as if they were a first-time user with no\nprior knowledge, trying to identify at least one place where they personally might get confused or\nmake an error, then add guidance for that specific point.",
+      "localKey": "MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT",
+      "language": "en",
+      "refs": [
+        "MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 43,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "Consistent Terminology (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Consistent Terminology (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "Step-by-Step Clarity for a Zero-Knowledge Reader",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Step-by-Step Clarity for a Zero-Knowledge Reader\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "Anticipating Reader Confusion and Error Points (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Anticipating Reader Confusion and Error Points (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 164,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "Full Application: Writing a Complete Technical Document",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Writing a Complete Technical Document\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING\",\"MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-TECHNICAL-WRITING-SHOULD-USE-VARIED-VOCABULARY-TO-AVOID-REPETITION-LIKE-OTHER-WRITING",
+        "MC-B-TECHNICAL-WRITING-ONLY-NEEDS-TO-DESCRIBE-WHAT-TO-DO-WHEN-EVERYTHING-GOES-RIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 170,
+        "endLine": 303
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Terminological Inconsistency**\nGiven a technical draft using multiple terms for one component, identify the inconsistency and select\na single term to standardize on.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Breaking a Process into Zero-Knowledge Steps**\nGiven a process described in one dense paragraph, break it into clear, numbered, sequential steps\nsuitable for a reader with no prior knowledge.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying a Likely Error Point**\nGiven a set of happy-path-only instructions, identify at least one likely point of reader confusion\nor error.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Writing Anticipatory Guidance**\nGiven an identified likely error point, write a brief, clear note addressing it within the\ninstructions.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Technical Document**\nGiven a new process with no draft provided, write complete step-by-step instructions using consistent\nterminology and addressing at least one likely error point.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 193,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated consistency-checking and error-anticipation (MP-1, MP-3) but\n  reverts to varied vocabulary or happy-path-only writing under the combined demand of MP-5, provide\n  a structured checklist (name once, use everywhere; walk through as a first-timer; note one likely\n  snag) as scaffolding before removing it.\n- If the student has been strongly praised for vocabulary variety in prior literary/expository writing\n  concepts, expect more initial resistance to MC-A — explicitly frame this as a register-specific\n  skill (this genre requires the opposite instinct), not a contradiction of prior good writing advice.\n- If the student's anticipated error points (MP-3, MP-4) are generic or vague (\"something might go\n  wrong here\") rather than specific and plausible, push for concrete specificity — what EXACTLY is\n  likely to confuse a reader at this exact step, based on the actual content of the process being\n  documented.\n- Students with hands-on experience with the specific process being documented (e.g., they've\n  actually assembled the object or performed the task) should be encouraged to draw on their own\n  memory of confusion points when they first learned it, since this is often the richest source of\n  genuinely useful anticipatory guidance.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 254,
+        "endLine": 272
+      }
+    },
+    {
+      "assetId": "eng.communication.technical-writing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.technical-writing",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: academic writing advanced check] --> [PD-2: instruction-writing check]\n   |                                                              |\n   | (gap found)                                                  | (pass)\n   v                                                               v\n[Route to eng.communication.academic-writing-advanced]  [Component 3: Named-Intersection /\n                                                            Hiking-Trail-Fork Anchor]\n                                                                    |\n                                                                    v\n                                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                    |\n                                                                    v\n                                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                    |\n                                                                    v\n                                          [MP-1 through MP-5 mastery probe set]\n                                                                    |\n                                          (pass >= 0.75) -----+----- (fail)\n                                                 |                      |\n                                                 v                      v\n                              [Unlock: presentation-design]  [S6 remediation: highlight-and-\n                                                               standardize / walk-it-yourself\n                                                               drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; an academic-writing gap routes back\nto that prerequisite, an instruction-writing gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-A typically surfaces during TA-1 (applying literary variety instincts) and MC-B\nduring TA-3 (writing only the happy path) — these are largely independent and often need separate,\nexplicit correction since MC-A is a register-transfer error (from other writing contexts) while MC-B\nis a perspective-taking gap (failing to imagine the reader's actual experience). If either fires,\nbranch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by\nfailure: MP-1 failure indicates residual MC-A; MP-2 failure alone indicates the step-breakdown\nmechanics (TA-2) needs review, distinct from either misconception; MP-3/MP-4 failures indicate\nresidual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one\nmore guided full-document example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.technical-writing.md",
+        "startLine": 215,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

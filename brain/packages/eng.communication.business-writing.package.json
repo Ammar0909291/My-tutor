@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.communication.business-writing-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.communication.business-writing",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:578808c4c057c2489854df8d4e9aac2fd1fc8f497b6ed48e869cdb6106ecce0a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.communication.business-writing.md": "sha256:90cfcb94c133e5a3e3d400db6d0c13c52f67027e4115804eb5f9af1d3d4dceef"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.communication.business-writing",
+    "name": "Business Writing",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.communication.academic-writing-advanced"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.communication.business-writing-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.communication.business-writing (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.communication.business-writing.md": "sha256:90cfcb94c133e5a3e3d400db6d0c13c52f67027e4115804eb5f9af1d3d4dceef"
+      },
+      "contentHash": "sha256:12096214555c968c7e238c82814cbbd9a6cfb5960a90cc5301464f3895baea32",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.communication.business-writing.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.business-writing.md#TA-1 (addresses MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.business-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.business-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.business-writing.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.business-writing.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.business-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.business-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.business-writing.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.business-writing.md#TA-3 (addresses MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.business-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.business-writing\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.communication.business-writing.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.communication.business-writing.md#TA-4 (addresses MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY, MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.communication.business-writing"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.communication.business-writing\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.communication.business-writing/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.communication.business-writing",
+      "title": "Business Writing — Conceptual Development Sequence",
+      "content": "### TA-1 — Stating the Main Point First (MC-A)\n\nUsing the road-sign anchor, teach the front-loading principle: state the request, decision, or main\npoint in the first sentence or two. Student practice: given three emails that bury their main point,\nidentify the actual main point and rewrite the opening to state it immediately.\n\n### TA-2 — Subordinating Context to Support, Not Precede, the Main Point\n\nTeach that context and explanation should follow the main point, providing just enough support to be\nuseful without restoring the \"build-up\" structure. Student practice: given a front-loaded opening\nsentence and a paragraph of context, arrange the context in logical support order after the opening.\n\n### TA-3 — Formatting for Scannability (MC-B)\n\nUsing the grocery-list anchor, teach short paragraphs, bullet points for lists/action items, and\nclear subject lines. Student practice: given a dense paragraph containing multiple distinct action\nitems, reformat it using short paragraphs and bullets.\n\n### TA-4 — Full Application: Writing a Complete Business Communication\n\nGive the student a workplace scenario (e.g., requesting a meeting reschedule, summarizing a project\nupdate with action items). They must write a complete email or memo that states the main point\nimmediately (TA-1), provides appropriately subordinated context (TA-2), and uses scannable formatting\n(TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 146,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/misconception/MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY",
+      "kind": "misconception",
+      "conceptId": "eng.communication.business-writing",
+      "title": "**Trigger signal:** Student, applying the academic essay convention of building context before",
+      "content": "### MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY\n\n**Trigger signal:** Student, applying the academic essay convention of building context before\nstating a thesis, writes business emails or memos that bury the actual request or main point several\nsentences or paragraphs in, requiring the busy reader to read through substantial preamble before\nunderstanding what's actually being asked or communicated.\n\n**Conflict evidence [P28]:** Show the student two emails with the same underlying request (asking a\nmanager to approve a schedule change): one that opens with several sentences of context and\nbackground before finally stating the request in the final paragraph, and one that states the request\nin the first sentence, with supporting context following. Ask: \"If you were a busy manager with fifty\nunread emails, which one would you understand and be able to act on fastest?\"\n\n**Bridge text [P30]:** \"Building up to your point like an academic essay works when a reader has\ncommitted to reading the whole thing carefully — but a business reader is more like someone glancing\nat a series of road signs while driving past at speed. If the most important information (which exit\nto take) is buried at the bottom of a sign packed with small print, they'll miss it entirely. Business\nwriting needs to put the destination — the main point or request — right at the top, in large,\nunmissable letters, with supporting details after.\"\n\n**Replacement text [P31]:** \"In business writing, state your main point, request, or conclusion in\nthe FIRST sentence or two — don't build up to it. Supporting context and explanation should come\nAFTER the main point is already clear, not before it.\"\n\n**Discrimination pairs [P33]:**\n1. \"I wanted to reach out regarding some scheduling matters that have come up recently, and after\n   considering several options, I was hoping we might discuss the possibility of adjusting...\"\n   (buries the actual request several sentences in) vs. \"I'd like to request a schedule change for next\n   week — could we move my Thursday shift to Friday? Here's the context:...\" (states the request\n   immediately, then explains).\n2. A student applying essay-building instincts to a workplace email (misapplied register) vs. a\n   student recognizing that business readers need the main point immediately, with context\n   subordinated (correctly calibrated register).\n\n**s6_path:** If the student continues burying the main point after the bridge, have them draft their\nemail, then literally delete everything before the sentence that states the actual request or main\npoint, and rewrite starting FROM there, adding back only the context genuinely necessary to\nunderstand or act on that opening statement.",
+      "localKey": "MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY",
+      "language": "en",
+      "refs": [
+        "MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/misconception/MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER",
+      "kind": "misconception",
+      "conceptId": "eng.communication.business-writing",
+      "title": "**Trigger signal:** Student writes a business document with technically all the necessary",
+      "content": "### MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER\n\n**Trigger signal:** Student writes a business document with technically all the necessary\ninformation present, but formatted as one or more dense, unbroken paragraphs with no visual structure\n(short paragraphs, bullet points, headers, clear subject lines) — believing that as long as the\ncontent is accurate and complete, HOW it's visually organized on the page doesn't matter.\n\n**Conflict evidence [P28]:** Show the student the same business content (a list of three action items\nfollowing a meeting) presented two ways: as one dense paragraph containing all three items woven\ntogether in prose, and as a short intro sentence followed by three clearly bulleted action items. Ask:\n\"Both contain the same information. Which one could a reader actually scan and extract the three\naction items from in five seconds, and which would require them to read carefully all the way\nthrough?\"\n\n**Bridge text [P30]:** \"Believing formatting doesn't matter as long as the content is accurate is\nlike believing a grocery list scribbled as one run-on sentence works just as well as a list with each\nitem on its own line — technically, both contain the same information, but one can be scanned at a\nglance in the store aisle while the other requires stopping to carefully parse a paragraph. Business\nreaders scan; formatting (short paragraphs, bullet points, clear subject lines) is what makes scanning\nactually work.\"\n\n**Replacement text [P31]:** \"In business writing, actively use visual structure — short paragraphs\n(2-3 sentences), bullet points for lists or action items, and a clear, specific subject line — to make\nyour document scannable. Don't rely on the reader to carefully parse dense prose to extract key\ninformation.\"\n\n**Discrimination pairs [P33]:**\n1. \"Following our meeting, I wanted to note that we agreed I would draft the report by Friday, Sarah\n   would contact the vendor, and Tom would update the budget spreadsheet before next week's\n   check-in.\" (accurate content, but requires careful reading to extract the three distinct action\n   items) vs. \"Following our meeting, here are our action items: • Draft the report (me) — due Friday\n   • Contact the vendor (Sarah) • Update the budget spreadsheet (Tom) — before next week's check-in\"\n   (same content, scannable in seconds).\n2. A student who believes visual formatting is a cosmetic afterthought irrelevant to communication\n   quality (misconception) vs. a student who recognizes formatting as a functional tool that\n   determines whether busy readers can actually extract and act on the information (correct\n   understanding).\n\n**s6_path:** If the student continues to under-format after the bridge, have them take their own\ndense paragraph and identify every distinct action item, deadline, or decision point buried within\nit, then reformat those specific pieces of information as a bulleted list, comparing scannability\nbefore and after.",
+      "localKey": "MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER",
+      "language": "en",
+      "refs": [
+        "MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 42,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.business-writing",
+      "title": "Stating the Main Point First (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Stating the Main Point First (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.business-writing",
+      "title": "Subordinating Context to Support, Not Precede, the Main Point",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Subordinating Context to Support, Not Precede, the Main Point\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 156,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.business-writing",
+      "title": "Formatting for Scannability (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Formatting for Scannability (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 162,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.communication.business-writing",
+      "title": "Full Application: Writing a Complete Business Communication",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Writing a Complete Business Communication\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY\",\"MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-BUSINESS-WRITING-SHOULD-BUILD-UP-TO-THE-MAIN-POINT-LIKE-AN-ACADEMIC-ESSAY",
+        "MC-B-A-BUSINESS-DOCUMENT-JUST-NEEDS-TO-CONTAIN-THE-RIGHT-INFORMATION-FORMATTING-DOESNT-MATTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 168,
+        "endLine": 299
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.business-writing",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying a Buried Main Point**\nGiven an email that buries its request or main point, identify what the actual main point is and\nwhere in the email it currently appears.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 192,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.business-writing",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Front-Loading a Main Point**\nGiven the buried-main-point email from MP-1, rewrite the opening to state the main point in the\nfirst sentence or two.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 192,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.business-writing",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Formatting Opportunities**\nGiven a dense paragraph containing multiple distinct action items or pieces of information, identify\nwhich parts could be reformatted as a bulleted list for scannability.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 192,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.business-writing",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Reformatting for Scannability**\nGiven the dense paragraph from MP-3, reformat it using short paragraphs and bullet points while\npreserving all the original information.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 192,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.communication.business-writing",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Business Communication**\nGiven a new workplace scenario, write a complete email or memo with a front-loaded main point,\nappropriately subordinated context, and scannable formatting.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 192,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.communication.business-writing",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters front-loading and formatting in isolation (MP-2, MP-4) but reverts to essay-\n  style build-up or dense paragraphs under the combined demand of MP-5, provide a structured checklist\n  (state the point first, then support; format for scanning) as scaffolding before removing it.\n- If the student has just completed `eng.communication.academic-writing-advanced` and shows strong\n  transfer resistance (actively defending the build-up structure as \"more thorough\" or\n  \"more professional\"), explicitly frame this as a genuinely different register with different goals\n  — not a lowering of standards, but a different, equally legitimate skill suited to a different\n  reading context.\n- If the student over-corrects into excessive bullet-pointing (fragmenting genuinely connected prose\n  into disconnected bullet fragments that lose necessary logical connection), clarify that bullets\n  suit discrete items (action items, lists) while connected reasoning may still need brief prose —\n  formatting should match the content's actual structure.\n- Students with real workplace or internship experience may already have intuitive business-writing\n  habits — leverage this directly by having them bring in or recall a real example email and analyze\n  it against this concept's principles.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 250,
+        "endLine": 268
+      }
+    },
+    {
+      "assetId": "eng.communication.business-writing/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.communication.business-writing",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: academic writing advanced check] --> [PD-2: audience-awareness check]\n   |                                                              |\n   | (gap found)                                                  | (pass)\n   v                                                               v\n[Route to eng.communication.academic-writing-advanced]  [Component 3: Road-Sign / Grocery-List Anchor]\n                                                                    |\n                                                                    v\n                                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                    |\n                                                                    v\n                                          [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                    |\n                                                                    v\n                                          [MP-1 through MP-5 mastery probe set]\n                                                                    |\n                                          (pass >= 0.75) -----+----- (fail)\n                                                 |                      |\n                                                 v                      v\n                       [Unlock: professional-communication]  [S6 remediation: delete-and-\n                                                                start-from-the-request /\n                                                                bullet-extraction drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; an academic-writing gap routes back\nto that prerequisite, an audience-awareness gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-A typically surfaces during TA-1/TA-2 (essay-building instincts transferred\nincorrectly) and MC-B during TA-3 (under-formatting) — these are largely independent register-\ntransfer errors and often need separate, explicit correction, since a student can master front-\nloading while still under-formatting, or vice versa. If either fires, branch to the relevant s6_path\ndrill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2 failures indicate\nresidual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-document example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.communication.business-writing.md",
+        "startLine": 214,
+        "endLine": 250
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
