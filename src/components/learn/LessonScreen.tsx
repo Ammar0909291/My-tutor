@@ -1759,21 +1759,41 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const lessonRef = resumeLessonTitle
         ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
         : null
+
+      // Lesson position data — available once curriculum loads; gracefully absent for
+      // school mode or subjects without a KG (positionCtx stays empty string).
+      const curLesson = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? curriculumLessons[0] ?? null
+      const nxtLesson = findNextLesson(curriculumLessons, curriculumProgress)
+      const prvLesson = findPreviousLesson(curriculumLessons, curriculumProgress)
+      const ttlLessons = curriculumLessons.length
+
+      const positionCtx = ttlLessons > 0 && curLesson
+        ? `POSITION (inject into step 1): Lesson ${curLesson.order} of ${ttlLessons}.${prvLesson ? ` Previous: "${prvLesson.lessonTitle}".` : ''} Today: "${curLesson.lessonTitle}".${nxtLesson ? ` Next: "${nxtLesson.lessonTitle}".` : ''}`
+        : ''
+      const positionCtxRu = ttlLessons > 0 && curLesson
+        ? `ПОЗИЦИЯ (вставь в шаг 1): Урок ${curLesson.order} из ${ttlLessons}.${prvLesson ? ` Предыдущий: "${prvLesson.lessonTitle}".` : ''} Сегодня: "${curLesson.lessonTitle}".${nxtLesson ? ` Следующий: "${nxtLesson.lessonTitle}".` : ''}`
+        : ''
+      const positionCtxHi = ttlLessons > 0 && curLesson
+        ? `POSITION (step 1 mein daalo): Lesson ${curLesson.order} of ${ttlLessons}.${prvLesson ? ` Pichla: "${prvLesson.lessonTitle}".` : ''} Aaj: "${curLesson.lessonTitle}".${nxtLesson ? ` Agla: "${nxtLesson.lessonTitle}".` : ''}`
+        : ''
+
       const opening = teachingLanguage === 'ru'
         ? (pastSessionsSummary || lessonRef
           // Returning learner — warm recap then continue
           ? `Студент вернулся. ${lessonRef ? `Тема: ${lessonRef}. ` : ''}${pastSessionsSummary ? `Прошлый раз: "${pastSessionsSummary}". ` : ''}
 Поприветствуй тепло, в 1–2 предложениях напомни что было пройдено, затем продолжай обучение с того места. Если урок сменился — сначала дай краткое вступление по новому уроку. Уровень: "${levelDescription}".`
-          // New learner — full 7-step lesson opening
-          : `Начинается новый урок. Открой урок точно по этой структуре — не пропускай ни одного раздела:
+          // New learner — world-class 9-step lesson opening
+          : `Начинается новый урок. Открой урок точно по этой структуре — не пропускай ни одного раздела. Весь вступительный блок — не больше 280 слов.${positionCtxRu ? `\n${positionCtxRu}` : ''}
 
-1. ПРИВЕТСТВИЕ — Представься как "Репетитор Макс". Назови тему урока (из контекста урока в твоих инструкциях) и его номер в курсе.
-2. ЦЕЛЬ УРОКА — 3–5 конкретных пунктов: что именно студент сможет делать после этого урока.
-3. ЗАЧЕМ ЭТО ВАЖНО — один короткий мотивирующий абзац: как эта тема применяется в жизни или что она открывает дальше.
-4. ЧТО НУЖНО ЗНАТЬ ЗАРАНЕЕ — перечисли предварительные знания. Если completedLessons показывает, что нужные темы уже пройдены — скажи об этом.
-5. ПЛАН УРОКА — покажи путь сегодня: Интуиция → Объяснение → Примеры → Практика → Проверка → Итог.
-6. КРЮЧОК ЛЮБОПЫТСТВА — одна неожиданная или контринтуитивная мысль о теме, которая хочется распутать.
-7. НАЧИНАЙ ОБУЧЕНИЕ — стартуй с интуиции: конкретный жизненный сценарий, который студент уже знает.
+1. ПРИВЕТСТВИЕ + ПОЗИЦИЯ — Представься как "Репетитор Макс". Назови тему урока из контекста. Скажи студенту точно, где он находится: "Сегодня — урок X из Y". Если есть данные о предыдущем и следующем уроке — назови их.
+2. ВРЕМЯ — Напиши "Примерное время: X–Y минут". Оцени по сложности цели урока: простая/узкая тема → 8–10 мин; стандартная → 12–15 мин; сложная/многоконцептная → 18–20 мин.
+3. ЦЕЛЬ УРОКА — 3–5 пунктов, каждый начинается с ✓. Последний пункт всегда: "✓ Объяснить это другому человеку своими словами."
+4. ЗАЧЕМ ЭТО ВАЖНО — 2–3 конкретных применения из разных областей (назови области). Используй название и цель урока — никаких общих слов.
+5. ЧТО НУЖНО ЗНАТЬ ЗАРАНЕЕ — перечисли предварительные знания. Если completedLessons показывает, что нужные темы пройдены — скажи об этом.
+6. ПЛАН УРОКА — Интуиция → Объяснение → Примеры → Практика → Проверка → Итог.
+7. КРЮЧОК ЛЮБОПЫТСТВА — одна неожиданная или контринтуитивная мысль о теме.
+8. ПРОВЕРКА УВЕРЕННОСТИ — задай ОДИН вопрос: "Прежде чем начать — насколько ты знаком с этой темой? 🟢 Уже знаю / 🟡 Слышал раньше / 🔴 Совсем новое". Только один вопрос — не превращай в викторину. Если студент отвечает своими словами — принимай и двигайся дальше.
+9. НАЧИНАЙ ОБУЧЕНИЕ — ориентируйся на ответ: 🟢 → быстро к проверке; 🟡 → интуиция + краткое напоминание; 🔴 или нет ответа → с нуля, с конкретного жизненного примера.
 
 Уровень студента: "${levelDescription}". Пиши под его уровень.`)
         : teachingLanguage === 'hi'
@@ -1781,38 +1801,42 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           // Returning learner — warm recap then continue
           ? `Student wapas aa gaya. ${lessonRef ? `Topic: ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}
 Warmly greet karein, 1–2 sentences mein pichla session recap karein, phir wahan se aage padhana shuru karein. Agar lesson badal gaya ho to pehle naye lesson ka brief introduction dein. Level: "${levelDescription}".`
-          // New learner — full 7-step lesson opening
-          : `Naya lesson shuru ho raha hai. Is exact structure mein lesson open karein — koi bhi section skip mat karein:
+          // New learner — world-class 9-step lesson opening
+          : `Naya lesson shuru ho raha hai. Is exact structure mein lesson open karein — koi bhi section skip mat karein. Poora opening block 280 words se kam mein rakhen.${positionCtxHi ? `\n${positionCtxHi}` : ''}
 
-1. SWAGAT — "Tutor Max" ke roop mein apna parichay dein. Aaj ka topic (apne instructions ke lesson context se) aur course mein uska number batayein.
-2. LESSON GOAL — 3–5 specific bullet points: is lesson ke baad student exactly kya kar paayega.
-3. YEH KYUN ZAROORI HAI — ek chhota motivating paragraph: yeh topic real life mein kahan kaam aata hai ya aage kya kholta hai.
-4. PREREQUISITES — kya jaanna chahiye pehle se. Agar completedLessons se pata chale ki related topics cover ho chuke hain to woh bata dein.
-5. AAJ KA ROADMAP — aaj ka safar dikhayein: Intuition → Explanation → Examples → Practice → Mastery Check → Summary.
-6. CURIOSITY HOOK — ek aisa fact jo surprising ya counterintuitive lage aur student jaanna chahey.
-7. PADHANA SHURU KAREIN — intuition se start karein: koi real-life scenario jo student pehle se jaanta ho.
+1. SWAGAT + POSITION — "Tutor Max" ke roop mein parichay dein. Lesson ka topic context se batayein. Student ko exactly batayein: "Aaj aap Lesson X of Y par hain". Pichle aur agle lesson ka naam ho to woh bhi batayein.
+2. SAMAY — "Estimated time: X–Y minutes" likhein. Lesson goal ki complexity se andaza lagayein: simple/focused → 8–10 min; standard → 12–15 min; complex/multi-concept → 18–20 min.
+3. LESSON GOAL — 3–5 bullet points, har ek ✓ se shuru ho. Aakhri bullet hamesha: "✓ Is idea ko apne words mein kisi aur ko explain kar paana."
+4. YEH KYUN ZAROORI HAI — 2–3 concrete real-world applications alag-alag fields se (fields ka naam lo). Lesson title aur goal se infer karein — generic mat bolein.
+5. PREREQUISITES — pehle se kya jaanna chahiye. Agar completedLessons se pata chale ki related topics cover ho chuke hain to woh bata dein.
+6. AAJ KA ROADMAP — Intuition → Explanation → Examples → Practice → Mastery Check → Summary.
+7. CURIOSITY HOOK — ek aisa surprising ya counterintuitive thought jo student ko jaannaane par majboor kare.
+8. CONFIDENCE CHECK — SIRF EK sawaal poochhein: "Shuru karne se pehle — is topic se aap kitne parichit hain? 🟢 Pehle se jaanta hoon / 🟡 Suna hai pehle / 🔴 Bilkul naya hai". Sirf ek sawaal — quiz mat banao. Agar student apne words mein jawab de to normal aage badho.
+9. PADHANA SHURU KAREIN — jawab ke hisaab se: 🟢 → seedha verification par jao; 🟡 → intuition + brief refresher; 🔴 ya koi jawab nahin → scratch se, ek concrete real-life example se.
 
 Student level: "${levelDescription}". Unke level ke hisaab se likhein.`)
         : (pastSessionsSummary || lessonRef
           // Returning learner — warm recap then continue
           ? `The student has returned. ${lessonRef ? `They were on: ${lessonRef}. ` : ''}${pastSessionsSummary ? `Last session: "${pastSessionsSummary}". ` : ''}
 Greet them warmly. In 1–2 sentences recap what was covered last time, then continue teaching from where they left off. If the lesson has changed, give a brief opening for the new lesson first. Student level: "${levelDescription}".`
-          // New learner — full 7-step lesson opening
-          : `A new lesson is beginning. Open the lesson in exactly this structure — do not skip any section:
+          // New learner — world-class 9-step lesson opening
+          : `A new lesson is beginning. Open the lesson in exactly this structure — do not skip any section. Keep the entire opening under 280 words.${positionCtx ? `\n${positionCtx}` : ''}
 
-1. WELCOME — Introduce yourself as "Tutor Max". State today's topic (use the lesson title from the lesson context in your instructions) and its number in the course.
-2. LEARNING GOAL — 3–5 specific bullet points: exactly what the student will be able to do by the end of this lesson.
-3. WHY THIS MATTERS — one short motivating paragraph: how this topic is used in real life or what it unlocks next.
-4. PREREQUISITES — list what the student should already know before this lesson. If completedLessons shows they have covered the relevant prior topics, say so.
-5. LESSON ROADMAP — show today's journey: Intuition → Explanation → Examples → Guided Practice → Mastery Check → Summary.
-6. CURIOSITY HOOK — one surprising or counterintuitive thought about today's topic that makes the student want to find out more.
-7. BEGIN TEACHING — start with intuition: a concrete, real-life scenario the student already knows.
+1. WELCOME + LESSON POSITION — Introduce yourself as "Tutor Max". State today's topic from the lesson context. Tell the student exactly where they are: "Today you're starting Lesson X of Y." If previous and next lesson titles are available, name them: "Yesterday: [title]. Next up: [title]."
+2. ESTIMATED DURATION — Write "Estimated time: X–Y minutes." Calibrate from the lesson goal complexity: short/focused topic → 8–10 min; standard lesson → 12–15 min; complex/multi-concept → 18–20 min.
+3. LEARNING GOAL — 3–5 bullet points each starting with ✓. Final bullet always: "✓ Explain this to someone else in plain words."
+4. WHY THIS MATTERS — 2–3 concrete real-world applications from different fields (name the fields). Use the lesson title and goal to infer — never be generic.
+5. PREREQUISITES — list what the student should already know. If completedLessons shows they have covered the relevant prior topics, say so.
+6. LESSON ROADMAP — Intuition → Explanation → Examples → Guided Practice → Mastery Check → Summary.
+7. CURIOSITY HOOK — one surprising or counterintuitive thought that makes the student want to find out more.
+8. CONFIDENCE CHECK — ask ONE question: "Before we begin — how familiar are you with this topic? 🟢 I already know it / 🟡 I've seen it before / 🔴 Completely new to me." ONE question only — do not turn it into a quiz. If the learner answers naturally instead of selecting an option, accept it and continue.
+9. BEGIN TEACHING — calibrate to the answer: 🟢 → move to verification quickly; 🟡 → start from intuition with a brief refresher; 🔴 or no answer → start from scratch with a concrete, real-life scenario the student already knows.
 
 Student level: "${levelDescription}". Write at a level appropriate for them.`)
       await sendMessage(sid, opening, false)
       if (initialPrompt) await sendMessage(sid, initialPrompt, true)
     } catch { setInitError('Connection failed. Please refresh the page.') }
-  }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage, teachingLanguage, userId, initialPrompt])
+  }, [subjectSlug, subjectName, levelDescription, memoryContext, pastSessionsSummary, sendMessage, teachingLanguage, userId, initialPrompt, curriculumLessons, curriculumProgress])
 
   // Vision send
   async function sendImageMessage(sid: string) {
