@@ -8844,6 +8844,173 @@ const INTJ_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.wave.superposition ─────────────────────────────────────────────────
+const SUP = 'phys.wave.superposition'
+const SUP_SRC = 'docs/curriculum/blueprints/phys.wave.superposition.md'
+
+const SUP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SUP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When two waves meet and cancel, are they destroyed? Watch two ' +
+      'ripples cross on a calm pond: at the instant they overlap the ' +
+      'surface briefly shows their COMBINED pattern (possibly flat, ' +
+      'if perfectly out of phase) \u2014 but keep watching and BOTH ' +
+      'ripples emerge on the far side, completely unchanged, ' +
+      'continuing with their original amplitude, frequency, and ' +
+      'direction. Two people can hold separate conversations across ' +
+      'a crowded room precisely because crossing sound waves do not ' +
+      'permanently cancel each other. Superposition is a rule about ' +
+      'a single MOMENT and POINT: y_total = y\u2081 + y\u2082, added there and ' +
+      'then, not a permanent alteration. After the overlap ends, each ' +
+      'wave simply carries on as if the other had never been there.',
+    targetedMisconceptions: [`${SUP}:MC-WAVES-COLLIDE-AND-STOP`],
+    source: `${SUP_SRC} — MC-WAVES-COLLIDE-AND-STOP (P28 crossing-sound-waves conversation evidence + s6 pond-ripple observation)`,
+  },
+  {
+    conceptId: SUP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Does superposition require both waves to share the same ' +
+      'frequency? No \u2014 a piano CHORD proves otherwise: strike three ' +
+      'keys at once, and three genuinely different frequencies add ' +
+      'together, y_total = \u03a3y\u1d62, producing the rich complex waveform ' +
+      'that reaches your ear \u2014 nobody doubts THAT works. Same-frequency ' +
+      'superposition is just the SPECIAL case that produces a fixed, ' +
+      'stationary interference pattern (constant maxima and minima at ' +
+      'set points). Different frequencies still superpose \u2014 the sum ' +
+      'is simply time-varying instead of fixed: beats (when the two ' +
+      'frequencies are close) or a genuinely complex, non-sinusoidal ' +
+      'waveform (music). The addition rule itself, y_total = \u03a3y\u1d62, ' +
+      'never requires matching frequencies \u2014 it always holds.',
+    targetedMisconceptions: [`${SUP}:MC-SUPERPOSITION-ONLY-FOR-SAME-FREQUENCY`],
+    source: `${SUP_SRC} — MC-SUPERPOSITION-ONLY-FOR-SAME-FREQUENCY (P28 piano-chord evidence + P30 same-freq-as-special-case bridge)`,
+  },
+]
+
+const SUP_PROBES: SeedProbe[] = [
+  {
+    conceptId: SUP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two ripples on a pond cross each other and momentarily cancel at one point. What happens after they pass through?',
+    choices: [
+      { text: 'Both ripples continue on, completely unchanged in amplitude, frequency, and direction', isCorrect: true },
+      { text: 'Both ripples are destroyed — they cancelled each other out permanently', isCorrect: false, misconceptionId: `${SUP}:MC-WAVES-COLLIDE-AND-STOP` },
+    ],
+    correctValue: 'both continue unchanged',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUP}:MC-WAVES-COLLIDE-AND-STOP`],
+    source: `${SUP_SRC} — s6 pond-ripple scenario as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SUP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A piano chord plays three different frequencies at once. Do these waves superpose?',
+    choices: [
+      { text: 'Yes — superposition (y_total = \u03a3y\u1d62) applies to any waves regardless of frequency; different frequencies just produce a complex, non-sinusoidal sum', isCorrect: true },
+      { text: 'No — superposition only works when all the waves share the same frequency', isCorrect: false, misconceptionId: `${SUP}:MC-SUPERPOSITION-ONLY-FOR-SAME-FREQUENCY` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SUP}:MC-SUPERPOSITION-ONLY-FOR-SAME-FREQUENCY`],
+    source: `${SUP_SRC} — P28 piano-chord evidence as probe, distractor-mapped`,
+  },
+]
+
+// ─── math.geom.similar-triangles ─────────────────────────────────────────────
+const SIM = 'math.geom.similar-triangles'
+const SIM_SRC = 'docs/curriculum/blueprints/math.geom.similar-triangles.md'
+
+const SIM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SIM,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Are two same-SIZE triangles with equal angles \u201csimilar\u201d or ' +
+      '\u201ccongruent\u201d \u2014 does being congruent DISQUALIFY them from ' +
+      'being similar? In everyday speech \u201csimilar\u201d means \u201calike but ' +
+      'different\u201d \u2014 but in mathematics, similar triangles need ' +
+      'equal angles and proportional sides with SOME scale factor k. ' +
+      'Congruent triangles are simply the special case k = 1: same ' +
+      'shape AND same size still satisfies \u201cproportional sides,\u201d it ' +
+      'just happens that the proportion is 1:1. So congruence is not ' +
+      'the OPPOSITE of similarity \u2014 it is a SUBSET: every congruent ' +
+      'pair is automatically also similar, the way every square is ' +
+      'also a rectangle. \u201cSimilar\u201d in math is the broader, inclusive ' +
+      'category; \u201ccongruent\u201d narrows it to k = 1.',
+    targetedMisconceptions: [`${SIM}:MC-1`],
+    source: `${SIM_SRC} — MC-1 CONGRUENT-MEANS-SIMILAR (TA-B01: k=1 special-case reframe; square/rectangle analogy)`,
+  },
+  {
+    conceptId: SIM,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two more traps once similarity criteria come up. First: does ' +
+      'AA (two matching angles) really prove similarity, or do you ' +
+      'need to check the third angle too? You don\u2019t \u2014 the third ' +
+      'angle is FORCED: since every triangle\u2019s angles sum to 180\u00b0, ' +
+      'once two angles match between triangles, the third automatically ' +
+      'matches too (180\u00b0 minus the same two numbers). AA is not an ' +
+      'incomplete shortcut; it is logically equivalent to AAA. ' +
+      'Second: in \u25b3ABC ~ \u25b3DEF, the ORDER of letters is not decoration ' +
+      '\u2014 it tells you exactly which sides correspond: A\u2194D, B\u2194E, ' +
+      'C\u2194F, so AB/DE = BC/EF = AC/DF. Matching sides by their ' +
+      'visual position in a drawing (\u201cboth bottom sides\u201d) instead of ' +
+      'by the letter order in the similarity statement produces wrong ' +
+      'ratios whenever the triangles are drawn at different ' +
+      'orientations. Always read the correspondence from the ' +
+      'STATEMENT, never from the picture.',
+    targetedMisconceptions: [`${SIM}:MC-2`, `${SIM}:MC-3`],
+    source: `${SIM_SRC} — MC-2 AA-NEEDS-THREE-ANGLES (angle-sum forces the third) + MC-3 CORRESPONDENCE-ORDER-DOESNT-MATTER (letter-order-not-picture-position rule)`,
+  },
+]
+
+const SIM_PROBES: SeedProbe[] = [
+  {
+    conceptId: SIM,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two triangles have exactly the same angles AND exactly the same side lengths. Are they similar?',
+    choices: [
+      { text: 'Yes — congruent triangles (scale factor k=1) are automatically also similar', isCorrect: true },
+      { text: 'No — since they are congruent, not similar, they cannot be similar too', isCorrect: false, misconceptionId: `${SIM}:MC-1` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SIM}:MC-1`],
+    source: `${SIM_SRC} — MC-1 trigger as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SIM,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two triangles share two pairs of equal angles. Is that enough to prove they are similar (AA), or must the third pair be checked too?',
+    choices: [
+      { text: 'AA alone is enough — the third angle is automatically forced by the 180\u00b0 angle-sum rule once two angles match', isCorrect: true },
+      { text: 'The third pair of angles must also be checked before concluding similarity', isCorrect: false, misconceptionId: `${SIM}:MC-2` },
+    ],
+    correctValue: 'AA is sufficient',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SIM}:MC-2`],
+    source: `${SIM_SRC} — MC-2 trigger as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -8950,6 +9117,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...REP_EXPLANATIONS,
   ...BEAT_EXPLANATIONS,
   ...INTJ_EXPLANATIONS,
+  ...SUP_EXPLANATIONS,
+  ...SIM_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -9056,4 +9225,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...REP_PROBES,
   ...BEAT_PROBES,
   ...INTJ_PROBES,
+  ...SUP_PROBES,
+  ...SIM_PROBES,
 ]
