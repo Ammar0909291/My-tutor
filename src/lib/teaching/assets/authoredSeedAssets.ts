@@ -1,0 +1,495 @@
+/**
+ * Authored Knowledge Assets — the Explanation Memory authoring loop
+ * (owner-directed, 2026-07-17).
+ *
+ * Sibling to brainSeedAssets.ts, deliberately a SEPARATE collection: that
+ * file's contract is "nothing here is invented — transcribed verbatim from
+ * the frozen educational-brain concept entries." Every asset below is
+ * instead NEWLY AUTHORED against a concept's Teaching Blueprint — same
+ * interfaces, same seed pipeline, same canonicalSlug convention, different
+ * provenance (each item cites the blueprint file + section it teaches
+ * from, and targeted misconceptions use the blueprint's own MC slugs).
+ *
+ * Authoring rules applied to every explanation:
+ *   - Pedagogically distinct per concept (intuition / contrast / worked
+ *     example / first-principles / repair) — never rewrites of each other.
+ *   - Teaches understanding, anticipates the blueprint's misconceptions,
+ *     builds on prerequisites the blueprint declares, self-contained.
+ *   - Grade-band variants are different TEACHING, not reworded copies.
+ *   - Probes are distractor-mapped to blueprint misconception slugs
+ *     (assessment/03 distractor science), never duplicating an existing
+ *     probe in brainSeedAssets.ts or the blueprint verbatim.
+ */
+import { GradeBand, ProbeDifficulty } from '@prisma/client'
+import type { SeedExplanation, SeedProbe } from './brainSeedAssets'
+
+// ─── phys.meas.units ─────────────────────────────────────────────────────────
+const UNITS = 'phys.meas.units'
+const UNITS_SRC = 'docs/curriculum/blueprints/phys.meas.units.md'
+
+const UNITS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: UNITS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive / everyday: why shared units exist at all (need before names)
+    content:
+      'Imagine ordering a table "four hands wide" from a carpenter with ' +
+      'bigger hands than yours. You\'d get the wrong table — not because ' +
+      'anyone measured badly, but because you weren\'t using the same ruler. ' +
+      'That\'s the whole reason SI units exist: the world agreed on ONE ruler ' +
+      'for each kind of quantity, so a metre in Tokyo is exactly a metre in ' +
+      'Delhi. There are only seven of these agreed base units — metre for ' +
+      'length, kilogram for mass, second for time, ampere for current, ' +
+      'kelvin for temperature, mole for amount of substance, candela for ' +
+      'light intensity. Every other unit you will ever meet is built out of ' +
+      'these seven, the way every word is built from letters.',
+    targetedMisconceptions: [`${UNITS}:MC-3`],
+    source: `${UNITS_SRC} — §1 Learning Objective + §5 Protocol Library (need-creation opening; "SI" banned-jargon rule respected: introduced after the need)`,
+  },
+  {
+    conceptId: UNITS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Contrast / classification: base vs derived vs non-SI — the discrimination skill
+    content:
+      'Three boxes sort every unit you\'ll meet. Box 1 — the seven SI base ' +
+      'units (m, kg, s, A, K, mol, cd): defined directly, owing nothing to ' +
+      'any other unit. Box 2 — SI derived units: legal combinations of Box 1, ' +
+      'like m/s for speed or the newton (kg·m/s²) for force. Box 3 — ' +
+      'everyday units that are NOT SI at all: litres, hours, centimetres, ' +
+      'degrees Celsius. The traps all live at the box boundaries: the litre ' +
+      'feels official but is Box 3; the centimetre contains "metre" but is a ' +
+      'multiple, not a base; the kilogram — despite carrying a prefix — IS ' +
+      'the Box-1 mass unit (the gram is not); and kelvin, not Celsius, is ' +
+      'the Box-1 temperature unit, because its zero is real: the coldest ' +
+      'anything can be, not the freezing point of one particular liquid.',
+    targetedMisconceptions: [`${UNITS}:MC-1`, `${UNITS}:MC-3`, `${UNITS}:MC-4`],
+    source: `${UNITS_SRC} — §6 Misconception Engine MC-1/MC-3/MC-4 (contrast repair chains P17/P33 rendered as teaching text)`,
+  },
+  {
+    conceptId: UNITS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: MC-2 mass vs weight — the blueprint's partial-repair boundary respected
+    content:
+      'You say "I weigh 70 kilograms" — everyone does — but physics splits ' +
+      'that sentence in two. The kilogram measures MASS: how much matter you ' +
+      'are made of, the same on Earth, on the Moon, or floating in deep ' +
+      'space. WEIGHT is different: it\'s the force gravity exerts on that ' +
+      'mass, so it has a force unit (the newton), and it CHANGES with where ' +
+      'you are — about 686 N here, 113 N on the Moon, zero in deep space, ' +
+      'while your mass stays 70 kg everywhere. For now, keep one clean rule: ' +
+      'kg = amount of matter; newtons = gravity\'s pull on it. The full ' +
+      'story of forces comes when we reach Newton\'s laws.',
+    targetedMisconceptions: [`${UNITS}:MC-2`],
+    source: `${UNITS_SRC} — §6 MC-2 (partial repair only, per the blueprint's explicit deferral note — full repair deferred to force/Newton blueprints)`,
+  },
+  {
+    conceptId: UNITS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles / returning adult: why exactly seven, why kelvin, why the kg anomaly
+    content:
+      'The SI system answers one engineering question: what is the smallest ' +
+      'set of quantities from which every measurable thing can be built? The ' +
+      'answer settled at seven — length, mass, time, current, temperature, ' +
+      'amount of substance, luminous intensity. Everything else is algebra ' +
+      'on those seven: speed is length/time, force is mass×length/time². Two ' +
+      'quirks are worth knowing because they trip everyone. Kelvin is the ' +
+      'temperature base because its zero is absolute — the point where ' +
+      'thermal motion stops — whereas 0 °C is just where water happens to ' +
+      'freeze; scales with arbitrary zeros break the algebra. And the ' +
+      'kilogram, prefix and all, is the mass base unit — a historical ' +
+      'accident from the original platinum standard, and the only base unit ' +
+      'with a prefix baked into its name.',
+    targetedMisconceptions: [`${UNITS}:MC-1`, `${UNITS}:MC-4`],
+    source: `${UNITS_SRC} — §5 Protocol Library (adult register) + §6 MC-1 (absolute-zero argument P28) + MC-4 (historical anomaly P28)`,
+  },
+]
+
+const UNITS_PROBES: SeedProbe[] = [
+  {
+    conceptId: UNITS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which of these is the SI base unit for temperature?',
+    choices: [
+      { text: 'kelvin (K)', isCorrect: true },
+      { text: 'degree Celsius (°C)', isCorrect: false, misconceptionId: `${UNITS}:MC-1` },
+      { text: 'degree Fahrenheit (°F)', isCorrect: false },
+    ],
+    correctValue: 'kelvin',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${UNITS}:MC-1`],
+    source: `${UNITS_SRC} — §3 Diagnostic Battery DB-2a / §6 MC-1 (distractor-mapped)`,
+  },
+  {
+    conceptId: UNITS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Sort test: which ONE of these is an SI base unit?',
+    choices: [
+      { text: 'second (s)', isCorrect: true },
+      { text: 'litre (L)', isCorrect: false, misconceptionId: `${UNITS}:MC-3` },
+      { text: 'gram (g)', isCorrect: false, misconceptionId: `${UNITS}:MC-4` },
+      { text: 'hour (h)', isCorrect: false, misconceptionId: `${UNITS}:MC-3` },
+    ],
+    correctValue: 'second',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${UNITS}:MC-3`, `${UNITS}:MC-4`],
+    source: `${UNITS_SRC} — §6 MC-3/MC-4 discrimination training (P33) as a single sort item`,
+  },
+]
+
+// ─── phys.mech.velocity ──────────────────────────────────────────────────────
+const VEL = 'phys.mech.velocity'
+const VEL_SRC = 'docs/curriculum/blueprints/phys.mech.velocity.md'
+
+const VEL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VEL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: two different questions about the same journey
+    content:
+      'Walk to a wall six metres away and walk back. Two honest questions ' +
+      'about that trip give two different answers. "How much ground did you ' +
+      'cover?" — twelve metres; divide by your time and you get your SPEED. ' +
+      '"Where did you end up, compared to where you started?" — exactly ' +
+      'where you began; zero metres of net change, so your VELOCITY for the ' +
+      'trip is zero, no matter how fast you walked. Velocity isn\'t a fancier ' +
+      'word for speed — it answers a different question: net change of ' +
+      'position (with its direction), per unit time.',
+    targetedMisconceptions: [`${VEL}:MC-SPEED-IS-VELOCITY`],
+    source: `${VEL_SRC} — §6 MC-SPEED-IS-VELOCITY (walk-to-the-wall conflict evidence P28, rendered as first-exposure teaching)`,
+  },
+  {
+    conceptId: VEL,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    // Worked example: the train problem, both quantities computed side by side
+    content:
+      'A train goes 80 km east, then 30 km west, in 2 hours total. Work both ' +
+      'quantities and watch them separate. Average speed = total distance / ' +
+      'time = (80 + 30) km / 2 h = 55 km/h — distances ADD because speed ' +
+      'only cares about ground covered. Average velocity = displacement / ' +
+      'time: the train ends up 80 − 30 = 50 km EAST of its start, so ' +
+      'velocity = 50 km / 2 h = 25 km/h east — the west leg SUBTRACTS, and ' +
+      'the answer carries a direction. Same train, same two hours: 55 km/h ' +
+      'but only 25 km/h east. Whenever a journey doubles back at all, speed ' +
+      'and velocity must disagree; they only match on a one-way straight line.',
+    targetedMisconceptions: [`${VEL}:MC-SPEED-IS-VELOCITY`],
+    source: `${VEL_SRC} — §7 Assessment Battery P76 transfer item, expanded into a full worked example with reasoning per step`,
+  },
+  {
+    conceptId: VEL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles: why physics bothers with the distinction (vector reasoning)
+    content:
+      'Physics keeps two motion quantities because prediction needs more ' +
+      'than a number — it needs a direction. Speed (total distance / time) ' +
+      'is a scalar: one number, fine for a car\'s odometer or a running ' +
+      'pace. Velocity (displacement / time) is a vector: it encodes where ' +
+      'you\'ll BE, which is what every later law needs — momentum, forces, ' +
+      'orbits all consume velocity, not speed. The definitions differ only ' +
+      'in the numerator: distance accumulates every metre travelled; ' +
+      'displacement is the straight arrow from start to finish and cancels ' +
+      'backtracking. A full lap at race pace: enormous speed, velocity zero ' +
+      '— and that is not a paradox but the design: the two numerators answer ' +
+      'different questions.',
+    targetedMisconceptions: [`${VEL}:MC-SPEED-IS-VELOCITY`],
+    source: `${VEL_SRC} — §6 bridge/replacement text (P30/P31) + §7 P78 explain item, taught first-principles for the adult register`,
+  },
+]
+
+const VEL_PROBES: SeedProbe[] = [
+  {
+    conceptId: VEL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A swimmer swims one full length of a pool and back to the start block in 100 s, swimming hard the whole way. Her average velocity for the swim is…',
+    choices: [
+      { text: 'zero — she ends where she started, so displacement is zero', isCorrect: true },
+      { text: 'the same as her average speed', isCorrect: false, misconceptionId: `${VEL}:MC-SPEED-IS-VELOCITY` },
+      { text: 'twice her average speed, because she covered the pool twice', isCorrect: false },
+    ],
+    correctValue: 'zero',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VEL}:MC-SPEED-IS-VELOCITY`],
+    source: `${VEL_SRC} — §9 Retrieval Schedule interval-4 scenario recast as a distractor-mapped MCQ (not duplicated from §7/§8 items)`,
+  },
+]
+
+// ─── phys.mech.acceleration ──────────────────────────────────────────────────
+const ACC = 'phys.mech.acceleration'
+const ACC_SRC = 'docs/curriculum/blueprints/phys.mech.acceleration.md'
+
+const ACC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: change-meter, not speed-meter
+    content:
+      'Your speedometer tells you how fast you\'re going. Acceleration is a ' +
+      'different instrument: a CHANGE-meter. It asks only one thing — is the ' +
+      'velocity different now than a moment ago, and how quickly is it ' +
+      'becoming different? A racing car cruising at a rock-steady 200 km/h ' +
+      'scores ZERO on the change-meter: huge speed, nothing changing. A ' +
+      'bicycle pulling away from a red light scores high: small speed, ' +
+      'changing fast. Speeding up, braking, and turning a corner all move ' +
+      'the change-meter — braking is just negative acceleration, and turning ' +
+      'counts because the DIRECTION of velocity is changing even when the ' +
+      'number isn\'t. Fast and accelerating are simply different things.',
+    targetedMisconceptions: [`${ACC}:MC-ACCELERATION-IS-SPEED`],
+    source: `${ACC_SRC} — §6 MC-ACCELERATION-IS-SPEED (racing-car vs bicycle conflict evidence P28 as first-exposure teaching)`,
+  },
+  {
+    conceptId: ACC,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    // Worked example: two-phase motorcycle problem incl. negative acceleration
+    content:
+      'A motorcycle goes from 5 m/s to 35 m/s in 6 s, then brakes from ' +
+      '35 m/s to rest in 3.5 s. One formula handles both phases: a = Δv/Δt. ' +
+      'Phase 1: Δv = 35 − 5 = +30 m/s over 6 s → a = +5 m/s² — every second, ' +
+      'the motorcycle gains 5 m/s. Phase 2: Δv = 0 − 35 = −35 m/s over ' +
+      '3.5 s → a = −10 m/s² — every second it LOSES 10 m/s. Note what the ' +
+      'signs are doing: "deceleration" isn\'t a separate quantity with its ' +
+      'own formula, just acceleration with a negative Δv. And note phase 2 ' +
+      'is the LARGER acceleration in magnitude, even though the bike is ' +
+      'slowing down — the change-rate is what counts, not the speed.',
+    targetedMisconceptions: [`${ACC}:MC-ACCELERATION-IS-SPEED`],
+    source: `${ACC_SRC} — §7 Assessment Battery P76 transfer item + P75 boundary item, expanded into a stepped worked example`,
+  },
+  {
+    conceptId: ACC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: the ball-at-the-top classic (zero velocity ≠ zero acceleration)
+    content:
+      'Throw a ball straight up and freeze the film at the very top, where ' +
+      'its velocity is exactly zero. Most people say its acceleration must ' +
+      'be zero too. Run the film one frame either side: an instant ago it ' +
+      'moved upward; an instant later it moves downward. Velocity went ' +
+      'up → zero → down. It was CHANGING the whole time — including at the ' +
+      'top — because gravity never pauses just because the ball does. So at ' +
+      'the top: velocity = 0 AND acceleration = 9.8 m/s² downward, both at ' +
+      'once. The two quantities are independent — ask them separately: "is ' +
+      'it moving?" (velocity) and "is its motion changing?" (acceleration). ' +
+      'A parked car answers no/no; the ball at the top answers no/YES.',
+    targetedMisconceptions: [`${ACC}:MC-ZERO-VELOCITY-ZERO-ACCELERATION`],
+    source: `${ACC_SRC} — §6 MC-ZERO-VELOCITY-ZERO-ACCELERATION (full repair chain P28→P30→P31 rendered as one teaching text)`,
+  },
+  {
+    conceptId: ACC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles: rate-of-change-of-a-rate, the derivative view
+    content:
+      'Position tells you where. Velocity is the rate position changes. ' +
+      'Acceleration is the rate VELOCITY changes — a rate of a rate, which ' +
+      'is why it feels one step more abstract and why intuition slips. Two ' +
+      'consequences fall straight out of the definition a = Δv/Δt. First, ' +
+      'the size of v is irrelevant: a jet at constant 900 km/h has a = 0, ' +
+      'while a dropped key has a = 9.8 m/s² from the moment it\'s released — ' +
+      'even at the instant v = 0. Second, direction changes count as ' +
+      'acceleration: circular motion at constant speed is accelerated ' +
+      'motion, because the velocity VECTOR is turning. Keep the two ' +
+      'questions separate — how fast (v), and how is that changing (a) — ' +
+      'and every "paradox" in kinematics dissolves.',
+    targetedMisconceptions: [`${ACC}:MC-ACCELERATION-IS-SPEED`, `${ACC}:MC-ZERO-VELOCITY-ZERO-ACCELERATION`],
+    source: `${ACC_SRC} — §6 both misconceptions' bridge texts (P30) unified into a first-principles adult explanation`,
+  },
+]
+
+const ACC_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A ball thrown straight up is at the highest point of its flight. Which statement is true?',
+    choices: [
+      { text: 'v = 0 and a = 9.8 m/s² downward', isCorrect: true },
+      { text: 'v = 0 and a = 0', isCorrect: false, misconceptionId: `${ACC}:MC-ZERO-VELOCITY-ZERO-ACCELERATION` },
+      { text: 'v ≠ 0 and a = 0', isCorrect: false },
+    ],
+    correctValue: 'v = 0 and a = 9.8 m/s² downward',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACC}:MC-ZERO-VELOCITY-ZERO-ACCELERATION`],
+    source: `${ACC_SRC} — §6 discrimination pair 1 (P33), distractor-mapped`,
+  },
+  {
+    conceptId: ACC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which object has the greatest acceleration right now?',
+    choices: [
+      { text: 'A scooter going from rest to 8 m/s in 2 s', isCorrect: true },
+      { text: 'An airliner cruising at a constant 900 km/h', isCorrect: false, misconceptionId: `${ACC}:MC-ACCELERATION-IS-SPEED` },
+      { text: 'A train holding a steady 160 km/h', isCorrect: false, misconceptionId: `${ACC}:MC-ACCELERATION-IS-SPEED` },
+    ],
+    correctValue: 'the scooter',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ACC}:MC-ACCELERATION-IS-SPEED`],
+    source: `${ACC_SRC} — §6 MC-ACCELERATION-IS-SPEED trigger scenario as a fresh distractor-mapped item (not the blueprint's own car/bicycle wording)`,
+  },
+]
+
+// ─── phys.mech.force ─────────────────────────────────────────────────────────
+const FORCE = 'phys.mech.force'
+const FORCE_SRC = 'docs/curriculum/blueprints/phys.mech.force.md'
+
+const FORCE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FORCE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: force as a two-object interaction, happening NOW
+    content:
+      'A force is never a thing an object HAS — it\'s always something ' +
+      'happening BETWEEN two objects, right now. Every real force lets you ' +
+      'answer two questions: what\'s pushing or pulling, and what\'s being ' +
+      'pushed or pulled? Your hand and the door. The Earth and the dropped ' +
+      'apple. If you can\'t name both objects, the force isn\'t real. That\'s ' +
+      'the test that catches the oldest mistake in physics: "the kicked ' +
+      'ball keeps flying because the kick\'s force is still in it." The ' +
+      'moment your foot leaves the ball, name the second object — there ' +
+      'isn\'t one. The kick is over; nothing stores it. What the flying ball ' +
+      'has is motion, and motion continues on its own until some NEW ' +
+      'interaction — air, grass, a wall — pushes back.',
+    targetedMisconceptions: [`${FORCE}:MC-FORCE-IS-IMPETUS`],
+    source: `${FORCE_SRC} — §1 Learning Objective (two-object interaction test) + §6 MC-FORCE-IS-IMPETUS (foot-leaves-ball conflict evidence P28)`,
+  },
+  {
+    conceptId: FORCE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Classification: contact vs non-contact + net force
+    content:
+      'Every force in mechanics falls into one of two families. CONTACT ' +
+      'forces need touching: friction, tension in a rope, the "normal" ' +
+      'push of a floor on your feet, an applied shove. NON-CONTACT forces ' +
+      'act across space through fields: gravity, magnetic, electric. Either ' +
+      'way, the two-object rule holds — the floor pushes YOU, the Earth ' +
+      'pulls the BALL. Objects usually feel several forces at once, so ' +
+      'physics adds them as vectors into one NET force, and only the net ' +
+      'force determines what happens to the motion. Careful with the ' +
+      'subtlety in that word: net force zero does NOT mean no forces — a ' +
+      'book on a table feels gravity down and the table\'s push up, two ' +
+      'real forces cancelling to a net of zero. That\'s why it just sits ' +
+      'there.',
+    targetedMisconceptions: [],
+    source: `${FORCE_SRC} — §1 Learning Objective items 2–3 (contact/non-contact classification + net-force-zero clause) rendered as teaching text`,
+  },
+  {
+    conceptId: FORCE,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: force needed to keep moving (Aristotle vs Newton)
+    content:
+      'Here\'s the belief to put on the table: "something must keep pushing ' +
+      'a moving object, or it stops." It feels obviously true — everything ' +
+      'you\'ve ever thrown eventually stopped. Now watch a hockey puck on ' +
+      'smooth ice: nothing touches it horizontally, no engine, no ongoing ' +
+      'push — and it just keeps going. If a "forward force" were carrying ' +
+      'it, name the two objects that force acts between. You can\'t; there ' +
+      'is no second object. The resolution: motion needs NO force to ' +
+      'continue — force is only needed to CHANGE motion. Things on Earth ' +
+      'stop because real, nameable forces stop them: friction from the ' +
+      'ground, drag from the air. Aristotle guessed "moving things need ' +
+      'movers"; Newton saw that the movers were only ever needed to start, ' +
+      'stop, or steer.',
+    targetedMisconceptions: [`${FORCE}:MC-FORCE-CAUSES-MOTION`],
+    source: `${FORCE_SRC} — §6 MC-FORCE-CAUSES-MOTION (hockey-puck conflict evidence P28 + bridge P30 + replacement P31 as one repair text)`,
+  },
+  {
+    conceptId: FORCE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles: force defined by what it does (changes motion), vector nature
+    content:
+      'Define force by its effect, and the concept snaps into focus: a ' +
+      'force is an interaction between two objects that changes — or tends ' +
+      'to change — a state of motion. Three consequences follow. It\'s a ' +
+      'VECTOR: a 10 N push left and a 10 N push right are different forces, ' +
+      'and their sum is zero. It\'s an INTERACTION: no object can exert a ' +
+      'force on itself, and every force names a partner (which is why "the ' +
+      'ball carries the kick\'s force" fails — the interaction ended when ' +
+      'contact did). And it\'s about CHANGE: constant velocity needs no net ' +
+      'force at all; only starting, stopping, and turning do. Most errors ' +
+      'in mechanics trace back to violating one of these three — treating ' +
+      'force as a stored substance, forgetting a partner object, or ' +
+      'demanding a force for motion that isn\'t changing.',
+    targetedMisconceptions: [`${FORCE}:MC-FORCE-IS-IMPETUS`, `${FORCE}:MC-FORCE-CAUSES-MOTION`],
+    source: `${FORCE_SRC} — §1 Learning Objective boundary statement, taught first-principles; both §6 misconceptions pre-empted structurally`,
+  },
+]
+
+const FORCE_PROBES: SeedProbe[] = [
+  {
+    conceptId: FORCE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A football is in mid-flight after being kicked (ignore air resistance). What horizontal force acts on it?',
+    choices: [
+      { text: 'None — no object is interacting with it horizontally', isCorrect: true },
+      { text: 'The force of the kick, still carried inside the ball', isCorrect: false, misconceptionId: `${FORCE}:MC-FORCE-IS-IMPETUS` },
+      { text: 'A forward "motion force" that keeps it flying', isCorrect: false, misconceptionId: `${FORCE}:MC-FORCE-CAUSES-MOTION` },
+    ],
+    correctValue: 'none',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FORCE}:MC-FORCE-IS-IMPETUS`, `${FORCE}:MC-FORCE-CAUSES-MOTION`],
+    source: `${FORCE_SRC} — §6 both misconceptions, one dual-mapped item (each distractor diagnoses a different MC)`,
+  },
+  {
+    conceptId: FORCE,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A book rests on a table. Someone says "there are no forces on it — it isn\'t moving." Name the two forces actually acting on the book, and explain why it stays still anyway.',
+    correctValue: 'Gravity (Earth pulls book down) and the normal force (table pushes book up); they are equal and opposite, so the NET force is zero — zero net force, not zero forces.',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${FORCE_SRC} — §1 Learning Objective item 3 (net force zero ≠ no forces), authored as an explain probe`,
+  },
+]
+
+// ─── Batch export ────────────────────────────────────────────────────────────
+
+export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
+  ...UNITS_EXPLANATIONS,
+  ...VEL_EXPLANATIONS,
+  ...ACC_EXPLANATIONS,
+  ...FORCE_EXPLANATIONS,
+]
+
+export const AUTHORED_PROBES: SeedProbe[] = [
+  ...UNITS_PROBES,
+  ...VEL_PROBES,
+  ...ACC_PROBES,
+  ...FORCE_PROBES,
+]

@@ -29,6 +29,13 @@ import { PrismaClient, AssetFamily, AssetStatus, AuthorKind, ExplanationStyle } 
 import {
   SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
 } from '../../src/lib/teaching/assets/brainSeedAssets'
+import { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } from '../../src/lib/teaching/assets/authoredSeedAssets'
+
+// One seed pass covers both collections: the frozen-Brain transcriptions
+// (brainSeedAssets) and the blueprint-grounded authored batch
+// (authoredSeedAssets). Same idempotency, KG-validation, and status rules.
+const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS]
+const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES]
 import { hashContent } from '../../src/lib/teaching/assets/similarity'
 
 const prisma = new PrismaClient()
@@ -42,8 +49,8 @@ async function main() {
   // (concepts/README.md binding rule: no entry exists without a KG node).
   const { createSubjectAdapter } = await import('../../src/lib/curriculum/subjectKgAdapter')
   const allConceptIds = new Set([
-    ...SEED_EXPLANATIONS.map((e) => `${e.subjectSlug}:${e.conceptId}`),
-    ...SEED_PROBES.map((p) => `${p.subjectSlug}:${p.conceptId}`),
+    ...ALL_EXPLANATIONS.map((e) => `${e.subjectSlug}:${e.conceptId}`),
+    ...ALL_PROBES.map((p) => `${p.subjectSlug}:${p.conceptId}`),
   ])
   for (const key of allConceptIds) {
     const [subjectSlug, conceptId] = [key.slice(0, key.indexOf(':')), key.slice(key.indexOf(':') + 1)]
@@ -58,7 +65,7 @@ async function main() {
   let created = 0
   let skipped = 0
 
-  for (const e of SEED_EXPLANATIONS) {
+  for (const e of ALL_EXPLANATIONS) {
     const canonicalSlug = seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand)
     if (dryRun) { created++; console.log(`would create EXPLANATION: ${canonicalSlug}`); continue }
     const existing = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
@@ -96,7 +103,7 @@ async function main() {
     console.log(`created EXPLANATION (${status}): ${canonicalSlug}`)
   }
 
-  for (const p of SEED_PROBES) {
+  for (const p of ALL_PROBES) {
     const canonicalSlug = seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand)
     if (dryRun) { created++; console.log(`would create PROBE: ${canonicalSlug}`); continue }
     const existing = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
