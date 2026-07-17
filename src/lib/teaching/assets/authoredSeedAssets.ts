@@ -5380,6 +5380,251 @@ const RATL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.em.dc-circuits ─────────────────────────────────────────────────────
+const DCC = 'phys.em.dc-circuits'
+const DCC_SRC = 'docs/curriculum/blueprints/phys.em.dc-circuits.md'
+
+const DCC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DCC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Parallel branches share the VOLTAGE, not the current — that is ' +
+      'the defining feature to build on. Put 2 \u03a9 and 8 \u03a9 in parallel ' +
+      'across 10 V: each branch feels the full 10 V, so each draws ' +
+      'its own current: I\u2081 = 10/2 = 5 A through the easy path, I\u2082 = ' +
+      '10/8 = 1.25 A through the hard one. Nothing like an equal ' +
+      'split — the current divides INVERSELY with resistance, like ' +
+      'traffic between a four-lane highway and a narrow lane under ' +
+      'the same pressure. Divider shortcut for two branches: I\u2081/I\u2082 = ' +
+      'R\u2082/R\u2081. Equal currents happen only in the special case of ' +
+      'equal resistances; the general rule is each branch computes ' +
+      'V/R for itself, and the totals add.',
+    targetedMisconceptions: [`${DCC}:MC-SAME-CURRENT-IN-PARALLEL-BRANCHES`],
+    source: `${DCC_SRC} — MC-SAME-CURRENT-IN-PARALLEL-BRANCHES (P28 2\u03a9/8\u03a9 computation + s6 parallel-pipes analogy)`,
+  },
+  {
+    conceptId: DCC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Does every resistor in a series loop get the battery\u2019s full ' +
+      '12 V? A voltmeter settles it: across R\u2081 = 4 \u03a9 it reads 4 V; ' +
+      'across R\u2082 = 8 \u03a9 it reads 8 V; only across the battery does it ' +
+      'read 12 V. The supply voltage is a BUDGET spent around the ' +
+      'loop: with I = 12/12 = 1 A flowing, each resistor drops ' +
+      'V = IR — more resistance, bigger share — and the drops sum ' +
+      'exactly back to the supply (Kirchhoff\u2019s voltage law). Like a ' +
+      'river descending over successive rocks, the total height loss ' +
+      'equals the sum of the individual drops — no rock gets the ' +
+      'whole descent. Series: current identical everywhere, voltage ' +
+      'divided by resistance share (V_k/V = R_k/R_total).',
+    targetedMisconceptions: [`${DCC}:MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES`],
+    source: `${DCC_SRC} — MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES (s6 voltmeter measurement + P30 river-descent bridge)`,
+  },
+]
+
+const DCC_PROBES: SeedProbe[] = [
+  {
+    conceptId: DCC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'R\u2081 = 2 \u03a9 and R\u2082 = 8 \u03a9 are in parallel across 10 V. What are the branch currents?',
+    choices: [
+      { text: 'I\u2081 = 5 A, I\u2082 = 1.25 A — same voltage on each branch; current is V/R per branch', isCorrect: true },
+      { text: 'Both carry the same current — parallel branches split the current equally', isCorrect: false, misconceptionId: `${DCC}:MC-SAME-CURRENT-IN-PARALLEL-BRANCHES` },
+      { text: 'I\u2081 = 1.25 A, I\u2082 = 5 A — the bigger resistor takes more current', isCorrect: false },
+    ],
+    correctValue: '5 A and 1.25 A',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DCC}:MC-SAME-CURRENT-IN-PARALLEL-BRANCHES`],
+    source: `${DCC_SRC} — P28 numeric case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DCC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 12 V battery drives R\u2081 = 4 \u03a9 and R\u2082 = 8 \u03a9 in SERIES. What does a voltmeter read across R\u2081?',
+    choices: [
+      { text: '4 V — the supply divides in proportion to resistance (V\u2081 = IR\u2081 = 1 A \u00d7 4 \u03a9); drops sum to 12 V', isCorrect: true },
+      { text: '12 V — every element in the circuit gets the full battery voltage', isCorrect: false, misconceptionId: `${DCC}:MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES` },
+    ],
+    correctValue: '4 V',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DCC}:MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES`],
+    source: `${DCC_SRC} — s6 voltmeter measurement as probe, distractor-mapped`,
+  },
+]
+
+// ─── phys.opt.lenses ─────────────────────────────────────────────────────────
+const LENS = 'phys.opt.lenses'
+const LENS_SRC = 'docs/curriculum/blueprints/phys.opt.lenses.md'
+
+const LENS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LENS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A \u201cconverging\u201d lens does not converge everything — the label ' +
+      'describes what it does to PARALLEL rays only. Hold a ' +
+      'magnifying glass (convex, f = +20 cm) close over printed text ' +
+      '(object inside F, say u = \u221210 cm) and the lens formula gives ' +
+      '1/v = 1/20 \u2212 1/10 \u2192 v = \u221220 cm: NEGATIVE, meaning the image ' +
+      'sits on the SAME side as the object — a virtual, magnified ' +
+      'image, and the exit beam actually DIVERGES. The lens still ' +
+      'bends every ray toward the axis, just not enough to make them ' +
+      'cross. So never classify an image from the lens type alone: ' +
+      'compute v from 1/v = 1/f + 1/u and let its sign answer — ' +
+      'v > 0 real (beam converges), v < 0 virtual (beam diverges). ' +
+      'Object beyond F: projector mode. Inside F: magnifying-glass ' +
+      'mode. Same lens.',
+    targetedMisconceptions: [`${LENS}:MC-CONVEX-ALWAYS-CONVERGES`],
+    source: `${LENS_SRC} — MC-CONVEX-ALWAYS-CONVERGES (P28 TA-3 case-6 computation + s6 magnifying-glass observation)`,
+  },
+  {
+    conceptId: LENS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Lens magnification is m = v/u — do NOT import the mirror\u2019s ' +
+      'm = \u2212v/u. The stray minus flips your answer\u2019s orientation: ' +
+      'with v = +60 cm, u = \u221230 cm, the lens formula gives m = ' +
+      '60/(\u221230) = \u22122 (inverted, correct — the ray diagram agrees); ' +
+      'the smuggled mirror formula gives +2 (erect, wrong). The ' +
+      'geometric reason the formulas differ: a mirror\u2019s object and ' +
+      'image live on the SAME side of the reflecting surface, which ' +
+      'plants a negative in the derivation; a lens transmits, object ' +
+      'and image on OPPOSITE sides, no geometric negative. Write ' +
+      'them as a pair and keep them apart forever: LENS m = v/u; ' +
+      'MIRROR m = \u2212v/u.',
+    targetedMisconceptions: [`${LENS}:MC-MAGNIFICATION-MIRROR-SIGN`],
+    source: `${LENS_SRC} — MC-MAGNIFICATION-MIRROR-SIGN (P28 WE-1 double-computation + P30 same-side/opposite-side geometry)`,
+  },
+]
+
+const LENS_PROBES: SeedProbe[] = [
+  {
+    conceptId: LENS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An object is placed INSIDE the focal length of a convex lens (u = \u221210 cm, f = +20 cm). The image is:',
+    choices: [
+      { text: 'Virtual, same side, magnified — v = \u221220 cm; the exit beam diverges (magnifying-glass mode)', isCorrect: true },
+      { text: 'Real and converging — a convex lens always converges the light to a real image', isCorrect: false, misconceptionId: `${LENS}:MC-CONVEX-ALWAYS-CONVERGES` },
+    ],
+    correctValue: 'virtual, magnified',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LENS}:MC-CONVEX-ALWAYS-CONVERGES`],
+    source: `${LENS_SRC} — MC-CONVEX-ALWAYS-CONVERGES probe (case-6 numbers), distractor-mapped`,
+  },
+  {
+    conceptId: LENS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a LENS with v = +60 cm and u = \u221230 cm, what is the magnification?',
+    choices: [
+      { text: 'm = v/u = \u22122 — inverted; the lens formula has no minus sign', isCorrect: true },
+      { text: 'm = \u2212v/u = +2 — erect; magnification is always \u2212v/u', isCorrect: false, misconceptionId: `${LENS}:MC-MAGNIFICATION-MIRROR-SIGN` },
+    ],
+    correctValue: '\u22122 (inverted)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LENS}:MC-MAGNIFICATION-MIRROR-SIGN`],
+    source: `${LENS_SRC} — MC-MAGNIFICATION-MIRROR-SIGN probe (WE-1 numbers), distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.subject-verb-agreement ──────────────────────────────────────
+const SVA = 'eng.grammar.subject-verb-agreement'
+const SVA_SRC = 'docs/curriculum/blueprints/eng.grammar.subject-verb-agreement.md'
+
+const SVA_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SVA,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cThe box of toys ARE on the floor\u201d — sounds plausible, and is ' +
+      'wrong. The verb must agree with the TRUE subject, and the true ' +
+      'subject here is BOX (singular), not the nearby \u201ctoys.\u201d The ' +
+      'phrase \u201cof toys\u201d is a prepositional hitchhiker describing the ' +
+      'box; it has no vote on the verb. The reliable trick: mentally ' +
+      'CROSS OUT every phrase between subject and verb, then listen — ' +
+      '\u201cThe box \u2026 IS on the floor.\u201d Same cure for the classic \u201cOne ' +
+      'of the students HAVE finished\u201d: cross out \u201cof the students\u201d ' +
+      'and the subject is ONE — \u201cOne \u2026 HAS finished.\u201d The nearest ' +
+      'noun is a decoy precisely because it sits next to the verb; ' +
+      'the subject can be several words away and still owns the ' +
+      'agreement.',
+    targetedMisconceptions: [`${SVA}:MC-AGREE-WITH-THE-NEAREST-NOUN`],
+    source: `${SVA_SRC} — MC-AGREE-WITH-THE-NEAREST-NOUN (P30 cross-out-the-phrase technique + P33 box/one pairs)`,
+  },
+  {
+    conceptId: SVA,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'A team has many players — so \u201cthe team ARE playing well\u201d? In ' +
+      'standard American English, no: collective nouns (team, family, ' +
+      'group, committee, audience) name a group acting as ONE unit ' +
+      'and take a SINGULAR verb — \u201cThe team IS playing well,\u201d \u201cThe ' +
+      'committee HAS decided,\u201d \u201cThe family IS coming to dinner.\u201d ' +
+      'The logic \u201cmany people = plural verb\u201d is reasonable but loses ' +
+      'to convention: the noun packages the group into a single ' +
+      'grammatical thing. (British English does often say \u201cthe team ' +
+      'ARE\u201d to spotlight the individual members — a genuine dialect ' +
+      'difference, not an error — but the American default is ' +
+      'singular.) Default rule: group word acting as one unit \u2192 ' +
+      'singular verb.',
+    targetedMisconceptions: [`${SVA}:MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS`],
+    source: `${SVA_SRC} — MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS (P30 unit-packaging bridge + British-variant honesty)`,
+  },
+]
+
+const SVA_PROBES: SeedProbe[] = [
+  {
+    conceptId: SVA,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which sentence is correct?',
+    choices: [
+      { text: '\u201cThe box of toys IS on the floor\u201d — the true subject is \u201cbox\u201d (singular); \u201cof toys\u201d has no vote', isCorrect: true },
+      { text: '\u201cThe box of toys ARE on the floor\u201d — the verb agrees with \u201ctoys,\u201d the noun next to it', isCorrect: false, misconceptionId: `${SVA}:MC-AGREE-WITH-THE-NEAREST-NOUN` },
+    ],
+    correctValue: 'The box of toys is on the floor',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SVA}:MC-AGREE-WITH-THE-NEAREST-NOUN`],
+    source: `${SVA_SRC} — P33 box-of-toys pair as probe`,
+  },
+  {
+    conceptId: SVA,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In standard American English, which is the default?',
+    choices: [
+      { text: '\u201cThe team IS practicing\u201d — collective nouns act as one unit and take a singular verb', isCorrect: true },
+      { text: '\u201cThe team ARE practicing\u201d — a team is many people, so the verb must be plural', isCorrect: false, misconceptionId: `${SVA}:MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS` },
+    ],
+    correctValue: 'The team is practicing',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SVA}:MC-COLLECTIVE-NOUNS-ARE-ALWAYS-PLURAL-VERBS`],
+    source: `${SVA_SRC} — P33 team pair as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -5444,6 +5689,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...OOP_EXPLANATIONS,
   ...RAT_EXPLANATIONS,
   ...RATL_EXPLANATIONS,
+  ...DCC_EXPLANATIONS,
+  ...LENS_EXPLANATIONS,
+  ...SVA_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -5508,4 +5756,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...OOP_PROBES,
   ...RAT_PROBES,
   ...RATL_PROBES,
+  ...DCC_PROBES,
+  ...LENS_PROBES,
+  ...SVA_PROBES,
 ]
