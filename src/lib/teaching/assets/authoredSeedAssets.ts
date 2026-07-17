@@ -4895,6 +4895,249 @@ const PREP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.prob.classical-probability ─────────────────────────────────────────
+const CPROB = 'math.prob.classical-probability'
+const CPROB_SRC = 'docs/curriculum/blueprints/math.prob.classical-probability.md'
+
+const CPROB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CPROB,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The classical formula P(A) = |A|/|\u03a9| — favorable outcomes over ' +
+      'total outcomes — comes with a licence condition people forget ' +
+      'to read: every outcome must be EQUALLY LIKELY. A biased coin ' +
+      'that lands heads 70% of the time still has two outcomes, ' +
+      '{H, T}; count them and the formula says 1/2 — flatly wrong, ' +
+      'because the outcomes were never equally likely. \u201cTwo outcomes, ' +
+      'so 50-50\u201d confuses listing with symmetry. Equal likelihood is ' +
+      'a PREcondition you must justify from the physical setup — a ' +
+      'fair die\u2019s symmetry, a well-shuffled deck, a balanced spinner ' +
+      '— before counting is allowed. No symmetry, no classical ' +
+      'formula: you need measured frequencies instead.',
+    targetedMisconceptions: [`${CPROB}:MC-1`],
+    source: `${CPROB_SRC} — MC-1 (biased-coin probe + equally-likely-as-precondition bridge)`,
+  },
+  {
+    conceptId: CPROB,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two technical words in the classical formula trip students. ' +
+      '\u201cFAVORABLE\u201d does not mean \u201cthe outcomes I want\u201d — it means ' +
+      'every outcome where the event OCCURS. For A = \u201croll at least ' +
+      '3,\u201d the favorable set is {3, 4, 5, 6}: four outcomes, ' +
+      '|A| = 4, P(A) = 4/6 — whether or not you were hoping for a 6. ' +
+      'Write the event as a SET and count its members; preference is ' +
+      'irrelevant. And the SAMPLE SPACE must be built from ' +
+      'non-overlapping building blocks: writing \u03a9 = {1, 2, 3, 4, 5, ' +
+      '6, \u201cany even number\u201d} and claiming |\u03a9| = 7 double-counts — ' +
+      '\u201cany even\u201d overlaps 2, 4, 6, which are already listed. Each ' +
+      'trial produces exactly ONE outcome; \u03a9 lists those atomic ' +
+      'results once each, and events are subsets you count within it.',
+    targetedMisconceptions: [`${CPROB}:MC-2`, `${CPROB}:MC-3`],
+    source: `${CPROB_SRC} — MC-2 (favorable = membership in A) + MC-3 (mutual-exclusivity of \u03a9)`,
+  },
+]
+
+const CPROB_PROBES: SeedProbe[] = [
+  {
+    conceptId: CPROB,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A biased coin lands heads 70% of the time. Since there are two outcomes {H, T}, is P(heads) = 1/2?',
+    choices: [
+      { text: 'No — the classical formula requires EQUALLY LIKELY outcomes; a biased coin has none, so P(H) = 0.7', isCorrect: true },
+      { text: 'Yes — two outcomes always means 50-50', isCorrect: false, misconceptionId: `${CPROB}:MC-1` },
+    ],
+    correctValue: 'no — outcomes not equally likely',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CPROB}:MC-1`],
+    source: `${CPROB_SRC} — MC-1 probe question verbatim, distractor-mapped`,
+  },
+  {
+    conceptId: CPROB,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Event A = \u201croll at least 3\u201d on a fair die. How many favorable outcomes are there?',
+    choices: [
+      { text: '4 — favorable means every outcome where A occurs: {3, 4, 5, 6}', isCorrect: true },
+      { text: '1 — favorable means the outcome I want, and I want a 6', isCorrect: false, misconceptionId: `${CPROB}:MC-2` },
+    ],
+    correctValue: '4',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CPROB}:MC-2`],
+    source: `${CPROB_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+]
+
+// ─── math.alg.like-terms ─────────────────────────────────────────────────────
+const LIKE = 'math.alg.like-terms'
+const LIKE_SRC = 'docs/curriculum/blueprints/math.alg.like-terms.md'
+
+const LIKE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LIKE,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Combining like terms is fruit-counting: 3 apples + 2 apples = ' +
+      '5 apples, but 3 apples + 2 bananas is just\u2026 3 apples and 2 ' +
+      'bananas. In algebra the \u201cfruit\u201d is the variable part: 3x + 2x ' +
+      '= 5x (same fruit), but 3x + 2y stays 3x + 2y — there is no 5x, ' +
+      'no 5y, and definitely no 5xy hiding in it. Test with numbers: ' +
+      'at x = 10, y = 1, 3x + 2y = 32, while \u201c5xy\u201d = 50 — not the ' +
+      'same expression. Two terms are LIKE only when their variable ' +
+      'parts match EXACTLY — same letters, same exponents. Then you ' +
+      'add the coefficients and leave the variable part untouched: ' +
+      'it is the label on the box, not a number in the sum.',
+    targetedMisconceptions: [`${LIKE}:MC-1`],
+    source: `${LIKE_SRC} — MC-1 VARIABLE-PARTS-IGNORED (B01: fruit-counting anchor + numeric substitution check)`,
+  },
+  {
+    conceptId: LIKE,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Two exponent traps in combining terms. Trap 1: 3x\u00b2 + 2x\u00b2 is ' +
+      'NOT 5x\u2074. Adding like terms adds the COUNTS: three x\u00b2-boxes ' +
+      'plus two x\u00b2-boxes is five x\u00b2-boxes — 5x\u00b2. Exponents add only ' +
+      'when you MULTIPLY powers (x\u00b2 \u00b7 x\u00b2 = x\u2074); addition never ' +
+      'touches the exponent. Check at x = 2: 3(4) + 2(4) = 20 = ' +
+      '5x\u00b2 \u2713, while 5x\u2074 = 80 \u2717. Trap 2: x + x\u00b2 does not combine ' +
+      'at all — \u201cboth have x\u201d is not enough; x and x\u00b2 are different ' +
+      'variable parts (different fruit), so neither 2x nor 2x\u00b2 is ' +
+      'right, and x + x\u00b2 is already fully simplified. Rule of thumb: ' +
+      'like terms differ ONLY in their coefficient.',
+    targetedMisconceptions: [`${LIKE}:MC-2`, `${LIKE}:MC-3`],
+    source: `${LIKE_SRC} — MC-2 EXPONENT-ADDS-WHEN-COMBINING + MC-3 UNLIKE-TERMS-FORCED (B02/B03: count-vs-multiply split + substitution checks)`,
+  },
+]
+
+const LIKE_PROBES: SeedProbe[] = [
+  {
+    conceptId: LIKE,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Simplify: 3x\u00b2 + 2x\u00b2',
+    choices: [
+      { text: '5x\u00b2 — add the coefficients; the variable part is the unchanged label', isCorrect: true },
+      { text: '5x\u2074 — add the coefficients and the exponents', isCorrect: false, misconceptionId: `${LIKE}:MC-2` },
+      { text: 'It cannot be simplified', isCorrect: false },
+    ],
+    correctValue: '5x\u00b2',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${LIKE}:MC-2`],
+    source: `${LIKE_SRC} — MC-2 trigger item, distractor-mapped`,
+  },
+  {
+    conceptId: LIKE,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Simplify: x + x\u00b2',
+    choices: [
+      { text: 'It is already simplified — x and x\u00b2 have different variable parts, so they are not like terms', isCorrect: true },
+      { text: '2x\u00b2 (or 2x) — both terms have x, so they combine', isCorrect: false, misconceptionId: `${LIKE}:MC-3` },
+    ],
+    correctValue: 'already simplified',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LIKE}:MC-3`],
+    source: `${LIKE_SRC} — MC-3 trigger item, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.adjectives ──────────────────────────────────────────────────
+const ADJ = 'eng.grammar.adjectives'
+const ADJ_SRC = 'docs/curriculum/blueprints/eng.grammar.adjectives.md'
+
+const ADJ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ADJ,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Adjectives describe nouns from TWO positions, and both count. ' +
+      'The obvious one sits right before the noun: \u201cthe RED ball,\u201d ' +
+      '\u201ca HAPPY child\u201d (attributive). The other stands after a ' +
+      'linking verb and describes the subject from a distance: \u201cThe ' +
+      'ball IS red,\u201d \u201cThe child SEEMS happy\u201d (predicate). Same word, ' +
+      'same describing job — only the seating changed. The linking ' +
+      'verbs to watch for: is/are, seems, looks, feels, becomes, ' +
+      'tastes, sounds — they connect a subject to its description ' +
+      'rather than reporting an action. So when hunting adjectives ' +
+      'in a sentence, check both seats: directly before nouns, AND ' +
+      'right after linking verbs.',
+    targetedMisconceptions: [`${ADJ}:MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN`],
+    source: `${ADJ_SRC} — MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN (P30 attributive/predicate split + P33 pairs)`,
+  },
+  {
+    conceptId: ADJ,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Say \u201ca wooden old table.\u201d Now say \u201can old wooden table.\u201d One ' +
+      'of those made your ear itch — and native speakers could not ' +
+      'tell you WHY, because the rule they are obeying was never ' +
+      'taught to them. English stacks adjectives in a conventional ' +
+      'order: OPINION \u2192 SIZE \u2192 AGE \u2192 SHAPE \u2192 COLOR \u2192 ORIGIN \u2192 ' +
+      'MATERIAL \u2192 PURPOSE. Hence \u201ca lovely (opinion) small (size) ' +
+      'old (age) round (shape) red (color) French (origin) wooden ' +
+      '(material) dining (purpose) table\u201d flows, while any scramble ' +
+      'of it clunks: \u201cbig red ball\u201d yes, \u201cred big ball\u201d no. Here is ' +
+      'your unfair advantage as a learner: natives need years of ' +
+      'exposure to absorb this feel — you get the explicit checklist ' +
+      'today. When stacking two or more adjectives, run the order ' +
+      'once before speaking.',
+    targetedMisconceptions: [`${ADJ}:MC-ADJECTIVE-ORDER-DOESNT-MATTER`],
+    source: `${ADJ_SRC} — MC-ADJECTIVE-ORDER-DOESNT-MATTER (P28 wooden-old ear test + P31 explicit order checklist)`,
+  },
+]
+
+const ADJ_PROBES: SeedProbe[] = [
+  {
+    conceptId: ADJ,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In \u201cThe child seems happy,\u201d is \u201chappy\u201d an adjective?',
+    choices: [
+      { text: 'Yes — a predicate adjective after the linking verb \u201cseems,\u201d describing \u201cchild\u201d', isCorrect: true },
+      { text: 'No — adjectives must come directly before the noun they describe', isCorrect: false, misconceptionId: `${ADJ}:MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN` },
+      { text: 'No — \u201chappy\u201d is a verb here', isCorrect: false },
+    ],
+    correctValue: 'yes — predicate adjective',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${ADJ}:MC-ADJECTIVES-MUST-COME-BEFORE-THE-NOUN`],
+    source: `${ADJ_SRC} — P33 seems-happy pair as probe`,
+  },
+  {
+    conceptId: ADJ,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Which phrase sounds natural to a fluent English speaker?',
+    choices: [
+      { text: '\u201cAn old wooden table\u201d — age comes before material in the conventional adjective order', isCorrect: true },
+      { text: 'Both are equally natural — adjective order doesn\u2019t matter in English', isCorrect: false, misconceptionId: `${ADJ}:MC-ADJECTIVE-ORDER-DOESNT-MATTER` },
+    ],
+    correctValue: 'an old wooden table',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ADJ}:MC-ADJECTIVE-ORDER-DOESNT-MATTER`],
+    source: `${ADJ_SRC} — P28 ear-test conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -4953,6 +5196,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...FMUL_EXPLANATIONS,
   ...RTRI_EXPLANATIONS,
   ...PREP_EXPLANATIONS,
+  ...CPROB_EXPLANATIONS,
+  ...LIKE_EXPLANATIONS,
+  ...ADJ_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -5011,4 +5257,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...FMUL_PROBES,
   ...RTRI_PROBES,
   ...PREP_PROBES,
+  ...CPROB_PROBES,
+  ...LIKE_PROBES,
+  ...ADJ_PROBES,
 ]
