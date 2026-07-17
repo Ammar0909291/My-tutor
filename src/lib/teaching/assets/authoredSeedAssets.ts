@@ -6867,6 +6867,169 @@ const PASV_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.rel.time-dilation ──────────────────────────────────────────────────
+const TDIL = 'phys.rel.time-dilation'
+const TDIL_SRC = 'docs/curriculum/blueprints/phys.rel.time-dilation.md'
+
+const TDIL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TDIL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Is time dilation a real effect or just light taking longer to ' +
+      'reach us — an optical trick? Real, and proven by REUNITING ' +
+      'clocks, which an illusion could never survive. Muons created ' +
+      'high in the atmosphere have a lab-measured lifetime of only ' +
+      '2.2 \u03bcs — nowhere near enough to reach sea level at nearly c. ' +
+      'Yet muons arrive at sea level in exactly the numbers time ' +
+      'dilation predicts: their own \u201cclock\u201d genuinely ticks slower ' +
+      'from our frame. The Hafele-Keating experiment sealed it: fly ' +
+      'atomic clocks around the world, land them, and compare them ' +
+      'side by side with clocks that stayed put — they read GENUINELY ' +
+      'different elapsed times. An illusion evaporates on reunion; ' +
+      'this difference is permanently stamped on the clock face.',
+    targetedMisconceptions: [`${TDIL}:MC-1`],
+    source: `${TDIL_SRC} — MC-1 MC-TIME-DILATION-IS-ILLUSION (P28 muon survival + Hafele-Keating reunited-clocks evidence)`,
+  },
+  {
+    conceptId: TDIL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'The word \u201cproper\u201d misleads — it does NOT mean \u201cthe real, ' +
+      'complete, bigger\u201d time. \u201cProper time\u201d (from Latin proprius, ' +
+      '\u201cone\u2019s own\u201d) is just the time on the clock that travels WITH ' +
+      'the object. A muon\u2019s own clock reads 2.2 \u03bcs (proper time, ' +
+      '\u0394\u03c4); the lab watching it fly measures 35 \u03bcs (coordinate ' +
+      'time, \u0394t). Since \u0394t = \u03b3\u0394\u03c4 and \u03b3 \u2265 1 ALWAYS, proper time is ' +
+      'always the SHORTER of the two, never longer — the moving ' +
+      'clock always shows less elapsed time than the stationary ' +
+      'observer measures. Compute \u03b3 = 35/2.2 \u2248 16 here, matching a ' +
+      'muon speed of about 0.998c. \u201cProper\u201d is a label of ownership, ' +
+      'not a claim about size.',
+    targetedMisconceptions: [`${TDIL}:MC-2`],
+    source: `${TDIL_SRC} — MC-2 MC-PROPER-TIME-IS-LONGER (P28 muon 2.2\u03bcs/35\u03bcs numbers + P30 proprius etymology bridge)`,
+  },
+]
+
+const TDIL_PROBES: SeedProbe[] = [
+  {
+    conceptId: TDIL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'The Hafele-Keating experiment flew atomic clocks around the world and compared them to ground clocks on landing. What does the observed time difference show?',
+    choices: [
+      { text: 'Time dilation is a real physical effect — the clocks genuinely accumulated different elapsed times, verified after reuniting', isCorrect: true },
+      { text: 'It was an optical illusion caused by the finite speed of light reaching the clocks', isCorrect: false, misconceptionId: `${TDIL}:MC-1` },
+    ],
+    correctValue: 'real physical effect',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TDIL}:MC-1`],
+    source: `${TDIL_SRC} — MC-1 probe question verbatim, distractor-mapped`,
+  },
+  {
+    conceptId: TDIL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A muon\u2019s proper lifetime is 2.2 \u03bcs; the lab measures 35 \u03bcs for the same muon. Which is longer?',
+    choices: [
+      { text: 'Coordinate time (the lab\u2019s 35 \u03bcs) — \u0394t = \u03b3\u0394\u03c4 with \u03b3 \u2265 1, so proper time is always the shorter one', isCorrect: true },
+      { text: 'Proper time — it is the \u201creal\u201d time, so it must be the longer, more complete measurement', isCorrect: false, misconceptionId: `${TDIL}:MC-2` },
+    ],
+    correctValue: 'coordinate time (35 \u03bcs)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TDIL}:MC-2`],
+    source: `${TDIL_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+]
+
+// ─── math.nt.prime-number ────────────────────────────────────────────────────
+const PRIME = 'math.nt.prime-number'
+const PRIME_SRC = 'docs/curriculum/blueprints/math.nt.prime-number.md'
+
+const PRIME_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PRIME,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Is 1 a prime number? Its only divisors ARE 1 and itself — ' +
+      'because they are the same number, so the argument sounds ' +
+      'airtight. But the definition of prime has a second clause ' +
+      'that quietly rules 1 out: a prime is a number GREATER THAN 1 ' +
+      'whose only divisors are 1 and itself. 1 fails the very first ' +
+      'requirement before the divisor-count question even applies. ' +
+      'Why mathematicians insist on this: if 1 counted as prime, ' +
+      'every number would have infinitely many \u201cprime\u201d ' +
+      'factorizations (6 = 2\u00d73 = 1\u00d72\u00d73 = 1\u00d71\u00d72\u00d73\u2026), wrecking the ' +
+      'Fundamental Theorem of Arithmetic\u2019s promise of a UNIQUE prime ' +
+      'factorization. 1 gets its own special category: a \u201cunit,\u201d ' +
+      'neither prime nor composite.',
+    targetedMisconceptions: [`${PRIME}:MC-1`],
+    source: `${PRIME_SRC} — MC-1 PRIME-INCLUDES-ONE (B01: greater-than-1 clause + unique-factorization rationale)`,
+  },
+  {
+    conceptId: PRIME,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Two shortcuts that feel safe and both fail. \u201cEven numbers are ' +
+      'never prime\u201d — except 2, which is prime (divisors: only 1 and ' +
+      '2) and also the ONLY even prime; every other even number has ' +
+      '2 as an extra divisor, but 2 itself doesn\u2019t get to divide ' +
+      'anything smaller. \u201cAll odd numbers are prime\u201d fails constantly: ' +
+      '9 = 3\u00d73, 15 = 3\u00d75, 21 = 3\u00d77 — all odd, all composite. And ' +
+      'the last-digit heuristic (\u201c21 ends in 1, so it\u2019s prime\u201d) has no ' +
+      'mathematical basis at all — 21 = 3 \u00d7 7. There is no shortcut ' +
+      'that skips checking: TEST for divisors up to \u221an (for 21, ' +
+      'check 2, 3; \u221a21 \u2248 4.6, and 3 divides evenly, so 21 is ' +
+      'composite). Primality is decided by division, never by ' +
+      'parity or the last digit.',
+    targetedMisconceptions: [`${PRIME}:MC-2`, `${PRIME}:MC-3`],
+    source: `${PRIME_SRC} — MC-2 ODD-EQUALS-PRIME + MC-3 LAST-DIGIT-HEURISTIC (B02/B03: 2-as-only-even-prime + 21/51/91 divisor tests)`,
+  },
+]
+
+const PRIME_PROBES: SeedProbe[] = [
+  {
+    conceptId: PRIME,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is 1 a prime number?',
+    choices: [
+      { text: 'No — the definition requires a number greater than 1; 1 is neither prime nor composite (it\u2019s a \u201cunit\u201d)', isCorrect: true },
+      { text: 'Yes — its only divisors are 1 and itself', isCorrect: false, misconceptionId: `${PRIME}:MC-1` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PRIME}:MC-1`],
+    source: `${PRIME_SRC} — MC-1 trigger as probe, distractor-mapped`,
+  },
+  {
+    conceptId: PRIME,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is 21 a prime number?',
+    choices: [
+      { text: 'No — 21 = 3 \u00d7 7, a composite number; testing divisors (not the last digit) is the only reliable method', isCorrect: true },
+      { text: 'Yes — 21 ends in 1, and numbers ending in 1 are prime', isCorrect: false, misconceptionId: `${PRIME}:MC-3` },
+    ],
+    correctValue: 'no — composite (3\u00d77)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PRIME}:MC-3`],
+    source: `${PRIME_SRC} — MC-3 trigger item (21), distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -6949,6 +7112,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...GRP_EXPLANATIONS,
   ...SCHR_EXPLANATIONS,
   ...PASV_EXPLANATIONS,
+  ...TDIL_EXPLANATIONS,
+  ...PRIME_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -7031,4 +7196,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...GRP_PROBES,
   ...SCHR_PROBES,
   ...PASV_PROBES,
+  ...TDIL_PROBES,
+  ...PRIME_PROBES,
 ]
