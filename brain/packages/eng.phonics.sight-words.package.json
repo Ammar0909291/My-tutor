@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.sight-words-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.sight-words",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4ead44a45f67f047ed0527f3afdad171582acd79ed5695d4246b40c8729029d8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.sight-words.md": "sha256:79ef554ece9f5053484f6c4c9c68bc00bcf681532791288d9e7de7bc38818b43"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.sight-words",
+    "name": "High-Frequency Sight Words",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.letter-sound-correspondence"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.sight-words-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.sight-words (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.sight-words.md": "sha256:79ef554ece9f5053484f6c4c9c68bc00bcf681532791288d9e7de7bc38818b43"
+      },
+      "contentHash": "sha256:30bb6a71fe48733e3c1d87f6a8d99c475d00bcd2c9e79cfe75f3809f347b9f83",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.sight-words.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.sight-words.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.sight-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.sight-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.sight-words.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.sight-words.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.sight-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.sight-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.sight-words.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.sight-words.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.sight-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.sight-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.sight-words.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.sight-words.md#TA-4 (addresses MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.sight-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.sight-words\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.sight-words.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.sight-words.md#TA-5 (addresses MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL, MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.sight-words"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.sight-words\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.sight-words/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "High-Frequency Sight Words — Conceptual Development Sequence",
+      "content": "**TA-1 — Regular Sight Word Decoding [C]**\n\nPresent phonetically regular high-frequency words (and, big, can, get, him, not); student sounds them out using known letter-sound correspondences, building the insight that most \"sight words\" are actually decodable, just common.\n\n**TA-2 — Irregular Sight Word Introduction [C]**\n\nIntroduce a small set of genuinely irregular high-frequency words (said, was, of, the, they, one) as words requiring direct memorization; explicitly flag which specific letter(s) behave unexpectedly in each (e.g., in \"said,\" the \"ai\" does not make its expected sound).\n\n**TA-3 — Flash Recognition with Letter-Order Check [C→P]**\n\nUsing the Component 3 flash-and-check technique, student practices fast recognition of a mixed set of regular and irregular sight words, always confirming with a full letter-by-letter check.\n\n**TA-4 — Twin-Word Discrimination [P]**\n\nPresent commonly confused sight-word pairs (was/saw, there/three, what/that, from/form); student discriminates each pair explicitly, directly targeting MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH.\n\n**TA-5 — Sight Words in Connected Text [P]**\n\nPresent a short sentence or two containing several taught sight words embedded among decodable words; student reads fluently, applying instant recognition for sight words and decoding for the rest.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 69,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/misconception/MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "- **Trigger signal:** Student refuses to attempt sounding out ANY sight word, treating the entire category as purely arbitrary shapes to memorize, even for sight words that are partially or fully phonetically regular (e.g., \"and,\" \"big,\" \"can\" — common but still phonetically decodable), and gives up immediately rather than attempting a partial decode.",
+      "content": "### MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL\n- **Trigger signal:** Student refuses to attempt sounding out ANY sight word, treating the entire category as purely arbitrary shapes to memorize, even for sight words that are partially or fully phonetically regular (e.g., \"and,\" \"big,\" \"can\" — common but still phonetically decodable), and gives up immediately rather than attempting a partial decode.\n- **Conflict evidence [P28]:** \"You said sight words can never be sounded out. Let's try 'and' — can you sound out /æ/-/n/-/d/? Does that actually work for this one?\"\n- **Bridge text [P30]:** \"'Sight word' means a word taught for instant, automatic recognition because of how common it is — NOT necessarily because it's unreadable by sounding out. Many sight words (and, big, can, get) are fully phonetically regular; only some (said, was, of, the) have genuinely irregular spelling-sound patterns that truly require memorization.\"\n- **Replacement text [P31]:** \"For any sight word, first try sounding it out — if that produces the correct word, treat it as a regular word you're building automatic recognition for; only fall back to pure memorization for the genuinely irregular ones.\"\n- **Discrimination pairs [P33]:**\n  - \"and\" (fully decodable: /æ/-/n/-/d/) vs. \"was\" (irregular: does not sound like /wæz/ read literally — actually /wʌz/, with the 'a' behaving unexpectedly).\n  - \"big\" (fully decodable) vs. \"the\" (irregular vowel — schwa /ðə/ or /ðiː/, not a predictable single spelling-sound rule for a beginner).\n- **s6_path:** \"It's understandable to assume 'sight word' means 'unreadable' since that's true for some of them — but many are just common, regular words being taught for speed, not because they're actually irregular.\"",
+      "localKey": "MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL",
+      "language": "en",
+      "refs": [
+        "MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/misconception/MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "- **Trigger signal:** Student \"reads\" a sight word by recognizing its overall visual shape/length/first letter alone (guessing from a partial glance) rather than processing all the letters, leading to errors on similar-looking or similar-length words (e.g., confusing \"was\"/\"saw\", \"there\"/\"three\", or \"what\"/\"that\").",
+      "content": "### MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH\n- **Trigger signal:** Student \"reads\" a sight word by recognizing its overall visual shape/length/first letter alone (guessing from a partial glance) rather than processing all the letters, leading to errors on similar-looking or similar-length words (e.g., confusing \"was\"/\"saw\", \"there\"/\"three\", or \"what\"/\"that\").\n- **Conflict evidence [P28]:** \"You read this as 'was' — let's look letter by letter: w-a-s. Now look at this other word: s-a-w. Same letters, different order — is it the same word?\"\n- **Bridge text [P30]:** \"Sight-word recognition needs to be fast, but it still has to process every letter, in order — glancing at just the shape, length, or first letter isn't enough, because many high-frequency words share those surface features while being different words entirely.\"\n- **Replacement text [P31]:** \"Even when reading a sight word quickly, make sure your eyes move across every letter in order — don't rely on shape or length alone.\"\n- **Discrimination pairs [P33]:**\n  - \"was\" vs. \"saw\" (same 3 letters, reversed — a classic sight-word reversal error).\n  - \"there\" vs. \"three\" (similar length/shape, genuinely different letters and meaning).\n- **s6_path:** \"Reversal and shape-based confusions are extremely common at this stage because it feels efficient to just glance — we'll build the habit of a quick but complete letter-by-letter check, especially for words with a common 'twin'.\"\n\n---",
+      "localKey": "MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH",
+      "language": "en",
+      "refs": [
+        "MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "Regular Sight Word Decoding",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Regular Sight Word Decoding\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 71,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "Irregular Sight Word Introduction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Irregular Sight Word Introduction\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 75,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "Flash Recognition with Letter-Order Check",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Flash Recognition with Letter-Order Check\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 79,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "Twin-Word Discrimination",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Twin-Word Discrimination\",\"primitives\":[],\"addresses\":[\"MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 83,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "Sight Words in Connected Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Sight Words in Connected Text\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH\",\"MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL",
+        "MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 87,
+        "endLine": 215
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Regular sight word, novel word**\n\"Read the word 'not.'\"\n*Target:* decodes and reads correctly using regular letter-sound correspondences.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Irregular sight word, novel word**\n\"Read the word 'of.' Is this word fully regular, or does something behave unexpectedly?\"\n*Target:* reads \"of\" correctly (/ʌv/, not the expected /ɒf/) and identifies that the \"f\" sound is unexpectedly voiced — an irregularity requiring memorization.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Flash recognition speed**\n\"[Flash 'they' briefly] What word was that?\"\n*Target:* correctly identifies \"they\" from a brief exposure, confirmed by a full letter check afterward.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Twin-word discrimination, novel pair**\n\"Read these two words carefully: 'what' and 'that.'\"\n*Target:* correctly distinguishes both, citing the different initial letters (wh- vs. th-) rather than guessing from overall shape.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the sight-word category**\n\"In your own words: what makes a word a 'sight word,' and does that mean it can never be sounded out?\"\n*Target:* explains that sight words are taught for fast, common-word recognition, and correctly states that many are actually phonetically regular — only some are truly irregular and need pure memorization.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "Adaptive Flags",
+      "content": "- **\"Sight word\" ≠ \"unreadable\"**: explicitly teach that the sight-word category is about frequency and automaticity, not universal irregularity — most taught sight words are phonetically regular and should be approached with decoding first.\n- **Irregular subset is small and identifiable**: flag exactly which letter(s) in each irregular sight word behave unexpectedly (Component 4 TA-2) rather than presenting the whole word as an undifferentiated blob to memorize — this preserves as much phonics-based processing as possible even within irregular words.\n- **Twin-word pairs deserve explicit, paired practice**: commonly confused high-frequency word pairs (was/saw, there/three, what/that) should be taught in deliberate side-by-side contrast (TA-4), not left to incidental exposure.\n- **Cross-link to word-recognition**: this concept is cross-linked to `eng.vocab.word-recognition` — sight-word automaticity is the phonics-side foundation that vocabulary-level word recognition builds on; do not duplicate broader vocabulary-acquisition content here.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 177,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "eng.phonics.sight-words/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.sight-words",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — flash-and-check warm-up on a known regular sight word\n  ↓\n[P41] PD-1 (basic letter-sound readiness)\n  ↓ PASS\n[P06] Anchor: word-card flash-and-check (including a twin-word demo)\n  ↓\nTA-1: Regular sight word decoding [C]\n  ↓\n[P28] Conflict: refusal to attempt decoding any sight word → MC-SIGHT-WORDS-CANNOT-BE-SOUNDED-OUT-AT-ALL (if triggered)\n  ↓\nTA-2: Irregular sight word introduction [C]\n  ↓\nTA-3: Flash recognition with letter-order check [C→P]\n  ↓\n[P28] Conflict: shape-guessing instead of full letter processing → MC-MEMORIZING-THE-WORD-SHAPE-IS-ENOUGH (if triggered)\n  ↓\nTA-4: Twin-word discrimination [P]\n  ↓\nTA-5: Sight words in connected text [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one sight word in a book and check if it's regular or irregular.\"\n[P68] Session close\n[P85] Regulation tail — praise attempting to decode before assuming a word must be memorized\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (no prior sight-word instruction): start exclusively with regular sight words (TA-1) to build the \"many are decodable\" insight before introducing any irregular words. S1 (has memorized some sight words by rote without decoding attempts): explicitly revisit already-known words through TA-1's decoding lens to build the habit of attempting sound-out first. S6 (frustrated by irregular words breaking expectations right after learning phonics rules): validate explicitly that only a small subset are truly irregular, and that this is a normal, bounded feature of English, not a sign phonics \"doesn't work.\" S9 (L1 literacy relies on a non-alphabetic or highly regular alphabetic system, e.g. a syllabary or a shallow orthography): expect the very concept of \"irregular high-frequency words requiring memorization independent of sound\" to be less intuitive; allow extra explicit framing of why this category exists in English specifically.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.sight-words.md",
+        "startLine": 139,
+        "endLine": 177
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
