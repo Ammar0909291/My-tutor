@@ -68,9 +68,27 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.em.kirchhoffs-laws':          { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
   'phys.em.electric-circuits':        { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
 
-  // Physics — Kinematics graphs
-  'phys.mech.kinematics-1d':          { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'kinematics_graphs' },
-  'phys.mech.kinematics-2d':          { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'kinematics_graphs' },
+  // Physics — Kinematics (P0 fix: these are NOT force/dynamics concepts —
+  // 'phys.mech.displacement' had no exact entry here, so it fell through to
+  // the 'phys.mech' domain-prefix default below, which is force_diagram.
+  // That default is correct for dynamics (force, tension, friction) but
+  // wrong for pure-kinematics concepts (position/motion description, no
+  // force analysis). Exact entries here win before the domain default is
+  // ever reached (lookupConceptVisual checks Tier 1 before Tier 2), closing
+  // the bug for every kinematics concept in one place rather than only the
+  // one reported. number_line fits displacement/velocity/acceleration/
+  // relative-motion (all fundamentally "position or its rate of change
+  // along a line/path" at this level); kinematics-1d/2d already had a
+  // correct sceneGenerator (kinematics_graphs, which renders position/
+  // velocity/acceleration-vs-time GRAPHS) but a mismatched static primary
+  // (force_diagram) — corrected to coordinate_plane, which is what those
+  // graphs actually look like.
+  'phys.mech.displacement':           { primary: 'number_line', all: ['number_line'] },
+  'phys.mech.velocity':               { primary: 'number_line', all: ['number_line', 'coordinate_plane'] },
+  'phys.mech.acceleration':           { primary: 'number_line', all: ['number_line', 'coordinate_plane'] },
+  'phys.mech.relative-motion':        { primary: 'number_line', all: ['number_line'] },
+  'phys.mech.kinematics-1d':          { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'kinematics_graphs' },
+  'phys.mech.kinematics-2d':          { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'kinematics_graphs' },
 
   // Chemistry — Atomic structure
   'chem.found.atomic-theory':         { primary: 'three_atomic_structure', all: ['three_atomic_structure'] },

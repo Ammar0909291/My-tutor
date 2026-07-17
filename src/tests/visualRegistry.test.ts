@@ -103,6 +103,53 @@ describe('visualRegistry', () => {
       expect(entry!.all[0]).toBe(entry!.primary)
     }
   })
+
+  // ── P0 regression: kinematics concepts must NOT resolve to force_diagram ──
+  // Root cause: 'phys.mech.displacement' had no exact (Tier 1) entry, so it
+  // fell through to the 'phys.mech' domain-prefix (Tier 2) default, which is
+  // force_diagram — correct for dynamics, wrong for pure kinematics. Exact
+  // entries added for every pure-kinematics phys.mech concept so Tier 1 wins
+  // before the dynamics-scoped domain default is ever reached.
+  it.each([
+    'phys.mech.displacement',
+    'phys.mech.velocity',
+    'phys.mech.acceleration',
+    'phys.mech.relative-motion',
+    'phys.mech.kinematics-1d',
+    'phys.mech.kinematics-2d',
+  ])('%s does not resolve to force_diagram', (conceptId) => {
+    const visual = getConceptVisualType(conceptId)
+    expect(visual).not.toBeNull()
+    expect(visual).not.toBe('force_diagram')
+  })
+
+  it('displacement resolves to number_line specifically (the reported bug)', () => {
+    expect(getConceptVisualType('phys.mech.displacement')).toBe('number_line')
+  })
+
+  it('kinematics-1d/2d keep their kinematics_graphs scene generator, only the static primary changed', () => {
+    expect(getConceptSceneGenerator('phys.mech.kinematics-1d')).toBe('kinematics_graphs')
+    expect(getConceptSceneGenerator('phys.mech.kinematics-2d')).toBe('kinematics_graphs')
+    expect(getConceptVisualType('phys.mech.kinematics-1d')).toBe('coordinate_plane')
+  })
+
+  // ── Regression: genuine dynamics/force concepts are unaffected ────────────
+  it.each([
+    ['phys.mech.newtons-first-law', 'three_newton_forces'],
+    ['phys.mech.newtons-second-law', 'three_newton_forces'],
+    ['phys.mech.newtons-third-law', 'three_newton_forces'],
+    ['phys.mech.friction', 'three_newton_forces'],
+  ] as const)('force concept %s still resolves correctly (%s), unaffected by the kinematics fix', (conceptId, expected) => {
+    expect(getConceptVisualType(conceptId)).toBe(expected)
+  })
+
+  it('an unlisted mechanics concept (no exact entry) still gets the dynamics domain default — unchanged behavior', () => {
+    // This is intentionally NOT one of the newly-added exact entries — it
+    // proves the domain-level default itself was left untouched (only exact
+    // Tier-1 entries were added), so any other force/dynamics concept
+    // without a dedicated entry keeps working exactly as before.
+    expect(getConceptVisualType('phys.mech.some-other-dynamics-concept')).toBe('force_diagram')
+  })
 })
 
 // ── Phase 2: server-authoritative forced render (route.ts's core gap fix) ────

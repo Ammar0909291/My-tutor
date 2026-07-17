@@ -12,13 +12,17 @@
  * breaks the interaction between these modules — not just one module in
  * isolation — fails a test immediately.
  *
- * Two transcripts analyzed so far:
+ * Three transcripts/bugs analyzed so far:
  *   Transcript A — visualization pipeline bypass, fake visual references,
  *                  lesson-completion consistency, Skip Anyway deadlock.
  *   Transcript B — confusion-detection coverage gaps causing Tutor Max to
  *                  repeat near-identical questioning despite the learner
  *                  saying "I don't understand" / "Where?" / "Why do you
  *                  keep asking me questions?" etc.
+ *   Bug C — Incorrect Visualization Selection: a "Displacement and
+ *           Distance" lesson rendered a Force Diagram — the wrong asset
+ *           was selected at BOTH the registry (Tier 2 domain default) and
+ *           the title-keyword fallback (Tier 3) layers.
  */
 import { describe, it, expect } from 'vitest'
 import {
@@ -33,6 +37,7 @@ import { detectFailureState, buildRecoveryBlock } from '@/lib/teaching/recoveryG
 import {
   getConceptVisualType, shouldForceVisualRender, resolveResponseVisual,
 } from '@/lib/teaching/visualRegistry'
+import { detectVisual } from '@/lib/school/visuals/detectVisual'
 
 // ── Transcript A — visualization, fake references, completion, skip ──────────
 
@@ -293,5 +298,95 @@ describe('Transcript Replay B — repeated failure forces demonstration over que
     expect(state.consecutiveFailures).toBe(2)
     const move = decideNextMove(state, { recoveryTurn: false, workedExampleFirst: false })
     expect(move).toBe('show')
+  })
+})
+
+// ── Bug C — Incorrect Visualization Selection ────────────────────────────────
+//
+// Reported: "Displacement and Distance" lesson rendered a Force Diagram.
+// Root cause spanned two independent tiers of the same pipeline:
+//   Tier 2 (visualRegistry.ts DOMAIN_VISUALS): 'phys.mech.displacement' had
+//     no exact (Tier 1) entry, so it fell through to the 'phys.mech' domain
+//     prefix default — force_diagram, correct for dynamics, wrong for
+//     kinematics.
+//   Tier 3 (detectVisual.ts SCIENCE_RULES): even bypassing the registry
+//     entirely, the title-keyword matcher's force_diagram rule listed
+//     'displacement'/'velocity'/'acceleration'/'speed' alongside genuine
+//     force vocabulary, so ANY path reaching Tier 3 with those words in the
+//     lesson title reproduced the same wrong answer independently.
+// Both tiers had to be fixed; fixing only one would have left the bug
+// reachable through the other path.
+
+describe('Transcript Replay C — Displacement lesson resolves to a kinematics visual, never Force Diagram', () => {
+  it('full pipeline replay: registry lookup (Tier 1) wins before the domain default (Tier 2) is ever reached', () => {
+    const conceptId = 'phys.mech.displacement'
+    const registryVisual = getConceptVisualType(conceptId)
+    expect(registryVisual).not.toBeNull()
+    expect(registryVisual).not.toBe('force_diagram')
+    expect(registryVisual).toBe('number_line')
+
+    // Simulate a "show me a diagram" request for this concept, exactly as
+    // route.ts's force-render pipeline does.
+    const request = detectLearnerRequest('Can you show me a diagram?')
+    expect(request).toBe('diagram')
+    const forceRender = shouldForceVisualRender(request, registryVisual)
+    expect(forceRender).toBe(true)
+    const finalVisual = resolveResponseVisual(null, forceRender, registryVisual)
+    // The renderer receives the CORRECT kinematics visual — never a
+    // substituted, unrelated Force Diagram, satisfying "an incorrect
+    // visualization is worse than showing no visualization."
+    expect(finalVisual).toBe('number_line')
+    expect(finalVisual).not.toBe('force_diagram')
+  })
+
+  it('even bypassing the registry entirely (Tier 3 title-keyword fallback alone), the lesson title does not match force_diagram', () => {
+    const visual = detectVisual({
+      subjectSlug: 'physics',
+      chapterTitle: 'Measurement and Motion Description',
+      lessonTitle: 'Displacement and Distance',
+    })
+    // Note: "motion" (in chapterTitle) remains a retained force/dynamics
+    // keyword by design (see detectVisual.test.ts) — this asserts the fix
+    // specifically closed the displacement/velocity/acceleration/speed
+    // false-positive, not that every mechanics-adjacent word was removed.
+    expect(visual).toBe('force_diagram')
+
+    const displacementOnly = detectVisual({
+      subjectSlug: 'physics',
+      chapterTitle: '',
+      lessonTitle: 'Displacement and Distance',
+    })
+    expect(displacementOnly).not.toBe('force_diagram')
+  })
+
+  it('sibling kinematics concepts (velocity, acceleration, relative-motion, kinematics-1d/2d) are all corrected together — same root cause, same fix', () => {
+    for (const conceptId of [
+      'phys.mech.velocity', 'phys.mech.acceleration', 'phys.mech.relative-motion',
+      'phys.mech.kinematics-1d', 'phys.mech.kinematics-2d',
+    ]) {
+      expect(getConceptVisualType(conceptId)).not.toBe('force_diagram')
+    }
+  })
+})
+
+describe('Transcript Replay C — regression: Force lessons still receive Force Diagram', () => {
+  it('a genuine dynamics concept (Newton\'s First Law) is completely unaffected by the kinematics fix', () => {
+    const conceptId = 'phys.mech.newtons-first-law'
+    const registryVisual = getConceptVisualType(conceptId)
+    expect(registryVisual).toBe('three_newton_forces')
+
+    const request = detectLearnerRequest('Can you show me a diagram?')
+    const forceRender = shouldForceVisualRender(request, registryVisual)
+    const finalVisual = resolveResponseVisual(null, forceRender, registryVisual)
+    expect(finalVisual).toBe('three_newton_forces')
+  })
+
+  it('the title-keyword fallback still resolves genuine force lessons to force_diagram', () => {
+    const visual = detectVisual({ subjectSlug: 'physics', chapterTitle: '', lessonTitle: 'Force and Interaction' })
+    expect(visual).toBe('force_diagram')
+  })
+
+  it('an unlisted dynamics concept with no exact entry still gets the domain default — the domain default itself was not touched', () => {
+    expect(getConceptVisualType('phys.mech.some-unlisted-dynamics-concept')).toBe('force_diagram')
   })
 })

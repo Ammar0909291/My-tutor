@@ -30,7 +30,16 @@ const SCIENCE_RULES: MatchRule[] = [
   { keywords: ['food chain', 'food web', 'producer', 'consumer', 'decomposer', 'ecosystem', 'trophic level', 'energy flow', 'herbivore', 'carnivore'], visual: 'food_chain' },
   { keywords: ['water cycle', 'evaporation', 'condensation', 'precipitation', 'transpiration', 'hydrological cycle', 'water vapor'], visual: 'water_cycle' },
   { keywords: ['solar system', 'planet', 'orbit', 'sun', 'earth moon', 'celestial', 'revolution', 'rotation of earth'], visual: 'solar_system' },
-  { keywords: ['force', 'motion', 'newton', 'friction', 'acceleration', 'velocity', 'speed', 'displacement', 'laws of motion', 'momentum'], visual: 'force_diagram' },
+  // P0 fix: 'displacement'/'velocity'/'acceleration'/'speed' were grouped
+  // here alongside genuine force/dynamics keywords — a kinematics lesson
+  // titled "Displacement and Distance" or "Speed and Velocity" matched this
+  // rule purely on vocabulary, producing a Force Diagram for a concept with
+  // no force analysis at all. These four describe motion QUANTITIES, not
+  // force interactions; removed from this group (they now fall through to
+  // the registry's kinematics entries in visualRegistry.ts, or to no match,
+  // rather than a wrong match). 'motion'/'newton'/'friction'/'laws of
+  // motion'/'momentum' remain — those are genuinely force/dynamics-scoped.
+  { keywords: ['force', 'motion', 'newton', 'friction', 'laws of motion', 'momentum'], visual: 'force_diagram' },
   { keywords: ['electric circuit', 'circuit', 'current electricity', 'resistance', 'ohm', 'voltage', 'battery', 'bulb', 'conductor', 'series', 'parallel'], visual: 'circuit_diagram' },
 ]
 
