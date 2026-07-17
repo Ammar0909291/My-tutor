@@ -8425,6 +8425,260 @@ const QF_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.trig.unit-circle ────────────────────────────────────────────────────
+const UCIRC = 'math.trig.unit-circle'
+const UCIRC_SRC = 'docs/curriculum/blueprints/math.trig.unit-circle.md'
+
+const UCIRC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: UCIRC,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Right-triangle sin \u03b8 = opposite/hypotenuse. Unit-circle sin ' +
+      '\u03b8 = y. Two different formulas \u2014 which is correct? Neither ' +
+      'contradicts the other: the unit circle IS a right triangle, ' +
+      'with the hypotenuse forced to length 1. Draw the radius from ' +
+      'the origin to the point (x, y) on the circle, drop a vertical ' +
+      'line to the x-axis, and you get a right triangle with ' +
+      'hypotenuse = 1 (the radius), adjacent side = x, opposite side ' +
+      '= y. Now the right-triangle formula and the unit-circle ' +
+      'formula are the SAME statement: sin \u03b8 = opposite/hypotenuse = ' +
+      'y/1 = y. The unit circle does not replace the right-triangle ' +
+      'definition; it is the SAME definition with hypotenuse fixed ' +
+      'at 1, extended to work for angles the triangle picture ' +
+      'cannot reach (past 90\u00b0, negative angles, angles beyond a ' +
+      'full turn).',
+    targetedMisconceptions: [`${UCIRC}:MC-1`],
+    source: `${UCIRC_SRC} — MC-1 UNIT-CIRCLE-CONTRADICTS-RIGHT-TRIANGLE (TA-B01: hypotenuse=1 embedding argument)`,
+  },
+  {
+    conceptId: UCIRC,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two memory traps on the unit circle. First: which coordinate ' +
+      'is sin, which is cos? Anchor on \u03b8 = 0: the point sits at ' +
+      '(1, 0) \u2014 pointing along the x-axis. cos(0) = 1 (correct \u2014 ' +
+      'cosine starts at its maximum), so cos must be the x-coordinate; ' +
+      'sin(0) = 0, so sin is the y-coordinate. (\u201cx before y\u201d ' +
+      'alphabetically matches \u201ccos before sin\u201d alphabetically \u2014 a ' +
+      'handy check.) Second: which direction does \u03b8 increase? ' +
+      'MATHEMATICAL convention is COUNTERCLOCKWISE \u2014 the OPPOSITE of ' +
+      'a clock face or compass bearings, which is exactly why this ' +
+      'trips people up. At \u03b8 = 90\u00b0 (counterclockwise from the ' +
+      'positive x-axis) the point is straight UP at (0, 1), never ' +
+      'down at (0, \u22121). Always rotate counterclockwise from the ' +
+      'positive x-axis, never clockwise.',
+    targetedMisconceptions: [`${UCIRC}:MC-2`, `${UCIRC}:MC-3`],
+    source: `${UCIRC_SRC} — MC-2 X-IS-SIN-Y-IS-COS + MC-3 ANGLE-INCREASES-CLOCKWISE (\u03b8=0 anchor check + counterclockwise convention)`,
+  },
+]
+
+const UCIRC_PROBES: SeedProbe[] = [
+  {
+    conceptId: UCIRC,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'On the unit circle, what are the coordinates of the point at \u03b8 = 90\u00b0?',
+    choices: [
+      { text: '(0, 1) — counterclockwise rotation from the positive x-axis puts 90\u00b0 straight up', isCorrect: true },
+      { text: '(0, \u22121) — clockwise rotation puts 90\u00b0 straight down', isCorrect: false, misconceptionId: `${UCIRC}:MC-3` },
+    ],
+    correctValue: '(0, 1)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${UCIRC}:MC-3`],
+    source: `${UCIRC_SRC} — MC-3 trigger as probe, distractor-mapped`,
+  },
+  {
+    conceptId: UCIRC,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At \u03b8 = 0\u00b0, the unit-circle point is (1, 0). Which is cos(0) and which is sin(0)?',
+    choices: [
+      { text: 'cos(0) = 1 (the x-coordinate); sin(0) = 0 (the y-coordinate)', isCorrect: true },
+      { text: 'sin(0) = 1 (the y-coordinate); cos(0) = 0 (the x-coordinate)', isCorrect: false, misconceptionId: `${UCIRC}:MC-2` },
+    ],
+    correctValue: 'cos=x=1, sin=y=0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${UCIRC}:MC-2`],
+    source: `${UCIRC_SRC} — MC-2 trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── math.linalg.determinant ──────────────────────────────────────────────────
+const DET = 'math.linalg.determinant'
+const DET_SRC = 'docs/curriculum/blueprints/math.linalg.determinant.md'
+
+const DET_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DET,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'det([[3,1],[2,4]]) = 3\u00d74 \u2212 1\u00d72 = 10 \u2014 correct arithmetic, but ' +
+      'what does \u201c10\u201d actually MEAN? The determinant is the SCALE ' +
+      'FACTOR by which the matrix stretches or shrinks area (2D) or ' +
+      'volume (3D): a matrix with determinant 10 takes any region ' +
+      'and multiplies its area by exactly 10. A NEGATIVE determinant ' +
+      'means the transformation also FLIPS orientation (like a ' +
+      'mirror). And det(A) = 0 means the transformation SQUASHES ' +
+      'everything onto a lower-dimensional space (a line, or a ' +
+      'point) \u2014 area collapses to zero, which is exactly why ' +
+      'det(A) = 0 signals that A is NOT invertible: you cannot undo ' +
+      'a squash, since infinitely many input points landed on the ' +
+      'same output point. The formula is a shortcut; the geometry is ' +
+      'the meaning.',
+    targetedMisconceptions: [`${DET}:MC-1`],
+    source: `${DET_SRC} — MC-1 DETERMINANT-IS-JUST-A-FORMULA (TA-B01: area-scale-factor geometric interpretation)`,
+  },
+  {
+    conceptId: DET,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Two traps that both stem from over-generalizing familiar ' +
+      'rules. First: det(A+B) = det(A) + det(B) is FALSE in general ' +
+      '\u2014 unlike trace, which genuinely is additive (tr(A+B) = ' +
+      'tr(A)+tr(B)), the determinant is only linear in EACH ROW ' +
+      'SEPARATELY, never across the whole sum; the valid ' +
+      'multiplicative law is det(AB) = det(A)det(B), a completely ' +
+      'different property. Check any nonzero example and the ' +
+      'additive claim breaks immediately. Second: det(A) = 0 does ' +
+      'NOT mean A is the zero matrix \u2014 [[1,2],[2,4]] has ' +
+      'det = 1\u00d74\u22122\u00d72 = 0 while every entry is nonzero. What ' +
+      'det = 0 actually signals is that the matrix\u2019s ROWS (or ' +
+      'columns) are LINEARLY DEPENDENT \u2014 here row 2 is exactly twice ' +
+      'row 1, so the transformation collapses 2D space onto a single ' +
+      'line. \u201cZero determinant\u201d means \u201ccollapsed,\u201d never \u201cempty.\u201d',
+    targetedMisconceptions: [`${DET}:MC-2`, `${DET}:MC-3`],
+    source: `${DET_SRC} — MC-2 DET(A+B)=DET(A)+DET(B) (row-multilinearity-not-additivity) + MC-3 ZERO-DETERMINANT-MEANS-ZERO-MATRIX ([[1,2],[2,4]] counterexample, linear dependence)`,
+  },
+]
+
+const DET_PROBES: SeedProbe[] = [
+  {
+    conceptId: DET,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Matrix A = [[1,2],[2,4]] has determinant 1\u00d74 \u2212 2\u00d72 = 0. What does this tell you about A?',
+    choices: [
+      { text: 'A\u2019s rows are linearly dependent (row 2 = 2\u00d7row 1); A collapses the plane onto a line and is not invertible — A itself is NOT the zero matrix', isCorrect: true },
+      { text: 'A must be the zero matrix, since det = 0', isCorrect: false, misconceptionId: `${DET}:MC-3` },
+    ],
+    correctValue: 'linearly dependent rows, not invertible',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DET}:MC-3`],
+    source: `${DET_SRC} — MC-3 [[1,2],[2,4]] counterexample as probe, distractor-mapped`,
+  },
+  {
+    conceptId: DET,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Is det(A+B) = det(A) + det(B) true for matrices in general?',
+    choices: [
+      { text: 'No — the determinant is not additive across the full matrix; it is only linear row-by-row (the valid product rule is det(AB) = det(A)det(B))', isCorrect: true },
+      { text: 'Yes — determinants are linear, just like trace', isCorrect: false, misconceptionId: `${DET}:MC-2` },
+    ],
+    correctValue: 'no, not additive',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DET}:MC-2`],
+    source: `${DET_SRC} — MC-2 trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.direct-and-indirect-speech ──────────────────────────────────
+const REP = 'eng.grammar.direct-and-indirect-speech'
+const REP_SRC = 'docs/curriculum/blueprints/eng.grammar.direct-and-indirect-speech.md'
+
+const REP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: REP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Converting \u201cShe said, \u2018I am tired\u2019\u201d to indirect speech is more ' +
+      'than deleting the quotation marks. \u201cShe said I am tired\u201d still ' +
+      'has the pronoun \u201cI\u201d and present-tense \u201cam\u201d as if SHE were ' +
+      'speaking right now \u2014 but you are reporting HER words from a ' +
+      'later moment. Three shifts happen together: (1) TENSE ' +
+      'BACKSHIFT \u2014 present becomes past (\u201cam\u201d \u2192 \u201cwas\u201d), since you ' +
+      'are reporting from later; (2) PRONOUN SHIFT \u2014 \u201cI\u201d becomes ' +
+      '\u201cshe,\u201d matching who is actually speaking now (you, not her); ' +
+      '(3) TIME/PLACE SHIFT \u2014 \u201ctomorrow\u201d becomes \u201cthe next day,\u201d ' +
+      '\u201chere\u201d becomes \u201cthere.\u201d Correct result: \u201cShe said she was ' +
+      'tired.\u201d All three shifts happen at once because they all ' +
+      'flow from the same fact: you are speaking from a different ' +
+      'time, place, and person than the original speaker.',
+    targetedMisconceptions: [`${REP}:MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS`],
+    source: `${REP_SRC} — MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS (P28 pronoun/tense conflict + P30 three-shift bridge)`,
+  },
+  {
+    conceptId: REP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      '\u201cShe said the Earth orbited the Sun\u201d \u2014 backshifted correctly by ' +
+      'the mechanical rule, but is it right? The Earth still DOES ' +
+      'orbit the Sun, right now, as you report it \u2014 so English lets ' +
+      'you SKIP the backshift for timeless facts: \u201cShe said the ' +
+      'Earth orbits the Sun\u201d (present kept). Backshift exists to show ' +
+      'a gap between when something was true and when you are ' +
+      'reporting it; when nothing has changed \u2014 a scientific fact, ' +
+      'or a still-current situation (\u201cHe said he LIVES in Boston,\u201d if ' +
+      'he still does) \u2014 there is no gap to signal, so the rule ' +
+      'becomes optional. Contrast with \u201cShe said she WAS tired\u201d: her ' +
+      'tiredness was a specific, time-bound state, not a standing ' +
+      'fact \u2014 backshift applies normally there. The rule follows the ' +
+      'MEANING, not a mechanical switch.',
+    targetedMisconceptions: [`${REP}:MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS`],
+    source: `${REP_SRC} — MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS (P28 Earth-orbits conflict + P33 still-true vs time-bound pair)`,
+  },
+]
+
+const REP_PROBES: SeedProbe[] = [
+  {
+    conceptId: REP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Convert to indirect speech: She said, \u201cI am tired.\u201d',
+    choices: [
+      { text: '\u201cShe said she was tired\u201d — tense backshift (am\u2192was) and pronoun shift (I\u2192she) together', isCorrect: true },
+      { text: '\u201cShe said I am tired\u201d — just remove the quotation marks', isCorrect: false, misconceptionId: `${REP}:MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS` },
+    ],
+    correctValue: 'She said she was tired',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${REP}:MC-INDIRECT-SPEECH-IS-JUST-REMOVING-QUOTATION-MARKS`],
+    source: `${REP_SRC} — P28 pronoun/tense conflict as probe`,
+  },
+  {
+    conceptId: REP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Convert to indirect speech: She said, \u201cThe Earth orbits the Sun.\u201d',
+    choices: [
+      { text: '\u201cShe said the Earth orbits the Sun\u201d — present tense may be kept for a timeless fact still true now', isCorrect: true },
+      { text: '\u201cShe said the Earth orbited the Sun\u201d — backshift is always mechanically required', isCorrect: false, misconceptionId: `${REP}:MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS` },
+    ],
+    correctValue: 'She said the Earth orbits the Sun',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REP}:MC-BACKSHIFT-ALWAYS-REQUIRED-REGARDLESS-OF-TRUTH-STATUS`],
+    source: `${REP_SRC} — P28 Earth-orbits conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -8526,6 +8780,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...BOHR_EXPLANATIONS,
   ...DEB_EXPLANATIONS,
   ...QF_EXPLANATIONS,
+  ...UCIRC_EXPLANATIONS,
+  ...DET_EXPLANATIONS,
+  ...REP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -8627,4 +8884,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...BOHR_PROBES,
   ...DEB_PROBES,
   ...QF_PROBES,
+  ...UCIRC_PROBES,
+  ...DET_PROBES,
+  ...REP_PROBES,
 ]
