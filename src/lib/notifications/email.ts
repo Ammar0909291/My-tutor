@@ -1,13 +1,10 @@
-import nodemailer from 'nodemailer'
-
-function makeTransport() {
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST ?? 'smtp.gmail.com',
-    port: Number(process.env.SMTP_PORT ?? 587),
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-  })
-}
+// Resend Integration (development-only, resend.dev sandbox sender): this
+// file used to maintain its own nodemailer transport, a parallel copy of
+// the one in src/lib/email/index.ts. Consolidated onto the shared
+// sendEmail()/emailReady() from that module — same Resend-first, SMTP-
+// fallback transport every other email sender in the app now uses, so
+// there is only one place that decides HOW an email leaves the server.
+import { sendEmail as sendViaSharedTransport, emailReady } from '@/lib/email'
 
 interface SendEmailOptions {
   to: string
@@ -17,14 +14,14 @@ interface SendEmailOptions {
 }
 
 async function sendEmail(opts: SendEmailOptions): Promise<void> {
-  const from = process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
-
-  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-    console.log('[email] SMTP not configured — skipping:', opts.subject, '→', opts.to)
+  if (!emailReady()) {
+    console.log('[email] No email transport configured — skipping:', opts.subject, '→', opts.to)
     return
   }
-
-  await makeTransport().sendMail({ from, ...opts })
+  const result = await sendViaSharedTransport(opts)
+  if (!result.success) {
+    console.error('[email] Failed to send:', opts.subject, '→', opts.to, result.error)
+  }
 }
 
 export async function sendStudyReminder(

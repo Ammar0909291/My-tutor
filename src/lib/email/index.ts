@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
 import type { Lang } from '@/lib/i18n'
 import { reportError, maskEmail } from '@/lib/monitoring'
+import { isResendConfigured, sendViaResend, getEmailFrom } from '@/lib/email/resend'
 
 function makeTransport() {
   return nodemailer.createTransport({
@@ -24,8 +25,52 @@ function smtpReady() {
   return !!(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS)
 }
 
-const FROM = () => process.env.SMTP_FROM ?? 'My Tutor <noreply@mytutor.app>'
+// FROM/emailReady now defer to the shared Resend client's resolution
+// (EMAIL_FROM → legacy SMTP_FROM → the same literal default this file
+// already used) so every sender below reads one consistent value
+// regardless of which transport actually sends the message.
+const FROM = getEmailFrom
 const APP_URL = () => process.env.NEXT_PUBLIC_APP_URL ?? process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
+
+/** True when EITHER transport can actually send — Resend (preferred, the
+ * onboarding@resend.dev sandbox address works with zero extra setup) or
+ * the legacy SMTP path (kept for any environment still configured that
+ * way). Real outbound sends (welcome/reset/verification emails) use this;
+ * sendTestEmail's diagnostics intentionally check smtpReady() directly, since
+ * that endpoint exists specifically to diagnose the SMTP path. Exported so
+ * other email senders (e.g. src/lib/notifications/email.ts) can reuse the
+ * same readiness check instead of re-deriving it. */
+export function emailReady() {
+  return isResendConfigured() || smtpReady()
+}
+
+/**
+ * The single send primitive every real outbound email (welcome, password
+ * reset, verification, verified-welcome) now goes through. Resend-first:
+ * if RESEND_API_KEY is set, send via Resend (src/lib/email/resend.ts) and
+ * return its result. Otherwise fall back to the pre-existing SMTP
+ * transport, unchanged — so any deployment that hasn't migrated to Resend
+ * yet keeps working exactly as before. Never throws.
+ *
+ * Exported (as sendEmail) so every module that needs to send an email —
+ * not just the senders in this file — shares ONE transport instead of each
+ * maintaining its own nodemailer setup (src/lib/notifications/email.ts
+ * used to do exactly that; it now calls this instead).
+ */
+export async function sendEmail(opts: { to: string; subject: string; html?: string; text?: string }): Promise<{ success: boolean; error?: string }> {
+  if (isResendConfigured()) {
+    return sendViaResend(opts)
+  }
+  if (!smtpReady()) {
+    return { success: false, error: 'No email transport configured (RESEND_API_KEY and SMTP_HOST/USER/PASS all missing)' }
+  }
+  try {
+    await makeTransport().sendMail({ from: FROM(), ...opts })
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: err instanceof Error ? err.message : String(err) }
+  }
+}
 
 function emailDomain(addr: string): string | null {
   const match = addr.match(/@([^\s>]+)/)
@@ -102,16 +147,14 @@ export async function sendTestEmail(to: string): Promise<EmailDiagnostics> {
 // ─── Welcome email ────────────────────────────────────────────────────────────
 
 export async function sendWelcomeEmail(to: string, name: string): Promise<void> {
-  if (!smtpReady()) {
-    console.log('[email] Welcome email skipped (SMTP not configured) for:', to)
+  if (!emailReady()) {
+    console.log('[email] Welcome email skipped (no email transport configured) for:', to)
     return
   }
-  try {
-    await makeTransport().sendMail({
-      from: FROM(),
-      to,
-      subject: 'Welcome to My Tutor! 🔥',
-      html: `
+  const result = await sendEmail({
+    to,
+    subject: 'Welcome to My Tutor! 🔥',
+    html: `
 <!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#0D1117;font-family:Inter,system-ui,sans-serif;">
@@ -142,11 +185,12 @@ export async function sendWelcomeEmail(to: string, name: string): Promise<void> 
   </table>
 </body>
 </html>`,
-      text: `Welcome to My Tutor!\n\nHi ${name},\n\nYour account has been created.\nStart learning: ${APP_URL()}/onboarding\n`,
-    })
+    text: `Welcome to My Tutor!\n\nHi ${name},\n\nYour account has been created.\nStart learning: ${APP_URL()}/onboarding\n`,
+  })
+  if (result.success) {
     console.log('[email] Welcome email sent to:', to)
-  } catch (err) {
-    console.error('[email] Failed to send welcome email:', err)
+  } else {
+    console.error('[email] Failed to send welcome email:', result.error)
     // Non-fatal — signup already succeeded
   }
 }
@@ -160,22 +204,20 @@ export async function sendPasswordResetEmail(
   const resetUrl = `${APP_URL()}/auth/reset-password?token=${token}`
   const masked = maskEmail(to)
 
-  if (!smtpReady()) {
+  if (!emailReady()) {
     if (process.env.NODE_ENV !== 'production') {
-      console.log('[email] SMTP not configured — RESET LINK (dev mode):', resetUrl)
+      console.log('[email] No email transport configured — RESET LINK (dev mode):', resetUrl)
       return { success: true }
     }
-    const count = reportError('email.password-reset.smtp-not-configured', new Error('SMTP_HOST / SMTP_USER / SMTP_PASS not set'), { to: masked })
-    console.error(`[email] sendPasswordResetEmail: SMTP not configured — email NOT sent to ${masked} (failure #${count})`)
-    return { success: false, error: 'SMTP not configured' }
+    const count = reportError('email.password-reset.no-transport-configured', new Error('Neither RESEND_API_KEY nor SMTP_HOST/SMTP_USER/SMTP_PASS are set'), { to: masked })
+    console.error(`[email] sendPasswordResetEmail: no email transport configured — email NOT sent to ${masked} (failure #${count})`)
+    return { success: false, error: 'No email transport configured' }
   }
 
-  try {
-    await makeTransport().sendMail({
-      from: FROM(),
-      to,
-      subject: 'Password reset — My Tutor',
-      html: `
+  const result = await sendEmail({
+    to,
+    subject: 'Password reset — My Tutor',
+    html: `
 <!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#0D1117;font-family:Inter,system-ui,sans-serif;">
@@ -206,26 +248,20 @@ export async function sendPasswordResetEmail(
   </table>
 </body>
 </html>`,
-      text: `Password Reset — My Tutor\n\nClick the link to reset your password:\n${resetUrl}\n\nLink valid for 1 hour.`,
-    })
+    text: `Password Reset — My Tutor\n\nClick the link to reset your password:\n${resetUrl}\n\nLink valid for 1 hour.`,
+  })
+
+  if (result.success) {
     console.log('[email] Password reset email sent to:', masked)
     return { success: true }
-  } catch (err) {
-    const errObj = err as Error & { code?: string; command?: string; response?: string; responseCode?: number }
-    const msg = errObj.message ?? String(err)
-    const count = reportError('email.password-reset.send-failed', err, {
-      to: masked,
-      code: errObj.code ?? null,
-      command: errObj.command ?? null,
-      responseCode: errObj.responseCode ?? null,
-      response: errObj.response ?? null,
-    })
-    console.error(`[email] Failed to send reset email to ${masked} (failure #${count}):`, msg)
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('[email] Reset link (dev fallback):', resetUrl)
-    }
-    return { success: false, error: msg }
   }
+
+  const count = reportError('email.password-reset.send-failed', new Error(result.error ?? 'unknown'), { to: masked })
+  console.error(`[email] Failed to send reset email to ${masked} (failure #${count}):`, result.error)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('[email] Reset link (dev fallback):', resetUrl)
+  }
+  return { success: false, error: result.error }
 }
 
 // ─── Email verification ───────────────────────────────────────────────────────
@@ -277,19 +313,17 @@ export async function sendVerificationEmail(
   const copy = VERIFY_COPY[lang] ?? VERIFY_COPY.en
   const verifyUrl = `${APP_URL()}/auth/verify-email?token=${token}`
 
-  if (!smtpReady()) {
+  if (!emailReady()) {
     if (process.env.NODE_ENV !== 'production') {
-      console.log('[email] SMTP not configured — VERIFICATION LINK (dev mode):', verifyUrl)
+      console.log('[email] No email transport configured — VERIFICATION LINK (dev mode):', verifyUrl)
     }
     return { success: true }
   }
 
-  try {
-    await makeTransport().sendMail({
-      from: FROM(),
-      to,
-      subject: copy.subject,
-      html: `
+  const result = await sendEmail({
+    to,
+    subject: copy.subject,
+    html: `
 <!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#0D1117;font-family:Inter,system-ui,sans-serif;">
@@ -316,16 +350,20 @@ export async function sendVerificationEmail(
   </table>
 </body>
 </html>`,
-      text: `${copy.heading}\n\n${copy.greeting(name)}\n\n${copy.body}\n\n${verifyUrl}\n\n${copy.expiry}`,
-    })
-    return { success: true }
-  } catch (err) {
-    console.error('[email] Failed to send verification email:', err instanceof Error ? err.message : 'unknown')
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('[email] Verification link (dev fallback):', verifyUrl)
-    }
-    return { success: true, error: String(err) }
+    text: `${copy.heading}\n\n${copy.greeting(name)}\n\n${copy.body}\n\n${verifyUrl}\n\n${copy.expiry}`,
+  })
+
+  if (result.success) return { success: true }
+
+  console.error('[email] Failed to send verification email:', result.error)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('[email] Verification link (dev fallback):', verifyUrl)
   }
+  // Preserves this function's existing (unusual but intentional) contract:
+  // success:true even on failure, since verification failure must not block
+  // the surrounding signup flow — only the error string tells the caller
+  // anything went wrong, exactly as before this integration.
+  return { success: true, error: result.error }
 }
 
 // ─── Post-verification welcome email ──────────────────────────────────────────
@@ -403,8 +441,8 @@ export async function sendVerifiedWelcomeEmail(
   subjects: string[] = [],
 ): Promise<void> {
   const copy = WELCOME_COPY[lang] ?? WELCOME_COPY.en
-  if (!smtpReady()) {
-    console.log('[email] Welcome email skipped (SMTP not configured) for:', to)
+  if (!emailReady()) {
+    console.log('[email] Welcome email skipped (no email transport configured) for:', to)
     return
   }
 
@@ -417,12 +455,10 @@ export async function sendVerifiedWelcomeEmail(
     .map((step) => `<li style="margin:0 0 6px;">${step}</li>`)
     .join('')
 
-  try {
-    await makeTransport().sendMail({
-      from: FROM(),
-      to,
-      subject: copy.subject,
-      html: `
+  const result = await sendEmail({
+    to,
+    subject: copy.subject,
+    html: `
 <!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#0D1117;font-family:Inter,system-ui,sans-serif;">
@@ -454,10 +490,11 @@ export async function sendVerifiedWelcomeEmail(
   </table>
 </body>
 </html>`,
-      text: `${copy.heading}\n\n${copy.greeting(name)}\n\n${copy.intro}\n\n${copy.learnButton} ${APP_URL()}/learn\n${copy.coachButton} ${APP_URL()}/coach`,
-    })
+    text: `${copy.heading}\n\n${copy.greeting(name)}\n\n${copy.intro}\n\n${copy.learnButton} ${APP_URL()}/learn\n${copy.coachButton} ${APP_URL()}/coach`,
+  })
+  if (result.success) {
     console.log('[email] Verified-welcome email sent to:', to)
-  } catch (err) {
-    console.error('[email] Failed to send verified-welcome email:', err)
+  } else {
+    console.error('[email] Failed to send verified-welcome email:', result.error)
   }
 }
