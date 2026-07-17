@@ -1,0 +1,398 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.creative-writing-forms-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.creative-writing-forms",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:92cef0a452566cbf3ec09bf6e27cde1c3a3b53884fbcc5b21d5a4d8d123cfbc5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md": "sha256:6655eaefb0a390b3dee95d0a14ee699b56dec1cc6222f6c6f78400d6ec3c706d"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.creative-writing-forms",
+    "name": "Creative Writing Forms",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.writing.narrative-writing",
+      "eng.writing.descriptive-writing"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.creative-writing-forms-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.creative-writing-forms (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md": "sha256:6655eaefb0a390b3dee95d0a14ee699b56dec1cc6222f6c6f78400d6ec3c706d"
+      },
+      "contentHash": "sha256:572ab287a08264dd1140fae822c9cf30f57b11821e2f26d508fba769222cad0f",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.creative-writing-forms.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md#TA-1 (addresses MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.creative-writing-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.creative-writing-forms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.creative-writing-forms.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md#TA-2 (addresses MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.creative-writing-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.creative-writing-forms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.creative-writing-forms.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md#TA-3 (addresses MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.creative-writing-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.creative-writing-forms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.creative-writing-forms.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md#TA-4 (addresses MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.creative-writing-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.creative-writing-forms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.creative-writing-forms.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md#TA-5 (addresses MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS, MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.creative-writing-forms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.creative-writing-forms\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.creative-writing-forms/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "Creative Writing Forms — Conceptual Development Sequence",
+      "content": "### TA-1 — Flash Fiction's Real Constraint: Extreme Compression (MC-A)\n\nUsing the improvisational-jazz anchor, teach flash fiction's genuine length constraint and the craft\nof selecting one moment to imply a larger story. Student practice: given a longer story idea,\nidentify the single moment that could carry a flash fiction piece.\n\n### TA-2 — Free Verse's Deliberate Line-Break Craft (MC-A)\n\nExtend TA-1: teach that free verse line breaks are deliberate craft choices controlling pacing and\nemphasis, not random arrangement. Student practice: given a prose passage, break it into free verse\nlines with deliberate reasoning for each break.\n\n### TA-3 — Dialogue-Driven Writing's Demands (MC-B)\n\nTeach that dialogue-driven writing conveys character and plot almost entirely through speech, not\nnarration with quotes added. Student practice: given a scene described in narration, rewrite it as a\ndialogue-driven piece conveying the same character and plot through speech alone.\n\n### TA-4 — Adapting Content to a Form's Specific Demands (MC-B)\n\nExtend TA-1/TA-3: given the same content idea, adapt it differently for two different forms\n(flash fiction vs. dialogue-driven writing), demonstrating genuinely different compositional choices\nfor each.\n\n### TA-5 — Full Application: Composing in a Chosen Creative Form\n\nGive the student a new story idea. They must choose one creative form (flash fiction, dialogue-\ndriven writing, or free verse), respect that form's specific constraints (TA-1/TA-2/TA-3), and adapt\ntheir content genuinely to the form's demands (TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 148,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/misconception/MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS",
+      "kind": "misconception",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "**Trigger signal:** Student assumes a non-standard creative form (flash fiction, free verse) is",
+      "content": "### MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS\n\n**Trigger signal:** Student assumes a non-standard creative form (flash fiction, free verse) is\nfree of any rules or constraints simply because it doesn't follow standard prose structure, treating\n\"creative\" or \"free\" as meaning \"no craft demands at all\" — for example, writing a rambling,\nunbounded piece and calling it flash fiction, or arranging text with random line breaks and calling\nit free verse, without recognizing each form has its own specific, real constraints.\n\n**Conflict evidence [P28]:** Show the student a piece of \"flash fiction\" that runs several pages\nlong with no compression of language, next to a genuine flash fiction piece (under 500 words) that\nachieves a complete narrative arc through extreme compression and implication. Ask: \"Does 'flash'\nfiction have an actual length constraint? Does calling something 'free verse' mean line breaks can be\nplaced anywhere with no purpose behind them?\"\n\n**Bridge text [P30]:** \"Assuming a non-standard form has no rules is like assuming improvisational\njazz has no musical structure at all just because it isn't sheet-music-exact — improvisation actually\nfollows its own real constraints (key, rhythm, call-and-response) even though those constraints\ndiffer from a classical score. Flash fiction has a real length constraint and demands extreme\ncompression; free verse's line breaks are deliberate craft choices, not random — 'free' from standard\nmeter, not free from all craft.\"\n\n**Replacement text [P31]:** \"Don't assume a creative form is rule-free just because it isn't\nstandard prose. Learn the specific constraints of the form you're using — flash fiction's extreme\nlength limit, free verse's deliberate (not random) line-break choices — and work skillfully within\nthem.\"\n\n**Discrimination pairs [P33]:**\n1. A rambling multi-page piece with no compression, labeled \"flash fiction\" (misconception — ignores\n   the form's real length constraint) vs. a genuine under-500-word flash fiction piece achieving a\n   complete arc through compression (correct application of the form's actual constraint).\n2. A student who arranges free verse lines with no deliberate reasoning behind each break\n   (misconception — treats \"free\" as \"no craft\") vs. a student who places each line break to control\n   pacing or emphasis (correct, deliberate free verse craft).\n\n**s6_path:** If the student continues to treat creative forms as rule-free after the bridge, give\nthem a rule-free draft in one form and have them identify the specific constraint of that form (a\nword count limit, a line-break purpose) their draft is currently ignoring, then revise to genuinely\nwork within it.",
+      "localKey": "MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS",
+      "language": "en",
+      "refs": [
+        "MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/misconception/MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM",
+      "kind": "misconception",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "**Trigger signal:** Student attempts to pour the same content and structure into a different",
+      "content": "### MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM\n\n**Trigger signal:** Student attempts to pour the same content and structure into a different\ncreative form without adapting it, treating the forms as interchangeable containers — for example,\ntrying to cram a full traditional multi-scene plot into flash fiction's extreme brevity without\ncutting or compressing, or writing a dialogue-driven piece exactly like standard narrative prose with\nquotation marks simply added, rather than recognizing each form demands genuinely different\ncompositional choices for the same underlying content.\n\n**Conflict evidence [P28]:** Show the student an attempt to compress a full traditional short story\n(exposition, rising action, multiple scenes, climax, resolution) into 400 words with nothing cut, next\nto a genuine flash fiction piece that deliberately selects one single moment and implies the rest.\nAsk: \"Can a full multi-scene plot actually fit into 400 words without cutting anything real? What did\nthe flash fiction piece do differently to fit the same kind of story into that space?\"\n\n**Bridge text [P30]:** \"Assuming any content works equally well in any form is like assuming a full\nthree-course restaurant meal and a single bite-sized appetizer should contain exactly the same amount\nof food, just plated differently — the appetizer's form demands a completely different approach:\nconcentrated flavor in a small space, not a shrunken version of the full meal. Flash fiction demands\nselecting one moment and implying the rest; dialogue-driven writing demands conveying character and\nplot almost entirely through speech, not narration with quotes added.\"\n\n**Replacement text [P31]:** \"Don't assume the same content and structure will work in any form.\nBefore choosing a form, ask what that specific form demands — does flash fiction require you to\nselect one moment and cut everything else? Does dialogue-driven writing require you to convey\ncharacter and events almost entirely through what's said aloud? Adapt your content to the form's\nactual demands.\"\n\n**Discrimination pairs [P33]:**\n1. An attempt to compress a full multi-scene plot into 400 words with nothing genuinely cut (form\n   mismatch — the content wasn't adapted) vs. a flash fiction piece that selects one single moment\n   and implies the rest (content genuinely adapted to the form's demands).\n2. A student who writes dialogue-driven fiction as standard narration with quotation marks inserted\n   (misconception — content not adapted to the form) vs. a student who conveys character and plot\n   almost entirely through what characters say to each other (correct adaptation to the form).\n\n**s6_path:** If the student continues to force unadapted content into a new form after the bridge,\nhave them take a full traditional short story outline and identify specifically what would need to\nbe cut or changed to genuinely fit it into flash fiction's constraints, rather than simply\nshortening sentences.",
+      "localKey": "MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM",
+      "language": "en",
+      "refs": [
+        "MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 42,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "Flash Fiction's Real Constraint: Extreme Compression (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Flash Fiction's Real Constraint: Extreme Compression (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "Free Verse's Deliberate Line-Break Craft (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Free Verse's Deliberate Line-Break Craft (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "Dialogue-Driven Writing's Demands (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Dialogue-Driven Writing's Demands (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 164,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "Adapting Content to a Form's Specific Demands (MC-B)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Adapting Content to a Form's Specific Demands (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 170,
+        "endLine": 176
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "Full Application: Composing in a Chosen Creative Form",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Composing in a Chosen Creative Form\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS\",\"MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-A-CREATIVE-FORM-LIKE-FLASH-FICTION-OR-FREE-VERSE-HAS-NO-RULES-OR-CONSTRAINTS",
+        "MC-B-THE-SAME-CONTENT-AND-STRUCTURE-WORKS-EQUALLY-WELL-IN-ANY-CREATIVE-FORM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 176,
+        "endLine": 300
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying a Single Moment for Flash Fiction**\nGiven a longer story idea, identify the single moment that could carry a flash fiction piece within\nits length constraint.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 197,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Breaking Prose into Deliberate Free Verse Lines**\nGiven a prose passage, break it into free verse lines with deliberate reasoning for each break.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 197,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Converting Narration into Dialogue-Driven Writing**\nGiven a scene described in narration, rewrite it as a dialogue-driven piece conveying the same\ncontent through speech alone.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 197,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining Why Unadapted Content Fails a Form**\nGiven a piece that forces standard-prose content into a creative form without adaptation, explain\nspecifically what wasn't adapted and why it fails the form's demands.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 197,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Composition in a Chosen Creative Form**\nGiven a new story idea, select a creative form and compose a piece that respects its constraints and\nadapts the content to its specific demands.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 197,
+        "endLine": 218
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly identifies a single moment on provided story ideas (MP-1) but writes an\n  overlong, uncompressed draft on their own original idea (MP-5), provide a mandatory word-count\n  check-in at the halfway point of drafting.\n- If the student's flash fiction compression is strong (MP-1) but their dialogue-driven writing\n  (MP-3) still relies heavily on narration, require an explicit \"could a reader understand this\n  entirely from what's said aloud?\" check before finalizing any dialogue-driven draft.\n- If the student struggles to identify a form's specific constraint at all, provide a one-line\n  constraint summary for each form (flash fiction: extreme brevity; free verse: deliberate line\n  breaks; dialogue-driven: speech carries everything) as a reference card.\n- Students with strong performance in `eng.writing.descriptive-writing`'s sensory-detail work should\n  transfer readily to flash fiction's compressed, evocative language, since both require conveying\n  meaning through carefully chosen concentrated detail — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 254,
+        "endLine": 269
+      }
+    },
+    {
+      "assetId": "eng.writing.creative-writing-forms/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.creative-writing-forms",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: narrative writing check] --> [PD-2: descriptive writing check]\n   |                       |                              |\n   | (gap found)           |                              | (pass both)\n   v                        v                              v\n[Route to prerequisite]                        [Component 3: Improvisational-Jazz /\n                                                 Bite-Sized-Appetizer Anchor]\n                                                            |\n                                                            v\n                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                            |\n                                                            v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: real-constraint-identification\n                     terminal in current      drills / content-adaptation drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either routes back to the\nrelevant prerequisite. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1/TA-2 (treating forms as rule-free) and MC-B during TA-3/TA-4 (forcing unadapted content into a\nnew form) — these are largely independent and often need separate, explicit correction. If either\nfires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route\nby failure: MP-1/MP-2 failures indicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B;\nMP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one more guided\nfull-composition example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.creative-writing-forms.md",
+        "startLine": 218,
+        "endLine": 254
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

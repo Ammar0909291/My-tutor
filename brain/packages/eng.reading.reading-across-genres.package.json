@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.reading-across-genres-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.reading-across-genres",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7c2054d47809cf5badda57c8b68647dfd5a194464f51865bcf0928b7e74f3d17",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.reading-across-genres.md": "sha256:a7ad4ee36d945080bbebbe703b44d8313609e1bb354bf4b5db2be05cd1232b46"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.reading-across-genres",
+    "name": "Reading Across Genres",
+    "difficultyRaw": "expert",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.reading.evaluating-sources",
+      "eng.reading.compare-and-contrast-texts"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.reading-across-genres-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.reading-across-genres (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.reading-across-genres.md": "sha256:a7ad4ee36d945080bbebbe703b44d8313609e1bb354bf4b5db2be05cd1232b46"
+      },
+      "contentHash": "sha256:8598c8f0f5cff7e3e3842c884edd24b69a71850b66f3cc8a47d40273d04cdabc",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-across-genres.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-across-genres"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-across-genres\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-across-genres.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md#TA-2 (addresses MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-across-genres"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-across-genres\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-across-genres.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md#TA-3 (addresses MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-across-genres"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-across-genres\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-across-genres.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-across-genres"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-across-genres\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.reading-across-genres.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md#TA-5 (addresses MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK, MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.reading-across-genres"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.reading-across-genres\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.reading-across-genres/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "Reading Across Genres — Conceptual Development Sequence",
+      "content": "### TA-1 — Understanding Each Text Individually First\n\nTeach establishing a solid individual understanding of each text before attempting synthesis.\nStudent practice: given three short texts on a related theme, summarize each one's main point\nindividually.\n\n### TA-2 — Genuine Synthesis vs. Separate Summaries (MC-A)\n\nUsing the photographs-vs-portrait anchor, teach integrating insights across texts into one unified\nstatement. Student practice: given three individually-summarized texts, write one integrated\nsentence drawing on all three together.\n\n### TA-3 — Connecting Texts Across Different Genres (MC-B)\n\nUsing the photograph-vs-written-description anchor, teach identifying a shared underlying topic\nacross texts in different genres. Student practice: given a poem and a report on a related topic,\nidentify the shared topic and write one sentence integrating both.\n\n### TA-4 — Identifying Points of Agreement and Tension Across Sources\n\nExtend TA-2/TA-3: teach identifying where multiple synthesized sources agree, and where they offer\ndifferent or even conflicting perspectives on the same shared topic. Student practice: given three\nsources on one topic, identify one point of agreement and one point of differing perspective.\n\n### TA-5 — Full Application: Synthesizing Across Multiple Genres\n\nGive the student three new texts in different genres on a shared topic. They must understand each\nindividually (TA-1), integrate their insights genuinely (TA-2), connect across the genre differences\n(TA-3), and identify agreement/tension across the sources (TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 142,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/misconception/MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK",
+      "kind": "misconception",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "**Trigger signal:** Student \"synthesizes\" multiple texts by producing a separate summary of each",
+      "content": "### MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK\n\n**Trigger signal:** Student \"synthesizes\" multiple texts by producing a separate summary of each\ntext placed one after another, never actually integrating or connecting the texts' insights into one\nunified understanding — the same block-structure problem as simple text comparison, but at the level\nof genuine cross-text synthesis, where the actual integrating work never happens on the page.\n\n**Conflict evidence [P28]:** Show the student a \"synthesis\" consisting of three separate paragraph\nsummaries (one per text, in isolation, with no connecting statements) next to a genuine synthesis\nparagraph that draws on all three texts together to make one integrated point (\"all three sources\nagree that X causes Y, though the poem frames it emotionally while the report frames it statistically\").\nAsk: \"Does the first version ever combine the three texts' insights into one idea? Does the second?\"\n\n**Bridge text [P30]:** \"Summarizing each text separately and calling it synthesis is like laying\nthree separate photographs side by side and calling it a single portrait — the photographs are all\npresent, but nothing has actually been combined into one unified image. Genuine synthesis integrates\ninsights from multiple texts into one connected understanding, not three separate summaries placed\nnext to each other.\"\n\n**Replacement text [P31]:** \"Don't summarize each text separately and stop there. After\nunderstanding each text individually, ask: what do these texts, taken together, tell me that no\nsingle one tells me alone? Write statements that draw on multiple texts at once, not one summary per\ntext.\"\n\n**Discrimination pairs [P33]:**\n1. Three separate paragraph summaries with no connecting statement between them (summaries placed\n   side by side, no genuine synthesis) vs. one integrated paragraph drawing on all three sources\n   together to make a combined point (genuine synthesis).\n2. A student whose \"synthesis\" essay could be split into three independent, unconnected sections\n   (misconception) vs. a student whose synthesis explicitly states what multiple sources reveal\n   together (correct synthesis).\n\n**s6_path:** If the student continues to produce separate summaries after the bridge, have them take\ntheir own separate-summary draft and, for one specific claim, identify what all three texts\ncollectively suggest about it, writing one integrated sentence naming all three sources together.",
+      "localKey": "MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK",
+      "language": "en",
+      "refs": [
+        "MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/misconception/MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED",
+      "kind": "misconception",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "**Trigger signal:** Student assumes that because texts belong to different genres (a poem and a news",
+      "content": "### MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED\n\n**Trigger signal:** Student assumes that because texts belong to different genres (a poem and a news\nreport, a short story and a scientific article), their content cannot be meaningfully connected or\nsynthesized, treating genre difference itself as a barrier to synthesis rather than recognizing that\ntexts in very different genres can address the same underlying topic or theme and be integrated into\none unified understanding.\n\n**Conflict evidence [P28]:** Show the student a poem about the emotional experience of drought and a\nscientific report on drought's measurable environmental effects. Ask: \"Are these texts in the same\ngenre? Do they address a genuinely related topic? Could understanding the emotional experience help\nyou understand why the measurable effects matter to the people experiencing them, or are the two\ntexts simply unrelated because their genres differ?\"\n\n**Bridge text [P30]:** \"Assuming different genres can't be synthesized is like assuming a\nphotograph and a written description of the same event have nothing to do with each other because one\nis a picture and one is words — different forms of the same underlying subject can absolutely inform\nand connect to each other. Genre is the FORM a text takes, not necessarily a wall around its content\n— a poem and a report can both illuminate the same real topic from different angles.\"\n\n**Replacement text [P31]:** \"Don't assume texts in different genres can't be connected. Ask: what\nunderlying topic or theme do these texts share, regardless of their different forms? Look for how\neach genre's distinct approach (emotional, factual, narrative) illuminates a different facet of the\nsame shared subject.\"\n\n**Discrimination pairs [P33]:**\n1. A poem about the emotional experience of drought and a scientific report on drought's measurable\n   effects (different genres, but a genuinely shared underlying topic that can be synthesized) vs.\n   two completely unrelated texts that happen to be in the same genre (same genre, no shared topic to\n   synthesize).\n2. A student who assumes a poem and a report \"can't go together\" in a synthesis essay simply because\n   of genre difference (misconception) vs. a student who identifies the shared topic and integrates\n   both genres' distinct perspectives on it (correct cross-genre synthesis).\n\n**s6_path:** If the student continues to treat genre difference as a barrier after the bridge, give\nthem two texts in clearly different genres sharing an underlying topic, and have them state\nexplicitly what shared topic connects the two despite their different forms, then write one\nsentence integrating both.",
+      "localKey": "MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED",
+      "language": "en",
+      "refs": [
+        "MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 39,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "Understanding Each Text Individually First",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Understanding Each Text Individually First\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 146,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "Genuine Synthesis vs. Separate Summaries (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Genuine Synthesis vs. Separate Summaries (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "Connecting Texts Across Different Genres (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Connecting Texts Across Different Genres (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "Identifying Points of Agreement and Tension Across Sources",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Identifying Points of Agreement and Tension Across Sources\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 164,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "Full Application: Synthesizing Across Multiple Genres",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Synthesizing Across Multiple Genres\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK\",\"MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-SYNTHESIZING-MULTIPLE-TEXTS-MEANS-SUMMARIZING-EACH-ONE-SEPARATELY-BACK-TO-BACK",
+        "MC-B-TEXTS-IN-DIFFERENT-GENRES-CANNOT-BE-MEANINGFULLY-CONNECTED-OR-SYNTHESIZED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 170,
+        "endLine": 294
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Summarizing Multiple Texts Individually**\nGiven three short texts on a related theme, summarize each one's main point individually.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 192,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Writing a Genuinely Integrated Synthesis Statement**\nGiven three individually-summarized texts, write one integrated sentence drawing on all three\ntogether.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 192,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Connecting Texts Across Genre Difference**\nGiven a poem and a report on a related topic, identify the shared underlying topic and write one\nsentence integrating both.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 192,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identifying Agreement and Tension Across Sources**\nGiven three sources on one topic, identify one point of agreement and one point of differing\nperspective across them.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 192,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Cross-Genre Synthesis**\nGiven three new texts in different genres on a shared topic, produce a genuine synthesis integrating\ninsights, connecting across genres, and identifying agreement and tension.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 192,
+        "endLine": 213
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly integrates provided summaries (MP-2) but reverts to separate summaries on\n  a new original set of texts (MP-5), provide a mandatory \"what do all of these say TOGETHER that\n  none says alone?\" prompt before finalizing any synthesis.\n- If the student's within-genre synthesis is strong (MP-2) but cross-genre synthesis (MP-3) stalls,\n  require an explicit \"what underlying topic connects these despite their different forms?\" question\n  before attempting to connect any two differently-formed texts.\n- If the student struggles to identify agreement/tension across sources at all, provide a two-column\n  scaffold (\"where do these agree?\" / \"where do these differ?\") before free synthesis writing.\n- Students with strong performance in `eng.reading.compare-and-contrast-texts`'s two-text comparison\n  should transfer readily to multi-text, multi-genre synthesis, since both require holding more than\n  one text's content in mind simultaneously — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 249,
+        "endLine": 263
+      }
+    },
+    {
+      "assetId": "eng.reading.reading-across-genres/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.reading-across-genres",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: source evaluation check] --> [PD-2: compare/contrast check]\n   |                       |                                |\n   | (gap found)           |                                | (pass both)\n   v                        v                                v\n[Route to prerequisite]                        [Component 3: Photographs-vs-Portrait /\n                                                 Photograph-vs-Written-Description Anchor]\n                                                            |\n                                                            v\n                                [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                            |\n                                                            v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                  (pass >= 0.70) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: separate-summary-to-integration\n                     terminal in current      drills / cross-genre-topic-connection drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either routes back to the\nrelevant prerequisite. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-2 (separate summaries mistaken for synthesis) and MC-B during TA-3 (treating genre difference as a\nbarrier) — these are largely independent and often need separate, explicit correction. If either\nfires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route\nby failure: MP-1/MP-2 failures indicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B;\nMP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one more guided\nfull cross-genre example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.reading-across-genres.md",
+        "startLine": 213,
+        "endLine": 249
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

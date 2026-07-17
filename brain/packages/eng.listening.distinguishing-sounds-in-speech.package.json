@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.listening.distinguishing-sounds-in-speech-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2352de96fc1d9cfc9c554fabdb4a2efb8fcb4f8989b18955a76e01d1f8cd1a17",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md": "sha256:185a09fb38a630eab17d92c22383cc2e69889bd3f7144ae72ef16a0fa7cb7b6d"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+    "name": "Distinguishing Sounds in Speech",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.phonetics.minimal-pairs",
+      "eng.listening.active-listening"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.listening.distinguishing-sounds-in-speech-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.listening.distinguishing-sounds-in-speech (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md": "sha256:185a09fb38a630eab17d92c22383cc2e69889bd3f7144ae72ef16a0fa7cb7b6d"
+      },
+      "contentHash": "sha256:0d194214ff816fbe92c1de2f4720a1c1182f65b5d9fa2e9556a6c18da1f90484",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.listening.distinguishing-sounds-in-speech.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md#TA-1 (addresses MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.distinguishing-sounds-in-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.distinguishing-sounds-in-speech\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.distinguishing-sounds-in-speech.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md#TA-2 (addresses MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.distinguishing-sounds-in-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.distinguishing-sounds-in-speech\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.distinguishing-sounds-in-speech.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.distinguishing-sounds-in-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.distinguishing-sounds-in-speech\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.listening.distinguishing-sounds-in-speech.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md#TA-4 (addresses MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT, MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.listening.distinguishing-sounds-in-speech"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.listening.distinguishing-sounds-in-speech\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "Distinguishing Sounds in Speech — Conceptual Development Sequence",
+      "content": "### TA-1 — Attending to Phonetic Contrast Instead of Context Alone (MC-A)\n\nUsing the map-reading anchor, teach identifying the specific phonetic feature (vowel length,\nconsonant sound) that distinguishes a minimal pair, independent of context. Student practice: given a\nsentence with ambiguous context around a minimal pair, identify the word from the audio alone,\nstating the specific phonetic feature that gave it away.\n\n### TA-2 — Recognizing Reduction in Connected Speech (MC-B)\n\nUsing the isolated-note-vs-fast-music anchor, teach that contrasts audible in isolation can blur in\nconnected speech. Student practice: given the same minimal pair first isolated then embedded in\nconnected speech, describe what became harder to hear in the connected version.\n\n### TA-3 — Targeted Listening Practice for Connected Speech\n\nExtend TA-2: practice distinguishing minimal pairs specifically within fast, connected sentences,\nbuilding the connected-speech-specific skill directly. Student practice: given five sentences with\nembedded minimal pairs in connected speech, identify the correct word in each.\n\n### TA-4 — Full Application: Distinguishing Sounds in a New Connected Passage\n\nGive the student a new short passage of natural connected speech containing two or three minimal-pair\ncontrasts. They must identify each correct word using phonetic attention rather than context alone\n(TA-1), applying connected-speech-specific listening practice (TA-2/TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 141,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/misconception/MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT",
+      "kind": "misconception",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "**Trigger signal:** Student relies entirely on sentence context and meaning to guess which of two",
+      "content": "### MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT\n\n**Trigger signal:** Student relies entirely on sentence context and meaning to guess which of two\nsimilar-sounding words was said, rather than actually attending to the phonetic contrast itself —\nworking reasonably well when context is unambiguous, but failing whenever context is genuinely\nambiguous or absent, because the ear was never actually trained to hear the sound difference.\n\n**Conflict evidence [P28]:** Present the student with a sentence where context does NOT disambiguate\nbetween two minimal-pair words: \"I saw the ship/sheep in the distance\" spoken in a context (a foggy\nharbor scene) where either word could plausibly fit. Ask: \"Can you tell which word was said just from\nthe sentence's meaning here? If context can't tell you, what's left to rely on?\"\n\n**Bridge text [P30]:** \"Relying entirely on context to distinguish similar sounds is like navigating\nonly by asking other people for directions instead of ever learning to read a map yourself — it works\nfine as long as someone's there to help, but falls apart the moment you're in unfamiliar territory\nwith no one to ask. Context often helps, but a listener who never trains their ear to actually hear\nthe phonetic contrast has no fallback when context is ambiguous.\"\n\n**Replacement text [P31]:** \"Don't rely only on sentence context to distinguish similar-sounding\nwords. Train your ear to actually hear the specific phonetic contrast (a vowel length, a consonant\nsound) so you can distinguish the words even when context doesn't settle it for you.\"\n\n**Discrimination pairs [P33]:**\n1. \"I saw the ship/sheep in the distance.\" spoken in an ambiguous foggy-harbor context (context\n   provides no disambiguation — the listener must rely on the actual sound heard) vs. \"I saw the\n   sheep grazing in the field.\" (context clearly disambiguates — but the listener who only ever relies\n   on context has no skill to fall back on when it doesn't).\n2. A student who guesses correctly only when context happens to make the answer obvious\n   (misconception — hasn't actually trained phonetic perception) vs. a student who can identify the\n   word correctly even in an ambiguous context by attending to the actual sound (correct, trained\n   perception).\n\n**s6_path:** If the student continues to rely purely on context after the bridge, give them three\nsentences with genuinely ambiguous context around a minimal pair, and have them identify the word\nbased on the audio alone, explicitly stating what phonetic feature (not context) told them the\nanswer.",
+      "localKey": "MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT",
+      "language": "en",
+      "refs": [
+        "MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 3,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/misconception/MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH",
+      "kind": "misconception",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "**Trigger signal:** Student assumes that because they can distinguish a minimal pair (ship/sheep,",
+      "content": "### MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH\n\n**Trigger signal:** Student assumes that because they can distinguish a minimal pair (ship/sheep,\nwould have/would of) when each word is pronounced carefully and in isolation, they will automatically\nbe able to distinguish the same pair in fast, connected, natural speech — failing to recognize that\nphonetic contrasts can blur, reduce, or merge under natural speech's faster pace and connected\npronunciation, requiring separate, dedicated practice beyond the isolated-word skill.\n\n**Conflict evidence [P28]:** Play (or present as description) the same minimal pair first spoken\ncarefully in isolation (clearly distinguishable) and then embedded in fast, natural connected speech\n(where the contrast noticeably reduces or blurs, such as \"would have\" sounding close to \"would of\" in\ncasual speech). Ask: \"Could you tell the words apart in the careful, isolated version? Is it as easy\nin the fast, connected version? What changed?\"\n\n**Bridge text [P30]:** \"Assuming isolated-word skill transfers automatically to connected speech is\nlike assuming that because you can identify a single musical note played slowly and clearly, you can\nautomatically pick out that same note within a fast, complex piece of music — the skill of isolated\nidentification doesn't automatically include the skill of picking the same thing out amid speed and\ncontext. Connected natural speech genuinely reduces and blurs contrasts that are clear in careful,\nisolated pronunciation.\"\n\n**Replacement text [P31]:** \"Don't assume that distinguishing a minimal pair in careful, isolated\nspeech means you can distinguish it in fast, connected speech too. Practice listening for the same\ncontrast specifically within natural, connected speech, where the sounds may blur or reduce compared\nto careful pronunciation.\"\n\n**Discrimination pairs [P33]:**\n1. \"Ship\" and \"sheep\" spoken carefully and separately (contrast clearly audible) vs. the same words\n   embedded in fast, natural connected speech (contrast noticeably reduced or blurred).\n2. A student who assumes their strong isolated-minimal-pair performance guarantees strong connected-\n   speech performance (misconception) vs. a student who recognizes connected speech requires separate\n   practice because the contrast behaves differently there (correct recognition).\n\n**s6_path:** If the student continues to assume automatic transfer after the bridge, give them the\nsame minimal pair first in isolated form (which they distinguish correctly) and then in fast\nconnected speech (where they struggle), and have them explicitly describe what specifically became\nharder to hear in the connected version.",
+      "localKey": "MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH",
+      "language": "en",
+      "refs": [
+        "MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 40,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "Attending to Phonetic Contrast Instead of Context Alone (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Attending to Phonetic Contrast Instead of Context Alone (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 145,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "Recognizing Reduction in Connected Speech (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Recognizing Reduction in Connected Speech (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 152,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "Targeted Listening Practice for Connected Speech",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Targeted Listening Practice for Connected Speech\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "Full Application: Distinguishing Sounds in a New Connected Passage",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Distinguishing Sounds in a New Connected Passage\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT\",\"MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-YOU-CAN-ALWAYS-TELL-SIMILAR-SOUNDING-WORDS-APART-JUST-BY-USING-SENTENCE-CONTEXT",
+        "MC-B-IF-YOU-CAN-DISTINGUISH-A-MINIMAL-PAIR-IN-CAREFUL-ISOLATED-SPEECH-YOULL-AUTOMATICALLY-DISTINGUISH-IT-IN-FAST-CONNECTED-SPEECH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 164,
+        "endLine": 290
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying a Word from Phonetic Contrast in Ambiguous Context**\nGiven a sentence with ambiguous context around a minimal pair, identify the word from the audio\nalone, stating the specific phonetic feature that gave it away.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 185,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Describing Contrast Reduction in Connected Speech**\nGiven the same minimal pair first isolated then embedded in connected speech, describe what became\nharder to hear in the connected version.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 185,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Distinguishing Embedded Minimal Pairs in Connected Sentences**\nGiven five sentences with embedded minimal pairs in connected speech, identify the correct word in\neach.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 185,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining Why Isolated Skill Doesn't Automatically Transfer**\nGiven a student's strong isolated-pair performance paired with weak connected-speech performance,\nexplain why the two skills are not automatically the same.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 185,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Connected-Speech Sound Discrimination**\nGiven a new short passage of natural connected speech containing two or three minimal-pair\ncontrasts, identify each correct word.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 185,
+        "endLine": 207
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly identifies words in ambiguous-context sentences with clear audio (MP-1)\n  but reverts to context-guessing on fast connected speech (MP-5), provide a mandatory \"what did I\n  actually hear, not what makes sense\" checkpoint before answering.\n- If the student's isolated minimal-pair recognition is strong (from prerequisite) but connected-\n  speech performance (MP-3) lags significantly, provide slowed-down connected-speech audio as an\n  intermediate scaffolding step before full-speed practice.\n- If the student struggles to describe what specifically reduces in connected speech, provide a\n  reference list of common connected-speech reduction patterns (contractions, blended consonants) as\n  a guide.\n- Students with strong performance in `eng.listening.active-listening`'s sustained attention should\n  transfer readily to the focused perceptual attention this concept requires, since both demand\n  resisting the pull toward passive, surface-level listening — draw this parallel explicitly if\n  useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 243,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "eng.listening.distinguishing-sounds-in-speech/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.listening.distinguishing-sounds-in-speech",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: minimal pairs check] --> [PD-2: active listening check]\n   |                       |                          |\n   | (gap found)           |                          | (pass both)\n   v                        v                          v\n[Route to prerequisite]                    [Component 3: Map-Reading-vs-Asking /\n                                             Isolated-Note-vs-Fast-Music Anchor]\n                                                        |\n                                                        v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                        |\n                                                        v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                        |\n                                                        v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                        |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: phonetic-attention drills /\n                     terminal in current      connected-speech-specific listening drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either routes back to the\nrelevant prerequisite. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (relying on context alone) and MC-B during TA-2/TA-3 (assuming automatic transfer to connected\nspeech) — these are largely independent and often need separate, explicit correction. If either\nfires, branch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route\nby failure: MP-1 failure indicates residual MC-A; MP-2/MP-3/MP-4 failures indicate residual MC-B;\nMP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one more guided\nfull-passage example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.listening.distinguishing-sounds-in-speech.md",
+        "startLine": 207,
+        "endLine": 243
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
