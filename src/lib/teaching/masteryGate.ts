@@ -120,6 +120,24 @@ export function gateLessonCompletion(
   }
 }
 
+/**
+ * P0-3 (School Mode): School has no conversation-state machine and so
+ * cannot run the full evidence-based gateLessonCompletion above — but a
+ * bare acknowledgement ("got it", "next", "ok") must still never be able
+ * to authorize completion on its own, regardless of what the model
+ * emitted. Extracted out of route.ts's inline School-mode branch into a
+ * named, pure, tested function (Phase 5: complete the existing guard
+ * rather than leave it as untestable inline logic) — narrower than
+ * gateLessonCompletion (no evidence check, just the acknowledgement
+ * guard), reusing the exact same isBareAcknowledgement() and
+ * LESSON_COMPLETE_RE this file already defines.
+ */
+export function stripCompletionOnBareAcknowledgement(text: string, learnerMessage: string): string {
+  if (!/\[LESSON_COMPLETE\]/i.test(text)) return text
+  if (!isBareAcknowledgement(learnerMessage)) return text
+  return text.replace(LESSON_COMPLETE_RE, ' ').replace(/\s+$/g, '').trim()
+}
+
 // ── Bug 4: autonomy without mastery → explicit choice, never silent skip ─────
 
 /**

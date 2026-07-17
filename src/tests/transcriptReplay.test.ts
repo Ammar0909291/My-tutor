@@ -1,0 +1,230 @@
+/**
+ * Transcript Replay — permanent regression tests (Master Implementation
+ * Loop, Phase 8/9).
+ *
+ * Every production transcript that surfaced a real defect becomes a
+ * standing test here, chaining the SAME exported pure functions the
+ * runtime uses turn-by-turn — not isolated single-call assertions (those
+ * already exist per-module: masteryGate.test.ts, recoveryGuard.test.ts,
+ * conversationTeaching.test.ts, visualRegistry.test.ts). This file's job
+ * is to replay the reported conversations end-to-end and prove the FINAL
+ * behavior at each turn matches what was fixed, so a future change that
+ * breaks the interaction between these modules — not just one module in
+ * isolation — fails a test immediately.
+ *
+ * Two transcripts analyzed so far:
+ *   Transcript A — visualization pipeline bypass, fake visual references,
+ *                  lesson-completion consistency, Skip Anyway deadlock.
+ *   Transcript B — confusion-detection coverage gaps causing Tutor Max to
+ *                  repeat near-identical questioning despite the learner
+ *                  saying "I don't understand" / "Where?" / "Why do you
+ *                  keep asking me questions?" etc.
+ */
+import { describe, it, expect } from 'vitest'
+import {
+  initialConversationState, advanceConversationState, decideNextMove,
+  type ConversationState,
+} from '@/lib/teaching/conversationState'
+import {
+  detectLearnerRequest, buildLearnerRequestBlock, gateLessonCompletion,
+  stripCompletionOnBareAcknowledgement, isBareAcknowledgement,
+} from '@/lib/teaching/masteryGate'
+import { detectFailureState, buildRecoveryBlock } from '@/lib/teaching/recoveryGuard'
+import {
+  getConceptVisualType, shouldForceVisualRender, resolveResponseVisual,
+} from '@/lib/teaching/visualRegistry'
+
+// ── Transcript A — visualization, fake references, completion, skip ──────────
+
+describe('Transcript Replay A — visualization pipeline bypass + fake references', () => {
+  const conceptId = 'phys.mech.newtons-first-law' // has a registered visual
+
+  it('an explicit diagram request force-renders the registry visual even if the LLM says nothing', () => {
+    const message = 'Can you give me a diagram of the forces?'
+    const request = detectLearnerRequest(message)
+    expect(request).toBe('diagram')
+
+    const availableVisual = getConceptVisualType(conceptId)
+    expect(availableVisual).toBe('three_newton_forces')
+
+    // The LLM ignored the instruction and emitted no VISUAL:<type> tag —
+    // llmTag is null, exactly the failure mode the transcript reported.
+    const forceRender = shouldForceVisualRender(request, availableVisual)
+    expect(forceRender).toBe(true)
+
+    const finalVisual = resolveResponseVisual(null, forceRender, availableVisual)
+    // The renderer receives the concept's real visual regardless of LLM
+    // compliance — the fix that closes "generates text instead of calling
+    // the Visualization Registry."
+    expect(finalVisual).toBe('three_newton_forces')
+  })
+
+  it('the diagram directive forbids prose and forbids claiming a visual that was not rendered', () => {
+    const block = buildLearnerRequestBlock('diagram', 'three_newton_forces')
+    expect(block).toMatch(/Do NOT reply with another prose paragraph/i)
+    expect(block).toContain('VISUAL:three_newton_forces')
+  })
+
+  it('with NO registered visual, the directive requires an honest text description, never a claimed image', () => {
+    const block = buildLearnerRequestBlock('diagram', null)
+    expect(block).toMatch(/Build the picture in text/i)
+    expect(block).not.toMatch(/VISUAL:/)
+  })
+})
+
+describe('Transcript Replay A — "Next topic" must never silently complete a lesson', () => {
+  it('mastery unverified + "Next topic" + a model that ignores instructions and emits the tag anyway → stripped', () => {
+    // The learner never answered a single CHECK/PRACTICE question — mastery
+    // is nowhere near verified.
+    const state: ConversationState = { ...initialConversationState('phys.mech.newtons-first-law') }
+    // The model hallucinated completion despite the prompt forbidding it —
+    // exactly the transcript's reported failure.
+    const llmText = "Great, you've got it! [LESSON_COMPLETE] Let's move to the next topic."
+    const gate = gateLessonCompletion(llmText, state)
+    expect(gate.suppressed).toBe(true)
+    expect(gate.authorized).toBe(false)
+    expect(gate.cleanText).not.toContain('[LESSON_COMPLETE]')
+    expect(gate.cleanText).toContain("Great, you've got it!")
+  })
+
+  it('the SAME acknowledgement ("got it" / "next") never itself supplies mastery evidence', () => {
+    for (const ack of ['got it', 'next', 'next topic', 'ok', 'continue']) {
+      expect(isBareAcknowledgement(ack)).toBe(true)
+    }
+  })
+
+  it('once real evidence accumulates (>=1 CHECK, >=2 PRACTICE correct), completion IS authorized', () => {
+    let state = initialConversationState('phys.mech.newtons-first-law')
+    // Walk the full evidence ladder for real, the way the runtime does.
+    state = advanceConversationState(state, { askedQuestion: true, signalCorrect: true, recoveryFired: false }) // → DEMONSTRATE
+    state = advanceConversationState(state, { askedQuestion: false, signalCorrect: true, recoveryFired: false }) // → GUIDE
+    state = advanceConversationState(state, { askedQuestion: true, signalCorrect: true, recoveryFired: false }) // → CHECK
+    state = advanceConversationState(state, { askedQuestion: true, signalCorrect: true, recoveryFired: false }) // correctAtCheck=1 → PRACTICE
+    state = advanceConversationState(state, { askedQuestion: true, signalCorrect: true, recoveryFired: false }) // correctAtPractice=1
+    state = advanceConversationState(state, { askedQuestion: true, signalCorrect: true, recoveryFired: false }) // correctAtPractice=2 → TRANSFER
+
+    const gate = gateLessonCompletion('Nicely done — you\'ve mastered this. [LESSON_COMPLETE]', state)
+    expect(gate.authorized).toBe(true)
+    expect(gate.suppressed).toBe(false)
+    expect(gate.cleanText).toContain('[LESSON_COMPLETE]')
+  })
+})
+
+describe('Transcript Replay A — School Mode: bare acknowledgement never completes a lesson', () => {
+  it('"Next" from the learner strips an unauthorized [LESSON_COMPLETE] the model emitted', () => {
+    const llmText = 'Good work today! [LESSON_COMPLETE]'
+    const cleaned = stripCompletionOnBareAcknowledgement(llmText, 'Next')
+    expect(cleaned).not.toContain('[LESSON_COMPLETE]')
+  })
+
+  it('a genuine substantive answer is never treated as a bare acknowledgement', () => {
+    const llmText = 'Correct — the net force is zero. [LESSON_COMPLETE]'
+    const cleaned = stripCompletionOnBareAcknowledgement(
+      llmText,
+      'The net force is zero because the two tensions cancel out',
+    )
+    // Not a bare acknowledgement — this narrow School guard does not strip it
+    // (School has no evidence machine to authorize OR deny beyond this guard).
+    expect(cleaned).toContain('[LESSON_COMPLETE]')
+  })
+})
+
+// ── Transcript B — repeated confusion, repetitive questioning ────────────────
+
+describe('Transcript Replay B — repeated confusion changes teaching behavior instead of repeating', () => {
+  it('every reported confusion phrase is now detected (previously silent)', () => {
+    const transcriptUtterances: Array<[string, string]> = [
+      ['I don\'t understand', 'dont_understand'],
+      ['I know nothing', 'dont_know'],
+      ["Don't know", 'dont_know'],
+      ['Where?', 'dont_understand'],
+      ['Why do you keep asking me questions?', 'too_many_questions'],
+      ["This doesn't make sense", 'confused'],
+    ]
+    for (const [utterance, expectedKey] of transcriptUtterances) {
+      expect(detectFailureState(utterance)).toBe(expectedKey)
+    }
+  })
+
+  it('full replay: the SAME concept, repeated confusion, escalating remediation — never the same generic instruction twice', () => {
+    let state = initialConversationState('phys.mech.newtons-first-law')
+
+    // Turn 1 — first confusion on this concept.
+    expect(detectLearnerRequest("I don't understand")).toBe('explain_differently')
+    const tier0 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount)
+    expect(tier0).toMatch(/different explanation/i)
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+    })
+    expect(state.remediationCount).toBe(1)
+    expect(state.consecutiveFailures).toBe(1)
+
+    // Turn 2 — still confused; the SAME generic "try something different"
+    // text must NOT repeat — it must escalate to a worked example.
+    const tier1 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount)
+    expect(tier1).toMatch(/worked example/i)
+    expect(tier1).not.toEqual(tier0)
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+    })
+    expect(state.remediationCount).toBe(2)
+
+    // Turn 3 — real-world example.
+    const tier2 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount)
+    expect(tier2).toMatch(/real.life.example/i)
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+    })
+    expect(state.remediationCount).toBe(3)
+
+    // Turn 4 — visualization, force-rendered through the EXISTING registry.
+    const availableVisual = getConceptVisualType('phys.mech.newtons-first-law')
+    const tier3 = buildLearnerRequestBlock('explain_differently', availableVisual, state.remediationCount)
+    expect(tier3).toMatch(/VISUALIZATION/i)
+    expect(tier3).toContain(`VISUAL:${availableVisual}`)
+    state = advanceConversationState(state, {
+      askedQuestion: false, signalCorrect: null, recoveryFired: false, learnerRequest: 'explain_differently',
+    })
+    expect(state.remediationCount).toBe(4)
+
+    // Turn 5 — guided step-by-step, minimal questioning.
+    const tier4 = buildLearnerRequestBlock('explain_differently', null, state.remediationCount)
+    expect(tier4).toMatch(/guided step-by-step/i)
+    expect(tier4).toMatch(/not already shown/i)
+
+    // By now the state machine has independently accumulated enough
+    // consecutive failures that the server FORCES a non-question turn
+    // regardless of prompt wording — the deterministic anti-repetition
+    // guarantee, not merely advisory text.
+    expect(state.consecutiveFailures).toBeGreaterThanOrEqual(2)
+    const move = decideNextMove(state, { recoveryTurn: false, workedExampleFirst: false })
+    expect(move).toBe('show')
+  })
+
+  it('"why do you keep asking me questions" stops the questioning outright, not just softens it', () => {
+    const key = detectFailureState('Why do you keep asking me questions?')
+    expect(key).toBe('too_many_questions')
+    const block = buildRecoveryBlock(key!, false, 0)
+    expect(block).toMatch(/STOP asking questions/i)
+    expect(block).toMatch(/no question attached/i)
+    // Preemption contract every recovery script shares.
+    expect(block).toMatch(/PREEMPTS EVERYTHING/)
+  })
+
+  it('a terse "Where?" is treated as confusion, not as a substantive question requiring an inference from the learner', () => {
+    expect(detectFailureState('Where?')).toBe('dont_understand')
+    const block = buildRecoveryBlock('dont_understand', false, 0)
+    expect(block).toMatch(/CHANGE REPRESENTATION/i)
+  })
+})
+
+describe('Transcript Replay B — repeated failure forces demonstration over questioning (deterministic, not advisory)', () => {
+  it('two consecutive recovery-fired turns force a SHOW move on turn three regardless of phase', () => {
+    let state = initialConversationState('c')
+    state = advanceConversationState(state, { askedQuestion: true, signalCorrect: null, recoveryFired: true })
+    state = advanceConversationState(state, { askedQuestion: true, signalCorrect: null, recoveryFired: true })
+    expect(state.consecutiveFailures).toBe(2)
+    const move = decideNextMove(state, { recoveryTurn: false, workedExampleFirst: false })
+    expect(move).toBe('show')
+  })
+})

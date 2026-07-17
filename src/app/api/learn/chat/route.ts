@@ -2320,15 +2320,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // masteryGate.ts already fixed for Library. This is the narrow,
         // deterministic part of that fix applied to School Mode: a bare
         // acknowledgement can never itself authorize completion, regardless
-        // of what the model emitted.
-        if (/\[LESSON_COMPLETE\]/i.test(cleanText)) {
-          try {
-            const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
-            if (isBareAcknowledgement(message)) {
-              cleanText = cleanText.replace(/\s*\[LESSON_COMPLETE\]\s*/gi, ' ').trim()
-            }
-          } catch { /* non-fatal */ }
-        }
+        // of what the model emitted. Extracted to masteryGate.ts's
+        // stripCompletionOnBareAcknowledgement (Phase 5: complete the
+        // existing guard, made unit-testable) instead of inline regex.
+        try {
+          const { stripCompletionOnBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
+          cleanText = stripCompletionOnBareAcknowledgement(cleanText, message)
+        } catch { /* non-fatal */ }
 
         // Sprint CH: extract and strip the [WE:...] worked-example progress tag
         if (workedExampleActive || snapshotWorkedExample) {
