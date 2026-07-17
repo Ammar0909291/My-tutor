@@ -6292,6 +6292,168 @@ const STW_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.torque ────────────────────────────────────────────────────────
+const TORQ = 'phys.mech.torque'
+const TORQ_SRC = 'docs/curriculum/blueprints/phys.mech.torque.md'
+
+const TORQ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TORQ,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Push a door at its edge, then push equally hard right next to ' +
+      'the hinge — the difference you feel IS torque. Same 10 N ' +
+      'force: at r = 0.8 m from the hinge it delivers \u03c4 = 8 N\u00b7m; at ' +
+      'r = 0.05 m, just 0.5 N\u00b7m — sixteen times weaker. Torque is ' +
+      'not force; it is force \u00d7 moment arm, \u03c4 = rF sin\u03b8, the ' +
+      '\u201cturning effectiveness\u201d of a force about a pivot. The moment ' +
+      'arm r is a full multiplier, which is why door handles sit at ' +
+      'the far edge and wrenches are long: distance is as good as ' +
+      'muscle. A small force far out can out-turn a big force close ' +
+      'in — 10 N at 1 m (10 N\u00b7m) beats 50 N at 0.1 m (5 N\u00b7m).',
+    targetedMisconceptions: [`${TORQ}:MC-TORQUE-IS-FORCE`],
+    source: `${TORQ_SRC} — MC-TORQUE-IS-FORCE (P28 door-hinge 16\u00d7 computation + P33 50N/10N inversion + s6 door anchor)`,
+  },
+  {
+    conceptId: TORQ,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The sin\u03b8 in \u03c4 = rF sin\u03b8 is not fine print — drop it and whole ' +
+      'answers go wrong. Push 10 N along a 0.5 m lever STRAIGHT ' +
+      'TOWARD the pivot (\u03b8 = 0\u00b0): the torque is exactly zero — a ' +
+      'force aimed through the pivot has no turning effect at all, ' +
+      'however hard you push (try spinning a wheel by pushing toward ' +
+      'its axle). Only the component of force PERPENDICULAR to the ' +
+      'lever turns anything, and sin\u03b8 measures precisely that ' +
+      'fraction: \u03b8 = 90\u00b0 \u2192 full rF; \u03b8 = 30\u00b0 \u2192 half; \u03b8 = 0\u00b0 or ' +
+      '180\u00b0 \u2192 nothing. Writing \u03c4 = rF is legal only after checking ' +
+      'the force really is perpendicular — otherwise sin\u03b8 stays in ' +
+      'the formula.',
+    targetedMisconceptions: [`${TORQ}:MC-TORQUE-PERPENDICULAR-ONLY`],
+    source: `${TORQ_SRC} — MC-TORQUE-PERPENDICULAR-ONLY (P28 \u03b8 = 0\u00b0 zero-torque conflict + P30 perpendicular-component bridge)`,
+  },
+]
+
+const TORQ_PROBES: SeedProbe[] = [
+  {
+    conceptId: TORQ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which produces more torque about a pivot: 50 N applied at r = 0.1 m, or 10 N applied (perpendicular) at r = 1 m?',
+    choices: [
+      { text: '10 N at 1 m — \u03c4 = 10 N\u00b7m beats 5 N\u00b7m; moment arm multiplies the force', isCorrect: true },
+      { text: '50 N at 0.1 m — the bigger force always wins', isCorrect: false, misconceptionId: `${TORQ}:MC-TORQUE-IS-FORCE` },
+      { text: 'They are equal', isCorrect: false },
+    ],
+    correctValue: '10 N at 1 m',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TORQ}:MC-TORQUE-IS-FORCE`],
+    source: `${TORQ_SRC} — P33 discrimination pair as probe`,
+  },
+  {
+    conceptId: TORQ,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 10 N force acts on a 0.5 m lever, directed straight toward the pivot (\u03b8 = 0\u00b0). What torque does it produce?',
+    choices: [
+      { text: 'Zero — \u03c4 = rF sin\u03b8 and sin 0\u00b0 = 0; a force through the pivot has no turning effect', isCorrect: true },
+      { text: '5 N\u00b7m — \u03c4 = rF; the angle factor barely matters', isCorrect: false, misconceptionId: `${TORQ}:MC-TORQUE-PERPENDICULAR-ONLY` },
+    ],
+    correctValue: 'zero',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TORQ}:MC-TORQUE-PERPENDICULAR-ONLY`],
+    source: `${TORQ_SRC} — P28 \u03b8 = 0\u00b0 case as probe`,
+  },
+]
+
+// ─── eng.vocab.prefixes ──────────────────────────────────────────────────────
+const PFX = 'eng.vocab.prefixes'
+const PFX_SRC = 'docs/curriculum/blueprints/eng.vocab.prefixes.md'
+
+const PFX_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PFX,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Prefixes are a vocabulary superpower — WHEN they are really ' +
+      'there. \u201cRe-\u201d means \u201cagain\u201d in redo and rewrite\u2026 so does ' +
+      '\u201crelax\u201d mean \u201clax again\u201d? There is no base word \u201clax\u201d being ' +
+      'modified — the \u201cre\u201d in relax is just the word\u2019s first two ' +
+      'letters, not a working prefix. Same with \u201cuncle\u201d: not ' +
+      '\u201cnot-cle.\u201d The test before trusting any prefix reading: ' +
+      'remove the suspected prefix and check whether a real, ' +
+      'recognizable base word remains. redo \u2192 do \u2713 (\u201cdo again\u201d); ' +
+      'unhappy \u2192 happy \u2713 (\u201cnot happy\u201d); relax \u2192 \u201clax\u201d? result \u2192 ' +
+      '\u201csult\u201d? No — so no prefix meaning applies. Prefixes ARE ' +
+      'reliable; the skill is confirming one is actually on duty.',
+    targetedMisconceptions: [`${PFX}:MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING`],
+    source: `${PFX_SRC} — MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING (P28 relax conflict + P31 remove-and-check test)`,
+  },
+  {
+    conceptId: PFX,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Does \u201csubmarine\u201d mean \u201cnot a marine\u201d? Prefixes do far more ' +
+      'than negate. Negation (un-, non-, dis-, in-/im-) is just one ' +
+      'category of a richer menu: LOCATION — sub- = under ' +
+      '(submarine), super- = above, inter- = between (international), ' +
+      'trans- = across; TIME — pre- = before (prehistoric), post- = ' +
+      'after, re- = again; NUMBER — bi- = two (bicycle), tri- = ' +
+      'three, multi- = many; DEGREE — over- = too much (overcooked), ' +
+      'under- = too little. When you meet a prefixed word, ask which ' +
+      'CATEGORY the prefix belongs to before assuming \u201copposite\u201d: ' +
+      'unhappy negates, but submarine locates, prehistoric dates, ' +
+      'and bicycle counts. Reading prefixes by category unlocks ' +
+      'hundreds of words per prefix.',
+    targetedMisconceptions: [`${PFX}:MC-PREFIXES-ONLY-NEGATE-MEANING`],
+    source: `${PFX_SRC} — MC-PREFIXES-ONLY-NEGATE-MEANING (P28 submarine conflict + P30 category menu)`,
+  },
+]
+
+const PFX_PROBES: SeedProbe[] = [
+  {
+    conceptId: PFX,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In which word does \u201cre-\u201d actually function as the prefix meaning \u201cagain\u201d?',
+    choices: [
+      { text: '\u201cRewrite\u201d — removing re- leaves the real base word \u201cwrite\u201d: write again', isCorrect: true },
+      { text: '\u201cRelax\u201d — re- always means again, so relax = lax again', isCorrect: false, misconceptionId: `${PFX}:MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING` },
+      { text: 'Both equally — any word starting with re- uses the prefix', isCorrect: false, misconceptionId: `${PFX}:MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING` },
+    ],
+    correctValue: 'rewrite',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${PFX}:MC-A-PREFIX-ALWAYS-HAS-ONE-FIXED-MEANING`],
+    source: `${PFX_SRC} — P33 redo/relax pair as probe`,
+  },
+  {
+    conceptId: PFX,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What does the prefix \u201csub-\u201d add in \u201csubmarine\u201d?',
+    choices: [
+      { text: 'Location: under (the sea) — prefixes express location, time, number, and degree, not only negation', isCorrect: true },
+      { text: 'Negation: not a marine — prefixes reverse the base word\u2019s meaning', isCorrect: false, misconceptionId: `${PFX}:MC-PREFIXES-ONLY-NEGATE-MEANING` },
+    ],
+    correctValue: 'under',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PFX}:MC-PREFIXES-ONLY-NEGATE-MEANING`],
+    source: `${PFX_SRC} — P28 submarine conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -6367,6 +6529,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...TRIG_EXPLANATIONS,
   ...DOP_EXPLANATIONS,
   ...STW_EXPLANATIONS,
+  ...TORQ_EXPLANATIONS,
+  ...PFX_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -6442,4 +6606,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...TRIG_PROBES,
   ...DOP_PROBES,
   ...STW_PROBES,
+  ...TORQ_PROBES,
+  ...PFX_PROBES,
 ]
