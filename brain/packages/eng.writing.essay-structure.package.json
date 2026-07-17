@@ -1,0 +1,447 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.essay-structure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.essay-structure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9b61abf5b7783711711a727cfce5612f337cc868665148b54ee9565577b33a82",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.essay-structure.md": "sha256:2a2306a082bf9e66ca4b897ae73310544284cfa8c07a8593473cb385778a163a"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.essay-structure",
+    "name": "Essay Structure",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.writing.editing-and-proofreading",
+      "eng.writing.expository-writing"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.essay-structure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.essay-structure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.essay-structure.md": "sha256:2a2306a082bf9e66ca4b897ae73310544284cfa8c07a8593473cb385778a163a"
+      },
+      "contentHash": "sha256:af55474ad860e9bd3a88ceea296c9a200271b1a5ce92a34bbdd4b9fe5d67f309",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.essay-structure.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.essay-structure.md#TA-1 (addresses MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.essay-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.essay-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.essay-structure.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.essay-structure.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.essay-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.essay-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.essay-structure.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.essay-structure.md#TA-3 (addresses MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.essay-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.essay-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.essay-structure.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.essay-structure.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.essay-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.essay-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.essay-structure.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.essay-structure.md#TA-5 (addresses MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES, MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.essay-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.essay-structure\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.essay-structure/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "Essay Structure — Conceptual Development Sequence",
+      "content": "### TA-1: Thesis vs. Topic-Announcement Sorting\nPresent 4 candidate introductions, half topic announcements and half genuine thesis statements, and have the student sort each, explaining what's missing from the announcements. Directly counters MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES.\n\n### TA-2: Body Paragraph Function — Each a Distinct Leg of the Journey\nTeach that each body paragraph should develop ONE distinct supporting point for the thesis (echoing topic-sentence/supporting-detail structure at the paragraph level, now organizing multiple paragraphs), and have the student outline 3 distinct body-paragraph functions for a given thesis.\n\n### TA-3: Synthesis vs. Repetition in Conclusions\nUsing the discrimination pairs from MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD, present a thesis and body-paragraph summary, then have the student write a synthesizing conclusion (not a repeat) that references the specific evidence developed and explains broader significance.\n\n### TA-4: Full Essay Outline Construction\nGiven a thesis, student outlines a complete essay structure: introduction (with thesis), 3 body paragraph topics (each supporting the thesis distinctly), and a conclusion synthesis plan.\n\n### TA-5: Composing a Full Original Essay\nStudent writes a complete short essay (introduction with specific thesis, 3 body paragraphs each developing a distinct point, and a synthesizing conclusion) on an assigned or chosen topic — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 56,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.essay-structure",
+      "title": ": Thesis vs. Announcement (Scaffolded)",
+      "content": "### WE-1: Thesis vs. Announcement (Scaffolded)\n**Candidates:** \"This essay is about the benefits of reading.\" (announcement) / \"Reading fiction regularly improves empathy more effectively than reading nonfiction alone.\" (thesis).\n**Walkthrough:** Confirm the second gives the reader a specific, defensible claim the essay body can develop with evidence, while the first only names a subject.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.essay-structure",
+      "title": ": Synthesizing Conclusion (Guided)",
+      "content": "### WE-2: Synthesizing Conclusion (Guided)\n**Thesis:** \"School gardens teach students practical skills that classroom lessons alone cannot.\" **Body paragraphs covered:** (1) hands-on science understanding, (2) responsibility through plant care, (3) community connection through shared harvests.\n**Walkthrough:** Write a conclusion synthesizing these three specific points (\"Through direct science engagement, daily responsibility, and shared community effort, school gardens build skills no textbook alone can teach\") rather than simply restating the thesis in the same words.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.essay-structure",
+      "title": ": Full Essay Composition (Independent)",
+      "content": "### WE-3: Full Essay Composition (Independent)\n**Task:** Student writes a complete essay on \"Why local libraries remain valuable in the digital age,\" with a specific thesis, 3 distinct body paragraphs (e.g., free resource access, community gathering space, digital literacy support), and a synthesizing conclusion.\n**Walkthrough:** Student demonstrates the full journey structure — specific departure (thesis), distinct route legs (body paragraphs), and a genuine arrival (synthesizing conclusion).",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 73,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/misconception/MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES",
+      "kind": "misconception",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "- **Trigger signal:** Student writes an essay introduction that merely announces the general topic (\"In this essay, I will talk about climate change.\") rather than establishing a specific, arguable thesis the entire essay will develop and support — confusing an essay-level introduction with a mere topic announcement, the same error pattern seen at the paragraph level but now needing a full thesis claim, not just a topic sentence's single-paragraph claim.",
+      "content": "### MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES\n- **Trigger signal:** Student writes an essay introduction that merely announces the general topic (\"In this essay, I will talk about climate change.\") rather than establishing a specific, arguable thesis the entire essay will develop and support — confusing an essay-level introduction with a mere topic announcement, the same error pattern seen at the paragraph level but now needing a full thesis claim, not just a topic sentence's single-paragraph claim.\n- **Conflict evidence [P28]:** Present \"This essay will discuss climate change.\" (topic announcement, no specific claim) alongside \"Local governments, not just national policy, hold the most practical power to reduce climate change's immediate impact on communities.\" (a specific, arguable thesis the essay body can develop with evidence). Ask which introduction actually tells the reader what the essay will ARGUE, not just what it's about.\n- **Bridge text [P30]:** \"An essay's introduction needs a specific, arguable thesis — not just a topic announcement. Just like a paragraph's topic sentence needs to be a genuine claim rather than a subject label, an essay's thesis needs to be a specific position the entire essay will develop and defend across multiple paragraphs, not a general subject area.\"\n- **Replacement text [P31]:** \"Before finalizing your introduction, check: does it state a specific, defensible position your essay will argue, or does it just name a general subject? If a reader can't predict roughly what your essay will claim from the introduction, it's still just a topic announcement, not a thesis.\"\n- **Discrimination pairs [P33]:** (a) Introduction-as-topic-announcement (an essay introduction merely names the general subject the essay covers) vs. (b) Introduction-as-thesis-establishment (an essay introduction states a specific, arguable claim the entire essay will develop and support across its body paragraphs).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's thesis-vs-announcement sort before continuing.",
+      "localKey": "MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES",
+      "language": "en",
+      "refs": [
+        "MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/misconception/MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "- **Trigger signal:** Student writes a conclusion that simply restates the introduction's thesis in nearly identical wording, without synthesizing what the essay's body has shown or explaining the thesis's broader significance — treating the conclusion as a mechanical repeat rather than a genuine synthesis that demonstrates the argument has actually developed across the essay.",
+      "content": "### MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD\n- **Trigger signal:** Student writes a conclusion that simply restates the introduction's thesis in nearly identical wording, without synthesizing what the essay's body has shown or explaining the thesis's broader significance — treating the conclusion as a mechanical repeat rather than a genuine synthesis that demonstrates the argument has actually developed across the essay.\n- **Conflict evidence [P28]:** Present an introduction thesis and two candidate conclusions: one that restates the thesis in nearly identical words, and one that synthesizes the evidence presented (referencing what was actually shown across the body paragraphs) and explains the broader significance of the argument. Ask which conclusion demonstrates that the essay's body actually did real developmental work.\n- **Bridge text [P30]:** \"A conclusion that just repeats the introduction word-for-word suggests the essay's body didn't actually develop anything — as if the argument never moved. A genuine conclusion synthesizes what the body specifically showed (referencing the actual evidence/reasoning developed) and explains why the argument matters beyond just restating the original claim.\"\n- **Replacement text [P31]:** \"Instead of restating your thesis in the same words, synthesize: what did your body paragraphs actually show that supports this thesis? What's the broader significance or implication of your argument, now that it's been developed? A conclusion should feel like an arrival, not a rewind.\"\n- **Discrimination pairs [P33]:** (a) Conclusion-as-repetition (an effective conclusion restates the introduction's thesis in similar wording) vs. (b) Conclusion-as-synthesis (an effective conclusion synthesizes the body's specific evidence/reasoning and explains the argument's broader significance, demonstrating genuine development).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's arrival-not-rewind framing before continuing to TA-3.",
+      "localKey": "MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD",
+      "language": "en",
+      "refs": [
+        "MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "Thesis vs. Topic-Announcement Sorting",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Thesis vs. Topic-Announcement Sorting\",\"primitives\":[],\"addresses\":[\"MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 60,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "Body Paragraph Function — Each a Distinct Leg of the Journey",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Body Paragraph Function — Each a Distinct Leg of the Journey\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 63,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "Synthesis vs. Repetition in Conclusions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Synthesis vs. Repetition in Conclusions\",\"primitives\":[],\"addresses\":[\"MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 66,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "Full Essay Outline Construction",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Essay Outline Construction\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 69,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "Composing a Full Original Essay",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Composing a Full Original Essay\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD\",\"MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES",
+        "MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 72,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reject a topic-announcement introduction**\nGiven a topic-announcement \"introduction,\" student identifies why it fails as a thesis and revises it into a specific, arguable claim. *(Directly targets MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Write a synthesizing conclusion**\nGiven a thesis and body-paragraph summary, student writes a conclusion that synthesizes the specific evidence and explains broader significance, rather than repeating the thesis verbatim. *(Directly targets MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Outline distinct body-paragraph functions**\nGiven a thesis, student outlines 3 distinct supporting points for separate body paragraphs.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Construct a full essay outline**\nGiven a topic, student constructs a complete essay outline (thesis, 3 body points, conclusion synthesis plan).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Compose a full original essay**\nStudent writes a complete short essay with a specific thesis, distinct body paragraphs, and a synthesizing conclusion.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 87,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "Adaptive Flags",
+      "content": "- If the student writes topic-announcement introductions, weight remediation toward MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES's bridge text and re-run TA-1's thesis-vs-announcement sort before returning to composition.\n- If the student writes repetitive conclusions, weight remediation toward MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD's bridge text and TA-3's synthesis practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.writing.thesis-statements`, `eng.composition.audience-and-purpose`) — do not certify mastery without TA-5's full essay composition, since thesis-statement craft assumes the student already understands the thesis's structural role within a complete essay.\n- Reuse the \"journey map\" framing explicitly when introducing `eng.writing.thesis-statements` — that concept refines the craft of writing the specific \"departure sign\" (thesis) established here.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES",
+        "MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 136,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.writing.essay-structure/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.essay-structure",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Editing/Proofreading + Expository-Writing Readiness Check]\n        |\n        v\n[Concrete Anchor: The Journey Map — Departure, Route, Arrival]\n        |\n        v\n[TA-1: Thesis vs. Topic-Announcement Sorting]\n        |\n        v\n[TA-2: Body Paragraph Function]\n        |\n        v\n[TA-3: Synthesis vs. Repetition in Conclusions]\n        |\n        v\n[TA-4: Full Essay Outline Construction]\n        |\n        v\n[TA-5: Composing a Full Original Essay]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — essay structure organizes already-solid expository content and polish into a larger multi-paragraph form, so weak foundational skill undermines the structural task. During instruction (S1), watch for both misconception patterns: introduction-as-announcement (MC-THE-INTRODUCTION-JUST-ANNOUNCES-THE-TOPIC-THE-WAY-A-PARAGRAPHS-TOPIC-SENTENCE-DOES) and conclusion-as-repetition (MC-THE-CONCLUSION-JUST-REPEATS-THE-INTRODUCTION-WORD-FOR-WORD) both apply an insufficiently developed model of essay-level argument — redirect both to the Journey Map anchor. If the student writes a topic-announcement introduction or a repetitive conclusion during TA-1/TA-3 (S6), drop back to the Concrete Anchor's departure/arrival demonstrations before returning to composition. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who outlines body paragraphs well (MP-3) but still writes announcement introductions or repetitive conclusions has not learned the core structural judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.essay-structure.md",
+        "startLine": 104,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

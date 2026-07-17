@@ -1,0 +1,448 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.literary-genres-overview-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.literary-genres-overview",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:978fd913cce0d14522ea1883b1b42af48770fd129503e32dca0bd1ac2f808f03",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md": "sha256:d8cfc81234e5a2d9de6aa9bfcd8647fa0a37ff3a43c1743fe3e3b1dfe7035fe6"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.literary-genres-overview",
+    "name": "Overview of Literary Genres",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.prose-fiction",
+      "eng.literature.poetry-basics",
+      "eng.literature.drama-basics"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.literary-genres-overview-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.literary-genres-overview (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md": "sha256:d8cfc81234e5a2d9de6aa9bfcd8647fa0a37ff3a43c1743fe3e3b1dfe7035fe6"
+      },
+      "contentHash": "sha256:32174105f98bda8592c18cf9d23d00e10c2f49def576c4fe1b2adf0ac23917c4",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-genres-overview.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md#TA-1 (addresses MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-genres-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-genres-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-genres-overview.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md#TA-2 (addresses MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-genres-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-genres-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-genres-overview.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-genres-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-genres-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-genres-overview.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-genres-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-genres-overview\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-genres-overview.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md#TA-5 (addresses MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY, MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-genres-overview"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-genres-overview\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.literary-genres-overview/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "Overview of Literary Genres — Conceptual Development Sequence",
+      "content": "### TA-1: Identifying Genre-Blending Hybrid Works\nPresent 3 hybrid or borderline works (a prose poem, a verse drama, a narrative-technique-using memoir) and have the student identify which genre techniques each blends, rather than forcing a single-category label. Directly counters MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY.\n\n### TA-2: Craft Techniques in Literary Nonfiction\nUsing the discrimination pairs from MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT, present a literary nonfiction excerpt and have the student identify 2 specific literary techniques used (scene development, figurative language, structural choice) despite its factual grounding.\n\n### TA-3: Comparing the Four Major Genres' Distinguishing Features\nTeach a comparative overview: fiction (imaginative narrative, plot/character/conflict), poetry (condensed language, line/stanza structure), drama (dialogue/stage directions, performance-oriented, no narrator), nonfiction (factual grounding, may or may not use fiction-like craft techniques). Student compares 4 short excerpts, one per genre, identifying each genre's distinguishing features.\n\n### TA-4: Genre Choice and Purpose\nGiven a communicative goal (e.g., \"convey a personal emotional experience,\" \"argue a position persuasively,\" \"entertain with an imaginative story\"), student considers which genre(s) might serve that purpose and why, including hybrid possibilities.\n\n### TA-5: Full Genre Survey Analysis\nStudent analyzes a set of 4 new excerpts (one per major genre, or including a hybrid), correctly identifying each genre's distinguishing features and any genre-blending present — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 57,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": ": Hybrid Identification (Scaffolded)",
+      "content": "### WE-1: Hybrid Identification (Scaffolded)\n**Excerpt:** A short prose passage using condensed, rhythmic, image-dense language uncommon in typical prose but written in continuous paragraphs, not lines.\n**Walkthrough:** Identify this as a prose poem — blending poetry's condensed/rhythmic language techniques within fiction/prose's continuous-paragraph form, rather than forcing it into just one category.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 74,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": ": Literary Technique in Nonfiction (Guided)",
+      "content": "### WE-2: Literary Technique in Nonfiction (Guided)\n**Nonfiction excerpt:** A memoir passage describing a childhood memory with vivid sensory scene-setting, a deliberate narrative build-up, and a symbolic image (a fading photograph representing memory loss).\n**Walkthrough:** Identify the scene-setting, narrative structure, and symbolic image as genuine literary techniques, despite the piece being factually-grounded nonfiction.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 74,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": ": Full Four-Genre Comparison (Independent)",
+      "content": "### WE-3: Full Four-Genre Comparison (Independent)\n**Excerpts:** One fiction passage (plot/character focus), one poem (condensed/lined), one drama excerpt (dialogue/stage directions), one nonfiction essay (factual, using some narrative technique).\n**Walkthrough:** Student identifies each genre's distinguishing features and notes any technique-blending present (e.g., the nonfiction essay's narrative technique borrowed from fiction).",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 74,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/misconception/MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY",
+      "kind": "misconception",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "- **Trigger signal:** Student assumes every literary work must be classifiable into exactly one clean genre category (fiction, poetry, drama, nonfiction), becoming confused or forcing an artificial classification when a work genuinely blends genres (a prose poem, a verse drama, a nonfiction memoir using narrative fiction techniques) — missing that genre boundaries are often blurry and hybrid works are a normal, legitimate part of literature.",
+      "content": "### MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY\n- **Trigger signal:** Student assumes every literary work must be classifiable into exactly one clean genre category (fiction, poetry, drama, nonfiction), becoming confused or forcing an artificial classification when a work genuinely blends genres (a prose poem, a verse drama, a nonfiction memoir using narrative fiction techniques) — missing that genre boundaries are often blurry and hybrid works are a normal, legitimate part of literature.\n- **Conflict evidence [P28]:** Present a \"prose poem\" (written in continuous prose paragraphs like fiction, but using condensed, image-rich, rhythmic language characteristic of poetry) and ask the student to force it into exactly one category, then ask whether treating it as a legitimate hybrid (poetry techniques within prose form) makes more sense than an artificial single-category label.\n- **Bridge text [P30]:** \"Genre categories are useful organizing tools, but they're not rigid boxes every work must fit cleanly into. Some works deliberately blend genre techniques — a prose poem uses poetry's condensed, rhythmic language within prose's continuous-paragraph form. Recognizing a work as a legitimate hybrid is more accurate than forcing an artificial single-category classification.\"\n- **Replacement text [P31]:** \"When a work doesn't cleanly fit one genre, don't force an artificial classification. Instead, identify which techniques from which genres it's blending and why that blend might serve the work's purpose — hybrid forms are a normal, legitimate part of literature, not classification failures.\"\n- **Discrimination pairs [P33]:** (a) Single-clean-category requirement (every work must fit exactly one genre category without overlap) vs. (b) Hybrid-form recognition (works can legitimately blend techniques from multiple genres, and identifying the blend is more accurate than forcing one category).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's hybrid-identification practice before continuing.",
+      "localKey": "MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY",
+      "language": "en",
+      "refs": [
+        "MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/misconception/MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT",
+      "kind": "misconception",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "- **Trigger signal:** Student treats nonfiction as inherently un-literary — merely a factual report with no genuine craft, structure, or literary technique — missing that literary nonfiction (memoir, personal essay, narrative journalism) deliberately employs many of the same techniques as fiction (scene development, figurative language, deliberate structure, theme) while still being grounded in factual/real events.",
+      "content": "### MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT\n- **Trigger signal:** Student treats nonfiction as inherently un-literary — merely a factual report with no genuine craft, structure, or literary technique — missing that literary nonfiction (memoir, personal essay, narrative journalism) deliberately employs many of the same techniques as fiction (scene development, figurative language, deliberate structure, theme) while still being grounded in factual/real events.\n- **Conflict evidence [P28]:** Present an excerpt from a literary memoir using vivid scene-setting, a deliberate narrative arc, and figurative language to recount a real event, alongside a plain factual report of the same event (just stating what happened with no craft). Ask the student whether the memoir excerpt uses genuine literary technique despite being nonfiction.\n- **Bridge text [P30]:** \"Nonfiction isn't automatically un-literary — literary nonfiction (memoir, personal essay, narrative journalism) deliberately uses many of fiction's techniques (scene development, figurative language, deliberate structure, thematic development) while remaining grounded in real, factual events. The distinction between fiction and nonfiction is about factual grounding, not about the presence or absence of literary craft.\"\n- **Replacement text [P31]:** \"Don't assume nonfiction lacks literary technique. Check whether the piece uses deliberate craft — scene development, figurative language, structural choices, thematic development — the same way you'd analyze fiction, while still recognizing its factual grounding as the genre-defining difference.\"\n- **Discrimination pairs [P33]:** (a) Nonfiction-as-craftless-facts (nonfiction is inherently un-literary, just factual reporting) vs. (b) Nonfiction-as-craft-plus-factual-grounding (nonfiction can deliberately employ genuine literary technique while remaining factually grounded — the factual grounding, not absence of craft, is what distinguishes it from fiction).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's shared-toolkit framing before continuing to TA-3.",
+      "localKey": "MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT",
+      "language": "en",
+      "refs": [
+        "MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "Identifying Genre-Blending Hybrid Works",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Genre-Blending Hybrid Works\",\"primitives\":[],\"addresses\":[\"MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "Craft Techniques in Literary Nonfiction",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Craft Techniques in Literary Nonfiction\",\"primitives\":[],\"addresses\":[\"MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "Comparing the Four Major Genres' Distinguishing Features",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Comparing the Four Major Genres' Distinguishing Features\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "Genre Choice and Purpose",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Genre Choice and Purpose\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 70,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "Full Genre Survey Analysis",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Genre Survey Analysis\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY\",\"MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY",
+        "MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 73,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identify a genre-blending hybrid work**\nGiven a hybrid work (e.g., a prose poem), student identifies the blended techniques rather than forcing a single-category classification. *(Directly targets MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identify literary technique in nonfiction**\nGiven a literary nonfiction excerpt, student identifies at least 2 genuine literary techniques used despite its factual grounding. *(Directly targets MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Compare genre distinguishing features**\nGiven 4 excerpts (one per major genre), student correctly identifies each genre's distinguishing features.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Match genre to communicative purpose**\nGiven a communicative goal, student identifies which genre(s) would serve that purpose and explains why.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full genre survey analysis**\nGiven a new set of excerpts, student correctly identifies genre features and any genre-blending present across all of them.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "Adaptive Flags",
+      "content": "- If the student forces hybrid works into a single genre category, weight remediation toward MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY's bridge text and re-run TA-1's hybrid-identification practice before returning to independent analysis.\n- If the student dismisses nonfiction as un-literary, weight remediation toward MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT's bridge text and TA-2's nonfiction-technique practice specifically.\n- This concept feeds one direct downstream unlock (`eng.literature.literary-periods-survey`) — do not certify mastery without TA-5's full genre survey analysis, since surveying literary periods assumes the student can already flexibly recognize genre features and blending across diverse works.\n- Reuse the \"genre Venn diagram\" framing explicitly when introducing `eng.literature.literary-periods-survey` — that concept traces how genre conventions themselves shifted and blended differently across historical periods.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY",
+        "MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 137,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-genres-overview/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.literary-genres-overview",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Prose-Fiction/Poetry/Drama Readiness Check]\n        |\n        v\n[Concrete Anchor: The Genre Venn Diagram / Shared Craft Toolkit]\n        |\n        v\n[TA-1: Identifying Genre-Blending Hybrid Works]\n        |\n        v\n[TA-2: Craft Techniques in Literary Nonfiction]\n        |\n        v\n[TA-3: Comparing the Four Major Genres]\n        |\n        v\n[TA-4: Genre Choice and Purpose]\n        |\n        v\n[TA-5: Full Genre Survey Analysis]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — this concept surveys and compares the three individually-studied genres plus nonfiction, so weak individual-genre foundations undermine the comparative survey. During instruction (S1), watch for both misconception patterns: forcing single-category classification (MC-A-WORK-MUST-FIT-CLEANLY-INTO-EXACTLY-ONE-GENRE-CATEGORY) and dismissing nonfiction's literary craft (MC-NONFICTION-IS-JUST-FACTS-WITH-NO-LITERARY-TECHNIQUE-OR-CRAFT) both reflect an overly rigid model of genre boundaries — redirect both to the Genre Venn Diagram/Shared Craft Toolkit anchor. If the student forces a hybrid work into one category or dismisses nonfiction technique during TA-1/TA-2 (S6), drop back to the Concrete Anchor's demonstrations before returning to independent analysis. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who compares genre features well (MP-3) but still forces single-category classification or dismisses nonfiction craft has not learned the flexible, cross-genre judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-genres-overview.md",
+        "startLine": 105,
+        "endLine": 137
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
