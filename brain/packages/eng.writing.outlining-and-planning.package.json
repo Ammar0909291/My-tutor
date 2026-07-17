@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.outlining-and-planning-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.outlining-and-planning",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b5a2bc6f9bc1e5deae833d1dfc2c575286bd12743969864ad988c40cd140c66b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md": "sha256:7d3e878a42c97142d85f83fc327e78f34a425ee3db564e82a7edcabb32cc806a"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.outlining-and-planning",
+    "name": "Outlining and Planning",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.writing.the-writing-process"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.outlining-and-planning-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.outlining-and-planning (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md": "sha256:7d3e878a42c97142d85f83fc327e78f34a425ee3db564e82a7edcabb32cc806a"
+      },
+      "contentHash": "sha256:50224dce875553248f3e6e68d191414104952fa7083ffebd333cb8a5be7b3784",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.outlining-and-planning.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md#TA-1 (addresses MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.outlining-and-planning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.outlining-and-planning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.outlining-and-planning.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.outlining-and-planning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.outlining-and-planning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.outlining-and-planning.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md#TA-3 (addresses MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.outlining-and-planning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.outlining-and-planning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.outlining-and-planning.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.outlining-and-planning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.outlining-and-planning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.outlining-and-planning.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md#TA-5 (addresses MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST, MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.outlining-and-planning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.outlining-and-planning\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.outlining-and-planning/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "Outlining and Planning — Conceptual Development Sequence",
+      "content": "### TA-1: Multi-Format Outlining Practice\nPresent the same set of main points and sub-points in 3 different formats (bullet list, cluster/web diagram, formal Roman-numeral outline) and have the student confirm all three achieve the same logical organization. Directly counters MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST.\n\n### TA-2: Identifying Main Points and Sub-Points\nGiven a jumbled set of ideas for a topic, student sorts them into main points (major sections) and sub-points (supporting details under each), building the hierarchical organization outlining requires.\n\n### TA-3: Revising an Outline Mid-Draft\nUsing the discrimination pairs from MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING, present a scenario where drafting reveals a better order or a new necessary point, and have the student revise the outline accordingly rather than forcing the original plan.\n\n### TA-4: Choosing the Right Outline Format for the Task\nStudent considers a writing task (e.g., a short persuasive paragraph vs. a longer research report) and selects/justifies an appropriate outlining format for its scale and complexity.\n\n### TA-5: Creating and Using an Original Outline\nStudent creates an original outline for an assigned writing topic in a format of their choice, then begins drafting from it, demonstrating willingness to revise the outline if drafting reveals improvements — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 54,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": ": Multi-Format Equivalence (Scaffolded)",
+      "content": "### WE-1: Multi-Format Equivalence (Scaffolded)\n**Same content, three formats:** A bullet list (\"- Introduce topic / - Reason 1: cost / - Reason 2: convenience / - Conclusion\"), a cluster diagram (a central bubble with three connected branch bubbles), and a formal outline (I. Introduction, II. Reason 1, III. Reason 2, IV. Conclusion).\n**Walkthrough:** Confirm all three represent the identical logical organization, just in different visual formats — none is more \"correct\" than the others.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": ": Mid-Draft Outline Revision (Guided)",
+      "content": "### WE-2: Mid-Draft Outline Revision (Guided)\n**Original outline order:** Point A (background), Point B (main argument), Point C (counterargument response). **Drafting reveals:** the counterargument response (Point C) actually needs to come right after the main argument (Point B) makes more sense placed before background context is fully given.\n**Walkthrough:** Student revises the outline to reflect the better order discovered during drafting, confirming this is normal, expected planning behavior.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": ": Original Outline Creation (Independent)",
+      "content": "### WE-3: Original Outline Creation (Independent)\n**Task:** Create an outline for a short essay about the benefits of a school garden program.\n**Walkthrough:** Student selects a format (e.g., bullet list), organizes main points (educational value, environmental benefit, community building) with sub-points under each, and begins drafting, noting one place where drafting suggests reordering.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 71,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/misconception/MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST",
+      "kind": "misconception",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "- **Trigger signal:** Student believes an outline must always follow the formal Roman-numeral/letter format (I, A, 1, a...) with strict rules, and either avoids outlining entirely because the formal format feels burdensome, or produces a rigid formal outline that doesn't actually help their thinking, rather than recognizing that outlining is fundamentally about organizing ideas BEFORE drafting, in whatever format genuinely helps the writer plan (a simple bullet list, a web/cluster diagram, a numbered list of main points).",
+      "content": "### MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST\n- **Trigger signal:** Student believes an outline must always follow the formal Roman-numeral/letter format (I, A, 1, a...) with strict rules, and either avoids outlining entirely because the formal format feels burdensome, or produces a rigid formal outline that doesn't actually help their thinking, rather than recognizing that outlining is fundamentally about organizing ideas BEFORE drafting, in whatever format genuinely helps the writer plan (a simple bullet list, a web/cluster diagram, a numbered list of main points).\n- **Conflict evidence [P28]:** Present a formal Roman-numeral outline alongside a simple bullet-point list capturing the same main points and sub-points in the same logical order. Ask whether both accomplish outlining's real purpose — organizing ideas logically before drafting — or whether only the Roman-numeral version \"counts.\"\n- **Bridge text [P30]:** \"The formal Roman-numeral format is just one possible outlining tool, not a requirement. What actually matters is organizing your main ideas and supporting points into a logical structure BEFORE you draft — a simple bullet list, a cluster diagram, or numbered points can all accomplish this just as well as a formal outline, as long as the logical organization is genuinely there.\"\n- **Replacement text [P31]:** \"Use whatever outlining format actually helps you organize your thinking — a bullet list, a simple numbered list, a web diagram. The goal is genuine logical organization before drafting, not matching a particular formal template.\"\n- **Discrimination pairs [P33]:** (a) Formal-format requirement (an outline must follow the formal Roman-numeral/letter structure to count as real planning) vs. (b) Function-over-format (any format that genuinely organizes ideas logically before drafting — bullet list, cluster diagram, simple list — satisfies outlining's real purpose).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's multi-format practice before continuing.",
+      "localKey": "MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST",
+      "language": "en",
+      "refs": [
+        "MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/misconception/MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING",
+      "kind": "misconception",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "- **Trigger signal:** Student treats their outline as a fixed, unchangeable contract once created, forcing their draft to follow it exactly even when drafting reveals a better idea, a logical gap, or a more effective organization — rather than treating the outline as a flexible planning tool that can and should be revised as understanding develops during drafting.",
+      "content": "### MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING\n- **Trigger signal:** Student treats their outline as a fixed, unchangeable contract once created, forcing their draft to follow it exactly even when drafting reveals a better idea, a logical gap, or a more effective organization — rather than treating the outline as a flexible planning tool that can and should be revised as understanding develops during drafting.\n- **Conflict evidence [P28]:** Present a scenario where a writer's outline places evidence A before evidence B, but while drafting, the writer realizes evidence B actually needs to come first to make sense of evidence A. Ask whether the writer should force the draft to match the original outline order, or adjust the outline (and draft) based on this new understanding.\n- **Bridge text [P30]:** \"An outline is a planning tool, not an unbreakable contract. It's completely normal — even a sign of good thinking — to revise your outline once drafting reveals a better structure, a logical gap, or a new idea. The plan should serve the writing, not the other way around.\"\n- **Replacement text [P31]:** \"Treat your outline as a flexible starting plan, not a fixed rule. If drafting reveals a better order or a new idea, update your outline to match — don't force your draft into an outline that no longer fits your improved understanding.\"\n- **Discrimination pairs [P33]:** (a) Fixed-outline contract (once created, an outline must be followed exactly during drafting, with no changes) vs. (b) Flexible-planning-tool recognition (an outline can and should be revised during drafting as the writer's understanding develops or a better structure emerges).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's GPS-reroute framing before continuing to TA-3.",
+      "localKey": "MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING",
+      "language": "en",
+      "refs": [
+        "MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "Multi-Format Outlining Practice",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Multi-Format Outlining Practice\",\"primitives\":[],\"addresses\":[\"MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 58,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "Identifying Main Points and Sub-Points",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Identifying Main Points and Sub-Points\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "Revising an Outline Mid-Draft",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Revising an Outline Mid-Draft\",\"primitives\":[],\"addresses\":[\"MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "Choosing the Right Outline Format for the Task",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Choosing the Right Outline Format for the Task\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "Creating and Using an Original Outline",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Creating and Using an Original Outline\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST\",\"MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST",
+        "MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 70,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Confirm outline format equivalence**\nGiven the same content in two different outline formats, student confirms both achieve genuine logical organization, rejecting the idea that only the formal Roman-numeral version counts. *(Directly targets MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Revise an outline based on drafting insight**\nGiven a scenario where drafting reveals a better structure than the original outline, student revises the outline accordingly rather than forcing the original plan. *(Directly targets MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Sort main points from sub-points**\nGiven a jumbled set of ideas, student correctly organizes them into a main-point/sub-point hierarchy.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Select an appropriate outline format**\nGiven a writing task of a specified scale, student selects and justifies an appropriate outlining format.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Create and use an original outline**\nStudent creates an original outline for an assigned topic and begins drafting from it, demonstrating flexible use.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "Adaptive Flags",
+      "content": "- If the student insists on a rigid formal outline format, weight remediation toward MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST's bridge text and re-run TA-1's multi-format practice before returning to independent planning.\n- If the student refuses to revise an outline once drafting reveals a better structure, weight remediation toward MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING's bridge text and TA-3's mid-draft revision practice specifically.\n- This concept feeds one direct downstream unlock (`eng.writing.drafting`) — do not certify mastery without TA-5's original outline creation and use, since drafting assumes the student has already produced a working (and flexibly revisable) plan to draft from.\n- Reuse the \"GPS route, not a locked track\" framing explicitly when introducing `eng.writing.drafting` — that concept extends the same flexible-plan-in-service-of-good-writing principle to the act of drafting itself.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST",
+        "MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 134,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.writing.outlining-and-planning/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.outlining-and-planning",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Writing-Process Readiness Check]\n        |\n        v\n[Concrete Anchor: The GPS Route, Not a Locked Track]\n        |\n        v\n[TA-1: Multi-Format Outlining Practice]\n        |\n        v\n[TA-2: Identifying Main Points and Sub-Points]\n        |\n        v\n[TA-3: Revising an Outline Mid-Draft]\n        |\n        v\n[TA-4: Choosing the Right Outline Format for the Task]\n        |\n        v\n[TA-5: Creating and Using an Original Outline]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — outlining deepens the planning stage of the writing process, so weak understanding of that process undermines the specific planning skill this concept teaches. During instruction (S1), watch for both misconception patterns: rigid format requirements (MC-AN-OUTLINE-MUST-BE-A-RIGID-FORMAL-ROMAN-NUMERAL-LIST) and treating outlines as unchangeable contracts (MC-ONCE-AN-OUTLINE-IS-MADE-IT-CANT-BE-CHANGED-DURING-DRAFTING) both reflect an overly rigid model of planning — redirect both to the GPS Route anchor. If the student rejects non-formal outline formats or refuses to revise mid-draft during TA-1/TA-3 (S6), drop back to the Concrete Anchor's multi-tool and reroute demonstrations before returning to independent practice. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who sorts main/sub-points correctly (MP-3) but insists on rigid formats or refuses outline revision has not learned the flexible planning judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.outlining-and-planning.md",
+        "startLine": 102,
+        "endLine": 134
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
