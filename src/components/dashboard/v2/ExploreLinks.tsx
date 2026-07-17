@@ -1,45 +1,48 @@
 import Link from 'next/link'
 import { Card, SectionTitle } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import styles from './dashboard.module.css'
+import type { TranslationKey } from '@/lib/i18n'
 
-const GROUPS = [
+const GROUPS: { labelKey: TranslationKey; links: { icon: string; labelKey: TranslationKey; href: string }[] }[] = [
   {
-    label: 'Practice & Learn',
+    labelKey: 'dashx_explore_group_practice',
     links: [
-      { icon: '🃏', label: 'Flashcards', href: '/flashcards' },
-      { icon: '📚', label: 'Library', href: '/library' },
+      { icon: '🃏', labelKey: 'dashx_explore_flashcards', href: '/flashcards' },
+      { icon: '📚', labelKey: 'dashx_explore_library', href: '/library' },
     ],
   },
   {
-    label: 'Track Progress',
+    labelKey: 'dashx_explore_group_track',
     links: [
-      { icon: '📊', label: 'Progress', href: '/progress' },
-      { icon: '🏆', label: 'Leaderboard', href: '/leaderboard' },
-      { icon: '🎓', label: 'Certificates', href: '/certificates' },
+      { icon: '📊', labelKey: 'dashx_explore_progress', href: '/progress' },
+      { icon: '🏆', labelKey: 'dashx_explore_leaderboard', href: '/leaderboard' },
+      { icon: '🎓', labelKey: 'dashx_explore_certificates', href: '/certificates' },
     ],
   },
   {
-    label: 'Account',
+    labelKey: 'dashx_explore_group_account',
     links: [
-      { icon: '⚙️', label: 'Settings', href: '/settings' },
+      { icon: '⚙️', labelKey: 'settings_title', href: '/settings' },
     ],
   },
 ]
 
 export function ExploreLinks() {
+  const { t } = useLanguage()
   return (
     <div className={styles['explore-section']}>
-      <SectionTitle>🧭 Explore</SectionTitle>
+      <SectionTitle>{t('dashx_explore_title')}</SectionTitle>
       <Card className={styles['explore-card']}>
         <div className={styles['explore-groups']}>
           {GROUPS.map((group) => (
-            <div key={group.label} className={styles['explore-group']}>
-              <div className={styles['explore-group-label']}>{group.label}</div>
+            <div key={group.labelKey} className={styles['explore-group']}>
+              <div className={styles['explore-group-label']}>{t(group.labelKey)}</div>
               <div className={styles['explore-group-row']}>
                 {group.links.map((link) => (
                   <Link key={link.href} href={link.href} className={styles['explore-nav-item']}>
                     <span className={styles['explore-nav-item-icon']}>{link.icon}</span>
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 ))}
               </div>

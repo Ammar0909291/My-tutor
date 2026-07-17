@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { Fragment } from 'react'
 import { Card, SectionTitle, ProgressBar } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+import type { TranslationKey } from '@/lib/i18n'
 import styles from './dashboard.module.css'
 import type { AchievementData } from './types'
 
@@ -8,6 +10,9 @@ interface AchievementCenterProps {
   data: AchievementData
 }
 
+// Keyed by the server's canonical English levelName (see getLevel() in
+// getDashboardV2Data.ts) — icons only; the displayed name is localized
+// separately via LEVEL_NAME_KEY below, never this array's `name`.
 const LEVELS = [
   { name: 'Novice',       icon: '🌱' },
   { name: 'Student',      icon: '📖' },
@@ -16,7 +21,16 @@ const LEVELS = [
   { name: 'Master',       icon: '🏆' },
 ]
 
+const LEVEL_NAME_KEY = {
+  Novice: 'level_novice',
+  Student: 'level_student',
+  Practitioner: 'level_practitioner',
+  Expert: 'level_expert',
+  Master: 'level_master',
+} as const
+
 export function AchievementCenter({ data }: AchievementCenterProps) {
+  const { t } = useLanguage()
   const xpPct = data.xpToNext
     ? Math.min(100, Math.round((data.xp / data.xpToNext) * 100))
     : 100
@@ -24,28 +38,30 @@ export function AchievementCenter({ data }: AchievementCenterProps) {
   const currentIdx = LEVELS.findIndex(l => l.name === data.levelName)
   const safeIdx = currentIdx >= 0 ? currentIdx : 0
   const currentLevel = LEVELS[safeIdx]
+  const levelNameKey = (LEVEL_NAME_KEY as Record<string, TranslationKey | undefined>)[data.levelName]
+  const levelDisplayName = levelNameKey ? t(levelNameKey) : data.levelName
 
   const tagline = data.xp === 0
-    ? 'Your journey begins 🌱'
-    : `${data.xp} XP earned so far`
+    ? t('dashx_ach_tagline_zero')
+    : t('dashx_ach_tagline_n').replace('{xp}', String(data.xp))
 
   const xpNextText = data.xpToNext != null
-    ? `Next: ${data.xpToNext} XP`
-    : 'Maximum level reached! 🏆'
+    ? t('dashx_ach_next_xp').replace('{xp}', String(data.xpToNext))
+    : t('dashx_ach_max_level')
 
   const certMsg =
-    data.certCount === 0 ? 'Complete a subject to earn one'
-    : data.certCount === 1 ? 'First certificate earned! 🎉'
-    : 'Keep collecting'
+    data.certCount === 0 ? t('dashx_ach_cert_zero')
+    : data.certCount === 1 ? t('dashx_ach_cert_one')
+    : t('dashx_ach_cert_more')
 
   const streakMsg =
-    data.streakDays === 0 ? 'Day 1 — start your streak! 🔥'
-    : data.streakDays === 1 ? '1 day streak — keep going!'
-    : `${data.streakDays}-day streak! 🔥`
+    data.streakDays === 0 ? t('dashx_ach_streak_zero')
+    : data.streakDays === 1 ? t('dashx_ach_streak_one')
+    : t('dashx_ach_streak_n').replace('{n}', String(data.streakDays))
 
   return (
     <div className={styles['achievement-section']}>
-      <SectionTitle>🏆 Achievements</SectionTitle>
+      <SectionTitle>{t('dashx_achievements_title')}</SectionTitle>
       <Card className={styles['level-card']}>
 
         {/* Header: badge circle + name + tagline */}
@@ -58,7 +74,7 @@ export function AchievementCenter({ data }: AchievementCenterProps) {
           </div>
           <div className={styles['level-title-block']}>
             <div className={styles['level-name']} style={{ color: data.levelColor }}>
-              {data.levelName}
+              {levelDisplayName}
             </div>
             <div className={styles['level-tagline']}>{tagline}</div>
           </div>
@@ -102,7 +118,7 @@ export function AchievementCenter({ data }: AchievementCenterProps) {
                 )}
                 <div className={stepClass}>
                   <div className={styles['level-step-dot']} />
-                  <span className={styles['level-step-name']}>{lvl.name}</span>
+                  <span className={styles['level-step-name']}>{t(LEVEL_NAME_KEY[lvl.name as keyof typeof LEVEL_NAME_KEY])}</span>
                 </div>
               </Fragment>
             )
@@ -117,7 +133,7 @@ export function AchievementCenter({ data }: AchievementCenterProps) {
               <div className={styles['level-stat-val']}>
                 {data.certCount === 0 ? '0' : data.certCount}
               </div>
-              <div className={styles['level-stat-label']}>Certificates</div>
+              <div className={styles['level-stat-label']}>{t('dashx_ach_certificates_label')}</div>
               <div className={styles['level-stat-msg']}>{certMsg}</div>
             </div>
           </Link>
@@ -128,7 +144,7 @@ export function AchievementCenter({ data }: AchievementCenterProps) {
               <div className={styles['level-stat-val']}>
                 {data.streakDays === 0 ? '0' : data.streakDays}
               </div>
-              <div className={styles['level-stat-label']}>Day streak</div>
+              <div className={styles['level-stat-label']}>{t('dashx_ach_daystreak_label')}</div>
               <div className={styles['level-stat-msg']}>{streakMsg}</div>
             </div>
           </div>

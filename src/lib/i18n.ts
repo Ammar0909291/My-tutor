@@ -975,6 +975,102 @@ export const translations = {
     dashx_lesson_n: 'Урок {n}',
     dashx_add_subject: '＋ Добавить предмет',
     nav_modes: 'Режимы',
+
+    /* ── Dashboard: Achievements panel ── */
+    dashx_achievements_title: '🏆 Достижения',
+    dashx_ach_tagline_zero: 'Ваше путешествие начинается 🌱',
+    dashx_ach_tagline_n: '{xp} XP заработано',
+    dashx_ach_next_xp: 'Далее: {xp} XP',
+    dashx_ach_max_level: 'Максимальный уровень достигнут! 🏆',
+    dashx_ach_cert_zero: 'Завершите предмет, чтобы получить сертификат',
+    dashx_ach_cert_one: 'Первый сертификат получен! 🎉',
+    dashx_ach_cert_more: 'Продолжайте собирать',
+    dashx_ach_streak_zero: 'День 1 — начните свою серию! 🔥',
+    dashx_ach_streak_one: 'Серия 1 день — продолжайте!',
+    dashx_ach_streak_n: 'Серия {n} дней! 🔥',
+    dashx_ach_certificates_label: 'Сертификаты',
+    dashx_ach_daystreak_label: 'Дней подряд',
+
+    /* ── Dashboard: Learning Journey (timeline) ── */
+    dashx_learning_journey: '📖 Учебный путь',
+    dashx_journey_empty_title: 'Ваш первый урок ждёт',
+    dashx_journey_empty_sub: 'Завершите урок и наблюдайте, как здесь разворачивается ваша учебная история — одно достижение за раз.',
+    dashx_journey_empty_btn: 'Начать обучение →',
+    dashx_journey_lead: '{n} урок(ов) на этой неделе',
+    dashx_journey_completed: 'Завершено «{title}»',
+    dashx_journey_studied: 'Изучено: {subject}',
+
+    /* ── Dashboard: Continue card ── */
+    dashx_continue_meta: '+{xp} XP · около {min} мин',
+    dashx_chapter_n: 'Глава {n}',
+
+    /* ── Dashboard: Daily Goal ── */
+    dashx_daily_goal_title: 'Дневная цель 🎯',
+    dashx_daily_goal_complete: 'Цель выполнена! Отличная работа сегодня! 🎉',
+    dashx_daily_goal_progress: '{done} из {target} уроков выполнено — ещё {remaining}, чтобы достичь цели!',
+
+    /* ── Dashboard: Daily Quests ── */
+    dashx_daily_quests_title: 'Ежедневные задания',
+    dashx_view_all: 'Смотреть все',
+    dashx_quest_lessons_name: 'Ежедневные уроки',
+    dashx_quest_lessons_unit: 'уроков',
+    dashx_quest_practice_name: 'Практические сессии',
+    dashx_quest_practice_unit: 'сессий',
+    dashx_quest_mastery_name: 'Освоенные темы',
+    dashx_quest_mastery_unit: 'тем',
+
+    /* ── Dashboard: Explore links ── */
+    dashx_explore_title: '🧭 Обзор',
+    dashx_explore_group_practice: 'Практика и обучение',
+    dashx_explore_group_track: 'Отслеживание прогресса',
+    dashx_explore_group_account: 'Аккаунт',
+    dashx_explore_flashcards: 'Карточки',
+    dashx_explore_library: 'Библиотека',
+    dashx_explore_progress: 'Прогресс',
+    dashx_explore_leaderboard: 'Рейтинг',
+    dashx_explore_certificates: 'Сертификаты',
+
+    /* ── Dashboard: League card ── */
+    dashx_league_title: 'Лига',
+    dashx_league_bronze: 'Бронзовая лига',
+    dashx_league_silver: 'Серебряная лига',
+    dashx_league_gold: 'Золотая лига',
+    dashx_league_sapphire: 'Сапфировая лига',
+    dashx_league_diamond: 'Бриллиантовая лига',
+
+    /* ── Dashboard: Learning Intelligence (coach card) ── */
+    dashx_learning_intelligence: '🧠 Учебный интеллект',
+    dashx_coach_empty_title: 'Ваш AI-коуч по обучению готов',
+    dashx_coach_empty_sub: 'Добавьте свой первый предмет и начните учиться — персональные инсайты появятся здесь по мере вашего прогресса.',
+    dashx_coach_header_title: 'Ваш AI-коуч по обучению',
+    dashx_coach_header_sub: 'Персональные инсайты на основе вашего прогресса',
+    dashx_pace_fast: '⚡ Быстрый темп',
+    dashx_pace_steady: '🎯 Стабильный темп',
+    dashx_pace_slow: '🐢 Шаг за шагом',
+    dashx_strongest: 'Сильнее всего',
+    dashx_focus_here: 'Внимание сюда',
+    dashx_build_it_up: 'Наращивайте!',
+    dashx_start_here: 'Начните здесь!',
+    dashx_mastery_trend: 'Тренд освоения',
+    dashx_recommended_focus: '🎯 Рекомендуемый фокус',
+    dashx_coach_warming: 'Завершите больше уроков, и ваш коуч составит персональную картину ваших сильных сторон и зон роста.',
+
+    /* ── Dashboard: Review Queue ── */
+    dashx_review_queue_title: '🔁 Очередь повторений',
+    dashx_review_due_n: '{n} тем(ы) нужно повторить',
+    dashx_review_sub: 'Быстрая практика припоминания не даёт освоенным темам забыться',
+    dashx_due_now: '🎯 Актуально сейчас',
+    dashx_days_overdue: '{n} дн. просрочено',
+    dashx_due_today: 'Нужно сегодня',
+    dashx_keep_going: 'Продолжайте',
+    dashx_ch_n: 'Гл. {n}',
+    dashx_mode_tutor_name: 'Репетитор',
+    dashx_mode_tutor_desc: 'Живой урок с кодом',
+    dashx_mode_quiz_name: 'Квиз',
+    dashx_mode_quiz_desc: 'Проверь навыки',
+    dashx_mode_quiz_badge: 'НОВОЕ',
+    dashx_mode_coach_name: 'Коуч',
+    dashx_mode_coach_desc: 'Твой учебный план',
   },
   en: {
     /* ── Landing ── */
@@ -1950,6 +2046,102 @@ export const translations = {
     dashx_lesson_n: 'Lesson {n}',
     dashx_add_subject: '＋ Add a subject',
     nav_modes: 'Modes',
+
+    /* ── Dashboard: Achievements panel ── */
+    dashx_achievements_title: '🏆 Achievements',
+    dashx_ach_tagline_zero: 'Your journey begins 🌱',
+    dashx_ach_tagline_n: '{xp} XP earned so far',
+    dashx_ach_next_xp: 'Next: {xp} XP',
+    dashx_ach_max_level: 'Maximum level reached! 🏆',
+    dashx_ach_cert_zero: 'Complete a subject to earn one',
+    dashx_ach_cert_one: 'First certificate earned! 🎉',
+    dashx_ach_cert_more: 'Keep collecting',
+    dashx_ach_streak_zero: 'Day 1 — start your streak! 🔥',
+    dashx_ach_streak_one: '1 day streak — keep going!',
+    dashx_ach_streak_n: '{n}-day streak! 🔥',
+    dashx_ach_certificates_label: 'Certificates',
+    dashx_ach_daystreak_label: 'Day streak',
+
+    /* ── Dashboard: Learning Journey (timeline) ── */
+    dashx_learning_journey: '📖 Learning Journey',
+    dashx_journey_empty_title: 'Your first lesson is waiting',
+    dashx_journey_empty_sub: 'Complete a lesson and watch your learning story unfold here — one achievement at a time.',
+    dashx_journey_empty_btn: 'Start learning →',
+    dashx_journey_lead: '{n} lesson(s) this week',
+    dashx_journey_completed: 'Completed "{title}"',
+    dashx_journey_studied: 'Studied {subject}',
+
+    /* ── Dashboard: Continue card ── */
+    dashx_continue_meta: '+{xp} XP · about {min} min',
+    dashx_chapter_n: 'Chapter {n}',
+
+    /* ── Dashboard: Daily Goal ── */
+    dashx_daily_goal_title: 'Daily Goal 🎯',
+    dashx_daily_goal_complete: 'Goal complete! Amazing work today! 🎉',
+    dashx_daily_goal_progress: '{done} of {target} lesson(s) done — {remaining} more to hit your goal!',
+
+    /* ── Dashboard: Daily Quests ── */
+    dashx_daily_quests_title: 'Daily Quests',
+    dashx_view_all: 'View all',
+    dashx_quest_lessons_name: 'Daily Lessons',
+    dashx_quest_lessons_unit: 'lessons',
+    dashx_quest_practice_name: 'Practice Sessions',
+    dashx_quest_practice_unit: 'sessions',
+    dashx_quest_mastery_name: 'Topics Mastered',
+    dashx_quest_mastery_unit: 'topics',
+
+    /* ── Dashboard: Explore links ── */
+    dashx_explore_title: '🧭 Explore',
+    dashx_explore_group_practice: 'Practice & Learn',
+    dashx_explore_group_track: 'Track Progress',
+    dashx_explore_group_account: 'Account',
+    dashx_explore_flashcards: 'Flashcards',
+    dashx_explore_library: 'Library',
+    dashx_explore_progress: 'Progress',
+    dashx_explore_leaderboard: 'Leaderboard',
+    dashx_explore_certificates: 'Certificates',
+
+    /* ── Dashboard: League card ── */
+    dashx_league_title: 'League',
+    dashx_league_bronze: 'Bronze League',
+    dashx_league_silver: 'Silver League',
+    dashx_league_gold: 'Gold League',
+    dashx_league_sapphire: 'Sapphire League',
+    dashx_league_diamond: 'Diamond League',
+
+    /* ── Dashboard: Learning Intelligence (coach card) ── */
+    dashx_learning_intelligence: '🧠 Learning Intelligence',
+    dashx_coach_empty_title: 'Your AI Learning Coach is ready',
+    dashx_coach_empty_sub: 'Add your first subject and start learning — personalized insights will appear here as you progress.',
+    dashx_coach_header_title: 'Your AI Learning Coach',
+    dashx_coach_header_sub: 'Personalized insights based on your progress',
+    dashx_pace_fast: '⚡ Fast pace',
+    dashx_pace_steady: '🎯 Steady pace',
+    dashx_pace_slow: '🐢 Step by step',
+    dashx_strongest: 'Strongest',
+    dashx_focus_here: 'Focus Here',
+    dashx_build_it_up: 'Build it up!',
+    dashx_start_here: 'Start here!',
+    dashx_mastery_trend: 'Mastery Trend',
+    dashx_recommended_focus: '🎯 Recommended Focus',
+    dashx_coach_warming: 'Complete more lessons and your coach will build a personalized picture of your strengths and focus areas.',
+
+    /* ── Dashboard: Review Queue ── */
+    dashx_review_queue_title: '🔁 Review Queue',
+    dashx_review_due_n: '{n} concept(s) due for review',
+    dashx_review_sub: 'Quick retrieval practice keeps mastered concepts from fading',
+    dashx_due_now: '🎯 Due now',
+    dashx_days_overdue: '{n} day(s) overdue',
+    dashx_due_today: 'Due today',
+    dashx_keep_going: 'Keep going',
+    dashx_ch_n: 'Ch. {n}',
+    dashx_mode_tutor_name: 'Tutor',
+    dashx_mode_tutor_desc: 'Live lesson with code',
+    dashx_mode_quiz_name: 'Quiz',
+    dashx_mode_quiz_desc: 'Test your skills',
+    dashx_mode_quiz_badge: 'NEW',
+    dashx_mode_coach_name: 'Coach',
+    dashx_mode_coach_desc: 'Your study plan',
   },
   hi: {
     /* ── Landing ── */
@@ -2926,6 +3118,102 @@ export const translations = {
     dashx_lesson_n: 'पाठ {n}',
     dashx_add_subject: '＋ विषय जोड़ें',
     nav_modes: 'मोड्स',
+
+    /* ── Dashboard: Achievements panel ── */
+    dashx_achievements_title: '🏆 Achievements',
+    dashx_ach_tagline_zero: 'Aapki learning journey shuru hoti hai 🌱',
+    dashx_ach_tagline_n: '{xp} XP kamaya ab tak',
+    dashx_ach_next_xp: 'Agla: {xp} XP',
+    dashx_ach_max_level: 'Maximum level ho gaya! 🏆',
+    dashx_ach_cert_zero: 'Ek subject poora karo certificate ke liye',
+    dashx_ach_cert_one: 'Pehla certificate mil gaya! 🎉',
+    dashx_ach_cert_more: 'Collect karte raho',
+    dashx_ach_streak_zero: 'Day 1 — apni streak shuru karo! 🔥',
+    dashx_ach_streak_one: '1 din ki streak — chalte raho!',
+    dashx_ach_streak_n: '{n}-din ki streak! 🔥',
+    dashx_ach_certificates_label: 'Certificates',
+    dashx_ach_daystreak_label: 'Din ki streak',
+
+    /* ── Dashboard: Learning Journey (timeline) ── */
+    dashx_learning_journey: '📖 Learning Journey',
+    dashx_journey_empty_title: 'Aapka pehla lesson wait kar raha hai',
+    dashx_journey_empty_sub: 'Ek lesson poora karo aur apni learning story yahan banti dekho — ek achievement ek baar mein.',
+    dashx_journey_empty_btn: 'Learning shuru karo →',
+    dashx_journey_lead: 'Is hafte {n} lesson(s)',
+    dashx_journey_completed: '"{title}" poora hua',
+    dashx_journey_studied: '{subject} padha',
+
+    /* ── Dashboard: Continue card ── */
+    dashx_continue_meta: '+{xp} XP · lagbhag {min} min',
+    dashx_chapter_n: 'Chapter {n}',
+
+    /* ── Dashboard: Daily Goal ── */
+    dashx_daily_goal_title: 'Daily Goal 🎯',
+    dashx_daily_goal_complete: 'Goal poora! Aaj bahut badhiya kaam! 🎉',
+    dashx_daily_goal_progress: '{target} mein se {done} lesson(s) poore — goal ke liye {remaining} aur!',
+
+    /* ── Dashboard: Daily Quests ── */
+    dashx_daily_quests_title: 'Daily Quests',
+    dashx_view_all: 'Sab dekho',
+    dashx_quest_lessons_name: 'Daily Lessons',
+    dashx_quest_lessons_unit: 'lessons',
+    dashx_quest_practice_name: 'Practice Sessions',
+    dashx_quest_practice_unit: 'sessions',
+    dashx_quest_mastery_name: 'Topics Mastered',
+    dashx_quest_mastery_unit: 'topics',
+
+    /* ── Dashboard: Explore links ── */
+    dashx_explore_title: '🧭 Explore',
+    dashx_explore_group_practice: 'Practice & Learn',
+    dashx_explore_group_track: 'Progress Track Karo',
+    dashx_explore_group_account: 'Account',
+    dashx_explore_flashcards: 'Flashcards',
+    dashx_explore_library: 'Library',
+    dashx_explore_progress: 'Progress',
+    dashx_explore_leaderboard: 'Leaderboard',
+    dashx_explore_certificates: 'Certificates',
+
+    /* ── Dashboard: League card ── */
+    dashx_league_title: 'League',
+    dashx_league_bronze: 'Bronze League',
+    dashx_league_silver: 'Silver League',
+    dashx_league_gold: 'Gold League',
+    dashx_league_sapphire: 'Sapphire League',
+    dashx_league_diamond: 'Diamond League',
+
+    /* ── Dashboard: Learning Intelligence (coach card) ── */
+    dashx_learning_intelligence: '🧠 Learning Intelligence',
+    dashx_coach_empty_title: 'Aapka AI Learning Coach ready hai',
+    dashx_coach_empty_sub: 'Apna pehla subject add karo aur seekhna shuru karo — personalized insights yahan progress ke saath dikhenge.',
+    dashx_coach_header_title: 'Aapka AI Learning Coach',
+    dashx_coach_header_sub: 'Aapki progress ke hisaab se personalized insights',
+    dashx_pace_fast: '⚡ Fast pace',
+    dashx_pace_steady: '🎯 Steady pace',
+    dashx_pace_slow: '🐢 Step by step',
+    dashx_strongest: 'Sabse strong',
+    dashx_focus_here: 'Yahan focus karo',
+    dashx_build_it_up: 'Build karo!',
+    dashx_start_here: 'Yahan se shuru karo!',
+    dashx_mastery_trend: 'Mastery Trend',
+    dashx_recommended_focus: '🎯 Recommended Focus',
+    dashx_coach_warming: 'Aur lessons poore karo, coach aapki strengths aur focus areas ki picture banayega.',
+
+    /* ── Dashboard: Review Queue ── */
+    dashx_review_queue_title: '🔁 Review Queue',
+    dashx_review_due_n: '{n} concept(s) review ke liye due hain',
+    dashx_review_sub: 'Quick retrieval practice mastered concepts ko fade hone se rokti hai',
+    dashx_due_now: '🎯 Abhi due hai',
+    dashx_days_overdue: '{n} din overdue',
+    dashx_due_today: 'Aaj due hai',
+    dashx_keep_going: 'Keep going',
+    dashx_ch_n: 'Ch. {n}',
+    dashx_mode_tutor_name: 'Tutor',
+    dashx_mode_tutor_desc: 'Live lesson with code',
+    dashx_mode_quiz_name: 'Quiz',
+    dashx_mode_quiz_desc: 'Apni skills test karo',
+    dashx_mode_quiz_badge: 'NEW',
+    dashx_mode_coach_name: 'Coach',
+    dashx_mode_coach_desc: 'Aapka study plan',
   },
 } as const
 
