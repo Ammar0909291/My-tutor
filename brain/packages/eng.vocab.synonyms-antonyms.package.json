@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.vocab.synonyms-antonyms-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.vocab.synonyms-antonyms",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7223f37643e95edba2ea248f9a7b51abd37d609d36298c5ea96d39d21bf6dc9d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md": "sha256:c0cf725d32c772a463b29de2205eb3b13b29061c928da423b53daf2949686def"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.vocab.synonyms-antonyms",
+    "name": "Synonyms and Antonyms",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.vocab.word-recognition"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.vocab.synonyms-antonyms-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.vocab.synonyms-antonyms (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md": "sha256:c0cf725d32c772a463b29de2205eb3b13b29061c928da423b53daf2949686def"
+      },
+      "contentHash": "sha256:03980e97331c6d5df51165ad38048fc91a5a8a0bf3d03645469f3c6c07e54561",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.vocab.synonyms-antonyms.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.synonyms-antonyms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.synonyms-antonyms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.synonyms-antonyms.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md#TA-2 (addresses MC-SYNONYMS-ARE-EXACTLY-IDENTICAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.synonyms-antonyms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.synonyms-antonyms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.synonyms-antonyms.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.synonyms-antonyms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.synonyms-antonyms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.synonyms-antonyms.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md#TA-4 (addresses MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.synonyms-antonyms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.synonyms-antonyms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.vocab.synonyms-antonyms.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md#TA-5 (addresses MC-SYNONYMS-ARE-EXACTLY-IDENTICAL, MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.vocab.synonyms-antonyms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.vocab.synonyms-antonyms\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "Synonyms and Antonyms — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying Synonym Pairs [C]**\n\nPresent word pairs; student identifies which are synonyms (similar meaning) from a mixed set including unrelated word pairs.\n\n**TA-2 — Noticing Synonym Shade/Connotation Differences [C]**\n\nPresent near-synonym triples (e.g., \"thin/slender/skinny,\" \"cheap/inexpensive/affordable\"); student identifies the subtle connotation or formality differences between them, directly targeting MC-SYNONYMS-ARE-EXACTLY-IDENTICAL.\n\n**TA-3 — Identifying Antonym Pairs [C→P]**\n\nPresent word pairs; student identifies which are true antonyms (clear opposites) from a mixed set including synonym pairs and unrelated pairs.\n\n**TA-4 — Gradable vs. Non-Gradable Words (Antonym Existence Check) [P]**\n\nPresent a mixed set of words; student sorts into \"has a meaningful antonym\" (gradable qualities/states) vs. \"does not have a meaningful antonym\" (concrete nouns/non-opposable concepts), directly targeting MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE.\n\n**TA-5 — Choosing the Best Synonym for Context [P]**\n\nPresent a sentence with a blank; student chooses the most appropriate synonym from several near-synonym options based on the sentence's tone/formality/context, integrating the connotation-awareness from TA-2 into practical usage.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/misconception/MC-SYNONYMS-ARE-EXACTLY-IDENTICAL",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "- **Trigger signal:** Student treats synonyms as fully interchangeable in every context, with zero difference in meaning, connotation, or appropriate usage (e.g., assumes \"skinny\" and \"slender\" are perfectly identical and can replace each other in any sentence with no change in tone or appropriateness), missing that most synonym pairs carry subtle differences in shade of meaning, formality, or connotation.",
+      "content": "### MC-SYNONYMS-ARE-EXACTLY-IDENTICAL\n- **Trigger signal:** Student treats synonyms as fully interchangeable in every context, with zero difference in meaning, connotation, or appropriate usage (e.g., assumes \"skinny\" and \"slender\" are perfectly identical and can replace each other in any sentence with no change in tone or appropriateness), missing that most synonym pairs carry subtle differences in shade of meaning, formality, or connotation.\n- **Conflict evidence [P28]:** \"You said 'skinny' and 'slender' mean exactly the same thing, no difference at all. If I called someone 'skinny' as a compliment versus 'slender,' would those feel exactly the same to the person hearing it?\"\n- **Bridge text [P30]:** \"Synonyms have SIMILAR meanings, not usually IDENTICAL ones — most synonym pairs differ in shade of meaning, formality level, or emotional connotation (positive/neutral/negative), even when they refer to roughly the same core idea. 'Skinny' often carries a slightly negative/critical connotation, while 'slender' often sounds more neutral or complimentary, even though both describe a similar body type.\"\n- **Replacement text [P31]:** \"Treat synonyms as SIMILAR in meaning, and always check for differences in connotation, formality, or precise shade of meaning before assuming full interchangeability.\"\n- **Discrimination pairs [P33]:**\n  - \"skinny\" (often negative connotation) vs. \"slender\" (often neutral/positive) — similar core meaning, different emotional coloring.\n  - \"cheap\" (often negative — poor quality implied) vs. \"inexpensive\" (neutral — simply low cost) — similar core meaning, different connotation.\n- **s6_path:** \"It's a very reasonable simplification to think synonyms are perfect substitutes, since dictionaries often list them together as equivalent — but noticing the subtle differences in tone and connotation is actually a more advanced and useful vocabulary skill than treating them as identical.\"",
+      "localKey": "MC-SYNONYMS-ARE-EXACTLY-IDENTICAL",
+      "language": "en",
+      "refs": [
+        "MC-SYNONYMS-ARE-EXACTLY-IDENTICAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/misconception/MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE",
+      "kind": "misconception",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "- **Trigger signal:** Student assumes every word has one single, clear-cut antonym, forcing an opposite even for words that don't have a clean binary opposite, or picking an inaccurate/overly broad \"opposite\" (e.g., insisting the antonym of \"happy\" must be \"sad\" in every case, when a more precise antonym might be context-dependent, or struggling with words like \"hot,\" whose antonym \"cold\" is a clear scalar opposite, versus a word like \"book,\" which has no simple antonym at all since it's not a gradable/opposable concept).",
+      "content": "### MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE\n- **Trigger signal:** Student assumes every word has one single, clear-cut antonym, forcing an opposite even for words that don't have a clean binary opposite, or picking an inaccurate/overly broad \"opposite\" (e.g., insisting the antonym of \"happy\" must be \"sad\" in every case, when a more precise antonym might be context-dependent, or struggling with words like \"hot,\" whose antonym \"cold\" is a clear scalar opposite, versus a word like \"book,\" which has no simple antonym at all since it's not a gradable/opposable concept).\n- **Conflict evidence [P28]:** \"You said every word has an opposite. What's the opposite of 'book'? Can we find one, the way we can find 'cold' for 'hot'?\"\n- **Bridge text [P30]:** \"Not every word has a clean antonym — antonyms typically apply to words describing qualities, states, or gradable concepts (hot/cold, happy/sad, fast/slow) where there's a meaningful 'opposite' on some scale or dimension. Many nouns naming concrete things (book, table, cloud) simply don't have a true antonym, because they're not part of an opposite-pair system at all.\"\n- **Replacement text [P31]:** \"Before searching for an antonym, check whether the word describes a gradable quality/state (which likely has an antonym) or a concrete thing/category (which likely doesn't).\"\n- **Discrimination pairs [P33]:**\n  - \"hot\" (gradable quality, clear antonym \"cold\") vs. \"book\" (concrete noun/category, no meaningful antonym).\n  - \"generous\" (gradable trait, antonym \"stingy\"/\"selfish\") vs. \"chair\" (concrete object, no antonym).\n- **s6_path:** \"It's easy to assume every word must pair up with an opposite, since that pattern works so often for describing words — but recognizing which words genuinely don't have antonyms is just as important a skill as finding the antonyms that do exist.\"\n\n---",
+      "localKey": "MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "Identifying Synonym Pairs",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Synonym Pairs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "Noticing Synonym Shade/Connotation Differences",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Noticing Synonym Shade/Connotation Differences\",\"primitives\":[],\"addresses\":[\"MC-SYNONYMS-ARE-EXACTLY-IDENTICAL\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SYNONYMS-ARE-EXACTLY-IDENTICAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "Identifying Antonym Pairs",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Antonym Pairs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "Gradable vs. Non-Gradable Words (Antonym Existence Check)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Gradable vs. Non-Gradable Words (Antonym Existence Check)\",\"primitives\":[],\"addresses\":[\"MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "Choosing the Best Synonym for Context",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Choosing the Best Synonym for Context\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE\",\"MC-SYNONYMS-ARE-EXACTLY-IDENTICAL\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SYNONYMS-ARE-EXACTLY-IDENTICAL",
+        "MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Synonym identification, novel pair**\n\"Are 'large' and 'big' synonyms?\"\n*Target:* yes.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Antonym identification, novel pair**\n\"What is the antonym of 'generous'?\"\n*Target:* \"stingy\" or \"selfish.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Connotation difference, novel triple**\n\"'Curious' and 'nosy' both describe someone who wants to know things about others. Is there a difference in how they sound?\"\n*Target:* correctly identifies \"curious\" as more neutral/positive, \"nosy\" as more negative/critical — same core meaning, different connotation.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Gradable vs. non-gradable antonym check**\n\"Does the word 'cloud' have a meaningful antonym? Does the word 'expensive'?\"\n*Target:* \"cloud\" — no meaningful antonym (concrete noun, not gradable); \"expensive\" — yes, \"cheap\" or \"inexpensive\" (gradable quality).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain synonyms and antonyms**\n\"In your own words: are synonyms always exactly the same, and does every word have an antonym?\"\n*Target:* states or demonstrates that synonyms are similar but often differ in connotation/formality (not identical), and that only gradable qualities/states typically have true antonyms, while many concrete nouns do not.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "Adaptive Flags",
+      "content": "- **Similar, not identical, is the correct synonym frame**: always teach synonym relationships with an explicit invitation to check for connotation/formality differences, rather than presenting synonym pairs as flatly interchangeable.\n- **Antonym existence is conditional on gradability**: explicitly teach the gradable-quality-vs-concrete-noun distinction (TA-4) as a genuine linguistic pattern, not an arbitrary exception list — this prevents a likely default assumption that every word must pair with an opposite.\n- **Connotation practice should start with high-contrast examples**: for building initial connotation-sensitivity (especially for S9 learners), use clearly positive-vs-negative near-synonym pairs before subtler formal/informal distinctions.\n- **Basic identification and connotation nuance are sequenced, separate skill layers**: don't require connotation sophistication before basic synonym/antonym identification is secure — treat them as building on each other, not simultaneous requirements.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.vocab.synonyms-antonyms/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.vocab.synonyms-antonyms",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — synonym shades and antonym scale warm-up\n  ↓\n[P41] PD-1 (word-recognition readiness)\n  ↓ PASS\n[P06] Anchor: synonym shades and antonym scale (spectrum + non-gradable example)\n  ↓\nTA-1: Identifying synonym pairs [C]\n  ↓\nTA-2: Noticing synonym shade/connotation differences [C]\n  ↓\n[P28] Conflict: synonyms treated as fully identical → MC-SYNONYMS-ARE-EXACTLY-IDENTICAL (if triggered)\n  ↓\nTA-3: Identifying antonym pairs [C→P]\n  ↓\nTA-4: Gradable vs. non-gradable words (antonym existence check) [P]\n  ↓\n[P28] Conflict: every word assumed to have an antonym → MC-EVERY-WORD-HAS-A-SIMPLE-OPPOSITE (if triggered)\n  ↓\nTA-5: Choosing the best synonym for context [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find two synonyms for one word and explain any difference between them.\"\n[P68] Session close\n[P85] Regulation tail — praise noticing subtle differences over assuming perfect equivalence\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word recognition, new to synonym/antonym concepts): dwell on TA-1/TA-3's basic identification tasks with clear, unambiguous pairs before introducing connotation subtlety. S1 (already identifies synonyms/antonyms but treats them as perfectly interchangeable): focus on TA-2's connotation work, since this is the more advanced, valuable skill layer. S6 (frustrated by the added complexity of connotation once basic synonym-matching felt \"solved\"): validate that basic identification is a real, useful skill on its own, and that connotation awareness is a bonus refinement, not a requirement to have \"really\" understood synonyms. S9 (English learner whose L1 may map multiple English synonyms onto a single L1 word, making connotation differences especially hard to perceive): expect TA-2's connotation distinctions to be a genuinely difficult, high-value skill area for this learner — prioritize repeated, concrete exposure to connotation contrasts using very clear, high-contrast examples (e.g., a clearly complimentary vs. clearly critical near-synonym pair) before subtler cases.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.vocab.synonyms-antonyms.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
