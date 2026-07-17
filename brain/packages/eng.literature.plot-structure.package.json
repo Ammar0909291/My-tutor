@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.plot-structure-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.plot-structure",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:97b3f5470c03072d24182da0498f92d1a12f49307c031864999bbfd638c742d3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.plot-structure.md": "sha256:2e10ddf907c2a0ac3c8d79eda7a11d76fb64794a2c5615d4a492128b284bc979"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.plot-structure",
+    "name": "Plot Structure",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.literature.narrative-elements"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.plot-structure-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.plot-structure (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.plot-structure.md": "sha256:2e10ddf907c2a0ac3c8d79eda7a11d76fb64794a2c5615d4a492128b284bc979"
+      },
+      "contentHash": "sha256:fd11135716d46dba71954b4f6c60022b7f81806d578d117fe0df96e2597360db",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.plot-structure.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.plot-structure.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.plot-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.plot-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.plot-structure.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.plot-structure.md#TA-2 (addresses MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.plot-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.plot-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.plot-structure.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.plot-structure.md#TA-3 (addresses MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.plot-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.plot-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.plot-structure.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.plot-structure.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.plot-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.plot-structure\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.plot-structure.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.plot-structure.md#TA-5 (addresses MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT, MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.plot-structure"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.plot-structure\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.plot-structure/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "Plot Structure — Conceptual Development Sequence",
+      "content": "### TA-1: Identifying the Five Stages by Function\nPresent a story and have the student identify each of the five stages by its narrative FUNCTION (introduces situation, builds tension, decides outcome, shows consequences, settles new normal) rather than by length or intensity.\n\n### TA-2: The Turning-Point Test for Climax\nUsing the discrimination pairs from MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT, present a story with a misleadingly exciting non-climax scene and a quieter true climax (as in the Conflict Evidence example) and have the student apply the turning-point test to correctly identify the true climax.\n\n### TA-3: Variable Stage Proportions\nUsing the discrimination pairs from MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION, present 2 stories with dramatically different stage-length proportions (one with long rising action/brief resolution, one with brief exposition/long falling action) and have the student confirm both are valid, well-structured plots despite the uneven proportions.\n\n### TA-4: Mapping a Story to the Mountain Path\nStudent takes a new short story and maps each event onto the five-stage mountain path, marking approximate boundaries and justifying each stage assignment by function.\n\n### TA-5: Constructing an Original Plot Outline\nStudent creates an original five-stage plot outline for a story premise (given a basic conflict/character setup), planning content for each stage and explicitly choosing to make some stages longer/shorter than others as narratively appropriate — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 57,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.plot-structure",
+      "title": ": Five-Stage Identification (Scaffolded)",
+      "content": "### WE-1: Five-Stage Identification (Scaffolded)\n**Story:** A young athlete (exposition: introduced, training routine established) faces increasingly difficult competitors and setbacks (rising action), until in the final match, alone on the field, decides whether to play it safe or take a risky final move (climax — the turning point, decided through an internal choice, not necessarily the loudest scene), the match concludes based on that choice (falling action), and the athlete reflects on what was learned regardless of the outcome (resolution).\n**Walkthrough:** Label each stage by function, noting the climax is specifically the decisive turning-point choice, not necessarily the most visually dramatic play.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 74,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.plot-structure",
+      "title": ": True vs. Misleading Climax (Guided)",
+      "content": "### WE-2: True vs. Misleading Climax (Guided)\n**Story:** A heist story has a loud, action-packed chase scene mid-story (rising action — a complication, not yet decisive) followed by a quiet scene where the protagonist decides whether to betray or protect their partner (the actual climax — the conflict's outcome is decided here).\n**Walkthrough:** Apply the turning-point test: does the chase scene decide the central conflict's outcome, or does it just add tension? Confirm the quiet betrayal-decision scene is the true climax.",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 74,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.literature.plot-structure",
+      "title": ": Uneven Stage Proportions (Independent)",
+      "content": "### WE-3: Uneven Stage Proportions (Independent)\n**Story:** A survival story spends 70% of its length on rising action (multiple escalating challenges), a brief climax (a single decisive moment), and one paragraph of resolution.\n**Walkthrough:** Student confirms this is a valid, well-structured plot despite the uneven proportions, correctly identifying each stage by function rather than expecting equal length.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 74,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/misconception/MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT",
+      "kind": "misconception",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "- **Trigger signal:** Student identifies \"the climax\" by looking for the moment with the most physical action, loudest drama, or highest excitement, rather than identifying the specific structural moment where the central conflict reaches its turning point — the moment of highest tension where the outcome of the central conflict is decided, which may or may not be the most physically action-packed scene.",
+      "content": "### MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT\n- **Trigger signal:** Student identifies \"the climax\" by looking for the moment with the most physical action, loudest drama, or highest excitement, rather than identifying the specific structural moment where the central conflict reaches its turning point — the moment of highest tension where the outcome of the central conflict is decided, which may or may not be the most physically action-packed scene.\n- **Conflict evidence [P28]:** Present a story where a loud, action-packed chase scene occurs in the rising action, followed by a quiet, tense conversation where the protagonist makes the decisive choice that resolves the central conflict. Ask the student which moment is \"the climax\" by their excitement-based rule, then ask which moment actually decides how the central conflict turns out.\n- **Bridge text [P30]:** \"The climax isn't defined by how much physical action or noise happens — it's defined by being the turning point where the central conflict's outcome gets decided. Sometimes that's a big action scene, but sometimes it's a quiet, tense decision or realization. The test is: does the outcome of the main conflict get settled here, not how loud or fast-paced it is.\"\n- **Replacement text [P31]:** \"To find the climax, don't look for the most exciting scene — look for the moment where the central conflict's outcome is actually decided, the turning point after which everything moves toward resolution. That moment could be loud and action-packed, or it could be quiet and internal.\"\n- **Discrimination pairs [P33]:** (a) Climax-as-most-exciting-moment (the climax is whichever scene has the most action, noise, or drama) vs. (b) Climax-as-conflict-turning-point (the climax is specifically the moment the central conflict's outcome is decided, regardless of how action-packed that moment is).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-2's turning-point test before continuing.",
+      "localKey": "MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT",
+      "language": "en",
+      "refs": [
+        "MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/misconception/MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION",
+      "kind": "misconception",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "- **Trigger signal:** Student assumes every story must divide its length roughly equally among the five plot stages (exposition, rising action, climax, falling action, resolution), and either forces an artificial equal division when analyzing a real story or is confused when a story spends dramatically more time in one stage (e.g., a very long rising action with a very brief resolution) than another.",
+      "content": "### MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION\n- **Trigger signal:** Student assumes every story must divide its length roughly equally among the five plot stages (exposition, rising action, climax, falling action, resolution), and either forces an artificial equal division when analyzing a real story or is confused when a story spends dramatically more time in one stage (e.g., a very long rising action with a very brief resolution) than another.\n- **Conflict evidence [P28]:** Present a story summary where 80% of the text is rising action (building tension, obstacles, complications) and the resolution is a single brief final paragraph. Ask the student whether this violates plot structure since the stages aren't equal length, or whether real stories commonly have unevenly-proportioned stages.\n- **Bridge text [P30]:** \"Real stories almost never divide their length equally among the five stages — rising action is very often the longest stage since it builds tension through multiple complications, while resolution is frequently quite brief. Plot structure describes the ORDER and FUNCTION of the stages, not their proportional length. Uneven length is the norm, not an exception.\"\n- **Replacement text [P31]:** \"Don't expect the five stages to be equal in length. Identify each stage by its FUNCTION (introducing the situation, building tension, deciding the outcome, showing immediate consequences, settling into the new normal) rather than assuming they should take up equal space in the story.\"\n- **Discrimination pairs [P33]:** (a) Equal-proportion assumption (the five plot stages should each occupy roughly equal length in a well-structured story) vs. (b) Function-based, variable-length recognition (plot stages are identified by their narrative function, and their relative length varies widely and normally from story to story).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's stretched-mountain-path framing before continuing to TA-3.",
+      "localKey": "MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "Identifying the Five Stages by Function",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Five Stages by Function\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 61,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "The Turning-Point Test for Climax",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Turning-Point Test for Climax\",\"primitives\":[],\"addresses\":[\"MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 64,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "Variable Stage Proportions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Variable Stage Proportions\",\"primitives\":[],\"addresses\":[\"MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 67,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "Mapping a Story to the Mountain Path",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Mapping a Story to the Mountain Path\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 70,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "Constructing an Original Plot Outline",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Constructing an Original Plot Outline\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION\",\"MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT",
+        "MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 73,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Apply the turning-point test**\nGiven a story with a misleadingly exciting non-climax scene and a quieter true climax, student correctly identifies the true climax using the turning-point test. *(Directly targets MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Confirm valid uneven stage proportions**\nGiven a story with dramatically uneven stage lengths, student confirms it is a valid, well-structured plot and identifies each stage by function despite the length imbalance. *(Directly targets MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Five-stage identification**\nGiven a new short story, student correctly labels all five plot stages by function.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Map a story to the mountain path**\nGiven a story, student maps its events onto the five-stage structure with justified boundaries.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Construct an original plot outline**\nGiven a basic conflict/character premise, student creates an original five-stage plot outline with deliberately varied stage proportions as narratively appropriate.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "Adaptive Flags",
+      "content": "- If the student identifies climax by excitement rather than turning-point function, weight remediation toward MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT's bridge text and re-run TA-2's turning-point test before returning to independent mapping.\n- If the student expects or forces equal stage proportions, weight remediation toward MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION's bridge text and TA-3's uneven-proportion practice specifically.\n- This concept feeds four direct downstream unlocks (`eng.literature.theme-and-message`, `eng.literature.foreshadowing-and-suspense`, `eng.literature.dramatic-structure`, `eng.literature.prose-fiction`) — do not certify mastery without TA-5's original plot outline, since all four downstream concepts assume the student can independently construct or analyze plot structure, not merely label a given story.\n- Reuse the \"mountain path\" framing explicitly when introducing `eng.literature.foreshadowing-and-suspense` — that concept examines how authors plant clues during the rising-action climb that pay off at the peak (climax), building directly on this concept's stage-function map.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT",
+        "MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 137,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.literature.plot-structure/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.plot-structure",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Narrative-Elements Readiness Check]\n        |\n        v\n[Concrete Anchor: The Mountain Path]\n        |\n        v\n[TA-1: Identifying the Five Stages by Function]\n        |\n        v\n[TA-2: The Turning-Point Test for Climax]\n        |\n        v\n[TA-3: Variable Stage Proportions]\n        |\n        v\n[TA-4: Mapping a Story to the Mountain Path]\n        |\n        v\n[TA-5: Constructing an Original Plot Outline]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — plot structure organizes exactly the conflict/plot-event material from narrative elements into a five-stage arc, so weak conflict/event identification undermines stage mapping. During instruction (S1), watch for both misconception patterns: mistaking excitement for climax (MC-THE-CLIMAX-IS-JUST-THE-MOST-EXCITING-OR-ACTION-PACKED-MOMENT) and expecting equal stage proportions (MC-EVERY-STORY-FOLLOWS-THE-FIVE-STAGES-IN-EQUAL-PROPORTION) both substitute a surface heuristic (intensity, length) for the real structural criterion (function, turning point) — redirect both to the Mountain Path anchor. If the student misidentifies the climax or expects equal proportions during TA-2/TA-3 (S6), drop back to the Concrete Anchor's turning-point and stretched-path demonstrations before returning to independent mapping. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who labels stages correctly in straightforward cases (MP-3) but misidentifies climax or expects equal proportions has not yet learned the functional judgment this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.plot-structure.md",
+        "startLine": 105,
+        "endLine": 137
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

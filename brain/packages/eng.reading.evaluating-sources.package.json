@@ -1,0 +1,446 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.evaluating-sources-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.evaluating-sources",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b3f182b6f9877c29112a137779ef443fdc8f3961f2305d288a7ee5c8b70a60cb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.evaluating-sources.md": "sha256:10e79ece169c0faf506d814542a97df49d5e0f7cfe0ea6a492ca4a70acfc909c"
+    },
+    "assetCount": 18,
+    "assetCounts": {
+      "core_explanation": 1,
+      "worked_example": 3,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.evaluating-sources",
+    "name": "Evaluating Sources",
+    "difficultyRaw": "advanced",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.reading.critical-reading"
+    ],
+    "status": "draft"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.evaluating-sources-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.evaluating-sources (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.evaluating-sources.md": "sha256:10e79ece169c0faf506d814542a97df49d5e0f7cfe0ea6a492ca4a70acfc909c"
+      },
+      "contentHash": "sha256:1127d4c3c6af60d51160ab6a7ce6322e5aa4499a9bf807fbc6517a935b268bbc",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.evaluating-sources.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md#TA-1 (addresses MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.evaluating-sources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.evaluating-sources\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.evaluating-sources.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.evaluating-sources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.evaluating-sources\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.evaluating-sources.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md#TA-3 (addresses MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.evaluating-sources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.evaluating-sources\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.evaluating-sources.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.evaluating-sources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.evaluating-sources\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.evaluating-sources.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md#TA-5 (addresses MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL, MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.evaluating-sources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.evaluating-sources\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.evaluating-sources/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "Evaluating Sources — Conceptual Development Sequence",
+      "content": "### TA-1: Substance Over Surface Checks\nUsing the discrimination pairs from MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL, present pairs of sources (one polished/unsubstantiated, one plain/well-substantiated) and have the student evaluate each on authorship, evidence, and track record rather than visual presentation.\n\n### TA-2: The Four-Question Source-Evaluation Framework\nTeach a systematic framework: (1) Who is the author, and what are their qualifications? (2) What evidence supports the claims, and is it specific/verifiable? (3) When was this published, and is it current for the topic? (4) What might be this source's purpose or potential bias? Student applies all four questions to 3 new sources.\n\n### TA-3: Claim-Specific, Degree-Based Evaluation\nUsing the discrimination pairs from MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE, present one source making multiple claims of varying quality and have the student evaluate each claim individually rather than assigning one blanket credibility label to the whole source.\n\n### TA-4: Cross-Checking Against Independent Sources\nTeach the practice of verifying an important claim against at least one independent, unrelated source before accepting it, especially for claims made by sources with known limitations or biases on the specific topic.\n\n### TA-5: Full Source Evaluation of Novel Materials\nStudent evaluates 2 novel sources making claims on the same topic, applying the four-question framework, claim-specific judgment, and cross-checking, then produces a comparative credibility assessment — the generative capstone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 55,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/worked_example/WE-1",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": ": Substance Over Surface (Scaffolded)",
+      "content": "### WE-1: Substance Over Surface (Scaffolded)\n**Sources:** A slickly-designed blog post with no named author and vague \"experts say\" claims, versus a plain academic repository page with a named, credentialed author and specific cited studies.\n**Walkthrough:** Apply the substance check: the blog post fails on authorship and evidence specificity despite its polish; the academic page passes despite its plainer design.",
+      "localKey": "WE-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/worked_example/WE-2",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": ": Four-Question Framework Application (Guided)",
+      "content": "### WE-2: Four-Question Framework Application (Guided)\n**Source:** A news article about a new medical treatment, citing a named doctor, referencing a specific published study, dated within the last year, published by an outlet with a general health-reporting focus.\n**Walkthrough:** Apply all four questions: author (named doctor — check relevant specialty), evidence (specific study cited — check the study itself if possible), currency (recent — good), purpose/bias (general health outlet — likely low bias on this specific medical topic, though check for any sponsorship).",
+      "localKey": "WE-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/worked_example/WE-3",
+      "kind": "worked_example",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": ": Claim-Specific Evaluation (Independent)",
+      "content": "### WE-3: Claim-Specific Evaluation (Independent)\n**Source:** A generally well-regarded science publication, in one article, makes both a well-cited claim about a physics finding (within its core expertise) and a passing, unsourced claim about an unrelated economic policy.\n**Walkthrough:** Student evaluates the physics claim as highly credible (strong sourcing, within core expertise) and the economic claim as lower credibility (unsourced, outside the publication's core expertise), rather than assigning one uniform credibility label to the whole article.",
+      "localKey": "WE-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 72,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/misconception/MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL",
+      "kind": "misconception",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "- **Trigger signal:** Student judges a source's credibility primarily by surface presentation — a polished website design, official-sounding name, professional formatting — rather than by examining the actual authority, evidence, and track record behind the source, mistaking visual/presentational polish for genuine reliability.",
+      "content": "### MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL\n- **Trigger signal:** Student judges a source's credibility primarily by surface presentation — a polished website design, official-sounding name, professional formatting — rather than by examining the actual authority, evidence, and track record behind the source, mistaking visual/presentational polish for genuine reliability.\n- **Conflict evidence [P28]:** Present two website screenshots making the same health claim: one with a slick, professional design but no named author, no cited studies, and a domain registered anonymously last month, and one with plainer formatting but a named, credentialed author, cited peer-reviewed studies, and a long-established, transparent publishing history. Ask the student which looks \"more credible\" by appearance, then which actually IS more credible by substance.\n- **Bridge text [P30]:** \"Professional appearance is easy to fake and expensive to produce even with false content — polished design tells you nothing about whether the underlying claims are actually true or well-supported. Real credibility comes from authorship (who wrote it, and are they qualified?), evidence (what supports the claims?), and track record (is this source known for accuracy over time?) — not from how nice the website looks.\"\n- **Replacement text [P31]:** \"Don't judge credibility by appearance. Check: who is the author, and are they qualified on this topic? What evidence supports the claims, and is it cited specifically? Does this source have an established track record of accuracy? A plain-looking source with strong answers to these questions beats a polished one with none.\"\n- **Discrimination pairs [P33]:** (a) Appearance-based credibility (professional design/official-sounding presentation signals reliability) vs. (b) Substance-based credibility (authorship qualifications, cited evidence, and track record determine reliability, independent of visual polish).\n- **s6_path:** If detected, drop to PD-1 re-check, then re-run TA-1's substance-check practice before continuing.",
+      "localKey": "MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL",
+      "language": "en",
+      "refs": [
+        "MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/misconception/MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE",
+      "kind": "misconception",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "- **Trigger signal:** Student treats source credibility as a binary all-or-nothing judgment (a source is either \"trustworthy\" or \"fake/biased\"), rather than recognizing that credibility varies by DEGREE and by SPECIFIC TOPIC — a generally reliable source can be weaker on a specific claim outside its expertise, and even a generally biased source can accurately report some verifiable facts.",
+      "content": "### MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE\n- **Trigger signal:** Student treats source credibility as a binary all-or-nothing judgment (a source is either \"trustworthy\" or \"fake/biased\"), rather than recognizing that credibility varies by DEGREE and by SPECIFIC TOPIC — a generally reliable source can be weaker on a specific claim outside its expertise, and even a generally biased source can accurately report some verifiable facts.\n- **Conflict evidence [P28]:** Present a generally reputable news source that has, in one specific article, cited a claim outside its usual area of expertise without adequate sourcing, alongside a source with a known strong bias on political topics that accurately reports a verifiable sports score. Ask the student whether \"trustworthy\" and \"untrustworthy\" are the only two categories, or whether credibility can vary by specific claim and topic even within one source.\n- **Bridge text [P30]:** \"Credibility isn't a fixed, all-or-nothing label stamped on an entire source forever — it varies by specific claim and topic. Even a generally reliable source can get one specific claim wrong or under-sourced, especially outside its area of expertise, and even a generally biased source can accurately report simple, verifiable facts. Evaluate claim-by-claim, not source-by-source as a blanket judgment.\"\n- **Replacement text [P31]:** \"Instead of labeling a whole source 'reliable' or 'unreliable' forever, evaluate each specific claim on its own merits: is this particular claim well-sourced, and is this source's general track record strong specifically on this kind of topic? A source's general reputation is useful context, but doesn't automatically transfer perfectly to every individual claim it makes.\"\n- **Discrimination pairs [P33]:** (a) Binary source-labeling (a source is either entirely trustworthy or entirely untrustworthy, and that label applies to everything it publishes) vs. (b) Claim-specific, degree-based evaluation (credibility varies by degree and by specific claim/topic, even within a single source's output).\n- **s6_path:** If detected, drop to PD-1, then re-present the Concrete Anchor's dial-not-switch framing before continuing to TA-3.",
+      "localKey": "MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE",
+      "language": "en",
+      "refs": [
+        "MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "Substance Over Surface Checks",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Substance Over Surface Checks\",\"primitives\":[],\"addresses\":[\"MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 59,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "The Four-Question Source-Evaluation Framework",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Four-Question Source-Evaluation Framework\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 62,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "Claim-Specific, Degree-Based Evaluation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Claim-Specific, Degree-Based Evaluation\",\"primitives\":[],\"addresses\":[\"MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 65,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "Cross-Checking Against Independent Sources",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Cross-Checking Against Independent Sources\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 68,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "Full Source Evaluation of Novel Materials",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Source Evaluation of Novel Materials\",\"primitives\":[\"P06\",\"P36\"],\"addresses\":[\"MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL\",\"MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL",
+        "MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 71,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Reject appearance-based credibility judgment**\nGiven a polished but poorly-substantiated source and a plain but well-substantiated one, student correctly judges the plain source as more credible using substance criteria. *(Directly targets MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL.)*",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Evaluate claims within one source individually**\nGiven one source making claims of varying quality, student evaluates each claim individually rather than assigning one blanket label to the whole source. *(Directly targets MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE.)*",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [
+        "MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Apply the four-question framework**\nGiven a new source, student applies all four evaluation questions (authorship, evidence, currency, purpose/bias) systematically.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Cross-check a claim**\nGiven an important claim from a source with known limitations, student identifies the need for and describes a cross-check against an independent source.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full comparative source evaluation**\nGiven two novel sources on the same topic, student produces a comparative credibility assessment using the full framework.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 86,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "Adaptive Flags",
+      "content": "- If the student judges credibility by visual polish, weight remediation toward MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL's bridge text and re-run TA-1's substance-check practice before returning to independent evaluation.\n- If the student assigns one blanket credibility label to an entire source regardless of specific claim, weight remediation toward MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE's bridge text and TA-3's claim-specific practice specifically.\n- This concept feeds two direct downstream unlocks (`eng.reading.reading-across-genres`, `eng.communication.media-literacy`) — do not certify mastery without TA-5's comparative novel-source evaluation, since media literacy in particular requires this exact framework applied to real-world, high-stakes information contexts.\n- Reuse the \"credibility dial, not a switch\" framing explicitly when introducing `eng.communication.media-literacy` — that concept applies the same degree-based, substance-over-surface evaluation to a wider range of media formats beyond written text.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL",
+        "MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 135,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "eng.reading.evaluating-sources/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.evaluating-sources",
+      "title": "Session Architecture",
+      "content": "```\n[PD-1: Critical-Reading Readiness Check]\n        |\n        v\n[Concrete Anchor: The Credibility Dial, Not a Switch]\n        |\n        v\n[TA-1: Substance Over Surface Checks]\n        |\n        v\n[TA-2: The Four-Question Source-Evaluation Framework]\n        |\n        v\n[TA-3: Claim-Specific, Degree-Based Evaluation]\n        |\n        v\n[TA-4: Cross-Checking Against Independent Sources]\n        |\n        v\n[TA-5: Full Source Evaluation of Novel Materials]\n        |\n        v\n[WE-1] --> [WE-2] --> [WE-3]\n        |\n        v\n[MP-1 through MP-5]\n```\n\n**Protocol routing paragraph:** At session open (S0), confirm PD-1 passes — source evaluation extends single-citation quality-checking to judging entire sources, so weak citation-evaluation skill undermines the broader task. During instruction (S1), watch for both misconception patterns: judging by surface polish (MC-A-SOURCE-IS-CREDIBLE-IF-IT-LOOKS-PROFESSIONAL-OR-OFFICIAL) and binary all-or-nothing labeling (MC-A-SOURCE-IS-EITHER-COMPLETELY-RELIABLE-OR-COMPLETELY-UNRELIABLE) both substitute a simple heuristic for the real evaluative work — redirect both to the Credibility Dial anchor. If the student judges by appearance or assigns a blanket label during TA-1/TA-3 (S6), drop back to the Concrete Anchor's dual-dial demonstration before returning to independent evaluation. At mastery-probe stage (S9), do not certify mastery unless MP-1 and MP-2 both pass — a student who applies the four-question framework correctly (MP-3) but still judges by appearance or uses blanket labels has not learned the core evaluative discipline this concept requires.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.evaluating-sources.md",
+        "startLine": 103,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
