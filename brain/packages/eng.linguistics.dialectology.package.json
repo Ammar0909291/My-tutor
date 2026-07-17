@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.dialectology-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.dialectology",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:999911c064e2490351dea31d1d11b22d41ccbdecb623771467c75bcd9c45841f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.dialectology.md": "sha256:62afd797d4ba2f35665746ae08e63bd4b8c314212ecdd0f3b7d3a1acc405cdb7"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.dialectology",
+    "name": "Dialectology",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.linguistics.sociolinguistics-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.dialectology-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.dialectology (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.dialectology.md": "sha256:62afd797d4ba2f35665746ae08e63bd4b8c314212ecdd0f3b7d3a1acc405cdb7"
+      },
+      "contentHash": "sha256:2780db0bf23a7a784392b2f3fe4b4cd800a4e8852a7463eb64d6c01882dbbb4e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.dialectology.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.dialectology.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.dialectology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.dialectology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.dialectology.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.dialectology.md#TA-2 (addresses MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.dialectology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.dialectology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.dialectology.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.dialectology.md#TA-3 (addresses MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.dialectology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.dialectology\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.dialectology.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.dialectology.md#TA-4 (addresses MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY, MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.dialectology"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.dialectology\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.dialectology/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "Dialectology — Conceptual Development Sequence",
+      "content": "### TA-1 — The Isogloss: Mapping One Feature at a Time\n\nIntroduce the isogloss as a mapped boundary line for a SINGLE specific linguistic feature. Student\npractice: given data on where a specific vocabulary feature is used across a region, sketch or\ndescribe the likely isogloss for that one feature.\n\n### TA-2 — Multiple Isoglosses Rarely Align (MC-A)\n\nUsing the climate-zone anchor, teach that different features' isoglosses typically follow different\npaths, creating gradual transition zones rather than one sharp boundary. Student practice: given two\nor three different features' isoglosses for the same region, identify where they diverge from each\nother.\n\n### TA-3 — Dialects as Feature Bundles, Not Monolithic Categories (MC-B)\n\nUsing the jazz-musician anchor, teach that a named dialect is a bundle of many individual features,\nwith normal speaker-to-speaker variation. Student practice: given two speakers both labeled with the\nsame named dialect but differing on some features, explain why this is expected, not contradictory.\n\n### TA-4 — Full Application: Analyzing a Dialect Region\n\nGive the student a new dataset describing several linguistic features across a region, with\nisoglosses that don't perfectly align, and two speaker profiles showing partial, non-identical\nmembership in the region's named dialect. They must explain the non-aligned isoglosses (TA-2) and the\nbundle-based, partial dialect membership (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 141,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/misconception/MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "**Trigger signal:** Student assumes dialect regions have sharp, clean boundaries (like a political",
+      "content": "### MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY\n\n**Trigger signal:** Student assumes dialect regions have sharp, clean boundaries (like a political\nborder on a map) where speech changes abruptly and uniformly at a single line, failing to recognize\nthat real dialect boundaries (isoglosses) are typically gradual, involve transition zones with mixed\nor intermediate features, and that different individual linguistic features often have DIFFERENT\nboundary lines that don't align with each other.\n\n**Conflict evidence [P28]:** Show the student a real (or realistic, illustrative) dialect map showing\nmultiple isoglosses for different features (a vocabulary difference, a pronunciation difference, a\ngrammatical difference) crossing a region at DIFFERENT, non-aligned lines, rather than one single\nunified boundary. Ask: \"Do all these different feature boundaries fall on exactly the same line? What\ndoes that suggest about assuming a single, sharp 'dialect border'?\"\n\n**Bridge text [P30]:** \"Assuming dialect boundaries are sharp, single lines is like assuming climate\nzones change abruptly at a single line on a map — but real climate transitions are gradual, and\ndifferent climate FEATURES (temperature, rainfall, vegetation) each have their own somewhat different\ntransition zones that don't align perfectly. Dialect boundaries work the same way: each individual\nlinguistic feature has its OWN isogloss, and these isoglosses for different features rarely stack up\ninto one single, sharp dividing line.\"\n\n**Replacement text [P31]:** \"Don't picture dialect boundaries as a single sharp line separating two\nuniform regions. Picture instead many individual isoglosses (one per linguistic feature), each\nfollowing its own somewhat different path, creating gradual, overlapping transition zones rather than\none clean dividing line.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming a single dialect border exists where speech uniformly changes at one line (misconception)\n   vs. recognizing multiple different isoglosses for different features, each following its own\n   somewhat different path across a region (correct, evidence-based understanding).\n2. A student surprised that someone living right at a \"dialect boundary\" might mix features from both\n   neighboring dialects (missing the transition-zone reality) vs. a student expecting this mixing as\n   the normal, predictable pattern in a genuine transition zone (correct understanding).\n\n**s6_path:** If the student continues to picture sharp dialect boundaries after the bridge, show them\ntwo or three individual isoglosses for different specific features in the same general region and have\nthem identify where the lines diverge from each other, reinforcing that no single unified boundary\nexists.",
+      "localKey": "MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY",
+      "language": "en",
+      "refs": [
+        "MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/misconception/MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "**Trigger signal:** Student treats \"a dialect\" as a single, monolithic, all-or-nothing category that a",
+      "content": "### MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE\n\n**Trigger signal:** Student treats \"a dialect\" as a single, monolithic, all-or-nothing category that a\nspeaker either fully has or entirely lacks, failing to recognize that a named dialect is actually a\nBUNDLE of many individual features (specific pronunciations, vocabulary items, grammatical patterns),\nand real speakers typically have some but not all of the features associated with a named dialect,\nwith individual variation being the norm rather than the exception.\n\n**Conflict evidence [P28]:** Show the student a description of two speakers both broadly identified\nas speaking \"the same regional dialect,\" but who differ from each other on several specific features\n(one uses a specific vocabulary item the other doesn't; one has a specific pronunciation feature the\nother lacks). Ask: \"If both are considered speakers of the same named dialect, but they differ on\nseveral specific features, does that mean the dialect label refers to one single, uniform, all-or-\nnothing set of features every speaker shares identically?\"\n\n**Bridge text [P30]:** \"Treating a dialect as one single unified thing everyone either has or lacks\nis like treating 'being a jazz musician' as requiring mastery of every single jazz technique that has\never existed — in reality, individual jazz musicians share a broad family resemblance while each\nhaving their own specific mix of techniques, influences, and quirks. A named dialect is similarly a\nBUNDLE of many individual features; real speakers typically share MOST but rarely ALL of the bundle,\nand individual variation within a dialect label is completely normal.\"\n\n**Replacement text [P31]:** \"When you encounter a named dialect, remember it's a convenient label for\na BUNDLE of many individual linguistic features, not a single monolithic thing. Expect real speakers\nlabeled with that dialect to vary — sharing many but rarely all of the associated features — rather\nthan assuming uniform, all-or-nothing membership.\"\n\n**Discrimination pairs [P33]:**\n1. Assuming every speaker of a named dialect must share every single associated feature identically\n   (rigid, monolithic view) vs. recognizing that speakers typically share a majority of features with\n   individual variation being normal and expected (correct, bundle-based understanding).\n2. A student confused when two speakers of \"the same dialect\" show real differences (treating this as\n   a contradiction) vs. a student expecting and explaining this variation as the normal reality of\n   dialects being feature bundles, not monolithic categories (correct understanding).\n\n**s6_path:** If the student continues to treat dialects as monolithic after the bridge, have them list\nfive individual features associated with a named dialect they're familiar with, then identify which\nspecific features they personally have and which they don't, demonstrating the bundle-based, partial-\nmembership reality directly from their own experience.",
+      "localKey": "MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE",
+      "language": "en",
+      "refs": [
+        "MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 42,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "The Isogloss: Mapping One Feature at a Time",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Isogloss: Mapping One Feature at a Time\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 145,
+        "endLine": 151
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "Multiple Isoglosses Rarely Align (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Multiple Isoglosses Rarely Align (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 151,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "Dialects as Feature Bundles, Not Monolithic Categories (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Dialects as Feature Bundles, Not Monolithic Categories (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 158,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "Full Application: Analyzing a Dialect Region",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing a Dialect Region\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY\",\"MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-DIALECT-BOUNDARIES-ARE-SHARP-LINES-WHERE-EVERYONE-ON-ONE-SIDE-SPEAKS-ONE-WAY-AND-EVERYONE-ON-THE-OTHER-SPEAKS-DIFFERENTLY",
+        "MC-B-A-DIALECT-IS-ONE-SINGLE-UNIFIED-THING-EVERYONE-IN-A-REGION-EITHER-HAS-OR-DOESNT-HAVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 164,
+        "endLine": 296
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Understanding the Isogloss**\nExplain what an isogloss is and what specific kind of linguistic information it maps.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 188,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Explaining Non-Aligned Isoglosses**\nGiven data showing two different features' isoglosses following different paths through the same\nregion, explain why this occurs and what it means for the idea of a single \"dialect boundary.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 188,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Explaining Dialect as a Feature Bundle**\nGiven two speakers labeled with the same named dialect but differing on some specific features,\nexplain why this variation is expected rather than contradictory.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 188,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Applying the Bundle Concept to a New Example**\nGiven a list of features associated with a named dialect, identify why a speaker sharing most but not\nall of them can still legitimately be considered a speaker of that dialect.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 188,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Dialect Region Analysis**\nGiven a new dataset with multiple features' isoglosses and speaker profiles, explain the non-aligned\nisoglosses and the bundle-based, partial dialect membership shown.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 188,
+        "endLine": 209
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "Adaptive Flags",
+      "content": "- If the student is themselves from a region with well-known dialect variation, or has family from\n  different dialect regions, connect this concept directly and validatingly to their own experience —\n  noticing which specific features they personally have or lack relative to a named regional dialect\n  can make the abstract \"feature bundle\" concept concrete and personal.\n- If the student masters the isogloss concept (MP-1, MP-2) but struggles specifically with the\n  feature-bundle reasoning (MP-3, MP-4), revisit `eng.linguistics.sociolinguistics-intro`'s social-\n  factor framing, since dialectology's feature-bundle concept builds directly on that foundational,\n  non-monolithic view of language variation.\n- If the student conflates \"the boundaries are gradual and dialects are feature bundles\" with \"dialect\n  distinctions aren't real or meaningful at all,\" clarify that gradual, bundle-based variation is\n  still genuinely systematic and describable — the nuance is about HOW dialects work, not whether they\n  exist.\n- Students who enjoy maps or geography may find the isogloss concept especially engaging — consider\n  drawing on real dialect survey maps (e.g., well-known regional vocabulary surveys) as concrete,\n  motivating illustrations if available.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 247,
+        "endLine": 265
+      }
+    },
+    {
+      "assetId": "eng.linguistics.dialectology/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.dialectology",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: sociolinguistics check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.linguistics.sociolinguistics-intro]  [Component 3: Climate-Zone / Jazz-\n                                                      Musician Anchor]\n                                                                |\n                                                                v\n                                            [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                |\n                                                                v\n                                      [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                |\n                                                                v\n                                      [MP-1 through MP-5 mastery probe set]\n                                                                |\n                                      (pass >= 0.70) -----+----- (fail)\n                                             |                      |\n                                             v                      v\n                        [No further unlocks —  [S6 remediation: diverging-isogloss /\n                         terminal in current      list-your-own-features drills]\n                         curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (assuming sharp\nboundaries) and MC-B during TA-3 (assuming monolithic dialects) — these are related but distinct\nmisconceptions and often need separate, explicit correction, since a student can accept gradual\ntransitions (fixing MC-A) while still viewing each dialect itself as internally uniform (still holding\nMC-B). If either fires, branch to the relevant s6_path drill before resuming. At the mastery probe\nstage (S9), route by failure: MP-1 failure indicates the basic isogloss concept (TA-1) needs review,\ndistinct from either misconception; MP-2 failure alone indicates residual MC-A; MP-3/MP-4 failures\nindicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap —\nprovide one more guided full-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.dialectology.md",
+        "startLine": 209,
+        "endLine": 247
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

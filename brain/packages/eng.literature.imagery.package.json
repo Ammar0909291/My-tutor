@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.imagery-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.imagery",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b3a91e0062c0cc99bd1002588747d40c3a8db20c553b3c35096f81d6922bdbcd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.imagery.md": "sha256:a4601d99abb83d505d77d48e1236383407b0e63209f15f50740ca9043b65854e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.literature.imagery",
+    "name": "Imagery",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.literature.metaphor-and-simile"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.imagery-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.imagery (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.imagery.md": "sha256:a4601d99abb83d505d77d48e1236383407b0e63209f15f50740ca9043b65854e"
+      },
+      "contentHash": "sha256:757154b3f072ae6505307944e14b96ab118efc28dd3c978611157f7e1ef3328d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.imagery.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.imagery.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.imagery"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.imagery\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.imagery.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.imagery.md#TA-2 (addresses MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.imagery"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.imagery\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.imagery.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.imagery.md#TA-3 (addresses MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.imagery"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.imagery\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.imagery.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.imagery.md#TA-4 (addresses MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT, MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.imagery"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.imagery\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.imagery/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.imagery",
+      "title": "Imagery — Conceptual Development Sequence",
+      "content": "### TA-1 — Identifying Imagery Across the Five Senses\n\nIntroduce imagery appealing to each of the five senses with clear examples. Student practice: given\nfive short phrases, identify which sense each appeals to.\n\n### TA-2 — Literal Sensory Description Also Counts as Imagery (MC-A)\n\nUsing the unstylized-photograph anchor, teach that imagery does not require figurative language.\nStudent practice: given four passages (some figurative, some purely literal sensory description),\nidentify the imagery in each regardless of whether it's figurative.\n\n### TA-3 — Explaining the Specific Effect of Imagery (MC-B)\n\nUsing the music-critic anchor and the sentence-stem requirement, teach students to explain imagery's\nspecific mood or effect, not just name the sense. Student practice: given three pieces of imagery with\nsense already identified, write the missing effect explanation for each.\n\n### TA-4 — Full Application: Analyzing Imagery in a New Passage\n\nGive the student a new short passage. They must identify at least two instances of imagery (TA-1),\nrecognizing both literal and figurative examples if present (TA-2), and explain the specific effect\neach creates (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 135,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/misconception/MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT",
+      "kind": "misconception",
+      "conceptId": "eng.literature.imagery",
+      "title": "**Trigger signal:** Student, having just learned metaphor and simile, assumes imagery REQUIRES",
+      "content": "### MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT\n\n**Trigger signal:** Student, having just learned metaphor and simile, assumes imagery REQUIRES\nfigurative (non-literal) language to qualify, failing to recognize that precise, vivid, entirely\nLITERAL sensory description is also genuine imagery — e.g., failing to identify \"the sharp, acrid\nsmell of burnt toast filled the kitchen\" as imagery because it contains no metaphor or simile, only\nliteral, specific sensory description.\n\n**Conflict evidence [P28]:** Show the student two passages: one using a metaphor for smell (\"the smell\nhit her like a wall\") and one using purely literal, precise sensory description (\"the sharp, acrid\nsmell of burnt toast filled the kitchen\"). Ask: \"Does the second passage, with no metaphor or simile at\nall, still create a vivid sensory experience for the reader? Is literal, precise sensory description\nalso a form of imagery?\"\n\n**Bridge text [P30]:** \"Assuming imagery must be figurative is like assuming a photograph only\ncounts as 'vivid' if it's been artistically distorted or stylized — but a perfectly clear, precisely\nfocused, literal photograph can be just as vivid and evocative as a stylized one. Imagery is defined by\nits SENSORY specificity and vividness, not by whether it uses figurative comparison — precise literal\ndescription ('the sharp, acric smell of burnt toast') is just as much imagery as a metaphor for the\nsame sensation.\"\n\n**Replacement text [P31]:** \"When looking for imagery, don't require figurative language. Ask: does\nthis language appeal specifically and vividly to one of the five senses (sight, sound, touch, taste,\nsmell), whether through literal, precise description or through metaphor/simile? Both count as\nimagery.\"\n\n**Discrimination pairs [P33]:**\n1. \"The smell hit her like a wall.\" (figurative — a simile creating sensory imagery) vs. \"The sharp,\n   acrid smell of burnt toast filled the kitchen.\" (entirely literal, precise sensory description —\n   still genuine imagery).\n2. A student who only marks figurative sensory language as \"imagery,\" missing precise literal\n   sensory description entirely (misconception) vs. a student who identifies BOTH figurative and\n   literal vivid sensory language as imagery (correct, broader understanding).\n\n**s6_path:** If the student continues to require figurative language for imagery after the bridge,\ngive them three passages containing ONLY literal (non-figurative) sensory description and have them\nidentify the specific sense each appeals to, confirming these count as imagery despite containing no\nmetaphor or simile.",
+      "localKey": "MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT",
+      "language": "en",
+      "refs": [
+        "MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 3,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/misconception/MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK",
+      "kind": "misconception",
+      "conceptId": "eng.literature.imagery",
+      "title": "**Trigger signal:** Student, upon identifying imagery, stops at labeling which of the five senses it",
+      "content": "### MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK\n\n**Trigger signal:** Student, upon identifying imagery, stops at labeling which of the five senses it\nappeals to (e.g., \"this is imagery appealing to smell\") without going further to explain the SPECIFIC\nEFFECT that imagery creates — what mood, atmosphere, association, or emphasis it produces for the\nreader in that particular context — treating sense-identification as the complete analytical task\nrather than its first step.\n\n**Conflict evidence [P28]:** Show the student two analyses of the same piece of imagery (\"the sharp,\nacrid smell of burnt toast filled the kitchen\"): one that stops at \"this is imagery appealing to\nsmell,\" and one that continues, \"this imagery appeals to smell, using the harsh words 'sharp' and\n'acrid' to create an unpleasant, jarring atmosphere that suggests something has gone wrong in this\notherwise ordinary domestic scene.\" Ask: \"Which analysis actually tells us something about how this\nimagery is FUNCTIONING in the passage, not just what sense it targets?\"\n\n**Bridge text [P30]:** \"Stopping at 'this appeals to smell' is like a music critic stopping at 'this\npiece uses violins' without ever describing what mood or effect those violins actually create in the\npiece — true analysis has to go further and explain the SPECIFIC EFFECT the sensory detail produces,\nnot just which instrument (or sense) is involved.\"\n\n**Replacement text [P31]:** \"After identifying which sense a piece of imagery appeals to, always add:\nwhat SPECIFIC mood, atmosphere, or emphasis does this particular sensory detail create in this\nparticular context? Naming the sense is only the first half of the analysis.\"\n\n**Discrimination pairs [P33]:**\n1. \"This is imagery appealing to smell.\" (naming only, no effect explained) vs. \"This imagery appeals\n   to smell, using harsh language to create an unpleasant, jarring atmosphere suggesting something has\n   gone wrong.\" (naming plus specific effect).\n2. A student analysis that lists five instances of imagery by sense with zero explanation of effect\n   (surface-level labeling) vs. an analysis that identifies fewer instances but explains each one's\n   specific mood or emphasis in context (deeper, effect-focused analysis).\n\n**s6_path:** If the student continues to stop at sense-labeling after the bridge, require them to\ncomplete the sentence stem \"This imagery appeals to [sense], creating the effect of ___ because ___\"\nfor every instance identified, making the effect-explanation step structurally unavoidable.",
+      "localKey": "MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK",
+      "language": "en",
+      "refs": [
+        "MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 42,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.imagery",
+      "title": "Identifying Imagery Across the Five Senses",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying Imagery Across the Five Senses\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 139,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.imagery",
+      "title": "Literal Sensory Description Also Counts as Imagery (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Literal Sensory Description Also Counts as Imagery (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 144,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.imagery",
+      "title": "Explaining the Specific Effect of Imagery (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Explaining the Specific Effect of Imagery (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.imagery",
+      "title": "Full Application: Analyzing Imagery in a New Passage",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing Imagery in a New Passage\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT\",\"MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-IMAGERY-MUST-BE-FIGURATIVE-USING-METAPHOR-OR-SIMILE-TO-COUNT",
+        "MC-B-IDENTIFYING-WHICH-SENSE-IMAGERY-APPEALS-TO-IS-THE-WHOLE-ANALYTICAL-TASK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 156,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.imagery",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Imagery by Sense**\nGiven four short phrases, identify which sense (sight, sound, touch, taste, smell) each piece of\nimagery appeals to.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 178,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.imagery",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Recognizing Literal Sensory Description as Imagery**\nGiven three passages (some figurative, some purely literal), identify the imagery in each regardless\nof whether it uses metaphor or simile.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 178,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.imagery",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Explaining Imagery's Effect**\nGiven a piece of imagery with its sense already identified, write a specific explanation of the mood\nor emphasis it creates in context.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 178,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.imagery",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Combined Identification and Effect Analysis**\nGiven a new passage, identify one instance of imagery, name its sense, and explain its effect in one\ncombined response.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 178,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.imagery",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Imagery Analysis**\nGiven a new short passage, identify at least two instances of imagery (literal or figurative), name\nthe sense each appeals to, and explain the specific effect each creates.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 178,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.imagery",
+      "title": "Adaptive Flags",
+      "content": "- If the student can identify imagery accurately (MP-1, MP-2) but their effect explanations (MP-3)\n  remain generic (\"it makes the scene more vivid\"), push for specificity — what EXACTLY does this\n  particular sensory detail suggest or emphasize in THIS particular context.\n- If the student conflates imagery with figurative language broadly (treating every metaphor or\n  simile as automatically imagery even when it doesn't appeal to a specific sense), clarify that\n  imagery specifically requires SENSORY appeal — a metaphor about an abstract concept with no sensory\n  content is not imagery.\n- If the student's own descriptive writing relies heavily on abstract statements (\"it was a nice day\")\n  rather than specific sensory detail, connect this concept directly to writing practice, encouraging\n  revision toward specific, vivid sensory language.\n- Students with strong performance in `eng.composition.figurative-language-in-composition` should\n  transfer well to the effect-explanation skill in TA-3, since both concepts require moving beyond\n  identification to functional analysis — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 237,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "eng.literature.imagery/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.imagery",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: metaphor and simile check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.literature.metaphor-and-simile]  [Component 3: Unstylized-Photograph /\n                                                 Music-Critic Anchor]\n                                                           |\n                                                           v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                           |\n                                                           v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                           |\n                                                           v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                           |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: literal-imagery-hunt /\n                     terminal in current      sentence-stem-effect drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (requiring figurative\nlanguage) and MC-B during TA-3 (stopping at sense-naming) — MC-A generally needs resolving first since\na student who misses literal imagery entirely has an incomplete inventory to practice explaining\neffects for. If either fires, branch to the relevant s6_path drill before resuming. At the mastery\nprobe stage (S9), route by failure: MP-1 failure indicates basic sense-identification (TA-1) needs\nreview, distinct from either misconception; MP-2 failure alone indicates residual MC-A; MP-3/MP-4\nfailures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing indicates an integration\ngap — provide one more guided full-analysis example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.imagery.md",
+        "startLine": 200,
+        "endLine": 237
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

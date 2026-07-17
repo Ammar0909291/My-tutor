@@ -1,0 +1,360 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.colons-semicolons-dashes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.colons-semicolons-dashes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9fab195bf157f631ca36b50ac35cc901719ee4200dcbd7db05819b7155a6793c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md": "sha256:754c9b267934f0c5b9676cff12cb498a4b9b2a11150462289cead1664ab2d856"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.grammar.colons-semicolons-dashes",
+    "name": "\"Colons, Semicolons, and Dashes\"",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.comma-usage",
+      "eng.grammar.compound-sentences"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.colons-semicolons-dashes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.colons-semicolons-dashes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md": "sha256:754c9b267934f0c5b9676cff12cb498a4b9b2a11150462289cead1664ab2d856"
+      },
+      "contentHash": "sha256:99bf0dd99eabe2b969b3c585661fa6b50b07b55f1b6ac3a5f93b247ad9368d46",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.colons-semicolons-dashes.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md#TA-1 (addresses MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.colons-semicolons-dashes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.colons-semicolons-dashes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.colons-semicolons-dashes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md#TA-2 (addresses MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.colons-semicolons-dashes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.colons-semicolons-dashes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.colons-semicolons-dashes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.colons-semicolons-dashes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.colons-semicolons-dashes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.colons-semicolons-dashes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md#TA-4 (addresses MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE, MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.colons-semicolons-dashes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.colons-semicolons-dashes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "\"Colons, Semicolons, and Dashes\" — Conceptual Development Sequence",
+      "content": "### TA-1 — The Colon: Introducing a List or Explanation After a Complete Clause (MC-A)\n\nUsing the formal-announcement anchor and the \"cover everything after the colon\" test, teach correct\ncolon placement. Student practice: given four candidate colon placements, identify which are correct\n(preceded by a complete independent clause) and which are not.\n\n### TA-2 — The Semicolon: Joining Independent Clauses Without a Conjunction (MC-B)\n\nUsing the heavy-staple-vs-tape anchor, teach the semicolon's specific job of joining two independent\nclauses with no conjunction. Student practice: given four sentences using semicolons (some correct,\nsome misused for non-independent-clause joins), identify and correct the misuses.\n\n### TA-3 — The Semicolon for Complex Lists (Items Already Containing Commas)\n\nExtend TA-2 to the semicolon's second use: separating items in a list where individual items already\ncontain internal commas (e.g., listing cities with their states: \"Austin, Texas; Denver, Colorado;\nand Miami, Florida\"). Student practice: given a complex list needing internal commas within items,\ncorrectly punctuate it using semicolons between items.\n\n### TA-4 — The Dash: Emphasis and Interruption\n\nIntroduce the dash's function: adding emphasis to a final element, or setting off an interrupting/\nparenthetical aside within a sentence. Student practice: given four sentences, correctly insert a\ndash (or pair of dashes) to add emphasis or set off an aside, distinguishing this from comma-set-off\nnon-essential information.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 140,
+        "endLine": 168
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/misconception/MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "**Trigger signal:** Student places a colon after any phrase that seems to be \"introducing\" a list or",
+      "content": "### MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE\n\n**Trigger signal:** Student places a colon after any phrase that seems to be \"introducing\" a list or\nexplanation, regardless of whether what comes BEFORE the colon is itself a grammatically complete\nindependent clause — e.g., writing \"My favorite foods are: pizza, tacos, and sushi.\" (incorrect — \"My\nfavorite foods are\" is not a complete independent clause on its own) instead of \"I have three favorite\nfoods: pizza, tacos, and sushi.\" (correct — \"I have three favorite foods\" is a complete clause).\n\n**Conflict evidence [P28]:** Show the student \"My favorite foods are: pizza, tacos, and sushi.\"\nalongside \"I have three favorite foods: pizza, tacos, and sushi.\" Ask: \"Does 'my favorite foods are'\nform a complete sentence on its own, with the colon simply removed? Does 'I have three favorite\nfoods' form a complete sentence on its own?\"\n\n**Bridge text [P30]:** \"Using a colon after any introductory-feeling phrase, regardless of whether it's\na complete sentence, is like opening a formal announcement with a half-finished sentence before\nmaking the announcement — the colon signals 'here comes something important,' but that signal only\nworks properly if what precedes it can stand on its own as a genuine, complete statement first. The\ncolon's job is to elaborate on or introduce something AFTER a complete independent clause, never in the\nmiddle of an incomplete one.\"\n\n**Replacement text [P31]:** \"Before placing a colon, check: does everything BEFORE the colon form a\ncomplete, grammatically independent sentence on its own? If not, the colon is misplaced — revise the\nwording so a complete clause precedes it, or remove the colon entirely.\"\n\n**Discrimination pairs [P33]:**\n1. \"My favorite foods are: pizza, tacos, and sushi.\" (incorrect — \"my favorite foods are\" is not a\n   complete clause) vs. \"I have three favorite foods: pizza, tacos, and sushi.\" (correct — \"I have\n   three favorite foods\" is a complete clause).\n2. A student who places a colon immediately after \"such as\" or \"including\" (never correct positions\n   for a colon) vs. a student who confirms a complete independent clause precedes the colon before\n   using it (correct practice).\n\n**s6_path:** If the student continues to place colons after incomplete clauses after the bridge, have\nthem take five candidate colon placements and test each by covering everything after the colon,\nchecking whether what remains reads as a complete, standalone sentence.",
+      "localKey": "MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE",
+      "language": "en",
+      "refs": [
+        "MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/misconception/MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "**Trigger signal:** Student treats semicolons and commas as interchangeable, either using a comma",
+      "content": "### MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY\n\n**Trigger signal:** Student treats semicolons and commas as interchangeable, either using a comma\nalone to join two independent clauses (creating a comma splice, already addressed in a related\nconcept) or using a semicolon where only a comma is grammatically appropriate (e.g., between items in\na simple list, or after an introductory phrase) — failing to recognize the semicolon's specific job\nof joining independent clauses without a conjunction, distinct from the comma's broader range of uses.\n\n**Conflict evidence [P28]:** Show the student \"After the movie, we got ice cream; then we walked\nhome.\" alongside an incorrect version, \"After the movie; we got ice cream, then we walked home.\"\n(semicolon misplaced after an introductory phrase that isn't an independent clause, comma misused to\njoin two independent clauses). Ask: \"Does 'After the movie' form a complete independent clause on its\nown? Does the semicolon in the first version correctly join two independent clauses?\"\n\n**Bridge text [P30]:** \"Treating semicolons and commas as interchangeable is like treating a heavy-\nduty industrial staple and a piece of tape as interchangeable — both can 'attach' things, but the\nsemicolon (like the heavy staple) is specifically built for joining two genuinely independent,\ncomplete clauses without a conjunction, while the comma has other jobs (introductory phrases, list\nitems, non-essential information) that the semicolon isn't built for.\"\n\n**Replacement text [P31]:** \"Reserve the semicolon specifically for joining two closely related\nindependent clauses with NO conjunction between them (each side must be a genuinely complete\nsentence on its own), or for separating items in a complex list that already contains commas. Use a\ncomma for everything else — introductory phrases, simple lists, non-essential information.\"\n\n**Discrimination pairs [P33]:**\n1. \"After the movie; we got ice cream.\" (semicolon incorrectly placed after an introductory phrase\n   that isn't independent) vs. \"We got ice cream; then we went home.\" (semicolon correctly joining two\n   independent clauses).\n2. A student who uses a semicolon to separate simple list items (\"apples; oranges; and bananas\" —\n   incorrect for a simple list, which needs only commas) vs. a student who correctly uses commas for\n   the simple list and reserves the semicolon for joining independent clauses.\n\n**s6_path:** If the student continues to conflate semicolons and commas after the bridge, have them\ntake five sentences using semicolons (some correct, some misused) and apply the \"is each side a\ncomplete independent clause?\" test to each, correcting any misuse to a comma or a different fix as\nappropriate.",
+      "localKey": "MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY",
+      "language": "en",
+      "refs": [
+        "MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 39,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "The Colon: Introducing a List or Explanation After a Complete Clause (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Colon: Introducing a List or Explanation After a Complete Clause (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 144,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "The Semicolon: Joining Independent Clauses Without a Conjunction (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Semicolon: Joining Independent Clauses Without a Conjunction (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 150,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "The Semicolon for Complex Lists (Items Already Containing Commas)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Semicolon for Complex Lists (Items Already Containing Commas)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 156,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "The Dash: Emphasis and Interruption",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Dash: Emphasis and Interruption\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE\",\"MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-COLON-CAN-BE-USED-AFTER-ANY-INTRODUCTORY-PHRASE-EVEN-IF-WHAT-COMES-BEFORE-ISNT-A-COMPLETE-SENTENCE",
+        "MC-B-SEMICOLONS-AND-COMMAS-DO-THE-SAME-JOB-AND-CAN-BE-USED-INTERCHANGEABLY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 163,
+        "endLine": 293
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Correct Colon Placement**\nGiven three candidate colon placements, identify which are correct (preceded by a complete\nindependent clause) and revise any incorrect ones.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Semicolon for Joining Independent Clauses**\nGiven three sentences using semicolons, identify which correctly join two independent clauses and\nwhich misuse the semicolon for a non-independent-clause join.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Semicolon for Complex Lists**\nGiven a list of items each containing an internal comma, correctly punctuate the list using\nsemicolons between items.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Correct Dash Usage**\nGiven two sentences, correctly insert a dash (or pair of dashes) to add emphasis or set off an\ninterrupting/parenthetical aside.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Mixed Application**\nGiven a new short passage requiring a colon, a semicolon, and a dash in different sentences, correctly\napply all three punctuation marks.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 186,
+        "endLine": 208
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters each punctuation mark in isolation (MP-1 through MP-4) but reverts to errors\n  when all three are mixed together (MP-5), provide a structured decision checklist (is this\n  introducing something after a complete clause — colon? joining two independent clauses — semicolon?\n  adding emphasis or an aside — dash?) as scaffolding during mixed practice.\n- If the student's semicolon usage remains hesitant even after mastering the rule (avoiding semicolons\n  entirely to sidestep the risk of error), encourage low-stakes practice specifically with the\n  \"closely related independent clauses\" case, since this is the most common and useful semicolon\n  application in everyday writing.\n- If the student overuses dashes for emphasis in every sentence (a common stylistic overcorrection\n  once the mark feels newly available), note that dashes are most effective used sparingly — connect\n  this to `eng.composition.style-voice-and-tone`'s precision-over-decoration principle if that\n  concept has been completed.\n- Students with strong reading exposure to more formal or literary prose may already have intuitive\n  recognition of these marks' effects even before formal instruction — allow this intuition as a\n  starting point, then connect it to the formal rules for reliable, independent application.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 244,
+        "endLine": 262
+      }
+    },
+    {
+      "assetId": "eng.grammar.colons-semicolons-dashes/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.colons-semicolons-dashes",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: comma usage check] --> [PD-2: compound sentences check]\n   |                                                |\n   | (gap found)                                    | (pass)\n   v                                                 v\n[Route to prerequisite concept]      [Component 3: Formal-Announcement / Heavy-Staple-vs-Tape Anchor]\n                                                     |\n                                                     v\n                                  [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                     |\n                                                     v\n                            [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                     |\n                                                     v\n                            [MP-1 through MP-5 mastery probe set]\n                                                     |\n                            (pass >= 0.75) -----+----- (fail)\n                                   |                      |\n                                   v                      v\n                [No further unlocks —  [S6 remediation: cover-the-colon-test /\n                 terminal in current      independent-clause-check drills]\n                 curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (colon placement) and MC-B during TA-2 (semicolon/comma conflation) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2/MP-3 failures indicate residual MC-B; MP-4 failure alone indicates the\ndash mechanics (TA-4) need review, distinct from either misconception; MP-5 failure with MP-1 through\nMP-4 passing indicates an integration gap across all three marks — provide one more guided mixed-\napplication example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.colons-semicolons-dashes.md",
+        "startLine": 208,
+        "endLine": 244
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
