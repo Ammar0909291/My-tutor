@@ -1,0 +1,396 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.morphology-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.morphology-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d8a529d3343b37242128c0dd2b587de561eaa8f3c397de8b1b398050d413b333",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md": "sha256:0f66866c8a6be7dbbcd1a68315a5b430fe4b50bf1bf0a7d98feb738878662719"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.morphology-intro",
+    "name": "Introduction to Morphology",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.linguistics.what-is-linguistics",
+      "eng.vocab.word-formation-processes"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.morphology-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.morphology-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md": "sha256:0f66866c8a6be7dbbcd1a68315a5b430fe4b50bf1bf0a7d98feb738878662719"
+      },
+      "contentHash": "sha256:6742ba401982e1d514db0b600526074021c3a4bdaca615a3030b306e25016de4",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.morphology-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md#TA-1 (addresses MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.morphology-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.morphology-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.morphology-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.morphology-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.morphology-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.morphology-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.morphology-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.morphology-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.morphology-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md#TA-4 (addresses MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.morphology-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.morphology-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.morphology-intro.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md#TA-5 (addresses MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE, MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.morphology-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.morphology-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.morphology-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "Introduction to Morphology — Conceptual Development Sequence",
+      "content": "### TA-1 — The Morpheme as a Unit of Meaning, Not Sound (MC-A)\n\nUsing the cake anchor, teach the core distinction between syllables (pronunciation units) and\nmorphemes (meaning/function units). Student practice: given six words, count both syllables and\nmorphemes for each and identify where the counts diverge.\n\n### TA-2 — Free vs. Bound Morphemes\n\nTeach the distinction between free morphemes (can stand alone as a word, like \"cat\") and bound\nmorphemes (must attach to something else, like \"-s\" or \"un-\"). Student practice: given eight\nmorphemes extracted from words, classify each as free or bound.\n\n### TA-3 — Derivational Morphemes\n\nTeach derivational morphemes as those that can change a word's part of speech or create a new,\nrelated word. Student practice: given five base words with a derivational suffix added, identify the\npart-of-speech change (if any) and confirm the morpheme is derivational.\n\n### TA-4 — Inflectional Morphemes (MC-B)\n\nUsing the house-renovation anchor, teach inflectional morphemes as those marking grammatical\ninformation (tense, number, possession, comparison) without changing the word's core category.\nStudent practice: given five base words with an inflectional suffix added, confirm the part of speech\nis unchanged and identify the specific grammatical information marked.\n\n### TA-5 — Full Morphological Analysis\n\nGive the student five new words with multiple morphemes each (e.g., \"unhappiness,\" \"reworked\"). They\nmust break each into its constituent morphemes (TA-1), classify each as free or bound (TA-2), and\nclassify each affix as derivational or inflectional (TA-3, TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 149,
+        "endLine": 182
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/misconception/MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "**Trigger signal:** Student assumes morphemes and syllables are the same kind of unit, breaking words",
+      "content": "### MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE\n\n**Trigger signal:** Student assumes morphemes and syllables are the same kind of unit, breaking words\ninto syllables when asked to identify morphemes, or assuming every syllable must carry independent\nmeaning — e.g., breaking \"banana\" into three syllables and assuming each syllable must be a separate\nmorpheme, when in fact \"banana\" is a single morpheme (it cannot be broken into smaller meaningful\nparts) despite having three syllables.\n\n**Conflict evidence [P28]:** Show the student the word \"banana\" (three syllables, but ONE morpheme —\nnone of \"ba,\" \"na,\" or \"na\" carries independent meaning) alongside the word \"cats\" (one syllable, but\nTWO morphemes — \"cat\" + the plural \"-s,\" each carrying distinct meaning/function). Ask: \"Does syllable\ncount match morpheme count in either of these words? What does this tell you about whether syllables\nand morphemes are the same kind of unit?\"\n\n**Bridge text [P30]:** \"A syllable is a unit of PRONUNCIATION (built around a vowel sound); a\nmorpheme is a unit of MEANING or grammatical function. These are like measuring a cake by 'number of\nbites' versus 'number of distinct ingredients' — the two counts often don't match, because they're\nmeasuring genuinely different things. 'Banana' takes three bites (syllables) but has one ingredient\n(morpheme, since no smaller piece carries separable meaning); 'cats' takes one bite but has two\ningredients (the animal, and the plural marker).\"\n\n**Replacement text [P31]:** \"Never assume a word's syllable count tells you its morpheme count. To\nfind morphemes, ask: can I break this word into smaller pieces that EACH carry their own meaning or\ngrammatical function? Count meaningful pieces, not spoken syllables.\"\n\n**Discrimination pairs [P33]:**\n1. \"Banana\" (three syllables, one morpheme — no smaller piece carries independent meaning) vs.\n   \"Cats\" (one syllable, two morphemes — \"cat\" the animal, \"-s\" the plural marker).\n2. A student assuming \"elephant\" (three syllables) must have three morphemes just because it has\n   three syllables (misconception) vs. a student correctly identifying \"elephant\" as one single\n   morpheme despite its syllable count, because no smaller piece of it carries independent meaning\n   (correct understanding).\n\n**s6_path:** If the student continues conflating syllables and morphemes after the bridge, have them\napply the \"can I remove this piece and does removing it still make sense as changing the meaning in a\npredictable way?\" test directly to five words with mismatched syllable/morpheme counts, forcing the\nmeaning-based test rather than a syllable count.",
+      "localKey": "MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE",
+      "language": "en",
+      "refs": [
+        "MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 3,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/misconception/MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "**Trigger signal:** Student treats all word-ending additions (suffixes) as functionally the same kind",
+      "content": "### MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME\n\n**Trigger signal:** Student treats all word-ending additions (suffixes) as functionally the same kind\nof change, failing to distinguish derivational morphemes (which can change a word's part of speech or\ncreate a new, related word — e.g., \"-ness\" turning the adjective \"happy\" into the noun \"happiness\")\nfrom inflectional morphemes (which mark grammatical information like tense, number, or possession\nwithout changing the word's core category — e.g., \"-s\" marking plural on \"cats,\" still a noun).\n\n**Conflict evidence [P28]:** Show the student two suffixed words: \"happiness\" (from \"happy,\" an\nadjective, now a noun — the suffix changed the PART OF SPEECH and created what feels like a related\nbut distinct word) and \"walked\" (from \"walk,\" a verb, still a verb — the suffix only marks past TENSE,\nthe core word and its category are unchanged). Ask: \"Does the suffix do the SAME kind of job in both\nwords, or something different?\"\n\n**Bridge text [P30]:** \"Treating all suffixes as the same is like assuming renovating a house (adding\na new room, changing its fundamental function) and simply changing its house number (updating\ninformation about it without changing the house itself) are the same kind of change — but one\ntransforms the building into something functionally new, while the other just adds grammatical\ninformation. Derivational morphemes ('-ness') are renovations — they can create a new kind of word.\nInflectional morphemes ('-s' for plural, '-ed' for past tense) are more like the house number update —\nthey add grammatical information without changing the word's fundamental category.\"\n\n**Replacement text [P31]:** \"When you see a suffix, ask: does this CHANGE THE WORD'S PART OF SPEECH\nor create what feels like a related-but-different word (derivational — like '-ness,' '-ly,' '-able')?\nOr does it just mark grammatical information like tense, number, or possession while the word stays\nthe same basic type (inflectional — like '-s,' '-ed,' '-ing')? These are functionally different kinds\nof morphemes.\"\n\n**Discrimination pairs [P33]:**\n1. \"Happy\" (adjective) + \"-ness\" = \"happiness\" (noun — the part of speech changed, a derivational\n   morpheme) vs. \"Walk\" (verb) + \"-ed\" = \"walked\" (still a verb, just marking past tense — an\n   inflectional morpheme).\n2. A student treating \"-ness\" and \"-s\" (plural) as doing the same kind of job because both are\n   suffixes (misconception) vs. a student correctly distinguishing that \"-ness\" changes the word's\n   category while \"-s\" (plural) only adds grammatical information to an unchanged category (correct\n   understanding).\n\n**s6_path:** If the student continues to conflate the two suffix types after the bridge, have them\nsort eight suffixed words into two columns — \"part of speech changed\" and \"part of speech unchanged,\ngrammatical information added\" — applying the direct test to each before any further discussion.",
+      "localKey": "MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME",
+      "language": "en",
+      "refs": [
+        "MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 41,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "The Morpheme as a Unit of Meaning, Not Sound (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Morpheme as a Unit of Meaning, Not Sound (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 153,
+        "endLine": 159
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "Free vs. Bound Morphemes",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Free vs. Bound Morphemes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 159,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "Derivational Morphemes",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Derivational Morphemes\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 165,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "Inflectional Morphemes (MC-B)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Inflectional Morphemes (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 171,
+        "endLine": 178
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "Full Morphological Analysis",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Morphological Analysis\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE\",\"MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-A-MORPHEME-IS-THE-SAME-THING-AS-A-SYLLABLE",
+        "MC-B-ADDING-ANY-ENDING-TO-A-WORD-HAS-THE-SAME-KIND-OF-EFFECT-DERIVATIONAL-AND-INFLECTIONAL-ARE-THE-SAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 178,
+        "endLine": 307
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Syllable vs. Morpheme Count**\nGiven three words, count both syllables and morphemes for each, identifying any words where the\ncounts diverge and explaining why.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Free vs. Bound Classification**\nGiven six morphemes extracted from words, classify each as free or bound.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Derivational Morphemes**\nGiven three words with a derivational suffix, identify the part-of-speech change (if any) and\nconfirm the morpheme is derivational.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identifying Inflectional Morphemes**\nGiven three words with an inflectional suffix, confirm the part of speech is unchanged and identify\nthe specific grammatical information marked.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Morphological Breakdown**\nGiven a new multi-morpheme word, break it into its constituent morphemes, classify each as free or\nbound, and classify each affix as derivational or inflectional.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 200,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated free/bound and derivational/inflectional classification (MP-2\n  through MP-4) but struggles to apply all steps together on a genuinely new word (MP-5), provide a\n  structured checklist (break into morphemes, classify free/bound, classify each affix's function) as\n  scaffolding before removing it.\n- If the student's morpheme-breakdown attempts consistently default back to syllable counting under\n  time pressure (a regression to MC-A even after apparent mastery), this suggests the meaning-based\n  test needs more automatic, overlearned practice — provide additional quick-fire practice pairs with\n  immediate feedback.\n- If the student is multilingual and their other language(s) have richer inflectional systems than\n  English (e.g., grammatical gender marking, more extensive case marking), leverage this as a\n  powerful comparative example for TA-4, since English's relatively sparse inflectional morphology can\n  make the category feel underdeveloped without cross-linguistic grounding.\n- Students who struggled with `eng.vocab.word-formation-processes`'s informal recognition should be\n  monitored closely here, since this concept requires the same recognition skill formalized under\n  more precise terminology — if the informal skill was shaky, expect more repetition needed at TA-1.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 258,
+        "endLine": 276
+      }
+    },
+    {
+      "assetId": "eng.linguistics.morphology-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.morphology-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: what-is-linguistics check] --> [PD-2: word-formation-processes check]\n   |                                                        |\n   | (gap found)                                            | (pass)\n   v                                                         v\n[Route to prerequisite concept]              [Component 3: Cake-Bites / House-Renovation Anchor]\n                                                             |\n                                                             v\n                                       [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                             |\n                                                             v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                             |\n                                                             v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                             |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [Unlock: syntax-theory-intro]  [S6 remediation: meaning-test / sort-by-\n                                                     function drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (before the syllable/morpheme distinction is settled) and MC-B during TA-4 (once both affix types\nhave been introduced and need distinguishing) — MC-A generally needs resolving before TA-2 onward can\nproceed cleanly, since the whole morpheme-identification process depends on it. If either fires,\nbranch to the relevant s6_path drill before resuming. At the mastery probe stage (S9), route by\nfailure: MP-1 failure indicates residual MC-A; MP-2 failure alone indicates the free/bound\ndistinction (TA-2) needs review, distinct from either misconception; MP-3 failure alone indicates the\nderivational-identification step (TA-3) specifically; MP-4 failure alone indicates residual MC-B;\nMP-5 failure with MP-1 through MP-4 passing indicates an integration gap at full-word-analysis scale\n— provide one more guided breakdown example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.morphology-intro.md",
+        "startLine": 221,
+        "endLine": 258
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

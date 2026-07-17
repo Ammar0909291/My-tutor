@@ -1,0 +1,395 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.literature.literary-criticism-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.literature.literary-criticism-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eef7b010fb34791950708f4eaf5b6db112e6659545bfef4e72c82aa95a8f869c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md": "sha256:28981b4595a6f23ed24a551bd5dbf33eab2eaae00a23c110019f5962dc49a13f"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.literature.literary-criticism-intro",
+    "name": "Introduction to Literary Criticism",
+    "difficultyRaw": "research",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.literature.literary-periods-survey"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.literature.literary-criticism-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.literature.literary-criticism-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md": "sha256:28981b4595a6f23ed24a551bd5dbf33eab2eaae00a23c110019f5962dc49a13f"
+      },
+      "contentHash": "sha256:76c681cb1c23f87f2f710c8ad430d02bfdba9e6e6de49caee4eaa1cedd8a7f0e",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-criticism-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-criticism-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-criticism-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-criticism-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-criticism-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-criticism-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-criticism-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md#TA-3 (addresses MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-criticism-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-criticism-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-criticism-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md#TA-4 (addresses MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-criticism-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-criticism-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.literature.literary-criticism-intro.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md#TA-5 (addresses MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS, MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.literature.literary-criticism-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.literature.literary-criticism-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.literature.literary-criticism-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "Introduction to Literary Criticism — Conceptual Development Sequence",
+      "content": "### TA-1 — Historical/Biographical Criticism\n\nIntroduce historical/biographical criticism: interpreting a text in light of the author's life,\nhistorical context, and the conditions of its production. Student practice: given a short text and\nbrief biographical/historical context, produce a historical/biographical reading.\n\n### TA-2 — Formalist Criticism\n\nIntroduce formalist criticism: interpreting a text based purely on its internal structure, language,\nand form, without reference to the author's biography or historical context. Student practice: given\nthe same short text from TA-1, produce a formalist reading focusing only on internal textual\nfeatures.\n\n### TA-3 — Reader-Response Criticism (MC-B)\n\nIntroduce reader-response criticism, using the sommelier anchor to emphasize that reactions must be\ngrounded in specific textual features. Student practice: given the same short text, produce a\nreader-response reading that explicitly connects a personal reaction to at least one specific\ntextual feature.\n\n### TA-4 — Multiple Lenses as Complementary, Not Competing (MC-A)\n\nUsing the doctor-nutritionist-trainer anchor, teach students to compare the three readings produced\nin TA-1 through TA-3 and articulate what SPECIFIC QUESTION each lens was answering, showing they are\ncomplementary rather than competing for one \"correct\" answer.\n\n### TA-5 — Full Application: Multi-Lens Analysis of a New Text\n\nGive the student a new short text. They must apply at least two different critical lenses (chosen\nfrom historical/biographical, formalist, reader-response) and produce genuinely distinct, lens-\nappropriate interpretations, then explicitly articulate what different question each lens answered —\nthe full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 150,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/misconception/MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS",
+      "kind": "misconception",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "**Trigger signal:** Student treats literary criticism as a search for the single, objectively",
+      "content": "### MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS\n\n**Trigger signal:** Student treats literary criticism as a search for the single, objectively\n\"correct\" hidden meaning of a text — as if formalist, historical, and reader-response critics are all\ncompeting to find the same one right answer, rather than recognizing that each approach asks a\ngenuinely different question and can legitimately produce different, non-competing insights about the\nsame text.\n\n**Conflict evidence [P28]:** Show the student a historical/biographical reading of a poem (focusing\non what the author's life circumstances reveal about the poem's meaning) alongside a formalist\nreading of the SAME poem (focusing purely on its internal structure, imagery patterns, and language,\nwith no reference to the author's biography at all). Ask: \"Are these two readings competing to find\nthe ONE correct answer, or are they asking two different questions that can both be legitimately\nanswered about the same poem?\"\n\n**Bridge text [P30]:** \"Assuming there's one single correct interpretation criticism is racing to\nfind is like assuming a doctor, a nutritionist, and a personal trainer are all competing to give the\n'one correct' assessment of a person's health — but they're actually each asking a different,\nlegitimate question (medical condition, diet, fitness) about the same person, and all three\nassessments can be true and useful at once. Different critical lenses similarly ask different\nlegitimate questions about the same text.\"\n\n**Replacement text [P31]:** \"Instead of asking 'which critical approach is right about this text?',\nask 'what specific KIND OF QUESTION is each approach asking, and what does each one reveal that the\nothers don't focus on?' Multiple readings can be simultaneously valid because they're not actually\ncompeting for the same answer.\"\n\n**Discrimination pairs [P33]:**\n1. \"The formalist reading is correct and the historical reading is wrong.\" (assumes one right\n   answer, treats the two as competing) vs. \"The formalist reading reveals how the poem's internal\n   structure creates its emotional effect, while the historical reading reveals how the author's\n   circumstances shaped its content — both are valid, complementary insights.\" (recognizes distinct,\n   non-competing questions).\n2. A student confused or frustrated when two critics reach different conclusions about the same text\n   (treating divergence as a problem to resolve) vs. a student recognizing that the divergence often\n   reflects genuinely different critical questions being asked (correct, lens-aware understanding).\n\n**s6_path:** If the student continues seeking one \"correct\" interpretation after the bridge, have\nthem write down, for two different critical readings of the same text, the SPECIFIC QUESTION each\none is actually trying to answer — making explicit that the questions themselves differ, not just the\nanswers.",
+      "localKey": "MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS",
+      "language": "en",
+      "refs": [
+        "MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 3,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/misconception/MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION",
+      "kind": "misconception",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "**Trigger signal:** Student conflates reader-response criticism (a rigorous approach examining how a",
+      "content": "### MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION\n\n**Trigger signal:** Student conflates reader-response criticism (a rigorous approach examining how a\nreader's engagement co-creates meaning, still grounded in textual evidence and defensible reasoning)\nwith \"any personal reaction is automatically a valid interpretation, no textual support needed\" —\nproducing purely subjective reactions with no connection back to specific features of the text.\n\n**Conflict evidence [P28]:** Show the student two reader-response-style readings of the same short\nstory: one that connects a personal reaction to SPECIFIC textual features (e.g., \"the story's\nambiguous ending made me feel anxious, and I think this is because the author deliberately withholds\nresolution at several earlier points too, building a pattern of unresolved tension\"), and one that is\npurely a personal reaction with no textual grounding at all (\"I didn't like this story, it was\nboring\"). Ask: \"Is the second response actually doing the analytical work reader-response criticism\nrequires, or is it just an unsupported opinion?\"\n\n**Bridge text [P30]:** \"Reader-response criticism examining how a reader's engagement shapes meaning\nis like a sommelier describing how a wine's specific acidity and tannins created their particular\ntasting experience — it's personal and experiential, but still grounded in specific, describable\nfeatures of the wine. Just saying 'I didn't like it' with no reference to any specific feature isn't\nsommelier-level analysis — it's just a preference. Reader-response criticism requires connecting your\nreaction to SPECIFIC textual features, not just stating an unsupported reaction.\"\n\n**Replacement text [P31]:** \"When using reader-response criticism, always connect your reaction back\nto a SPECIFIC feature of the text (a particular scene, a pattern of imagery, a structural choice) that\nyou believe produced that reaction in you. An unsupported 'I liked/didn't like it' is not yet a\nreader-response interpretation — it's the raw material one could start from.\"\n\n**Discrimination pairs [P33]:**\n1. \"I didn't like this story.\" (unsupported personal reaction, no textual connection) vs. \"The\n   story's shifting narrator made me feel disoriented, which I think mirrors the protagonist's own\n   confusion — a deliberate effect created by that specific structural choice.\" (a reader-response\n   interpretation grounded in a specific textual feature).\n2. A student treating any gut reaction as automatically a complete critical interpretation\n   (misconception) vs. a student using their gut reaction as a STARTING POINT, then identifying the\n   specific textual feature that produced it (correct application of reader-response criticism).\n\n**s6_path:** If the student continues to offer ungrounded personal reactions after the bridge, have\nthem take their own stated reaction and complete the sentence \"I felt/thought this because the text\nspecifically ___\" — requiring the connection to a textual feature before the reaction counts as an\ninterpretation.",
+      "localKey": "MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 45,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "Historical/Biographical Criticism",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Historical/Biographical Criticism\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 154,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "Formalist Criticism",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Formalist Criticism\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 160,
+        "endLine": 167
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "Reader-Response Criticism (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Reader-Response Criticism (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 167,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "Multiple Lenses as Complementary, Not Competing (MC-A)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Multiple Lenses as Complementary, Not Competing (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 174,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "Full Application: Multi-Lens Analysis of a New Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Multi-Lens Analysis of a New Text\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS\",\"MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-THERE-IS-ONE-SINGLE-CORRECT-INTERPRETATION-OF-A-TEXT-THAT-CRITICISM-UNCOVERS",
+        "MC-B-ANY-PERSONAL-REACTION-TO-A-TEXT-COUNTS-AS-A-VALID-READER-RESPONSE-INTERPRETATION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 180,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Critical Approaches by Their Questions**\nGiven three brief critical statements about a text, identify which critical approach\n(historical/biographical, formalist, reader-response) each represents based on the KIND OF QUESTION\nit asks.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Producing a Formalist Reading**\nGiven a short text, produce a formalist interpretation based purely on its internal structure and\nlanguage, with no reference to author or historical context.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Grounding a Reader-Response Interpretation**\nGiven a personal reaction to a text with no textual grounding, revise it into a genuine reader-\nresponse interpretation by connecting the reaction to a specific textual feature.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining Complementary (Not Competing) Lenses**\nGiven two different critical readings of the same text, explain why both can be simultaneously\nvalid rather than one being \"more correct\" than the other.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Multi-Lens Analysis**\nGiven a new short text, apply at least two critical lenses to produce genuinely distinct\ninterpretations, and explain what different question each lens answered.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 205,
+        "endLine": 228
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student produces technically distinct readings across lenses (MP-1, MP-2, MP-3) but still\n  privately favors one lens as \"the real answer\" when asked directly, revisit MC-A explicitly with a\n  text the student has strong personal opinions about, to test whether the plurality principle holds\n  under genuine investment.\n- If the student's formalist readings (TA-2) inadvertently smuggle in biographical assumptions (a\n  common early error, since formalist analysis requires actively suppressing outside context), flag\n  this specifically and have the student explicitly list what outside information they are\n  deliberately setting aside before writing a formalist reading.\n- If the student's reader-response readings remain vague even after grounding attempts (\"the ending\n  made me feel something because of how it was written\" — still not specific), push for naming the\n  EXACT textual feature (a specific word choice, a specific structural moment) rather than accepting\n  a still-general connection.\n- Given this concept's research-level difficulty and 3-hour length, monitor for cognitive fatigue\n  across the three-lens sequence — this is an appropriate concept to split across sessions if needed,\n  resuming at the next TA with a brief recap of the lens(es) already covered.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 267,
+        "endLine": 285
+      }
+    },
+    {
+      "assetId": "eng.literature.literary-criticism-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.literature.literary-criticism-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: literary periods check] --> [PD-2: interpretive-plurality check]\n   |                                                     |\n   | (gap found)                                         | (pass)\n   v                                                      v\n[Route to eng.literature.literary-periods-survey]  [Component 3: Doctor-Nutritionist-Trainer /\n                                                     Sommelier Anchor]\n                                                                |\n                                                                v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                                |\n                                                                v\n                                       [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                |\n                                                                v\n                                       [MP-1 through MP-5 mastery probe set]\n                                                                |\n                                       (pass >= 0.70) -----+----- (fail)\n                                              |                      |\n                                              v                      v\n                     [Unlock: comparative-literature-intro]  [S6 remediation: name-the-\n                                                                question / ground-the-\n                                                                reaction drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a periods gap routes back to that\nprerequisite, an interpretive-plurality gap gets a brief primer. During Component 4 (S1, active\ninstruction), MC-B typically surfaces during TA-3 (ungrounded reactions) and MC-A during TA-4\n(seeking one \"correct\" reading when comparing lenses) — MC-B often needs resolving first since\nproducing a genuine reader-response reading is a prerequisite for meaningfully comparing it against\nthe other two lenses in TA-4. If either fires, branch to the relevant s6_path drill before resuming.\nAt the mastery probe stage (S9), route by failure: MP-1 failure indicates basic lens-identification\nneeds review; MP-2 failure alone indicates the formalist-mechanics step (TA-2) needs review, distinct\nfrom either misconception; MP-3 failure alone indicates residual MC-B; MP-4 failure alone indicates\nresidual MC-A; MP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one\nmore guided multi-lens example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.literature.literary-criticism-intro.md",
+        "startLine": 228,
+        "endLine": 267
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
