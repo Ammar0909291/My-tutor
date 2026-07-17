@@ -478,6 +478,336 @@ const FORCE_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── phys.mech.newtons-second-law ────────────────────────────────────────────
+const N2 = 'phys.mech.newtons-second-law'
+const N2_SRC = 'docs/curriculum/blueprints/phys.mech.newtons-second-law.md'
+
+const N2_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: N2,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: same push, different stuff — the a = F/m feel
+    content:
+      'Push an empty shopping trolley and it leaps forward. Push a fully ' +
+      'loaded one exactly as hard and it barely creeps. Same push, ' +
+      "different response — the difference is the trolley's mass. Newton's " +
+      'Second Law is just that experience turned into a recipe: ' +
+      'acceleration = net force ÷ mass. Twice the push, twice the ' +
+      'acceleration. Twice the mass, HALF the acceleration. And the word ' +
+      '"net" matters: the trolley only responds to the leftover force after ' +
+      'friction has taken its bite — what you push minus what pushes back.',
+    targetedMisconceptions: [`${N2}:MC-SINGLE-FORCE`],
+    source: `${N2_SRC} — §5 Protocol Library concrete opening + §6 MC-SINGLE-FORCE bridge (net-force emphasis at first exposure)`,
+  },
+  {
+    conceptId: N2,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    // Worked example: the blueprint's car transfer item, three explicit steps
+    content:
+      'A 1200 kg car has a 3000 N driving force and 600 N of total ' +
+      'resistance (friction + air). How fast does it accelerate, and how ' +
+      'long to reach 20 m/s? Three steps, never skip step 2. Step 1 — list ' +
+      'forces with direction: +3000 N forward, −600 N backward. Step 2 — ' +
+      'NET force: 3000 − 600 = 2400 N forward. (Using 3000 here is the ' +
+      'classic error: the car only "feels" the leftover after resistance.) ' +
+      'Step 3 — a = ΣF/m = 2400/1200 = 2 m/s². Then time: gaining 2 m/s ' +
+      'every second, reaching 20 m/s takes t = 20/2 = 10 s. Notice the ' +
+      'units carry the meaning: newtons ÷ kilograms literally equals m/s².',
+    targetedMisconceptions: [`${N2}:MC-SINGLE-FORCE`],
+    source: `${N2_SRC} — §7 Assessment Battery P76 transfer item expanded into the three-step ΣF procedure (§6 replacement text P31)`,
+  },
+  {
+    conceptId: N2,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: mass vs weight inside F = ma
+    content:
+      'An astronaut "weighs less on the Moon" — so does she have less mass ' +
+      'there? Count her atoms: exactly the same ones she had on Earth; ' +
+      'nothing left her body on the trip. Her MASS — the amount of matter, ' +
+      'her resistance to being accelerated — is unchanged, say 60 kg ' +
+      'everywhere in the universe. What changed is her WEIGHT: the ' +
+      "gravitational force on that mass, W = mg. Earth's g gives " +
+      '60 × 9.8 ≈ 588 N; the Moon\'s weaker g gives about 96 N. Same mass, ' +
+      'different pull. In F = ma the m is ALWAYS mass in kilograms — if a ' +
+      'problem hands you a weight in newtons, divide by g first to recover ' +
+      'the mass before you do anything else.',
+    targetedMisconceptions: [`${N2}:MC-MASS-IS-WEIGHT`],
+    source: `${N2_SRC} — §6 MC-MASS-IS-WEIGHT (same-atoms conflict evidence P28 + bridge P30 + replacement P31 as one repair text)`,
+  },
+  {
+    conceptId: N2,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles: the law as the definition of dynamics, limits included
+    content:
+      "Newton's Second Law is the engine of mechanics: ΣF = ma connects " +
+      'the causes (forces) to the effect (change of motion) through one ' +
+      'property of the object (mass). Read it in both directions. Forward: ' +
+      'sum every force as a vector — applied pushes, friction, gravity, ' +
+      'supports — and the object MUST accelerate at exactly ΣF/m, no vote. ' +
+      'Backward: measure an acceleration and you\'ve measured the net ' +
+      'force. Two boundary cases carry most of the meaning: ΣF = 0 gives ' +
+      'a = 0 — which is the First Law appearing as a special case, balance ' +
+      'meaning constant velocity, not rest — and a large force on a large ' +
+      'mass can produce a smaller acceleration than a modest force on a ' +
+      'small one, because only the RATIO decides.',
+    targetedMisconceptions: [`${N2}:MC-SINGLE-FORCE`],
+    source: `${N2_SRC} — §7 P75 boundary item + §6 bridge texts, unified as a first-principles adult treatment`,
+  },
+]
+
+const N2_PROBES: SeedProbe[] = [
+  {
+    conceptId: N2,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You push a 5 kg box with 10 N while friction resists with 4 N. What acceleration does the box get?',
+    choices: [
+      { text: '1.2 m/s² — the box feels the net force, 6 N', isCorrect: true },
+      { text: '2 m/s² — divide the 10 N push by 5 kg', isCorrect: false, misconceptionId: `${N2}:MC-SINGLE-FORCE` },
+      { text: '0.8 m/s² — divide the friction by 5 kg', isCorrect: false },
+    ],
+    correctValue: '1.2 m/s²',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${N2}:MC-SINGLE-FORCE`],
+    source: `${N2_SRC} — §6 MC-SINGLE-FORCE conflict scenario recast with fresh numbers, distractor-mapped`,
+  },
+  {
+    conceptId: N2,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: "A suitcase is labelled '18 kg' on Earth. An airline moves its hub to a Moon base. What does the label read there, and what HAS changed?",
+    choices: [
+      { text: 'Still 18 kg — mass is unchanged; only its weight (the force mg) is smaller', isCorrect: true },
+      { text: 'About 3 kg — things have less mass on the Moon', isCorrect: false, misconceptionId: `${N2}:MC-MASS-IS-WEIGHT` },
+    ],
+    correctValue: '18 kg; weight changed, mass did not',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${N2}:MC-MASS-IS-WEIGHT`],
+    source: `${N2_SRC} — §7 P79 predict item (suitcase) recast as a distractor-mapped probe`,
+  },
+]
+
+// ─── phys.mech.newtons-third-law ─────────────────────────────────────────────
+const N3 = 'phys.mech.newtons-third-law'
+const N3_SRC = 'docs/curriculum/blueprints/phys.mech.newtons-third-law.md'
+
+const N3_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: N3,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: forces come in pairs, swap the objects
+    content:
+      'Push a wall. You feel the wall push back on your hand — that ' +
+      "pressure on your palm IS the wall's answer, and it's exactly as " +
+      'strong as your push. Every force in the universe works like this: ' +
+      'forces come in PAIRS, one on each of the two things interacting. ' +
+      'The recipe for finding the partner force is a simple swap: if the ' +
+      'force is "A pushes B", its partner is "B pushes A" — same size, ' +
+      'opposite direction, and always on the OTHER object. A swimmer ' +
+      'pushes the water backward; the water pushes the swimmer forward — ' +
+      "that second one, on the swimmer, is what actually moves her. You " +
+      'can\'t touch anything without it touching you back, equally.',
+    targetedMisconceptions: [`${N3}:MC-SAME-OBJECT-PAIR`],
+    source: `${N3_SRC} — §5 Protocol Library concrete opening (wall/swimmer) + §6 replacement text P31 (the object-swap recipe)`,
+  },
+  {
+    conceptId: N3,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: weight + normal force is NOT a third-law pair
+    content:
+      "Here's the trap nearly everyone falls into. A book rests on a " +
+      "table. Weight pulls it down, the table's normal force pushes it up, " +
+      'equal and opposite — so they\'re an action-reaction pair, right? ' +
+      'No — and the test is WHICH OBJECT each force acts on. Both of those ' +
+      'act on the BOOK. A Third-Law pair always has one force on EACH of ' +
+      'two objects. Try the removal test: take the table away. The weight ' +
+      'is still there (the book falls) — but a real reaction partner can ' +
+      'never outlive its force. The true partner of "Earth pulls book ' +
+      'down" is "book pulls EARTH up" — acting on the planet itself. The ' +
+      "table's push balancing the weight is a different story: two forces " +
+      'on ONE object cancelling — that\'s the First Law (balance), not the ' +
+      'Third (pairs).',
+    targetedMisconceptions: [`${N3}:MC-SAME-OBJECT-PAIR`],
+    source: `${N3_SRC} — §6 MC-SAME-OBJECT-PAIR (removal-test conflict evidence P28 + bridge P30, rendered as one repair text)`,
+  },
+  {
+    conceptId: N3,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    // Repair: truck vs car — equal forces, unequal effects (accessible from
+    // middle band; the HIGH repair slot is held by the weight/normal pair)
+    content:
+      'A truck and a small car collide head-on. Which one hits harder? ' +
+      'Instinct screams "the truck" — but the Third Law allows no ' +
+      'exceptions: during the crash the truck\'s force on the car and the ' +
+      "car's force on the truck are EQUAL in size, every instant, " +
+      'regardless of mass or speed. So why is the car wrecked and the ' +
+      'truck barely dented? Because the LAWS divide the labour: the Third ' +
+      'Law fixes the forces equal; the SECOND Law converts the same force ' +
+      'into wildly different accelerations — a = F/m, and the car\'s m is ' +
+      'small, so it gets flung. Equal force, unequal consequence. The ' +
+      'damage difference is a mass story, never a force story.',
+    targetedMisconceptions: [`${N3}:MC-BIGGER-EXERTS-MORE`],
+    source: `${N3_SRC} — §6 MC-BIGGER-EXERTS-MORE (full P28→P30→P31 chain as one repair text)`,
+  },
+  {
+    conceptId: N3,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles: why pairs never cancel + rocket propulsion
+    content:
+      'Two puzzles unlock the Third Law completely. First: if every force ' +
+      'has an equal opposite partner, why doesn\'t everything cancel and ' +
+      'nothing ever move? Because the two forces act on DIFFERENT objects ' +
+      '— cancellation only happens between forces on the same body. Your ' +
+      'push acts on the trolley; the trolley\'s push-back acts on YOU. ' +
+      'Each object responds only to the forces on itself. Second: how does ' +
+      'a rocket accelerate in empty space with nothing to push against? ' +
+      'It carries its own something: it hurls exhaust gas backward ' +
+      '(rocket pushes gas), and the pair force — gas pushes rocket — ' +
+      'drives it forward. No road, no air, no wall required: just the ' +
+      'other half of an interaction it created itself.',
+    targetedMisconceptions: [`${N3}:MC-SAME-OBJECT-PAIR`],
+    source: `${N3_SRC} — §7 P75 boundary item (why pairs don't cancel) + P76 rocket transfer item, taught first-principles`,
+  },
+]
+
+const N3_PROBES: SeedProbe[] = [
+  {
+    conceptId: N3,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: "A book rests on a table. Earth's gravity pulls the book down. What is the Third-Law reaction to that force?",
+    choices: [
+      { text: 'The book pulls the Earth upward', isCorrect: true },
+      { text: "The table's normal force pushes the book upward", isCorrect: false, misconceptionId: `${N3}:MC-SAME-OBJECT-PAIR` },
+      { text: 'There is no reaction — gravity acts alone', isCorrect: false },
+    ],
+    correctValue: 'the book pulls the Earth upward',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${N3}:MC-SAME-OBJECT-PAIR`],
+    source: `${N3_SRC} — §7 P74 classify item, distractor-mapped to the same-object trap`,
+  },
+  {
+    conceptId: N3,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A lorry collides with a parked bicycle. During the impact, how do the forces compare?',
+    choices: [
+      { text: 'Exactly equal in size, opposite in direction — the bicycle just accelerates far more', isCorrect: true },
+      { text: 'The lorry exerts a much larger force because it is heavier and moving', isCorrect: false, misconceptionId: `${N3}:MC-BIGGER-EXERTS-MORE` },
+    ],
+    correctValue: 'equal and opposite',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${N3}:MC-BIGGER-EXERTS-MORE`],
+    source: `${N3_SRC} — §6 discrimination pairs (mosquito–lorry) recast, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.momentum ──────────────────────────────────────────────────────
+const MOM = 'phys.mech.momentum'
+const MOM_SRC = 'docs/curriculum/blueprints/phys.mech.momentum.md'
+
+const MOM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MOM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: "how hard to stop" — mass amplifies motion
+    content:
+      'Momentum answers one question: how hard is this thing to stop? Two ' +
+      'ingredients multiply together — how much stuff is moving (mass) and ' +
+      'how fast it\'s going (velocity): p = m × v. That multiplication is ' +
+      'why a lorry rolling at walking pace is more dangerous than a tennis ' +
+      'ball at motorway speed: 1000 kg × 2 m/s = 2000 units of momentum ' +
+      'against 0.1 kg × 50 m/s = just 5. The faster object loses, ' +
+      'overwhelmingly, because mass counts every bit as much as speed. ' +
+      "That's also why momentum carries a direction: stopping something " +
+      'means pushing against the way it\'s moving.',
+    targetedMisconceptions: [`${MOM}:MC-MOMENTUM-IS-SPEED`],
+    source: `${MOM_SRC} — Component 3 MC-MOMENTUM-IS-SPEED (tennis-ball vs truck conflict evidence P28 as first-exposure teaching)`,
+  },
+  {
+    conceptId: MOM,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    // Worked example: comparing momenta + direction/sign handling
+    content:
+      'Compare three movers. (a) 0.1 kg tennis ball at 50 m/s east: ' +
+      'p = 0.1 × 50 = 5 kg·m/s east. (b) 1000 kg truck at 2 m/s east: ' +
+      'p = 1000 × 2 = 2000 kg·m/s east — four hundred times the ball, at ' +
+      'one twenty-fifth the speed. (c) A 70 kg sprinter at 10 m/s WEST: ' +
+      'direction now matters — call east positive and her momentum is ' +
+      'p = 70 × (−10) = −700 kg·m/s. The sign isn\'t bookkeeping ' +
+      'decoration: momenta ADD as vectors, so the truck and the sprinter ' +
+      'together carry 2000 + (−700) = 1300 kg·m/s east. Drop the ' +
+      'directions and every multi-object problem gives wrong answers.',
+    targetedMisconceptions: [`${MOM}:MC-MOMENTUM-IS-SPEED`, `${MOM}:MC-MOMENTUM-IS-SCALAR`],
+    source: `${MOM_SRC} — Component 3 both MCs' conflict evidence, expanded into a signed three-object worked example`,
+  },
+  {
+    conceptId: MOM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles: why m×v is THE conserved bookkeeping quantity
+    content:
+      'Why does physics single out m × v, of all combinations? Because ' +
+      "it's the quantity that interactions can only EXCHANGE, never create " +
+      'or destroy. When two objects push on each other, the Third Law makes ' +
+      'their forces equal-and-opposite over the same contact time, so ' +
+      'whatever momentum one gains the other loses, exactly — the total is ' +
+      'untouched. That makes momentum the accounting currency of every ' +
+      'collision, recoil, and explosion: add the m×v of everything before ' +
+      '(with directions), and the after-total must match, no matter how ' +
+      'violent or messy the event. Mass alone isn\'t conserved in motion ' +
+      'terms; velocity alone certainly isn\'t; their product is the thing ' +
+      'the universe keeps books on.',
+    targetedMisconceptions: [`${MOM}:MC-MOMENTUM-IS-SCALAR`],
+    source: `${MOM_SRC} — Component 1 Concept Spine (conservation preview) + Component 3, taught first-principles for the adult register`,
+  },
+]
+
+const MOM_PROBES: SeedProbe[] = [
+  {
+    conceptId: MOM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which has more momentum: a 0.5 kg football kicked at 30 m/s, or a 900 kg car creeping at 1 m/s?',
+    choices: [
+      { text: 'The car — 900 kg·m/s beats the ball\'s 15 kg·m/s', isCorrect: true },
+      { text: 'The football — it is moving 30 times faster', isCorrect: false, misconceptionId: `${MOM}:MC-MOMENTUM-IS-SPEED` },
+      { text: 'They are equal — speed and mass trade off exactly', isCorrect: false },
+    ],
+    correctValue: 'the car',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MOM}:MC-MOMENTUM-IS-SPEED`],
+    source: `${MOM_SRC} — Component 3 MC-MOMENTUM-IS-SPEED, fresh numbers (not the blueprint's tennis-ball/truck pair), distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -485,6 +815,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...VEL_EXPLANATIONS,
   ...ACC_EXPLANATIONS,
   ...FORCE_EXPLANATIONS,
+  ...N2_EXPLANATIONS,
+  ...N3_EXPLANATIONS,
+  ...MOM_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -492,4 +825,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...VEL_PROBES,
   ...ACC_PROBES,
   ...FORCE_PROBES,
+  ...N2_PROBES,
+  ...N3_PROBES,
+  ...MOM_PROBES,
 ]
