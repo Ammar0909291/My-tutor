@@ -1075,6 +1075,289 @@ const SET_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── phys.meas.scalars-vectors ───────────────────────────────────────────────
+const SV = 'phys.meas.scalars-vectors'
+const SV_SRC = 'docs/curriculum/blueprints/phys.meas.scalars-vectors.md'
+
+const SV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // Intuitive: two kinds of questions — how much vs how much AND which way
+    content:
+      'Some measurements answer one question; others answer two. "How hot ' +
+      'is the tea?" — 70 degrees. Done. Temperature, mass, time: one ' +
+      'number tells the whole story. These are SCALARS. But try giving ' +
+      'someone directions with "walk 500 metres" — they immediately ask ' +
+      '"which WAY?" Some quantities are incomplete without a direction: ' +
+      'displacement, velocity, force. These are VECTORS — a size AND a ' +
+      'direction, welded together. The quick test for any quantity: does ' +
+      'asking "in which direction?" make sense? "In which direction is ' +
+      'the mass?" — nonsense, scalar. "In which direction is the push?" — ' +
+      'essential, vector.',
+    targetedMisconceptions: [`${SV}:MC-4`],
+    source: `${SV_SRC} — §5 Protocol Library concrete opening + §6 MC-4 (all-quantities-are-numbers), the which-way test`,
+  },
+  {
+    conceptId: SV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: MC-1 speed/velocity via circular track + MC-2 distance/displacement
+    content:
+      'Everyday English treats speed/velocity and distance/displacement as ' +
+      'synonyms — physics splits both pairs, and a car on a circular track ' +
+      'shows why. Lap at a perfectly steady 60 km/h: your SPEED never ' +
+      'changes. But your VELOCITY is changing every instant — because ' +
+      "velocity includes direction, and your direction is sweeping around " +
+      'the circle. Same split for the path: after one full lap your ' +
+      'DISTANCE is the whole track length — say 400 m of tyre wear — but ' +
+      'your DISPLACEMENT is ZERO: the straight arrow from start-point to ' +
+      'end-point has no length, because they\'re the same point. Rule: ' +
+      'distance and speed are scalars (path and its rate); displacement ' +
+      'and velocity are their vector siblings (net change with direction, ' +
+      'and its rate).',
+    targetedMisconceptions: [`${SV}:MC-1`, `${SV}:MC-2`],
+    source: `${SV_SRC} — §6 MC-1 (circular-track conflict P28/P07) + MC-2 (path vs directed straight-line), one unified repair`,
+  },
+  {
+    conceptId: SV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Negative vectors: sign IS direction on a line
+    content:
+      'A negative vector isn\'t a wrong or missing quantity — the minus ' +
+      'sign IS the direction. On a straight road, pick east as positive. ' +
+      'A displacement of +30 m means 30 m east; −30 m means 30 m WEST — ' +
+      'equally real, equally valid. The sign is doing the same job an ' +
+      'arrow does on a diagram. This is why a ball thrown upward can have ' +
+      'velocity +12 m/s on the way up and −12 m/s coming back through the ' +
+      'same point: same size, opposite direction, and the sign carries ' +
+      'that fact through the algebra. Refusing negative values for vector ' +
+      'quantities is refusing half the directions in the universe; for ' +
+      'scalars like mass or distance, by contrast, negatives genuinely ' +
+      'are meaningless.',
+    targetedMisconceptions: [`${SV}:MC-3`],
+    source: `${SV_SRC} — §6 MC-3 (negative-vector refusal; number-line root cause addressed by making sign = direction explicit)`,
+  },
+]
+
+const SV_PROBES: SeedProbe[] = [
+  {
+    conceptId: SV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A car drives one full lap of a 400 m circular track at a constant 60 km/h. Which statement is correct?',
+    choices: [
+      { text: 'Its speed was constant, but its velocity was changing the whole time', isCorrect: true },
+      { text: 'Its velocity was constant because its speed was constant', isCorrect: false, misconceptionId: `${SV}:MC-1` },
+      { text: 'Its displacement for the lap is 400 m', isCorrect: false, misconceptionId: `${SV}:MC-2` },
+    ],
+    correctValue: 'speed constant, velocity changing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SV}:MC-1`, `${SV}:MC-2`],
+    source: `${SV_SRC} — §6 MC-1/MC-2 circular-track scenario as one dual-mapped item`,
+  },
+  {
+    conceptId: SV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Taking east as positive, a hiker\'s displacement is −2 km. What does this mean?',
+    choices: [
+      { text: 'She ended up 2 km west of her start — the sign is the direction', isCorrect: true },
+      { text: 'The measurement is invalid — displacement cannot be negative', isCorrect: false, misconceptionId: `${SV}:MC-3` },
+      { text: 'She walked 2 km less than planned', isCorrect: false },
+    ],
+    correctValue: '2 km west',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SV}:MC-3`],
+    source: `${SV_SRC} — §6 MC-3, distractor-mapped`,
+  },
+]
+
+// ─── math.arith.multiplication ───────────────────────────────────────────────
+const MUL = 'math.arith.multiplication'
+const MUL_SRC = 'docs/curriculum/blueprints/math.arith.multiplication.md'
+
+const MUL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MUL,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    // Intuitive: groups-of, distinguished from adding
+    content:
+      'Multiplication counts GROUPS. 3 × 4 doesn\'t mean "3 and 4" — it ' +
+      'means "3 groups, with 4 in each group". Picture 3 plates with 4 ' +
+      'strawberries on each: count them all — 4, 8, 12. That\'s why ' +
+      '3 × 4 = 12 while 3 + 4 = 7: adding puts two piles together once; ' +
+      'multiplying repeats a whole pile again and again. When you see ×, ' +
+      'ask "how many groups, and how big is each?" — never just squash ' +
+      'the two numbers together.',
+    targetedMisconceptions: [`${MUL}:MC-1`],
+    source: `${MUL_SRC} — Component 4 concrete opening (groups-of model) + Component 2 MC-1 (ADDITION-CONFUSION, 3×4=7)`,
+  },
+  {
+    conceptId: MUL,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    // Visual/spatial: the array proof of commutativity
+    content:
+      'Here\'s a fair question: "3 groups of 4 sweets" and "4 groups of 3 ' +
+      'sweets" LOOK completely different on the table — so why is ' +
+      '3 × 4 = 4 × 3? Arrange the sweets in a rectangle: 3 rows, 4 ' +
+      'columns. Count by rows: 3 rows of 4 → 3 × 4. Now just TURN YOUR ' +
+      'HEAD sideways: the same rectangle is 4 rows of 3 → 4 × 3. Not one ' +
+      'sweet moved. The two descriptions were different, but they were ' +
+      'always describing the same rectangle — that\'s why the totals must ' +
+      'match, for any two numbers, forever. The picture IS the proof.',
+    targetedMisconceptions: [`${MUL}:MC-2`],
+    source: `${MUL_SRC} — Component 2 MC-2 (COMMUTATIVITY-FALSE: models differ physically, totals don't) via the rotation-of-array argument`,
+  },
+  {
+    conceptId: MUL,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    // Repair: a×0 — the mirror image of addition's zero
+    content:
+      'Zero plays opposite roles in adding and multiplying, and mixing ' +
+      'them up is the most common slip there is. ADDING zero changes ' +
+      'nothing: 7 + 0 = 7 — you got no new sweets, your pile stands. ' +
+      'MULTIPLYING by zero wipes everything out: 7 × 0 means "7 groups ' +
+      'with NOTHING in each group" — seven empty plates hold zero sweets ' +
+      'total, so 7 × 0 = 0. Ask the groups question every time: how many ' +
+      'groups (7), how big is each (0)? Seven nothings is nothing. So ' +
+      'a + 0 = a, but a × 0 = 0 — same zero, opposite superpowers.',
+    targetedMisconceptions: [`${MUL}:MC-3`],
+    source: `${MUL_SRC} — Component 2 MC-3 (ZERO-IDENTITY-CONFUSION, a×0=a from additive overgeneralisation) + repair protocol`,
+  },
+]
+
+const MUL_PROBES: SeedProbe[] = [
+  {
+    conceptId: MUL,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is 6 × 0?',
+    choices: [
+      { text: '0 — six groups with nothing in each is nothing', isCorrect: true },
+      { text: '6 — the zero changes nothing', isCorrect: false, misconceptionId: `${MUL}:MC-3` },
+    ],
+    correctValue: '0',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MUL}:MC-3`],
+    source: `${MUL_SRC} — Component 2 MC-3 surface pattern, distractor-mapped`,
+  },
+  {
+    conceptId: MUL,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.EARLY,
+    stem: 'What is 3 × 4?',
+    choices: [
+      { text: '12 — three groups of four: 4, 8, 12', isCorrect: true },
+      { text: '7 — put the 3 and the 4 together', isCorrect: false, misconceptionId: `${MUL}:MC-1` },
+    ],
+    correctValue: '12',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${MUL}:MC-1`],
+    source: `${MUL_SRC} — Component 2 MC-1 exact surface pattern (3×4=7), distractor-mapped`,
+  },
+]
+
+// ─── math.arith.subtraction ──────────────────────────────────────────────────
+const SUB = 'math.arith.subtraction'
+const SUB_SRC = 'docs/curriculum/blueprints/math.arith.subtraction.md'
+
+const SUB_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SUB,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    // Intuitive: taking away + order matters (anti-commutativity early)
+    content:
+      'Subtraction is taking away — and unlike adding, the ORDER is part ' +
+      'of the story. 8 − 3 asks: start with 8 sweets, give 3 away, what\'s ' +
+      'left? Five. But 3 − 8 is a different story with a different ' +
+      'starting pile: start with only 3 and try to give away 8 — you ' +
+      "can't even finish (you'd owe 5). With adding, 3 + 8 and 8 + 3 tell " +
+      'the same combining story. With taking away, who STARTS with the ' +
+      'sweets completely changes what happens — so never flip a ' +
+      'subtraction around to make it easier.',
+    targetedMisconceptions: [`${SUB}:MC-2`],
+    source: `${SUB_SRC} — Component 4 concrete opening + Component 2 MC-2 (COMMUTATIVITY-ASSUMED, 3−8 = 8−3)`,
+  },
+  {
+    conceptId: SUB,
+    subjectSlug: 'mathematics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.ELEMENTARY,
+    // Worked example: 53−28 with borrowing, exposing both MC-1 and MC-3
+    content:
+      "Let's do 53 − 28 in columns, slowly, because two traps live here. " +
+      'Ones column: 3 − 8. You can\'t take 8 from 3 — and the WRONG move ' +
+      'is to quietly flip it to 8 − 3 = 5 (that answers a different ' +
+      'question!). The right move is to BORROW: go next door to the tens. ' +
+      'The 5 tens lend one ten to the ones — but a loan isn\'t free: the ' +
+      'tens column drops from 5 to 4, and you must write that down. Now ' +
+      'the ones have 13: 13 − 8 = 5. Tens column — using the reduced 4, ' +
+      'not the original 5: 4 − 2 = 2. Answer: 25. Check by adding back: ' +
+      '25 + 28 = 53 ✓. Both traps are bookkeeping: don\'t reverse the ' +
+      'digits, and don\'t forget the lender lost a ten.',
+    targetedMisconceptions: [`${SUB}:MC-1`, `${SUB}:MC-3`],
+    source: `${SUB_SRC} — Component 2 MC-1 (SMALLER-FROM-LARGER, 53−28→35) + MC-3 (BORROW-NOT-REDUCED), one stepped worked example`,
+  },
+  {
+    conceptId: SUB,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    // Repair: smaller-from-larger, with the addition-check as the detector
+    content:
+      'A very common habit: whenever a column looks impossible, subtract ' +
+      'the smaller digit from the larger one and move on — 53 − 28: ones ' +
+      'become 8 − 3 = 5, tens 5 − 2 = 3, answer 35. It feels tidy, but ' +
+      "here's the detector every subtraction carries built-in: the answer " +
+      'plus what you took away must rebuild what you started with. Check: ' +
+      '35 + 28 = 63. Not 53. The habit quietly answered a DIFFERENT ' +
+      'question. The 3 in the ones place means the pile is short there — ' +
+      'and the fix is borrowing from the tens (53 is just 40 + 13 in ' +
+      'disguise), not reversing who takes from whom. Reversed columns ' +
+      'always fail the add-back check; borrowed ones always pass it.',
+    targetedMisconceptions: [`${SUB}:MC-1`],
+    source: `${SUB_SRC} — Component 2 MC-1 root cause (reverses to avoid negatives) + Component 5 repair, taught via the add-back verification`,
+  },
+]
+
+const SUB_PROBES: SeedProbe[] = [
+  {
+    conceptId: SUB,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is 62 − 37?',
+    choices: [
+      { text: '25', isCorrect: true },
+      { text: '35 — take the smaller digit from the larger in each column', isCorrect: false, misconceptionId: `${SUB}:MC-1` },
+      { text: '15 — borrow, and also drop the tens by one extra', isCorrect: false },
+    ],
+    correctValue: '25',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SUB}:MC-1`],
+    source: `${SUB_SRC} — Component 2 MC-1 surface pattern with fresh numbers, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -1088,6 +1371,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ADD_EXPLANATIONS,
   ...EQN_EXPLANATIONS,
   ...SET_EXPLANATIONS,
+  ...SV_EXPLANATIONS,
+  ...MUL_EXPLANATIONS,
+  ...SUB_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -1101,4 +1387,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...ADD_PROBES,
   ...EQN_PROBES,
   ...SET_PROBES,
+  ...SV_PROBES,
+  ...MUL_PROBES,
+  ...SUB_PROBES,
 ]
