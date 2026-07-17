@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { Card, ProgressRing, SectionTitle } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+import type { TranslationKey } from '@/lib/i18n'
 import styles from './dashboard.module.css'
 
 interface SubjectProgress {
@@ -33,16 +35,19 @@ interface CoachState {
   hasSignal: boolean
 }
 
-const PACE_TEXT: Record<string, string> = {
-  FAST:   '⚡ Fast pace',
-  STEADY: '🎯 Steady pace',
-  SLOW:   '🐢 Step by step',
+const PACE_KEY: Record<string, TranslationKey> = {
+  FAST: 'dashx_pace_fast',
+  STEADY: 'dashx_pace_steady',
+  SLOW: 'dashx_pace_slow',
 }
 
-const LEVEL_BADGE: Record<string, { label: string; color: string; bg: string }> = {
-  beginner:     { label: 'Getting Started', color: '#fff', bg: 'rgba(255,255,255,0.20)' },
-  intermediate: { label: 'Intermediate',    color: '#fff', bg: 'rgba(255,255,255,0.22)' },
-  advanced:     { label: 'Advanced',        color: '#fff', bg: 'rgba(255,255,255,0.22)' },
+// Reuses the Coach Planner's existing skill-level translations
+// (src/lib/i18n.ts coach_level_*) — same concept (a skill-level label),
+// no new duplicate vocabulary.
+const LEVEL_BADGE: Record<string, { labelKey: TranslationKey; color: string; bg: string }> = {
+  beginner:     { labelKey: 'coach_level_beginner2',    color: '#fff', bg: 'rgba(255,255,255,0.20)' },
+  intermediate: { labelKey: 'coach_level_intermediate', color: '#fff', bg: 'rgba(255,255,255,0.22)' },
+  advanced:     { labelKey: 'coach_level_advanced',     color: '#fff', bg: 'rgba(255,255,255,0.22)' },
 }
 
 function humanize(s: string) {
@@ -50,6 +55,7 @@ function humanize(s: string) {
 }
 
 export function LearningCoachCard() {
+  const { t } = useLanguage()
   const [state, setState] = useState<CoachState | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -96,7 +102,7 @@ export function LearningCoachCard() {
   if (loading) {
     return (
       <div className={styles['coach-section']}>
-        <SectionTitle>🧠 Learning Intelligence</SectionTitle>
+        <SectionTitle>{t('dashx_learning_intelligence')}</SectionTitle>
         <div className={styles['coach-skeleton']}>
           <div className={styles['coach-skeleton-shimmer']} />
         </div>
@@ -107,11 +113,11 @@ export function LearningCoachCard() {
   if (!state || state.subjects.length === 0) {
     return (
       <div className={styles['coach-section']}>
-        <SectionTitle>🧠 Learning Intelligence</SectionTitle>
+        <SectionTitle>{t('dashx_learning_intelligence')}</SectionTitle>
         <Card className={styles['coach-empty-card']}>
           <div className={styles['coach-empty-icon']}>🧠</div>
-          <div className={styles['coach-empty-title']}>Your AI Learning Coach is ready</div>
-          <p className={styles['coach-empty-sub']}>Add your first subject and start learning — personalized insights will appear here as you progress.</p>
+          <div className={styles['coach-empty-title']}>{t('dashx_coach_empty_title')}</div>
+          <p className={styles['coach-empty-sub']}>{t('dashx_coach_empty_sub')}</p>
         </Card>
       </div>
     )
@@ -129,21 +135,21 @@ export function LearningCoachCard() {
   const pace = mastery?.learningPace ?? 'STEADY'
   const weakConcepts = mastery?.weakConcepts ?? []
 
-  const focusTile = weakest ?? { name: 'Keep going', completionPercent: masteryPct }
+  const focusTile = weakest ?? { name: t('dashx_keep_going'), completionPercent: masteryPct }
 
   return (
     <div className={styles['coach-section']}>
-      <SectionTitle>🧠 Learning Intelligence</SectionTitle>
+      <SectionTitle>{t('dashx_learning_intelligence')}</SectionTitle>
       <Card className={styles['coach-card']}>
 
         {/* Gradient header */}
         <div className={styles['coach-header']}>
           <div>
-            <div className={styles['coach-header-title']}>Your AI Learning Coach</div>
-            <div className={styles['coach-header-sub']}>Personalized insights based on your progress</div>
+            <div className={styles['coach-header-title']}>{t('dashx_coach_header_title')}</div>
+            <div className={styles['coach-header-sub']}>{t('dashx_coach_header_sub')}</div>
           </div>
           <span className={styles['coach-level-badge']} style={{ color: badge.color, background: badge.bg }}>
-            {badge.label}
+            {t(badge.labelKey)}
           </span>
         </div>
 
@@ -152,10 +158,10 @@ export function LearningCoachCard() {
           {/* Strongest */}
           <div className={`${styles['coach-tile']} ${styles['coach-tile-green']}`}>
             <span className={styles['coach-tile-icon']}>💪</span>
-            <span className={styles['coach-tile-label']}>Strongest</span>
+            <span className={styles['coach-tile-label']}>{t('dashx_strongest')}</span>
             <span className={styles['coach-tile-name']}>{strongest.name}</span>
             <span className={styles['coach-tile-pct']} style={{ color: 'var(--green)' }}>
-              {strongest.completionPercent > 0 ? `${strongest.completionPercent}%` : 'Build it up!'}
+              {strongest.completionPercent > 0 ? `${strongest.completionPercent}%` : t('dashx_build_it_up')}
             </span>
           </div>
 
@@ -172,21 +178,21 @@ export function LearningCoachCard() {
               label={
                 <div className={styles['coach-ring-inner']}>
                   <span className={styles['coach-ring-pct']}>{masteryPct}%</span>
-                  <span className={styles['coach-ring-word']}>mastery</span>
+                  <span className={styles['coach-ring-word']}>{t('coach_preview_ring_word')}</span>
                 </div>
               }
             />
-            <span className={styles['coach-tile-label']} style={{ marginTop: 6 }}>Mastery Trend</span>
-            <span className={styles['coach-pace']}>{PACE_TEXT[pace] ?? PACE_TEXT.STEADY}</span>
+            <span className={styles['coach-tile-label']} style={{ marginTop: 6 }}>{t('dashx_mastery_trend')}</span>
+            <span className={styles['coach-pace']}>{t(PACE_KEY[pace] ?? PACE_KEY.STEADY)}</span>
           </div>
 
           {/* Focus Here */}
           <div className={`${styles['coach-tile']} ${styles['coach-tile-amber']}`}>
             <span className={styles['coach-tile-icon']}>🎯</span>
-            <span className={styles['coach-tile-label']}>Focus Here</span>
+            <span className={styles['coach-tile-label']}>{t('dashx_focus_here')}</span>
             <span className={styles['coach-tile-name']}>{focusTile.name}</span>
             <span className={styles['coach-tile-pct']} style={{ color: 'var(--yellow-d)' }}>
-              {focusTile.completionPercent > 0 ? `${focusTile.completionPercent}%` : 'Start here!'}
+              {focusTile.completionPercent > 0 ? `${focusTile.completionPercent}%` : t('dashx_start_here')}
             </span>
           </div>
         </div>
@@ -194,7 +200,7 @@ export function LearningCoachCard() {
         {/* Recommended focus chips */}
         {weakConcepts.length > 0 && (
           <div className={styles['coach-focus-row']}>
-            <span className={styles['coach-focus-heading']}>🎯 Recommended Focus</span>
+            <span className={styles['coach-focus-heading']}>{t('dashx_recommended_focus')}</span>
             <div className={styles['coach-focus-chips']}>
               {weakConcepts.slice(0, 4).map(c => (
                 <span key={c} className={styles['coach-focus-chip']}>{humanize(c)}</span>
@@ -215,7 +221,7 @@ export function LearningCoachCard() {
         {!hasSignal && !focusInsight && weakConcepts.length === 0 && (
           <div className={styles['coach-warming-row']}>
             <span>📈</span>
-            <span>Complete more lessons and your coach will build a personalized picture of your strengths and focus areas.</span>
+            <span>{t('dashx_coach_warming')}</span>
           </div>
         )}
 

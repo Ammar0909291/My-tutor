@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import styles from './dashboard.module.css'
 import { Card, ProgressBar } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import type { DailyQuestData } from './types'
 
 interface DailyQuestsProps {
@@ -8,10 +9,11 @@ interface DailyQuestsProps {
 }
 
 export function DailyQuests({ quests }: DailyQuestsProps) {
+  const { t } = useLanguage()
   return (
     <Card className={styles['side-card']}>
       <div className={styles['side-title']}>
-        Daily Quests <Link href="/progress">View all</Link>
+        {t('dashx_daily_quests_title')} <Link href="/progress">{t('dashx_view_all')}</Link>
       </div>
       {quests.map((quest) => {
         const pct = Math.min(100, (quest.progress / quest.target) * 100)

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Card, SectionTitle } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import styles from './dashboard.module.css'
 import type { ActivityItem } from './types'
 
@@ -7,17 +8,17 @@ interface ActivityTimelineProps {
   items: ActivityItem[]
 }
 
-const BUCKET_LABELS = { today: 'Today', yesterday: 'Yesterday', earlier: 'Earlier' }
-
 const DOT_COLORS = ['var(--purple)', 'var(--blue)', 'var(--green)', 'var(--orange)', 'var(--pink)']
 
 export function ActivityTimeline({ items }: ActivityTimelineProps) {
+  const { t } = useLanguage()
+  const BUCKET_LABELS = { today: t('dashx_today'), yesterday: t('dashx_yesterday'), earlier: t('dashx_earlier') }
   const recentCount = items.filter(i => i.bucket === 'today' || i.bucket === 'yesterday').length
 
   if (items.length === 0) {
     return (
       <div className={styles['activity-section']}>
-        <SectionTitle>📖 Learning Journey</SectionTitle>
+        <SectionTitle>{t('dashx_learning_journey')}</SectionTitle>
         <Card className={styles['journey-card']}>
           <div className={styles['journey-empty']}>
             <div className={styles['journey-empty-timeline']}>
@@ -27,9 +28,9 @@ export function ActivityTimeline({ items }: ActivityTimelineProps) {
               <div className={styles['journey-empty-fade-line']} />
             </div>
             <div className={styles['journey-empty-body']}>
-              <div className={styles['journey-empty-title']}>Your first lesson is waiting</div>
-              <div className={styles['journey-empty-sub']}>Complete a lesson and watch your learning story unfold here — one achievement at a time.</div>
-              <Link href="/learn" className={styles['journey-empty-btn']}>Start learning →</Link>
+              <div className={styles['journey-empty-title']}>{t('dashx_journey_empty_title')}</div>
+              <div className={styles['journey-empty-sub']}>{t('dashx_journey_empty_sub')}</div>
+              <Link href="/learn" className={styles['journey-empty-btn']}>{t('dashx_journey_empty_btn')}</Link>
             </div>
           </div>
         </Card>
@@ -48,11 +49,11 @@ export function ActivityTimeline({ items }: ActivityTimelineProps) {
 
   return (
     <div className={styles['activity-section']}>
-      <SectionTitle>📖 Learning Journey</SectionTitle>
+      <SectionTitle>{t('dashx_learning_journey')}</SectionTitle>
       <Card className={styles['journey-card']}>
         {recentCount > 0 && (
           <div className={styles['journey-lead']}>
-            {recentCount} lesson{recentCount !== 1 ? 's' : ''} this week
+            {t('dashx_journey_lead').replace('{n}', String(recentCount))}
           </div>
         )}
 
@@ -66,8 +67,8 @@ export function ActivityTimeline({ items }: ActivityTimelineProps) {
                 const idx = globalIdx++
                 const dotColor = DOT_COLORS[idx % DOT_COLORS.length]
                 const narrativeTitle = item.title
-                  ? `Completed "${item.title}"`
-                  : `Studied ${item.subjectName}`
+                  ? t('dashx_journey_completed').replace('{title}', item.title)
+                  : t('dashx_journey_studied').replace('{subject}', item.subjectName)
                 const isLast = idx === items.length - 1
                 return (
                   <div key={item.id} className={styles['journey-node']}>

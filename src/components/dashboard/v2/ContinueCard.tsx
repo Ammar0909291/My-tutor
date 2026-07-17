@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import styles from './dashboard.module.css'
 import { CandyButton, useConfetti } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import type { ContinueLessonData } from './types'
 
 interface ContinueCardProps {
@@ -12,6 +13,7 @@ interface ContinueCardProps {
 export function ContinueCard({ data }: ContinueCardProps) {
   const fireConfetti = useConfetti()
   const router = useRouter()
+  const { t } = useLanguage()
 
   return (
     <CandyButton
@@ -34,7 +36,7 @@ export function ContinueCard({ data }: ContinueCardProps) {
           <div className={styles['cc-label']}>{data.label}</div>
           <div className={styles['cc-title']}>{data.title}</div>
           <div className={styles['cc-meta']}>
-            +{data.xpReward} XP · about {data.estimatedMinutes} min
+            {t('dashx_continue_meta').replace('{xp}', String(data.xpReward)).replace('{min}', String(data.estimatedMinutes))}
           </div>
         </div>
       </div>

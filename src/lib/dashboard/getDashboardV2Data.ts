@@ -49,6 +49,18 @@ const SUBJECT_COLOR_MAP: Record<string, { color: string; bgColor: string }> = {
 }
 const DEFAULT_SUBJECT_COLORS = { color: 'var(--pink)', bgColor: 'rgba(255,95,162,0.12)' }
 
+// Maps xp.ts's canonical English LeagueTier.name (its stable identifier) to
+// the display translation key — mirrors AchievementCenter's LEVEL_NAME_KEY
+// pattern: the source of truth stays a stable English enum-like value,
+// localization happens only at render/response-shaping time.
+const LEAGUE_NAME_KEY: Record<string, import('@/lib/i18n').TranslationKey> = {
+  'Bronze League': 'dashx_league_bronze',
+  'Silver League': 'dashx_league_silver',
+  'Gold League': 'dashx_league_gold',
+  'Sapphire League': 'dashx_league_sapphire',
+  'Diamond League': 'dashx_league_diamond',
+}
+
 export function getLevel(xp: number): { name: string; color: string; next: number | null } {
   if (xp >= 1001) return { name: 'Master',       color: 'var(--yellow)', next: null }
   if (xp >= 601)  return { name: 'Expert',       color: 'var(--blue)',   next: 1001 }
@@ -106,15 +118,15 @@ function emptyContinueLesson(lang: Lang = 'en'): ContinueLessonData {
   }
 }
 
-export function buildPracticeModes(tutorHref: string): PracticeModeData[] {
+export function buildPracticeModes(tutorHref: string, lang: Lang = 'en'): PracticeModeData[] {
   return [
-    { id: 'tutor', emoji: '👨‍🏫', name: 'Tutor', description: 'Live lesson with code', href: tutorHref },
-    { id: 'quiz',  emoji: '🎯',   name: 'Quiz',  description: 'Test your skills', badge: 'NEW', href: '/quiz' },
-    { id: 'coach', emoji: '🧭',   name: 'Coach', description: 'Your study plan', href: '/coach' },
+    { id: 'tutor', emoji: '👨‍🏫', name: t(lang, 'dashx_mode_tutor_name'), description: t(lang, 'dashx_mode_tutor_desc'), href: tutorHref },
+    { id: 'quiz',  emoji: '🎯',   name: t(lang, 'dashx_mode_quiz_name'),  description: t(lang, 'dashx_mode_quiz_desc'), badge: t(lang, 'dashx_mode_quiz_badge'), href: '/quiz' },
+    { id: 'coach', emoji: '🧭',   name: t(lang, 'dashx_mode_coach_name'), description: t(lang, 'dashx_mode_coach_desc'), href: '/coach' },
   ]
 }
 
-export function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string): SkillNodeData[] {
+export function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji: string, lang: Lang = 'en'): SkillNodeData[] {
   if (allChapters.length === 0) return []
   let idx = allChapters.findIndex((c) => c.status === 'current')
   if (idx === -1) idx = allChapters.length - 1
@@ -122,7 +134,7 @@ export function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji:
   const end = Math.min(allChapters.length, start + 5)
   return allChapters.slice(start, end).map((c) => {
     const raw = c.title ?? ''
-    const label = raw.length > 16 ? raw.slice(0, 15) + '…' : raw || `Ch. ${c.order}`
+    const label = raw.length > 16 ? raw.slice(0, 15) + '…' : raw || t(lang, 'dashx_ch_n').replace('{n}', String(c.order))
     return {
       id: c.id,
       status: c.status === 'completed' ? 'done' : c.status === 'current' ? 'current' : 'locked',
@@ -135,6 +147,7 @@ export function buildSchoolSkillPath(allChapters: RoadmapChapter[], activeEmoji:
 export function buildLibrarySkillPath(
   sp: { currentLesson: number; completedLessons: number[] } | undefined,
   activeEmoji: string,
+  lang: Lang = 'en',
 ): SkillNodeData[] {
   const current = sp?.currentLesson ?? 1
   const completed = new Set(sp?.completedLessons ?? [])
@@ -145,7 +158,7 @@ export function buildLibrarySkillPath(
     if (n === current) status = 'current'
     else if (n < current || completed.has(n)) status = 'done'
     else status = 'locked'
-    nodes.push({ id: `lesson-${n}`, status, emoji: status === 'current' ? activeEmoji : status === 'locked' ? '🔒' : undefined, label: `Lesson ${n}` })
+    nodes.push({ id: `lesson-${n}`, status, emoji: status === 'current' ? activeEmoji : status === 'locked' ? '🔒' : undefined, label: t(lang, 'dashx_lesson_n').replace('{n}', String(n)) })
   }
   return nodes
 }
@@ -287,7 +300,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
 
     if (schoolSlugs.length === 0) {
       continueLesson = emptyContinueLesson(dashLang)
-      practiceModes = buildPracticeModes('/learn')
+      practiceModes = buildPracticeModes('/learn', dashLang)
       skillPath = []
       dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
     } else {
@@ -315,20 +328,20 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
         const href = `/learn?subject=${activeSlug}&chapter=${encodeURIComponent(chapter.id)}`
         continueLesson = {
           emoji: meta?.icon ?? '📘',
-          label: `${meta?.label ?? activeSlug} · Chapter ${chapter.order}`,
+          label: `${meta?.label ?? activeSlug} · ${t(dashLang, 'dashx_chapter_n').replace('{n}', String(chapter.order))}`,
           title: chapterDisplayTitle(chapter.title),
           xpReward: 10,
           estimatedMinutes: 15,
           href,
         }
-        practiceModes = buildPracticeModes(href)
+        practiceModes = buildPracticeModes(href, dashLang)
       } else {
         continueLesson = emptyContinueLesson(dashLang)
-        practiceModes = buildPracticeModes('/learn')
+        practiceModes = buildPracticeModes('/learn', dashLang)
       }
 
       const roadmap = await getSubjectRoadmap(userId, board, grade, activeSlug).catch(() => null)
-      skillPath = roadmap ? buildSchoolSkillPath(roadmap.allChapters, meta?.icon ?? '📘') : []
+      skillPath = roadmap ? buildSchoolSkillPath(roadmap.allChapters, meta?.icon ?? '📘', dashLang) : []
 
       // School subjects as dashboard content cards — same SubjectsGrid V2 component
       // the Library Mode shell already uses; only the data source differs.
@@ -421,17 +434,17 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       const href = `/learn?subject=${slug}`
       continueLesson = {
         emoji: lib?.icon ?? '📘',
-        label: `${lib?.name ?? activePs.subject.name} · Lesson ${lessonNum}`,
-        title: sp?.lastLessonTitle ?? `Lesson ${lessonNum}`,
+        label: `${lib?.name ?? activePs.subject.name} · ${t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum))}`,
+        title: sp?.lastLessonTitle ?? t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum)),
         xpReward: 10,
         estimatedMinutes: 5,
         href,
       }
-      practiceModes = buildPracticeModes(href)
-      skillPath = buildLibrarySkillPath(sp ?? { currentLesson: lessonNum, completedLessons: [] }, lib?.icon ?? '📘')
+      practiceModes = buildPracticeModes(href, dashLang)
+      skillPath = buildLibrarySkillPath(sp ?? { currentLesson: lessonNum, completedLessons: [] }, lib?.icon ?? '📘', dashLang)
     } else {
       continueLesson = emptyContinueLesson(dashLang)
-      practiceModes = buildPracticeModes('/learn')
+      practiceModes = buildPracticeModes('/learn', dashLang)
       skillPath = []
     }
 
@@ -459,8 +472,11 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
   const dailyGoalPercent = Math.min(100, Math.round((sessionsToday / dailyGoalTarget) * 100))
   const remaining = Math.max(0, dailyGoalTarget - sessionsToday)
   const dailyGoalDescription = remaining === 0
-    ? 'Goal complete! Amazing work today! 🎉'
-    : `${sessionsToday} of ${dailyGoalTarget} ${dailyGoalTarget === 1 ? 'lesson' : 'lessons'} done — ${remaining} more to hit your goal!`
+    ? t(dashLang, 'dashx_daily_goal_complete')
+    : t(dashLang, 'dashx_daily_goal_progress')
+        .replace('{done}', String(sessionsToday))
+        .replace('{target}', String(dailyGoalTarget))
+        .replace('{remaining}', String(remaining))
 
   // League
   const myXP = myWeeklyXP?.xp ?? 0
@@ -517,10 +533,10 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       id: 'q-lessons',
       icon: '📚',
       iconBg: 'q1',
-      name: 'Daily Lessons',
+      name: t(dashLang, 'dashx_quest_lessons_name'),
       progress: sessionsToday,
       target: dailyGoalTarget,
-      unitLabel: 'lessons',
+      unitLabel: t(dashLang, 'dashx_quest_lessons_unit'),
       gradientFrom: '#FFC800',
       gradientTo: '#FF9600',
     },
@@ -528,10 +544,10 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       id: 'q-practice',
       icon: '🎯',
       iconBg: 'q2',
-      name: 'Practice Sessions',
+      name: t(dashLang, 'dashx_quest_practice_name'),
       progress: practiceCountToday,
       target: 3,
-      unitLabel: 'sessions',
+      unitLabel: t(dashLang, 'dashx_quest_practice_unit'),
       gradientFrom: '#3B9EFF',
       gradientTo: '#1B7EEF',
     },
@@ -539,10 +555,10 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       id: 'q-mastery',
       icon: '⭐',
       iconBg: 'q3',
-      name: 'Topics Mastered',
+      name: t(dashLang, 'dashx_quest_mastery_name'),
       progress: Math.min(topicsMastered, 5),
       target: 5,
-      unitLabel: 'topics',
+      unitLabel: t(dashLang, 'dashx_quest_mastery_unit'),
       gradientFrom: '#FF5FA2',
       gradientTo: '#FF3F82',
     },
@@ -563,14 +579,14 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     },
     dailyGoal: {
       percent: dailyGoalPercent,
-      title: 'Daily Goal 🎯',
+      title: t(dashLang, 'dashx_daily_goal_title'),
       description: dailyGoalDescription,
     },
     continueLesson,
     practiceModes,
     skillPath,
     league: {
-      name: tier.name,
+      name: t(dashLang, LEAGUE_NAME_KEY[tier.name] ?? 'dashx_league_bronze'),
       emoji: tier.emoji,
       subtitle: myRank ? t(dashLang, 'dashx_leaderboard_rank').replace('{rank}', String(myRank)) : t(dashLang, 'dashx_leaderboard_join'),
       entries,

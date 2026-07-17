@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import styles from './dashboard.module.css'
 import { Card } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import type { LeagueData } from './types'
 
 interface LeagueCardProps {
@@ -8,10 +9,11 @@ interface LeagueCardProps {
 }
 
 export function LeagueCard({ league }: LeagueCardProps) {
+  const { t } = useLanguage()
   return (
     <Card className={styles['side-card']}>
       <div className={styles['side-title']}>
-        League <Link href="/leaderboard">View all</Link>
+        {t('dashx_league_title')} <Link href="/leaderboard">{t('dashx_view_all')}</Link>
       </div>
       <div className={styles['league-banner']}>
         <div className={styles['league-icon']}>{league.emoji}</div>

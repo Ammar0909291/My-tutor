@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, SectionTitle } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import styles from './dashboard.module.css'
 
 interface ReviewItem {
@@ -35,6 +36,7 @@ function humanizeConcept(id: string): string {
  */
 export function ReviewQueueCard() {
   const router = useRouter()
+  const { t } = useLanguage()
   const [state, setState] = useState<ReviewQueueState | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -51,7 +53,7 @@ export function ReviewQueueCard() {
   if (loading) {
     return (
       <div className={styles['coach-section']}>
-        <SectionTitle>🔁 Review Queue</SectionTitle>
+        <SectionTitle>{t('dashx_review_queue_title')}</SectionTitle>
         <div className={styles['coach-skeleton']}>
           <div className={styles['coach-skeleton-shimmer']} />
         </div>
@@ -65,21 +67,21 @@ export function ReviewQueueCard() {
 
   return (
     <div className={styles['coach-section']}>
-      <SectionTitle>🔁 Review Queue</SectionTitle>
+      <SectionTitle>{t('dashx_review_queue_title')}</SectionTitle>
       <Card className={styles['coach-card']}>
         <div className={styles['coach-header']}>
           <div>
             <div className={styles['coach-header-title']}>
-              {state.totalDue} concept{state.totalDue === 1 ? '' : 's'} due for review
+              {t('dashx_review_due_n').replace('{n}', String(state.totalDue))}
             </div>
             <div className={styles['coach-header-sub']}>
-              Quick retrieval practice keeps mastered concepts from fading
+              {t('dashx_review_sub')}
             </div>
           </div>
         </div>
 
         <div className={styles['coach-focus-row']}>
-          <span className={styles['coach-focus-heading']}>🎯 Due now</span>
+          <span className={styles['coach-focus-heading']}>{t('dashx_due_now')}</span>
           <div className={styles['coach-focus-chips']}>
             {items.map((item) => (
               <button
@@ -87,7 +89,7 @@ export function ReviewQueueCard() {
                 type="button"
                 className={styles['coach-focus-chip']}
                 onClick={() => router.push(`/learn?subject=${encodeURIComponent(item.subject)}`)}
-                title={item.overdue ? `${item.daysOverdue} day${item.daysOverdue === 1 ? '' : 's'} overdue` : 'Due today'}
+                title={item.overdue ? t('dashx_days_overdue').replace('{n}', String(item.daysOverdue)) : t('dashx_due_today')}
               >
                 {humanizeConcept(item.conceptId)}
               </button>
