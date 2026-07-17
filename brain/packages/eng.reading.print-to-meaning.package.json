@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.print-to-meaning-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.print-to-meaning",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a5d6387434d8f777fe73a8ed6080d9497c57ea67cb543a34719acdb2ed635392",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.print-to-meaning.md": "sha256:3a07a0af7938adde07bfce7d606073a93703f7e629913567485575d9fd683f54"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.reading.print-to-meaning",
+    "name": "From Print to Meaning",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonics.decoding-fluency",
+      "eng.vocab.context-clues"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.print-to-meaning-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.print-to-meaning (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.print-to-meaning.md": "sha256:3a07a0af7938adde07bfce7d606073a93703f7e629913567485575d9fd683f54"
+      },
+      "contentHash": "sha256:587f2027aa5e4a2fde60d45c46cb75c1962b5c49a2c4977112f993a64c723d05",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.print-to-meaning.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md#TA-1 (addresses MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.print-to-meaning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.print-to-meaning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.print-to-meaning.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.print-to-meaning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.print-to-meaning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.print-to-meaning.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md#TA-3 (addresses MC-COMPREHENSION-IS-ALL-OR-NOTHING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.print-to-meaning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.print-to-meaning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.print-to-meaning.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.print-to-meaning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.print-to-meaning\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.print-to-meaning.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md#TA-5 (addresses MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION, MC-COMPREHENSION-IS-ALL-OR-NOTHING)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.print-to-meaning"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.print-to-meaning\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.print-to-meaning/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "From Print to Meaning — Conceptual Development Sequence",
+      "content": "**TA-1 — Read-Then-Retell Practice [C]**\n\nStudent reads a short passage fluently, then immediately retells its content in their own words, directly practicing the connection between decoding and comprehension, targeting MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION.\n\n**TA-2 — Self-Monitoring While Reading [C]**\n\nStudent practices pausing periodically while reading to ask \"does this make sense? can I explain what just happened?\" — building an active, ongoing comprehension-check habit rather than waiting until the end.\n\n**TA-3 — Identifying Partial Understanding [C→P]**\n\nStudent reads a moderately challenging passage and explicitly separates what they DID understand (main idea, characters, general plot) from SPECIFIC gaps (one unfamiliar word, one unclear sentence), directly targeting MC-COMPREHENSION-IS-ALL-OR-NOTHING.\n\n**TA-4 — Applying Repair Strategies for Gaps [P]**\n\nFor each specific gap identified in TA-3, student applies an appropriate repair strategy (reread the confusing sentence, use context clues for an unfamiliar word, ask a clarifying question) and confirms whether the gap is resolved.\n\n**TA-5 — Integrating Decoding, Vocabulary, and Comprehension in Extended Text [P]**\n\nStudent reads a longer, unseen passage combining decoding fluency, context-clue vocabulary inference, and active self-monitoring, then answers comprehension questions and provides an accurate retelling — demonstrating the full integration this concept is designed to build.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/misconception/MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION",
+      "kind": "misconception",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "- **Trigger signal:** Student reads a passage aloud accurately and fluently (correct words, appropriate pace, good expression) but cannot answer basic comprehension questions afterward, treating successful oral performance as the end goal rather than a means to understanding — the student has essentially \"performed\" the text without genuinely processing its meaning.",
+      "content": "### MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION\n- **Trigger signal:** Student reads a passage aloud accurately and fluently (correct words, appropriate pace, good expression) but cannot answer basic comprehension questions afterward, treating successful oral performance as the end goal rather than a means to understanding — the student has essentially \"performed\" the text without genuinely processing its meaning.\n- **Conflict evidence [P28]:** \"You read that whole paragraph perfectly — every word right, nice pace, good expression. Now, without looking back, tell me: what was the paragraph actually about?\"\n- **Bridge text [P30]:** \"Reading accurately and fluently is necessary but NOT sufficient for comprehension — it's entirely possible to decode every word correctly while your attention/thinking is elsewhere, producing accurate sound without processed meaning. Genuine reading comprehension requires actively connecting decoded words to their meanings and integrating them into an understanding of the whole passage, not just performing correct pronunciation.\"\n- **Replacement text [P31]:** \"After (or while) reading, actively check: can I explain what this said in my own words? Correct pronunciation alone doesn't confirm understanding.\"\n- **Discrimination pairs [P33]:**\n  - Reading a paragraph flawlessly aloud but being unable to summarize it (decoding without comprehension) vs. reading the same paragraph and being able to explain its content and main idea (genuine comprehension).\n  - \"Barking at print\" (fluent-sounding but disconnected-from-meaning oral reading) vs. reading that pauses/self-monitors for understanding.\n- **s6_path:** \"It's easy to feel like reading correctly IS the whole job, especially after all the hard work of building decoding fluency — but connecting those correctly-read words to genuine understanding is a separate, essential final step.\"",
+      "localKey": "MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION",
+      "language": "en",
+      "refs": [
+        "MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/misconception/MC-COMPREHENSION-IS-ALL-OR-NOTHING",
+      "kind": "misconception",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "- **Trigger signal:** Student treats comprehension as a binary state (either \"I understood everything\" or \"I understood nothing\"), rather than recognizing that real reading comprehension is often PARTIAL and can be actively improved through specific strategies (rereading, using context clues, self-questioning) — leading to either false confidence (claiming full understanding without checking) or excessive discouragement (giving up entirely when one part is unclear).",
+      "content": "### MC-COMPREHENSION-IS-ALL-OR-NOTHING\n- **Trigger signal:** Student treats comprehension as a binary state (either \"I understood everything\" or \"I understood nothing\"), rather than recognizing that real reading comprehension is often PARTIAL and can be actively improved through specific strategies (rereading, using context clues, self-questioning) — leading to either false confidence (claiming full understanding without checking) or excessive discouragement (giving up entirely when one part is unclear).\n- **Conflict evidence [P28]:** \"You said you didn't understand this paragraph at all. But you just correctly told me who the main character was and what they wanted. Is that 'nothing,' or is that a partial understanding you can build on?\"\n- **Bridge text [P30]:** \"Comprehension exists on a SPECTRUM, not as an all-or-nothing switch — you might fully understand the main idea but be unsure about one specific word, or grasp the plot but miss a subtle inference. Recognizing PARTIAL understanding, and then using strategies (rereading a confusing sentence, using context clues for an unknown word, asking yourself questions) to fill gaps, is the actual skill of active comprehension — not achieving instant, complete understanding on the first pass.\"\n- **Replacement text [P31]:** \"Notice what you DID understand, identify the SPECIFIC gaps, and apply a targeted strategy (reread, use context clues, ask a clarifying question) to close them — rather than treating any confusion as total failure.\"\n- **Discrimination pairs [P33]:**\n  - \"I understood the main story but not what 'ephemeral' meant\" (partial, specific, workable gap) vs. \"I understood nothing\" (an inaccurate, discouraged overgeneralization).\n  - Giving up after one confusing sentence (all-or-nothing response) vs. rereading just that sentence and continuing (targeted strategy use).\n- **s6_path:** \"It's natural to feel like any confusion means you 'didn't get it' — but real readers, even skilled ones, regularly have partial understanding and use specific strategies to fill in gaps, rather than expecting instant, complete comprehension every time.\"\n\n---",
+      "localKey": "MC-COMPREHENSION-IS-ALL-OR-NOTHING",
+      "language": "en",
+      "refs": [
+        "MC-COMPREHENSION-IS-ALL-OR-NOTHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "Read-Then-Retell Practice",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Read-Then-Retell Practice\",\"primitives\":[],\"addresses\":[\"MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "Self-Monitoring While Reading",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Self-Monitoring While Reading\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "Identifying Partial Understanding",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Identifying Partial Understanding\",\"primitives\":[],\"addresses\":[\"MC-COMPREHENSION-IS-ALL-OR-NOTHING\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-COMPREHENSION-IS-ALL-OR-NOTHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "Applying Repair Strategies for Gaps",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Applying Repair Strategies for Gaps\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "Integrating Decoding, Vocabulary, and Comprehension in Extended Text",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Integrating Decoding, Vocabulary, and Comprehension in Extended Text\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-COMPREHENSION-IS-ALL-OR-NOTHING\",\"MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION",
+        "MC-COMPREHENSION-IS-ALL-OR-NOTHING"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Read-then-retell, novel passage**\n\"Read this passage, then retell it in your own words.\"\n*Target:* fluent reading followed by an accurate, meaningful retelling — not just correct pronunciation.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Self-monitoring demonstration**\n\"Show me how you'd check your own understanding while reading this passage.\"\n*Target:* demonstrates pausing to self-question at appropriate points, not just reading straight through.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Partial understanding identification**\n\"After reading this passage, what did you understand well, and what's still unclear?\"\n*Target:* provides a specific, honest breakdown rather than an all-or-nothing judgment.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Repair strategy application**\n\"You found one word unclear in that passage. What strategy would you use to figure it out?\"\n*Target:* correctly proposes and applies an appropriate strategy (context clues, rereading) rather than giving up.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the print-to-meaning bridge**\n\"In your own words: is reading correctly out loud the same as understanding what you read, and what do you do when you only partly understand something?\"\n*Target:* states or demonstrates that accurate oral reading doesn't guarantee comprehension, and that partial understanding is normal and workable through specific repair strategies rather than being treated as total failure.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "Adaptive Flags",
+      "content": "- **Decoding fluency and comprehension must be explicitly bridged, never assumed to co-occur automatically**: this concept's entire purpose is countering the natural but false assumption that accurate oral reading guarantees understanding — the read-then-retell check (Component 3) should be a standing practice, not a one-time demonstration.\n- **Partial understanding is the normal, expected state, not a failure mode**: explicitly teach and reinforce the gap-identification-and-repair framework (TA-3/TA-4) as the core active-comprehension skill, rather than expecting or requiring instant full understanding.\n- **This concept genuinely unites two previously separate skill strands**: decoding fluency (phonics) and context-based vocabulary inference (vocab) — reinforce this integration explicitly as the concept's unique value, rather than treating it as redundant with either prerequisite alone.\n- **Special priority for learners whose decoding outpaces their comprehension**: for S9 (and some native-speaker) learners where strong phonics instruction has produced fluent decoding ahead of full vocabulary/background-knowledge development, treat explicit comprehension-checking as a priority skill from the earliest instruction, not an assumed byproduct of fluency.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.reading.print-to-meaning/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.print-to-meaning",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — reading-then-retell check warm-up\n  ↓\n[P41] PD-1 (decoding fluency readiness)\n  ↓ PASS\n[P41] PD-2 (context-clues readiness)\n  ↓ PASS\n[P06] Anchor: reading-then-retell check (contrast fluent-only vs. paused self-checking reading)\n  ↓\nTA-1: Read-then-retell practice [C]\n  ↓\n[P28] Conflict: fluent reading treated as sufficient → MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION (if triggered)\n  ↓\nTA-2: Self-monitoring while reading [C]\n  ↓\nTA-3: Identifying partial understanding [C→P]\n  ↓\n[P28] Conflict: comprehension treated as all-or-nothing → MC-COMPREHENSION-IS-ALL-OR-NOTHING (if triggered)\n  ↓\nTA-4: Applying repair strategies for gaps [P]\n  ↓\nTA-5: Integrating decoding, vocabulary, and comprehension in extended text [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, read one paragraph and note one thing you understood well and one gap, plus how you'd fix it.\"\n[P68] Session close\n[P85] Regulation tail — praise active self-checking and honest partial-understanding reporting\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on decoding fluency and context clues separately, new to their integration): dwell on TA-1's read-then-retell contrast before introducing the more nuanced partial-understanding framework. S1 (already comprehends well but hasn't developed explicit self-monitoring habits): use TA-2/TA-3 to build metacognitive vocabulary and habits for an already-present but unconscious skill. S6 (discouraged by any confusion while reading, prone to giving up): explicitly validate partial understanding as normal and workable (Component 1 s6_path), building confidence in the repair-strategy approach rather than an all-or-nothing self-assessment. S9 (English learner whose decoding may be accurate but whose vocabulary/background knowledge gaps are larger, making the fluent-reading-without-comprehension gap especially pronounced): expect MC-READING-ALOUD-CORRECTLY-EQUALS-COMPREHENSION to be a particularly salient risk for this learner, since strong phonics instruction can produce accurate decoding well ahead of vocabulary/comprehension development — prioritize explicit comprehension-checking routines from early instruction rather than assuming fluent oral reading implies understanding.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.print-to-meaning.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

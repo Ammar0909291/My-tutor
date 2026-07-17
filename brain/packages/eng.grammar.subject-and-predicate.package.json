@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.subject-and-predicate-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.subject-and-predicate",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:abb4ca7aded584863ece8f5bb49684f5f4a82b1582867830838a02bed6084abf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md": "sha256:94b82914b792cb3a745e237cd9e50f88f00cb1c39b7d1f6be323ddd141e5c998"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.subject-and-predicate",
+    "name": "Subject and Predicate",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.nouns",
+      "eng.grammar.verbs"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.subject-and-predicate-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.subject-and-predicate (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md": "sha256:94b82914b792cb3a745e237cd9e50f88f00cb1c39b7d1f6be323ddd141e5c998"
+      },
+      "contentHash": "sha256:1eda17d2c86793dd1c14f2ad3ad91668e7d287326f95f9fabb9a1a90ed93f077",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-and-predicate.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-and-predicate"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-and-predicate\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-and-predicate.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md#TA-2 (addresses MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-and-predicate"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-and-predicate\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-and-predicate.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md#TA-3 (addresses MC-PREDICATE-IS-JUST-THE-VERB)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-and-predicate"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-and-predicate\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-and-predicate.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-and-predicate"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-and-predicate\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.subject-and-predicate.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md#TA-5 (addresses MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD, MC-PREDICATE-IS-JUST-THE-VERB)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.subject-and-predicate"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.subject-and-predicate\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.subject-and-predicate/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "Subject and Predicate — Conceptual Development Sequence",
+      "content": "**TA-1 — Identifying the Simple Subject and Simple Predicate [C]**\n\nPresent short, simple sentences (subject-verb only or subject-verb-object); student splits into subject and predicate using the \"who/what + what's said about it\" test.\n\n**TA-2 — Sentences with Introductory Phrases [C]**\n\nPresent sentences starting with introductory phrases (In the morning, After school, Suddenly); student correctly identifies the TRUE subject rather than the introductory phrase, directly targeting MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD.\n\n**TA-3 — Full (Complete) Predicate Identification [C→P]**\n\nPresent sentences with predicates including objects, complements, and modifiers (chased the ball across the yard); student identifies the FULL predicate, not just the main verb, directly targeting MC-PREDICATE-IS-JUST-THE-VERB.\n\n**TA-4 — Compound Subjects and Compound Predicates [P]**\n\nPresent sentences with compound subjects (Tom and Jerry ran) or compound predicates (She sang and danced); student identifies both parts of the compound structure.\n\n**TA-5 — Subject/Predicate Identification in Longer, Varied Sentences [P]**\n\nStudent applies the full subject/predicate identification skill to longer, more complex sentences combining introductory phrases, compound structures, and extended predicates.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/misconception/MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "- **Trigger signal:** Student identifies the subject as simply \"whichever word/phrase comes first\" in the sentence, rather than identifying WHO or WHAT the sentence is about — leading to errors when a sentence begins with an introductory phrase, adverb, or prepositional phrase rather than the true subject (e.g., in \"In the morning, the birds sing,\" incorrectly identifies \"In the morning\" as the subject rather than \"the birds\").",
+      "content": "### MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD\n- **Trigger signal:** Student identifies the subject as simply \"whichever word/phrase comes first\" in the sentence, rather than identifying WHO or WHAT the sentence is about — leading to errors when a sentence begins with an introductory phrase, adverb, or prepositional phrase rather than the true subject (e.g., in \"In the morning, the birds sing,\" incorrectly identifies \"In the morning\" as the subject rather than \"the birds\").\n- **Conflict evidence [P28]:** \"You said 'In the morning' is the subject because it comes first. But who or what is doing the singing in this sentence? Is 'In the morning' doing any action, or is it just telling us WHEN?\"\n- **Bridge text [P30]:** \"The subject is WHO or WHAT the sentence is about — usually the doer of the action or the thing being described — not simply whatever word or phrase happens to appear first. Introductory phrases (In the morning, After school, Quickly) often come before the true subject and answer a different question (when? how? where?), not 'who/what is this sentence about?'\"\n- **Replacement text [P31]:** \"Ask 'who or what is this sentence about, or who/what is doing the action?' to find the subject — don't assume it's simply the first word or phrase.\"\n- **Discrimination pairs [P33]:**\n  - \"In the morning, the birds sing\" (subject = \"the birds,\" not the introductory phrase \"In the morning\").\n  - \"Quickly, she finished her homework\" (subject = \"she,\" not \"Quickly,\" which is an adverb describing how).\n- **s6_path:** \"Assuming the subject is just the first word is a very reasonable first strategy, since it often works in simple sentences — but sentences starting with introductory phrases are common enough that checking 'who/what is doing the action' is the more reliable test.\"",
+      "localKey": "MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD",
+      "language": "en",
+      "refs": [
+        "MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/misconception/MC-PREDICATE-IS-JUST-THE-VERB",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "- **Trigger signal:** Student defines the predicate as only the single verb word, rather than recognizing it as EVERYTHING in the sentence that tells what the subject does or is — including the verb plus its objects, complements, and modifiers (e.g., in \"The dog chased the ball across the yard,\" the predicate is the whole phrase \"chased the ball across the yard,\" not just \"chased\").",
+      "content": "### MC-PREDICATE-IS-JUST-THE-VERB\n- **Trigger signal:** Student defines the predicate as only the single verb word, rather than recognizing it as EVERYTHING in the sentence that tells what the subject does or is — including the verb plus its objects, complements, and modifiers (e.g., in \"The dog chased the ball across the yard,\" the predicate is the whole phrase \"chased the ball across the yard,\" not just \"chased\").\n- **Conflict evidence [P28]:** \"In 'The dog chased the ball across the yard,' you said the predicate is just 'chased.' But does 'the ball across the yard' also tell us more about what happened? Is that part of what's being said ABOUT the subject 'the dog'?\"\n- **Bridge text [P30]:** \"The predicate is EVERYTHING in the sentence except the subject — it includes the main verb PLUS any objects, complements, and modifiers that complete the statement about the subject. 'Chased' is the main verb within the predicate, but 'chased the ball across the yard' is the FULL predicate — everything that tells us what the dog did.\"\n- **Replacement text [P31]:** \"Identify the predicate as everything in the sentence EXCEPT the subject — the verb plus everything that completes the statement, not just the single verb word.\"\n- **Discrimination pairs [P33]:**\n  - \"chased\" (just the main verb, a common but incomplete answer) vs. \"chased the ball across the yard\" (the full, correct predicate).\n  - \"The children played happily in the park\" — predicate = \"played happily in the park\" (not just \"played\").\n- **s6_path:** \"It's a natural simplification to think of the predicate as 'the verb,' since the verb is the core action word — but the full predicate includes everything describing what the subject does or is, which is a more complete and useful way to think about sentence structure.\"\n\n---",
+      "localKey": "MC-PREDICATE-IS-JUST-THE-VERB",
+      "language": "en",
+      "refs": [
+        "MC-PREDICATE-IS-JUST-THE-VERB"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "Identifying the Simple Subject and Simple Predicate",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Identifying the Simple Subject and Simple Predicate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "Sentences with Introductory Phrases",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Sentences with Introductory Phrases\",\"primitives\":[],\"addresses\":[\"MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "Full (Complete) Predicate Identification",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Full (Complete) Predicate Identification\",\"primitives\":[],\"addresses\":[\"MC-PREDICATE-IS-JUST-THE-VERB\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-PREDICATE-IS-JUST-THE-VERB"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "Compound Subjects and Compound Predicates",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Compound Subjects and Compound Predicates\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "Subject/Predicate Identification in Longer, Varied Sentences",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Subject/Predicate Identification in Longer, Varied Sentences\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-PREDICATE-IS-JUST-THE-VERB\",\"MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD",
+        "MC-PREDICATE-IS-JUST-THE-VERB"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Simple subject/predicate, novel sentence**\n\"In 'The baby cried,' identify the subject and predicate.\"\n*Target:* subject = \"The baby\"; predicate = \"cried.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Introductory phrase, novel sentence**\n\"In 'Quickly, the firefighter climbed the ladder,' identify the true subject.\"\n*Target:* \"the firefighter\" — not \"Quickly,\" which is an adverb.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Full predicate, novel sentence**\n\"In 'The children built a sandcastle on the beach,' identify the full predicate.\"\n*Target:* \"built a sandcastle on the beach\" — the entire phrase, not just \"built.\"",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Compound subject/predicate**\n\"In 'Maria and Tom cooked and cleaned,' identify the compound subject and compound predicate.\"\n*Target:* compound subject = \"Maria and Tom\"; compound predicate = \"cooked and cleaned.\"",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain subject and predicate**\n\"In your own words: how do you find the subject of a sentence, and is the predicate just the verb?\"\n*Target:* states or demonstrates that the subject is who/what the sentence is about (found by asking who/what, not just the first word), and that the predicate is everything else — the full verb phrase plus objects, complements, and modifiers, not just the single verb.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "Adaptive Flags",
+      "content": "- **Who/what test over first-word assumption**: always train students to ask \"who or what is this about?\" rather than defaulting to the first word/phrase, especially given how common introductory phrases are in natural writing.\n- **Full predicate, not just the verb**: consistently require identification of the ENTIRE predicate (verb + objects/complements/modifiers) as the correct answer, directly countering the common verb-only shortcut.\n- **Compound structures build naturally on the simple pattern**: introduce compound subjects/predicates only after the simple subject/predicate distinction is secure, as a natural extension rather than a separate topic.\n- **Word-order and pro-drop transfer for specific L1 backgrounds**: for S9 learners from L1s with different word order or implied/omitted subjects, provide explicit contrastive practice on English's requirement for an always-present, identifiable subject.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.grammar.subject-and-predicate/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.subject-and-predicate",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — sentence split warm-up (simple sentence, cut into two parts)\n  ↓\n[P41] PD-1 (noun readiness)\n  ↓ PASS\n[P41] PD-2 (verb readiness)\n  ↓ PASS\n[P06] Anchor: sentence split (including introductory-phrase and long-predicate examples)\n  ↓\nTA-1: Identifying the simple subject and simple predicate [C]\n  ↓\nTA-2: Sentences with introductory phrases [C]\n  ↓\n[P28] Conflict: subject assumed to be the first word → MC-SUBJECT-IS-ALWAYS-THE-FIRST-WORD (if triggered)\n  ↓\nTA-3: Full (complete) predicate identification [C→P]\n  ↓\n[P28] Conflict: predicate reduced to just the verb → MC-PREDICATE-IS-JUST-THE-VERB (if triggered)\n  ↓\nTA-4: Compound subjects and compound predicates [P]\n  ↓\nTA-5: Subject/predicate identification in longer, varied sentences [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, split one sentence into its subject and full predicate.\"\n[P68] Session close\n[P85] Regulation tail — praise checking who/what over assuming the first word, and full predicate over just the verb\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on nouns/verbs, new to sentence structure): dwell on TA-1's simple subject-verb sentences before introducing introductory phrases or extended predicates. S1 (already writes fluent sentences but hasn't formally analyzed subject/predicate structure): use this concept to build explicit, transferable structural awareness for an already-present intuitive skill. S6 (frustrated by sentences that don't fit the simple \"first word = subject\" pattern): validate that the who/what test is more reliable and worth the extra step, especially as sentences become more varied and complex. S9 (L1 has different word order, e.g. verb-first or verb-final languages, or a pro-drop language where the subject can be omitted/implied): expect subject identification specifically to require more explicit contrastive teaching, since the concept of an always-explicit English subject (even in imperatives, where \"you\" is implied) may not map cleanly from certain L1 structures.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.subject-and-predicate.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
