@@ -1,0 +1,394 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonics.syllable-types-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonics.syllable-types",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0426fa9f40864eb7f7835d96bf5468f39150a5e348f9053474df674f91d16474",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonics.syllable-types.md": "sha256:fa5ebd9ea783f9e51b455b0ed3b9ac34d65b1fe5d0c1032200c6a54e3af91725"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonics.syllable-types",
+    "name": "Syllable Types",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.phonics.digraphs",
+      "eng.phonics.long-vowels-silent-e"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonics.syllable-types-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonics.syllable-types (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonics.syllable-types.md": "sha256:fa5ebd9ea783f9e51b455b0ed3b9ac34d65b1fe5d0c1032200c6a54e3af91725"
+      },
+      "contentHash": "sha256:587fef1ad0c747c168c4ccc3fd9989876242d999b28e8a4636f10fc0b90f3244",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonics.syllable-types.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.syllable-types.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.syllable-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.syllable-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.syllable-types.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.syllable-types.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.syllable-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.syllable-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.syllable-types.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.syllable-types.md#TA-3 (addresses MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.syllable-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.syllable-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.syllable-types.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.syllable-types.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.syllable-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.syllable-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonics.syllable-types.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonics.syllable-types.md#TA-5 (addresses MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE, MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonics.syllable-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonics.syllable-types\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonics.syllable-types/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "Syllable Types — Conceptual Development Sequence",
+      "content": "**TA-1 — Six Syllable Types in Single Syllables [C]**\n\nUsing the Component 3 sorting hats, student classifies a set of single-syllable words into the six types and correctly produces each vowel sound, building/reviewing the type-to-sound mapping (closed=short, open=long, silent-e=long, vowel-team=usually long, r-controlled=distinct r-colored vowel, consonant-le=unstressed schwa+consonant+l).\n\n**TA-2 — Syllable Division in Two-Syllable Words [C]**\n\nPresent two-syllable words (napkin, baby, reptile, market); student divides each into syllables using standard division patterns (VC/CV for closed-closed like \"nap-kin\"; V/CV for open-first like \"ba-by\"), then identifies each syllable's type.\n\n**TA-3 — Applying Type-Specific Vowel Rules [C→P]**\n\nStudent reads the divided syllables from TA-2 aloud, applying the correct vowel sound for each identified type, directly targeting MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN by requiring type-by-type checking rather than a single default rule.\n\n**TA-4 — R-Controlled and Consonant-le Syllables [P]**\n\nIntroduce the two less-intuitive types in more depth: r-controlled syllables (car, her, bird, for, fur — where \"r\" changes the vowel to a distinct r-colored sound, neither short nor long) and consonant-le syllables (table, little, purple — an unstressed final syllable with a schwa-like vowel before consonant+le). Student reads words containing each type.\n\n**TA-5 — Full Multisyllabic Word Decoding [P]**\n\nPresent unseen multisyllabic words (magnetic, fantastic, adventure); student divides into syllables, identifies each type, and reads the whole word fluently, directly targeting MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE by demonstrating the systematic approach works on genuinely novel words.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 74,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/misconception/MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "- **Trigger signal:** Student treats longer, multisyllabic words as unreadable chunks to guess at wholesale (e.g., glances at \"reptile\" and guesses \"repeat\" or another visually similar word) rather than breaking the word into syllables and applying known single-syllable decoding patterns to each chunk.",
+      "content": "### MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE\n- **Trigger signal:** Student treats longer, multisyllabic words as unreadable chunks to guess at wholesale (e.g., glances at \"reptile\" and guesses \"repeat\" or another visually similar word) rather than breaking the word into syllables and applying known single-syllable decoding patterns to each chunk.\n- **Conflict evidence [P28]:** \"You guessed 'repeat' for this word — let's split it into syllables instead: rep-tile. Do you recognize the pattern in 'rep' (closed syllable, short vowel)? What about 'tile' (silent-e syllable, long vowel)?\"\n- **Bridge text [P30]:** \"A long word isn't a mystery to guess at — it's just a sequence of syllables, and EVERY syllable follows one of six reliable patterns you already partly know from single-syllable words. Break it apart, identify each syllable's TYPE, and decode each one using rules you already have.\"\n- **Replacement text [P31]:** \"For any multisyllabic word, divide it into syllables first, then decode syllable-by-syllable using the six syllable-type rules, rather than guessing from the whole word's shape.\"\n- **Discrimination pairs [P33]:**\n  - \"reptile\" split as rep-tile (closed + silent-e syllables, both decodable) vs. guessing \"repeat\" from a whole-word glance.\n  - \"napkin\" split as nap-kin (two closed syllables) vs. an unfounded whole-word guess.\n- **s6_path:** \"Long words feel intimidating because they look like a lot at once — but breaking them into syllable-sized pieces, each following a pattern you already know, turns an overwhelming word into several small, familiar decoding tasks.\"",
+      "localKey": "MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE",
+      "language": "en",
+      "refs": [
+        "MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/misconception/MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN",
+      "kind": "misconception",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "- **Trigger signal:** Student applies a single learned syllable-type rule (usually closed-syllable/short-vowel, since it's taught earliest and most heavily drilled) to every syllable regardless of its actual structure — e.g., reads the open syllable \"ba-\" in \"baby\" with a short vowel sound (as if closed) instead of correctly using the long vowel sound that open syllables require.",
+      "content": "### MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN\n- **Trigger signal:** Student applies a single learned syllable-type rule (usually closed-syllable/short-vowel, since it's taught earliest and most heavily drilled) to every syllable regardless of its actual structure — e.g., reads the open syllable \"ba-\" in \"baby\" with a short vowel sound (as if closed) instead of correctly using the long vowel sound that open syllables require.\n- **Conflict evidence [P28]:** \"You read 'ba' in 'baby' with a short vowel, like 'bat'. But does 'ba-by' have a consonant closing off that first syllable, the way 'bat' does? What's different about how the syllable ends?\"\n- **Bridge text [P30]:** \"There are six different syllable TYPES, and each one signals a different vowel sound — closed syllables (ending in a consonant) get the short vowel, but OPEN syllables (ending in the vowel itself, nothing closing it off) get the LONG vowel instead, like 'ba' in 'baby' or 'go' in 'going'. You have to check which type a syllable actually is before assuming the rule.\"\n- **Replacement text [P31]:** \"Before applying a vowel-sound rule to any syllable, first identify which of the six syllable types it is — closed, open, silent-e, vowel-team, r-controlled, or consonant-le — since each type has its own vowel-sound rule.\"\n- **Discrimination pairs [P33]:**\n  - \"nap-kin\" (both closed syllables, short vowels) vs. \"ba-by\" (first syllable open, long vowel; second syllable is a special unstressed pattern).\n  - \"cat\" (closed, short /æ/) vs. \"cape\" (silent-e, long /eɪ/) vs. \"car\" (r-controlled, neither short nor long — a distinct third vowel quality).\n- **s6_path:** \"It's natural to lean on the syllable type learned first and most thoroughly — but all six types are genuinely different from each other, and the skill here is checking type-by-type rather than assuming one rule covers everything.\"\n\n---",
+      "localKey": "MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN",
+      "language": "en",
+      "refs": [
+        "MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "Six Syllable Types in Single Syllables",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Six Syllable Types in Single Syllables\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 76,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "Syllable Division in Two-Syllable Words",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Syllable Division in Two-Syllable Words\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 80,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "Applying Type-Specific Vowel Rules",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Applying Type-Specific Vowel Rules\",\"primitives\":[],\"addresses\":[\"MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 84,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "R-Controlled and Consonant-le Syllables",
+      "content": "{\"id\":\"TA-4\",\"title\":\"R-Controlled and Consonant-le Syllables\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 88,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "Full Multisyllabic Word Decoding",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Multisyllabic Word Decoding\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN\",\"MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE",
+        "MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 92,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Single-syllable type identification, novel word**\n\"What syllable type is 'car'? What's special about its vowel sound?\"\n*Target:* r-controlled — the vowel is neither short nor long but takes on a distinct r-colored quality.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Two-syllable division, novel word**\n\"Divide 'market' into syllables and identify each type.\"\n*Target:* \"mar-ket\" — \"mar\" is r-controlled; \"ket\" is closed (short /ɛ/).",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Consonant-le syllable, novel word**\n\"Divide 'purple' into syllables. What's the second syllable's type?\"\n*Target:* \"pur-ple\" — second syllable is consonant-le (unstressed, schwa-like vowel before \"ple\").",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Full multisyllabic decoding, novel word**\n\"Divide and read 'magnetic.'\"\n*Target:* \"mag-net-ic\" — correctly divided and read, applying closed-syllable short vowels to each part (with appropriate stress on the correct syllable).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain the six-type system**\n\"In your own words: why does it help to know there are six different syllable types, instead of just one rule for all syllables?\"\n<br>*Target:* states or demonstrates that different syllable structures (closed, open, silent-e, vowel-team, r-controlled, consonant-le) produce different, predictable vowel sounds, so checking the TYPE first lets you decode any syllable correctly, including in words you've never seen before.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 120,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "Adaptive Flags",
+      "content": "- **Syllabify before decoding**: for any multisyllabic word, the standing procedure is: divide into syllables FIRST, identify each syllable's type SECOND, then decode — never attempt whole-word pattern-guessing, which directly targets MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE.\n- **Six types, six distinct rules — check, don't default**: build the explicit habit of checking syllable structure before applying any vowel-sound rule, since the closed-syllable/short-vowel rule (taught earliest) is the most common over-generalization target.\n- **R-controlled and consonant-le need dedicated, separate attention**: these two types are the least intuitive and most often under-taught relative to the other four; TA-4 exists specifically to give them proportionate dedicated practice.\n- **Novel-word generalization is the actual mastery bar**: Component 6's MP-4/MP-5 explicitly require applying the system to a genuinely unseen word — session design must include at least one truly novel multisyllabic word before mastery is claimed.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 184,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "eng.phonics.syllable-types/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonics.syllable-types",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — syllable-type sorting hats warm-up (single syllables)\n  ↓\n[P41] PD-1 (digraph readiness)\n  ↓ PASS\n[P41] PD-2 (silent-e readiness)\n  ↓ PASS\n[P06] Anchor: syllable-type sorting hats (6 types, single-syllable words)\n  ↓\nTA-1: Six syllable types in single syllables [C]\n  ↓\nTA-2: Syllable division in two-syllable words [C]\n  ↓\nTA-3: Applying type-specific vowel rules [C→P]\n  ↓\n[P28] Conflict: one rule over-applied to all types → MC-ALL-SYLLABLES-FOLLOW-THE-SAME-PATTERN (if triggered)\n  ↓\nTA-4: R-controlled and consonant-le syllables [P]\n  ↓\nTA-5: Full multisyllabic word decoding [P]\n  ↓\n[P28] Conflict: whole-word guessing instead of syllable-by-syllable decoding → MC-MULTISYLLABIC-WORDS-ARE-UNPREDICTABLE (if triggered)\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one multisyllabic word and divide it into its syllable types.\"\n[P68] Session close\n[P85] Regulation tail — praise dividing and checking type-by-type over whole-word guessing\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on digraphs/silent-e, new to the six-type framework): move through TA-1 methodically, one type at a time, before combining into two-syllable words. S1 (already divides words into syllables intuitively but doesn't yet apply type-specific rules): compress TA-1/TA-2, spend most time on TA-3/TA-4's rule application. S6 (overwhelmed by six categories after previously only needing one or two rules): explicitly acknowledge the jump in complexity and use the physical sorting-hats anchor repeatedly as a concrete anchor to return to. S9 (L1 orthography has no syllable-type-dependent vowel system, e.g. most phonetic/syllabic-writing L1s): treat this entire six-type framework as a genuinely new organizing principle for decoding, not an extension of an existing intuition — allow extra repetition especially for the two least-intuitive types (r-controlled, consonant-le).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonics.syllable-types.md",
+        "startLine": 144,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

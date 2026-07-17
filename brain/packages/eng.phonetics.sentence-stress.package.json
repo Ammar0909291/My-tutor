@@ -1,0 +1,391 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.phonetics.sentence-stress-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.phonetics.sentence-stress",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1f9ad885b1ceb5a5d1f8237469f5fe630dd093e6d139f46e07e435ab12489613",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md": "sha256:1ba2925aac0e35cc1e845291d38b93a469c9a942449e870b6cac921e8474fbc1"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.phonetics.sentence-stress",
+    "name": "Sentence Stress",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.phonetics.syllable-stress"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.phonetics.sentence-stress-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.phonetics.sentence-stress (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md": "sha256:1ba2925aac0e35cc1e845291d38b93a469c9a942449e870b6cac921e8474fbc1"
+      },
+      "contentHash": "sha256:e9e62d9e3409ab697d23961cca37d7cd01581e5a32dee067a98b9ba09299405f",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.sentence-stress.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.sentence-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.sentence-stress\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.sentence-stress.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.sentence-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.sentence-stress\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.sentence-stress.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md#TA-3 (addresses MC-EVERY-WORD-GETS-EQUAL-STRESS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.sentence-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.sentence-stress\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.sentence-stress.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.sentence-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.sentence-stress\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.phonetics.sentence-stress.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md#TA-5 (addresses MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD, MC-EVERY-WORD-GETS-EQUAL-STRESS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.phonetics.sentence-stress"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.phonetics.sentence-stress\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.phonetics.sentence-stress/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "Sentence Stress — Conceptual Development Sequence",
+      "content": "**TA-1 — Content vs. Function Word Identification [C]**\n\nPresent simple sentences; student labels each word as content (noun, main verb, adjective, adverb) or function (article, preposition, auxiliary, pronoun, conjunction).\n\n**TA-2 — Producing the Stress Pattern [C]**\n\nUsing the Component 3 walk technique, student says sentences aloud, correctly stressing content words and reducing function words (including using schwa reductions for common function words: \"to\" → /tə/, \"and\" → /ən/, \"of\" → /əv/).\n\n**TA-3 — Equal-Stress vs. Natural-Stress Contrast [C→P]**\n\nStudent says a sentence both ways — flat/equal stress, then natural content/function stress — and identifies which sounds like natural spoken English, directly targeting MC-EVERY-WORD-GETS-EQUAL-STRESS.\n\n**TA-4 — Contextual Stress Shift (Grammatical Role) [P]**\n\nPresent the same word used in two different grammatical roles within different sentences (e.g., \"can\" as auxiliary vs. noun; \"record\" as verb vs. noun); student identifies the correct stress pattern for each context.\n\n**TA-5 — Contrastive/Emphatic Stress [P]**\n\nPresent sentence pairs where a normally-unstressed function word receives emphatic stress for contrast (e.g., \"I said I WOULD go, not that I DID go\"); student produces and explains the emphatic stress shift, directly targeting MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/misconception/MC-EVERY-WORD-GETS-EQUAL-STRESS",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "- **Trigger signal:** Student reads sentences with roughly equal emphasis on every word (a common pattern in careful, word-by-word reading or early L2 production), producing unnaturally flat or robotic-sounding speech, rather than emphasizing content words and reducing function words.",
+      "content": "### MC-EVERY-WORD-GETS-EQUAL-STRESS\n- **Trigger signal:** Student reads sentences with roughly equal emphasis on every word (a common pattern in careful, word-by-word reading or early L2 production), producing unnaturally flat or robotic-sounding speech, rather than emphasizing content words and reducing function words.\n- **Conflict evidence [P28]:** \"Say this sentence giving every word completely equal emphasis: 'I WANT TO GO TO THE STORE.' Now listen to a natural speaker say the same sentence. Are all the words equally loud/clear, or do some stand out more?\"\n- **Bridge text [P30]:** \"Natural English sentences are NOT evenly stressed — content words (nouns, main verbs, adjectives, adverbs — the words carrying the core meaning) get stress, while function words (articles, prepositions, auxiliary verbs, pronouns — the grammatical 'glue') are typically unstressed and often reduced (e.g., 'to' becomes /tə/, 'the' becomes /ðə/).\"\n- **Replacement text [P31]:** \"Before speaking a sentence, identify which words are CONTENT words (stress these) and which are FUNCTION words (reduce these) — don't give every word the same weight.\"\n- **Discrimination pairs [P33]:**\n  - \"I WANT to go to the STORE\" (content words WANT, STORE stressed; function words to/to/the reduced) vs. flat equal-stress reading.\n  - \"She's READING a BOOK\" (content: READING, BOOK) vs. over-stressing \"she's\" and \"a,\" which are function-word-like here.\n- **s6_path:** \"Equal stress on every word can feel like it's being extra clear and careful — but natural English actually relies on this uneven pattern, and flattening it out is what makes speech sound unnatural or overly formal, even when every word is pronounced correctly.\"",
+      "localKey": "MC-EVERY-WORD-GETS-EQUAL-STRESS",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-WORD-GETS-EQUAL-STRESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/misconception/MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD",
+      "kind": "misconception",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "- **Trigger signal:** Student assumes a given word is ALWAYS either stressed or unstressed regardless of context/meaning, missing that (a) the same word can shift category depending on grammatical role (e.g., \"can\" as a modal auxiliary is usually unstressed, but \"can\" as a noun, \"get me a CAN,\" is a content word and gets stressed), and (b) speakers can deliberately stress a normally-unstressed function word for emphasis or contrast (e.g., \"I did NOT say that\" — stressing the auxiliary \"did\" for contrastive emphasis).",
+      "content": "### MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD\n- **Trigger signal:** Student assumes a given word is ALWAYS either stressed or unstressed regardless of context/meaning, missing that (a) the same word can shift category depending on grammatical role (e.g., \"can\" as a modal auxiliary is usually unstressed, but \"can\" as a noun, \"get me a CAN,\" is a content word and gets stressed), and (b) speakers can deliberately stress a normally-unstressed function word for emphasis or contrast (e.g., \"I did NOT say that\" — stressing the auxiliary \"did\" for contrastive emphasis).\n- **Conflict evidence [P28]:** \"You said 'can' is always unstressed. Say 'I CAN swim' (a simple statement) — is 'can' stressed there? Now say 'Yes, I CAN do it!' as a strong, emphatic reply to someone who doubted you — is it stressed there?\"\n- **Bridge text [P30]:** \"The content/function classification is a strong DEFAULT pattern, not a fixed, unchangeable label per word — a word's grammatical role (is 'can' being used as a helping verb or a noun for a container?) and the speaker's communicative intent (emphasizing or contrasting something) can both shift which words get stressed in a specific sentence.\"\n- **Replacement text [P31]:** \"Use the content/function default as a strong starting guess, but always check the word's actual grammatical role in this specific sentence and whether the speaker seems to be adding emphasis or contrast.\"\n- **Discrimination pairs [P33]:**\n  - \"I CAN swim\" (default: 'can' as auxiliary, usually reduced) vs. \"Yes, I CAN!\" (emphatic reinforcement, 'can' stressed for contrast/emphasis).\n  - \"put it ON the table\" (default: 'on' as preposition, usually unstressed) vs. \"Turn it ON, not off\" (contrastive stress on 'on' to highlight the on/off distinction).\n- **s6_path:** \"It's a reasonable simplification to think each word has one fixed stress status — but real speakers use stress flexibly for emphasis and contrast, which is actually a powerful communicative tool once you notice it, not an exception that breaks the rule.\"\n\n---",
+      "localKey": "MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD",
+      "language": "en",
+      "refs": [
+        "MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "Content vs. Function Word Identification",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Content vs. Function Word Identification\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "Producing the Stress Pattern",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Producing the Stress Pattern\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "Equal-Stress vs. Natural-Stress Contrast",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Equal-Stress vs. Natural-Stress Contrast\",\"primitives\":[],\"addresses\":[\"MC-EVERY-WORD-GETS-EQUAL-STRESS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-EVERY-WORD-GETS-EQUAL-STRESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "Contextual Stress Shift (Grammatical Role)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Contextual Stress Shift (Grammatical Role)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "Contrastive/Emphatic Stress",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Contrastive/Emphatic Stress\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD\",\"MC-EVERY-WORD-GETS-EQUAL-STRESS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD",
+        "MC-EVERY-WORD-GETS-EQUAL-STRESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Content/function identification, novel sentence**\n\"In 'The dog chased the ball quickly,' which words are content words?\"\n*Target:* \"dog,\" \"chased,\" \"ball,\" \"quickly\" (content); \"the,\" \"the\" (function).",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Producing the pattern, novel sentence**\n\"Say 'He is going to the market' with natural sentence stress.\"\n*Target:* stresses \"GOing\" and \"MARket,\" reduces \"he,\" \"is,\" \"to,\" \"the.\"",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Equal vs. natural stress judgment**\n\"Listen to two versions of the same sentence — one flat, one naturally stressed. Which sounds more natural, and why?\"\n*Target:* correctly identifies the naturally-stressed version and explains the content/function distinction as the reason.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Contextual stress shift, novel example**\n\"Say 'I object to that' (verb). Now say 'that's quite an object' (noun). What changes?\"\n*Target:* correctly shifts stress for the grammatical-role change (though note: \"object\" here is primarily a word-stress example; ensure content-word status is still correctly assigned as a full content word in both uses at the sentence level, with the internal syllable stress shifting per `eng.phonetics.syllable-stress`).",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain sentence stress**\n\"In your own words: how do you decide which words to stress in a sentence, and can that ever change?\"\n*Target:* states or demonstrates the content/function default, and correctly notes that grammatical role and speaker emphasis/contrast can shift which words receive stress.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "Adaptive Flags",
+      "content": "- **Content/function is the essential organizing default**: this is the single most important pattern to establish first (TA-1/TA-2) before any of the contextual nuance (TA-4/TA-5) is introduced.\n- **Function-word reduction (schwa) should be explicitly taught, not left implicit**: reducing \"to,\" \"and,\" \"the,\" \"of,\" \"a\" to their weak schwa forms is a concrete, teachable sub-skill within this concept, directly connected to the schwa-recognition work from `eng.phonetics.syllable-stress`.\n- **Grammatical-role and emphatic shifts are real, not exceptions to suppress**: teach these explicitly as legitimate, rule-governed flexibility within the content/function system (TA-4/TA-5), not as noise that undermines the default pattern.\n- **Syllable-timed L1 background requires patience and extra practice**: for S9 learners whose L1 rhythm is fundamentally different (syllable-timed vs. English's stress-timed pattern), budget significantly more repetition and treat slow progress as expected, not a sign of difficulty with the underlying concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.phonetics.sentence-stress/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.phonetics.sentence-stress",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — stress-beat sentence walk warm-up\n  ↓\n[P41] PD-1 (word stress readiness)\n  ↓ PASS\n[P06] Anchor: stress-beat sentence walk (stomp on content, tiptoe on function)\n  ↓\nTA-1: Content vs. function word identification [C]\n  ↓\nTA-2: Producing the stress pattern [C]\n  ↓\nTA-3: Equal-stress vs. natural-stress contrast [C→P]\n  ↓\n[P28] Conflict: flat equal-stress speech → MC-EVERY-WORD-GETS-EQUAL-STRESS (if triggered)\n  ↓\nTA-4: Contextual stress shift (grammatical role) [P]\n  ↓\nTA-5: Contrastive/emphatic stress [P]\n  ↓\n[P28] Conflict: rigid fixed-word-category assumption → MC-CONTENT-FUNCTION-SPLIT-IS-FIXED-PER-WORD (if triggered)\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, say one sentence with natural stress and identify the content words.\"\n[P68] Session close\n[P85] Regulation tail — praise natural rhythm over word-by-word equal emphasis\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 75%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word stress, new to sentence-level stress): dwell on TA-1's content/function labeling with simple, short sentences before producing the pattern aloud. S1 (already speaks with natural rhythm but can't yet explain why): use TA-1's explicit labeling to build metalinguistic awareness of an already-present skill. S6 (frustrated that careful/formal speech habits are being \"corrected\"): validate that word-by-word equal stress isn't wrong, just unnatural for conversational speech — context-appropriate register matters. S9 (L1 is syllable-timed rather than stress-timed, e.g. Spanish, French, Mandarin, or has different content/function stress conventions): expect this concept to require substantially more deliberate practice than for stress-timed-L1 speakers, since equal-interval syllable timing may be the learner's default unmarked pattern; use the physical walk-anchor extensively and be patient with the adjustment.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.phonetics.sentence-stress.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
