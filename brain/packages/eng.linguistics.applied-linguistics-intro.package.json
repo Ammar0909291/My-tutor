@@ -1,0 +1,362 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.applied-linguistics-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.applied-linguistics-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0a53453b3ff9d173598060c0b30256448d4e13746ed9fee91ff6810cda0bb72c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md": "sha256:a28f2cf38d3f6dd7a3d706bbbfba85796e5f0d2652fde8c47b0e52bed8dd454f"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.applied-linguistics-intro",
+    "name": "Introduction to Applied Linguistics",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.linguistics.sociolinguistics-intro",
+      "eng.linguistics.language-acquisition-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.applied-linguistics-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.applied-linguistics-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md": "sha256:a28f2cf38d3f6dd7a3d706bbbfba85796e5f0d2652fde8c47b0e52bed8dd454f"
+      },
+      "contentHash": "sha256:0f3c09c5aa6384061500d69a642dbe84dbae6261cf80e7d908cf5adf1a48240b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.applied-linguistics-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md#TA-1 (addresses MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.applied-linguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.applied-linguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.applied-linguistics-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md#TA-2 (addresses MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.applied-linguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.applied-linguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.applied-linguistics-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.applied-linguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.applied-linguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.applied-linguistics-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md#TA-4 (addresses MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE, MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.applied-linguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.applied-linguistics-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "Introduction to Applied Linguistics — Conceptual Development Sequence",
+      "content": "### TA-1 — Evaluating Teaching Methods Against Acquisition Research (MC-A)\n\nUsing the traditional-medicine anchor, teach students to evaluate teaching methods against actual\nacquisition findings rather than assuming tradition equals effectiveness. Student practice: given\nthree teaching approaches, evaluate each against a specific acquisition-research principle studied\nearlier.\n\n### TA-2 — Testing and Assessment: Skill vs. Dialect Conflation (MC-B)\n\nUsing the miscalibrated-height-device anchor, teach students to identify when a test conflates\ndialect conformity with the underlying skill being measured. Student practice: given three test items,\nidentify which ones risk penalizing legitimate dialect features rather than genuinely measuring the\nintended skill.\n\n### TA-3 — Language Policy Trade-offs\n\nIntroduce language policy as involving genuine social trade-offs (e.g., which language(s) to use in\nschools) rather than purely neutral technical decisions. Student practice: given a hypothetical\nlanguage policy scenario, identify at least one genuine trade-off or competing value at stake.\n\n### TA-4 — Full Application: Evaluating a Real-World Applied Linguistics Scenario\n\nGive the student a new scenario involving teaching, testing, or policy. They must evaluate it against\nacquisition research (TA-1) or dialect-fairness principles (TA-2) as appropriate, and identify any\npolicy trade-offs involved (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 155,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/misconception/MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "**Trigger signal:** Student assumes that a language-teaching method is effective simply because it",
+      "content": "### MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE\n\n**Trigger signal:** Student assumes that a language-teaching method is effective simply because it\nfeels traditional, familiar, or was the way they themselves were taught, without evaluating it\nagainst actual acquisition research findings — e.g., assuming rote memorization of isolated\nvocabulary lists or endless grammar-rule drilling with no communicative practice must be effective\nteaching simply because it is common practice.\n\n**Conflict evidence [P28]:** Show the student two teaching approaches for the same grammar point: one\nthat relies purely on memorizing rule statements and completing isolated drill exercises with no\ncommunicative context, and one that embeds the same grammar point in meaningful, communicative\npractice (using the structure to actually accomplish a real communicative task). Ask: \"Does language\nacquisition research (from the prerequisite concept) suggest which approach better matches how people\nactually internalize language — rule memorization alone, or meaningful, communicative use?\"\n\n**Bridge text [P30]:** \"Assuming a traditional teaching method must be effective is like assuming a\ncenturies-old medical remedy must work simply because it's been used for a long time — but medicine\nprogresses by testing traditional practices against actual evidence, keeping what works and\ndiscarding what doesn't. Applied linguistics does the same for language teaching: methods should be\nevaluated against real acquisition research, not assumed effective just because they're familiar or\nlong-standing.\"\n\n**Replacement text [P31]:** \"Before assuming a teaching method is effective, ask: does it align with\nwhat acquisition research actually shows about how people internalize language (meaningful input,\ncommunicative practice, systematic exposure), or does it rely purely on tradition and unverified\nintuition?\"\n\n**Discrimination pairs [P33]:**\n1. Rote memorization of isolated vocabulary lists with no communicative context (traditional but not\n   well-supported by acquisition research) vs. vocabulary embedded in meaningful, communicative\n   practice (supported by the research on how people actually acquire and retain new vocabulary).\n2. A student assuming a teaching method must work because \"that's how everyone learns it\"\n   (misconception) vs. a student asking whether a specific method actually aligns with known\n   acquisition principles before endorsing it (correct, evidence-based reasoning).\n\n**s6_path:** If the student continues to assume traditional methods are effective by default after\nthe bridge, have them evaluate two more teaching approaches against a specific acquisition-research\nfinding studied earlier (e.g., overregularization evidence for active rule-construction), determining\nwhether each approach's assumptions about HOW learning happens are actually consistent with that\nevidence.",
+      "localKey": "MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/misconception/MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "**Trigger signal:** Student assumes a standardized language test using only one prestige dialect's",
+      "content": "### MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL\n\n**Trigger signal:** Student assumes a standardized language test using only one prestige dialect's\nnorms is a neutral, purely technical measure of a student's underlying language ability, failing to\nrecognize that such a test can unfairly penalize speakers of other, equally legitimate and systematic\ndialects for features that reflect dialect difference rather than any genuine deficiency in the\nunderlying skill being tested.\n\n**Conflict evidence [P28]:** Show the student a hypothetical test item that marks a systematic,\nlegitimate dialect feature (studied in the Accents and Dialects/Sociolinguistics concepts) as\n\"incorrect,\" alongside the same underlying skill (e.g., reading comprehension) tested through content\nthat doesn't penalize dialect variation. Ask: \"Is the first test measuring the actual skill it claims\nto measure (reading comprehension), or is it partly measuring something else (conformity to one\nspecific dialect) disguised as a skill measurement?\"\n\n**Bridge text [P30]:** \"Assuming a one-dialect standardized test is neutral is like assuming a\nheight-measuring device calibrated only in one unit system is 'unbiased' just because it produces a\nnumber — but if it systematically produces lower readings for people using an equally valid\nmeasurement convention, it's not actually measuring height fairly across everyone. A test that\npenalizes systematic, legitimate dialect features isn't neutrally measuring the underlying skill — it's\npartly measuring dialect conformity, which isn't the same thing.\"\n\n**Replacement text [P31]:** \"When evaluating whether a test is fair, ask: does it accurately measure\nthe intended skill for speakers of ALL relevant dialects, or does it inadvertently penalize systematic,\nlegitimate dialect features that have nothing to do with the actual skill being tested? A test that\nconflates dialect conformity with skill isn't neutral.\"\n\n**Discrimination pairs [P33]:**\n1. A reading comprehension test that marks a legitimate dialect grammatical feature as an \"error\" in\n   a student's written response, when the underlying comprehension is genuinely demonstrated\n   (conflating dialect with skill, unfair) vs. a test designed to assess comprehension without\n   penalizing dialect-specific grammatical features unrelated to comprehension itself (fair, skill-\n   focused).\n2. A student assuming any standardized test using one dialect's norms must be objective and fair\n   (misconception) vs. a student recognizing that such a test can systematically disadvantage\n   dialect-speakers for reasons unrelated to the actual skill being measured (correct, critical\n   understanding).\n\n**s6_path:** If the student continues to view one-dialect tests as automatically neutral after the\nbridge, have them identify a specific test item that could disadvantage a dialect speaker and propose\na way to test the same underlying skill without penalizing the dialect feature.",
+      "localKey": "MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL",
+      "language": "en",
+      "refs": [
+        "MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 44,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "Evaluating Teaching Methods Against Acquisition Research (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Evaluating Teaching Methods Against Acquisition Research (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 159,
+        "endLine": 166
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "Testing and Assessment: Skill vs. Dialect Conflation (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Testing and Assessment: Skill vs. Dialect Conflation (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 166,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "Language Policy Trade-offs",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Language Policy Trade-offs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 173,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "Full Application: Evaluating a Real-World Applied Linguistics Scenario",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Evaluating a Real-World Applied Linguistics Scenario\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE\",\"MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-ANY-LANGUAGE-TEACHING-METHOD-THAT-FEELS-TRADITIONAL-OR-FAMILIAR-MUST-BE-EFFECTIVE",
+        "MC-B-A-STANDARDIZED-LANGUAGE-TEST-THAT-USES-ONE-DIALECT-IS-A-NEUTRAL-FAIR-MEASURE-OF-LANGUAGE-SKILL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 179,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Evaluating a Teaching Method**\nGiven a teaching method description, evaluate it against a specific acquisition-research principle\nand determine whether it aligns with or contradicts that principle.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Dialect-Conflation in Testing**\nGiven three test items, identify which one(s) risk penalizing legitimate dialect features rather than\ngenuinely measuring the intended skill.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Proposing a Fairer Test Alternative**\nGiven a test item that conflates dialect with skill, propose a way to test the same underlying skill\nwithout penalizing the dialect feature.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Identifying a Policy Trade-off**\nGiven a language policy scenario, identify at least one genuine trade-off or competing value at\nstake.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Applied Linguistics Evaluation**\nGiven a new scenario involving teaching, testing, or policy, evaluate it against the appropriate\nprinciple (acquisition research or dialect fairness) and identify any policy trade-offs involved.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters teaching-method evaluation (MP-1) but struggles specifically with test-\n  fairness analysis (MP-2, MP-3), revisit the underlying dialect/skill distinction from\n  `eng.phonetics.accents-and-dialects` and `eng.linguistics.sociolinguistics-intro` before continuing,\n  since this concept assumes that distinction is already solid.\n- If the student proposes fairer test alternatives (MP-3) that are technically dialect-neutral but\n  impractically complex to implement at scale, acknowledge the practical trade-off explicitly — this\n  connects naturally to TA-3's policy trade-offs theme.\n- If the student's policy trade-off identification (MP-4) remains one-sided (only naming benefits or\n  only naming costs of a policy), push for identifying genuine trade-offs on BOTH sides, since real\n  policy decisions rarely have costless \"right answers.\"\n- Students with personal experience of being tested in a dialect or language variety different from\n  their own home variety may have strong, relevant intuitions for MC-B — invite this experience\n  explicitly and validatingly if the student is comfortable sharing it, since it can ground the\n  abstract fairness principle powerfully.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 262,
+        "endLine": 279
+      }
+    },
+    {
+      "assetId": "eng.linguistics.applied-linguistics-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.applied-linguistics-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: sociolinguistics check] --> [PD-2: language acquisition check]\n   |                                                     |\n   | (gap found)                                         | (pass)\n   v                                                      v\n[Route to prerequisite concept]         [Component 3: Traditional-Medicine / Miscalibrated-\n                                          Height-Device Anchor]\n                                                          |\n                                                          v\n                                      [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                          |\n                                                          v\n                                [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                          |\n                                                          v\n                                [MP-1 through MP-5 mastery probe set]\n                                                          |\n                                (pass >= 0.70) -----+----- (fail)\n                                       |                      |\n                                       v                      v\n                [Unlock: bilingualism-and-multilingualism]  [S6 remediation: evidence-check /\n                                                               fairer-test-design drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (defaulting to tradition) and MC-B during TA-2 (assuming one-dialect tests are neutral) — these\nare largely independent and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1\nfailure indicates residual MC-A; MP-2/MP-3 failures indicate residual MC-B; MP-4 failure alone\nindicates the policy-trade-off extension (TA-3) needs review, distinct from either misconception;\nMP-5 failure with MP-1 through MP-4 passing indicates an integration gap — provide one more guided\nfull-scenario example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.applied-linguistics-intro.md",
+        "startLine": 226,
+        "endLine": 262
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

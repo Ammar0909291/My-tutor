@@ -1,0 +1,362 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.composition.persuasive-techniques-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.composition.persuasive-techniques",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:74b86b5da3a7600d3e125edce4b3927b2c9493758730c3e88f406381ad4e07a4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md": "sha256:5a135529935c4b2ec23e5612f88a3cc810d647c7eb04a40369400849a880b1ea"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.composition.persuasive-techniques",
+    "name": "Advanced Persuasive Techniques",
+    "difficultyRaw": "advanced",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.composition.rhetorical-appeals",
+      "eng.composition.counterargument-and-rebuttal"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.composition.persuasive-techniques-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.composition.persuasive-techniques (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md": "sha256:5a135529935c4b2ec23e5612f88a3cc810d647c7eb04a40369400849a880b1ea"
+      },
+      "contentHash": "sha256:5941ed088ce07121a0d7529aa16a056d1cc4c05c7877b5572eeee658d1e754a6",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.composition.persuasive-techniques.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md#TA-1 (addresses MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.persuasive-techniques"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.persuasive-techniques\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.persuasive-techniques.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md#TA-2 (addresses MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.persuasive-techniques"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.persuasive-techniques\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.persuasive-techniques.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.persuasive-techniques"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.persuasive-techniques\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.composition.persuasive-techniques.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md#TA-4 (addresses MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION, MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.composition.persuasive-techniques"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.composition.persuasive-techniques\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.composition.persuasive-techniques/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "Advanced Persuasive Techniques — Conceptual Development Sequence",
+      "content": "### TA-1 — Weaving Appeals and Evidence Together (MC-A)\n\nUsing the combined-dish anchor, teach students to reinforce a single supporting point with a\ncombination of appeal and evidence working together, rather than isolated technique sections. Student\npractice: given a supporting point and separate pieces of evidence/appeal material, combine them into\none integrated passage.\n\n### TA-2 — Strategic Counterargument Placement (MC-B)\n\nUsing the lawyer's-timing anchor, teach students to evaluate multiple placement options for a\ncounterargument-and-rebuttal sequence based on the argument's specific structure. Student practice:\ngiven an argument outline and its strongest counterargument, evaluate three possible placements\n(early, mid-argument at a relevant point, end) and select the most strategic one with justification.\n\n### TA-3 — Full Integration: Building One Layered Passage\n\nGive the student a claim, supporting evidence, and a counterargument. They must construct one\nintegrated passage that weaves appeal and evidence together (TA-1) and places the counterargument\nstrategically within the overall structure (TA-2), rather than treating these as separate,\ncompartmentalized sections.\n\n### TA-4 — Full Application: Constructing a Complete Sophisticated Persuasive Piece\n\nGive the student a new persuasive topic with source material (evidence, an audience profile, and a\ncounterargument). They must construct a complete persuasive piece integrating at least two appeals\nwith evidence and a strategically placed counterargument-and-rebuttal — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 152,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/misconception/MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION",
+      "kind": "misconception",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "**Trigger signal:** Student, having learned appeals, evidence, and counterargument handling as",
+      "content": "### MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION\n\n**Trigger signal:** Student, having learned appeals, evidence, and counterargument handling as\nseparate skills, writes a persuasive piece that includes each technique in its own disconnected\nsection (a paragraph of \"ethos,\" a paragraph of \"pathos,\" a paragraph of \"logos,\" a separate\ncounterargument paragraph) with no integration between them, rather than weaving techniques together\nto reinforce specific points.\n\n**Conflict evidence [P28]:** Show the student two persuasive excerpts on the same topic: one with\nseparate, disconnected sections for ethos, pathos, logos, and counterargument (each technique\n\"checked off\" in its own box), and one where a single supporting point is reinforced by BOTH a\nspecific piece of evidence (logos) AND an emotionally resonant framing of that same evidence (pathos)\nworking together, with the counterargument addressed at a point where it directly reinforces that\nsame point. Ask: \"Which piece feels like a genuinely integrated, layered argument, and which feels\nlike a checklist of separate techniques stapled together?\"\n\n**Bridge text [P30]:** \"Writing separate sections for each technique is like a chef serving each\ningredient of a dish on its own separate plate instead of combining them into one integrated dish —\ntechnically, all the ingredients are present, but they're not actually working together to create one\nunified experience. Sophisticated persuasion weaves appeals and evidence together to reinforce the\nSAME specific points, rather than presenting each technique in its own isolated compartment.\"\n\n**Replacement text [P31]:** \"Instead of writing a separate section for each rhetorical appeal, ask:\nfor THIS specific supporting point, which combination of appeals and evidence would reinforce it most\npowerfully together? Weave them into the same passage rather than compartmentalizing each technique.\"\n\n**Discrimination pairs [P33]:**\n1. Separate sections labeled implicitly as \"here's my ethos paragraph,\" \"here's my pathos paragraph,\"\n   with no connection between them (compartmentalized, checklist-style) vs. one passage where a\n   specific statistic (logos) is immediately reinforced by a vivid, connected human example\n   illustrating what that statistic means for real people (pathos), working together on the same\n   point (integrated).\n2. A student who includes a counterargument paragraph only at the very end, disconnected from the\n   points it might actually reinforce (bolted-on) vs. a student who addresses a counterargument at\n   the specific point where doing so strengthens the argument's most relevant point (integrated,\n   strategically placed).\n\n**s6_path:** If the student continues to compartmentalize techniques after the bridge, have them take\none of their own separate \"technique paragraphs\" and identify a SPECIFIC supporting point elsewhere in\ntheir piece that this technique could instead be woven into and reinforce directly.",
+      "localKey": "MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION",
+      "language": "en",
+      "refs": [
+        "MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 3,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/misconception/MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE",
+      "kind": "misconception",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "**Trigger signal:** Student assumes a counterargument-and-rebuttal sequence must always be placed at",
+      "content": "### MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE\n\n**Trigger signal:** Student assumes a counterargument-and-rebuttal sequence must always be placed at\nthe very end of a persuasive piece as a fixed, formulaic rule, regardless of whether that placement\nactually serves the argument's specific structure and strategy — missing that a counterargument can be\nmore strategically effective placed earlier (to preempt an objection before building the main case) or\nintegrated at the specific point where it's most relevant, rather than following one rigid template\nposition.\n\n**Conflict evidence [P28]:** Show the student two versions of the same persuasive piece: one with the\ncounterargument mechanically placed at the very end regardless of relevance, and one where the\ncounterargument is addressed early, right after introducing the central claim, preemptively clearing\nthe most obvious objection before building the rest of the case on cleared ground. Ask: \"Does the\ncounterargument's placement in the second version serve a specific strategic purpose? Is 'always at the\nend' actually the only effective placement?\"\n\n**Bridge text [P30]:** \"Assuming a counterargument must always go at the very end is like assuming a\nlawyer should only ever address the opposing side's strongest objection in their closing statement,\nregardless of the case — sometimes addressing it EARLY, right after stating the claim, clears the way\nfor the rest of the case to build on solid ground; sometimes it works better woven in right where a\nspecific piece of evidence would otherwise seem to invite that exact objection. Placement should serve\nthe argument's specific strategy, not follow one fixed rule.\"\n\n**Replacement text [P31]:** \"Decide where to place your counterargument-and-rebuttal based on your\nspecific argument's needs: does addressing it early clear the ground for everything else? Does it fit\nnaturally right where a specific piece of evidence would otherwise invite that objection? Don't\ndefault to 'always at the end' without considering the strategic alternatives.\"\n\n**Discrimination pairs [P33]:**\n1. A counterargument mechanically placed at the end regardless of whether that's the most strategic\n   spot (rigid, template-following placement) vs. a counterargument placed early to preempt the most\n   obvious objection before building the rest of the case (strategic, purpose-driven placement).\n2. A student who never considers alternatives to end-placement because \"that's the rule\" (rigid\n   rule-following) vs. a student who evaluates their specific argument's structure to decide the most\n   effective placement (flexible, strategic reasoning).\n\n**s6_path:** If the student continues to place counterarguments only at the end regardless of fit\nafter the bridge, have them identify the single strongest objection to their own argument and\nconsider two alternative placements (early, to preempt; or embedded at the specific point most\nrelevant to that objection) before defaulting to the end-placement, explicitly weighing the\nstrategic trade-offs of each option.",
+      "localKey": "MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE",
+      "language": "en",
+      "refs": [
+        "MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 44,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "Weaving Appeals and Evidence Together (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Weaving Appeals and Evidence Together (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 156,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "Strategic Counterargument Placement (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Strategic Counterargument Placement (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 163,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "Full Integration: Building One Layered Passage",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Full Integration: Building One Layered Passage\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 170,
+        "endLine": 177
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "Full Application: Constructing a Complete Sophisticated Persuasive Piece",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Constructing a Complete Sophisticated Persuasive Piece\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION\",\"MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-SOPHISTICATED-PERSUASION-MEANS-INCLUDING-EVERY-TECHNIQUE-SEPARATELY-IN-ITS-OWN-SECTION",
+        "MC-B-A-COUNTERARGUMENT-SHOULD-ALWAYS-GO-AT-THE-VERY-END-REGARDLESS-OF-THE-ARGUMENTS-STRUCTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 177,
+        "endLine": 310
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Weaving Appeal and Evidence Together**\nGiven a supporting point and separate pieces of evidence and appeal material, combine them into one\nintegrated passage that reinforces the same point together.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Evaluating Counterargument Placement Options**\nGiven an argument outline and its strongest counterargument, evaluate three possible placements\n(early, mid-argument, end) and select the most strategic one with justification.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Detecting Compartmentalized Writing**\nGiven a persuasive draft with separate, disconnected technique sections, identify the\ncompartmentalization problem and propose how two specific sections could be integrated instead.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detecting Formulaic Counterargument Placement**\nGiven a persuasive draft with a mechanically end-placed counterargument, evaluate whether an earlier\nor mid-argument placement would be more strategic, and justify the recommendation.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Sophisticated Persuasive Construction**\nGiven a new persuasive topic with source material, construct a complete piece integrating at least\ntwo appeals with evidence and a strategically placed counterargument-and-rebuttal.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 204,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters isolated weaving and placement-evaluation (MP-1, MP-2) but reverts to\n  compartmentalized, formulaic writing under the combined demand of MP-5, provide a structured\n  outline template (for each point: which appeals/evidence reinforce it together; where does the\n  counterargument fit best) as scaffolding before removing it.\n- If the student's \"integrated\" attempts (MP-1, MP-3) still read as two separate sentences merely\n  placed next to each other rather than genuinely reinforcing the same point, push for tighter\n  connection — the evidence and the appeal should feel like they're making ONE combined case, not two\n  adjacent ones.\n- If the student overcorrects after MC-B into scattering the counterargument response across\n  multiple disconnected points with no clear resolution anywhere, clarify that strategic placement\n  still requires ONE clear, identifiable rebuttal moment, just not necessarily at the end.\n- Students who excelled at `eng.composition.rhetorical-analysis`'s synthesis work (explaining how\n  multiple rhetorical choices work together in a text) should transfer that analytical skill readily to\n  this concept's PRODUCTION demand — if this transfer doesn't occur, the gap is likely\n  analysis-to-production rather than conceptual.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 261,
+        "endLine": 279
+      }
+    },
+    {
+      "assetId": "eng.composition.persuasive-techniques/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.composition.persuasive-techniques",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: rhetorical appeals check] --> [PD-2: counterargument/rebuttal check]\n   |                                                       |\n   | (gap found)                                           | (pass)\n   v                                                        v\n[Route to prerequisite concept]           [Component 3: Combined-Dish / Lawyer's-Timing Anchor]\n                                                            |\n                                                            v\n                                       [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                            |\n                                                            v\n                                 [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                 [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                 (pass >= 0.75) -----+----- (fail)\n                                        |                      |\n                                        v                      v\n                       [No further unlocks —  [S6 remediation: find-a-point-to-weave-into /\n                        terminal in current      weigh-the-placement-options drills]\n                        curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1 and PD-2; a gap in either prerequisite routes\nback before Component 3. During Component 4 (S1, active instruction), MC-A typically surfaces during\nTA-1 (compartmentalized writing) and MC-B during TA-2 (formulaic counterargument placement) — these\nare largely independent and often need separate, explicit correction. If either fires, branch to the\nrelevant s6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-3\nfailures indicate residual MC-A; MP-2/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap at full-piece scale — provide one more guided\nfull-construction example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.composition.persuasive-techniques.md",
+        "startLine": 226,
+        "endLine": 261
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

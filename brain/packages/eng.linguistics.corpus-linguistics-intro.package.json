@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.linguistics.corpus-linguistics-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.linguistics.corpus-linguistics-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ae1588262a3acdb497329b7c23ee0aa524015fe9fbb83ea76baedac5de92b9af",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md": "sha256:cd042a51e9ab11c71318c5133c7ae36508ecd45e6e1b6d36c54edc22d844e58e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.linguistics.corpus-linguistics-intro",
+    "name": "Introduction to Corpus Linguistics",
+    "difficultyRaw": "research",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.linguistics.discourse-analysis-intro"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.linguistics.corpus-linguistics-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.linguistics.corpus-linguistics-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md": "sha256:cd042a51e9ab11c71318c5133c7ae36508ecd45e6e1b6d36c54edc22d844e58e"
+      },
+      "contentHash": "sha256:9cdcf2764cc0a46a449d5bda0049866fb45fdd4eff2c9170f680d2dd28c27b1f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.corpus-linguistics-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md#TA-1 (addresses MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.corpus-linguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.corpus-linguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.corpus-linguistics-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.corpus-linguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.corpus-linguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.corpus-linguistics-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md#TA-3 (addresses MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.corpus-linguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.corpus-linguistics-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.linguistics.corpus-linguistics-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md#TA-4 (addresses MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA, MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.linguistics.corpus-linguistics-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.linguistics.corpus-linguistics-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "Introduction to Corpus Linguistics — Conceptual Development Sequence",
+      "content": "### TA-1 — Why Corpus Data Beats Individual Intuition for Frequency Questions (MC-A)\n\nUsing the forest-survey anchor, teach that large-scale corpus data reliably answers frequency\nquestions that individual intuition cannot. Student practice: given three frequency-comparison\nquestions, make an intuition-based prediction, then check against provided corpus data, noting\nmatches and mismatches.\n\n### TA-2 — What a Corpus Actually Is and What It Can Show\n\nIntroduce the basic concept of a corpus (a large, structured collection of authentic texts) and what\nkinds of questions it can answer (word frequency, collocation patterns, usage over time). Student\npractice: given three research questions, identify which are well-suited to corpus-based investigation\nand which are not.\n\n### TA-3 — Frequency vs. Grammaticality: Two Separate Questions (MC-B)\n\nUsing the rare-medical-treatment anchor, teach that corpus frequency and syntactic grammaticality are\nrelated but distinct questions. Student practice: given four constructions (mixing frequent/\ngrammatical, rare/grammatical, and genuinely ungrammatical examples), classify each along both\ndimensions separately.\n\n### TA-4 — Full Application: Using Corpus Reasoning to Investigate a Language Question\n\nGive the student a new language question (e.g., which of two near-synonymous phrasings is more\ncommon, or whether a given construction is genuinely rare-but-valid or genuinely ungrammatical). They\nmust reason about it using corpus-style thinking (TA-1, TA-2) and correctly separate frequency from\ngrammaticality (TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 145,
+        "endLine": 175
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/misconception/MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "**Trigger signal:** Student assumes their own personal intuition about how frequently a word or",
+      "content": "### MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA\n\n**Trigger signal:** Student assumes their own personal intuition about how frequently a word or\nstructure is used, or which of two options is more common, is just as reliable as actual large-scale\ncorpus data, failing to recognize that individual intuition about FREQUENCY and typical usage patterns\nis notoriously unreliable compared to genuinely large-scale empirical data — people's intuitions about\nfrequency are often measurably wrong.\n\n**Conflict evidence [P28]:** Present the student with a question about which of two near-synonymous\nphrasings is more common in actual usage (a case where intuitions frequently diverge from documented\ncorpus frequencies) and have them guess based on intuition, then show the actual corpus frequency\ndata. Ask: \"Did your intuition match the actual large-scale data? Why might individual intuition be\nan unreliable guide to how OFTEN something actually occurs across millions of real instances?\"\n\n**Bridge text [P30]:** \"Trusting personal intuition over corpus data for frequency questions is like\ntrusting your gut feeling about which of two harmless-looking mushrooms is more common in a specific\nforest, rather than actually surveying the forest systematically — your intuition might feel\nconfident, but it's built from a small, biased sample of your own limited experience, not the full\npicture. Corpus data draws on genuinely large-scale evidence that individual intuition simply cannot\nmatch for frequency questions.\"\n\n**Replacement text [P31]:** \"For questions about how OFTEN something occurs or which of two options\nis more typical in actual usage, trust systematic corpus data over personal intuition — intuition is\nbuilt from a small, unrepresentative personal sample, while a well-constructed corpus draws on\ngenuinely large-scale, representative evidence.\"\n\n**Discrimination pairs [P33]:**\n1. Guessing which of two phrasings is \"obviously\" more common based on personal feeling\n   (unreliable intuition-based guess) vs. checking actual corpus frequency data to determine which is\n   genuinely more common (reliable, evidence-based determination).\n2. A student who insists their intuition about a word's typical usage must be correct even after\n   corpus data contradicts it (misconception) vs. a student who updates their belief about frequency\n   based on the more reliable, large-scale evidence (correct, evidence-responsive understanding).\n\n**s6_path:** If the student continues to trust intuition over corpus data after the bridge, have them\nmake frequency predictions for three more word-pair or phrasing comparisons, then check each against\nactual data, tallying how often their intuition matched versus diverged from the evidence.",
+      "localKey": "MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA",
+      "language": "en",
+      "refs": [
+        "MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 3,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/misconception/MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL",
+      "kind": "misconception",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "**Trigger signal:** Student conflates FREQUENCY (how often something occurs in usage, what corpus",
+      "content": "### MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL\n\n**Trigger signal:** Student conflates FREQUENCY (how often something occurs in usage, what corpus\ndata measures) with GRAMMATICALITY (whether something is structurally well-formed according to the\nlanguage's rules, a separate question from Syntactic Theory) — assuming that because corpus data shows\na construction is rare or unusual, it must therefore be ungrammatical or incorrect, when in fact a\nperfectly grammatical construction can simply be infrequently used for reasons unrelated to its\ngrammatical status (it may be stylistically marked, topic-specific, or simply less commonly needed).\n\n**Conflict evidence [P28]:** Show the student a grammatically well-formed but relatively rare\nsentence construction (e.g., a passive-voice construction that is perfectly grammatical but less\nfrequent than its active-voice equivalent in casual conversation) and ask: \"Is this construction\nungrammatical just because corpus data shows it occurs less often than the alternative? Would a\nfluent speaker judge it as a genuinely broken, unacceptable sentence, or just as a less common but\nperfectly valid one?\"\n\n**Bridge text [P30]:** \"Assuming rare in a corpus means ungrammatical is like assuming a rarely-\nprescribed but medically valid treatment must be medically invalid just because it's uncommon — rarity\nand validity are separate questions. A perfectly grammatical sentence can simply be needed less often\n(a specific style, a specific context, a specific emphasis) without being structurally broken.\nFrequency (corpus linguistics's question) and grammaticality (syntax's question) are related but\ndistinct.\"\n\n**Replacement text [P31]:** \"When corpus data shows a construction is rare, don't automatically\nconclude it's ungrammatical. Ask separately: is this construction actually structurally well-formed\naccording to the language's rules (a syntax question), regardless of how often it happens to be used\n(a corpus-frequency question)? A rare but grammatical construction is different from a genuinely\nungrammatical one.\"\n\n**Discrimination pairs [P33]:**\n1. A grammatically well-formed but stylistically rare construction, appearing infrequently in casual\n   corpus data but judged fully acceptable by fluent speakers (rare but grammatical) vs. a genuinely\n   ungrammatical string that virtually never occurs because it violates the language's structural\n   rules (both rare AND ungrammatical, for a different reason).\n2. A student assuming corpus rarity alone proves ungrammaticality (misconception) vs. a student\n   checking a rare construction against fluent speakers' grammaticality judgments separately from its\n   corpus frequency (correct, two-question understanding).\n\n**s6_path:** If the student continues to conflate rarity with ungrammaticality after the bridge, have\nthem identify a rare-but-grammatical construction from their own reading and explain, using the\nsyntax/semantics-style separation of questions, why its rarity doesn't make it structurally invalid.",
+      "localKey": "MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL",
+      "language": "en",
+      "refs": [
+        "MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 41,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "Why Corpus Data Beats Individual Intuition for Frequency Questions (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Why Corpus Data Beats Individual Intuition for Frequency Questions (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 149,
+        "endLine": 156
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "What a Corpus Actually Is and What It Can Show",
+      "content": "{\"id\":\"TA-2\",\"title\":\"What a Corpus Actually Is and What It Can Show\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 156,
+        "endLine": 163
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "Frequency vs. Grammaticality: Two Separate Questions (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Frequency vs. Grammaticality: Two Separate Questions (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 163,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "Full Application: Using Corpus Reasoning to Investigate a Language Question",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Using Corpus Reasoning to Investigate a Language Question\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA\",\"MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-MY-OWN-INTUITION-ABOUT-HOW-LANGUAGE-IS-USUALLY-USED-IS-ALWAYS-AS-RELIABLE-AS-CORPUS-DATA",
+        "MC-B-IF-CORPUS-DATA-SHOWS-SOMETHING-IS-RARE-OR-UNUSUAL-IT-MUST-BE-UNGRAMMATICAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 170,
+        "endLine": 301
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Intuition vs. Corpus Data Check**\nGiven a frequency-comparison question, make an intuition-based prediction, then evaluate it against\nprovided corpus data and explain any mismatch.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Identifying Corpus-Suitable Questions**\nGiven three research questions, identify which are well-suited to corpus-based empirical\ninvestigation and which are not.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Separating Frequency from Grammaticality**\nGiven four constructions, classify each along both frequency (common/rare) and grammaticality\n(grammatical/ungrammatical) dimensions separately.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Defending a Rare but Grammatical Construction**\nGiven a rare but structurally well-formed construction, explain why its rarity in corpus data does\nnot make it ungrammatical.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Corpus-Linguistics Reasoning**\nGiven a new language question, reason through it using corpus-linguistics thinking and correctly\nseparate any frequency findings from grammaticality judgments.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 195,
+        "endLine": 217
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "Adaptive Flags",
+      "content": "- If the student masters the intuition-check process (MP-1) but resists updating their beliefs even\n  when their intuition is repeatedly shown to be wrong, this may reflect general resistance to\n  evidence-based revision rather than a corpus-linguistics-specific gap — reinforce with additional,\n  varied examples until the pattern of intuition-unreliability becomes undeniable.\n  undeniable.\n- If the student conflates \"rare\" with \"informal\" or \"wrong register\" rather than genuinely\n  ungrammatical, clarify that register and grammaticality are yet another distinct pair of questions —\n  a rare construction can be perfectly grammatical in ANY register, just infrequently needed.\n- If the student's own writing shows over-reliance on intuition about word frequency (e.g., choosing\n  words based on personal familiarity rather than actual common usage), connect this concept to\n  practical writing revision, since corpus-informed word choice can improve clarity and naturalness.\n- Students with strong performance in `eng.vocab.collocations` should transfer well to this concept's\n  practical applications (TA-2, since collocation frequency is a classic corpus-linguistics use case)\n  — draw the cross-link explicitly if that concept has been completed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 253,
+        "endLine": 270
+      }
+    },
+    {
+      "assetId": "eng.linguistics.corpus-linguistics-intro/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.linguistics.corpus-linguistics-intro",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: discourse analysis check]\n   |                    |\n   | (gap found)        | (pass)\n   v                     v\n[Route to eng.linguistics.discourse-analysis-intro]  [Component 3: Forest-Survey / Rare-\n                                                        Medical-Treatment Anchor]\n                                                                  |\n                                                                  v\n                                              [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                                  |\n                                                                  v\n                                        [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                  |\n                                                                  v\n                                        [MP-1 through MP-5 mastery probe set]\n                                                                  |\n                                        (pass >= 0.70) -----+----- (fail)\n                                               |                      |\n                                               v                      v\n                    [Unlock: computational-linguistics-intro]  [S6 remediation: intuition-\n                                                                  check / two-question-\n                                                                  separation drills]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite. During\nComponent 4 (S1, active instruction), MC-A typically surfaces during TA-1 (over-trusting intuition)\nand MC-B during TA-3 (conflating rarity with ungrammaticality) — these are largely independent and\noften need separate, explicit correction. If either fires, branch to the relevant s6_path drill before\nresuming. At the mastery probe stage (S9), route by failure: MP-1 failure indicates residual MC-A;\nMP-2 failure alone indicates the corpus-suitability judgment (TA-2) needs review, distinct from either\nmisconception; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through MP-4 passing\nindicates an integration gap — provide one more guided full-reasoning example before re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.linguistics.corpus-linguistics-intro.md",
+        "startLine": 217,
+        "endLine": 253
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
