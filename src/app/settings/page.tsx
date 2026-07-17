@@ -59,6 +59,7 @@ export default function SettingsPage() {
   const { t, lang, setLang } = useLanguage()
   const { country, setCountry } = useCountry()
   const [data, setData] = useState<SettingsData | null>(null)
+  const [avatarFailed, setAvatarFailed] = useState(false)
   const [teachingLanguage, setTeachingLang] = useState<TeachingLang>('en')
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [loadError, setLoadError] = useState(false)
@@ -209,6 +210,23 @@ export default function SettingsPage() {
 
   const avatarName = profileName || profile?.name || 'U'
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarName)}&background=F78166&color=fff&size=128&bold=true&rounded=true`
+  // QA fix (2026-07-16 live browser pass): ui-avatars.com is an external
+  // service — on restricted networks the request fails and a broken-image
+  // icon rendered here. Fall back to a same-size local initial instead.
+  const avatarFallback = (
+    <div
+      role="img"
+      aria-label="avatar"
+      className="rounded-2xl"
+      style={{
+        width: 64, height: 64, flexShrink: 0, background: '#F78166', color: '#fff',
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        fontWeight: 700, fontSize: 28,
+      }}
+    >
+      {(avatarName.trim()[0] ?? 'U').toUpperCase()}
+    </div>
+  )
 
   return (
     <div className={tokenStyles.candyTheme} style={{ minHeight: '100vh', background: 'var(--candy-bg)' }}>
@@ -237,7 +255,9 @@ export default function SettingsPage() {
         {/* Profile */}
         <Section label={t('profile_title')}>
           <div className="flex items-center gap-4 mb-5">
-            <Image src={avatarUrl} alt="avatar" width={64} height={64} className="rounded-2xl" style={{ flexShrink: 0 }} unoptimized />
+            {avatarFailed
+              ? avatarFallback
+              : <Image src={avatarUrl} alt="avatar" width={64} height={64} className="rounded-2xl" style={{ flexShrink: 0 }} unoptimized onError={() => setAvatarFailed(true)} />}
             <div className="min-w-0">
               <p className="font-bold text-sm" style={{ color: 'var(--candy-ink)' }}>{profile?.name || '—'}</p>
               <p className="text-xs mt-0.5" style={{ color: 'var(--candy-ink-soft)' }}>{profile?.email}</p>

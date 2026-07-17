@@ -64,6 +64,8 @@ const VOICE_MAP: Record<string, VoiceType> = {
   male: 'male', female: 'female', warm: 'warm',
   alexei: 'male', maria: 'female', dmitry: 'warm',
 }
+import { isInternalOpeningPrompt } from '@/lib/learn/internalPromptFilter'
+
 function resolveVoice(choice: string): VoiceType { return VOICE_MAP[choice] ?? 'male' }
 
 const LANG_BADGE: Record<string, { label: string; accent: string }> = {
@@ -919,6 +921,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return
         const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
+          .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
           .map((m) => ({
             id: m.id,
             role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
@@ -927,6 +930,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             provider: m.provider ?? undefined,
           }))
         if (cancelled) return
+        // All rows were internal bootstrap prompts (e.g. the only prior turn
+        // failed before the tutor replied) → treat as no history at all, so
+        // the welcome screen + Start Lesson gate still shows.
+        if (restored.length === 0) return
         setMessages(restored)
         setLessonStarted(true) // skip the "Start Lesson" welcome screen
         // Acquire a sessionId so subsequent sends can dispatch. Resume path
@@ -1660,6 +1667,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
           const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
+            .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
             .map((m) => ({
               id: m.id,
               role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
@@ -1667,8 +1675,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               ts: new Date(m.createdAt).getTime(),
               provider: m.provider ?? undefined,
             }))
-          setMessages(restored)
-          restoredAny = true
+          if (restored.length > 0) {
+            setMessages(restored)
+            restoredAny = true
+          }
         }
       } catch { /* fall back to the resumed-session payload below */ }
 
@@ -1677,6 +1687,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       if (!restoredAny && data.resumed && Array.isArray(data.data.messages) && data.data.messages.length > 0) {
         const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
           .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
+          .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
           .map((m) => ({
             id: m.id,
             role: m.role === 'USER' ? 'user' : 'assistant',
