@@ -1492,8 +1492,25 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // greeting) — playback only starts from the explicit play button on
       // each message (handleSpeak, wired to that button below).
     } catch (err) {
+      // P1 (transcript-driven, Recovery/graceful-degradation): this used to
+      // render `Error: ${msg}` directly into the chat bubble — for a pure
+      // network failure (fetch never reaching the server) msg is a raw
+      // browser exception ("Load failed", "TypeError: Failed to fetch"),
+      // and even the server's own friendly copy ("High demand right now —
+      // please try again in a minute.") got the flat "Error:" label slapped
+      // on it. Either way a student sees a stack-trace-shaped line instead
+      // of a teacher who got interrupted. Same root cause as the mastery-
+      // gate/visual-registry fixes: a raw technical string reaching the
+      // student unfiltered. console.error keeps the real message for
+      // debugging; the bubble gets a warm, teacherly recovery line instead.
       const msg = err instanceof Error ? err.message : String(err)
-      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: `Error: ${msg}`, streaming: false } : m))
+      console.error('[learn/chat] turn failed:', msg)
+      const recoveryText = teachingLanguage === 'ru'
+        ? 'Ой, связь прервалась на секунду. Можешь повторить или просто отправь сообщение ещё раз — я на месте.'
+        : teachingLanguage === 'hi'
+        ? 'Oops, connection ek second ke liye ruk gaya. Dobara try karo — main yahin hoon.'
+        : "Sorry, I got cut off there for a second. Go ahead and try again — I'm still here."
+      setMessages((p) => p.map((m) => m.id === aid ? { ...m, content: recoveryText, streaming: false } : m))
     } finally { setIsStreaming(false); textareaRef.current?.focus() }
   }, [handleSpeak, curriculumLessons, curriculumProgress.currentLesson, handleLessonComplete, userId, subjectSlug])
 
