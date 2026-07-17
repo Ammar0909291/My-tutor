@@ -1829,6 +1829,229 @@ const KIN2_PROBES: SeedProbe[] = [
   },
 ]
 
+
+// ─── phys.mech.work ──────────────────────────────────────────────────────────
+const WORK = 'phys.mech.work'
+const WORK_SRC = 'docs/curriculum/blueprints/phys.mech.work.md'
+
+const WORK_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: WORK,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Intuitive: work = energy moved in the direction of travel; cosθ as "useful fraction"
+    content:
+      'In physics, "work" has nothing to do with effort or tiredness — it ' +
+      'measures ENERGY TRANSFERRED to an object along its direction of ' +
+      'motion. Push a trolley forward as it rolls forward: energy flows ' +
+      'in — positive work. Hold a heavy suitcase perfectly still for ten ' +
+      'exhausting minutes: your arms ache, but zero energy moved into the ' +
+      "suitcase's motion, so the physics-work is ZERO. And when a force " +
+      'pulls at an angle, only the slice of it pointing along the motion ' +
+      'counts: pulling a sledge with a rope angled upward, part of your ' +
+      'pull tries to lift the sledge — useless for forward travel. The ' +
+      'formula W = Fd·cosθ does the slicing automatically: cosθ is the ' +
+      '"useful fraction" of the force — 1 when perfectly aligned, 0 when ' +
+      'perpendicular (a sideways force moves nothing forward).',
+    targetedMisconceptions: [`${WORK}:MC-FULL-FORCE`],
+    source: `${WORK_SRC} — §5 Protocol Library opening + §6 MC-FULL-FORCE (sledge conflict evidence P28, cosθ-as-useful-fraction bridge)`,
+  },
+  {
+    conceptId: WORK,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: negative work is real and means energy removal
+    content:
+      'Can work be negative? It must be — otherwise brakes couldn\'t ' +
+      'work. Slide a box across a floor: friction points BACKWARD, at ' +
+      '180° to the motion, so W = Fd·cos180° = −Fd. That minus sign is ' +
+      'physics, not bookkeeping: negative work means the force is TAKING ' +
+      'energy OUT of the object\'s motion. If friction\'s work were ' +
+      'positive it would be feeding energy in — the box would speed up as ' +
+      'it slid, which nothing in the universe does. Same for gravity ' +
+      'while a ball rises: gravity points down, motion is up, W < 0, and ' +
+      'the ball duly slows. The angle tells the story every time: force ' +
+      'helping the motion (θ < 90°) → positive work, energy in; force ' +
+      'fighting the motion (θ > 90°) → negative work, energy out; force ' +
+      'sideways (θ = 90°) → no work at all.',
+    targetedMisconceptions: [`${WORK}:MC-WORK-ALWAYS-POSITIVE`],
+    source: `${WORK_SRC} — §6 MC-WORK-ALWAYS-POSITIVE (friction conflict evidence P28 + angle-regimes replacement P31)`,
+  },
+]
+
+const WORK_PROBES: SeedProbe[] = [
+  {
+    conceptId: WORK,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A box slides 5 m to the right while friction acts on it. The work done by friction is…',
+    choices: [
+      { text: 'Negative — friction opposes the motion and removes energy', isCorrect: true },
+      { text: 'Positive — friction is a real force doing real work', isCorrect: false, misconceptionId: `${WORK}:MC-WORK-ALWAYS-POSITIVE` },
+      { text: 'Zero — friction only acts on the surface', isCorrect: false },
+    ],
+    correctValue: 'negative',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WORK}:MC-WORK-ALWAYS-POSITIVE`],
+    source: `${WORK_SRC} — §7 P74 classify item, distractor-mapped`,
+  },
+  {
+    conceptId: WORK,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You pull a sledge 12 m with a 50 N rope at 25° above the horizontal. What work do you do on the sledge?',
+    choices: [
+      { text: 'About 544 J — only the component along the motion counts: 50·cos25°·12', isCorrect: true },
+      { text: '600 J — force times distance: 50 × 12', isCorrect: false, misconceptionId: `${WORK}:MC-FULL-FORCE` },
+    ],
+    correctValue: '≈544 J',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WORK}:MC-FULL-FORCE`],
+    source: `${WORK_SRC} — §6 MC-FULL-FORCE conflict scenario verbatim numbers, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.kinetic-energy ────────────────────────────────────────────────
+const KE = 'phys.mech.kinetic-energy'
+const KE_SRC = 'docs/curriculum/blueprints/phys.mech.kinetic-energy.md'
+
+const KE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: KE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Intuitive: the square is the whole story — braking distances
+    content:
+      'Kinetic energy is the energy of being in motion — KE = ½mv² — and ' +
+      'the entire personality of that formula lives in the little ². ' +
+      'Because speed is SQUARED, doubling your speed doesn\'t double the ' +
+      'energy: it quadruples it. Triple the speed, nine times the energy. ' +
+      'This is why motorway speeds are so unforgiving: a car at 100 km/h ' +
+      'carries FOUR times the kinetic energy of the same car at 50 km/h, ' +
+      'and the brakes — which drain energy at a roughly fixed rate per ' +
+      'metre — need four times the distance to empty the tank. Your ' +
+      'intuition, trained on "a bit faster = a bit more", systematically ' +
+      'underestimates fast objects. Trust the square, not the gut.',
+    targetedMisconceptions: [`${KE}:MC-KE-LINEAR`],
+    source: `${KE_SRC} — Component 3 MC-KE-LINEAR (2 J vs 8 J conflict evidence P28 + braking-distance bridge P30)`,
+  },
+  {
+    conceptId: KE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ADULT,
+    // First-principles: why ½mv², and why KE can't be negative
+    content:
+      'Where does ½mv² come from? From work. Accelerate a mass m from ' +
+      'rest with constant force F over distance d: the work done is Fd = ' +
+      '(ma)d, and kinematics gives v² = 2ad, so ad = v²/2 — substitute ' +
+      'and the energy delivered is exactly ½mv². Kinetic energy is just ' +
+      'the accumulated work it took to get the object moving, stored in ' +
+      'the motion itself. Two properties fall out immediately. KE can ' +
+      'never be negative: m is positive and v² is a square — a leftward ' +
+      'velocity of −5 m/s gives the same ½m(25) as a rightward +5; energy ' +
+      'of motion has magnitude but no direction (unlike momentum, which ' +
+      'keeps the sign). And KE is frame-dependent but always ≥ 0 in every ' +
+      'frame: the minimum, zero, means simply "not moving in this frame."',
+    targetedMisconceptions: [`${KE}:MC-KE-NEGATIVE`],
+    source: `${KE_SRC} — Component 1 Concept Spine (work-energy derivation) + Component 3 MC-KE-NEGATIVE (v² kills the sign)`,
+  },
+]
+
+const KE_PROBES: SeedProbe[] = [
+  {
+    conceptId: KE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A cyclist doubles her speed from 4 m/s to 8 m/s. Her kinetic energy…',
+    choices: [
+      { text: 'quadruples — speed is squared in ½mv²', isCorrect: true },
+      { text: 'doubles — twice the speed, twice the energy', isCorrect: false, misconceptionId: `${KE}:MC-KE-LINEAR` },
+      { text: 'increases by half', isCorrect: false },
+    ],
+    correctValue: 'quadruples',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${KE}:MC-KE-LINEAR`],
+    source: `${KE_SRC} — Component 3 MC-KE-LINEAR trigger, fresh numbers, distractor-mapped`,
+  },
+]
+
+// ─── phys.mech.potential-energy ──────────────────────────────────────────────
+const PE = 'phys.mech.potential-energy'
+const PE_SRC = 'docs/curriculum/blueprints/phys.mech.potential-energy.md'
+
+const PE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: PE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    // Intuitive: stored by position; the zero is YOUR choice, only Δ matters
+    content:
+      'Gravitational potential energy is energy stored by POSITION: lift ' +
+      'a book and you bank energy (GPE = mgh) that gravity will pay back ' +
+      'the moment you let go. Now the part that confuses everyone: h ' +
+      'measured from WHERE? Here\'s the secret — you choose. Measure a ' +
+      '1 kg book from the floor (1 m below it): GPE = 10 J. Your friend ' +
+      'measures from the tabletop it\'s sitting on: GPE = 0 J. You\'re ' +
+      'BOTH right, because GPE is like altitude on a hiking map: sea ' +
+      'level is a convention, and only CHANGES in height decide how hard ' +
+      'the climb is. Physics only ever cashes in ΔGPE — the change — and ' +
+      'that number comes out identical whatever zero level you picked. ' +
+      'Choose the reference that makes the problem easiest, say it out ' +
+      'loud, and stay consistent.',
+    targetedMisconceptions: [`${PE}:MC-GPE-ABSOLUTE`],
+    source: `${PE_SRC} — Component 3 MC-GPE-ABSOLUTE (two-students conflict evidence P28 + Celsius/Fahrenheit bridge P30)`,
+  },
+  {
+    conceptId: PE,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    // Repair: h is VERTICAL height, not path length (ramp vs ladder)
+    content:
+      'Two movers lift identical 20 kg boxes onto the same 1.5 m platform. ' +
+      'One hauls straight up a ladder; the other pushes up a long, gentle ' +
+      '6 m ramp. Who stored more energy in their box? Neither — the h in ' +
+      'mgh is the VERTICAL height gained, and both boxes rose exactly ' +
+      '1.5 m. The ramp\'s 6 m is path length, not height; walking a ' +
+      'longer, shallower route changes how the effort FEELS (smaller ' +
+      'force, longer distance) but not the energy banked, which depends ' +
+      'only on where the box ENDS UP vertically relative to where it ' +
+      'started. Gravity is direction-picky in the cleanest way: it only ' +
+      'notices up-and-down. Horizontal travel is free as far as GPE is ' +
+      'concerned — carry the box a kilometre across a flat floor and its ' +
+      'stored energy hasn\'t changed by a joule.',
+    targetedMisconceptions: [`${PE}:MC-HEIGHT-VERTICAL-ONLY`],
+    source: `${PE_SRC} — Component 3 MC-HEIGHT-VERTICAL-ONLY (ramp-vs-ladder repair rendered as teaching text)`,
+  },
+]
+
+const PE_PROBES: SeedProbe[] = [
+  {
+    conceptId: PE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two students compute the GPE of the same book on the same shelf. One gets 30 J (measuring from the floor), the other 0 J (measuring from the shelf). Who is right?',
+    choices: [
+      { text: 'Both — GPE depends on the chosen reference level; only changes in GPE are physical', isCorrect: true },
+      { text: 'The one using the floor — the ground is the true zero', isCorrect: false, misconceptionId: `${PE}:MC-GPE-ABSOLUTE` },
+      { text: 'Neither — the book has one true GPE they both missed', isCorrect: false, misconceptionId: `${PE}:MC-GPE-ABSOLUTE` },
+    ],
+    correctValue: 'both',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PE}:MC-GPE-ABSOLUTE`],
+    source: `${PE_SRC} — Component 3 MC-GPE-ABSOLUTE conflict scenario as the probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -1850,6 +2073,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...LOGIC_EXPLANATIONS,
   ...EXPR_EXPLANATIONS,
   ...KIN2_EXPLANATIONS,
+  ...WORK_EXPLANATIONS,
+  ...KE_EXPLANATIONS,
+  ...PE_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -1871,4 +2097,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...LOGIC_PROBES,
   ...EXPR_PROBES,
   ...KIN2_PROBES,
+  ...WORK_PROBES,
+  ...KE_PROBES,
+  ...PE_PROBES,
 ]
