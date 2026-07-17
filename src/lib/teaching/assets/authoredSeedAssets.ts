@@ -9011,6 +9011,170 @@ const SIM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.geom.slope ──────────────────────────────────────────────────────────
+const SLOPE = 'math.geom.slope'
+const SLOPE_SRC = 'docs/curriculum/blueprints/math.geom.slope.md'
+
+const SLOPE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SLOPE,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Slope is \u201crise over run\u201d \u2014 \u0394y OVER \u0394x, never the other way ' +
+      'around. For points (2,3) and (5,9): rise = change in y = ' +
+      '9\u22123 = 6; run = change in x = 5\u22122 = 3; slope = 6/3 = 2. ' +
+      'Flipping the fraction to \u0394x/\u0394y = 3/6 = 1/2 answers a ' +
+      'completely different question. Anchor it physically: walk ' +
+      'along the line \u2014 how far up (or down) do you climb (\u0394y, the ' +
+      'RISE) for every step forward (\u0394x, the RUN)? \u201cRise\u201d ' +
+      'naturally goes on top because you are measuring how much ' +
+      'height you gain PER unit of horizontal travel. Write the ' +
+      'formula the same way every time: m = (y\u2082\u2212y\u2081)/(x\u2082\u2212x\u2081), ' +
+      'y-difference always on top.',
+    targetedMisconceptions: [`${SLOPE}:MC-1`],
+    source: `${SLOPE_SRC} — MC-1 DELTA-Y-OVER-DELTA-X-REVERSED (TA-B01: rise-per-run physical anchor)`,
+  },
+  {
+    conceptId: SLOPE,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Two more slope traps. First: does slope change depending on ' +
+      'WHICH two points you pick on a line? No \u2014 slope is a property ' +
+      'of the WHOLE line, not of any particular pair of points on it. ' +
+      'Using (0,1) and (2,5) gives slope 2; using (1,3) and (4,9) on ' +
+      'the SAME line gives exactly the same slope, 2 \u2014 a straight ' +
+      'line rises at one constant rate everywhere, by definition. ' +
+      'Second: perpendicular lines do NOT share the same slope \u2014 ' +
+      'that is the PARALLEL condition. Perpendicular slopes are ' +
+      'NEGATIVE RECIPROCALS of each other: if one line has slope 3, ' +
+      'the perpendicular line has slope \u22121/3 (flip and negate). ' +
+      'Equal slopes mean the lines never meet (parallel); negative-' +
+      'reciprocal slopes mean the lines cross at a perfect right ' +
+      'angle.',
+    targetedMisconceptions: [`${SLOPE}:MC-2`, `${SLOPE}:MC-3`],
+    source: `${SLOPE_SRC} — MC-2 SLOPE-DEPENDS-ON-POINT-CHOICE (line-wide invariance) + MC-3 PERPENDICULAR-SLOPES-EQUAL (negative-reciprocal rule vs. parallel condition)`,
+  },
+]
+
+const SLOPE_PROBES: SeedProbe[] = [
+  {
+    conceptId: SLOPE,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'What is the slope between (2,3) and (5,9)?',
+    choices: [
+      { text: '2 — (9\u22123)/(5\u22122) = 6/3', isCorrect: true },
+      { text: '1/2 — (5\u22122)/(9\u22123) = 3/6', isCorrect: false, misconceptionId: `${SLOPE}:MC-1` },
+    ],
+    correctValue: '2',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SLOPE}:MC-1`],
+    source: `${SLOPE_SRC} — MC-1 trigger case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: SLOPE,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'A line has slope 3. What is the slope of a line PERPENDICULAR to it?',
+    choices: [
+      { text: '\u22121/3 — the negative reciprocal', isCorrect: true },
+      { text: '3 — perpendicular lines have equal slopes', isCorrect: false, misconceptionId: `${SLOPE}:MC-3` },
+    ],
+    correctValue: '\u22121/3',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SLOPE}:MC-3`],
+    source: `${SLOPE_SRC} — MC-3 trigger as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.capitalization-rules ────────────────────────────────────────
+const CAP = 'eng.grammar.capitalization-rules'
+const CAP_SRC = 'docs/curriculum/blueprints/eng.grammar.capitalization-rules.md'
+
+const CAP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CAP,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.EARLY,
+    content:
+      '\u201cWe went to the Beach\u201d \u2014 capitalize \u201cBeach\u201d because the trip ' +
+      'felt special? Capitalization does not track how much you ' +
+      'care; it tracks PROPER vs. COMMON nouns. \u201cBeach\u201d here names a ' +
+      'general category of place, like \u201cpark\u201d or \u201cstore\u201d \u2014 a ' +
+      'COMMON noun, lowercase. \u201cWaikiki Beach\u201d names one SPECIFIC, ' +
+      'officially-named beach \u2014 a PROPER noun, capitalized. Same test ' +
+      'for people-words: \u201cI love my mom\u201d keeps \u201cmom\u201d lowercase (a ' +
+      'general role, common noun), but \u201cI love you, Mom\u201d capitalizes ' +
+      'it \u2014 here \u201cMom\u201d is being used AS a name, in direct address, ' +
+      'standing in for \u201cSarah\u201d or whatever her actual name is. Ask: ' +
+      'does this word name one specific, particular thing with its ' +
+      'own name, or a general category? Specific \u2192 capitalize; ' +
+      'general \u2192 lowercase, no matter how emotionally significant it ' +
+      'feels.',
+    targetedMisconceptions: [`${CAP}:MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD`],
+    source: `${CAP_SRC} — MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD (P28 Beach conflict + P33 mom/Mom, beach/Waikiki-Beach pairs)`,
+  },
+  {
+    conceptId: CAP,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.EARLY,
+    content:
+      '\u201cThe dog barked. it ran to the door.\u201d \u2014 the FIRST word of the ' +
+      'whole paragraph is capitalized, but the second sentence\u2019s ' +
+      'first word, \u201cit,\u201d is not. The rule is NOT \u201ccapitalize once at ' +
+      'the start of the document\u201d \u2014 it is \u201ccapitalize the first word ' +
+      'after EVERY sentence-ending mark\u201d (period, question mark, ' +
+      'exclamation point), applying fresh at every single sentence ' +
+      'boundary, no matter how many sentences follow. Correct: \u201cThe ' +
+      'dog barked. It ran to the door.\u201d Treat every period as a ' +
+      'reset button: whatever comes right after gets capitalized, ' +
+      'every time, all the way through the piece.',
+    targetedMisconceptions: [`${CAP}:MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT`],
+    source: `${CAP_SRC} — MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT (P28 dog-barked conflict + P31 period-as-reset-button rule)`,
+  },
+]
+
+const CAP_PROBES: SeedProbe[] = [
+  {
+    conceptId: CAP,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.EARLY,
+    stem: 'Which sentence uses capitalization correctly?',
+    choices: [
+      { text: '\u201cWe went to the beach\u201d — a general place category stays lowercase', isCorrect: true },
+      { text: '\u201cWe went to the Beach\u201d — capitalize words that feel important', isCorrect: false, misconceptionId: `${CAP}:MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD` },
+    ],
+    correctValue: 'We went to the beach',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CAP}:MC-CAPITALIZE-ANY-IMPORTANT-SOUNDING-WORD`],
+    source: `${CAP_SRC} — P28 Beach conflict as probe`,
+  },
+  {
+    conceptId: CAP,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.EARLY,
+    stem: 'Which is correctly capitalized: \u201cThe dog barked. It ran to the door.\u201d or \u201cThe dog barked. it ran to the door.\u201d?',
+    choices: [
+      { text: '\u201cThe dog barked. It ran to the door.\u201d — every new sentence needs its own capital first letter', isCorrect: true },
+      { text: '\u201cThe dog barked. it ran to the door.\u201d — only the very first word of the whole text needs a capital', isCorrect: false, misconceptionId: `${CAP}:MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT` },
+    ],
+    correctValue: 'The dog barked. It ran to the door.',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${CAP}:MC-CAPITALIZE-ONLY-THE-VERY-FIRST-WORD-OF-A-TEXT`],
+    source: `${CAP_SRC} — P28 dog-barked conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -9119,6 +9283,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...INTJ_EXPLANATIONS,
   ...SUP_EXPLANATIONS,
   ...SIM_EXPLANATIONS,
+  ...SLOPE_EXPLANATIONS,
+  ...CAP_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -9227,4 +9393,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...INTJ_PROBES,
   ...SUP_PROBES,
   ...SIM_PROBES,
+  ...SLOPE_PROBES,
+  ...CAP_PROBES,
 ]
