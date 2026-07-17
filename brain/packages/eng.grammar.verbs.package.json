@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.grammar.verbs-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.grammar.verbs",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e475af7284ef13d7a674c1b405a56edc1ee9f28124dc66f15656a69476f7bc21",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.grammar.verbs.md": "sha256:cd38dae70bbd69bbeab729a262c7edabb7ad7deb9d1730b3f49427c4b8ec2507"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.grammar.verbs",
+    "name": "Verbs",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "eng.grammar.word-classes-overview"
+    ],
+    "status": "READY / PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.grammar.verbs-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.grammar.verbs (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.grammar.verbs.md": "sha256:cd38dae70bbd69bbeab729a262c7edabb7ad7deb9d1730b3f49427c4b8ec2507"
+      },
+      "contentHash": "sha256:0c008a3046e126172d190e619b649ee831c645b6f71a1487124bf980075ea325",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.grammar.verbs.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.verbs.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.verbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.verbs.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.verbs.md#TA-2 (addresses MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.verbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.verbs.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.verbs.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.verbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.verbs.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.verbs.md#TA-4 (addresses MC-HELPING-VERBS-ARE-NOT-REAL-VERBS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.verbs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.grammar.verbs.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.grammar.verbs.md#TA-5 (addresses MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS, MC-HELPING-VERBS-ARE-NOT-REAL-VERBS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.grammar.verbs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.grammar.verbs\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.grammar.verbs/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.grammar.verbs",
+      "title": "Verbs — Conceptual Development Sequence",
+      "content": "**TA-1 — Physical Action Verbs [C]**\n\nPresent sentences with clear physical-action verbs; student identifies them, building the foundational, most intuitive verb category.\n\n**TA-2 — Linking/State Verbs [C]**\n\nPresent sentences using \"be\" verbs and other linking verbs (seem, become, feel, appear) connecting a subject to a description; student identifies these as verbs despite the absence of physical action, directly targeting MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS.\n\n**TA-3 — Mental/Sensory Verbs [C→P]**\n\nPresent sentences using mental-process verbs (think, know, believe, want, love); student identifies these as verbs, further expanding beyond physical action.\n\n**TA-4 — Helping (Auxiliary) Verbs and Verb Phrases [P]**\n\nPresent sentences with helping-verb + main-verb combinations (is running, has finished, will go, can swim); student identifies the FULL verb phrase, not just the main verb, directly targeting MC-HELPING-VERBS-ARE-NOT-REAL-VERBS.\n\n**TA-5 — Testing Sentence Completeness via the Verb [P]**\n\nStudent tests whether a word group is a complete sentence by checking for a genuine verb (including checking that a helping verb alone or a main verb alone might not be sufficient without its partner); student identifies incomplete \"sentences\" missing a necessary verb component and corrects them.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 68,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/misconception/MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.verbs",
+      "title": "- **Trigger signal:** Student defines verbs only as words showing visible physical movement (run, jump, throw), failing to recognize state-of-being verbs (is, am, are, was, were, seem, feel, become) and mental/sensory verbs (think, know, believe, want) as legitimate verb categories, since nothing physically \"moves.",
+      "content": "### MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS\n- **Trigger signal:** Student defines verbs only as words showing visible physical movement (run, jump, throw), failing to recognize state-of-being verbs (is, am, are, was, were, seem, feel, become) and mental/sensory verbs (think, know, believe, want) as legitimate verb categories, since nothing physically \"moves.\"\n- **Conflict evidence [P28]:** \"You said verbs are only physical actions like 'run' or 'jump.' In the sentence 'She IS happy,' is anything physically moving? Is 'is' still doing a verb's job in that sentence?\"\n- **Bridge text [P30]:** \"Verbs express action OR state of being — 'is,' 'am,' 'are,' 'seem,' 'feel,' 'become' are all verbs even though they don't show physical movement; they connect a subject to a description or state (linking verbs), or express mental/emotional states (think, want, believe, love) rather than physical action. All of these do the grammatical JOB of a verb — they're essential to forming a complete sentence.\"\n- **Replacement text [P31]:** \"Check whether a word expresses action OR a state/condition/mental process — not just visible physical movement.\"\n- **Discrimination pairs [P33]:**\n  - \"run\" (physical action verb) vs. \"seem\" (linking/state verb — \"She seems tired\") — both function as the main verb of their sentence.\n  - \"think\" (mental-process verb, no physical action) vs. \"throw\" (physical action verb) — both are verbs.\n- **s6_path:** \"It's a natural first instinct to picture verbs as physical actions, since those are the most vivid examples — but state-of-being and mental-process verbs are just as central to the category, and every complete sentence needs some kind of verb, action or not.\"",
+      "localKey": "MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS",
+      "language": "en",
+      "refs": [
+        "MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 3,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/misconception/MC-HELPING-VERBS-ARE-NOT-REAL-VERBS",
+      "kind": "misconception",
+      "conceptId": "eng.grammar.verbs",
+      "title": "- **Trigger signal:** Student ignores or dismisses auxiliary/helping verbs (is, has, will, can, must, do) as unimportant \"extra\" words rather than recognizing them as genuine verbs that combine with a main verb to form the complete verb phrase, carrying essential grammatical information (tense, aspect, modality) — e.g., in \"She is running,\" identifies only \"running\" as the verb and misses that \"is\" is also functioning as part of the verb phrase.",
+      "content": "### MC-HELPING-VERBS-ARE-NOT-REAL-VERBS\n- **Trigger signal:** Student ignores or dismisses auxiliary/helping verbs (is, has, will, can, must, do) as unimportant \"extra\" words rather than recognizing them as genuine verbs that combine with a main verb to form the complete verb phrase, carrying essential grammatical information (tense, aspect, modality) — e.g., in \"She is running,\" identifies only \"running\" as the verb and misses that \"is\" is also functioning as part of the verb phrase.\n- **Conflict evidence [P28]:** \"In 'She is running,' you said only 'running' is the verb. But if I said just 'She running' by itself, would that be a complete, correct sentence? What is 'is' doing there?\"\n- **Bridge text [P30]:** \"Helping (auxiliary) verbs — is, am, are, was, were, has, have, had, will, would, can, could, must, do, does, did — combine with a main verb to form the complete VERB PHRASE, carrying essential information about tense, ongoing action, ability, obligation, or question formation. They are genuine verbs, not optional extras — removing them often breaks the sentence's grammar entirely.\"\n- **Replacement text [P31]:** \"Always check for helping verbs alongside the main verb, and treat the full verb phrase (helping verb + main verb) as the complete verb, not just the main action word.\"\n- **Discrimination pairs [P33]:**\n  - \"She is running\" (complete: helping verb \"is\" + main verb \"running\") vs. \"She running\" (incomplete/ungrammatical without the helping verb).\n  - \"I have finished\" (helping verb \"have\" + main verb \"finished,\" present perfect tense) vs. dropping \"have\" leaving an incomplete tense signal.\n- **s6_path:** \"It's easy to focus on the word that seems to carry the main 'action meaning' and overlook the smaller helping verb next to it — but helping verbs carry real grammatical weight (tense, question formation, ability), and learning to spot them as part of the verb phrase is an important skill.\"\n\n---",
+      "localKey": "MC-HELPING-VERBS-ARE-NOT-REAL-VERBS",
+      "language": "en",
+      "refs": [
+        "MC-HELPING-VERBS-ARE-NOT-REAL-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 13,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.verbs",
+      "title": "Physical Action Verbs",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Physical Action Verbs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 70,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.verbs",
+      "title": "Linking/State Verbs",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Linking/State Verbs\",\"primitives\":[],\"addresses\":[\"MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 74,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.verbs",
+      "title": "Mental/Sensory Verbs",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Mental/Sensory Verbs\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 78,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.verbs",
+      "title": "Helping (Auxiliary) Verbs and Verb Phrases",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Helping (Auxiliary) Verbs and Verb Phrases\",\"primitives\":[],\"addresses\":[\"MC-HELPING-VERBS-ARE-NOT-REAL-VERBS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-HELPING-VERBS-ARE-NOT-REAL-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 82,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.grammar.verbs",
+      "title": "Testing Sentence Completeness via the Verb",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Testing Sentence Completeness via the Verb\",\"primitives\":[\"P01\",\"P06\",\"P28\",\"P30\",\"P31\",\"P33\",\"P36\",\"P41\",\"P51\",\"P52\",\"P62\",\"P68\",\"P85\",\"P89\",\"P91\"],\"addresses\":[\"MC-HELPING-VERBS-ARE-NOT-REAL-VERBS\",\"MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS",
+        "MC-HELPING-VERBS-ARE-NOT-REAL-VERBS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 86,
+        "endLine": 214
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.verbs",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Physical action verb, novel sentence**\n\"In 'The cat climbed the tree,' what's the verb?\"\n*Target:* \"climbed.\"",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.verbs",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Linking/state verb, novel sentence**\n\"In 'He seems tired today,' what's the verb?\"\n*Target:* \"seems\" — a linking verb, despite no physical action.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.verbs",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Mental/sensory verb, novel sentence**\n\"In 'She believes in hard work,' what's the verb?\"\n*Target:* \"believes\" — a mental-process verb.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.verbs",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Helping verb + main verb, novel sentence**\n\"In 'I will have finished by tomorrow,' what's the complete verb phrase?\"\n*Target:* \"will have finished\" — all three words together form the complete verb phrase.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.grammar.verbs",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Explain verb categories**\n\"In your own words: are verbs only about physical action, and do helping verbs count as real verbs?\"\n*Target:* states or demonstrates that verbs express action OR state of being/mental processes, and that helping (auxiliary) verbs are genuine verbs forming part of the complete verb phrase alongside the main verb.\n\n---",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 114,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.grammar.verbs",
+      "title": "Adaptive Flags",
+      "content": "- **State/mental verbs are equally central, not exceptions**: introduce linking and mental-process verbs as core verb subcategories early, directly countering the intuitive \"verb = physical action\" default.\n- **Helping verbs must be taught as part of the complete verb phrase**: never let students identify only the main verb when a helping verb is present — the full phrase (helping + main) is the grammatically complete unit.\n- **Sentence-completeness testing reinforces the practical value of this concept**: TA-5's practical application (does this word group have what it needs to be a complete sentence?) gives concrete, functional payoff to the verb-identification skill.\n- **Copula-drop and auxiliary-system transfer errors deserve dedicated practice**: for S9 learners from L1s that omit \"be\" in certain constructions or handle auxiliaries differently, budget explicit, repeated practice on the specific English auxiliary patterns that are commonly dropped or misapplied.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 176,
+        "endLine": 185
+      }
+    },
+    {
+      "assetId": "eng.grammar.verbs/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.grammar.verbs",
+      "title": "Session Architecture",
+      "content": "```\n[P01] Session open — verb charades warm-up (physical action verbs)\n  ↓\n[P41] PD-1 (word-classes-overview readiness)\n  ↓ PASS\n[P06] Anchor: verb charades (action round, then no-movement state/mental verb round)\n  ↓\nTA-1: Physical action verbs [C]\n  ↓\nTA-2: Linking/state verbs [C]\n  ↓\n[P28] Conflict: verbs assumed only physical action → MC-VERBS-ARE-ONLY-PHYSICAL-ACTIONS (if triggered)\n  ↓\nTA-3: Mental/sensory verbs [C→P]\n  ↓\nTA-4: Helping (auxiliary) verbs and verb phrases [P]\n  ↓\n[P28] Conflict: helping verbs dismissed as non-verbs → MC-HELPING-VERBS-ARE-NOT-REAL-VERBS (if triggered)\n  ↓\nTA-5: Testing sentence completeness via the verb [P]\n  ↓\n[P51] Check-in WE-1 → WE-2 → WE-3\n  ↓\n[P36] MP-1 through MP-5 (mastery probe set)\n  ↓\n[P62] Retrieval seed: \"Tomorrow, find one sentence with a helping verb and identify the full verb phrase.\"\n[P68] Session close\n[P85] Regulation tail — praise identifying the full verb phrase over just the main action word\n[P89] Retrieval schedule: 1 day, 3 days, 7 days\n[P91] Mastery gate: 80%; re-route to Component 3 anchor if below\n```\n\n**Protocol routing:** S0 (secure on word-classes-overview, new to verb subcategories): dwell on TA-1's physical-action verbs before introducing linking/mental verbs. S1 (already identifies action verbs confidently, needs subcategory expansion): compress TA-1, focus on TA-2/TA-4's less intuitive categories. S6 (frustrated by the abstractness of state/mental verbs after the concrete charades warm-up): explicitly bridge the gap by discussing how these verbs still \"do a job\" in the sentence, just a different kind of job than physical action. S9 (L1 doesn't use a copula/linking verb the way English does, e.g. some languages omit \"be\" in present-tense statements, or has different auxiliary-verb systems): expect TA-2/TA-4 to require dedicated, explicit contrastive teaching, since omitting \"is/are\" or misusing helping verbs is a very common, persistent transfer error for learners from copula-drop languages.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.grammar.verbs.md",
+        "startLine": 138,
+        "endLine": 176
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
