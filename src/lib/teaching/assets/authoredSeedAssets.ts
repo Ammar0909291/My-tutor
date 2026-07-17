@@ -8679,6 +8679,171 @@ const REP_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.wave.beats ──────────────────────────────────────────────────────────
+const BEAT = 'phys.wave.beats'
+const BEAT_SRC = 'docs/curriculum/blueprints/phys.wave.beats.md'
+
+const BEAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BEAT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two tuning forks ring at 440 Hz and 442 Hz. Is the beat rate ' +
+      'their AVERAGE, (440+442)/2 = 441 Hz? That would be one beat ' +
+      'every 441 seconds \u2014 imperceptibly slow. Strike them together ' +
+      'and you hear roughly TWO throbs per second instead: the beat ' +
+      'frequency is the DIFFERENCE, |f\u2081 \u2212 f\u2082| = 2 Hz. The average ' +
+      'is a real number too, but it answers a different question: ' +
+      '441 Hz is the PITCH you hear (the carrier tone), while 2 Hz is ' +
+      'the THROBBING rate of loud-soft-loud-soft. The sum-to-product ' +
+      'formula produces both an average and a half-difference term; ' +
+      'the ear perceives a loud peak TWICE per envelope cycle (once ' +
+      'rising, once falling), doubling the half-difference back up to ' +
+      'the full |f\u2081\u2212f\u2082|. Keep the two numbers strictly separate: ' +
+      'average = pitch, difference = beat rate.',
+    targetedMisconceptions: [`${BEAT}:MC-BEATS-FREQUENCY-IS-AVERAGE`],
+    source: `${BEAT_SRC} — MC-BEATS-FREQUENCY-IS-AVERAGE (P28 440/442 Hz counting experiment + P30 pitch-vs-envelope-rate split)`,
+  },
+  {
+    conceptId: BEAT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Do beats require both tones to be EQUALLY loud? No \u2014 play a ' +
+      '440 Hz tone at 80 dB alongside a 442 Hz tone at only 60 dB and ' +
+      'you still hear throbbing, just less dramatic. With equal ' +
+      'amplitudes, destructive interference drives the combined ' +
+      'amplitude all the way to zero at the quiet moments \u2014 crisp, ' +
+      'full-contrast beats. With UNEQUAL amplitudes A\u2081 \u2260 A\u2082, the ' +
+      'quiet moments only drop to |A\u2081 \u2212 A\u2082| (never quite reaching ' +
+      'zero, since the louder tone always leaves a residue) \u2014 lower ' +
+      'contrast, but the throbbing RATE is unchanged, still ' +
+      '|f\u2081\u2212f\u2082|. This is the exact same pattern as optical fringes ' +
+      'with unequal-intensity sources: unequal amplitudes soften the ' +
+      'contrast, they never eliminate the effect.',
+    targetedMisconceptions: [`${BEAT}:MC-BEATS-NEED-SAME-AMPLITUDE`],
+    source: `${BEAT_SRC} — MC-BEATS-NEED-SAME-AMPLITUDE (P28 80dB/60dB conflict + P30 |A\u2081\u2212A\u2082| residual-trough bridge)`,
+  },
+]
+
+const BEAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: BEAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two tuning forks ring at 440 Hz and 442 Hz. What beat frequency do you hear?',
+    choices: [
+      { text: '2 Hz — the beat frequency is |f\u2081 \u2212 f\u2082|', isCorrect: true },
+      { text: '441 Hz — the beat frequency is the average of the two', isCorrect: false, misconceptionId: `${BEAT}:MC-BEATS-FREQUENCY-IS-AVERAGE` },
+    ],
+    correctValue: '2 Hz',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BEAT}:MC-BEATS-FREQUENCY-IS-AVERAGE`],
+    source: `${BEAT_SRC} — P28 440/442 Hz case as probe, distractor-mapped`,
+  },
+  {
+    conceptId: BEAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A loud 440 Hz tone and a much quieter 442 Hz tone play together. Do you still hear beats?',
+    choices: [
+      { text: 'Yes — at reduced contrast (the quiet moments drop to |A\u2081\u2212A\u2082|, not zero), but still at the same 2 Hz rate', isCorrect: true },
+      { text: 'No — beats require both sources to have equal amplitude', isCorrect: false, misconceptionId: `${BEAT}:MC-BEATS-NEED-SAME-AMPLITUDE` },
+    ],
+    correctValue: 'yes, reduced contrast',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BEAT}:MC-BEATS-NEED-SAME-AMPLITUDE`],
+    source: `${BEAT_SRC} — P28 unequal-amplitude conflict as probe, distractor-mapped`,
+  },
+]
+
+// ─── eng.grammar.interjections ────────────────────────────────────────────────
+const INTJ = 'eng.grammar.interjections'
+const INTJ_SRC = 'docs/curriculum/blueprints/eng.grammar.interjections.md'
+
+const INTJ_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: INTJ,
+    subjectSlug: 'english',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Does an interjection need an exclamation point and big emotion ' +
+      '\u2014 like \u201cWow!\u201d or \u201cOuch!\u201d? Look at \u201cWell, I suppose that\u2019s ' +
+      'true\u201d \u2014 \u201cwell\u201d is quiet and thoughtful, punctuated with just ' +
+      'a comma, yet it is JUST AS MUCH an interjection: a word ' +
+      'standing independently to express a reaction or emotion, big ' +
+      'or small. \u201cOh, I didn\u2019t know that\u201d (mild realization), \u201cHmm, ' +
+      'let me think\u201d (contemplation) \u2014 all interjections, all with a ' +
+      'comma, none shouting. The exclamation point matches the ' +
+      'INTENSITY of the emotion, not a rule about what counts as an ' +
+      'interjection: strong feeling gets \u201c!\u201d, mild feeling gets \u201c,\u201d, ' +
+      'and both are the same word class doing the same job at ' +
+      'different volumes.',
+    targetedMisconceptions: [`${INTJ}:MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS`],
+    source: `${INTJ_SRC} — MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS (P28 well-comma conflict + P33 wow/well, ouch/hmm pairs)`,
+  },
+  {
+    conceptId: INTJ,
+    subjectSlug: 'english',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    content:
+      'Are \u201coh\u201d and \u201cwow\u201d just meaningless filler noise, not real ' +
+      'words? They communicate something quite specific \u2014 \u201cwow\u201d = ' +
+      'surprise, \u201couch\u201d = pain, \u201coh\u201d = realization, \u201cum\u201d = ' +
+      'hesitation \u2014 which is the opposite of meaningless. ' +
+      'Interjections ARE a genuine word class, the eighth one ' +
+      'alongside nouns, verbs, adjectives, and the rest; they just ' +
+      'work differently, standing grammatically INDEPENDENT from the ' +
+      'sentence\u2019s normal subject-verb structure rather than filling a ' +
+      'subject, object, or verb slot. Because they don\u2019t plug into ' +
+      'the usual sentence machinery, it is tempting to write them ' +
+      'off \u2014 but they carry real, specific communicative meaning, ' +
+      'just delivered outside the ordinary grammar.',
+    targetedMisconceptions: [`${INTJ}:MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS`],
+    source: `${INTJ_SRC} — MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS (P28 meaningless-noise conflict + P30 genuine-eighth-word-class bridge)`,
+  },
+]
+
+const INTJ_PROBES: SeedProbe[] = [
+  {
+    conceptId: INTJ,
+    subjectSlug: 'english',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'In \u201cWell, I suppose that\u2019s true,\u201d is \u201cwell\u201d an interjection?',
+    choices: [
+      { text: 'Yes — interjections can express mild reactions with just a comma, not only strong emotion with an exclamation point', isCorrect: true },
+      { text: 'No — interjections must be strong exclamations ending in \u201c!\u201d', isCorrect: false, misconceptionId: `${INTJ}:MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${INTJ}:MC-INTERJECTIONS-MUST-BE-EXCLAMATIONS-WITH-EXCLAMATION-POINTS`],
+    source: `${INTJ_SRC} — P28 well-comma conflict as probe`,
+  },
+  {
+    conceptId: INTJ,
+    subjectSlug: 'english',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE,
+    stem: 'Is \u201couch\u201d in \u201cOuch! That hurt!\u201d meaningless filler noise?',
+    choices: [
+      { text: 'No — it is a genuine interjection communicating pain, a real word class standing grammatically independent', isCorrect: true },
+      { text: 'Yes — interjections have no real grammatical status or meaning', isCorrect: false, misconceptionId: `${INTJ}:MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS` },
+    ],
+    correctValue: 'no, genuine word class',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${INTJ}:MC-INTERJECTIONS-ARE-JUST-FILLER-WITH-NO-GRAMMATICAL-STATUS`],
+    source: `${INTJ_SRC} — P28 meaningless-noise conflict as probe`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -8783,6 +8948,8 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...UCIRC_EXPLANATIONS,
   ...DET_EXPLANATIONS,
   ...REP_EXPLANATIONS,
+  ...BEAT_EXPLANATIONS,
+  ...INTJ_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -8887,4 +9054,6 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...UCIRC_PROBES,
   ...DET_PROBES,
   ...REP_PROBES,
+  ...BEAT_PROBES,
+  ...INTJ_PROBES,
 ]
