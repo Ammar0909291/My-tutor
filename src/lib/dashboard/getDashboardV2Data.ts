@@ -15,6 +15,7 @@ import { getKnowledgeGraph } from '@/lib/curriculum/knowledgeGraph'
 import { computeCurriculumEntryOrder } from '@/lib/curriculum/placement'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { getLeagueForXP, currentWeekString } from '@/lib/xp'
+import { t, type Lang } from '@/lib/i18n'
 import type {
   DashboardV2Data,
   ContinueLessonData,
@@ -79,28 +80,26 @@ export function getISTDayBoundsUTC(): { gte: Date; lt: Date } {
   return { gte, lt }
 }
 
-export function timeOfDayGreeting(name: string): string {
+export function timeOfDayGreeting(name: string, lang: Lang = 'en'): string {
   const hour = parseInt(
     new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kolkata', hour: 'numeric', hourCycle: 'h23' }).format(new Date()),
     10,
   )
-  if (hour < 5) return `Still up, ${name}? 🌙`
-  if (hour < 12) return `Good morning, ${name}! ☀️`
-  if (hour < 17) return `Good afternoon, ${name}! 🌤️`
-  return `Good evening, ${name}! 🌙`
+  const key = hour < 5 ? 'dashx_greeting_night' : hour < 12 ? 'dashx_greeting_morning' : hour < 17 ? 'dashx_greeting_afternoon' : 'dashx_greeting_evening'
+  return t(lang, key).replace('{name}', name)
 }
 
-export function heroSubtitle(streak: number): string {
-  if (streak >= 2) return `You're on a ${streak}-day streak. Let's keep the fire going!`
-  if (streak === 1) return "You're on a 1-day streak. Keep it up!"
-  return "Let's start a streak today!"
+export function heroSubtitle(streak: number, lang: Lang = 'en'): string {
+  if (streak >= 2) return t(lang, 'dashx_subtitle_streak_n').replace('{streak}', String(streak))
+  if (streak === 1) return t(lang, 'dashx_subtitle_streak_1')
+  return t(lang, 'dashx_subtitle_streak_0')
 }
 
-function emptyContinueLesson(): ContinueLessonData {
+function emptyContinueLesson(lang: Lang = 'en'): ContinueLessonData {
   return {
     emoji: '🚀',
-    label: 'Get started',
-    title: 'Pick a subject to begin your journey',
+    label: t(lang, 'dashx_empty_continue_label'),
+    title: t(lang, 'dashx_empty_continue_title'),
     xpReward: 10,
     estimatedMinutes: 5,
     href: '/library',
@@ -183,6 +182,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
             currentLevel: true,
             educationBoard: true,
             grade: true,
+            teachingLanguage: true,
             subjects: { where: { isActive: true }, include: { subject: true }, orderBy: { createdAt: 'asc' } },
           },
         },
@@ -253,6 +253,12 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
 
   const profile = user.profile
   const displayName = profile.displayName ?? user.name ?? 'Student'
+  // Single source of truth for the learner's selected app language: the
+  // same Profile.teachingLanguage field the client LanguageProvider PATCHes
+  // via /api/settings (src/components/ui/LanguageToggle.tsx) — reused here
+  // (not duplicated) so server-rendered text (greeting, empty states,
+  // leaderboard subtitle) matches whatever the client renders.
+  const dashLang: Lang = (profile.teachingLanguage as Lang | null) ?? 'en'
   const xp = user.xpPoints ?? 0
   // Cross-system navigation: a learner with board/grade set can view either
   // experience without changing their stored profile or progress data —
@@ -280,7 +286,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     const schoolSlugs = getUserNavSubjects(profile, true).map((s) => s.slug)
 
     if (schoolSlugs.length === 0) {
-      continueLesson = emptyContinueLesson()
+      continueLesson = emptyContinueLesson(dashLang)
       practiceModes = buildPracticeModes('/learn')
       skillPath = []
       dailyGoalTarget = DEFAULT_DAILY_GOAL_LESSONS
@@ -317,7 +323,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
         }
         practiceModes = buildPracticeModes(href)
       } else {
-        continueLesson = emptyContinueLesson()
+        continueLesson = emptyContinueLesson(dashLang)
         practiceModes = buildPracticeModes('/learn')
       }
 
@@ -424,7 +430,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       practiceModes = buildPracticeModes(href)
       skillPath = buildLibrarySkillPath(sp ?? { currentLesson: lessonNum, completedLessons: [] }, lib?.icon ?? '📘')
     } else {
-      continueLesson = emptyContinueLesson()
+      continueLesson = emptyContinueLesson(dashLang)
       practiceModes = buildPracticeModes('/learn')
       skillPath = []
     }
@@ -552,8 +558,8 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
       userRole,
     },
     hero: {
-      greeting: timeOfDayGreeting(displayName),
-      subtitle: heroSubtitle(streak.currentStreak),
+      greeting: timeOfDayGreeting(displayName, dashLang),
+      subtitle: heroSubtitle(streak.currentStreak, dashLang),
     },
     dailyGoal: {
       percent: dailyGoalPercent,
@@ -566,7 +572,7 @@ export async function getDashboardV2Data(userId: string, modeOverride?: 'library
     league: {
       name: tier.name,
       emoji: tier.emoji,
-      subtitle: myRank ? `You're #${myRank} this week!` : 'Earn XP this week to join the leaderboard!',
+      subtitle: myRank ? t(dashLang, 'dashx_leaderboard_rank').replace('{rank}', String(myRank)) : t(dashLang, 'dashx_leaderboard_join'),
       entries,
     },
     dailyQuests,

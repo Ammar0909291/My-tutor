@@ -19,6 +19,7 @@ import { LearningCoachCard } from './LearningCoachCard'
 import { ReviewQueueCard } from './ReviewQueueCard'
 import { SectionTitle, useConfetti } from '@/components/ui/candy'
 import { InstallBanner } from '@/components/dashboard/InstallBanner'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import type { DashboardV2Data } from './types'
 
 interface DashboardV2Props {
@@ -27,6 +28,7 @@ interface DashboardV2Props {
 
 export function DashboardV2({ data }: DashboardV2Props) {
   const fireConfetti = useConfetti()
+  const { t } = useLanguage()
 
   useEffect(() => {
     const timer = setTimeout(fireConfetti, 300)
@@ -48,13 +50,13 @@ export function DashboardV2({ data }: DashboardV2Props) {
           <HeroBanner data={data.hero} />
           <DailyGoalCard data={data.dailyGoal} />
 
-          <SectionTitle>⚡ Jump back in</SectionTitle>
+          <SectionTitle>{t('dashx_jump_back_in')}</SectionTitle>
           <ContinueCard data={data.continueLesson} />
 
-          <SectionTitle>🎮 Practice modes</SectionTitle>
+          <SectionTitle>{t('dashx_practice_modes')}</SectionTitle>
           <PracticeModes modes={data.practiceModes} />
 
-          <SectionTitle>🗺️ Your path</SectionTitle>
+          <SectionTitle>{t('dashx_your_path')}</SectionTitle>
           <SkillPath nodes={data.skillPath} currentHref={data.continueLesson.href} />
 
           {/* ── RESTORED EDUCATIONAL CAPABILITIES ── */}

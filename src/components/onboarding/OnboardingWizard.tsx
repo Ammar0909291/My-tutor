@@ -50,7 +50,7 @@ const SCHOOL_GRADES = [5, 6, 7, 8, 9, 10, 11, 12]
 type LearnerMode = 'school' | 'general' | null
 
 export function OnboardingWizard({ userName }: { userName: string | null | undefined }) {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const { country } = useCountry()
   const [mode, setMode] = useState<LearnerMode>(null)
   const [boardId, setBoardId] = useState('')
@@ -67,8 +67,10 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   const [placeholderIdx, setPlaceholderIdx] = useState(0)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // Derive teaching language from country selection
-  const teachingLang: TeachingLang = country === 'ru' ? 'ru' : country === 'in' ? 'hi' : 'en'
+  // Single source of truth for onboarding UI/content language: the app's
+  // selected language (Settings/LanguageToggle), not region — region only
+  // selects the AI/voice provider (see settings_region_hint).
+  const teachingLang: TeachingLang = lang
 
   useEffect(() => {
     // Fetch the full Subject Library (not just the legacy 4-subject /api/subjects)
@@ -94,9 +96,6 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   }
   const canProceed2 = skillLevel !== ''
   const canProceed3 = description.trim().length >= 20
-
-  // Tri-lingual inline label helper (same pattern as the level step below)
-  const L = (en: string, hi: string, ru: string) => (teachingLang === 'hi' ? hi : teachingLang === 'ru' ? ru : en)
 
   async function handleSchoolFinish(selectedGrade: number) {
     setGrade(selectedGrade)
@@ -197,10 +196,10 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           {mode === null && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-                {L(userName ? `Hi ${userName}! Who are you?` : 'Who are you?', userName ? `नमस्ते ${userName}! आप कौन हैं?` : 'आप कौन हैं?', userName ? `Привет, ${userName}! Кто вы?` : 'Кто вы?')}
+                {userName ? t('ob_who_title_named').replace('{name}', userName) : t('ob_who_title')}
               </h1>
               <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-                {L('We’ll personalize everything around your answer.', 'हम आपके उत्तर के अनुसार सब कुछ व्यक्तिगत बनाएंगे।', 'Мы персонализируем всё под ваш ответ.')}
+                {t('ob_who_sub')}
               </p>
               {/* School Student onboarding path intentionally hidden from the
                   UI (presentation layer only — the mode==='school' steps
@@ -212,10 +211,10 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                   <span className="text-3xl shrink-0">🚀</span>
                   <div>
                     <div className="font-bold text-base" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-                      {L('General Learner', 'सामान्य शिक्षार्थी', 'Самообучение')}
+                      {t('ob_mode_general_title')}
                     </div>
                     <div className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
-                      {L('I want to learn programming, languages and more', 'मैं प्रोग्रामिंग, भाषाएँ और बहुत कुछ सीखना चाहता/चाहती हूँ', 'Хочу изучать программирование, языки и многое другое')}
+                      {t('ob_mode_general_desc')}
                     </div>
                   </div>
                 </button>
@@ -227,10 +226,10 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           {mode === 'school' && schoolStep === 1 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-                {L('Choose your curriculum', 'अपना बोर्ड चुनें', 'Выберите программу')}
+                {t('ob_school_curriculum_title')}
               </h1>
               <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-                {L('Which board does your school follow?', 'आपका स्कूल किस बोर्ड का पालन करता है?', 'Какой программе следует ваша школа?')}
+                {t('ob_school_curriculum_sub')}
               </p>
               <div className="space-y-4 mb-8">
                 {SCHOOL_BOARDS.map((b) => {
@@ -260,10 +259,10 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           {mode === 'school' && schoolStep === 2 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-                {L('Which class are you in?', 'आप किस कक्षा में हैं?', 'В каком вы классе?')}
+                {t('ob_school_grade_title')}
               </h1>
               <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-                {L('Tap your class — that’s the last step!', 'अपनी कक्षा चुनें — यह आखिरी कदम है!', 'Выберите класс — это последний шаг!')}
+                {t('ob_school_grade_sub')}
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
                 {SCHOOL_GRADES.map((g) => (
@@ -299,11 +298,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
               <p className={subjectSlugs.length > 0 ? 'text-sm mb-2' : 'text-sm mb-8'} style={{ color: 'var(--text-secondary)' }}>{t('ob_s1_sub')}</p>
               {subjectSlugs.length > 0 && (
                 <p className="text-xs mb-6 font-semibold" style={{ color: 'var(--accent-primary)' }}>
-                  {teachingLang === 'ru'
-                    ? `Выбрано: ${subjectSlugs.length}`
-                    : teachingLang === 'hi'
-                    ? `${subjectSlugs.length} चुने गए`
-                    : `${subjectSlugs.length} selected`}
+                  {t('ob_selected_count').replace('{n}', String(subjectSlugs.length))}
                 </p>
               )}
               <div className="grid grid-cols-2 gap-4 mb-8">
@@ -348,10 +343,10 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           {mode === 'general' && step === 2 && (
             <div className="animate-scale-in">
               <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
-                {teachingLang === 'ru' ? 'Какой у вас текущий уровень?' : 'What is your current level?'}
+                {t('ob_level_title')}
               </h1>
               <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-                {teachingLang === 'ru' ? 'Это поможет построить персональную программу обучения.' : 'This helps us build your personalized learning roadmap.'}
+                {t('ob_level_sub')}
               </p>
               <div className="space-y-2.5 mb-6">
                 {SKILL_LEVELS.map((lvl) => {

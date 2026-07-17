@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { SectionTitle, ProgressBar } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import styles from './dashboard.module.css'
 import type { SubjectCardData } from './types'
 
@@ -13,12 +14,13 @@ interface SubjectsGridProps {
 
 export function SubjectsGrid({ subjects }: SubjectsGridProps) {
   const router = useRouter()
+  const { t } = useLanguage()
   const [removingSlug, setRemovingSlug] = useState<string | null>(null)
 
   if (subjects.length === 0) return null
 
   async function removeSubject(slug: string, name: string) {
-    if (!window.confirm(`Remove ${name} from your subjects? Your progress is kept — you can add it back anytime.`)) return
+    if (!window.confirm(t('dashx_remove_subject_confirm').replace('{name}', name))) return
     setRemovingSlug(slug)
     try {
       const res = await fetch('/api/subjects/unenroll', {
@@ -36,7 +38,7 @@ export function SubjectsGrid({ subjects }: SubjectsGridProps) {
 
   return (
     <div className={styles['subjects-section']}>
-      <SectionTitle>📚 My Subjects</SectionTitle>
+      <SectionTitle>📚 {t('dashx_my_subjects')}</SectionTitle>
       <div className={styles['subjects-grid-new']}>
         {subjects.map((s) => (
           <div key={s.slug} className={styles['subject-card-new']} style={{ position: 'relative' }}>
@@ -44,8 +46,8 @@ export function SubjectsGrid({ subjects }: SubjectsGridProps) {
               type="button"
               onClick={(e) => { e.preventDefault(); removeSubject(s.slug, s.name) }}
               disabled={removingSlug === s.slug}
-              aria-label={`Remove ${s.name}`}
-              title="Remove subject"
+              aria-label={t('dashx_remove_subject_label').replace('{name}', s.name)}
+              title={t('dashx_remove_subject_title')}
               style={{
                 position: 'absolute', top: 8, right: 8, zIndex: 1,
                 width: 24, height: 24, borderRadius: '50%', border: 'none',
@@ -67,13 +69,13 @@ export function SubjectsGrid({ subjects }: SubjectsGridProps) {
                   <div className={styles['subject-card-info']}>
                     <div className={styles['subject-card-name']}>{s.name}</div>
                     <div className={styles['subject-card-lesson']}>
-                      {s.lastLessonTitle ?? `Lesson ${s.currentLesson}`}
+                      {s.lastLessonTitle ?? t('dashx_lesson_n').replace('{n}', String(s.currentLesson))}
                     </div>
                   </div>
                 </div>
                 <div className={styles['subject-card-bottom']}>
                   <div className={styles['subject-pct-row']}>
-                    <span className={styles['subject-pct-label']}>Progress</span>
+                    <span className={styles['subject-pct-label']}>{t('module_stat_progress')}</span>
                     <span className={styles['subject-pct-val']} style={{ color: s.color }}>
                       {s.completionPercent}%
                     </span>
@@ -91,7 +93,7 @@ export function SubjectsGrid({ subjects }: SubjectsGridProps) {
           </div>
         ))}
         <Link href="/library" className={styles['subjects-add-new']}>
-          ＋ Add a subject
+          {t('dashx_add_subject')}
         </Link>
       </div>
     </div>

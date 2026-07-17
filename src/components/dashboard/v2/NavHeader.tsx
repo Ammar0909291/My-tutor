@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Settings } from 'lucide-react'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { SignOutButton } from '@/components/dashboard/SignOutButton'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 import styles from './dashboard.module.css'
 
 interface NavHeaderProps {
@@ -11,6 +12,7 @@ interface NavHeaderProps {
 }
 
 export function NavHeader({ userRole }: NavHeaderProps) {
+  const { t } = useLanguage()
   return (
     <nav className={styles['nav-header']}>
       <div className={styles['nav-inner']}>
@@ -27,11 +29,11 @@ export function NavHeader({ userRole }: NavHeaderProps) {
           )}
           <Link href="/modes" className={styles['nav-link']}>
             <span>🎒</span>
-            <span className={styles['nav-link-label']}>Modes</span>
+            <span className={styles['nav-link-label']}>{t('nav_modes')}</span>
           </Link>
           <Link href="/settings" className={styles['nav-link']}>
             <Settings size={15} />
-            <span className={styles['nav-link-label']}>Settings</span>
+            <span className={styles['nav-link-label']}>{t('settings_title')}</span>
           </Link>
           <SignOutButton />
         </div>
