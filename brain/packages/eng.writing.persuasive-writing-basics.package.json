@@ -1,0 +1,393 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.writing.persuasive-writing-basics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.writing.persuasive-writing-basics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b51b4b3f0c01548a4593886835bfa33eb229566cbff7e20c57938446e191a9ae",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md": "sha256:934249a5a3d99c4c18ce86754cf49dbc81150d8f8319f13fbc8eecb705785132"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 5,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "eng.writing.persuasive-writing-basics",
+    "name": "Persuasive Writing Basics",
+    "difficultyRaw": "proficient",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "eng.writing.transitions-and-cohesion"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.writing.persuasive-writing-basics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.writing.persuasive-writing-basics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md": "sha256:934249a5a3d99c4c18ce86754cf49dbc81150d8f8319f13fbc8eecb705785132"
+      },
+      "contentHash": "sha256:2bf51867fbdf8cd15b8236f9e30280980add7e9cd75a7e00d2c3808de85c57f6",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.writing.persuasive-writing-basics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.persuasive-writing-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.persuasive-writing-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.persuasive-writing-basics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md#TA-2 (addresses MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.persuasive-writing-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.persuasive-writing-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.persuasive-writing-basics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md#TA-3 (addresses MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.persuasive-writing-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.persuasive-writing-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.persuasive-writing-basics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.persuasive-writing-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.persuasive-writing-basics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.writing.persuasive-writing-basics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md#TA-5 (addresses MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE, MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.writing.persuasive-writing-basics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.writing.persuasive-writing-basics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "Persuasive Writing Basics — Conceptual Development Sequence",
+      "content": "### TA-1 — Stating a Clear Position\n\nTeach writing a plain, direct position statement without relying on intensifiers or forceful\nlanguage. Student practice: given a forcefully-worded position, rewrite it as a calm, direct\nstatement.\n\n### TA-2 — Reasons vs. Forceful Assertion (MC-A)\n\nUsing the shouting-courtroom anchor, teach that persuasive strength comes from reasons, not wording\nintensity. Student practice: given a forceful, reason-free passage, rewrite it in calm language while\nadding at least one specific reason.\n\n### TA-3 — Genuine Reasons vs. Restated Preference (MC-B)\n\nUsing the \"because-my-client-says-so\" anchor, teach digging beneath personal preference to find a\ngenuine, independently-weighable reason. Student practice: given a preference-restating \"reason,\"\ndig to surface the actual effect or consequence behind it.\n\n### TA-4 — Organizing Position and Reasons Cohesively\n\nExtend TA-1/TA-3: using transitions (prerequisite skill), organize a position statement with two or\nthree genuine reasons into a cohesive short paragraph. Student practice: given a position and a list\nof genuine reasons, organize them into one cohesive paragraph with appropriate transitions.\n\n### TA-5 — Full Application: Writing a Persuasive Paragraph\n\nGive the student a new topic. They must state a clear position (TA-1), generate genuine reasons\nrather than restated preference (TA-3), avoid relying on forceful wording (TA-2), and organize the\nwhole into a cohesive paragraph (TA-4) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 133,
+        "endLine": 165
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/misconception/MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE",
+      "kind": "misconception",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "**Trigger signal:** Student relies on forceful language, intensifiers, repetition, or exclamation",
+      "content": "### MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE\n\n**Trigger signal:** Student relies on forceful language, intensifiers, repetition, or exclamation\npoints (\"This is absolutely, definitely, one hundred percent true!!!\") to make a position sound\nconvincing, rather than backing the position with actual reasons — mistaking the volume or intensity\nof an assertion for persuasive strength.\n\n**Conflict evidence [P28]:** Show the student two short passages arguing the same position: one\nusing intense, repeated assertion with no reasons (\"School uniforms are terrible! Everyone hates\nthem! They are just awful and wrong!\") and one stating the position calmly with two specific reasons\n(\"School uniforms limit self-expression, and research shows they don't measurably improve academic\noutcomes.\"). Ask: \"Which passage actually gives you a reason to agree? Does saying something loudly\nmake it more true?\"\n\n**Bridge text [P30]:** \"Trying to persuade through forceful language alone is like trying to win a\ncourtroom case by shouting 'Guilty! Guilty! Absolutely guilty!' without presenting any evidence — the\nvolume changes nothing about whether the claim is actually supported. A real persuasive argument\nconvinces through the strength of its reasons, not the intensity of its wording.\"\n\n**Replacement text [P31]:** \"Don't rely on strong language or repetition to persuade. State your\nposition calmly and clearly, then back it with specific reasons a reader could actually weigh and\nconsider — the reasons do the persuading, not the volume of your wording.\"\n\n**Discrimination pairs [P33]:**\n1. \"School uniforms are terrible! Everyone hates them! They are just awful and wrong!\" (forceful\n   assertion, zero actual reasons) vs. \"School uniforms limit self-expression, and research shows\n   they don't measurably improve academic outcomes.\" (calm statement, two specific reasons).\n2. A student who adds exclamation points and intensifiers to make a weak argument sound stronger\n   (misconception) vs. a student who states a position plainly and lets specific reasons carry the\n   persuasive weight (correct discipline).\n\n**s6_path:** If the student continues to rely on forceful wording after the bridge, give them a\nforcefully-worded passage with no reasons and have them rewrite it in calm, plain language while\nadding at least two specific reasons — proving the reasons, not the wording, are what changed the\npersuasive strength.",
+      "localKey": "MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE",
+      "language": "en",
+      "refs": [
+        "MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 3,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/misconception/MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON",
+      "kind": "misconception",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "**Trigger signal:** Student offers reasons that are simply a restatement of personal preference or",
+      "content": "### MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON\n\n**Trigger signal:** Student offers reasons that are simply a restatement of personal preference or\nthe position itself (\"School uniforms are bad because I don't like them\" / \"because they're just not\ngood\") rather than a genuine reason a neutral reader — who does not share the writer's preference —\ncould find compelling, failing to distinguish circular restatement from actual supporting reasoning.\n\n**Conflict evidence [P28]:** Show the student two candidate \"reasons\" for the same position: \"School\nuniforms are bad because I don't like wearing them.\" (restated preference) and \"School uniforms limit\nstudents' ability to express their individual identity, which research links to lower student\nengagement.\" (a reason independent of the writer's personal taste). Ask: \"Would someone who doesn't\nshare your personal preference find the first reason convincing? What about the second?\"\n\n**Bridge text [P30]:** \"Offering 'because I don't like it' as a reason is like a lawyer's entire\ncourtroom argument being 'because my client says so' — it asks the listener to simply trust the\nspeaker's preference rather than offering anything they could independently evaluate. A genuine\nreason gives a neutral reader — someone who doesn't already share your preference — something real\nto weigh.\"\n\n**Replacement text [P31]:** \"Before writing a reason, ask: would this convince someone who doesn't\nalready share my opinion? If your 'reason' just restates that you personally dislike or prefer\nsomething, it isn't a reason yet — dig for the actual effect, evidence, or consequence behind your\npreference.\"\n\n**Discrimination pairs [P33]:**\n1. \"School uniforms are bad because I don't like wearing them.\" (restated personal preference, not a\n   reason a neutral reader could weigh) vs. \"School uniforms limit students' ability to express their\n   individual identity, which research links to lower student engagement.\" (a genuine reason\n   independent of personal taste).\n2. A student whose every \"reason\" reduces to \"because I like/dislike it\" (misconception) vs. a\n   student who digs beneath their preference to identify an effect, consequence, or evidence a\n   neutral reader could evaluate (correct reasoning discipline).\n\n**s6_path:** If the student continues to offer restated preference as reasoning after the bridge,\nhave them take one of their own preference-based \"reasons\" and ask \"why does this matter to someone\nwho doesn't share my opinion?\" repeatedly until they surface a genuine, independently-weighable\nreason.",
+      "localKey": "MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON",
+      "language": "en",
+      "refs": [
+        "MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 39,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "Stating a Clear Position",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Stating a Clear Position\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 137,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "Reasons vs. Forceful Assertion (MC-A)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Reasons vs. Forceful Assertion (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 143,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "Genuine Reasons vs. Restated Preference (MC-B)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Genuine Reasons vs. Restated Preference (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 149,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "Organizing Position and Reasons Cohesively",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Organizing Position and Reasons Cohesively\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 155,
+        "endLine": 161
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "Full Application: Writing a Persuasive Paragraph",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Full Application: Writing a Persuasive Paragraph\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE\",\"MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-A-STATING-AN-OPINION-FORCEFULLY-OR-WITH-STRONG-LANGUAGE-MAKES-IT-PERSUASIVE",
+        "MC-B-RESTATING-A-PERSONAL-PREFERENCE-COUNTS-AS-A-REASON"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 161,
+        "endLine": 284
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Rewriting Forceful Language as a Calm Position Statement**\nGiven a forcefully-worded opinion, rewrite it as a plain, direct position statement.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 182,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Distinguishing Reasons from Forceful Assertion**\nGiven a reason-free, forcefully-worded passage, add at least one specific reason while removing the\nforceful wording.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 182,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Identifying Restated Preference vs. a Genuine Reason**\nGiven two candidate reasons for the same position, identify which is restated personal preference\nand which is a genuine, independently-weighable reason.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 182,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Digging Beneath Preference to a Genuine Reason**\nGiven a preference-restating \"reason,\" dig to surface the actual effect or consequence behind it.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 182,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Persuasive Paragraph**\nGiven a new topic, write a cohesive persuasive paragraph stating a calm position and supporting it\nwith genuine reasons.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 182,
+        "endLine": 202
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly rewrites forceful passages on provided examples (MP-1) but reverts to\n  intensifiers when writing an original position (MP-5), provide a mandatory \"read your position\n  aloud without any exclamation points or intensifiers\" check before finalizing.\n- If the student's calm tone is strong (MP-1, MP-2) but their reasons (MP-4) remain restated\n  preference, require the explicit \"would someone who disagrees with me find this convincing?\"\n  question before accepting any reason as finished.\n- If the student struggles to generate any reason beyond preference, provide sentence starters\n  (\"This matters because it affects...\", \"Evidence shows that...\") as scaffolding before free\n  reason-generation.\n- Students with strong performance in `eng.writing.transitions-and-cohesion`'s idea-linking work\n  should transfer readily to organizing position and reasons cohesively, since both require\n  connecting ideas so a reader can follow the logic — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 238,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "eng.writing.persuasive-writing-basics/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.writing.persuasive-writing-basics",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: transitions/cohesion check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.writing.transitions-and-cohesion]  [Component 3: Shouting-Courtroom /\n                                                   Because-My-Client-Says-So Anchor]\n                                                                |\n                                                                v\n                                    [TA-1] -> [TA-2] -> [TA-3] -> [TA-4] -> [TA-5]\n                                                                |\n                                                                v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                                |\n                                                                v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                                |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: forceful-to-calm rewrite drills /\n                     terminal in current      preference-vs-reason sorting drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1/TA-2 (relying on\nforceful wording) and MC-B during TA-3 (restated preference as reason) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1/MP-2 failures\nindicate residual MC-A; MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1 through\nMP-4 passing indicates an integration gap — provide one more guided full-paragraph example before\nre-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.writing.persuasive-writing-basics.md",
+        "startLine": 202,
+        "endLine": 238
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

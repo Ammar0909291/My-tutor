@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.reading.predicting-and-confirming-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.reading.predicting-and-confirming",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:67e8c7cbfb690efe3cc40a7bf4b1d1156dab58229c2a8b512cb39aced22395e3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md": "sha256:fde3ee693200b40518acfd8e7d818e4e9278ec9f47ad0005989c023d09a72181"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.reading.predicting-and-confirming",
+    "name": "Predicting and Confirming",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.reading.inference-in-reading"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.reading.predicting-and-confirming-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.reading.predicting-and-confirming (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md": "sha256:fde3ee693200b40518acfd8e7d818e4e9278ec9f47ad0005989c023d09a72181"
+      },
+      "contentHash": "sha256:5a9044e4bf1ef0dda2541f32ea64eeca0ef6f5ec8b879300248d26f70b032ff4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.reading.predicting-and-confirming.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md#TA-1 (addresses MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.predicting-and-confirming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.predicting-and-confirming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.predicting-and-confirming.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md#TA-2 (addresses MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.predicting-and-confirming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.predicting-and-confirming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.predicting-and-confirming.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.predicting-and-confirming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.predicting-and-confirming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.reading.predicting-and-confirming.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md#TA-4 (addresses MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES, MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.reading.predicting-and-confirming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.reading.predicting-and-confirming\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.reading.predicting-and-confirming/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "Predicting and Confirming — Conceptual Development Sequence",
+      "content": "### TA-1 — Grounding a Prediction in Available Clues (MC-A)\n\nUsing the random-card-forecaster anchor, teach identifying specific text clues (title, headings,\nopening details) and reasoning from them to a prediction. Student practice: given a title and\nopening paragraph, state a prediction and name the specific clue behind it.\n\n### TA-2 — Treating a Prediction as a Working Hypothesis (MC-B)\n\nUsing the stubborn-detective anchor, teach checking new text information against an existing\nprediction rather than defending it. Student practice: given a prediction and a contradicting later\ndetail, state explicitly whether the new information supports or contradicts the prediction.\n\n### TA-3 — Revising a Prediction When Contradicted\n\nExtend TA-2: when contradiction is found, write a genuinely revised prediction reflecting the new\nevidence rather than only noting the contradiction. Student practice: given a contradicted\nprediction, write a specific revised prediction.\n\n### TA-4 — Full Application: Predict, Read, Confirm or Revise\n\nGive the student a new short text in three parts. After part one, they predict (TA-1); after part\ntwo, they check the prediction against new evidence and revise if needed (TA-2/TA-3); after part\nthree, they confirm or make a final revision — the full synthesis task across a complete predict-\nread-confirm cycle.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 128,
+        "endLine": 155
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/misconception/MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES",
+      "kind": "misconception",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "**Trigger signal:** Student produces predictions with no grounding in the text's actual available",
+      "content": "### MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES\n\n**Trigger signal:** Student produces predictions with no grounding in the text's actual available\nclues (title, headings, opening sentences, illustrations), treating \"predicting\" as equivalent to\n\"making up any guess,\" rather than reasoning from specific evidence already present to what is likely\nto come next.\n\n**Conflict evidence [P28]:** Show the student a text titled \"The Drought That Changed the Village\"\nwith an opening paragraph describing cracked, dry farmland. Ask the student for two predictions: one\nungrounded (\"the story is about a dragon\") and one grounded in the title and opening details (\"the\nstory is probably about how the village deals with water shortage\"). Ask: \"Which prediction actually\nuses clues already in front of you? Which one could be true of almost any story?\"\n\n**Bridge text [P30]:** \"Making an ungrounded guess and calling it a 'prediction' is like a weather\nforecaster predicting rain by picking a card at random, instead of looking at the clouds and\nbarometric pressure already visible. A real prediction uses the evidence already available — the\ntitle, the headings, the opening details — to reason toward what's likely to come next, not a guess\ndisconnected from any of it.\"\n\n**Replacement text [P31]:** \"Before predicting, look for the actual clues in front of you: the\ntitle, headings, opening sentences, images. Base your prediction specifically on those clues — be\nready to explain which clue led you to your prediction.\"\n\n**Discrimination pairs [P33]:**\n1. \"The story is about a dragon.\" (given a drought-themed title and opening — an ungrounded guess\n   disconnected from any available clue) vs. \"The story is probably about how the village deals with\n   water shortage.\" (grounded specifically in the title and opening details).\n2. A student who predicts without being able to point to any clue that led there (misconception) vs.\n   a student who can name the specific clue that grounds their prediction (correct, evidence-based\n   prediction).\n\n**s6_path:** If the student continues to guess ungrounded after the bridge, give them a new text's\ntitle and opening paragraph and have them state their prediction alongside the specific clue (a\nword, phrase, or detail) that led to it, for three separate predictions in a row.",
+      "localKey": "MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES",
+      "language": "en",
+      "refs": [
+        "MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 3,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/misconception/MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED",
+      "kind": "misconception",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "**Trigger signal:** Student continues to defend or read selectively in favor of an initial",
+      "content": "### MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED\n\n**Trigger signal:** Student continues to defend or read selectively in favor of an initial\nprediction even after new text information directly contradicts it, rather than genuinely revising\nthe prediction — treating the first guess as something to protect rather than a working hypothesis\nto be updated as evidence accumulates.\n\n**Conflict evidence [P28]:** Show the student a prediction made after the first paragraph (\"this\ncharacter will succeed easily\") followed by a later paragraph clearly showing the character failing\nrepeatedly. Ask: \"Does the new information support the original prediction, or contradict it? What\nshould happen to the original prediction now?\"\n\n**Bridge text [P30]:** \"Defending an original prediction against contradicting evidence is like a\ndetective who, having named one suspect early on, ignores every new clue that points elsewhere just\nto avoid admitting the first guess was wrong. A prediction is a working hypothesis, not a commitment\n— when new text clearly contradicts it, the strong reader revises the prediction rather than\ndefending it.\"\n\n**Replacement text [P31]:** \"Treat your prediction as a working guess, not a fixed answer. As you\nread on, check: does the new information support my prediction, or contradict it? If it contradicts\nit, revise your prediction to match what the text is now actually showing you.\"\n\n**Discrimination pairs [P33]:**\n1. A reader who, after evidence of repeated failure, still insists \"the character will succeed\n   easily\" (defending the original guess against contradicting evidence) vs. a reader who revises to\n   \"the character seems to be struggling more than I first thought — maybe this story is really about\n   overcoming failure\" (genuine revision based on new evidence).\n2. A student who reads selectively, noticing only details that support their first guess\n   (misconception) vs. a student who actively checks new information against their prediction and\n   updates it when needed (correct confirming discipline).\n\n**s6_path:** If the student continues to defend contradicted predictions after the bridge, give them\na short text where a mid-text detail clearly contradicts their stated prediction, and have them\nexplicitly state the contradiction and write a revised prediction before continuing to read.",
+      "localKey": "MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED",
+      "language": "en",
+      "refs": [
+        "MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 38,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "Grounding a Prediction in Available Clues (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Grounding a Prediction in Available Clues (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 132,
+        "endLine": 138
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "Treating a Prediction as a Working Hypothesis (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Treating a Prediction as a Working Hypothesis (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 138,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "Revising a Prediction When Contradicted",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Revising a Prediction When Contradicted\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 144,
+        "endLine": 150
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "Full Application: Predict, Read, Confirm or Revise",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Predict, Read, Confirm or Revise\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES\",\"MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-A-PREDICTION-IS-JUST-A-GUESS-AND-DOESNT-NEED-TO-BE-BASED-ON-TEXT-CLUES",
+        "MC-B-ONCE-A-PREDICTION-IS-MADE-IT-SHOULD-BE-DEFENDED-RATHER-THAN-REVISED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 150,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Grounding a Prediction in a Specific Clue**\nGiven a title and opening paragraph, state a prediction and name the specific clue it is based on.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 171,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Distinguishing a Supporting Detail from a Contradicting One**\nGiven a prediction and a new text detail, state whether the detail supports or contradicts the\nprediction.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 171,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Writing a Genuine Revision**\nGiven a prediction clearly contradicted by new text evidence, write a specific revised prediction\nreflecting that evidence.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 171,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Detecting Selective Reading in Favor of a Guess**\nGiven a reader's account that ignores a contradicting detail to preserve their original prediction,\nidentify what the reader is doing wrong and state the correct revision.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 171,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Predict-Read-Confirm Cycle**\nGiven a new short text in stages, predict after the first stage, check the prediction against\nsubsequent stages, and revise or confirm it as appropriate.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 171,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly names clues on provided titles (MP-1) but cannot generate a grounded\n  prediction unaided on a new text (MP-5), provide a clue checklist (title, headings, opening\n  details, images) as a scaffolding prompt before free prediction.\n- If the student correctly identifies contradictions (MP-2) but their revisions (MP-3) merely\n  restate the contradiction without producing a new, updated prediction, model one fully-worded\n  revision sentence structure (\"I originally thought ___, but now I think ___ because ___\") as a\n  template.\n- If the student struggles to notice contradictions at all, flag the specific contradicting detail\n  explicitly before asking them to state whether it supports or contradicts their prediction.\n- Students with strong performance in `eng.reading.inference-in-reading`'s clue-based reasoning\n  should transfer readily to grounded prediction, since both require reasoning from specific text\n  evidence rather than general assumption — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 228,
+        "endLine": 243
+      }
+    },
+    {
+      "assetId": "eng.reading.predicting-and-confirming/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.reading.predicting-and-confirming",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: inference-in-reading check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.reading.inference-in-reading]  [Component 3: Random-Card-Forecaster /\n                                               Stubborn-Detective Anchor]\n                                                            |\n                                                            v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                            |\n                                                            v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: clue-naming drills /\n                     terminal in current      contradiction-and-revision drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1 (ungrounded\nguessing) and MC-B during TA-2/TA-3 (defending a contradicted prediction) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2/MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-cycle example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.reading.predicting-and-confirming.md",
+        "startLine": 192,
+        "endLine": 228
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

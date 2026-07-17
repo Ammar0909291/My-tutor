@@ -1,0 +1,359 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "eng.speaking.non-verbal-communication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "eng.speaking.non-verbal-communication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1f6ac44d7bd6333ab051af52e40830539f47392671faa46d45c7dad6338893e5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md": "sha256:36b67ecf0023fbe1e3e6a42b2bdf61c934f372a7527cfb15560c25ca6539b5e6"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 5,
+      "adaptive_rule": 1,
+      "session_flow": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "eng.speaking.non-verbal-communication",
+    "name": "Non-Verbal Communication",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "eng.speaking.conversation-skills"
+    ],
+    "status": "active"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "eng.speaking.non-verbal-communication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for eng.speaking.non-verbal-communication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md": "sha256:36b67ecf0023fbe1e3e6a42b2bdf61c934f372a7527cfb15560c25ca6539b5e6"
+      },
+      "contentHash": "sha256:160118e909aed3880e8573822fca17a942ddeb6f9c5369ba6788c9d61c475551",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.eng.speaking.non-verbal-communication.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md#TA-1 (addresses MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.non-verbal-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.non-verbal-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.non-verbal-communication.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md#TA-2 (addresses MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.non-verbal-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.non-verbal-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.non-verbal-communication.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.non-verbal-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.non-verbal-communication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.eng.speaking.non-verbal-communication.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md#TA-4 (addresses MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE, MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "eng.speaking.non-verbal-communication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"eng.speaking.non-verbal-communication\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "eng.speaking.non-verbal-communication/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "Non-Verbal Communication — Conceptual Development Sequence",
+      "content": "### TA-1 — Non-Verbal Cues Vary by Culture (MC-A)\n\nUsing the thumbs-up anchor, teach that specific non-verbal cues (gesture, eye contact, personal\nspace) carry culturally variable, not universal, meaning. Student practice: given one non-verbal cue,\nidentify at least one cultural context where its meaning differs from an assumed default.\n\n### TA-2 — Non-Verbal Signals Carry Real Communicative Weight (MC-B)\n\nUsing the flat-\"fine.\"-text-message anchor, teach that non-verbal signals communicate real meaning,\nsometimes decisively. Student practice: given a spoken line with described contradictory body\nlanguage, state what message the listener most likely walks away believing.\n\n### TA-3 — Recognizing Alignment and Contradiction Between Words and Body Language\n\nExtend TA-2: teach identifying whether a speaker's words and non-verbal signals align or contradict\neach other. Student practice: given three short described scenarios, classify each as aligned or\ncontradictory.\n\n### TA-4 — Full Application: Analyzing a Complete Spoken Exchange\n\nGive the student a new short scenario describing both spoken words and non-verbal behavior across a\nbrief exchange. They must identify any culturally-variable cues present (TA-1) and determine whether\nwords and body language align or contradict, explaining what message the listener likely receives\n(TA-2/TA-3) — the full synthesis task.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 131,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/misconception/MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "**Trigger signal:** Student assumes a specific non-verbal cue (direct eye contact, a particular",
+      "content": "### MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE\n\n**Trigger signal:** Student assumes a specific non-verbal cue (direct eye contact, a particular\ngesture, physical distance during conversation) carries one universal meaning everywhere, failing to\nrecognize that non-verbal communication is culturally variable — the same cue can signal respect in\none culture and disrespect or aggression in another.\n\n**Conflict evidence [P28]:** Present two accounts of direct eye contact during a conversation with an\nelder: in one cultural context, maintaining direct eye contact signals attentiveness and respect; in\nanother, sustained direct eye contact with an elder is considered disrespectful or confrontational,\nand looking down or away signals respect instead. Ask: \"Does direct eye contact mean the same thing\nin both descriptions? What does this tell you about whether non-verbal cues are universal?\"\n\n**Bridge text [P30]:** \"Assuming a gesture or eye-contact norm means the same thing everywhere is\nlike assuming a thumbs-up means 'good job' in every country — in some cultures, the same gesture is\nactually offensive. Non-verbal cues are like words in a language: their meaning is set by cultural\nconvention, not by some universal, built-in signal that means the same thing to everyone.\"\n\n**Replacement text [P31]:** \"Don't assume a non-verbal cue means the same thing across every\nculture. Recognize that eye contact norms, gestures, and personal space all vary by cultural context\n— what signals respect in one setting can signal the opposite in another.\"\n\n**Discrimination pairs [P33]:**\n1. Direct eye contact with an elder signaling respect and attentiveness in one cultural context vs.\n   the same direct eye contact signaling disrespect or confrontation in another cultural context (the\n   identical cue, opposite meanings).\n2. A student who assumes a gesture they know means the same thing everywhere (misconception) vs. a\n   student who recognizes that the same gesture's meaning depends on cultural context (correct\n   recognition).\n\n**s6_path:** If the student continues to assume universal non-verbal meaning after the bridge, give\nthem three non-verbal cues (a gesture, an eye-contact norm, a personal-space distance) and have them\nresearch or identify at least one cultural context in which each cue's meaning differs from their own\nassumed default.",
+      "localKey": "MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE",
+      "language": "en",
+      "refs": [
+        "MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 3,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/misconception/MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS",
+      "kind": "misconception",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "**Trigger signal:** Student treats non-verbal cues as a minor decoration on top of the \"real",
+      "content": "### MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS\n\n**Trigger signal:** Student treats non-verbal cues as a minor decoration on top of the \"real\"\nmessage carried by spoken words, failing to recognize that non-verbal communication carries real,\nsometimes decisive, communicative weight — including situations where contradictory body language\noverrides or reverses how a spoken message is actually received.\n\n**Conflict evidence [P28]:** Present a scenario: a speaker says \"I'm really excited to be here\" while\nlooking at the floor, speaking in a flat monotone, with arms crossed. Ask: \"What message does the\nlistener actually walk away believing — the words, or what the body language suggested? Which one do\nyou think the listener trusts more when the two disagree?\"\n\n**Bridge text [P30]:** \"Treating body language as a minor add-on to the real message is like\nthinking the tone of a text message doesn't matter as long as the words are technically polite — but\neveryone knows a flat 'fine.' can mean the opposite of fine. When spoken words and body language\ndisagree, listeners very often trust the non-verbal signal over the words — non-verbal communication\nisn't a minor decoration; it can carry the real message.\"\n\n**Replacement text [P31]:** \"Don't treat non-verbal communication as secondary to your words.\nRecognize that your body language, tone, and expression communicate right alongside — and sometimes\ninstead of — what you're saying, and a listener will often trust the non-verbal signal when the two\ncontradict each other.\"\n\n**Discrimination pairs [P33]:**\n1. \"I'm really excited to be here,\" said with a flat, disengaged voice, eyes on the floor, arms\n   crossed (words and non-verbal signal contradict — listener likely trusts the non-verbal cue over\n   the words) vs. the same words said with genuine energy, eye contact, and open posture (words and\n   non-verbal signal align, reinforcing the message).\n2. A student who assumes their polite words alone will communicate sincerity regardless of tone or\n   posture (misconception) vs. a student who recognizes their body language must align with their\n   words for the message to land as intended (correct recognition).\n\n**s6_path:** If the student continues to treat non-verbal cues as minor after the bridge, have them\nrole-play delivering the same short spoken message twice — once with contradictory body language and\nonce with aligned body language — and describe, from a listener's perspective, how differently the\nmessage actually comes across each time.",
+      "localKey": "MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS",
+      "language": "en",
+      "refs": [
+        "MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 38,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "Non-Verbal Cues Vary by Culture (MC-A)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Non-Verbal Cues Vary by Culture (MC-A)\",\"primitives\":[],\"addresses\":[\"MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE\"]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [
+        "MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 135,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "Non-Verbal Signals Carry Real Communicative Weight (MC-B)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Non-Verbal Signals Carry Real Communicative Weight (MC-B)\",\"primitives\":[],\"addresses\":[\"MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 141,
+        "endLine": 147
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "Recognizing Alignment and Contradiction Between Words and Body Language",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Recognizing Alignment and Contradiction Between Words and Body Language\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 147,
+        "endLine": 153
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "Full Application: Analyzing a Complete Spoken Exchange",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Full Application: Analyzing a Complete Spoken Exchange\",\"primitives\":[\"P36\"],\"addresses\":[\"MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE\",\"MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-A-NON-VERBAL-CUES-LIKE-EYE-CONTACT-AND-GESTURE-MEAN-THE-SAME-THING-IN-EVERY-CULTURE",
+        "MC-B-NON-VERBAL-COMMUNICATION-IS-JUST-A-MINOR-ADDITION-TO-THE-REAL-MESSAGE-WHICH-IS-THE-SPOKEN-WORDS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 153,
+        "endLine": 280
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/mastery_probe/MP-1",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "MP-1",
+      "content": "**MP-1 [P36] — Identifying Cultural Variability in a Non-Verbal Cue**\nGiven one non-verbal cue, identify at least one cultural context in which its meaning differs from\nan assumed default.",
+      "localKey": "MP-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 176,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/mastery_probe/MP-2",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "MP-2",
+      "content": "**MP-2 [P36] — Determining the Message a Listener Actually Receives**\nGiven a spoken line paired with described contradictory body language, state what message the\nlistener most likely walks away believing.",
+      "localKey": "MP-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 176,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/mastery_probe/MP-3",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "MP-3",
+      "content": "**MP-3 [P36] — Classifying Alignment vs. Contradiction**\nGiven three short scenarios describing words and body language, classify each as aligned or\ncontradictory.",
+      "localKey": "MP-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 176,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/mastery_probe/MP-4",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "MP-4",
+      "content": "**MP-4 [P36] — Explaining Why Non-Verbal Signals Can Override Words**\nGiven a scenario where words and body language contradict, explain why the listener is likely to\ntrust the non-verbal signal over the literal words.",
+      "localKey": "MP-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 176,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/mastery_probe/MP-5",
+      "kind": "mastery_probe",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "MP-5",
+      "content": "**MP-5 [P36] — Full Exchange Analysis**\nGiven a new scenario describing both words and non-verbal behavior, identify any culturally-variable\ncues and determine whether the exchange is aligned or contradictory, explaining the likely message\nreceived.",
+      "localKey": "MP-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 176,
+        "endLine": 199
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/adaptive_rule/1",
+      "kind": "adaptive_rule",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "Adaptive Flags",
+      "content": "- If the student correctly identifies cultural variability on provided single cues (MP-1) but\n  assumes universal meaning when analyzing a full new scenario (MP-5), provide a mandatory \"could\n  this cue mean something different elsewhere?\" checklist step before finalizing any analysis.\n- If the student's alignment/contradiction classification is strong (MP-3) but they underweight the\n  non-verbal signal's actual impact on the listener (MP-2, MP-4), push for an explicit \"which signal\n  would I trust if I were the listener?\" framing on every contradiction case.\n- If the student struggles to notice contradictions between words and body language at all, flag the\n  specific contradicting non-verbal detail explicitly before asking them to classify the scenario.\n- Students with strong performance in `eng.speaking.conversation-skills`'s exchange-management work\n  should transfer readily to non-verbal awareness, since both require attending to more than just the\n  literal content of what is said — draw this parallel explicitly if useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 235,
+        "endLine": 249
+      }
+    },
+    {
+      "assetId": "eng.speaking.non-verbal-communication/session_flow/1",
+      "kind": "session_flow",
+      "conceptId": "eng.speaking.non-verbal-communication",
+      "title": "Session Architecture",
+      "content": "```\n[Entry] --> [PD-1: conversation skills check]\n   |                       |\n   | (gap found)           | (pass)\n   v                        v\n[Route to eng.speaking.conversation-skills]  [Component 3: Thumbs-Up-Not-Universal /\n                                               Flat-\"Fine.\"-Text Anchor]\n                                                            |\n                                                            v\n                                        [TA-1] -> [TA-2] -> [TA-3] -> [TA-4]\n                                                            |\n                                                            v\n                                  [WE-1 Scaffolded] -> [WE-2 Guided] -> [WE-3 Independent]\n                                                            |\n                                                            v\n                                  [MP-1 through MP-5 mastery probe set]\n                                                            |\n                                  (pass >= 0.75) -----+----- (fail)\n                                         |                      |\n                                         v                      v\n                    [No further unlocks —  [S6 remediation: cultural-context research drills /\n                     terminal in current      alignment-vs-contradiction sorting drills]\n                     curriculum sequence]\n```\n\n**Protocol routing paragraph:** On entry (S0), run PD-1; a gap routes back to the prerequisite.\nDuring Component 4 (S1, active instruction), MC-A typically surfaces during TA-1 (assuming universal\ncue meaning) and MC-B during TA-2/TA-3 (treating non-verbal signals as minor) — these are largely\nindependent and often need separate, explicit correction. If either fires, branch to the relevant\ns6_path drill before resuming. At the mastery probe stage (S9), route by failure: MP-1 failure\nindicates residual MC-A; MP-2/MP-3/MP-4 failures indicate residual MC-B; MP-5 failure with MP-1\nthrough MP-4 passing indicates an integration gap — provide one more guided full-exchange example\nbefore re-probing.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/eng.speaking.non-verbal-communication.md",
+        "startLine": 199,
+        "endLine": 235
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
