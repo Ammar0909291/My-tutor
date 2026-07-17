@@ -5138,6 +5138,248 @@ const ADJ_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── math.arith.order-of-operations ──────────────────────────────────────────
+const OOP = 'math.arith.order-of-operations'
+const OOP_SRC = 'docs/curriculum/blueprints/math.arith.order-of-operations.md'
+
+const OOP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: OOP,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'Why isn\u2019t 3 + 4 \u00d7 2 just \u201cread left to right\u201d = 14? Because ' +
+      'math gave multiplication a higher RANK, and for a reason: ' +
+      '4 \u00d7 2 is shorthand for 4 + 4 — a package deal that must be ' +
+      'unwrapped before it can join an addition. So 3 + 4 \u00d7 2 means ' +
+      '3 + (4 + 4) = 11. Without ranks, the same expression would ' +
+      'mean different things to different readers — the rules are a ' +
+      'shared contract, not a trick. The ladder: parentheses first ' +
+      '(they override everything), then exponents, then ' +
+      'multiplication/division, then addition/subtraction. Reading ' +
+      'order still matters WITHIN a rank — but between ranks, the ' +
+      'higher rank always goes first, wherever it sits in the line.',
+    targetedMisconceptions: [`${OOP}:MC-1`, `${OOP}:MC-2`],
+    source: `${OOP_SRC} — MC-1 LEFT-TO-RIGHT-ONLY + MC-2 ADDITION-BEFORE-MULTIPLICATION (B01/B02: package-deal rationale + shared-contract framing)`,
+  },
+  {
+    conceptId: OOP,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'The M-before-D trap: 12 \u00f7 4 \u00d7 3. If \u201cmultiplication comes ' +
+      'before division\u201d (the letter order in PEMDAS/BODMAS seems to ' +
+      'say so!), you\u2019d compute 12 \u00f7 (4 \u00d7 3) = 1. Wrong. ' +
+      'Multiplication and division are the SAME rank — equal ' +
+      'partners, like addition and subtraction — and equal ranks are ' +
+      'processed left to right: (12 \u00f7 4) \u00d7 3 = 9. The acronym\u2019s ' +
+      'letters are a memory aid, not a strict queue: read MD as one ' +
+      'tier and AS as one tier. Same trap on the bottom rung: ' +
+      '10 \u2212 3 + 2 is (10 \u2212 3) + 2 = 9, not 10 \u2212 (3 + 2) = 5. Two ' +
+      'tiers of rank, left-to-right inside each tier.',
+    targetedMisconceptions: [`${OOP}:MC-3`],
+    source: `${OOP_SRC} — MC-3 MULTIPLICATION-BEFORE-DIVISION-ALWAYS (B03: same-rank left-to-right rule + acronym-as-memory-aid caveat)`,
+  },
+]
+
+const OOP_PROBES: SeedProbe[] = [
+  {
+    conceptId: OOP,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is 3 + 4 \u00d7 2?',
+    choices: [
+      { text: '11 — multiplication outranks addition: 3 + 8', isCorrect: true },
+      { text: '14 — work left to right: 7 \u00d7 2', isCorrect: false, misconceptionId: `${OOP}:MC-1` },
+    ],
+    correctValue: '11',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${OOP}:MC-1`, `${OOP}:MC-2`],
+    source: `${OOP_SRC} — MC-1 trigger expression, distractor-mapped`,
+  },
+  {
+    conceptId: OOP,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'What is 12 \u00f7 4 \u00d7 3?',
+    choices: [
+      { text: '9 — \u00d7 and \u00f7 are the same rank, so work left to right: (12 \u00f7 4) \u00d7 3', isCorrect: true },
+      { text: '1 — multiplication comes before division: 12 \u00f7 (4 \u00d7 3)', isCorrect: false, misconceptionId: `${OOP}:MC-3` },
+    ],
+    correctValue: '9',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${OOP}:MC-3`],
+    source: `${OOP_SRC} — MC-3 trigger expression, distractor-mapped`,
+  },
+]
+
+// ─── math.arith.ratios ───────────────────────────────────────────────────────
+const RAT = 'math.arith.ratios'
+const RAT_SRC = 'docs/curriculum/blueprints/math.arith.ratios.md'
+
+const RAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RAT,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'A ratio is a directed comparison — the ORDER is half the ' +
+      'information. \u201c3 apples to 5 oranges\u201d (3:5) and \u201c5 oranges to ' +
+      '3 apples\u201d (5:3) describe the same fruit bowl, but as RATIOS ' +
+      'they are different statements, the way \u201cI am taller than you\u201d ' +
+      'and \u201cyou are taller than me\u201d are different claims. The first ' +
+      'number always belongs to the first-named thing. This matters ' +
+      'the moment ratios do work: a recipe of 1 part syrup to 4 ' +
+      'parts water (1:4) makes juice; 4:1 makes syrup soup. Habit to ' +
+      'build: before writing any ratio, say out loud WHICH quantity ' +
+      'is being compared TO which — then keep that order everywhere ' +
+      'downstream.',
+    targetedMisconceptions: [`${RAT}:MC-1`],
+    source: `${RAT_SRC} — MC-1 ratio-commutativity (order-as-information; recipe consequence)`,
+  },
+  {
+    conceptId: RAT,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.ELEMENTARY,
+    content:
+      'A bag has 6 red and 10 blue marbles. \u201cThe ratio of red to ' +
+      'blue\u201d is 6:10 — PART to PART. \u201cThe fraction of marbles that ' +
+      'are red\u201d is 6/16 — PART to WHOLE. Different questions, ' +
+      'different answers; mixing them is the classic ratio error. ' +
+      'Check which is being asked: does the sentence name TWO parts ' +
+      '(red to blue), or one part against the TOTAL? And when you ' +
+      'simplify 6:10 to 3:5, nothing shrinks — the bag still holds ' +
+      '6 red and 10 blue; 3:5 just states the same RELATIONSHIP in ' +
+      'smallest terms, exactly like 6/10 = 3/5 as fractions: \u201cfor ' +
+      'every 3 red there are 5 blue.\u201d Simplifying renames the ' +
+      'comparison; it never changes the quantities.',
+    targetedMisconceptions: [`${RAT}:MC-2`, `${RAT}:MC-3`],
+    source: `${RAT_SRC} — MC-2 part-to-part vs part-to-whole + MC-3 simplification-changes-quantities (same-relationship reframe)`,
+  },
+]
+
+const RAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: RAT,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'A bag has 6 red and 10 blue marbles. What is the ratio of red to blue?',
+    choices: [
+      { text: '6:10 (= 3:5) — part to part, in the order named', isCorrect: true },
+      { text: '10:6 — order doesn\u2019t matter in a ratio', isCorrect: false, misconceptionId: `${RAT}:MC-1` },
+      { text: '6:16 — red compared to all the marbles', isCorrect: false, misconceptionId: `${RAT}:MC-2` },
+    ],
+    correctValue: '6:10',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${RAT}:MC-1`, `${RAT}:MC-2`],
+    source: `${RAT_SRC} — MC-1/MC-2 combined probe, distractor-mapped`,
+  },
+  {
+    conceptId: RAT,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.ELEMENTARY,
+    stem: 'The ratio 6:10 is simplified to 3:5. Did the number of items change?',
+    choices: [
+      { text: 'No — 3:5 describes the same relationship in smallest terms; the quantities are untouched', isCorrect: true },
+      { text: 'Yes — the 6 items became 3 items and the 10 became 5', isCorrect: false, misconceptionId: `${RAT}:MC-3` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RAT}:MC-3`],
+    source: `${RAT_SRC} — MC-3 probe, distractor-mapped`,
+  },
+]
+
+// ─── math.found.rational-numbers ─────────────────────────────────────────────
+const RATL = 'math.found.rational-numbers'
+const RATL_SRC = 'docs/curriculum/blueprints/math.found.rational-numbers.md'
+
+const RATL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RATL,
+    subjectSlug: 'mathematics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'A rational number is not a fraction — it is the VALUE that ' +
+      'infinitely many fractions share. 1/2, 2/4, 3/6, 50/100 are ' +
+      'four names for one number: one single point on the number ' +
+      'line. Simplifying doesn\u2019t \u201cchange the number\u201d — it switches ' +
+      'to the shortest name (the canonical form p/q in lowest terms, ' +
+      'convenient but no more \u201creal\u201d than the others). Formally, ℚ\u2019s ' +
+      'elements are these families of equivalent fractions: a/b and ' +
+      'c/d name the same rational exactly when ad = bc — the ' +
+      'cross-multiplication test. This number-vs-name split is the ' +
+      'gateway idea for everything after: adding fractions is ' +
+      'CHOOSING convenient names (common denominators) for numbers ' +
+      'that never moved.',
+    targetedMisconceptions: [`${RATL}:MC-1`],
+    source: `${RATL_SRC} — MC-1 FRACTION-UNIQUE (TA-B01: value-vs-name split; ad = bc equivalence test)`,
+  },
+  {
+    conceptId: RATL,
+    subjectSlug: 'mathematics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    content:
+      'Is 1/3 = 0.333\u2026 \u201cnot really rational\u201d because the decimal ' +
+      'never ends? Backwards: rationality is about the FRACTION ' +
+      'form, not the decimal\u2019s length. 1/3 is one integer over ' +
+      'another — rational by definition; its endless decimal is just ' +
+      'an artifact of base ten (in base 3 it is exactly 0.1). The ' +
+      'real rule: a rational\u2019s decimal either TERMINATES (when the ' +
+      'denominator\u2019s only prime factors are 2 and 5, like 1/4 = ' +
+      '0.25) or REPEATS forever in a block (1/3 = 0.3\u0305, 1/7 = ' +
+      '0.142857\u0305). What rationals can never do is run forever WITHOUT ' +
+      'repeating — that behaviour belongs to the irrationals (\u221a2, ' +
+      '\u03c0). So: repeating = rational; non-repeating-forever = ' +
+      'irrational; \u201cnever ends\u201d alone decides nothing.',
+    targetedMisconceptions: [`${RATL}:MC-3`],
+    source: `${RATL_SRC} — MC-3 RATIONAL-TERMINATING (TA-B03: terminate-or-repeat dichotomy; base-dependence of decimals)`,
+  },
+]
+
+const RATL_PROBES: SeedProbe[] = [
+  {
+    conceptId: RATL,
+    subjectSlug: 'mathematics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Are 1/2 and 2/4 the same rational number?',
+    choices: [
+      { text: 'Yes — they are two names for one value (cross-check: 1\u00d74 = 2\u00d72); one point on the number line', isCorrect: true },
+      { text: 'No — they are written differently, so they are different rational numbers', isCorrect: false, misconceptionId: `${RATL}:MC-1` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${RATL}:MC-1`],
+    source: `${RATL_SRC} — MC-1 trigger as probe, distractor-mapped`,
+  },
+  {
+    conceptId: RATL,
+    subjectSlug: 'mathematics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'The decimal of 1/3 never ends (0.333\u2026). Is 1/3 rational?',
+    choices: [
+      { text: 'Yes — it is an integer over an integer; rational decimals either terminate or repeat, and 0.333\u2026 repeats', isCorrect: true },
+      { text: 'No — a truly rational number must have a terminating decimal', isCorrect: false, misconceptionId: `${RATL}:MC-3` },
+    ],
+    correctValue: 'yes — repeating decimal',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RATL}:MC-3`],
+    source: `${RATL_SRC} — MC-3 trigger as probe, distractor-mapped`,
+  },
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -5199,6 +5441,9 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...CPROB_EXPLANATIONS,
   ...LIKE_EXPLANATIONS,
   ...ADJ_EXPLANATIONS,
+  ...OOP_EXPLANATIONS,
+  ...RAT_EXPLANATIONS,
+  ...RATL_EXPLANATIONS,
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
@@ -5260,4 +5505,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...CPROB_PROBES,
   ...LIKE_PROBES,
   ...ADJ_PROBES,
+  ...OOP_PROBES,
+  ...RAT_PROBES,
+  ...RATL_PROBES,
 ]
